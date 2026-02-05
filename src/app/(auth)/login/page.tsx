@@ -10,21 +10,25 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { BookOpen, Mail, User } from 'lucide-react'
+import { BookOpen, Mail, User, AlertCircle, Loader2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { signInWithEmail } from '@/lib/services/auth-service'
 
 export default function LoginPage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = React.useState(false)
   const [showEmailForm, setShowEmailForm] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
 
   const handleAnonymousLogin = async () => {
     setIsLoading(true)
+    setError(null)
     // TODO: Implement Firebase anonymous auth
     // await signInAnonymously(auth)
     setTimeout(() => {
@@ -35,10 +39,45 @@ export default function LoginPage() {
   const handleEmailLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsLoading(true)
-    // TODO: Implement Firebase email auth
-    setTimeout(() => {
+    setError(null)
+
+    const formData = new FormData(e.currentTarget)
+    const email = formData.get('email') as string
+    const password = formData.get('password') as string
+
+    try {
+      await signInWithEmail(email, password)
       router.push('/')
-    }, 500)
+    } catch (err) {
+      const firebaseError = err as { code?: string; message?: string }
+
+      // Map Firebase error codes to user-friendly messages
+      switch (firebaseError.code) {
+        case 'auth/invalid-email':
+          setError('Adresse email invalide.')
+          break
+        case 'auth/user-disabled':
+          setError('Ce compte a été désactivé.')
+          break
+        case 'auth/user-not-found':
+          setError('Aucun compte trouvé avec cet email.')
+          break
+        case 'auth/wrong-password':
+          setError('Mot de passe incorrect.')
+          break
+        case 'auth/invalid-credential':
+          setError('Email ou mot de passe incorrect.')
+          break
+        case 'auth/too-many-requests':
+          setError('Trop de tentatives. Réessayez plus tard.')
+          break
+        default:
+          setError('Erreur de connexion. Veuillez réessayer.')
+          console.error('Login error:', firebaseError)
+      }
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -90,34 +129,56 @@ export default function LoginPage() {
             </>
           ) : (
             <form onSubmit={handleEmailLogin} className="space-y-4">
+              {error && (
+                <Alert variant="destructive">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
+
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder="vous@example.com"
                   required
+                  disabled={isLoading}
                 />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Mot de passe</Label>
                 <Input
                   id="password"
+                  name="password"
                   type="password"
                   placeholder="••••••••"
                   required
+                  disabled={isLoading}
                 />
               </div>
 
               <Button type="submit" className="w-full" disabled={isLoading}>
-                Se connecter
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Connexion...
+                  </>
+                ) : (
+                  'Se connecter'
+                )}
               </Button>
 
               <Button
                 type="button"
                 variant="ghost"
                 className="w-full"
-                onClick={() => setShowEmailForm(false)}
+                onClick={() => {
+                  setShowEmailForm(false)
+                  setError(null)
+                }}
+                disabled={isLoading}
               >
                 Retour
               </Button>
