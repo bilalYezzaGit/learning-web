@@ -4,11 +4,23 @@
       "Bash(npm run *)",
       "Bash(npm install *)",
       "Bash(npx shadcn@latest *)",
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "Bash(mkdir -p chantiers/*)",
+      "Bash(mv chantiers/* chantiers/archive/*)"
     ],
     "deny": []
   },
   "hooks": {
+    "sessionStart": [
+      {
+        "command": ".claude/hooks/load-chantier.sh"
+      }
+    ],
+    "preCompact": [
+      {
+        "command": ".claude/hooks/save-chantier-state.sh"
+      }
+    ],
     "postToolUse": [
       {
         "matcher": {
