@@ -21,6 +21,7 @@ Reprend un chantier existant en chargeant son contexte et son plan.
 
 **Objectif** : [objectif]
 **Pipeline actuel** : X/Y - [description du pipeline]
+**GitHub Issue** : #XX (lien) ou "Pas d'issue liee"
 
 ## Prochain pipeline
 
@@ -31,6 +32,8 @@ Reprend un chantier existant en chargeant son contexte et son plan.
 
 Pret a continuer. On lance ce pipeline ?
 ```
+
+Note : Lire le champ `> **GitHub Issue**` dans CONTEXTE.md pour afficher le lien.
 
 5. **Attendre le "go"** avant d'executer
 

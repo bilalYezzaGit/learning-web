@@ -50,13 +50,33 @@ Checklist fixe :
 
 ---
 
-## Phase 2 : Rapport
+## Phase 2 : Sync GitHub
+
+Apres le COMMIT reussi :
+
+1. **Lire le numero d'issue** depuis CONTEXTE.md (ligne `> **GitHub Issue** : #XXX`)
+   - Si pas d'issue liee (ligne contient `-`), passer cette phase
+
+2. **Ajouter un commentaire sur l'Issue** :
+   ```bash
+   gh issue comment <NUM> --body "✅ **Pipeline <N> termine**: <DESCRIPTION>
+
+   - Commit: <COMMIT_HASH>
+   - Pipelines restants: <PENDING_COUNT>"
+   ```
+
+3. Si erreur `gh`, afficher un warning mais continuer
+
+---
+
+## Phase 3 : Rapport
 
 Format :
 ```
 ## Fait
 
 - [1 ligne par fichier/action]
+- GitHub: Commentaire ajoute sur l'issue #XX (ou "Pas d'issue liee")
 
 ## A noter
 

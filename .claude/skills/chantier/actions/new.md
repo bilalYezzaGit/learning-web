@@ -19,7 +19,36 @@ Cree un nouveau chantier avec sa structure de fichiers.
 
 5. **Confirmer la creation** avec le chemin du dossier
 
-6. **Proposer** de commencer a remplir le contexte (recherche + inventaire)
+6. **Creer l'Issue GitHub** :
+   ```bash
+   gh issue create \
+     --title "🔨 Chantier: <nom>" \
+     --body "## Objectif
+
+[A definir]
+
+---
+
+_Chantier local: chantiers/<nom>/_"
+   ```
+   - Recuperer le numero et l'URL de l'issue depuis la sortie
+
+7. **Ajouter l'Issue au projet MVP** :
+   ```bash
+   gh project item-add 1 --owner @me --url <ISSUE_URL>
+   ```
+
+8. **Mettre a jour CONTEXTE.md** :
+   - Remplacer la ligne `> **GitHub Issue** : -` par :
+   - `> **GitHub Issue** : #<NUM> (<URL>)`
+
+9. **Proposer** de commencer a remplir le contexte (recherche + inventaire)
+
+## Gestion des erreurs GitHub
+
+Si les commandes `gh` echouent (pas de connexion, pas de repo, etc.) :
+- Afficher un warning mais continuer la creation locale
+- Le chantier reste fonctionnel sans sync GitHub
 
 ## Exemple
 
@@ -28,6 +57,7 @@ User: /chantier new add-stats-screen
 Assistant: Chantier cree : chantiers/add-stats-screen/
 - CONTEXTE.md (decisions et contraintes)
 - PLAN.md (pipelines sequentiels)
+- GitHub Issue #42 creee et ajoutee au projet MVP
 
 Quel est l'objectif de ce chantier ?
 ```
