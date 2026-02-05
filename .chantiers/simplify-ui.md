@@ -112,31 +112,15 @@ Simplifier le frontend en utilisant les blocks shadcn et standardiser l'UI.
 - [x] Supprimer composants inutilisés: `section-cards.tsx`, `chart-area-interactive.tsx`, `data-table.tsx`
 - [x] Refaire `/(main)/page.tsx` avec pattern learner (streak, CTA, stats, quick actions)
 
-### Pipeline 4: Page Profil avec Tabs ⬅️ NEXT
+### Pipeline 4: Page Profil avec Tabs ✅
 **Objectif**: Refaire `/profil` avec layout onglets propre
 
-**Design cible**:
-```
-┌─────────────────────────────────────────────────┐
-│ [Profil] [Stats] [Paramètres]     ← Tabs        │
-├─────────────────────────────────────────────────┤
-│ Tab Profil:                                     │
-│   Avatar + Email + Déconnexion                  │
-├─────────────────────────────────────────────────┤
-│ Tab Stats:                                      │
-│   Cards stats (réutiliser pattern dashboard-01) │
-│   [Activités] [Score QCM] [Taux réussite]      │
-├─────────────────────────────────────────────────┤
-│ Tab Paramètres:                                 │
-│   Thème, notifications, etc.                    │
-└─────────────────────────────────────────────────┘
-```
-
 **Tâches**:
-- [ ] Ajouter composant Tabs si pas installé
-- [ ] Refaire `/profil` avec 3 onglets
-- [ ] Supprimer `StatCard` custom
-- [ ] Réutiliser pattern stats de dashboard-01
+- [x] Tabs component (déjà installé)
+- [x] Refaire `/profil` avec 3 onglets (Stats, Profil, Paramètres)
+- [x] Supprimer `StatCard` custom
+- [x] Stats tab: 4-card grid + QCM details
+- [x] Settings tab: theme switcher
 
 ### Pipeline 5: Calendrier streak (optionnel)
 **Objectif**: Visualisation des jours d'étude
@@ -164,15 +148,18 @@ Simplifier le frontend en utilisant les blocks shadcn et standardiser l'UI.
 
 ## Ordre d'exécution
 
-1. **P3.1** - Fix layout (toutes les pages) ⬅️ MAINTENANT
-2. **P3.2** - Accueil learner + cleanup dashboard
-3. **P4** - Profil avec Tabs
-4. **P5** - Calendrier (optionnel)
+1. ~~**P3.1** - Fix layout (toutes les pages)~~ ✅
+2. ~~**P3.2** - Accueil learner + cleanup dashboard~~ ✅
+3. ~~**P4** - Profil avec Tabs~~ ✅
+4. **P5** - Calendrier (optionnel) ⬅️ NEXT
 
 ---
 
 ## Commits liés
 ```
+9fdcad6 feat(profil): refactor profile page with tabs layout
+aea5a43 feat(home): replace analytics dashboard with learner-focused home
+ac062df refactor(layout): adopt dashboard-01 layout pattern across all pages
 7943506 feat(auth): add shadcn login-04 and signup-04 with Firebase auth
 e9fff74 refactor(ui): clean layout structure with shadcn inset variant
 6454e13 feat(ui): integrate shadcn dashboard-01 block and standardize CSS
