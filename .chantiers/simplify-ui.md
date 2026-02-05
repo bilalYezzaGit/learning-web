@@ -58,9 +58,9 @@ Simplifier le frontend en utilisant les blocks shadcn et standardiser l'UI.
 
 ## Pipelines à faire
 
-### Pipeline 3: Fix Layout + Accueil Learner ⬅️ PRIORITÉ
+### Pipeline 3: Fix Layout + Accueil Learner ✅
 
-#### 3.1 Fix Layout (URGENT)
+#### 3.1 Fix Layout ✅
 **Problème**: Les pages utilisent `container max-w-6xl` = contenu étroit et centré, moche.
 
 **Solution**: Adopter le pattern dashboard-01 partout.
@@ -104,33 +104,15 @@ Simplifier le frontend en utilisant les blocks shadcn et standardiser l'UI.
 - [ ] `src/app/(main)/scan/page.tsx` - retirer container
 - [ ] Sous-pages apprendre et reviser
 
-#### 3.2 Accueil Learner
+#### 3.2 Accueil Learner ✅
 **Objectif**: Remplacer le dashboard analytics par un accueil orienté apprentissage
 
-**Design cible**:
-```
-┌─────────────────────────────────────────────────┐
-│ Card: Streak + Daily Goal                       │ ← Progress component
-│ 🔥 5 jours | Aujourd'hui: ████░░ 10/15 min     │
-├─────────────────────────────────────────────────┤
-│ Card: Continue Learning (CTA principal)         │ ← Card + Button
-│ ▶ Reprendre: Algèbre - Chapitre 3              │
-├─────────────────────────────────────────────────┤
-│ Cards grid: Quick Stats                         │ ← 3x Card component
-│ [Activités: 12] [QCM: 85%] [Série: 3/5]        │
-├─────────────────────────────────────────────────┤
-│ Card: Révisions suggérées                       │ ← Card + Badge
-│ • Équations (à revoir) • Fonctions (nouveau)   │
-└─────────────────────────────────────────────────┘
-```
-
 **Tâches**:
-- [ ] Supprimer `/dashboard` (page analytics)
-- [ ] Supprimer composants inutilisés: `section-cards.tsx`, `chart-area-interactive.tsx`, `data-table.tsx`
-- [ ] Refaire `/(main)/page.tsx` avec pattern learner
-- [ ] Composants: Card, Progress, Badge (déjà installés)
+- [x] Supprimer `/dashboard` (page analytics)
+- [x] Supprimer composants inutilisés: `section-cards.tsx`, `chart-area-interactive.tsx`, `data-table.tsx`
+- [x] Refaire `/(main)/page.tsx` avec pattern learner (streak, CTA, stats, quick actions)
 
-### Pipeline 4: Page Profil avec Tabs
+### Pipeline 4: Page Profil avec Tabs ⬅️ NEXT
 **Objectif**: Refaire `/profil` avec layout onglets propre
 
 **Design cible**:
