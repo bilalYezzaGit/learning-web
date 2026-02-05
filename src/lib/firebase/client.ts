@@ -1,0 +1,68 @@
+/**
+ * Firebase Client
+ *
+ * Initializes Firebase app and exports service instances.
+ * Uses lazy initialization to avoid issues with SSR.
+ *
+ * Usage:
+ * ```ts
+ * import { auth, db, functions } from '@/lib/firebase/client'
+ * ```
+ */
+
+import { initializeApp, getApps, type FirebaseApp } from 'firebase/app'
+import { getAuth, type Auth } from 'firebase/auth'
+import { getFirestore, type Firestore } from 'firebase/firestore'
+import { getFunctions, type Functions } from 'firebase/functions'
+
+import { firebaseConfig } from './config'
+
+// Initialize Firebase app (singleton)
+function getApp(): FirebaseApp {
+  const existingApps = getApps()
+  if (existingApps.length > 0) {
+    return existingApps[0]!
+  }
+  return initializeApp(firebaseConfig)
+}
+
+// Lazy-initialized instances
+let _auth: Auth | null = null
+let _db: Firestore | null = null
+let _functions: Functions | null = null
+
+/**
+ * Firebase Authentication instance
+ */
+export function getAuthInstance(): Auth {
+  if (!_auth) {
+    _auth = getAuth(getApp())
+  }
+  return _auth
+}
+
+/**
+ * Firestore Database instance
+ */
+export function getDbInstance(): Firestore {
+  if (!_db) {
+    _db = getFirestore(getApp())
+  }
+  return _db
+}
+
+/**
+ * Cloud Functions instance (us-central1)
+ */
+export function getFunctionsInstance(): Functions {
+  if (!_functions) {
+    _functions = getFunctions(getApp(), 'us-central1')
+  }
+  return _functions
+}
+
+// Convenience exports for direct usage
+export const auth = typeof window !== 'undefined' ? getAuthInstance() : null
+export const db = typeof window !== 'undefined' ? getDbInstance() : null
+export const functions =
+  typeof window !== 'undefined' ? getFunctionsInstance() : null

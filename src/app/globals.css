@@ -1,0 +1,241 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+/*
+ ---break---
+ */
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design Tokens - Mapped from Flutter AppColors
+ * Using shadcn semantic naming convention
+ *
+ * Flutter source: lib/design_system/tokens/colors.dart
+ */
+
+:root {
+  /* Base colors - Flutter AppColors */
+  --background: #FBFBFA;           /* AppColors.background - warm off-white */
+  --foreground: #37352F;           /* AppColors.textPrimary - dark brown-gray */
+
+  /* Card/Surface */
+  --card: #FFFFFF;                 /* AppColors.surface */
+  --card-foreground: #37352F;
+
+  /* Popover (same as card) */
+  --popover: #FFFFFF;
+  --popover-foreground: #37352F;
+
+  /* Primary - Warm brown accent */
+  --primary: #9F6B53;              /* AppColors.accent */
+  --primary-foreground: #FFFFFF;   /* AppColors.textOnAccent */
+
+  /* Secondary - Surface variant */
+  --secondary: #F7F6F3;            /* AppColors.surfaceVariant */
+  --secondary-foreground: #37352F;
+
+  /* Muted - For subtle backgrounds */
+  --muted: #F7F6F3;                /* AppColors.surfaceVariant */
+  --muted-foreground: #5A5A5A;     /* AppColors.textSecondary - darkened for a11y */
+
+  /* Accent - Light warm background for hover/highlights */
+  --accent: #F5EBE6;               /* AppColors.accentLight */
+  --accent-foreground: #37352F;
+
+  /* Destructive - Error state */
+  --destructive: #E03E3E;          /* AppColors.error */
+  --destructive-foreground: #FFFFFF;
+
+  /* Border & Input */
+  --border: #E9E9E7;               /* AppColors.border */
+  --input: #E9E9E7;
+  --ring: #9F6B53;                 /* Focus ring = primary */
+
+  /* Chart colors (for data visualization) */
+  --chart-1: #9F6B53;              /* Primary brown */
+  --chart-2: #0F7B6C;              /* Success teal */
+  --chart-3: #2F80ED;              /* Info blue */
+  --chart-4: #D9730D;              /* Warning orange */
+  --chart-5: #E03E3E;              /* Error red */
+
+  /* Status colors (custom, not in default shadcn) */
+  --success: #0F7B6C;              /* AppColors.success */
+  --success-foreground: #FFFFFF;
+  --success-light: #DBEDEB;        /* AppColors.successLight */
+
+  --warning: #D9730D;              /* AppColors.warning */
+  --warning-foreground: #FFFFFF;
+  --warning-light: #FBECDD;        /* AppColors.warningLight */
+
+  --info: #2F80ED;                 /* AppColors.info */
+  --info-foreground: #FFFFFF;
+  --info-light: #E3EFFC;           /* AppColors.infoLight */
+
+  /* Border radius */
+  --radius: 0.625rem;
+
+  /* Sidebar */
+  --sidebar: #FBFBFA;
+  --sidebar-foreground: #37352F;
+  --sidebar-primary: #9F6B53;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F5EBE6;
+  --sidebar-accent-foreground: #37352F;
+  --sidebar-border: #E9E9E7;
+  --sidebar-ring: #9F6B53;
+}
+
+/* Dark mode - keeping Notion aesthetic but inverted */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #191919;
+    --foreground: #E6E6E4;
+
+    --card: #252525;
+    --card-foreground: #E6E6E4;
+
+    --popover: #252525;
+    --popover-foreground: #E6E6E4;
+
+    --primary: #C4917A;            /* Lighter brown for dark mode */
+    --primary-foreground: #191919;
+
+    --secondary: #2F2F2F;
+    --secondary-foreground: #E6E6E4;
+
+    --muted: #2F2F2F;
+    --muted-foreground: #A8A8A6;     /* Lightened for a11y */
+
+    --accent: #3D2F28;
+    --accent-foreground: #C4917A;
+
+    --destructive: #E03E3E;
+    --destructive-foreground: #FFFFFF;
+
+    --border: #3D3D3D;
+    --input: #3D3D3D;
+    --ring: #C4917A;
+
+    --sidebar: #191919;
+    --sidebar-foreground: #E6E6E4;
+    --sidebar-primary: #C4917A;
+    --sidebar-primary-foreground: #191919;
+    --sidebar-accent: #3D2F28;
+    --sidebar-accent-foreground: #C4917A;
+    --sidebar-border: #3D3D3D;
+    --sidebar-ring: #C4917A;
+  }
+}
+
+/* Tailwind v4 theme inline - map CSS vars to Tailwind */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Status colors */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  /* Chart colors */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Fonts - Inter for body, Source Serif for headings */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Border radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+/* Base styles */
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+/* .dark class for manual dark mode toggle (same as prefers-color-scheme) */
+.dark {
+  --background: #191919;
+  --foreground: #E6E6E4;
+  --card: #252525;
+  --card-foreground: #E6E6E4;
+  --popover: #252525;
+  --popover-foreground: #E6E6E4;
+  --primary: #C4917A;
+  --primary-foreground: #191919;
+  --secondary: #2F2F2F;
+  --secondary-foreground: #E6E6E4;
+  --muted: #2F2F2F;
+  --muted-foreground: #9B9A97;
+  --accent: #3D2F28;
+  --accent-foreground: #C4917A;
+  --destructive: #E03E3E;
+  --destructive-foreground: #FFFFFF;
+  --border: #3D3D3D;
+  --input: #3D3D3D;
+  --ring: #C4917A;
+  --chart-1: #C4917A;
+  --chart-2: #0F7B6C;
+  --chart-3: #2F80ED;
+  --chart-4: #D9730D;
+  --chart-5: #E03E3E;
+  --sidebar: #191919;
+  --sidebar-foreground: #E6E6E4;
+  --sidebar-primary: #C4917A;
+  --sidebar-primary-foreground: #191919;
+  --sidebar-accent: #3D2F28;
+  --sidebar-accent-foreground: #C4917A;
+  --sidebar-border: #3D3D3D;
+  --sidebar-ring: #C4917A;
+}
+/*
+ ---break---
+ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(npm install *)",
+      "Bash(npx shadcn@latest *)",
+      "Bash(npx next *)"
+    ],
+    "deny": []
+  },
+  "hooks": {
+    "postToolUse": [
+      {
+        "matcher": {
+          "tool": "Edit",
+          "filePath": "src/**/*.{ts,tsx}"
+        },
+        "command": ".claude/hooks/lint.sh"
+      },
+      {
+        "matcher": {
+          "tool": "Write",
+          "filePath": "src/**/*.{ts,tsx}"
+        },
+        "command": ".claude/hooks/lint.sh"
+      }
+    ]
+  }
+}
