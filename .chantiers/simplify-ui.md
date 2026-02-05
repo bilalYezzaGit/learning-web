@@ -2,7 +2,7 @@
 
 Simplifier le frontend en utilisant les blocks shadcn et standardiser l'UI.
 
-## Statut: En cours
+## Statut: ✅ Terminé (2024-02)
 
 ---
 
@@ -35,6 +35,7 @@ Simplifier le frontend en utilisant les blocks shadcn et standardiser l'UI.
 - Card, Progress, Badge, Button, Tabs
 - Sidebar, SidebarInset, SidebarProvider
 - Input, Label, Field (auth forms)
+- Accordion, Collapsible, ScrollArea (course timeline)
 
 ---
 
@@ -122,7 +123,29 @@ Simplifier le frontend en utilisant les blocks shadcn et standardiser l'UI.
 - [x] Stats tab: 4-card grid + QCM details
 - [x] Settings tab: theme switcher
 
-### Pipeline 5: Calendrier streak (optionnel)
+### Pipeline 5: Course Timeline ✅
+**Objectif**: Timeline moderne pour la navigation des modules et séries (style Linear/Notion)
+
+**Composants shadcn ajoutés**: `accordion`, `collapsible`, `scroll-area`
+
+**Tâches**:
+- [x] Design via v0 (course-timeline-sidebar)
+- [x] Composant `CourseTimeline` générique (Module + Serie)
+- [x] Header collapsible (objectifs OU difficulté, progression, CTA)
+- [x] Sections accordion pour Module / liste plate pour Serie
+- [x] Indicateurs visuels (complété, en cours, à revoir)
+- [x] Sidebar responsive (overlay mobile, fixe desktop)
+- [x] Intégration avec useProgress pour le suivi
+- [x] Navigation par activité
+
+**Fichiers créés/modifiés**:
+- `src/components/course-timeline.tsx` - Composant générique (TimelineData interface)
+- `src/app/(main)/apprendre/[moduleId]/course-timeline-wrapper.tsx` - Wrapper Module
+- `src/app/(main)/apprendre/[moduleId]/layout.tsx` - Layout Module
+- `src/app/(main)/reviser/serie/[id]/serie-timeline-wrapper.tsx` - Wrapper Serie
+- `src/app/(main)/reviser/serie/[id]/page.tsx` - Page Serie avec split-view
+
+### Pipeline 6: Calendrier streak (optionnel)
 **Objectif**: Visualisation des jours d'étude
 
 **Block shadcn**: `calendar-31` (with event slots)
@@ -151,7 +174,8 @@ Simplifier le frontend en utilisant les blocks shadcn et standardiser l'UI.
 1. ~~**P3.1** - Fix layout (toutes les pages)~~ ✅
 2. ~~**P3.2** - Accueil learner + cleanup dashboard~~ ✅
 3. ~~**P4** - Profil avec Tabs~~ ✅
-4. **P5** - Calendrier (optionnel) ⬅️ NEXT
+4. ~~**P5** - Course Timeline~~ ✅
+5. **P6** - Calendrier (optionnel) ⬅️ NEXT
 
 ---
 
