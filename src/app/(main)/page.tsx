@@ -1,148 +1,149 @@
 /**
- * Dashboard Page
+ * Home Page - Learner Dashboard
  *
- * Central hub with overview and quick actions.
+ * Central hub focused on learning actions.
  * Public - works for both visitors and authenticated users.
  */
 
-import { BookOpen, GraduationCap, Sparkles } from 'lucide-react'
 import Link from 'next/link'
+import { ArrowRight, BookOpen, CheckCircle, Flame, GraduationCap, Target } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
+import { Badge } from '@/components/ui/badge'
 
-export default function DashboardPage() {
+export default function HomePage() {
   return (
     <div className="px-4 lg:px-6">
-      {/* Welcome */}
-      <div className="mb-8">
-        <h1 className="font-serif text-2xl font-semibold text-foreground">
-          Bienvenue ! 👋
-        </h1>
-        <p className="mt-1 text-muted-foreground">
-          Prêt à apprendre aujourd&apos;hui ?
-        </p>
+      {/* Streak & Daily Goal */}
+      <Card className="mb-6">
+        <CardContent className="py-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-orange-100 dark:bg-orange-900/30">
+                <Flame className="h-6 w-6 text-orange-500" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold">0 jours</p>
+                <p className="text-sm text-muted-foreground">Série en cours</p>
+              </div>
+            </div>
+            <div className="flex-1 sm:max-w-xs">
+              <div className="mb-1.5 flex items-center justify-between text-sm">
+                <span className="flex items-center gap-1.5">
+                  <Target className="h-4 w-4 text-muted-foreground" />
+                  Objectif du jour
+                </span>
+                <span className="font-medium">0 / 15 min</span>
+              </div>
+              <Progress value={0} className="h-2" />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Continue Learning - Main CTA */}
+      <Card className="mb-6 border-primary/20 bg-primary/5">
+        <CardContent className="py-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-4">
+              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+                <BookOpen className="h-7 w-7" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Reprendre</p>
+                <p className="text-lg font-semibold">Commencez votre apprentissage</p>
+                <p className="text-sm text-muted-foreground">
+                  Explorez les modules disponibles
+                </p>
+              </div>
+            </div>
+            <Button size="lg" asChild>
+              <Link href="/apprendre">
+                Continuer
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Quick Stats Grid */}
+      <div className="mb-6 grid gap-4 sm:grid-cols-3">
+        <Card>
+          <CardContent className="py-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900/30">
+                <CheckCircle className="h-5 w-5 text-green-600" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold">0</p>
+                <p className="text-sm text-muted-foreground">Activités</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="py-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                <GraduationCap className="h-5 w-5 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold">--</p>
+                <p className="text-sm text-muted-foreground">Score QCM</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="py-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/30">
+                <Flame className="h-5 w-5 text-amber-600" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold">0 / 5</p>
+                <p className="text-sm text-muted-foreground">Séries</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Quick Actions */}
-      <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <QuickActionCard
-          title="Continuer"
-          description="Reprendre où vous en étiez"
-          icon={BookOpen}
-          href="/apprendre"
-          variant="primary"
-        />
-        <QuickActionCard
-          title="Réviser"
-          description="Tester vos connaissances"
-          icon={GraduationCap}
-          href="/reviser"
-        />
-        <QuickActionCard
-          title="Explorer"
-          description="Découvrir de nouveaux modules"
-          icon={Sparkles}
-          href="/apprendre"
-        />
-      </div>
-
-      {/* Stats Preview */}
-      <div className="mb-8">
-        <h2 className="mb-4 font-serif text-lg font-semibold">
-          Cette semaine
-        </h2>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-2xl font-bold">0</p>
-                <p className="text-sm text-muted-foreground">
-                  activités complétées
-                </p>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Card className="transition-colors hover:bg-muted/50">
+          <Link href="/reviser" className="block">
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base font-medium">Réviser</CardTitle>
+                <Badge variant="secondary">3 séries</Badge>
               </div>
-              <div>
-                <p className="text-2xl font-bold">0</p>
-                <p className="text-sm text-muted-foreground">
-                  QCM réussis
-                </p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold">0 min</p>
-                <p className="text-sm text-muted-foreground">
-                  temps d&apos;étude
-                </p>
-              </div>
-            </div>
-            <div className="mt-4">
-              <div className="mb-2 flex justify-between text-sm">
-                <span>Progression hebdomadaire</span>
-                <span className="text-muted-foreground">0%</span>
-              </div>
-              <Progress value={0} />
-            </div>
-          </CardContent>
+              <p className="text-sm text-muted-foreground">
+                Testez vos connaissances avec des QCM
+              </p>
+            </CardHeader>
+          </Link>
         </Card>
-      </div>
 
-      {/* Recent Modules */}
-      <div>
-        <h2 className="mb-4 font-serif text-lg font-semibold">
-          Modules récents
-        </h2>
-        <Card>
-          <CardContent className="py-8 text-center text-muted-foreground">
-            <BookOpen className="mx-auto mb-2 h-8 w-8 opacity-50" />
-            <p>Aucun module consulté récemment</p>
-            <Button asChild variant="link" className="mt-2">
-              <Link href="/apprendre">Explorer les modules</Link>
-            </Button>
-          </CardContent>
+        <Card className="transition-colors hover:bg-muted/50">
+          <Link href="/apprendre" className="block">
+            <CardHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base font-medium">Explorer</CardTitle>
+                <Badge variant="outline">Nouveau</Badge>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Découvrez de nouveaux modules
+              </p>
+            </CardHeader>
+          </Link>
         </Card>
       </div>
     </div>
-  )
-}
-
-function QuickActionCard({
-  title,
-  description,
-  icon: Icon,
-  href,
-  variant = 'default',
-}: {
-  title: string
-  description: string
-  icon: React.ComponentType<{ className?: string }>
-  href: string
-  variant?: 'default' | 'primary'
-}) {
-  return (
-    <Link href={href}>
-      <Card
-        className={`transition-colors hover:bg-muted/50 ${
-          variant === 'primary' ? 'border-primary/20 bg-primary/5' : ''
-        }`}
-      >
-        <CardHeader className="pb-2">
-          <div className="flex items-center gap-3">
-            <div
-              className={`flex h-10 w-10 items-center justify-center rounded-lg ${
-                variant === 'primary'
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-muted'
-              }`}
-            >
-              <Icon className="h-5 w-5" />
-            </div>
-            <div>
-              <CardTitle className="text-base">{title}</CardTitle>
-              <p className="text-sm text-muted-foreground">{description}</p>
-            </div>
-          </div>
-        </CardHeader>
-      </Card>
-    </Link>
   )
 }
