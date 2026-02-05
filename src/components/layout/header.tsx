@@ -7,10 +7,11 @@
  * Search opens Command Menu (Cmd+K).
  */
 
+import Link from 'next/link'
 import { Menu, Search } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { useUIStore } from '@/lib/stores/ui-store'
+import { useAuth } from '@/lib/hooks/use-auth'
 
 interface HeaderProps {
   onMenuClick?: () => void
@@ -18,6 +19,23 @@ interface HeaderProps {
 }
 
 export function Header({ onMenuClick, onSearchClick }: HeaderProps) {
+  const { user, isLoading, isAuthenticated } = useAuth()
+
+  // Get user initials for avatar
+  const getInitials = () => {
+    if (!user) return '?'
+    if (user.displayName) {
+      return user.displayName.charAt(0).toUpperCase()
+    }
+    if (user.email) {
+      return user.email.charAt(0).toUpperCase()
+    }
+    if (user.isAnonymous) {
+      return 'A'
+    }
+    return '?'
+  }
+
   return (
     <header className="sticky top-0 z-40 flex h-14 items-center gap-4 border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       {/* Mobile menu button */}
@@ -48,13 +66,23 @@ export function Header({ onMenuClick, onSearchClick }: HeaderProps) {
       {/* Spacer */}
       <div className="flex-1" />
 
-      {/* User menu placeholder */}
-      <Button variant="ghost" size="icon" className="rounded-full">
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-sm font-medium text-primary">
-          ?
-        </div>
-        <span className="sr-only">Profil</span>
-      </Button>
+      {/* User avatar */}
+      {isLoading ? (
+        <div className="h-8 w-8 animate-pulse rounded-full bg-muted" />
+      ) : isAuthenticated ? (
+        <Button variant="ghost" size="icon" className="rounded-full" asChild>
+          <Link href="/profil">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground">
+              {getInitials()}
+            </div>
+            <span className="sr-only">Profil</span>
+          </Link>
+        </Button>
+      ) : (
+        <Button size="sm" asChild>
+          <Link href="/login">Connexion</Link>
+        </Button>
+      )}
     </header>
   )
 }
