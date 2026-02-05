@@ -1,11 +1,11 @@
 # Plan : fix-auth
 
 > Statut : En cours
-> Pipeline actuel : 0/5
+> Pipeline actuel : 5/5 ✓ TERMINÉ
 
 ## Pipelines
 
-### 1. Connecter login email a Firebase [ ]
+### 1. Connecter login email a Firebase [x]
 - CODE: Modifier `src/app/(auth)/login/page.tsx`
   - Importer `signInWithEmail` de auth-service
   - Remplacer le TODO par l'appel reel
@@ -14,7 +14,7 @@
 - VERIFY: npm run build + npm run lint
 - COMMIT: feat(auth): implement email login with Firebase
 
-### 2. Connecter login anonyme a Firebase [ ]
+### 2. Connecter login anonyme a Firebase [x]
 - CODE: Modifier `src/app/(auth)/login/page.tsx`
   - Importer `signInAnonymouslyFn` de auth-service
   - Remplacer le TODO par l'appel reel
@@ -22,7 +22,7 @@
 - VERIFY: npm run build + npm run lint
 - COMMIT: feat(auth): implement anonymous login with Firebase
 
-### 3. Creer page/modal signup [ ]
+### 3. Creer page/modal signup [x]
 - CODE:
   - Option A: Creer `src/app/(auth)/signup/page.tsx`
   - Option B: Ajouter mode signup dans login/page.tsx
@@ -31,7 +31,7 @@
 - VERIFY: npm run build + npm run lint
 - COMMIT: feat(auth): add signup functionality
 
-### 4. Ajouter "Mot de passe oublie" [ ]
+### 4. Ajouter "Mot de passe oublie" [x]
 - CODE:
   - Ajouter lien dans le formulaire login
   - Creer page ou modal forgot-password
@@ -39,7 +39,7 @@
 - VERIFY: npm run build + npm run lint
 - COMMIT: feat(auth): add forgot password flow
 
-### 5. Mettre a jour UI apres auth [ ]
+### 5. Mettre a jour UI apres auth [x]
 - CODE:
   - Verifier auth-context.tsx fournit user
   - Modifier sidebar/header pour afficher nom/email

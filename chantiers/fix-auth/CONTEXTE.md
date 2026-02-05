@@ -1,7 +1,7 @@
 # Contexte : fix-auth
 
 > **Cree** : 2025-02-05
-> **Statut** : En cours
+> **Statut** : Terminé ✓
 > **GitHub Issue** : #1 (https://github.com/bilalYezzaGit/learning-web/issues/1)
 > **Objectif** : Implementer l'authentification Firebase (login, signup, logout) qui est actuellement un stub non fonctionnel
 
@@ -101,13 +101,13 @@ subscribeToAuthState()     // Observer auth state
 
 ## Definition of Done
 
-- [ ] Login email fonctionnel (appelle Firebase, gere erreurs)
-- [ ] Login anonyme fonctionnel
-- [ ] Page/Modal signup fonctionnel
-- [ ] Lien "Mot de passe oublie" fonctionnel
-- [ ] UI mise a jour apres login (avatar, nom)
-- [ ] Logout fonctionnel
-- [ ] Gestion des erreurs avec feedback utilisateur
-- [ ] Pipelines executes et valides
-- [ ] VERIFY checklist OK (npm run build + npm run lint)
+- [x] Login email fonctionnel (appelle Firebase, gere erreurs)
+- [x] Login anonyme fonctionnel
+- [x] Page/Modal signup fonctionnel
+- [x] Lien "Mot de passe oublie" fonctionnel
+- [x] UI mise a jour apres login (avatar, nom)
+- [x] Logout fonctionnel
+- [x] Gestion des erreurs avec feedback utilisateur
+- [x] Pipelines executes et valides
+- [x] VERIFY checklist OK (npm run build + npm run lint)
 - [ ] Chantier archive
