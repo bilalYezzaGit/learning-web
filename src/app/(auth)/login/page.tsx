@@ -18,12 +18,13 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { signInWithEmail, signInAnonymouslyFn } from '@/lib/services/auth-service'
+import { signInWithEmail, signInAnonymouslyFn, createAccount } from '@/lib/services/auth-service'
 
 export default function LoginPage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = React.useState(false)
   const [showEmailForm, setShowEmailForm] = React.useState(false)
+  const [isSignupMode, setIsSignupMode] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
 
   const handleAnonymousLogin = async () => {
@@ -89,6 +90,43 @@ export default function LoginPage() {
     }
   }
 
+  const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setError(null)
+
+    const formData = new FormData(e.currentTarget)
+    const email = formData.get('email') as string
+    const password = formData.get('password') as string
+
+    try {
+      await createAccount(email, password)
+      router.push('/')
+    } catch (err) {
+      const firebaseError = err as { code?: string; message?: string }
+
+      switch (firebaseError.code) {
+        case 'auth/email-already-in-use':
+          setError('Cette adresse email est déjà utilisée.')
+          break
+        case 'auth/invalid-email':
+          setError('Adresse email invalide.')
+          break
+        case 'auth/weak-password':
+          setError('Le mot de passe doit contenir au moins 6 caractères.')
+          break
+        case 'auth/operation-not-allowed':
+          setError('La création de compte n\'est pas activée.')
+          break
+        default:
+          setError('Erreur lors de la création du compte.')
+          console.error('Signup error:', firebaseError)
+      }
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
       <Card className="w-full max-w-md">
@@ -137,7 +175,7 @@ export default function LoginPage() {
               </Button>
             </>
           ) : (
-            <form onSubmit={handleEmailLogin} className="space-y-4">
+            <form onSubmit={isSignupMode ? handleSignup : handleEmailLogin} className="space-y-4">
               {error && (
                 <Alert variant="destructive">
                   <AlertCircle className="h-4 w-4" />
@@ -164,6 +202,7 @@ export default function LoginPage() {
                   type="password"
                   placeholder="••••••••"
                   required
+                  minLength={6}
                   disabled={isLoading}
                 />
               </div>
@@ -172,12 +211,46 @@ export default function LoginPage() {
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Connexion...
+                    {isSignupMode ? 'Création...' : 'Connexion...'}
                   </>
                 ) : (
-                  'Se connecter'
+                  isSignupMode ? 'Créer un compte' : 'Se connecter'
                 )}
               </Button>
+
+              <div className="text-center text-sm">
+                {isSignupMode ? (
+                  <p className="text-muted-foreground">
+                    Déjà un compte ?{' '}
+                    <button
+                      type="button"
+                      className="font-medium text-primary hover:underline"
+                      onClick={() => {
+                        setIsSignupMode(false)
+                        setError(null)
+                      }}
+                      disabled={isLoading}
+                    >
+                      Se connecter
+                    </button>
+                  </p>
+                ) : (
+                  <p className="text-muted-foreground">
+                    Pas de compte ?{' '}
+                    <button
+                      type="button"
+                      className="font-medium text-primary hover:underline"
+                      onClick={() => {
+                        setIsSignupMode(true)
+                        setError(null)
+                      }}
+                      disabled={isLoading}
+                    >
+                      Créer un compte
+                    </button>
+                  </p>
+                )}
+              </div>
 
               <Button
                 type="button"
@@ -185,6 +258,7 @@ export default function LoginPage() {
                 className="w-full"
                 onClick={() => {
                   setShowEmailForm(false)
+                  setIsSignupMode(false)
                   setError(null)
                 }}
                 disabled={isLoading}
