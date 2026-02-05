@@ -65,7 +65,13 @@ Apres le COMMIT reussi :
    - Pipelines restants: <PENDING_COUNT>"
    ```
 
-3. Si erreur `gh`, afficher un warning mais continuer
+3. **Mettre a jour le body de l'Issue** avec la progression :
+   - Lire PLAN.md pour extraire la liste des pipelines et leur statut
+   - Lire CONTEXTE.md pour extraire la DoD
+   - Mettre a jour l'issue avec `gh issue edit <NUM> --body "..."`
+   - Inclure : objectif, progression pipelines, DoD avec checkboxes
+
+4. Si erreur `gh`, afficher un warning mais continuer
 
 ---
 
