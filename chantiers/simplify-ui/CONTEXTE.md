@@ -11,17 +11,30 @@
 
 Reduire le nombre de fichiers et la complexite en :
 1. Remplacant les layouts custom par des shadcn blocks
-2. Inlinant les patterns simples directement dans les pages
-3. Gardant uniquement les composants metier necessaires
+2. Remplacant la page auth par un block login shadcn
+3. Utilisant le dashboard block pour la home
+4. Inlinant les patterns simples directement dans les pages
+5. Gardant uniquement les composants metier necessaires
 
 ---
 
 ## Recherche et inventaire
 
+### Shadcn Blocks a utiliser
+
+| Block | Usage | Remplace |
+|-------|-------|----------|
+| `sidebar-07` | Layout principal (collapsible) | layout/*, sections/sidebar |
+| `login-04` | Page auth (form + image) | login/page.tsx (285 lignes) |
+| `dashboard-01` | Home avec stats + charts | page.tsx custom |
+
 ### Analyse des composants actuels
 
 | Fichier | Lignes | Decision | Raison |
 |---------|--------|----------|--------|
+| **pages/** | | | |
+| `login/page.tsx` | 285 | SHADCN BLOCK | login-04 |
+| `(main)/page.tsx` | 149 | SHADCN BLOCK | dashboard-01 |
 | **patterns/** | | | |
 | `module-card.tsx` | 85 | INLINE | Simple Card, utilise 1x |
 | `activity-card.tsx` | ~80 | INLINE | Simple Card, utilise 1x |
@@ -34,32 +47,27 @@ Reduire le nombre de fichiers et la complexite en :
 | `activity-list.tsx` | 35 | INLINE | Juste un .map() |
 | `header.tsx` | 136 | SUPPRIMER | Doublon avec layout/header |
 | `sidebar.tsx` | 85 | SUPPRIMER | Doublon avec layout/sidebar |
-| `bottom-nav.tsx` | 50 | SHADCN BLOCK | Mobile nav |
+| `bottom-nav.tsx` | 50 | INTEGRER | Dans sidebar-07 mobile |
 | **layout/** | | | |
 | `app-shell.tsx` | 47 | SHADCN BLOCK | sidebar-07 |
-| `header.tsx` | 90 | SHADCN BLOCK | Simplifier |
+| `header.tsx` | 90 | SHADCN BLOCK | Integre dans sidebar-07 |
 | `sidebar.tsx` | 80 | SHADCN BLOCK | sidebar-07 |
-| `mobile-nav.tsx` | 80 | SHADCN BLOCK | Sheet nav |
+| `mobile-nav.tsx` | 80 | SHADCN BLOCK | sidebar-07 mobile |
 | **qcm/** | | | |
 | Tous | ~350 | GARDER | Logique metier |
 
-### Shadcn Blocks a utiliser
-
-| Block | Usage | URL |
-|-------|-------|-----|
-| sidebar-07 | Layout principal | ui.shadcn.com/blocks#sidebar-07 |
-| login-01 | Page login | ui.shadcn.com/blocks#login-01 |
-
-### Estimation impact
+### Estimation impact (revisee)
 
 | Metrique | Avant | Apres | Delta |
 |----------|-------|-------|-------|
-| Fichiers components | 32 | ~24 | -8 |
-| Lignes patterns/ | ~900 | ~600 | -300 |
-| Lignes sections/ | ~400 | ~100 | -300 |
-| Lignes layout/ | ~300 | ~200 | -100 |
+| Fichiers components | 32 | ~22 | **-10** |
+| Lignes login | 285 | ~50 | **-235** |
+| Lignes dashboard | 149 | ~80 | **-69** |
+| Lignes patterns/ | ~900 | ~600 | **-300** |
+| Lignes sections/ | ~400 | ~50 | **-350** |
+| Lignes layout/ | ~300 | ~150 | **-150** |
 
-**Total estime : -700 lignes, -8 fichiers**
+**Total estime : ~1100 lignes en moins, -10 fichiers**
 
 ---
 
@@ -68,18 +76,20 @@ Reduire le nombre de fichiers et la complexite en :
 - Ne pas casser les fonctionnalites existantes
 - Garder le meme look & feel global
 - Les composants metier (QCM, scan) restent intacts
+- Conserver la logique auth Firebase (juste changer l'UI)
 - Tester chaque page apres modification
 
 ---
 
 ## Definition of Done
 
-- [ ] Layout remplace par shadcn block (sidebar-07)
+- [ ] Layout remplace par shadcn sidebar-07
+- [ ] Page login remplacee par shadcn login-04
+- [ ] Dashboard utilise shadcn dashboard-01
 - [ ] patterns/module-card inline dans pages
 - [ ] patterns/activity-card inline dans pages
-- [ ] sections/module-list supprime (inline)
-- [ ] sections/activity-list supprime (inline)
-- [ ] Doublons supprimes (sections/header, sections/sidebar)
+- [ ] sections/ nettoye (doublons supprimes)
 - [ ] npm run build OK
 - [ ] npm run lint OK
 - [ ] Test manuel de toutes les pages
+- [ ] Chantier archive
