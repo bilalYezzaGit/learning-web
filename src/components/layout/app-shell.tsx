@@ -3,15 +3,15 @@
 /**
  * App Shell
  *
- * Main layout wrapper with sidebar (desktop) and mobile nav.
- * Provides the structure for all main pages.
+ * Main layout wrapper using shadcn sidebar pattern.
+ * Uses SidebarProvider for responsive sidebar behavior.
  */
 
 import * as React from 'react'
 
-import { Sidebar } from './sidebar'
-import { Header } from './header'
-import { MobileNav } from './mobile-nav'
+import { AppSidebar } from '@/components/app-sidebar'
+import { SiteHeader } from '@/components/site-header'
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { CommandMenu } from '@/components/patterns/command-menu'
 
 interface AppShellProps {
@@ -19,28 +19,16 @@ interface AppShellProps {
 }
 
 export function AppShell({ children }: AppShellProps) {
-  const [mobileNavOpen, setMobileNavOpen] = React.useState(false)
   const [commandOpen, setCommandOpen] = React.useState(false)
 
   return (
-    <div className="relative flex min-h-screen">
-      {/* Desktop Sidebar */}
-      <Sidebar className="hidden md:flex" />
-
-      {/* Mobile Navigation */}
-      <MobileNav open={mobileNavOpen} onOpenChange={setMobileNavOpen} />
-
-      {/* Main Content */}
-      <div className="flex flex-1 flex-col">
-        <Header
-          onMenuClick={() => setMobileNavOpen(true)}
-          onSearchClick={() => setCommandOpen(true)}
-        />
+    <SidebarProvider>
+      <AppSidebar onSearchClick={() => setCommandOpen(true)} />
+      <SidebarInset>
+        <SiteHeader />
         <main className="flex-1 overflow-auto">{children}</main>
-      </div>
-
-      {/* Command Menu (Cmd+K) */}
+      </SidebarInset>
       <CommandMenu open={commandOpen} onOpenChange={setCommandOpen} />
-    </div>
+    </SidebarProvider>
   )
 }
