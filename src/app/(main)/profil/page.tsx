@@ -3,73 +3,122 @@
 /**
  * Profil Page
  *
- * User profile with stats and settings.
- * Shows guest state or authenticated profile with real stats.
+ * User profile with tabs: Profil, Stats, Paramètres.
+ * Shows guest state or authenticated profile.
  */
 
 import * as React from 'react'
 import Link from 'next/link'
-import { BookOpen, Camera, Check, GraduationCap, LogOut, RotateCcw, Trophy, User } from 'lucide-react'
+import {
+  BookOpen,
+  CheckCircle,
+  GraduationCap,
+  LogOut,
+  Moon,
+  Settings,
+  Sun,
+  Trophy,
+  User,
+} from 'lucide-react'
+import { useTheme } from 'next-themes'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
 
 export default function ProfilPage() {
   const { user, userId, isAuthenticated, isAnonymous, signOut } = useAuth()
 
+  if (!isAuthenticated) {
+    return (
+      <div className="px-4 lg:px-6">
+        <Card className="mx-auto max-w-md">
+          <CardContent className="py-12 text-center">
+            <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-muted">
+              <User className="h-10 w-10 text-muted-foreground" />
+            </div>
+            <h1 className="text-xl font-semibold">Visiteur</h1>
+            <p className="mt-2 text-muted-foreground">
+              Connectez-vous pour sauvegarder votre progression
+            </p>
+            <Button className="mt-6" size="lg" asChild>
+              <Link href="/login">Se connecter</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  const displayName = user?.email || (isAnonymous ? 'Utilisateur anonyme' : 'Utilisateur')
+  const initials = user?.email ? user.email.charAt(0).toUpperCase() : 'U'
+
   return (
     <div className="px-4 lg:px-6">
-      <div className="mb-8">
-        <h1 className="font-serif text-2xl font-semibold text-foreground">Profil</h1>
-        <p className="mt-1 text-muted-foreground">Vos statistiques et paramètres</p>
+      {/* Header with avatar */}
+      <div className="mb-6 flex items-center gap-4">
+        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-2xl font-semibold text-primary-foreground">
+          {initials}
+        </div>
+        <div className="flex-1">
+          <h1 className="text-xl font-semibold">{displayName}</h1>
+          {isAnonymous && (
+            <p className="text-sm text-muted-foreground">
+              <Link href="/signup" className="text-primary underline">
+                Créez un compte
+              </Link>{' '}
+              pour sauvegarder
+            </p>
+          )}
+        </div>
+        <Button variant="outline" size="sm" onClick={signOut}>
+          <LogOut className="mr-2 h-4 w-4" />
+          Déconnexion
+        </Button>
       </div>
 
-      {!isAuthenticated ? (
-        <GuestProfile />
-      ) : (
-        <AuthenticatedProfile
-          userId={userId!}
-          email={user?.email}
-          isAnonymous={isAnonymous}
-          onSignOut={signOut}
-        />
-      )}
+      {/* Tabs */}
+      <Tabs defaultValue="stats" className="w-full">
+        <TabsList className="mb-6 grid w-full grid-cols-3">
+          <TabsTrigger value="stats">
+            <Trophy className="mr-2 h-4 w-4" />
+            Stats
+          </TabsTrigger>
+          <TabsTrigger value="profil">
+            <User className="mr-2 h-4 w-4" />
+            Profil
+          </TabsTrigger>
+          <TabsTrigger value="settings">
+            <Settings className="mr-2 h-4 w-4" />
+            Paramètres
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="stats">
+          <StatsTab userId={userId!} />
+        </TabsContent>
+
+        <TabsContent value="profil">
+          <ProfilTab email={user?.email} isAnonymous={isAnonymous} />
+        </TabsContent>
+
+        <TabsContent value="settings">
+          <SettingsTab />
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }
 
-function GuestProfile() {
-  return (
-    <Card>
-      <CardContent className="py-8 text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-muted">
-          <User className="h-8 w-8 text-muted-foreground" />
-        </div>
-        <h2 className="text-lg font-semibold">Visiteur</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Connectez-vous pour sauvegarder votre progression et accéder à vos statistiques
-        </p>
-        <Button className="mt-4" asChild>
-          <Link href="/login">Se connecter</Link>
-        </Button>
-      </CardContent>
-    </Card>
-  )
-}
+// =============================================================================
+// Stats Tab
+// =============================================================================
 
-interface AuthenticatedProfileProps {
-  userId: string
-  email?: string | null
-  isAnonymous: boolean
-  onSignOut: () => void
-}
-
-function AuthenticatedProfile({ userId, email, isAnonymous, onSignOut }: AuthenticatedProfileProps) {
+function StatsTab({ userId }: { userId: string }) {
   const { progress } = useProgress(userId)
 
-  // Calculate stats from progress
   const stats = React.useMemo(() => {
     let completed = 0
     let success = 0
@@ -101,87 +150,74 @@ function AuthenticatedProfile({ userId, email, isAnonymous, onSignOut }: Authent
     return { completed, success, qcmDone, qcmSuccess, exercisesDone, avgScore, successRate }
   }, [progress])
 
-  const displayName = email || (isAnonymous ? 'Utilisateur anonyme' : 'Utilisateur')
-  const initials = email ? email.charAt(0).toUpperCase() : 'U'
-
   return (
     <div className="space-y-6">
-      {/* User Info */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Informations</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-2xl font-semibold text-primary">
-                {initials}
+      {/* Stats Grid */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardContent className="py-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900/30">
+                <CheckCircle className="h-5 w-5 text-green-600" />
               </div>
               <div>
-                <p className="font-medium">{displayName}</p>
-                {isAnonymous && (
-                  <p className="text-sm text-muted-foreground">
-                    <Link href="/login" className="text-primary underline">
-                      Créez un compte
-                    </Link>{' '}
-                    pour ne pas perdre votre progression
-                  </p>
-                )}
+                <p className="text-2xl font-bold">{stats.completed}</p>
+                <p className="text-sm text-muted-foreground">Activités</p>
               </div>
             </div>
-            <Button variant="ghost" size="sm" onClick={onSignOut}>
-              <LogOut className="mr-2 h-4 w-4" />
-              Déconnexion
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
 
-      {/* Stats Overview */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Trophy className="h-5 w-5 text-primary" />
-            Statistiques
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 gap-4">
-            <StatCard
-              icon={<Check className="h-5 w-5 text-green-600" />}
-              value={stats.completed.toString()}
-              label="Activités complétées"
-              color="green"
-            />
-            <StatCard
-              icon={<GraduationCap className="h-5 w-5 text-blue-600" />}
-              value={`${stats.avgScore}%`}
-              label="Score moyen QCM"
-              color="blue"
-            />
-            <StatCard
-              icon={<BookOpen className="h-5 w-5 text-amber-600" />}
-              value={stats.exercisesDone.toString()}
-              label="Exercices résolus"
-              color="amber"
-            />
-            <StatCard
-              icon={<Trophy className="h-5 w-5 text-primary" />}
-              value={`${stats.successRate}%`}
-              label="Taux de réussite"
-              color="primary"
-            />
-          </div>
-        </CardContent>
-      </Card>
+        <Card>
+          <CardContent className="py-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30">
+                <GraduationCap className="h-5 w-5 text-blue-600" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold">{stats.avgScore}%</p>
+                <p className="text-sm text-muted-foreground">Score QCM</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-      {/* Detailed Stats */}
+        <Card>
+          <CardContent className="py-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/30">
+                <BookOpen className="h-5 w-5 text-amber-600" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold">{stats.exercisesDone}</p>
+                <p className="text-sm text-muted-foreground">Exercices</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="py-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100 dark:bg-purple-900/30">
+                <Trophy className="h-5 w-5 text-purple-600" />
+              </div>
+              <div>
+                <p className="text-2xl font-bold">{stats.successRate}%</p>
+                <p className="text-sm text-muted-foreground">Réussite</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* QCM Details */}
       <Card>
         <CardHeader>
           <CardTitle>Détails QCM</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-between border-b pb-3">
+        <CardContent className="space-y-0">
+          <div className="flex items-center justify-between border-b py-3">
             <span className="text-muted-foreground">QCM complétés</span>
             <span className="font-medium">{stats.qcmDone}</span>
           </div>
@@ -189,59 +225,107 @@ function AuthenticatedProfile({ userId, email, isAnonymous, onSignOut }: Authent
             <span className="text-muted-foreground">QCM réussis (≥70%)</span>
             <span className="font-medium text-green-600">{stats.qcmSuccess}</span>
           </div>
-          <div className="flex items-center justify-between pt-3">
+          <div className="flex items-center justify-between py-3">
             <span className="text-muted-foreground">À revoir</span>
             <span className="font-medium text-orange-600">{stats.qcmDone - stats.qcmSuccess}</span>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Quick Actions */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Actions rapides</CardTitle>
-        </CardHeader>
-        <CardContent className="flex gap-3">
-          <Button variant="outline" className="flex-1" asChild>
-            <Link href="/reviser">
-              <RotateCcw className="mr-2 h-4 w-4" />
-              Réviser
-            </Link>
-          </Button>
-          <Button variant="outline" className="flex-1" asChild>
-            <Link href="/scan">
-              <Camera className="mr-2 h-4 w-4" />
-              Scanner
-            </Link>
-          </Button>
         </CardContent>
       </Card>
     </div>
   )
 }
 
-interface StatCardProps {
-  icon: React.ReactNode
-  value: string
-  label: string
-  color: 'green' | 'blue' | 'amber' | 'primary'
+// =============================================================================
+// Profil Tab
+// =============================================================================
+
+function ProfilTab({ email, isAnonymous }: { email?: string | null; isAnonymous: boolean }) {
+  return (
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>Informations du compte</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground">Email</span>
+            <span className="font-medium">{email || 'Non renseigné'}</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-muted-foreground">Type de compte</span>
+            <span className="font-medium">{isAnonymous ? 'Anonyme' : 'Complet'}</span>
+          </div>
+        </CardContent>
+      </Card>
+
+      {isAnonymous && (
+        <Card className="border-primary/20 bg-primary/5">
+          <CardContent className="py-6">
+            <h3 className="font-semibold">Passez à un compte complet</h3>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Créez un compte avec email pour ne jamais perdre votre progression.
+            </p>
+            <Button className="mt-4" asChild>
+              <Link href="/signup">Créer un compte</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  )
 }
 
-function StatCard({ icon, value, label, color }: StatCardProps) {
-  const bgColors = {
-    green: 'bg-green-50 dark:bg-green-950/20',
-    blue: 'bg-blue-50 dark:bg-blue-950/20',
-    amber: 'bg-amber-50 dark:bg-amber-950/20',
-    primary: 'bg-primary/5',
-  }
+// =============================================================================
+// Settings Tab
+// =============================================================================
+
+function SettingsTab() {
+  const { theme, setTheme } = useTheme()
 
   return (
-    <div className={`rounded-lg p-4 ${bgColors[color]}`}>
-      <div className="flex items-center gap-2">
-        {icon}
-        <span className="text-2xl font-bold">{value}</span>
-      </div>
-      <p className="mt-1 text-xs text-muted-foreground">{label}</p>
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>Apparence</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="font-medium">Thème</p>
+              <p className="text-sm text-muted-foreground">Choisissez votre préférence</p>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                variant={theme === 'light' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setTheme('light')}
+              >
+                <Sun className="mr-2 h-4 w-4" />
+                Clair
+              </Button>
+              <Button
+                variant={theme === 'dark' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setTheme('dark')}
+              >
+                <Moon className="mr-2 h-4 w-4" />
+                Sombre
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Notifications</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground">
+            Les notifications seront disponibles prochainement.
+          </p>
+        </CardContent>
+      </Card>
     </div>
   )
 }
