@@ -10,7 +10,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { BookOpen, Mail, User, AlertCircle, Loader2 } from 'lucide-react'
+import { BookOpen, Mail, User, AlertCircle, Loader2, CheckCircle } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -18,14 +18,16 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { signInWithEmail, signInAnonymouslyFn, createAccount } from '@/lib/services/auth-service'
+import { signInWithEmail, signInAnonymouslyFn, createAccount, resetPassword } from '@/lib/services/auth-service'
 
 export default function LoginPage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = React.useState(false)
   const [showEmailForm, setShowEmailForm] = React.useState(false)
   const [isSignupMode, setIsSignupMode] = React.useState(false)
+  const [isForgotPasswordMode, setIsForgotPasswordMode] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
+  const [successMessage, setSuccessMessage] = React.useState<string | null>(null)
 
   const handleAnonymousLogin = async () => {
     setIsLoading(true)
@@ -127,6 +129,37 @@ export default function LoginPage() {
     }
   }
 
+  const handleForgotPassword = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setError(null)
+    setSuccessMessage(null)
+
+    const formData = new FormData(e.currentTarget)
+    const email = formData.get('email') as string
+
+    try {
+      await resetPassword(email)
+      setSuccessMessage('Un email de réinitialisation a été envoyé.')
+    } catch (err) {
+      const firebaseError = err as { code?: string; message?: string }
+
+      switch (firebaseError.code) {
+        case 'auth/invalid-email':
+          setError('Adresse email invalide.')
+          break
+        case 'auth/user-not-found':
+          setError('Aucun compte trouvé avec cet email.')
+          break
+        default:
+          setError('Erreur lors de l\'envoi. Veuillez réessayer.')
+          console.error('Forgot password error:', firebaseError)
+      }
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/30 p-4">
       <Card className="w-full max-w-md">
@@ -174,6 +207,59 @@ export default function LoginPage() {
                 Se connecter avec un email
               </Button>
             </>
+          ) : isForgotPasswordMode ? (
+            <form onSubmit={handleForgotPassword} className="space-y-4">
+              {error && (
+                <Alert variant="destructive">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
+
+              {successMessage && (
+                <Alert>
+                  <CheckCircle className="h-4 w-4 text-green-600" />
+                  <AlertDescription className="text-green-600">{successMessage}</AlertDescription>
+                </Alert>
+              )}
+
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="vous@example.com"
+                  required
+                  disabled={isLoading}
+                />
+              </div>
+
+              <Button type="submit" className="w-full" disabled={isLoading || !!successMessage}>
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Envoi...
+                  </>
+                ) : (
+                  'Envoyer le lien'
+                )}
+              </Button>
+
+              <Button
+                type="button"
+                variant="ghost"
+                className="w-full"
+                onClick={() => {
+                  setIsForgotPasswordMode(false)
+                  setError(null)
+                  setSuccessMessage(null)
+                }}
+                disabled={isLoading}
+              >
+                Retour à la connexion
+              </Button>
+            </form>
           ) : (
             <form onSubmit={isSignupMode ? handleSignup : handleEmailLogin} className="space-y-4">
               {error && (
@@ -195,7 +281,22 @@ export default function LoginPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Mot de passe</Label>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">Mot de passe</Label>
+                  {!isSignupMode && (
+                    <button
+                      type="button"
+                      className="text-xs text-muted-foreground hover:text-primary hover:underline"
+                      onClick={() => {
+                        setIsForgotPasswordMode(true)
+                        setError(null)
+                      }}
+                      disabled={isLoading}
+                    >
+                      Mot de passe oublié ?
+                    </button>
+                  )}
+                </div>
                 <Input
                   id="password"
                   name="password"

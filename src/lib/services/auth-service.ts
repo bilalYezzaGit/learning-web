@@ -9,6 +9,7 @@ import {
   signInAnonymously,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
   signOut as firebaseSignOut,
   onAuthStateChanged,
   type User,
@@ -85,6 +86,14 @@ export async function signOut(): Promise<void> {
 }
 
 /**
+ * Send password reset email
+ */
+export async function resetPassword(email: string): Promise<void> {
+  const auth = getAuthInstance()
+  await sendPasswordResetEmail(auth, email)
+}
+
+/**
  * Check if user is authenticated
  */
 export function isAuthenticated(): boolean {
@@ -113,6 +122,7 @@ export const authService = {
   signInWithEmail,
   createAccount,
   signOut,
+  resetPassword,
   isAuthenticated,
   getUserId,
 }
