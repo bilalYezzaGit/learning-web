@@ -1,20 +1,20 @@
 # Plan : simplify-ui
 
 > Statut : En cours
-> Pipeline actuel : 0/5
+> Pipeline actuel : 0/4
 
 ## Pipelines
 
-### 1. Installer shadcn sidebar-07 pour le layout [ ]
+### 1. Installer shadcn dashboard-01 (layout + home) [ ]
 - CODE:
-  - `npx shadcn@latest add sidebar-07`
-  - Adapter la navigation (Dashboard, Apprendre, Reviser, Profil)
-  - Integrer avatar user avec useAuth
-  - Integrer search (Cmd+K)
-  - Supprimer anciens: layout/sidebar.tsx, layout/mobile-nav.tsx
-  - Mettre a jour app-shell.tsx
-- VERIFY: npm run build + npm run lint + test navigation
-- COMMIT: refactor(layout): replace custom layout with shadcn sidebar-07
+  - `npx shadcn@latest add dashboard-01`
+  - Adapter AppSidebar: navigation (Dashboard, Apprendre, Reviser, Profil)
+  - Adapter SiteHeader: avatar user avec useAuth, search (Cmd+K)
+  - Adapter contenu home: stats, quick actions, modules recents
+  - Supprimer anciens: layout/sidebar.tsx, layout/mobile-nav.tsx, layout/header.tsx
+  - Mettre a jour app-shell.tsx pour utiliser SidebarProvider
+- VERIFY: npm run build + npm run lint + test navigation + test home
+- COMMIT: refactor(layout): replace custom layout with shadcn dashboard-01
 
 ### 2. Remplacer login par shadcn login-04 [ ]
 - CODE:
@@ -26,17 +26,7 @@
 - VERIFY: npm run build + npm run lint + test auth complet
 - COMMIT: refactor(auth): replace custom login with shadcn login-04
 
-### 3. Utiliser dashboard-01 pour la home [ ]
-- CODE:
-  - `npx shadcn@latest add dashboard-01`
-  - Adapter les stats (activites, QCM, temps)
-  - Adapter les quick actions
-  - Adapter les modules recents
-  - Remplacer (main)/page.tsx
-- VERIFY: npm run build + npm run lint + test dashboard
-- COMMIT: refactor(home): use shadcn dashboard-01 block
-
-### 4. Inline patterns et supprimer sections [ ]
+### 3. Inline patterns et supprimer sections [ ]
 - CODE:
   - Inline module-card dans /apprendre
   - Inline activity-card dans /apprendre/[id]
@@ -50,7 +40,7 @@
 - VERIFY: npm run build + npm run lint
 - COMMIT: refactor(ui): inline patterns and remove redundant sections
 
-### 5. Cleanup final [ ]
+### 4. Cleanup final [ ]
 - CODE:
   - Verifier tous les imports
   - Nettoyer index.ts exports
@@ -63,12 +53,17 @@
 
 ## Notes
 
-- Pipeline 1-3 sont les shadcn blocks (gros impact)
-- Pipeline 4 est le nettoyage des abstractions inutiles
-- Pipeline 5 est la verification finale
+- Pipeline 1 est le plus gros (layout complet + home)
+- Pipeline 2 est independant (page auth separee)
+- Pipeline 3-4 sont le nettoyage
 - Toujours tester apres chaque pipeline
 - Garder qcm/, command-menu, scan-upload intacts
 
-## Ordre recommande
+## Blocks utilises
 
-1 -> 2 -> 3 -> 4 -> 5 (sequentiel, chaque etape depend de la precedente pour le layout)
+| Block | Contenu |
+|-------|---------|
+| `dashboard-01` | AppSidebar + SiteHeader + Charts + DataTable |
+| `login-04` | Form + Image (standalone, pas de sidebar) |
+
+> sidebar-07 n'est PAS necessaire car dashboard-01 inclut deja la sidebar.

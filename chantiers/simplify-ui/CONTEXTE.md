@@ -10,11 +10,10 @@
 ## Objectif detaille
 
 Reduire le nombre de fichiers et la complexite en :
-1. Remplacant les layouts custom par des shadcn blocks
-2. Remplacant la page auth par un block login shadcn
-3. Utilisant le dashboard block pour la home
-4. Inlinant les patterns simples directement dans les pages
-5. Gardant uniquement les composants metier necessaires
+1. Remplacant layout + home par shadcn dashboard-01 (inclut sidebar)
+2. Remplacant la page auth par shadcn login-04
+3. Inlinant les patterns simples directement dans les pages
+4. Gardant uniquement les composants metier necessaires
 
 ---
 
@@ -22,11 +21,12 @@ Reduire le nombre de fichiers et la complexite en :
 
 ### Shadcn Blocks a utiliser
 
-| Block | Usage | Remplace |
-|-------|-------|----------|
-| `sidebar-07` | Layout principal (collapsible) | layout/*, sections/sidebar |
-| `login-04` | Page auth (form + image) | login/page.tsx (285 lignes) |
-| `dashboard-01` | Home avec stats + charts | page.tsx custom |
+| Block | Usage | Inclut |
+|-------|-------|--------|
+| `dashboard-01` | Layout + Home | AppSidebar, SiteHeader, Charts, DataTable |
+| `login-04` | Page auth | Form + image (pas de sidebar) |
+
+> **Note**: dashboard-01 inclut deja la sidebar, donc sidebar-07 n'est PAS necessaire.
 
 ### Analyse des composants actuels
 
@@ -35,6 +35,11 @@ Reduire le nombre de fichiers et la complexite en :
 | **pages/** | | | |
 | `login/page.tsx` | 285 | SHADCN BLOCK | login-04 |
 | `(main)/page.tsx` | 149 | SHADCN BLOCK | dashboard-01 |
+| **layout/** | | | |
+| `app-shell.tsx` | 47 | SHADCN BLOCK | dashboard-01 |
+| `header.tsx` | 90 | SHADCN BLOCK | Integre dans dashboard-01 |
+| `sidebar.tsx` | 80 | SHADCN BLOCK | Integre dans dashboard-01 |
+| `mobile-nav.tsx` | 80 | SHADCN BLOCK | Integre dans dashboard-01 |
 | **patterns/** | | | |
 | `module-card.tsx` | 85 | INLINE | Simple Card, utilise 1x |
 | `activity-card.tsx` | ~80 | INLINE | Simple Card, utilise 1x |
@@ -45,27 +50,21 @@ Reduire le nombre de fichiers et la complexite en :
 | **sections/** | | | |
 | `module-list.tsx` | 50 | INLINE | Juste un .map() |
 | `activity-list.tsx` | 35 | INLINE | Juste un .map() |
-| `header.tsx` | 136 | SUPPRIMER | Doublon avec layout/header |
-| `sidebar.tsx` | 85 | SUPPRIMER | Doublon avec layout/sidebar |
-| `bottom-nav.tsx` | 50 | INTEGRER | Dans sidebar-07 mobile |
-| **layout/** | | | |
-| `app-shell.tsx` | 47 | SHADCN BLOCK | sidebar-07 |
-| `header.tsx` | 90 | SHADCN BLOCK | Integre dans sidebar-07 |
-| `sidebar.tsx` | 80 | SHADCN BLOCK | sidebar-07 |
-| `mobile-nav.tsx` | 80 | SHADCN BLOCK | sidebar-07 mobile |
+| `header.tsx` | 136 | SUPPRIMER | Doublon |
+| `sidebar.tsx` | 85 | SUPPRIMER | Doublon |
+| `bottom-nav.tsx` | 50 | INTEGRER | Dans dashboard-01 mobile |
 | **qcm/** | | | |
 | Tous | ~350 | GARDER | Logique metier |
 
-### Estimation impact (revisee)
+### Estimation impact
 
 | Metrique | Avant | Apres | Delta |
 |----------|-------|-------|-------|
 | Fichiers components | 32 | ~22 | **-10** |
 | Lignes login | 285 | ~50 | **-235** |
-| Lignes dashboard | 149 | ~80 | **-69** |
+| Lignes layout | ~300 | ~100 | **-200** |
 | Lignes patterns/ | ~900 | ~600 | **-300** |
 | Lignes sections/ | ~400 | ~50 | **-350** |
-| Lignes layout/ | ~300 | ~150 | **-150** |
 
 **Total estime : ~1100 lignes en moins, -10 fichiers**
 
@@ -83,9 +82,8 @@ Reduire le nombre de fichiers et la complexite en :
 
 ## Definition of Done
 
-- [ ] Layout remplace par shadcn sidebar-07
+- [ ] Layout + Home remplaces par shadcn dashboard-01
 - [ ] Page login remplacee par shadcn login-04
-- [ ] Dashboard utilise shadcn dashboard-01
 - [ ] patterns/module-card inline dans pages
 - [ ] patterns/activity-card inline dans pages
 - [ ] sections/ nettoye (doublons supprimes)
