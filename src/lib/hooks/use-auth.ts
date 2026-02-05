@@ -6,7 +6,12 @@
 
 import * as React from 'react'
 import { type User } from 'firebase/auth'
-import { subscribeToAuthState, signOut as authSignOut } from '@/lib/services'
+import {
+  subscribeToAuthState,
+  signOut as authSignOut,
+  signInWithEmail,
+  createAccount,
+} from '@/lib/services'
 
 interface AuthState {
   user: User | null
@@ -50,9 +55,19 @@ export function useAuth() {
     await authSignOut()
   }, [])
 
+  const signIn = React.useCallback(async (email: string, password: string) => {
+    return signInWithEmail(email, password)
+  }, [])
+
+  const signUp = React.useCallback(async (email: string, password: string) => {
+    return createAccount(email, password)
+  }, [])
+
   return {
     ...state,
     signOut,
+    signIn,
+    signUp,
     userId: state.user?.uid ?? null,
   }
 }
