@@ -56,7 +56,7 @@ export function AppSidebar({ onSearchClick, ...props }: AppSidebarProps) {
   const pathname = usePathname()
 
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar variant="inset" collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>

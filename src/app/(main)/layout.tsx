@@ -1,16 +1,23 @@
-/**
- * Main Layout
- *
- * Layout for all main pages (dashboard, apprendre, reviser, profil).
- * Wraps content with AppShell (sidebar + header).
- */
+'use client'
 
-import { AppShell } from '@/components/layout'
+import { AppSidebar } from '@/components/app-sidebar'
+import { SiteHeader } from '@/components/site-header'
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 
 export default function MainLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return <AppShell>{children}</AppShell>
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <SiteHeader />
+        <div className="flex flex-1 flex-col gap-4 p-4">
+          {children}
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
+  )
 }
