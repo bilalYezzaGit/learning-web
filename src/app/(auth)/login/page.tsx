@@ -18,7 +18,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { signInWithEmail } from '@/lib/services/auth-service'
+import { signInWithEmail, signInAnonymouslyFn } from '@/lib/services/auth-service'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -29,11 +29,20 @@ export default function LoginPage() {
   const handleAnonymousLogin = async () => {
     setIsLoading(true)
     setError(null)
-    // TODO: Implement Firebase anonymous auth
-    // await signInAnonymously(auth)
-    setTimeout(() => {
+    try {
+      await signInAnonymouslyFn()
       router.push('/')
-    }, 500)
+    } catch (err) {
+      const firebaseError = err as { code?: string; message?: string }
+      if (firebaseError.code === 'auth/operation-not-allowed') {
+        setError('La connexion anonyme n\'est pas activée.')
+      } else {
+        setError('Erreur de connexion. Veuillez réessayer.')
+        console.error('Anonymous login error:', firebaseError)
+      }
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleEmailLogin = async (e: React.FormEvent<HTMLFormElement>) => {
