@@ -288,7 +288,7 @@ export default function SeriePlayerPage({ params }: PageProps) {
 
         {/* QCM Player */}
         <div className="flex-1 overflow-auto">
-          <div className="container max-w-3xl py-6">
+          <div className="mx-auto max-w-3xl px-4 lg:px-6 py-6">
             {previousProgress && previousProgress.score !== undefined && previousProgress.total ? (
               <div className="mb-6 rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-950/20">
                 <p className="text-sm text-green-800 dark:text-green-200">
@@ -348,7 +348,7 @@ export default function SeriePlayerPage({ params }: PageProps) {
 
       {/* Content */}
       <div className="flex-1 overflow-auto">
-        <div className="container max-w-3xl py-6">
+        <div className="mx-auto max-w-3xl px-4 lg:px-6 py-6">
           {currentActivity.type === 'lesson' && (
             <ContentRenderer html={currentActivity.body} />
           )}

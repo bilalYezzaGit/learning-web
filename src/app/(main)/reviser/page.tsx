@@ -43,7 +43,7 @@ export default async function ReviserPage() {
   const activityIdsMap = new Map(seriesWithActivities.map((s) => [s.id, s.activityIds]))
 
   return (
-    <div className="container max-w-6xl py-6">
+    <div className="px-4 lg:px-6">
       <div className="mb-8">
         <h1 className="font-serif text-2xl font-semibold text-foreground">Réviser</h1>
         <p className="mt-1 text-muted-foreground">

@@ -7,7 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 export default function ApprendreLoading() {
   return (
-    <div className="container max-w-6xl py-6">
+    <div className="px-4 lg:px-6">
       {/* Header */}
       <div className="mb-8">
         <Skeleton className="h-8 w-40" />

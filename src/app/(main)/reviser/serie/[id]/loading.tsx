@@ -7,7 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 export default function SerieLoading() {
   return (
-    <div className="container max-w-4xl py-6">
+    <div className="px-4 lg:px-6">
       {/* Back button */}
       <Skeleton className="mb-4 h-9 w-36" />
 

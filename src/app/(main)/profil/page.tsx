@@ -20,7 +20,7 @@ export default function ProfilPage() {
   const { user, userId, isAuthenticated, isAnonymous, signOut } = useAuth()
 
   return (
-    <div className="container max-w-2xl py-6">
+    <div className="px-4 lg:px-6">
       <div className="mb-8">
         <h1 className="font-serif text-2xl font-semibold text-foreground">Profil</h1>
         <p className="mt-1 text-muted-foreground">Vos statistiques et paramètres</p>

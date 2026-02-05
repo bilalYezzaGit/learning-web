@@ -13,22 +13,23 @@ Simplifier le frontend en utilisant les blocks shadcn et standardiser l'UI.
 ┌─ SidebarProvider (shadcn) ─────────────────────────┐
 │ ┌─ AppSidebar ─┐ ┌─ SidebarInset (shadcn) ───────┐ │
 │ │  sidebar-07  │ │ SiteHeader (dashboard-01)     │ │
-│ │  collapse    │ │ ┌─ Content wrapper ─────────┐ │ │
-│ │  to icons    │ │ │ flex flex-1 gap-4 p-4     │ │ │
-│ │              │ │ │ ┌─ Page container ──────┐ │ │ │
-│ │              │ │ │ │ container max-w-6xl   │ │ │ │
+│ │  collapse    │ │ ┌─ @container/main ─────────┐ │ │
+│ │  to icons    │ │ │ flex flex-1 flex-col gap-2│ │ │
+│ │              │ │ │ ┌─ Content area ────────┐ │ │ │
+│ │              │ │ │ │ px-4 lg:px-6 (padding)│ │ │ │
+│ │              │ │ │ │ FULL WIDTH            │ │ │ │
 │ │              │ │ │ └──────────────────────┘ │ │ │
 │ └──────────────┘ └──────────────────────────────┘ │
 └────────────────────────────────────────────────────┘
 ```
 
-| Couche | Source |
-|--------|--------|
-| Shell | shadcn `SidebarProvider` + `SidebarInset` |
-| Sidebar | shadcn `sidebar-07` (collapse to icons) |
-| Header | shadcn `SiteHeader` (from dashboard-01) |
-| Content wrapper | dashboard-01 pattern |
-| Page container | Custom Tailwind (`container max-w-*`) |
+| Couche | Source | Pattern |
+|--------|--------|---------|
+| Shell | shadcn | `SidebarProvider` + `SidebarInset` |
+| Sidebar | shadcn | `sidebar-07` (collapse to icons) |
+| Header | shadcn | `SiteHeader` (from dashboard-01) |
+| Content wrapper | **dashboard-01** | `@container/main flex flex-1 flex-col gap-2` |
+| Page padding | **dashboard-01** | `px-4 lg:px-6` (PAS de `container max-w-*`) |
 
 ### Composants shadcn utilisés
 - Card, Progress, Badge, Button, Tabs
@@ -57,7 +58,53 @@ Simplifier le frontend en utilisant les blocks shadcn et standardiser l'UI.
 
 ## Pipelines à faire
 
-### Pipeline 3: Accueil Learner
+### Pipeline 3: Fix Layout + Accueil Learner ⬅️ PRIORITÉ
+
+#### 3.1 Fix Layout (URGENT)
+**Problème**: Les pages utilisent `container max-w-6xl` = contenu étroit et centré, moche.
+
+**Solution**: Adopter le pattern dashboard-01 partout.
+
+**Layout actuel (BAD)**:
+```tsx
+// (main)/layout.tsx
+<div className="flex flex-1 flex-col gap-4 p-4">
+  {children}
+</div>
+
+// pages
+<div className="container max-w-6xl py-6">
+  {/* contenu */}
+</div>
+```
+
+**Layout cible (GOOD)**:
+```tsx
+// (main)/layout.tsx
+<div className="flex flex-1 flex-col">
+  <div className="@container/main flex flex-1 flex-col gap-2">
+    <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+      {children}
+    </div>
+  </div>
+</div>
+
+// pages
+<div className="px-4 lg:px-6">
+  {/* contenu full width */}
+</div>
+```
+
+**Fichiers à modifier**:
+- [ ] `src/app/(main)/layout.tsx` - wrapper dashboard-01
+- [ ] `src/app/(main)/page.tsx` - retirer container
+- [ ] `src/app/(main)/profil/page.tsx` - retirer container
+- [ ] `src/app/(main)/apprendre/page.tsx` - retirer container
+- [ ] `src/app/(main)/reviser/page.tsx` - retirer container
+- [ ] `src/app/(main)/scan/page.tsx` - retirer container
+- [ ] Sous-pages apprendre et reviser
+
+#### 3.2 Accueil Learner
 **Objectif**: Remplacer le dashboard analytics par un accueil orienté apprentissage
 
 **Design cible**:
@@ -130,6 +177,15 @@ Simplifier le frontend en utilisant les blocks shadcn et standardiser l'UI.
 | `src/components/section-cards.tsx` | Analytics, pas learner |
 | `src/components/chart-area-interactive.tsx` | Analytics |
 | `src/components/data-table.tsx` | Analytics |
+
+---
+
+## Ordre d'exécution
+
+1. **P3.1** - Fix layout (toutes les pages) ⬅️ MAINTENANT
+2. **P3.2** - Accueil learner + cleanup dashboard
+3. **P4** - Profil avec Tabs
+4. **P5** - Calendrier (optionnel)
 
 ---
 

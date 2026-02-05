@@ -14,7 +14,7 @@ import { Progress } from '@/components/ui/progress'
 
 export default function DashboardPage() {
   return (
-    <div className="container max-w-6xl py-6">
+    <div className="px-4 lg:px-6">
       {/* Welcome */}
       <div className="mb-8">
         <h1 className="font-serif text-2xl font-semibold text-foreground">

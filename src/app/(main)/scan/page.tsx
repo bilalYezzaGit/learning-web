@@ -42,7 +42,7 @@ export default function ScanPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="container max-w-2xl py-12">
+      <div className="px-4 lg:px-6">
         <Card>
           <CardContent className="py-12 text-center">
             <Camera className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
@@ -60,7 +60,7 @@ export default function ScanPage() {
   }
 
   return (
-    <div className="container max-w-2xl py-6">
+    <div className="px-4 lg:px-6">
       {/* Header */}
       <div className="mb-8">
         <h1 className="font-serif text-2xl font-semibold">Scanner ma copie</h1>

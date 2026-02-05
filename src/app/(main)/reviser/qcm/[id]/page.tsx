@@ -117,7 +117,7 @@ export default function QCMPlayerPage() {
 
   if (state === 'finished') {
     return (
-      <div className="container max-w-lg py-12">
+      <div className="mx-auto max-w-lg px-4 lg:px-6 py-12">
         <Card>
           <CardContent className="py-8 text-center">
             <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
@@ -179,7 +179,7 @@ export default function QCMPlayerPage() {
 
       {/* Question */}
       <div className="flex-1 overflow-auto">
-        <div className="container max-w-2xl py-8">
+        <div className="mx-auto max-w-2xl px-4 lg:px-6 py-8">
           <h2 className="text-lg font-medium">{currentQuestion.text}</h2>
 
           <div className="mt-6 space-y-3">

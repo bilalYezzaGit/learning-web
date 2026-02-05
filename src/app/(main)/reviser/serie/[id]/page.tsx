@@ -83,7 +83,7 @@ export default async function SerieDetailPage({ params }: PageProps) {
   const progressPercent = totalActivities > 0 ? (completedActivities / totalActivities) * 100 : 0
 
   return (
-    <div className="container max-w-4xl py-6">
+    <div className="px-4 lg:px-6">
       {/* Back button */}
       <Button variant="ghost" size="sm" className="mb-4" asChild>
         <Link href="/reviser">

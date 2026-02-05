@@ -37,7 +37,7 @@ export default async function SerieResultPage({ params }: PageProps) {
   const lessonCount = serie.activities.filter((a) => a.type === 'lesson').length
 
   return (
-    <div className="container max-w-2xl py-12">
+    <div className="mx-auto max-w-2xl px-4 lg:px-6">
       {/* Success Header */}
       <div className="mb-8 text-center">
         <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
