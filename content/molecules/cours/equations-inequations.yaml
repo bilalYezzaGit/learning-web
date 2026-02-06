@@ -3,7 +3,7 @@ description: "Resolution d equations et d inequations du premier degre"
 programme: 1ere-tc
 trimester: T2
 order: 13
-estimatedTime: 120
+estimatedMinutes: 120
 objectives:
   - "Resoudre une equation du premier degre"
   - "Resoudre une inequation du premier degre"

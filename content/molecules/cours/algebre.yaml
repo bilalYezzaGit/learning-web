@@ -3,7 +3,7 @@ description: "Calcul litteral, identites remarquables et factorisation"
 programme: 1ere-tc
 trimester: T1
 order: 11
-estimatedTime: 120
+estimatedMinutes: 120
 objectives:
   - "Developper et reduire des expressions algebriques"
   - "Utiliser les identites remarquables"

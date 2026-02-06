@@ -5,6 +5,7 @@
  * Passed to compileMDX() to handle:
  *
  * Exercise parts:  <Enonce>, <Solution>, <Methode>, <Hint>, <Erreurs>
+ * QCM parts:       <Question>, <Option>, <Explanation>
  * Variations:      <Variations var="x" intervals="[...]"><Row .../></Variations>
  * Graphs:          <Graph function="..." range="[...]" />
  * Video:           <YouTube id="..." title="..." />
@@ -13,6 +14,7 @@
 import React from 'react'
 
 import { Enonce, Solution, Methode, Hint, Erreurs } from './exercise-parts'
+import { Question, Option, Explanation } from './qcm-parts'
 import { Graph as GraphBase } from '@/content/extensions/graph'
 import { YouTube as YouTubeBase } from '@/content/extensions/youtube'
 import { VariationsTable } from '@/content/extensions/variations'
@@ -147,6 +149,10 @@ export const mdxComponents = {
   Methode,
   Hint,
   Erreurs,
+  // QCM parts
+  Question,
+  Option,
+  Explanation,
   // Interactive content
   Variations,
   Row,

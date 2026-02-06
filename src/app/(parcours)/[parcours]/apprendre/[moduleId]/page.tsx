@@ -85,8 +85,8 @@ export default async function ModuleDetailPage({ params }: PageProps) {
               <Badge variant="secondary">
                 {totalAtoms} activités
               </Badge>
-              {cours.estimatedTime && (
-                <Badge variant="outline">{cours.estimatedTime} min</Badge>
+              {cours.estimatedMinutes && (
+                <Badge variant="outline">{cours.estimatedMinutes} min</Badge>
               )}
             </div>
 

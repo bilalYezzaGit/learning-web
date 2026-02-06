@@ -40,7 +40,7 @@ export default async function ModuleLayout({ children, params }: LayoutProps) {
         coursSlug={cours.slug}
         title={cours.title}
         description={cours.description}
-        estimatedMinutes={cours.estimatedTime}
+        estimatedMinutes={cours.estimatedMinutes}
         objectives={cours.objectives}
         activities={activities}
         sections={sections}

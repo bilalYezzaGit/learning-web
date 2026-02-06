@@ -9,7 +9,7 @@ icon: timeline
 trimester: T2
 order: 3
 version: 1
-estimatedTime: 180
+estimatedMinutes: 180
 
 prerequisites:
   - Limites

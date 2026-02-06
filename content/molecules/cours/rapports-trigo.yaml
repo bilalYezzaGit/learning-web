@@ -3,7 +3,7 @@ description: "Sinus, cosinus et tangente d un angle aigu dans un triangle rectan
 programme: 1ere-tc
 trimester: T1
 order: 3
-estimatedTime: 120
+estimatedMinutes: 120
 objectives:
   - "Definir le sinus, cosinus et tangente d un angle aigu"
   - "Calculer des longueurs et des angles dans un triangle rectangle"

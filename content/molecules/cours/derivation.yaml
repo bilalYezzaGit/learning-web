@@ -3,7 +3,7 @@ description: "Definition du nombre derive, interpretation geometrique et tangent
 programme: 3eme-math
 trimester: T2
 order: 2
-estimatedTime: 180
+estimatedMinutes: 180
 objectives:
   - "Calculer la derivee d une fonction"
   - "Interpreter geometriquement le nombre derive"

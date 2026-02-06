@@ -10,7 +10,7 @@ icon: functions
 trimester: T1
 order: 1
 version: 1
-estimatedTime: 120
+estimatedMinutes: 120
 
 prerequisites:
   - Limites

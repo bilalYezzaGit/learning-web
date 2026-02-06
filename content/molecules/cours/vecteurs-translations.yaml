@@ -3,7 +3,7 @@ description: "Introduction aux vecteurs et aux translations dans le plan"
 programme: 1ere-tc
 trimester: T1
 order: 4
-estimatedTime: 120
+estimatedMinutes: 120
 objectives:
   - "Definir un vecteur et ses caracteristiques"
   - "Comprendre la notion de translation"

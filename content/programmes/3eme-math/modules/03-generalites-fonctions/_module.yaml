@@ -9,7 +9,7 @@ icon: functions
 trimester: T1
 order: 3
 version: 1
-estimatedTime: 180
+estimatedMinutes: 180
 
 prerequisites:
   - Fonctions de reference (2eme annee)

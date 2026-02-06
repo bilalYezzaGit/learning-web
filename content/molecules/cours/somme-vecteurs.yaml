@@ -3,7 +3,7 @@ description: "Operations sur les vecteurs et colinearite"
 programme: 1ere-tc
 trimester: T2
 order: 5
-estimatedTime: 120
+estimatedMinutes: 120
 objectives:
   - "Calculer la somme de deux vecteurs"
   - "Reconnaitre des vecteurs colineaires"

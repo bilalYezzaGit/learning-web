@@ -259,19 +259,70 @@ function latexToMathTags(text: string): string {
 /**
  * Parse QCM atom MDX content into structured question data.
  *
- * Expected format:
+ * Supports the component format (v2):
  * ```
- * Question text with $LaTeX$
- *
- * - [ ] Wrong answer
- * - [x] Correct answer
- * - [ ] Wrong answer
- *
- * > Optional explanation
+ * <Question>Question text</Question>
+ * <Option>Wrong</Option>
+ * <Option correct>Correct</Option>
+ * <Explanation>Why</Explanation>
  * ```
  */
 export function parseQcmContent(atom: Atom): ParsedQCMQuestion {
-  const lines = atom.content.trim().split('\n')
+  const raw = atom.content.trim()
+
+  // Detect format: component-based (<Question>) vs legacy (checkbox)
+  if (raw.includes('<Question>')) {
+    return parseQcmComponents(atom, raw)
+  }
+
+  return parseQcmLegacy(atom, raw)
+}
+
+/**
+ * Parse v2 component format using regex on raw MDX source.
+ */
+function parseQcmComponents(atom: Atom, raw: string): ParsedQCMQuestion {
+  // Extract <Question>...</Question>
+  const questionMatch = raw.match(/<Question>([\s\S]*?)<\/Question>/)
+  const enonce = latexToMathTags((questionMatch?.[1] ?? '').trim())
+
+  // Extract all <Option>...</Option> and <Option correct>...</Option>
+  const options: string[] = []
+  let correctIndex = 0
+  const optionRegex = /<Option(\s+correct)?>([\s\S]*?)<\/Option>/g
+  let match
+  while ((match = optionRegex.exec(raw)) !== null) {
+    if (match[1]) {
+      correctIndex = options.length
+    }
+    options.push(latexToMathTags((match[2] ?? '').trim()))
+  }
+
+  // Extract <Explanation>...</Explanation>
+  const explMatch = raw.match(/<Explanation>([\s\S]*?)<\/Explanation>/)
+  const explication = explMatch?.[1]?.trim() || undefined
+
+  return {
+    id: atom.id,
+    enonce,
+    options,
+    correctIndex,
+    explication: explication ? latexToMathTags(explication) : undefined,
+    timeMinutes: atom.timeMinutes,
+  }
+}
+
+/**
+ * Parse legacy checkbox format (v1).
+ * ```
+ * Question text
+ * - [ ] Wrong
+ * - [x] Correct
+ * > Explanation
+ * ```
+ */
+function parseQcmLegacy(atom: Atom, raw: string): ParsedQCMQuestion {
+  const lines = raw.split('\n')
 
   const enonceLines: string[] = []
   const options: string[] = []

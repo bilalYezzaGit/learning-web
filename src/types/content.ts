@@ -61,7 +61,7 @@ export interface CoursMolecule {
   programme: string
   trimester: string
   order: number
-  estimatedTime: number
+  estimatedMinutes: number
   objectives: string[]
   sections: MoleculeSection[]
 }

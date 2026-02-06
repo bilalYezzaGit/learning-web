@@ -1,6 +1,6 @@
 # Convention de contenu
 
-Version 1 — 2026-02-06
+Version 2 — 2026-02-06
 
 Ce document definit les regles strictes d'ecriture du contenu pedagogique. Tout contenu qui ne respecte pas ces regles doit etre corrige. La convention prime sur l'existant.
 
@@ -192,25 +192,37 @@ Erreurs frequentes a eviter.
 
 ### 2.3 QCM
 
-Une seule question par atome. Format Markdown checkbox :
+Une seule question par atome. Format composants MDX :
 
 ```mdx
-Texte de la question (enonce).
+---
+type: qcm
+title: "Continuite des polynomes"
+difficulty: 1
+timeMinutes: 1
+tags: [continuite, polynomes]
+---
 
-- [ ] Reponse incorrecte A
-- [ ] Reponse incorrecte B
-- [x] Reponse correcte
-- [ ] Reponse incorrecte D
+<Question>
+Une fonction polynome est continue sur :
+</Question>
 
-> Explication de la bonne reponse.
+<Option>$\mathbb{R}^+$ seulement</Option>
+<Option>$\mathbb{R}^*$</Option>
+<Option correct>$\mathbb{R}$</Option>
+<Option>Un intervalle borne</Option>
+
+<Explanation>
+Les polynomes sont continus sur tout $\mathbb{R}$, sans exception.
+</Explanation>
 ```
 
 **Regles** :
-- Exactement **4 options** (ni plus, ni moins)
-- Exactement **1 seule** reponse correcte (`[x]`)
-- L'explication (`> ...`) est **obligatoire**
-- Le texte de la question precede directement les options (une ligne vide entre les deux)
-- Pas de composants MDX (`<Enonce>`, etc.) — format Markdown pur
+- `<Question>` obligatoire, une seule, contient l'enonce
+- De **2 a 5 `<Option>`**, une seule avec l'attribut `correct`
+- `<Explanation>` obligatoire, une seule, contient l'explication pedagogique
+- Ordre strict : Question → Options → Explanation
+- Pas de contenu hors des composants
 - L'explication doit etre pedagogique, pas juste "C'est la bonne reponse"
 
 ---
@@ -229,7 +241,7 @@ description: "Description courte"       # obligatoire
 programme: 3eme-math                    # obligatoire, ID du programme
 trimester: T1 | T2 | T3                # obligatoire
 order: 1                                # obligatoire, position dans le programme
-estimatedTime: 180                      # obligatoire, en minutes
+estimatedMinutes: 180                   # obligatoire, en minutes
 objectives:                             # obligatoire, >= 1
   - "Objectif 1"
   - "Objectif 2"
@@ -321,28 +333,255 @@ Tout le contenu mathematique utilise la syntaxe LaTeX standard.
 
 ---
 
-## 5. Composants MDX
+## 5. Composants MDX — Reference detaillee
 
-Composants disponibles dans le contenu MDX. Tout autre composant est interdit.
+Seuls les composants listes ci-dessous sont autorises dans le contenu MDX. Tout autre composant est interdit (pas de `<Geogebra>`, `<Simulation>`, `<Manim>`, etc.).
 
-| Composant | Usage | Types autorises |
-|-----------|-------|-----------------|
-| `<Enonce>` | Enonce d'exercice | exercise |
-| `<Solution>` | Solution d'exercice | exercise |
-| `<Methode>` | Methode generale | exercise |
-| `<Hint>` | Indication | exercise |
-| `<Erreurs>` | Erreurs frequentes | exercise |
-| `<Graph>` | Graphe de fonction | lesson, exercise |
-| `<Variations>` + `<Row>` | Tableau de variations | lesson, exercise |
-| `<YouTube>` | Video YouTube | lesson |
+### 5.1 Exercice
 
-**Interdit** : tout composant non liste ici (pas de `<Geogebra>`, `<Simulation>`, `<Manim>`, etc.)
+#### `<Enonce>`
+
+Enonce de l'exercice. Contient la question posee a l'eleve.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX) |
+| **Obligatoire** | Oui |
+| **Types autorises** | `exercise` |
+| **Rendu** | Bloc visible directement, sans collapse |
+
+**Exemple** :
+```mdx
+<Enonce>
+Soit $f(x) = x^2 - 3x + 2$. Determiner les racines de $f$.
+</Enonce>
+```
+
+#### `<Solution>`
+
+Solution detaillee de l'exercice. Masquee par defaut, l'eleve clique pour reveler.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX) |
+| **Obligatoire** | Oui |
+| **Types autorises** | `exercise` |
+| **Rendu** | Bloc `<details>` vert avec icone, collapse ferme par defaut |
+
+**Exemple** :
+```mdx
+<Solution>
+On cherche les racines : $\Delta = 9 - 8 = 1 > 0$.
+
+$$x_1 = \frac{3 - 1}{2} = 1 \quad ; \quad x_2 = \frac{3 + 1}{2} = 2$$
+</Solution>
+```
+
+#### `<Methode>`
+
+Rappel de la methode generale applicable a ce type d'exercice.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX) |
+| **Obligatoire** | Non |
+| **Types autorises** | `exercise` |
+| **Rendu** | Bloc `<details>` bleu avec icone livre, collapse ferme par defaut |
+
+**Exemple** :
+```mdx
+<Methode>
+Pour trouver les racines d'un polynome du second degre $ax^2 + bx + c$ :
+
+1. Calculer le discriminant $\Delta = b^2 - 4ac$
+2. Si $\Delta > 0$ : deux racines $x_{1,2} = \frac{-b \pm \sqrt{\Delta}}{2a}$
+</Methode>
+```
+
+#### `<Hint>`
+
+Indication pour aider l'eleve a demarrer sans donner la solution.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX) |
+| **Obligatoire** | Non |
+| **Types autorises** | `exercise` |
+| **Rendu** | Bloc `<details>` ambre avec icone ampoule, collapse ferme par defaut |
+
+**Exemple** :
+```mdx
+<Hint>
+Pensez a calculer le discriminant d'abord.
+</Hint>
+```
+
+#### `<Erreurs>`
+
+Erreurs frequentes que les eleves commettent sur ce type d'exercice.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX) |
+| **Obligatoire** | Non |
+| **Types autorises** | `exercise` |
+| **Rendu** | Bloc `<details>` rouge avec icone alerte, collapse ferme par defaut |
+
+**Exemple** :
+```mdx
+<Erreurs>
+- Oublier de verifier le signe du discriminant avant d'appliquer la formule
+- Confondre $-b$ avec $b$ dans la formule
+</Erreurs>
+```
+
+### 5.2 QCM
+
+#### `<Question>`
+
+Enonce de la question QCM. Contient le texte de la question posee.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX) |
+| **Obligatoire** | Oui |
+| **Types autorises** | `qcm` |
+| **Rendu** | Data carrier — le contenu est extrait par le parser, pas rendu directement |
+
+**Exemple** :
+```mdx
+<Question>
+La derivee de $f(x) = x^3$ est :
+</Question>
+```
+
+#### `<Option>`
+
+Une option de reponse dans un QCM. De 2 a 5 par atome, une seule avec `correct`.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX), `correct` (boolean, optionnel) |
+| **Obligatoire** | Oui (2 a 5) |
+| **Types autorises** | `qcm` |
+| **Rendu** | Data carrier — extrait par le parser |
+
+**Exemple** :
+```mdx
+<Option>$x^2$</Option>
+<Option correct>$3x^2$</Option>
+<Option>$3x^3$</Option>
+<Option>$x^4$</Option>
+```
+
+#### `<Explanation>`
+
+Explication pedagogique de la bonne reponse. Affichee apres que l'eleve a repondu.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX) |
+| **Obligatoire** | Oui |
+| **Types autorises** | `qcm` |
+| **Rendu** | Data carrier — extrait par le parser |
+
+**Exemple** :
+```mdx
+<Explanation>
+On applique la regle $(x^n)' = nx^{n-1}$, donc $(x^3)' = 3x^2$.
+</Explanation>
+```
+
+### 5.3 Contenu enrichi
+
+#### `<Graph>`
+
+Affiche le graphe d'une fonction mathematique avec des axes et une grille.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `function` ou `fn` (expression), `range` (intervalle x), `yRange` ou `y-range` (intervalle y, optionnel), `points` (points remarquables, optionnel), `hideFormula` ou `hide-formula` (boolean, optionnel) |
+| **Obligatoire** | Non |
+| **Types autorises** | `lesson`, `exercise` |
+| **Rendu** | Graphique interactif (Recharts) avec axes, grille, et courbe |
+
+**Exemple** :
+```mdx
+<Graph function="x^2 - 1" range="[-3, 3]" yRange="[-2, 8]" />
+```
+
+#### `<Variations>` + `<Row>`
+
+Tableau de variations d'une fonction (signe de la derivee + variations de f).
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props (Variations)** | `var` (variable, defaut `"x"`), `intervals` (bornes du tableau) |
+| **Props (Row)** | `label` (nom de la ligne), `kind` (`"sign"` ou `"var"`), `values` (valeurs entre les bornes) |
+| **Obligatoire** | Non |
+| **Types autorises** | `lesson`, `exercise` |
+| **Rendu** | Tableau de variations formate avec fleches et signes |
+
+**Exemple** :
+```mdx
+<Variations var="x" intervals="[-∞, -1, 2, +∞]">
+  <Row label="f'(x)" kind="sign" values="[+, 0, -, 0, +]" />
+  <Row label="f(x)" kind="var" values="[-∞, ↗, 3, ↘, -1, ↗, +∞]" />
+</Variations>
+```
+
+#### `<YouTube>`
+
+Integre une video YouTube. Rendu responsive avec ratio 16:9.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `id` (ID de la video YouTube), `title` (titre accessible, optionnel) |
+| **Obligatoire** | Non |
+| **Types autorises** | `lesson` |
+| **Rendu** | iframe YouTube responsive |
+
+**Exemple** :
+```mdx
+<YouTube id="dQw4w9WgXcQ" title="Introduction a la continuite" />
+```
 
 ---
 
-## 6. Vocabulaire controle
+## 6. Extensibilite — Ajouter un nouveau composant
 
-### 6.1 Topics (segment d'ID)
+### Ou vivent les composants
+
+```
+src/
+├── components/content/
+│   ├── exercise-parts.tsx      # Enonce, Solution, Methode, Hint, Erreurs
+│   ├── qcm-parts.tsx           # Question, Option, Explanation
+│   └── mdx-components.tsx      # Registre central
+└── content/extensions/
+    ├── graph.tsx                # Graph
+    ├── youtube.tsx              # YouTube
+    └── variations.tsx           # VariationsTable
+```
+
+### Le registre MDX
+
+Tous les composants disponibles dans le contenu MDX sont enregistres dans `src/components/content/mdx-components.tsx`. Ce fichier exporte un objet `mdxComponents` passe a `compileMDX()`.
+
+### Procedure pour ajouter un nouveau composant
+
+1. **Creer le composant** dans `src/components/content/` (partie structurelle) ou `src/content/extensions/` (rendu visuel riche)
+2. **Creer un adaptateur** dans `mdx-components.tsx` si les props MDX different des props du composant
+3. **Enregistrer** dans l'objet `mdxComponents` de `mdx-components.tsx`
+4. **Documenter** dans la section 5 de ce document (description, props, rendu, exemple, types autorises)
+
+Un composant non documente ici est considere comme non autorise dans le contenu.
+
+---
+
+## 7. Vocabulaire controle
+
+### 7.1 Topics (segment d'ID)
 
 Le topic dans l'ID de l'atome est un slug court. Chaque topic correspond a un cours.
 
@@ -370,7 +609,7 @@ Le topic dans l'ID de l'atome est un slug court. Chaque topic correspond a un co
 
 Pour ajouter un nouveau topic : l'ajouter a ce tableau et creer le cours correspondant.
 
-### 6.2 Tags
+### 7.2 Tags
 
 Les tags sont semantiques et libres, mais doivent rester dans le vocabulaire existant autant que possible. Avant de creer un nouveau tag, verifier qu'un tag existant ne couvre pas deja le concept.
 
@@ -382,7 +621,7 @@ Les tags sont semantiques et libres, mais doivent rester dans le vocabulaire exi
 
 ---
 
-## 7. Markdown
+## 8. Markdown
 
 ### Headings
 
@@ -409,7 +648,7 @@ Les tags sont semantiques et libres, mais doivent rester dans le vocabulaire exi
 
 ---
 
-## 8. Checklist de validation
+## 9. Checklist de validation
 
 Un atome est valide si :
 
@@ -422,7 +661,8 @@ Un atome est valide si :
 - [ ] `category` est present si et seulement si `type: exercise`
 - [ ] Le contenu suit la structure obligatoire du type (voir section 2)
 - [ ] Les exercises ont `<Enonce>` et `<Solution>`
-- [ ] Les QCM ont exactement 4 options, 1 `[x]`, et une explication `>`
+- [ ] Les QCM ont `<Question>`, de 2 a 5 `<Option>` (une seule avec `correct`), et `<Explanation>`
 - [ ] Le LaTeX utilise `$...$` et `$$...$$` (pas de balises HTML)
 - [ ] Les headings commencent a `###`
 - [ ] Pas de composants non autorises
+- [ ] Tout nouveau composant est documente dans la section 5

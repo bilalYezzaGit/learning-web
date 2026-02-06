@@ -3,7 +3,7 @@ description: "Resolution de systemes d equations lineaires"
 programme: 1ere-tc
 trimester: T3
 order: 15
-estimatedTime: 120
+estimatedMinutes: 120
 objectives:
   - "Resoudre un systeme par substitution"
   - "Resoudre un systeme par combinaison lineaire"

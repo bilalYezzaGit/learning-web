@@ -3,7 +3,7 @@ description: "Vocabulaire des fonctions, parite, sens de variation, extremums, t
 programme: 3eme-math
 trimester: T1
 order: 3
-estimatedTime: 180
+estimatedMinutes: 180
 objectives:
   - "Maitriser le vocabulaire des fonctions (domaine, image, antecedent)"
   - "Etudier la parite d une fonction"

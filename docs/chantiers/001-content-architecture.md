@@ -224,7 +224,7 @@ description: "Continuite, prolongement par continuite et TVI"
 programme: 3eme-math
 trimester: T1
 order: 1
-estimatedTime: 180
+estimatedMinutes: 180
 objectives:
   - "Determiner si une fonction est continue en un point"
   - "Calculer un prolongement par continuite"

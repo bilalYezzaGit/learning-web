@@ -3,7 +3,7 @@ description: "Coupes de solides par des plans"
 programme: 1ere-tc
 trimester: T2
 order: 8
-estimatedTime: 90
+estimatedMinutes: 90
 objectives:
   - "Determiner la section d un solide par un plan"
   - "Construire des sections de pyramides et de cones"

@@ -3,7 +3,7 @@ description: "Etude des fonctions usuelles et leurs proprietes"
 programme: 3eme-sciences
 trimester: T1
 order: 1
-estimatedTime: 90
+estimatedMinutes: 90
 objectives:
   - "Connaitre les fonctions usuelles"
 

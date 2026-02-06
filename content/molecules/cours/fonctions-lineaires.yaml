@@ -3,7 +3,7 @@ description: "Definition, representation graphique et proprietes des fonctions l
 programme: 1ere-tc
 trimester: T2
 order: 12
-estimatedTime: 120
+estimatedMinutes: 120
 objectives:
   - "Definir une fonction lineaire"
   - "Representer graphiquement une fonction lineaire"

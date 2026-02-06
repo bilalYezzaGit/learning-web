@@ -3,7 +3,7 @@ description: "Intervalles, valeur absolue et encadrements"
 programme: 1ere-tc
 trimester: T2
 order: 10
-estimatedTime: 120
+estimatedMinutes: 120
 objectives:
   - "Utiliser les intervalles de nombres reels"
   - "Maitriser la valeur absolue"

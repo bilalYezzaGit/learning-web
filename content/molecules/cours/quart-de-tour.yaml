@@ -3,7 +3,7 @@ description: "Rotation de 90 degres et ses proprietes"
 programme: 1ere-tc
 trimester: T2
 order: 7
-estimatedTime: 90
+estimatedMinutes: 90
 objectives:
   - "Definir le quart de tour (rotation de 90 degres)"
   - "Construire l image d un point par un quart de tour"

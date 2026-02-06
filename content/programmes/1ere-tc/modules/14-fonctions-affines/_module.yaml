@@ -9,7 +9,7 @@ icon: "📉"
 trimester: T3
 order: 14
 version: 1
-estimatedTime: 120
+estimatedMinutes: 120
 available: true
 
 prerequisites:

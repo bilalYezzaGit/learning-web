@@ -3,7 +3,7 @@ description: "Reperage dans le plan, coordonnees et calculs"
 programme: 1ere-tc
 trimester: T2
 order: 6
-estimatedTime: 120
+estimatedMinutes: 120
 objectives:
   - "Se reperer dans un repere orthonorme"
   - "Calculer les coordonnees d un point et d un vecteur"
