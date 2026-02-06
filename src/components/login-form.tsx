@@ -14,7 +14,9 @@ import {
   FieldSeparator,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { doc, getDoc } from 'firebase/firestore'
 import { useAuth } from '@/lib/hooks/use-auth'
+import { getDbInstance } from '@/lib/firebase/client'
 
 export function LoginForm({
   className,
@@ -36,8 +38,18 @@ export function LoginForm({
     const password = formData.get('password') as string
 
     try {
-      await signIn(email, password)
-      router.push('/')
+      const user = await signIn(email, password)
+
+      // Fetch user's parcours to redirect to the right dashboard
+      const db = getDbInstance()
+      const userDoc = await getDoc(doc(db, 'users', user.uid))
+      const parcoursSlug = userDoc.data()?.parcours?.slug
+
+      if (parcoursSlug) {
+        router.push(`/${parcoursSlug}`)
+      } else {
+        router.push('/select-parcours')
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur de connexion')
     } finally {

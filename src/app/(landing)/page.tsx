@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
+import { LandingHeader } from '@/components/landing-header'
 import { getAvailableParcours } from '@/lib/parcours'
 
 export default function LandingPage() {
@@ -19,19 +20,7 @@ export default function LandingPage() {
   return (
     <div className="flex min-h-svh flex-col">
       {/* Nav */}
-      <header className="border-b">
-        <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between px-4 md:px-6">
-          <span className="text-lg font-semibold">Learning OS</span>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/login">Se connecter</Link>
-            </Button>
-            <Button size="sm" asChild>
-              <Link href="/signup">S&apos;inscrire</Link>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <LandingHeader />
 
       {/* Hero */}
       <section className="mx-auto flex w-full max-w-7xl flex-col items-center gap-6 px-4 py-16 text-center md:px-6 md:py-24">
