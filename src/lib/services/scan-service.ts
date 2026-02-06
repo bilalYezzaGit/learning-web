@@ -14,17 +14,7 @@
  */
 
 import { httpsCallable } from 'firebase/functions'
-import {
-  collection,
-  query,
-  where,
-  orderBy,
-  limit,
-  getDocs,
-  type Timestamp,
-} from 'firebase/firestore'
-
-import { getFunctionsInstance, getDbInstance } from '@/lib/firebase/client'
+import { getFunctionsInstance } from '@/lib/firebase/client'
 
 // =============================================================================
 // Types
@@ -157,47 +147,3 @@ export async function analyzeScan({
   }
 }
 
-/**
- * Get the most recent scan result for an activity
- */
-export async function getLastScanForActivity(
-  userId: string,
-  activityId: string
-): Promise<ScanResult | null> {
-  const db = getDbInstance()
-
-  const scanCollection = collection(db, 'users', userId, 'scanHistory')
-  const q = query(
-    scanCollection,
-    where('activityId', '==', activityId),
-    orderBy('analyzedAt', 'desc'),
-    limit(1)
-  )
-
-  const snapshot = await getDocs(q)
-
-  if (snapshot.empty || !snapshot.docs[0]) return null
-
-  const doc = snapshot.docs[0]
-  const data = doc.data()
-
-  return {
-    scanId: doc.id,
-    activityId: data.activityId,
-    moduleId: data.moduleId,
-    isCorrect: data.isCorrect ?? false,
-    confidence: data.confidence ?? 0,
-    feedback: data.feedback ?? '',
-    suggestions: data.suggestions ?? [],
-    analyzedAt: (data.analyzedAt as Timestamp)?.toDate() ?? new Date(),
-  }
-}
-
-// =============================================================================
-// Export
-// =============================================================================
-
-export const scanService = {
-  analyzeScan,
-  getLastScanForActivity,
-}

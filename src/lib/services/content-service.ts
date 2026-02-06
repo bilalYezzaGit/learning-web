@@ -147,13 +147,3 @@ export async function fetchSerie(serieId: string): Promise<Serie> {
   return data as Serie
 }
 
-// =============================================================================
-// Convenience exports
-// =============================================================================
-
-export const contentService = {
-  fetchProgrammes,
-  fetchModule,
-  fetchSeriesCatalog,
-  fetchSerie,
-}

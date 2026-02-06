@@ -3,7 +3,6 @@
  */
 
 export {
-  contentService,
   fetchProgrammes,
   fetchModule,
   fetchSeriesCatalog,
@@ -16,12 +15,9 @@ export {
 export { ProgressService, type ProgressMap, type ProgressListener } from './progress-service'
 
 export {
-  getCurrentUser,
   subscribeToAuthState,
   signInWithEmail,
   createAccount,
   signOut,
-  isAuthenticated,
-  getUserId,
   type AuthStateListener,
 } from './auth-service'

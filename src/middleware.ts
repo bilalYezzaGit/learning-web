@@ -16,7 +16,6 @@ const GLOBAL_ROUTES = [
   '/signup',
   '/parametres',
   '/select-parcours',
-  '/gallery',
 ]
 
 /**

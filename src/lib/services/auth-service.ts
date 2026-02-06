@@ -8,7 +8,6 @@
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
   signOut as firebaseSignOut,
   onAuthStateChanged,
   type User,
@@ -26,14 +25,6 @@ export type AuthStateListener = (user: User | null) => void
 // =============================================================================
 // Service functions
 // =============================================================================
-
-/**
- * Get current user (synchronous, may be null)
- */
-export function getCurrentUser(): User | null {
-  const auth = getAuthInstance()
-  return auth.currentUser
-}
 
 /**
  * Subscribe to auth state changes
@@ -75,29 +66,4 @@ export async function signOut(): Promise<void> {
   await firebaseSignOut(auth)
 }
 
-/**
- * Send password reset email
- */
-export async function resetPassword(email: string): Promise<void> {
-  const auth = getAuthInstance()
-  await sendPasswordResetEmail(auth, email)
-}
-
-/**
- * Check if user is authenticated
- */
-export function isAuthenticated(): boolean {
-  return getCurrentUser() !== null
-}
-
-/**
- * Get current user ID (throws if not authenticated)
- */
-export function getUserId(): string {
-  const user = getCurrentUser()
-  if (!user) {
-    throw new Error('User not authenticated')
-  }
-  return user.uid
-}
 

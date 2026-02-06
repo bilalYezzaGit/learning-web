@@ -36,31 +36,3 @@ export function useMediaQuery(query: string): boolean {
   return matches
 }
 
-// =============================================================================
-// Convenience hooks for common breakpoints
-// =============================================================================
-
-/** Mobile: < 640px */
-export function useIsMobile(): boolean {
-  return useMediaQuery('(max-width: 639px)')
-}
-
-/** Tablet: 640px - 1023px */
-export function useIsTablet(): boolean {
-  return useMediaQuery('(min-width: 640px) and (max-width: 1023px)')
-}
-
-/** Desktop: >= 1024px */
-export function useIsDesktop(): boolean {
-  return useMediaQuery('(min-width: 1024px)')
-}
-
-/** Prefers dark color scheme */
-export function usePrefersDarkMode(): boolean {
-  return useMediaQuery('(prefers-color-scheme: dark)')
-}
-
-/** Prefers reduced motion */
-export function usePrefersReducedMotion(): boolean {
-  return useMediaQuery('(prefers-reduced-motion: reduce)')
-}

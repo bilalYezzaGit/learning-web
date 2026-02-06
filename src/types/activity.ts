@@ -133,12 +133,3 @@ export function getActivityTypeLabel(type: ActivityType): string {
   }
 }
 
-/** Check if exercise is a multi-question problem */
-export function isProbleme(exercise: Exercise): boolean {
-  return exercise.questions.length > 0
-}
-
-/** Get question count for QCM */
-export function getQuestionCount(qcm: QCM): number {
-  return qcm.questions.length
-}

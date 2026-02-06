@@ -113,51 +113,45 @@
 
 ---
 
-## PARTIE 12 — Hooks & State Management
+## ~~PARTIE 12 — Hooks & State Management~~ DONE
 
-### 12.1 Auditer les hooks
-- [ ] Relire tous les hooks dans `lib/hooks/` et `src/hooks/`.
-- [ ] Identifier les doublons (use-mobile vs use-media-query), les hooks inutilisés, les hooks trop complexes.
-- [ ] Vérifier la cohérence des patterns (certains utilisent React Query, d'autres non).
-
-### 12.2 Auditer les stores Zustand
-- [ ] Relire `stores/preferences-store.ts` et `stores/ui-store.ts`.
-- [ ] Vérifier si tous les states sont réellement utilisés.
-
-### 12.3 Appliquer le nettoyage
-- [ ] Fusionner/supprimer les doublons.
-- [ ] Simplifier les hooks complexes.
+- [x] Supprimé `ui-store.ts` (76 lignes) — 100% inutilisé (theme via next-themes, sidebar via React Context, toasts via Sonner)
+- [x] Supprimé `preferences-store.ts` (109 lignes) — 100% inutilisé, jamais importé
+- [x] Supprimé `use-module.ts` (27 lignes) — jamais utilisé, les Server Components fetchent directement
+- [x] Supprimé `use-local-storage.ts` (78 lignes) — jamais utilisé
+- [x] Nettoyé `use-media-query.ts` — supprimé 5 hooks de convenience morts (useIsTablet, useIsDesktop, usePrefersDarkMode, usePrefersReducedMotion, useIsMobile), gardé `useMediaQuery` seul
+- [x] Gardé `src/hooks/use-mobile.ts` (shadcn default, utilisé par sidebar, breakpoint 768px)
+- [x] Hooks actifs restants : `useProgrammes`, `useParcoursModules`, `useProgress` — tous bien utilisés
+- [x] ~483 lignes de code mort supprimées (79% des hooks/stores)
 
 ---
 
-## PARTIE 13 — Types & Services
+## ~~PARTIE 13 — Types & Services~~ DONE
 
-### 13.1 Auditer les types
-- [ ] Relire tous les fichiers dans `types/`.
-- [ ] Identifier les types dupliqués, les interfaces trop larges, les fichiers obsolètes.
+### Types nettoyés :
+- [x] Supprimé `ModuleSummary` et `ProgrammeSummary` de models.ts (jamais importés)
+- [x] Supprimé `ModuleStats` + 5 helpers morts de progress.ts (`emptyModuleStats`, `isProgressSuccess`, `needsReview`, `isModuleComplete`, `getRemainingCount`)
+- [x] Supprimé `OnboardingState` + `ONBOARDING_TOTAL_STEPS` + 6 helpers morts de user.ts (`initialOnboardingState`, `hasFirstName`, `getDisplayName`, `canProceed`, `isOnboardingComplete`, `getOnboardingProgress`, `getStepLabel`)
+- [x] Supprimé 4 helpers morts de series.ts (`findSeriesById`, `getSeriesExerciseCount`, `getSeriesQCMCount`, `getSeriesModuleIds`)
+- [x] Supprimé `isProbleme` et `getQuestionCount` de activity.ts (jamais importés)
+- [x] Nettoyé `types/index.ts` barrel — supprimé tous les re-exports morts
 
-### 13.2 Auditer les services
-- [ ] Relire `services/content-service.ts`, `services/progress-service.ts`, `services/scan-service.ts`.
-- [ ] Identifier la sur-complexité (converters Firestore, subscriptions manuelles).
-
-### 13.3 Appliquer la simplification
-- [ ] Consolider les types, simplifier les services.
+### Services nettoyés :
+- [x] Supprimé 4 fonctions mortes de auth-service.ts (`getCurrentUser`, `resetPassword`, `isAuthenticated`, `getUserId`) + import `sendPasswordResetEmail`
+- [x] Supprimé `contentService` object wrapper de content-service.ts (jamais importé)
+- [x] Supprimé `getLastScanForActivity` + `scanService` object de scan-service.ts (jamais importés) + imports Firestore devenus inutiles
+- [x] Nettoyé `services/index.ts` barrel
 
 ---
 
-## PARTIE 14 — Content System & Gallery
+## ~~PARTIE 14 — Content System & Gallery~~ DONE
 
-### 14.1 Auditer le système de contenu
-- [ ] Relire `content/renderer.tsx`, `content/utils.ts`, `content/index.ts` et les 4 extensions (math, graph, variations, youtube).
-- [ ] Identifier la complexité et les opportunités de simplification.
-
-### 14.2 Auditer la gallery
-- [ ] Relire `gallery/page.tsx` (~500 lignes).
-- [ ] Décider : supprimer, garder en dev-only, ou simplifier.
-
-### 14.3 Appliquer les changements
-- [ ] Simplifier le content system si possible.
-- [ ] Traiter la gallery selon la décision.
+- [x] Supprimé `gallery/page.tsx` (450 lignes) — page dev-only, non liée depuis l'app, accessible uniquement par URL directe
+- [x] Supprimé 4 composants QCM gallery-only : `qcm-option.tsx`, `qcm-question.tsx`, `qcm-review.tsx`, `qcm-result.tsx`
+- [x] Supprimé 3 composants UI gallery-only : `search-bar.tsx`, `chip.tsx`, `icon.tsx`
+- [x] Retiré `/gallery` de la whitelist middleware
+- [x] Nettoyé `content/index.ts` — supprimé les exports de utilities et extensions inutilisés (seul `ContentRenderer` est importé)
+- [x] Content system (renderer + 4 extensions) gardé tel quel — bien structuré, utilisé par 5 fichiers
 
 ---
 
@@ -170,6 +164,6 @@
 | **Phase 3** | P5, P6 | Navigation : sidebar, header, dashboard | **DONE**      |
 | **Phase 4** | P7, P8 | Core features : apprendre, reviser | **DONE**      |
 | **Phase 5** | P9, P10, P11 | Components lourds : timeline, profile, QCM | **DONE** |
-| **Phase 6** | P12, P13, P14 | Lib & finition : hooks, types, services, content | -      |
+| **Phase 6** | P12, P13, P14 | Lib & finition : hooks, types, services, content | **DONE** |
 
 **Chaque partie suit le cycle : Audit -> Discussion -> Action.**

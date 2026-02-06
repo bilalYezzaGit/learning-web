@@ -51,35 +51,3 @@ export interface SeriesCatalog {
   series: SeriesCatalogEntry[]
 }
 
-// =============================================================================
-// Helpers
-// =============================================================================
-
-/** Find series entry by ID in catalog */
-export function findSeriesById(
-  catalog: SeriesCatalog,
-  id: string
-): SeriesCatalogEntry | undefined {
-  return catalog.series.find((entry) => entry.id === id)
-}
-
-/** Get exercise count in a serie */
-export function getSeriesExerciseCount(serie: Serie): number {
-  return serie.activities.filter((a) => a.type === 'exercise').length
-}
-
-/** Get QCM count in a serie */
-export function getSeriesQCMCount(serie: Serie): number {
-  return serie.activities.filter((a) => a.type === 'qcm').length
-}
-
-/** Get all unique module IDs referenced by a serie */
-export function getSeriesModuleIds(serie: Serie): string[] {
-  const moduleSet = new Set<string>()
-  for (const activity of serie.activities) {
-    for (const moduleId of activity.modules) {
-      moduleSet.add(moduleId)
-    }
-  }
-  return Array.from(moduleSet)
-}

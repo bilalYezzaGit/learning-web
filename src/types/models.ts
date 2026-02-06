@@ -111,37 +111,3 @@ export interface Programme {
   modules: Module[]
 }
 
-// =============================================================================
-// Lightweight types (for lists without full content)
-// =============================================================================
-
-/** Module summary for list display (without activities) */
-export interface ModuleSummary {
-  id: string
-  slug: string
-  programmeId: string
-  title: string
-  description: string
-  icon?: string
-  trimester: string
-  order: number
-  estimatedTime: number
-  activityCount: number
-  available: boolean
-}
-
-/** Programme summary for list display (without modules) */
-export interface ProgrammeSummary {
-  id: string
-  label: string
-  levelSlug: string
-  sectionSlug: string
-  levelName: string
-  sectionName: string
-  description: string
-  order: number
-  color: string
-  icon: string
-  available: boolean
-  moduleCount: number
-}
