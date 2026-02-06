@@ -184,7 +184,7 @@ function AuthenticatedContent({
             </TabsContent>
 
             <TabsContent value="profil" className="mt-0">
-              <ProfilTab email={user?.email} onClose={onClose} />
+              <ProfilTab email={user?.email} />
             </TabsContent>
 
             <TabsContent value="settings" className="mt-0">
@@ -328,7 +328,6 @@ function ProfilTab({
   email,
 }: {
   email?: string | null
-  onClose: () => void
 }) {
   const { parcoursConfig } = useUserParcours()
 

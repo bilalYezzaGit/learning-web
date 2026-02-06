@@ -9,7 +9,6 @@ import Link from 'next/link'
 import { BookOpen, ChevronRight } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
 import { fetchProgrammes } from '@/lib/services/content-service'
 import { getParcoursConfig } from '@/lib/parcours/config'
 
@@ -91,15 +90,9 @@ export default async function ApprendrePage({ params }: PageProps) {
                           </div>
                           <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1" />
                         </div>
-                        <div className="mt-4">
-                          <div className="mb-1 flex justify-between text-xs">
-                            <span className="text-muted-foreground">
-                              {module.sections?.length || 0} sections
-                            </span>
-                            <span className="text-muted-foreground">0%</span>
-                          </div>
-                          <Progress value={0} className="h-1.5" />
-                        </div>
+                        <p className="mt-3 text-xs text-muted-foreground">
+                          {module.sections?.length || 0} sections
+                        </p>
                       </CardContent>
                     </Card>
                   </Link>

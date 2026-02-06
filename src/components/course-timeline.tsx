@@ -14,7 +14,6 @@ import {
   ChevronUp,
   Clock,
   ArrowRight,
-  PanelLeftClose,
   PanelLeft,
   Gauge,
 } from 'lucide-react'
@@ -32,6 +31,11 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible'
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+} from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
 import type { Activity, ActivityType } from '@/types/activity'
 
@@ -75,10 +79,6 @@ interface CourseTimelineProps {
   currentActivityId?: string
   onActivityClick: (activityId: string) => void
   progress?: ActivityProgress[]
-  /** Back link URL (optional) */
-  backHref?: string
-  /** Back link label */
-  backLabel?: string
 }
 
 interface SectionWithActivities {
@@ -526,7 +526,7 @@ export function CourseTimeline({
   onActivityClick,
   progress = [],
 }: CourseTimelineProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sheetOpen, setSheetOpen] = useState(false)
 
   // Group activities by sections (or single flat list)
   const sections = useMemo(() => groupActivitiesBySections(data), [data])
@@ -564,96 +564,71 @@ export function CourseTimeline({
 
   const handleActivityClick = (id: string) => {
     onActivityClick(id)
-    // Close sidebar on mobile after selection
-    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
-      setSidebarOpen(false)
-    }
+    setSheetOpen(false)
   }
+
+  const timelineContent = (
+    <>
+      <TimelineHeader
+        data={data}
+        progressPercent={progressPercent}
+        onContinue={handleContinue}
+      />
+
+      <div className="mx-4 h-px bg-border/30" />
+
+      <ScrollArea className="flex-1">
+        {hasSections ? (
+          <Accordion
+            type="multiple"
+            defaultValue={defaultOpenSections}
+            className="w-full"
+          >
+            {sections.map((section) => (
+              <SectionAccordion
+                key={section.id}
+                section={section}
+                currentActivityId={currentActivityId}
+                progress={progress}
+                onActivityClick={handleActivityClick}
+              />
+            ))}
+          </Accordion>
+        ) : (
+          <FlatActivityList
+            activities={data.activities}
+            currentActivityId={currentActivityId}
+            progress={progress}
+            onActivityClick={handleActivityClick}
+          />
+        )}
+      </ScrollArea>
+    </>
+  )
 
   return (
     <>
-      {/* Mobile toggle button */}
-      {!sidebarOpen && (
-        <Button
-          variant="outline"
-          size="icon"
-          className="fixed left-4 top-4 z-50 h-9 w-9 border-border/50 bg-background/80 backdrop-blur-sm lg:hidden"
-          onClick={() => setSidebarOpen(true)}
-        >
-          <PanelLeft className="h-4 w-4" />
-          <span className="sr-only">Ouvrir le menu</span>
-        </Button>
-      )}
-
-      {/* Overlay for mobile */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-background/50 backdrop-blur-sm lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-          onKeyDown={(e) => {
-            if (e.key === 'Escape') setSidebarOpen(false)
-          }}
-          role="button"
-          tabIndex={-1}
-          aria-label="Fermer le menu"
-        />
-      )}
-
-      <aside
-        className={cn(
-          'fixed inset-y-0 left-0 z-50 flex h-full w-80 flex-col border-r border-border/40 bg-background transition-transform duration-300 lg:relative lg:z-auto lg:w-80 lg:translate-x-0 lg:transition-none',
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        )}
+      {/* Mobile: Sheet sidebar */}
+      <Button
+        variant="outline"
+        size="icon"
+        className="fixed left-4 top-4 z-50 h-9 w-9 border-border/50 bg-background/80 backdrop-blur-sm lg:hidden"
+        onClick={() => setSheetOpen(true)}
       >
-        {/* Close button (mobile) */}
-        <div className="flex items-center justify-end px-3 pt-3 lg:hidden">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-7 w-7 text-muted-foreground/50"
-            onClick={() => setSidebarOpen(false)}
-          >
-            <PanelLeftClose className="h-4 w-4" />
-            <span className="sr-only">Fermer le menu</span>
-          </Button>
-        </div>
+        <PanelLeft className="h-4 w-4" />
+        <span className="sr-only">Ouvrir le menu</span>
+      </Button>
 
-        {/* Header */}
-        <TimelineHeader
-          data={data}
-          progressPercent={progressPercent}
-          onContinue={handleContinue}
-        />
+      <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+        <SheetContent side="left" className="w-80 p-0 flex flex-col">
+          <SheetTitle className="sr-only">{data.title}</SheetTitle>
+          {timelineContent}
+        </SheetContent>
+      </Sheet>
 
-        <div className="mx-4 h-px bg-border/30" />
-
-        {/* Activities */}
-        <ScrollArea className="flex-1">
-          {hasSections ? (
-            <Accordion
-              type="multiple"
-              defaultValue={defaultOpenSections}
-              className="w-full"
-            >
-              {sections.map((section) => (
-                <SectionAccordion
-                  key={section.id}
-                  section={section}
-                  currentActivityId={currentActivityId}
-                  progress={progress}
-                  onActivityClick={handleActivityClick}
-                />
-              ))}
-            </Accordion>
-          ) : (
-            <FlatActivityList
-              activities={data.activities}
-              currentActivityId={currentActivityId}
-              progress={progress}
-              onActivityClick={handleActivityClick}
-            />
-          )}
-        </ScrollArea>
+      {/* Desktop: static aside */}
+      <aside className="hidden lg:flex h-full w-80 flex-col border-r border-border/40 bg-background">
+        {timelineContent}
       </aside>
     </>
   )

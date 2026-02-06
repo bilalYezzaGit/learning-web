@@ -6,7 +6,7 @@
 
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Award, BookOpen, CheckCircle, Home, RotateCcw } from 'lucide-react'
+import { Award, Home, RotateCcw } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -29,11 +29,7 @@ export default async function SerieResultPage({ params }: PageProps) {
     throw e
   }
 
-  // Stats - placeholder, would come from user session/progress
   const totalActivities = serie.activities.length
-  const completedActivities = totalActivities // Assuming all completed when reaching this page
-  const exerciseCount = serie.activities.filter((a) => a.type === 'exercise').length
-  const lessonCount = serie.activities.filter((a) => a.type === 'lesson').length
 
   return (
     <div className="mx-auto max-w-2xl px-4 lg:px-6">
@@ -46,31 +42,9 @@ export default async function SerieResultPage({ params }: PageProps) {
         <p className="mt-2 text-lg text-muted-foreground">
           Tu as terminé la série &quot;{serie.title}&quot;
         </p>
-      </div>
-
-      {/* Stats Cards */}
-      <div className="mb-8 grid gap-4 sm:grid-cols-3">
-        <Card>
-          <CardContent className="py-4 text-center">
-            <CheckCircle className="mx-auto mb-2 h-8 w-8 text-green-600" />
-            <p className="text-2xl font-bold">{completedActivities}</p>
-            <p className="text-sm text-muted-foreground">Activités complétées</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="py-4 text-center">
-            <BookOpen className="mx-auto mb-2 h-8 w-8 text-blue-600" />
-            <p className="text-2xl font-bold">{lessonCount}</p>
-            <p className="text-sm text-muted-foreground">Cours révisés</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="py-4 text-center">
-            <CheckCircle className="mx-auto mb-2 h-8 w-8 text-amber-600" />
-            <p className="text-2xl font-bold">{exerciseCount}</p>
-            <p className="text-sm text-muted-foreground">Exercices résolus</p>
-          </CardContent>
-        </Card>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {totalActivities} activités parcourues
+        </p>
       </div>
 
       {/* Encouragement */}

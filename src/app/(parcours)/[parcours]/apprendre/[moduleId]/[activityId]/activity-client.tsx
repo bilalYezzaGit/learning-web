@@ -12,7 +12,6 @@ import Link from 'next/link'
 import { CheckCircle2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { QCMPlayer, type QCMResult } from '@/components/patterns/qcm-player'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
@@ -27,7 +26,7 @@ interface ActivityClientProps {
 
 export function ActivityClient({ activity, moduleId, parcours, children }: ActivityClientProps) {
   const { userId } = useAuth()
-  const { completeExercise, completeQCM, isCompleted, isSuccess, getProgress } = useProgress(userId ?? undefined)
+  const { completeExercise, completeQCM, isCompleted, getProgress } = useProgress(userId ?? undefined)
   const [completedInSession, setCompletedInSession] = React.useState(false)
   const [qcmFinished, setQcmFinished] = React.useState(false)
 
@@ -151,26 +150,4 @@ export function ActivityClient({ activity, moduleId, parcours, children }: Activ
 
   // For lessons, just show the content
   return <>{children}</>
-}
-
-/**
- * Progress badge to show completion status
- */
-export function ProgressBadge({ activityId }: { activityId: string }) {
-  const { userId } = useAuth()
-  const { isCompleted, isSuccess } = useProgress(userId ?? undefined)
-
-  if (!isCompleted(activityId)) return null
-
-  const success = isSuccess(activityId)
-
-  return (
-    <Badge
-      variant="default"
-      className={success ? 'bg-green-600' : 'bg-orange-500'}
-    >
-      <CheckCircle2 className="mr-1 h-3 w-3" />
-      {success ? 'Fait' : 'À revoir'}
-    </Badge>
-  )
 }

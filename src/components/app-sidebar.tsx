@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { BookOpen, Brain, Home, Search } from "lucide-react"
+import { BookOpen, Brain, Home } from "lucide-react"
 
 import { NavApprendre } from "@/components/nav-apprendre"
 import { NavUser } from "@/components/nav-user"
@@ -23,10 +23,9 @@ import { getParcoursConfig } from "@/lib/parcours"
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   parcours?: string
-  onSearchClick?: () => void
 }
 
-export function AppSidebar({ parcours, onSearchClick, ...props }: AppSidebarProps) {
+export function AppSidebar({ parcours, ...props }: AppSidebarProps) {
   const pathname = usePathname()
   const parcoursConfig = parcours ? getParcoursConfig(parcours) : null
 
@@ -78,21 +77,6 @@ export function AppSidebar({ parcours, onSearchClick, ...props }: AppSidebarProp
                     <Brain className="h-4 w-4" />
                     <span>Réviser</span>
                   </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-        <SidebarGroup className="mt-auto">
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <button type="button" onClick={onSearchClick}>
-                    <Search className="h-4 w-4" />
-                    <span>Rechercher</span>
-                    <kbd className="ml-auto text-xs text-muted-foreground">⌘K</kbd>
-                  </button>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>

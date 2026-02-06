@@ -8,82 +8,18 @@
 
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, ArrowRight, ChevronLeft, Lightbulb, CheckCircle } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ChevronLeft } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ContentRenderer } from '@/content'
+import { ExerciseContent, getActivityTypeLabel } from '@/components/patterns/activity-content'
 import { fetchModule, ContentNotFoundError } from '@/lib/services/content-service'
-import type { Activity, Exercise } from '@/types/activity'
+import type { Activity } from '@/types/activity'
 import { ActivityClient } from './activity-client'
 
 interface PageProps {
   params: Promise<{ parcours: string; moduleId: string; activityId: string }>
-}
-
-/**
- * Collapsible section for hints and solutions
- */
-function CollapsibleSection({
-  title,
-  icon: Icon,
-  children,
-  variant = 'default',
-}: {
-  title: string
-  icon: React.ComponentType<{ className?: string }>
-  children: React.ReactNode
-  variant?: 'default' | 'solution'
-}) {
-  const bgColor =
-    variant === 'solution'
-      ? 'bg-green-50 dark:bg-green-950/20'
-      : 'bg-amber-50 dark:bg-amber-950/20'
-  const borderColor =
-    variant === 'solution'
-      ? 'border-green-200 dark:border-green-800'
-      : 'border-amber-200 dark:border-amber-800'
-  const iconColor = variant === 'solution' ? 'text-green-600' : 'text-amber-600'
-
-  return (
-    <details className={`mt-6 rounded-lg border ${borderColor} ${bgColor}`}>
-      <summary className="flex cursor-pointer items-center gap-2 px-4 py-3 font-medium">
-        <Icon className={`h-5 w-5 ${iconColor}`} />
-        {title}
-      </summary>
-      <div className="border-t px-4 py-4">{children}</div>
-    </details>
-  )
-}
-
-/**
- * Exercise content with hint and solution sections
- */
-function ExerciseContent({ exercise }: { exercise: Exercise }) {
-  return (
-    <>
-      <ContentRenderer html={exercise.enonce} />
-
-      {exercise.hint && (
-        <CollapsibleSection title="Indice" icon={Lightbulb} variant="default">
-          <ContentRenderer html={exercise.hint} />
-        </CollapsibleSection>
-      )}
-
-      {exercise.solution && (
-        <CollapsibleSection title="Voir la solution" icon={CheckCircle} variant="solution">
-          <ContentRenderer html={exercise.solution} />
-        </CollapsibleSection>
-      )}
-    </>
-  )
-}
-
-/**
- * Lesson content
- */
-function LessonContent({ body }: { body: string }) {
-  return <ContentRenderer html={body} />
 }
 
 export default async function ActivityPage({ params }: PageProps) {
@@ -126,7 +62,7 @@ export default async function ActivityPage({ params }: PageProps) {
   const renderContent = () => {
     switch (activity.type) {
       case 'lesson':
-        return <LessonContent body={activity.body} />
+        return <ContentRenderer html={activity.body} />
       case 'exercise':
         return <ExerciseContent exercise={activity} />
       case 'qcm':
@@ -148,7 +84,7 @@ export default async function ActivityPage({ params }: PageProps) {
         <div className="min-w-0 flex-1">
           <h1 className="truncate font-medium">{activity.title}</h1>
           <Badge variant="outline" className="mt-1 text-xs capitalize">
-            {activity.type === 'qcm' ? 'QCM' : activity.type === 'exercise' ? 'Exercice' : 'Cours'}
+            {getActivityTypeLabel(activity.type)}
           </Badge>
         </div>
       </header>

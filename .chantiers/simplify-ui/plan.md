@@ -24,125 +24,92 @@
 
 ---
 
-## PARTIE 3 — Pages Auth (login, signup, select-parcours)
+## ~~PARTIE 3 — Pages Auth (login, signup, select-parcours)~~ DONE
 
-### 3.1 Auditer les pages auth
-- [ ] Relire `login-form.tsx`, `signup-form.tsx`, `select-parcours/page.tsx`.
-- [ ] Comparer avec les blocks shadcn officiels (login-01, signup-01, etc.) — identifier ce qui peut être remplacé.
-- [ ] Détecter le code mort, la logique incomplète, les validations manuelles remplaçables.
-
-### 3.2 Appliquer la standardisation
-- [ ] Remplacer par des blocks shadcn là où c'est pertinent.
-- [ ] Nettoyer le code mort et simplifier les validations.
+- [x] Supprimé l'auth anonyme (code mort) : `signInAnonymouslyFn`, `isAnonymous` dans auth-service, services/index, auth-context, nav-user, profile-sheet
+- [x] Login : supprimé le state `mode` mort (`'login' | 'forgot'`) et le bouton "Mot de passe oublié" (aucun rendu conditionnel n'existait)
+- [x] Signup : fusionné le flow 2-steps en **1 seule page** — RadioGroup pour le choix parcours, un seul `handleSubmit` (création user + sauvegarde parcours Firestore)
+- [x] Profile sheet : supprimé le ternaire "Anonyme/Complet", le Card "Passez à un compte complet", la prop `isAnonymous` de `ProfilTab`
+- [x] select-parcours : gardé tel quel (utile pour redirect post-login)
 
 ---
 
-## PARTIE 4 — Landing page
+## ~~PARTIE 4 — Landing page~~ DONE
 
-### 4.1 Auditer la landing
-- [ ] Relire `(landing)/page.tsx` et `landing-header.tsx`.
-- [ ] Comparer chaque section (hero, features, CTA, footer) avec les blocks shadcn disponibles.
-- [ ] Identifier les sections custom qui pourraient devenir standard.
-
-### 4.2 Appliquer la standardisation
-- [ ] Remplacer les sections par des blocks shadcn quand un match existe.
-- [ ] Garder les sections spécifiques au domaine (parcours carousel, etc.).
-
----
-
-## PARTIE 5 — Sidebar & Navigation
-
-### 5.1 Auditer la navigation
-- [ ] Relire `app-sidebar.tsx`, `site-header.tsx`, et tous les `nav-*.tsx` (main, secondary, documents, apprendre, user).
-- [ ] Identifier les composants nav non-fonctionnels (boutons morts, actions placeholder).
-- [ ] Comparer avec les blocks shadcn sidebar (sidebar-01 à sidebar-15) — trouver le meilleur match.
-
-### 5.2 Appliquer le nettoyage
-- [ ] Supprimer les nav components inutilisés ou vides.
-- [ ] Simplifier la sidebar en s'alignant sur un block shadcn.
+- [x] Vérifié : les blocks shadcn officiels (hero-01, feature-01, footer-01) **n'existent pas** dans le registry — seuls login/signup/sidebar/dashboard existent
+- [x] Amélioré la landing avec composants shadcn standard (Badge, Card, Button, Separator)
+- [x] Hero : typo plus grande (text-4xl/6xl), padding accru (py-20/32)
+- [x] Features : icônes dans des containers `bg-primary/10` arrondis
+- [x] CTA : wrappé dans un Card `bg-primary` avec bouton `variant="secondary"`
+- [x] Footer : layout 3 colonnes (brand, liens Conditions/Confidentialité, copyright)
+- [x] Gardé : landing-header (auth-aware) et section parcours (spécifique au domaine)
 
 ---
 
-## PARTIE 6 — Dashboard parcours
+## ~~PARTIE 5 — Sidebar & Navigation~~ DONE
 
-### 6.1 Auditer le dashboard
-- [ ] Relire `[parcours]/page.tsx` (page d'accueil après login).
-- [ ] Identifier les données hardcodées, les cards qui pourraient utiliser des patterns shadcn standard.
-- [ ] Vérifier si des blocks shadcn dashboard existent (stats, cards, etc.).
-
-### 6.2 Appliquer les améliorations
-- [ ] Standardiser les cards, connecter les vraies données si possible.
+- [x] Supprimé 3 composants nav morts : `nav-main.tsx` (Quick Create/Inbox, vestige template), `nav-secondary.tsx`, `nav-documents.tsx` (Open/Share/Delete factice)
+- [x] Supprimé le bouton "Rechercher ⌘K" mort dans `app-sidebar.tsx` (prop `onSearchClick` jamais passée depuis le layout)
+- [x] Gardé : `nav-apprendre.tsx` (charge les modules dynamiquement), `nav-user.tsx` (nettoyé en P3), `site-header.tsx`, `parcours-banner.tsx`
+- [x] Sidebar finale : Header (logo + parcours badge) → Dashboard / Apprendre (collapsible modules) / Réviser → Footer (NavUser)
 
 ---
 
-## PARTIE 7 — Apprendre (modules & activités)
+## ~~PARTIE 6 — Dashboard parcours~~ DONE
 
-### 7.1 Auditer le flow "apprendre"
-- [ ] Relire toutes les pages sous `[parcours]/apprendre/` : page.tsx, [moduleId]/page.tsx, [moduleId]/layout.tsx, [activityId]/page.tsx, activity-client.tsx, course-timeline-wrapper.tsx.
-- [ ] Identifier les patterns dupliqués (welcome screens, collapsible sections, activity type handling).
-- [ ] Identifier les fichiers trop longs ou trop complexes à décomposer.
-- [ ] Vérifier si des blocks shadcn correspondent (cards, collapsibles, etc.).
-
-### 7.2 Appliquer le refactoring
-- [ ] Extraire les composants réutilisables.
-- [ ] Simplifier la logique client.
-- [ ] Standardiser les patterns sur shadcn.
+- [x] Supprimé le bloc Streak & Daily Goal (100% hardcodé, aucune logique backend)
+- [x] Supprimé les 3 stats cards hardcodées ("0 activités", "-- score", "0/5 séries")
+- [x] Supprimé les Badges hardcodés ("3 séries", "Nouveau")
+- [x] Dashboard simplifié : CTA "Reprendre" + 2 Quick Actions (Apprendre / Réviser) avec icônes et descriptions
+- [x] Reste Server Component — les vraies stats sont dans le ProfileSheet (client-side via `useProgress`)
 
 ---
 
-## PARTIE 8 — Reviser (séries & QCM)
+## ~~PARTIE 7 — Apprendre (modules & activités)~~ DONE
 
-### 8.1 Auditer le flow "reviser"
-- [ ] Relire toutes les pages sous `[parcours]/reviser/` : page.tsx, reviser-client.tsx, serie/[id]/page.tsx, serie/[id]/layout.tsx, [activityId]/page.tsx, play/page.tsx, result/page.tsx, serie-timeline-wrapper.tsx.
-- [ ] Identifier la duplication avec le flow "apprendre" (activity rendering, navigation, progression).
-- [ ] Repérer les Client Components qui devraient être Server + wrapper.
-- [ ] Mesurer la complexité des fichiers (lignes, responsabilités).
-
-### 8.2 Appliquer le refactoring
-- [ ] Factoriser la logique commune entre apprendre et reviser.
-- [ ] Convertir en Server Components là où possible.
-- [ ] Simplifier les fichiers longs.
+- [x] Extrait `CollapsibleSection`, `ExerciseContent`, `getActivityTypeLabel` vers `components/patterns/activity-content.tsx` (source unique partagée)
+- [x] Supprimé la barre de progression 0% hardcodée dans `apprendre/page.tsx` — remplacée par un simple label "N sections"
+- [x] Supprimé `ProgressBadge` mort dans `activity-client.tsx` (exporté mais jamais importé)
+- [x] Nettoyé imports inutilisés (`Badge`, `isSuccess`) dans `activity-client.tsx`
+- [x] `apprendre/[activityId]/page.tsx` : 194 → 130 lignes (helpers extraits)
 
 ---
 
-## PARTIE 9 — Course Timeline
+## ~~PARTIE 8 — Reviser (séries & QCM)~~ DONE
 
-### 9.1 Auditer course-timeline.tsx
-- [ ] Relire `course-timeline.tsx` (550+ lignes) en détail.
-- [ ] Identifier les helpers extractibles, les sous-composants séparables, la logique mobile complexe.
-- [ ] Vérifier si des composants shadcn (Accordion, Collapsible, ScrollArea) sont sous-utilisés.
-
-### 9.2 Appliquer la décomposition
-- [ ] Extraire helpers vers utils.
-- [ ] Séparer les sous-composants.
-- [ ] Maximiser l'usage de shadcn.
+- [x] Remplacé les 3 helpers dupliqués dans `reviser/[activityId]/page.tsx` par imports de `activity-content.tsx` (398 → 310 lignes)
+- [x] Remplacé les 3 helpers dupliqués dans `reviser/play/page.tsx` par imports de `activity-content.tsx` (383 → 296 lignes)
+- [x] Simplifié `result/page.tsx` : supprimé les 3 stats cards menteur (`completedActivities = totalActivities`), gardé le header de succès + encouragement
+- [x] ~140 lignes de code dupliqué éliminées au total entre les 3 fichiers
+- [x] Note pour plus tard : `[activityId]` (route-based) et `/play` (index-based) sont 2 patterns de navigation différents — consolidation possible en Phase 5
 
 ---
 
-## PARTIE 10 — Profile Sheet
+## ~~PARTIE 9 — Course Timeline~~ DONE
 
-### 10.1 Auditer profile-sheet.tsx
-- [ ] Relire `profile-sheet.tsx` (550+ lignes) en détail.
-- [ ] Identifier les 3 tabs et leur complexité respective.
-- [ ] Vérifier si le calcul des stats peut être extrait.
-- [ ] Comparer avec les blocks shadcn (sheet, tabs, settings patterns).
-
-### 10.2 Appliquer la décomposition
-- [ ] Séparer chaque tab dans son fichier.
-- [ ] Extraire la logique dans des hooks.
+- [x] Supprimé les props mortes `backHref`/`backLabel` (définies dans l'interface mais jamais utilisées ni passées)
+- [x] Remplacé le sidebar mobile custom (overlay `div` + `aside` fixe + toggle button + close button, ~40 lignes) par shadcn `Sheet` (side="left") pour mobile + `aside` statique pour desktop
+- [x] Meilleure a11y (Sheet gère focus trap, Escape, aria), moins de code custom
+- [x] Supprimé import `PanelLeftClose` devenu inutile
+- [x] Helpers et sous-composants (StepIndicator, ActivityItem, SectionAccordion, etc.) déjà bien structurés — gardés tels quels
+- [x] 661 → ~630 lignes (gain net après remplacement mobile sidebar)
 
 ---
 
-## PARTIE 11 — QCM System
+## ~~PARTIE 10 — Profile Sheet~~ DONE
 
-### 11.1 Auditer le système QCM
-- [ ] Relire `patterns/qcm-player.tsx` (400+ lignes) et les 4 sous-composants `qcm/*.tsx`.
-- [ ] Identifier la logique extractible (validation, score, keyboard).
-- [ ] Vérifier la cohérence entre qcm-player et les sous-composants.
+- [x] Supprimé la prop morte `onClose` de `ProfilTab` (destructurée mais jamais utilisée)
+- [x] Composant déjà propre après nettoyage P3 (auth anonyme supprimée) : 6 sous-composants bien découpés, ~75 lignes/composant
+- [x] Utilise déjà shadcn correctement (Sheet, Tabs, Card, Badge, Avatar, ScrollArea, Button)
+- [x] Pas de décomposition supplémentaire nécessaire — 452 lignes pour 6 composants c'est raisonnable
 
-### 11.2 Appliquer la simplification
-- [ ] Extraire la logique dans des utils/hooks.
-- [ ] Simplifier le player.
+---
+
+## ~~PARTIE 11 — QCM System~~ DONE
+
+- [x] `qcm-player.tsx` (303 lignes) : déjà propre — state machine claire, keyboard shortcuts, composants shadcn (Card, Progress, Button)
+- [x] 4 sous-composants `qcm/*.tsx` (qcm-option, qcm-question, qcm-review, qcm-result) : uniquement importés par `gallery/page.tsx` (dev-only), pas par l'app principale. Suppression reportée à P14 (décision gallery)
+- [x] Pas de simplification nécessaire sur le player lui-même
 
 ---
 
@@ -199,10 +166,10 @@
 | Phase | Parties | Description | Statut |
 |-------|---------|-------------|--------|
 | **Phase 1** | P1, P2 | Fondations : deps, config, Firebase, auth | DONE |
-| **Phase 2** | P3, P4 | Pages publiques : auth pages, landing | **EN COURS** |
-| **Phase 3** | P5, P6 | Navigation : sidebar, header, dashboard | - |
-| **Phase 4** | P7, P8 | Core features : apprendre, reviser | - |
-| **Phase 5** | P9, P10, P11 | Components lourds : timeline, profile, QCM | - |
-| **Phase 6** | P12, P13, P14 | Lib & finition : hooks, types, services, content | - |
+| **Phase 2** | P3, P4 | Pages publiques : auth pages, landing | **DONE**      |
+| **Phase 3** | P5, P6 | Navigation : sidebar, header, dashboard | **DONE**      |
+| **Phase 4** | P7, P8 | Core features : apprendre, reviser | **DONE**      |
+| **Phase 5** | P9, P10, P11 | Components lourds : timeline, profile, QCM | **DONE** |
+| **Phase 6** | P12, P13, P14 | Lib & finition : hooks, types, services, content | -      |
 
 **Chaque partie suit le cycle : Audit -> Discussion -> Action.**
