@@ -2,16 +2,8 @@
  * Types barrel export
  *
  * Re-exports all types for convenient imports:
- * import { Module, Activity, UserProfile } from '@/types'
+ * import { Activity, UserProfile } from '@/types'
  */
-
-// Models
-export type {
-  Programme,
-  Module,
-  Section,
-  CourseContent,
-} from './models'
 
 // Activities
 export type {
@@ -41,6 +33,3 @@ export type {
 
 // User
 export type { UserProfile } from './user'
-
-// Series
-export type { Serie, SeriesCatalog, SeriesCatalogEntry } from './series'

@@ -2,13 +2,15 @@
  * Réviser Page (Parcours-specific)
  *
  * Practice hub with series from filesystem.
+ * Filtered by parcours — only shows series belonging to the matching programme.
  * Public - playable without authentication (score not saved).
  */
 
 import { BookOpen } from 'lucide-react'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { getAllSeries, resolveSerieActivities } from '@/lib/content'
+import { getAllProgrammes, getSerie, resolveSerieActivities } from '@/lib/content'
+import { getParcoursConfig } from '@/lib/parcours'
 import { ReviserStats, SeriesListItem } from './reviser-client'
 
 interface PageProps {
@@ -17,19 +19,30 @@ interface PageProps {
 
 export default async function ReviserPage({ params }: PageProps) {
   const { parcours } = await params
+  const parcoursConfig = getParcoursConfig(parcours)
 
-  const allSeries = getAllSeries()
+  // Find the programme matching this parcours
+  const allProgrammes = getAllProgrammes()
+  const programme = parcoursConfig
+    ? allProgrammes.find(
+        (p) => p.levelSlug === parcoursConfig.level && p.sectionSlug === parcoursConfig.section
+      )
+    : undefined
+
+  // Get series belonging to this programme
+  const seriesSlugs = programme?.series ?? []
+  const seriesList = seriesSlugs.map((slug) => getSerie(slug))
 
   // Resolve activity IDs for each serie (for progress tracking)
-  const seriesWithActivities = allSeries.map((serie) => ({
-    id: serie.slug,
-    activityIds: resolveSerieActivities(serie.slug).map((a) => a.id),
-  }))
-
-  const activityIdsMap = new Map(seriesWithActivities.map((s) => [s.id, s.activityIds]))
+  const activityIdsMap = new Map(
+    seriesList.map((serie) => [
+      serie.slug,
+      resolveSerieActivities(serie.slug).map((a) => a.id),
+    ])
+  )
 
   // Map to catalog entries for the list items
-  const catalogEntries = allSeries.map((serie) => ({
+  const catalogEntries = seriesList.map((serie) => ({
     id: serie.slug,
     title: serie.title,
     description: serie.description,

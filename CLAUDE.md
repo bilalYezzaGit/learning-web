@@ -91,15 +91,21 @@ export const useAuthStore = create<AuthState>((set) => ({
 
 ### Services
 
-Les services sont des singletons qui encapsulent la logique Firebase :
+Les services encapsulent la logique Firebase (auth, progress) :
 
 ```typescript
-// src/lib/services/content-service.ts
-class ContentService {
-  async fetchModules(): Promise<Module[]> { ... }
-}
+// src/lib/services/auth-service.ts
+export async function signInWithEmail(email: string, password: string) { ... }
+```
 
-export const contentService = new ContentService()
+### Contenu (filesystem)
+
+Le contenu est lu directement depuis `content/` via `src/lib/content.ts` :
+
+```typescript
+// src/lib/content.ts
+import { getAllAtoms, getAtom, getCours } from '@/lib/content'
+import { compileMdx } from '@/lib/mdx'
 ```
 
 ### Types
@@ -107,12 +113,9 @@ export const contentService = new ContentService()
 Interfaces TypeScript dans `src/types/` :
 
 ```typescript
-// src/types/models.ts
-export interface Module {
-  id: string
-  title: string
-  // ...
-}
+// src/types/content.ts — Atomes, Molecules, Programmes
+// src/types/activity.ts — Activity, Exercise, QCM (legacy, pour QCMPlayer)
+// src/types/progress.ts — ActivityProgress
 ```
 
 ## Design System (shadcn/ui)
@@ -138,43 +141,26 @@ Le contenu pédagogique (cours, exercices, QCM) est géré séparément.
 ### Structure
 
 ```
-content/                    # Source YAML
-├── activities/            # 75 activités (lessons, exercises, qcm)
-├── programmes/            # 3 programmes avec modules
-└── series/                # 2 séries de révision
-
-scripts/content-build/     # Build pipeline (Node.js)
-├── src/build.js          # YAML → JSON
-├── src/validate.js       # Validation contenu
-└── src/bump-version.js   # Version Remote Config
-
-public/content/            # Output JSON (généré, gitignore)
+content/                    # Contenu pédagogique (filesystem)
+├── atoms/                 # 114 atomes MDX (lessons, exercises, qcm)
+└── molecules/             # Assemblages YAML
+    ├── cours/            # 20 cours (timelines de modules)
+    ├── series/           # 2 séries de révision
+    └── programmes/       # 3 programmes
 ```
 
-### Commandes
+### Lecture du contenu
 
-```bash
-cd scripts/content-build
-npm run validate      # Valider le contenu YAML
-npm run build         # Générer les JSON
-npm run deploy        # Build + deploy Firebase + bump version
-```
+Le contenu est lu directement depuis le filesystem par `src/lib/content.ts` (pas de build pipeline, pas de CDN) :
 
-### Configuration actuelle
-
-Le contenu est servi depuis **Firebase CDN** :
 ```typescript
-// src/lib/services/content-service.ts
-const BASE_URL = 'https://learning-os-platform.web.app/content'
+import { getAllAtoms, getAtom, getCours } from '@/lib/content'
+import { compileMdx } from '@/lib/mdx'
 ```
 
 ### Documentation complète
 
-Voir `docs/CONTENT-SYSTEM.md` pour :
-- Architecture détaillée
-- Option de servir via Next.js direct
-- Format des fichiers JSON
-- Workflow de mise à jour
+Voir `docs/chantiers/001-content-architecture.md` pour l'architecture atome/molecule.
 
 ## Skills disponibles
 

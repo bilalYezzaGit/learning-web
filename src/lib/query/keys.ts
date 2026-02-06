@@ -9,30 +9,6 @@
 
 export const queryKeys = {
   // ==========================================================================
-  // Programmes & Modules
-  // ==========================================================================
-
-  programmes: {
-    all: ['programmes'] as const,
-    catalogue: () => [...queryKeys.programmes.all, 'catalogue'] as const,
-  },
-
-  modules: {
-    all: ['modules'] as const,
-    detail: (moduleId: string) => [...queryKeys.modules.all, moduleId] as const,
-  },
-
-  // ==========================================================================
-  // Series
-  // ==========================================================================
-
-  series: {
-    all: ['series'] as const,
-    catalogue: () => [...queryKeys.series.all, 'catalogue'] as const,
-    detail: (serieId: string) => [...queryKeys.series.all, serieId] as const,
-  },
-
-  // ==========================================================================
   // Progress
   // ==========================================================================
 

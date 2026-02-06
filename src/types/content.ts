@@ -92,6 +92,8 @@ export interface Programme {
   icon: string
   /** Ordered list of cours molecule slugs */
   cours: string[]
+  /** Ordered list of series molecule slugs */
+  series: string[]
 }
 
 // =============================================================================

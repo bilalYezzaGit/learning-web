@@ -175,7 +175,7 @@ export const getAllProgrammes = cache((): Programme[] => {
     .map(f => {
       const id = f.replace('.yaml', '')
       const data = readYaml<Omit<Programme, 'id'>>(path.join(dir, f))
-      return { id, ...data }
+      return { id, ...data, series: data.series ?? [] }
     })
     .sort((a, b) => a.order - b.order)
 })
@@ -186,7 +186,7 @@ export const getAllProgrammes = cache((): Programme[] => {
 export const getProgramme = cache((id: string): Programme => {
   const filePath = path.join(MOLECULES_DIR, 'programmes', `${id}.yaml`)
   const data = readYaml<Omit<Programme, 'id'>>(filePath)
-  return { id, ...data }
+  return { id, ...data, series: data.series ?? [] }
 })
 
 // =============================================================================

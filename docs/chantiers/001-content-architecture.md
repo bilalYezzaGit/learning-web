@@ -508,14 +508,16 @@ Est-ce que `next-mdx-remote` + `fs` detecte les changements de fichiers MDX en d
 5. ~~**Phase 5** : Creer les molecules YAML a partir des modules existants~~ **DONE** — 3 programmes, 20 cours, 2 series
 6. ~~**Phase 6** : Creer les composants MDX (`Enonce`, `Solution`, `Variations`, etc.)~~ **DONE**
 7. ~~**Phase 7** : Brancher les pages sur le nouveau systeme~~ **DONE**
-8. **Phase 8** : Creer le dashboard admin `/admin/content` ← **NEXT**
-9. **Phase 9** : Supprimer l'ancien pipeline + Firebase CDN
-10. **Phase 10** : Migrer/adapter validate.js
+8. ~~**Phase 8** : Creer le dashboard admin `/admin/content`~~ **DONE**
+9. ~~**Phase 9** : Supprimer l'ancien pipeline + Firebase CDN~~ **DONE**
+10. **Phase 10** : Migrer/adapter validate.js ← **NEXT**
 
 ---
 
 ## Changelog
 
+- **2026-02-06 v10** : Phase 9 done. Ancien pipeline supprime. Fichiers supprimes : `scripts/content-build/` (build.js, validate.js, bump-version.js, package.json), `src/lib/services/content-service.ts` (150 lignes, fetch Firebase CDN), `src/lib/hooks/use-programmes.ts` + `use-parcours-modules.ts` (hooks react-query orphelins), `src/types/models.ts` + `src/types/series.ts` (types Flutter legacy), `docs/CONTENT-SYSTEM.md`. Nettoye : `services/index.ts` (exports content retires), `types/index.ts` (re-exports models/series retires), `query/keys.ts` (programmes/modules/series retires), `CLAUDE.md` (section services + contenu mise a jour). Build OK.
+- **2026-02-06 v9** : Phase 8 done. Dashboard admin `/admin/content` cree. 6 fichiers : middleware (ajout `/admin` aux routes globales), `admin/layout.tsx` (header + noindex), `admin/content/page.tsx` (orchestrateur Server Component, searchParams-driven), `atom-filters.tsx` (seul Client Component — Input recherche, Checkbox types, Badge tags), `atom-list.tsx` (ScrollArea, orphan dots orange, type badges colores), `atom-preview.tsx` (metadata + MDX compile). Filtrage server-side par type/tags/texte, preview MDX avec KaTeX, compteurs stats bar. Build OK.
 - **2026-02-06 v8** : Phase 7 done. Toutes les pages branchees sur le nouveau systeme. Types resolus (`TimelineActivity`, `ResolvedActivity`, `ResolvedQuiz`, `ParsedQCMQuestion`). Parseur QCM MDX + resolvers molecules ajoutés dans `content.ts`. CourseTimeline migre sur `TimelineActivity`. Pages apprendre (grid, module, activite) et reviser (grid, serie, play, activite, resultat) migrees — plus de `fetchProgrammes`/`fetchModule`/`fetchSerie`. Sidebar (`NavApprendre`) recoit les modules en props depuis le layout (filesystem). HydrationBoundary react-query retiree du parcours layout. Build OK.
 - **2026-02-06 v7** : Phase 6 done. 3 fichiers crees : `exercise-parts.tsx` (5 composants), `mdx-components.tsx` (registre + adaptateurs), `mdx.ts` (helper compilation). Build OK.
 - **2026-02-06 v6** : Phase 5 done. 25 molecules YAML creees (3 programmes, 20 cours, 2 series). References atomes verifiees.
