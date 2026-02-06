@@ -11,7 +11,6 @@ import * as React from 'react'
 import { type User } from 'firebase/auth'
 import {
   subscribeToAuthState,
-  signInAnonymouslyFn,
   signOut as authSignOut,
   signInWithEmail,
   createAccount,
@@ -26,10 +25,8 @@ interface AuthContextValue {
   userId: string | null
   isLoading: boolean
   isAuthenticated: boolean
-  isAnonymous: boolean
   signIn: (email: string, password: string) => Promise<User>
   signUp: (email: string, password: string) => Promise<User>
-  signInAnonymously: () => Promise<void>
   signOut: () => Promise<void>
 }
 
@@ -64,10 +61,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return createAccount(email, password)
   }, [])
 
-  const signInAnonymously = React.useCallback(async () => {
-    await signInAnonymouslyFn()
-  }, [])
-
   const signOut = React.useCallback(async () => {
     await authSignOut()
   }, [])
@@ -78,13 +71,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       userId: user?.uid ?? null,
       isLoading,
       isAuthenticated: user !== null,
-      isAnonymous: user?.isAnonymous ?? false,
       signIn,
       signUp,
-      signInAnonymously,
       signOut,
     }),
-    [user, isLoading, signIn, signUp, signInAnonymously, signOut]
+    [user, isLoading, signIn, signUp, signOut]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

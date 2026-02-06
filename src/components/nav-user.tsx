@@ -76,14 +76,12 @@ export function NavUser() {
   }
 
   // Get user info
-  const userName = user.displayName || (user.isAnonymous ? "Visiteur" : "Utilisateur")
-  const userEmail = user.email || (user.isAnonymous ? "Compte anonyme" : "")
+  const userName = user.displayName || user.email || "Utilisateur"
+  const userEmail = user.email || ""
   const userInitials = user.displayName
     ? user.displayName.charAt(0).toUpperCase()
     : user.email
     ? user.email.charAt(0).toUpperCase()
-    : user.isAnonymous
-    ? "V"
     : "U"
 
   return (

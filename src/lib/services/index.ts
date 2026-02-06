@@ -18,7 +18,6 @@ export { ProgressService, type ProgressMap, type ProgressListener } from './prog
 export {
   getCurrentUser,
   subscribeToAuthState,
-  signInAnonymouslyFn,
   signInWithEmail,
   createAccount,
   signOut,

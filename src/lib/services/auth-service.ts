@@ -6,7 +6,6 @@
  */
 
 import {
-  signInAnonymously,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
@@ -42,15 +41,6 @@ export function getCurrentUser(): User | null {
 export function subscribeToAuthState(listener: AuthStateListener): Unsubscribe {
   const auth = getAuthInstance()
   return onAuthStateChanged(auth, listener)
-}
-
-/**
- * Sign in anonymously
- */
-export async function signInAnonymouslyFn(): Promise<User> {
-  const auth = getAuthInstance()
-  const result = await signInAnonymously(auth)
-  return result.user
 }
 
 /**

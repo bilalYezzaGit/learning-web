@@ -26,7 +26,6 @@ export function LoginForm({
   const { signIn } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [mode, setMode] = useState<'login' | 'forgot'>('login')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -89,16 +88,7 @@ export function LoginForm({
               </Field>
 
               <Field>
-                <div className="flex items-center">
-                  <FieldLabel htmlFor="password">Mot de passe</FieldLabel>
-                  <button
-                    type="button"
-                    onClick={() => setMode('forgot')}
-                    className="ml-auto text-sm underline-offset-2 hover:underline"
-                  >
-                    Mot de passe oublié ?
-                  </button>
-                </div>
+                <FieldLabel htmlFor="password">Mot de passe</FieldLabel>
                 <Input
                   id="password"
                   name="password"

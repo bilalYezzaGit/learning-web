@@ -130,13 +130,12 @@ function AuthenticatedContent({
   onClose,
 }: AuthenticatedContentProps) {
   const displayName = user?.displayName || user?.email || 'Utilisateur'
-  const userEmail = user?.email || (user?.isAnonymous ? 'Compte anonyme' : '')
+  const userEmail = user?.email || ''
   const initials = user?.displayName
     ? user.displayName.charAt(0).toUpperCase()
     : user?.email
       ? user.email.charAt(0).toUpperCase()
       : 'U'
-  const isAnonymous = user?.isAnonymous ?? false
 
   return (
     <>
@@ -152,14 +151,6 @@ function AuthenticatedContent({
           <div className="flex-1 min-w-0">
             <SheetTitle className="truncate">{displayName}</SheetTitle>
             <SheetDescription className="truncate">{userEmail}</SheetDescription>
-            {isAnonymous && (
-              <p className="text-xs text-muted-foreground mt-1">
-                <Link href="/signup" className="text-primary underline" onClick={onClose}>
-                  Créez un compte
-                </Link>{' '}
-                pour sauvegarder
-              </p>
-            )}
           </div>
           <Button variant="outline" size="sm" onClick={() => onSignOut()}>
             <LogOut className="h-4 w-4" />
@@ -193,7 +184,7 @@ function AuthenticatedContent({
             </TabsContent>
 
             <TabsContent value="profil" className="mt-0">
-              <ProfilTab email={user?.email} isAnonymous={isAnonymous} onClose={onClose} />
+              <ProfilTab email={user?.email} onClose={onClose} />
             </TabsContent>
 
             <TabsContent value="settings" className="mt-0">
@@ -335,11 +326,8 @@ function StatsTab({ userId }: { userId: string }) {
 
 function ProfilTab({
   email,
-  isAnonymous,
-  onClose,
 }: {
   email?: string | null
-  isAnonymous: boolean
   onClose: () => void
 }) {
   const { parcoursConfig } = useUserParcours()
@@ -356,10 +344,6 @@ function ProfilTab({
             <span className="text-sm font-medium">{email || 'Non renseigné'}</span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">Type de compte</span>
-            <span className="text-sm font-medium">{isAnonymous ? 'Anonyme' : 'Complet'}</span>
-          </div>
-          <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Parcours</span>
             {parcoursConfig ? (
               <Badge variant="secondary">{parcoursConfig.label}</Badge>
@@ -369,22 +353,6 @@ function ProfilTab({
           </div>
         </CardContent>
       </Card>
-
-      {isAnonymous && (
-        <Card className="border-primary/20 bg-primary/5">
-          <CardContent className="py-4">
-            <h3 className="text-sm font-semibold">Passez à un compte complet</h3>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Créez un compte avec email pour ne jamais perdre votre progression.
-            </p>
-            <Button className="mt-3" size="sm" asChild>
-              <Link href="/signup" onClick={onClose}>
-                Créer un compte
-              </Link>
-            </Button>
-          </CardContent>
-        </Card>
-      )}
     </div>
   )
 }
