@@ -1,0 +1,20 @@
+title: Rapports trigonometriques d un angle aigu
+description: "Sinus, cosinus et tangente d un angle aigu dans un triangle rectangle"
+programme: 1ere-tc
+trimester: T1
+order: 3
+estimatedTime: 120
+objectives:
+  - "Definir le sinus, cosinus et tangente d un angle aigu"
+  - "Calculer des longueurs et des angles dans un triangle rectangle"
+  - "Utiliser les relations trigonometriques fondamentales"
+
+sections:
+  - label: "Rapports trigonometriques"
+    steps:
+      - lesson-rapports-trigo
+      - ex-rapports-trigo-01
+      - quiz:
+          - qcm-trigo-1
+          - qcm-trigo-2
+          - qcm-trigo-3

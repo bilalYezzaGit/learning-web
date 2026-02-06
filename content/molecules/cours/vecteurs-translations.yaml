@@ -1,0 +1,20 @@
+title: Vecteurs et translations
+description: "Introduction aux vecteurs et aux translations dans le plan"
+programme: 1ere-tc
+trimester: T1
+order: 4
+estimatedTime: 120
+objectives:
+  - "Definir un vecteur et ses caracteristiques"
+  - "Comprendre la notion de translation"
+  - "Construire l image d une figure par une translation"
+
+sections:
+  - label: "Vecteurs et translations"
+    steps:
+      - lesson-vecteurs-translations
+      - ex-vecteurs-translations-01
+      - quiz:
+          - qcm-vt-1
+          - qcm-vt-2
+          - qcm-vt-3

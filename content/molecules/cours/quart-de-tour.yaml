@@ -1,0 +1,20 @@
+title: Quart de tour
+description: "Rotation de 90 degres et ses proprietes"
+programme: 1ere-tc
+trimester: T2
+order: 7
+estimatedTime: 90
+objectives:
+  - "Definir le quart de tour (rotation de 90 degres)"
+  - "Construire l image d un point par un quart de tour"
+  - "Utiliser les proprietes du quart de tour"
+
+sections:
+  - label: "Quart de tour"
+    steps:
+      - lesson-quart-de-tour
+      - ex-quart-de-tour-01
+      - quiz:
+          - qcm-qt-1
+          - qcm-qt-2
+          - qcm-qt-3

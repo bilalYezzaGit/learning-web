@@ -1,0 +1,20 @@
+title: Activites dans un repere
+description: "Reperage dans le plan, coordonnees et calculs"
+programme: 1ere-tc
+trimester: T2
+order: 6
+estimatedTime: 120
+objectives:
+  - "Se reperer dans un repere orthonorme"
+  - "Calculer les coordonnees d un point et d un vecteur"
+  - "Calculer la distance entre deux points"
+
+sections:
+  - label: "Repere"
+    steps:
+      - lesson-repere
+      - ex-repere-01
+      - quiz:
+          - qcm-rep-1
+          - qcm-rep-2
+          - qcm-rep-3

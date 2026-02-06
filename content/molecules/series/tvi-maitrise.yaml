@@ -1,0 +1,19 @@
+title: "TVI : theoreme des valeurs intermediaires"
+description: "Approfondis le TVI avec des exercices progressifs : application directe, equations, et problemes."
+difficulty: 2
+estimatedMinutes: 50
+tags: [continuite, tvi, equations]
+
+steps:
+  - lesson-cont-tvi
+  - ex-cont-3
+  - ex-cont-3b
+  - ex-cont-3c
+  - ex-cont-4
+  - ex-cont-6
+  - quiz:
+      - qcm-cont-3
+      - qcm-cont-4
+  - quiz:
+      - qcm-cont-5
+      - qcm-cont-6

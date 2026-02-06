@@ -1,0 +1,22 @@
+title: Fonctions
+description: "Etude des fonctions usuelles et leurs proprietes"
+programme: 3eme-sciences
+trimester: T1
+order: 1
+estimatedTime: 90
+objectives:
+  - "Connaitre les fonctions usuelles"
+
+sections:
+  - label: "Domaine de definition"
+    steps:
+      - ex-fn-domaine
+
+  - label: "Parite"
+    steps:
+      - quiz:
+          - qcm-fn-v1
+          - qcm-fn-v2
+          - qcm-fn-v3
+          - qcm-fn-v4
+          - qcm-fn-v5

@@ -1,0 +1,20 @@
+title: Activites numeriques I
+description: "Calculs numeriques, puissances et racines carrees"
+programme: 1ere-tc
+trimester: T1
+order: 9
+estimatedTime: 120
+objectives:
+  - "Maitriser les calculs avec les puissances"
+  - "Simplifier des expressions avec des racines carrees"
+  - "Rationaliser un denominateur"
+
+sections:
+  - label: "Numerique I"
+    steps:
+      - lesson-numerique-1
+      - ex-numerique-1-01
+      - quiz:
+          - qcm-num1-1
+          - qcm-num1-2
+          - qcm-num1-3

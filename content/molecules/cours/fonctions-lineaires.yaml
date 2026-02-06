@@ -1,0 +1,20 @@
+title: Fonctions lineaires
+description: "Definition, representation graphique et proprietes des fonctions lineaires"
+programme: 1ere-tc
+trimester: T2
+order: 12
+estimatedTime: 120
+objectives:
+  - "Definir une fonction lineaire"
+  - "Representer graphiquement une fonction lineaire"
+  - "Determiner le coefficient d une fonction lineaire"
+
+sections:
+  - label: "Fonctions lineaires"
+    steps:
+      - lesson-fonctions-lineaires
+      - ex-fonctions-lineaires-01
+      - quiz:
+          - qcm-fl-1
+          - qcm-fl-2
+          - qcm-fl-3

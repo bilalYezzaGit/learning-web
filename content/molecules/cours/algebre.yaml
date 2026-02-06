@@ -1,0 +1,20 @@
+title: Activites algebriques
+description: "Calcul litteral, identites remarquables et factorisation"
+programme: 1ere-tc
+trimester: T1
+order: 11
+estimatedTime: 120
+objectives:
+  - "Developper et reduire des expressions algebriques"
+  - "Utiliser les identites remarquables"
+  - "Factoriser des expressions"
+
+sections:
+  - label: "Algebre"
+    steps:
+      - lesson-algebre
+      - ex-algebre-01
+      - quiz:
+          - qcm-alg-1
+          - qcm-alg-2
+          - qcm-alg-3

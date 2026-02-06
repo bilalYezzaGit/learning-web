@@ -1,0 +1,25 @@
+title: Generalites sur les fonctions
+description: "Vocabulaire des fonctions, parite, sens de variation, extremums, transformations de courbes"
+programme: 3eme-math
+trimester: T1
+order: 3
+estimatedTime: 180
+objectives:
+  - "Maitriser le vocabulaire des fonctions (domaine, image, antecedent)"
+  - "Etudier la parite d une fonction"
+  - "Determiner le sens de variation et dresser un tableau de variations"
+  - "Identifier maximum, minimum, majorant, minorant"
+  - "Construire des courbes par transformations"
+
+sections:
+  - label: "Rappels et vocabulaire"
+    steps:
+      - lesson-fn-rappels
+      - ex-fn-lecture-graphique
+      - ex-fn-domaine
+      - quiz:
+          - qcm-fn-v1
+          - qcm-fn-v2
+          - qcm-fn-v3
+          - qcm-fn-v4
+          - qcm-fn-v5

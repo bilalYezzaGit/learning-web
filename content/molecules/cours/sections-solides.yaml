@@ -1,0 +1,20 @@
+title: Sections planes d un solide
+description: "Coupes de solides par des plans"
+programme: 1ere-tc
+trimester: T2
+order: 8
+estimatedTime: 90
+objectives:
+  - "Determiner la section d un solide par un plan"
+  - "Construire des sections de pyramides et de cones"
+  - "Calculer des aires de sections"
+
+sections:
+  - label: "Sections de solides"
+    steps:
+      - lesson-sections-solides
+      - ex-sections-solides-01
+      - quiz:
+          - qcm-ss-1
+          - qcm-ss-2
+          - qcm-ss-3

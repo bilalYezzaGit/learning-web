@@ -1,0 +1,20 @@
+title: Theoreme de Thales et sa reciproque
+description: "Theoreme de Thales, sa reciproque et applications"
+programme: 1ere-tc
+trimester: T1
+order: 2
+estimatedTime: 120
+objectives:
+  - "Connaitre et appliquer le theoreme de Thales"
+  - "Connaitre et appliquer la reciproque du theoreme de Thales"
+  - "Demontrer le parallelisme de droites"
+
+sections:
+  - label: "Thales"
+    steps:
+      - lesson-thales
+      - ex-thales-01
+      - quiz:
+          - qcm-thales-1
+          - qcm-thales-2
+          - qcm-thales-3

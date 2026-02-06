@@ -1,0 +1,21 @@
+title: Derivation
+description: "Definition du nombre derive, interpretation geometrique et tangente a une courbe"
+programme: 3eme-math
+trimester: T2
+order: 2
+estimatedTime: 180
+objectives:
+  - "Calculer la derivee d une fonction"
+  - "Interpreter geometriquement le nombre derive"
+
+sections:
+  - label: "Derivees de base"
+    steps:
+      - ex-der-1
+      - quiz:
+          - qcm-der-1
+
+  - label: "Derivees composees"
+    steps:
+      - quiz:
+          - qcm-der-2

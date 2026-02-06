@@ -1,0 +1,20 @@
+title: Systemes de deux equations a deux inconnues
+description: "Resolution de systemes d equations lineaires"
+programme: 1ere-tc
+trimester: T3
+order: 15
+estimatedTime: 120
+objectives:
+  - "Resoudre un systeme par substitution"
+  - "Resoudre un systeme par combinaison lineaire"
+  - "Interpreter graphiquement un systeme"
+
+sections:
+  - label: "Systemes"
+    steps:
+      - lesson-systemes
+      - ex-systemes-01
+      - quiz:
+          - qcm-sys-1
+          - qcm-sys-2
+          - qcm-sys-3

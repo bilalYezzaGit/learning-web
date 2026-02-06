@@ -1,0 +1,20 @@
+title: Fonctions affines
+description: "Definition, representation graphique et proprietes des fonctions affines"
+programme: 1ere-tc
+trimester: T3
+order: 14
+estimatedTime: 120
+objectives:
+  - "Definir une fonction affine"
+  - "Representer graphiquement une fonction affine"
+  - "Determiner les coefficients d une fonction affine"
+
+sections:
+  - label: "Fonctions affines"
+    steps:
+      - lesson-fonctions-affines
+      - ex-fonctions-affines-01
+      - quiz:
+          - qcm-fa-1
+          - qcm-fa-2
+          - qcm-fa-3

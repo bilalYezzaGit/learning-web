@@ -505,8 +505,8 @@ Est-ce que `next-mdx-remote` + `fs` detecte les changements de fichiers MDX en d
 2. ~~**Phase 2** : Creer la structure `content/atoms/` + `content/molecules/`~~ **DONE**
 3. ~~**Phase 3** : Creer `src/lib/content.ts` (couche de lecture)~~ **DONE**
 4. ~~**Phase 4** : Convertir les YAML actuels en atomes MDX (script de migration)~~ **DONE** — 75 YAML → 114 atomes (21 lessons, 32 exercises, 61 QCM questions)
-5. **Phase 5** : Creer les molecules YAML a partir des modules existants ← **NEXT**
-6. **Phase 6** : Creer les composants MDX (`Enonce`, `Solution`, `Variations`, etc.)
+5. ~~**Phase 5** : Creer les molecules YAML a partir des modules existants~~ **DONE** — 3 programmes, 20 cours, 2 series
+6. **Phase 6** : Creer les composants MDX (`Enonce`, `Solution`, `Variations`, etc.) ← **NEXT**
 7. **Phase 7** : Brancher les pages sur le nouveau systeme
 8. **Phase 8** : Creer le dashboard admin `/admin/content`
 9. **Phase 9** : Supprimer l'ancien pipeline + Firebase CDN
@@ -516,6 +516,7 @@ Est-ce que `next-mdx-remote` + `fs` detecte les changements de fichiers MDX en d
 
 ## Changelog
 
+- **2026-02-06 v6** : Phase 5 done. 25 molecules YAML creees (3 programmes, 20 cours, 2 series). References atomes verifiees.
 - **2026-02-06 v5** : Phase 4 done. 75 YAML → 114 atomes MDX migres (`scripts/migrate-to-mdx.mjs`).
 - **2026-02-06 v4** : Phase 3 done. `src/types/content.ts` + `src/lib/content.ts` crees. TypeScript OK.
 - **2026-02-06 v3** : Phase 1+2 done. Deps installees, structure dossiers creee.

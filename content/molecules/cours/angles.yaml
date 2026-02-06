@@ -1,0 +1,20 @@
+title: Angles
+description: "Mesure des angles, angles inscrits et angles au centre"
+programme: 1ere-tc
+trimester: T1
+order: 1
+estimatedTime: 90
+objectives:
+  - "Connaitre les differentes unites de mesure des angles"
+  - "Maitriser les angles inscrits et les angles au centre"
+  - "Resoudre des problemes geometriques impliquant des angles"
+
+sections:
+  - label: "Angles"
+    steps:
+      - lesson-angles
+      - ex-angles-01
+      - quiz:
+          - qcm-angles-1
+          - qcm-angles-2
+          - qcm-angles-3
