@@ -1,0 +1,42 @@
+---
+type: exercise
+title: Lecture graphique d une fonction
+difficulty: 1
+timeMinutes: 10
+category: application
+tags:
+  - fonctions
+---
+
+<Enonce>
+On considere une fonction $f$ definie sur $[-4, 5]$ dont la courbe representative $\mathscr{C}_f$ est donnee dans le repere ci-dessous.
+
+<Graph function="-(x+1)^2/4+3" range="[-4,5]" y-range="[-7,4]" hide-formula="true"></Graph>
+
+En utilisant le graphique :
+
+1. Determiner $f(0)$ et $f(2)$.
+2. Determiner les antecedents de $2$ par $f$.
+3. Resoudre graphiquement l'inequation $f(x) \geq 2$.
+4. Determiner les intervalles sur lesquels $f$ est croissante.
+5. Determiner le maximum de $f$ sur $[-4, 5]$. Pour quelle valeur de $x$ est-il atteint ?
+6. Donner le tableau de variation de $f$.
+</Enonce>
+
+<Solution>
+**1)** Par lecture graphique : $f(0) \approx 2{,}75$ et $f(2) \approx 0{,}75$.
+
+**2)** On trace la droite $y = 2$. Elle coupe $\mathscr{C}_f$ en deux points d'abscisses environ $-3$ et $1$. Les antecedents de 2 sont donc environ $-3$ et $1$.
+
+**3)** $f(x) \geq 2$ correspond aux portions de la courbe situees au dessus de la droite $y = 2$. L'ensemble solution est environ $[-3, 1]$.
+
+**4)** D'apres la courbe, $f$ est croissante sur $[-4, -1]$.
+
+**5)** Le maximum de $f$ est $f(-1) = 3$, atteint en $x = -1$.
+
+**6)** Tableau de variation :
+
+<Variations var="x" intervals="[-4,-1,5]">
+    <Row label="f" kind="var" values="[-1,3,-6]"/>
+</Variations>
+</Solution>

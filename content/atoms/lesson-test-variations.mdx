@@ -1,0 +1,116 @@
+---
+type: lesson
+title: "[TEST] Tableaux de variations"
+difficulty: 0
+timeMinutes: 5
+tags:
+  - continuite
+---
+
+### 1. Tableau de signes simple
+
+Signe de $(x-1)$ sur $\mathbb{R}$ :
+
+<Variations var="x" intervals="[-∞,1,+∞]">
+    <Row label="(x-1)" kind="sign" values="[-,+]"/>
+</Variations>
+
+### 2. Tableau de signes avec zeros aux bornes
+
+Signe de $(x-1)(x+2)$ :
+
+<Variations var="x" intervals="[-∞,-2,1,+∞]">
+    <Row label="(x-1)(x+2)" kind="sign" values="[+,0,-,0,+]"/>
+</Variations>
+
+### 3. Tableau de signes multi-lignes
+
+Signe de $(2x+1)(x-3)$ :
+
+<Variations var="x" intervals="[-∞,-1/2,3,+∞]">
+    <Row label="(2x+1)" kind="sign" values="[-,0,+,+]"/>
+    <Row label="(x-3)" kind="sign" values="[-,-,0,+]"/>
+    <Row label="(2x+1)(x-3)" kind="sign" values="[+,0,-,0,+]"/>
+</Variations>
+
+### 4. Tableau de variations simple
+
+Variations de $f(x) = x^2 - 2x$ sur $[-1; 3]$ :
+
+<Variations var="x" intervals="[-1,1,3]">
+    <Row label="f'(x)" kind="sign" values="[-,+]"/>
+    <Row label="f" kind="var" values="[3,-1,3]"/>
+</Variations>
+
+### 5. Tableau de variations avec 3 intervalles
+
+Variations de $f$ sur $[-2; 4]$ :
+
+<Variations var="x" intervals="[-2,0,2,4]">
+    <Row label="f'(x)" kind="sign" values="[+,-,+]"/>
+    <Row label="f" kind="var" values="[-3,1,-2,5]"/>
+</Variations>
+
+### 6. Signes + variations complet
+
+Etude de $f(x) = x^3 - 3x$ sur $[-2; 2]$ :
+
+<Variations var="x" intervals="[-2,-1,1,2]">
+    <Row label="f'(x)" kind="sign" values="[+,-,+]"/>
+    <Row label="f" kind="var" values="[-2,2,-2,2]"/>
+</Variations>
+
+### 7. Multi-lignes signes + variation
+
+Etude complete avec facteurs :
+
+<Variations var="x" intervals="[-∞,-1,2,+∞]">
+    <Row label="(x+1)" kind="sign" values="[-,0,+,+]"/>
+    <Row label="(x-2)" kind="sign" values="[-,-,0,+]"/>
+    <Row label="f'(x)" kind="sign" values="[+,0,-,0,+]"/>
+    <Row label="f" kind="var" values="[-∞,3,-2,+∞]"/>
+</Variations>
+
+### 8. Variation avec discontinuite (asymptote)
+
+Variations de $f(x) = \frac{1}{x}$ sur $\mathbb{R}^*$ :
+
+<Variations var="x" intervals="[-∞,0,+∞]">
+    <Row label="f'(x)" kind="sign" values="[-,-]"/>
+    <Row label="f" kind="var" values="[0,-∞,+∞,0]"/>
+</Variations>
+
+### 9. Tableau de signes seul (trinome)
+
+Signe de $x^2 - 5x + 6$ :
+
+<Variations var="x" intervals="[-∞,2,3,+∞]">
+    <Row label="x^2-5x+6" kind="sign" values="[+,0,-,0,+]"/>
+</Variations>
+
+### 10. Variation monotone decroissante
+
+Variations de $g(x) = -x^2$ sur $[0; 5]$ :
+
+<Variations var="x" intervals="[0,5]">
+    <Row label="g'(x)" kind="sign" values="[-]"/>
+    <Row label="g" kind="var" values="[0,-25]"/>
+</Variations>
+
+### 11. Variation monotone croissante
+
+Variations de $h(x) = \sqrt{x}$ sur $[0; 9]$ :
+
+<Variations var="x" intervals="[0,9]">
+    <Row label="h'(x)" kind="sign" values="[+]"/>
+    <Row label="h" kind="var" values="[0,3]"/>
+</Variations>
+
+### 12. Cas complexe : 4 intervalles + discontinuite
+
+Variations de $f(x) = \frac{x^2-1}{x}$ :
+
+<Variations var="x" intervals="[-∞,-1,0,1,+∞]">
+    <Row label="f'(x)" kind="sign" values="[+,0,-,-,0,+]"/>
+    <Row label="f" kind="var" values="[-∞,0,-∞,+∞,0,+∞]"/>
+</Variations>

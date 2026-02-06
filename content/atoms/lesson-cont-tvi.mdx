@@ -1,0 +1,37 @@
+---
+type: lesson
+title: "Rappel : Theoreme des valeurs intermediaires"
+difficulty: 0
+timeMinutes: 4
+tags:
+  - continuite
+---
+
+### Theoreme des valeurs intermediaires (TVI)
+
+Soit $f$ une fonction **continue** sur un intervalle $[a, b]$.
+
+Pour tout reel $k$ compris entre $f(a)$ et $f(b)$, il existe au moins un $c \in [a, b]$ tel que :
+
+$$f(c) = k$$
+
+### Corollaire (TVI pour les zeros)
+
+Si $f$ est continue sur $[a, b]$ et si $f(a)$ et $f(b)$ sont de **signes contraires**, alors il existe au moins un $c \in ]a, b[$ tel que $f(c) = 0$.
+
+$$f(a) \times f(b) < 0 \implies \exists\, c \in ]a,b[,\ f(c) = 0$$
+
+### Cas particulier : bijection
+
+Si $f$ est continue et **strictement monotone** sur $[a, b]$, alors pour tout $k$ entre $f(a)$ et $f(b)$, l'equation $f(x) = k$ admet une **unique** solution.
+
+### Application : encadrement de solutions
+
+Pour montrer qu'une equation $f(x) = 0$ admet une solution dans $[a, b]$ :
+
+1. Verifier que $f$ est continue sur $[a, b]$
+2. Calculer $f(a)$ et $f(b)$
+3. Verifier que $f(a) \times f(b) < 0$
+4. Conclure par le TVI
+
+Pour affiner, appliquer la **dichotomie** : couper l'intervalle en deux et recommencer.

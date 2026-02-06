@@ -1,0 +1,42 @@
+---
+type: lesson
+title: "Rappel : Continuite en un point"
+difficulty: 0
+timeMinutes: 3
+tags:
+  - continuite
+---
+
+### Definition
+
+Soit $f$ une fonction definie sur un intervalle $I$ et $a \in I$.
+
+On dit que $f$ est **continue en $a$** si :
+
+$$\lim_{x \to a} f(x) = f(a)$$
+
+Autrement dit, trois conditions doivent etre reunies :
+
+1. $f(a)$ existe (la fonction est definie en $a$)
+2. $\lim_{x \to a} f(x)$ existe (la limite existe)
+3. La limite est egale a $f(a)$
+
+### Continuite sur un intervalle
+
+$f$ est **continue sur $I$** si elle est continue en tout point de $I$.
+
+### Fonctions usuelles continues
+
+Les fonctions suivantes sont continues sur leur domaine de definition :
+
+- Fonctions polynomiales (sur $\mathbb{R}$)
+- Fonctions rationnelles (la ou le denominateur ne s'annule pas)
+- $\sqrt{x}$, $|x|$, $\sin x$, $\cos x$
+
+### Operations conservant la continuite
+
+Si $f$ et $g$ sont continues en $a$, alors :
+
+- $f + g$, $f - g$, $f \times g$ sont continues en $a$
+- $\frac{f}{g}$ est continue en $a$ si $g(a) \neq 0$
+- $g \circ f$ est continue en $a$

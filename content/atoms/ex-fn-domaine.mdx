@@ -1,0 +1,41 @@
+---
+type: exercise
+title: Domaine de definition
+difficulty: 2
+timeMinutes: 10
+category: application
+tags:
+  - fonctions
+---
+
+<Enonce>
+Determiner l'ensemble de definition de chacune des fonctions suivantes :
+
+1. $f(x) = \sqrt{2x^2 - 3x + 1}$
+2. $g(x) = \sqrt{x^2 - |x|}$
+3. $h(x) = \frac{x}{\sqrt{x^2 - 3} - 2}$
+</Enonce>
+
+<Solution>
+**1)** Il faut $2x^2 - 3x + 1 \geq 0$.
+
+Le discriminant vaut $\Delta = 9 - 8 = 1$. Les racines sont $x_1 = \frac{1}{2}$ et $x_2 = 1$.
+
+Comme $a = 2 > 0$, le trinome est positif a l'exterieur des racines :
+
+$$D_f = \left]-\infty, \frac{1}{2}\right] \cup [1, +\infty[$$
+
+**2)** Il faut $x^2 - |x| \geq 0$, soit $|x|(|x| - 1) \geq 0$.
+
+Cela donne $|x| = 0$ ou $|x| \geq 1$, donc :
+
+$$D_g = ]-\infty, -1] \cup \{0\} \cup [1, +\infty[$$
+
+**3)** Il faut $x^2 - 3 \geq 0$ et $\sqrt{x^2 - 3} \neq 2$.
+
+$x^2 - 3 \geq 0$ donne $x \leq -\sqrt{3}$ ou $x \geq \sqrt{3}$.
+
+$\sqrt{x^2 - 3} = 2$ donne $x^2 = 7$, soit $x = \pm\sqrt{7}$.
+
+$$D_h = ]-\infty, -\sqrt{3}] \cup [\sqrt{3}, +\infty[ \;\setminus\; \{-\sqrt{7}, \sqrt{7}\}$$
+</Solution>

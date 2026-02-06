@@ -1,0 +1,21 @@
+---
+type: exercise
+title: Application du TVI
+difficulty: 2
+timeMinutes: 10
+category: demonstration
+tags:
+  - continuite
+---
+
+<Enonce>
+Montrer que l'equation $x^3 + x - 1 = 0$ admet une unique solution dans $[0; 1]$.
+</Enonce>
+
+<Solution>
+Soit $f(x) = x^3 + x - 1$. $f$ est continue sur $[0;1]$ (polynome). $f(0) = -1 < 0$ et $f(1) = 1 > 0$. Par le TVI, il existe $c \in ]0;1[$ tel que $f(c) = 0$. De plus, $f'(x) = 3x^2 + 1 > 0$ donc $f$ est strictement croissante, d'ou l'unicite.
+</Solution>
+
+<Methode>
+TVI : si $f$ continue sur $[a;b]$ et $f(a) \cdot f(b) < 0$, alors il existe $c \in ]a;b[$ tel que $f(c) = 0$.
+</Methode>

@@ -1,0 +1,32 @@
+---
+type: lesson
+title: "Rappel : Prolongement par continuite"
+difficulty: 0
+timeMinutes: 3
+tags:
+  - continuite
+---
+
+### Definition
+
+Soit $f$ une fonction definie sur un intervalle $I$ sauf peut-etre en un point $a \in I$.
+
+Si $\lim_{x \to a} f(x) = \ell$ existe et est finie, on peut definir le **prolongement par continuite** de $f$ en $a$ :
+
+$$\tilde{f}(x) = \begin{cases} f(x) & \text{si } x \neq a \\ \ell & \text{si } x = a \end{cases}$$
+
+La fonction $\tilde{f}$ est alors continue en $a$.
+
+### Methode
+
+1. Identifier le point $a$ ou $f$ n'est pas definie
+2. Calculer $\lim_{x \to a} f(x)$
+3. Si la limite $\ell$ est finie, poser $\tilde{f}(a) = \ell$
+
+### Exemple
+
+$f(x) = \frac{x^2 - 1}{x - 1}$ n'est pas definie en $x = 1$.
+
+Or $f(x) = \frac{(x-1)(x+1)}{x-1} = x + 1$ pour $x \neq 1$.
+
+Donc $\lim_{x \to 1} f(x) = 2$, et on prolonge par $\tilde{f}(1) = 2$.
