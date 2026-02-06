@@ -111,18 +111,3 @@ export function getUserId(): string {
   return user.uid
 }
 
-// =============================================================================
-// Convenience export
-// =============================================================================
-
-export const authService = {
-  getCurrentUser,
-  subscribeToAuthState,
-  signInAnonymously: signInAnonymouslyFn,
-  signInWithEmail,
-  createAccount,
-  signOut,
-  resetPassword,
-  isAuthenticated,
-  getUserId,
-}

@@ -15,7 +15,7 @@ import {
   FieldSeparator,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { useAuth } from '@/lib/hooks/use-auth'
+import { useAuth } from '@/lib/context'
 import { getAvailableParcours, type ParcoursConfig } from '@/lib/parcours'
 import { doc, setDoc } from 'firebase/firestore'
 import { getDbInstance } from '@/lib/firebase/client'

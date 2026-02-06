@@ -50,13 +50,3 @@ export function isFirebaseConfigured(): boolean {
   return Boolean(config.apiKey && config.projectId)
 }
 
-// For backwards compatibility - but prefer using getFirebaseConfig()
-export const firebaseConfig = {
-  get apiKey() { return getFirebaseConfig().apiKey },
-  get authDomain() { return getFirebaseConfig().authDomain },
-  get projectId() { return getFirebaseConfig().projectId },
-  get storageBucket() { return getFirebaseConfig().storageBucket },
-  get messagingSenderId() { return getFirebaseConfig().messagingSenderId },
-  get appId() { return getFirebaseConfig().appId },
-  get measurementId() { return getFirebaseConfig().measurementId },
-}

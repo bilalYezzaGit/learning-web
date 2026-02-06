@@ -36,7 +36,7 @@ import {
   SheetDescription,
 } from '@/components/ui/sheet'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { useAuth } from '@/lib/hooks/use-auth'
+import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
 import { useUserParcours, getAvailableParcours } from '@/lib/parcours'
 

@@ -3,14 +3,9 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import {
-  IconBook,
-  IconBrain,
-  IconHome,
-  IconSearch,
-} from "@tabler/icons-react"
-import { BookOpen } from "lucide-react"
+import { BookOpen, Brain, Home, Search } from "lucide-react"
 
+import { NavApprendre } from "@/components/nav-apprendre"
 import { NavUser } from "@/components/nav-user"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -35,27 +30,9 @@ export function AppSidebar({ parcours, onSearchClick, ...props }: AppSidebarProp
   const pathname = usePathname()
   const parcoursConfig = parcours ? getParcoursConfig(parcours) : null
 
-  // Build nav items with parcours prefix
-  const navItems = React.useMemo(() => {
-    const base = parcours ? `/${parcours}` : ''
-    return [
-      {
-        title: "Dashboard",
-        url: base || '/',
-        icon: IconHome,
-      },
-      {
-        title: "Apprendre",
-        url: `${base}/apprendre`,
-        icon: IconBook,
-      },
-      {
-        title: "Réviser",
-        url: `${base}/reviser`,
-        icon: IconBrain,
-      },
-    ]
-  }, [parcours])
+  const base = parcours ? `/${parcours}` : ''
+  const dashboardUrl = base || '/'
+  const reviserUrl = `${base}/reviser`
 
   return (
     <Sidebar variant="inset" collapsible="icon" {...props}>
@@ -84,20 +61,25 @@ export function AppSidebar({ parcours, onSearchClick, ...props }: AppSidebarProp
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navItems.map((item) => {
-                const isActive = pathname === item.url ||
-                  (item.url !== "/" && item.url !== `/${parcours}` && pathname.startsWith(item.url))
-                return (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={isActive}>
-                      <Link href={item.url}>
-                        <item.icon className="h-4 w-4" />
-                        <span>{item.title}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                )
-              })}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={pathname === dashboardUrl}>
+                  <Link href={dashboardUrl}>
+                    <Home className="h-4 w-4" />
+                    <span>Dashboard</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              {parcours && <NavApprendre parcours={parcours} />}
+
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={pathname.startsWith(reviserUrl)}>
+                  <Link href={reviserUrl}>
+                    <Brain className="h-4 w-4" />
+                    <span>Réviser</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -107,7 +89,7 @@ export function AppSidebar({ parcours, onSearchClick, ...props }: AppSidebarProp
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <button type="button" onClick={onSearchClick}>
-                    <IconSearch className="h-4 w-4" />
+                    <Search className="h-4 w-4" />
                     <span>Rechercher</span>
                     <kbd className="ml-auto text-xs text-muted-foreground">⌘K</kbd>
                   </button>

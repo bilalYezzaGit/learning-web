@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { doc, getDoc } from 'firebase/firestore'
-import { useAuth } from '@/lib/hooks/use-auth'
+import { useAuth } from '@/lib/context'
 import { getDbInstance } from '@/lib/firebase/client'
 
 export function LoginForm({

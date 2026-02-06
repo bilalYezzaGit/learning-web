@@ -4,9 +4,9 @@
 
 // Data hooks
 export { useProgrammes } from './use-programmes'
+export { useParcoursModules } from './use-parcours-modules'
 export { useModule } from './use-module'
 export { useProgress } from './use-progress'
-export { useAuth } from './use-auth'
 
 // Utility hooks
 export {

@@ -2,12 +2,7 @@
 
 import Link from "next/link"
 import * as React from "react"
-import {
-  IconDotsVertical,
-  IconLogout,
-  IconUserCircle,
-  IconSettings,
-} from "@tabler/icons-react"
+import { EllipsisVertical, LogOut, CircleUser, Settings } from "lucide-react"
 
 import {
   Avatar,
@@ -29,7 +24,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
-import { useAuth } from "@/lib/hooks/use-auth"
+import { useAuth } from "@/lib/context"
 import { useUserParcours } from "@/lib/parcours"
 import { Skeleton } from "@/components/ui/skeleton"
 import { ProfileSheet } from "@/components/profile-sheet"
@@ -71,7 +66,7 @@ export function NavUser() {
         <SidebarMenuItem>
           <SidebarMenuButton asChild>
             <Link href="/login">
-              <IconUserCircle className="h-4 w-4" />
+              <CircleUser className="h-4 w-4" />
               <span>Se connecter</span>
             </Link>
           </SidebarMenuButton>
@@ -113,7 +108,7 @@ export function NavUser() {
                     {parcoursConfig ? parcoursConfig.label : userEmail}
                   </span>
                 </div>
-                <IconDotsVertical className="ml-auto size-4" />
+                <EllipsisVertical className="ml-auto size-4" />
               </SidebarMenuButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -145,16 +140,16 @@ export function NavUser() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => openProfile('stats')}>
-                <IconUserCircle className="mr-2 h-4 w-4" />
+                <CircleUser className="mr-2 h-4 w-4" />
                 Profil
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => openProfile('settings')}>
-                <IconSettings className="mr-2 h-4 w-4" />
+                <Settings className="mr-2 h-4 w-4" />
                 Paramètres
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => signOut()}>
-                <IconLogout className="mr-2 h-4 w-4" />
+                <LogOut className="mr-2 h-4 w-4" />
                 Déconnexion
               </DropdownMenuItem>
             </DropdownMenuContent>

@@ -16,7 +16,6 @@ export {
 export { ProgressService, type ProgressMap, type ProgressListener } from './progress-service'
 
 export {
-  authService,
   getCurrentUser,
   subscribeToAuthState,
   signInAnonymouslyFn,

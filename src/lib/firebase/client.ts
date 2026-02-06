@@ -15,7 +15,7 @@ import { getAuth, type Auth } from 'firebase/auth'
 import { getFirestore, type Firestore } from 'firebase/firestore'
 import { getFunctions, type Functions } from 'firebase/functions'
 
-import { firebaseConfig } from './config'
+import { getFirebaseConfig } from './config'
 
 // Initialize Firebase app (singleton)
 function getApp(): FirebaseApp {
@@ -23,7 +23,7 @@ function getApp(): FirebaseApp {
   if (existingApps.length > 0) {
     return existingApps[0]!
   }
-  return initializeApp(firebaseConfig)
+  return initializeApp(getFirebaseConfig())
 }
 
 // Lazy-initialized instances
@@ -61,8 +61,3 @@ export function getFunctionsInstance(): Functions {
   return _functions
 }
 
-// Convenience exports for direct usage
-export const auth = typeof window !== 'undefined' ? getAuthInstance() : null
-export const db = typeof window !== 'undefined' ? getDbInstance() : null
-export const functions =
-  typeof window !== 'undefined' ? getFunctionsInstance() : null

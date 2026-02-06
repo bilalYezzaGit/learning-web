@@ -1,41 +1,53 @@
-'use client'
-
 /**
  * Parcours Layout
  *
- * Layout for all parcours-specific pages.
- * Includes sidebar with parcours indicator and banner for out-of-parcours navigation.
+ * Server component layout for all parcours-specific pages.
+ * Prefetches programmes data so the sidebar modules render instantly.
  */
 
-import { useParams } from 'next/navigation'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 
 import { AppSidebar } from '@/components/app-sidebar'
 import { SiteHeader } from '@/components/site-header'
 import { ParcoursBanner } from '@/components/parcours-banner'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
+import { getQueryClient } from '@/lib/query/get-query-client'
+import { queryKeys } from '@/lib/query/keys'
+import { fetchProgrammes } from '@/lib/services'
 
-export default function ParcoursLayout({
-  children,
-}: {
+interface ParcoursLayoutProps {
   children: React.ReactNode
-}) {
-  const params = useParams()
-  const parcours = params.parcours as string
+  params: Promise<{ parcours: string }>
+}
+
+export default async function ParcoursLayout({
+  children,
+  params,
+}: ParcoursLayoutProps) {
+  const { parcours } = await params
+
+  const queryClient = getQueryClient()
+  await queryClient.prefetchQuery({
+    queryKey: queryKeys.programmes.catalogue(),
+    queryFn: fetchProgrammes,
+  })
 
   return (
-    <SidebarProvider>
-      <AppSidebar parcours={parcours} />
-      <SidebarInset>
-        <SiteHeader parcours={parcours} />
-        <ParcoursBanner urlParcours={parcours} />
-        <div className="flex flex-1 flex-col">
-          <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              {children}
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <SidebarProvider>
+        <AppSidebar parcours={parcours} />
+        <SidebarInset>
+          <SiteHeader parcours={parcours} />
+          <ParcoursBanner urlParcours={parcours} />
+          <div className="flex flex-1 flex-col">
+            <div className="@container/main flex flex-1 flex-col gap-2">
+              <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+                {children}
+              </div>
             </div>
           </div>
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+        </SidebarInset>
+      </SidebarProvider>
+    </HydrationBoundary>
   )
 }
