@@ -24,7 +24,6 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { Progress } from '@/components/ui/progress'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { Button } from '@/components/ui/button'
 import {
   Collapsible,
@@ -577,7 +576,7 @@ export function CourseTimeline({
 
       <div className="mx-4 h-px bg-border/30" />
 
-      <ScrollArea className="flex-1">
+      <div className="flex-1 min-h-0 overflow-y-auto">
         {hasSections ? (
           <Accordion
             type="multiple"
@@ -602,7 +601,7 @@ export function CourseTimeline({
             onActivityClick={handleActivityClick}
           />
         )}
-      </ScrollArea>
+      </div>
     </>
   )
 
@@ -627,7 +626,7 @@ export function CourseTimeline({
       </Sheet>
 
       {/* Desktop: static aside */}
-      <aside className="hidden lg:flex h-full w-80 flex-col border-r border-border/40 bg-background">
+      <aside className="hidden lg:flex h-full w-80 flex-col overflow-hidden border-r border-border/40 bg-background">
         {timelineContent}
       </aside>
     </>
