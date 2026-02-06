@@ -166,4 +166,7 @@
 | **Phase 5** | P9, P10, P11 | Components lourds : timeline, profile, QCM | **DONE** |
 | **Phase 6** | P12, P13, P14 | Lib & finition : hooks, types, services, content | **DONE** |
 
-**Chaque partie suit le cycle : Audit -> Discussion -> Action.**
+## CHANTIER TERMINÉ
+
+### Piste future (hors scope)
+- **Migrer le contenu vers Markdown/MDX** côté backend → permettrait de remplacer `html-react-parser` par `react-markdown` + `remark-math` + `rehype-katex` (~10 lignes au lieu de ~150). Le content system actuel est correct pour du contenu HTML.
