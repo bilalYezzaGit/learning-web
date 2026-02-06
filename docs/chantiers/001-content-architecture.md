@@ -499,12 +499,12 @@ Est-ce que `next-mdx-remote` + `fs` detecte les changements de fichiers MDX en d
 
 ---
 
-## Plan de migration (a affiner)
+## Plan de migration
 
-1. **Phase 1** : Installer les deps (`next-mdx-remote`, `remark-math`, `rehype-katex`, `yaml`)
-2. **Phase 2** : Creer la structure `content/atoms/` + `content/molecules/`
-3. **Phase 3** : Creer `src/lib/content.ts` (couche de lecture)
-4. **Phase 4** : Convertir les YAML actuels en atomes MDX (script de migration)
+1. ~~**Phase 1** : Installer les deps (`next-mdx-remote`, `remark-math`, `rehype-katex`, `yaml`)~~ **DONE**
+2. ~~**Phase 2** : Creer la structure `content/atoms/` + `content/molecules/`~~ **DONE**
+3. ~~**Phase 3** : Creer `src/lib/content.ts` (couche de lecture)~~ **DONE**
+4. **Phase 4** : Convertir les YAML actuels en atomes MDX (script de migration) ← **NEXT**
 5. **Phase 5** : Creer les molecules YAML a partir des modules existants
 6. **Phase 6** : Creer les composants MDX (`Enonce`, `Solution`, `Variations`, etc.)
 7. **Phase 7** : Brancher les pages sur le nouveau systeme
@@ -514,4 +514,9 @@ Est-ce que `next-mdx-remote` + `fs` detecte les changements de fichiers MDX en d
 
 ---
 
-*Derniere mise a jour : 2026-02-06*
+## Changelog
+
+- **2026-02-06 v4** : Phase 3 done. `src/types/content.ts` + `src/lib/content.ts` crees. TypeScript OK.
+- **2026-02-06 v3** : Phase 1+2 done. Deps installees, structure dossiers creee.
+- **2026-02-06 v2** : Architecture atome/molecule, tags semantiques, QCM atomique, dashboard admin.
+- **2026-02-06 v1** : Version initiale, exploration MDX vs YAML.
