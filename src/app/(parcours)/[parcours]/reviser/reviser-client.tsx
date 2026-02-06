@@ -68,7 +68,7 @@ export function ReviserStats() {
             <Trophy className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <p className="text-2xl font-bold">{stats.completed}</p>
+            <p className="tabular-nums text-2xl font-bold">{stats.completed}</p>
             <p className="text-sm text-muted-foreground">Activités complétées</p>
           </div>
         </CardContent>
@@ -79,7 +79,7 @@ export function ReviserStats() {
             <GraduationCap className="h-5 w-5 text-green-600" />
           </div>
           <div>
-            <p className="text-2xl font-bold">{stats.avgScore}%</p>
+            <p className="tabular-nums text-2xl font-bold">{stats.avgScore}%</p>
             <p className="text-sm text-muted-foreground">Score moyen QCM</p>
           </div>
         </CardContent>
@@ -90,7 +90,7 @@ export function ReviserStats() {
             <Check className="h-5 w-5 text-blue-600" />
           </div>
           <div>
-            <p className="text-2xl font-bold">{stats.exercisesDone}</p>
+            <p className="tabular-nums text-2xl font-bold">{stats.exercisesDone}</p>
             <p className="text-sm text-muted-foreground">Exercices résolus</p>
           </div>
         </CardContent>

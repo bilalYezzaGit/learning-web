@@ -26,7 +26,7 @@ export default function LandingPage() {
         <Badge variant="secondary" className="text-sm">
           Plateforme d&apos;apprentissage
         </Badge>
-        <h1 className="max-w-3xl text-4xl font-bold tracking-tight md:text-6xl">
+        <h1 className="max-w-3xl text-balance text-4xl font-bold tracking-tight md:text-6xl">
           Apprenez les maths à votre rythme
         </h1>
         <p className="max-w-xl text-lg text-muted-foreground md:text-xl">
@@ -51,7 +51,7 @@ export default function LandingPage() {
       {/* Features */}
       <section className="mx-auto w-full max-w-7xl px-4 py-20 md:px-6">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-semibold">Comment ça marche</h2>
+          <h2 className="text-balance text-3xl font-semibold">Comment ça marche</h2>
           <p className="mt-3 text-lg text-muted-foreground">
             Tout ce qu&apos;il faut pour progresser en mathématiques.
           </p>
@@ -60,7 +60,7 @@ export default function LandingPage() {
           <Card>
             <CardHeader>
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                <BookOpen className="h-6 w-6 text-primary" />
+                <BookOpen className="h-6 w-6 text-primary" aria-hidden="true" />
               </div>
               <CardTitle className="pt-2">Cours structurés</CardTitle>
               <CardDescription>
@@ -72,7 +72,7 @@ export default function LandingPage() {
           <Card>
             <CardHeader>
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                <Brain className="h-6 w-6 text-primary" />
+                <Brain className="h-6 w-6 text-primary" aria-hidden="true" />
               </div>
               <CardTitle className="pt-2">Exercices interactifs</CardTitle>
               <CardDescription>
@@ -84,7 +84,7 @@ export default function LandingPage() {
           <Card>
             <CardHeader>
               <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                <BarChart3 className="h-6 w-6 text-primary" />
+                <BarChart3 className="h-6 w-6 text-primary" aria-hidden="true" />
               </div>
               <CardTitle className="pt-2">Suivi de progression</CardTitle>
               <CardDescription>
@@ -101,7 +101,7 @@ export default function LandingPage() {
       {/* Parcours */}
       <section className="mx-auto w-full max-w-7xl px-4 py-20 md:px-6">
         <div className="mb-12 text-center">
-          <h2 className="text-3xl font-semibold">Choisissez votre parcours</h2>
+          <h2 className="text-balance text-3xl font-semibold">Choisissez votre parcours</h2>
           <p className="mt-3 text-lg text-muted-foreground">
             Sélectionnez le niveau qui correspond à vos besoins.
           </p>
@@ -132,7 +132,7 @@ export default function LandingPage() {
       <section className="mx-auto w-full max-w-7xl px-4 py-20 text-center md:px-6">
         <Card className="mx-auto max-w-2xl bg-primary text-primary-foreground">
           <CardContent className="flex flex-col items-center gap-4 py-12">
-            <h2 className="text-2xl font-semibold">Prêt à commencer ?</h2>
+            <h2 className="text-balance text-2xl font-semibold">Prêt à commencer ?</h2>
             <p className="text-primary-foreground/80">
               Créez un compte gratuit et commencez à progresser dès maintenant.
             </p>

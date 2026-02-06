@@ -11,7 +11,7 @@ import {
 } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { Card } from '@/components/ui/card'
+import { InteractiveCard } from '@/components/ui/interactive-card'
 
 type ActivityType = 'cours' | 'exercice' | 'qcm'
 type ActivityStatus = 'locked' | 'available' | 'in_progress' | 'completed'
@@ -23,10 +23,10 @@ const activityIcons: Record<ActivityType, LucideIcon> = {
 }
 
 const statusStyles: Record<ActivityStatus, string> = {
-  locked: 'opacity-50 cursor-not-allowed',
-  available: 'cursor-pointer hover:shadow-md hover:border-primary/50',
-  in_progress: 'cursor-pointer border-primary/50 bg-primary/5',
-  completed: 'cursor-pointer border-success/50 bg-success/5',
+  locked: '',
+  available: 'hover:shadow-md hover:border-primary/50',
+  in_progress: 'border-primary/50 bg-primary/5',
+  completed: 'border-success/50 bg-success/5',
 }
 
 export interface ActivityCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -51,13 +51,14 @@ export function ActivityCard({
   const isLocked = status === 'locked'
 
   return (
-    <Card
+    <InteractiveCard
       className={cn(
-        'flex items-center gap-4 p-4 transition-all',
+        'flex items-center gap-4 p-4 transition-[shadow,border-color,background-color]',
         statusStyles[status],
         className
       )}
-      onClick={isLocked ? undefined : onClick}
+      onClick={onClick}
+      disabled={isLocked}
       {...props}
     >
       {/* Activity type icon */}
@@ -68,6 +69,7 @@ export function ActivityCard({
         )}
       >
         <IconComponent
+          aria-hidden="true"
           className={cn(
             'h-5 w-5',
             isCompleted ? 'text-success' : 'text-muted-foreground'
@@ -86,7 +88,7 @@ export function ActivityCard({
       {/* Status indicator */}
       <div className="shrink-0">
         {isCompleted ? (
-          <CheckCircle2 className="h-5 w-5 text-success" />
+          <CheckCircle2 className="h-5 w-5 text-success" aria-hidden="true" />
         ) : (
           <Circle
             className={cn(
@@ -98,6 +100,6 @@ export function ActivityCard({
           />
         )}
       </div>
-    </Card>
+    </InteractiveCard>
   )
 }

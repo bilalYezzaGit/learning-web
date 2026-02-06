@@ -33,9 +33,9 @@ export default async function SerieResultPage({ params }: PageProps) {
       {/* Success Header */}
       <div className="mb-8 text-center">
         <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
-          <Award className="h-10 w-10 text-green-600" />
+          <Award className="h-10 w-10 text-green-600" aria-hidden="true" />
         </div>
-        <h1 className="font-serif text-3xl font-semibold">Félicitations !</h1>
+        <h1 className="text-balance font-serif text-3xl font-semibold">Félicitations !</h1>
         <p className="mt-2 text-lg text-muted-foreground">
           Tu as terminé la série &quot;{serie.title}&quot;
         </p>

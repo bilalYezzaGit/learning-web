@@ -115,7 +115,7 @@ export default async function AdminContentPage({ searchParams }: PageProps) {
   return (
     <div className="flex h-[calc(100svh-3.25rem)] flex-col">
       {/* Stats bar */}
-      <div className="flex items-center gap-3 border-b px-6 py-2">
+      <div className="flex flex-wrap items-center gap-3 border-b px-6 py-2">
         <Badge variant="secondary">{totalCount} atomes</Badge>
         <Badge variant="outline">{countByType.lesson} cours</Badge>
         <Badge variant="outline">{countByType.exercise} exercices</Badge>

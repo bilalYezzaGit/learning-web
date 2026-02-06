@@ -27,7 +27,7 @@ export default async function ParcoursDashboardPage({ params }: PageProps) {
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-4">
               <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-                <BookOpen className="h-7 w-7" />
+                <BookOpen className="h-7 w-7" aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Reprendre</p>
@@ -56,7 +56,7 @@ export default async function ParcoursDashboardPage({ params }: PageProps) {
             <CardHeader>
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                  <BookOpen className="h-5 w-5 text-primary" />
+                  <BookOpen className="h-5 w-5 text-primary" aria-hidden="true" />
                 </div>
                 <div>
                   <CardTitle className="text-base">Apprendre</CardTitle>
@@ -72,7 +72,7 @@ export default async function ParcoursDashboardPage({ params }: PageProps) {
             <CardHeader>
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                  <Brain className="h-5 w-5 text-primary" />
+                  <Brain className="h-5 w-5 text-primary" aria-hidden="true" />
                 </div>
                 <div>
                   <CardTitle className="text-base">Réviser</CardTitle>

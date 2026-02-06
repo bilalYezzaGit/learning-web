@@ -8,6 +8,7 @@
 
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -48,6 +49,12 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
 }
 
 :root {
@@ -85,6 +92,12 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --success: oklch(0.6 0.2 145);
+  --success-foreground: oklch(0.3 0.1 145);
+  --info: oklch(0.55 0.15 240);
+  --info-foreground: oklch(0.3 0.1 240);
+  --warning: oklch(0.75 0.15 85);
+  --warning-foreground: oklch(0.4 0.1 85);
 }
 
 .dark {
@@ -120,6 +133,12 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.439 0 0);
+  --success: oklch(0.65 0.2 145);
+  --success-foreground: oklch(0.85 0.1 145);
+  --info: oklch(0.6 0.15 240);
+  --info-foreground: oklch(0.85 0.1 240);
+  --warning: oklch(0.75 0.15 85);
+  --warning-foreground: oklch(0.85 0.1 85);
 }
 
 @layer base {
@@ -130,5 +149,15 @@
     @apply bg-background text-foreground antialiased;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

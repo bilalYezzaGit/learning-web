@@ -55,7 +55,7 @@ export default async function ReviserPage({ params }: PageProps) {
   return (
     <div className="px-4 lg:px-6">
       <div className="mb-8">
-        <h1 className="font-serif text-2xl font-semibold text-foreground">Réviser</h1>
+        <h1 className="text-balance font-serif text-2xl font-semibold text-foreground">Réviser</h1>
         <p className="mt-1 text-muted-foreground">
           Entraînez-vous avec des séries d&apos;exercices thématiques
         </p>
@@ -68,7 +68,7 @@ export default async function ReviserPage({ params }: PageProps) {
       {catalogEntries.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center text-muted-foreground">
-            <BookOpen className="mx-auto mb-4 h-12 w-12 opacity-50" />
+            <BookOpen className="mx-auto mb-4 h-12 w-12 opacity-50" aria-hidden="true" />
             <p className="text-lg font-medium">Aucune série disponible</p>
             <p className="mt-1 text-sm">Les séries d&apos;exercices arrivent bientôt</p>
           </CardContent>

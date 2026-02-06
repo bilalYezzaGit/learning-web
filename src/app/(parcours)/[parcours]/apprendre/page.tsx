@@ -45,7 +45,7 @@ export default async function ApprendrePage({ params }: PageProps) {
   return (
     <div className="px-4 lg:px-6">
       <div className="mb-8">
-        <h1 className="font-serif text-2xl font-semibold text-foreground">
+        <h1 className="text-balance font-serif text-2xl font-semibold text-foreground">
           Apprendre
         </h1>
         <p className="mt-1 text-muted-foreground">
@@ -56,7 +56,7 @@ export default async function ApprendrePage({ params }: PageProps) {
       {programmesWithCours.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center text-muted-foreground">
-            <BookOpen className="mx-auto mb-4 h-12 w-12 opacity-50" />
+            <BookOpen className="mx-auto mb-4 h-12 w-12 opacity-50" aria-hidden="true" />
             <p className="text-lg font-medium">Aucun module disponible</p>
           </CardContent>
         </Card>
@@ -87,7 +87,7 @@ export default async function ApprendrePage({ params }: PageProps) {
                               </p>
                             )}
                           </div>
-                          <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1" />
+                          <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1" aria-hidden="true" />
                         </div>
                         <p className="mt-3 text-xs text-muted-foreground">
                           {mod.sectionsCount} sections

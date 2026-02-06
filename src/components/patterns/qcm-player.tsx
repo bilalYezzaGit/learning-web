@@ -160,10 +160,10 @@ export function QCMPlayer({
             <h2 className="text-2xl font-bold">
               {isSuccess ? 'Bravo !' : 'Continue tes efforts !'}
             </h2>
-            <p className="mt-2 text-4xl font-bold text-primary">
+            <p className="mt-2 tabular-nums text-4xl font-bold text-primary">
               {finalScore} / {total}
             </p>
-            <p className="mt-1 text-muted-foreground">
+            <p className="mt-1 tabular-nums text-muted-foreground">
               {percentage}% de bonnes réponses
             </p>
             {!isSuccess && (
@@ -188,7 +188,7 @@ export function QCMPlayer({
       <div className="mb-6">
         <div className="flex items-center justify-between text-sm">
           <span className="font-medium">{qcm.title}</span>
-          <span className="text-muted-foreground">
+          <span className="tabular-nums text-muted-foreground">
             {currentIndex + 1}/{qcm.questions.length}
           </span>
         </div>
@@ -213,7 +213,7 @@ export function QCMPlayer({
                 onClick={() => state === 'answering' && setSelectedOption(index)}
                 disabled={state === 'validated'}
                 className={cn(
-                  'flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors',
+                  'flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
                   state === 'answering' && [
                     isSelected
                       ? 'border-primary bg-primary/5'
@@ -260,7 +260,7 @@ export function QCMPlayer({
 
         {/* Explanation after validation */}
         {state === 'validated' && currentQuestion.explication && (
-          <div className="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950/20">
+          <div aria-live="polite" className="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950/20">
             <p className="text-sm font-medium text-blue-800 dark:text-blue-200">Explication</p>
             <div className="mt-1 text-sm text-blue-700 dark:text-blue-300">
               <ContentRenderer html={currentQuestion.explication} />
@@ -271,7 +271,7 @@ export function QCMPlayer({
 
       {/* Footer */}
       <div className="mt-6 flex items-center justify-between border-t pt-4">
-        <p className="text-sm text-muted-foreground">
+        <p aria-live="polite" className="text-sm text-muted-foreground">
           Score: {score}/{currentIndex + (state === 'validated' ? 1 : 0)}
         </p>
 

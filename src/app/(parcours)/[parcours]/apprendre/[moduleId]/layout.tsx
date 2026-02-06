@@ -47,7 +47,7 @@ export default async function ModuleLayout({ children, params }: LayoutProps) {
       />
 
       {/* Content Area */}
-      <main className="flex-1 overflow-auto">{children}</main>
+      <main id="main-content" className="flex-1 overflow-auto">{children}</main>
     </div>
   )
 }

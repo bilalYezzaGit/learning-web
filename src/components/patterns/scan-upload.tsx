@@ -161,7 +161,7 @@ export function ScanUpload({ activityId, moduleId, onResult, className }: ScanUp
   if (state === 'analyzing') {
     return (
       <Card className={cn(className)}>
-        <CardContent className="py-8 text-center">
+        <CardContent aria-live="polite" className="py-8 text-center">
           {preview && (
             <img
               src={preview}
@@ -206,6 +206,7 @@ export function ScanUpload({ activityId, moduleId, onResult, className }: ScanUp
           capture="environment"
           onChange={handleInputChange}
           className="hidden"
+          aria-label="Choisir une photo à analyser"
         />
 
         {/* Drop zone */}

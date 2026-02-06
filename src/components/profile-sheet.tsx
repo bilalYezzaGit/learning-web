@@ -63,7 +63,7 @@ export function ProfileSheet({ open, onOpenChange, defaultTab = 'stats' }: Profi
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="sm:max-w-md p-0 flex flex-col">
+      <SheetContent side="right" className="sm:max-w-md p-0 flex flex-col overscroll-contain">
         {!isAuthenticated ? (
           <GuestContent />
         ) : (
@@ -152,7 +152,7 @@ function AuthenticatedContent({
             <SheetTitle className="truncate">{displayName}</SheetTitle>
             <SheetDescription className="truncate">{userEmail}</SheetDescription>
           </div>
-          <Button variant="outline" size="sm" onClick={() => onSignOut()}>
+          <Button variant="outline" size="sm" onClick={() => onSignOut()} aria-label="Se deconnecter">
             <LogOut className="h-4 w-4" />
           </Button>
         </div>
@@ -246,7 +246,7 @@ function StatsTab({ userId }: { userId: string }) {
                 <CheckCircle className="h-4 w-4 text-green-600" />
               </div>
               <div>
-                <p className="text-xl font-bold">{stats.completed}</p>
+                <p className="tabular-nums text-xl font-bold">{stats.completed}</p>
                 <p className="text-xs text-muted-foreground">Activités</p>
               </div>
             </div>
@@ -260,7 +260,7 @@ function StatsTab({ userId }: { userId: string }) {
                 <GraduationCap className="h-4 w-4 text-blue-600" />
               </div>
               <div>
-                <p className="text-xl font-bold">{stats.avgScore}%</p>
+                <p className="tabular-nums text-xl font-bold">{stats.avgScore}%</p>
                 <p className="text-xs text-muted-foreground">Score QCM</p>
               </div>
             </div>
@@ -274,7 +274,7 @@ function StatsTab({ userId }: { userId: string }) {
                 <BookOpen className="h-4 w-4 text-amber-600" />
               </div>
               <div>
-                <p className="text-xl font-bold">{stats.exercisesDone}</p>
+                <p className="tabular-nums text-xl font-bold">{stats.exercisesDone}</p>
                 <p className="text-xs text-muted-foreground">Exercices</p>
               </div>
             </div>
@@ -288,7 +288,7 @@ function StatsTab({ userId }: { userId: string }) {
                 <Trophy className="h-4 w-4 text-purple-600" />
               </div>
               <div>
-                <p className="text-xl font-bold">{stats.successRate}%</p>
+                <p className="tabular-nums text-xl font-bold">{stats.successRate}%</p>
                 <p className="text-xs text-muted-foreground">Réussite</p>
               </div>
             </div>

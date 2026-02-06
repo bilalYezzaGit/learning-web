@@ -65,7 +65,7 @@ export function AppSidebar({ parcours, modules = [], ...props }: AppSidebarProps
                 <SidebarMenuButton asChild isActive={pathname === dashboardUrl}>
                   <Link href={dashboardUrl}>
                     <Home className="h-4 w-4" />
-                    <span>Dashboard</span>
+                    <span>Tableau de bord</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

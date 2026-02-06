@@ -277,7 +277,7 @@ function ActivityItem({
       type="button"
       onClick={() => onActivityClick(activity.id)}
       className={cn(
-        'group flex w-full items-start gap-3 rounded-md px-3 py-2 text-left transition-all duration-200',
+        'group flex w-full items-start gap-3 rounded-md px-3 py-2 text-left transition-colors duration-200',
         isCurrent
           ? 'border-l-2 border-l-foreground bg-muted'
           : 'hover:bg-muted/50'
@@ -620,7 +620,7 @@ export function CourseTimeline({
       </Button>
 
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-        <SheetContent side="left" className="w-80 p-0 flex flex-col">
+        <SheetContent side="left" className="w-80 p-0 flex flex-col overscroll-contain">
           <SheetTitle className="sr-only">{data.title}</SheetTitle>
           {timelineContent}
         </SheetContent>

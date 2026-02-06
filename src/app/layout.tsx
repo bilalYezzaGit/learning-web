@@ -4,6 +4,7 @@ import './globals.css'
 
 import { QueryProvider } from '@/lib/query/provider'
 import { AuthProvider } from '@/lib/context'
+import { Toaster } from '@/components/ui/sonner'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -43,10 +44,19 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
       <body className={`${inter.variable} ${sourceSerif.variable} antialiased`}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg focus:ring-2 focus:ring-ring"
+        >
+          Aller au contenu principal
+        </a>
         <QueryProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            {children}
+            <Toaster />
+          </AuthProvider>
         </QueryProvider>
       </body>
     </html>

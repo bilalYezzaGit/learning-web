@@ -10,7 +10,8 @@ import { useRouter } from 'next/navigation'
 import { GraduationCap, ArrowRight } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { InteractiveCard } from '@/components/ui/interactive-card'
 import { useAuth } from '@/lib/context'
 import { useUserParcours, getAvailableParcours } from '@/lib/parcours'
 
@@ -38,7 +39,7 @@ export default function SelectParcoursPage() {
   if (authLoading || parcoursLoading) {
     return (
       <div className="flex min-h-svh items-center justify-center">
-        <div className="text-muted-foreground">Chargement...</div>
+        <div className="text-muted-foreground">Chargement\u2026</div>
       </div>
     )
   }
@@ -47,18 +48,18 @@ export default function SelectParcoursPage() {
     <div className="flex min-h-svh flex-col items-center justify-center p-6">
       <div className="mx-auto max-w-2xl text-center">
         <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
-          <GraduationCap className="h-10 w-10 text-primary" />
+          <GraduationCap className="h-10 w-10 text-primary" aria-hidden="true" />
         </div>
-        <h1 className="font-serif text-3xl font-bold">Bienvenue !</h1>
+        <h1 className="text-balance font-serif text-3xl font-bold">Bienvenue !</h1>
         <p className="mt-2 text-lg text-muted-foreground">
           Choisissez votre parcours pour commencer
         </p>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {availableParcours.map((parcours) => (
-            <Card
+            <InteractiveCard
               key={parcours.slug}
-              className="cursor-pointer transition-all hover:border-primary hover:shadow-md"
+              className="transition-[shadow,border-color] hover:border-primary hover:shadow-md"
               onClick={() => handleSelect(parcours.slug)}
             >
               <CardHeader className="pb-2">
@@ -71,7 +72,7 @@ export default function SelectParcoursPage() {
                   <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
               </CardContent>
-            </Card>
+            </InteractiveCard>
           ))}
         </div>
       </div>

@@ -39,13 +39,13 @@ export function NavApprendre({ parcours, modules }: NavApprendreProps) {
       <SidebarMenuItem>
         <SidebarMenuButton asChild isActive={isApprendreActive}>
           <Link href={apprendreUrl}>
-            <Book className="h-4 w-4" />
+            <Book className="h-4 w-4" aria-hidden="true" />
             <span>Apprendre</span>
           </Link>
         </SidebarMenuButton>
         <CollapsibleTrigger asChild>
-          <SidebarMenuAction className="data-[state=open]:rotate-90">
-            <ChevronRight />
+          <SidebarMenuAction className="data-[state=open]:rotate-90" aria-label="Ouvrir les modules">
+            <ChevronRight aria-hidden="true" />
           </SidebarMenuAction>
         </CollapsibleTrigger>
         <CollapsibleContent>
