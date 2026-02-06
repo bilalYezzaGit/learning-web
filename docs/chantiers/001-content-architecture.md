@@ -506,9 +506,9 @@ Est-ce que `next-mdx-remote` + `fs` detecte les changements de fichiers MDX en d
 3. ~~**Phase 3** : Creer `src/lib/content.ts` (couche de lecture)~~ **DONE**
 4. ~~**Phase 4** : Convertir les YAML actuels en atomes MDX (script de migration)~~ **DONE** — 75 YAML → 114 atomes (21 lessons, 32 exercises, 61 QCM questions)
 5. ~~**Phase 5** : Creer les molecules YAML a partir des modules existants~~ **DONE** — 3 programmes, 20 cours, 2 series
-6. **Phase 6** : Creer les composants MDX (`Enonce`, `Solution`, `Variations`, etc.) ← **NEXT**
-7. **Phase 7** : Brancher les pages sur le nouveau systeme
-8. **Phase 8** : Creer le dashboard admin `/admin/content`
+6. ~~**Phase 6** : Creer les composants MDX (`Enonce`, `Solution`, `Variations`, etc.)~~ **DONE**
+7. ~~**Phase 7** : Brancher les pages sur le nouveau systeme~~ **DONE**
+8. **Phase 8** : Creer le dashboard admin `/admin/content` ← **NEXT**
 9. **Phase 9** : Supprimer l'ancien pipeline + Firebase CDN
 10. **Phase 10** : Migrer/adapter validate.js
 
@@ -516,6 +516,8 @@ Est-ce que `next-mdx-remote` + `fs` detecte les changements de fichiers MDX en d
 
 ## Changelog
 
+- **2026-02-06 v8** : Phase 7 done. Toutes les pages branchees sur le nouveau systeme. Types resolus (`TimelineActivity`, `ResolvedActivity`, `ResolvedQuiz`, `ParsedQCMQuestion`). Parseur QCM MDX + resolvers molecules ajoutés dans `content.ts`. CourseTimeline migre sur `TimelineActivity`. Pages apprendre (grid, module, activite) et reviser (grid, serie, play, activite, resultat) migrees — plus de `fetchProgrammes`/`fetchModule`/`fetchSerie`. Sidebar (`NavApprendre`) recoit les modules en props depuis le layout (filesystem). HydrationBoundary react-query retiree du parcours layout. Build OK.
+- **2026-02-06 v7** : Phase 6 done. 3 fichiers crees : `exercise-parts.tsx` (5 composants), `mdx-components.tsx` (registre + adaptateurs), `mdx.ts` (helper compilation). Build OK.
 - **2026-02-06 v6** : Phase 5 done. 25 molecules YAML creees (3 programmes, 20 cours, 2 series). References atomes verifiees.
 - **2026-02-06 v5** : Phase 4 done. 75 YAML → 114 atomes MDX migres (`scripts/migrate-to-mdx.mjs`).
 - **2026-02-06 v4** : Phase 3 done. `src/types/content.ts` + `src/lib/content.ts` crees. TypeScript OK.

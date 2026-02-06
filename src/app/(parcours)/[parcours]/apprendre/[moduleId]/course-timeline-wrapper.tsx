@@ -3,7 +3,7 @@
 /**
  * Course Timeline Wrapper for Module
  *
- * Client wrapper that maps Module to TimelineData format.
+ * Client wrapper that maps resolved cours data to TimelineData format.
  */
 
 import { useRouter, usePathname, useParams } from 'next/navigation'
@@ -12,13 +12,27 @@ import { useMemo } from 'react'
 import { CourseTimeline, type TimelineData } from '@/components/course-timeline'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
-import type { Module } from '@/types/models'
+import type { ResolvedActivity } from '@/types/content'
 
 interface CourseTimelineWrapperProps {
-  module: Module
+  coursSlug: string
+  title: string
+  description: string
+  estimatedMinutes: number
+  objectives: string[]
+  activities: ResolvedActivity[]
+  sections: Array<{ id: string; label: string; order: number }>
 }
 
-export function CourseTimelineWrapper({ module }: CourseTimelineWrapperProps) {
+export function CourseTimelineWrapper({
+  coursSlug,
+  title,
+  description,
+  estimatedMinutes,
+  objectives,
+  activities,
+  sections,
+}: CourseTimelineWrapperProps) {
   const router = useRouter()
   const pathname = usePathname()
   const params = useParams()
@@ -30,26 +44,25 @@ export function CourseTimelineWrapper({ module }: CourseTimelineWrapperProps) {
   const currentActivityId = useMemo(() => {
     // pathname format: /[parcours]/apprendre/[moduleId]/[activityId]
     const parts = pathname.split('/')
-    // Check if we're on an activity page (5 parts: '', parcours, 'apprendre', moduleId, activityId)
     if (parts.length >= 5 && parts[4]) {
       return parts[4]
     }
     return undefined
   }, [pathname])
 
-  // Map Module to TimelineData
+  // Map to TimelineData
   const timelineData: TimelineData = useMemo(
     () => ({
-      id: module.id,
-      title: module.title,
-      description: module.description,
-      estimatedMinutes: module.estimatedTime,
-      activities: module.activities,
-      sections: module.sections,
-      activityOrder: module.coursePath,
-      objectives: module.objectives,
+      id: coursSlug,
+      title,
+      description,
+      estimatedMinutes,
+      activities,
+      sections,
+      activityOrder: activities.map((a) => a.id),
+      objectives,
     }),
-    [module]
+    [coursSlug, title, description, estimatedMinutes, activities, sections, objectives]
   )
 
   // Map user progress to timeline format
@@ -62,9 +75,8 @@ export function CourseTimelineWrapper({ module }: CourseTimelineWrapperProps) {
       total?: number
     }> = []
 
-    // Convert Map to array, filtering for this module's activities
     userProgress.forEach((p, activityId) => {
-      if (module.activities.some((a) => a.id === activityId)) {
+      if (activities.some((a) => a.id === activityId)) {
         result.push({
           activityId,
           isCompleted: p.status !== 'pending',
@@ -76,10 +88,10 @@ export function CourseTimelineWrapper({ module }: CourseTimelineWrapperProps) {
     })
 
     return result
-  }, [userProgress, module.activities])
+  }, [userProgress, activities])
 
   const handleActivityClick = (activityId: string) => {
-    router.push(`/${parcours}/apprendre/${module.id}/${activityId}`)
+    router.push(`/${parcours}/apprendre/${coursSlug}/${activityId}`)
   }
 
   return (

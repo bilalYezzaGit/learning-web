@@ -8,7 +8,7 @@
 
 import { notFound } from 'next/navigation'
 
-import { fetchModule, ContentNotFoundError } from '@/lib/services/content-service'
+import { getCours, resolveCoursActivities } from '@/lib/content'
 import { CourseTimelineWrapper } from './course-timeline-wrapper'
 
 interface LayoutProps {
@@ -19,20 +19,32 @@ interface LayoutProps {
 export default async function ModuleLayout({ children, params }: LayoutProps) {
   const { moduleId } = await params
 
-  let module
+  let cours
   try {
-    module = await fetchModule(moduleId)
-  } catch (e) {
-    if (e instanceof ContentNotFoundError) {
-      notFound()
-    }
-    throw e
+    cours = getCours(moduleId)
+  } catch {
+    notFound()
   }
+
+  const activities = resolveCoursActivities(moduleId)
+  const sections = cours.sections.map((s, i) => ({
+    id: `section-${i}`,
+    label: s.label,
+    order: i,
+  }))
 
   return (
     <div className="flex flex-1 min-h-0 overflow-hidden">
       {/* Course Timeline Sidebar */}
-      <CourseTimelineWrapper module={module} />
+      <CourseTimelineWrapper
+        coursSlug={cours.slug}
+        title={cours.title}
+        description={cours.description}
+        estimatedMinutes={cours.estimatedTime}
+        objectives={cours.objectives}
+        activities={activities}
+        sections={sections}
+      />
 
       {/* Content Area */}
       <main className="flex-1 overflow-auto">{children}</main>

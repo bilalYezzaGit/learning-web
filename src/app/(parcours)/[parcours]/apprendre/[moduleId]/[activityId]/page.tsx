@@ -2,8 +2,7 @@
  * Activity Content Page
  *
  * Shows activity content with navigation and progress tracking.
- * Uses ContentRenderer for HTML with custom extensions.
- * Server Component with client wrapper for interactivity.
+ * Uses compileMdx for lessons/exercises, QCMPlayer for quizzes.
  */
 
 import Link from 'next/link'
@@ -12,10 +11,9 @@ import { ArrowLeft, ArrowRight, ChevronLeft } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { ContentRenderer } from '@/content'
-import { ExerciseContent, getActivityTypeLabel } from '@/components/patterns/activity-content'
-import { fetchModule, ContentNotFoundError } from '@/lib/services/content-service'
-import type { Activity } from '@/types/activity'
+import { compileMdx } from '@/lib/mdx'
+import { getAtom, resolveCoursActivities, findQuizGroup, resolveQuiz } from '@/lib/content'
+import { getAtomTypeLabel } from '@/types/content'
 import { ActivityClient } from './activity-client'
 
 interface PageProps {
@@ -25,50 +23,36 @@ interface PageProps {
 export default async function ActivityPage({ params }: PageProps) {
   const { parcours, moduleId, activityId } = await params
 
-  // Fetch module (which contains activities)
-  let module
+  // Resolve the ordered activity list for navigation
+  let activities
   try {
-    module = await fetchModule(moduleId)
-  } catch (e) {
-    if (e instanceof ContentNotFoundError) {
-      notFound()
-    }
-    throw e
-  }
-
-  // Find activity in module
-  const activity = module.activities.find((a) => a.id === activityId)
-  if (!activity) {
+    activities = resolveCoursActivities(moduleId)
+  } catch {
     notFound()
   }
 
-  // Build ordered activities list using coursePath
-  const orderedActivityIds = module.coursePath || []
-  const activitiesMap = new Map(module.activities.map((a) => [a.id, a]))
-  const orderedActivities = [
-    ...orderedActivityIds
-      .map((id) => activitiesMap.get(id))
-      .filter((a): a is Activity => a !== undefined),
-    ...module.activities.filter((a) => !orderedActivityIds.includes(a.id)),
-  ]
+  // Find current activity in the resolved list
+  const currentIndex = activities.findIndex((a) => a.id === activityId)
+  if (currentIndex === -1) {
+    notFound()
+  }
 
-  // Find current index and prev/next
-  const currentIndex = orderedActivities.findIndex((a) => a.id === activityId)
-  const prevActivity = currentIndex > 0 ? orderedActivities[currentIndex - 1] : null
-  const nextActivity =
-    currentIndex < orderedActivities.length - 1 ? orderedActivities[currentIndex + 1] : null
+  const currentActivity = activities[currentIndex]!
+  const prevActivity = currentIndex > 0 ? activities[currentIndex - 1] : null
+  const nextActivity = currentIndex < activities.length - 1 ? activities[currentIndex + 1] : null
 
-  // Render content based on type (for server rendering)
-  const renderContent = () => {
-    switch (activity.type) {
-      case 'lesson':
-        return <ContentRenderer html={activity.body} />
-      case 'exercise':
-        return <ExerciseContent exercise={activity} />
-      case 'qcm':
-        // QCM is handled entirely by ActivityClient
-        return null
-    }
+  // Render content based on type
+  let content: React.ReactNode = null
+  let quizData = null
+
+  if (currentActivity.type === 'qcm') {
+    // Quiz group: resolve all QCM atoms
+    const quizAtomIds = currentActivity.quizAtomIds ?? findQuizGroup(moduleId, activityId) ?? [activityId]
+    quizData = resolveQuiz(quizAtomIds)
+  } else {
+    // Lesson or exercise: compile MDX
+    const atom = getAtom(activityId)
+    content = await compileMdx(atom.content)
   }
 
   return (
@@ -82,9 +66,9 @@ export default async function ActivityPage({ params }: PageProps) {
           </Link>
         </Button>
         <div className="min-w-0 flex-1">
-          <h1 className="truncate font-medium">{activity.title}</h1>
+          <h1 className="truncate font-medium">{currentActivity.title}</h1>
           <Badge variant="outline" className="mt-1 text-xs capitalize">
-            {getActivityTypeLabel(activity.type)}
+            {getAtomTypeLabel(currentActivity.type)}
           </Badge>
         </div>
       </header>
@@ -92,8 +76,18 @@ export default async function ActivityPage({ params }: PageProps) {
       {/* Content */}
       <div className="flex-1 overflow-auto">
         <div className="mx-auto max-w-3xl px-4 py-6">
-          <ActivityClient activity={activity} moduleId={moduleId} parcours={parcours}>
-            {renderContent()}
+          <ActivityClient
+            activityId={activityId}
+            activityType={currentActivity.type}
+            moduleId={moduleId}
+            parcours={parcours}
+            quizData={quizData}
+          >
+            {content && (
+              <article className="prose prose-stone dark:prose-invert max-w-none">
+                {content}
+              </article>
+            )}
           </ActivityClient>
         </div>
       </div>

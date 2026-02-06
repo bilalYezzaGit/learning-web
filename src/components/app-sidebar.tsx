@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { BookOpen, Brain, Home } from "lucide-react"
 
-import { NavApprendre } from "@/components/nav-apprendre"
+import { NavApprendre, type SidebarModule } from "@/components/nav-apprendre"
 import { NavUser } from "@/components/nav-user"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -23,9 +23,10 @@ import { getParcoursConfig } from "@/lib/parcours"
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   parcours?: string
+  modules?: SidebarModule[]
 }
 
-export function AppSidebar({ parcours, ...props }: AppSidebarProps) {
+export function AppSidebar({ parcours, modules = [], ...props }: AppSidebarProps) {
   const pathname = usePathname()
   const parcoursConfig = parcours ? getParcoursConfig(parcours) : null
 
@@ -69,7 +70,7 @@ export function AppSidebar({ parcours, ...props }: AppSidebarProps) {
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
-              {parcours && <NavApprendre parcours={parcours} />}
+              {parcours && <NavApprendre parcours={parcours} modules={modules} />}
 
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={pathname.startsWith(reviserUrl)}>

@@ -12,7 +12,8 @@ import { ArrowLeft, BookOpen, Play, Target } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { fetchModule, ContentNotFoundError } from '@/lib/services/content-service'
+import { getCours, resolveCoursActivities } from '@/lib/content'
+import { extractAtomIds } from '@/types/content'
 
 interface PageProps {
   params: Promise<{ parcours: string; moduleId: string }>
@@ -21,18 +22,19 @@ interface PageProps {
 export default async function ModuleDetailPage({ params }: PageProps) {
   const { parcours, moduleId } = await params
 
-  let module
+  let cours
   try {
-    module = await fetchModule(moduleId)
-  } catch (e) {
-    if (e instanceof ContentNotFoundError) {
-      notFound()
-    }
-    throw e
+    cours = getCours(moduleId)
+  } catch {
+    notFound()
   }
 
-  // Get first activity for "Start" button
-  const firstActivityId = module.coursePath?.[0] || module.activities[0]?.id
+  const activities = resolveCoursActivities(moduleId)
+  const firstActivityId = activities[0]?.id
+  const totalAtoms = cours.sections.reduce(
+    (sum, s) => sum + extractAtomIds(s.steps).length,
+    0
+  )
 
   return (
     <div className="flex h-full flex-col">
@@ -53,20 +55,20 @@ export default async function ModuleDetailPage({ params }: PageProps) {
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
               <BookOpen className="h-8 w-8 text-primary" />
             </div>
-            <h1 className="text-xl font-semibold">{module.title}</h1>
-            {module.description && (
-              <p className="mt-2 text-muted-foreground">{module.description}</p>
+            <h1 className="text-xl font-semibold">{cours.title}</h1>
+            {cours.description && (
+              <p className="mt-2 text-muted-foreground">{cours.description}</p>
             )}
 
             {/* Objectives */}
-            {module.objectives && module.objectives.length > 0 && (
+            {cours.objectives && cours.objectives.length > 0 && (
               <div className="mt-6 text-left">
                 <div className="mb-2 flex items-center gap-2 text-sm font-medium">
                   <Target className="h-4 w-4" />
                   Objectifs
                 </div>
                 <ul className="space-y-1 text-sm text-muted-foreground">
-                  {module.objectives.map((obj, i) => (
+                  {cours.objectives.map((obj, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <span className="text-primary">•</span>
                       {obj}
@@ -78,13 +80,13 @@ export default async function ModuleDetailPage({ params }: PageProps) {
 
             <div className="mt-4 flex flex-wrap justify-center gap-2">
               <Badge variant="secondary">
-                {module.sections?.length || 0} sections
+                {cours.sections.length} sections
               </Badge>
               <Badge variant="secondary">
-                {module.activities.length} activités
+                {totalAtoms} activités
               </Badge>
-              {module.estimatedTime && (
-                <Badge variant="outline">{module.estimatedTime} min</Badge>
+              {cours.estimatedTime && (
+                <Badge variant="outline">{cours.estimatedTime} min</Badge>
               )}
             </div>
 

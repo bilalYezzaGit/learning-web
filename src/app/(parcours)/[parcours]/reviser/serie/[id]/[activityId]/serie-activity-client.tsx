@@ -1,14 +1,13 @@
 'use client'
 
 /**
- * Activity Client Wrapper
+ * Serie Activity Client Wrapper
  *
- * Handles progress tracking and exercise completion.
- * Wraps server-rendered content with client-side interactivity.
+ * Handles progress tracking and QCM playback for serie activities.
  */
 
 import * as React from 'react'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { CheckCircle2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -17,30 +16,29 @@ import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
 import type { AtomType, ResolvedQuiz } from '@/types/content'
 
-interface ActivityClientProps {
+interface SerieActivityClientProps {
   activityId: string
   activityType: AtomType
-  moduleId: string
+  serieSlug: string
   parcours: string
   quizData: ResolvedQuiz | null
   children: React.ReactNode
 }
 
-export function ActivityClient({
+export function SerieActivityClient({
   activityId,
   activityType,
-  moduleId,
+  serieSlug,
   parcours,
   quizData,
   children,
-}: ActivityClientProps) {
+}: SerieActivityClientProps) {
+  const router = useRouter()
   const { userId } = useAuth()
   const { completeExercise, completeQCM, isCompleted, getProgress } = useProgress(userId ?? undefined)
   const [completedInSession, setCompletedInSession] = React.useState(false)
-  const [qcmFinished, setQcmFinished] = React.useState(false)
 
   const activityCompleted = isCompleted(activityId) || completedInSession
-  const previousProgress = getProgress(activityId)
 
   const handleExerciseComplete = async () => {
     setCompletedInSession(true)
@@ -50,8 +48,8 @@ export function ActivityClient({
         await completeExercise({
           activityId,
           status: 'success',
-          contextType: 'module',
-          contextId: moduleId,
+          contextType: 'serie',
+          contextId: serieSlug,
         })
       } catch (e) {
         console.error('Failed to save exercise progress:', e)
@@ -61,7 +59,6 @@ export function ActivityClient({
 
   const handleQCMComplete = async (result: QCMResult) => {
     setCompletedInSession(true)
-    setQcmFinished(true)
 
     if (userId) {
       try {
@@ -69,8 +66,8 @@ export function ActivityClient({
           activityId,
           score: result.score,
           total: result.total,
-          contextType: 'module',
-          contextId: moduleId,
+          contextType: 'serie',
+          contextId: serieSlug,
         })
       } catch (e) {
         console.error('Failed to save QCM progress:', e)
@@ -78,9 +75,10 @@ export function ActivityClient({
     }
   }
 
-  // For QCM activities, show the player
+  // QCM
   if (activityType === 'qcm' && quizData) {
-    // Adapt ResolvedQuiz to QCM format for QCMPlayer
+    const previousProgress = getProgress(activityId)
+
     const qcm = {
       id: quizData.id,
       title: quizData.title,
@@ -101,20 +99,6 @@ export function ActivityClient({
       })),
     }
 
-    if (qcmFinished) {
-      return (
-        <div className="text-center py-8">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-950/30">
-            <CheckCircle2 className="h-8 w-8 text-green-600" />
-          </div>
-          <h2 className="text-xl font-bold">QCM terminé !</h2>
-          <p className="mt-2 text-muted-foreground">
-            Utilisez les boutons de navigation pour continuer.
-          </p>
-        </div>
-      )
-    }
-
     return (
       <div>
         {previousProgress && previousProgress.score !== undefined && previousProgress.total ? (
@@ -123,59 +107,40 @@ export function ActivityClient({
               Déjà fait : {previousProgress.score}/{previousProgress.total} (
               {Math.round((previousProgress.score / previousProgress.total) * 100)}%)
             </p>
-            <Button
-              variant="outline"
-              size="sm"
-              className="mt-2"
-              onClick={() => setQcmFinished(false)}
-            >
-              Refaire le QCM
-            </Button>
           </div>
         ) : null}
-        <QCMPlayer qcm={qcm} onComplete={handleQCMComplete} showExit={false} />
+        <QCMPlayer
+          qcm={qcm}
+          onComplete={handleQCMComplete}
+          onExit={() => router.push(`/${parcours}/reviser/serie/${serieSlug}`)}
+          showExit={false}
+        />
       </div>
     )
   }
 
-  // For exercises, add completion button
+  // Exercise
   if (activityType === 'exercise') {
     return (
       <>
         {children}
-
-        {/* Completion section */}
-        <div className="mt-8 flex flex-col items-center justify-center border-t pt-6">
+        <div className="mt-6 flex items-center justify-center">
           {activityCompleted ? (
             <div className="flex items-center gap-2 text-green-600">
               <CheckCircle2 className="h-5 w-5" />
               <span className="font-medium">Exercice terminé</span>
             </div>
           ) : (
-            <>
-              <p className="mb-3 text-sm text-muted-foreground">
-                Tu as fini cet exercice ?
-              </p>
-              <Button onClick={handleExerciseComplete} variant="outline">
-                <CheckCircle2 className="mr-2 h-4 w-4" />
-                J&apos;ai compris
-              </Button>
-            </>
-          )}
-
-          {!userId && (
-            <p className="mt-4 text-xs text-muted-foreground">
-              <Link href="/login" className="underline hover:text-foreground">
-                Connecte-toi
-              </Link>{' '}
-              pour sauvegarder ta progression.
-            </p>
+            <Button onClick={handleExerciseComplete} variant="outline">
+              <CheckCircle2 className="mr-2 h-4 w-4" />
+              J&apos;ai compris
+            </Button>
           )}
         </div>
       </>
     )
   }
 
-  // For lessons, just show the content
+  // Lesson
   return <>{children}</>
 }

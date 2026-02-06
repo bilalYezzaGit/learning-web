@@ -20,8 +20,11 @@ import type {
   SeriesMolecule,
   Programme,
   Step,
+  ResolvedActivity,
+  ParsedQCMQuestion,
+  ResolvedQuiz,
 } from '@/types/content'
-import { extractAtomIds } from '@/types/content'
+import { extractAtomIds, isQuizStep } from '@/types/content'
 
 // =============================================================================
 // Paths
@@ -236,3 +239,199 @@ export const getAllTags = cache((): Map<string, number> => {
 
   return tagCounts
 })
+
+// =============================================================================
+// QCM parser
+// =============================================================================
+
+/**
+ * Convert $...$ LaTeX to <math>...</math> tags for ContentRenderer.
+ * Also converts $$...$$ to <math-block>...</math-block>.
+ */
+function latexToMathTags(text: string): string {
+  // Block math: $$...$$ → <math-block>...</math-block>
+  let result = text.replace(/\$\$([\s\S]+?)\$\$/g, '<math-block>$1</math-block>')
+  // Inline math: $...$ → <math>...</math>
+  result = result.replace(/\$(.+?)\$/g, '<math>$1</math>')
+  return result
+}
+
+/**
+ * Parse QCM atom MDX content into structured question data.
+ *
+ * Expected format:
+ * ```
+ * Question text with $LaTeX$
+ *
+ * - [ ] Wrong answer
+ * - [x] Correct answer
+ * - [ ] Wrong answer
+ *
+ * > Optional explanation
+ * ```
+ */
+export function parseQcmContent(atom: Atom): ParsedQCMQuestion {
+  const lines = atom.content.trim().split('\n')
+
+  const enonceLines: string[] = []
+  const options: string[] = []
+  let correctIndex = 0
+  const explicLines: string[] = []
+  let phase: 'enonce' | 'options' | 'explic' = 'enonce'
+
+  for (const line of lines) {
+    const trimmed = line.trim()
+
+    // Check for option line
+    const optionMatch = trimmed.match(/^-\s+\[([ x])\]\s+(.+)$/)
+    if (optionMatch && optionMatch[2]) {
+      phase = 'options'
+      if (optionMatch[1] === 'x') {
+        correctIndex = options.length
+      }
+      options.push(latexToMathTags(optionMatch[2]))
+      continue
+    }
+
+    // Check for explanation (blockquote)
+    if (trimmed.startsWith('>')) {
+      phase = 'explic'
+      explicLines.push(trimmed.replace(/^>\s*/, ''))
+      continue
+    }
+
+    if (phase === 'enonce') {
+      enonceLines.push(line)
+    } else if (phase === 'explic') {
+      explicLines.push(trimmed)
+    }
+  }
+
+  const enonce = latexToMathTags(enonceLines.join('\n').trim())
+  const explication = explicLines.join(' ').trim() || undefined
+
+  return {
+    id: atom.id,
+    enonce,
+    options,
+    correctIndex,
+    explication: explication ? latexToMathTags(explication) : undefined,
+    timeMinutes: atom.timeMinutes,
+  }
+}
+
+// =============================================================================
+// Molecule resolvers
+// =============================================================================
+
+/**
+ * Resolve a list of molecule steps into a flat array of ResolvedActivity.
+ * Each atom step becomes one entry. Each quiz step becomes one entry
+ * with type 'qcm' and the list of QCM atom IDs.
+ */
+function resolveSteps(
+  steps: Step[],
+  sectionId?: string,
+): ResolvedActivity[] {
+  const activities: ResolvedActivity[] = []
+
+  for (const step of steps) {
+    if (isQuizStep(step)) {
+      // Quiz group: use first QCM atom as the activity ID
+      const firstId = step.quiz[0]
+      if (!firstId) continue
+      const firstAtom = getAtom(firstId)
+      const totalTime = step.quiz.reduce((sum, id) => {
+        const a = getAtom(id)
+        return sum + a.timeMinutes
+      }, 0)
+      activities.push({
+        id: firstId,
+        type: 'qcm',
+        title: `QCM (${step.quiz.length} questions)`,
+        timeMinutes: totalTime,
+        sectionId,
+        quizAtomIds: step.quiz,
+      })
+    } else {
+      // Single atom
+      const atom = getAtom(step)
+      activities.push({
+        id: atom.id,
+        type: atom.type,
+        title: atom.title,
+        timeMinutes: atom.timeMinutes,
+        sectionId,
+      })
+    }
+  }
+
+  return activities
+}
+
+/**
+ * Resolve a cours molecule into a flat list of activities for timeline and navigation.
+ * Section IDs are generated as `section-{index}`.
+ */
+export const resolveCoursActivities = cache((slug: string): ResolvedActivity[] => {
+  const cours = getCours(slug)
+  const activities: ResolvedActivity[] = []
+
+  for (let i = 0; i < cours.sections.length; i++) {
+    const section = cours.sections[i]!
+    const sectionId = `section-${i}`
+    activities.push(...resolveSteps(section.steps, sectionId))
+  }
+
+  return activities
+})
+
+/**
+ * Resolve a serie molecule into a flat list of activities.
+ */
+export const resolveSerieActivities = cache((slug: string): ResolvedActivity[] => {
+  const serie = getSerie(slug)
+  return resolveSteps(serie.steps)
+})
+
+/**
+ * Build a ResolvedQuiz from a list of QCM atom IDs (for QCMPlayer).
+ */
+export function resolveQuiz(atomIds: string[]): ResolvedQuiz {
+  const questions = atomIds.map(id => parseQcmContent(getAtom(id)))
+  const firstId = atomIds[0] ?? 'quiz'
+  return {
+    id: firstId,
+    title: `QCM (${atomIds.length} questions)`,
+    questions,
+  }
+}
+
+/**
+ * Find the quiz group that contains a given activity ID in a cours molecule.
+ * Returns the list of QCM atom IDs, or undefined if not in a quiz group.
+ */
+export function findQuizGroup(slug: string, activityId: string): string[] | undefined {
+  const cours = getCours(slug)
+  for (const section of cours.sections) {
+    for (const step of section.steps) {
+      if (isQuizStep(step) && step.quiz.includes(activityId)) {
+        return step.quiz
+      }
+    }
+  }
+  return undefined
+}
+
+/**
+ * Find the quiz group that contains a given activity ID in a serie molecule.
+ */
+export function findSerieQuizGroup(slug: string, activityId: string): string[] | undefined {
+  const serie = getSerie(slug)
+  for (const step of serie.steps) {
+    if (isQuizStep(step) && step.quiz.includes(activityId)) {
+      return step.quiz
+    }
+  }
+  return undefined
+}

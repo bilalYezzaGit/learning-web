@@ -3,7 +3,7 @@
 /**
  * Serie Timeline Wrapper
  *
- * Client wrapper that maps Serie to TimelineData format.
+ * Client wrapper that maps resolved serie data to TimelineData format.
  */
 
 import { useRouter, usePathname, useParams } from 'next/navigation'
@@ -12,13 +12,25 @@ import { useMemo } from 'react'
 import { CourseTimeline, type TimelineData } from '@/components/course-timeline'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
-import type { Serie } from '@/types/series'
+import type { ResolvedActivity } from '@/types/content'
 
 interface SerieTimelineWrapperProps {
-  serie: Serie
+  serieSlug: string
+  title: string
+  description: string
+  estimatedMinutes: number
+  difficulty: number
+  activities: ResolvedActivity[]
 }
 
-export function SerieTimelineWrapper({ serie }: SerieTimelineWrapperProps) {
+export function SerieTimelineWrapper({
+  serieSlug,
+  title,
+  description,
+  estimatedMinutes,
+  difficulty,
+  activities,
+}: SerieTimelineWrapperProps) {
   const router = useRouter()
   const pathname = usePathname()
   const params = useParams()
@@ -30,28 +42,25 @@ export function SerieTimelineWrapper({ serie }: SerieTimelineWrapperProps) {
   const currentActivityId = useMemo(() => {
     // pathname format: /[parcours]/reviser/serie/[id]/[activityId]
     const parts = pathname.split('/')
-    // Check if we're on an activity page (6 parts: '', parcours, 'reviser', 'serie', id, activityId)
     if (parts.length >= 6 && parts[5] && parts[5] !== 'play' && parts[5] !== 'result') {
       return parts[5]
     }
     return undefined
   }, [pathname])
 
-  // Map Serie to TimelineData
+  // Map to TimelineData
   const timelineData: TimelineData = useMemo(
     () => ({
-      id: serie.id,
-      title: serie.title,
-      description: serie.description,
-      estimatedMinutes: serie.estimatedMinutes,
-      activities: serie.activities,
-      // No sections for Serie (flat list)
+      id: serieSlug,
+      title,
+      description,
+      estimatedMinutes,
+      activities,
       sections: undefined,
       activityOrder: undefined,
-      // Serie specific
-      difficulty: serie.difficulty,
+      difficulty,
     }),
-    [serie]
+    [serieSlug, title, description, estimatedMinutes, activities, difficulty]
   )
 
   // Map user progress to timeline format
@@ -64,9 +73,8 @@ export function SerieTimelineWrapper({ serie }: SerieTimelineWrapperProps) {
       total?: number
     }> = []
 
-    // Convert Map to array, filtering for this serie's activities
     userProgress.forEach((p, activityId) => {
-      if (serie.activities.some((a) => a.id === activityId)) {
+      if (activities.some((a) => a.id === activityId)) {
         result.push({
           activityId,
           isCompleted: p.status !== 'pending',
@@ -78,10 +86,10 @@ export function SerieTimelineWrapper({ serie }: SerieTimelineWrapperProps) {
     })
 
     return result
-  }, [userProgress, serie.activities])
+  }, [userProgress, activities])
 
   const handleActivityClick = (activityId: string) => {
-    router.push(`/${parcours}/reviser/serie/${serie.id}/${activityId}`)
+    router.push(`/${parcours}/reviser/serie/${serieSlug}/${activityId}`)
   }
 
   return (

@@ -10,7 +10,7 @@ import { Award, Home, RotateCcw } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { fetchSerie, ContentNotFoundError } from '@/lib/services/content-service'
+import { getSerie, resolveSerieActivities } from '@/lib/content'
 
 interface PageProps {
   params: Promise<{ parcours: string; id: string }>
@@ -21,15 +21,12 @@ export default async function SerieResultPage({ params }: PageProps) {
 
   let serie
   try {
-    serie = await fetchSerie(id)
-  } catch (e) {
-    if (e instanceof ContentNotFoundError) {
-      notFound()
-    }
-    throw e
+    serie = getSerie(id)
+  } catch {
+    notFound()
   }
 
-  const totalActivities = serie.activities.length
+  const totalActivities = resolveSerieActivities(id).length
 
   return (
     <div className="mx-auto max-w-2xl px-4 lg:px-6">

@@ -95,6 +95,42 @@ export interface Programme {
 }
 
 // =============================================================================
+// Resolved types (for pages + timeline)
+// =============================================================================
+
+/** Minimal activity data needed by CourseTimeline */
+export interface TimelineActivity {
+  id: string
+  type: AtomType
+  title: string
+  timeMinutes: number
+  sectionId?: string
+}
+
+/** Flat activity entry in a resolved molecule (for navigation) */
+export interface ResolvedActivity extends TimelineActivity {
+  /** For quiz groups, the list of QCM atom IDs */
+  quizAtomIds?: string[]
+}
+
+/** Parsed QCM question from atom MDX */
+export interface ParsedQCMQuestion {
+  id: string
+  enonce: string
+  options: string[]
+  correctIndex: number
+  explication?: string
+  timeMinutes: number
+}
+
+/** Resolved quiz group compatible with QCMPlayer */
+export interface ResolvedQuiz {
+  id: string
+  title: string
+  questions: ParsedQCMQuestion[]
+}
+
+// =============================================================================
 // Helpers
 // =============================================================================
 

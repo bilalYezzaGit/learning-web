@@ -1,14 +1,14 @@
 /**
  * Réviser Page (Parcours-specific)
  *
- * Practice hub with series from Firebase.
+ * Practice hub with series from filesystem.
  * Public - playable without authentication (score not saved).
  */
 
 import { BookOpen } from 'lucide-react'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { fetchSeriesCatalog, fetchSerie } from '@/lib/services/content-service'
+import { getAllSeries, resolveSerieActivities } from '@/lib/content'
 import { ReviserStats, SeriesListItem } from './reviser-client'
 
 interface PageProps {
@@ -18,34 +18,26 @@ interface PageProps {
 export default async function ReviserPage({ params }: PageProps) {
   const { parcours } = await params
 
-  let catalog
-  let seriesWithActivities: { id: string; activityIds: string[] }[] = []
-  let error = null
+  const allSeries = getAllSeries()
 
-  try {
-    catalog = await fetchSeriesCatalog()
+  // Resolve activity IDs for each serie (for progress tracking)
+  const seriesWithActivities = allSeries.map((serie) => ({
+    id: serie.slug,
+    activityIds: resolveSerieActivities(serie.slug).map((a) => a.id),
+  }))
 
-    // Fetch activity IDs for each serie (for progress tracking)
-    // We do this in parallel for better performance
-    const seriePromises = catalog.series.map(async (entry) => {
-      try {
-        const serie = await fetchSerie(entry.id)
-        return {
-          id: entry.id,
-          activityIds: serie.activities.map((a) => a.id),
-        }
-      } catch {
-        return { id: entry.id, activityIds: [] }
-      }
-    })
-
-    seriesWithActivities = await Promise.all(seriePromises)
-  } catch (e) {
-    error = e instanceof Error ? e.message : 'Erreur de chargement'
-  }
-
-  // Create a map for quick lookup
   const activityIdsMap = new Map(seriesWithActivities.map((s) => [s.id, s.activityIds]))
+
+  // Map to catalog entries for the list items
+  const catalogEntries = allSeries.map((serie) => ({
+    id: serie.slug,
+    title: serie.title,
+    description: serie.description,
+    difficulty: serie.difficulty,
+    estimatedMinutes: serie.estimatedMinutes,
+    tags: serie.tags,
+    activityCount: resolveSerieActivities(serie.slug).length,
+  }))
 
   return (
     <div className="px-4 lg:px-6">
@@ -60,15 +52,7 @@ export default async function ReviserPage({ params }: PageProps) {
       <ReviserStats />
 
       {/* Series List */}
-      {error ? (
-        <Card>
-          <CardContent className="py-12 text-center text-muted-foreground">
-            <BookOpen className="mx-auto mb-4 h-12 w-12 opacity-50" />
-            <p className="text-lg font-medium">Erreur de chargement</p>
-            <p className="mt-1 text-sm">{error}</p>
-          </CardContent>
-        </Card>
-      ) : !catalog || catalog.series.length === 0 ? (
+      {catalogEntries.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center text-muted-foreground">
             <BookOpen className="mx-auto mb-4 h-12 w-12 opacity-50" />
@@ -82,7 +66,7 @@ export default async function ReviserPage({ params }: PageProps) {
             <CardTitle>Séries disponibles</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
-            {catalog.series.map((serie) => (
+            {catalogEntries.map((serie) => (
               <SeriesListItem
                 key={serie.id}
                 serie={serie}

@@ -15,7 +15,17 @@ import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
-import type { SeriesCatalogEntry } from '@/types/series'
+
+/** Lightweight serie metadata for the list */
+interface SeriesCatalogEntry {
+  id: string
+  title: string
+  description?: string
+  difficulty: number
+  estimatedMinutes: number
+  tags: string[]
+  activityCount: number
+}
 
 // =============================================================================
 // Stats Cards

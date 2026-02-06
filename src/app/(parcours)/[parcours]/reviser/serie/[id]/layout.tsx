@@ -7,7 +7,7 @@
 
 import { notFound } from 'next/navigation'
 
-import { fetchSerie, ContentNotFoundError } from '@/lib/services/content-service'
+import { getSerie, resolveSerieActivities } from '@/lib/content'
 import { SerieTimelineWrapper } from './serie-timeline-wrapper'
 
 interface LayoutProps {
@@ -20,18 +20,24 @@ export default async function SerieLayout({ children, params }: LayoutProps) {
 
   let serie
   try {
-    serie = await fetchSerie(id)
-  } catch (e) {
-    if (e instanceof ContentNotFoundError) {
-      notFound()
-    }
-    throw e
+    serie = getSerie(id)
+  } catch {
+    notFound()
   }
+
+  const activities = resolveSerieActivities(id)
 
   return (
     <div className="flex h-[calc(100vh-3.5rem)]">
       {/* Timeline Sidebar */}
-      <SerieTimelineWrapper serie={serie} />
+      <SerieTimelineWrapper
+        serieSlug={serie.slug}
+        title={serie.title}
+        description={serie.description}
+        estimatedMinutes={serie.estimatedMinutes}
+        difficulty={serie.difficulty}
+        activities={activities}
+      />
 
       {/* Content Area */}
       <main className="flex-1 overflow-auto">{children}</main>

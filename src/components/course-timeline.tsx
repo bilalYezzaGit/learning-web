@@ -36,7 +36,8 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
-import type { Activity, ActivityType } from '@/types/activity'
+import type { TimelineActivity } from '@/types/content'
+import type { AtomType } from '@/types/content'
 
 // =============================================================================
 // Types
@@ -58,7 +59,7 @@ export interface TimelineData {
   /** Estimated time in minutes */
   estimatedMinutes: number
   /** Activities list */
-  activities: Activity[]
+  activities: TimelineActivity[]
   /** Optional sections for grouping (Module has them, Serie doesn't) */
   sections?: Array<{
     id: string
@@ -84,14 +85,14 @@ interface SectionWithActivities {
   id: string
   label: string
   order: number
-  activities: Activity[]
+  activities: TimelineActivity[]
 }
 
 // =============================================================================
 // Constants
 // =============================================================================
 
-const TYPE_LABELS: Record<ActivityType, string> = {
+const TYPE_LABELS: Record<AtomType, string> = {
   lesson: 'Cours',
   exercise: 'Exercice',
   qcm: 'QCM',
@@ -133,7 +134,7 @@ function getSectionProgress(
 }
 
 function findNextActivity(
-  activities: Activity[],
+  activities: TimelineActivity[],
   progress: ActivityProgress[]
 ): string | undefined {
   for (const activity of activities) {
@@ -152,7 +153,7 @@ function groupActivitiesBySections(
   // Get activities in order
   const orderedActivities = orderedActivityIds
     .map((id) => activitiesMap.get(id))
-    .filter((a): a is Activity => a !== undefined)
+    .filter((a): a is TimelineActivity => a !== undefined)
 
   // Add any activities not in order
   const inOrder = new Set(orderedActivityIds)
@@ -172,8 +173,8 @@ function groupActivitiesBySections(
   }
 
   // Group by section
-  const sectionsMap = new Map<string, Activity[]>()
-  const noSection: Activity[] = []
+  const sectionsMap = new Map<string, TimelineActivity[]>()
+  const noSection: TimelineActivity[] = []
 
   for (const activity of allActivities) {
     if (activity.sectionId) {
@@ -265,7 +266,7 @@ function ActivityItem({
   index,
   onActivityClick,
 }: {
-  activity: Activity
+  activity: TimelineActivity
   activityProgress?: ActivityProgress
   isCurrent: boolean
   index: number
@@ -389,7 +390,7 @@ function FlatActivityList({
   progress,
   onActivityClick,
 }: {
-  activities: Activity[]
+  activities: TimelineActivity[]
   currentActivityId?: string
   progress: ActivityProgress[]
   onActivityClick: (id: string) => void

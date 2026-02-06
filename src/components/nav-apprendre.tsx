@@ -4,13 +4,11 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Book, ChevronRight } from 'lucide-react'
 
-import { useParcoursModules } from '@/lib/hooks/use-parcours-modules'
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible'
-import { Skeleton } from '@/components/ui/skeleton'
 import {
   SidebarMenuAction,
   SidebarMenuButton,
@@ -20,13 +18,18 @@ import {
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar'
 
-interface NavApprendreProps {
-  parcours: string
+export interface SidebarModule {
+  id: string
+  title: string
 }
 
-export function NavApprendre({ parcours }: NavApprendreProps) {
+interface NavApprendreProps {
+  parcours: string
+  modules: SidebarModule[]
+}
+
+export function NavApprendre({ parcours, modules }: NavApprendreProps) {
   const pathname = usePathname()
-  const { modules, isLoading } = useParcoursModules(parcours)
 
   const apprendreUrl = `/${parcours}/apprendre`
   const isApprendreActive = pathname.startsWith(apprendreUrl)
@@ -47,29 +50,21 @@ export function NavApprendre({ parcours }: NavApprendreProps) {
         </CollapsibleTrigger>
         <CollapsibleContent>
           <SidebarMenuSub>
-            {isLoading ? (
-              Array.from({ length: 3 }, (_, i) => (
-                <li key={i} className="flex h-7 items-center gap-2 rounded-md px-2">
-                  <Skeleton className="h-3.5 flex-1" style={{ maxWidth: `${60 + i * 12}%` }} />
-                </li>
-              ))
-            ) : (
-              modules.map((mod) => {
-                const moduleUrl = `${apprendreUrl}/${mod.id}`
-                return (
-                  <SidebarMenuSubItem key={mod.id}>
-                    <SidebarMenuSubButton
-                      asChild
-                      isActive={pathname.startsWith(moduleUrl)}
-                    >
-                      <Link href={moduleUrl}>
-                        <span>{mod.title}</span>
-                      </Link>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                )
-              })
-            )}
+            {modules.map((mod) => {
+              const moduleUrl = `${apprendreUrl}/${mod.id}`
+              return (
+                <SidebarMenuSubItem key={mod.id}>
+                  <SidebarMenuSubButton
+                    asChild
+                    isActive={pathname.startsWith(moduleUrl)}
+                  >
+                    <Link href={moduleUrl}>
+                      <span>{mod.title}</span>
+                    </Link>
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
+              )
+            })}
           </SidebarMenuSub>
         </CollapsibleContent>
       </SidebarMenuItem>

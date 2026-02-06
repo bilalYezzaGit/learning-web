@@ -11,7 +11,7 @@ import { ArrowLeft, BookOpen, Play } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { fetchSerie, ContentNotFoundError } from '@/lib/services/content-service'
+import { getSerie, resolveSerieActivities } from '@/lib/content'
 
 interface PageProps {
   params: Promise<{ parcours: string; id: string }>
@@ -22,13 +22,12 @@ export default async function SerieDetailPage({ params }: PageProps) {
 
   let serie
   try {
-    serie = await fetchSerie(id)
-  } catch (e) {
-    if (e instanceof ContentNotFoundError) {
-      notFound()
-    }
-    throw e
+    serie = getSerie(id)
+  } catch {
+    notFound()
   }
+
+  const activities = resolveSerieActivities(id)
 
   return (
     <div className="flex h-full flex-col">
@@ -54,7 +53,7 @@ export default async function SerieDetailPage({ params }: PageProps) {
               <p className="mt-2 text-muted-foreground">{serie.description}</p>
             )}
             <p className="mt-4 text-sm text-muted-foreground">
-              {serie.activities.length} activités · {serie.estimatedMinutes} min estimées
+              {activities.length} activités · {serie.estimatedMinutes} min estimées
             </p>
             <Button className="mt-6" size="lg" asChild>
               <Link href={`/${parcours}/reviser/serie/${id}/play`}>

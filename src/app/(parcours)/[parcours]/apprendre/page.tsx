@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { BookOpen, ChevronRight } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
-import { fetchProgrammes } from '@/lib/services/content-service'
+import { getAllProgrammes, getCours } from '@/lib/content'
 import { getParcoursConfig } from '@/lib/parcours/config'
 
 interface PageProps {
@@ -18,22 +18,29 @@ interface PageProps {
 
 export default async function ApprendrePage({ params }: PageProps) {
   const { parcours } = await params
+  const parcoursConfig = getParcoursConfig(parcours)
 
-  let programmes
-  let error = null
+  // Get programmes matching this parcours
+  const allProgrammes = getAllProgrammes()
+  const programmes = parcoursConfig
+    ? allProgrammes.filter(
+        (p) => p.levelSlug === parcoursConfig.level && p.sectionSlug === parcoursConfig.section
+      )
+    : allProgrammes
 
-  try {
-    const response = await fetchProgrammes()
-    const parcoursConfig = getParcoursConfig(parcours)
-
-    programmes = parcoursConfig
-      ? response.programmes.filter(
-          (p) => p.levelSlug === parcoursConfig.level && p.sectionSlug === parcoursConfig.section
-        )
-      : response.programmes
-  } catch (e) {
-    error = e instanceof Error ? e.message : 'Erreur de chargement'
-  }
+  // Resolve cours molecules for each programme
+  const programmesWithCours = programmes.map((programme) => ({
+    ...programme,
+    modules: programme.cours.map((slug) => {
+      const cours = getCours(slug)
+      return {
+        id: cours.slug,
+        title: cours.title,
+        description: cours.description,
+        sectionsCount: cours.sections.length,
+      }
+    }),
+  }))
 
   return (
     <div className="px-4 lg:px-6">
@@ -46,15 +53,7 @@ export default async function ApprendrePage({ params }: PageProps) {
         </p>
       </div>
 
-      {error ? (
-        <Card>
-          <CardContent className="py-12 text-center text-muted-foreground">
-            <BookOpen className="mx-auto mb-4 h-12 w-12 opacity-50" />
-            <p className="text-lg font-medium">Erreur de chargement</p>
-            <p className="mt-1 text-sm">{error}</p>
-          </CardContent>
-        </Card>
-      ) : !programmes || programmes.length === 0 ? (
+      {programmesWithCours.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center text-muted-foreground">
             <BookOpen className="mx-auto mb-4 h-12 w-12 opacity-50" />
@@ -63,16 +62,16 @@ export default async function ApprendrePage({ params }: PageProps) {
         </Card>
       ) : (
         <div className="space-y-6">
-          {programmes.map((programme) => (
+          {programmesWithCours.map((programme) => (
             <div key={programme.id}>
               <h2 className="mb-4 font-serif text-lg font-semibold">
                 {programme.label}
               </h2>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {programme.modules.map((module) => (
+                {programme.modules.map((mod) => (
                   <Link
-                    key={module.id}
-                    href={`/${parcours}/apprendre/${module.id}`}
+                    key={mod.id}
+                    href={`/${parcours}/apprendre/${mod.id}`}
                     className="group"
                   >
                     <Card className="h-full transition-colors group-hover:border-primary/50">
@@ -80,18 +79,18 @@ export default async function ApprendrePage({ params }: PageProps) {
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <h3 className="font-medium group-hover:text-primary">
-                              {module.title}
+                              {mod.title}
                             </h3>
-                            {module.description && (
+                            {mod.description && (
                               <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
-                                {module.description}
+                                {mod.description}
                               </p>
                             )}
                           </div>
                           <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1" />
                         </div>
                         <p className="mt-3 text-xs text-muted-foreground">
-                          {module.sections?.length || 0} sections
+                          {mod.sectionsCount} sections
                         </p>
                       </CardContent>
                     </Card>
