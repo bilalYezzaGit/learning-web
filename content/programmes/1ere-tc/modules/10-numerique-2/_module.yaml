@@ -1,0 +1,31 @@
+# Module : Activites numeriques II
+
+id: b0000001-0000-0000-0000-000000000010
+slug: numerique-2
+programmeId: 1ere-tc
+title: Activites numeriques II
+description: Intervalles, valeur absolue et encadrements
+icon: "🧮"
+trimester: T2
+order: 10
+version: 1
+estimatedTime: 120
+available: true
+
+prerequisites:
+  - Activites numeriques I
+
+objectives:
+  - Utiliser les intervalles de nombres reels
+  - Maitriser la valeur absolue
+  - Effectuer des encadrements
+
+tags:
+  - intervalles
+  - valeur-absolue
+  - encadrements
+
+coursePath:
+  - lesson-numerique-2
+  - ex-numerique-2-01
+  - qcm-numerique-2

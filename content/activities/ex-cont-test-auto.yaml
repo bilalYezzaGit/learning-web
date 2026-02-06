@@ -1,0 +1,18 @@
+id: ex-cont-test-auto
+type: exercise
+title: "[TEST] Exercice auto-deploy"
+difficulty: 1
+timeMinutes: 2
+category: application
+
+sectionId: cont-definition
+
+modules:
+  - continuite
+
+enonce: |
+  <p>Cet exercice teste le pipeline de deploy automatique.</p>
+  <p>Si tu vois cet exercice, le deploy + bump de <code>content_version</code> a fonctionné !</p>
+
+solution: |
+  <p>Le cache s'est rafraîchi automatiquement grâce à Remote Config.</p>

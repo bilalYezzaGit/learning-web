@@ -1,0 +1,48 @@
+# QCM : Theoreme de Thales
+
+id: qcm-thales
+type: qcm
+title: Theoreme de Thales
+difficulty: 1
+timeMinutes: 5
+description: Questions sur le theoreme de Thales et son application
+
+modules:
+  - thales
+
+questions:
+  - id: qcm-thales-1
+    enonce: |
+      <p>Pour appliquer le theoreme de Thales, il faut que les droites soient :</p>
+    options:
+      - '<p>Perpendiculaires</p>'
+      - '<p>Paralleles</p>'
+      - '<p>Confondues</p>'
+      - '<p>Secantes</p>'
+    correctIndex: 1
+    explication: |
+      <p>Le theoreme de Thales s'applique quand deux droites paralleles coupent deux droites secantes.</p>
+
+  - id: qcm-thales-2
+    enonce: |
+      <p>Dans une configuration de Thales avec <math>(BC) \parallel (DE)</math>, si <math>\frac{AB}{AD} = \frac{2}{3}</math>, alors :</p>
+    options:
+      - '<p><math>\frac{AC}{AE} = \frac{2}{3}</math></p>'
+      - '<p><math>\frac{AC}{AE} = \frac{3}{2}</math></p>'
+      - '<p><math>\frac{AC}{AE} = \frac{1}{3}</math></p>'
+      - '<p><math>\frac{BC}{DE} = \frac{3}{2}</math></p>'
+    correctIndex: 0
+    explication: |
+      <p>D'apres le theoreme de Thales, les rapports sont egaux : <math>\frac{AB}{AD} = \frac{AC}{AE} = \frac{BC}{DE}</math>.</p>
+
+  - id: qcm-thales-3
+    enonce: |
+      <p>La reciproque du theoreme de Thales permet de :</p>
+    options:
+      - '<p>Calculer des longueurs</p>'
+      - '<p>Demontrer que deux droites sont paralleles</p>'
+      - '<p>Calculer des angles</p>'
+      - '<p>Demontrer que deux droites sont perpendiculaires</p>'
+    correctIndex: 1
+    explication: |
+      <p>La reciproque du theoreme de Thales permet de prouver que deux droites sont paralleles en verifiant l'egalite des rapports.</p>

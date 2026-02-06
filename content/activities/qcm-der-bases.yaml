@@ -1,0 +1,24 @@
+# QCM : Notions de base
+
+id: qcm-der-bases
+type: qcm
+title: Notions de base
+difficulty: 1
+timeMinutes: 2
+description: Questions sur les derivees elementaires
+
+sectionId: der-bases
+
+modules:
+  - derivation
+
+questions:
+  - id: qcm-der-1
+    enonce: |
+      <p>La derivee de <math>f(x) = x^3</math> est :</p>
+    options:
+      - "<math>x^2</math>"
+      - "<math>3x^2</math>"
+      - "<math>3x^3</math>"
+      - "<math>x^4</math>"
+    correctIndex: 1

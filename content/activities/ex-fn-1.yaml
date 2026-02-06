@@ -1,0 +1,36 @@
+# Exercice : Domaine de definition
+
+id: ex-fn-domaine
+type: exercise
+title: Domaine de definition
+difficulty: 2
+timeMinutes: 10
+category: application
+
+sectionId: fn-rappels
+
+modules:
+  - fonctions
+
+enonce: |
+  <p>Determiner l'ensemble de definition de chacune des fonctions suivantes :</p>
+  <ol>
+    <li><math>f(x) = \sqrt{2x^2 - 3x + 1}</math></li>
+    <li><math>g(x) = \sqrt{x^2 - |x|}</math></li>
+    <li><math>h(x) = \frac{x}{\sqrt{x^2 - 3} - 2}</math></li>
+  </ol>
+
+solution: |
+  <p><strong>1)</strong> Il faut <math>2x^2 - 3x + 1 \geq 0</math>.</p>
+  <p>Le discriminant vaut <math>\Delta = 9 - 8 = 1</math>. Les racines sont <math>x_1 = \frac{1}{2}</math> et <math>x_2 = 1</math>.</p>
+  <p>Comme <math>a = 2 > 0</math>, le trinome est positif a l'exterieur des racines :</p>
+  <math-block>D_f = \left]-\infty, \frac{1}{2}\right] \cup [1, +\infty[</math-block>
+
+  <p><strong>2)</strong> Il faut <math>x^2 - |x| \geq 0</math>, soit <math>|x|(|x| - 1) \geq 0</math>.</p>
+  <p>Cela donne <math>|x| = 0</math> ou <math>|x| \geq 1</math>, donc :</p>
+  <math-block>D_g = ]-\infty, -1] \cup \{0\} \cup [1, +\infty[</math-block>
+
+  <p><strong>3)</strong> Il faut <math>x^2 - 3 \geq 0</math> et <math>\sqrt{x^2 - 3} \neq 2</math>.</p>
+  <p><math>x^2 - 3 \geq 0</math> donne <math>x \leq -\sqrt{3}</math> ou <math>x \geq \sqrt{3}</math>.</p>
+  <p><math>\sqrt{x^2 - 3} = 2</math> donne <math>x^2 = 7</math>, soit <math>x = \pm\sqrt{7}</math>.</p>
+  <math-block>D_h = ]-\infty, -\sqrt{3}] \cup [\sqrt{3}, +\infty[ \;\setminus\; \{-\sqrt{7}, \sqrt{7}\}</math-block>

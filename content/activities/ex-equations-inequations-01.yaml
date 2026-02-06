@@ -1,0 +1,44 @@
+# Exercice : Equations et inequations
+
+id: ex-equations-inequations-01
+type: exercise
+title: Resolution d equations et inequations
+difficulty: 1
+timeMinutes: 10
+category: application
+
+modules:
+  - equations-inequations
+
+enonce: |
+  <p>Resoudre les equations et inequations suivantes :</p>
+  <ol>
+    <li><math>3x - 7 = 5</math></li>
+    <li><math>2(x + 3) = 4x - 2</math></li>
+    <li><math>-2x + 6 > 0</math></li>
+    <li><math>3x - 1 \leq 2x + 5</math></li>
+  </ol>
+
+solution: |
+  <p><strong>1)</strong> <math>3x - 7 = 5</math></p>
+  <p><math>3x = 5 + 7 = 12</math></p>
+  <p><math>x = 4</math></p>
+  <p>Solution : <math>S = \{4\}</math></p>
+
+  <p><strong>2)</strong> <math>2(x + 3) = 4x - 2</math></p>
+  <p><math>2x + 6 = 4x - 2</math></p>
+  <p><math>6 + 2 = 4x - 2x</math></p>
+  <p><math>8 = 2x</math></p>
+  <p><math>x = 4</math></p>
+  <p>Solution : <math>S = \{4\}</math></p>
+
+  <p><strong>3)</strong> <math>-2x + 6 > 0</math></p>
+  <p><math>-2x > -6</math></p>
+  <p>On divise par <math>-2</math> (negatif), donc on inverse :</p>
+  <p><math>x < 3</math></p>
+  <p>Solution : <math>S = ]-\infty; 3[</math></p>
+
+  <p><strong>4)</strong> <math>3x - 1 \leq 2x + 5</math></p>
+  <p><math>3x - 2x \leq 5 + 1</math></p>
+  <p><math>x \leq 6</math></p>
+  <p>Solution : <math>S = ]-\infty; 6]</math></p>

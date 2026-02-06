@@ -1,0 +1,48 @@
+# QCM : Rotation et quart de tour
+
+id: qcm-quart-de-tour
+type: qcm
+title: Rotation et quart de tour
+difficulty: 1
+timeMinutes: 5
+description: Questions sur les rotations et le quart de tour
+
+modules:
+  - quart-de-tour
+
+questions:
+  - id: qcm-qt-1
+    enonce: |
+      <p>Une rotation conserve :</p>
+    options:
+      - '<p>Uniquement les longueurs</p>'
+      - '<p>Uniquement les angles</p>'
+      - '<p>Les longueurs et les angles</p>'
+      - '<p>Ni les longueurs ni les angles</p>'
+    correctIndex: 2
+    explication: |
+      <p>Une rotation est une isometrie : elle conserve les longueurs et les angles.</p>
+
+  - id: qcm-qt-2
+    enonce: |
+      <p>Le sens positif d'une rotation est :</p>
+    options:
+      - '<p>Le sens des aiguilles d''une montre</p>'
+      - '<p>Le sens inverse des aiguilles d''une montre</p>'
+      - '<p>De gauche a droite</p>'
+      - '<p>De haut en bas</p>'
+    correctIndex: 1
+    explication: |
+      <p>Le sens positif (sens trigonometrique) est le sens inverse des aiguilles d'une montre.</p>
+
+  - id: qcm-qt-3
+    enonce: |
+      <p>Une rotation d'angle <math>180°</math> est equivalente a :</p>
+    options:
+      - '<p>Une translation</p>'
+      - '<p>Une symetrie axiale</p>'
+      - '<p>Une symetrie centrale</p>'
+      - '<p>Un quart de tour</p>'
+    correctIndex: 2
+    explication: |
+      <p>Une rotation de <math>180°</math> autour d'un point <math>O</math> est la symetrie centrale de centre <math>O</math>.</p>

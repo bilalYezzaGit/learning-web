@@ -1,0 +1,13 @@
+# Programme : 3eme annee Math
+
+id: 3eme-math
+label: 3eme annee - Math
+levelSlug: 3eme
+sectionSlug: math
+levelName: 3eme annee
+sectionName: Mathematiques
+description: Programme de mathematiques pour la 3eme annee secondaire
+order: 1
+color: "#3B82F6"
+icon: calculate
+available: false

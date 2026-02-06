@@ -1,0 +1,54 @@
+# Exercice : Etude complete d'une fonction
+
+id: ex-cont-4
+type: exercise
+title: Etude complete d une fonction
+difficulty: 3
+timeMinutes: 20
+category: demonstration
+
+# Rattachement pedagogique
+sectionId: cont-tvi
+
+modules:
+  - continuite
+
+contexte: |
+  <p>Soit <math>f</math> la fonction definie sur <math>\mathbb{R}</math> par <math>f(x) = x^3 - 3x + 1</math>.</p>
+
+# Champs obligatoires (fallback pour exercice multi-questions)
+enonce: |
+  <p>Etude complete de la fonction <math>f(x) = x^3 - 3x + 1</math>.</p>
+
+solution: |
+  <p>Voir les questions ci-dessous pour la resolution detaillee.</p>
+
+# Exercice a questions multiples
+questions:
+  - id: q1
+    enonce: |
+      <p>Montrer que <math>f</math> est continue sur <math>\mathbb{R}</math>.</p>
+    solution: |
+      <p><math>f</math> est une fonction polynomiale, donc continue sur <math>\mathbb{R}</math>.</p>
+    dependsPrevious: false
+
+  - id: q2
+    enonce: |
+      <p>Calculer <math>f(-2)</math>, <math>f(0)</math> et <math>f(2)</math>.</p>
+    solution: |
+      <p><math>f(-2) = -1</math>, <math>f(0) = 1</math>, <math>f(2) = 3</math>.</p>
+    dependsPrevious: false
+
+  - id: q3
+    enonce: |
+      <p>En deduire que l equation <math>f(x) = 0</math> admet au moins une solution dans <math>[-2; 0]</math>.</p>
+    solution: |
+      <p>Par le TVI, il existe <math>c \in ]-2; 0[</math> tel que <math>f(c) = 0</math>.</p>
+    dependsPrevious: true
+
+  - id: q4
+    enonce: |
+      <p>Montrer que l equation admet exactement trois solutions reelles.</p>
+    solution: |
+      <p>En etudiant <math>f</math>, on trouve une racine dans chaque intervalle.</p>
+    dependsPrevious: true

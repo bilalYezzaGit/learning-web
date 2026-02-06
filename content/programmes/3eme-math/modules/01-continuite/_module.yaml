@@ -1,0 +1,51 @@
+# Module : Continuite
+# Source editable - sera compile en JSON
+
+id: a0000001-0000-0000-0000-000000000001
+slug: continuite
+programmeId: 3eme-math
+title: Continuite
+description: Notion de continuite d une fonction en un point et sur un intervalle
+icon: functions
+trimester: T1
+order: 1
+version: 1
+estimatedTime: 120
+
+prerequisites:
+  - Limites
+  - Fonctions
+
+objectives:
+  - Comprendre la notion de continuite en un point
+  - Savoir etudier la continuite sur un intervalle
+  - Maitriser le theoreme des valeurs intermediaires
+
+tags:
+  - continuite
+  - fonctions
+  - TVI
+
+# Sequential learning path (activities shown in Cours tab)
+# Activities not in this list go to the injection pool for dynamic suggestions
+coursePath:
+  # Section 1: Definition de la continuite
+  - lesson-cont-definition
+  - ex-cont-1
+  - ex-cont-2
+  - ex-cont-8
+  - qcm-cont-bases
+  # Section 2: Prolongement par continuite
+  - lesson-cont-prolongement
+  - ex-cont-5
+  # Section 3: Theoreme des valeurs intermediaires
+  - lesson-cont-tvi
+  - ex-cont-3
+  - ex-cont-3b
+  - ex-cont-3c
+  - ex-cont-4
+  - ex-cont-6
+  - qcm-cont-approf
+  - qcm-cont-avance
+  # Test temporaire - tableaux de variations
+  - lesson-test-variations

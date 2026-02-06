@@ -1,0 +1,33 @@
+# Exercice : Application du theoreme de Thales
+
+id: ex-thales-01
+type: exercise
+title: Calcul de longueurs avec Thales
+difficulty: 1
+timeMinutes: 10
+category: application
+
+modules:
+  - thales
+
+enonce: |
+  <p>Dans la figure ci-dessous, les droites <math>(BC)</math> et <math>(DE)</math> sont paralleles.</p>
+  <p>On donne : <math>AB = 4</math> cm, <math>AD = 6</math> cm, <math>AE = 9</math> cm et <math>BC = 5</math> cm.</p>
+  <ol>
+    <li>Calculer <math>AC</math>.</li>
+    <li>Calculer <math>DE</math>.</li>
+    <li>Calculer <math>BD</math>.</li>
+  </ol>
+
+solution: |
+  <p><strong>1)</strong> Puisque <math>(BC) \parallel (DE)</math>, on applique le theoreme de Thales :</p>
+  <math-block>\frac{AB}{AD} = \frac{AC}{AE}</math-block>
+  <p>Donc : <math>\frac{4}{6} = \frac{AC}{9}</math></p>
+  <p>Ainsi : <math>AC = \frac{4 \times 9}{6} = \frac{36}{6} = 6</math> cm</p>
+
+  <p><strong>2)</strong> En utilisant le theoreme de Thales :</p>
+  <math-block>\frac{AB}{AD} = \frac{BC}{DE}</math-block>
+  <p>Donc : <math>\frac{4}{6} = \frac{5}{DE}</math></p>
+  <p>Ainsi : <math>DE = \frac{5 \times 6}{4} = \frac{30}{4} = 7{,}5</math> cm</p>
+
+  <p><strong>3)</strong> On a : <math>BD = AD - AB = 6 - 4 = 2</math> cm</p>

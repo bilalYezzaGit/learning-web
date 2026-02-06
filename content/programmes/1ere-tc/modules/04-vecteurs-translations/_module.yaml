@@ -1,0 +1,30 @@
+# Module : Vecteurs et translations
+
+id: b0000001-0000-0000-0000-000000000004
+slug: vecteurs-translations
+programmeId: 1ere-tc
+title: Vecteurs et translations
+description: Introduction aux vecteurs et aux translations dans le plan
+icon: "➡️"
+trimester: T1
+order: 4
+version: 1
+estimatedTime: 120
+available: true
+
+prerequisites: []
+
+objectives:
+  - Definir un vecteur et ses caracteristiques
+  - Comprendre la notion de translation
+  - Construire l image d une figure par une translation
+
+tags:
+  - vecteurs
+  - translations
+  - geometrie
+
+coursePath:
+  - lesson-vecteurs-translations
+  - ex-vecteurs-translations-01
+  - qcm-vecteurs-translations

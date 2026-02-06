@@ -1,0 +1,25 @@
+# Exercice : TVI et unicite
+
+id: ex-cont-6
+type: exercise
+title: TVI et unicite
+difficulty: 2
+timeMinutes: 15
+category: application
+
+# Rattachement pedagogique
+sectionId: cont-tvi
+
+modules:
+  - continuite
+
+enonce: |
+  <p>Montrer que <math>x^3 + x - 1 = 0</math> admet une unique solution dans <math>\mathbb{R}</math>.</p>
+
+solution: |
+  <p>Soit <math>f(x) = x^3 + x - 1</math>.</p>
+  <p><b>Existence (TVI)</b> : <math>f(0) = -1 < 0</math>, <math>f(1) = 1 > 0</math>. Par le TVI, il existe une racine dans <math>]0; 1[</math>.</p>
+  <p><b>Unicite</b> : <math>f'(x) = 3x^2 + 1 > 0</math> pour tout <math>x</math>. <math>f</math> est strictement croissante sur <math>\mathbb{R}</math>, donc elle ne peut s'annuler qu'une seule fois.</p>
+
+methode: |
+  <p>Montrer que <math>f</math> est strictement monotone pour l'unicite.</p>

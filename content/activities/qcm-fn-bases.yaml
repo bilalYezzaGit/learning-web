@@ -1,0 +1,74 @@
+# QCM : Vocabulaire des fonctions
+
+id: qcm-fn-vocabulaire
+type: qcm
+title: Vocabulaire des fonctions
+difficulty: 1
+timeMinutes: 5
+description: Questions sur le vocabulaire de base des fonctions
+
+sectionId: fn-rappels
+
+modules:
+  - fonctions
+
+questions:
+  - id: qcm-fn-v1
+    enonce: |
+      <p>L'ensemble de definition d'une fonction <math>f</math> est :</p>
+    options:
+      - '<p>L''ensemble des images de <math>f</math></p>'
+      - '<p>L''ensemble des reels <math>x</math> pour lesquels <math>f(x)</math> existe</p>'
+      - '<p>L''ensemble des reels positifs</p>'
+      - '<p>L''intervalle <math>[0, +\infty[</math></p>'
+    correctIndex: 1
+    explication: |
+      <p>Le domaine de definition <math>D_f</math> est l'ensemble des valeurs de <math>x</math> pour lesquelles <math>f(x)</math> est definie.</p>
+
+  - id: qcm-fn-v2
+    enonce: |
+      <p>Si <math>f(3) = 7</math>, on dit que :</p>
+    options:
+      - '<p>3 est l''image de 7 par <math>f</math></p>'
+      - '<p>7 est un antecedent de 3 par <math>f</math></p>'
+      - '<p>7 est l''image de 3 par <math>f</math></p>'
+      - '<p>3 est la valeur de <math>f</math></p>'
+    correctIndex: 2
+    explication: |
+      <p>7 est l'<strong>image</strong> de 3 par <math>f</math>, et 3 est un <strong>antecedent</strong> de 7 par <math>f</math>.</p>
+
+  - id: qcm-fn-v3
+    enonce: |
+      <p>La courbe representative de <math>f</math> dans un repere <math>(O, \vec{i}, \vec{j})</math> est :</p>
+    options:
+      - '<p>L''ensemble des points <math>M(x, f(x))</math> ou <math>x \in D_f</math></p>'
+      - '<p>La droite <math>y = f(x)</math></p>'
+      - '<p>L''ensemble des antecedents de <math>f</math></p>'
+      - '<p>Le domaine de definition de <math>f</math></p>'
+    correctIndex: 0
+    explication: |
+      <p>La courbe <math>\mathscr{C}_f</math> est l'ensemble des points de coordonnees <math>(x, f(x))</math> pour <math>x</math> dans <math>D_f</math>.</p>
+
+  - id: qcm-fn-v4
+    enonce: |
+      <p>L'equation <math>f(x) = k</math> revient graphiquement a chercher :</p>
+    options:
+      - '<p>L''intersection de <math>\mathscr{C}_f</math> avec l''axe des abscisses</p>'
+      - '<p>L''intersection de <math>\mathscr{C}_f</math> avec la droite <math>y = k</math></p>'
+      - '<p>L''intersection de <math>\mathscr{C}_f</math> avec la droite <math>x = k</math></p>'
+      - '<p>Le maximum de <math>f</math></p>'
+    correctIndex: 1
+    explication: |
+      <p>Les solutions de <math>f(x) = k</math> sont les abscisses des points d'intersection de <math>\mathscr{C}_f</math> avec la droite horizontale <math>y = k</math>.</p>
+
+  - id: qcm-fn-v5
+    enonce: |
+      <p>L'inequation <math>f(x) \geq 0</math> revient graphiquement a chercher les <math>x</math> pour lesquels :</p>
+    options:
+      - '<p><math>\mathscr{C}_f</math> est en dessous de l''axe des abscisses</p>'
+      - '<p><math>\mathscr{C}_f</math> est au dessus ou sur l''axe des abscisses</p>'
+      - '<p><math>\mathscr{C}_f</math> coupe l''axe des ordonnees</p>'
+      - '<p><math>f</math> est croissante</p>'
+    correctIndex: 1
+    explication: |
+      <p><math>f(x) \geq 0</math> signifie que la courbe est situee au dessus (ou sur) l'axe <math>(O, \vec{i})</math>.</p>

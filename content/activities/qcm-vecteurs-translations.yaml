@@ -1,0 +1,48 @@
+# QCM : Vecteurs et translations
+
+id: qcm-vecteurs-translations
+type: qcm
+title: Vecteurs et translations
+difficulty: 1
+timeMinutes: 5
+description: Questions sur les vecteurs et les translations
+
+modules:
+  - vecteurs-translations
+
+questions:
+  - id: qcm-vt-1
+    enonce: |
+      <p>Deux vecteurs <math>\vec{AB}</math> et <math>\vec{CD}</math> sont egaux si et seulement si :</p>
+    options:
+      - '<p><math>ABCD</math> est un parallelogramme</p>'
+      - '<p><math>ABDC</math> est un parallelogramme</p>'
+      - '<p><math>AB = CD</math></p>'
+      - '<p><math>A = C</math> et <math>B = D</math></p>'
+    correctIndex: 1
+    explication: |
+      <p>Si <math>\vec{AB} = \vec{CD}</math>, alors <math>ABDC</math> est un parallelogramme (attention a l'ordre des lettres).</p>
+
+  - id: qcm-vt-2
+    enonce: |
+      <p>La norme du vecteur <math>\vec{AB}</math> est :</p>
+    options:
+      - '<p>La longueur <math>AB</math></p>'
+      - '<p>La direction de <math>(AB)</math></p>'
+      - '<p>Le sens de <math>A</math> vers <math>B</math></p>'
+      - '<p>L''angle forme par <math>\vec{AB}</math></p>'
+    correctIndex: 0
+    explication: |
+      <p>La norme d'un vecteur est sa longueur, notee <math>\|\vec{AB}\| = AB</math>.</p>
+
+  - id: qcm-vt-3
+    enonce: |
+      <p>Par la translation de vecteur <math>\vec{u}</math>, l'image d'un segment est :</p>
+    options:
+      - '<p>Un point</p>'
+      - '<p>Un segment parallele et de meme longueur</p>'
+      - '<p>Un segment perpendiculaire</p>'
+      - '<p>Un cercle</p>'
+    correctIndex: 1
+    explication: |
+      <p>La translation conserve les longueurs et les directions : l'image d'un segment est un segment parallele de meme longueur.</p>

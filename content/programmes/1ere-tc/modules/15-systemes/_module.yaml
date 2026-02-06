@@ -1,0 +1,32 @@
+# Module : Systemes d equations
+
+id: b0000001-0000-0000-0000-000000000015
+slug: systemes
+programmeId: 1ere-tc
+title: Systemes de deux equations a deux inconnues
+description: Resolution de systemes d equations lineaires
+icon: "🔗"
+trimester: T3
+order: 15
+version: 1
+estimatedTime: 120
+available: true
+
+prerequisites:
+  - Equations et inequations
+  - Fonctions affines
+
+objectives:
+  - Resoudre un systeme par substitution
+  - Resoudre un systeme par combinaison lineaire
+  - Interpreter graphiquement un systeme
+
+tags:
+  - systemes
+  - equations
+  - resolution
+
+coursePath:
+  - lesson-systemes
+  - ex-systemes-01
+  - qcm-systemes

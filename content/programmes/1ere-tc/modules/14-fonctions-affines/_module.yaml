@@ -1,0 +1,31 @@
+# Module : Fonctions affines
+
+id: b0000001-0000-0000-0000-000000000014
+slug: fonctions-affines
+programmeId: 1ere-tc
+title: Fonctions affines
+description: Definition, representation graphique et proprietes des fonctions affines
+icon: "📉"
+trimester: T3
+order: 14
+version: 1
+estimatedTime: 120
+available: true
+
+prerequisites:
+  - Fonctions lineaires
+
+objectives:
+  - Definir une fonction affine
+  - Representer graphiquement une fonction affine
+  - Determiner les coefficients d une fonction affine
+
+tags:
+  - fonctions
+  - affine
+  - droite
+
+coursePath:
+  - lesson-fonctions-affines
+  - ex-fonctions-affines-01
+  - qcm-fonctions-affines

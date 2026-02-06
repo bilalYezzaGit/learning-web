@@ -1,0 +1,44 @@
+# Rappel de cours : Definition de la continuite
+
+id: lesson-cont-definition
+type: lesson
+title: "Rappel : Continuite en un point"
+difficulty: 0
+timeMinutes: 3
+category: lesson
+
+sectionId: cont-definition
+
+modules:
+  - continuite
+
+body: |
+  <h3>Definition</h3>
+  <p>Soit <math>f</math> une fonction definie sur un intervalle <math>I</math> et <math>a \in I</math>.</p>
+  <p>On dit que <math>f</math> est <strong>continue en <math>a</math></strong> si :</p>
+  <math-block>\lim_{x \to a} f(x) = f(a)</math-block>
+  <p>Autrement dit, trois conditions doivent etre reunies :</p>
+  <ol>
+    <li><math>f(a)</math> existe (la fonction est definie en <math>a</math>)</li>
+    <li><math>\lim_{x \to a} f(x)</math> existe (la limite existe)</li>
+    <li>La limite est egale a <math>f(a)</math></li>
+  </ol>
+
+  <h3>Continuite sur un intervalle</h3>
+  <p><math>f</math> est <strong>continue sur <math>I</math></strong> si elle est continue en tout point de <math>I</math>.</p>
+
+  <h3>Fonctions usuelles continues</h3>
+  <p>Les fonctions suivantes sont continues sur leur domaine de definition :</p>
+  <ul>
+    <li>Fonctions polynomiales (sur <math>\mathbb{R}</math>)</li>
+    <li>Fonctions rationnelles (la ou le denominateur ne s'annule pas)</li>
+    <li><math>\sqrt{x}</math>, <math>|x|</math>, <math>\sin x</math>, <math>\cos x</math></li>
+  </ul>
+
+  <h3>Operations conservant la continuite</h3>
+  <p>Si <math>f</math> et <math>g</math> sont continues en <math>a</math>, alors :</p>
+  <ul>
+    <li><math>f + g</math>, <math>f - g</math>, <math>f \times g</math> sont continues en <math>a</math></li>
+    <li><math>\frac{f}{g}</math> est continue en <math>a</math> si <math>g(a) \neq 0</math></li>
+    <li><math>g \circ f</math> est continue en <math>a</math></li>
+  </ul>

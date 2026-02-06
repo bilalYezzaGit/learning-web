@@ -1,0 +1,30 @@
+# Module : Activites numeriques I
+
+id: b0000001-0000-0000-0000-000000000009
+slug: numerique-1
+programmeId: 1ere-tc
+title: Activites numeriques I
+description: Calculs numeriques, puissances et racines carrees
+icon: "🔢"
+trimester: T1
+order: 9
+version: 1
+estimatedTime: 120
+available: true
+
+prerequisites: []
+
+objectives:
+  - Maitriser les calculs avec les puissances
+  - Simplifier des expressions avec des racines carrees
+  - Rationaliser un denominateur
+
+tags:
+  - calcul
+  - puissances
+  - racines
+
+coursePath:
+  - lesson-numerique-1
+  - ex-numerique-1-01
+  - qcm-numerique-1

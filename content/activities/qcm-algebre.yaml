@@ -1,0 +1,48 @@
+# QCM : Calcul algebrique
+
+id: qcm-algebre
+type: qcm
+title: Developpement et factorisation
+difficulty: 1
+timeMinutes: 5
+description: Questions sur les identites remarquables
+
+modules:
+  - algebre
+
+questions:
+  - id: qcm-alg-1
+    enonce: |
+      <p>Le developpement de <math>(a + b)^2</math> est :</p>
+    options:
+      - '<p><math>a^2 + b^2</math></p>'
+      - '<p><math>a^2 + 2ab + b^2</math></p>'
+      - '<p><math>a^2 - 2ab + b^2</math></p>'
+      - '<p><math>2a + 2b</math></p>'
+    correctIndex: 1
+    explication: |
+      <p><math>(a + b)^2 = a^2 + 2ab + b^2</math> est une identite remarquable.</p>
+
+  - id: qcm-alg-2
+    enonce: |
+      <p>La factorisation de <math>x^2 - 16</math> est :</p>
+    options:
+      - '<p><math>(x - 4)^2</math></p>'
+      - '<p><math>(x + 4)^2</math></p>'
+      - '<p><math>(x - 4)(x + 4)</math></p>'
+      - '<p><math>(x - 8)(x + 2)</math></p>'
+    correctIndex: 2
+    explication: |
+      <p><math>x^2 - 16 = x^2 - 4^2 = (x - 4)(x + 4)</math> (difference de carres).</p>
+
+  - id: qcm-alg-3
+    enonce: |
+      <p>L'expression <math>(a - b)(a + b)</math> est egale a :</p>
+    options:
+      - '<p><math>a^2 + b^2</math></p>'
+      - '<p><math>a^2 - b^2</math></p>'
+      - '<p><math>a^2 - 2ab + b^2</math></p>'
+      - '<p><math>2a^2 - 2b^2</math></p>'
+    correctIndex: 1
+    explication: |
+      <p><math>(a - b)(a + b) = a^2 - b^2</math> est l'identite de la difference de carres.</p>

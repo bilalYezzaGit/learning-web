@@ -1,0 +1,23 @@
+# Exercice : Application du TVI
+
+id: ex-cont-3
+type: exercise
+title: Application du TVI
+difficulty: 2
+timeMinutes: 10
+category: demonstration
+
+# Rattachement pedagogique
+sectionId: cont-tvi
+
+modules:
+  - continuite
+
+enonce: |
+  <p>Montrer que l'equation <math>x^3 + x - 1 = 0</math> admet une unique solution dans <math>[0; 1]</math>.</p>
+
+solution: |
+  <p>Soit <math>f(x) = x^3 + x - 1</math>. <math>f</math> est continue sur <math>[0;1]</math> (polynome). <math>f(0) = -1 < 0</math> et <math>f(1) = 1 > 0</math>. Par le TVI, il existe <math>c \in ]0;1[</math> tel que <math>f(c) = 0</math>. De plus, <math>f'(x) = 3x^2 + 1 > 0</math> donc <math>f</math> est strictement croissante, d'ou l'unicite.</p>
+
+methode: |
+  <p>TVI : si <math>f</math> continue sur <math>[a;b]</math> et <math>f(a) \cdot f(b) < 0</math>, alors il existe <math>c \in ]a;b[</math> tel que <math>f(c) = 0</math>.</p>

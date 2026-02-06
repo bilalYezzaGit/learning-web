@@ -1,0 +1,36 @@
+# Exercice : Quart de tour
+
+id: ex-quart-de-tour-01
+type: exercise
+title: Quart de tour et rotation
+difficulty: 1
+timeMinutes: 8
+category: application
+
+modules:
+  - quart-de-tour
+
+enonce: |
+  <p>Soit un carre <math>ABCD</math> de centre <math>O</math>.</p>
+  <ol>
+    <li>Quelle est l'image de <math>A</math> par la rotation de centre <math>O</math> et d'angle <math>90°</math> ?</li>
+    <li>Quelle est l'image de <math>B</math> par la rotation de centre <math>O</math> et d'angle <math>-90°</math> ?</li>
+    <li>Quelle est l'image du segment <math>[AB]</math> par la rotation de centre <math>O</math> et d'angle <math>90°</math> ?</li>
+    <li>Quelle transformation permet de passer de <math>A</math> a <math>C</math> en gardant <math>O</math> comme centre ?</li>
+  </ol>
+
+solution: |
+  <p><strong>1)</strong> Dans un carre, les diagonales se coupent en leur milieu <math>O</math>.</p>
+  <p>Une rotation de <math>90°</math> autour de <math>O</math> envoie <math>A</math> sur <math>B</math>.</p>
+
+  <p><strong>2)</strong> Une rotation de <math>-90°</math> (sens horaire) autour de <math>O</math> envoie <math>B</math> sur <math>A</math>.</p>
+
+  <p><strong>3)</strong> La rotation de centre <math>O</math> et d'angle <math>90°</math> envoie :</p>
+  <ul>
+    <li><math>A</math> sur <math>B</math></li>
+    <li><math>B</math> sur <math>C</math></li>
+  </ul>
+  <p>Donc le segment <math>[AB]</math> a pour image le segment <math>[BC]</math>.</p>
+
+  <p><strong>4)</strong> <math>A</math> et <math>C</math> sont diametralement opposes par rapport a <math>O</math>.</p>
+  <p>La transformation qui envoie <math>A</math> sur <math>C</math> est la rotation de centre <math>O</math> et d'angle <math>180°</math> (ou la symetrie centrale de centre <math>O</math>).</p>

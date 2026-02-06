@@ -1,0 +1,48 @@
+# QCM : Calcul numerique II
+
+id: qcm-numerique-2
+type: qcm
+title: Racines carrees et valeur absolue
+difficulty: 1
+timeMinutes: 5
+description: Questions sur les racines carrees et la valeur absolue
+
+modules:
+  - numerique-2
+
+questions:
+  - id: qcm-num2-1
+    enonce: |
+      <p>Que vaut <math>\sqrt{49}</math> ?</p>
+    options:
+      - '<p>7</p>'
+      - '<p><math>\pm 7</math></p>'
+      - '<p>49</p>'
+      - '<p><math>7^2</math></p>'
+    correctIndex: 0
+    explication: |
+      <p><math>\sqrt{49} = 7</math> (la racine carree est toujours positive).</p>
+
+  - id: qcm-num2-2
+    enonce: |
+      <p><math>\sqrt{72}</math> simplifie vaut :</p>
+    options:
+      - '<p><math>6\sqrt{2}</math></p>'
+      - '<p><math>8\sqrt{2}</math></p>'
+      - '<p><math>36\sqrt{2}</math></p>'
+      - '<p><math>2\sqrt{18}</math></p>'
+    correctIndex: 0
+    explication: |
+      <p><math>72 = 36 \times 2</math>, donc <math>\sqrt{72} = \sqrt{36} \times \sqrt{2} = 6\sqrt{2}</math>.</p>
+
+  - id: qcm-num2-3
+    enonce: |
+      <p>Que vaut <math>|{-7}|</math> ?</p>
+    options:
+      - '<p><math>-7</math></p>'
+      - '<p>7</p>'
+      - '<p>0</p>'
+      - '<p>49</p>'
+    correctIndex: 1
+    explication: |
+      <p><math>|{-7}| = 7</math> car la valeur absolue est toujours positive.</p>

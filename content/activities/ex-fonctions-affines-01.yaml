@@ -1,0 +1,41 @@
+# Exercice : Fonctions affines
+
+id: ex-fonctions-affines-01
+type: exercise
+title: Etude d une fonction affine
+difficulty: 1
+timeMinutes: 10
+category: application
+
+modules:
+  - fonctions-affines
+
+enonce: |
+  <p>Soit la fonction affine <math>f</math> definie par <math>f(x) = 2x - 3</math>.</p>
+  <ol>
+    <li>Calculer <math>f(0)</math>, <math>f(2)</math> et <math>f(-1)</math>.</li>
+    <li>Determiner l'antecedent de <math>5</math> par <math>f</math>.</li>
+    <li>Tracer la representation graphique de <math>f</math>.</li>
+    <li>Determiner le coefficient directeur et l'ordonnee a l'origine.</li>
+  </ol>
+
+solution: |
+  <p><strong>1)</strong> Calcul des images :</p>
+  <p><math>f(0) = 2 \times 0 - 3 = -3</math></p>
+  <p><math>f(2) = 2 \times 2 - 3 = 1</math></p>
+  <p><math>f(-1) = 2 \times (-1) - 3 = -5</math></p>
+
+  <p><strong>2)</strong> On cherche <math>x</math> tel que <math>f(x) = 5</math> :</p>
+  <p><math>2x - 3 = 5</math></p>
+  <p><math>2x = 8</math></p>
+  <p><math>x = 4</math></p>
+  <p>L'antecedent de <math>5</math> est <math>4</math>.</p>
+
+  <p><strong>3)</strong> La droite passe par <math>A(0, -3)</math> et <math>B(2, 1)</math>.</p>
+  <p>On trace la droite passant par ces deux points.</p>
+
+  <p><strong>4)</strong> Dans <math>f(x) = 2x - 3</math> :</p>
+  <ul>
+    <li>Coefficient directeur : <math>a = 2</math></li>
+    <li>Ordonnee a l'origine : <math>b = -3</math></li>
+  </ul>

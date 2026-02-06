@@ -1,0 +1,35 @@
+# Lesson : Theoreme de Thales
+
+id: lesson-thales
+type: lesson
+title: Theoreme de Thales
+difficulty: 1
+timeMinutes: 10
+
+modules:
+  - thales
+
+body: |
+  <h3>Configuration de Thales</h3>
+  <p>Soit deux droites <math>(d)</math> et <math>(d')</math> secantes en un point <math>A</math>.</p>
+  <p>Soient <math>B</math>, <math>C</math> deux points de <math>(d)</math> distincts de <math>A</math>.</p>
+  <p>Soient <math>B'</math>, <math>C'</math> deux points de <math>(d')</math> distincts de <math>A</math>.</p>
+
+  <h3>Theoreme de Thales</h3>
+  <p>Si les droites <math>(BB')</math> et <math>(CC')</math> sont paralleles, alors :</p>
+  <math-block>\frac{AB}{AC} = \frac{AB'}{AC'} = \frac{BB'}{CC'}</math-block>
+
+  <h3>Reciproque du theoreme de Thales</h3>
+  <p>Si les points <math>A</math>, <math>B</math>, <math>C</math> sont alignes (dans cet ordre), les points <math>A</math>, <math>B'</math>, <math>C'</math> sont alignes (dans cet ordre), et si :</p>
+  <math-block>\frac{AB}{AC} = \frac{AB'}{AC'}</math-block>
+  <p>alors les droites <math>(BB')</math> et <math>(CC')</math> sont paralleles.</p>
+
+  <h3>Applications</h3>
+  <ul>
+    <li>Calculer des longueurs dans une configuration de Thales.</li>
+    <li>Demontrer que deux droites sont paralleles.</li>
+    <li>Partager un segment en parties egales.</li>
+  </ul>
+
+summary: |
+  Le theoreme de Thales permet de calculer des longueurs dans une configuration avec deux droites secantes coupees par des paralleles. La reciproque permet de demontrer le parallelisme.

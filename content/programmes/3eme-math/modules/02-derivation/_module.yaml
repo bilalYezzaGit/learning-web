@@ -1,0 +1,32 @@
+# Module : Derivation
+
+id: a0000001-0000-0000-0000-000000000002
+slug: derivation
+programmeId: 3eme-math
+title: Derivation
+description: Definition du nombre derive, interpretation geometrique et tangente a une courbe
+icon: timeline
+trimester: T2
+order: 3
+version: 1
+estimatedTime: 180
+
+prerequisites:
+  - Limites
+  - Continuite
+
+objectives:
+  - Calculer la derivee d une fonction
+  - Interpreter geometriquement le nombre derive
+
+tags:
+  - derivation
+  - tangente
+
+# Sequential learning path
+coursePath:
+  # Section 1: Derivees de base
+  - ex-der-1
+  - qcm-der-bases
+  # Section 2: Fonctions composees
+  - qcm-der-approf

@@ -1,0 +1,31 @@
+# Module : Somme de vecteurs
+
+id: b0000001-0000-0000-0000-000000000005
+slug: somme-vecteurs
+programmeId: 1ere-tc
+title: Somme de deux vecteurs - Vecteurs colineaires
+description: Operations sur les vecteurs et colinearite
+icon: "↗️"
+trimester: T2
+order: 5
+version: 1
+estimatedTime: 120
+available: true
+
+prerequisites:
+  - Vecteurs et translations
+
+objectives:
+  - Calculer la somme de deux vecteurs
+  - Reconnaitre des vecteurs colineaires
+  - Utiliser la relation de Chasles
+
+tags:
+  - vecteurs
+  - colinearite
+  - chasles
+
+coursePath:
+  - lesson-somme-vecteurs
+  - ex-somme-vecteurs-01
+  - qcm-somme-vecteurs

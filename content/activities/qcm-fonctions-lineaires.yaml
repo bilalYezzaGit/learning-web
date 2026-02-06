@@ -1,0 +1,48 @@
+# QCM : Fonctions lineaires
+
+id: qcm-fonctions-lineaires
+type: qcm
+title: Fonctions lineaires
+difficulty: 1
+timeMinutes: 5
+description: Questions sur les fonctions lineaires
+
+modules:
+  - fonctions-lineaires
+
+questions:
+  - id: qcm-fl-1
+    enonce: |
+      <p>La representation graphique d'une fonction lineaire est :</p>
+    options:
+      - '<p>Une parabole</p>'
+      - '<p>Une droite quelconque</p>'
+      - '<p>Une droite passant par l''origine</p>'
+      - '<p>Un cercle</p>'
+    correctIndex: 2
+    explication: |
+      <p>Une fonction lineaire <math>f(x) = ax</math> a pour graphique une droite passant par l'origine.</p>
+
+  - id: qcm-fl-2
+    enonce: |
+      <p>Si <math>f(x) = 3x</math>, alors <math>f</math> est :</p>
+    options:
+      - '<p>Croissante</p>'
+      - '<p>Decroissante</p>'
+      - '<p>Constante</p>'
+      - '<p>Ni croissante ni decroissante</p>'
+    correctIndex: 0
+    explication: |
+      <p>Le coefficient <math>a = 3 > 0</math>, donc <math>f</math> est croissante.</p>
+
+  - id: qcm-fl-3
+    enonce: |
+      <p>Pour <math>f(x) = ax</math> avec <math>A(2, 6)</math> sur la courbe, <math>a</math> vaut :</p>
+    options:
+      - '<p>2</p>'
+      - '<p>3</p>'
+      - '<p>6</p>'
+      - '<p>12</p>'
+    correctIndex: 1
+    explication: |
+      <p><math>a = \frac{y_A}{x_A} = \frac{6}{2} = 3</math></p>

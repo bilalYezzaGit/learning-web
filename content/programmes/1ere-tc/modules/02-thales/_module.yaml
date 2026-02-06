@@ -1,0 +1,31 @@
+# Module : Theoreme de Thales
+
+id: b0000001-0000-0000-0000-000000000002
+slug: thales
+programmeId: 1ere-tc
+title: Theoreme de Thales et sa reciproque
+description: Theoreme de Thales, sa reciproque et applications
+icon: "📏"
+trimester: T1
+order: 2
+version: 1
+estimatedTime: 120
+available: true
+
+prerequisites:
+  - Angles
+
+objectives:
+  - Connaitre et appliquer le theoreme de Thales
+  - Connaitre et appliquer la reciproque du theoreme de Thales
+  - Demontrer le parallelisme de droites
+
+tags:
+  - thales
+  - geometrie
+  - proportionnalite
+
+coursePath:
+  - lesson-thales
+  - ex-thales-01
+  - qcm-thales

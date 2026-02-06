@@ -1,0 +1,48 @@
+# QCM : Somme de vecteurs
+
+id: qcm-somme-vecteurs
+type: qcm
+title: Somme de vecteurs
+difficulty: 1
+timeMinutes: 5
+description: Questions sur la somme de vecteurs et la relation de Chasles
+
+modules:
+  - somme-vecteurs
+
+questions:
+  - id: qcm-sv-1
+    enonce: |
+      <p>La relation de Chasles stipule que :</p>
+    options:
+      - '<p><math>\vec{AB} + \vec{BA} = \vec{0}</math></p>'
+      - '<p><math>\vec{AB} + \vec{BC} = \vec{AC}</math></p>'
+      - '<p><math>\vec{AB} - \vec{BC} = \vec{AC}</math></p>'
+      - '<p><math>\vec{AB} = \vec{BC} + \vec{CA}</math></p>'
+    correctIndex: 1
+    explication: |
+      <p>La relation de Chasles : pour tous points A, B, C, on a <math>\vec{AB} + \vec{BC} = \vec{AC}</math>.</p>
+
+  - id: qcm-sv-2
+    enonce: |
+      <p>Le vecteur oppose de <math>\vec{AB}</math> est :</p>
+    options:
+      - '<p><math>\vec{AB}</math></p>'
+      - '<p><math>\vec{BA}</math></p>'
+      - '<p><math>\vec{0}</math></p>'
+      - '<p><math>-\vec{BA}</math></p>'
+    correctIndex: 1
+    explication: |
+      <p>Le vecteur oppose de <math>\vec{AB}</math> est <math>\vec{BA}</math>, car <math>\vec{AB} + \vec{BA} = \vec{0}</math>.</p>
+
+  - id: qcm-sv-3
+    enonce: |
+      <p>Dans un parallelogramme <math>ABCD</math>, la somme <math>\vec{AB} + \vec{AD}</math> est egale a :</p>
+    options:
+      - '<p><math>\vec{BD}</math></p>'
+      - '<p><math>\vec{AC}</math></p>'
+      - '<p><math>\vec{CD}</math></p>'
+      - '<p><math>\vec{BC}</math></p>'
+    correctIndex: 1
+    explication: |
+      <p>D'apres la regle du parallelogramme, <math>\vec{AB} + \vec{AD} = \vec{AC}</math>.</p>

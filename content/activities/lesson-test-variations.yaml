@@ -1,0 +1,99 @@
+# Test : Exemples de tableaux de variations et signes
+# Activite temporaire pour valider le rendu visuel
+
+id: lesson-test-variations
+type: lesson
+title: "[TEST] Tableaux de variations"
+difficulty: 0
+timeMinutes: 5
+category: lesson
+
+sectionId: cont-tvi
+
+modules:
+  - continuite
+
+body: |
+  <h3>1. Tableau de signes simple</h3>
+  <p>Signe de <math>(x-1)</math> sur <math>\mathbb{R}</math> :</p>
+  <variations var="x" intervals="[-∞,1,+∞]">
+    <row label="(x-1)" kind="sign" values="[-,+]"/>
+  </variations>
+
+  <h3>2. Tableau de signes avec zeros aux bornes</h3>
+  <p>Signe de <math>(x-1)(x+2)</math> :</p>
+  <variations var="x" intervals="[-∞,-2,1,+∞]">
+    <row label="(x-1)(x+2)" kind="sign" values="[+,0,-,0,+]"/>
+  </variations>
+
+  <h3>3. Tableau de signes multi-lignes</h3>
+  <p>Signe de <math>(2x+1)(x-3)</math> :</p>
+  <variations var="x" intervals="[-∞,-1/2,3,+∞]">
+    <row label="(2x+1)" kind="sign" values="[-,0,+,+]"/>
+    <row label="(x-3)" kind="sign" values="[-,-,0,+]"/>
+    <row label="(2x+1)(x-3)" kind="sign" values="[+,0,-,0,+]"/>
+  </variations>
+
+  <h3>4. Tableau de variations simple</h3>
+  <p>Variations de <math>f(x) = x^2 - 2x</math> sur <math>[-1; 3]</math> :</p>
+  <variations var="x" intervals="[-1,1,3]">
+    <row label="f'(x)" kind="sign" values="[-,+]"/>
+    <row label="f" kind="var" values="[3,-1,3]"/>
+  </variations>
+
+  <h3>5. Tableau de variations avec 3 intervalles</h3>
+  <p>Variations de <math>f</math> sur <math>[-2; 4]</math> :</p>
+  <variations var="x" intervals="[-2,0,2,4]">
+    <row label="f'(x)" kind="sign" values="[+,-,+]"/>
+    <row label="f" kind="var" values="[-3,1,-2,5]"/>
+  </variations>
+
+  <h3>6. Signes + variations complet</h3>
+  <p>Etude de <math>f(x) = x^3 - 3x</math> sur <math>[-2; 2]</math> :</p>
+  <variations var="x" intervals="[-2,-1,1,2]">
+    <row label="f'(x)" kind="sign" values="[+,-,+]"/>
+    <row label="f" kind="var" values="[-2,2,-2,2]"/>
+  </variations>
+
+  <h3>7. Multi-lignes signes + variation</h3>
+  <p>Etude complete avec facteurs :</p>
+  <variations var="x" intervals="[-∞,-1,2,+∞]">
+    <row label="(x+1)" kind="sign" values="[-,0,+,+]"/>
+    <row label="(x-2)" kind="sign" values="[-,-,0,+]"/>
+    <row label="f'(x)" kind="sign" values="[+,0,-,0,+]"/>
+    <row label="f" kind="var" values="[-∞,3,-2,+∞]"/>
+  </variations>
+
+  <h3>8. Variation avec discontinuite (asymptote)</h3>
+  <p>Variations de <math>f(x) = \frac{1}{x}</math> sur <math>\mathbb{R}^*</math> :</p>
+  <variations var="x" intervals="[-∞,0,+∞]">
+    <row label="f'(x)" kind="sign" values="[-,-]"/>
+    <row label="f" kind="var" values="[0,-∞,+∞,0]"/>
+  </variations>
+
+  <h3>9. Tableau de signes seul (trinome)</h3>
+  <p>Signe de <math>x^2 - 5x + 6</math> :</p>
+  <variations var="x" intervals="[-∞,2,3,+∞]">
+    <row label="x^2-5x+6" kind="sign" values="[+,0,-,0,+]"/>
+  </variations>
+
+  <h3>10. Variation monotone decroissante</h3>
+  <p>Variations de <math>g(x) = -x^2</math> sur <math>[0; 5]</math> :</p>
+  <variations var="x" intervals="[0,5]">
+    <row label="g'(x)" kind="sign" values="[-]"/>
+    <row label="g" kind="var" values="[0,-25]"/>
+  </variations>
+
+  <h3>11. Variation monotone croissante</h3>
+  <p>Variations de <math>h(x) = \sqrt{x}</math> sur <math>[0; 9]</math> :</p>
+  <variations var="x" intervals="[0,9]">
+    <row label="h'(x)" kind="sign" values="[+]"/>
+    <row label="h" kind="var" values="[0,3]"/>
+  </variations>
+
+  <h3>12. Cas complexe : 4 intervalles + discontinuite</h3>
+  <p>Variations de <math>f(x) = \frac{x^2-1}{x}</math> :</p>
+  <variations var="x" intervals="[-∞,-1,0,1,+∞]">
+    <row label="f'(x)" kind="sign" values="[+,0,-,-,0,+]"/>
+    <row label="f" kind="var" values="[-∞,0,-∞,+∞,0,+∞]"/>
+  </variations>

@@ -1,0 +1,35 @@
+# QCM : Approfondissement
+
+id: qcm-cont-approf
+type: qcm
+title: Approfondissement
+difficulty: 2
+timeMinutes: 5
+description: Questions sur le prolongement et les theoremes
+
+# Rattachement pedagogique
+sectionId: cont-tvi
+
+modules:
+  - continuite
+
+questions:
+  - id: qcm-cont-3
+    enonce: |
+      <p>Pour prolonger <math>f(x) = \frac{\sin x}{x}</math> par continuite en 0, on pose <math>f(0) =</math> ?</p>
+    options:
+      - '0'
+      - '1'
+      - '<math>\infty</math>'
+      - 'Non prolongeable'
+    correctIndex: 1
+
+  - id: qcm-cont-4
+    enonce: |
+      <p>Si <math>f</math> est continue sur <math>[a, b]</math>, <math>f(a) \cdot f(b) < 0</math>, alors :</p>
+    options:
+      - "<math>f</math> a au moins un zero dans <math>]a, b[</math>"
+      - "<math>f</math> a exactement un zero dans <math>]a, b[</math>"
+      - "<math>f</math> n'a pas de zero"
+      - "On ne peut rien dire"
+    correctIndex: 0

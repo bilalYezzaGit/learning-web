@@ -1,0 +1,48 @@
+# QCM : Equations et inequations
+
+id: qcm-equations-inequations
+type: qcm
+title: Equations et inequations du 1er degre
+difficulty: 1
+timeMinutes: 5
+description: Questions sur les equations et inequations
+
+modules:
+  - equations-inequations
+
+questions:
+  - id: qcm-ei-1
+    enonce: |
+      <p>La solution de <math>2x + 4 = 0</math> est :</p>
+    options:
+      - '<p><math>x = 2</math></p>'
+      - '<p><math>x = -2</math></p>'
+      - '<p><math>x = 4</math></p>'
+      - '<p><math>x = -4</math></p>'
+    correctIndex: 1
+    explication: |
+      <p><math>2x = -4</math>, donc <math>x = -2</math></p>
+
+  - id: qcm-ei-2
+    enonce: |
+      <p>Si on multiplie les deux membres d'une inequation par <math>-3</math>, on doit :</p>
+    options:
+      - '<p>Garder le sens de l''inegalite</p>'
+      - '<p>Inverser le sens de l''inegalite</p>'
+      - '<p>Mettre les deux membres au carre</p>'
+      - '<p>Ne rien changer</p>'
+    correctIndex: 1
+    explication: |
+      <p>En multipliant par un nombre negatif, on inverse le sens de l'inegalite.</p>
+
+  - id: qcm-ei-3
+    enonce: |
+      <p>L'ensemble des solutions de <math>x + 3 > 5</math> est :</p>
+    options:
+      - '<p><math>]-\infty; 2[</math></p>'
+      - '<p><math>]2; +\infty[</math></p>'
+      - '<p><math>]-\infty; 8[</math></p>'
+      - '<p><math>]8; +\infty[</math></p>'
+    correctIndex: 1
+    explication: |
+      <p><math>x > 5 - 3 = 2</math>, donc <math>S = ]2; +\infty[</math>.</p>

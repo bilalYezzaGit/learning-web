@@ -1,0 +1,31 @@
+# Module : Equations et inequations
+
+id: b0000001-0000-0000-0000-000000000013
+slug: equations-inequations
+programmeId: 1ere-tc
+title: Equations et inequations du 1er degre
+description: Resolution d equations et d inequations du premier degre
+icon: "⚖️"
+trimester: T2
+order: 13
+version: 1
+estimatedTime: 120
+available: true
+
+prerequisites:
+  - Algebre
+
+objectives:
+  - Resoudre une equation du premier degre
+  - Resoudre une inequation du premier degre
+  - Representer les solutions sur une droite graduee
+
+tags:
+  - equations
+  - inequations
+  - premier-degre
+
+coursePath:
+  - lesson-equations-inequations
+  - ex-equations-inequations-01
+  - qcm-equations-inequations

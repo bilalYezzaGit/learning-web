@@ -1,0 +1,29 @@
+# Exercice : Continuite et tableau de signes
+
+id: ex-cont-3d
+type: exercise
+title: Continuite et tableau de signes
+difficulty: 1
+timeMinutes: 8
+category: application
+
+# Rattachement pedagogique
+sectionId: cont-definition
+
+modules:
+  - continuite
+
+enonce: |
+  <p>Soit <math>g(x) = (x - 1)(x + 2)</math> definie sur <math>\mathbb{R}</math>. Le tableau de signes de <math>g</math> est donne ci-dessous.</p>
+  <variations var="x" intervals="[-∞,-2,1,+∞]">
+    <row label="(x-1)(x+2)" kind="sign" values="[+,0,-,0,+]"/>
+  </variations>
+  <p>La fonction <math>g</math> est-elle continue sur <math>\mathbb{R}</math> ? Justifier.</p>
+
+solution: |
+  <p><math>g</math> est une fonction polynome (produit de deux fonctions affines).</p>
+  <p>Toute fonction polynome est continue sur <math>\mathbb{R}</math>.</p>
+  <p>Donc <math>g</math> est continue sur <math>\mathbb{R}</math>.</p>
+
+methode: |
+  <p>Reconnaitre le type de fonction pour determiner la continuite.</p>

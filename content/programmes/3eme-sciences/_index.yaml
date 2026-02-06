@@ -1,0 +1,13 @@
+# Programme : 3eme annee Sciences
+
+id: 3eme-sciences
+label: 3eme annee - Sciences
+levelSlug: 3eme
+sectionSlug: sciences
+levelName: 3eme annee
+sectionName: Sciences
+description: Programme de sciences pour la 3eme annee secondaire
+order: 2
+color: "#10B981"
+icon: science
+available: false

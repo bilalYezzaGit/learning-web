@@ -1,0 +1,17 @@
+id: serie-continuite-fondamentaux
+title: "Continuite : les fondamentaux"
+description: "Maitrise les bases de la continuite : definition, prolongement et premiers exercices d'application."
+difficulty: 1
+estimatedMinutes: 40
+tags:
+  - continuite
+  - definition
+  - prolongement
+activityIds:
+  - lesson-cont-definition
+  - ex-cont-1
+  - ex-cont-2
+  - ex-cont-8
+  - qcm-cont-bases
+  - lesson-cont-prolongement
+  - ex-cont-5

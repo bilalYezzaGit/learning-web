@@ -1,0 +1,39 @@
+# Module : Generalites sur les fonctions
+
+id: a0000003-0000-0000-0000-000000000001
+slug: fonctions
+programmeId: 3eme-math
+title: Generalites sur les fonctions
+description: Vocabulaire des fonctions, parite, sens de variation, extremums, transformations de courbes
+icon: functions
+trimester: T1
+order: 3
+version: 1
+estimatedTime: 180
+
+prerequisites:
+  - Fonctions de reference (2eme annee)
+  - Calcul algebrique
+
+objectives:
+  - Maitriser le vocabulaire des fonctions (domaine, image, antecedent)
+  - Etudier la parite d une fonction
+  - Determiner le sens de variation et dresser un tableau de variations
+  - Identifier maximum, minimum, majorant, minorant
+  - Construire des courbes par transformations
+
+tags:
+  - fonctions
+  - parite
+  - variations
+  - extremums
+  - transformations
+
+# Sequential learning path (activities shown in Cours tab)
+coursePath:
+  # Section 1: Rappels et vocabulaire
+  - lesson-fn-rappels
+  - ex-fn-lecture-graphique
+  - ex-fn-domaine
+  - qcm-fn-vocabulaire
+  # Section 2-5: a completer au fur et a mesure

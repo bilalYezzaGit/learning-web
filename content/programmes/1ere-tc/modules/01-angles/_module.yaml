@@ -1,0 +1,29 @@
+# Module : Angles
+
+id: b0000001-0000-0000-0000-000000000001
+slug: angles
+programmeId: 1ere-tc
+title: Angles
+description: Mesure des angles, angles inscrits et angles au centre
+icon: "📐"
+trimester: T1
+order: 1
+version: 1
+estimatedTime: 90
+available: true
+
+prerequisites: []
+
+objectives:
+  - Connaitre les differentes unites de mesure des angles
+  - Maitriser les angles inscrits et les angles au centre
+  - Resoudre des problemes geometriques impliquant des angles
+
+tags:
+  - angles
+  - geometrie
+
+coursePath:
+  - lesson-angles
+  - ex-angles-01
+  - qcm-angles

@@ -1,0 +1,35 @@
+# Exercice : Calcul numerique II
+
+id: ex-numerique-2-01
+type: exercise
+title: Racines carrees et valeur absolue
+difficulty: 1
+timeMinutes: 8
+category: application
+
+modules:
+  - numerique-2
+
+enonce: |
+  <ol>
+    <li>Simplifier <math>\sqrt{50}</math>.</li>
+    <li>Calculer <math>\sqrt{3} \times \sqrt{12}</math>.</li>
+    <li>Calculer <math>|{-5}| + |3|</math>.</li>
+    <li>Resoudre <math>|x| = 4</math>.</li>
+  </ol>
+
+solution: |
+  <p><strong>1)</strong> <math>\sqrt{50}</math></p>
+  <p><math>50 = 25 \times 2</math>, donc :</p>
+  <p><math>\sqrt{50} = \sqrt{25 \times 2} = \sqrt{25} \times \sqrt{2} = 5\sqrt{2}</math></p>
+
+  <p><strong>2)</strong> <math>\sqrt{3} \times \sqrt{12}</math></p>
+  <p><math>= \sqrt{3 \times 12} = \sqrt{36} = 6</math></p>
+
+  <p><strong>3)</strong> <math>|{-5}| + |3|</math></p>
+  <p><math>= 5 + 3 = 8</math></p>
+
+  <p><strong>4)</strong> <math>|x| = 4</math></p>
+  <p>Par definition de la valeur absolue, <math>|x| = 4</math> signifie que <math>x</math> est a distance 4 de l'origine.</p>
+  <p>Donc <math>x = 4</math> ou <math>x = -4</math>.</p>
+  <p>Solutions : <math>S = \{-4; 4\}</math></p>

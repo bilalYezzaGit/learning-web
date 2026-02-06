@@ -1,0 +1,25 @@
+# Exercice : Demo - Contenu futur
+
+id: ex-cont-demo-futur
+type: exercise
+title: Demo - Contenu futur
+difficulty: 1
+timeMinutes: 5
+category: application
+
+# Rattachement pedagogique
+sectionId: cont-definition
+
+modules:
+  - continuite
+
+enonce: |
+  <p>Voici un exemple de contenu avec des <b>widgets futurs</b> :</p>
+  <geogebra id="abc123" title="Graphique interactif"/>
+  <p>Et une animation Manim :</p>
+  <manim scene="ContinuityScene" quality="high"/>
+  <p>Une simulation interactive :</p>
+  <simulation type="limit" function="1/x" point="0">Explorez le comportement</simulation>
+
+solution: |
+  <p>Les widgets ci-dessus seront implementes prochainement.</p>

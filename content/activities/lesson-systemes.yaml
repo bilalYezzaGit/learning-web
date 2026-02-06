@@ -1,0 +1,42 @@
+# Lesson : Systemes d equations
+
+id: lesson-systemes
+type: lesson
+title: Systemes de deux equations a deux inconnues
+difficulty: 1
+timeMinutes: 10
+
+modules:
+  - systemes
+
+body: |
+  <h3>Definition</h3>
+  <p>Un <strong>systeme de deux equations a deux inconnues</strong> est de la forme :</p>
+  <math-block>\begin{cases} ax + by = c \\ a'x + b'y = c' \end{cases}</math-block>
+  <p>Resoudre ce systeme, c'est trouver tous les couples <math>(x, y)</math> qui verifient les deux equations.</p>
+
+  <h3>Methode par substitution</h3>
+  <ol>
+    <li>Exprimer une inconnue en fonction de l'autre a partir d'une equation.</li>
+    <li>Substituer dans l'autre equation.</li>
+    <li>Resoudre l'equation obtenue.</li>
+    <li>En deduire la valeur de l'autre inconnue.</li>
+  </ol>
+
+  <h3>Methode par combinaison lineaire</h3>
+  <ol>
+    <li>Multiplier les equations pour avoir des coefficients opposes.</li>
+    <li>Additionner les equations pour eliminer une inconnue.</li>
+    <li>Resoudre et substituer.</li>
+  </ol>
+
+  <h3>Interpretation graphique</h3>
+  <p>Chaque equation represente une droite. La solution du systeme est le point d'intersection des deux droites (s'il existe).</p>
+  <ul>
+    <li>Droites secantes : une solution unique.</li>
+    <li>Droites paralleles : aucune solution.</li>
+    <li>Droites confondues : infinite de solutions.</li>
+  </ul>
+
+summary: |
+  Un systeme de deux equations se resout par substitution ou combinaison lineaire. Graphiquement, la solution est l'intersection des deux droites.

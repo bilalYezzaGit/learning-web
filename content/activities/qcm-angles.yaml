@@ -1,0 +1,48 @@
+# QCM : Angles inscrits et angles au centre
+
+id: qcm-angles
+type: qcm
+title: Angles inscrits et angles au centre
+difficulty: 1
+timeMinutes: 5
+description: Questions sur les proprietes des angles inscrits et au centre
+
+modules:
+  - angles
+
+questions:
+  - id: qcm-angles-1
+    enonce: |
+      <p>L'angle au centre <math>\widehat{AOB}</math> mesure <math>120°</math>. Quelle est la mesure de l'angle inscrit <math>\widehat{AMB}</math> interceptant le meme arc ?</p>
+    options:
+      - '<p><math>60°</math></p>'
+      - '<p><math>120°</math></p>'
+      - '<p><math>240°</math></p>'
+      - '<p><math>30°</math></p>'
+    correctIndex: 0
+    explication: |
+      <p>L'angle inscrit est egal a la moitie de l'angle au centre : <math>\widehat{AMB} = \frac{120°}{2} = 60°</math></p>
+
+  - id: qcm-angles-2
+    enonce: |
+      <p>Un angle inscrit intercepte un demi-cercle. Quelle est sa mesure ?</p>
+    options:
+      - '<p><math>45°</math></p>'
+      - '<p><math>90°</math></p>'
+      - '<p><math>180°</math></p>'
+      - '<p><math>60°</math></p>'
+    correctIndex: 1
+    explication: |
+      <p>Un angle inscrit dans un demi-cercle est toujours un angle droit (<math>90°</math>).</p>
+
+  - id: qcm-angles-3
+    enonce: |
+      <p>Deux angles inscrits interceptent le meme arc. Que peut-on dire ?</p>
+    options:
+      - '<p>Ils sont egaux</p>'
+      - '<p>Leur somme vaut <math>180°</math></p>'
+      - '<p>Leur somme vaut <math>90°</math></p>'
+      - '<p>L''un est le double de l''autre</p>'
+    correctIndex: 0
+    explication: |
+      <p>Tous les angles inscrits qui interceptent le meme arc sont egaux.</p>

@@ -1,0 +1,49 @@
+# Lesson : Rappels et vocabulaire des fonctions
+
+id: lesson-fn-rappels
+type: lesson
+title: Rappels et vocabulaire
+difficulty: 0
+timeMinutes: 8
+
+sectionId: fn-rappels
+
+modules:
+  - fonctions
+
+body: |
+  <h3>Fonction et ensemble de definition</h3>
+  <p>Soit <math>E</math> une partie non vide de <math>\mathbb{R}</math>.</p>
+  <p>Une <strong>fonction</strong> <math>f</math> de <math>E</math> dans <math>\mathbb{R}</math> est un procede qui a tout reel <math>x</math> de <math>E</math> fait correspondre au plus un reel note <math>f(x)</math>.</p>
+  <p>L'ensemble <math>D_f</math> des reels <math>x</math> pour lesquels <math>f(x)</math> existe est appele <strong>ensemble de definition</strong> de <math>f</math>.</p>
+
+  <h3>Image et antecedent</h3>
+  <p>Soit <math>f</math> une fonction definie sur <math>D_f</math> et <math>a \in D_f</math>.</p>
+  <ul>
+    <li><math>f(a)</math> est l'<strong>image</strong> de <math>a</math> par <math>f</math>.</li>
+    <li>Si <math>f(a) = b</math>, alors <math>a</math> est un <strong>antecedent</strong> de <math>b</math> par <math>f</math>.</li>
+  </ul>
+  <p>Un nombre peut avoir plusieurs antecedents, mais il a au plus une image.</p>
+
+  <h3>Representation graphique</h3>
+  <p>Dans un repere <math>(O, \vec{i}, \vec{j})</math>, la <strong>courbe representative</strong> <math>\mathscr{C}_f</math> de <math>f</math> est l'ensemble des points <math>M(x, f(x))</math> pour <math>x \in D_f</math>.</p>
+  <p>On dit que <math>y = f(x)</math> est l'equation de la courbe.</p>
+
+  <h3>Lecture graphique</h3>
+  <p>A partir de la courbe <math>\mathscr{C}_f</math>, on peut :</p>
+  <ul>
+    <li><strong>Determiner <math>f(a)</math></strong> : tracer la verticale <math>x = a</math>, lire l'ordonnee du point d'intersection avec <math>\mathscr{C}_f</math>.</li>
+    <li><strong>Trouver les antecedents de <math>b</math></strong> : tracer l'horizontale <math>y = b</math>, lire les abscisses des points d'intersection.</li>
+    <li><strong>Resoudre <math>f(x) \geq k</math></strong> : reperer ou la courbe est au dessus de la droite <math>y = k</math>.</li>
+  </ul>
+
+  <h3>Positions relatives de deux courbes</h3>
+  <p>Pour comparer deux fonctions <math>f</math> et <math>g</math>, on etudie le signe de <math>f(x) - g(x)</math> :</p>
+  <ul>
+    <li>Si <math>f(x) - g(x) > 0</math> : <math>\mathscr{C}_f</math> est au dessus de <math>\mathscr{C}_g</math>.</li>
+    <li>Si <math>f(x) - g(x) < 0</math> : <math>\mathscr{C}_f</math> est en dessous de <math>\mathscr{C}_g</math>.</li>
+    <li>Si <math>f(x) - g(x) = 0</math> : les courbes ont un point commun.</li>
+  </ul>
+
+summary: |
+  Une fonction associe a chaque x de son domaine au plus une image f(x). La courbe representative est l'ensemble des points (x, f(x)). On peut lire images, antecedents et resoudre des inequations graphiquement.

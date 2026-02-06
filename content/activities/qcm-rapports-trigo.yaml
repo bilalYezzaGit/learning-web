@@ -1,0 +1,48 @@
+# QCM : Rapports trigonometriques
+
+id: qcm-rapports-trigo
+type: qcm
+title: Rapports trigonometriques
+difficulty: 1
+timeMinutes: 5
+description: Questions sur les rapports trigonometriques
+
+modules:
+  - rapports-trigo
+
+questions:
+  - id: qcm-trigo-1
+    enonce: |
+      <p>Dans un triangle rectangle, le cosinus d'un angle aigu est egal a :</p>
+    options:
+      - '<p>cote oppose / hypotenuse</p>'
+      - '<p>cote adjacent / hypotenuse</p>'
+      - '<p>cote oppose / cote adjacent</p>'
+      - '<p>hypotenuse / cote adjacent</p>'
+    correctIndex: 1
+    explication: |
+      <p><math>\cos(\alpha) = \frac{\text{cote adjacent}}{\text{hypotenuse}}</math></p>
+
+  - id: qcm-trigo-2
+    enonce: |
+      <p>Si <math>\cos(\alpha) = 0{,}6</math> et <math>\sin(\alpha) = 0{,}8</math>, que vaut <math>\tan(\alpha)</math> ?</p>
+    options:
+      - '<p><math>\frac{3}{4}</math></p>'
+      - '<p><math>\frac{4}{3}</math></p>'
+      - '<p><math>1{,}4</math></p>'
+      - '<p><math>0{,}48</math></p>'
+    correctIndex: 1
+    explication: |
+      <p><math>\tan(\alpha) = \frac{\sin(\alpha)}{\cos(\alpha)} = \frac{0{,}8}{0{,}6} = \frac{4}{3}</math></p>
+
+  - id: qcm-trigo-3
+    enonce: |
+      <p>Que vaut <math>\cos^2(\alpha) + \sin^2(\alpha)</math> pour tout angle <math>\alpha</math> ?</p>
+    options:
+      - '<p>0</p>'
+      - '<p>1</p>'
+      - '<p>2</p>'
+      - '<p>Cela depend de <math>\alpha</math></p>'
+    correctIndex: 1
+    explication: |
+      <p>C'est la relation fondamentale de la trigonometrie : <math>\cos^2(\alpha) + \sin^2(\alpha) = 1</math>.</p>

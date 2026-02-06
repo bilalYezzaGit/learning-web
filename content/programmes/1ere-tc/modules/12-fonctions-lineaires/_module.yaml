@@ -1,0 +1,31 @@
+# Module : Fonctions lineaires
+
+id: b0000001-0000-0000-0000-000000000012
+slug: fonctions-lineaires
+programmeId: 1ere-tc
+title: Fonctions lineaires
+description: Definition, representation graphique et proprietes des fonctions lineaires
+icon: "📈"
+trimester: T2
+order: 12
+version: 1
+estimatedTime: 120
+available: true
+
+prerequisites:
+  - Repere
+
+objectives:
+  - Definir une fonction lineaire
+  - Representer graphiquement une fonction lineaire
+  - Determiner le coefficient d une fonction lineaire
+
+tags:
+  - fonctions
+  - lineaire
+  - proportionnalite
+
+coursePath:
+  - lesson-fonctions-lineaires
+  - ex-fonctions-lineaires-01
+  - qcm-fonctions-lineaires

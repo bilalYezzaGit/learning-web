@@ -1,0 +1,37 @@
+# Lesson : Calcul algebrique
+
+id: lesson-algebre
+type: lesson
+title: Developpement et factorisation
+difficulty: 1
+timeMinutes: 10
+
+modules:
+  - algebre
+
+body: |
+  <h3>Developpement</h3>
+  <p><strong>Distributivite</strong> : <math>k(a + b) = ka + kb</math></p>
+  <p><strong>Double distributivite</strong> : <math>(a + b)(c + d) = ac + ad + bc + bd</math></p>
+
+  <h3>Identites remarquables</h3>
+  <ul>
+    <li><math>(a + b)^2 = a^2 + 2ab + b^2</math></li>
+    <li><math>(a - b)^2 = a^2 - 2ab + b^2</math></li>
+    <li><math>(a + b)(a - b) = a^2 - b^2</math></li>
+  </ul>
+
+  <h3>Factorisation</h3>
+  <p><strong>Facteur commun</strong> : <math>ka + kb = k(a + b)</math></p>
+  <p><strong>Difference de carres</strong> : <math>a^2 - b^2 = (a + b)(a - b)</math></p>
+  <p><strong>Trinome carre</strong> : <math>a^2 + 2ab + b^2 = (a + b)^2</math></p>
+
+  <h3>Simplification de fractions algebriques</h3>
+  <p>Pour simplifier une fraction algebrique :</p>
+  <ol>
+    <li>Factoriser le numerateur et le denominateur.</li>
+    <li>Simplifier par les facteurs communs.</li>
+  </ol>
+
+summary: |
+  Les identites remarquables permettent de developper et factoriser rapidement. La factorisation est l'operation inverse du developpement.

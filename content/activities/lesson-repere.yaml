@@ -1,0 +1,35 @@
+# Lesson : Repere dans le plan
+
+id: lesson-repere
+type: lesson
+title: Repere dans le plan
+difficulty: 1
+timeMinutes: 10
+
+modules:
+  - repere
+
+body: |
+  <h3>Definition d un repere</h3>
+  <p>Un <strong>repere</strong> du plan est defini par un point <math>O</math> (origine) et deux vecteurs non colineaires <math>\vec{i}</math> et <math>\vec{j}</math>.</p>
+  <p>On note le repere <math>(O, \vec{i}, \vec{j})</math> ou <math>(O; I, J)</math> avec <math>\vec{OI} = \vec{i}</math> et <math>\vec{OJ} = \vec{j}</math>.</p>
+
+  <h3>Coordonnees d un point</h3>
+  <p>Dans le repere <math>(O, \vec{i}, \vec{j})</math>, tout point <math>M</math> du plan a des coordonnees uniques <math>(x, y)</math> telles que :</p>
+  <math-block>\vec{OM} = x\vec{i} + y\vec{j}</math-block>
+  <p><math>x</math> est l'<strong>abscisse</strong> et <math>y</math> est l'<strong>ordonnee</strong> de <math>M</math>.</p>
+
+  <h3>Coordonnees d un vecteur</h3>
+  <p>Si <math>A(x_A, y_A)</math> et <math>B(x_B, y_B)</math>, alors :</p>
+  <math-block>\vec{AB}\begin{pmatrix} x_B - x_A \\ y_B - y_A \end{pmatrix}</math-block>
+
+  <h3>Coordonnees du milieu</h3>
+  <p>Le milieu <math>I</math> du segment <math>[AB]</math> a pour coordonnees :</p>
+  <math-block>I\left(\frac{x_A + x_B}{2}, \frac{y_A + y_B}{2}\right)</math-block>
+
+  <h3>Distance entre deux points</h3>
+  <p>Dans un repere orthonorme, la distance <math>AB</math> est :</p>
+  <math-block>AB = \sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}</math-block>
+
+summary: |
+  Un repere permet de definir les coordonnees de chaque point. Les coordonnees d'un vecteur AB sont (xB-xA, yB-yA). Le milieu a pour coordonnees la moyenne des coordonnees.

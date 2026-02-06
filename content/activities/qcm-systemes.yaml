@@ -1,0 +1,48 @@
+# QCM : Systemes d equations
+
+id: qcm-systemes
+type: qcm
+title: Systemes d equations
+difficulty: 1
+timeMinutes: 5
+description: Questions sur les systemes d equations
+
+modules:
+  - systemes
+
+questions:
+  - id: qcm-sys-1
+    enonce: |
+      <p>Graphiquement, la solution d'un systeme de deux equations est :</p>
+    options:
+      - '<p>L''origine du repere</p>'
+      - '<p>Le point d''intersection des deux droites</p>'
+      - '<p>L''ordonnee a l''origine</p>'
+      - '<p>Le coefficient directeur</p>'
+    correctIndex: 1
+    explication: |
+      <p>Chaque equation represente une droite. Le point d'intersection est la solution du systeme.</p>
+
+  - id: qcm-sys-2
+    enonce: |
+      <p>Si deux droites sont paralleles, le systeme :</p>
+    options:
+      - '<p>A une solution unique</p>'
+      - '<p>A une infinite de solutions</p>'
+      - '<p>N''a pas de solution</p>'
+      - '<p>A deux solutions</p>'
+    correctIndex: 2
+    explication: |
+      <p>Des droites paralleles (non confondues) ne se coupent pas, donc pas de solution.</p>
+
+  - id: qcm-sys-3
+    enonce: |
+      <p>La methode de substitution consiste a :</p>
+    options:
+      - '<p>Additionner les deux equations</p>'
+      - '<p>Exprimer une inconnue et remplacer dans l''autre equation</p>'
+      - '<p>Tracer les deux droites</p>'
+      - '<p>Multiplier les equations entre elles</p>'
+    correctIndex: 1
+    explication: |
+      <p>On isole une inconnue dans une equation, puis on la remplace dans l'autre.</p>

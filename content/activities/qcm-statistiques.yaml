@@ -1,0 +1,48 @@
+# QCM : Statistiques
+
+id: qcm-statistiques
+type: qcm
+title: Statistiques descriptives
+difficulty: 1
+timeMinutes: 5
+description: Questions sur les statistiques
+
+modules:
+  - statistiques
+
+questions:
+  - id: qcm-stat-1
+    enonce: |
+      <p>La moyenne d'une serie est :</p>
+    options:
+      - '<p>La valeur centrale de la serie ordonnee</p>'
+      - '<p>La somme des valeurs divisee par l''effectif total</p>'
+      - '<p>La difference entre le max et le min</p>'
+      - '<p>La valeur qui apparait le plus souvent</p>'
+    correctIndex: 1
+    explication: |
+      <p>La moyenne est la somme des valeurs (ponderees par les effectifs) divisee par l'effectif total.</p>
+
+  - id: qcm-stat-2
+    enonce: |
+      <p>La mediane d'une serie de 9 valeurs ordonnees est :</p>
+    options:
+      - '<p>La 4e valeur</p>'
+      - '<p>La 5e valeur</p>'
+      - '<p>La moyenne des 4e et 5e valeurs</p>'
+      - '<p>La 9e valeur</p>'
+    correctIndex: 1
+    explication: |
+      <p>Pour 9 valeurs (impair), la mediane est la valeur centrale, soit la 5e.</p>
+
+  - id: qcm-stat-3
+    enonce: |
+      <p>L'etendue d'une serie mesure :</p>
+    options:
+      - '<p>La valeur moyenne</p>'
+      - '<p>La frequence</p>'
+      - '<p>La dispersion des valeurs</p>'
+      - '<p>L''effectif total</p>'
+    correctIndex: 2
+    explication: |
+      <p>L'etendue <math>E = x_{max} - x_{min}</math> mesure la dispersion de la serie.</p>

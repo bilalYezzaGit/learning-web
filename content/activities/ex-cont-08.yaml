@@ -1,0 +1,23 @@
+# Exercice : Fonction par morceaux
+
+id: ex-cont-8
+type: exercise
+title: Fonction definie par morceaux
+difficulty: 2
+timeMinutes: 15
+category: synthese
+
+# Rattachement pedagogique
+sectionId: cont-definition
+
+modules:
+  - continuite
+
+enonce: |
+  <p>Soit <math>f(x) = \begin{cases} x^2 & \text{si } x \leq 1 \\ 2x - 1 & \text{si } x > 1 \end{cases}</math>. <math>f</math> est-elle continue en <math>x = 1</math> ?</p>
+
+solution: |
+  <p><math>f(1) = 1^2 = 1</math>. <math>\lim_{x \to 1^-} f(x) = 1</math>. <math>\lim_{x \to 1^+} f(x) = 1</math>. Les limites a gauche et a droite sont egales a <math>f(1)</math>. Donc <math>f</math> est continue en <math>x = 1</math>.</p>
+
+methode: |
+  <p>Comparer les limites a gauche, a droite et la valeur de <math>f</math>.</p>

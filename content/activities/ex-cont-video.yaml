@@ -1,0 +1,27 @@
+# Exercice : Introduction video - Continuite
+
+id: ex-cont-video
+type: exercise
+title: Introduction video - Continuite
+difficulty: 1
+timeMinutes: 5
+category: application
+
+# Rattachement pedagogique
+sectionId: cont-definition
+
+modules:
+  - continuite
+
+enonce: |
+  <p>Regardez cette video d introduction sur la continuite des fonctions, puis repondez a la question ci-dessous.</p>
+  <youtube id="HfACrKJ_Y2w" title="Continuite - Khan Academy"></youtube>
+  <p>D apres la video, une fonction <math>f</math> est continue en <math>a</math> si :</p>
+  <ul>
+    <li>La limite de <math>f(x)</math> quand <math>x</math> tend vers <math>a</math> existe</li>
+    <li>Cette limite est egale a <math>f(a)</math></li>
+  </ul>
+
+solution: |
+  <p>Une fonction est continue en un point <math>a</math> lorsque <math>\lim_{x \to a} f(x) = f(a)</math>.</p>
+  <p>Cela signifie que le graphe de la fonction ne presente pas de saut en ce point.</p>

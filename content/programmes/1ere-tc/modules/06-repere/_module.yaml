@@ -1,0 +1,32 @@
+# Module : Activites dans un repere
+
+id: b0000001-0000-0000-0000-000000000006
+slug: repere
+programmeId: 1ere-tc
+title: Activites dans un repere
+description: Reperage dans le plan, coordonnees et calculs
+icon: "📍"
+trimester: T2
+order: 6
+version: 1
+estimatedTime: 120
+available: true
+
+prerequisites:
+  - Vecteurs et translations
+  - Somme de vecteurs
+
+objectives:
+  - Se reperer dans un repere orthonorme
+  - Calculer les coordonnees d un point et d un vecteur
+  - Calculer la distance entre deux points
+
+tags:
+  - repere
+  - coordonnees
+  - distance
+
+coursePath:
+  - lesson-repere
+  - ex-repere-01
+  - qcm-repere

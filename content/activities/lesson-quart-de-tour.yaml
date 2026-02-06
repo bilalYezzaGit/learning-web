@@ -1,0 +1,42 @@
+# Lesson : Rotation et quart de tour
+
+id: lesson-quart-de-tour
+type: lesson
+title: Rotation et quart de tour
+difficulty: 1
+timeMinutes: 10
+
+modules:
+  - quart-de-tour
+
+body: |
+  <h3>Rotation</h3>
+  <p>Une <strong>rotation</strong> de centre <math>O</math> et d'angle <math>\alpha</math> est une transformation qui a tout point <math>M</math> associe le point <math>M'</math> tel que :</p>
+  <ul>
+    <li><math>OM' = OM</math> (conservation des distances)</li>
+    <li>L'angle <math>(\vec{OM}, \vec{OM'}) = \alpha</math></li>
+  </ul>
+
+  <h3>Quart de tour</h3>
+  <p>Un <strong>quart de tour</strong> est une rotation d'angle <math>90°</math> (sens positif) ou <math>-90°</math> (sens negatif).</p>
+  <p>Le sens positif est le sens inverse des aiguilles d'une montre (sens trigonometrique).</p>
+
+  <h3>Proprietes de la rotation</h3>
+  <ul>
+    <li>Une rotation conserve les longueurs et les angles.</li>
+    <li>L'image d'une droite est une droite.</li>
+    <li>L'image d'un cercle est un cercle de meme rayon.</li>
+    <li>La rotation d'angle <math>0°</math> est l'identite.</li>
+    <li>La rotation d'angle <math>180°</math> est la symetrie centrale.</li>
+  </ul>
+
+  <h3>Construction</h3>
+  <p>Pour construire l'image <math>M'</math> de <math>M</math> par la rotation de centre <math>O</math> et d'angle <math>\alpha</math> :</p>
+  <ol>
+    <li>Tracer le cercle de centre <math>O</math> passant par <math>M</math>.</li>
+    <li>A partir de <math>M</math>, reporter l'angle <math>\alpha</math> depuis <math>(OM)</math>.</li>
+    <li><math>M'</math> est le point d'intersection avec le cercle.</li>
+  </ol>
+
+summary: |
+  Une rotation conserve les distances au centre et les angles. Le quart de tour est une rotation de 90 degres. Le sens positif est le sens trigonometrique.

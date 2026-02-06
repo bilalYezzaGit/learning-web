@@ -1,0 +1,36 @@
+# Exercice : TVI avec tableau de variations
+
+id: ex-cont-3c
+type: exercise
+title: TVI avec tableau de variations
+difficulty: 2
+timeMinutes: 10
+category: demonstration
+
+# Rattachement pedagogique
+sectionId: cont-tvi
+
+modules:
+  - continuite
+
+enonce: |
+  <p>Soit <math>f</math> une fonction continue sur <math>[-2; 3]</math> dont le tableau de variations est donne ci-dessous.</p>
+  <variations var="x" intervals="[-2,-1,1,3]">
+    <row label="f'(x)" kind="sign" values="[-,+,-]"/>
+    <row label="f" kind="var" values="[-1,2,2,-3]"/>
+  </variations>
+  <p>En utilisant le TVI, determiner le nombre de solutions de l equation <math>f(x) = 0</math> sur <math>[-2; 3]</math>.</p>
+
+solution: |
+  <p>D apres le tableau de variations :</p>
+  <ul>
+    <li><math>f(-2) = -1 < 0</math></li>
+    <li><math>f(-1) = 2 > 0</math></li>
+    <li><math>f(1) = 2 > 0</math></li>
+    <li><math>f(3) = -3 < 0</math></li>
+  </ul>
+  <p>Par le TVI, il existe une unique solution dans <math>]-2; -1[</math> et une dans <math>]1; 3[</math>.</p>
+  <p>Au total, l equation admet <b>2 solutions</b>.</p>
+
+methode: |
+  <p>Utiliser le tableau de variations pour reperer les changements de signe.</p>

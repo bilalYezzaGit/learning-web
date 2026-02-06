@@ -1,0 +1,38 @@
+# Lesson : Fonctions lineaires
+
+id: lesson-fonctions-lineaires
+type: lesson
+title: Fonctions lineaires
+difficulty: 1
+timeMinutes: 10
+
+modules:
+  - fonctions-lineaires
+
+body: |
+  <h3>Definition</h3>
+  <p>Une <strong>fonction lineaire</strong> est une fonction <math>f</math> definie sur <math>\mathbb{R}</math> par :</p>
+  <math-block>f(x) = ax</math-block>
+  <p>ou <math>a</math> est un nombre reel appele <strong>coefficient</strong> de la fonction lineaire.</p>
+
+  <h3>Representation graphique</h3>
+  <p>La representation graphique d'une fonction lineaire est une <strong>droite passant par l'origine</strong>.</p>
+  <p>Le coefficient <math>a</math> est le <strong>coefficient directeur</strong> de la droite.</p>
+
+  <h3>Coefficient directeur</h3>
+  <p>Si <math>M(x_M, y_M)</math> est un point de la droite different de l'origine :</p>
+  <math-block>a = \frac{y_M}{x_M}</math-block>
+
+  <h3>Proprietes</h3>
+  <ul>
+    <li><math>f(0) = 0</math> (la droite passe par l'origine)</li>
+    <li>Si <math>a > 0</math>, la fonction est croissante.</li>
+    <li>Si <math>a < 0</math>, la fonction est decroissante.</li>
+    <li>Si <math>a = 0</math>, la fonction est constante (<math>f(x) = 0</math>).</li>
+  </ul>
+
+  <h3>Proportionnalite</h3>
+  <p>Une fonction lineaire traduit une situation de proportionnalite : <math>y</math> est proportionnel a <math>x</math> avec le coefficient <math>a</math>.</p>
+
+summary: |
+  Une fonction lineaire f(x) = ax a pour graphique une droite passant par l'origine. Le coefficient a determine la pente : positif pour croissante, negatif pour decroissante.

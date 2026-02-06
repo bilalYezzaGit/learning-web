@@ -131,6 +131,58 @@ Personnalisation via CSS variables dans `globals.css`.
 - `/audit` — Audit code TypeScript/React
 - `/component <Nom>` — Générer un composant DS
 
+## Système de contenu
+
+Le contenu pédagogique (cours, exercices, QCM) est géré séparément.
+
+### Structure
+
+```
+content/                    # Source YAML
+├── activities/            # 75 activités (lessons, exercises, qcm)
+├── programmes/            # 3 programmes avec modules
+└── series/                # 2 séries de révision
+
+scripts/content-build/     # Build pipeline (Node.js)
+├── src/build.js          # YAML → JSON
+├── src/validate.js       # Validation contenu
+└── src/bump-version.js   # Version Remote Config
+
+public/content/            # Output JSON (généré, gitignore)
+```
+
+### Commandes
+
+```bash
+cd scripts/content-build
+npm run validate      # Valider le contenu YAML
+npm run build         # Générer les JSON
+npm run deploy        # Build + deploy Firebase + bump version
+```
+
+### Configuration actuelle
+
+Le contenu est servi depuis **Firebase CDN** :
+```typescript
+// src/lib/services/content-service.ts
+const BASE_URL = 'https://learning-os-platform.web.app/content'
+```
+
+### Documentation complète
+
+Voir `docs/CONTENT-SYSTEM.md` pour :
+- Architecture détaillée
+- Option de servir via Next.js direct
+- Format des fichiers JSON
+- Workflow de mise à jour
+
+## Skills disponibles
+
+- `/chantier` — Gestion des chantiers de développement
+- `/dev` — Guide développement et debug
+- `/audit` — Audit code TypeScript/React
+- `/component <Nom>` — Générer un composant DS
+
 ## Règles critiques
 
 1. **TypeScript strict** — Pas de `any`, pas de `@ts-ignore`
