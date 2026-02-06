@@ -30,6 +30,7 @@ function isGlobalRoute(pathname: string): boolean {
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
+    pathname.startsWith('/admin') ||
     pathname.startsWith('/icons') ||
     pathname.includes('.') // Static files like favicon.ico, manifest.json
   ) {
