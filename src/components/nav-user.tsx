@@ -5,6 +5,7 @@ import {
   IconDotsVertical,
   IconLogout,
   IconUserCircle,
+  IconSettings,
 } from "@tabler/icons-react"
 
 import {
@@ -12,6 +13,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,10 +29,12 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 import { useAuth } from "@/lib/hooks/use-auth"
+import { useUserParcours } from "@/lib/parcours"
 import { Skeleton } from "@/components/ui/skeleton"
 
 export function NavUser() {
   const { user, isLoading, isAuthenticated, signOut } = useAuth()
+  const { parcoursConfig } = useUserParcours()
   const { isMobile } = useSidebar()
 
   // Loading state
@@ -95,7 +99,7 @@ export function NavUser() {
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{userName}</span>
                 <span className="text-muted-foreground truncate text-xs">
-                  {userEmail}
+                  {parcoursConfig ? parcoursConfig.label : userEmail}
                 </span>
               </div>
               <IconDotsVertical className="ml-auto size-4" />
@@ -120,6 +124,11 @@ export function NavUser() {
                   <span className="text-muted-foreground truncate text-xs">
                     {userEmail}
                   </span>
+                  {parcoursConfig && (
+                    <Badge variant="secondary" className="mt-1 w-fit text-[10px]">
+                      {parcoursConfig.label}
+                    </Badge>
+                  )}
                 </div>
               </div>
             </DropdownMenuLabel>
@@ -128,6 +137,12 @@ export function NavUser() {
               <Link href="/profil">
                 <IconUserCircle className="mr-2 h-4 w-4" />
                 Profil
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href="/profil?tab=settings">
+                <IconSettings className="mr-2 h-4 w-4" />
+                Paramètres
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />

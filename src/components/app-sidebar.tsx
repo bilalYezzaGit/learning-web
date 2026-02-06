@@ -8,11 +8,11 @@ import {
   IconBrain,
   IconHome,
   IconSearch,
-  IconUser,
 } from "@tabler/icons-react"
 import { BookOpen } from "lucide-react"
 
 import { NavUser } from "@/components/nav-user"
+import { Badge } from "@/components/ui/badge"
 import {
   Sidebar,
   SidebarContent,
@@ -24,36 +24,38 @@ import {
   SidebarGroup,
   SidebarGroupContent,
 } from "@/components/ui/sidebar"
-
-const navItems = [
-  {
-    title: "Dashboard",
-    url: "/",
-    icon: IconHome,
-  },
-  {
-    title: "Apprendre",
-    url: "/apprendre",
-    icon: IconBook,
-  },
-  {
-    title: "Réviser",
-    url: "/reviser",
-    icon: IconBrain,
-  },
-  {
-    title: "Profil",
-    url: "/profil",
-    icon: IconUser,
-  },
-]
+import { getParcoursConfig } from "@/lib/parcours"
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  parcours?: string
   onSearchClick?: () => void
 }
 
-export function AppSidebar({ onSearchClick, ...props }: AppSidebarProps) {
+export function AppSidebar({ parcours, onSearchClick, ...props }: AppSidebarProps) {
   const pathname = usePathname()
+  const parcoursConfig = parcours ? getParcoursConfig(parcours) : null
+
+  // Build nav items with parcours prefix
+  const navItems = React.useMemo(() => {
+    const base = parcours ? `/${parcours}` : ''
+    return [
+      {
+        title: "Dashboard",
+        url: base || '/',
+        icon: IconHome,
+      },
+      {
+        title: "Apprendre",
+        url: `${base}/apprendre`,
+        icon: IconBook,
+      },
+      {
+        title: "Réviser",
+        url: `${base}/reviser`,
+        icon: IconBrain,
+      },
+    ]
+  }, [parcours])
 
   return (
     <Sidebar variant="inset" collapsible="icon" {...props}>
@@ -61,11 +63,18 @@ export function AppSidebar({ onSearchClick, ...props }: AppSidebarProps) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild size="lg">
-              <Link href="/">
+              <Link href={parcours ? `/${parcours}` : '/'}>
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                   <BookOpen className="h-4 w-4" />
                 </div>
-                <span className="font-serif text-lg font-semibold">Learning</span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="font-serif text-lg font-semibold leading-none">Learning</span>
+                  {parcoursConfig && (
+                    <Badge variant="secondary" className="w-fit text-[10px] font-normal">
+                      {parcoursConfig.label}
+                    </Badge>
+                  )}
+                </div>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -77,7 +86,7 @@ export function AppSidebar({ onSearchClick, ...props }: AppSidebarProps) {
             <SidebarMenu>
               {navItems.map((item) => {
                 const isActive = pathname === item.url ||
-                  (item.url !== "/" && pathname.startsWith(item.url))
+                  (item.url !== "/" && item.url !== `/${parcours}` && pathname.startsWith(item.url))
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={isActive}>

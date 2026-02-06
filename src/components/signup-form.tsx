@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { ArrowRight, Check } from 'lucide-react'
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -15,6 +16,9 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { useAuth } from '@/lib/hooks/use-auth'
+import { getAvailableParcours, type ParcoursConfig } from '@/lib/parcours'
+import { doc, setDoc } from 'firebase/firestore'
+import { getDbInstance } from '@/lib/firebase/client'
 
 export function SignupForm({
   className,
@@ -24,8 +28,13 @@ export function SignupForm({
   const { signUp } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [step, setStep] = useState<'credentials' | 'parcours'>('credentials')
+  const [selectedParcours, setSelectedParcours] = useState<string | null>(null)
+  const [userId, setUserId] = useState<string | null>(null)
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const availableParcours = getAvailableParcours()
+
+  const handleCredentialsSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError(null)
 
@@ -47,8 +56,9 @@ export function SignupForm({
     setIsLoading(true)
 
     try {
-      await signUp(email, password)
-      router.push('/')
+      const user = await signUp(email, password)
+      setUserId(user.uid)
+      setStep('parcours')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur lors de l\'inscription')
     } finally {
@@ -56,11 +66,92 @@ export function SignupForm({
     }
   }
 
+  const handleParcoursSelect = async (parcoursSlug: string) => {
+    if (!userId) return
+
+    setSelectedParcours(parcoursSlug)
+    setIsLoading(true)
+
+    try {
+      const db = getDbInstance()
+      const userRef = doc(db, 'users', userId)
+      await setDoc(userRef, {
+        parcours: {
+          slug: parcoursSlug,
+          selectedAt: new Date().toISOString(),
+        },
+        createdAt: new Date().toISOString(),
+      }, { merge: true })
+
+      router.push(`/${parcoursSlug}`)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erreur lors de la sélection du parcours')
+      setSelectedParcours(null)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  // Step 2: Parcours selection
+  if (step === 'parcours') {
+    return (
+      <div className={cn("flex flex-col gap-6", className)} {...props}>
+        <Card className="overflow-hidden p-0">
+          <CardContent className="p-6 md:p-8">
+            <div className="flex flex-col items-center gap-2 text-center mb-6">
+              <h1 className="text-2xl font-bold">Choisissez votre parcours</h1>
+              <p className="text-muted-foreground text-sm text-balance">
+                Sélectionnez le niveau qui correspond à vos besoins
+              </p>
+            </div>
+
+            {error && (
+              <div className="mb-4 rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+                {error}
+              </div>
+            )}
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {availableParcours.map((parcours) => (
+                <button
+                  key={parcours.slug}
+                  onClick={() => handleParcoursSelect(parcours.slug)}
+                  disabled={isLoading}
+                  className={cn(
+                    "flex flex-col items-start rounded-lg border p-4 text-left transition-all hover:border-primary hover:bg-primary/5",
+                    selectedParcours === parcours.slug && "border-primary bg-primary/5"
+                  )}
+                >
+                  <div className="flex w-full items-center justify-between">
+                    <span className="font-medium">{parcours.label}</span>
+                    {selectedParcours === parcours.slug && (
+                      <Check className="h-4 w-4 text-primary" />
+                    )}
+                  </div>
+                  <span className="mt-1 text-sm text-muted-foreground">
+                    {parcours.description}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {isLoading && (
+              <p className="mt-4 text-center text-sm text-muted-foreground">
+                Configuration en cours...
+              </p>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  // Step 1: Credentials
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0">
         <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8" onSubmit={handleSubmit}>
+          <form className="p-6 md:p-8" onSubmit={handleCredentialsSubmit}>
             <FieldGroup>
               <div className="flex flex-col items-center gap-2 text-center">
                 <h1 className="text-2xl font-bold">Créer un compte</h1>
@@ -115,7 +206,8 @@ export function SignupForm({
 
               <Field>
                 <Button type="submit" disabled={isLoading} className="w-full">
-                  {isLoading ? 'Création...' : 'Créer mon compte'}
+                  {isLoading ? 'Création...' : 'Continuer'}
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Field>
 

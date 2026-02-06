@@ -4,25 +4,31 @@ import { usePathname } from "next/navigation"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 
-const pageTitles: Record<string, string> = {
-  "/": "Dashboard",
-  "/apprendre": "Apprendre",
-  "/reviser": "Réviser",
-  "/profil": "Profil",
+interface SiteHeaderProps {
+  parcours?: string
 }
 
-export function SiteHeader() {
+export function SiteHeader({ parcours }: SiteHeaderProps) {
   const pathname = usePathname()
 
   // Get the title based on the current path
   const getTitle = () => {
+    // Build page titles with parcours prefix
+    const base = parcours ? `/${parcours}` : ''
+    const pageTitles: Record<string, string> = {
+      [base || '/']: 'Dashboard',
+      [`${base}/apprendre`]: 'Apprendre',
+      [`${base}/reviser`]: 'Réviser',
+      '/profil': 'Profil',
+    }
+
     // Exact match first
     if (pageTitles[pathname]) {
       return pageTitles[pathname]
     }
     // Check for sub-routes
     for (const [path, title] of Object.entries(pageTitles)) {
-      if (path !== "/" && pathname.startsWith(path)) {
+      if (path !== "/" && path !== base && pathname.startsWith(path)) {
         return title
       }
     }
