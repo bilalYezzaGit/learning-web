@@ -19,7 +19,6 @@ export function SiteHeader({ parcours }: SiteHeaderProps) {
       [base || '/']: 'Dashboard',
       [`${base}/apprendre`]: 'Apprendre',
       [`${base}/reviser`]: 'Réviser',
-      '/profil': 'Profil',
     }
 
     // Exact match first

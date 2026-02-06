@@ -14,7 +14,6 @@ import {
   GraduationCap,
   Home,
   Search,
-  User,
 } from 'lucide-react'
 
 import {
@@ -42,11 +41,6 @@ const navigationItems = [
     label: 'Réviser',
     href: '/reviser',
     icon: GraduationCap,
-  },
-  {
-    label: 'Profil',
-    href: '/profil',
-    icon: User,
   },
 ]
 

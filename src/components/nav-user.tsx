@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import * as React from "react"
 import {
   IconDotsVertical,
   IconLogout,
@@ -31,11 +32,20 @@ import {
 import { useAuth } from "@/lib/hooks/use-auth"
 import { useUserParcours } from "@/lib/parcours"
 import { Skeleton } from "@/components/ui/skeleton"
+import { ProfileSheet } from "@/components/profile-sheet"
 
 export function NavUser() {
   const { user, isLoading, isAuthenticated, signOut } = useAuth()
   const { parcoursConfig } = useUserParcours()
   const { isMobile } = useSidebar()
+
+  const [profileOpen, setProfileOpen] = React.useState(false)
+  const [profileTab, setProfileTab] = React.useState('stats')
+
+  const openProfile = (tab: string) => {
+    setProfileTab(tab)
+    setProfileOpen(true)
+  }
 
   // Loading state
   if (isLoading) {
@@ -82,37 +92,15 @@ export function NavUser() {
     : "U"
 
   return (
-    <SidebarMenu>
-      <SidebarMenuItem>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.photoURL || undefined} alt={userName} />
-                <AvatarFallback className="rounded-lg bg-primary text-primary-foreground">
-                  {userInitials}
-                </AvatarFallback>
-              </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{userName}</span>
-                <span className="text-muted-foreground truncate text-xs">
-                  {parcoursConfig ? parcoursConfig.label : userEmail}
-                </span>
-              </div>
-              <IconDotsVertical className="ml-auto size-4" />
-            </SidebarMenuButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
-            align="end"
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+    <>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <SidebarMenuButton
+                size="lg"
+                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              >
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={user.photoURL || undefined} alt={userName} />
                   <AvatarFallback className="rounded-lg bg-primary text-primary-foreground">
@@ -122,37 +110,63 @@ export function NavUser() {
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{userName}</span>
                   <span className="text-muted-foreground truncate text-xs">
-                    {userEmail}
+                    {parcoursConfig ? parcoursConfig.label : userEmail}
                   </span>
-                  {parcoursConfig && (
-                    <Badge variant="secondary" className="mt-1 w-fit text-[10px]">
-                      {parcoursConfig.label}
-                    </Badge>
-                  )}
                 </div>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              <Link href="/profil">
+                <IconDotsVertical className="ml-auto size-4" />
+              </SidebarMenuButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+              side={isMobile ? "bottom" : "right"}
+              align="end"
+              sideOffset={4}
+            >
+              <DropdownMenuLabel className="p-0 font-normal">
+                <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                  <Avatar className="h-8 w-8 rounded-lg">
+                    <AvatarImage src={user.photoURL || undefined} alt={userName} />
+                    <AvatarFallback className="rounded-lg bg-primary text-primary-foreground">
+                      {userInitials}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-medium">{userName}</span>
+                    <span className="text-muted-foreground truncate text-xs">
+                      {userEmail}
+                    </span>
+                    {parcoursConfig && (
+                      <Badge variant="secondary" className="mt-1 w-fit text-[10px]">
+                        {parcoursConfig.label}
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => openProfile('stats')}>
                 <IconUserCircle className="mr-2 h-4 w-4" />
                 Profil
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/profil?tab=settings">
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => openProfile('settings')}>
                 <IconSettings className="mr-2 h-4 w-4" />
                 Paramètres
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => signOut()}>
-              <IconLogout className="mr-2 h-4 w-4" />
-              Déconnexion
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </SidebarMenuItem>
-    </SidebarMenu>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => signOut()}>
+                <IconLogout className="mr-2 h-4 w-4" />
+                Déconnexion
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </SidebarMenuItem>
+      </SidebarMenu>
+
+      <ProfileSheet
+        open={profileOpen}
+        onOpenChange={setProfileOpen}
+        defaultTab={profileTab}
+      />
+    </>
   )
 }
