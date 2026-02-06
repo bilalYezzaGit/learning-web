@@ -11,6 +11,7 @@ import { BookOpen, ChevronRight } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { fetchProgrammes } from '@/lib/services/content-service'
+import { getParcoursConfig } from '@/lib/parcours/config'
 
 interface PageProps {
   params: Promise<{ parcours: string }>
@@ -24,7 +25,13 @@ export default async function ApprendrePage({ params }: PageProps) {
 
   try {
     const response = await fetchProgrammes()
-    programmes = response.programmes
+    const parcoursConfig = getParcoursConfig(parcours)
+
+    programmes = parcoursConfig
+      ? response.programmes.filter(
+          (p) => p.levelSlug === parcoursConfig.level && p.sectionSlug === parcoursConfig.section
+        )
+      : response.programmes
   } catch (e) {
     error = e instanceof Error ? e.message : 'Erreur de chargement'
   }
