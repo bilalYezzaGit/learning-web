@@ -27,6 +27,16 @@
 - [ ] Validation des references : chaque step pointe vers un atome existant
 - [ ] Erreurs claires au build, pas de crash silencieux en prod
 
+### 1.4 Evoluer le modele de donnees des series
+- [ ] Ajouter les champs au schema YAML des series :
+  - `type` : `mono-module` | `cross-module` | `devoir-controle` | `devoir-synthese`
+  - `trimestre` : 1, 2 ou 3
+  - `modules` : liste des modules couverts (pour cross-module et devoirs)
+  - `priority` : ordre d'affichage au sein d'un trimestre
+- [ ] Mettre a jour le schema Zod (1.2) pour valider ces nouveaux champs
+- [ ] Mettre a jour `src/lib/content.ts` : loaders, resolvers, types
+- [ ] Mettre a jour `src/types/content.ts` : interface Serie
+
 ### 1.3 Refactorer le parsing QCM (approche hybride)
 - [ ] Garder `<Question>`, `<Option>`, `<Explanation>` comme vrais composants MDX (contenu riche)
 - [ ] Deplacer uniquement `correctOption` dans le frontmatter (seule donnee structuree)
@@ -54,6 +64,21 @@
 ### 2.3 Creer les contenus manquants
 - [ ] (A definir apres l'audit module par module)
 
+### 2.4 Creer les series de revision
+> Prerequis : Chantier 1.4 (nouveau modele de donnees series)
+>
+> Actuellement : 4 series, toutes sur fonctions affines/continuite. Il en faut ~25-40.
+
+- [ ] **Series mono-module** : au moins 1 par module (15 series minimum)
+- [ ] **Series cross-module par trimestre** :
+  - T1 : geometrie (angles, Thales, trigo), numerique, algebre
+  - T2 : fonctions (lineaires, affines, equations), systemes
+  - T3 : revision generale / synthese
+- [ ] **Devoirs types** :
+  - Devoirs de controle (1-2 par trimestre, ciblent quelques modules)
+  - Devoirs de synthese (1 par trimestre, couvrent tout le trimestre)
+- [ ] **Gros problemes cross-module** : problemes ouverts compilant plusieurs chapitres
+
 ---
 
 ## Chantier 3 — UI/UX : de "prototype" a "produit attractif"
@@ -74,6 +99,19 @@
 - [ ] **Lot G** : CourseTimeline (chevauchement mobile, largeur sheet)
 - [ ] **Lot G** : Landing page (cards entierement cliquables, feature cards non-interactives)
 - [ ] **Lot G** : Admin responsive, scan-upload next/image, QCM focus ring
+
+### 3.6 Refonte page Revision
+> Prerequis : Chantier 1.4 (nouveau modele series)
+>
+> Actuellement : une liste a plat sans filtres ni organisation.
+> Doit devenir le hub principal d'entrainement.
+
+- [ ] **Section "Pour toi maintenant"** : series du trimestre en cours mises en avant automatiquement
+- [ ] **Organisation par categorie** : onglets ou sections (par module / cross-module / devoirs types)
+- [ ] **Filtres** : par module, par difficulte, par type de serie, par trimestre
+- [ ] **Recherche** : trouver une serie specifique
+- [ ] **Indicateurs visuels** : differencier mono-module, cross-module, devoir-controle, devoir-synthese
+- [ ] **Badge trimestre** : T1, T2, T3 visible sur chaque serie
 
 ### 3.4 Motion & Animation (~2h)
 - [ ] **Lot D** : Countdown visuel auto-advance serie (au lieu de setTimeout invisible)
@@ -162,7 +200,6 @@
 > Points ouverts a couvrir ensemble :
 > - Deploiement : Vercel ? Domaine ? CI/CD ?
 > - SEO : comment les eleves trouvent le site ?
-> - Series (revision) : etat actuel, enrichir ?
 > - Performance : temps de chargement, optimisation build
 
 ---
