@@ -56,14 +56,48 @@
 
 ---
 
-## Chantier 3 — (A discuter)
+## Chantier 3 — UI/UX : de "prototype" a "produit attractif"
+
+> Score actuel : 4.5/10. L'app est fonctionnelle mais generique.
+> Diagnostic complet dans `docs/audits/` (3 rapports + plan d'action).
+
+### 3.1 Quick wins + Accessibilite (~2h)
+- [ ] **Lot A** : 11 corrections atomiques (svh, cursor-pointer, ellipsis, touch-action, preconnect...)
+- [ ] **Lot B** : Sweep aria-hidden sur ~60 icones decoratives dans ~25 fichiers
+- [ ] **Lot C** : Interactions clavier (closure stale QCM, drop zone, double-click prevention)
+
+### 3.2 Typographie + Tokens couleur (~2h)
+- [ ] **Lot E** : Tailles min mobile (11px/13px → 14px), text-balance, placeholders
+- [ ] **Lot F** : Migrer 40+ couleurs hardcodees (green-100, blue-50...) vers tokens `--success`, `--info`, `--warning`
+
+### 3.3 Composants specifiques (~2h)
+- [ ] **Lot G** : CourseTimeline (chevauchement mobile, largeur sheet)
+- [ ] **Lot G** : Landing page (cards entierement cliquables, feature cards non-interactives)
+- [ ] **Lot G** : Admin responsive, scan-upload next/image, QCM focus ring
+
+### 3.4 Motion & Animation (~2h)
+- [ ] **Lot D** : Countdown visuel auto-advance serie (au lieu de setTimeout invisible)
+- [ ] **Lot D** : Skeletons coherents (remplacer les 2 "Chargement..." texte brut)
+- [ ] **Lot D** : Animations entree staggerees sur grilles de cards
+- [ ] **Lot D** : Animation de celebration page result QCM
+
+### 3.5 Identite visuelle (chantier design)
+- [ ] **H1** : Palette de couleur de marque (remplacer le noir/blanc/gris achromatique)
+- [ ] **H2** : Police distinctive (remplacer Inter — Plus Jakarta Sans, Outfit, ou Manrope)
+- [ ] **H3** : Atmosphere sur surfaces cles (gradient hero, panneau auth, page result)
+- [ ] **H4** : Elements mathematiques decoratifs (formules dans le hero, symboles)
+- [ ] **H5** : Landing page recentree MVP (acces direct au parcours 1ere TC, pas "signup first")
+
+---
+
+## Chantier 4 — (A discuter)
 
 > Points ouverts a couvrir ensemble :
-> - Design / UI : le look actuel convient ?
-> - Deploiement : Vercel ? Domaine ?
-> - SEO / Landing page : comment les eleves trouvent le site ?
-> - Performance / Mobile : experience sur telephone ?
+> - Deploiement : Vercel ? Domaine ? CI/CD ?
+> - SEO : comment les eleves trouvent le site ?
+> - Mobile : experience sur telephone (PWA ?)
 > - Series (revision) : etat actuel, enrichir ?
+> - Performance : temps de chargement, optimisation build
 
 ---
 
@@ -72,5 +106,8 @@
 | Priorite | Chantier | Raison |
 |----------|----------|--------|
 | 1 | 1 — Fiabiliser le systeme | Prerequis avant de toucher au contenu en masse |
-| 2 | 2 — Enrichir les contenus | Le coeur de la MVP |
-| 3 | 3 — A definir | Selon discussion |
+| 2 | 3.1-3.3 — UI quick wins + corrections | Rendre l'app utilisable proprement |
+| 3 | 3.5 — Identite visuelle | Donner envie aux eleves de rester |
+| 4 | 3.4 — Motion & animation | Polish final |
+| 5 | 2 — Enrichir les contenus | Le coeur de la MVP |
+| 6 | 4 — A definir | Deploiement, SEO, etc. |
