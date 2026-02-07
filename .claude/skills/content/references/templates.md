@@ -41,33 +41,61 @@ Si $f$ et $g$ sont continues en $a$, alors :
 - Headings a partir de `###`
 - Definitions en **gras**
 - Formules cles en bloc LaTeX `$$...$$`
-- Composants optionnels : `<Graph>`, `<Variations>`, `<YouTube>`
+- Composants de structure : `<Definition>`, `<Theorem>`, `<Property>`, `<Example>`, `<Remark>`, `<Attention>`
+- Composants enrichis : `<Graph>`, `<Variations>`, `<YouTube>`
 
-### Avec composants enrichis
+### Avec composants de structure et enrichis
 
 ```mdx
 ---
 type: lesson
-title: "Variations d'une fonction"
+title: "Theoreme des valeurs intermediaires"
 difficulty: 1
 timeMinutes: 8
-tags: [derivation, variations]
+tags: [continuite, tvi, equations]
 ---
 
-### Signe de la derivee et variations
+### Intuition
 
-Si $f'(x) > 0$ sur un intervalle, alors $f$ est **strictement croissante** sur cet intervalle.
+Texte d'accroche pour expliquer le concept intuitivement.
 
-### Exemple
+<Graph function="x^3 - 3*x + 1" range="[-2.5, 2.5]" yRange="[-4, 4]" />
 
-Soit $f(x) = x^2 - 2x + 1$. On a $f'(x) = 2x - 2$.
+### Le theoreme
 
-<Variations var="x" intervals="[-∞, 1, +∞]">
-  <Row label="f'(x)" kind="sign" values="[-, 0, +]" />
-  <Row label="f(x)" kind="var" values="[+∞, ↘, 0, ↗, +∞]" />
-</Variations>
+<Theorem title="Theoreme des valeurs intermediaires (TVI)">
 
-<Graph function="x^2 - 2x + 1" range="[-2, 4]" yRange="[-1, 9]" />
+Soit $f$ une fonction **continue** sur $[a, b]$. Pour tout $k$ entre $f(a)$ et $f(b)$, il existe $c \in [a, b]$ tel que $f(c) = k$.
+
+</Theorem>
+
+<Remark>
+Le TVI garantit l'existence, pas l'unicite.
+</Remark>
+
+### Corollaire
+
+<Property title="Corollaire du TVI">
+
+Si $f(a) \times f(b) < 0$, alors il existe $c$ tel que $f(c) = 0$.
+
+</Property>
+
+### Application
+
+<Example title="Application du TVI">
+
+Montrer que $x^3 - 3x + 1 = 0$ admet une solution dans $[0, 1]$.
+
+1. $f$ est polynomiale donc continue
+2. $f(0) = 1 > 0$ et $f(1) = -1 < 0$
+3. Par le TVI, il existe $c \in ]0, 1[$ tel que $f(c) = 0$
+
+</Example>
+
+<Attention>
+Ne jamais oublier de verifier la continuite avant d'appliquer le TVI !
+</Attention>
 ```
 
 ---

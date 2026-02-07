@@ -132,8 +132,9 @@ Structure libre en Markdown. Conventions :
 - Commencer par `###` (heading 3), jamais `#` ou `##` (reserves au layout de page)
 - Les definitions importantes sont en **gras**
 - Les formules cles sont en bloc LaTeX (`$$...$$`)
-- Pas de composants interactifs (`<Enonce>`, `<Solution>`) — c'est du cours, pas un exercice
-- Composants autorises : `<Graph>`, `<Variations>`, `<YouTube>`
+- Pas de composants d'exercice (`<Enonce>`, `<Solution>`) — c'est du cours, pas un exercice
+- Composants de structure : `<Definition>`, `<Theorem>`, `<Property>`, `<Example>`, `<Remark>`, `<Attention>`
+- Composants enrichis : `<Graph>`, `<Variations>`, `<YouTube>`
 
 ```mdx
 ---
@@ -546,6 +547,118 @@ Integre une video YouTube. Rendu responsive avec ratio 16:9.
 <YouTube id="dQw4w9WgXcQ" title="Introduction a la continuite" />
 ```
 
+### 5.4 Lesson Parts
+
+Composants de structure pour les lecons. Toujours visibles (pas de collapse). Definis dans `src/components/content/lesson-parts.tsx`.
+
+#### `<Definition>`
+
+Definition formelle d'un concept mathematique.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX), `title` (string, optionnel — defaut : "Definition") |
+| **Obligatoire** | Non |
+| **Types autorises** | `lesson` |
+| **Rendu** | Bloc `<aside>` indigo avec icone BookText, toujours visible |
+
+**Exemple** :
+```mdx
+<Definition title="Continuite en un point">
+On dit que $f$ est **continue en $a$** si $\lim_{x \to a} f(x) = f(a)$.
+</Definition>
+```
+
+#### `<Theorem>`
+
+Enonce d'un theoreme.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX), `title` (string, optionnel — defaut : "Theoreme") |
+| **Obligatoire** | Non |
+| **Types autorises** | `lesson` |
+| **Rendu** | Bloc `<aside>` violet avec icone ShieldCheck, toujours visible |
+
+**Exemple** :
+```mdx
+<Theorem title="Theoreme des valeurs intermediaires">
+Soit $f$ continue sur $[a, b]$. Pour tout $k$ entre $f(a)$ et $f(b)$, il existe $c \in [a, b]$ tel que $f(c) = k$.
+</Theorem>
+```
+
+#### `<Property>`
+
+Propriete ou corollaire.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX), `title` (string, optionnel — defaut : "Propriete") |
+| **Obligatoire** | Non |
+| **Types autorises** | `lesson` |
+| **Rendu** | Bloc `<aside>` sky avec icone Puzzle, toujours visible |
+
+**Exemple** :
+```mdx
+<Property title="Corollaire du TVI">
+Si $f(a) \times f(b) < 0$, alors il existe $c$ tel que $f(c) = 0$.
+</Property>
+```
+
+#### `<Example>`
+
+Exemple travaille avec solution detaillee.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX), `title` (string, optionnel — defaut : "Exemple") |
+| **Obligatoire** | Non |
+| **Types autorises** | `lesson` |
+| **Rendu** | Bloc `<aside>` emerald avec icone PenLine, toujours visible |
+
+**Exemple** :
+```mdx
+<Example title="Application du TVI">
+Montrer que $x^3 - 3x + 1 = 0$ admet une solution dans $[0, 1]$.
+</Example>
+```
+
+#### `<Remark>`
+
+Note pedagogique ou precision importante.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX), `title` (string, optionnel — defaut : "Remarque") |
+| **Obligatoire** | Non |
+| **Types autorises** | `lesson` |
+| **Rendu** | Bloc `<aside>` amber avec icone Info, toujours visible |
+
+**Exemple** :
+```mdx
+<Remark>
+Le TVI garantit l'existence, pas l'unicite.
+</Remark>
+```
+
+#### `<Attention>`
+
+Piege ou erreur courante a eviter.
+
+| Propriete | Valeur |
+|-----------|--------|
+| **Props** | `children` (contenu MDX), `title` (string, optionnel — defaut : "Attention") |
+| **Obligatoire** | Non |
+| **Types autorises** | `lesson` |
+| **Rendu** | Bloc `<aside>` rose avec icone TriangleAlert, toujours visible |
+
+**Exemple** :
+```mdx
+<Attention>
+Ne jamais oublier de verifier la continuite avant d'appliquer le TVI !
+</Attention>
+```
+
 ---
 
 ## 6. Extensibilite — Ajouter un nouveau composant
@@ -556,6 +669,7 @@ Integre une video YouTube. Rendu responsive avec ratio 16:9.
 src/
 ├── components/content/
 │   ├── exercise-parts.tsx      # Enonce, Solution, Methode, Hint, Erreurs
+│   ├── lesson-parts.tsx        # Definition, Theorem, Property, Example, Remark, Attention
 │   ├── qcm-parts.tsx           # Question, Option, Explanation
 │   └── mdx-components.tsx      # Registre central
 └── content/extensions/

@@ -142,6 +142,12 @@ Categories exercice : `application`, `approfondissement`, `synthese`, `probleme`
 
 | Composant | lesson | exercise | qcm |
 |-----------|--------|----------|-----|
+| `<Definition>` | optionnel | - | - |
+| `<Theorem>` | optionnel | - | - |
+| `<Property>` | optionnel | - | - |
+| `<Example>` | optionnel | - | - |
+| `<Remark>` | optionnel | - | - |
+| `<Attention>` | optionnel | - | - |
 | `<Enonce>` | - | **obligatoire** | - |
 | `<Solution>` | - | **obligatoire** | - |
 | `<Methode>` | - | optionnel | - |
