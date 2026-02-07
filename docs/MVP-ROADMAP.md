@@ -86,11 +86,44 @@
 - [ ] **H2** : Police distinctive (remplacer Inter — Plus Jakarta Sans, Outfit, ou Manrope)
 - [ ] **H3** : Atmosphere sur surfaces cles (gradient hero, panneau auth, page result)
 - [ ] **H4** : Elements mathematiques decoratifs (formules dans le hero, symboles)
-- [ ] **H5** : Landing page recentree MVP (acces direct au parcours 1ere TC, pas "signup first")
 
 ---
 
-## Chantier 4 — (A discuter)
+## Chantier 4 — Landing page recentree MVP
+
+> La landing raconte actuellement "inscrivez-vous a une plateforme generique".
+> Elle doit raconter "voici la plateforme du lycee, le 1ere TC est pret, plongez-y".
+
+### 4.1 Hero
+- [ ] CTA principal → "Explorer le parcours 1ere TC" (lien direct vers `/1ere-tc/apprendre`)
+- [ ] CTA secondaire → "J'ai un compte" (reste ok)
+- [ ] Message large lycee mais qui met en avant le 1ere TC comme parcours disponible
+- [ ] Retirer le push vers signup comme action principale
+
+### 4.2 Section parcours (actif vs bientot)
+- [ ] 1ere TC = cliquable, visuellement mis en avant
+- [ ] Les 4 autres niveaux = badge "Bientot", visuellement desactives (opacite, pas de lien)
+- [ ] Passer `available: false` dans `ParcoursConfig` pour les parcours sans contenu
+- [ ] Gerer l'affichage "coming soon" sur la landing (et bloquer l'acces aux routes)
+
+### 4.3 Section features
+- [ ] Rendre les promesses concretes : chiffres (15 modules, 90+ activites), apercu, preuve
+- [ ] Ou rendre les cards cliquables vers une section du parcours
+
+### 4.4 CTA final
+- [ ] "Commence le premier chapitre" → lien direct dans le contenu
+- [ ] Inscription suggeree en secondaire ("Cree un compte pour sauvegarder ta progression")
+
+### 4.5 Header
+- [ ] Ajouter un lien direct vers le parcours meme quand non connecte (pas que signup/login)
+
+### 4.6 Footer / Legal
+- [ ] Verifier que /terms et /privacy existent (pages necessaires avant mise en prod)
+- [ ] Garder "Learning OS" pour le moment
+
+---
+
+## Chantier 5 — (A discuter)
 
 > Points ouverts a couvrir ensemble :
 > - Deploiement : Vercel ? Domaine ? CI/CD ?
@@ -109,5 +142,6 @@
 | 2 | 3.1-3.3 — UI quick wins + corrections | Rendre l'app utilisable proprement |
 | 3 | 3.5 — Identite visuelle | Donner envie aux eleves de rester |
 | 4 | 3.4 — Motion & animation | Polish final |
-| 5 | 2 — Enrichir les contenus | Le coeur de la MVP |
-| 6 | 4 — A definir | Deploiement, SEO, etc. |
+| 5 | 4 — Landing page MVP | Premier contact eleve, doit donner envie |
+| 6 | 2 — Enrichir les contenus | Le coeur de la MVP |
+| 7 | 5 — A definir | Deploiement, SEO, etc. |
