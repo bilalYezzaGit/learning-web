@@ -27,11 +27,12 @@
 - [ ] Validation des references : chaque step pointe vers un atome existant
 - [ ] Erreurs claires au build, pas de crash silencieux en prod
 
-### 1.3 Migrer le format QCM vers frontmatter structure
-- [ ] Nouveau format : question + options dans le frontmatter YAML
-- [ ] Body MDX = explication riche (peut utiliser Graph, Variations, etc.)
-- [ ] Script de migration des 67 QCM existants
-- [ ] Supprimer le parsing regex
+### 1.3 Refactorer le parsing QCM (approche hybride)
+- [ ] Garder `<Question>`, `<Option>`, `<Explanation>` comme vrais composants MDX (contenu riche)
+- [ ] Deplacer uniquement `correctOption` dans le frontmatter (seule donnee structuree)
+- [ ] Compiler le MDX au lieu de parser par regex — plein pouvoir MDX dans questions/options/explications
+- [ ] Migrer les 67 QCM existants (ajouter `correctOption` au frontmatter)
+- [ ] Supprimer le parsing regex (`parseQcmComponents`, `parseQcmLegacy`)
 
 ---
 
