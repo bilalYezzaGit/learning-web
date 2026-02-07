@@ -123,12 +123,45 @@
 
 ---
 
-## Chantier 5 — (A discuter)
+## Chantier 5 — Mobile (PWA + Scan)
+
+> Les eleves utilisent principalement le telephone. Le site doit etre une vraie app mobile
+> via PWA, et le scan d'exercices doit etre branche et fonctionnel.
+
+### 5.1 Brancher le scan dans les pages exercices
+- [ ] Integrer `ScanUpload` dans la page activite (type exercice)
+- [ ] Verifier/deployer la Cloud Function `analyzeScan` cote Firebase
+- [ ] Historique des scans visible par l'eleve (Firestore `users/{uid}/scanHistory/`)
+
+### 5.2 UX cross-device : QR code desktop → scan mobile
+- [ ] Page exercice desktop : afficher un QR code "Scanne depuis ton telephone"
+- [ ] Le QR ouvre directement la page de scan pour cet exercice precis
+- [ ] Resultat synchro en temps reel sur le desktop via Firestore `onSnapshot`
+- [ ] Necessite que l'eleve soit connecte (meme compte sur les 2 appareils)
+
+### 5.3 PWA complete
+- [ ] Page offline/fallback (quand pas de reseau)
+- [ ] Strategie de cache : cours consultables hors-ligne
+- [ ] Prompt "Ajouter a l'ecran d'accueil" (install banner)
+- [ ] Verifier les icones PWA (192/512 existent, verifier la qualite)
+
+### 5.4 Corrections UX mobile (deja identifies dans l'audit)
+- [ ] `100vh` → `100svh` (debordement iOS Safari)
+- [ ] Textes trop petits dans la timeline (11px/13px → 14px min)
+- [ ] Sheet mobile trop large sur petits ecrans
+- [ ] Bouton timeline mobile qui chevauche le header
+
+### 5.5 Analytics / Geolocalisation
+- [ ] Firebase Analytics pour localiser les utilisateurs
+- [ ] Dashboard basique pour visualiser la repartition geographique
+
+---
+
+## Chantier 6 — (A discuter)
 
 > Points ouverts a couvrir ensemble :
 > - Deploiement : Vercel ? Domaine ? CI/CD ?
 > - SEO : comment les eleves trouvent le site ?
-> - Mobile : experience sur telephone (PWA ?)
 > - Series (revision) : etat actuel, enrichir ?
 > - Performance : temps de chargement, optimisation build
 
@@ -143,5 +176,6 @@
 | 3 | 3.5 — Identite visuelle | Donner envie aux eleves de rester |
 | 4 | 3.4 — Motion & animation | Polish final |
 | 5 | 4 — Landing page MVP | Premier contact eleve, doit donner envie |
-| 6 | 2 — Enrichir les contenus | Le coeur de la MVP |
-| 7 | 5 — A definir | Deploiement, SEO, etc. |
+| 6 | 5 — Mobile (PWA + Scan) | Experience telephone + feature scan |
+| 7 | 2 — Enrichir les contenus | Le coeur de la MVP |
+| 8 | 6 — A definir | Deploiement, SEO, etc. |
