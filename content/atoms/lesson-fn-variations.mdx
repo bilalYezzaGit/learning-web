@@ -1,0 +1,191 @@
+---
+type: lesson
+title: "Sens de variation et extremums"
+difficulty: 1
+timeMinutes: 8
+tags: [fonctions, variations, extremums, monotonie]
+---
+
+### Sens de variation
+
+#### Fonction croissante
+
+<Definition title="Fonction croissante">
+
+Soit $f$ une fonction definie sur un intervalle $I$.
+
+$f$ est **croissante** sur $I$ si, pour tous $x_1, x_2 \in I$ :
+
+$$x_1 < x_2 \Rightarrow f(x_1) \leq f(x_2)$$
+
+$f$ est **strictement croissante** sur $I$ si :
+
+$$x_1 < x_2 \Rightarrow f(x_1) < f(x_2)$$
+
+</Definition>
+
+<Remark>
+
+Une fonction croissante "ne descend jamais" : elle peut stagner (rester constante) mais ne diminue pas.
+
+Une fonction strictement croissante "monte toujours" : elle ne stagne jamais.
+
+</Remark>
+
+#### Fonction decroissante
+
+<Definition title="Fonction decroissante">
+
+Soit $f$ une fonction definie sur un intervalle $I$.
+
+$f$ est **decroissante** sur $I$ si, pour tous $x_1, x_2 \in I$ :
+
+$$x_1 < x_2 \Rightarrow f(x_1) \geq f(x_2)$$
+
+$f$ est **strictement decroissante** sur $I$ si :
+
+$$x_1 < x_2 \Rightarrow f(x_1) > f(x_2)$$
+
+</Definition>
+
+#### Fonction monotone
+
+<Definition title="Fonction monotone">
+
+Une fonction est **monotone** sur $I$ si elle est croissante sur $I$ ou decroissante sur $I$.
+
+</Definition>
+
+### Tableau de variations
+
+<Property title="Tableau de variations">
+
+Le **tableau de variations** d'une fonction resume graphiquement son sens de variation sur son domaine.
+
+- Les fleches $\nearrow$ indiquent la croissance
+- Les fleches $\searrow$ indiquent la decroissance
+- Les valeurs aux extremites et aux points remarquables sont indiquees
+
+</Property>
+
+<Example title="Fonction definie par morceaux">
+
+Soit $f$ definie sur $[-1, 2]$ par : $f(x) = x^2$ sur $[-1, 0]$ et $f(x) = -x + 1$ sur $]0, 2]$.
+
+- Sur $[-1, 0]$ : $f$ est decroissante (branche descendante de $x^2$)
+- Sur $]0, 2]$ : $f$ est decroissante ($-x + 1$ a un coefficient negatif)
+
+Calcul des valeurs :
+- $f(-1) = 1$
+- $f(0) = 0$
+- $f(2) = -1$
+
+**Tableau de variations** :
+
+| $x$    | $-1$ |         | $0$ |         | $2$ |
+|--------|------|---------|-----|---------|-----|
+| $f(x)$ | $1$  | $\searrow$ | $0$ | $\searrow$ | $-1$ |
+
+</Example>
+
+### Maximum et minimum
+
+#### Definitions
+
+<Definition title="Maximum et minimum globaux">
+
+Soit $f$ une fonction definie sur un ensemble $D$.
+
+- $f$ admet un **maximum global** en $a \in D$ si, pour tout $x \in D$ : $f(x) \leq f(a)$
+
+- $f$ admet un **minimum global** en $a \in D$ si, pour tout $x \in D$ : $f(x) \geq f(a)$
+
+</Definition>
+
+<Definition title="Maximum et minimum locaux">
+
+Soit $f$ une fonction et $a \in D_f$.
+
+- $f$ admet un **maximum local** en $a$ s'il existe un intervalle $I$ contenant $a$ tel que, pour tout $x \in I \cap D_f$ : $f(x) \leq f(a)$
+
+- $f$ admet un **minimum local** en $a$ s'il existe un intervalle $I$ contenant $a$ tel que, pour tout $x \in I \cap D_f$ : $f(x) \geq f(a)$
+
+</Definition>
+
+<Remark>
+
+- Un maximum **global** est le point le plus haut de toute la courbe
+- Un maximum **local** est le point le plus haut dans un "voisinage"
+- Un maximum global est forcement un maximum local, mais la reciproque est fausse
+
+</Remark>
+
+<Example title="Extremums locaux et globaux">
+
+Soit $f(x) = x^2$ definie sur $[-1, 2]$.
+
+- $f$ admet un **minimum global** en $x = 0$ : $f(0) = 0$ et $f(x) \geq 0$ pour tout $x \in [-1, 2]$
+- $f$ admet un **maximum global** en $x = 2$ : $f(2) = 4$ et $f(x) \leq 4$ pour tout $x \in [-1, 2]$
+
+Il n'y a pas d'extremum local qui ne soit pas global dans cet exemple.
+
+</Example>
+
+### Majorant, minorant, borne superieure et inferieure
+
+<Definition title="Majorant et minorant">
+
+Soit $f$ une fonction definie sur $D$.
+
+- Un reel $M$ est un **majorant** de $f$ si, pour tout $x \in D$ : $f(x) \leq M$
+
+- Un reel $m$ est un **minorant** de $f$ si, pour tout $x \in D$ : $f(x) \geq m$
+
+</Definition>
+
+<Definition title="Borne superieure et inferieure">
+
+- La **borne superieure** (notee $\sup f$) est le plus petit des majorants, s'il existe
+
+- La **borne inferieure** (notee $\inf f$) est le plus grand des minorants, s'il existe
+
+</Definition>
+
+<Remark title="Difference entre maximum et borne superieure">
+
+- Le **maximum** est une valeur **atteinte** par $f$ : il existe $a \in D$ tel que $f(a) = \max f$
+
+- La **borne superieure** peut ne pas etre atteinte : c'est la limite "au-dessus de laquelle $f$ ne va jamais"
+
+</Remark>
+
+<Example title="Borne superieure non atteinte">
+
+Soit $f(x) = \frac{1}{x}$ sur $]0, +\infty[$.
+
+- $f$ n'a pas de maximum (elle tend vers $+\infty$ quand $x \to 0^+$)
+- $f$ n'a pas de borne superieure finie
+
+Par contre, $f$ a une borne inferieure : $\inf f = 0$ (mais $0$ n'est pas atteint, donc ce n'est pas un minimum).
+
+</Example>
+
+<Example title="Fonction avec maximum">
+
+Soit $g(x) = \frac{1}{x}$ sur $[1, +\infty[$.
+
+- $g$ admet un **maximum** en $x = 1$ : $g(1) = 1$, et $g(x) \leq 1$ pour tout $x \geq 1$
+- Donc $\max g = 1$ et $\sup g = 1$ (ici la borne superieure est atteinte)
+
+</Example>
+
+<Attention>
+
+Pieges frequents :
+
+- Confondre extremum global et local
+- Confondre maximum et borne superieure
+- Oublier de preciser l'intervalle d'etude des variations
+- Pour une fonction non monotone, il faut decouper en intervalles
+
+</Attention>

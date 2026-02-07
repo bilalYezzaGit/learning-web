@@ -1,0 +1,24 @@
+---
+type: qcm
+title: "Piege : derivee d'un produit"
+difficulty: 2
+timeMinutes: 2
+tags: [derivation, produit, piege]
+---
+
+<Question>
+Soit $f(x) = (2x+1)(x^2-3)$. Quelle est $f'(x)$ ?
+</Question>
+
+<Option>$4x$</Option>
+<Option correct>$2(x^2-3) + (2x+1) \cdot 2x$</Option>
+<Option>$2 \cdot 2x$</Option>
+<Option>$(2x+1)(x^2-3)(2+2x)$</Option>
+
+<Explanation>
+On applique la formule $(uv)' = u'v + uv'$, **pas** $u'v'$. Ici $u = 2x+1$ donc $u' = 2$, et $v = x^2-3$ donc $v' = 2x$.
+
+Donc $f'(x) = 2(x^2-3) + (2x+1) \cdot 2x = 2x^2 - 6 + 4x^2 + 2x = 6x^2 + 2x - 6$.
+
+L'erreur classique est de croire que $(uv)' = u'v'$, ce qui donnerait $2 \cdot 2x = 4x$ (faux !).
+</Explanation>

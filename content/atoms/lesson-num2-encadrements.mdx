@@ -1,0 +1,195 @@
+---
+type: lesson
+title: "Encadrements et operations"
+difficulty: 1
+timeMinutes: 7
+tags: [encadrements, operations, inegalites]
+---
+
+### Definition
+
+<Definition title="Encadrement">
+
+Un **encadrement** d'un nombre $x$ est une double inegalite de la forme :
+
+$$a \leq x \leq b$$
+
+ou $a$ est la **borne inferieure** et $b$ est la **borne superieure**.
+
+L'**amplitude** de l'encadrement est $b - a$.
+
+</Definition>
+
+<Example>
+
+Si $3 \leq x \leq 7$, alors :
+- La borne inferieure est $a = 3$
+- La borne superieure est $b = 7$
+- L'amplitude est $7 - 3 = 4$
+
+</Example>
+
+<Remark>
+
+Plus l'amplitude est petite, plus l'encadrement est **precis**. Un encadrement d'amplitude $0{,}1$ est plus precis qu'un encadrement d'amplitude $1$.
+
+</Remark>
+
+### Operations sur les encadrements
+
+#### Addition
+
+<Property title="Addition d'encadrements">
+
+Si $a \leq x \leq b$ et $c \leq y \leq d$, alors :
+
+$$a + c \leq x + y \leq b + d$$
+
+</Property>
+
+<Example title="Addition">
+
+Si $2 \leq x \leq 5$ et $1 \leq y \leq 3$, alors :
+
+$$2 + 1 \leq x + y \leq 5 + 3$$
+
+$$3 \leq x + y \leq 8$$
+
+</Example>
+
+#### Soustraction
+
+<Property title="Soustraction d'encadrements">
+
+Si $a \leq x \leq b$ et $c \leq y \leq d$, alors :
+
+$$a - d \leq x - y \leq b - c$$
+
+**Attention** : on **inverse** les bornes de ce qu'on soustrait.
+
+</Property>
+
+<Example title="Soustraction">
+
+Si $2 \leq x \leq 5$ et $1 \leq y \leq 3$, alors :
+
+$$2 - 3 \leq x - y \leq 5 - 1$$
+
+$$-1 \leq x - y \leq 4$$
+
+</Example>
+
+<Attention>
+
+Erreur frequente : ne pas inverser les bornes lors de la soustraction.
+
+Si $1 \leq y \leq 3$, alors $-3 \leq -y \leq -1$ (on inverse tout).
+
+C'est pourquoi on soustrait la borne superieure de $y$ de la borne inferieure de $x$, et vice versa.
+
+</Attention>
+
+#### Multiplication par une constante
+
+<Property title="Multiplication par une constante">
+
+Si $a \leq x \leq b$ :
+
+- Si $k > 0$ : $ka \leq kx \leq kb$ (l'ordre est preserve)
+- Si $k < 0$ : $kb \leq kx \leq ka$ (l'ordre est **inverse**)
+- Si $k = 0$ : $kx = 0$
+
+</Property>
+
+<Example title="Multiplication par constante positive">
+
+Si $2 \leq x \leq 5$, alors en multipliant par $3$ :
+
+$$3 \times 2 \leq 3x \leq 3 \times 5$$
+
+$$6 \leq 3x \leq 15$$
+
+</Example>
+
+<Example title="Multiplication par constante negative">
+
+Si $2 \leq x \leq 5$, alors en multipliant par $-2$ :
+
+$$-2 \times 5 \leq -2x \leq -2 \times 2$$
+
+$$-10 \leq -2x \leq -4$$
+
+Attention : on a inverse les bornes.
+
+</Example>
+
+#### Produit de deux encadrements positifs
+
+<Property title="Produit d'encadrements positifs">
+
+Si $0 \leq a \leq x \leq b$ et $0 \leq c \leq y \leq d$, alors :
+
+$$ac \leq xy \leq bd$$
+
+**Attention** : cette regle ne s'applique que si **tous les nombres sont positifs**.
+
+</Property>
+
+<Example title="Produit">
+
+Si $2 \leq x \leq 3$ et $4 \leq y \leq 5$, alors :
+
+$$2 \times 4 \leq xy \leq 3 \times 5$$
+
+$$8 \leq xy \leq 15$$
+
+</Example>
+
+<Attention>
+
+Si les encadrements contiennent des nombres negatifs, on ne peut pas appliquer directement la regle du produit. Il faut etudier les cas separement.
+
+</Attention>
+
+#### Inverse
+
+<Property title="Inverse d'un encadrement">
+
+Si $0 < a \leq x \leq b$, alors :
+
+$$\frac{1}{b} \leq \frac{1}{x} \leq \frac{1}{a}$$
+
+**Attention** : on **inverse** les bornes ET l'ordre.
+
+</Property>
+
+<Example title="Inverse">
+
+Si $2 \leq x \leq 5$, alors :
+
+$$\frac{1}{5} \leq \frac{1}{x} \leq \frac{1}{2}$$
+
+On verifie : $\frac{1}{5} = 0{,}2$ et $\frac{1}{2} = 0{,}5$, donc bien $0{,}2 \leq \frac{1}{x} \leq 0{,}5$.
+
+</Example>
+
+<Remark>
+
+L'inverse "retourne" les inegalites : plus $x$ est grand, plus $\frac{1}{x}$ est petit, et vice versa.
+
+</Remark>
+
+### Resume des regles
+
+<Property title="Tableau recapitulatif">
+
+| Operation | Regle | Attention |
+|-----------|-------|-----------|
+| Addition | $a + c \leq x + y \leq b + d$ | Ordre preserve |
+| Soustraction | $a - d \leq x - y \leq b - c$ | **Inverser les bornes** de ce qu'on soustrait |
+| $\times k > 0$ | $ka \leq kx \leq kb$ | Ordre preserve |
+| $\times k < 0$ | $kb \leq kx \leq ka$ | **Ordre inverse** |
+| Produit $(x, y > 0)$ | $ac \leq xy \leq bd$ | Uniquement si tout est positif |
+| Inverse $(x > 0)$ | $\frac{1}{b} \leq \frac{1}{x} \leq \frac{1}{a}$ | **Inverser les bornes** ET l'ordre |
+
+</Property>

@@ -1,0 +1,93 @@
+---
+type: lesson
+title: "Dérivées des fonctions usuelles"
+difficulty: 1
+timeMinutes: 6
+tags: [derivation, derivees-usuelles, formules]
+---
+
+### Tableau des dérivées usuelles
+
+<Property title="Dérivées des fonctions de référence">
+
+| Fonction $f(x)$ | Domaine de dérivabilité | Dérivée $f'(x)$ |
+|-----------------|-------------------------|-----------------|
+| $k$ (constante) | $\mathbb{R}$ | $0$ |
+| $x$ | $\mathbb{R}$ | $1$ |
+| $x^n$ ($n \in \mathbb{N}^*$) | $\mathbb{R}$ | $nx^{n-1}$ |
+| $\frac{1}{x}$ | $\mathbb{R}^*$ | $-\frac{1}{x^2}$ |
+| $\sqrt{x}$ | $]0, +\infty[$ | $\frac{1}{2\sqrt{x}}$ |
+
+</Property>
+
+<Attention>
+
+Ces formules doivent être **mémorisées**. Elles sont la base de tous les calculs de dérivées.
+
+</Attention>
+
+### Démonstration : dérivée de x²
+
+<Example title="Démonstration de (x²)' = 2x">
+
+On calcule le nombre dérivé de $f(x) = x^2$ en un point $a$ quelconque :
+
+$$\tau(h) = \frac{f(a+h) - f(a)}{h} = \frac{(a+h)^2 - a^2}{h}$$
+
+$$= \frac{a^2 + 2ah + h^2 - a^2}{h} = \frac{2ah + h^2}{h} = \frac{h(2a + h)}{h} = 2a + h$$
+
+Donc :
+
+$$f'(a) = \lim_{h \to 0} (2a + h) = 2a$$
+
+Comme $a$ est quelconque, on a $f'(x) = 2x$ pour tout $x \in \mathbb{R}$.
+
+</Example>
+
+<Remark>
+
+On peut généraliser : $(x^n)' = nx^{n-1}$ pour tout $n \in \mathbb{N}^*$. Cette formule se démontre par récurrence ou en utilisant la formule du binôme de Newton.
+
+</Remark>
+
+### Applications directes
+
+<Example title="Dérivées de fonctions simples">
+
+1. $f(x) = x^3$ sur $\mathbb{R}$
+
+   $$f'(x) = 3x^2$$
+
+2. $g(x) = x^5$ sur $\mathbb{R}$
+
+   $$g'(x) = 5x^4$$
+
+3. $h(x) = \frac{1}{x}$ sur $\mathbb{R}^*$
+
+   $$h'(x) = -\frac{1}{x^2}$$
+
+4. $k(x) = \sqrt{x}$ sur $]0, +\infty[$
+
+   $$k'(x) = \frac{1}{2\sqrt{x}}$$
+
+5. $\ell(x) = 7$ (fonction constante)
+
+   $$\ell'(x) = 0$$
+
+</Example>
+
+<Attention>
+
+Pour $\sqrt{x}$, la dérivée n'est définie que sur $]0, +\infty[$, pas en $x = 0$. En effet, en $0$, la limite du taux d'accroissement est infinie.
+
+</Attention>
+
+### Notation
+
+On peut noter la dérivée de $f$ de plusieurs façons :
+
+- $f'$ (prononcé "f prime")
+- $\frac{df}{dx}$ (dérivée par rapport à $x$)
+- $Df$ (opérateur de dérivation)
+
+La notation $f'$ est la plus courante au lycée.

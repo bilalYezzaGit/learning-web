@@ -1,0 +1,111 @@
+---
+type: lesson
+title: "Moyenne et moyenne ponderee"
+difficulty: 1
+timeMinutes: 6
+tags: [statistiques, moyenne, calcul]
+---
+
+### Definition de la moyenne
+
+<Definition title="Moyenne arithmetique simple">
+
+La **moyenne arithmetique** d'une serie de $n$ valeurs $x_1, x_2, \ldots, x_n$ est :
+
+$$\bar{x} = \frac{x_1 + x_2 + \cdots + x_n}{n} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
+
+On lit $\bar{x}$ comme "x barre".
+
+</Definition>
+
+<Example>
+
+Les notes d'un eleve sont : 12, 15, 10, 14, 9.
+
+La moyenne est :
+
+$$\bar{x} = \frac{12 + 15 + 10 + 14 + 9}{5} = \frac{60}{5} = 12$$
+
+</Example>
+
+### Moyenne ponderee
+
+Quand certaines valeurs se repetent, on utilise une formule plus efficace avec les effectifs.
+
+<Definition title="Moyenne ponderee avec effectifs">
+
+Si une valeur $x_i$ a un effectif $n_i$, la moyenne est :
+
+$$\bar{x} = \frac{\sum n_i x_i}{\sum n_i} = \frac{n_1 x_1 + n_2 x_2 + \cdots + n_k x_k}{N}$$
+
+ou $N = n_1 + n_2 + \cdots + n_k$ est l'effectif total.
+
+</Definition>
+
+<Property title="Moyenne avec frequences">
+
+On peut aussi calculer la moyenne avec les frequences $f_i = \frac{n_i}{N}$ :
+
+$$\bar{x} = \sum f_i x_i = f_1 x_1 + f_2 x_2 + \cdots + f_k x_k$$
+
+</Property>
+
+<Example>
+
+Dans une classe de 30 eleves, on a releve les notes a un controle :
+
+| Note $x_i$ | Effectif $n_i$ | $n_i x_i$ |
+|------------|----------------|-----------|
+| 8 | 5 | 40 |
+| 10 | 8 | 80 |
+| 12 | 10 | 120 |
+| 15 | 7 | 105 |
+| **Total** | **30** | **345** |
+
+La moyenne est :
+
+$$\bar{x} = \frac{345}{30} = 11,5$$
+
+</Example>
+
+### Donnees groupees en classes
+
+Quand les donnees sont regroupees en classes (intervalles), on utilise le centre de chaque classe pour calculer la moyenne.
+
+<Definition title="Centre de classe">
+
+Pour une classe $[a ; b[$, le **centre de classe** est :
+
+$$c = \frac{a + b}{2}$$
+
+</Definition>
+
+<Example>
+
+Les tailles (en cm) d'un groupe de 40 eleves :
+
+| Classe | Effectif $n_i$ | Centre $c_i$ | $n_i c_i$ |
+|--------|----------------|--------------|-----------|
+| $[150 ; 160[$ | 8 | 155 | 1240 |
+| $[160 ; 170[$ | 18 | 165 | 2970 |
+| $[170 ; 180[$ | 10 | 175 | 1750 |
+| $[180 ; 190[$ | 4 | 185 | 740 |
+| **Total** | **40** | — | **6700** |
+
+La moyenne est :
+
+$$\bar{x} = \frac{6700}{40} = 167,5 \text{ cm}$$
+
+</Example>
+
+<Attention>
+
+Pour des donnees groupees en classes, la moyenne calculee est une **approximation**. Plus les classes sont larges, moins la moyenne est precise.
+
+</Attention>
+
+<Remark>
+
+La moyenne est sensible aux valeurs extremes. Si une serie contient des valeurs tres grandes ou tres petites, elles influencent fortement la moyenne.
+
+</Remark>

@@ -3,18 +3,46 @@ description: "Calculs numeriques, puissances et racines carrees"
 programme: 1ere-tc
 trimester: T1
 order: 9
-estimatedMinutes: 120
+estimatedMinutes: 150
 objectives:
   - "Maitriser les calculs avec les puissances"
   - "Simplifier des expressions avec des racines carrees"
   - "Rationaliser un denominateur"
 
 sections:
-  - label: "Numerique I"
+  - label: "Puissances"
     steps:
-      - lesson-numerique-1
-      - ex-numerique-1-01
+      - lesson-num1-puissances-definition
+      - lesson-num1-puissances-proprietes
+      - ex-num1-puissances-calcul
+      - ex-num1-puissances-simplification
       - quiz:
-          - qcm-num1-1
-          - qcm-num1-2
-          - qcm-num1-3
+          - qcm-num1-puissance-def
+          - qcm-num1-puissance-produit
+          - qcm-num1-puissance-quotient
+          - qcm-num1-puissance-negative
+          - qcm-num1-piege-puissance-somme
+
+  - label: "Racines carrees"
+    steps:
+      - lesson-num1-racine-definition
+      - lesson-num1-racine-proprietes
+      - ex-num1-racine-simplification
+      - ex-num1-racine-operations
+      - quiz:
+          - qcm-num1-racine-def
+          - qcm-num1-racine-produit
+          - qcm-num1-racine-quotient
+          - qcm-num1-racine-somme
+          - qcm-num1-piege-racine-somme
+          - qcm-num1-piege-signe
+
+  - label: "Rationalisation et synthese"
+    steps:
+      - lesson-num1-rationalisation
+      - ex-num1-rationalisation
+      - ex-num1-expressions-mixtes
+      - ex-num1-demonstration
+      - quiz:
+          - qcm-num1-rationalisation
+

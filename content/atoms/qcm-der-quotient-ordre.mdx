@@ -1,0 +1,26 @@
+---
+type: qcm
+title: "Derivee d'un quotient : l'ordre compte"
+difficulty: 2
+timeMinutes: 2
+tags: [derivation, quotient, piege]
+---
+
+<Question>
+La derivee de $f(x) = \frac{x}{x+1}$ est :
+</Question>
+
+<Option correct>$\frac{1}{(x+1)^2}$</Option>
+<Option>$\frac{-1}{(x+1)^2}$</Option>
+<Option>$\frac{x+2}{(x+1)^2}$</Option>
+<Option>$\frac{1}{x+1}$</Option>
+
+<Explanation>
+On applique la formule $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$.
+
+Ici $u = x$ donc $u' = 1$, et $v = x+1$ donc $v' = 1$.
+
+$$f'(x) = \frac{1 \cdot (x+1) - x \cdot 1}{(x+1)^2} = \frac{x+1-x}{(x+1)^2} = \frac{1}{(x+1)^2}$$
+
+**Attention a l'ordre** : si on inverse $u'v - uv'$ en $uv' - u'v$, on obtient le signe oppose. L'ordre dans la formule est essentiel.
+</Explanation>

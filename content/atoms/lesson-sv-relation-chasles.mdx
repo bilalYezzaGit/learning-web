@@ -1,0 +1,80 @@
+---
+type: lesson
+title: "Relation de Chasles"
+difficulty: 1
+timeMinutes: 8
+tags: [vecteurs, chasles, somme]
+---
+
+### La relation fondamentale
+
+Pour trois points quelconques $A$, $B$ et $C$ de l'espace, on a toujours :
+
+$$\vec{AC} = \vec{AB} + \vec{BC}$$
+
+<Definition title="Relation de Chasles">
+
+Pour tous points $A$, $B$ et $C$ de l'espace, on a :
+
+$$\vec{AC} = \vec{AB} + \vec{BC}$$
+
+Cette relation exprime que pour **additionner deux vecteurs**, l'extremite du premier doit coincider avec l'origine du second.
+
+</Definition>
+
+### Interpretation geometrique
+
+La relation de Chasles permet de **decomposer un deplacement** en plusieurs etapes :
+
+- Pour aller de $A$ a $C$, on peut passer par un point intermediaire $B$
+- Le deplacement total $\vec{AC}$ est la somme des deplacements $\vec{AB}$ puis $\vec{BC}$
+
+<Remark>
+
+L'ordre des vecteurs est important : on ecrit $\vec{AB} + \vec{BC}$ car **l'extremite de $\vec{AB}$ est $B$**, qui est aussi **l'origine de $\vec{BC}$**.
+
+</Remark>
+
+### Generalisation
+
+La relation de Chasles se generalise a une chaine de points :
+
+$$\vec{AB} + \vec{BC} + \vec{CD} = \vec{AD}$$
+
+Plus generalement, pour $n$ points $A_1, A_2, \ldots, A_n$ :
+
+$$\vec{A_1A_2} + \vec{A_2A_3} + \cdots + \vec{A_{n-1}A_n} = \vec{A_1A_n}$$
+
+<Example title="Simplification d'une somme de vecteurs">
+
+Simplifier l'expression : $\vec{AB} + \vec{BC} + \vec{CD} + \vec{DA}$.
+
+**Solution** :
+
+En appliquant la relation de Chasles :
+
+$$\vec{AB} + \vec{BC} + \vec{CD} + \vec{DA} = \vec{AD} + \vec{DA} = \vec{AA} = \vec{0}$$
+
+On obtient le **vecteur nul** car on revient au point de depart.
+
+</Example>
+
+### Applications pratiques
+
+<Example title="Calculer un vecteur en passant par un point intermediaire">
+
+Soit $O$ un point quelconque. Exprimer $\vec{AC}$ en fonction de $\vec{AO}$ et $\vec{OC}$.
+
+**Solution** :
+
+En appliquant Chasles avec les points $A$, $O$, $C$ dans cet ordre :
+
+$$\vec{AC} = \vec{AO} + \vec{OC}$$
+
+</Example>
+
+<Attention>
+
+Dans la relation de Chasles, **l'ordre compte** : pour que $\vec{AB} + \vec{BC} = \vec{AC}$ soit valide, il faut que le point $B$ apparaisse a la fois comme extremite du premier vecteur et origine du second.
+
+</Attention>

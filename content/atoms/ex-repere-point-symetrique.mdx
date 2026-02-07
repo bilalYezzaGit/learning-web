@@ -1,0 +1,77 @@
+---
+type: exercise
+title: "Point symetrique par rapport au milieu"
+difficulty: 2
+timeMinutes: 10
+category: approfondissement
+tags: [repere, symetrie, milieu]
+---
+
+<Enonce>
+Dans un repere orthonorme $(O, \vec{i}, \vec{j})$ :
+
+1. Soit $A(3; -1)$ et $I(1; 2)$. Sachant que $I$ est le milieu du segment $[AB]$, determiner les coordonnees du point $B$
+2. Determiner les coordonnees du point $C'$, symetrique du point $C(4; 5)$ par rapport au point $D(0; 1)$
+</Enonce>
+
+<Solution>
+**1. Trouver $B$ sachant que $I$ est le milieu de $[AB]$**
+
+Si $I(x_I; y_I)$ est le milieu de $[AB]$ avec $A(x_A; y_A)$ et $B(x_B; y_B)$, alors :
+
+$$x_I = \frac{x_A + x_B}{2} \quad \text{et} \quad y_I = \frac{y_A + y_B}{2}$$
+
+On en deduit :
+
+$$x_B = 2x_I - x_A \quad \text{et} \quad y_B = 2y_I - y_A$$
+
+Avec $A(3; -1)$ et $I(1; 2)$ :
+
+$$x_B = 2 \times 1 - 3 = 2 - 3 = -1$$
+
+$$y_B = 2 \times 2 - (-1) = 4 + 1 = 5$$
+
+Donc $B(-1; 5)$.
+
+**Verification** : Le milieu de $[AB]$ avec $A(3; -1)$ et $B(-1; 5)$ est :
+
+$$\left(\frac{3 + (-1)}{2}; \frac{-1 + 5}{2}\right) = \left(\frac{2}{2}; \frac{4}{2}\right) = (1; 2) = I \quad \checkmark$$
+
+**2. Symetrique de $C$ par rapport a $D$**
+
+Le symetrique $C'$ de $C$ par rapport a $D$ est tel que $D$ est le milieu de $[CC']$.
+
+On utilise la meme formule :
+
+$$x_{C'} = 2x_D - x_C \quad \text{et} \quad y_{C'} = 2y_D - y_C$$
+
+Avec $C(4; 5)$ et $D(0; 1)$ :
+
+$$x_{C'} = 2 \times 0 - 4 = -4$$
+
+$$y_{C'} = 2 \times 1 - 5 = 2 - 5 = -3$$
+
+Donc $C'(-4; -3)$.
+</Solution>
+
+<Methode>
+**Trouver le symetrique** d'un point $M(x_M; y_M)$ par rapport a un point $\Omega(x_\Omega; y_\Omega)$ :
+
+Le symetrique $M'(x_{M'}; y_{M'})$ verifie que $\Omega$ est le milieu de $[MM']$.
+
+Formule :
+
+$$x_{M'} = 2x_\Omega - x_M \quad \text{et} \quad y_{M'} = 2y_\Omega - y_M$$
+
+**Astuce** : On multiplie les coordonnees du centre de symetrie par 2, puis on soustrait les coordonnees du point initial.
+</Methode>
+
+<Hint>
+Utilisez le fait que si $I$ est le milieu de $[AB]$, alors $\vec{IA} = -\vec{IB}$, ou directement la formule du milieu inversee.
+</Hint>
+
+<Erreurs>
+- Calculer $x_B = x_I - x_A$ au lieu de $x_B = 2x_I - x_A$ (oublier le facteur 2)
+- Confondre symetrie centrale et symetrie axiale
+- Faire des erreurs de signe : $2 \times 2 - (-1) = 4 + 1 = 5$
+</Erreurs>

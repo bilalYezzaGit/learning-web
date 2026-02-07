@@ -1,0 +1,18 @@
+title: "Polynomes et equations du second degre"
+description: "Fractions algebriques, discriminant et resolution d'equations"
+difficulty: 2
+estimatedMinutes: 35
+tags: [algebre, polynomes, second-degre, discriminant]
+
+steps:
+  - lesson-algebre-fractions-algebriques
+  - lesson-algebre-polynomes
+  - ex-algebre-fractions
+  - ex-algebre-polynome-second-degre
+  - ex-algebre-synthese
+  - quiz:
+      - qcm-algebre-fraction-simplification
+      - qcm-algebre-discriminant
+      - qcm-algebre-racines-equation
+      - qcm-algebre-piege-fraction
+      - qcm-algebre-piege-discriminant-negatif

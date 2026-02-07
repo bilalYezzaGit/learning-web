@@ -1,0 +1,101 @@
+---
+type: exercise
+title: "Démonstration géométrique avec Thalès"
+difficulty: 3
+timeMinutes: 18
+category: synthese
+tags: [thales, demonstration, geometrie]
+---
+
+<Enonce>
+Soit $ABCD$ un trapèze avec $(AB) \parallel (CD)$.
+
+Les diagonales $[AC]$ et $[BD]$ se coupent en $O$.
+
+1. Montrer que $\frac{OA}{OC} = \frac{OB}{OD}$.
+2. On pose $k = \frac{OA}{OC}$. Exprimer $\frac{AB}{CD}$ en fonction de $k$.
+3. Si $AB = 6$ cm et $CD = 9$ cm, calculer le rapport $\frac{OA}{OC}$.
+4. Sachant que $OA + OC = 10$ cm, calculer $OA$ et $OC$.
+</Enonce>
+
+<Solution>
+**1. Démonstration de l'égalité des rapports**
+
+Dans le trapèze $ABCD$, on a $(AB) \parallel (CD)$.
+
+Les diagonales $(AC)$ et $(BD)$ se coupent en $O$.
+
+Cette configuration correspond à la **configuration papillon** du théorème de Thalès.
+
+Par le théorème de Thalès appliqué aux triangles $OAB$ et $OCD$ :
+
+$$\frac{OA}{OC} = \frac{OB}{OD}$$
+
+**2. Expression de AB/CD en fonction de k**
+
+Appliquons également le théorème de Thalès sur les côtés parallèles :
+
+$$\frac{OA}{OC} = \frac{AB}{CD}$$
+
+Puisque $k = \frac{OA}{OC}$, on a :
+
+$$\frac{AB}{CD} = k$$
+
+**3. Calcul du rapport OA/OC**
+
+D'après la question 2, on sait que :
+
+$$k = \frac{OA}{OC} = \frac{AB}{CD}$$
+
+Avec $AB = 6$ cm et $CD = 9$ cm :
+
+$$k = \frac{6}{9} = \frac{2}{3}$$
+
+Donc $\frac{OA}{OC} = \frac{2}{3}$.
+
+**4. Calcul de OA et OC**
+
+Nous avons le système :
+- $\frac{OA}{OC} = \frac{2}{3}$
+- $OA + OC = 10$
+
+De la première équation :
+
+$$OA = \frac{2}{3} OC$$
+
+En substituant dans la deuxième équation :
+
+$$\frac{2}{3} OC + OC = 10$$
+
+$$\frac{2 OC + 3 OC}{3} = 10$$
+
+$$\frac{5 OC}{3} = 10$$
+
+$$OC = 10 \times \frac{3}{5} = 6 \text{ cm}$$
+
+Donc :
+
+$$OA = 10 - OC = 10 - 6 = 4 \text{ cm}$$
+
+**Vérification** : $\frac{OA}{OC} = \frac{4}{6} = \frac{2}{3}$ ✓
+
+**Réponses** :
+- $OA = 4$ cm
+- $OC = 6$ cm
+</Solution>
+
+<Hint>
+Pour la question 1, pensez à la configuration papillon avec les triangles $OAB$ et $OCD$.
+
+Pour la question 4, posez $OC = x$ et exprimez $OA$ en fonction de $x$ en utilisant le rapport $\frac{2}{3}$.
+</Hint>
+
+<Erreurs>
+**Erreurs fréquentes** :
+
+- Question 1 : Ne pas reconnaître la configuration papillon du théorème de Thalès
+- Question 2 : Confondre le rapport $\frac{AB}{CD}$ avec $\frac{CD}{AB}$
+- Question 4 : Écrire $OC = \frac{2}{3} OA$ au lieu de $OA = \frac{2}{3} OC$ (attention au sens du rapport)
+- Question 4 : Faire une erreur de calcul en résolvant le système, notamment en additionnant $\frac{2}{3} OC + OC = \frac{5}{3} OC$
+- Ne pas vérifier sa réponse à la fin (la vérification est toujours une bonne pratique en géométrie)
+</Erreurs>

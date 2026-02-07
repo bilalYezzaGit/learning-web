@@ -1,0 +1,48 @@
+---
+type: exercise
+title: "Somme de vecteurs et parallelogramme"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [vecteurs, parallelogramme, construction]
+---
+
+<Enonce>
+Soit $ABCD$ un parallelogramme.
+
+1. Exprimer $\vec{AC}$ en fonction de $\vec{AB}$ et $\vec{AD}$.
+2. Exprimer $\vec{BD}$ en fonction de $\vec{AB}$ et $\vec{AD}$.
+3. Calculer $\vec{AB} + \vec{CB}$.
+</Enonce>
+
+<Solution>
+**1.** On utilise la relation de Chasles :
+
+$$\vec{AC} = \vec{AB} + \vec{BC}$$
+
+Or, $ABCD$ est un parallelogramme, donc $\vec{BC} = \vec{AD}$.
+
+Ainsi :
+
+$$\vec{AC} = \vec{AB} + \vec{AD}$$
+
+**2.** On utilise la relation de Chasles :
+
+$$\vec{BD} = \vec{BA} + \vec{AD} = -\vec{AB} + \vec{AD}$$
+
+Ou encore :
+
+$$\vec{BD} = \vec{AD} - \vec{AB}$$
+
+**3.** Methode directe avec Chasles. On observe que $B$ est l'extremite du premier vecteur et l'origine du second n'est pas compatible directement, donc on transforme :
+
+$$\vec{AB} + \vec{CB} = \vec{AB} + (-\vec{BC})$$
+
+Or, dans un parallelogramme $ABCD$, on a $\vec{BC} = \vec{AD}$, donc :
+
+$$\vec{CB} = -\vec{BC} = -\vec{AD}$$
+
+Ainsi :
+
+$$\vec{AB} + \vec{CB} = \vec{AB} + (-\vec{AD}) = \vec{AB} - \vec{AD}$$
+</Solution>

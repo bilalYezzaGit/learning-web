@@ -1,0 +1,17 @@
+title: "Statistiques : graphiques et synthese"
+description: "Representer des donnees et resoudre des problemes statistiques complets"
+difficulty: 2
+estimatedMinutes: 35
+tags: [statistiques, diagramme, classes, synthese]
+
+steps:
+  - lesson-stat-representations
+  - ex-stat-classes
+  - ex-stat-diagramme-circulaire
+  - ex-stat-synthese
+  - quiz:
+      - qcm-stat-diagramme
+      - qcm-stat-etendue
+      - qcm-stat-mediane-pair
+      - qcm-stat-piege-moyenne-mediane
+      - qcm-stat-piege-angle

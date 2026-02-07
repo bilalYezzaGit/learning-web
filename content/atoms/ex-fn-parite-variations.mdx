@@ -1,0 +1,83 @@
+---
+type: exercise
+title: "Parite et deduction des variations"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [fonctions, parite, variations]
+---
+
+<Enonce>
+Soit $f$ une fonction **paire** definie sur $\mathbb{R}$.
+
+On sait que $f$ est **decroissante** sur $]-\infty, 0]$ et que :
+
+$$f(0) = -2, \quad f(2) = 3, \quad f(4) = 7$$
+
+1. Que peut-on dire des variations de $f$ sur $[0, +\infty[$ ? Justifier.
+2. Calculer $f(-2)$ et $f(-4)$.
+3. Comparer $f(-3)$ et $f(-1)$.
+4. Dresser le tableau de variations de $f$ sur $\mathbb{R}$.
+5. Determiner le minimum de $f$ sur $\mathbb{R}$.
+</Enonce>
+
+<Solution>
+**1. Variations de $f$ sur $[0, +\infty[$**
+
+**Propriete** : Une fonction paire a des variations symetriques par rapport a l'axe des ordonnees.
+
+Plus precisement :
+- Si $f$ est decroissante sur $]-\infty, 0]$, alors $f$ est **croissante** sur $[0, +\infty[$.
+
+**Justification** : Soit $0 \leq x_1 < x_2$. Alors $-x_2 < -x_1 \leq 0$.
+
+Comme $f$ est decroissante sur $]-\infty, 0]$ :
+
+$$f(-x_2) \geq f(-x_1)$$
+
+Comme $f$ est paire, $f(-x) = f(x)$ pour tout $x$, donc :
+
+$$f(x_2) \geq f(x_1)$$
+
+Donc $f$ est croissante sur $[0, +\infty[$.
+
+**2. Calcul de $f(-2)$ et $f(-4)$**
+
+Comme $f$ est paire, $f(-x) = f(x)$ pour tout $x \in \mathbb{R}$.
+
+$$f(-2) = f(2) = 3$$
+
+$$f(-4) = f(4) = 7$$
+
+**3. Comparaison de $f(-3)$ et $f(-1)$**
+
+On a $-3 < -1 \leq 0$, et $f$ est decroissante sur $]-\infty, 0]$.
+
+Donc :
+
+$$f(-3) \geq f(-1)$$
+
+On sait que $f(0) = -2$ et $f$ est decroissante sur $]-\infty, 0]$, donc $f$ augmente quand on se deplace de 0 vers $-\infty$.
+
+Comme $f$ est croissante sur $[0, +\infty[$ et que $f(0) = -2 < f(2) = 3$, on peut en deduire que $f(-1)$ est compris entre $f(0) = -2$ et $f(-2) = 3$.
+
+Par symetrie et decroissance sur $]-\infty, 0]$ :
+
+$$f(-3) > f(-1) > f(0) = -2$$
+
+**4. Tableau de variations de $f$ sur $\mathbb{R}$**
+
+| $x$      | $-\infty$ |          | $-4$ |          | $-2$ |          | $0$ |          | $2$ |          | $4$ |          | $+\infty$ |
+|----------|-----------|----------|------|----------|------|----------|-----|----------|-----|----------|-----|----------|-----------|
+| $f(x)$   | $+\infty$ | $\searrow$ | $7$  | $\searrow$ | $3$  | $\searrow$ | $-2$ | $\nearrow$ | $3$  | $\nearrow$ | $7$  | $\nearrow$ | $+\infty$ |
+
+**5. Minimum de $f$**
+
+D'apres le tableau de variations, $f$ atteint son minimum en $x = 0$ :
+
+$$\min_{\mathbb{R}} f = f(0) = -2$$
+</Solution>
+
+<Hint>
+Rappelez-vous qu'une fonction paire verifie $f(-x) = f(x)$ et que sa courbe est symetrique par rapport a l'axe des ordonnees. Les variations sont donc "inversees" de part et d'autre de 0.
+</Hint>

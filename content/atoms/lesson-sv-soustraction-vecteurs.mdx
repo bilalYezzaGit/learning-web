@@ -1,0 +1,96 @@
+---
+type: lesson
+title: "Soustraction de vecteurs"
+difficulty: 1
+timeMinutes: 5
+tags: [vecteurs, soustraction]
+---
+
+### Definition de la soustraction
+
+La soustraction de vecteurs se definit a partir de l'addition et du vecteur oppose.
+
+<Definition title="Soustraction de vecteurs">
+
+Soustraire un vecteur $\vec{v}$, c'est ajouter son oppose $-\vec{v}$ :
+
+$$\vec{u} - \vec{v} = \vec{u} + (-\vec{v})$$
+
+</Definition>
+
+### Relation fondamentale
+
+<Property title="Relation vectorielle importante">
+
+Pour tous points $A$, $B$ et $C$ :
+
+$$\vec{AB} - \vec{AC} = \vec{CB}$$
+
+**Demonstration** :
+
+$$\vec{AB} - \vec{AC} = \vec{AB} + (-\vec{AC}) = \vec{AB} + \vec{CA} = \vec{CB}$$
+
+(par relation de Chasles)
+
+</Property>
+
+<Remark>
+
+Une autre formulation utile avec un point d'origine $O$ :
+
+$$\vec{OB} - \vec{OA} = \vec{AB}$$
+
+Cette relation permet de **calculer un vecteur** en connaissant les vecteurs positions de ses extremites.
+
+</Remark>
+
+### Construction graphique
+
+Pour construire graphiquement $\vec{u} - \vec{v}$ :
+
+1. Placer les vecteurs $\vec{u}$ et $\vec{v}$ a la **meme origine** $A$
+2. Soit $\vec{AB} = \vec{u}$ et $\vec{AC} = \vec{v}$
+3. Alors $\vec{u} - \vec{v} = \vec{CB}$ (du bout de $\vec{v}$ vers le bout de $\vec{u}$)
+
+<Example title="Application de la soustraction">
+
+Soit $O$ un point et $A$, $B$ deux points tels que $\vec{OA} = \vec{u}$ et $\vec{OB} = \vec{v}$.
+
+Exprimer $\vec{AB}$ en fonction de $\vec{u}$ et $\vec{v}$.
+
+**Solution** :
+
+$$\vec{AB} = \vec{OB} - \vec{OA} = \vec{v} - \vec{u}$$
+
+</Example>
+
+### Proprietes de la soustraction
+
+La soustraction herite des proprietes de l'addition :
+
+- **Non commutative** : $\vec{u} - \vec{v} \neq \vec{v} - \vec{u}$ en general
+- En fait : $\vec{u} - \vec{v} = -(\vec{v} - \vec{u})$
+
+<Example title="Simplification avec soustraction">
+
+Simplifier : $\vec{AB} - \vec{CD} + \vec{DC}$.
+
+**Solution** :
+
+$$\vec{AB} - \vec{CD} + \vec{DC} = \vec{AB} + (-\vec{CD}) + \vec{DC}$$
+
+Or $\vec{DC} = -\vec{CD}$, donc :
+
+$$= \vec{AB} + (-\vec{CD}) + (-\vec{CD}) = \vec{AB} - 2\vec{CD}$$
+
+</Example>
+
+<Attention>
+
+Ne pas confondre :
+- $\vec{AB} - \vec{AC} = \vec{CB}$ (on va de $C$ vers $B$)
+- $\vec{AC} - \vec{AB} = \vec{BC}$ (on va de $B$ vers $C$)
+
+Ces deux vecteurs sont **opposes**.
+
+</Attention>

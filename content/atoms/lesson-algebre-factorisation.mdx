@@ -1,0 +1,115 @@
+---
+type: lesson
+title: "Factorisation d'expressions algebriques"
+difficulty: 1
+timeMinutes: 8
+tags: [algebre, factorisation]
+---
+
+### Qu'est-ce que factoriser ?
+
+**Factoriser** une expression, c'est l'ecrire sous forme d'un produit. C'est l'operation inverse du developpement.
+
+### Methode 1 : Facteur commun
+
+<Property title="Factorisation par facteur commun">
+
+Si une expression contient un terme present dans chaque partie, on peut le mettre en facteur :
+
+$$ab + ac = a(b + c)$$
+
+</Property>
+
+<Example>
+
+Factoriser $6x + 9$ :
+
+Le facteur commun est $3$ :
+
+$$6x + 9 = 3 \times 2x + 3 \times 3 = 3(2x + 3)$$
+
+</Example>
+
+<Example>
+
+Factoriser $x^2 + 5x$ :
+
+Le facteur commun est $x$ :
+
+$$x^2 + 5x = x \times x + x \times 5 = x(x + 5)$$
+
+</Example>
+
+### Methode 2 : Identites remarquables
+
+On peut utiliser les identites remarquables dans le sens inverse pour factoriser.
+
+<Property title="Factorisation par identites remarquables">
+
+1. **Difference de deux carres** :
+
+$$a^2 - b^2 = (a + b)(a - b)$$
+
+2. **Carre parfait (somme)** :
+
+$$a^2 + 2ab + b^2 = (a + b)^2$$
+
+3. **Carre parfait (difference)** :
+
+$$a^2 - 2ab + b^2 = (a - b)^2$$
+
+</Property>
+
+<Example title="Difference de deux carres">
+
+Factoriser $x^2 - 25$ :
+
+On reconnait $a^2 - b^2$ avec $a = x$ et $b = 5$ :
+
+$$x^2 - 25 = x^2 - 5^2 = (x + 5)(x - 5)$$
+
+</Example>
+
+<Example title="Carre parfait">
+
+Factoriser $x^2 + 6x + 9$ :
+
+On reconnait $a^2 + 2ab + b^2$ avec $a = x$ et $b = 3$ :
+
+$$x^2 + 6x + 9 = x^2 + 2 \times x \times 3 + 3^2 = (x + 3)^2$$
+
+</Example>
+
+### Methode 3 : Combinaison des techniques
+
+<Example title="Facteur commun puis identite">
+
+Factoriser $2x^2 - 8$ :
+
+**Etape 1** : Facteur commun $2$ :
+
+$$2x^2 - 8 = 2(x^2 - 4)$$
+
+**Etape 2** : Dans la parenthese, on reconnait $a^2 - b^2$ :
+
+$$2(x^2 - 4) = 2(x^2 - 2^2) = 2(x + 2)(x - 2)$$
+
+</Example>
+
+### Verification
+
+<Attention>
+
+Pour verifier qu'une factorisation est correcte, developper le resultat obtenu : on doit retrouver l'expression de depart.
+
+Exemple : Verifier que $x^2 - 25 = (x + 5)(x - 5)$
+
+$$(x + 5)(x - 5) = x^2 - 5x + 5x - 25 = x^2 - 25 \quad \checkmark$$
+
+</Attention>
+
+<Remark>
+
+La factorisation est tres utile pour resoudre des equations ou simplifier des fractions algebriques.
+
+</Remark>

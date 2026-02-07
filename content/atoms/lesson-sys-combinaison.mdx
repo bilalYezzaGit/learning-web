@@ -1,0 +1,86 @@
+---
+type: lesson
+title: "Resolution par combinaison lineaire"
+difficulty: 1
+timeMinutes: 7
+tags: [systemes, combinaison, elimination]
+---
+
+### Principe de la methode
+
+La methode de **combinaison lineaire** (ou **elimination**) consiste a additionner ou soustraire les deux equations pour eliminer une des inconnues.
+
+<Property title="Methode de resolution par combinaison lineaire">
+
+Pour resoudre un systeme par combinaison lineaire :
+
+1. **Multiplier** une ou les deux equations par un nombre pour obtenir des **coefficients egaux** (ou opposes) pour une meme inconnue
+2. **Additionner** ou **soustraire** les equations pour **eliminer** cette inconnue
+3. **Resoudre** l'equation obtenue (a une seule inconnue)
+4. **Substituer** la valeur trouvee dans une des equations initiales pour trouver l'autre inconnue
+
+</Property>
+
+### Exemple detaille
+
+<Example title="Application de la methode de combinaison">
+
+Resoudre le systeme :
+
+$$\begin{cases}
+2x + 3y = 8 \\
+5x - 2y = 1
+\end{cases}$$
+
+**Etape 1 :** Pour eliminer $y$, rendons les coefficients opposes.
+
+Multiplions la premiere equation par 2 et la deuxieme par 3 :
+
+$$\begin{cases}
+4x + 6y = 16 \\
+15x - 6y = 3
+\end{cases}$$
+
+**Etape 2 :** Additionnons les deux equations :
+
+$$(4x + 6y) + (15x - 6y) = 16 + 3$$
+
+$$19x = 19$$
+
+**Etape 3 :** Resolvons pour $x$ :
+
+$$x = 1$$
+
+**Etape 4 :** Substituons $x = 1$ dans la premiere equation initiale :
+
+$$2(1) + 3y = 8$$
+
+$$2 + 3y = 8$$
+
+$$3y = 6$$
+
+$$y = 2$$
+
+**Solution :** Le systeme admet une unique solution : $(1, 2)$.
+
+</Example>
+
+### Cas particuliers
+
+<Remark>
+
+**Choix de l'inconnue a eliminer :**
+
+On peut eliminer $x$ ou $y$ selon ce qui simplifie le plus les calculs. Il faut regarder les coefficients et choisir ceux qui permettent d'obtenir des multiples simples.
+
+</Remark>
+
+<Attention>
+
+**Attention aux signes lors de la soustraction !**
+
+Lors de la soustraction d'equations, il faut soustraire **tous les termes** avec leurs signes. Une erreur frequente est d'oublier de changer le signe lors de la soustraction.
+
+Exemple : $(3x - 2y) - (x + 5y) = 3x - 2y - x - 5y = 2x - 7y$ et **non** $2x - 3y$.
+
+</Attention>

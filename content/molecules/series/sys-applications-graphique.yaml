@@ -1,0 +1,18 @@
+title: "Systemes : applications et interpretation graphique"
+description: "Interpreter graphiquement et resoudre des problemes avec les systemes"
+difficulty: 2
+estimatedMinutes: 35
+tags: [systemes, graphique, problemes]
+
+steps:
+  - lesson-sys-interpretation-graphique
+  - ex-sys-choix-methode
+  - ex-sys-interpretation-graphique
+  - ex-sys-probleme
+  - ex-sys-cas-particuliers
+  - quiz:
+      - qcm-sys-graphique
+      - qcm-sys-resolution
+      - qcm-sys-nombre-solutions
+      - qcm-sys-piege-pas-solution
+      - qcm-sys-piege-infinite

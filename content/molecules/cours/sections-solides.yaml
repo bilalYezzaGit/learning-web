@@ -3,18 +3,41 @@ description: "Coupes de solides par des plans"
 programme: 1ere-tc
 trimester: T2
 order: 8
-estimatedMinutes: 90
+estimatedMinutes: 120
 objectives:
-  - "Determiner la section d un solide par un plan"
-  - "Construire des sections de pyramides et de cones"
-  - "Calculer des aires de sections"
+  - "Determiner la section d'un solide par un plan"
+  - "Construire des sections de cubes, pyramides et cones"
+  - "Calculer des aires de sections avec le rapport de reduction"
 
 sections:
-  - label: "Sections de solides"
+  - label: "Definition et methode"
     steps:
-      - lesson-sections-solides
-      - ex-sections-solides-01
+      - lesson-ss-section-definition
+      - lesson-ss-section-cube
+      - ex-ss-section-cube-triangle
       - quiz:
-          - qcm-ss-1
-          - qcm-ss-2
-          - qcm-ss-3
+          - qcm-ss-definition-section
+          - qcm-ss-cube-face
+          - qcm-ss-piege-forme
+
+  - label: "Sections paralleles a la base"
+    steps:
+      - lesson-ss-section-pyramide
+      - lesson-ss-section-cone-cylindre
+      - ex-ss-pyramide-section-parallele
+      - ex-ss-cone-section
+      - quiz:
+          - qcm-ss-pyramide-parallele
+          - qcm-ss-ratio-reduction
+          - qcm-ss-cone-section
+          - qcm-ss-cylindre-section
+
+  - label: "Applications et synthese"
+    steps:
+      - ex-ss-section-cube-quadrilatere
+      - ex-ss-construction-complete
+      - ex-ss-demonstration
+      - quiz:
+          - qcm-ss-aire-section
+          - qcm-ss-piege-orientation
+          - qcm-ss-piege-rapport

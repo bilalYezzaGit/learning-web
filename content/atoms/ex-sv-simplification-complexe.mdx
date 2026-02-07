@@ -1,0 +1,61 @@
+---
+type: exercise
+title: "Simplifications vectorielles complexes"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [vecteurs, simplification, chasles]
+---
+
+<Enonce>
+Simplifier les expressions vectorielles suivantes :
+
+1. $\vec{AB} + \vec{BC} - \vec{DC}$
+2. $2\vec{AB} - \vec{CB} + \vec{CA}$
+3. $\vec{MA} + \vec{BN} - \vec{BA} - \vec{MN}$
+</Enonce>
+
+<Solution>
+**1.** On transforme la soustraction en addition :
+
+$$\vec{AB} + \vec{BC} - \vec{DC} = \vec{AB} + \vec{BC} + \vec{CD}$$
+
+Par la relation de Chasles :
+
+$$= \vec{AC} + \vec{CD} = \vec{AD}$$
+
+**2.** On transforme d'abord $-\vec{CB} = \vec{BC}$ :
+
+$$2\vec{AB} - \vec{CB} + \vec{CA} = 2\vec{AB} + \vec{BC} + \vec{CA}$$
+
+On regroupe les vecteurs qui forment une chaine :
+
+$$= 2\vec{AB} + \vec{BC} + \vec{CA} = \vec{AB} + (\vec{AB} + \vec{BC} + \vec{CA})$$
+
+Or, $\vec{AB} + \vec{BC} + \vec{CA} = \vec{AC} + \vec{CA} = \vec{AA} = \vec{0}$.
+
+Donc :
+
+$$2\vec{AB} - \vec{CB} + \vec{CA} = \vec{AB} + \vec{0} = \vec{AB}$$
+
+**3.** On transforme les soustractions en additions :
+
+$$\vec{MA} + \vec{BN} - \vec{BA} - \vec{MN} = \vec{MA} + \vec{BN} + \vec{AB} - \vec{MN}$$
+
+On reordonne pour former des chaines :
+
+$$= \vec{MA} + \vec{AB} + \vec{BN} - \vec{MN}$$
+
+Par la relation de Chasles :
+
+$$= \vec{MB} + \vec{BN} - \vec{MN} = \vec{MN} - \vec{MN} = \vec{0}$$
+</Solution>
+
+<Hint>
+Pour simplifier des expressions complexes :
+
+1. Transformer toutes les soustractions en additions ($\vec{u} - \vec{v} = \vec{u} + (-\vec{v})$)
+2. Factoriser les coefficients si possible
+3. Reordonner pour former des chaines consecutives
+4. Appliquer la relation de Chasles
+</Hint>

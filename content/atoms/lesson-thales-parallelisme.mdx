@@ -1,0 +1,224 @@
+---
+type: lesson
+title: "Demontrer le parallelisme avec Thales"
+difficulty: 2
+timeMinutes: 7
+tags: [thales, parallelisme, demonstration]
+---
+
+### Introduction
+
+La **réciproque du théorème de Thalès** est un outil puissant pour démontrer que deux droites sont parallèles. Cette leçon présente la méthode complète de démonstration.
+
+### Rappel de la reciproque
+
+<Theorem title="Reciproque du theoreme de Thales">
+
+Soient deux droites $(AB)$ et $(AC)$ sécantes en $A$.
+
+Soient $M$ et $M'$ deux points de $(AB)$, et $N$ et $N'$ deux points de $(AC)$.
+
+Si les points sont alignés dans le même ordre et si :
+
+$$\frac{AM}{AM'} = \frac{AN}{AN'}$$
+
+Alors les droites $(MN)$ et $(M'N')$ sont parallèles.
+
+</Theorem>
+
+### Methode complete de demonstration
+
+<Property title="Methode pour demontrer le parallelisme">
+
+Pour démontrer que deux droites $(d)$ et $(d')$ sont parallèles en utilisant la réciproque de Thalès :
+
+**Étape 1 : Calculer les rapports**
+
+Identifier les segments pertinents et calculer les rapports de longueurs.
+
+**Étape 2 : Vérifier l'égalité des rapports**
+
+Simplifier les fractions et vérifier qu'elles sont égales.
+
+**Étape 3 : Vérifier l'ordre des points**
+
+S'assurer que les points sont alignés dans le même ordre sur les deux droites sécantes.
+
+**Étape 4 : Conclure**
+
+Utiliser la formulation : "Par la réciproque du théorème de Thalès, les droites ... sont parallèles."
+
+</Property>
+
+### Demonstration complete
+
+<Example title="Demonstration de parallelisme">
+
+Dans une figure, les points $A$, $M$, $B$ sont alignés dans cet ordre, et les points $A$, $N$, $C$ sont alignés dans cet ordre.
+
+On donne : $AM = 6$ cm, $AB = 9$ cm, $AN = 8$ cm, $AC = 12$ cm.
+
+Démontrer que les droites $(MN)$ et $(BC)$ sont parallèles.
+
+**Solution :**
+
+**Étape 1 : Calculer les rapports**
+
+$$\frac{AM}{AB} = \frac{6}{9} = \frac{2}{3}$$
+
+$$\frac{AN}{AC} = \frac{8}{12} = \frac{2}{3}$$
+
+**Étape 2 : Vérifier l'égalité**
+
+On a bien :
+
+$$\frac{AM}{AB} = \frac{AN}{AC} = \frac{2}{3}$$
+
+Les rapports sont égaux.
+
+**Étape 3 : Vérifier l'ordre des points**
+
+- Les points $A$, $M$, $B$ sont alignés dans cet ordre (donné dans l'énoncé)
+- Les points $A$, $N$, $C$ sont alignés dans cet ordre (donné dans l'énoncé)
+- $M$ est entre $A$ et $B$ ; $N$ est entre $A$ et $C$
+
+L'ordre est respecté.
+
+**Étape 4 : Conclusion**
+
+Les conditions de la réciproque du théorème de Thalès sont vérifiées :
+- Les rapports sont égaux
+- Les points sont dans le bon ordre
+
+Donc, par la **réciproque du théorème de Thalès**, les droites $(MN)$ et $(BC)$ sont **parallèles**.
+
+</Example>
+
+### Contre-reciproque
+
+<Property title="Contre-reciproque du theoreme de Thales">
+
+Si les rapports sont **différents**, alors les droites ne sont **pas** parallèles.
+
+En effet, si $(MN) \parallel (BC)$, alors par Thalès les rapports sont égaux. Par contraposition, si les rapports ne sont pas égaux, alors $(MN)$ n'est pas parallèle à $(BC)$.
+
+</Property>
+
+<Example title="Demonstration de non-parallelisme">
+
+Dans une figure, les points $A$, $P$, $Q$ sont alignés, et les points $A$, $R$, $S$ sont alignés.
+
+On donne : $AP = 5$ cm, $AQ = 8$ cm, $AR = 7$ cm, $AS = 12$ cm.
+
+Les droites $(PR)$ et $(QS)$ sont-elles parallèles ?
+
+**Solution :**
+
+Calculons les rapports :
+
+$$\frac{AP}{AQ} = \frac{5}{8}$$
+
+$$\frac{AR}{AS} = \frac{7}{12}$$
+
+Vérifions si ces rapports sont égaux :
+
+$$\frac{5}{8} = 0,625$$
+
+$$\frac{7}{12} \approx 0,583$$
+
+Les rapports sont **différents** : $\frac{5}{8} \neq \frac{7}{12}$.
+
+**Conclusion :** Les droites $(PR)$ et $(QS)$ **ne sont pas parallèles**.
+
+</Example>
+
+<Remark>
+
+Pour prouver que deux droites ne sont PAS parallèles, il suffit de montrer que les rapports sont différents. On n'a même pas besoin de vérifier l'ordre des points dans ce cas.
+
+</Remark>
+
+### Erreurs frequentes
+
+<Attention title="Erreur 1 : Oublier de verifier l'ordre">
+
+Même si les rapports sont égaux, si l'ordre des points n'est pas respecté, on ne peut **pas** conclure au parallélisme.
+
+**Exemple :** Si $M$ est entre $A$ et $B$, mais $C$ est entre $A$ et $N$ (ordre inversé), alors même avec des rapports égaux, la réciproque ne s'applique pas.
+
+</Attention>
+
+<Attention title="Erreur 2 : Confondre Thales direct et reciproque">
+
+- **Thalès direct** : On sait que les droites sont parallèles → on calcule des longueurs
+- **Réciproque** : On calcule des rapports → on démontre le parallélisme
+
+Ne pas utiliser le théorème direct pour prouver le parallélisme ! Seule la réciproque permet cette conclusion.
+
+</Attention>
+
+<Attention title="Erreur 3 : Mauvais rapports">
+
+Il faut utiliser les **bons** rapports selon la configuration :
+
+Configuration triangle : $\frac{AM}{AB} = \frac{AN}{AC}$
+
+Configuration papillon : $\frac{OA}{OB} = \frac{OC}{OD}$
+
+Utiliser les mauvais rapports conduit à des conclusions fausses !
+
+</Attention>
+
+### Cas pratique : probleme de construction
+
+<Example title="Application en construction geometrique">
+
+On veut tracer une droite $(d)$ parallèle à $(BC)$ qui passe par un point $M$ situé sur $[AB]$ dans un triangle $ABC$.
+
+**Méthode avec Thalès :**
+
+1. Mesurer $AM$ et $AB$
+2. Calculer le rapport $k = \frac{AM}{AB}$
+3. Placer le point $N$ sur $[AC]$ tel que $AN = k \times AC$
+4. Tracer la droite $(MN)$
+
+**Vérification :**
+
+Par construction, on a :
+
+$$\frac{AM}{AB} = k = \frac{AN}{AC}$$
+
+Les points sont dans le bon ordre, donc par la réciproque de Thalès, $(MN) \parallel (BC)$.
+
+</Example>
+
+<Remark>
+
+Cette méthode de construction montre que la réciproque de Thalès est non seulement un outil de **démonstration**, mais aussi un outil de **construction géométrique**.
+
+</Remark>
+
+### Resume de la demarche
+
+Pour résumer, voici la démarche complète pour démontrer un parallélisme :
+
+1. **Données** : repérer les longueurs données
+2. **Calcul** : calculer les rapports pertinents
+3. **Simplification** : simplifier les fractions
+4. **Comparaison** : vérifier l'égalité (ou non)
+5. **Ordre** : vérifier l'alignement et l'ordre des points
+6. **Conclusion** : rédiger la conclusion avec la référence à la réciproque
+
+<Property title="Redaction de la conclusion">
+
+La conclusion doit toujours mentionner explicitement :
+- L'égalité des rapports
+- Le respect de l'ordre des points
+- La référence à la réciproque du théorème de Thalès
+- Les droites dont on démontre le parallélisme
+
+**Exemple de rédaction :**
+
+"Les rapports $\frac{AM}{AB}$ et $\frac{AN}{AC}$ sont égaux, et les points sont alignés dans le même ordre. Par la réciproque du théorème de Thalès, les droites $(MN)$ et $(BC)$ sont parallèles."
+
+</Property>

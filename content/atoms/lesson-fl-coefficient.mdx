@@ -1,0 +1,104 @@
+---
+type: lesson
+title: "Determiner le coefficient d'une fonction lineaire"
+difficulty: 1
+timeMinutes: 6
+tags: [fonctions-lineaires, coefficient, lecture-graphique]
+---
+
+### Methodes de determination du coefficient
+
+Il existe plusieurs methodes pour determiner le coefficient $a$ d'une fonction lineaire $f(x) = ax$.
+
+### Methode 1 : A partir de la formule
+
+Si on connait l'expression de $f(x)$, le coefficient est directement le nombre qui multiplie $x$.
+
+<Example title="Lecture directe">
+
+- $f(x) = 5x$ : le coefficient est $a = 5$
+- $g(x) = -3x$ : le coefficient est $a = -3$
+- $h(x) = 0,7x$ : le coefficient est $a = 0,7$
+- $k(x) = \frac{2}{3}x$ : le coefficient est $a = \frac{2}{3}$
+
+</Example>
+
+### Methode 2 : A partir d'un point
+
+Si on connait l'image d'un nombre **non nul** par la fonction, on peut determiner le coefficient.
+
+<Property title="Determination par un point">
+
+Si $f$ est une fonction lineaire et $f(x_0) = y_0$ avec $x_0 \neq 0$, alors :
+
+$$a = \frac{y_0}{x_0}$$
+
+</Property>
+
+**Justification** : Puisque $f(x_0) = ax_0 = y_0$, on a $a = \frac{y_0}{x_0}$ (en divisant par $x_0 \neq 0$).
+
+<Example title="Calcul du coefficient">
+
+Soit $f$ une fonction lineaire telle que $f(4) = 12$.
+
+Determinons le coefficient $a$ :
+
+$$a = \frac{f(4)}{4} = \frac{12}{4} = 3$$
+
+Donc $f(x) = 3x$.
+
+**Verification** : $f(4) = 3 \times 4 = 12$ ✓
+
+</Example>
+
+### Methode 3 : Lecture graphique
+
+Sur un graphe, le coefficient $a$ se lit comme le **rapport** entre la variation verticale et la variation horizontale.
+
+<Property title="Lecture graphique du coefficient">
+
+Si $M(x; y)$ est un point du graphe de $f$ (avec $x \neq 0$), alors :
+
+$$a = \frac{y}{x} = \frac{\text{ordonnee}}{\text{abscisse}}$$
+
+On peut aussi ecrire : $a = \frac{\Delta y}{\Delta x}$ ou $\Delta y$ est la variation verticale depuis $O$ jusqu'a $M$, et $\Delta x$ la variation horizontale.
+
+</Property>
+
+<Example title="Lecture sur un graphique">
+
+Sur le graphe d'une fonction lineaire $f$, on lit le point $A(2; 6)$.
+
+Le coefficient est :
+
+$$a = \frac{6}{2} = 3$$
+
+Donc $f(x) = 3x$.
+
+**Autre lecture** : si on passe de $O(0; 0)$ a $A(2; 6)$ :
+- Variation horizontale : $\Delta x = 2 - 0 = 2$
+- Variation verticale : $\Delta y = 6 - 0 = 6$
+- Coefficient : $a = \frac{\Delta y}{\Delta x} = \frac{6}{2} = 3$
+
+</Example>
+
+<Attention>
+
+**Attention a la division par zero !**
+
+On ne peut pas determiner le coefficient a partir du point $O(0; 0)$ seul, car $\frac{0}{0}$ n'est pas defini.
+
+Il faut **au moins un point dont l'abscisse est non nulle**.
+
+</Attention>
+
+<Remark>
+
+Le coefficient $a$ represente aussi le **taux de variation** de la fonction : quand $x$ augmente de $1$, $f(x)$ augmente de $a$.
+
+Par exemple, si $f(x) = 5x$ :
+- $f(3) = 15$
+- $f(4) = 20$
+- Variation : $f(4) - f(3) = 20 - 15 = 5 = a$
+
+</Remark>

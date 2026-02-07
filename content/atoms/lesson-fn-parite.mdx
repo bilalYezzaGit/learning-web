@@ -1,0 +1,156 @@
+---
+type: lesson
+title: "Parite d'une fonction"
+difficulty: 1
+timeMinutes: 7
+tags: [fonctions, parite, symetrie]
+---
+
+### Introduction
+
+La **parite** d'une fonction decrit son comportement par rapport a l'oppose d'un nombre. Elle se traduit geometriquement par une symetrie de la courbe.
+
+### Condition prealable
+
+<Attention>
+
+Pour etudier la parite de $f$, il faut d'abord verifier que **son domaine de definition est symetrique par rapport a $0$**.
+
+C'est-a-dire : pour tout $x \in D_f$, on a $-x \in D_f$.
+
+</Attention>
+
+### Fonction paire
+
+<Definition title="Fonction paire">
+
+Une fonction $f$ est **paire** si, pour tout $x \in D_f$ :
+
+$$f(-x) = f(x)$$
+
+</Definition>
+
+<Property title="Interpretation geometrique">
+
+La courbe representative d'une fonction paire est **symetrique par rapport a l'axe des ordonnees** (axe $Oy$).
+
+Si le point $M(x, y)$ appartient a la courbe, alors le point $M'(-x, y)$ appartient aussi a la courbe.
+
+</Property>
+
+<Example title="Fonction paire classique">
+
+Soit $f(x) = x^2 + 1$.
+
+- Domaine : $D_f = \mathbb{R}$ (symetrique par rapport a $0$)
+- Pour tout $x \in \mathbb{R}$ : $f(-x) = (-x)^2 + 1 = x^2 + 1 = f(x)$
+
+Donc $f$ est **paire**.
+
+</Example>
+
+### Fonction impaire
+
+<Definition title="Fonction impaire">
+
+Une fonction $f$ est **impaire** si, pour tout $x \in D_f$ :
+
+$$f(-x) = -f(x)$$
+
+</Definition>
+
+<Property title="Interpretation geometrique">
+
+La courbe representative d'une fonction impaire est **symetrique par rapport a l'origine** $O(0, 0)$.
+
+Si le point $M(x, y)$ appartient a la courbe, alors le point $M'(-x, -y)$ appartient aussi a la courbe.
+
+</Property>
+
+<Property title="Propriete importante">
+
+Si $f$ est une fonction impaire definie en $0$, alors **necessairement** :
+
+$$f(0) = 0$$
+
+**Demonstration** : Si $f$ est impaire, alors $f(-0) = -f(0)$, donc $f(0) = -f(0)$, d'ou $2f(0) = 0$, soit $f(0) = 0$.
+
+</Property>
+
+<Example title="Fonction impaire classique">
+
+Soit $f(x) = x^3 - x$.
+
+- Domaine : $D_f = \mathbb{R}$ (symetrique par rapport a $0$)
+- Pour tout $x \in \mathbb{R}$ :
+
+$$f(-x) = (-x)^3 - (-x) = -x^3 + x = -(x^3 - x) = -f(x)$$
+
+Donc $f$ est **impaire**.
+
+On verifie bien que $f(0) = 0$.
+
+</Example>
+
+### Fonction ni paire ni impaire
+
+Une fonction peut n'etre ni paire ni impaire.
+
+<Example title="Fonction sans parite">
+
+Soit $f(x) = x^2 + x$.
+
+- Domaine : $D_f = \mathbb{R}$ (symetrique)
+- $f(1) = 1 + 1 = 2$
+- $f(-1) = (-1)^2 + (-1) = 1 - 1 = 0$
+
+On a $f(-1) \neq f(1)$ et $f(-1) \neq -f(1)$ (car $0 \neq -2$).
+
+Donc $f$ n'est **ni paire ni impaire**.
+
+</Example>
+
+### Methodologie d'etude de la parite
+
+<Property title="Methode en 3 etapes">
+
+Pour etudier la parite de $f$ :
+
+1. **Verifier** que $D_f$ est symetrique par rapport a $0$. Si ce n'est pas le cas, $f$ n'est ni paire ni impaire.
+
+2. **Calculer** $f(-x)$ en fonction de $x$.
+
+3. **Comparer** $f(-x)$ avec $f(x)$ :
+   - Si $f(-x) = f(x)$, alors $f$ est paire
+   - Si $f(-x) = -f(x)$, alors $f$ est impaire
+   - Sinon, $f$ n'est ni paire ni impaire
+
+</Property>
+
+<Example title="Etude complete de parite">
+
+Soit $f(x) = \frac{x}{x^2 + 1}$.
+
+**Etape 1** : $D_f = \mathbb{R}$ (car $x^2 + 1 > 0$ pour tout $x$). Le domaine est symetrique.
+
+**Etape 2** : Calcul de $f(-x)$ :
+
+$$f(-x) = \frac{-x}{(-x)^2 + 1} = \frac{-x}{x^2 + 1}$$
+
+**Etape 3** : Comparaison :
+
+$$f(-x) = \frac{-x}{x^2 + 1} = -\frac{x}{x^2 + 1} = -f(x)$$
+
+**Conclusion** : $f$ est **impaire**.
+
+</Example>
+
+<Attention>
+
+Pieges classiques :
+
+- Oublier de verifier que le domaine est symetrique avant de conclure
+- Confondre $f(-x) = -f(x)$ (impaire) avec $-f(-x) = f(x)$ (c'est la meme chose !)
+- Pour une fonction definie par morceaux, il faut verifier la parite sur tout le domaine
+
+</Attention>

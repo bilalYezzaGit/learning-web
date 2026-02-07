@@ -1,0 +1,18 @@
+title: "Rationalisation et applications"
+description: "Rationaliser des denominateurs et combiner puissances et racines"
+difficulty: 2
+estimatedMinutes: 35
+tags: [racine-carree, rationalisation, puissances]
+
+steps:
+  - lesson-num1-rationalisation
+  - ex-num1-rationalisation
+  - ex-num1-puissances-simplification
+  - ex-num1-racine-operations
+  - ex-num1-expressions-mixtes
+  - ex-num1-demonstration
+  - quiz:
+      - qcm-num1-rationalisation
+      - qcm-num1-piege-puissance-somme
+      - qcm-num1-piege-racine-somme
+      - qcm-num1-piege-signe

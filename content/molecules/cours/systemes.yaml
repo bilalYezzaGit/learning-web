@@ -10,11 +10,34 @@ objectives:
   - "Interpreter graphiquement un systeme"
 
 sections:
-  - label: "Systemes"
+  - label: "Definition et substitution"
     steps:
-      - lesson-systemes
-      - ex-systemes-01
+      - lesson-sys-definition
+      - lesson-sys-substitution
+      - ex-sys-substitution
       - quiz:
-          - qcm-sys-1
-          - qcm-sys-2
-          - qcm-sys-3
+          - qcm-sys-definition
+          - qcm-sys-verification
+          - qcm-sys-substitution
+
+  - label: "Combinaison lineaire"
+    steps:
+      - lesson-sys-combinaison
+      - ex-sys-combinaison
+      - ex-sys-choix-methode
+      - quiz:
+          - qcm-sys-combinaison
+          - qcm-sys-resolution
+          - qcm-sys-piege-erreur-signe
+
+  - label: "Interpretation graphique et applications"
+    steps:
+      - lesson-sys-interpretation-graphique
+      - ex-sys-interpretation-graphique
+      - ex-sys-probleme
+      - ex-sys-cas-particuliers
+      - quiz:
+          - qcm-sys-graphique
+          - qcm-sys-nombre-solutions
+          - qcm-sys-piege-pas-solution
+          - qcm-sys-piege-infinite

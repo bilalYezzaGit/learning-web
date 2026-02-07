@@ -1,0 +1,65 @@
+---
+type: lesson
+title: "Sections d'un cube par un plan"
+difficulty: 1
+timeMinutes: 8
+tags: [sections-solides, cube, construction]
+---
+
+### Principe de construction
+
+Pour trouver la section d'un cube par un plan, on utilise la méthode suivante :
+
+**Règle clé** : Si deux points appartiennent à la même face ET au plan de coupe, alors le segment qui les relie appartient à la section.
+
+### Méthode de construction pas à pas
+
+<Example title="Construction d'une section de cube">
+
+Soit un cube $ABCDEFGH$ et trois points $I$, $J$, $K$ situés respectivement sur les arêtes $[AB]$, $[BC]$, et $[CG]$.
+
+**Objectif** : Construire la section du cube par le plan $(IJK)$.
+
+**Démarche** :
+
+1. $I$ et $J$ sont sur la face $ABCD$, donc le segment $[IJ]$ appartient à la section
+2. $J$ et $K$ sont sur la face $BCGF$, donc le segment $[JK]$ appartient à la section
+3. On continue face par face jusqu'à fermer le polygone
+4. La section obtenue est un polygone (triangle, quadrilatère, pentagone, ou hexagone selon le cas)
+
+</Example>
+
+### Propriété des faces parallèles
+
+<Property title="Sections et faces parallèles">
+
+Lorsqu'un plan coupe deux faces **parallèles** d'un cube, les segments d'intersection obtenus sont **parallèles** entre eux.
+
+</Property>
+
+Cette propriété permet de construire certains côtés de la section par parallélisme.
+
+### Formes possibles
+
+Selon la position du plan de coupe, la section d'un cube peut être :
+
+- Un **triangle** (3 faces coupées)
+- Un **quadrilatère** (4 faces coupées) — souvent un parallélogramme, parfois un rectangle
+- Un **pentagone** (5 faces coupées)
+- Un **hexagone** (6 faces coupées) — maximum possible
+
+<Remark>
+
+Un cube ne peut pas donner de section avec plus de 6 côtés, car il n'a que 6 faces.
+
+</Remark>
+
+### Erreur fréquente
+
+<Attention>
+
+On ne peut **jamais** relier directement deux points qui ne sont pas dans une même face du cube.
+
+Par exemple, si $I \in [AB]$ et $K \in [EF]$, on ne peut pas tracer directement $[IK]$ car ces arêtes ne sont pas coplanaires. Il faut d'abord trouver les points intermédiaires en passant par les faces du cube.
+
+</Attention>

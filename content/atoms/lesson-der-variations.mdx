@@ -1,0 +1,133 @@
+---
+type: lesson
+title: "Signe de la dérivée et variations"
+difficulty: 1
+timeMinutes: 8
+tags: [derivation, variations, signe, extremums]
+---
+
+### Théorème fondamental
+
+<Theorem title="Lien entre signe de la dérivée et variations">
+
+Soit $f$ une fonction dérivable sur un intervalle $I$.
+
+- Si $f'(x) \geq 0$ pour tout $x \in I$, alors $f$ est **croissante** sur $I$
+- Si $f'(x) \leq 0$ pour tout $x \in I$, alors $f$ est **décroissante** sur $I$
+- Si $f'(x) = 0$ pour tout $x \in I$, alors $f$ est **constante** sur $I$
+
+</Theorem>
+
+<Remark>
+
+**Réciproque** : Si $f$ est croissante sur $I$, alors $f'(x) \geq 0$ sur $I$ (et de même pour décroissante).
+
+Ce théorème est l'outil principal pour **étudier les variations** d'une fonction.
+
+</Remark>
+
+### Extremums locaux
+
+<Property title="Condition nécessaire d'extremum">
+
+Si $f$ admet un **extremum local** (maximum ou minimum) en $a$ et si $f$ est dérivable en $a$, alors :
+
+$$f'(a) = 0$$
+
+</Property>
+
+<Attention>
+
+La réciproque est **FAUSSE** : $f'(a) = 0$ n'implique pas forcément que $f$ ait un extremum en $a$.
+
+</Attention>
+
+<Example title="Contre-exemple : x³ en x = 0">
+
+Soit $f(x) = x^3$ sur $\mathbb{R}$.
+
+$$f'(x) = 3x^2 \quad \text{donc} \quad f'(0) = 0$$
+
+Pourtant, $f$ n'a **pas d'extremum** en $x = 0$ car :
+- Pour $x < 0$ : $f(x) < 0 = f(0)$
+- Pour $x > 0$ : $f(x) > 0 = f(0)$
+
+La fonction traverse le point sans s'arrêter (c'est un **point d'inflexion**).
+
+</Example>
+
+<Property title="Condition suffisante d'extremum">
+
+Si $f'$ s'annule en $a$ en **changeant de signe**, alors $f$ admet un extremum local en $a$ :
+
+- Si $f'$ passe de **positif à négatif** : $f$ admet un **maximum local** en $a$
+- Si $f'$ passe de **négatif à positif** : $f$ admet un **minimum local** en $a$
+
+</Property>
+
+### Méthodologie : tableau de variations
+
+Pour étudier les variations d'une fonction $f$ sur un intervalle $I$ :
+
+1. **Déterminer le domaine de définition** $D_f$ et vérifier que $f$ est dérivable sur $I$
+2. **Calculer la dérivée** $f'(x)$
+3. **Étudier le signe** de $f'(x)$ (résoudre $f'(x) = 0$ et déterminer le signe sur chaque intervalle)
+4. **Dresser le tableau de variations** avec :
+   - Ligne $x$ : les bornes et les valeurs qui annulent $f'$
+   - Ligne $f'(x)$ : le signe de la dérivée
+   - Ligne $f(x)$ : les variations (flèches) et les valeurs aux points remarquables
+5. **Conclure** sur les intervalles de croissance/décroissance et les extremums
+
+### Exemple complet
+
+<Example title="Étude de f(x) = x³ - 3x + 1">
+
+**1. Domaine** : $D_f = \mathbb{R}$, $f$ est dérivable sur $\mathbb{R}$
+
+**2. Dérivée** :
+
+$$f'(x) = 3x^2 - 3 = 3(x^2 - 1) = 3(x-1)(x+1)$$
+
+**3. Signe de $f'$** :
+
+$f'(x) = 0 \iff x = -1$ ou $x = 1$
+
+Tableau de signes :
+
+| $x$ | $-\infty$ | $-1$ | $1$ | $+\infty$ |
+|-----|-----------|------|-----|-----------|
+| $x-1$ | $-$ | $-$ | $0$ | $+$ |
+| $x+1$ | $-$ | $0$ | $+$ | $+$ |
+| $f'(x)$ | $+$ | $0$ | $-$ | $0$ | $+$ |
+
+**4. Calcul des valeurs** :
+
+$$f(-1) = (-1)^3 - 3(-1) + 1 = -1 + 3 + 1 = 3$$
+
+$$f(1) = 1 - 3 + 1 = -1$$
+
+**5. Tableau de variations** :
+
+| $x$ | $-\infty$ | | $-1$ | | $1$ | | $+\infty$ |
+|-----|-----------|---|------|---|-----|---|-----------|
+| $f'(x)$ | | $+$ | $0$ | $-$ | $0$ | $+$ | |
+| $f(x)$ | $-\infty$ | $\nearrow$ | $3$ | $\searrow$ | $-1$ | $\nearrow$ | $+\infty$ |
+
+**Conclusion** :
+
+- $f$ est **croissante** sur $]-\infty, -1]$ et sur $[1, +\infty[$
+- $f$ est **décroissante** sur $[-1, 1]$
+- $f$ admet un **maximum local** en $x = -1$ : $f(-1) = 3$
+- $f$ admet un **minimum local** en $x = 1$ : $f(1) = -1$
+
+</Example>
+
+<Attention title="Erreur fréquente">
+
+Ne pas confondre :
+- Les **valeurs qui annulent $f'$** (solutions de $f'(x) = 0$) — elles déterminent les **extremums potentiels**
+- Les **valeurs qui annulent $f$** (solutions de $f(x) = 0$) — ce sont les **racines** de $f$
+
+Pour le tableau de variations, on utilise les racines de $f'$, pas celles de $f$.
+
+</Attention>

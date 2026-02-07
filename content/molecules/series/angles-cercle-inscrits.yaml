@@ -1,0 +1,16 @@
+title: "Angles inscrits et cercle"
+description: "Maitriser les angles inscrits, angles au centre et leurs proprietes dans le cercle"
+difficulty: 2
+estimatedMinutes: 35
+tags: [angles, angle-inscrit, angle-au-centre, cercle]
+
+steps:
+  - lesson-angles-inscrits-centre
+  - lesson-angles-arcs-cercle
+  - ex-angles-inscrit-centre
+  - ex-angles-figure-complexe
+  - ex-angles-demonstration
+  - quiz:
+      - qcm-angles-inscrit-def
+      - qcm-angles-inscrit-centre-relation
+      - qcm-angles-piege-demi-cercle

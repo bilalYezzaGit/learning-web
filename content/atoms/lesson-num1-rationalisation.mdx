@@ -1,0 +1,126 @@
+---
+type: lesson
+title: "Rationalisation du denominateur"
+difficulty: 1
+timeMinutes: 7
+tags: [racine-carree, rationalisation, denominateur]
+---
+
+### Qu'est-ce que la rationalisation ?
+
+<Definition title="Rationaliser">
+
+**Rationaliser le denominateur** d'une fraction, c'est transformer cette fraction de maniere a eliminer toute racine carree du denominateur.
+
+C'est une convention mathematique qui facilite les calculs et la comparaison de nombres.
+
+</Definition>
+
+<Remark>
+
+Par convention, on prefere ecrire $\frac{3\sqrt{2}}{2}$ plutot que $\frac{3}{\sqrt{2}}$, meme si les deux expressions sont egales.
+
+</Remark>
+
+### Cas 1 : Denominateur de la forme $\sqrt{b}$
+
+<Property title="Rationalisation simple">
+
+Pour transformer $\frac{a}{\sqrt{b}}$ :
+
+On multiplie le numerateur et le denominateur par $\sqrt{b}$ :
+
+$$\frac{a}{\sqrt{b}} = \frac{a}{\sqrt{b}} \times \frac{\sqrt{b}}{\sqrt{b}} = \frac{a\sqrt{b}}{b}$$
+
+</Property>
+
+<Example title="Exemples de cas simple">
+
+**Exemple 1** : $\frac{3}{\sqrt{2}}$
+
+$$\frac{3}{\sqrt{2}} = \frac{3}{\sqrt{2}} \times \frac{\sqrt{2}}{\sqrt{2}} = \frac{3\sqrt{2}}{2}$$
+
+**Exemple 2** : $\frac{5}{\sqrt{3}}$
+
+$$\frac{5}{\sqrt{3}} = \frac{5}{\sqrt{3}} \times \frac{\sqrt{3}}{\sqrt{3}} = \frac{5\sqrt{3}}{3}$$
+
+**Exemple 3** : $\frac{2}{\sqrt{5}}$
+
+$$\frac{2}{\sqrt{5}} = \frac{2}{\sqrt{5}} \times \frac{\sqrt{5}}{\sqrt{5}} = \frac{2\sqrt{5}}{5}$$
+
+</Example>
+
+### Cas 2 : Denominateur de la forme $\sqrt{a} + \sqrt{b}$
+
+<Property title="Rationalisation avec conjugue">
+
+Pour transformer $\frac{c}{\sqrt{a} + \sqrt{b}}$ :
+
+On multiplie par le **conjugue** $\frac{\sqrt{a} - \sqrt{b}}{\sqrt{a} - \sqrt{b}}$ :
+
+$$\frac{c}{\sqrt{a} + \sqrt{b}} = \frac{c(\sqrt{a} - \sqrt{b})}{(\sqrt{a} + \sqrt{b})(\sqrt{a} - \sqrt{b})} = \frac{c(\sqrt{a} - \sqrt{b})}{a - b}$$
+
+**On utilise l'identite remarquable** : $(x+y)(x-y) = x^2 - y^2$
+
+</Property>
+
+<Example title="Exemples avec conjugue">
+
+**Exemple 1** : $\frac{1}{\sqrt{3} + \sqrt{2}}$
+
+$$\frac{1}{\sqrt{3} + \sqrt{2}} = \frac{1}{\sqrt{3} + \sqrt{2}} \times \frac{\sqrt{3} - \sqrt{2}}{\sqrt{3} - \sqrt{2}}$$
+
+$$= \frac{\sqrt{3} - \sqrt{2}}{(\sqrt{3})^2 - (\sqrt{2})^2} = \frac{\sqrt{3} - \sqrt{2}}{3 - 2} = \sqrt{3} - \sqrt{2}$$
+
+**Exemple 2** : $\frac{2}{\sqrt{5} + 1}$
+
+$$\frac{2}{\sqrt{5} + 1} = \frac{2}{\sqrt{5} + 1} \times \frac{\sqrt{5} - 1}{\sqrt{5} - 1}$$
+
+$$= \frac{2(\sqrt{5} - 1)}{5 - 1} = \frac{2(\sqrt{5} - 1)}{4} = \frac{\sqrt{5} - 1}{2}$$
+
+</Example>
+
+### Cas 3 : Denominateur de la forme $a + \sqrt{b}$
+
+<Property title="Rationalisation avec nombre entier">
+
+Pour transformer $\frac{c}{a + \sqrt{b}}$ :
+
+On multiplie par le conjugue $\frac{a - \sqrt{b}}{a - \sqrt{b}}$ :
+
+$$\frac{c}{a + \sqrt{b}} = \frac{c(a - \sqrt{b})}{(a + \sqrt{b})(a - \sqrt{b})} = \frac{c(a - \sqrt{b})}{a^2 - b}$$
+
+</Property>
+
+<Example title="Exemple mixte">
+
+**Rationaliser** $\frac{3}{2 + \sqrt{3}}$ :
+
+$$\frac{3}{2 + \sqrt{3}} = \frac{3}{2 + \sqrt{3}} \times \frac{2 - \sqrt{3}}{2 - \sqrt{3}}$$
+
+$$= \frac{3(2 - \sqrt{3})}{4 - 3} = \frac{3(2 - \sqrt{3})}{1} = 6 - 3\sqrt{3}$$
+
+</Example>
+
+### Principe general
+
+<Remark title="La quantite conjuguee">
+
+Pour $\sqrt{a} + \sqrt{b}$, le conjugue est $\sqrt{a} - \sqrt{b}$
+
+Pour $\sqrt{a} - \sqrt{b}$, le conjugue est $\sqrt{a} + \sqrt{b}$
+
+Pour $a + \sqrt{b}$, le conjugue est $a - \sqrt{b}$
+
+**L'interet** : le produit d'une expression par son conjugue elimine les racines carrees grace a l'identite remarquable $(x+y)(x-y) = x^2 - y^2$.
+
+</Remark>
+
+<Attention>
+
+**Ne pas confondre** :
+
+- $\frac{1}{\sqrt{2} + 1}$ doit etre rationalise en multipliant par $\frac{\sqrt{2} - 1}{\sqrt{2} - 1}$
+- Ne **jamais** separer la fraction comme $\frac{1}{\sqrt{2}} + \frac{1}{1}$ (erreur frequente !)
+
+</Attention>

@@ -1,0 +1,85 @@
+---
+type: lesson
+title: "Identites remarquables"
+difficulty: 1
+timeMinutes: 7
+tags: [algebre, identites-remarquables]
+---
+
+### Les trois identites fondamentales
+
+Les **identites remarquables** sont des formules de developpement tres utiles qu'il faut connaitre par coeur.
+
+<Theorem title="Identites remarquables">
+
+Pour tous nombres $a$ et $b$ :
+
+1. **Carre d'une somme** :
+
+$$(a + b)^2 = a^2 + 2ab + b^2$$
+
+2. **Carre d'une difference** :
+
+$$(a - b)^2 = a^2 - 2ab + b^2$$
+
+3. **Produit d'une somme par une difference** :
+
+$$(a + b)(a - b) = a^2 - b^2$$
+
+</Theorem>
+
+### Exemples d'application
+
+<Example title="Carre d'une somme">
+
+Developper $(3x + 2)^2$ :
+
+On pose $a = 3x$ et $b = 2$. D'apres la premiere identite :
+
+$$(3x + 2)^2 = (3x)^2 + 2 \times 3x \times 2 + 2^2$$
+
+$$= 9x^2 + 12x + 4$$
+
+</Example>
+
+<Example title="Carre d'une difference">
+
+Developper $(5 - 2x)^2$ :
+
+On pose $a = 5$ et $b = 2x$. D'apres la deuxieme identite :
+
+$$(5 - 2x)^2 = 5^2 - 2 \times 5 \times 2x + (2x)^2$$
+
+$$= 25 - 20x + 4x^2$$
+
+</Example>
+
+<Example title="Difference de deux carres">
+
+Developper $(3x + 4)(3x - 4)$ :
+
+On pose $a = 3x$ et $b = 4$. D'apres la troisieme identite :
+
+$$(3x + 4)(3x - 4) = (3x)^2 - 4^2 = 9x^2 - 16$$
+
+</Example>
+
+### Erreur frequente
+
+<Attention>
+
+L'erreur la plus courante est de croire que $(a + b)^2 = a^2 + b^2$.
+
+**C'est faux !** Il ne faut pas oublier le terme du milieu $2ab$ :
+
+$$(a + b)^2 = a^2 + 2ab + b^2 \neq a^2 + b^2$$
+
+Par exemple : $(x + 3)^2 = x^2 + 6x + 9$ et non $x^2 + 9$.
+
+</Attention>
+
+<Remark>
+
+Ces identites fonctionnent aussi dans le sens inverse (pour factoriser), ce que nous verrons dans la lecon suivante.
+
+</Remark>

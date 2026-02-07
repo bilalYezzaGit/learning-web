@@ -1,0 +1,105 @@
+---
+type: lesson
+title: "Valeur absolue d'un nombre reel"
+difficulty: 1
+timeMinutes: 7
+tags: [valeur-absolue, definition, distance]
+---
+
+### Definition
+
+<Definition title="Valeur absolue">
+
+La **valeur absolue** d'un nombre reel $x$, notee $|x|$, est definie par :
+
+$$|x| = \begin{cases}
+x & \text{si } x \geq 0 \\
+-x & \text{si } x < 0
+\end{cases}$$
+
+</Definition>
+
+<Example>
+
+- $|5| = 5$ (car $5 \geq 0$)
+- $|-3| = -(-3) = 3$ (car $-3 < 0$)
+- $|0| = 0$
+- $\left|\frac{-7}{2}\right| = \frac{7}{2}$
+
+</Example>
+
+<Remark>
+
+La valeur absolue d'un nombre est toujours **positive ou nulle**. Elle represente la "grandeur" du nombre sans tenir compte de son signe.
+
+</Remark>
+
+### Interpretation geometrique
+
+<Property title="Distance a zero">
+
+Sur la droite des reels, $|x|$ represente la **distance** entre le point $x$ et l'origine $0$.
+
+</Property>
+
+<Property title="Distance entre deux points">
+
+Pour deux nombres reels $a$ et $b$, la distance entre $a$ et $b$ sur la droite des reels est :
+
+$$d(a, b) = |a - b| = |b - a|$$
+
+</Property>
+
+<Example title="Distance">
+
+La distance entre $-2$ et $5$ est :
+
+$$|-2 - 5| = |-7| = 7$$
+
+ou
+
+$$|5 - (-2)| = |7| = 7$$
+
+Les deux points sont separes de $7$ unites sur la droite.
+
+</Example>
+
+### Proprietes de la valeur absolue
+
+<Property>
+
+Pour tous nombres reels $x$ et $y$ :
+
+1. $|x| \geq 0$ (positivite)
+2. $|x| = 0 \Leftrightarrow x = 0$ (separation)
+3. $|-x| = |x|$ (symetrie)
+4. $|xy| = |x| \cdot |y|$ (produit)
+5. $\left|\frac{x}{y}\right| = \frac{|x|}{|y|}$ si $y \neq 0$ (quotient)
+6. $|x + y| \leq |x| + |y|$ (inegalite triangulaire)
+
+</Property>
+
+<Example title="Propriete du produit">
+
+$$|-3 \times 4| = |{-12}| = 12$$
+
+$$|-3| \times |4| = 3 \times 4 = 12$$
+
+Donc $|-3 \times 4| = |-3| \times |4|$.
+
+</Example>
+
+<Remark title="Inegalite triangulaire">
+
+L'inegalite $|x + y| \leq |x| + |y|$ signifie que la longueur d'un cote d'un triangle est toujours inferieure ou egale a la somme des longueurs des deux autres cotes. C'est pourquoi on l'appelle "inegalite triangulaire".
+
+L'egalite $|x + y| = |x| + |y|$ a lieu si et seulement si $x$ et $y$ ont le meme signe (ou l'un est nul).
+
+</Remark>
+
+<Example title="Inegalite triangulaire">
+
+- $|3 + 5| = |8| = 8$ et $|3| + |5| = 3 + 5 = 8$ → egalite car meme signe
+- $|3 + (-5)| = |-2| = 2$ et $|3| + |-5| = 3 + 5 = 8$ → $2 < 8$ : inegalite stricte car signes opposes
+
+</Example>

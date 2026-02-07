@@ -1,21 +1,55 @@
 title: Derivation
-description: "Definition du nombre derive, interpretation geometrique et tangente a une courbe"
+description: "Nombre derive, equation de la tangente, derivees usuelles, regles de derivation, composee, application aux variations"
 programme: 3eme-math
 trimester: T2
 order: 2
-estimatedMinutes: 180
+estimatedMinutes: 240
 objectives:
-  - "Calculer la derivee d une fonction"
-  - "Interpreter geometriquement le nombre derive"
+  - "Calculer le nombre derive en un point par definition"
+  - "Determiner l equation de la tangente a une courbe"
+  - "Connaitre et appliquer les derivees des fonctions usuelles"
+  - "Maitriser les regles de derivation (somme, produit, quotient, composee)"
+  - "Utiliser le signe de la derivee pour etudier les variations"
 
 sections:
-  - label: "Derivees de base"
+  - label: "Nombre derive et tangente"
     steps:
-      - ex-der-1
+      - lesson-der-nombre-derive
+      - ex-der-calcul-definition
+      - lesson-der-tangente
+      - ex-der-tangente-simple
       - quiz:
-          - qcm-der-1
+          - qcm-der-definition-taux
+          - qcm-der-tangente-coeff
+          - qcm-der-derivabilite-continuite
 
-  - label: "Derivees composees"
+  - label: "Derivees usuelles et regles"
     steps:
+      - lesson-der-usuelles
+      - ex-der-derivees-polynomes
+      - lesson-der-regles
+      - ex-der-produit-quotient
       - quiz:
-          - qcm-der-2
+          - qcm-der-usuelle-xn
+          - qcm-der-usuelle-racine
+          - qcm-der-usuelle-inverse
+          - qcm-der-piege-produit
+          - qcm-der-quotient-ordre
+
+  - label: "Composee et derivabilite"
+    steps:
+      - lesson-der-composee
+      - ex-der-composee-racine
+      - ex-der-derivabilite-morceaux
+      - quiz:
+          - qcm-der-composee-chaine
+          - qcm-der-piege-racine-composee
+
+  - label: "Application aux variations"
+    steps:
+      - lesson-der-variations
+      - ex-der-etude-variations
+      - ex-der-etude-fonction-complete
+      - quiz:
+          - qcm-der-signe-variations
+          - qcm-der-piege-extremum

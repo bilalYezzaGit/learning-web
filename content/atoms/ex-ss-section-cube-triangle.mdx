@@ -1,0 +1,64 @@
+---
+type: exercise
+title: "Section triangulaire d'un cube"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [sections-solides, cube, triangle]
+---
+
+<Enonce>
+ABCDEFGH est un cube d'arete 6 cm. On considere les points suivants :
+- M est le milieu de [AB]
+- N est le milieu de [BC]
+- P est le milieu de [BF]
+
+Determiner la section du cube par le plan (MNP). Quelle est la nature de cette section ?
+</Enonce>
+
+<Solution>
+**Etape 1 : Identification des points**
+
+Les trois points M, N et P sont situes sur des faces contenant le sommet B :
+- M est sur la face ABCD (base inferieure)
+- N est sur la face ABCD (base inferieure)
+- P est sur la face ABFE (face laterale)
+
+**Etape 2 : Construction de la section**
+
+Les points M, N et P appartiennent tous au plan (MNP). La section du cube par ce plan est le **triangle MNP**.
+
+**Etape 3 : Calcul des longueurs des cotes**
+
+Dans le repere avec B comme origine :
+- M est le milieu de [AB] donc M est a la distance $\frac{6}{2} = 3$ cm de B sur [AB]
+- N est le milieu de [BC] donc N est a la distance 3 cm de B sur [BC]
+- P est le milieu de [BF] donc P est a la distance 3 cm de B sur [BF]
+
+Calculons les distances :
+
+**MN** : M et N sont sur la face ABCD, avec BM = BN = 3 cm et l'angle MBN = 90°.
+
+$$MN = \sqrt{BM^2 + BN^2} = \sqrt{3^2 + 3^2} = \sqrt{18} = 3\sqrt{2} \text{ cm}$$
+
+**MP** : M est sur [AB] et P sur [BF], avec BM = BP = 3 cm et l'angle MBP = 90°.
+
+$$MP = \sqrt{BM^2 + BP^2} = \sqrt{3^2 + 3^2} = \sqrt{18} = 3\sqrt{2} \text{ cm}$$
+
+**NP** : N est sur [BC] et P sur [BF], avec BN = BP = 3 cm et l'angle NBP = 90°.
+
+$$NP = \sqrt{BN^2 + BP^2} = \sqrt{3^2 + 3^2} = \sqrt{18} = 3\sqrt{2} \text{ cm}$$
+
+**Etape 4 : Nature de la section**
+
+La section est un **triangle equilateral** de cote $3\sqrt{2}$ cm.
+</Solution>
+
+<Methode>
+Pour determiner une section d'un cube par un plan defini par trois points :
+
+1. Identifier les positions des trois points sur les faces du cube
+2. Verifier si la section est un triangle (si les points ne sont pas alignes)
+3. Calculer les longueurs des cotes en utilisant le theoreme de Pythagore
+4. Identifier la nature du triangle en comparant les longueurs
+</Methode>

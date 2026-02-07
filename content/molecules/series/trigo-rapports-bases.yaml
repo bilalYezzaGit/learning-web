@@ -1,0 +1,16 @@
+title: "Trigonometrie : les bases"
+description: "Maitriser les definitions et valeurs remarquables de sin, cos et tan"
+difficulty: 1
+estimatedMinutes: 25
+tags: [trigonometrie, sinus, cosinus, tangente, valeurs-remarquables]
+
+steps:
+  - lesson-trigo-definitions-soh-cah-toa
+  - lesson-trigo-valeurs-remarquables
+  - ex-trigo-identifier-rapports
+  - ex-trigo-valeurs-remarquables
+  - quiz:
+      - qcm-trigo-def-sinus
+      - qcm-trigo-valeur-sin30
+      - qcm-trigo-valeur-cos45
+      - qcm-trigo-relation-fondamentale

@@ -1,0 +1,83 @@
+---
+type: exercise
+title: "Dérivée d'un produit et d'un quotient"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [derivation, produit, quotient, regles]
+---
+
+<Enonce>
+1. Soit $f(x) = (2x-1)(x^2+3)$. Calculer $f'(x)$ en utilisant $(uv)' = u'v + uv'$.
+2. Soit $g(x) = \frac{x+1}{x-2}$. Calculer $g'(x)$ et étudier son signe.
+3. Soit $h(x) = \frac{x}{x^2+1}$. Calculer $h'(x)$.
+</Enonce>
+
+<Solution>
+**1. Dérivée de $f(x) = (2x-1)(x^2+3)$**
+
+Posons $u(x) = 2x - 1$ et $v(x) = x^2 + 3$.
+
+Calculons les dérivées :
+
+$$u'(x) = 2 \quad \text{et} \quad v'(x) = 2x$$
+
+Appliquons la formule $(uv)' = u'v + uv'$ :
+
+$$f'(x) = 2(x^2 + 3) + (2x - 1)(2x)$$
+
+$$= 2x^2 + 6 + 4x^2 - 2x$$
+
+$$= 6x^2 - 2x + 6$$
+
+**2. Dérivée de $g(x) = \frac{x+1}{x-2}$**
+
+Posons $u(x) = x + 1$ et $v(x) = x - 2$.
+
+Calculons les dérivées :
+
+$$u'(x) = 1 \quad \text{et} \quad v'(x) = 1$$
+
+Appliquons la formule $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$ :
+
+$$g'(x) = \frac{1 \times (x-2) - (x+1) \times 1}{(x-2)^2}$$
+
+$$= \frac{x - 2 - x - 1}{(x-2)^2} = \frac{-3}{(x-2)^2}$$
+
+**Signe de $g'(x)$ :**
+
+Le numérateur est $-3 < 0$ (toujours négatif).
+
+Le dénominateur $(x-2)^2 > 0$ pour tout $x \neq 2$ (carré toujours positif).
+
+Donc : $g'(x) = \frac{-3}{(x-2)^2} < 0$ pour tout $x \in \mathbb{R} \setminus \{2\}$.
+
+La fonction $g$ est strictement décroissante sur $]-\infty, 2[$ et sur $]2, +\infty[$.
+
+**3. Dérivée de $h(x) = \frac{x}{x^2+1}$**
+
+Posons $u(x) = x$ et $v(x) = x^2 + 1$.
+
+Calculons les dérivées :
+
+$$u'(x) = 1 \quad \text{et} \quad v'(x) = 2x$$
+
+Appliquons la formule :
+
+$$h'(x) = \frac{1 \times (x^2 + 1) - x \times 2x}{(x^2 + 1)^2}$$
+
+$$= \frac{x^2 + 1 - 2x^2}{(x^2 + 1)^2} = \frac{1 - x^2}{(x^2 + 1)^2}$$
+
+On peut factoriser le numérateur :
+
+$$h'(x) = \frac{(1-x)(1+x)}{(x^2 + 1)^2}$$
+</Solution>
+
+<Erreurs>
+**Erreurs fréquentes à éviter :**
+
+- **Produit** : Penser que $(uv)' = u'v'$ — c'est FAUX ! La formule correcte est $(uv)' = u'v + uv'$.
+- **Quotient** : Inverser l'ordre du numérateur. C'est $u'v - uv'$ et non $uv' - u'v$.
+- **Quotient** : Oublier le carré au dénominateur : $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$ et non $\frac{u'v - uv'}{v}$.
+- **Signe** : Ne pas étudier séparément le signe du numérateur et du dénominateur.
+</Erreurs>

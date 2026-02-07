@@ -1,0 +1,102 @@
+---
+type: exercise
+title: "Demonstration avec les sections de solides"
+difficulty: 3
+timeMinutes: 15
+category: synthese
+tags: [sections-solides, demonstration, thales]
+---
+
+<Enonce>
+SABC est un tetraedre. On considere les points suivants :
+- M est le milieu de [SA]
+- N est le milieu de [SB]
+
+Le plan passant par M et N, parallele au plan (ABC), coupe [SC] en un point P.
+
+1. Montrer que P est le milieu de [SC].
+2. Montrer que le triangle MNP est semblable au triangle ABC avec un rapport de similitude de $\frac{1}{2}$.
+3. Calculer l'aire du triangle MNP sachant que l'aire du triangle ABC est 24 cm².
+</Enonce>
+
+<Solution>
+**1. P est le milieu de [SC]**
+
+Le plan passant par M et N est parallele au plan (ABC).
+
+**Dans le triangle SAC** :
+- M est le milieu de [SA]
+- Le plan coupe [SC] en P
+- Le plan est parallele a (ABC) qui contient AC
+
+Donc le plan coupe le triangle SAC selon une droite parallele a (AC).
+
+Cette droite passe par M (milieu de [SA]) et est parallele a (AC).
+
+Par le **theoreme de Thales** dans le triangle SAC :
+- (MP) // (AC)
+- M est le milieu de [SA]
+- Donc P est le milieu de [SC]
+
+**Verification avec le triangle SBC** :
+- N est le milieu de [SB]
+- Le plan coupe [SC] en P
+- (NP) // (BC)
+
+Par Thales dans SBC, P est aussi le milieu de [SC]. ✓
+
+**2. MNP semblable a ABC avec rapport $\frac{1}{2}$**
+
+On a etabli que :
+- M est le milieu de [SA]
+- N est le milieu de [SB]
+- P est le milieu de [SC]
+
+Le triangle MNP est la section du tetraedre par un plan parallele a la base (ABC), passant a mi-hauteur.
+
+**Pour le segment MN** :
+Dans le triangle SAB :
+- M est le milieu de [SA]
+- N est le milieu de [SB]
+- Donc (MN) est parallele a (AB) et $MN = \frac{1}{2}AB$ (theoreme de la droite des milieux)
+
+**De meme** :
+- $MP = \frac{1}{2}AC$ et (MP) // (AC)
+- $NP = \frac{1}{2}BC$ et (NP) // (BC)
+
+**Conclusion** :
+Les triangles MNP et ABC ont :
+- Leurs cotes paralleles deux a deux
+- Leurs longueurs dans le rapport $\frac{1}{2}$
+
+Donc MNP et ABC sont **semblables** avec un **rapport de similitude** $k = \frac{1}{2}$.
+
+**3. Aire de MNP**
+
+Pour des triangles semblables, le rapport des aires est egal au carre du rapport de similitude.
+
+$$\frac{\mathcal{A}_{MNP}}{\mathcal{A}_{ABC}} = k^2 = \left(\frac{1}{2}\right)^2 = \frac{1}{4}$$
+
+Donc :
+
+$$\mathcal{A}_{MNP} = \frac{1}{4} \times \mathcal{A}_{ABC} = \frac{1}{4} \times 24 = 6 \text{ cm}^2$$
+</Solution>
+
+<Methode>
+Pour demontrer des proprietes de sections dans un tetraedre :
+
+1. **Utiliser le theoreme de Thales** dans les triangles formes par le sommet et deux aretes
+2. **Theoreme de la droite des milieux** : dans un triangle, la droite joignant les milieux de deux cotes est parallele au troisieme cote et mesure la moitie de sa longueur
+3. **Similitude** : rapport des longueurs = k, rapport des aires = $k^2$, rapport des volumes = $k^3$
+</Methode>
+
+<Erreurs>
+- **Erreur courante** : Confondre le rapport lineaire ($\frac{1}{2}$) avec le rapport des aires ($\frac{1}{4}$)
+  - Si les longueurs sont divisees par 2, les aires sont divisees par $2^2 = 4$
+  - Si les longueurs sont divisees par 3, les aires sont divisees par $3^2 = 9$
+
+- **Erreur de raisonnement** : Ne pas justifier que P est bien le milieu en appliquant Thales
+  - Il faut montrer que le plan parallele a (ABC) passant par les milieux de [SA] et [SB] coupe necessairement [SC] en son milieu
+
+- **Erreur de calcul** : Calculer $\frac{24}{2} = 12$ au lieu de $\frac{24}{4} = 6$
+</Erreurs>

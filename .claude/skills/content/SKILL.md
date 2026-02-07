@@ -190,6 +190,14 @@ Categories exercice : `application`, `approfondissement`, `synthese`, `probleme`
 | `sys` | Systemes |
 | `stat` | Statistiques |
 
+### Sources pedagogiques
+
+Le registre de sources (`docs/content-intelligence/sources/`) contient des fiches
+detaillees de sites web educatifs pre-scannes. Les actions create-module et
+create-programme consultent automatiquement ces fiches avant la recherche web.
+
+Commandes liees : `/source scan`, `/source discover`, `/source status`
+
 ### Difficulty scale
 
 | Valeur | Signification |

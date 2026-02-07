@@ -1,0 +1,52 @@
+---
+type: exercise
+title: "Dérivées de fonctions polynomiales"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [derivation, polynomes, derivees-usuelles]
+---
+
+<Enonce>
+Calculer la dérivée de :
+
+1. $f(x) = 5x^3 - 2x^2 + 7x - 4$
+2. $g(x) = (x+1)(2x-3)$ (développer d'abord)
+3. $h(x) = \frac{x^4}{4} - \frac{x^3}{3} + x$
+</Enonce>
+
+<Solution>
+**1. Dérivée de $f(x) = 5x^3 - 2x^2 + 7x - 4$**
+
+On applique les formules de dérivation :
+
+- $(x^n)' = nx^{n-1}$
+- $(k)' = 0$ où $k$ est une constante
+- La dérivée d'une somme est la somme des dérivées
+
+$$f'(x) = 5 \times 3x^2 - 2 \times 2x + 7 - 0$$
+
+$$f'(x) = 15x^2 - 4x + 7$$
+
+**2. Dérivée de $g(x) = (x+1)(2x-3)$**
+
+Développons d'abord :
+
+$$g(x) = x \times 2x + x \times (-3) + 1 \times 2x + 1 \times (-3)$$
+
+$$= 2x^2 - 3x + 2x - 3 = 2x^2 - x - 3$$
+
+Dérivons :
+
+$$g'(x) = 2 \times 2x - 1 - 0 = 4x - 1$$
+
+**3. Dérivée de $h(x) = \frac{x^4}{4} - \frac{x^3}{3} + x$**
+
+On peut écrire : $h(x) = \frac{1}{4}x^4 - \frac{1}{3}x^3 + x$
+
+Dérivons :
+
+$$h'(x) = \frac{1}{4} \times 4x^3 - \frac{1}{3} \times 3x^2 + 1$$
+
+$$h'(x) = x^3 - x^2 + 1$$
+</Solution>

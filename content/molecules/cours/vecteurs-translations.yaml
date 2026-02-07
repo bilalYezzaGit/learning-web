@@ -1,20 +1,45 @@
-title: Vecteurs et translations
-description: "Introduction aux vecteurs et aux translations dans le plan"
+title: "Vecteurs et translations"
+description: "Definition des vecteurs, egalite, translations et proprietes"
 programme: 1ere-tc
 trimester: T1
 order: 4
-estimatedMinutes: 120
+estimatedMinutes: 160
 objectives:
   - "Definir un vecteur et ses caracteristiques"
-  - "Comprendre la notion de translation"
-  - "Construire l image d une figure par une translation"
+  - "Comprendre l'egalite de deux vecteurs"
+  - "Maitriser la notion de translation"
+  - "Connaitre les proprietes de conservation de la translation"
 
 sections:
-  - label: "Vecteurs et translations"
+  - label: "Notion de vecteur"
     steps:
-      - lesson-vecteurs-translations
-      - ex-vecteurs-translations-01
+      - lesson-vt-definition-vecteur
+      - lesson-vt-egalite-vecteurs
+      - lesson-vt-vecteur-oppose
+      - ex-vt-identifier-vecteurs-egaux
       - quiz:
-          - qcm-vt-1
-          - qcm-vt-2
-          - qcm-vt-3
+          - qcm-vt-def-vecteur
+          - qcm-vt-direction-sens-norme
+          - qcm-vt-egalite-def
+          - qcm-vt-vecteur-oppose
+
+  - label: "La translation"
+    steps:
+      - lesson-vt-translation-definition
+      - lesson-vt-proprietes-translation
+      - ex-vt-construire-translate
+      - ex-vt-image-figure
+      - quiz:
+          - qcm-vt-translation-def
+          - qcm-vt-conservation-distance
+          - qcm-vt-image-droite
+          - qcm-vt-image-cercle
+
+  - label: "Applications"
+    steps:
+      - ex-vt-parallelogramme
+      - ex-vt-composition
+      - ex-vt-demonstration
+      - quiz:
+          - qcm-vt-piege-egalite
+          - qcm-vt-piege-translation-reciproque

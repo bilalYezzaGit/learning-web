@@ -3,18 +3,42 @@ description: "Rotation de 90 degres et ses proprietes"
 programme: 1ere-tc
 trimester: T2
 order: 7
-estimatedMinutes: 90
+estimatedMinutes: 120
 objectives:
   - "Definir le quart de tour (rotation de 90 degres)"
-  - "Construire l image d un point par un quart de tour"
-  - "Utiliser les proprietes du quart de tour"
+  - "Construire l'image d'un point par un quart de tour"
+  - "Utiliser les proprietes de conservation du quart de tour"
+  - "Composer des quarts de tour"
 
 sections:
-  - label: "Quart de tour"
+  - label: "Definition et construction"
     steps:
-      - lesson-quart-de-tour
-      - ex-quart-de-tour-01
+      - lesson-qt-definition
+      - lesson-qt-construction
+      - ex-qt-construction-image
       - quiz:
-          - qcm-qt-1
-          - qcm-qt-2
-          - qcm-qt-3
+          - qcm-qt-definition
+          - qcm-qt-angle
+          - qcm-qt-sens
+
+  - label: "Proprietes du quart de tour"
+    steps:
+      - lesson-qt-proprietes
+      - ex-qt-coordonnees
+      - ex-qt-proprietes-conservation
+      - quiz:
+          - qcm-qt-image-point
+          - qcm-qt-conservation-distance
+          - qcm-qt-conservation-angle
+
+  - label: "Composition et applications"
+    steps:
+      - lesson-qt-composee
+      - ex-qt-carre
+      - ex-qt-composee
+      - ex-qt-demonstration
+      - quiz:
+          - qcm-qt-composee-demi-tour
+          - qcm-qt-piege-sens
+          - qcm-qt-piege-centre
+          - qcm-qt-piege-composee

@@ -3,18 +3,41 @@ description: "Statistiques descriptives et representation des donnees"
 programme: 1ere-tc
 trimester: T3
 order: 16
-estimatedMinutes: 90
+estimatedMinutes: 120
 objectives:
   - "Calculer des indicateurs statistiques (moyenne, mediane, etendue)"
   - "Representer des donnees statistiques (diagrammes, histogrammes)"
   - "Interpreter des donnees statistiques"
 
 sections:
-  - label: "Statistiques"
+  - label: "Vocabulaire et frequences"
     steps:
-      - lesson-statistiques
-      - ex-statistiques-01
+      - lesson-stat-vocabulaire
+      - ex-stat-tableau-frequences
       - quiz:
-          - qcm-stat-1
-          - qcm-stat-2
-          - qcm-stat-3
+          - qcm-stat-vocabulaire
+          - qcm-stat-frequence
+
+  - label: "Indicateurs statistiques"
+    steps:
+      - lesson-stat-moyenne
+      - lesson-stat-mediane-mode-etendue
+      - ex-stat-moyenne
+      - ex-stat-mediane
+      - quiz:
+          - qcm-stat-moyenne
+          - qcm-stat-mediane-impair
+          - qcm-stat-mediane-pair
+          - qcm-stat-mode
+          - qcm-stat-etendue
+          - qcm-stat-piege-moyenne-mediane
+
+  - label: "Representations et synthese"
+    steps:
+      - lesson-stat-representations
+      - ex-stat-classes
+      - ex-stat-diagramme-circulaire
+      - ex-stat-synthese
+      - quiz:
+          - qcm-stat-diagramme
+          - qcm-stat-piege-angle

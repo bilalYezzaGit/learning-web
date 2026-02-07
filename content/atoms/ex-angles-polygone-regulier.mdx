@@ -1,0 +1,64 @@
+---
+type: exercise
+title: "Angles d'un polygone regulier"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [angles, polygone, polygone-regulier, hexagone]
+---
+
+<Enonce>
+1. Rappeler la formule donnant la somme des angles d'un polygone a $n$ cotes.
+
+2. Calculer la somme des angles d'un hexagone (polygone a 6 cotes).
+
+3. En deduire la mesure de chaque angle d'un hexagone regulier.
+
+4. Calculer la mesure de l'angle au centre d'un hexagone regulier (angle forme au centre par deux sommets consecutifs).
+</Enonce>
+
+<Solution>
+**1. Formule generale**
+
+La somme des angles d'un polygone a $n$ cotes est :
+
+$$S = (n - 2) \times 180°$$
+
+Cette formule provient de la triangulation : un polygone a $n$ cotes peut etre decompose en $(n - 2)$ triangles, et chaque triangle a une somme d'angles de $180°$.
+
+**2. Somme des angles d'un hexagone**
+
+Pour un hexagone, $n = 6$ :
+
+$$S = (6 - 2) \times 180° = 4 \times 180° = 720°$$
+
+**3. Angle d'un hexagone regulier**
+
+Un polygone regulier a tous ses angles egaux.
+
+Si la somme vaut $720°$ et qu'il y a $6$ angles egaux, alors chaque angle mesure :
+
+$$\frac{720°}{6} = 120°$$
+
+**4. Angle au centre**
+
+Dans un polygone regulier, les angles au centre sont egaux et leur somme fait un tour complet ($360°$).
+
+Pour un hexagone regulier a $6$ sommets, l'angle au centre mesure :
+
+$$\frac{360°}{6} = 60°$$
+
+On remarque que l'angle au centre ($60°$) et l'angle du polygone ($120°$) sont supplementaires : $60° + 120° = 180°$.
+</Solution>
+
+<Methode>
+**Formules pour un polygone regulier a n cotes**
+
+1. **Somme des angles** : $S = (n - 2) \times 180°$
+
+2. **Mesure d'un angle** : $\frac{S}{n} = \frac{(n - 2) \times 180°}{n}$
+
+3. **Angle au centre** : $\frac{360°}{n}$
+
+Ces formules sont valables pour tout polygone regulier : triangle equilateral ($n=3$), carre ($n=4$), pentagone ($n=5$), hexagone ($n=6$), etc.
+</Methode>

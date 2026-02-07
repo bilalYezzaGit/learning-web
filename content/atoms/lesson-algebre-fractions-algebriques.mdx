@@ -1,0 +1,107 @@
+---
+type: lesson
+title: "Fractions algebriques"
+difficulty: 1
+timeMinutes: 7
+tags: [algebre, fractions, simplification]
+---
+
+### Definition
+
+<Definition>
+
+Une **fraction algebrique** est un quotient de deux expressions algebriques.
+
+$$\frac{P(x)}{Q(x)} \quad \text{avec } Q(x) \neq 0$$
+
+</Definition>
+
+<Remark>
+
+La condition $Q(x) \neq 0$ est essentielle : le denominateur ne doit jamais etre nul.
+
+</Remark>
+
+### Condition d'existence
+
+<Property title="Domaine de definition">
+
+Une fraction algebrique $\frac{P(x)}{Q(x)}$ est definie pour toutes les valeurs de $x$ telles que $Q(x) \neq 0$.
+
+</Property>
+
+<Example>
+
+Determiner la condition d'existence de $\frac{2x + 3}{x - 5}$ :
+
+Le denominateur est $x - 5$. La fraction existe si :
+
+$$x - 5 \neq 0 \quad \Leftrightarrow \quad x \neq 5$$
+
+La fraction est donc definie pour $x \in \mathbb{R} \setminus \{5\}$.
+
+</Example>
+
+### Simplification de fractions
+
+<Property title="Simplification">
+
+Pour simplifier une fraction algebrique, on factorise le numerateur et le denominateur, puis on simplifie les facteurs communs.
+
+$$\frac{ab}{ac} = \frac{b}{c} \quad \text{si } a \neq 0 \text{ et } c \neq 0$$
+
+</Property>
+
+<Example title="Simplification par factorisation">
+
+Simplifier $\frac{x^2 - 4}{x - 2}$ :
+
+**Etape 1** : Factoriser le numerateur (difference de carres) :
+
+$$x^2 - 4 = (x + 2)(x - 2)$$
+
+**Etape 2** : Simplifier :
+
+$$\frac{x^2 - 4}{x - 2} = \frac{(x + 2)(x - 2)}{x - 2} = x + 2$$
+
+**Condition** : Cette simplification est valable pour $x \neq 2$.
+
+</Example>
+
+<Attention>
+
+On ne peut simplifier que les **facteurs** communs, pas les **termes** communs.
+
+**Correct** : $\frac{2(x + 3)}{2(x + 1)} = \frac{x + 3}{x + 1}$
+
+**Incorrect** : $\frac{x + 3}{x + 1} \neq \frac{3}{1}$ (on ne peut pas simplifier les $x$)
+
+</Attention>
+
+### Operations sur les fractions
+
+<Property title="Addition et soustraction">
+
+Pour additionner ou soustraire des fractions, on les met au meme denominateur :
+
+$$\frac{a}{c} + \frac{b}{c} = \frac{a + b}{c}$$
+
+</Property>
+
+<Property title="Multiplication">
+
+Pour multiplier des fractions, on multiplie les numerateurs entre eux et les denominateurs entre eux :
+
+$$\frac{a}{b} \times \frac{c}{d} = \frac{ac}{bd}$$
+
+</Property>
+
+<Example title="Multiplication de fractions">
+
+Calculer $\frac{x + 1}{x - 2} \times \frac{x - 2}{x + 3}$ :
+
+$$\frac{x + 1}{x - 2} \times \frac{x - 2}{x + 3} = \frac{(x + 1)(x - 2)}{(x - 2)(x + 3)} = \frac{x + 1}{x + 3}$$
+
+**Conditions** : $x \neq 2$ et $x \neq -3$.
+
+</Example>

@@ -1,0 +1,61 @@
+---
+type: exercise
+title: "Calcul avec la tangente"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [trigonometrie, tangente, longueur, application-concrete]
+---
+
+<Enonce>
+Du haut d'un phare de 30 m, on observe un bateau sous un angle de depression de 25° par rapport a l'horizontale.
+
+1. Faire un schema de la situation.
+2. Calculer la distance entre le pied du phare et le bateau (arrondir au metre).
+3. Calculer la distance directe entre le sommet du phare et le bateau.
+</Enonce>
+
+<Solution>
+**1.** Schema :
+
+Le triangle rectangle forme a :
+- Un angle droit au pied du phare
+- Un cote vertical de 30 m (hauteur du phare)
+- Un angle de 25° au sommet du phare (angle de depression)
+
+**2.** Distance horizontale phare-bateau :
+
+Soit d la distance horizontale cherchee. Dans le triangle rectangle :
+- La hauteur du phare (30 m) est le cote oppose a l'angle de 25°
+- La distance d est le cote adjacent
+
+On utilise la tangente :
+
+$$\tan(25°) = \frac{30}{d}$$
+
+$$d = \frac{30}{\tan(25°)} \approx \frac{30}{0{,}4663} \approx 64 \text{ m}$$
+
+Le bateau est a environ **64 m** du pied du phare.
+
+**3.** Distance directe :
+
+La distance directe est l'hypotenuse du triangle. On peut utiliser le sinus :
+
+$$\sin(25°) = \frac{30}{\text{hypotenuse}}$$
+
+$$\text{hypotenuse} = \frac{30}{\sin(25°)} \approx \frac{30}{0{,}4226} \approx 71 \text{ m}$$
+
+La distance directe entre le sommet du phare et le bateau est d'environ **71 m**.
+</Solution>
+
+<Methode>
+Pour un probleme avec angle de depression ou d'elevation :
+
+1. Tracer un schema avec le triangle rectangle
+2. Identifier l'angle, les cotes oppose, adjacent et l'hypotenuse
+3. Choisir le rapport trigonometrique adapte :
+   - Tangente si on a oppose et adjacent
+   - Sinus si on a oppose et hypotenuse
+   - Cosinus si on a adjacent et hypotenuse
+4. Resoudre l'equation pour trouver la longueur inconnue
+</Methode>

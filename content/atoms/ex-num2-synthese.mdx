@@ -1,0 +1,88 @@
+---
+type: exercise
+title: "Probleme de synthese sur intervalles et encadrements"
+difficulty: 3
+timeMinutes: 15
+category: synthese
+tags: [intervalles, encadrements, valeur-absolue]
+---
+
+<Enonce>
+Soit $x \in [1, 4]$.
+
+1. Trouver un encadrement de $\frac{1}{x}$.
+
+2. En deduire un encadrement de $\frac{2}{x} + 3$.
+
+3. Montrer que $|x - 2| \leq 2$.
+
+4. Determiner l'ensemble des valeurs de $x$ telles que $|x - 2| < 1$ et l'exprimer sous forme d'intervalle.
+</Enonce>
+
+<Solution>
+**1.** Encadrement de $\frac{1}{x}$
+
+On a $1 \leq x \leq 4$ avec $x > 0$.
+
+Lorsqu'on prend l'inverse de nombres positifs, **l'ordre est inverse** :
+
+$$\frac{1}{4} \leq \frac{1}{x} \leq \frac{1}{1}$$
+
+$$\frac{1}{4} \leq \frac{1}{x} \leq 1$$
+
+**2.** Encadrement de $\frac{2}{x} + 3$
+
+On multiplie l'encadrement de $\frac{1}{x}$ par 2 :
+
+$$\frac{2}{4} \leq \frac{2}{x} \leq 2 \times 1$$
+
+$$\frac{1}{2} \leq \frac{2}{x} \leq 2$$
+
+Puis on ajoute 3 :
+
+$$\frac{1}{2} + 3 \leq \frac{2}{x} + 3 \leq 2 + 3$$
+
+$$\frac{7}{2} \leq \frac{2}{x} + 3 \leq 5$$
+
+Donc : $3{,}5 \leq \frac{2}{x} + 3 \leq 5$
+
+**3.** Montrer que $|x - 2| \leq 2$
+
+Pour $x \in [1, 4]$, on a :
+
+$$1 \leq x \leq 4$$
+
+En soustrayant 2 :
+
+$$1 - 2 \leq x - 2 \leq 4 - 2$$
+
+$$-1 \leq x - 2 \leq 2$$
+
+Donc $x - 2$ est compris entre $-1$ et $2$. En particulier, la valeur absolue de $x - 2$ ne depasse jamais 2 :
+
+$$|x - 2| \leq 2$$
+
+**4.** Ensemble des valeurs telles que $|x - 2| < 1$
+
+L'inequation $|x - 2| < 1$ signifie :
+
+$$-1 < x - 2 < 1$$
+
+$$-1 + 2 < x < 1 + 2$$
+
+$$1 < x < 3$$
+
+L'ensemble des valeurs est donc l'intervalle **ouvert** $]1, 3[$.
+
+Comme on a aussi la contrainte $x \in [1, 4]$, l'intersection est :
+
+$$]1, 3[ \cap [1, 4] = ]1, 3[$$
+
+**Ensemble des solutions** : $S = ]1, 3[$
+</Solution>
+
+<Hint>
+Pour la question 1, rappelez-vous que lorsqu'on inverse des inegalites sur des nombres positifs, l'ordre change.
+
+Pour la question 3, partez de l'encadrement $1 \leq x \leq 4$ et centrez-le autour de 2 en soustrayant 2 a tous les membres.
+</Hint>

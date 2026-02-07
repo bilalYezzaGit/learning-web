@@ -1,0 +1,112 @@
+---
+type: exercise
+title: "Démonstration sur les racines carrées"
+difficulty: 3
+timeMinutes: 15
+category: synthese
+tags: [racine-carree, demonstration, irrationalite, num1]
+---
+
+<Enonce>
+**1.** Montrer que $\sqrt{2}$ est un nombre irrationnel.
+
+**Indication** : Procéder par l'absurde en supposant que $\sqrt{2} = \frac{p}{q}$ avec $p$ et $q$ entiers **premiers entre eux** (c'est-à-dire $\text{pgcd}(p, q) = 1$).
+
+**2.** En déduire que $3 + \sqrt{2}$ est irrationnel.
+
+**3.** Montrer que $\frac{1}{\sqrt{2}}$ est irrationnel.
+</Enonce>
+
+<Solution>
+**1. Démonstration de l'irrationalité de $\sqrt{2}$**
+
+Procédons par l'absurde. Supposons que $\sqrt{2}$ est rationnel.
+
+Alors il existe deux entiers $p$ et $q$ **premiers entre eux** tels que :
+
+$$\sqrt{2} = \frac{p}{q}$$
+
+En élevant au carré les deux membres :
+
+$$2 = \frac{p^2}{q^2}$$
+
+$$p^2 = 2q^2$$
+
+Donc $p^2$ est pair, ce qui implique que **$p$ est pair** (car si $p$ était impair, $p^2$ serait impair).
+
+On peut donc écrire $p = 2k$ avec $k$ entier.
+
+En substituant dans l'équation :
+
+$$(2k)^2 = 2q^2$$
+
+$$4k^2 = 2q^2$$
+
+$$2k^2 = q^2$$
+
+Donc $q^2$ est pair, ce qui implique que **$q$ est pair**.
+
+On a montré que $p$ et $q$ sont tous les deux pairs, donc ils ont 2 comme diviseur commun.
+
+Ceci **contredit** l'hypothèse que $p$ et $q$ sont premiers entre eux.
+
+Conclusion : $\sqrt{2}$ est **irrationnel**.
+
+**2. Démonstration pour $3 + \sqrt{2}$**
+
+Procédons par l'absurde. Supposons que $3 + \sqrt{2}$ est rationnel.
+
+Alors il existe un rationnel $r$ tel que :
+
+$$3 + \sqrt{2} = r$$
+
+$$\sqrt{2} = r - 3$$
+
+Or $r$ et $3$ sont rationnels, donc $r - 3$ est rationnel.
+
+Cela impliquerait que $\sqrt{2}$ est rationnel, ce qui **contredit** le résultat de la question 1.
+
+Conclusion : $3 + \sqrt{2}$ est **irrationnel**.
+
+**3. Démonstration pour $\frac{1}{\sqrt{2}}$**
+
+Procédons par l'absurde. Supposons que $\frac{1}{\sqrt{2}}$ est rationnel.
+
+Alors il existe un rationnel $r$ tel que :
+
+$$\frac{1}{\sqrt{2}} = r$$
+
+$$\sqrt{2} = \frac{1}{r}$$
+
+Or $r$ est rationnel (et non nul), donc $\frac{1}{r}$ est aussi rationnel.
+
+Cela impliquerait que $\sqrt{2}$ est rationnel, ce qui **contredit** le résultat de la question 1.
+
+Conclusion : $\frac{1}{\sqrt{2}}$ est **irrationnel**.
+</Solution>
+
+<Methode>
+Pour démontrer qu'un nombre est irrationnel :
+
+**Méthode 1 : Raisonnement par l'absurde direct**
+- Supposer que le nombre est rationnel : $x = \frac{p}{q}$ avec $p, q$ premiers entre eux
+- Déduire des conséquences mathématiques
+- Arriver à une contradiction
+
+**Méthode 2 : Utiliser un résultat connu**
+- Si on sait qu'un nombre $a$ est irrationnel
+- Et qu'on peut écrire $x = f(a)$ où $f$ est une fonction préservant l'irrationalité
+- Alors $x$ est irrationnel
+
+Par exemple : si $a$ irrationnel et $r$ rationnel, alors $r + a$ et $\frac{1}{a}$ sont irrationnels.
+</Methode>
+
+<Hint>
+Pour la question 1, l'hypothèse clé est que $p$ et $q$ sont **premiers entre eux**. C'est cette hypothèse qui va être contredite.
+</Hint>
+
+<Erreurs>
+- **Oublier** de préciser que $p$ et $q$ sont premiers entre eux : sans cette hypothèse, la démonstration ne fonctionne pas (on pourrait simplifier la fraction)
+- **Confondre** "$p^2$ pair" avec "$p$ pair" sans justifier : il faut rappeler que le carré d'un nombre impair est impair
+- Pour la question 2, ne pas raisonner par l'absurde : il faut supposer que $3 + \sqrt{2}$ est rationnel et en déduire que $\sqrt{2}$ le serait aussi
+</Erreurs>

@@ -1,0 +1,96 @@
+---
+type: lesson
+title: "Image et antecedent d'une fonction"
+difficulty: 0
+timeMinutes: 4
+tags: [fonctions, image, antecedent]
+---
+
+### Definitions
+
+<Definition title="Image">
+
+Soit $f$ une fonction et $a \in D_f$.
+
+L'**image** de $a$ par $f$ est le nombre $f(a)$.
+
+On note : $a \xrightarrow{f} f(a)$
+
+</Definition>
+
+<Definition title="Antecedent">
+
+Soit $f$ une fonction et $b$ un reel.
+
+Un **antecedent** de $b$ par $f$ est un nombre $a \in D_f$ tel que $f(a) = b$.
+
+</Definition>
+
+<Example title="Calcul d'image et d'antecedent">
+
+Soit $f(x) = x^2 - 3$.
+
+**Image de 2** : $f(2) = 2^2 - 3 = 4 - 3 = 1$. L'image de $2$ est $1$.
+
+**Antecedent de 1** : On cherche $x$ tel que $f(x) = 1$.
+
+$$x^2 - 3 = 1 \Rightarrow x^2 = 4 \Rightarrow x = -2 \text{ ou } x = 2$$
+
+Les antecedents de $1$ sont $-2$ et $2$.
+
+</Example>
+
+### Unicite de l'image
+
+<Property>
+
+Un nombre $a$ a **une seule image** par $f$ (si $a \in D_f$).
+
+</Property>
+
+<Remark>
+
+C'est la definition meme d'une fonction : a chaque valeur $x$ du domaine correspond **une et une seule** valeur $f(x)$.
+
+</Remark>
+
+### Multiplicite des antecedents
+
+Contrairement a l'image, un nombre peut avoir **zero, un ou plusieurs antecedents**.
+
+<Example title="Nombre d'antecedents">
+
+Soit $f(x) = x^2$.
+
+- Le nombre $4$ a deux antecedents : $-2$ et $2$ (car $f(-2) = f(2) = 4$)
+- Le nombre $0$ a un seul antecedent : $0$ (car $f(0) = 0$)
+- Le nombre $-1$ n'a aucun antecedent (car $x^2 \geq 0$ pour tout $x \in \mathbb{R}$)
+
+</Example>
+
+### Lecture graphique
+
+<Property title="Methode de lecture graphique">
+
+Sur le graphe de $f$ :
+
+- **Image de $a$** : on trace la verticale $x = a$. L'ordonnee du point d'intersection avec la courbe est $f(a)$.
+
+- **Antecedent(s) de $b$** : on trace l'horizontale $y = b$. Les abscisses des points d'intersection avec la courbe sont les antecedents de $b$.
+
+</Property>
+
+<Remark>
+
+La methode graphique permet de visualiser rapidement le nombre d'antecedents d'un nombre : c'est le nombre de points d'intersection entre la droite horizontale $y = b$ et la courbe de $f$.
+
+</Remark>
+
+<Attention>
+
+Ne pas confondre :
+
+- "L'image de $a$" (on part de $x$ et on cherche $y$)
+- "Un antecedent de $b$" (on part de $y$ et on cherche $x$)
+
+</Attention>

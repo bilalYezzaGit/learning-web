@@ -1,0 +1,167 @@
+---
+type: lesson
+title: "Representations graphiques"
+difficulty: 1
+timeMinutes: 6
+tags: [statistiques, graphiques, diagramme]
+---
+
+### Introduction
+
+Les representations graphiques permettent de visualiser rapidement les informations contenues dans un tableau statistique. Le choix du graphique depend du type de donnees.
+
+### Diagramme en batons
+
+<Property title="Diagramme en batons (bar chart)">
+
+Le **diagramme en batons** est utilise pour representer un **caractere quantitatif discret** ou un caractere qualitatif.
+
+- En abscisse : les valeurs du caractere
+- En ordonnee : les effectifs (ou les frequences)
+- On trace des batons verticaux (segments) dont la hauteur represente l'effectif
+
+</Property>
+
+<Example>
+
+Nombre de freres et sœurs des eleves d'une classe :
+
+| Nombre | 0 | 1 | 2 | 3 | 4 |
+|--------|---|---|---|---|---|
+| Effectif | 5 | 12 | 8 | 4 | 1 |
+
+On trace 5 batons aux positions 0, 1, 2, 3, 4 avec des hauteurs 5, 12, 8, 4, 1.
+
+</Example>
+
+<Remark>
+
+Les batons ne se touchent pas, car les valeurs sont discretes (isolees).
+
+</Remark>
+
+### Diagramme circulaire
+
+<Property title="Diagramme circulaire (pie chart)">
+
+Le **diagramme circulaire** (ou diagramme en secteurs) est utilise pour representer des **proportions** d'un tout.
+
+Chaque valeur du caractere est representee par un **secteur angulaire** dont l'angle est proportionnel a sa frequence :
+
+$$\text{Angle du secteur} = \text{Frequence} \times 360°$$
+
+</Property>
+
+<Example>
+
+Moyen de transport des eleves (30 eleves au total) :
+
+| Transport | Effectif | Frequence | Angle |
+|-----------|----------|-----------|-------|
+| Marche | 12 | 0,4 | $0,4 \times 360° = 144°$ |
+| Bus | 10 | 0,33 | $0,33 \times 360° = 120°$ |
+| Voiture | 8 | 0,27 | $0,27 \times 360° = 96°$ |
+| **Total** | **30** | **1** | **360°** |
+
+On trace un cercle et on partage en 3 secteurs d'angles 144°, 120° et 96°.
+
+</Example>
+
+<Attention>
+
+La somme des angles doit toujours etre egale a 360°. C'est un bon moyen de verifier ses calculs.
+
+</Attention>
+
+### Histogramme
+
+<Property title="Histogramme">
+
+L'**histogramme** est utilise pour representer un **caractere quantitatif continu** groupe en classes.
+
+- En abscisse : les classes (intervalles)
+- En ordonnee : les effectifs (ou frequences)
+- On trace des **rectangles** (pas des batons) qui se touchent
+- L'**aire** de chaque rectangle est proportionnelle a l'effectif de la classe
+
+</Property>
+
+<Remark title="Histogramme avec classes de meme amplitude">
+
+Quand toutes les classes ont la **meme amplitude**, la hauteur du rectangle est simplement l'effectif (ou la frequence). L'aire est alors automatiquement proportionnelle a l'effectif.
+
+</Remark>
+
+<Example>
+
+Tailles (en cm) d'un groupe de 40 eleves :
+
+| Classe | Effectif |
+|--------|----------|
+| $[150 ; 160[$ | 8 |
+| $[160 ; 170[$ | 18 |
+| $[170 ; 180[$ | 10 |
+| $[180 ; 190[$ | 4 |
+
+On trace 4 rectangles contigus (qui se touchent) au-dessus de chaque classe, de hauteurs 8, 18, 10, 4.
+
+</Example>
+
+<Attention title="Classes d'amplitudes differentes">
+
+Si les classes n'ont **pas la meme amplitude**, il faut calculer des hauteurs pour que l'aire reste proportionnelle a l'effectif :
+
+$$\text{Hauteur du rectangle} = \frac{\text{Effectif}}{\text{Amplitude de la classe}}$$
+
+</Attention>
+
+### Polygone des frequences cumulees
+
+<Property title="Frequences cumulees croissantes">
+
+La **frequence cumulee croissante** d'une valeur est la somme des frequences de toutes les valeurs inferieures ou egales a cette valeur.
+
+Le **polygone des frequences cumulees** relie les points de coordonnees (valeur, frequence cumulee).
+
+</Property>
+
+<Example>
+
+Notes d'un controle :
+
+| Note | Effectif | Frequence | Frequence cumulee |
+|------|----------|-----------|-------------------|
+| 8 | 2 | 0,1 | 0,1 |
+| 10 | 5 | 0,25 | 0,35 |
+| 12 | 8 | 0,4 | 0,75 |
+| 14 | 3 | 0,15 | 0,9 |
+| 16 | 2 | 0,1 | 1 |
+
+On trace les points (8 ; 0,1), (10 ; 0,35), (12 ; 0,75), (14 ; 0,9), (16 ; 1) et on les relie.
+
+</Example>
+
+<Remark>
+
+Le polygone des frequences cumulees permet de determiner graphiquement la mediane : c'est l'abscisse du point dont l'ordonnee vaut 0,5.
+
+</Remark>
+
+### Choix du graphique
+
+<Property title="Guide de choix">
+
+| Type de caractere | Graphique adapte |
+|-------------------|------------------|
+| Qualitatif ou discret avec peu de valeurs | Diagramme en batons, diagramme circulaire |
+| Quantitatif continu (ou discret avec beaucoup de valeurs) | Histogramme |
+| Etude de la repartition (proportions) | Diagramme circulaire |
+| Etude des frequences cumulees | Polygone des frequences cumulees |
+
+</Property>
+
+<Attention>
+
+Ne jamais tracer un histogramme pour des donnees discretes non groupees : utiliser un diagramme en batons. Les rectangles de l'histogramme se touchent car les classes sont des intervalles continus.
+
+</Attention>

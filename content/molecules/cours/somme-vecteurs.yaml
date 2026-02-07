@@ -1,20 +1,45 @@
-title: Somme de deux vecteurs - Vecteurs colineaires
-description: "Operations sur les vecteurs et colinearite"
+title: "Somme de vecteurs"
+description: "Relation de Chasles, regle du parallelogramme, proprietes de l'addition vectorielle"
 programme: 1ere-tc
 trimester: T2
 order: 5
-estimatedMinutes: 120
+estimatedMinutes: 160
 objectives:
-  - "Calculer la somme de deux vecteurs"
-  - "Reconnaitre des vecteurs colineaires"
-  - "Utiliser la relation de Chasles"
+  - "Maitriser la relation de Chasles"
+  - "Construire la somme de vecteurs avec la regle du parallelogramme"
+  - "Connaitre les proprietes de l'addition vectorielle"
+  - "Appliquer les vecteurs a la geometrie"
 
 sections:
-  - label: "Somme de vecteurs"
+  - label: "Relation de Chasles"
     steps:
-      - lesson-somme-vecteurs
-      - ex-somme-vecteurs-01
+      - lesson-sv-relation-chasles
+      - lesson-sv-regle-parallelogramme
+      - ex-sv-chasles-simple
+      - ex-sv-chasles-chaine
       - quiz:
-          - qcm-sv-1
-          - qcm-sv-2
-          - qcm-sv-3
+          - qcm-sv-chasles-base
+          - qcm-sv-chasles-trois-points
+          - qcm-sv-piege-ordre
+
+  - label: "Proprietes de l'addition"
+    steps:
+      - lesson-sv-proprietes-addition
+      - lesson-sv-soustraction-vecteurs
+      - ex-sv-parallelogramme-somme
+      - ex-sv-soustraction
+      - quiz:
+          - qcm-sv-commutativite
+          - qcm-sv-associativite
+          - qcm-sv-element-neutre
+          - qcm-sv-oppose
+          - qcm-sv-soustraction-def
+
+  - label: "Applications geometriques"
+    steps:
+      - lesson-sv-applications-geometriques
+      - ex-sv-simplification-complexe
+      - ex-sv-demonstration-alignement
+      - quiz:
+          - qcm-sv-simplification
+          - qcm-sv-piege-signe

@@ -1,0 +1,76 @@
+---
+type: exercise
+title: "Dérivées de fonctions composées"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [derivation, composee, racine]
+---
+
+<Enonce>
+Calculer la dérivée des fonctions suivantes :
+
+1. $f(x) = (3x+1)^4$
+2. $g(x) = \sqrt{2x^2-1}$ sur un domaine à préciser
+3. $h(x) = \frac{1}{(2x+5)^3}$
+</Enonce>
+
+<Solution>
+**1. Dérivée de $f(x) = (3x+1)^4$**
+
+C'est une fonction composée de la forme $(u(x))^4$ avec $u(x) = 3x + 1$.
+
+Appliquons la formule $(u^n)' = n \times u' \times u^{n-1}$ :
+
+$$u'(x) = 3$$
+
+$$f'(x) = 4 \times 3 \times (3x+1)^3$$
+
+$$f'(x) = 12(3x+1)^3$$
+
+**2. Dérivée de $g(x) = \sqrt{2x^2-1}$**
+
+**Domaine de définition :**
+
+Pour que $\sqrt{2x^2-1}$ existe, il faut que $2x^2 - 1 \geq 0$.
+
+$$2x^2 \geq 1 \Leftrightarrow x^2 \geq \frac{1}{2} \Leftrightarrow |x| \geq \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}$$
+
+Donc : $D_g = ]-\infty, -\frac{\sqrt{2}}{2}] \cup [\frac{\sqrt{2}}{2}, +\infty[$
+
+**Calcul de la dérivée :**
+
+On peut écrire $g(x) = \sqrt{u(x)}$ avec $u(x) = 2x^2 - 1$.
+
+La formule de dérivation est $(\sqrt{u})' = \frac{u'}{2\sqrt{u}}$.
+
+$$u'(x) = 4x$$
+
+$$g'(x) = \frac{4x}{2\sqrt{2x^2-1}} = \frac{2x}{\sqrt{2x^2-1}}$$
+
+**3. Dérivée de $h(x) = \frac{1}{(2x+5)^3}$**
+
+On peut écrire $h(x) = (2x+5)^{-3} = (u(x))^{-3}$ avec $u(x) = 2x + 5$.
+
+Appliquons $(u^n)' = n \times u' \times u^{n-1}$ avec $n = -3$ :
+
+$$u'(x) = 2$$
+
+$$h'(x) = -3 \times 2 \times (2x+5)^{-4}$$
+
+$$h'(x) = -6(2x+5)^{-4} = \frac{-6}{(2x+5)^4}$$
+</Solution>
+
+<Attention>
+**Ne pas oublier $u'$ !**
+
+Pour dériver une fonction composée $(u(x))^n$, on applique $(u^n)' = n \times u' \times u^{n-1}$.
+
+Le facteur $u'$ est indispensable. Une erreur fréquente est d'écrire :
+
+$$[(3x+1)^4]' = 4(3x+1)^3 \quad \text{FAUX !}$$
+
+La bonne réponse est :
+
+$$[(3x+1)^4]' = 4 \times 3 \times (3x+1)^3 = 12(3x+1)^3$$
+</Attention>

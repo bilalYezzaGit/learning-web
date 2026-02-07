@@ -1,0 +1,19 @@
+title: "Equations, inequations et encadrements"
+description: "Resoudre des equations avec valeur absolue et effectuer des encadrements"
+difficulty: 2
+estimatedMinutes: 35
+tags: [valeur-absolue, equations, encadrements]
+
+steps:
+  - lesson-num2-equations-valeur-absolue
+  - lesson-num2-encadrements
+  - ex-num2-valeur-absolue-equation
+  - ex-num2-valeur-absolue-inequation
+  - ex-num2-encadrements
+  - ex-num2-synthese
+  - quiz:
+      - qcm-num2-equation-va
+      - qcm-num2-inequation-va
+      - qcm-num2-encadrement-somme
+      - qcm-num2-piege-encadrement-difference
+      - qcm-num2-piege-inverse

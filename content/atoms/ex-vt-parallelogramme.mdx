@@ -1,0 +1,64 @@
+---
+type: exercise
+title: "Demontrer qu'un quadrilatere est un parallelogramme"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [vecteurs, parallelogramme, demonstration]
+---
+
+<Enonce>
+Soit les points A(1;1), B(4;2), C(5;5) et D(2;4).
+
+1. Calculer les coordonnees des vecteurs $\vec{AB}$ et $\vec{DC}$.
+2. Calculer les coordonnees des vecteurs $\vec{AD}$ et $\vec{BC}$.
+3. Montrer que ABCD est un parallelogramme.
+</Enonce>
+
+<Solution>
+**1.** Calcul de $\vec{AB}$ et $\vec{DC}$ :
+
+$$\vec{AB} = \begin{pmatrix} x_B - x_A \\ y_B - y_A \end{pmatrix} = \begin{pmatrix} 4-1 \\ 2-1 \end{pmatrix} = \begin{pmatrix} 3 \\ 1 \end{pmatrix}$$
+
+$$\vec{DC} = \begin{pmatrix} x_C - x_D \\ y_C - y_D \end{pmatrix} = \begin{pmatrix} 5-2 \\ 5-4 \end{pmatrix} = \begin{pmatrix} 3 \\ 1 \end{pmatrix}$$
+
+**2.** Calcul de $\vec{AD}$ et $\vec{BC}$ :
+
+$$\vec{AD} = \begin{pmatrix} x_D - x_A \\ y_D - y_A \end{pmatrix} = \begin{pmatrix} 2-1 \\ 4-1 \end{pmatrix} = \begin{pmatrix} 1 \\ 3 \end{pmatrix}$$
+
+$$\vec{BC} = \begin{pmatrix} x_C - x_B \\ y_C - y_B \end{pmatrix} = \begin{pmatrix} 5-4 \\ 5-2 \end{pmatrix} = \begin{pmatrix} 1 \\ 3 \end{pmatrix}$$
+
+**3.** Demonstration que ABCD est un parallelogramme :
+
+On constate que :
+- $\vec{AB} = \vec{DC}$ (les deux vecteurs ont les memes coordonnees)
+- $\vec{AD} = \vec{BC}$ (les deux vecteurs ont les memes coordonnees)
+
+**Or, un quadrilatere est un parallelogramme si et seulement si ses cotes opposes sont definis par des vecteurs egaux.**
+
+**Conclusion** : ABCD est un parallelogramme car $\vec{AB} = \vec{DC}$ et $\vec{AD} = \vec{BC}$.
+
+**Methode alternative** : On pouvait aussi montrer que $\vec{AB} = \vec{DC}$ uniquement, ce qui suffit pour prouver que ABCD est un parallelogramme (definition vectorielle).
+</Solution>
+
+<Methode>
+Pour demontrer qu'un quadrilatere ABCD est un parallelogramme, on peut utiliser la caracterisation vectorielle :
+
+**Methode 1** : Montrer que $\vec{AB} = \vec{DC}$ (les cotes opposes sont egaux)
+
+**Methode 2** : Montrer que les diagonales se coupent en leur milieu (calculer les coordonnees des milieux)
+
+**Methode 3** : Montrer que $\vec{AC} = \vec{AB} + \vec{AD}$ (relation de Chasles dans un parallelogramme)
+
+La methode vectorielle (1) est la plus directe quand on a les coordonnees.
+</Methode>
+
+<Hint>
+Calculez les coordonnees des vecteurs qui representent les cotes opposes du quadrilatere. Si ces vecteurs sont egaux, le quadrilatere est un parallelogramme.
+</Hint>
+
+<Erreurs>
+- Confondre l'ordre des points : $\vec{AB} \neq \vec{BA}$ (vecteurs opposes)
+- Verifier seulement une paire de cotes opposes n'est pas suffisant en general (sauf si on utilise la definition vectorielle stricte)
+- Oublier de conclure explicitement en citant la propriete utilisee
+</Erreurs>

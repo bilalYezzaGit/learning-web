@@ -1,0 +1,115 @@
+---
+type: exercise
+title: "Étude de variations d'un polynôme"
+difficulty: 3
+timeMinutes: 15
+category: synthese
+tags: [derivation, variations, polynome, extremums]
+---
+
+<Enonce>
+Soit $f(x) = 2x^3 - 9x^2 + 12x - 3$.
+
+1. Déterminer $D_f$, l'ensemble de définition de $f$.
+2. Calculer $f'(x)$.
+3. Résoudre l'équation $f'(x) = 0$.
+4. Étudier le signe de $f'(x)$ et dresser le tableau de variations de $f$.
+5. Déterminer les extremums locaux de $f$.
+6. Déterminer l'équation de la tangente au point d'inflexion d'abscisse $x = \frac{3}{2}$.
+</Enonce>
+
+<Solution>
+**1. Ensemble de définition**
+
+$f$ est une fonction polynomiale, donc :
+
+$$D_f = \mathbb{R}$$
+
+**2. Calcul de $f'(x)$**
+
+$$f'(x) = 2 \times 3x^2 - 9 \times 2x + 12$$
+
+$$f'(x) = 6x^2 - 18x + 12$$
+
+On peut factoriser par 6 :
+
+$$f'(x) = 6(x^2 - 3x + 2)$$
+
+**3. Résolution de $f'(x) = 0$**
+
+$$f'(x) = 0 \Leftrightarrow 6(x^2 - 3x + 2) = 0$$
+
+$$\Leftrightarrow x^2 - 3x + 2 = 0$$
+
+Calculons le discriminant :
+
+$$\Delta = (-3)^2 - 4 \times 1 \times 2 = 9 - 8 = 1 > 0$$
+
+Deux racines distinctes :
+
+$$x_1 = \frac{3 - 1}{2} = 1 \quad \text{et} \quad x_2 = \frac{3 + 1}{2} = 2$$
+
+**4. Signe de $f'(x)$ et tableau de variations**
+
+$f'(x) = 6(x-1)(x-2)$
+
+Le signe dépend du produit $(x-1)(x-2)$ (car $6 > 0$) :
+
+| $x$ | $-\infty$ | | $1$ | | $2$ | | $+\infty$ |
+|-----|-----------|---|-----|---|-----|---|-----------|
+| $x-1$ | $-$ | | $0$ | | $+$ | | $+$ |
+| $x-2$ | $-$ | | $-$ | | $0$ | | $+$ |
+| $f'(x)$ | $+$ | | $0$ | $-$ | $0$ | | $+$ |
+
+Calculons les valeurs de $f$ aux points critiques :
+
+$$f(1) = 2(1)^3 - 9(1)^2 + 12(1) - 3 = 2 - 9 + 12 - 3 = 2$$
+
+$$f(2) = 2(8) - 9(4) + 12(2) - 3 = 16 - 36 + 24 - 3 = 1$$
+
+**Tableau de variations :**
+
+| $x$ | $-\infty$ | | $1$ | | $2$ | | $+\infty$ |
+|-----|-----------|---|-----|---|-----|---|-----------|
+| $f'(x)$ | | $+$ | $0$ | $-$ | $0$ | $+$ | |
+| $f(x)$ | $-\infty$ | $\nearrow$ | $2$ | $\searrow$ | $1$ | $\nearrow$ | $+\infty$ |
+
+**5. Extremums locaux**
+
+- **Maximum local** en $x = 1$ : $f(1) = 2$
+- **Minimum local** en $x = 2$ : $f(2) = 1$
+
+**6. Équation de la tangente au point d'inflexion**
+
+Un point d'inflexion est un point où la dérivée seconde s'annule.
+
+Calculons $f''(x)$ :
+
+$$f''(x) = 12x - 18 = 6(2x - 3)$$
+
+$$f''(x) = 0 \Leftrightarrow x = \frac{3}{2}$$
+
+C'est bien le point d'inflexion.
+
+Calculons $f\left(\frac{3}{2}\right)$ :
+
+$$f\left(\frac{3}{2}\right) = 2\left(\frac{3}{2}\right)^3 - 9\left(\frac{3}{2}\right)^2 + 12\left(\frac{3}{2}\right) - 3$$
+
+$$= 2 \times \frac{27}{8} - 9 \times \frac{9}{4} + 18 - 3$$
+
+$$= \frac{27}{4} - \frac{81}{4} + 15 = \frac{27 - 81 + 60}{4} = \frac{6}{4} = \frac{3}{2}$$
+
+Calculons $f'\left(\frac{3}{2}\right)$ (pente de la tangente) :
+
+$$f'\left(\frac{3}{2}\right) = 6\left(\frac{3}{2} - 1\right)\left(\frac{3}{2} - 2\right) = 6 \times \frac{1}{2} \times \left(-\frac{1}{2}\right) = -\frac{3}{2}$$
+
+Équation de la tangente :
+
+$$y = f'\left(\frac{3}{2}\right)\left(x - \frac{3}{2}\right) + f\left(\frac{3}{2}\right)$$
+
+$$y = -\frac{3}{2}\left(x - \frac{3}{2}\right) + \frac{3}{2}$$
+
+$$y = -\frac{3}{2}x + \frac{9}{4} + \frac{3}{2} = -\frac{3}{2}x + \frac{9}{4} + \frac{6}{4}$$
+
+$$y = -\frac{3}{2}x + \frac{15}{4}$$
+</Solution>

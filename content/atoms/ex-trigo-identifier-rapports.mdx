@@ -1,0 +1,69 @@
+---
+type: exercise
+title: "Identifier les rapports trigonometriques"
+difficulty: 0
+timeMinutes: 6
+category: application
+tags: [trigonometrie, identification, triangle-rectangle]
+---
+
+<Enonce>
+Soit ABC un triangle rectangle en A avec AB = 3, AC = 4, BC = 5.
+
+1. Exprimer sin(B), cos(B) et tan(B).
+2. Exprimer sin(C), cos(C) et tan(C).
+3. Verifier que sin²(B) + cos²(B) = 1.
+</Enonce>
+
+<Solution>
+**1.** Pour l'angle B :
+
+- Le cote oppose a B est AC = 4
+- Le cote adjacent a B est AB = 3
+- L'hypotenuse est BC = 5
+
+Donc :
+
+$$\sin(B) = \frac{\text{oppose}}{\text{hypotenuse}} = \frac{AC}{BC} = \frac{4}{5}$$
+
+$$\cos(B) = \frac{\text{adjacent}}{\text{hypotenuse}} = \frac{AB}{BC} = \frac{3}{5}$$
+
+$$\tan(B) = \frac{\text{oppose}}{\text{adjacent}} = \frac{AC}{AB} = \frac{4}{3}$$
+
+**2.** Pour l'angle C :
+
+- Le cote oppose a C est AB = 3
+- Le cote adjacent a C est AC = 4
+- L'hypotenuse est BC = 5
+
+Donc :
+
+$$\sin(C) = \frac{AB}{BC} = \frac{3}{5}$$
+
+$$\cos(C) = \frac{AC}{BC} = \frac{4}{5}$$
+
+$$\tan(C) = \frac{AB}{AC} = \frac{3}{4}$$
+
+**3.** Verification :
+
+$$\sin^2(B) + \cos^2(B) = \left(\frac{4}{5}\right)^2 + \left(\frac{3}{5}\right)^2 = \frac{16}{25} + \frac{9}{25} = \frac{25}{25} = 1$$
+
+La relation est bien verifiee.
+</Solution>
+
+<Methode>
+Pour identifier les rapports trigonometriques dans un triangle rectangle :
+
+1. Reperer l'angle considere et l'angle droit
+2. Identifier les trois cotes : oppose, adjacent, hypotenuse
+3. Appliquer **SOH-CAH-TOA** :
+   - **S**inus = **O**ppose / **H**ypotenuse
+   - **C**osinus = **A**djacent / **H**ypotenuse
+   - **T**angente = **O**ppose / **A**djacent
+</Methode>
+
+<Erreurs>
+- Confondre le cote oppose et le cote adjacent (depend de l'angle considere)
+- Oublier que l'hypotenuse est toujours le cote oppose a l'angle droit
+- Inverser les rapports (par exemple ecrire sin = adjacent/hypotenuse)
+</Erreurs>

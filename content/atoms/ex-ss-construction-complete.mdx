@@ -1,0 +1,97 @@
+---
+type: exercise
+title: "Construction complete d'une section"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [sections-solides, construction, cube]
+---
+
+<Enonce>
+ABCDEFGH est un cube d'arete a. On considere les points suivants :
+- M est un point de [AE] tel que $AM = \frac{a}{3}$
+- N est le milieu de [FG]
+- P est un point de [GH] tel que $GP = \frac{a}{4}$
+
+Construire la section du cube par le plan (MNP) et determiner la nature du polygone obtenu.
+</Enonce>
+
+<Solution>
+**Etape 1 : Positionnement des points**
+
+Dans le cube ABCDEFGH ou ABCD est la base inferieure et EFGH la base superieure :
+- M est sur l'arete verticale [AE] a $\frac{a}{3}$ de A
+- N est le milieu de [FG] sur la face superieure EFGH
+- P est sur [GH] a $\frac{a}{4}$ de G
+
+**Etape 2 : Construction face par face**
+
+**Face AEHD (face gauche)** :
+- M est sur [AE]
+- Cherchons l'intersection avec [DH] : soit Q ce point
+- Le plan coupe cette face selon [MQ]
+
+**Face EFGH (face superieure)** :
+- N est le milieu de [FG]
+- P est sur [GH]
+- Le segment [NP] appartient a la section
+
+**Face BFGC (face droite)** :
+- Cherchons l'intersection avec cette face
+- Le plan coupe [FG] en N (deja trouve)
+- Prolongeons pour trouver l'intersection avec [BC] : soit R ce point
+
+**Face ABCD (face inferieure)** :
+- Cherchons l'intersection avec cette face
+- Le plan entre par M (sur [AE])
+
+**Etape 3 : Determination des intersections**
+
+En utilisant les proprietes des plans coupant les faces :
+
+Le plan (MNP) coupe :
+- [AE] en M
+- [FG] en N
+- [GH] en P
+- [DH] en Q (a determiner par alignement)
+- [AB] ou [BC] en un point supplementaire
+
+**Construction complete** :
+
+En procedant methodiquement :
+1. On a M, N, P
+2. Le plan coupe [DH] en un point Q
+3. Le plan coupe [AB] en un point R
+
+La section est un **pentagone** MNPQR (ou dans un ordre different selon la construction).
+
+**Etape 4 : Nature du polygone**
+
+En raison des positions non symetriques des points M, N et P, et du fait que le plan coupe 5 faces du cube, la section est un **pentagone** (polygone a 5 cotes).
+
+Ce pentagone n'a pas de proprietes particulieres de symetrie ou de regularite.
+</Solution>
+
+<Methode>
+Pour construire une section complexe de cube :
+
+1. **Placer les points donnes** sur le cube
+2. **Identifier les faces contenant au moins 2 points** du plan
+   - Ces faces donnent directement des segments de la section
+3. **Pour les autres faces**, chercher les intersections :
+   - Utiliser les droites d'intersection de deux faces contenant le plan
+   - Prolonger les segments connus
+   - Utiliser les parallelismes (faces opposees)
+4. **Ordonner les points** pour former le polygone
+5. **Compter les cotes** pour identifier la nature (triangle, quadrilatere, pentagone, hexagone)
+</Methode>
+
+<Hint>
+Commencez par relier les points sur les faces ou vous en avez au moins deux. Puis utilisez les proprietes de parallelisme pour trouver les autres intersections.
+</Hint>
+
+<Erreurs>
+- Oublier qu'une section de cube peut avoir jusqu'a 6 cotes (hexagone)
+- Ne pas verifier toutes les faces du cube
+- Confondre l'ordre des points lors de la construction du polygone
+</Erreurs>

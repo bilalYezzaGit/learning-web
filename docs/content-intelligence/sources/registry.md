@@ -5,8 +5,9 @@ Registre central de toutes les sources pedagogiques connues pour le curriculum t
 ## Stats
 
 - **Total** : 28 sources
-- **Scannees** : 0
-- **En attente** : 28
+- **Scannees** : 8
+- **Hors ligne** : 4
+- **En attente** : 16
 
 ---
 
@@ -14,24 +15,24 @@ Registre central de toutes les sources pedagogiques connues pour le curriculum t
 
 | Slug | URL | Niveaux | Contenus | Statut | Fiche |
 |------|-----|---------|----------|--------|-------|
-| `sigmaths-net` | sigmaths.net | 1ere-Term | Cours, exercices, series, devoirs | ⬜ Pending | - |
-| `devoir-tn` | devoir.tn | 1ere-Term | Devoirs, examens, corrections | ⬜ Pending | - |
-| `devoirat-net` | devoirat.net | 1ere-Term | Devoirs, series, corrections | ⬜ Pending | - |
-| `tunisie-etude` | tunisie-etude.com | 1ere-Term | Cours, exercices, annales | ⬜ Pending | - |
-| `topnetschool` | topnetschool.com | 1ere-Term | Cours video, exercices | ⬜ Pending | - |
-| `easymath-tn` | easymath.tn | 3eme-Term | Cours, exercices corriges | ⬜ Pending | - |
-| `mathstn` | maths.tn | 1ere-Term | Cours, exercices | ⬜ Pending | - |
+| `sigmaths-net` | sigmaths.net | 1ere-Term | Cours, exercices, series, devoirs | ✅ Scanned | [fiche](sites/sigmaths-net.md) |
+| `devoir-tn` | devoir.tn | 1ere-Term | Devoirs, series, annales | ✅ Scanned | [fiche](sites/devoir-tn.md) |
+| `devoirat-net` | devoirat.net | 1ere-Term | Devoirs, series, cours (PDF) | ✅ Scanned | [fiche](sites/devoirat-net.md) |
+| `tunisie-etude` | tunisie-etude.com | 1ere-Term | Cours, exercices, annales | ❌ Offline | - |
+| `topnetschool` | topnetschool.tn | 1ere-Term | Cours video, exercices (payant) | ❌ Offline | [fiche](sites/topnetschool.md) |
+| `easymath-tn` | easymath.tn | 3eme-Term | Cours, exercices corriges | ❌ Offline | - |
+| `mathstn` | maths.tn | 1ere-Term | Cours, exercices | ❌ Offline | - |
 
 ## Sites francophones de reference
 
 | Slug | URL | Niveaux | Contenus | Statut | Fiche |
 |------|-----|---------|----------|--------|-------|
-| `maths-et-tiques` | maths-et-tiques.fr | 2nde-Term | Cours video, exercices, methodes (Yvan Monka) | ⬜ Pending | - |
-| `maths-france` | maths-france.fr | 2nde-Term | Cours, exercices corriges (haute qualite) | ⬜ Pending | - |
-| `bibmath-net` | bibmath.net | Sup+ | Encyclopedie math, fiches | ⬜ Pending | - |
-| `jaicompris` | jaicompris.com | 2nde-Term | Exercices corriges en video | ⬜ Pending | - |
-| `mathrix` | mathrix.fr | 3eme-Term | Cours video, exercices, fiches | ⬜ Pending | - |
-| `mathsbook` | mathsbook.fr | 2nde-Term | Cours, exercices, QCM | ⬜ Pending | - |
+| `maths-et-tiques` | maths-et-tiques.fr | 3eme-Term | Cours PDF, 1100+ videos, exercices corriges (Yvan Monka) | ✅ Scanned | [fiche](sites/maths-et-tiques.md) |
+| `maths-france` | maths-france.fr | Term-Sup | Cours, fiches, 520+ annales BAC corriges (freemium, 35 EUR/an) | ✅ Scanned | [fiche](sites/maths-france.md) |
+| `bibmath-net` | bibmath.net | College-Sup+ | Encyclopedie, formulaire, quiz, exercices corriges | ✅ Scanned | [fiche](sites/bibmath-net.md) |
+| `jaicompris` | jaicompris.com | 3eme-Term | Cours et exercices corriges en video (gratuit) | ✅ Scanned | [fiche](sites/jaicompris-com.md) |
+| `mathrix` | mathrix.fr | 5eme-Term | Cours video, exercices, fiches (freemium) | ⚠️ TLS broken | [fiche](sites/mathrix.md) |
+| `mathsbook` | mathsbook.fr | 3eme-Term | Cours HTML, exercices, QCM, fiches PDF (freemium) | ✅ Scanned | [fiche](sites/mathsbook-fr.md) |
 | `cmath` | cmath.fr | 6eme-Term | Cours, exercices interactifs | ⬜ Pending | - |
 | `ilemaths` | ilemaths.net | 6eme-Term | Cours, exercices, forum | ⬜ Pending | - |
 | `annales2maths` | annales2maths.com | 2nde-Term | Annales BAC, corrections | ⬜ Pending | - |

@@ -31,6 +31,34 @@ Modules a creer : {count}
 
 Demander confirmation a l'utilisateur avant de continuer.
 
+## Etape 0.5 — Consultation des sources pre-cataloguees
+
+Avant la recherche web, exploiter le registre de sources existantes :
+
+1. **Lire le registre** : `docs/content-intelligence/sources/registry.md`
+2. **Identifier les sources scannees** (statut ✅ dans le tableau)
+3. **Pour chaque source scannee**, lire la fiche : `docs/content-intelligence/sources/sites/{slug}.md`
+4. **Pour chaque module a creer**, extraire les ressources pertinentes :
+   - URLs directes (exercices en ligne, documents PDF)
+   - Nombre de ressources disponibles
+   - Instructions d'extraction specifiques au site
+5. **Compiler un dossier de sources par module** :
+   ```
+   ## Sources pre-cataloguees par module
+
+   ### {module-1} (topic: {topic})
+   - sigmaths.net : {n} exercices en ligne (URL: ...), {n} docs PDF
+   - devoir.tn : {n} series, {n} devoirs
+   - ...
+
+   ### {module-2} (topic: {topic})
+   - ...
+
+   Sources non scannees potentiellement pertinentes : {liste des ⬜ Pending}
+   ```
+
+Si AUCUNE source n'est scannee, passer directement a l'etape 1 sans dossier de sources.
+
 ## Etape 1 — Recherche web globale
 
 Lancer UN SEUL **content-researcher** pour l'ensemble du programme :
@@ -43,6 +71,17 @@ Prompt :
 ```
 Recherche exhaustive sur le web pour le programme complet de mathematiques
 {label} ({niveau}) en Tunisie.
+
+{SI dossier de sources existe, INCLURE :}
+## Sources pre-cataloguees (registre source intelligence)
+
+Les fiches suivantes contiennent des URLs directes et resumes pour chaque module :
+{contenu du dossier de sources compile a l'etape 0.5}
+
+Utilise ces URLs comme point de depart pour tes recherches. N'hesite pas a
+fetcher directement ces pages pour en extraire le contenu. Complete ensuite par
+tes propres recherches pour ce qui n'est pas couvert.
+{FIN SI}
 
 Couvrir les {n} chapitres suivants :
 1. {module-1} — {description}
@@ -61,8 +100,9 @@ Et globalement :
 - Progression pedagogique recommandee
 
 IMPORTANT : organiser le rapport PAR CHAPITRE avec des sections claires.
-Chercher sur : devoir.tn, devoirat.net, sigmaths.net, mathinfo.tn,
-maths-et-tiques.fr, khan academy fr, geogebra, cnp.com.tn
+Chercher AUSSI sur : devoir.tn, devoirat.net, sigmaths.net, mathinfo.tn,
+maths-et-tiques.fr, khan academy fr, geogebra, cnp.com.tn (en plus des sources
+pre-cataloguees ci-dessus).
 ```
 
 Stocker le rapport complet pour les etapes suivantes.

@@ -1,0 +1,103 @@
+---
+type: lesson
+title: "Coordonnees d'un vecteur"
+difficulty: 1
+timeMinutes: 7
+tags: [repere, vecteur, coordonnees]
+---
+
+### Introduction
+
+Dans un repere, tout vecteur peut etre decompose selon les vecteurs de base $\vec{i}$ et $\vec{j}$.
+
+### Definition
+
+<Definition title="Coordonnees d'un vecteur">
+
+Soit $(O; \vec{i}, \vec{j})$ un repere du plan et $\vec{u}$ un vecteur.
+
+Il existe un unique couple de nombres reels $(x; y)$ tels que :
+
+$$\vec{u} = x\vec{i} + y\vec{j}$$
+
+On dit que $x$ et $y$ sont les **coordonnees** du vecteur $\vec{u}$.
+
+On note $\vec{u}\begin{pmatrix} x \\ y \end{pmatrix}$ ou $\vec{u}(x; y)$.
+
+</Definition>
+
+### Coordonnees du vecteur AB
+
+<Property title="Formule fondamentale">
+
+Si A$(x_A; y_A)$ et B$(x_B; y_B)$ sont deux points du plan, alors le vecteur $\vec{AB}$ a pour coordonnees :
+
+$$\vec{AB}\begin{pmatrix} x_B - x_A \\ y_B - y_A \end{pmatrix}$$
+
+</Property>
+
+<Example title="Calcul de coordonnees">
+
+Soient A(1; 3) et B(4; -2).
+
+Les coordonnees de $\vec{AB}$ sont :
+
+$$\vec{AB}\begin{pmatrix} 4 - 1 \\ -2 - 3 \end{pmatrix} = \begin{pmatrix} 3 \\ -5 \end{pmatrix}$$
+
+</Example>
+
+### Egalite de vecteurs
+
+<Property>
+
+Deux vecteurs sont egaux si et seulement s'ils ont les memes coordonnees.
+
+Si $\vec{u}\begin{pmatrix} x \\ y \end{pmatrix}$ et $\vec{v}\begin{pmatrix} x' \\ y' \end{pmatrix}$, alors :
+
+$$\vec{u} = \vec{v} \Longleftrightarrow \begin{cases} x = x' \\ y = y' \end{cases}$$
+
+</Property>
+
+### Operations sur les vecteurs
+
+<Property title="Somme de vecteurs">
+
+Si $\vec{u}\begin{pmatrix} x \\ y \end{pmatrix}$ et $\vec{v}\begin{pmatrix} x' \\ y' \end{pmatrix}$, alors :
+
+$$\vec{u} + \vec{v} = \begin{pmatrix} x + x' \\ y + y' \end{pmatrix}$$
+
+On additionne les coordonnees **composante par composante**.
+
+</Property>
+
+<Property title="Multiplication par un reel">
+
+Si $\vec{u}\begin{pmatrix} x \\ y \end{pmatrix}$ et $k \in \mathbb{R}$, alors :
+
+$$k\vec{u} = \begin{pmatrix} kx \\ ky \end{pmatrix}$$
+
+</Property>
+
+### Norme d'un vecteur
+
+<Definition title="Norme d'un vecteur">
+
+La **norme** (ou longueur) d'un vecteur $\vec{u}\begin{pmatrix} x \\ y \end{pmatrix}$ est donnee par :
+
+$$||\vec{u}|| = \sqrt{x^2 + y^2}$$
+
+</Definition>
+
+<Example title="Calcul de norme">
+
+Soit $\vec{u}\begin{pmatrix} 3 \\ -4 \end{pmatrix}$.
+
+$$||\vec{u}|| = \sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = \sqrt{25} = 5$$
+
+</Example>
+
+<Remark>
+
+La formule de la norme provient du theoreme de Pythagore dans un repere orthonorme.
+
+</Remark>

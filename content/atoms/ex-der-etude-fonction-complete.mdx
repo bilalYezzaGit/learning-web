@@ -1,0 +1,143 @@
+---
+type: exercise
+title: "Étude complète d'une fonction rationnelle"
+difficulty: 3
+timeMinutes: 20
+category: synthese
+tags: [derivation, etude-fonction, rationnelle, asymptote]
+---
+
+<Enonce>
+Soit $f(x) = \frac{x^2-1}{x-2}$.
+
+1. Déterminer $D_f$ et calculer les limites aux bornes.
+2. Montrer que la droite $D : y = x + 2$ est asymptote oblique à $C_f$.
+3. Calculer $f'(x)$ et montrer que $f'(x) = \frac{x^2-4x+1}{(x-2)^2}$.
+4. Résoudre l'équation $f'(x) = 0$.
+5. Dresser le tableau de variations complet de $f$.
+6. Déterminer l'équation de la tangente au point d'abscisse $x = 0$.
+</Enonce>
+
+<Solution>
+**1. Ensemble de définition et limites**
+
+Le dénominateur s'annule en $x = 2$, donc :
+
+$$D_f = \mathbb{R} \setminus \{2\} = ]-\infty, 2[ \cup ]2, +\infty[$$
+
+**Limites aux bornes :**
+
+- En $-\infty$ : $f(x) = \frac{x^2-1}{x-2} \sim \frac{x^2}{x} = x \to -\infty$
+
+- En $+\infty$ : $f(x) \sim x \to +\infty$
+
+- En $2^-$ : $x^2-1 \to 3$ et $x-2 \to 0^-$, donc $f(x) \to -\infty$
+
+- En $2^+$ : $x^2-1 \to 3$ et $x-2 \to 0^+$, donc $f(x) \to +\infty$
+
+**2. Asymptote oblique**
+
+Effectuons la division euclidienne de $x^2-1$ par $x-2$ :
+
+$$x^2 - 1 = (x-2) \times q(x) + r$$
+
+Pour trouver $q(x)$, on divise :
+
+$$\begin{array}{c|cc}
+ & x & +2 \\
+\hline
+x-2 & x^2 & -1 \\
+ & x^2-2x & \\
+\hline
+ & 2x & -1 \\
+ & 2x-4 & \\
+\hline
+ & 3 &
+\end{array}$$
+
+Donc : $x^2 - 1 = (x-2)(x+2) + 3$
+
+On peut écrire :
+
+$$f(x) = \frac{(x-2)(x+2) + 3}{x-2} = x + 2 + \frac{3}{x-2}$$
+
+On a : $\lim_{x \to \pm\infty} \frac{3}{x-2} = 0$
+
+Donc : $\lim_{x \to \pm\infty} [f(x) - (x+2)] = 0$
+
+La droite $D : y = x + 2$ est **asymptote oblique** à $C_f$ en $\pm\infty$.
+
+**3. Calcul de $f'(x)$**
+
+Méthode 1 (quotient) : Posons $u(x) = x^2-1$ et $v(x) = x-2$.
+
+$$u'(x) = 2x \quad \text{et} \quad v'(x) = 1$$
+
+$$f'(x) = \frac{u'v - uv'}{v^2} = \frac{2x(x-2) - (x^2-1) \times 1}{(x-2)^2}$$
+
+$$= \frac{2x^2 - 4x - x^2 + 1}{(x-2)^2} = \frac{x^2 - 4x + 1}{(x-2)^2}$$
+
+**4. Résolution de $f'(x) = 0$**
+
+$$f'(x) = 0 \Leftrightarrow x^2 - 4x + 1 = 0 \quad \text{(car } (x-2)^2 > 0\text{)}$$
+
+Calculons le discriminant :
+
+$$\Delta = 16 - 4 = 12 = 4 \times 3$$
+
+$$x_1 = \frac{4 - 2\sqrt{3}}{2} = 2 - \sqrt{3} \approx 0{,}27$$
+
+$$x_2 = \frac{4 + 2\sqrt{3}}{2} = 2 + \sqrt{3} \approx 3{,}73$$
+
+**5. Tableau de variations**
+
+Le signe de $f'(x)$ dépend du numérateur $x^2 - 4x + 1$ (le dénominateur est toujours positif).
+
+Comme $\Delta > 0$, le trinôme est négatif entre ses racines :
+
+| $x$ | $-\infty$ | | $2-\sqrt{3}$ | | $2$ | | $2+\sqrt{3}$ | | $+\infty$ |
+|-----|-----------|---|--------------|---|-----|---|--------------|---|-----------|
+| $f'(x)$ | | $+$ | $0$ | $-$ | $\|$ | $-$ | $0$ | $+$ | |
+
+Calculons les valeurs aux points critiques :
+
+$$f(2-\sqrt{3}) = \frac{(2-\sqrt{3})^2-1}{(2-\sqrt{3})-2} = \frac{4-4\sqrt{3}+3-1}{-\sqrt{3}} = \frac{6-4\sqrt{3}}{-\sqrt{3}}$$
+
+$$= \frac{-2(3-2\sqrt{3})}{\sqrt{3}} = \frac{-2\sqrt{3}(3-2\sqrt{3})}{3} = \frac{-6\sqrt{3}+12}{3} = 4 - 2\sqrt{3}$$
+
+De même : $f(2+\sqrt{3}) = 4 + 2\sqrt{3}$
+
+**Tableau de variations :**
+
+| $x$ | $-\infty$ | | $2-\sqrt{3}$ | | $2$ | | $2+\sqrt{3}$ | | $+\infty$ |
+|-----|-----------|---|--------------|---|-----|---|--------------|---|-----------|
+| $f'(x)$ | | $+$ | $0$ | $-$ | $\|$ | $-$ | $0$ | $+$ | |
+| $f(x)$ | $-\infty$ | $\nearrow$ | $4-2\sqrt{3}$ | $\searrow$ | $-\infty$ | | $+\infty$ | $\nearrow$ | $+\infty$ |
+
+**6. Équation de la tangente en $x = 0$**
+
+$$f(0) = \frac{0-1}{0-2} = \frac{-1}{-2} = \frac{1}{2}$$
+
+$$f'(0) = \frac{0 - 0 + 1}{(0-2)^2} = \frac{1}{4}$$
+
+Équation de la tangente :
+
+$$y = f'(0)(x - 0) + f(0) = \frac{1}{4}x + \frac{1}{2}$$
+
+$$T : y = \frac{x}{4} + \frac{1}{2}$$
+</Solution>
+
+<Methode>
+Méthodologie pour une étude complète de fonction :
+
+1. **Ensemble de définition** : déterminer les valeurs interdites
+2. **Limites aux bornes** : bornes de $D_f$ et points d'annulation du dénominateur
+3. **Asymptotes** : verticales (limites infinies), obliques (division euclidienne)
+4. **Dérivée** : calculer $f'(x)$ et la simplifier
+5. **Signe de $f'$** : résoudre $f'(x) = 0$, étudier le signe
+6. **Tableau de variations** : synthétiser toutes les informations
+</Methode>
+
+<Hint>
+Pour la question 2, pensez à effectuer la division euclidienne de $x^2-1$ par $x-2$ pour mettre $f(x)$ sous la forme $q(x) + \frac{r}{x-2}$.
+</Hint>

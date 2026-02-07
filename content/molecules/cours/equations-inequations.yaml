@@ -3,18 +3,50 @@ description: "Resolution d equations et d inequations du premier degre"
 programme: 1ere-tc
 trimester: T2
 order: 13
-estimatedMinutes: 120
+estimatedMinutes: 150
 objectives:
   - "Resoudre une equation du premier degre"
   - "Resoudre une inequation du premier degre"
-  - "Representer les solutions sur une droite graduee"
+  - "Resoudre des equations produits et quotients"
+  - "Mettre un probleme en equation"
 
 sections:
-  - label: "Equations et inequations"
+  - label: "Equations du premier degre"
     steps:
-      - lesson-equations-inequations
-      - ex-equations-inequations-01
+      - lesson-ei-equation-premier-degre
+      - ex-ei-equation-simple
       - quiz:
-          - qcm-ei-1
-          - qcm-ei-2
-          - qcm-ei-3
+          - qcm-ei-equation-simple
+          - qcm-ei-equation-fractions
+
+  - label: "Inequations du premier degre"
+    steps:
+      - lesson-ei-inequation-premier-degre
+      - ex-ei-inequation-simple
+      - quiz:
+          - qcm-ei-inequation-sens
+          - qcm-ei-inequation-intervalle
+          - qcm-ei-double-inequation
+          - qcm-ei-piege-division-negative
+
+  - label: "Equations produits et quotients"
+    steps:
+      - lesson-ei-equation-produit
+      - lesson-ei-equation-quotient
+      - ex-ei-equation-produit
+      - ex-ei-factoriser-resoudre
+      - ex-ei-signe-quotient
+      - quiz:
+          - qcm-ei-produit-nul
+          - qcm-ei-equation-quotient
+          - qcm-ei-signe-expression
+          - qcm-ei-piege-produit
+          - qcm-ei-piege-quotient-denominateur
+
+  - label: "Problemes et synthese"
+    steps:
+      - lesson-ei-problemes
+      - ex-ei-probleme
+      - ex-ei-synthese
+      - quiz:
+          - qcm-ei-piege-mise-equation

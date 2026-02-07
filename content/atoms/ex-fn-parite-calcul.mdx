@@ -1,0 +1,98 @@
+---
+type: exercise
+title: "Etude de parite de fonctions"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [fonctions, parite]
+---
+
+<Enonce>
+Etudier la parite de chacune des fonctions suivantes :
+
+a) $f(x) = x^4 - 2x^2 + 1$
+
+b) $g(x) = x^3 + x$
+
+c) $h(x) = \frac{x^2+1}{x}$
+
+d) $k(x) = x^2 + x + 1$
+</Enonce>
+
+<Solution>
+**a)** $f(x) = x^4 - 2x^2 + 1$
+
+**Etape 1** : Le domaine de definition est $D_f = \mathbb{R}$, qui est symetrique par rapport a 0.
+
+**Etape 2** : Calculons $f(-x)$ :
+
+$$f(-x) = (-x)^4 - 2(-x)^2 + 1 = x^4 - 2x^2 + 1$$
+
+**Etape 3** : On constate que $f(-x) = f(x)$ pour tout $x \in \mathbb{R}$.
+
+**Conclusion** : $f$ est **paire**.
+
+---
+
+**b)** $g(x) = x^3 + x$
+
+**Etape 1** : Le domaine de definition est $D_g = \mathbb{R}$, qui est symetrique par rapport a 0.
+
+**Etape 2** : Calculons $g(-x)$ :
+
+$$g(-x) = (-x)^3 + (-x) = -x^3 - x = -(x^3 + x)$$
+
+**Etape 3** : On constate que $g(-x) = -g(x)$ pour tout $x \in \mathbb{R}$.
+
+**Conclusion** : $g$ est **impaire**.
+
+---
+
+**c)** $h(x) = \frac{x^2+1}{x}$
+
+**Etape 1** : Le domaine de definition est $D_h = \mathbb{R}^*$, qui est symetrique par rapport a 0.
+
+**Etape 2** : Calculons $h(-x)$ :
+
+$$h(-x) = \frac{(-x)^2+1}{-x} = \frac{x^2+1}{-x} = -\frac{x^2+1}{x}$$
+
+**Etape 3** : On constate que $h(-x) = -h(x)$ pour tout $x \in \mathbb{R}^*$.
+
+**Conclusion** : $h$ est **impaire**.
+
+---
+
+**d)** $k(x) = x^2 + x + 1$
+
+**Etape 1** : Le domaine de definition est $D_k = \mathbb{R}$, qui est symetrique par rapport a 0.
+
+**Etape 2** : Calculons $k(-x)$ :
+
+$$k(-x) = (-x)^2 + (-x) + 1 = x^2 - x + 1$$
+
+**Etape 3** : On compare :
+- $k(-x) = x^2 - x + 1$
+- $k(x) = x^2 + x + 1$
+- $-k(x) = -x^2 - x - 1$
+
+On a $k(-x) \neq k(x)$ et $k(-x) \neq -k(x)$.
+
+**Conclusion** : $k$ est **ni paire ni impaire**.
+</Solution>
+
+<Methode>
+Pour etudier la parite d'une fonction $f$ :
+
+1. **Verifier que $D_f$ est symetrique** par rapport a 0 : si $x \in D_f$ alors $-x \in D_f$
+2. **Calculer $f(-x)$** en remplacant $x$ par $-x$ dans l'expression
+3. **Comparer $f(-x)$ avec $f(x)$ et $-f(x)$** :
+   - Si $f(-x) = f(x)$ pour tout $x \in D_f$ : fonction **paire**
+   - Si $f(-x) = -f(x)$ pour tout $x \in D_f$ : fonction **impaire**
+   - Sinon : fonction **ni paire ni impaire**
+</Methode>
+
+<Erreurs>
+- Oublier de verifier que le domaine de definition est symetrique (une fonction definie sur $[0, +\infty[$ ne peut pas etre paire ou impaire)
+- Faire des erreurs de calcul avec les puissances negatives : $(-x)^2 = x^2$ mais $(-x)^3 = -x^3$
+- Conclure trop vite sans comparer avec $f(x)$ ET $-f(x)$
+</Erreurs>

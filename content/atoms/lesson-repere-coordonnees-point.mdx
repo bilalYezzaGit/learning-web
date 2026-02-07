@@ -1,0 +1,65 @@
+---
+type: lesson
+title: "Coordonnees d'un point"
+difficulty: 1
+timeMinutes: 6
+tags: [repere, coordonnees, point, abscisse, ordonnee]
+---
+
+### Introduction
+
+Dans un repere, tout point du plan peut etre repere par deux nombres appeles **coordonnees**.
+
+### Definition
+
+<Definition title="Coordonnees d'un point">
+
+Soit $(O; \vec{i}, \vec{j})$ un repere du plan et M un point du plan.
+
+Il existe un unique couple de nombres reels $(x; y)$ tels que :
+
+$$\vec{OM} = x\vec{i} + y\vec{j}$$
+
+On dit que :
+- $x$ est l'**abscisse** de M
+- $y$ est l'**ordonnee** de M
+
+On note **M(x; y)** les coordonnees du point M dans le repere $(O; \vec{i}, \vec{j})$.
+
+</Definition>
+
+### L'origine
+
+<Property>
+
+L'origine O du repere a pour coordonnees $(0; 0)$ car $\vec{OO} = \vec{0} = 0\vec{i} + 0\vec{j}$.
+
+</Property>
+
+### Placer un point
+
+Pour placer un point M(x; y) dans un repere :
+1. On se deplace de x unites le long de l'axe des abscisses (vers la droite si $x > 0$, vers la gauche si $x < 0$)
+2. Puis de y unites le long de l'axe des ordonnees (vers le haut si $y > 0$, vers le bas si $y < 0$)
+
+<Example title="Placer des points">
+
+Dans le repere $(O; \vec{i}, \vec{j})$ :
+- A(2; 3) : on se deplace de 2 unites vers la droite, puis 3 unites vers le haut
+- B(-1; 2) : on se deplace de 1 unite vers la gauche, puis 2 unites vers le haut
+- C(0; -2) : on ne se deplace pas horizontalement, puis 2 unites vers le bas
+
+</Example>
+
+### Lire les coordonnees
+
+Pour lire les coordonnees d'un point M place dans un repere :
+1. On trace la perpendiculaire a l'axe des abscisses passant par M : elle coupe cet axe au point d'abscisse $x$
+2. On trace la perpendiculaire a l'axe des ordonnees passant par M : elle coupe cet axe au point d'ordonnee $y$
+3. Les coordonnees de M sont $(x; y)$
+
+<Remark>
+
+Dans un repere orthonorme, on peut aussi projeter orthogonalement le point sur chaque axe.
+
+</Remark>

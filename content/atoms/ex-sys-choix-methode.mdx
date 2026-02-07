@@ -1,0 +1,86 @@
+---
+type: exercise
+title: "Choisir la methode de resolution"
+difficulty: 2
+timeMinutes: 10
+category: approfondissement
+tags: [systemes, substitution, combinaison]
+---
+
+<Enonce>
+Resoudre chaque systeme par la methode la plus appropriee :
+
+a) $\begin{cases} y = 3x - 1 \\ 2x + 3y = 8 \end{cases}$
+
+b) $\begin{cases} 5x + 7y = 3 \\ 5x - 2y = 12 \end{cases}$
+
+c) $\begin{cases} \frac{x}{2} + \frac{y}{3} = 1 \\ x - y = 2 \end{cases}$
+</Enonce>
+
+<Solution>
+**a)** La premiere equation donne directement $y$ en fonction de $x$ : **la substitution** est naturelle.
+
+On substitue $y = 3x - 1$ dans la deuxieme equation :
+
+$$2x + 3(3x - 1) = 8$$
+
+$$2x + 9x - 3 = 8$$
+
+$$11x = 11$$
+
+$$x = 1$$
+
+On en deduit $y = 3(1) - 1 = 2$.
+
+**Solution : $(x, y) = (1, 2)$**
+
+**b)** Les deux equations ont le meme coefficient pour $x$ ($5$) : **la combinaison** est naturelle.
+
+On soustrait la premiere equation de la deuxieme :
+
+$$(5x - 2y) - (5x + 7y) = 12 - 3$$
+
+$$-9y = 9$$
+
+$$y = -1$$
+
+On substitue dans la premiere equation :
+
+$$5x + 7(-1) = 3$$
+
+$$5x = 10$$
+
+$$x = 2$$
+
+**Solution : $(x, y) = (2, -1)$**
+
+**c)** De la deuxieme equation : $x = y + 2$. On peut utiliser **la substitution**.
+
+On substitue dans la premiere equation :
+
+$$\frac{y + 2}{2} + \frac{y}{3} = 1$$
+
+Multiplions par 6 :
+
+$$3(y + 2) + 2y = 6$$
+
+$$3y + 6 + 2y = 6$$
+
+$$5y = 0$$
+
+$$y = 0$$
+
+On en deduit $x = 0 + 2 = 2$.
+
+**Solution : $(x, y) = (2, 0)$**
+</Solution>
+
+<Methode>
+Comment choisir la methode de resolution ?
+
+**Substitution** : quand une equation exprime deja une variable en fonction de l'autre ($y = ...$, $x = ...$), ou quand c'est facile de le faire.
+
+**Combinaison lineaire** : quand les coefficients d'une variable sont egaux, opposes, ou facilement rendus egaux par multiplication.
+
+En general, observer les coefficients avant de se lancer dans les calculs permet de gagner du temps.
+</Methode>

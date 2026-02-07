@@ -1,0 +1,53 @@
+---
+type: exercise
+title: "Chaines de vecteurs avec Chasles"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [vecteurs, chasles, chaine]
+---
+
+<Enonce>
+Simplifier les expressions vectorielles suivantes. Certaines necessitent de reordonner les termes.
+
+1. $\vec{HF} + \vec{SU} + \vec{RS} + \vec{UH}$
+2. $\vec{AB} + \vec{CD} + \vec{BA} + \vec{DC}$
+3. $\vec{MN} + \vec{PQ} + \vec{NP}$
+</Enonce>
+
+<Solution>
+**1.** On reordonne les vecteurs pour former une chaine :
+
+$$\vec{HF} + \vec{SU} + \vec{RS} + \vec{UH} = \vec{RS} + \vec{SU} + \vec{UH} + \vec{HF}$$
+
+En appliquant la relation de Chasles successivement :
+
+$$= \vec{RU} + \vec{UH} + \vec{HF} = \vec{RH} + \vec{HF} = \vec{RF}$$
+
+**2.** On reordonne pour former des chaines :
+
+$$\vec{AB} + \vec{CD} + \vec{BA} + \vec{DC} = \vec{AB} + \vec{BA} + \vec{CD} + \vec{DC}$$
+
+On remarque que $\vec{AB} + \vec{BA} = \vec{AA} = \vec{0}$ et $\vec{CD} + \vec{DC} = \vec{CC} = \vec{0}$.
+
+Donc :
+
+$$\vec{AB} + \vec{CD} + \vec{BA} + \vec{DC} = \vec{0}$$
+
+**3.** On reordonne les vecteurs :
+
+$$\vec{MN} + \vec{PQ} + \vec{NP} = \vec{MN} + \vec{NP} + \vec{PQ}$$
+
+En appliquant la relation de Chasles :
+
+$$= \vec{MP} + \vec{PQ} = \vec{MQ}$$
+</Solution>
+
+<Methode>
+Quand les vecteurs ne forment pas immediatement une chaine :
+
+1. Identifier les extremites et origines communes
+2. Reordonner les vecteurs pour former une ou plusieurs chaines
+3. Simplifier chaque chaine avec la relation de Chasles
+4. Se rappeler que $\vec{AB} + \vec{BA} = \vec{0}$
+</Methode>

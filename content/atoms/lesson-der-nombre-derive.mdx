@@ -1,0 +1,89 @@
+---
+type: lesson
+title: "Nombre dérivé en un point"
+difficulty: 1
+timeMinutes: 8
+tags: [derivation, nombre-derive, taux-accroissement]
+---
+
+### Taux d'accroissement
+
+Soit $f$ une fonction définie sur un intervalle $I$ et $a \in I$. Pour tout $h \neq 0$ tel que $a+h \in I$, on définit le **taux d'accroissement** de $f$ entre $a$ et $a+h$ par :
+
+$$\tau(h) = \frac{f(a+h) - f(a)}{h}$$
+
+<Remark>
+
+Le taux d'accroissement représente la **pente de la sécante** passant par les points $A(a, f(a))$ et $M(a+h, f(a+h))$.
+
+</Remark>
+
+### Nombre dérivé
+
+<Definition title="Nombre dérivé">
+
+On dit que $f$ est **dérivable en $a$** si le taux d'accroissement admet une limite finie quand $h$ tend vers $0$. Cette limite est appelée **nombre dérivé de $f$ en $a$** et notée $f'(a)$ :
+
+$$f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$$
+
+</Definition>
+
+<Attention>
+
+Pour que $f$ soit dérivable en $a$, il faut que la limite existe ET soit **finie**. Si la limite est infinie, $f$ n'est pas dérivable en $a$.
+
+</Attention>
+
+### Interprétation géométrique
+
+Le nombre dérivé $f'(a)$ représente le **coefficient directeur de la tangente** à la courbe de $f$ au point $A(a, f(a))$.
+
+Quand $h \to 0$, le point $M(a+h, f(a+h))$ se rapproche de $A$, et la sécante $(AM)$ converge vers la tangente à la courbe en $A$.
+
+<Remark>
+
+- Si $f'(a) > 0$, la tangente est croissante
+- Si $f'(a) < 0$, la tangente est décroissante
+- Si $f'(a) = 0$, la tangente est horizontale
+
+</Remark>
+
+### Exemples de calcul par définition
+
+<Example title="Dérivée de f(x) = x² en a = 3">
+
+On calcule :
+
+$$\tau(h) = \frac{f(3+h) - f(3)}{h} = \frac{(3+h)^2 - 9}{h}$$
+
+$$= \frac{9 + 6h + h^2 - 9}{h} = \frac{6h + h^2}{h} = \frac{h(6 + h)}{h} = 6 + h$$
+
+Donc :
+
+$$f'(3) = \lim_{h \to 0} (6 + h) = 6$$
+
+Le nombre dérivé de $f(x) = x^2$ en $x = 3$ est $6$.
+
+</Example>
+
+<Example title="Dérivée de f(x) = 1/x en a = 2">
+
+On calcule :
+
+$$\tau(h) = \frac{f(2+h) - f(2)}{h} = \frac{\frac{1}{2+h} - \frac{1}{2}}{h}$$
+
+$$= \frac{\frac{2 - (2+h)}{2(2+h)}}{h} = \frac{-h}{2h(2+h)} = \frac{-1}{2(2+h)}$$
+
+Donc :
+
+$$f'(2) = \lim_{h \to 0} \frac{-1}{2(2+h)} = \frac{-1}{4}$$
+
+Le nombre dérivé de $f(x) = \frac{1}{x}$ en $x = 2$ est $-\frac{1}{4}$.
+
+</Example>
+
+<Attention>
+
+Dans le calcul du taux d'accroissement, il est essentiel de **simplifier par $h$** avant de passer à la limite, car on a $h \neq 0$. Si on ne simplifie pas, on obtient une forme indéterminée $\frac{0}{0}$.
+
+</Attention>

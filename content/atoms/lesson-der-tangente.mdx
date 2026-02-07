@@ -1,0 +1,85 @@
+---
+type: lesson
+title: "Équation de la tangente"
+difficulty: 1
+timeMinutes: 5
+tags: [derivation, tangente, equation]
+---
+
+### Équation de la tangente
+
+<Property title="Équation de la tangente">
+
+Soit $f$ une fonction dérivable en $a$. L'**équation de la tangente** à la courbe de $f$ au point $A(a, f(a))$ est :
+
+$$y = f(a) + f'(a)(x - a)$$
+
+</Property>
+
+<Remark>
+
+Cette formule vient du fait que la tangente est une droite passant par $A(a, f(a))$ avec un coefficient directeur égal à $f'(a)$. On retrouve l'équation d'une droite : $y - y_0 = m(x - x_0)$.
+
+</Remark>
+
+### Cas particulier : tangente horizontale
+
+<Property>
+
+Si $f'(a) = 0$, alors la tangente est **horizontale** et son équation devient :
+
+$$y = f(a)$$
+
+C'est une droite parallèle à l'axe des abscisses.
+
+</Property>
+
+### Méthode pour déterminer l'équation de la tangente
+
+Pour trouver l'équation de la tangente à la courbe de $f$ au point d'abscisse $a$ :
+
+1. **Calculer** $f(a)$ (ordonnée du point de contact)
+2. **Calculer** $f'(a)$ (coefficient directeur de la tangente)
+3. **Appliquer la formule** : $y = f(a) + f'(a)(x - a)$
+
+<Example title="Tangente à f(x) = x² + 1 en x = 2">
+
+**Étape 1** : Calculer $f(2)$
+
+$$f(2) = 2^2 + 1 = 5$$
+
+**Étape 2** : Calculer $f'(2)$
+
+On sait que $(x^2)' = 2x$ (nous verrons cette formule plus tard), donc :
+
+$$f'(x) = 2x$$
+
+$$f'(2) = 2 \times 2 = 4$$
+
+**Étape 3** : Appliquer la formule
+
+$$y = f(2) + f'(2)(x - 2) = 5 + 4(x - 2)$$
+
+$$y = 5 + 4x - 8 = 4x - 3$$
+
+L'équation de la tangente est $y = 4x - 3$.
+
+</Example>
+
+<Example title="Tangente horizontale à f(x) = x² - 4x + 1 en x = 2">
+
+**Étape 1** : $f(2) = 4 - 8 + 1 = -3$
+
+**Étape 2** : $f'(x) = 2x - 4$, donc $f'(2) = 4 - 4 = 0$
+
+**Étape 3** : Comme $f'(2) = 0$, la tangente est horizontale :
+
+$$y = -3$$
+
+</Example>
+
+<Remark>
+
+Une tangente horizontale en $x = a$ signifie que la fonction "s'aplatit" en ce point. Cela correspond souvent à un **extremum local** (maximum ou minimum).
+
+</Remark>

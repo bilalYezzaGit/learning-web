@@ -24,5 +24,35 @@ cours:
   - statistiques
 
 series:
+  - angles-mesure-et-conversion
+  - angles-cercle-inscrits
+  - thales-direct-calculs
+  - thales-reciproque-parallelisme
+  - trigo-rapports-bases
+  - trigo-calculs-applications
+  - vt-bases-vecteurs
+  - vt-translations-applications
+  - sv-chasles-simplifications
+  - sv-applications-geometrie
+  - repere-coordonnees-bases
+  - repere-milieu-distance-applications
+  - qt-definition-construction
+  - qt-proprietes-composition
+  - ss-sections-bases
+  - ss-sections-applications
+  - num1-puissances-racines
+  - num1-rationalisation-applications
+  - num2-intervalles-valeur-absolue
+  - num2-equations-encadrements
+  - algebre-identites-factorisation
+  - algebre-polynomes-equations
+  - fl-definition-representation
+  - fl-coefficient-proportionnalite
+  - ei-equations-bases
+  - ei-produits-quotients
+  - sys-methodes-resolution
+  - sys-applications-graphique
+  - stat-indicateurs
+  - stat-graphiques-synthese
   - fa-fondamentaux
   - fa-signe-inequations

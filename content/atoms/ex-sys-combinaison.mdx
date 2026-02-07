@@ -1,0 +1,58 @@
+---
+type: exercise
+title: "Resolution par combinaison lineaire"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [systemes, combinaison]
+---
+
+<Enonce>
+Resoudre les systemes suivants par la methode de combinaison lineaire :
+
+a) $\begin{cases} 2x + 3y = 12 \\ 4x - 3y = 6 \end{cases}$
+
+b) $\begin{cases} 3x + 2y = 8 \\ 5x + 3y = 13 \end{cases}$
+</Enonce>
+
+<Solution>
+**a)** On observe que les coefficients de $y$ sont opposes ($+3$ et $-3$). On additionne les deux equations :
+
+$$(2x + 3y) + (4x - 3y) = 12 + 6$$
+
+$$6x = 18$$
+
+$$x = 3$$
+
+On substitue dans la premiere equation :
+
+$$2(3) + 3y = 12$$
+
+$$6 + 3y = 12$$
+
+$$y = 2$$
+
+**Solution : $(x, y) = (3, 2)$**
+
+**b)** Pour eliminer $y$, on multiplie la premiere equation par $3$ et la deuxieme par $-2$ :
+
+$$\begin{cases} 9x + 6y = 24 \\ -10x - 6y = -26 \end{cases}$$
+
+On additionne les deux equations :
+
+$$(9x + 6y) + (-10x - 6y) = 24 + (-26)$$
+
+$$-x = -2$$
+
+$$x = 2$$
+
+On substitue dans la premiere equation :
+
+$$3(2) + 2y = 8$$
+
+$$6 + 2y = 8$$
+
+$$y = 1$$
+
+**Solution : $(x, y) = (2, 1)$**
+</Solution>

@@ -1,0 +1,93 @@
+---
+type: exercise
+title: "Encadrements et operations"
+difficulty: 2
+timeMinutes: 10
+category: application
+tags: [encadrements, operations]
+---
+
+<Enonce>
+On donne les encadrements suivants : $2 \leq x \leq 5$ et $-1 \leq y \leq 3$.
+
+Determiner des encadrements pour :
+
+a) $x + y$
+
+b) $x - y$
+
+c) $2x + 3$
+
+d) $-3y + 1$
+</Enonce>
+
+<Solution>
+**a)** Encadrement de $x + y$
+
+On additionne membre a membre les deux encadrements :
+
+$$2 \leq x \leq 5$$
+
+$$-1 \leq y \leq 3$$
+
+En additionnant :
+
+$$2 + (-1) \leq x + y \leq 5 + 3$$
+
+$$1 \leq x + y \leq 8$$
+
+**b)** Encadrement de $x - y$
+
+On encadre $-y$ d'abord. Comme $-1 \leq y \leq 3$, en multipliant par $-1$ (et en inversant les inegalites) :
+
+$$-3 \leq -y \leq 1$$
+
+Puis on additionne avec l'encadrement de $x$ :
+
+$$2 + (-3) \leq x - y \leq 5 + 1$$
+
+$$-1 \leq x - y \leq 6$$
+
+**c)** Encadrement de $2x + 3$
+
+On multiplie l'encadrement de $x$ par 2 :
+
+$$2 \times 2 \leq 2x \leq 2 \times 5$$
+
+$$4 \leq 2x \leq 10$$
+
+Puis on ajoute 3 :
+
+$$4 + 3 \leq 2x + 3 \leq 10 + 3$$
+
+$$7 \leq 2x + 3 \leq 13$$
+
+**d)** Encadrement de $-3y + 1$
+
+On multiplie l'encadrement de $y$ par $-3$ (en inversant les inegalites) :
+
+$$-1 \leq y \leq 3$$
+
+$$-3 \times 3 \leq -3y \leq -3 \times (-1)$$
+
+$$-9 \leq -3y \leq 3$$
+
+Puis on ajoute 1 :
+
+$$-9 + 1 \leq -3y + 1 \leq 3 + 1$$
+
+$$-8 \leq -3y + 1 \leq 4$$
+</Solution>
+
+<Erreurs>
+**Erreurs frequentes a eviter** :
+
+1. **Oublier d'inverser les inegalites** lors d'une multiplication ou division par un nombre negatif.
+
+   Par exemple, si $-1 \leq y \leq 3$ et qu'on multiplie par $-3$, on doit ecrire :
+   $$-9 \leq -3y \leq 3$$ (et non $3 \leq -3y \leq -9$)
+
+2. **Se tromper dans les bornes lors d'une soustraction** : pour encadrer $x - y$, il faut d'abord encadrer $-y$ correctement.
+
+3. **Additionner directement pour une soustraction** : ne pas confondre l'encadrement de $x + y$ avec celui de $x - y$.
+</Erreurs>

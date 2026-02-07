@@ -1,0 +1,128 @@
+---
+type: exercise
+title: "Etude complete d'une fonction sans derivee"
+difficulty: 3
+timeMinutes: 18
+category: synthese
+tags: [fonctions, parite, variations, domaine-definition]
+---
+
+<Enonce>
+Soit $f$ la fonction definie sur $\mathbb{R}^*$ par :
+
+$$f(x) = \frac{x^2 - 1}{x}$$
+
+1. Determiner le domaine de definition $D_f$ de $f$.
+2. Montrer que $f$ est impaire.
+3. Montrer que pour tout $x \in D_f$, on a : $f(x) = x - \frac{1}{x}$.
+4. Soit $x_1$ et $x_2$ deux reels strictement positifs tels que $x_1 < x_2$. Calculer $f(x_2) - f(x_1)$ et en deduire que $f$ est strictement croissante sur $]0, +\infty[$.
+5. En utilisant la parite de $f$, deduire les variations de $f$ sur $]-\infty, 0[$.
+6. Dresser le tableau de variations complet de $f$ sur $D_f$.
+7. La fonction $f$ admet-elle un maximum ? un minimum ?
+</Enonce>
+
+<Solution>
+**1. Domaine de definition**
+
+La fonction $f$ est definie si et seulement si le denominateur est non nul :
+
+$$x \neq 0$$
+
+Donc :
+
+$$D_f = \mathbb{R}^* = ]-\infty, 0[ \cup ]0, +\infty[$$
+
+**2. Parite de $f$**
+
+Le domaine $D_f = \mathbb{R}^*$ est **symetrique** par rapport a 0.
+
+Calculons $f(-x)$ pour $x \in D_f$ :
+
+$$f(-x) = \frac{(-x)^2 - 1}{-x} = \frac{x^2 - 1}{-x} = -\frac{x^2 - 1}{x} = -f(x)$$
+
+On a $f(-x) = -f(x)$ pour tout $x \in D_f$.
+
+Donc $f$ est **impaire**.
+
+**3. Forme simplifiee**
+
+$$f(x) = \frac{x^2 - 1}{x} = \frac{x^2}{x} - \frac{1}{x} = x - \frac{1}{x}$$
+
+pour tout $x \in \mathbb{R}^*$.
+
+**4. Sens de variation sur $]0, +\infty[$**
+
+Soit $0 < x_1 < x_2$. Calculons :
+
+$$f(x_2) - f(x_1) = \left(x_2 - \frac{1}{x_2}\right) - \left(x_1 - \frac{1}{x_1}\right)$$
+
+$$= x_2 - x_1 - \frac{1}{x_2} + \frac{1}{x_1}$$
+
+$$= (x_2 - x_1) + \left(\frac{1}{x_1} - \frac{1}{x_2}\right)$$
+
+$$= (x_2 - x_1) + \frac{x_2 - x_1}{x_1 x_2}$$
+
+$$= (x_2 - x_1)\left(1 + \frac{1}{x_1 x_2}\right)$$
+
+Analysons le signe :
+- $x_2 - x_1 > 0$ (car $x_1 < x_2$)
+- $x_1 > 0$ et $x_2 > 0$ donc $x_1 x_2 > 0$, d'ou $\frac{1}{x_1 x_2} > 0$
+- Donc $1 + \frac{1}{x_1 x_2} > 1 > 0$
+
+Par produit de deux nombres strictement positifs :
+
+$$f(x_2) - f(x_1) > 0$$
+
+Donc $f(x_2) > f(x_1)$.
+
+**Conclusion** : $f$ est **strictement croissante** sur $]0, +\infty[$.
+
+**5. Variations sur $]-\infty, 0[$**
+
+Comme $f$ est **impaire** et strictement croissante sur $]0, +\infty[$, elle est egalement **strictement croissante** sur $]-\infty, 0[$.
+
+**Justification** : Soit $x_1 < x_2 < 0$. Alors $0 < -x_2 < -x_1$.
+
+Comme $f$ est croissante sur $]0, +\infty[$ :
+
+$$f(-x_2) < f(-x_1)$$
+
+Comme $f$ est impaire :
+
+$$-f(x_2) < -f(x_1) \iff f(x_2) > f(x_1)$$
+
+Donc $f$ est strictement croissante sur $]-\infty, 0[$.
+
+**6. Tableau de variations**
+
+| $x$      | $-\infty$ |          | $0$ |          | $+\infty$ |
+|----------|-----------|----------|-----|----------|-----------|
+| $f(x)$   | $-\infty$ | $\nearrow$ | $\Vert$  | $\nearrow$ | $+\infty$ |
+
+(Le symbole $\Vert$ indique que $f$ n'est pas definie en 0)
+
+**7. Extremums**
+
+D'apres le tableau de variations :
+- $f(x) \to -\infty$ quand $x \to -\infty$
+- $f(x) \to +\infty$ quand $x \to +\infty$
+- $f$ est strictement croissante sur chaque composante de son domaine
+
+**Conclusion** : La fonction $f$ **n'admet ni maximum ni minimum** sur $D_f$.
+</Solution>
+
+<Methode>
+Pour etudier completement une fonction :
+
+1. **Domaine de definition** : identifier les valeurs interdites
+2. **Parite** : verifier si $D_f$ est symetrique, calculer $f(-x)$
+3. **Simplification** : mettre sous forme pratique pour l'etude
+4. **Variations** : etudier le signe de $f(x_2) - f(x_1)$ ou utiliser des proprietes
+5. **Symetrie** : exploiter la parite pour deduire les variations sur l'autre partie du domaine
+6. **Tableau** : synthetiser toutes les informations
+7. **Extremums** : chercher les valeurs maximales/minimales
+</Methode>
+
+<Hint>
+Pour la question 4, factorisez par $(x_2 - x_1)$ apres avoir mis au meme denominateur la partie $\frac{1}{x_1} - \frac{1}{x_2}$.
+</Hint>

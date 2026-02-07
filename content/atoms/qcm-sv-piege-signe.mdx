@@ -1,0 +1,37 @@
+---
+type: qcm
+title: "Piege sur les signes dans la soustraction"
+difficulty: 2
+timeMinutes: 2
+tags: [vecteurs, soustraction, piege]
+---
+
+<Question>
+Que vaut $\vec{AB} - \vec{AC}$ ?
+</Question>
+
+<Option>$\vec{BC}$</Option>
+<Option correct>$\vec{CB}$</Option>
+<Option>$\vec{AB} + \vec{AC}$</Option>
+<Option>$\vec{CA}$</Option>
+
+<Explanation>
+**Attention au piege des signes !** On transforme d'abord la soustraction en addition :
+
+$$\vec{AB} - \vec{AC} = \vec{AB} + (-\vec{AC}) = \vec{AB} + \vec{CA}$$
+
+On applique ensuite la commutativite, puis Chasles :
+
+$$\vec{AB} + \vec{CA} = \vec{CA} + \vec{AB} = \vec{CB}$$
+
+**Erreur frequente** : Confondre $\vec{AB} - \vec{AC}$ avec $\vec{BC}$. Le piege vient du signe $-$ devant $\vec{AC}$ : soustraire $\vec{AC}$ revient a ajouter $\vec{CA}$ (et non $\vec{AC}$).
+
+**Verification** : On peut aussi utiliser la relation de Chasles inverse :
+
+$$\vec{CB} = \vec{CA} + \vec{AB} = \vec{AB} + \vec{CA} = \vec{AB} + (-\vec{AC}) = \vec{AB} - \vec{AC}$$
+
+**Les autres options sont fausses** :
+- $\vec{BC} = -\vec{CB}$ est le vecteur oppose du resultat
+- $\vec{AB} + \vec{AC}$ est la somme (pas la soustraction)
+- $\vec{CA} = -\vec{AC}$ est une etape intermediaire, pas le resultat final
+</Explanation>

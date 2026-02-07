@@ -1,0 +1,71 @@
+---
+type: exercise
+title: "Quart de tour dans un repere orthonorme"
+difficulty: 2
+timeMinutes: 10
+category: application
+tags: [quart-de-tour, coordonnees, repere]
+---
+
+<Enonce>
+Dans un repere orthonorme $(O, \vec{i}, \vec{j})$, on considere les points :
+
+- $A(2, 1)$
+- $B(-1, 3)$
+- $C(0, -4)$
+
+Determiner les coordonnees des images $A'$, $B'$ et $C'$ de ces points par le quart de tour direct de centre $O$.
+</Enonce>
+
+<Solution>
+Dans un repere orthonorme $(O, \vec{i}, \vec{j})$, le quart de tour direct de centre $O$ transforme un point de coordonnees $(x, y)$ en un point de coordonnees $(-y, x)$.
+
+**Demonstration rapide de la formule** :
+
+Le quart de tour direct de centre $O$ effectue une rotation de $90°$ dans le sens positif. Si $M(x, y)$, alors :
+
+- La distance $OM$ est conservee : $OM' = OM$
+- L'angle entre $\vec{OM}$ et $\vec{OM'}$ est de $90°$ dans le sens positif
+
+Geometriquement, cela revient a transformer $(x, y) \to (-y, x)$.
+
+**Application aux points donnes** :
+
+**Pour le point $A(2, 1)$** :
+
+$$A' = (-1, 2)$$
+
+**Pour le point $B(-1, 3)$** :
+
+$$B' = (-3, -1)$$
+
+**Pour le point $C(0, -4)$** :
+
+$$C' = (4, 0)$$
+
+**Verification** : On peut verifier que $OA' = OA$, $OB' = OB$ et $OC' = OC$.
+
+Pour $A$ et $A'$ :
+
+- $OA = \sqrt{2^2 + 1^2} = \sqrt{5}$
+- $OA' = \sqrt{(-1)^2 + 2^2} = \sqrt{5}$
+
+Les distances sont bien conservees.
+</Solution>
+
+<Methode>
+Pour trouver l'image d'un point $M(x, y)$ par le quart de tour direct de centre $O$ dans un repere orthonorme :
+
+**Appliquer la formule** : $(x, y) \to (-y, x)$
+
+**Autrement dit** :
+
+- La nouvelle abscisse $x' = -y$ (l'opposee de l'ancienne ordonnee)
+- La nouvelle ordonnee $y' = x$ (l'ancienne abscisse)
+
+**Remarque** : Pour un quart de tour indirect (sens negatif), la formule serait $(x, y) \to (y, -x)$.
+</Methode>
+
+<Hint>
+Rappelez-vous que le quart de tour direct transforme le vecteur $\vec{i}$ en $\vec{j}$, et le vecteur $\vec{j}$ en $-\vec{i}$.
+</Hint>

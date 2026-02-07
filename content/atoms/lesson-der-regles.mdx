@@ -1,0 +1,143 @@
+---
+type: lesson
+title: "Règles de dérivation"
+difficulty: 1
+timeMinutes: 8
+tags: [derivation, regles, produit, quotient, somme]
+---
+
+### Règle de la somme
+
+<Property title="Dérivée d'une somme">
+
+Si $u$ et $v$ sont dérivables sur un intervalle $I$, alors $u + v$ est dérivable sur $I$ et :
+
+$$(u + v)' = u' + v'$$
+
+</Property>
+
+<Example>
+
+$f(x) = x^3 + x^2$ sur $\mathbb{R}$
+
+$$f'(x) = (x^3)' + (x^2)' = 3x^2 + 2x$$
+
+</Example>
+
+### Règle du produit par une constante
+
+<Property title="Dérivée d'un produit par une constante">
+
+Si $u$ est dérivable sur $I$ et $k \in \mathbb{R}$, alors $ku$ est dérivable sur $I$ et :
+
+$$(ku)' = ku'$$
+
+</Property>
+
+<Example>
+
+$f(x) = 5x^3$ sur $\mathbb{R}$
+
+$$f'(x) = 5 \times (x^3)' = 5 \times 3x^2 = 15x^2$$
+
+</Example>
+
+### Règle du produit
+
+<Property title="Dérivée d'un produit">
+
+Si $u$ et $v$ sont dérivables sur $I$, alors $uv$ est dérivable sur $I$ et :
+
+$$(uv)' = u'v + uv'$$
+
+</Property>
+
+<Attention title="Erreur fréquente">
+
+La dérivée d'un produit **n'est PAS** le produit des dérivées !
+
+$$(uv)' \neq u'v'$$
+
+Il faut appliquer la formule : $u'v + uv'$ (dérivée du premier fois le second, plus le premier fois dérivée du second).
+
+</Attention>
+
+<Example title="Dérivée de (x² + 1)(x³ - 2)">
+
+Posons $u(x) = x^2 + 1$ et $v(x) = x^3 - 2$.
+
+$$u'(x) = 2x \quad ; \quad v'(x) = 3x^2$$
+
+Par la formule du produit :
+
+$$f'(x) = u'v + uv' = 2x(x^3 - 2) + (x^2 + 1)(3x^2)$$
+
+$$= 2x^4 - 4x + 3x^4 + 3x^2 = 5x^4 + 3x^2 - 4x$$
+
+</Example>
+
+### Règle du quotient
+
+<Property title="Dérivée d'un quotient">
+
+Si $u$ et $v$ sont dérivables sur $I$ et $v$ ne s'annule pas sur $I$, alors $\frac{u}{v}$ est dérivable sur $I$ et :
+
+$$\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$$
+
+</Property>
+
+<Attention title="Ordre important">
+
+L'ordre dans la formule est crucial : c'est $u'v - uv'$ (et **non** $uv' - u'v$).
+
+Moyen mnémotechnique : "dérivée du **haut** fois le **bas**, moins le **haut** fois dérivée du **bas**, le tout sur **bas au carré**".
+
+</Attention>
+
+<Example title="Dérivée de (x² + 1)/(x - 1)">
+
+Posons $u(x) = x^2 + 1$ et $v(x) = x - 1$.
+
+$$u'(x) = 2x \quad ; \quad v'(x) = 1$$
+
+Par la formule du quotient (sur $\mathbb{R} \setminus \{1\}$) :
+
+$$f'(x) = \frac{u'v - uv'}{v^2} = \frac{2x(x-1) - (x^2+1) \times 1}{(x-1)^2}$$
+
+$$= \frac{2x^2 - 2x - x^2 - 1}{(x-1)^2} = \frac{x^2 - 2x - 1}{(x-1)^2}$$
+
+</Example>
+
+### Cas particulier : dérivée de 1/u
+
+<Property title="Dérivée de l'inverse">
+
+Si $u$ est dérivable sur $I$ et ne s'annule pas sur $I$, alors :
+
+$$\left(\frac{1}{u}\right)' = -\frac{u'}{u^2}$$
+
+</Property>
+
+<Remark>
+
+Cette formule se retrouve en appliquant la formule du quotient avec le numérateur égal à $1$ (donc de dérivée nulle).
+
+</Remark>
+
+<Example>
+
+$f(x) = \frac{1}{x^2 + 1}$ sur $\mathbb{R}$
+
+$$f'(x) = -\frac{(x^2+1)'}{(x^2+1)^2} = -\frac{2x}{(x^2+1)^2}$$
+
+</Example>
+
+### Tableau récapitulatif
+
+| Opération | Formule |
+|-----------|---------|
+| Somme | $(u + v)' = u' + v'$ |
+| Constante × fonction | $(ku)' = ku'$ |
+| Produit | $(uv)' = u'v + uv'$ |
+| Quotient | $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$ |
+| Inverse | $\left(\frac{1}{u}\right)' = -\frac{u'}{u^2}$ |

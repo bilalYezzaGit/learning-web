@@ -1,0 +1,108 @@
+---
+type: lesson
+title: "Propriétés fondamentales des rapports trigonométriques"
+difficulty: 1
+timeMinutes: 6
+tags: [trigonometrie, proprietes, identites]
+---
+
+### La relation fondamentale
+
+<Theorem title="Relation de Pythagore trigonométrique">
+
+Pour tout angle aigu $\alpha$ :
+
+$$\sin^2(\alpha) + \cos^2(\alpha) = 1$$
+
+</Theorem>
+
+<Remark>
+
+La notation $\sin^2(\alpha)$ signifie $[\sin(\alpha)]^2$. C'est une notation abrégée pour éviter d'écrire des parenthèses.
+
+</Remark>
+
+### Démonstration
+
+<Example title="Démonstration par le théorème de Pythagore">
+
+Considérons un triangle rectangle d'hypoténuse $h$, avec un angle aigu $\alpha$.
+
+Notons $a$ le côté opposé à $\alpha$ et $b$ le côté adjacent.
+
+Par définition :
+
+$$\sin(\alpha) = \frac{a}{h} \quad \text{et} \quad \cos(\alpha) = \frac{b}{h}$$
+
+Par le théorème de Pythagore : $a^2 + b^2 = h^2$
+
+En divisant les deux membres par $h^2$ :
+
+$$\frac{a^2}{h^2} + \frac{b^2}{h^2} = \frac{h^2}{h^2}$$
+
+$$\left(\frac{a}{h}\right)^2 + \left(\frac{b}{h}\right)^2 = 1$$
+
+D'où :
+
+$$\sin^2(\alpha) + \cos^2(\alpha) = 1$$
+
+</Example>
+
+### Relation avec la tangente
+
+<Property title="Tangente en fonction de sinus et cosinus">
+
+Pour tout angle aigu $\alpha$ :
+
+$$\tan(\alpha) = \frac{\sin(\alpha)}{\cos(\alpha)}$$
+
+</Property>
+
+Cette formule découle directement des définitions :
+
+$$\tan(\alpha) = \frac{\text{opposé}}{\text{adjacent}} = \frac{\text{opposé}/h}{\text{adjacent}/h} = \frac{\sin(\alpha)}{\cos(\alpha)}$$
+
+### Angles complémentaires
+
+<Property title="Rapports trigonométriques d'angles complémentaires">
+
+Si deux angles $\alpha$ et $\beta$ sont complémentaires (c'est-à-dire $\alpha + \beta = 90°$), alors :
+
+$$\sin(\alpha) = \cos(\beta) \quad \text{et} \quad \cos(\alpha) = \sin(\beta)$$
+
+</Property>
+
+En particulier :
+
+$$\sin(90° - \alpha) = \cos(\alpha) \quad \text{et} \quad \cos(90° - \alpha) = \sin(\alpha)$$
+
+<Example title="Vérification avec les valeurs remarquables">
+
+Vérifions avec 30° et 60° (angles complémentaires) :
+
+$$\sin(30°) = \frac{1}{2} = \cos(60°) \quad \checkmark$$
+
+$$\cos(30°) = \frac{\sqrt{3}}{2} = \sin(60°) \quad \checkmark$$
+
+</Example>
+
+### Domaines de valeurs
+
+<Property>
+
+Pour tout angle aigu $\alpha$ (c'est-à-dire $0° < \alpha < 90°$) :
+
+- $0 < \sin(\alpha) < 1$
+- $0 < \cos(\alpha) < 1$
+- $\tan(\alpha) > 0$
+
+</Property>
+
+<Remark>
+
+Ces inégalités découlent du fait que dans un triangle rectangle :
+
+- Le côté opposé et le côté adjacent sont toujours plus petits que l'hypoténuse
+- Tous les côtés ont des longueurs positives
+
+</Remark>

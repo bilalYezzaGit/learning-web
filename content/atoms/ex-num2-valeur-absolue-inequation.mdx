@@ -1,0 +1,78 @@
+---
+type: exercise
+title: "Inequations avec valeur absolue"
+difficulty: 2
+timeMinutes: 10
+category: approfondissement
+tags: [valeur-absolue, inequations]
+---
+
+<Enonce>
+Resoudre les inequations suivantes et representer les solutions sur la droite numerique :
+
+a) $|x| < 3$
+
+b) $|x - 2| \leq 5$
+
+c) $|2x + 1| > 4$
+
+d) $|x + 3| \geq 1$
+</Enonce>
+
+<Solution>
+**a)** $|x| < 3$
+
+Cela signifie que $x$ est a une distance inferieure a 3 de l'origine, donc :
+
+$$-3 < x < 3$$
+
+**Ensemble des solutions** : $S = ]-3, 3[$
+
+**b)** $|x - 2| \leq 5$
+
+Cela signifie que la distance entre $x$ et 2 est inferieure ou egale a 5 :
+
+$$-5 \leq x - 2 \leq 5$$
+
+$$-5 + 2 \leq x \leq 5 + 2$$
+
+$$-3 \leq x \leq 7$$
+
+**Ensemble des solutions** : $S = [-3, 7]$
+
+**c)** $|2x + 1| > 4$
+
+L'expression $2x + 1$ est soit superieure a 4, soit inferieure a $-4$ :
+
+- **Cas 1** : $2x + 1 > 4 \Rightarrow 2x > 3 \Rightarrow x > \frac{3}{2}$
+- **Cas 2** : $2x + 1 < -4 \Rightarrow 2x < -5 \Rightarrow x < -\frac{5}{2}$
+
+**Ensemble des solutions** : $S = \left]-\infty, -\frac{5}{2}\right[ \cup \left]\frac{3}{2}, +\infty\right[$
+
+**d)** $|x + 3| \geq 1$
+
+L'expression $x + 3$ est soit superieure ou egale a 1, soit inferieure ou egale a $-1$ :
+
+- **Cas 1** : $x + 3 \geq 1 \Rightarrow x \geq -2$
+- **Cas 2** : $x + 3 \leq -1 \Rightarrow x \leq -4$
+
+**Ensemble des solutions** : $S = ]-\infty, -4] \cup [-2, +\infty[$
+</Solution>
+
+<Methode>
+Pour resoudre une inequation avec valeur absolue :
+
+**Type 1** : $|f(x)| < a$ (ou $\leq$) avec $a > 0$
+
+$$-a < f(x) < a$$
+
+L'ensemble solution est un **intervalle central**.
+
+**Type 2** : $|f(x)| > a$ (ou $\geq$) avec $a > 0$
+
+$$f(x) > a \quad \text{ou} \quad f(x) < -a$$
+
+L'ensemble solution est une **reunion de deux intervalles** (les extremites).
+
+**Attention** : Si $a < 0$, analyser la coherence (par exemple $|f(x)| < -2$ n'a aucune solution).
+</Methode>

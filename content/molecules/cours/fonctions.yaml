@@ -12,14 +12,38 @@ objectives:
   - "Construire des courbes par transformations"
 
 sections:
-  - label: "Rappels et vocabulaire"
+  - label: "Vocabulaire et domaine de definition"
     steps:
-      - lesson-fn-rappels
-      - ex-fn-lecture-graphique
-      - ex-fn-domaine
+      - lesson-fn-domaine
+      - lesson-fn-image-antecedent
+      - ex-fn-domaine-determination
+      - ex-fn-lecture-graphique-complet
       - quiz:
-          - qcm-fn-v1
-          - qcm-fn-v2
-          - qcm-fn-v3
-          - qcm-fn-v4
-          - qcm-fn-v5
+          - qcm-fn-domaine-polynome
+          - qcm-fn-domaine-fraction
+          - qcm-fn-domaine-racine
+          - qcm-fn-image-def
+          - qcm-fn-antecedent-def
+
+  - label: "Parite et sens de variation"
+    steps:
+      - lesson-fn-parite
+      - ex-fn-parite-calcul
+      - lesson-fn-variations
+      - ex-fn-variations-tableau
+      - ex-fn-parite-variations
+      - quiz:
+          - qcm-fn-paire-def
+          - qcm-fn-impaire-def
+          - qcm-fn-piege-parite-domaine
+          - qcm-fn-croissance-def
+          - qcm-fn-extremum-global
+
+  - label: "Transformations de courbes"
+    steps:
+      - lesson-fn-transformations
+      - ex-fn-transformations-construction
+      - ex-fn-synthese-complete
+      - quiz:
+          - qcm-fn-translation-verticale
+          - qcm-fn-piege-translation-horizontale

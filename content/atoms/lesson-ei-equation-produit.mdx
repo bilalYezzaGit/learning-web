@@ -1,0 +1,96 @@
+---
+type: lesson
+title: "Equation produit"
+difficulty: 1
+timeMinutes: 6
+tags: [equations, produit, factorisation]
+---
+
+### Propriete fondamentale
+
+<Property title="Regle du produit nul">
+
+Un produit de facteurs est nul si et seulement si **au moins un** des facteurs est nul.
+
+$$A \times B = 0 \quad \Leftrightarrow \quad A = 0 \text{ ou } B = 0$$
+
+Plus generalement, pour trois facteurs ou plus :
+
+$$A \times B \times C = 0 \quad \Leftrightarrow \quad A = 0 \text{ ou } B = 0 \text{ ou } C = 0$$
+
+</Property>
+
+### Methode de resolution
+
+Pour resoudre une equation produit :
+
+1. **Factoriser** l'equation pour la mettre sous la forme $A \times B = 0$
+2. **Appliquer** la regle du produit nul : $A = 0$ ou $B = 0$
+3. **Resoudre** chaque equation separement
+4. **Regrouper** toutes les solutions obtenues
+
+<Example title="Equation produit simple">
+
+Resoudre $(2x - 3)(x + 1) = 0$.
+
+**Solution :**
+
+L'equation est deja factorisee. On applique la regle du produit nul :
+
+$$(2x - 3)(x + 1) = 0 \quad \Leftrightarrow \quad 2x - 3 = 0 \text{ ou } x + 1 = 0$$
+
+**Premier facteur :** $2x - 3 = 0 \Rightarrow x = \frac{3}{2}$
+
+**Deuxieme facteur :** $x + 1 = 0 \Rightarrow x = -1$
+
+**L'ensemble des solutions est** $S = \left\{-1, \frac{3}{2}\right\}$.
+
+</Example>
+
+### Cas necessitant une factorisation
+
+<Example title="Equation a factoriser">
+
+Resoudre $x^2 = 4x$.
+
+**Solution incorrecte :** Ne JAMAIS diviser par $x$ (on perdrait une solution).
+
+**Solution correcte :**
+
+On ramene tout a gauche :
+
+$$x^2 - 4x = 0$$
+
+On factorise par $x$ :
+
+$$x(x - 4) = 0$$
+
+On applique la regle du produit nul :
+
+$$x = 0 \text{ ou } x - 4 = 0$$
+
+$$x = 0 \text{ ou } x = 4$$
+
+**L'ensemble des solutions est** $S = \{0, 4\}$.
+
+</Example>
+
+<Remark title="Lien avec la factorisation">
+
+La resolution d'equations produit utilise les techniques de factorisation vues en algebre :
+
+- Factorisation par un facteur commun
+- Identites remarquables : $a^2 - b^2 = (a-b)(a+b)$, $(a+b)^2$, $(a-b)^2$
+- Factorisation du trinome du second degre (si connue)
+
+</Remark>
+
+<Attention title="Piege classique">
+
+L'equation **doit etre egale a ZERO** pour appliquer la regle du produit nul.
+
+$(x-1)(x+2) = 3$ ne permet PAS de dire que $x-1 = 3$ ou $x+2 = 3$ !
+
+Il faut d'abord developper et ramener l'equation a la forme $\text{expression} = 0$.
+
+</Attention>

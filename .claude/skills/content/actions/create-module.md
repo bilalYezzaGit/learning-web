@@ -32,6 +32,34 @@ Enchaine automatiquement : **recherche web** -> **creation** -> **review** -> **
    Atomes existants: {count} (a remplacer)
    ```
 
+## Etape 0.5 — Consultation des sources pre-cataloguees
+
+Avant la recherche web, exploiter le registre de sources existantes :
+
+1. **Lire le registre** : `docs/content-intelligence/sources/registry.md`
+2. **Identifier les sources scannees** (statut ✅ dans le tableau)
+3. **Pour chaque source scannee**, lire la fiche : `docs/content-intelligence/sources/sites/{slug}.md`
+4. **Extraire les ressources pertinentes** pour le topic du module :
+   - Dans chaque fiche, chercher la section du module cible (ex: le mapping `type` pour les exercices en ligne, les URLs de documents PDF)
+   - Collecter les URLs directes, types de contenu, resumes
+5. **Compiler un dossier de sources** :
+   ```
+   ## Sources pre-cataloguees pour "{topic}"
+
+   ### {nom-source-1} (✅ scannee)
+   - URLs exercices : {liste}
+   - URLs documents PDF : {liste}
+   - Nb exercices en ligne : {n}
+   - Instructions d'extraction : {resume}
+
+   ### {nom-source-2} (✅ scannee)
+   - ...
+
+   Sources non scannees potentiellement pertinentes : {liste des ⬜ Pending}
+   ```
+
+Si AUCUNE source n'est scannee (toutes ⬜ Pending), passer directement a l'etape 1 sans dossier de sources.
+
 ## Etape 1 — Recherche web exhaustive
 
 Lancer le **content-researcher** avec le Task tool :
@@ -45,6 +73,17 @@ Prompt pour le researcher :
 Recherche exhaustive sur le web pour creer un module complet "{nom-module}"
 pour {niveau} en Tunisie.
 
+{SI dossier de sources existe, INCLURE :}
+## Sources pre-cataloguees (registre source intelligence)
+
+Les fiches suivantes contiennent des URLs directes et resumes pour ce module :
+{contenu du dossier de sources compile a l'etape 0.5}
+
+Utilise ces URLs comme point de depart pour tes recherches. N'hesite pas a
+fetcher directement ces pages pour en extraire le contenu. Complete ensuite par
+tes propres recherches pour ce qui n'est pas couvert.
+{FIN SI}
+
 Couvrir :
 1. Programme officiel tunisien : objectifs, prerequis, progression
 2. Contenu mathematique detaille : definitions, theoremes, proprietes, formules
@@ -53,8 +92,9 @@ Couvrir :
 5. Erreurs frequentes des eleves
 6. Approches pedagogiques efficaces
 
-Chercher sur : devoir.tn, devoirat.net, sigmaths.net, maths-et-tiques.fr,
-khan academy fr, geogebra, et autres sites pertinents.
+Chercher AUSSI sur : devoir.tn, devoirat.net, sigmaths.net, maths-et-tiques.fr,
+khan academy fr, geogebra, et autres sites pertinents (en plus des sources
+pre-cataloguees ci-dessus).
 
 Produire un rapport TRES DETAILLE.
 ```

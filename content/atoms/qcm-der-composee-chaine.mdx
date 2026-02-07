@@ -1,0 +1,26 @@
+---
+type: qcm
+title: "Regle de la chaine"
+difficulty: 2
+timeMinutes: 2
+tags: [derivation, composee, chaine]
+---
+
+<Question>
+La derivee de $f(x) = (3x-2)^4$ est :
+</Question>
+
+<Option>$4(3x-2)^3$</Option>
+<Option correct>$12(3x-2)^3$</Option>
+<Option>$12(3x-2)^4$</Option>
+<Option>$(3x-2)^3$</Option>
+
+<Explanation>
+On applique la **regle de la chaine** : $(u^n)' = n \cdot u' \cdot u^{n-1}$.
+
+Ici $u = 3x-2$ donc $u' = 3$.
+
+$$f'(x) = 4 \cdot 3 \cdot (3x-2)^{4-1} = 12(3x-2)^3$$
+
+**Ne pas oublier** le facteur $u' = 3$. Si on oublie ce facteur, on obtient $4(3x-2)^3$ (faux !). La derivee de la fonction "interieure" $u$ est essentielle.
+</Explanation>

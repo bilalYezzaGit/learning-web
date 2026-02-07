@@ -1,0 +1,15 @@
+title: "Vecteurs : les fondamentaux"
+description: "Maitriser la definition, l'egalite et l'oppose des vecteurs"
+difficulty: 1
+estimatedMinutes: 25
+tags: [vecteurs, definition, egalite, oppose]
+
+steps:
+  - lesson-vt-definition-vecteur
+  - lesson-vt-egalite-vecteurs
+  - lesson-vt-vecteur-oppose
+  - ex-vt-identifier-vecteurs-egaux
+  - quiz:
+      - qcm-vt-def-vecteur
+      - qcm-vt-egalite-def
+      - qcm-vt-vecteur-oppose

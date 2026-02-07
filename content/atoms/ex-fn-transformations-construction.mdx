@@ -1,0 +1,83 @@
+---
+type: exercise
+title: "Construction de courbes par transformations"
+difficulty: 2
+timeMinutes: 10
+category: approfondissement
+tags: [fonctions, transformations, translation]
+---
+
+<Enonce>
+On donne la fonction de reference $f(x) = x^2$.
+
+Pour chacune des fonctions suivantes, exprimer la fonction en termes de $f$ et decrire la transformation geometrique permettant d'obtenir la courbe representative a partir de la courbe $\mathcal{C}_f$ de $f$.
+
+a) $g(x) = x^2 + 3$
+
+b) $h(x) = (x-2)^2$
+
+c) $k(x) = -x^2$
+
+d) $m(x) = (x+1)^2 - 4$
+</Enonce>
+
+<Solution>
+**a)** $g(x) = x^2 + 3$
+
+**Expression en fonction de $f$** :
+
+$$g(x) = f(x) + 3$$
+
+**Transformation** : **Translation verticale** de vecteur $\vec{u}(0, 3)$.
+
+La courbe $\mathcal{C}_g$ s'obtient en decalant $\mathcal{C}_f$ de **3 unites vers le haut**.
+
+---
+
+**b)** $h(x) = (x-2)^2$
+
+**Expression en fonction de $f$** :
+
+$$h(x) = f(x-2)$$
+
+**Transformation** : **Translation horizontale** de vecteur $\vec{v}(2, 0)$.
+
+La courbe $\mathcal{C}_h$ s'obtient en decalant $\mathcal{C}_f$ de **2 unites vers la droite**.
+
+---
+
+**c)** $k(x) = -x^2$
+
+**Expression en fonction de $f$** :
+
+$$k(x) = -f(x)$$
+
+**Transformation** : **Symetrie** par rapport a l'axe des abscisses (axe des $x$).
+
+La courbe $\mathcal{C}_k$ s'obtient en effectuant une symetrie de $\mathcal{C}_f$ par rapport a l'axe horizontal.
+
+---
+
+**d)** $m(x) = (x+1)^2 - 4$
+
+**Expression en fonction de $f$** :
+
+$$m(x) = f(x+1) - 4$$
+
+**Transformation** : Composition de deux translations :
+1. Translation horizontale de vecteur $\vec{w}(-1, 0)$ : decalage de **1 unite vers la gauche**
+2. Translation verticale de vecteur $\vec{t}(0, -4)$ : decalage de **4 unites vers le bas**
+
+Ou de maniere equivalente : **translation de vecteur $\vec{u}(-1, -4)$**.
+
+La courbe $\mathcal{C}_m$ s'obtient en decalant $\mathcal{C}_f$ de 1 unite a gauche et 4 unites vers le bas.
+</Solution>
+
+<Attention>
+**Piege classique** : La transformation $f(x - a)$ correspond a une translation de $+a$ vers la **droite**, pas vers la gauche !
+
+- $f(x - 2)$ : translation de $+2$ vers la droite
+- $f(x + 1)$ : translation de $-1$ vers la gauche (soit $+1$ mais dans le sens negatif)
+
+Le signe dans la formule est **inverse** du sens du deplacement.
+</Attention>

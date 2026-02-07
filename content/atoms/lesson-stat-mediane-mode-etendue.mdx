@@ -1,0 +1,133 @@
+---
+type: lesson
+title: "Mediane, mode et etendue"
+difficulty: 1
+timeMinutes: 7
+tags: [statistiques, mediane, mode, etendue]
+---
+
+### La mediane
+
+<Definition title="Mediane">
+
+La **mediane** d'une serie statistique est la valeur qui partage la serie ordonnee en deux parties de meme effectif.
+
+- Si l'effectif total $N$ est **impair**, la mediane est la valeur du milieu.
+- Si l'effectif total $N$ est **pair**, la mediane est la moyenne des deux valeurs centrales.
+
+</Definition>
+
+<Attention>
+
+Avant de chercher la mediane, il faut **obligatoirement ordonner** les donnees dans l'ordre croissant (ou decroissant).
+
+</Attention>
+
+<Example title="Effectif impair">
+
+Les notes d'un eleve : 8, 12, 10, 15, 11.
+
+1. On ordonne : 8, 10, 11, 12, 15
+2. Effectif $N = 5$ (impair)
+3. La valeur du milieu est en position $\frac{5+1}{2} = 3$
+4. **Mediane = 11**
+
+</Example>
+
+<Example title="Effectif pair">
+
+Les ages de 6 personnes : 18, 20, 22, 25, 28, 30.
+
+1. Les donnees sont deja ordonnees
+2. Effectif $N = 6$ (pair)
+3. Les deux valeurs centrales sont en positions 3 et 4 : 22 et 25
+4. **Mediane** = $\frac{22 + 25}{2} = 23,5$ ans
+
+</Example>
+
+<Property title="Mediane pour donnees groupees">
+
+Quand les donnees sont groupees en classes, on determine la **classe mediane** : c'est la classe qui contient la valeur de rang $\frac{N}{2}$ dans la serie ordonnee.
+
+</Property>
+
+<Remark title="Difference entre moyenne et mediane">
+
+- La **moyenne** tient compte de toutes les valeurs et est sensible aux valeurs extremes.
+- La **mediane** n'est pas influencee par les valeurs extremes : elle represente le "milieu" de la serie.
+
+Exemple : pour les salaires 1000, 1200, 1300, 1400, 8000 :
+- Moyenne = 2580 (tiree vers le haut par 8000)
+- Mediane = 1300 (valeur centrale, plus representative)
+
+</Remark>
+
+### Le mode
+
+<Definition title="Mode">
+
+Le **mode** (ou valeur modale) est la valeur du caractere qui a le plus grand effectif, c'est-a-dire la valeur la plus frequente.
+
+Une serie peut avoir :
+- **Un seul mode** (serie unimodale)
+- **Plusieurs modes** (serie bimodale, multimodale)
+- **Aucun mode** si toutes les valeurs ont le meme effectif
+
+</Definition>
+
+<Example>
+
+Dans une classe, les notes obtenues sont :
+
+| Note | 8 | 10 | 12 | 14 | 16 |
+|------|---|----|----|----|----|
+| Effectif | 3 | 7 | 10 | 5 | 2 |
+
+Le plus grand effectif est 10, donc **mode = 12**.
+
+</Example>
+
+<Remark>
+
+Pour des donnees groupees en classes, on parle de **classe modale** : c'est la classe qui a le plus grand effectif.
+
+</Remark>
+
+### L'etendue
+
+<Definition title="Etendue">
+
+L'**etendue** d'une serie statistique est la difference entre la plus grande valeur et la plus petite valeur :
+
+$$\text{Etendue} = \text{Maximum} - \text{Minimum}$$
+
+L'etendue mesure la **dispersion** des donnees : plus l'etendue est grande, plus les donnees sont dispersees.
+
+</Definition>
+
+<Example>
+
+Les temperatures relevees pendant une semaine : 18°C, 20°C, 22°C, 19°C, 25°C, 21°C, 23°C.
+
+- Minimum = 18°C
+- Maximum = 25°C
+- **Etendue** = 25 - 18 = 7°C
+
+</Example>
+
+<Attention>
+
+L'etendue est tres sensible aux valeurs extremes. Une seule valeur tres grande ou tres petite peut donner une etendue importante, meme si le reste des donnees est groupe.
+
+</Attention>
+
+### Resume
+
+<Property title="Caracteristiques de position et de dispersion">
+
+Pour resumer une serie statistique, on utilise :
+
+- **Caracteristiques de tendance centrale** : moyenne, mediane, mode (indiquent "autour de quelle valeur" se situent les donnees)
+- **Caracteristiques de dispersion** : etendue (indique si les donnees sont groupees ou dispersees)
+
+</Property>

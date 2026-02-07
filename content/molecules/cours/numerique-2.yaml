@@ -6,15 +6,38 @@ order: 10
 estimatedMinutes: 120
 objectives:
   - "Utiliser les intervalles de nombres reels"
-  - "Maitriser la valeur absolue"
-  - "Effectuer des encadrements"
+  - "Maitriser la valeur absolue et ses applications"
+  - "Effectuer des encadrements et operations sur les inegalites"
 
 sections:
-  - label: "Numerique II"
+  - label: "Intervalles"
     steps:
-      - lesson-numerique-2
-      - ex-numerique-2-01
+      - lesson-num2-intervalles
+      - ex-num2-intervalles-operations
       - quiz:
-          - qcm-num2-1
-          - qcm-num2-2
-          - qcm-num2-3
+          - qcm-num2-intervalle-notation
+          - qcm-num2-intervalle-intersection
+          - qcm-num2-intervalle-union
+
+  - label: "Valeur absolue"
+    steps:
+      - lesson-num2-valeur-absolue
+      - lesson-num2-equations-valeur-absolue
+      - ex-num2-valeur-absolue-calcul
+      - ex-num2-valeur-absolue-equation
+      - ex-num2-valeur-absolue-inequation
+      - quiz:
+          - qcm-num2-valeur-absolue-def
+          - qcm-num2-valeur-absolue-distance
+          - qcm-num2-equation-va
+          - qcm-num2-inequation-va
+
+  - label: "Encadrements et synthese"
+    steps:
+      - lesson-num2-encadrements
+      - ex-num2-encadrements
+      - ex-num2-synthese
+      - quiz:
+          - qcm-num2-encadrement-somme
+          - qcm-num2-piege-encadrement-difference
+          - qcm-num2-piege-inverse

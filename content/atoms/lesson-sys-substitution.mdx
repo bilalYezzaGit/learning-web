@@ -1,0 +1,73 @@
+---
+type: lesson
+title: "Resolution par substitution"
+difficulty: 1
+timeMinutes: 7
+tags: [systemes, substitution, resolution]
+---
+
+### Principe de la methode
+
+La methode de **substitution** consiste a exprimer une inconnue en fonction de l'autre dans une equation, puis a remplacer cette expression dans la deuxieme equation.
+
+<Property title="Methode de resolution par substitution">
+
+Pour resoudre un systeme par substitution :
+
+1. **Choisir** une equation et **exprimer** une inconnue en fonction de l'autre
+2. **Substituer** cette expression dans la deuxieme equation
+3. **Resoudre** l'equation obtenue (a une seule inconnue)
+4. **Calculer** la deuxieme inconnue en utilisant l'expression trouvee a l'etape 1
+
+</Property>
+
+### Exemple detaille
+
+<Example title="Application de la methode de substitution">
+
+Resoudre le systeme :
+
+$$\begin{cases}
+x + 2y = 7 \\
+3x - y = 5
+\end{cases}$$
+
+**Etape 1 :** Exprimons $x$ en fonction de $y$ dans la premiere equation :
+
+$$x + 2y = 7 \implies x = 7 - 2y$$
+
+**Etape 2 :** Substituons dans la deuxieme equation :
+
+$$3(7 - 2y) - y = 5$$
+
+**Etape 3 :** Resolvons pour $y$ :
+
+$$21 - 6y - y = 5$$
+
+$$21 - 7y = 5$$
+
+$$-7y = 5 - 21$$
+
+$$-7y = -16$$
+
+$$y = \frac{16}{7}$$
+
+**Etape 4 :** Calculons $x$ :
+
+$$x = 7 - 2y = 7 - 2 \times \frac{16}{7} = 7 - \frac{32}{7} = \frac{49 - 32}{7} = \frac{17}{7}$$
+
+**Solution :** Le systeme admet une unique solution : $\left(\frac{17}{7}, \frac{16}{7}\right)$.
+
+</Example>
+
+### Conseils pratiques
+
+<Remark>
+
+Pour faciliter les calculs :
+
+- Choisir l'equation ou une inconnue a un **coefficient egal a 1** ou **-1**
+- Si possible, isoler l'inconnue qui simplifiera le plus les calculs
+- Verifier la solution en la substituant dans les deux equations initiales
+
+</Remark>

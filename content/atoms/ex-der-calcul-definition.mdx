@@ -1,0 +1,76 @@
+---
+type: exercise
+title: "Calcul du nombre dérivé par définition"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [derivation, nombre-derive, definition]
+---
+
+<Enonce>
+Calculer par la définition (limite du taux d'accroissement) :
+
+1. $f'(2)$ pour $f(x) = x^2 - 3x + 1$
+2. $g'(1)$ pour $g(x) = \frac{1}{x+1}$
+</Enonce>
+
+<Solution>
+**1. Calcul de $f'(2)$ pour $f(x) = x^2 - 3x + 1$**
+
+On utilise la définition du nombre dérivé :
+
+$$f'(2) = \lim_{h \to 0} \frac{f(2+h) - f(2)}{h}$$
+
+Calculons $f(2)$ :
+
+$$f(2) = 2^2 - 3 \times 2 + 1 = 4 - 6 + 1 = -1$$
+
+Calculons $f(2+h)$ :
+
+$$f(2+h) = (2+h)^2 - 3(2+h) + 1$$
+
+$$= 4 + 4h + h^2 - 6 - 3h + 1$$
+
+$$= h^2 + h - 1$$
+
+Formons le taux d'accroissement :
+
+$$\frac{f(2+h) - f(2)}{h} = \frac{h^2 + h - 1 - (-1)}{h} = \frac{h^2 + h}{h} = \frac{h(h + 1)}{h} = h + 1$$
+
+Passons à la limite :
+
+$$f'(2) = \lim_{h \to 0} (h + 1) = 1$$
+
+**2. Calcul de $g'(1)$ pour $g(x) = \frac{1}{x+1}$**
+
+On utilise la définition :
+
+$$g'(1) = \lim_{h \to 0} \frac{g(1+h) - g(1)}{h}$$
+
+Calculons $g(1)$ :
+
+$$g(1) = \frac{1}{1+1} = \frac{1}{2}$$
+
+Calculons $g(1+h)$ :
+
+$$g(1+h) = \frac{1}{(1+h)+1} = \frac{1}{2+h}$$
+
+Formons le taux d'accroissement :
+
+$$\frac{g(1+h) - g(1)}{h} = \frac{\frac{1}{2+h} - \frac{1}{2}}{h} = \frac{\frac{2 - (2+h)}{2(2+h)}}{h} = \frac{\frac{-h}{2(2+h)}}{h}$$
+
+$$= \frac{-h}{2(2+h)} \times \frac{1}{h} = \frac{-1}{2(2+h)}$$
+
+Passons à la limite :
+
+$$g'(1) = \lim_{h \to 0} \frac{-1}{2(2+h)} = \frac{-1}{2 \times 2} = -\frac{1}{4}$$
+</Solution>
+
+<Methode>
+Pour calculer le nombre dérivé $f'(a)$ par définition :
+
+1. **Calculer $f(a)$** : valeur de la fonction au point $a$
+2. **Calculer $f(a+h)$** : valeur de la fonction au point $a+h$
+3. **Former le quotient** : $\frac{f(a+h) - f(a)}{h}$ et le simplifier pour faire disparaître $h$ au dénominateur
+4. **Passer à la limite** : calculer $\lim_{h \to 0}$ du quotient simplifié
+</Methode>

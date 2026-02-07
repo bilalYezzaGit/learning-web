@@ -1,0 +1,15 @@
+title: "Thales : calculs de longueurs"
+description: "Appliquer le theoreme de Thales pour calculer des longueurs dans differentes configurations"
+difficulty: 1
+estimatedMinutes: 30
+tags: [thales, longueurs, proportionnalite]
+
+steps:
+  - lesson-thales-enonce-direct
+  - lesson-thales-configurations
+  - ex-thales-calcul-longueur
+  - ex-thales-configuration-papillon
+  - quiz:
+      - qcm-thales-direct-simple
+      - qcm-thales-papillon
+      - qcm-thales-calcul-inverse

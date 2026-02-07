@@ -1,0 +1,16 @@
+title: "Quart de tour : definition et construction"
+description: "Comprendre le quart de tour et construire des images"
+difficulty: 1
+estimatedMinutes: 25
+tags: [quart-de-tour, definition, construction]
+
+steps:
+  - lesson-qt-definition
+  - lesson-qt-construction
+  - ex-qt-construction-image
+  - ex-qt-coordonnees
+  - quiz:
+      - qcm-qt-definition
+      - qcm-qt-angle
+      - qcm-qt-sens
+      - qcm-qt-image-point

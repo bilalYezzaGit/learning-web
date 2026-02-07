@@ -1,0 +1,74 @@
+---
+type: exercise
+title: "Quart de tour et construction d'un carre"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [quart-de-tour, carre, construction]
+---
+
+<Enonce>
+On donne deux points $A$ et $B$ distincts dans le plan.
+
+1. Construire le carre $ABCD$ en utilisant le quart de tour. On determinera d'abord le centre $O$ du quart de tour qui transforme $A$ en $B$.
+2. Quel quart de tour transforme $B$ en $C$ ? Et $C$ en $D$ ? Et $D$ en $A$ ?
+</Enonce>
+
+<Solution>
+**1. Construction du carre $ABCD$**
+
+Pour que le quart de tour de centre $O$ transforme $A$ en $B$, il faut que :
+
+- $OA = OB$
+- L'angle $\widehat{AOB} = 90°$
+
+**Determination du centre $O$** :
+
+Le point $O$ doit etre equidistant de $A$ et $B$, donc $O$ appartient a la **mediatrice** du segment $[AB]$.
+
+De plus, l'angle $\widehat{AOB} = 90°$, donc le triangle $OAB$ est rectangle isocele en $O$.
+
+**Construction** :
+
+1. Construire la mediatrice du segment $[AB]$
+2. Construire le cercle de diametre $[AB]$ (car dans un triangle rectangle, l'hypotenuse est le diametre du cercle circonscrit)
+3. Le centre $O$ est l'intersection de la mediatrice de $[AB]$ et du cercle de diametre $[AB]$, du cote ou l'on souhaite construire le carre
+
+**Remarque** : Il y a deux positions possibles pour $O$, correspondant aux deux carres possibles (un de chaque cote de $[AB]$).
+
+Une fois $O$ determine, on construit :
+
+- $C$ = image de $B$ par le quart de tour direct de centre $O$
+- $D$ = image de $C$ par le quart de tour direct de centre $O$ (ou directement, $D$ = image de $A$ par le quart de tour indirect de centre $O$)
+
+**Verification** : $ABCD$ est bien un carre car :
+
+- $AB = BC = CD = DA$ (le quart de tour conserve les distances et $OA = OB = OC = OD$)
+- Les angles sont tous droits (angles consecutifs de $90°$)
+
+**2. Quarts de tour successifs**
+
+Le **meme quart de tour** de centre $O$ transforme :
+
+- $A$ en $B$
+- $B$ en $C$
+- $C$ en $D$
+- $D$ en $A$
+
+Le centre $O$ est en fait le **centre du carre** $ABCD$, et le quart de tour de centre $O$ est une **symetrie de rotation d'ordre 4** du carre.
+</Solution>
+
+<Methode>
+Pour construire un carre $ABCD$ a partir de deux points $A$ et $B$ :
+
+1. Construire la mediatrice de $[AB]$
+2. Construire le cercle de diametre $[AB]$
+3. Le centre du quart de tour $O$ est a l'intersection de la mediatrice et du cercle
+4. Appliquer le quart de tour de centre $O$ successivement pour obtenir $C$ puis $D$
+
+**Propriete cle** : Le centre du carre est le centre du quart de tour qui transforme chaque sommet en le suivant.
+</Methode>
+
+<Hint>
+Le centre $O$ du quart de tour est equidistant de $A$ et $B$, et forme un triangle rectangle isocele avec ces deux points.
+</Hint>
