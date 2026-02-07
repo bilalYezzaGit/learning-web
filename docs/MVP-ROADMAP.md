@@ -27,6 +27,13 @@
 - [ ] Validation des references : chaque step pointe vers un atome existant
 - [ ] Erreurs claires au build, pas de crash silencieux en prod
 
+### 1.3 Refactorer le parsing QCM (approche hybride)
+- [ ] Garder `<Question>`, `<Option>`, `<Explanation>` comme vrais composants MDX (contenu riche)
+- [ ] Deplacer uniquement `correctOption` dans le frontmatter (seule donnee structuree)
+- [ ] Compiler le MDX au lieu de parser par regex — plein pouvoir MDX dans questions/options/explications
+- [ ] Migrer les 67 QCM existants (ajouter `correctOption` au frontmatter)
+- [ ] Supprimer le parsing regex (`parseQcmComponents`, `parseQcmLegacy`)
+
 ### 1.4 Evoluer le modele de donnees des series
 - [ ] Ajouter les champs au schema YAML des series :
   - `type` : `mono-module` | `cross-module` | `devoir-controle` | `devoir-synthese`
@@ -36,13 +43,6 @@
 - [ ] Mettre a jour le schema Zod (1.2) pour valider ces nouveaux champs
 - [ ] Mettre a jour `src/lib/content.ts` : loaders, resolvers, types
 - [ ] Mettre a jour `src/types/content.ts` : interface Serie
-
-### 1.3 Refactorer le parsing QCM (approche hybride)
-- [ ] Garder `<Question>`, `<Option>`, `<Explanation>` comme vrais composants MDX (contenu riche)
-- [ ] Deplacer uniquement `correctOption` dans le frontmatter (seule donnee structuree)
-- [ ] Compiler le MDX au lieu de parser par regex — plein pouvoir MDX dans questions/options/explications
-- [ ] Migrer les 67 QCM existants (ajouter `correctOption` au frontmatter)
-- [ ] Supprimer le parsing regex (`parseQcmComponents`, `parseQcmLegacy`)
 
 ---
 
@@ -78,6 +78,8 @@
   - Devoirs de controle (1-2 par trimestre, ciblent quelques modules)
   - Devoirs de synthese (1 par trimestre, couvrent tout le trimestre)
 - [ ] **Gros problemes cross-module** : problemes ouverts compilant plusieurs chapitres
+- [ ] Contenus riches dans les series (meme standard que chantier 2.2)
+- [ ] Priorite par trimestre (trimestre 1 d'abord pour le lancement)
 
 ---
 
@@ -100,6 +102,18 @@
 - [ ] **Lot G** : Landing page (cards entierement cliquables, feature cards non-interactives)
 - [ ] **Lot G** : Admin responsive, scan-upload next/image, QCM focus ring
 
+### 3.4 Motion & Animation (~2h)
+- [ ] **Lot D** : Countdown visuel auto-advance serie (au lieu de setTimeout invisible)
+- [ ] **Lot D** : Skeletons coherents (remplacer les 2 "Chargement..." texte brut)
+- [ ] **Lot D** : Animations entree staggerees sur grilles de cards
+- [ ] **Lot D** : Animation de celebration page result QCM
+
+### 3.5 Identite visuelle (chantier design)
+- [ ] **H1** : Palette de couleur de marque (remplacer le noir/blanc/gris achromatique)
+- [ ] **H2** : Police distinctive (remplacer Inter — Plus Jakarta Sans, Outfit, ou Manrope)
+- [ ] **H3** : Atmosphere sur surfaces cles (gradient hero, panneau auth, page result)
+- [ ] **H4** : Elements mathematiques decoratifs (formules dans le hero, symboles)
+
 ### 3.6 Refonte page Revision
 > Prerequis : Chantier 1.4 (nouveau modele series)
 >
@@ -112,18 +126,6 @@
 - [ ] **Recherche** : trouver une serie specifique
 - [ ] **Indicateurs visuels** : differencier mono-module, cross-module, devoir-controle, devoir-synthese
 - [ ] **Badge trimestre** : T1, T2, T3 visible sur chaque serie
-
-### 3.4 Motion & Animation (~2h)
-- [ ] **Lot D** : Countdown visuel auto-advance serie (au lieu de setTimeout invisible)
-- [ ] **Lot D** : Skeletons coherents (remplacer les 2 "Chargement..." texte brut)
-- [ ] **Lot D** : Animations entree staggerees sur grilles de cards
-- [ ] **Lot D** : Animation de celebration page result QCM
-
-### 3.5 Identite visuelle (chantier design)
-- [ ] **H1** : Palette de couleur de marque (remplacer le noir/blanc/gris achromatique)
-- [ ] **H2** : Police distinctive (remplacer Inter — Plus Jakarta Sans, Outfit, ou Manrope)
-- [ ] **H3** : Atmosphere sur surfaces cles (gradient hero, panneau auth, page result)
-- [ ] **H4** : Elements mathematiques decoratifs (formules dans le hero, symboles)
 
 ---
 
@@ -195,12 +197,26 @@
 
 ---
 
-## Chantier 6 — (A discuter)
+## Chantier 6 — Deploiement + Performance
 
-> Points ouverts a couvrir ensemble :
-> - Deploiement : Vercel ? Domaine ? CI/CD ?
-> - SEO : comment les eleves trouvent le site ?
-> - Performance : temps de chargement, optimisation build
+> Deploiement simple sur Vercel. SEO ignore pour cette phase.
+> Performance : uniquement des quick wins zero risque de regression.
+
+### 6.1 Deploiement Vercel
+- [ ] Deployer sur Vercel (import du repo)
+- [ ] Configurer les variables d'environnement Firebase (`NEXT_PUBLIC_FIREBASE_*`)
+- [ ] Domaine personnalise (si pret)
+- [ ] Verifier le build en production (`npm run build` sans erreurs)
+
+### 6.2 Performance — Quick wins zero risque
+- [ ] `React.cache()` sur `compileMdx` dans `src/lib/mdx.ts` (cache per-request, ~100ms, aucun risque de stale)
+- [ ] Dynamic imports pour les libs lourdes : `recharts`, `mathjs`, `mafs` (chargees uniquement quand utilisees)
+- [ ] `optimizePackageImports` dans `next.config.ts` pour `lucide-react`, `recharts`, `date-fns`
+
+### 6.3 PWA — Strategie de cache
+- [ ] Strategie **NetworkFirst** (contenu frais a chaque visite si reseau disponible)
+- [ ] Fallback offline uniquement pour les pages deja visitees
+- [ ] Pas de cache agressif pendant la phase de lancement (contenus changent souvent)
 
 ---
 
@@ -209,10 +225,12 @@
 | Priorite | Chantier | Raison |
 |----------|----------|--------|
 | 1 | 1 — Fiabiliser le systeme | Prerequis avant de toucher au contenu en masse |
-| 2 | 3.1-3.3 — UI quick wins + corrections | Rendre l'app utilisable proprement |
-| 3 | 3.5 — Identite visuelle | Donner envie aux eleves de rester |
-| 4 | 3.4 — Motion & animation | Polish final |
-| 5 | 4 — Landing page MVP | Premier contact eleve, doit donner envie |
-| 6 | 5 — Mobile (PWA + Scan) | Experience telephone + feature scan |
-| 7 | 2 — Enrichir les contenus | Le coeur de la MVP |
-| 8 | 6 — A definir | Deploiement, SEO, etc. |
+| 2 | 6.2 — Perf quick wins | 3 lignes de code, zero risque, gain immediat |
+| 3 | 3.1-3.3 — UI quick wins + corrections | Rendre l'app utilisable proprement |
+| 4 | 3.5 — Identite visuelle | Donner envie aux eleves de rester |
+| 5 | 3.4 — Motion & animation | Polish final |
+| 6 | 4 — Landing page MVP | Premier contact eleve, doit donner envie |
+| 7 | 3.6 — Refonte page Revision | Depend du data model (1.4) et du contenu (2.4) |
+| 8 | 5 — Mobile (PWA + Scan) | Experience telephone + feature scan |
+| 9 | 2 — Enrichir les contenus + series | Le coeur de la MVP, le plus gros chantier |
+| 10 | 6.1 + 6.3 — Deploiement + PWA cache | Mise en ligne finale |
