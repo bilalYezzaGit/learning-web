@@ -3,6 +3,7 @@ name: chantier
 description: Gestion des chantiers de developpement. Use when starting work, checking progress, resuming work, or completing a task. Keywords - chantier, pipeline, task, travail, projet.
 argument-hint: "[new|list|resume|exec|sync|done] [nom]"
 disable-model-invocation: true
+allowed-tools: Read, Glob, Grep, Bash, Edit, Write
 ---
 
 # Chantier Management

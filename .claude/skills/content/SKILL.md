@@ -2,6 +2,7 @@
 name: content
 description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/atoms/ or content/molecules/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon.
 argument-hint: "[action] [details]"
+model: sonnet
 ---
 
 # Content Management
