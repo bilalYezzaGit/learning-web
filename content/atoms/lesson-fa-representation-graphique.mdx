@@ -1,0 +1,62 @@
+---
+type: lesson
+title: "Representation graphique d'une fonction affine"
+difficulty: 1
+timeMinutes: 8
+tags: [fonctions-affines, representation-graphique]
+---
+
+### Theoreme fondamental
+
+<Theorem title="Representation graphique d'une fonction affine">
+
+La representation graphique d'une fonction affine $f(x) = ax + b$ est une droite $(D)$.
+
+Reciproquement, toute droite non parallele a l'axe des ordonnees est la representation graphique d'une fonction affine.
+
+</Theorem>
+
+### Interpretation graphique des coefficients
+
+<Property title="Signification geometrique de a et b">
+
+Pour une fonction affine $f(x) = ax + b$ :
+
+- **L'ordonnee a l'origine** $b$ est l'ordonnee du point d'intersection de la droite avec l'axe $(Oy)$, c'est-a-dire le point de coordonnees $(0, b)$.
+
+- **Le coefficient directeur** $a$ represente la pente de la droite : pour un deplacement de 1 unite vers la droite, on monte de $a$ unites (ou descend si $a < 0$).
+
+</Property>
+
+### Methode de tracage
+
+<Property title="Tracer une fonction affine">
+
+Pour tracer la droite representant $f(x) = ax + b$, on place deux points :
+
+- Point $A(0, b)$ : intersection avec l'axe des ordonnees
+- Point $B(1, a + b)$ : on se deplace de 1 vers la droite, puis de $a$ verticalement
+
+Puis on trace la droite $(AB)$.
+
+</Property>
+
+<Example title="Tracer f(x) = 2x - 1">
+
+Pour tracer $f(x) = 2x - 1$ :
+
+1. Point $A(0, -1)$ : quand $x = 0$, $f(0) = -1$
+2. Point $B(1, 1)$ : quand $x = 1$, $f(1) = 2 \times 1 - 1 = 1$
+3. On trace la droite passant par $A$ et $B$
+
+</Example>
+
+<Graph function="2*x - 1" range="[-3, 4]" yRange="[-4, 6]" />
+
+<Remark>
+
+- Lorsque $a > 0$, la droite "monte" de gauche a droite (fonction croissante).
+- Lorsque $a < 0$, la droite "descend" de gauche a droite (fonction decroissante).
+- Lorsque $a = 0$, la droite est horizontale (fonction constante).
+
+</Remark>

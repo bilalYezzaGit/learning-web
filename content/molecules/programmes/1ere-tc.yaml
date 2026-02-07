@@ -23,4 +23,6 @@ cours:
   - systemes
   - statistiques
 
-series: []
+series:
+  - fa-fondamentaux
+  - fa-signe-inequations

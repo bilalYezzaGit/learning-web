@@ -1,0 +1,18 @@
+title: "Fonctions affines : les fondamentaux"
+description: "Maitriser les bases des fonctions affines : definition, representation graphique et determination"
+difficulty: 1
+estimatedMinutes: 40
+tags: [fonctions-affines, definition, representation-graphique, determination]
+
+steps:
+  - lesson-fa-definition
+  - ex-fa-reconnaissance
+  - lesson-fa-representation-graphique
+  - ex-fa-tracer-droite
+  - lesson-fa-determination
+  - ex-fa-images-antecedents
+  - ex-fa-coeff-deux-points
+  - quiz:
+      - qcm-fa-definition
+      - qcm-fa-ordonnee-origine
+      - qcm-fa-coeff-directeur

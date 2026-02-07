@@ -37,12 +37,21 @@ export const PARCOURS_LIST: ParcoursConfig[] = [
     available: true,
   },
   {
+    slug: '1ere-tc',
+    label: '1ère TC',
+    level: '1ere',
+    section: 'tc',
+    description: 'Programme de mathématiques pour la 1ère année Tronc Commun',
+    order: 3,
+    available: true,
+  },
+  {
     slug: '1ere-math',
     label: '1ère Maths',
     level: '1ere',
     section: 'math',
     description: 'Programme de mathématiques pour la 1ère année',
-    order: 3,
+    order: 4,
     available: true,
   },
   {
@@ -51,7 +60,7 @@ export const PARCOURS_LIST: ParcoursConfig[] = [
     level: 'term',
     section: 'math',
     description: 'Programme de mathématiques pour la Terminale',
-    order: 4,
+    order: 5,
     available: true,
   },
 ]

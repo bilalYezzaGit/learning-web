@@ -1,0 +1,107 @@
+---
+type: exercise
+title: "Signe d'une fonction affine"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [fonctions-affines, signe]
+---
+
+<Enonce>
+1. Étudier le signe de $f(x) = 2x - 8$.
+2. Étudier le signe de $g(x) = -5x + 15$.
+3. Déterminer le signe du produit $P(x) = (2x - 4)(-x + 3)$.
+4. Résoudre l'inéquation $(3x + 6)(-2x + 10) \leq 0$.
+</Enonce>
+
+<Solution>
+**1. Signe de f(x) = 2x - 8**
+
+On cherche d'abord la **racine** (valeur qui annule $f$) :
+
+$$2x - 8 = 0 \Rightarrow x = 4$$
+
+Le coefficient directeur est $a = 2 > 0$, donc $f$ est croissante.
+
+**Tableau de signes** :
+
+| $x$ | $-\infty$ | | $4$ | | $+\infty$ |
+|-----|-----------|--|-----|--|-----------|
+| $f(x)$ | | $-$ | $0$ | $+$ | |
+
+**Conclusion** :
+- $f(x) < 0$ sur $]-\infty, 4[$
+- $f(x) = 0$ pour $x = 4$
+- $f(x) > 0$ sur $]4, +\infty[$
+
+**2. Signe de g(x) = -5x + 15**
+
+**Racine** :
+
+$$-5x + 15 = 0 \Rightarrow x = 3$$
+
+Le coefficient directeur est $a = -5 < 0$, donc $g$ est décroissante.
+
+**Tableau de signes** :
+
+| $x$ | $-\infty$ | | $3$ | | $+\infty$ |
+|-----|-----------|--|-----|--|-----------|
+| $g(x)$ | | $+$ | $0$ | $-$ | |
+
+**Conclusion** :
+- $g(x) > 0$ sur $]-\infty, 3[$
+- $g(x) = 0$ pour $x = 3$
+- $g(x) < 0$ sur $]3, +\infty[$
+
+**3. Signe de P(x) = (2x - 4)(-x + 3)**
+
+**Racine du premier facteur** : $2x - 4 = 0 \Rightarrow x = 2$
+
+**Racine du second facteur** : $-x + 3 = 0 \Rightarrow x = 3$
+
+**Tableau de signes** :
+
+| $x$ | $-\infty$ | | $2$ | | $3$ | | $+\infty$ |
+|-----|-----------|--|-----|--|-----|--|-----------|
+| $2x - 4$ | | $-$ | $0$ | $+$ | $+$ | $+$ | |
+| $-x + 3$ | | $+$ | $+$ | $+$ | $0$ | $-$ | |
+| $P(x)$ | | $-$ | $0$ | $+$ | $0$ | $-$ | |
+
+**Conclusion** :
+- $P(x) < 0$ sur $]-\infty, 2[ \cup ]3, +\infty[$
+- $P(x) = 0$ pour $x = 2$ ou $x = 3$
+- $P(x) > 0$ sur $]2, 3[$
+
+**4. Résolution de $(3x + 6)(-2x + 10) \leq 0$**
+
+**Racine du premier facteur** : $3x + 6 = 0 \Rightarrow x = -2$
+
+**Racine du second facteur** : $-2x + 10 = 0 \Rightarrow x = 5$
+
+**Tableau de signes** :
+
+| $x$ | $-\infty$ | | $-2$ | | $5$ | | $+\infty$ |
+|-----|-----------|--|------|--|-----|--|-----------|
+| $3x + 6$ | | $-$ | $0$ | $+$ | $+$ | $+$ | |
+| $-2x + 10$ | | $+$ | $+$ | $+$ | $0$ | $-$ | |
+| Produit | | $-$ | $0$ | $+$ | $0$ | $-$ | |
+
+On cherche où le produit est **négatif ou nul**, donc :
+
+$$S = ]-\infty, -2] \cup [5, +\infty[$$
+</Solution>
+
+<Methode>
+Pour étudier le signe d'un produit de fonctions affines :
+
+1. **Trouver les racines** de chaque facteur
+2. **Construire le tableau de signes** ligne par ligne (un facteur par ligne)
+3. **Multiplier les signes** pour obtenir le signe du produit
+4. **Conclure** en fonction de la question (positif, négatif, nul)
+</Methode>
+
+<Erreurs>
+- **Oublier d'inverser les signes** quand $a < 0$ : si $a < 0$, la fonction est décroissante, donc négative après la racine.
+- Confondre $<$ (strictement négatif) et $\leq$ (négatif ou nul) : les racines sont incluses dans le second cas.
+- Mal ordonner les racines sur l'axe des abscisses.
+</Erreurs>

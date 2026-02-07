@@ -1,0 +1,109 @@
+---
+type: exercise
+title: "Détermination d'une fonction affine à partir de deux points"
+difficulty: 2
+timeMinutes: 10
+category: application
+tags: [fonctions-affines, coefficient-directeur, determination]
+---
+
+<Enonce>
+1. Déterminer la fonction affine $f$ dont la représentation graphique passe par $A(1, 5)$ et $B(3, 11)$.
+2. Déterminer la fonction affine $g$ telle que $g(-2) = 7$ et $g(4) = -5$.
+3. La droite $(D)$ a pour coefficient directeur $3$ et passe par le point $C(2, 1)$. Déterminer son équation.
+4. Déterminer la fonction affine $h$ sachant que $h(0) = -3$ et que $h$ est croissante avec $h(2) = 5$.
+</Enonce>
+
+<Solution>
+**1. Détermination de f**
+
+On cherche $f(x) = ax + b$.
+
+**Calcul du coefficient directeur** $a$ :
+
+$$a = \frac{y_B - y_A}{x_B - x_A} = \frac{11 - 5}{3 - 1} = \frac{6}{2} = 3$$
+
+**Calcul de l'ordonnée à l'origine** $b$ :
+
+Le point $A(1, 5)$ appartient à la droite, donc $f(1) = 5$ :
+
+$$a \times 1 + b = 5$$
+
+$$3 \times 1 + b = 5$$
+
+$$b = 2$$
+
+**Réponse :** $f(x) = 3x + 2$
+
+**Vérification :** $f(1) = 3 \times 1 + 2 = 5$ ✓ et $f(3) = 3 \times 3 + 2 = 11$ ✓
+
+**2. Détermination de g**
+
+On a $g(-2) = 7$ et $g(4) = -5$. On cherche $g(x) = ax + b$.
+
+**Calcul de** $a$ :
+
+$$a = \frac{-5 - 7}{4 - (-2)} = \frac{-12}{6} = -2$$
+
+**Calcul de** $b$ :
+
+$$g(-2) = 7 \Rightarrow -2 \times (-2) + b = 7$$
+
+$$4 + b = 7$$
+
+$$b = 3$$
+
+**Réponse :** $g(x) = -2x + 3$
+
+**Vérification :** $g(-2) = -2 \times (-2) + 3 = 7$ ✓ et $g(4) = -2 \times 4 + 3 = -5$ ✓
+
+**3. Détermination de l'équation de (D)**
+
+On sait que $a = 3$ et que $(D)$ passe par $C(2, 1)$.
+
+L'équation est de la forme $y = 3x + b$.
+
+Le point $C(2, 1)$ vérifie cette équation :
+
+$$1 = 3 \times 2 + b$$
+
+$$1 = 6 + b$$
+
+$$b = -5$$
+
+**Réponse :** $y = 3x - 5$
+
+**4. Détermination de h**
+
+On sait que $h(0) = -3$ et $h(2) = 5$.
+
+**Calcul de** $b$ :
+
+$$h(0) = -3 \Rightarrow a \times 0 + b = -3 \Rightarrow b = -3$$
+
+**Calcul de** $a$ :
+
+$$h(2) = 5 \Rightarrow a \times 2 + (-3) = 5$$
+
+$$2a = 8$$
+
+$$a = 4$$
+
+**Réponse :** $h(x) = 4x - 3$
+
+**Vérification de la croissance :** $a = 4 > 0$, donc $h$ est bien croissante ✓
+</Solution>
+
+<Methode>
+Pour déterminer une fonction affine $f(x) = ax + b$ à partir de deux points $A(x_A, y_A)$ et $B(x_B, y_B)$ :
+
+1. **Calculer le coefficient directeur** : $a = \frac{y_B - y_A}{x_B - x_A}$
+2. **Calculer l'ordonnée à l'origine** : $b = y_A - a \times x_A$
+3. **Vérifier** en substituant les coordonnées du second point.
+</Methode>
+
+<Erreurs>
+- **Inverser le numérateur et le dénominateur** dans la formule de $a$ : c'est $\frac{\Delta y}{\Delta x}$ et non $\frac{\Delta x}{\Delta y}$.
+- Oublier de vérifier le résultat avec le deuxième point.
+- Confondre le coefficient directeur et l'ordonnée à l'origine.
+</Erreurs>

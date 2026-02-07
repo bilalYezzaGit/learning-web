@@ -1,0 +1,75 @@
+---
+type: lesson
+title: "Sens de variation d'une fonction affine"
+difficulty: 1
+timeMinutes: 5
+tags: [fonctions-affines, variations]
+---
+
+### Theoreme fondamental
+
+<Theorem title="Sens de variation d'une fonction affine">
+
+Soit $f(x) = ax + b$ une fonction affine.
+
+- Si $a > 0$, alors $f$ est **strictement croissante** sur $\mathbb{R}$
+- Si $a < 0$, alors $f$ est **strictement decroissante** sur $\mathbb{R}$
+- Si $a = 0$, alors $f$ est **constante** sur $\mathbb{R}$
+
+</Theorem>
+
+### Tableaux de variations
+
+<Property title="Tableau de variations selon le signe de a">
+
+**Cas 1 : $a > 0$ (fonction croissante)**
+
+Exemple : $f(x) = 2x + 3$
+
+</Property>
+
+<Variations var="x" intervals="[-∞, +∞]">
+  <Row label="f(x)" kind="var" values="[-∞, ↗, +∞]" />
+</Variations>
+
+<Property title="Cas 2 : a < 0 (fonction decroissante)">
+
+Exemple : $g(x) = -3x + 5$
+
+</Property>
+
+<Variations var="x" intervals="[-∞, +∞]">
+  <Row label="g(x)" kind="var" values="[+∞, ↘, -∞]" />
+</Variations>
+
+<Property title="Cas 3 : a = 0 (fonction constante)">
+
+Exemple : $h(x) = 7$
+
+</Property>
+
+<Variations var="x" intervals="[-∞, +∞]">
+  <Row label="h(x)" kind="var" values="[7, →, 7]" />
+</Variations>
+
+<Example title="Dresser le tableau de variations">
+
+Dresser le tableau de variations de $f(x) = -4x + 7$.
+
+**Solution :**
+
+On identifie $a = -4 < 0$, donc la fonction est strictement decroissante sur $\mathbb{R}$.
+
+</Example>
+
+<Variations var="x" intervals="[-∞, +∞]">
+  <Row label="f(x)" kind="var" values="[+∞, ↘, -∞]" />
+</Variations>
+
+<Remark>
+
+Le sens de variation d'une fonction affine ne depend **que du signe de $a$**, pas de la valeur de $b$.
+
+Autrement dit, l'ordonnee a l'origine n'a aucun impact sur le sens de variation, seulement sur la position de la droite dans le plan.
+
+</Remark>

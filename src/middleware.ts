@@ -5,7 +5,7 @@ import type { NextRequest } from 'next/server'
  * Valid parcours slugs
  * Keep in sync with src/lib/parcours/config.ts
  */
-const VALID_PARCOURS = ['3eme-math', '2nde-math', '1ere-math', 'term-math']
+const VALID_PARCOURS = ['3eme-math', '2nde-math', '1ere-math', '1ere-tc', 'term-math']
 
 /**
  * Global routes that don't require parcours prefix

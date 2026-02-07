@@ -1,8 +1,7 @@
 ---
 name: content
-description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/atoms/ or content/molecules/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon.
+description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/atoms/ or content/molecules/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon, module.
 argument-hint: "[action] [details]"
-model: sonnet
 ---
 
 # Content Management
@@ -15,10 +14,13 @@ Determine l'action a partir de `$ARGUMENTS` ou du contexte utilisateur :
 
 | Intent | Workflow | Quand |
 |--------|----------|-------|
+| **Create module** | [actions/create-module.md](actions/create-module.md) | "create-module", "module complet", "creer le module" |
 | **Creer** | [Creation](#creation-workflow) | ajouter, creer, nouveau, ecrire un atome/molecule |
 | **Editer** | [Edition](#edition-workflow) | modifier, corriger, editer, renommer |
 | **Valider** | [Validation](#validation-workflow) | valider, verifier, checker, audit |
 | **Lister** | [Listing](#listing-workflow) | lister, inventaire, combien, quels atomes |
+
+**Priority** : si `$ARGUMENTS` commence par `create-module`, lire [actions/create-module.md](actions/create-module.md) et suivre le pipeline complet (recherche → creation → review).
 
 ---
 
