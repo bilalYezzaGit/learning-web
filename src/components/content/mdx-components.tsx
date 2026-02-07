@@ -20,6 +20,7 @@ import { Question, Option, Explanation } from './qcm-parts'
 import { Graph as GraphBase } from '@/content/extensions/graph'
 import { YouTube as YouTubeBase } from '@/content/extensions/youtube'
 import { VariationsTable } from '@/content/extensions/variations'
+import { TviExplorer } from '@/content/extensions/tvi-explorer'
 
 // =============================================================================
 // Utilities
@@ -167,4 +168,5 @@ export const mdxComponents = {
   Row,
   Graph,
   YouTube,
+  TviExplorer,
 }
