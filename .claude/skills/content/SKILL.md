@@ -14,13 +14,16 @@ Determine l'action a partir de `$ARGUMENTS` ou du contexte utilisateur :
 
 | Intent | Workflow | Quand |
 |--------|----------|-------|
+| **Create programme** | [actions/create-programme.md](actions/create-programme.md) | "create-programme", "tous les modules", "programme complet" |
 | **Create module** | [actions/create-module.md](actions/create-module.md) | "create-module", "module complet", "creer le module" |
 | **Creer** | [Creation](#creation-workflow) | ajouter, creer, nouveau, ecrire un atome/molecule |
 | **Editer** | [Edition](#edition-workflow) | modifier, corriger, editer, renommer |
 | **Valider** | [Validation](#validation-workflow) | valider, verifier, checker, audit |
 | **Lister** | [Listing](#listing-workflow) | lister, inventaire, combien, quels atomes |
 
-**Priority** : si `$ARGUMENTS` commence par `create-module`, lire [actions/create-module.md](actions/create-module.md) et suivre le pipeline complet (recherche → creation → review).
+**Priority de routing** :
+1. Si `$ARGUMENTS` commence par `create-programme` → [actions/create-programme.md](actions/create-programme.md) — pipeline complet pour TOUS les modules d'un programme (recherche mutualisee + creation par batch + review globale)
+2. Si `$ARGUMENTS` commence par `create-module` → [actions/create-module.md](actions/create-module.md) — pipeline pour UN module (recherche + creation + review)
 
 ---
 
