@@ -28,7 +28,7 @@ export default async function SerieLayout({ children, params }: LayoutProps) {
   const activities = resolveSerieActivities(id)
 
   return (
-    <div className="flex h-[calc(100vh-3.5rem)]">
+    <div className="flex h-[calc(100svh-3.5rem)]">
       {/* Timeline Sidebar */}
       <SerieTimelineWrapper
         serieSlug={serie.slug}

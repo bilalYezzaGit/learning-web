@@ -227,7 +227,7 @@ function StepIndicator({
   if (activityProgress?.isCompleted && activityProgress?.isSuccess) {
     return (
       <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-foreground/10">
-        <Check className="h-3 w-3 text-foreground/50" />
+        <Check className="h-3 w-3 text-foreground/50" aria-hidden="true" />
       </span>
     )
   }
@@ -235,7 +235,7 @@ function StepIndicator({
   if (activityProgress?.isCompleted && !activityProgress?.isSuccess) {
     return (
       <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-foreground/10">
-        <RotateCcw className="h-3 w-3 text-foreground/40" />
+        <RotateCcw className="h-3 w-3 text-foreground/40" aria-hidden="true" />
       </span>
     )
   }
@@ -249,7 +249,7 @@ function StepIndicator({
   }
 
   return (
-    <span className="flex h-5 w-5 shrink-0 items-center justify-center text-[11px] tabular-nums text-muted-foreground/60">
+    <span className="flex h-5 w-5 shrink-0 items-center justify-center text-xs tabular-nums text-muted-foreground/60">
       {index + 1}
     </span>
   )
@@ -292,7 +292,7 @@ function ActivityItem({
       <div className="flex min-w-0 flex-1 flex-col gap-0.5">
         <span
           className={cn(
-            'text-[13px] leading-snug',
+            'text-sm leading-snug',
             isCurrent
               ? 'font-medium text-foreground'
               : activityProgress?.isCompleted
@@ -303,11 +303,11 @@ function ActivityItem({
           {activity.title}
         </span>
         <div className="flex items-center gap-2">
-          <span className="text-[11px] text-muted-foreground/60">
+          <span className="text-xs text-muted-foreground/60">
             {TYPE_LABELS[activity.type]}
           </span>
           {activity.timeMinutes > 0 && (
-            <span className="text-[11px] text-muted-foreground/40">
+            <span className="text-xs text-muted-foreground/40">
               {formatDuration(activity.timeMinutes)}
             </span>
           )}
@@ -317,7 +317,7 @@ function ActivityItem({
             activityProgress?.total !== undefined && (
               <span
                 className={cn(
-                  'text-[11px] tabular-nums',
+                  'text-xs tabular-nums',
                   activityProgress.isSuccess
                     ? 'text-muted-foreground/60'
                     : 'font-medium text-foreground/50'
@@ -354,10 +354,10 @@ function SectionAccordion({
     <AccordionItem value={section.id} className="border-none">
       <AccordionTrigger className="px-4 py-2.5 hover:bg-muted/50 hover:no-underline [&>svg]:h-3.5 [&>svg]:w-3.5 [&>svg]:text-muted-foreground/50">
         <div className="flex flex-1 items-center justify-between pr-2">
-          <span className="text-[13px] font-medium text-foreground">
+          <span className="text-sm font-medium text-foreground">
             {section.label}
           </span>
-          <span className="text-[11px] tabular-nums text-muted-foreground/60">
+          <span className="text-xs tabular-nums text-muted-foreground/60">
             {allDone ? 'Terminé' : `${completed}/${total}`}
           </span>
         </div>
@@ -442,6 +442,7 @@ function TimelineHeader({
               className="h-6 w-6 shrink-0 text-muted-foreground/50 hover:text-muted-foreground"
             >
               <ChevronUp
+                aria-hidden="true"
                 className={cn(
                   'h-3.5 w-3.5 transition-transform duration-200',
                   !isOpen && 'rotate-180'
@@ -457,7 +458,7 @@ function TimelineHeader({
         <CollapsibleContent className="overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
           <div className="flex flex-col gap-3 pb-1">
             {data.description && (
-              <p className="text-[12px] leading-relaxed text-muted-foreground">
+              <p className="text-xs leading-relaxed text-muted-foreground">
                 {data.description}
               </p>
             )}
@@ -468,25 +469,25 @@ function TimelineHeader({
                 {data.objectives!.map((obj) => (
                   <li
                     key={obj}
-                    className="flex items-start gap-2 text-[12px] text-muted-foreground/80"
+                    className="flex items-start gap-2 text-xs text-muted-foreground/80"
                   >
-                    <Check className="mt-0.5 h-3 w-3 shrink-0 text-muted-foreground/40" />
+                    <Check className="mt-0.5 h-3 w-3 shrink-0 text-muted-foreground/40" aria-hidden="true" />
                     <span className="leading-relaxed">{obj}</span>
                   </li>
                 ))}
               </ul>
             )}
 
-            <div className="flex items-center gap-3 text-[11px] text-muted-foreground/60">
+            <div className="flex items-center gap-3 text-xs text-muted-foreground/60">
               {/* Difficulty (Serie) */}
               {hasDifficulty && (
                 <span className="flex items-center gap-1">
-                  <Gauge className="h-3 w-3" />
+                  <Gauge className="h-3 w-3" aria-hidden="true" />
                   {DIFFICULTY_LABELS[data.difficulty!] || 'Moyen'}
                 </span>
               )}
               <span className="flex items-center gap-1">
-                <Clock className="h-3 w-3" />
+                <Clock className="h-3 w-3" aria-hidden="true" />
                 {formatDuration(data.estimatedMinutes)}
               </span>
               <span className="tabular-nums">{progressPercent}% terminé</span>
@@ -495,11 +496,11 @@ function TimelineHeader({
             <Button
               variant="ghost"
               size="sm"
-              className="w-full justify-between text-[13px] font-medium text-foreground hover:bg-muted"
+              className="w-full justify-between text-sm font-medium text-foreground hover:bg-muted"
               onClick={onContinue}
             >
               Continuer
-              <ArrowRight className="h-3.5 w-3.5" />
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Button>
           </div>
         </CollapsibleContent>
@@ -507,7 +508,7 @@ function TimelineHeader({
         {/* Progress bar always visible */}
         <div className="flex items-center gap-2.5">
           <Progress value={progressPercent} className="h-1 flex-1" />
-          <span className="text-[11px] tabular-nums text-muted-foreground/50">
+          <span className="text-xs tabular-nums text-muted-foreground/50">
             {progressPercent}%
           </span>
         </div>
@@ -616,12 +617,12 @@ export function CourseTimeline({
         className="fixed left-4 top-4 z-50 h-9 w-9 border-border/50 bg-background/80 backdrop-blur-sm lg:hidden"
         onClick={() => setSheetOpen(true)}
       >
-        <PanelLeft className="h-4 w-4" />
+        <PanelLeft className="h-4 w-4" aria-hidden="true" />
         <span className="sr-only">Ouvrir le menu</span>
       </Button>
 
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-        <SheetContent side="left" className="w-80 p-0 flex flex-col overscroll-contain">
+        <SheetContent side="left" className="w-[min(80vw,320px)] p-0 flex flex-col overscroll-contain">
           <SheetTitle className="sr-only">{data.title}</SheetTitle>
           {timelineContent}
         </SheetContent>

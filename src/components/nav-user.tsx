@@ -66,7 +66,7 @@ export function NavUser() {
         <SidebarMenuItem>
           <SidebarMenuButton asChild>
             <Link href="/login">
-              <CircleUser className="h-4 w-4" />
+              <CircleUser className="h-4 w-4" aria-hidden="true" />
               <span>Se connecter</span>
             </Link>
           </SidebarMenuButton>
@@ -106,7 +106,7 @@ export function NavUser() {
                     {parcoursConfig ? parcoursConfig.label : userEmail}
                   </span>
                 </div>
-                <EllipsisVertical className="ml-auto size-4" />
+                <EllipsisVertical className="ml-auto size-4" aria-hidden="true" />
               </SidebarMenuButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -138,16 +138,16 @@ export function NavUser() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => openProfile('stats')}>
-                <CircleUser className="mr-2 h-4 w-4" />
+                <CircleUser className="mr-2 h-4 w-4" aria-hidden="true" />
                 Profil
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => openProfile('settings')}>
-                <Settings className="mr-2 h-4 w-4" />
+                <Settings className="mr-2 h-4 w-4" aria-hidden="true" />
                 Paramètres
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => signOut()}>
-                <LogOut className="mr-2 h-4 w-4" />
+                <LogOut className="mr-2 h-4 w-4" aria-hidden="true" />
                 Déconnexion
               </DropdownMenuItem>
             </DropdownMenuContent>

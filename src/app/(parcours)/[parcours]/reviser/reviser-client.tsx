@@ -65,7 +65,7 @@ export function ReviserStats() {
       <Card>
         <CardContent className="flex items-center gap-4 py-4">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-            <Trophy className="h-5 w-5 text-primary" />
+            <Trophy className="h-5 w-5 text-primary" aria-hidden="true" />
           </div>
           <div>
             <p className="tabular-nums text-2xl font-bold">{stats.completed}</p>
@@ -75,8 +75,8 @@ export function ReviserStats() {
       </Card>
       <Card>
         <CardContent className="flex items-center gap-4 py-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900/20">
-            <GraduationCap className="h-5 w-5 text-green-600" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-success/10">
+            <GraduationCap className="h-5 w-5 text-success" aria-hidden="true" />
           </div>
           <div>
             <p className="tabular-nums text-2xl font-bold">{stats.avgScore}%</p>
@@ -86,8 +86,8 @@ export function ReviserStats() {
       </Card>
       <Card>
         <CardContent className="flex items-center gap-4 py-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/20">
-            <Check className="h-5 w-5 text-blue-600" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-info/10">
+            <Check className="h-5 w-5 text-info" aria-hidden="true" />
           </div>
           <div>
             <p className="tabular-nums text-2xl font-bold">{stats.exercisesDone}</p>
@@ -169,16 +169,16 @@ export function SeriesListItem({ serie, activityIds, parcours }: SeriesListItemP
       <div
         className={`flex h-10 w-10 items-center justify-center rounded-lg ${
           isSerieComplete
-            ? 'bg-green-100 dark:bg-green-900/20'
+            ? 'bg-success/10'
             : 'bg-primary/10'
         }`}
       >
         {isSerieComplete ? (
-          <Check className="h-5 w-5 text-green-600" />
+          <Check className="h-5 w-5 text-success" aria-hidden="true" />
         ) : serieProgress.completed > 0 ? (
-          <RotateCcw className="h-5 w-5 text-primary" />
+          <RotateCcw className="h-5 w-5 text-primary" aria-hidden="true" />
         ) : (
-          <GraduationCap className="h-5 w-5 text-primary" />
+          <GraduationCap className="h-5 w-5 text-primary" aria-hidden="true" />
         )}
       </div>
 
@@ -186,7 +186,7 @@ export function SeriesListItem({ serie, activityIds, parcours }: SeriesListItemP
         <div className="flex items-center gap-2">
           <p className="font-medium">{serie.title}</p>
           {isSerieComplete && (
-            <Badge variant="default" className="bg-green-600 text-xs">
+            <Badge variant="default" className="bg-success text-xs">
               Terminé
             </Badge>
           )}
@@ -206,7 +206,7 @@ export function SeriesListItem({ serie, activityIds, parcours }: SeriesListItemP
             {getDifficultyLabel(serie.difficulty)}
           </Badge>
           <span className="flex items-center gap-1 text-xs text-muted-foreground">
-            <Clock className="h-3 w-3" />
+            <Clock className="h-3 w-3" aria-hidden="true" />
             {serie.estimatedMinutes} min
           </span>
           <span className="text-xs text-muted-foreground">
@@ -220,7 +220,7 @@ export function SeriesListItem({ serie, activityIds, parcours }: SeriesListItemP
         )}
       </div>
 
-      <ChevronRight className="h-5 w-5 text-muted-foreground" />
+      <ChevronRight className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
     </Link>
   )
 }

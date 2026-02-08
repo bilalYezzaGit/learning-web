@@ -50,7 +50,7 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
 
   if (!currentActivity) {
     return (
-      <div className="flex h-[calc(100vh-3.5rem)] items-center justify-center">
+      <div className="flex h-[calc(100svh-3.5rem)] items-center justify-center">
         <div className="text-center text-muted-foreground">
           <p className="text-lg font-medium">Activité non trouvée</p>
           <Button className="mt-4" asChild>
@@ -126,11 +126,11 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
     const previousProgress = getProgress(currentActivity.id)
 
     return (
-      <div className="flex h-[calc(100vh-3.5rem)] flex-col">
+      <div className="flex h-[calc(100svh-3.5rem)] flex-col">
         <header className="flex items-center gap-4 border-b px-4 py-3">
           <Button variant="ghost" size="icon" asChild>
             <Link href={`/${parcours}/reviser/serie/${serieSlug}`}>
-              <X className="h-5 w-5" />
+              <X className="h-5 w-5" aria-hidden="true" />
               <span className="sr-only">Quitter</span>
             </Link>
           </Button>
@@ -148,8 +148,8 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
         <div className="flex-1 overflow-auto">
           <div className="mx-auto max-w-3xl px-4 lg:px-6 py-6">
             {previousProgress && previousProgress.score !== undefined && previousProgress.total ? (
-              <div className="mb-6 rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-950/20">
-                <p className="text-sm text-green-800 dark:text-green-200">
+              <div className="mb-6 rounded-lg border border-success/25 bg-success/10 p-4">
+                <p className="text-sm text-success-foreground">
                   Déjà fait : {previousProgress.score}/{previousProgress.total} ({Math.round((previousProgress.score / previousProgress.total) * 100)}%)
                 </p>
               </div>
@@ -168,11 +168,11 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
 
   // Lessons and Exercises
   return (
-    <div className="flex h-[calc(100vh-3.5rem)] flex-col">
+    <div className="flex h-[calc(100svh-3.5rem)] flex-col">
       <header className="flex items-center gap-4 border-b px-4 py-3">
         <Button variant="ghost" size="icon" asChild>
           <Link href={`/${parcours}/reviser/serie/${serieSlug}`}>
-            <X className="h-5 w-5" />
+            <X className="h-5 w-5" aria-hidden="true" />
             <span className="sr-only">Quitter</span>
           </Link>
         </Button>
@@ -193,8 +193,8 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
             {getAtomTypeLabel(currentActivity.type)}
           </Badge>
           {activityCompleted && (
-            <Badge variant="default" className="bg-green-600 text-xs">
-              <CheckCircle2 className="mr-1 h-3 w-3" />
+            <Badge variant="default" className="bg-success text-xs">
+              <CheckCircle2 className="mr-1 h-3 w-3" aria-hidden="true" />
               Fait
             </Badge>
           )}
@@ -211,13 +211,13 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
           {currentActivity.type === 'exercise' && (
             <div className="mt-6 flex items-center justify-center">
               {activityCompleted ? (
-                <div className="flex items-center gap-2 text-green-600">
-                  <CheckCircle2 className="h-5 w-5" />
+                <div className="flex items-center gap-2 text-success">
+                  <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
                   <span className="font-medium">Exercice terminé</span>
                 </div>
               ) : (
                 <Button onClick={handleExerciseComplete} variant="outline">
-                  <CheckCircle2 className="mr-2 h-4 w-4" />
+                  <CheckCircle2 className="mr-2 h-4 w-4" aria-hidden="true" />
                   J&apos;ai compris
                 </Button>
               )}
@@ -228,19 +228,19 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
 
       <footer className="flex items-center justify-between border-t px-4 py-3">
         <Button variant="outline" onClick={handlePrevious} disabled={isFirst}>
-          <ArrowLeft className="mr-2 h-4 w-4" />
+          <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" />
           Précédent
         </Button>
 
         {isLast ? (
           <Button onClick={handleFinish}>
             Terminer
-            <CheckCircle className="ml-2 h-4 w-4" />
+            <CheckCircle className="ml-2 h-4 w-4" aria-hidden="true" />
           </Button>
         ) : (
           <Button onClick={handleNext}>
             Suivant
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
           </Button>
         )}
       </footer>

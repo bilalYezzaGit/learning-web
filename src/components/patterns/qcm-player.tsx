@@ -148,13 +148,13 @@ export function QCMPlayer({
             <div
               className={cn(
                 'mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full',
-                isSuccess ? 'bg-green-100 dark:bg-green-950/30' : 'bg-orange-100 dark:bg-orange-950/30'
+                isSuccess ? 'bg-success/10' : 'bg-warning/10'
               )}
             >
               {isSuccess ? (
-                <Check className="h-8 w-8 text-green-600" />
+                <Check className="h-8 w-8 text-success" aria-hidden="true" />
               ) : (
-                <X className="h-8 w-8 text-orange-600" />
+                <X className="h-8 w-8 text-warning" aria-hidden="true" />
               )}
             </div>
             <h2 className="text-2xl font-bold">
@@ -220,8 +220,8 @@ export function QCMPlayer({
                       : 'hover:border-primary/50 hover:bg-muted/50',
                   ],
                   showResult && [
-                    isCorrect && 'border-green-500 bg-green-50 dark:bg-green-950/20',
-                    isSelected && !isCorrect && 'border-red-500 bg-red-50 dark:bg-red-950/20',
+                    isCorrect && 'border-success bg-success/10',
+                    isSelected && !isCorrect && 'border-destructive bg-destructive/10',
                   ]
                 )}
               >
@@ -234,8 +234,8 @@ export function QCMPlayer({
                         : 'border-muted-foreground/30',
                     ],
                     showResult && [
-                      isCorrect && 'border-green-500 bg-green-500 text-white',
-                      isSelected && !isCorrect && 'border-red-500 bg-red-500 text-white',
+                      isCorrect && 'border-success bg-success text-white',
+                      isSelected && !isCorrect && 'border-destructive bg-destructive text-white',
                     ]
                   )}
                 >
@@ -260,9 +260,9 @@ export function QCMPlayer({
 
         {/* Explanation after validation */}
         {state === 'validated' && currentQuestion.explication && (
-          <div aria-live="polite" className="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950/20">
-            <p className="text-sm font-medium text-blue-800 dark:text-blue-200">Explication</p>
-            <div className="mt-1 text-sm text-blue-700 dark:text-blue-300">
+          <div aria-live="polite" className="mt-4 rounded-lg border border-info/25 bg-info/10 p-4">
+            <p className="text-sm font-medium text-info-foreground">Explication</p>
+            <div className="mt-1 text-sm text-info-foreground">
               {currentQuestion.explication}
             </div>
           </div>
@@ -292,7 +292,7 @@ export function QCMPlayer({
           ) : (
             <Button onClick={handleNext}>
               {isLastQuestion ? 'Terminer' : 'Suivant'}
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
             </Button>
           )}
         </div>
