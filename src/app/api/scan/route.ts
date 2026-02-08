@@ -2,7 +2,9 @@
  * Scan Analysis API Route
  *
  * Receives a photo of student work + exercise content,
- * calls Claude Vision to analyze correctness, returns feedback.
+ * calls Claude Vision to analyze correctness, returns structured feedback.
+ *
+ * Uses tool_use to guarantee structured JSON output.
  *
  * POST /api/scan
  * Body (JSON): { imageBase64: string, activityId: string, exerciseContent: string }
@@ -24,19 +26,48 @@ Ta mission :
 - Donner un feedback clair et encourageant en français
 - Proposer des suggestions d'amélioration si nécessaire
 
-Réponds UNIQUEMENT en JSON valide avec ce format exact :
-{
-  "isCorrect": boolean,
-  "confidence": number entre 0 et 1,
-  "feedback": "string — retour clair en français",
-  "suggestions": ["string — suggestion 1", "string — suggestion 2"]
-}
-
 Règles :
 - Si le travail est globalement correct avec des erreurs mineures, isCorrect = true mais mentionne les erreurs dans le feedback
 - Si tu ne peux pas lire la photo ou si elle n'est pas pertinente, confidence = 0 et isCorrect = false
 - Maximum 3 suggestions
-- Sois encourageant, jamais condescendant`
+- Sois encourageant, jamais condescendant
+
+Utilise le tool submit_analysis pour retourner ton analyse.`
+
+const ANALYSIS_TOOL: Anthropic.Tool = {
+  name: 'submit_analysis',
+  description: "Soumet l'analyse du travail de l'élève avec feedback structuré",
+  input_schema: {
+    type: 'object' as const,
+    properties: {
+      isCorrect: {
+        type: 'boolean',
+        description: 'true si le travail est globalement correct',
+      },
+      confidence: {
+        type: 'number',
+        description: 'Niveau de confiance entre 0 et 1',
+      },
+      feedback: {
+        type: 'string',
+        description: 'Retour clair et encourageant en français',
+      },
+      suggestions: {
+        type: 'array',
+        items: { type: 'string' },
+        description: "Suggestions d'amélioration (max 3)",
+      },
+    },
+    required: ['isCorrect', 'confidence', 'feedback', 'suggestions'],
+  },
+}
+
+interface AnalysisResult {
+  isCorrect: boolean
+  confidence: number
+  feedback: string
+  suggestions: string[]
+}
 
 interface ScanRequest {
   imageBase64: string
@@ -58,6 +89,8 @@ export async function POST(request: Request) {
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-5-20250929',
       max_tokens: 1024,
+      tools: [ANALYSIS_TOOL],
+      tool_choice: { type: 'tool', name: 'submit_analysis' },
       messages: [
         {
           role: 'user',
@@ -84,24 +117,19 @@ export async function POST(request: Request) {
       system: SYSTEM_PROMPT,
     })
 
-    const textBlock = message.content.find((b) => b.type === 'text')
-    if (!textBlock || textBlock.type !== 'text') {
-      return NextResponse.json({ error: 'No response from AI' }, { status: 500 })
+    const toolBlock = message.content.find((b) => b.type === 'tool_use')
+    if (!toolBlock || toolBlock.type !== 'tool_use') {
+      return NextResponse.json({ error: 'No structured response from AI' }, { status: 500 })
     }
 
-    const parsed = JSON.parse(textBlock.text) as {
-      isCorrect: boolean
-      confidence: number
-      feedback: string
-      suggestions: string[]
-    }
+    const result = toolBlock.input as AnalysisResult
 
     return NextResponse.json({
       activityId: body.activityId,
-      isCorrect: parsed.isCorrect,
-      confidence: parsed.confidence,
-      feedback: parsed.feedback,
-      suggestions: parsed.suggestions ?? [],
+      isCorrect: result.isCorrect,
+      confidence: result.confidence,
+      feedback: result.feedback,
+      suggestions: result.suggestions ?? [],
     })
   } catch (e) {
     console.error('Scan analysis error:', e)
