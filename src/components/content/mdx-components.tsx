@@ -26,7 +26,7 @@ const GraphBase = dynamic(
   () => import('@/content/extensions/graph').then(mod => mod.Graph),
   {
     loading: () => (
-      <div className="my-4 h-[400px] animate-pulse rounded-lg border border-stone-200 bg-stone-100 dark:border-stone-700 dark:bg-stone-800" />
+      <div className="my-6 h-[400px] animate-pulse rounded-xl border border-stone-200/80 bg-stone-100 shadow-sm dark:border-stone-700/50 dark:bg-stone-800" />
     ),
   },
 )

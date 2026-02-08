@@ -117,8 +117,8 @@ function parseVarPairs(
  * Get sign color class
  */
 function signColorClass(sign: string): string {
-  if (sign === '+') return 'text-green-600 dark:text-green-400'
-  if (sign === '-') return 'text-red-600 dark:text-red-400'
+  if (sign === '+') return 'text-emerald-600 dark:text-emerald-400'
+  if (sign === '-') return 'text-rose-600 dark:text-rose-400'
   return 'text-stone-900 dark:text-stone-100'
 }
 
@@ -128,6 +128,44 @@ function signColorClass(sign: string): string {
 function boundaryColorClass(value: string): string {
   if (value === '0') return 'text-amber-600 dark:text-amber-400'
   return 'text-stone-900 dark:text-stone-100'
+}
+
+/**
+ * SVG arrow component for variation rows
+ */
+function VariationArrow({ increasing }: { increasing: boolean }) {
+  return (
+    <svg
+      width="40"
+      height="24"
+      viewBox="0 0 40 24"
+      fill="none"
+      className="text-stone-500 dark:text-stone-400"
+      aria-hidden="true"
+    >
+      <line
+        x1="4"
+        y1={increasing ? 20 : 4}
+        x2="32"
+        y2={increasing ? 4 : 20}
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <polyline
+        points={
+          increasing
+            ? '26,2 32,4 28,9'
+            : '26,22 32,20 28,15'
+        }
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    </svg>
+  )
 }
 
 export function VariationsTable({
@@ -147,23 +185,23 @@ export function VariationsTable({
     : Array(numIntervals).fill('+')
 
   return (
-    <div className="my-4 overflow-x-auto">
-      <table className="w-full border-collapse border border-stone-800 text-sm dark:border-stone-200">
+    <div className="not-prose my-6 overflow-x-auto rounded-xl border border-stone-200 shadow-sm dark:border-stone-700">
+      <table className="w-full border-collapse text-sm">
         {/* Header row with variable and intervals */}
         <thead>
           <tr>
-            <th className="w-20 border border-stone-800 bg-stone-50 px-2 py-1.5 text-center font-bold dark:border-stone-200 dark:bg-stone-800">
+            <th className="w-24 border-r border-b border-stone-200 bg-stone-100/80 px-3 py-2.5 text-center font-bold text-stone-700 dark:border-stone-700 dark:bg-stone-800/80 dark:text-stone-300">
               {variable}
             </th>
             {intervals.slice(0, -1).map((bound, i) => (
               <th
                 key={i}
-                className="relative border border-stone-800 bg-stone-50 px-2 py-1.5 dark:border-stone-200 dark:bg-stone-800"
+                className="relative border-b border-stone-200 bg-stone-100/80 px-3 py-2.5 dark:border-stone-700 dark:bg-stone-800/80"
               >
                 {/* Left boundary */}
                 <span
                   className={cn(
-                    'absolute left-1 top-1/2 -translate-y-1/2 font-semibold',
+                    'absolute left-1.5 top-1/2 -translate-y-1/2 font-semibold text-stone-700 dark:text-stone-300',
                     i === 0 ? '' : '-translate-x-1/2'
                   )}
                 >
@@ -171,7 +209,7 @@ export function VariationsTable({
                 </span>
                 {/* Right boundary (last cell only) */}
                 {i === numIntervals - 1 && (
-                  <span className="absolute right-1 top-1/2 -translate-y-1/2 font-semibold">
+                  <span className="absolute right-1.5 top-1/2 -translate-y-1/2 font-semibold text-stone-700 dark:text-stone-300">
                     {intervals[i + 1]}
                   </span>
                 )}
@@ -182,6 +220,8 @@ export function VariationsTable({
 
         <tbody>
           {rows.map((row, rowIdx) => {
+            const isLastRow = rowIdx === rows.length - 1
+
             if (row.kind === 'sign') {
               const { intervalSigns, boundaryValues } = parseSignRow(
                 row.values,
@@ -191,19 +231,28 @@ export function VariationsTable({
 
               return (
                 <tr key={rowIdx}>
-                  <td className="border border-stone-800 px-2 py-2 text-center font-bold dark:border-stone-200">
+                  <td
+                    className={cn(
+                      'border-r border-stone-200 px-3 py-3 text-center font-bold text-stone-700 dark:border-stone-700 dark:text-stone-300',
+                      !isLastRow && 'border-b'
+                    )}
+                  >
                     {row.label}
                   </td>
                   {intervalSigns.map((sign, i) => (
                     <td
                       key={i}
-                      className="relative border border-stone-800 px-2 py-2 text-center dark:border-stone-200"
+                      className={cn(
+                        'relative px-3 py-3 text-center',
+                        !isLastRow && 'border-b border-stone-200 dark:border-stone-700',
+                        i < numIntervals - 1 && 'border-r border-stone-100 dark:border-stone-800'
+                      )}
                     >
                       {/* Left boundary value (0 or ||) */}
                       {boundaryValues[i] && (
                         <span
                           className={cn(
-                            'absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-0.5 font-bold dark:bg-stone-900',
+                            'absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white px-1 text-xs font-bold dark:bg-stone-900',
                             boundaryColorClass(boundaryValues[i]!)
                           )}
                         >
@@ -211,14 +260,14 @@ export function VariationsTable({
                         </span>
                       )}
                       {/* Sign */}
-                      <span className={cn('font-bold', signColorClass(sign))}>
+                      <span className={cn('text-base font-bold', signColorClass(sign))}>
                         {sign}
                       </span>
                       {/* Right boundary value (last cell only) */}
                       {i === numIntervals - 1 && boundaryValues[i + 1] && (
                         <span
                           className={cn(
-                            'absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-white px-0.5 font-bold dark:bg-stone-900',
+                            'absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 rounded-full bg-white px-1 text-xs font-bold dark:bg-stone-900',
                             boundaryColorClass(boundaryValues[i + 1]!)
                           )}
                         >
@@ -238,7 +287,12 @@ export function VariationsTable({
 
             return (
               <tr key={rowIdx}>
-                <td className="border border-stone-800 px-2 py-2 text-center font-bold dark:border-stone-200">
+                <td
+                  className={cn(
+                    'border-r border-stone-200 px-3 py-2 text-center font-bold text-stone-700 dark:border-stone-700 dark:text-stone-300',
+                    !isLastRow && 'border-b'
+                  )}
+                >
                   {row.label}
                 </td>
                 {pairs.map((pair, i) => {
@@ -253,36 +307,35 @@ export function VariationsTable({
                   return (
                     <td
                       key={i}
-                      className="relative h-16 border border-stone-800 px-2 dark:border-stone-200"
+                      className={cn(
+                        'relative h-20 px-3',
+                        !isLastRow && 'border-b border-stone-200 dark:border-stone-700',
+                        i < numIntervals - 1 && 'border-r border-stone-100 dark:border-stone-800'
+                      )}
                     >
                       {/* Start value */}
                       <span
                         className={cn(
-                          'absolute font-semibold',
-                          isFirst ? 'left-1' : 'left-0 -translate-x-1/2',
-                          isIncreasing ? 'bottom-1' : 'top-1'
+                          'absolute font-semibold text-stone-700 dark:text-stone-300',
+                          isFirst ? 'left-2' : 'left-0 -translate-x-1/2',
+                          isIncreasing ? 'bottom-2' : 'top-2'
                         )}
                       >
                         {pair.start}
                       </span>
 
-                      {/* Arrow */}
-                      <span
-                        className={cn(
-                          'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg text-stone-600 dark:text-stone-400',
-                          isIncreasing ? 'rotate-[-30deg]' : 'rotate-[30deg]'
-                        )}
-                      >
-                        →
+                      {/* SVG Arrow */}
+                      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <VariationArrow increasing={isIncreasing} />
                       </span>
 
                       {/* End value (only on last cell or discontinuity) */}
                       {(isLast || hasDiscontinuity) && (
                         <span
                           className={cn(
-                            'absolute font-semibold',
-                            isLast ? 'right-1' : 'right-0 translate-x-1/2',
-                            isIncreasing ? 'top-1' : 'bottom-1'
+                            'absolute font-semibold text-stone-700 dark:text-stone-300',
+                            isLast ? 'right-2' : 'right-0 translate-x-1/2',
+                            isIncreasing ? 'top-2' : 'bottom-2'
                           )}
                         >
                           {pair.end}
