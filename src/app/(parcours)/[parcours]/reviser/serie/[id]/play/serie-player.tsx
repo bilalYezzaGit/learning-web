@@ -18,6 +18,7 @@ import { Progress } from '@/components/ui/progress'
 import { QCMPlayer, type QCMResult } from '@/components/patterns/qcm-player'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
+import { trackExerciseCompleted, trackQcmCompleted, trackSerieStarted } from '@/lib/services/analytics-service'
 import { getAtomTypeLabel } from '@/types/content'
 import type { AtomType, CompiledQuiz } from '@/types/content'
 
@@ -44,6 +45,11 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
 
   const [currentIndex, setCurrentIndex] = React.useState(0)
   const [completedInSession, setCompletedInSession] = React.useState<Set<string>>(new Set())
+
+  // Track serie start
+  React.useEffect(() => {
+    trackSerieStarted(serieSlug)
+  }, [serieSlug])
 
   const totalActivities = activities.length
   const currentActivity = activities[currentIndex]
@@ -80,6 +86,7 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
 
   const handleExerciseComplete = async () => {
     setCompletedInSession((prev) => new Set(prev).add(currentActivity.id))
+    trackExerciseCompleted(currentActivity.id)
 
     if (userId) {
       try {
@@ -97,6 +104,7 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
 
   const handleQCMComplete = async (result: QCMResult) => {
     setCompletedInSession((prev) => new Set(prev).add(currentActivity.id))
+    trackQcmCompleted(currentActivity.id, result.score, result.total)
 
     if (userId) {
       try {

@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { analyzeScan, type ScanResult, ScanError } from '@/lib/services/scan-service'
+import { trackScanUploaded } from '@/lib/services/analytics-service'
 
 interface ScanUploadProps {
   activityId: string
@@ -56,6 +57,7 @@ export function ScanUpload({ activityId, moduleId, onResult, className }: ScanUp
 
       setResult(scanResult)
       setState('success')
+      trackScanUploaded(activityId, scanResult.isCorrect)
       onResult?.(scanResult)
     } catch (e) {
       const message = e instanceof ScanError ? e.message : 'Erreur lors de l\'analyse'
@@ -99,14 +101,14 @@ export function ScanUpload({ activityId, moduleId, onResult, className }: ScanUp
             className={cn(
               'flex items-center gap-3 px-4 py-3',
               result.isCorrect
-                ? 'bg-green-50 dark:bg-green-950/20'
-                : 'bg-orange-50 dark:bg-orange-950/20'
+                ? 'bg-success/10'
+                : 'bg-warning/10'
             )}
           >
             <div
               className={cn(
                 'flex h-10 w-10 items-center justify-center rounded-full',
-                result.isCorrect ? 'bg-green-500' : 'bg-orange-500'
+                result.isCorrect ? 'bg-success' : 'bg-warning'
               )}
             >
               {result.isCorrect ? (
@@ -132,8 +134,8 @@ export function ScanUpload({ activityId, moduleId, onResult, className }: ScanUp
             {/* Suggestions */}
             {result.suggestions.length > 0 && (
               <div className="mt-4">
-                <p className="flex items-center gap-1.5 text-sm font-medium text-amber-600">
-                  <Lightbulb className="h-4 w-4" />
+                <p className="flex items-center gap-1.5 text-sm font-medium text-warning">
+                  <Lightbulb className="h-4 w-4" aria-hidden="true" />
                   Suggestions
                 </p>
                 <ul className="mt-2 space-y-1">

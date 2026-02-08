@@ -14,6 +14,7 @@ import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { InteractiveCard } from '@/components/ui/interactive-card'
 import { useAuth } from '@/lib/context'
 import { useUserParcours, getAvailableParcours } from '@/lib/parcours'
+import { trackParcoursSelected } from '@/lib/services/analytics-service'
 
 export default function SelectParcoursPage() {
   const router = useRouter()
@@ -23,6 +24,7 @@ export default function SelectParcoursPage() {
 
   const handleSelect = async (slug: string) => {
     try {
+      trackParcoursSelected(slug)
       await setParcours(slug)
       router.push(`/${slug}`)
     } catch (e) {

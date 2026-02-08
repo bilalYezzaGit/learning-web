@@ -14,6 +14,7 @@ import { initializeApp, getApps, type FirebaseApp } from 'firebase/app'
 import { getAuth, type Auth } from 'firebase/auth'
 import { getFirestore, type Firestore } from 'firebase/firestore'
 import { getFunctions, type Functions } from 'firebase/functions'
+import { getAnalytics, isSupported, type Analytics } from 'firebase/analytics'
 
 import { getFirebaseConfig } from './config'
 
@@ -30,6 +31,7 @@ function getApp(): FirebaseApp {
 let _auth: Auth | null = null
 let _db: Firestore | null = null
 let _functions: Functions | null = null
+let _analytics: Analytics | null = null
 
 /**
  * Firebase Authentication instance
@@ -59,5 +61,19 @@ export function getFunctionsInstance(): Functions {
     _functions = getFunctions(getApp(), 'us-central1')
   }
   return _functions
+}
+
+/**
+ * Firebase Analytics instance (browser only)
+ * Returns null if analytics is not supported (SSR, privacy blockers)
+ */
+export async function getAnalyticsInstance(): Promise<Analytics | null> {
+  if (_analytics) return _analytics
+
+  const supported = await isSupported()
+  if (!supported) return null
+
+  _analytics = getAnalytics(getApp())
+  return _analytics
 }
 

@@ -13,8 +13,11 @@ import { CheckCircle2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { QCMPlayer, type QCMResult } from '@/components/patterns/qcm-player'
+import { ScanUpload } from '@/components/patterns/scan-upload'
+import { Separator } from '@/components/ui/separator'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
+import { trackExerciseCompleted, trackQcmCompleted } from '@/lib/services/analytics-service'
 import type { AtomType, CompiledQuiz } from '@/types/content'
 
 interface ActivityClientProps {
@@ -45,6 +48,7 @@ export function ActivityClient({
 
   const handleExerciseComplete = async () => {
     setCompletedInSession(true)
+    trackExerciseCompleted(activityId)
 
     if (userId) {
       try {
@@ -63,6 +67,7 @@ export function ActivityClient({
   const handleQCMComplete = async (result: QCMResult) => {
     setCompletedInSession(true)
     setQcmFinished(true)
+    trackQcmCompleted(activityId, result.score, result.total)
 
     if (userId) {
       try {
@@ -118,11 +123,23 @@ export function ActivityClient({
     )
   }
 
-  // For exercises, add completion button
+  // For exercises, add scan + completion button
   if (activityType === 'exercise') {
     return (
       <>
         {children}
+
+        {/* Scan section */}
+        <Separator className="my-8" />
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-muted-foreground">
+            Vérifier mon travail avec l&apos;IA
+          </h3>
+          <ScanUpload
+            activityId={activityId}
+            moduleId={moduleId}
+          />
+        </div>
 
         {/* Completion section */}
         <div className="mt-8 flex flex-col items-center justify-center border-t pt-6">
