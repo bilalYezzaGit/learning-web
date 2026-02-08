@@ -614,7 +614,7 @@ export function CourseTimeline({
       <Button
         variant="outline"
         size="icon"
-        className="fixed left-4 top-4 z-50 h-9 w-9 border-border/50 bg-background/80 backdrop-blur-sm lg:hidden"
+        className="fixed left-4 top-16 z-50 h-9 w-9 border-border/50 bg-background/80 backdrop-blur-sm lg:hidden"
         onClick={() => setSheetOpen(true)}
       >
         <PanelLeft className="h-4 w-4" aria-hidden="true" />
