@@ -21,16 +21,26 @@ interface YouTubeProps {
 export function YouTube({ videoId, title }: YouTubeProps) {
   if (!videoId) {
     return (
-      <div className="my-4 rounded-lg bg-red-50 p-6 text-red-700 dark:bg-red-900/20 dark:text-red-400">
+      <div className="my-6 rounded-xl bg-red-50 p-6 text-red-700 dark:bg-red-900/20 dark:text-red-400">
         Erreur: ID YouTube manquant
       </div>
     )
   }
 
   return (
-    <div className="my-4 overflow-hidden rounded-xl shadow-md">
+    <div className="not-prose my-6 overflow-hidden rounded-xl border border-stone-200/80 shadow-sm dark:border-stone-700/50">
+      {/* Title bar (above video) */}
+      {title && (
+        <div className="flex items-center gap-2.5 bg-stone-50 px-4 py-3 dark:bg-stone-800/60">
+          <PlayCircle className="h-5 w-5 shrink-0 text-red-500" aria-hidden="true" />
+          <span className="text-sm font-medium text-stone-800 dark:text-stone-200">
+            {title}
+          </span>
+        </div>
+      )}
+
       {/* YouTube iframe */}
-      <div className="relative aspect-video w-full">
+      <div className="relative aspect-video w-full bg-black">
         <iframe
           src={`https://www.youtube-nocookie.com/embed/${videoId}`}
           title={title || 'YouTube video'}
@@ -39,16 +49,6 @@ export function YouTube({ videoId, title }: YouTubeProps) {
           className="absolute inset-0 h-full w-full border-0"
         />
       </div>
-
-      {/* Title bar */}
-      {title && (
-        <div className="flex items-center gap-2 bg-stone-100 px-4 py-3 dark:bg-stone-800">
-          <PlayCircle className="h-5 w-5 text-red-500" />
-          <span className="text-sm font-medium text-stone-900 dark:text-stone-100">
-            {title}
-          </span>
-        </div>
-      )}
     </div>
   )
 }

@@ -9,6 +9,7 @@
  * - <Remark> — Pedagogical note (amber)
  * - <Attention> — Common trap / warning (rose)
  *
+ * Design: Left accent bar + subtle gradient background.
  * Always visible (aside elements) — no collapsible sections.
  */
 
@@ -21,103 +22,145 @@ import {
   TriangleAlert,
 } from 'lucide-react'
 
+import { cn } from '@/lib/utils'
+
 interface LessonPartProps {
   children: React.ReactNode
   title?: string
 }
 
-export function Definition({ children, title }: LessonPartProps) {
+interface LessonPartConfig {
+  defaultTitle: string
+  icon: React.ElementType
+  accentClass: string
+  bgClass: string
+  iconClass: string
+  badgeClass: string
+}
+
+function LessonPart({
+  children,
+  title,
+  config,
+}: LessonPartProps & { config: LessonPartConfig }) {
+  const Icon = config.icon
+
   return (
-    <aside className="not-prose my-6 overflow-hidden rounded-lg border border-indigo-200 bg-indigo-50 dark:border-indigo-800 dark:bg-indigo-950/20">
-      <div className="flex items-center gap-2 border-b border-indigo-200 px-4 py-2.5 dark:border-indigo-800">
-        <BookText className="h-5 w-5 shrink-0 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
-        <span className="text-sm font-semibold tracking-wide text-indigo-600 dark:text-indigo-400">
-          {title ?? 'Definition'}
-        </span>
+    <aside
+      className={cn(
+        'not-prose my-8 rounded-r-xl rounded-l-sm border-l-[3.5px] shadow-sm',
+        config.accentClass,
+        config.bgClass,
+      )}
+    >
+      <div className="px-5 pt-4 pb-1">
+        <div className="flex items-center gap-2.5">
+          <div
+            className={cn(
+              'flex h-7 w-7 shrink-0 items-center justify-center rounded-full',
+              config.badgeClass,
+            )}
+          >
+            <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+          </div>
+          <span
+            className={cn(
+              'text-sm font-bold uppercase tracking-wider',
+              config.iconClass,
+            )}
+          >
+            {title ?? config.defaultTitle}
+          </span>
+        </div>
       </div>
-      <div className="prose prose-stone dark:prose-invert max-w-none px-4 py-4">
+      <div className="prose prose-stone dark:prose-invert max-w-none px-5 pt-2 pb-5">
         {children}
       </div>
     </aside>
   )
 }
 
-export function Theorem({ children, title }: LessonPartProps) {
-  return (
-    <aside className="not-prose my-6 overflow-hidden rounded-lg border border-violet-200 bg-violet-50 dark:border-violet-800 dark:bg-violet-950/20">
-      <div className="flex items-center gap-2 border-b border-violet-200 px-4 py-2.5 dark:border-violet-800">
-        <ShieldCheck className="h-5 w-5 shrink-0 text-violet-600 dark:text-violet-400" aria-hidden="true" />
-        <span className="text-sm font-semibold tracking-wide text-violet-600 dark:text-violet-400">
-          {title ?? 'Theoreme'}
-        </span>
-      </div>
-      <div className="prose prose-stone dark:prose-invert max-w-none px-4 py-4">
-        {children}
-      </div>
-    </aside>
-  )
+const definitionConfig: LessonPartConfig = {
+  defaultTitle: 'Définition',
+  icon: BookText,
+  accentClass: 'border-l-indigo-500 dark:border-l-indigo-400',
+  bgClass:
+    'bg-gradient-to-r from-indigo-50/80 to-indigo-50/20 dark:from-indigo-950/30 dark:to-indigo-950/5',
+  iconClass: 'text-indigo-600 dark:text-indigo-400',
+  badgeClass: 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/50 dark:text-indigo-400',
 }
 
-export function Property({ children, title }: LessonPartProps) {
-  return (
-    <aside className="not-prose my-6 overflow-hidden rounded-lg border border-sky-200 bg-sky-50 dark:border-sky-800 dark:bg-sky-950/20">
-      <div className="flex items-center gap-2 border-b border-sky-200 px-4 py-2.5 dark:border-sky-800">
-        <Puzzle className="h-5 w-5 shrink-0 text-sky-600 dark:text-sky-400" aria-hidden="true" />
-        <span className="text-sm font-semibold tracking-wide text-sky-600 dark:text-sky-400">
-          {title ?? 'Propriete'}
-        </span>
-      </div>
-      <div className="prose prose-stone dark:prose-invert max-w-none px-4 py-4">
-        {children}
-      </div>
-    </aside>
-  )
+const theoremConfig: LessonPartConfig = {
+  defaultTitle: 'Théorème',
+  icon: ShieldCheck,
+  accentClass: 'border-l-violet-500 dark:border-l-violet-400',
+  bgClass:
+    'bg-gradient-to-r from-violet-50/80 to-violet-50/20 dark:from-violet-950/30 dark:to-violet-950/5',
+  iconClass: 'text-violet-600 dark:text-violet-400',
+  badgeClass: 'bg-violet-100 text-violet-600 dark:bg-violet-900/50 dark:text-violet-400',
 }
 
-export function Example({ children, title }: LessonPartProps) {
-  return (
-    <aside className="not-prose my-6 overflow-hidden rounded-lg border border-emerald-200 bg-emerald-50 dark:border-emerald-800 dark:bg-emerald-950/20">
-      <div className="flex items-center gap-2 border-b border-emerald-200 px-4 py-2.5 dark:border-emerald-800">
-        <PenLine className="h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
-        <span className="text-sm font-semibold tracking-wide text-emerald-600 dark:text-emerald-400">
-          {title ?? 'Exemple'}
-        </span>
-      </div>
-      <div className="prose prose-stone dark:prose-invert max-w-none px-4 py-4">
-        {children}
-      </div>
-    </aside>
-  )
+const propertyConfig: LessonPartConfig = {
+  defaultTitle: 'Propriété',
+  icon: Puzzle,
+  accentClass: 'border-l-sky-500 dark:border-l-sky-400',
+  bgClass:
+    'bg-gradient-to-r from-sky-50/80 to-sky-50/20 dark:from-sky-950/30 dark:to-sky-950/5',
+  iconClass: 'text-sky-600 dark:text-sky-400',
+  badgeClass: 'bg-sky-100 text-sky-600 dark:bg-sky-900/50 dark:text-sky-400',
 }
 
-export function Remark({ children, title }: LessonPartProps) {
-  return (
-    <aside className="not-prose my-6 overflow-hidden rounded-lg border border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/20">
-      <div className="flex items-center gap-2 border-b border-amber-200 px-4 py-2.5 dark:border-amber-800">
-        <Info className="h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden="true" />
-        <span className="text-sm font-semibold tracking-wide text-amber-600 dark:text-amber-400">
-          {title ?? 'Remarque'}
-        </span>
-      </div>
-      <div className="prose prose-stone dark:prose-invert max-w-none px-4 py-4">
-        {children}
-      </div>
-    </aside>
-  )
+const exampleConfig: LessonPartConfig = {
+  defaultTitle: 'Exemple',
+  icon: PenLine,
+  accentClass: 'border-l-emerald-500 dark:border-l-emerald-400',
+  bgClass:
+    'bg-gradient-to-r from-emerald-50/80 to-emerald-50/20 dark:from-emerald-950/30 dark:to-emerald-950/5',
+  iconClass: 'text-emerald-600 dark:text-emerald-400',
+  badgeClass:
+    'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/50 dark:text-emerald-400',
 }
 
-export function Attention({ children, title }: LessonPartProps) {
-  return (
-    <aside className="not-prose my-6 overflow-hidden rounded-lg border border-rose-200 bg-rose-50 dark:border-rose-800 dark:bg-rose-950/20">
-      <div className="flex items-center gap-2 border-b border-rose-200 px-4 py-2.5 dark:border-rose-800">
-        <TriangleAlert className="h-5 w-5 shrink-0 text-rose-600 dark:text-rose-400" aria-hidden="true" />
-        <span className="text-sm font-semibold tracking-wide text-rose-600 dark:text-rose-400">
-          {title ?? 'Attention'}
-        </span>
-      </div>
-      <div className="prose prose-stone dark:prose-invert max-w-none px-4 py-4">
-        {children}
-      </div>
-    </aside>
-  )
+const remarkConfig: LessonPartConfig = {
+  defaultTitle: 'Remarque',
+  icon: Info,
+  accentClass: 'border-l-amber-500 dark:border-l-amber-400',
+  bgClass:
+    'bg-gradient-to-r from-amber-50/80 to-amber-50/20 dark:from-amber-950/30 dark:to-amber-950/5',
+  iconClass: 'text-amber-600 dark:text-amber-400',
+  badgeClass: 'bg-amber-100 text-amber-600 dark:bg-amber-900/50 dark:text-amber-400',
+}
+
+const attentionConfig: LessonPartConfig = {
+  defaultTitle: 'Attention',
+  icon: TriangleAlert,
+  accentClass: 'border-l-rose-500 dark:border-l-rose-400',
+  bgClass:
+    'bg-gradient-to-r from-rose-50/80 to-rose-50/20 dark:from-rose-950/30 dark:to-rose-950/5',
+  iconClass: 'text-rose-600 dark:text-rose-400',
+  badgeClass: 'bg-rose-100 text-rose-600 dark:bg-rose-900/50 dark:text-rose-400',
+}
+
+export function Definition(props: LessonPartProps) {
+  return <LessonPart {...props} config={definitionConfig} />
+}
+
+export function Theorem(props: LessonPartProps) {
+  return <LessonPart {...props} config={theoremConfig} />
+}
+
+export function Property(props: LessonPartProps) {
+  return <LessonPart {...props} config={propertyConfig} />
+}
+
+export function Example(props: LessonPartProps) {
+  return <LessonPart {...props} config={exampleConfig} />
+}
+
+export function Remark(props: LessonPartProps) {
+  return <LessonPart {...props} config={remarkConfig} />
+}
+
+export function Attention(props: LessonPartProps) {
+  return <LessonPart {...props} config={attentionConfig} />
 }

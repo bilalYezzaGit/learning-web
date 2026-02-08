@@ -187,108 +187,112 @@ export function Graph({
 
   if (data.length === 0) {
     return (
-      <div className="my-4 rounded-lg border border-red-200 bg-red-50 p-6 text-center text-red-700 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
+      <div className="my-6 rounded-xl border border-red-200 bg-red-50 p-6 text-center text-red-700 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
         Erreur: impossible d&apos;évaluer la fonction
       </div>
     )
   }
 
   return (
-    <div className="my-4 rounded-lg border border-stone-200 bg-white p-4 dark:border-stone-700 dark:bg-stone-900">
+    <div className="not-prose my-6 overflow-hidden rounded-xl border border-stone-200/80 bg-white shadow-sm dark:border-stone-700/50 dark:bg-stone-900">
       {!hideFormula && (
-        <div className="mb-4 text-center text-sm font-semibold text-stone-900 dark:text-stone-100">
-          f(x) = {expression}
+        <div className="border-b border-stone-100 bg-stone-50/80 px-5 py-3 dark:border-stone-800 dark:bg-stone-800/40">
+          <p className="text-center font-mono text-sm font-medium text-stone-700 dark:text-stone-300">
+            f(x) = {expression}
+          </p>
         </div>
       )}
 
-      <ResponsiveContainer width="100%" height={400}>
-        <ComposedChart
-          data={data}
-          margin={{ top: 20, right: 30, left: 10, bottom: 10 }}
-        >
-          <CartesianGrid
-            strokeDasharray="3 3"
-            stroke="var(--color-stone-200)"
-            className="dark:stroke-stone-700"
-          />
-
-          {/* Axes at origin */}
-          <ReferenceLine x={0} stroke="var(--color-stone-800)" strokeWidth={1.5} />
-          <ReferenceLine y={0} stroke="var(--color-stone-800)" strokeWidth={1.5} />
-
-          <XAxis
-            dataKey="x"
-            type="number"
-            domain={xRange}
-            tickFormatter={formatValue}
-            tick={{ fontSize: 12 }}
-            interval={0}
-            ticks={Array.from(
-              { length: Math.floor((xRange[1] - xRange[0]) / xInterval) + 1 },
-              (_, i) => xRange[0] + i * xInterval
-            ).filter((v) => v >= xRange[0] && v <= xRange[1])}
-          />
-
-          <YAxis
-            type="number"
-            domain={computedYRange}
-            tickFormatter={formatValue}
-            tick={{ fontSize: 12 }}
-            interval={0}
-            ticks={Array.from(
-              {
-                length:
-                  Math.floor((computedYRange[1] - computedYRange[0]) / yInterval) + 1,
-              },
-              (_, i) => computedYRange[0] + i * yInterval
-            ).filter((v) => v >= computedYRange[0] && v <= computedYRange[1])}
-          />
-
-          <Tooltip
-            formatter={(value) => [formatValue(Number(value)), 'y']}
-            labelFormatter={(label) => `x = ${formatValue(Number(label))}`}
-            contentStyle={{
-              backgroundColor: 'white',
-              border: '1px solid #e7e5e4',
-              borderRadius: '8px',
-              fontSize: '13px',
-            }}
-          />
-
-          {/* Main function curve */}
-          <Line
-            type="monotone"
-            dataKey="y"
-            stroke="#3b82f6"
-            strokeWidth={2.5}
-            dot={false}
-            connectNulls={false}
-            isAnimationActive={false}
-          />
-
-          {/* Annotated points */}
-          {annotatedPoints.map((point, idx) => (
-            <ReferenceLine
-              key={`point-${idx}`}
-              x={point.x}
-              y={point.y}
-              ifOverflow="extendDomain"
-              segment={[
-                { x: point.x, y: point.y },
-                { x: point.x, y: point.y },
-              ]}
+      <div className="p-4">
+        <ResponsiveContainer width="100%" height={400}>
+          <ComposedChart
+            data={data}
+            margin={{ top: 20, right: 30, left: 10, bottom: 10 }}
+          >
+            <CartesianGrid
+              strokeDasharray="3 3"
+              stroke="var(--color-stone-200)"
+              className="dark:stroke-stone-700"
             />
-          ))}
-        </ComposedChart>
-      </ResponsiveContainer>
 
-      {/* Render annotated points as separate dots overlay */}
+            {/* Axes at origin */}
+            <ReferenceLine x={0} stroke="var(--color-stone-800)" strokeWidth={1.5} />
+            <ReferenceLine y={0} stroke="var(--color-stone-800)" strokeWidth={1.5} />
+
+            <XAxis
+              dataKey="x"
+              type="number"
+              domain={xRange}
+              tickFormatter={formatValue}
+              tick={{ fontSize: 12 }}
+              interval={0}
+              ticks={Array.from(
+                { length: Math.floor((xRange[1] - xRange[0]) / xInterval) + 1 },
+                (_, i) => xRange[0] + i * xInterval
+              ).filter((v) => v >= xRange[0] && v <= xRange[1])}
+            />
+
+            <YAxis
+              type="number"
+              domain={computedYRange}
+              tickFormatter={formatValue}
+              tick={{ fontSize: 12 }}
+              interval={0}
+              ticks={Array.from(
+                {
+                  length:
+                    Math.floor((computedYRange[1] - computedYRange[0]) / yInterval) + 1,
+                },
+                (_, i) => computedYRange[0] + i * yInterval
+              ).filter((v) => v >= computedYRange[0] && v <= computedYRange[1])}
+            />
+
+            <Tooltip
+              formatter={(value) => [formatValue(Number(value)), 'y']}
+              labelFormatter={(label) => `x = ${formatValue(Number(label))}`}
+              contentStyle={{
+                backgroundColor: 'white',
+                border: '1px solid #e7e5e4',
+                borderRadius: '8px',
+                fontSize: '13px',
+              }}
+            />
+
+            {/* Main function curve */}
+            <Line
+              type="monotone"
+              dataKey="y"
+              stroke="#3b82f6"
+              strokeWidth={2.5}
+              dot={false}
+              connectNulls={false}
+              isAnimationActive={false}
+            />
+
+            {/* Annotated points */}
+            {annotatedPoints.map((point, idx) => (
+              <ReferenceLine
+                key={`point-${idx}`}
+                x={point.x}
+                y={point.y}
+                ifOverflow="extendDomain"
+                segment={[
+                  { x: point.x, y: point.y },
+                  { x: point.x, y: point.y },
+                ]}
+              />
+            ))}
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* Render annotated points as footer badge row */}
       {annotatedPoints.length > 0 && (
-        <div className="mt-2 flex flex-wrap justify-center gap-2 text-xs text-stone-600 dark:text-stone-400">
+        <div className="flex flex-wrap justify-center gap-2 border-t border-stone-100 bg-stone-50/50 px-4 py-3 text-xs dark:border-stone-800 dark:bg-stone-800/30">
           {annotatedPoints.map((point, idx) => (
             <span
               key={idx}
-              className="rounded bg-red-100 px-2 py-1 dark:bg-red-900/30"
+              className="rounded-full bg-blue-100 px-3 py-1 font-mono font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
             >
               ({formatValue(point.x)}, {formatValue(point.y)})
             </span>
