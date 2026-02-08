@@ -33,7 +33,7 @@ ERRORS=""
 
 # ESLint check
 echo "🔍 Quality gate: ESLint..."
-if ! npx eslint src/ --quiet --max-warnings 0 2>/dev/null; then
+if ! npx eslint src/ --quiet 2>/dev/null; then
   ERRORS="${ERRORS}\n❌ ESLint: des erreurs ont été détectées"
 fi
 

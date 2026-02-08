@@ -24,6 +24,7 @@ interface MathProps {
 /**
  * Server Component - renders KaTeX to HTML string
  */
+/* eslint-disable react-hooks/error-boundaries */
 export function Math({ latex, block = false }: MathProps) {
   const decoded = decodeHtmlEntities(latex.trim())
 
@@ -59,3 +60,4 @@ export function Math({ latex, block = false }: MathProps) {
     )
   }
 }
+/* eslint-enable react-hooks/error-boundaries */

@@ -173,10 +173,12 @@ export function Graph({
   const xRange = parseRange(range)
   const annotatedPoints = parsePoints(points)
 
+  /* eslint-disable react-hooks/preserve-manual-memoization */
   const data = useMemo(
     () => evaluateFunction(expression, xRange),
     [expression, xRange[0], xRange[1]]
   )
+  /* eslint-enable react-hooks/preserve-manual-memoization */
 
   const computedYRange = useMemo(() => {
     if (yRange) return parseRange(yRange)

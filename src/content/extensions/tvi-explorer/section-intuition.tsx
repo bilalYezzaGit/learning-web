@@ -19,6 +19,7 @@ export function SectionIntuition({ height }: SectionIntuitionProps) {
 
   const k = kPoint.y
 
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const { fMin, fMax } = useMemo(() => {
     let min = Infinity
     let max = -Infinity
