@@ -17,6 +17,7 @@ interface QuestionProps {
   children: React.ReactNode
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function Question(_props: QuestionProps) {
   return null
 }
@@ -26,6 +27,7 @@ interface OptionProps {
   correct?: boolean
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function Option(_props: OptionProps) {
   return null
 }
@@ -34,6 +36,7 @@ interface ExplanationProps {
   children: React.ReactNode
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function Explanation(_props: ExplanationProps) {
   return null
 }

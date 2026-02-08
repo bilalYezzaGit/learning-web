@@ -137,7 +137,7 @@ function getDifficultyColor(difficulty: number): string {
 
 export function SeriesListItem({ serie, activityIds, parcours }: SeriesListItemProps) {
   const { userId } = useAuth()
-  const { progress, isCompleted, isSuccess } = useProgress(userId ?? undefined)
+  const { isCompleted, isSuccess } = useProgress(userId ?? undefined)
 
   // Calculate progress for this serie
   const serieProgress = React.useMemo(() => {
@@ -157,7 +157,7 @@ export function SeriesListItem({ serie, activityIds, parcours }: SeriesListItemP
     const percentage = total > 0 ? Math.round((completed / total) * 100) : 0
 
     return { completed, success, total, percentage }
-  }, [activityIds, isCompleted, isSuccess, progress])
+  }, [activityIds, isCompleted, isSuccess])
 
   const isSerieComplete = serieProgress.completed === serieProgress.total && serieProgress.total > 0
 

@@ -27,6 +27,7 @@ interface MathProps {
 export function Math({ latex, block = false }: MathProps) {
   const decoded = decodeHtmlEntities(latex.trim())
 
+  /* eslint-disable react-hooks/error-boundaries */
   try {
     const html = katex.renderToString(decoded, {
       displayMode: block,
@@ -58,4 +59,5 @@ export function Math({ latex, block = false }: MathProps) {
       </code>
     )
   }
+  /* eslint-enable react-hooks/error-boundaries */
 }

@@ -72,35 +72,6 @@ export function QCMPlayer({
   const isLastQuestion = currentIndex === qcm.questions.length - 1
   const progressPercent = ((currentIndex + 1) / qcm.questions.length) * 100
 
-  // Keyboard shortcuts
-  React.useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (state === 'finished') return
-
-      if (state === 'answering' && currentQuestion) {
-        // Number keys to select option
-        const num = parseInt(e.key)
-        const optionCount = currentQuestion.options?.length ?? 0
-        if (num >= 1 && num <= optionCount) {
-          setSelectedOption(num - 1)
-        }
-        // Enter to validate
-        if (e.key === 'Enter' && selectedOption !== null) {
-          handleValidate()
-        }
-      } else if (state === 'validated') {
-        // Space or Enter to continue
-        if (e.key === ' ' || e.key === 'Enter') {
-          e.preventDefault()
-          handleNext()
-        }
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [state, selectedOption, currentIndex, currentQuestion])
-
   const handleValidate = () => {
     if (selectedOption === null || !currentQuestion) return
 
@@ -132,6 +103,36 @@ export function QCMPlayer({
       setState('answering')
     }
   }
+
+  // Keyboard shortcuts
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (state === 'finished') return
+
+      if (state === 'answering' && currentQuestion) {
+        // Number keys to select option
+        const num = parseInt(e.key)
+        const optionCount = currentQuestion.options?.length ?? 0
+        if (num >= 1 && num <= optionCount) {
+          setSelectedOption(num - 1)
+        }
+        // Enter to validate
+        if (e.key === 'Enter' && selectedOption !== null) {
+          handleValidate()
+        }
+      } else if (state === 'validated') {
+        // Space or Enter to continue
+        if (e.key === ' ' || e.key === 'Enter') {
+          e.preventDefault()
+          handleNext()
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, selectedOption, currentIndex, currentQuestion])
 
   // Finished state - show score
   if (state === 'finished') {

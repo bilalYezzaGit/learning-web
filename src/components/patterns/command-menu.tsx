@@ -13,7 +13,6 @@ import {
   BookOpen,
   GraduationCap,
   Home,
-  Search,
 } from 'lucide-react'
 
 import {

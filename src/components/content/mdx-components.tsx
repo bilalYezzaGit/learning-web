@@ -54,7 +54,7 @@ interface RowProps {
 /**
  * Data carrier — content is extracted by parent <Variations>.
  */
-function Row(_props: RowProps) {
+function Row(_props: RowProps) { // eslint-disable-line @typescript-eslint/no-unused-vars
   return null
 }
 

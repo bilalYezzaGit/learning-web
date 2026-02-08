@@ -1,24 +1,24 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Source_Serif_4 } from 'next/font/google'
+import { Lora, DM_Sans } from 'next/font/google'
 import './globals.css'
 
 import { QueryProvider } from '@/lib/query/provider'
 import { AuthProvider } from '@/lib/context'
 import { Toaster } from '@/components/ui/sonner'
 
-const inter = Inter({
-  variable: '--font-inter',
+const dmSans = DM_Sans({
+  variable: '--font-dm-sans',
   subsets: ['latin'],
 })
 
-const sourceSerif = Source_Serif_4({
-  variable: '--font-source-serif',
+const lora = Lora({
+  variable: '--font-lora',
   subsets: ['latin'],
 })
 
 export const metadata: Metadata = {
   title: 'Learning OS',
-  description: "Application d'apprentissage des mathématiques",
+  description: "Application d'apprentissage des mathématiques — Lycée tunisien",
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -45,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <body className={`${inter.variable} ${sourceSerif.variable} antialiased`}>
+      <body className={`${dmSans.variable} ${lora.variable} antialiased`}>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg focus:ring-2 focus:ring-ring"

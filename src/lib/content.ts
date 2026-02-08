@@ -319,7 +319,7 @@ function resolveSteps(
       // Quiz group: use first QCM atom as the activity ID
       const firstId = step.quiz[0]
       if (!firstId) continue
-      const firstAtom = getAtom(firstId)
+      getAtom(firstId) // validate existence
       const totalTime = step.quiz.reduce((sum, id) => {
         const a = getAtom(id)
         return sum + a.timeMinutes

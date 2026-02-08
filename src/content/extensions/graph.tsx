@@ -22,7 +22,6 @@
 
 import { useMemo } from 'react'
 import {
-  LineChart,
   Line,
   XAxis,
   YAxis,
@@ -30,11 +29,9 @@ import {
   Tooltip,
   ReferenceLine,
   ResponsiveContainer,
-  Scatter,
-  ScatterChart,
   ComposedChart,
 } from 'recharts'
-import { evaluate, parse } from 'mathjs'
+import { parse } from 'mathjs'
 
 import { parseRange } from '../utils'
 
@@ -173,10 +170,12 @@ export function Graph({
   const xRange = parseRange(range)
   const annotatedPoints = parsePoints(points)
 
+  /* eslint-disable react-hooks/preserve-manual-memoization, react-hooks/exhaustive-deps */
   const data = useMemo(
     () => evaluateFunction(expression, xRange),
     [expression, xRange[0], xRange[1]]
   )
+  /* eslint-enable react-hooks/preserve-manual-memoization, react-hooks/exhaustive-deps */
 
   const computedYRange = useMemo(() => {
     if (yRange) return parseRange(yRange)

@@ -21,34 +21,46 @@ export function LandingHeader() {
     : '?'
 
   return (
-    <header className="border-b">
+    <header className="border-b bg-background/80 backdrop-blur-sm">
       <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between px-4 md:px-6">
-        <span className="text-lg font-semibold">Learning OS</span>
+        <Link href="/" className="font-serif text-lg font-bold text-foreground">
+          Learning<span className="text-primary">&nbsp;OS</span>
+        </Link>
 
-        {isLoading ? (
-          <div className="flex items-center gap-2">
-            <Skeleton className="h-8 w-24 rounded-md" />
-            <Skeleton className="h-8 w-8 rounded-full" />
-          </div>
-        ) : isAuthenticated ? (
-          <div className="flex items-center gap-2">
-            <Button size="sm" asChild>
-              <Link href={dashboardHref}>Mon parcours</Link>
-            </Button>
-            <Avatar className="h-8 w-8">
-              <AvatarFallback className="text-xs">{initials}</AvatarFallback>
-            </Avatar>
-          </div>
-        ) : (
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/login">Se connecter</Link>
-            </Button>
-            <Button size="sm" asChild>
-              <Link href="/signup">S&apos;inscrire</Link>
-            </Button>
-          </div>
-        )}
+        <nav className="flex items-center gap-2">
+          {isLoading ? (
+            <div className="flex items-center gap-2">
+              <Skeleton className="h-8 w-24 rounded-md" />
+              <Skeleton className="h-8 w-8 rounded-full" />
+            </div>
+          ) : isAuthenticated ? (
+            <div className="flex items-center gap-2">
+              <Button size="sm" asChild>
+                <Link href={dashboardHref}>Mon parcours</Link>
+              </Button>
+              <Avatar className="h-8 w-8">
+                <AvatarFallback className="text-xs">{initials}</AvatarFallback>
+              </Avatar>
+            </div>
+          ) : (
+            <>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="hidden sm:inline-flex"
+                asChild
+              >
+                <Link href="/1ere-tc/apprendre">Parcours 1\u00E8re TC</Link>
+              </Button>
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/login">Se connecter</Link>
+              </Button>
+              <Button size="sm" asChild>
+                <Link href="/signup">S&apos;inscrire</Link>
+              </Button>
+            </>
+          )}
+        </nav>
       </div>
     </header>
   )

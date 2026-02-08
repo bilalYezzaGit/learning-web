@@ -30,6 +30,7 @@ export function ActivityClient({
   activityId,
   activityType,
   moduleId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   parcours,
   quizData,
   children,
