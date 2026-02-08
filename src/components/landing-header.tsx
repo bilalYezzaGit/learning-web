@@ -21,30 +21,39 @@ export function LandingHeader() {
     : '?'
 
   return (
-    <header className="border-b">
-      <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between px-4 md:px-6">
-        <span className="text-lg font-semibold">Learning OS</span>
+    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-lg">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 md:px-6">
+        <Link href="/" className="flex items-center gap-2.5 transition-opacity hover:opacity-80">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-violet to-pink text-lg font-bold text-white shadow-md">
+            L
+          </div>
+          <span className="font-heading text-xl font-bold tracking-tight text-foreground">
+            Learning OS
+          </span>
+        </Link>
 
         {isLoading ? (
           <div className="flex items-center gap-2">
-            <Skeleton className="h-8 w-24 rounded-md" />
-            <Skeleton className="h-8 w-8 rounded-full" />
+            <Skeleton className="h-9 w-28 rounded-xl" />
+            <Skeleton className="h-9 w-9 rounded-full" />
           </div>
         ) : isAuthenticated ? (
           <div className="flex items-center gap-2">
-            <Button size="sm" asChild>
+            <Button size="sm" className="rounded-xl font-heading font-semibold" asChild>
               <Link href={dashboardHref}>Mon parcours</Link>
             </Button>
-            <Avatar className="h-8 w-8">
-              <AvatarFallback className="text-xs">{initials}</AvatarFallback>
+            <Avatar className="h-9 w-9 ring-2 ring-violet/20">
+              <AvatarFallback className="bg-violet-light text-xs font-semibold text-violet">
+                {initials}
+              </AvatarFallback>
             </Avatar>
           </div>
         ) : (
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" asChild>
+            <Button variant="ghost" size="sm" className="rounded-xl font-heading font-semibold" asChild>
               <Link href="/login">Se connecter</Link>
             </Button>
-            <Button size="sm" asChild>
+            <Button size="sm" className="rounded-xl bg-gradient-to-r from-violet to-pink font-heading font-semibold text-white shadow-md hover:shadow-lg hover:brightness-110" asChild>
               <Link href="/signup">S&apos;inscrire</Link>
             </Button>
           </div>

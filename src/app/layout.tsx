@@ -1,20 +1,9 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Source_Serif_4 } from 'next/font/google'
 import './globals.css'
 
 import { QueryProvider } from '@/lib/query/provider'
 import { AuthProvider } from '@/lib/context'
 import { Toaster } from '@/components/ui/sonner'
-
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
-})
-
-const sourceSerif = Source_Serif_4({
-  variable: '--font-source-serif',
-  subsets: ['latin'],
-})
 
 export const metadata: Metadata = {
   title: 'Learning OS',
@@ -32,7 +21,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#9F6B53',
+  themeColor: '#8B5CF6',
   width: 'device-width',
   initialScale: 1,
   // Allow zoom for accessibility (Lighthouse requirement)
@@ -45,7 +34,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <body className={`${inter.variable} ${sourceSerif.variable} antialiased`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body
+        className="font-sans antialiased"
+        style={{
+          '--font-nunito': 'Nunito, ui-sans-serif, system-ui, sans-serif',
+          '--font-outfit': 'Outfit, ui-sans-serif, system-ui, sans-serif',
+          '--font-source-serif': '"Source Serif 4", ui-serif, Georgia, serif',
+        } as React.CSSProperties}
+      >
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg focus:ring-2 focus:ring-ring"
