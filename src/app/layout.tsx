@@ -1,24 +1,36 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Source_Serif_4 } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 
 import { QueryProvider } from '@/lib/query/provider'
 import { AuthProvider } from '@/lib/context'
 import { Toaster } from '@/components/ui/sonner'
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
+const plusJakarta = localFont({
+  variable: '--font-plus-jakarta',
+  src: [
+    { path: '../../public/fonts/plus-jakarta-sans-latin-400.woff2', weight: '400', style: 'normal' },
+    { path: '../../public/fonts/plus-jakarta-sans-latin-500.woff2', weight: '500', style: 'normal' },
+    { path: '../../public/fonts/plus-jakarta-sans-latin-600.woff2', weight: '600', style: 'normal' },
+    { path: '../../public/fonts/plus-jakarta-sans-latin-700.woff2', weight: '700', style: 'normal' },
+  ],
+  display: 'swap',
 })
 
-const sourceSerif = Source_Serif_4({
-  variable: '--font-source-serif',
-  subsets: ['latin'],
+const crimsonPro = localFont({
+  variable: '--font-crimson',
+  src: [
+    { path: '../../public/fonts/crimson-pro-latin-400.woff2', weight: '400', style: 'normal' },
+    { path: '../../public/fonts/crimson-pro-latin-600.woff2', weight: '600', style: 'normal' },
+    { path: '../../public/fonts/crimson-pro-latin-700.woff2', weight: '700', style: 'normal' },
+  ],
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
-  title: 'Learning OS',
-  description: "Application d'apprentissage des mathématiques",
+  title: 'Learning OS — Maths lycee tunisien',
+  description:
+    'Cours, exercices et revisions de mathematiques pour le lycee tunisien. 100% gratuit.',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
@@ -32,7 +44,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#9F6B53',
+  themeColor: '#1E6FA0',
   width: 'device-width',
   initialScale: 1,
   // Allow zoom for accessibility (Lighthouse requirement)
@@ -45,7 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <body className={`${inter.variable} ${sourceSerif.variable} antialiased`}>
+      <body className={`${plusJakarta.variable} ${crimsonPro.variable} antialiased`}>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg focus:ring-2 focus:ring-ring"

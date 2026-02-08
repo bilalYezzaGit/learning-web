@@ -21,9 +21,11 @@ export function LandingHeader() {
     : '?'
 
   return (
-    <header className="border-b">
-      <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between px-4 md:px-6">
-        <span className="text-lg font-semibold">Learning OS</span>
+    <header className="border-b bg-background/80 backdrop-blur-sm">
+      <div className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between px-4 md:px-6">
+        <Link href="/" className="font-serif text-lg font-bold text-foreground">
+          Learning <span className="text-primary">OS</span>
+        </Link>
 
         {isLoading ? (
           <div className="flex items-center gap-2">
@@ -41,6 +43,9 @@ export function LandingHeader() {
           </div>
         ) : (
           <div className="flex items-center gap-2">
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="/1ere-tc/apprendre">Parcours 1ere TC</Link>
+            </Button>
             <Button variant="ghost" size="sm" asChild>
               <Link href="/login">Se connecter</Link>
             </Button>
