@@ -3,20 +3,26 @@
 /**
  * Réviser Client Components
  *
- * Client-side components for displaying progress on series.
+ * Client-side components for the revision page:
+ * - ReviserStats: progress overview cards
+ * - ReviserContent: tabs, filters, search, and series list
+ * - SeriesListItem: individual serie card with badges
  */
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Check, ChevronRight, Clock, GraduationCap, RotateCcw, Trophy } from 'lucide-react'
+import { Check, ChevronRight, Clock, GraduationCap, RotateCcw, Search, Trophy } from 'lucide-react'
 
-import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 import { Progress } from '@/components/ui/progress'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
+import type { SeriesType, Trimestre } from '@/types/content'
 
-/** Lightweight serie metadata for the list */
+/** Enriched serie metadata for the list */
 interface SeriesCatalogEntry {
   id: string
   title: string
@@ -25,6 +31,52 @@ interface SeriesCatalogEntry {
   estimatedMinutes: number
   tags: string[]
   activityCount: number
+  type: SeriesType
+  trimestre: Trimestre
+  modules: string[]
+  priority: number
+}
+
+// =============================================================================
+// Label helpers
+// =============================================================================
+
+function getDifficultyLabel(difficulty: number): string {
+  switch (difficulty) {
+    case 1: return 'Facile'
+    case 2: return 'Moyen'
+    case 3: return 'Difficile'
+    default: return 'Moyen'
+  }
+}
+
+function getDifficultyVariant(difficulty: number): 'default' | 'secondary' | 'destructive' {
+  switch (difficulty) {
+    case 1: return 'secondary'
+    case 2: return 'default'
+    case 3: return 'destructive'
+    default: return 'secondary'
+  }
+}
+
+function getTypeLabel(type: SeriesType): string {
+  switch (type) {
+    case 'mono-module': return 'Module'
+    case 'cross-module': return 'Multi-module'
+    case 'devoir-controle': return 'Devoir de contrôle'
+    case 'devoir-synthese': return 'Devoir de synthèse'
+  }
+}
+
+function getTrimestreLabel(trimestre: Trimestre): string {
+  return `T${trimestre}`
+}
+
+function formatModuleName(mod: string): string {
+  return mod
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
 }
 
 // =============================================================================
@@ -35,7 +87,6 @@ export function ReviserStats() {
   const { userId } = useAuth()
   const { progress } = useProgress(userId ?? undefined)
 
-  // Calculate stats from progress
   const stats = React.useMemo(() => {
     let completed = 0
     let totalScore = 0
@@ -100,6 +151,232 @@ export function ReviserStats() {
 }
 
 // =============================================================================
+// Reviser Content (tabs, filters, search, series list)
+// =============================================================================
+
+interface ReviserContentProps {
+  entries: SeriesCatalogEntry[]
+  activityIdsMap: Record<string, string[]>
+  parcours: string
+  currentTrimestre: Trimestre
+  availableModules: string[]
+}
+
+export function ReviserContent({
+  entries,
+  activityIdsMap,
+  parcours,
+  currentTrimestre,
+  availableModules,
+}: ReviserContentProps) {
+  const [search, setSearch] = React.useState('')
+  const [selectedModule, setSelectedModule] = React.useState<string>('all')
+  const [selectedDifficulty, setSelectedDifficulty] = React.useState<string>('all')
+
+  // Filter entries based on search, module, and difficulty
+  const filterEntries = React.useCallback(
+    (items: SeriesCatalogEntry[]) => {
+      return items.filter((entry) => {
+        // Search filter
+        if (search) {
+          const q = search.toLowerCase()
+          const matchesTitle = entry.title.toLowerCase().includes(q)
+          const matchesDesc = entry.description?.toLowerCase().includes(q) ?? false
+          const matchesTags = entry.tags.some((t) => t.toLowerCase().includes(q))
+          const matchesModule = entry.modules.some((m) => m.toLowerCase().includes(q))
+          if (!matchesTitle && !matchesDesc && !matchesTags && !matchesModule) return false
+        }
+
+        // Module filter
+        if (selectedModule !== 'all' && !entry.modules.includes(selectedModule)) return false
+
+        // Difficulty filter
+        if (selectedDifficulty !== 'all' && entry.difficulty !== Number(selectedDifficulty)) return false
+
+        return true
+      })
+    },
+    [search, selectedModule, selectedDifficulty]
+  )
+
+  // Group entries by trimestre
+  const byTrimestre = React.useMemo(() => {
+    const grouped: Record<number, SeriesCatalogEntry[]> = { 1: [], 2: [], 3: [] }
+    for (const entry of entries) {
+      grouped[entry.trimestre]?.push(entry)
+    }
+    // Sort by priority within each trimestre
+    for (const key of [1, 2, 3]) {
+      grouped[key]?.sort((a, b) => a.priority - b.priority)
+    }
+    return grouped
+  }, [entries])
+
+  // Highlighted series for current trimestre
+  const highlightedEntries = React.useMemo(
+    () => filterEntries(byTrimestre[currentTrimestre] ?? []),
+    [filterEntries, byTrimestre, currentTrimestre]
+  )
+
+  // All entries filtered (for "Tout" tab)
+  const allFiltered = React.useMemo(
+    () => filterEntries(entries),
+    [filterEntries, entries]
+  )
+
+  // Filtered by trimestre tabs
+  const t1Filtered = React.useMemo(() => filterEntries(byTrimestre[1] ?? []), [filterEntries, byTrimestre])
+  const t2Filtered = React.useMemo(() => filterEntries(byTrimestre[2] ?? []), [filterEntries, byTrimestre])
+  const t3Filtered = React.useMemo(() => filterEntries(byTrimestre[3] ?? []), [filterEntries, byTrimestre])
+
+  return (
+    <div className="space-y-6">
+      {/* Search + Filters */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+          <Input
+            placeholder="Rechercher une série..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-9"
+          />
+        </div>
+        <div className="flex gap-2">
+          <select
+            value={selectedModule}
+            onChange={(e) => setSelectedModule(e.target.value)}
+            className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground"
+            aria-label="Filtrer par module"
+          >
+            <option value="all">Tous les modules</option>
+            {availableModules.map((mod) => (
+              <option key={mod} value={mod}>{formatModuleName(mod)}</option>
+            ))}
+          </select>
+          <select
+            value={selectedDifficulty}
+            onChange={(e) => setSelectedDifficulty(e.target.value)}
+            className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground"
+            aria-label="Filtrer par difficulté"
+          >
+            <option value="all">Toute difficulté</option>
+            <option value="1">Facile</option>
+            <option value="2">Moyen</option>
+            <option value="3">Difficile</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Highlighted: "Pour toi maintenant" */}
+      {highlightedEntries.length > 0 && !search && selectedModule === 'all' && selectedDifficulty === 'all' && (
+        <Card className="border-primary/20 bg-primary/5">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-base">
+              Pour toi maintenant — Trimestre {currentTrimestre}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            {highlightedEntries.slice(0, 4).map((serie) => (
+              <SeriesListItem
+                key={serie.id}
+                serie={serie}
+                activityIds={activityIdsMap[serie.id] ?? []}
+                parcours={parcours}
+              />
+            ))}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Tabs by trimestre */}
+      <Tabs defaultValue="all">
+        <TabsList className="w-full sm:w-auto">
+          <TabsTrigger value="all">
+            Tout ({allFiltered.length})
+          </TabsTrigger>
+          <TabsTrigger value="t1">
+            T1 ({t1Filtered.length})
+          </TabsTrigger>
+          <TabsTrigger value="t2">
+            T2 ({t2Filtered.length})
+          </TabsTrigger>
+          <TabsTrigger value="t3">
+            T3 ({t3Filtered.length})
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="all">
+          <SeriesList
+            entries={allFiltered}
+            activityIdsMap={activityIdsMap}
+            parcours={parcours}
+          />
+        </TabsContent>
+        <TabsContent value="t1">
+          <SeriesList
+            entries={t1Filtered}
+            activityIdsMap={activityIdsMap}
+            parcours={parcours}
+          />
+        </TabsContent>
+        <TabsContent value="t2">
+          <SeriesList
+            entries={t2Filtered}
+            activityIdsMap={activityIdsMap}
+            parcours={parcours}
+          />
+        </TabsContent>
+        <TabsContent value="t3">
+          <SeriesList
+            entries={t3Filtered}
+            activityIdsMap={activityIdsMap}
+            parcours={parcours}
+          />
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}
+
+// =============================================================================
+// Series List
+// =============================================================================
+
+interface SeriesListProps {
+  entries: SeriesCatalogEntry[]
+  activityIdsMap: Record<string, string[]>
+  parcours: string
+}
+
+function SeriesList({ entries, activityIdsMap, parcours }: SeriesListProps) {
+  if (entries.length === 0) {
+    return (
+      <Card>
+        <CardContent className="py-8 text-center text-muted-foreground">
+          <p>Aucune série ne correspond à vos critères</p>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  return (
+    <Card>
+      <CardContent className="p-0">
+        {entries.map((serie) => (
+          <SeriesListItem
+            key={serie.id}
+            serie={serie}
+            activityIds={activityIdsMap[serie.id] ?? []}
+            parcours={parcours}
+          />
+        ))}
+      </CardContent>
+    </Card>
+  )
+}
+
+// =============================================================================
 // Series List Item
 // =============================================================================
 
@@ -109,37 +386,10 @@ interface SeriesListItemProps {
   parcours: string
 }
 
-function getDifficultyLabel(difficulty: number): string {
-  switch (difficulty) {
-    case 1:
-      return 'Facile'
-    case 2:
-      return 'Moyen'
-    case 3:
-      return 'Difficile'
-    default:
-      return 'Moyen'
-  }
-}
-
-function getDifficultyColor(difficulty: number): string {
-  switch (difficulty) {
-    case 1:
-      return 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400'
-    case 2:
-      return 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400'
-    case 3:
-      return 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
-    default:
-      return 'bg-muted text-muted-foreground'
-  }
-}
-
-export function SeriesListItem({ serie, activityIds, parcours }: SeriesListItemProps) {
+function SeriesListItem({ serie, activityIds, parcours }: SeriesListItemProps) {
   const { userId } = useAuth()
   const { isCompleted, isSuccess } = useProgress(userId ?? undefined)
 
-  // Calculate progress for this serie
   const serieProgress = React.useMemo(() => {
     let completed = 0
     let success = 0
@@ -168,9 +418,7 @@ export function SeriesListItem({ serie, activityIds, parcours }: SeriesListItemP
     >
       <div
         className={`flex h-10 w-10 items-center justify-center rounded-lg ${
-          isSerieComplete
-            ? 'bg-success/10'
-            : 'bg-primary/10'
+          isSerieComplete ? 'bg-success/10' : 'bg-primary/10'
         }`}
       >
         {isSerieComplete ? (
@@ -183,7 +431,7 @@ export function SeriesListItem({ serie, activityIds, parcours }: SeriesListItemP
       </div>
 
       <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <p className="font-medium">{serie.title}</p>
           {isSerieComplete && (
             <Badge variant="default" className="bg-success text-xs">
@@ -199,12 +447,23 @@ export function SeriesListItem({ serie, activityIds, parcours }: SeriesListItemP
         )}
 
         <div className="mt-2 flex flex-wrap items-center gap-2">
-          <Badge
-            variant="secondary"
-            className={`text-xs ${getDifficultyColor(serie.difficulty)}`}
-          >
+          {/* Trimestre badge */}
+          <Badge variant="outline" className="text-xs">
+            {getTrimestreLabel(serie.trimestre)}
+          </Badge>
+
+          {/* Type badge (only if not mono-module) */}
+          {serie.type !== 'mono-module' && (
+            <Badge variant="secondary" className="text-xs">
+              {getTypeLabel(serie.type)}
+            </Badge>
+          )}
+
+          {/* Difficulty badge */}
+          <Badge variant={getDifficultyVariant(serie.difficulty)} className="text-xs">
             {getDifficultyLabel(serie.difficulty)}
           </Badge>
+
           <span className="flex items-center gap-1 text-xs text-muted-foreground">
             <Clock className="h-3 w-3" aria-hidden="true" />
             {serie.estimatedMinutes} min
@@ -220,7 +479,7 @@ export function SeriesListItem({ serie, activityIds, parcours }: SeriesListItemP
         )}
       </div>
 
-      <ChevronRight className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+      <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground" aria-hidden="true" />
     </Link>
   )
 }
