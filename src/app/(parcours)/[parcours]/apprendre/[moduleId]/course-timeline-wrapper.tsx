@@ -4,12 +4,14 @@
  * Course Timeline Wrapper for Module
  *
  * Client wrapper that maps resolved cours data to TimelineData format.
+ * Manages mobile sheet state and provides TimelineContext to children.
  */
 
 import { useRouter, usePathname, useParams } from 'next/navigation'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 import { CourseTimeline, type TimelineData } from '@/components/course-timeline'
+import { TimelineProvider } from '@/lib/context/timeline-context'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
 import type { ResolvedActivity } from '@/types/content'
@@ -22,6 +24,7 @@ interface CourseTimelineWrapperProps {
   objectives: string[]
   activities: ResolvedActivity[]
   sections: Array<{ id: string; label: string; order: number }>
+  children: React.ReactNode
 }
 
 export function CourseTimelineWrapper({
@@ -32,6 +35,7 @@ export function CourseTimelineWrapper({
   objectives,
   activities,
   sections,
+  children,
 }: CourseTimelineWrapperProps) {
   const router = useRouter()
   const pathname = usePathname()
@@ -39,6 +43,7 @@ export function CourseTimelineWrapper({
   const parcours = params.parcours as string
   const { userId } = useAuth()
   const { progress: userProgress } = useProgress(userId || '')
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   // Extract current activity ID from pathname
   const currentActivityId = useMemo(() => {
@@ -95,11 +100,16 @@ export function CourseTimelineWrapper({
   }
 
   return (
-    <CourseTimeline
-      data={timelineData}
-      currentActivityId={currentActivityId}
-      onActivityClick={handleActivityClick}
-      progress={activityProgress}
-    />
+    <TimelineProvider onOpen={() => setMobileOpen(true)}>
+      <CourseTimeline
+        data={timelineData}
+        currentActivityId={currentActivityId}
+        onActivityClick={handleActivityClick}
+        progress={activityProgress}
+        mobileOpen={mobileOpen}
+        onMobileOpenChange={setMobileOpen}
+      />
+      {children}
+    </TimelineProvider>
   )
 }

@@ -15,7 +15,6 @@ import {
   ChevronUp,
   Clock,
   ArrowRight,
-  PanelLeft,
   Gauge,
   BookOpen,
   PenLine,
@@ -83,6 +82,9 @@ interface CourseTimelineProps {
   currentActivityId?: string
   onActivityClick: (activityId: string) => void
   progress?: ActivityProgress[]
+  /** External control: open/close the mobile sheet */
+  mobileOpen?: boolean
+  onMobileOpenChange?: (open: boolean) => void
 }
 
 interface SectionWithActivities {
@@ -594,9 +596,15 @@ export function CourseTimeline({
   currentActivityId,
   onActivityClick,
   progress = [],
+  mobileOpen,
+  onMobileOpenChange,
 }: CourseTimelineProps) {
-  const [sheetOpen, setSheetOpen] = useState(false)
+  const [internalOpen, setInternalOpen] = useState(false)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  // Support both controlled (from activity header) and uncontrolled modes
+  const sheetOpen = mobileOpen ?? internalOpen
+  const setSheetOpen = onMobileOpenChange ?? setInternalOpen
 
   // Group activities by sections (or single flat list)
   const sections = useMemo(() => groupActivitiesBySections(data), [data])
@@ -697,17 +705,7 @@ export function CourseTimeline({
 
   return (
     <>
-      {/* Mobile: Sheet sidebar */}
-      <Button
-        variant="outline"
-        size="icon"
-        className="fixed left-4 top-16 z-50 h-9 w-9 border-border/50 bg-background/80 backdrop-blur-sm lg:hidden"
-        onClick={() => setSheetOpen(true)}
-      >
-        <PanelLeft className="h-4 w-4" aria-hidden="true" />
-        <span className="sr-only">Ouvrir le menu</span>
-      </Button>
-
+      {/* Mobile: Sheet sidebar (controlled externally or internally) */}
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetContent side="left" className="w-[min(80vw,320px)] p-0 flex flex-col overscroll-contain">
           <SheetTitle className="sr-only">{data.title}</SheetTitle>

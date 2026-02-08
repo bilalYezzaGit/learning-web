@@ -34,8 +34,7 @@ export default async function ModuleLayout({ children, params }: LayoutProps) {
   }))
 
   return (
-    <div className="flex flex-1 min-h-0 overflow-hidden">
-      {/* Course Timeline Sidebar */}
+    <div className="-my-4 md:-my-6 flex flex-1 min-h-0 overflow-hidden">
       <CourseTimelineWrapper
         coursSlug={cours.slug}
         title={cours.title}
@@ -44,10 +43,9 @@ export default async function ModuleLayout({ children, params }: LayoutProps) {
         objectives={cours.objectives}
         activities={activities}
         sections={sections}
-      />
-
-      {/* Content Area */}
-      <main id="main-content" className="flex-1 overflow-auto">{children}</main>
+      >
+        <main id="main-content" className="flex-1 min-w-0 overflow-auto">{children}</main>
+      </CourseTimelineWrapper>
     </div>
   )
 }

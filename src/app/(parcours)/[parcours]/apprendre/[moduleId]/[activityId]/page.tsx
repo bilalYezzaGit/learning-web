@@ -7,14 +7,13 @@
 
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, ArrowRight, ChevronLeft } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { compileMdx } from '@/lib/mdx'
 import { getAtom, resolveCoursActivities, findQuizGroup, compileQuiz } from '@/lib/content'
-import { getAtomTypeLabel } from '@/types/content'
 import { ActivityClient } from './activity-client'
+import { ActivityHeader } from './activity-header'
 
 interface PageProps {
   params: Promise<{ parcours: string; moduleId: string; activityId: string }>
@@ -61,25 +60,12 @@ export default async function ActivityPage({ params }: PageProps) {
 
   return (
     <div className="flex h-full flex-col">
-      {/* Header - Mobile back button + title */}
-      <header className="flex items-center gap-4 border-b px-4 py-3 md:border-b-0">
-        <Button variant="ghost" size="icon" className="md:hidden" asChild>
-          <Link href={`/${parcours}/apprendre/${moduleId}`}>
-            <ChevronLeft className="h-5 w-5" />
-            <span className="sr-only">Retour au module</span>
-          </Link>
-        </Button>
-        <div className="min-w-0 flex-1">
-          <h1 className="truncate font-medium">{currentActivity.title}</h1>
-          <Badge variant="outline" className="mt-1 text-xs capitalize">
-            {getAtomTypeLabel(currentActivity.type)}
-          </Badge>
-        </div>
-      </header>
+      {/* Slim mobile header with timeline toggle — hidden on desktop */}
+      <ActivityHeader title={currentActivity.title} type={currentActivity.type} />
 
       {/* Content */}
       <div className="flex-1 overflow-auto">
-        <div className="mx-auto max-w-3xl px-4 py-6">
+        <div className="mx-auto max-w-3xl px-4 py-4 lg:py-6">
           <ActivityClient
             activityId={activityId}
             activityType={currentActivity.type}
