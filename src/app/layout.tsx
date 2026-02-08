@@ -9,12 +9,12 @@ import { PwaInstallPrompt } from '@/components/pwa-install-prompt'
 
 const dmSans = DM_Sans({
   variable: '--font-dm-sans',
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
 })
 
 const lora = Lora({
   variable: '--font-lora',
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
 })
 
 export const metadata: Metadata = {
