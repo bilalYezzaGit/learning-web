@@ -12,5 +12,5 @@
 
 1. **Build fails** → `npm run type-check` puis `npm run lint`
 2. **Hydration mismatch** → verifier `'use client'` sur composants avec state, pas de `window`/`document` dans Server Components
-3. **Firebase error** → verifier `.env.local` et variables `NEXT_PUBLIC_FIREBASE_*`
+3. **Firebase error** → verifier `src/lib/firebase/config.ts` (config hardcodee)
 4. **Tailwind ne s'applique pas** → verifier `content` dans config et import `globals.css` dans layout

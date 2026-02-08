@@ -1,52 +1,31 @@
 /**
  * Firebase Configuration
  *
- * Reads Firebase config from environment variables.
- * All variables are prefixed with NEXT_PUBLIC_ to be available client-side.
- *
- * Setup:
- * 1. Copy .env.example to .env.local
- * 2. Fill in your Firebase project values from firebase_options.dart or Firebase console
+ * These values are public client-side identifiers (not secrets).
+ * Security is enforced via Firebase Security Rules, not by hiding these keys.
  */
 
-// Lazy config - only evaluated when getFirebaseConfig() is called
-let _config: ReturnType<typeof buildConfig> | null = null
-
-function buildConfig() {
-  return {
-    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY ?? '',
-    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN ?? '',
-    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID ?? '',
-    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET ?? '',
-    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID ?? '',
-    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID ?? '',
-    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID ?? '',
-  }
+const firebaseConfig = {
+  apiKey: 'AIzaSyAaVBSA21N2rFbiL2IAVz4StVO-YMhwZdY',
+  authDomain: 'learning-os-platform.firebaseapp.com',
+  projectId: 'learning-os-platform',
+  storageBucket: 'learning-os-platform.firebasestorage.app',
+  messagingSenderId: '919055938534',
+  appId: '1:919055938534:web:bee55a90c0783c36b95c27',
+  measurementId: 'G-R50QDXT405',
 }
 
 /**
- * Get Firebase configuration (lazy loaded)
+ * Get Firebase configuration
  */
 export function getFirebaseConfig() {
-  if (!_config) {
-    _config = buildConfig()
-  }
-
-  // Validate in browser only
-  if (typeof window !== 'undefined' && !_config.apiKey) {
-    console.error(
-      'Firebase not configured. Make sure .env.local has NEXT_PUBLIC_FIREBASE_* variables.'
-    )
-  }
-
-  return _config
+  return firebaseConfig
 }
 
 /**
  * Check if Firebase is properly configured
  */
 export function isFirebaseConfigured(): boolean {
-  const config = getFirebaseConfig()
-  return Boolean(config.apiKey && config.projectId)
+  return Boolean(firebaseConfig.apiKey && firebaseConfig.projectId)
 }
 

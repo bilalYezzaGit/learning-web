@@ -17,8 +17,7 @@
       "Bash(mkdir *)"
     ],
     "deny": [
-      "Bash(rm -rf *)",
-      "Read(.env.local)"
+      "Bash(rm -rf *)"
     ]
   },
   "hooks": {
@@ -26,11 +25,6 @@
       {
         "matcher": "startup",
         "hooks": [
-          {
-            "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/setup-env.sh",
-            "statusMessage": "Setting up environment..."
-          },
           {
             "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/load-chantier.sh",

@@ -30,9 +30,8 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files
+# env files (if any future secrets are needed)
 .env*
-!.env.example
 
 # PWA generated files
 public/sw.js
