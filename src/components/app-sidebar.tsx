@@ -42,7 +42,7 @@ export function AppSidebar({ parcours, modules = [], ...props }: AppSidebarProps
             <SidebarMenuButton asChild size="lg">
               <Link href={parcours ? `/${parcours}` : '/'}>
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <BookOpen className="h-4 w-4" />
+                  <BookOpen className="h-4 w-4" aria-hidden="true" />
                 </div>
                 <div className="flex flex-col gap-0.5">
                   <span className="font-serif text-lg font-semibold leading-none">Learning</span>
@@ -64,7 +64,7 @@ export function AppSidebar({ parcours, modules = [], ...props }: AppSidebarProps
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={pathname === dashboardUrl}>
                   <Link href={dashboardUrl}>
-                    <Home className="h-4 w-4" />
+                    <Home className="h-4 w-4" aria-hidden="true" />
                     <span>Tableau de bord</span>
                   </Link>
                 </SidebarMenuButton>
@@ -75,7 +75,7 @@ export function AppSidebar({ parcours, modules = [], ...props }: AppSidebarProps
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={pathname.startsWith(reviserUrl)}>
                   <Link href={reviserUrl}>
-                    <Brain className="h-4 w-4" />
+                    <Brain className="h-4 w-4" aria-hidden="true" />
                     <span>Réviser</span>
                   </Link>
                 </SidebarMenuButton>

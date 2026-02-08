@@ -39,22 +39,22 @@ export function ParcoursBanner({ urlParcours }: ParcoursBannerProps) {
   }
 
   return (
-    <Alert className="mx-4 mt-4 border-blue-200 bg-blue-50 lg:mx-6 dark:border-blue-800 dark:bg-blue-950/20">
-      <Info className="h-4 w-4 text-blue-600" />
-      <AlertDescription className="flex flex-wrap items-center gap-x-2 gap-y-1 text-blue-800 dark:text-blue-200">
+    <Alert className="mx-4 mt-4 border-info/25 bg-info/10 lg:mx-6">
+      <Info className="h-4 w-4 text-info" aria-hidden="true" />
+      <AlertDescription className="flex flex-wrap items-center gap-x-2 gap-y-1 text-info-foreground">
         <span>Vous consultez &quot;{urlParcoursConfig.label}&quot;.</span>
-        <span className="text-blue-600 dark:text-blue-400">
+        <span className="text-info">
           Votre parcours : {userParcoursConfig.label}
         </span>
         <Button
           variant="link"
           size="sm"
-          className="h-auto p-0 text-blue-600 dark:text-blue-400"
+          className="h-auto p-0 text-info"
           asChild
         >
           <Link href={`/${userParcours.slug}`}>
             Aller à mon parcours
-            <ArrowRight className="ml-1 h-3 w-3" />
+            <ArrowRight className="ml-1 h-3 w-3" aria-hidden="true" />
           </Link>
         </Button>
       </AlertDescription>

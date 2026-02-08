@@ -2,28 +2,21 @@
  * Scan Service
  *
  * Analyzes scanned worksheets via AI (Claude Vision).
- * Calls Cloud Function `analyzeScan` with compressed base64 image.
+ * Calls Next.js API route /api/scan with compressed base64 image.
  *
  * Flow:
  * 1. User uploads/captures photo of their work
  * 2. Image is compressed (max 1024px, JPEG 80%)
- * 3. Cloud Function calls Claude Vision
- * 4. Result is saved to Firestore and returned
- *
- * Storage: Firestore `users/{uid}/scanHistory/`
+ * 3. API route calls Claude Vision with image + exercise content
+ * 4. Result is returned to the client
  */
-
-import { httpsCallable } from 'firebase/functions'
-import { getFunctionsInstance } from '@/lib/firebase/client'
 
 // =============================================================================
 // Types
 // =============================================================================
 
 export interface ScanResult {
-  scanId?: string
   activityId: string
-  moduleId: string
   isCorrect: boolean
   confidence: number
   feedback: string
@@ -57,7 +50,6 @@ async function compressImage(
     const ctx = canvas.getContext('2d')
 
     img.onload = () => {
-      // Calculate new dimensions
       let width = img.width
       let height = img.height
 
@@ -69,11 +61,9 @@ async function compressImage(
       canvas.width = width
       canvas.height = height
 
-      // Draw and compress
       ctx?.drawImage(img, 0, 0, width, height)
       const dataUrl = canvas.toDataURL('image/jpeg', quality)
 
-      // Extract base64 (remove data:image/jpeg;base64, prefix)
       const base64 = dataUrl.split(',')[1]
       if (!base64) {
         reject(new ScanError('Failed to compress image'))
@@ -85,7 +75,6 @@ async function compressImage(
 
     img.onerror = () => reject(new ScanError('Failed to load image'))
 
-    // Read file as data URL
     const reader = new FileReader()
     reader.onload = (e) => {
       img.src = e.target?.result as string
@@ -100,50 +89,44 @@ async function compressImage(
 // =============================================================================
 
 /**
- * Analyze a scanned worksheet image
+ * Analyze a scanned worksheet image via Next.js API route
  */
 export async function analyzeScan({
   imageFile,
   activityId,
-  moduleId,
+  exerciseContent,
 }: {
   imageFile: File
   activityId: string
-  moduleId: string
+  exerciseContent: string
 }): Promise<ScanResult> {
-  const functions = getFunctionsInstance()
-
-  // Compress image
   const base64Image = await compressImage(imageFile)
 
-  // Call Cloud Function
-  const callable = httpsCallable<
-    { imageBase64: string; activityId: string; moduleId: string },
-    {
-      scanId?: string
-      activityId: string
-      moduleId: string
-      isCorrect: boolean
-      confidence: number
-      feedback: string
-      suggestions: string[]
-    }
-  >(functions, 'analyzeScan')
-
-  try {
-    const result = await callable({
+  const response = await fetch('/api/scan', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
       imageBase64: base64Image,
       activityId,
-      moduleId,
-    })
+      exerciseContent,
+    }),
+  })
 
-    return {
-      ...result.data,
-      analyzedAt: new Date(),
-    }
-  } catch (e) {
-    const message = e instanceof Error ? e.message : 'Unknown error'
-    throw new ScanError(`Failed to analyze scan: ${message}`)
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({ error: 'Unknown error' })) as { error?: string }
+    throw new ScanError(data.error ?? `HTTP ${response.status}`)
+  }
+
+  const data = await response.json() as {
+    activityId: string
+    isCorrect: boolean
+    confidence: number
+    feedback: string
+    suggestions: string[]
+  }
+
+  return {
+    ...data,
+    analyzedAt: new Date(),
   }
 }
-

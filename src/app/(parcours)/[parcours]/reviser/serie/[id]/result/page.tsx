@@ -32,8 +32,8 @@ export default async function SerieResultPage({ params }: PageProps) {
     <div className="mx-auto max-w-2xl px-4 lg:px-6">
       {/* Success Header */}
       <div className="mb-8 text-center">
-        <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
-          <Award className="h-10 w-10 text-green-600" aria-hidden="true" />
+        <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-success/10">
+          <Award className="h-10 w-10 text-success" aria-hidden="true" />
         </div>
         <h1 className="text-balance font-serif text-3xl font-semibold">Félicitations !</h1>
         <p className="mt-2 text-lg text-muted-foreground">
@@ -60,13 +60,13 @@ export default async function SerieResultPage({ params }: PageProps) {
       <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
         <Button variant="outline" asChild>
           <Link href={`/${parcours}/reviser/serie/${id}/play`}>
-            <RotateCcw className="mr-2 h-4 w-4" />
+            <RotateCcw className="mr-2 h-4 w-4" aria-hidden="true" />
             Refaire la série
           </Link>
         </Button>
         <Button asChild>
           <Link href={`/${parcours}/reviser`}>
-            <Home className="mr-2 h-4 w-4" />
+            <Home className="mr-2 h-4 w-4" aria-hidden="true" />
             Autres séries
           </Link>
         </Button>

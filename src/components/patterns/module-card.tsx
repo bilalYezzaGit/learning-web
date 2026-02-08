@@ -48,7 +48,7 @@ export function ModuleCard({
           />
         ) : (
           <div className="flex h-full items-center justify-center">
-            <BookOpen className="h-12 w-12 text-muted-foreground/50" />
+            <BookOpen className="h-12 w-12 text-muted-foreground/50" aria-hidden="true" />
           </div>
         )}
       </div>

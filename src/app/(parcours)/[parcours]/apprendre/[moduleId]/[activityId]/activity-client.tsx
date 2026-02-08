@@ -13,8 +13,11 @@ import { CheckCircle2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { QCMPlayer, type QCMResult } from '@/components/patterns/qcm-player'
+import { ScanUpload } from '@/components/patterns/scan-upload'
+import { Separator } from '@/components/ui/separator'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
+import { trackExerciseCompleted, trackQcmCompleted } from '@/lib/services/analytics-service'
 import type { AtomType, CompiledQuiz } from '@/types/content'
 
 interface ActivityClientProps {
@@ -23,6 +26,7 @@ interface ActivityClientProps {
   moduleId: string
   parcours: string
   quizData: CompiledQuiz | null
+  exerciseContent?: string
   children: React.ReactNode
 }
 
@@ -33,6 +37,7 @@ export function ActivityClient({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   parcours,
   quizData,
+  exerciseContent,
   children,
 }: ActivityClientProps) {
   const { userId } = useAuth()
@@ -45,6 +50,7 @@ export function ActivityClient({
 
   const handleExerciseComplete = async () => {
     setCompletedInSession(true)
+    trackExerciseCompleted(activityId)
 
     if (userId) {
       try {
@@ -63,6 +69,7 @@ export function ActivityClient({
   const handleQCMComplete = async (result: QCMResult) => {
     setCompletedInSession(true)
     setQcmFinished(true)
+    trackQcmCompleted(activityId, result.score, result.total)
 
     if (userId) {
       try {
@@ -84,8 +91,8 @@ export function ActivityClient({
     if (qcmFinished) {
       return (
         <div className="text-center py-8">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-950/30">
-            <CheckCircle2 className="h-8 w-8 text-green-600" />
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-success/10">
+            <CheckCircle2 className="h-8 w-8 text-success" aria-hidden="true" />
           </div>
           <h2 className="text-xl font-bold">QCM terminé !</h2>
           <p className="mt-2 text-muted-foreground">
@@ -98,8 +105,8 @@ export function ActivityClient({
     return (
       <div>
         {previousProgress && previousProgress.score !== undefined && previousProgress.total ? (
-          <div className="mb-6 rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-950/20">
-            <p className="text-sm text-green-800 dark:text-green-200">
+          <div className="mb-6 rounded-lg border border-success/25 bg-success/10 p-4">
+            <p className="text-sm text-success-foreground">
               Déjà fait : {previousProgress.score}/{previousProgress.total} (
               {Math.round((previousProgress.score / previousProgress.total) * 100)}%)
             </p>
@@ -118,17 +125,29 @@ export function ActivityClient({
     )
   }
 
-  // For exercises, add completion button
+  // For exercises, add scan + completion button
   if (activityType === 'exercise') {
     return (
       <>
         {children}
 
+        {/* Scan section */}
+        <Separator className="my-8" />
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-muted-foreground">
+            Vérifier mon travail avec l&apos;IA
+          </h3>
+          <ScanUpload
+            activityId={activityId}
+            exerciseContent={exerciseContent ?? ''}
+          />
+        </div>
+
         {/* Completion section */}
         <div className="mt-8 flex flex-col items-center justify-center border-t pt-6">
           {activityCompleted ? (
-            <div className="flex items-center gap-2 text-green-600">
-              <CheckCircle2 className="h-5 w-5" />
+            <div className="flex items-center gap-2 text-success">
+              <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
               <span className="font-medium">Exercice terminé</span>
             </div>
           ) : (
@@ -137,7 +156,7 @@ export function ActivityClient({
                 Tu as fini cet exercice ?
               </p>
               <Button onClick={handleExerciseComplete} variant="outline">
-                <CheckCircle2 className="mr-2 h-4 w-4" />
+                <CheckCircle2 className="mr-2 h-4 w-4" aria-hidden="true" />
                 J&apos;ai compris
               </Button>
             </>

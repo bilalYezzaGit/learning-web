@@ -1,20 +1,29 @@
 /**
  * Réviser Page (Parcours-specific)
  *
- * Practice hub with series from filesystem.
- * Filtered by parcours — only shows series belonging to the matching programme.
+ * Practice hub with series organized by trimestre and type.
+ * Features: tabs, filters, search, trimestre badges, type indicators.
  * Public - playable without authentication (score not saved).
  */
 
 import { BookOpen } from 'lucide-react'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { getAllProgrammes, getSerie, resolveSerieActivities } from '@/lib/content'
 import { getParcoursConfig } from '@/lib/parcours'
-import { ReviserStats, SeriesListItem } from './reviser-client'
+import { ReviserStats, ReviserContent } from './reviser-client'
+import type { Trimestre } from '@/types/content'
 
 interface PageProps {
   params: Promise<{ parcours: string }>
+}
+
+/** Determine the current trimestre based on the month (Tunisian school year) */
+function getCurrentTrimestre(): Trimestre {
+  const month = new Date().getMonth() + 1 // 1-12
+  if (month >= 9 && month <= 12) return 1 // Sept-Dec
+  if (month >= 1 && month <= 3) return 2  // Jan-Mar
+  return 3                                 // Apr-Jun
 }
 
 export default async function ReviserPage({ params }: PageProps) {
@@ -33,7 +42,7 @@ export default async function ReviserPage({ params }: PageProps) {
   const seriesSlugs = programme?.series ?? []
   const seriesList = seriesSlugs.map((slug) => getSerie(slug))
 
-  // Resolve activity IDs for each serie (for progress tracking)
+  // Resolve activity IDs for each serie
   const activityIdsMap = new Map(
     seriesList.map((serie) => [
       serie.slug,
@@ -41,7 +50,7 @@ export default async function ReviserPage({ params }: PageProps) {
     ])
   )
 
-  // Map to catalog entries for the list items
+  // Build enriched catalog entries
   const catalogEntries = seriesList.map((serie) => ({
     id: serie.slug,
     title: serie.title,
@@ -50,7 +59,23 @@ export default async function ReviserPage({ params }: PageProps) {
     estimatedMinutes: serie.estimatedMinutes,
     tags: serie.tags,
     activityCount: resolveSerieActivities(serie.slug).length,
+    type: serie.type,
+    trimestre: serie.trimestre,
+    modules: serie.modules,
+    priority: serie.priority,
   }))
+
+  // Extract unique modules for filter options
+  const moduleSet = new Set<string>()
+  for (const entry of catalogEntries) {
+    for (const mod of entry.modules) {
+      moduleSet.add(mod)
+    }
+  }
+  const availableModules = Array.from(moduleSet).sort()
+
+  // Determine current trimestre
+  const currentTrimestre = getCurrentTrimestre()
 
   return (
     <div className="px-4 lg:px-6">
@@ -64,7 +89,7 @@ export default async function ReviserPage({ params }: PageProps) {
       {/* Stats Cards - Client Component */}
       <ReviserStats />
 
-      {/* Series List */}
+      {/* Series Content */}
       {catalogEntries.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center text-muted-foreground">
@@ -74,21 +99,13 @@ export default async function ReviserPage({ params }: PageProps) {
           </CardContent>
         </Card>
       ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle>Séries disponibles</CardTitle>
-          </CardHeader>
-          <CardContent className="p-0">
-            {catalogEntries.map((serie) => (
-              <SeriesListItem
-                key={serie.id}
-                serie={serie}
-                activityIds={activityIdsMap.get(serie.id) ?? []}
-                parcours={parcours}
-              />
-            ))}
-          </CardContent>
-        </Card>
+        <ReviserContent
+          entries={catalogEntries}
+          activityIdsMap={Object.fromEntries(activityIdsMap)}
+          parcours={parcours}
+          currentTrimestre={currentTrimestre}
+          availableModules={availableModules}
+        />
       )}
     </div>
   )

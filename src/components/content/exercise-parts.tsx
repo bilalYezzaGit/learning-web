@@ -23,12 +23,12 @@ export function Enonce({ children }: PartProps) {
 
 export function Solution({ children }: PartProps) {
   return (
-    <details className="not-prose mt-6 rounded-lg border border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950/20">
+    <details className="not-prose mt-6 rounded-lg border border-success/25 bg-success/10">
       <summary className="flex cursor-pointer select-none items-center gap-2 px-4 py-3 font-medium">
-        <CheckCircle className="h-5 w-5 text-green-600" aria-hidden="true" />
+        <CheckCircle className="h-5 w-5 text-success" aria-hidden="true" />
         Voir la solution
       </summary>
-      <div className="prose prose-stone dark:prose-invert max-w-none border-t border-green-200 px-4 py-4 dark:border-green-800">
+      <div className="prose prose-stone dark:prose-invert max-w-none border-t border-success/25 px-4 py-4">
         {children}
       </div>
     </details>
@@ -37,12 +37,12 @@ export function Solution({ children }: PartProps) {
 
 export function Methode({ children }: PartProps) {
   return (
-    <details className="not-prose mt-6 rounded-lg border border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950/20">
+    <details className="not-prose mt-6 rounded-lg border border-info/25 bg-info/10">
       <summary className="flex cursor-pointer select-none items-center gap-2 px-4 py-3 font-medium">
-        <BookOpen className="h-5 w-5 text-blue-600" aria-hidden="true" />
-        Methode
+        <BookOpen className="h-5 w-5 text-info" aria-hidden="true" />
+        Méthode
       </summary>
-      <div className="prose prose-stone dark:prose-invert max-w-none border-t border-blue-200 px-4 py-4 dark:border-blue-800">
+      <div className="prose prose-stone dark:prose-invert max-w-none border-t border-info/25 px-4 py-4">
         {children}
       </div>
     </details>
@@ -51,12 +51,12 @@ export function Methode({ children }: PartProps) {
 
 export function Hint({ children }: PartProps) {
   return (
-    <details className="not-prose mt-6 rounded-lg border border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950/20">
+    <details className="not-prose mt-6 rounded-lg border border-warning/25 bg-warning/10">
       <summary className="flex cursor-pointer select-none items-center gap-2 px-4 py-3 font-medium">
-        <Lightbulb className="h-5 w-5 text-amber-600" aria-hidden="true" />
+        <Lightbulb className="h-5 w-5 text-warning" aria-hidden="true" />
         Indice
       </summary>
-      <div className="prose prose-stone dark:prose-invert max-w-none border-t border-amber-200 px-4 py-4 dark:border-amber-800">
+      <div className="prose prose-stone dark:prose-invert max-w-none border-t border-warning/25 px-4 py-4">
         {children}
       </div>
     </details>
@@ -65,12 +65,12 @@ export function Hint({ children }: PartProps) {
 
 export function Erreurs({ children }: PartProps) {
   return (
-    <details className="not-prose mt-6 rounded-lg border border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-950/20">
+    <details className="not-prose mt-6 rounded-lg border border-destructive/25 bg-destructive/10">
       <summary className="flex cursor-pointer select-none items-center gap-2 px-4 py-3 font-medium">
-        <AlertTriangle className="h-5 w-5 text-red-600" aria-hidden="true" />
+        <AlertTriangle className="h-5 w-5 text-destructive" aria-hidden="true" />
         Erreurs courantes
       </summary>
-      <div className="prose prose-stone dark:prose-invert max-w-none border-t border-red-200 px-4 py-4 dark:border-red-800">
+      <div className="prose prose-stone dark:prose-invert max-w-none border-t border-destructive/25 px-4 py-4">
         {children}
       </div>
     </details>

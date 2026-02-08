@@ -5,6 +5,7 @@ import './globals.css'
 import { QueryProvider } from '@/lib/query/provider'
 import { AuthProvider } from '@/lib/context'
 import { Toaster } from '@/components/ui/sonner'
+import { PwaInstallPrompt } from '@/components/pwa-install-prompt'
 
 const dmSans = DM_Sans({
   variable: '--font-dm-sans',
@@ -56,6 +57,7 @@ export default function RootLayout({
           <AuthProvider>
             {children}
             <Toaster />
+            <PwaInstallPrompt />
           </AuthProvider>
         </QueryProvider>
       </body>
