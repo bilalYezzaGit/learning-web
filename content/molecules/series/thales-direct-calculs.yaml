@@ -13,3 +13,7 @@ steps:
       - qcm-thales-direct-simple
       - qcm-thales-papillon
       - qcm-thales-calcul-inverse
+type: mono-module
+trimestre: 1
+modules: [thales]
+priority: 0

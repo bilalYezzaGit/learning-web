@@ -14,3 +14,7 @@ steps:
       - qcm-ei-inequation-sens
       - qcm-ei-inequation-intervalle
       - qcm-ei-piege-division-negative
+type: mono-module
+trimestre: 2
+modules: [equations-inequations]
+priority: 0

@@ -14,3 +14,7 @@ steps:
       - qcm-trigo-valeur-sin30
       - qcm-trigo-valeur-cos45
       - qcm-trigo-relation-fondamentale
+type: mono-module
+trimestre: 1
+modules: [rapports-trigo]
+priority: 0

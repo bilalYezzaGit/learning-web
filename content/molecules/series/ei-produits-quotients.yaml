@@ -19,3 +19,7 @@ steps:
       - qcm-ei-piege-produit
       - qcm-ei-piege-quotient-denominateur
       - qcm-ei-piege-mise-equation
+type: mono-module
+trimestre: 2
+modules: [equations-inequations]
+priority: 0

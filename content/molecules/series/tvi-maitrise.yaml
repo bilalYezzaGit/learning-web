@@ -17,3 +17,7 @@ steps:
   - quiz:
       - qcm-cont-5
       - qcm-cont-6
+type: mono-module
+trimestre: 1
+modules: [continuite]
+priority: 0

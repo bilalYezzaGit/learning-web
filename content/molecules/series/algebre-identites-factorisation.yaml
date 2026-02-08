@@ -15,3 +15,7 @@ steps:
       - qcm-algebre-identite-diff-carres
       - qcm-algebre-facteur-commun
       - qcm-algebre-piege-identite
+type: mono-module
+trimestre: 1
+modules: [algebre]
+priority: 0

@@ -13,3 +13,7 @@ steps:
       - qcm-sv-simplification
       - qcm-sv-piege-ordre
       - qcm-sv-piege-signe
+type: mono-module
+trimestre: 2
+modules: [somme-vecteurs]
+priority: 0

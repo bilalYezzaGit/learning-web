@@ -2,27 +2,8 @@
  * Types barrel export
  *
  * Re-exports all types for convenient imports:
- * import { Activity, UserProfile } from '@/types'
+ * import { UserProfile } from '@/types'
  */
-
-// Activities
-export type {
-  Activity,
-  Exercise,
-  QCM,
-  Lesson,
-  ActivityType,
-  ExerciseCategory,
-  ExerciseQuestion,
-  QCMQuestion,
-} from './activity'
-
-export {
-  isExercise,
-  isQCM,
-  isLesson,
-  getActivityTypeLabel,
-} from './activity'
 
 // Progress
 export type {

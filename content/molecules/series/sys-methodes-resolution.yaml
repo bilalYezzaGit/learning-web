@@ -15,3 +15,7 @@ steps:
       - qcm-sys-verification
       - qcm-sys-substitution
       - qcm-sys-combinaison
+type: mono-module
+trimestre: 3
+modules: [systemes]
+priority: 0

@@ -15,3 +15,7 @@ steps:
       - qcm-fn-domaine-racine
       - qcm-fn-image-def
       - qcm-fn-antecedent-def
+type: mono-module
+trimestre: 1
+modules: [fonctions]
+priority: 0

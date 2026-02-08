@@ -13,3 +13,7 @@ steps:
       - qcm-angles-conversion-base
       - qcm-angles-somme-triangle
       - qcm-angles-piege-conversion
+type: mono-module
+trimestre: 1
+modules: [angles]
+priority: 0

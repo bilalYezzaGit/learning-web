@@ -14,3 +14,7 @@ steps:
       - qcm-ss-cube-face
       - qcm-ss-pyramide-parallele
       - qcm-ss-ratio-reduction
+type: mono-module
+trimestre: 2
+modules: [sections-solides]
+priority: 0

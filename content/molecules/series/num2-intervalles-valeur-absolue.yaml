@@ -14,3 +14,7 @@ steps:
       - qcm-num2-intervalle-intersection
       - qcm-num2-valeur-absolue-def
       - qcm-num2-valeur-absolue-distance
+type: mono-module
+trimestre: 2
+modules: [numerique-2]
+priority: 0

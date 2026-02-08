@@ -1,32 +1,8 @@
 /**
- * Content rendering utilities
+ * Content extension utilities
+ *
+ * Shared parsing helpers used by graph, math, and variations extensions.
  */
-
-import type { DOMNode, Element } from 'html-react-parser'
-
-/**
- * Check if a DOMNode is an Element
- */
-export function isElement(node: DOMNode): node is Element {
-  return node.type === 'tag'
-}
-
-/**
- * Get text content from an element, handling nested children
- */
-export function getTextContent(element: Element): string {
-  let text = ''
-
-  for (const child of element.children || []) {
-    if (child.type === 'text') {
-      text += (child as { data: string }).data
-    } else if (child.type === 'tag') {
-      text += getTextContent(child as Element)
-    }
-  }
-
-  return text
-}
 
 /**
  * Decode HTML entities commonly found in math content
@@ -64,23 +40,4 @@ export function parseRange(rangeStr: string): [number, number] {
     // Fall through to default
   }
   return [-5, 5]
-}
-
-/**
- * Get attribute value with fallback
- */
-export function getAttr(
-  element: Element,
-  name: string,
-  fallback: string = ''
-): string {
-  return element.attribs?.[name] ?? fallback
-}
-
-/**
- * Get boolean attribute
- */
-export function getBoolAttr(element: Element, name: string): boolean {
-  const value = element.attribs?.[name]
-  return value === 'true' || value === ''
 }

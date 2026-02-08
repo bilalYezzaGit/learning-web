@@ -14,3 +14,7 @@ steps:
       - qcm-cont-2
   - lesson-cont-prolongement
   - ex-cont-5
+type: mono-module
+trimestre: 1
+modules: [continuite]
+priority: 0

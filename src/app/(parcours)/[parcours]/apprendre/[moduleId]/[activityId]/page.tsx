@@ -12,7 +12,7 @@ import { ArrowLeft, ArrowRight, ChevronLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { compileMdx } from '@/lib/mdx'
-import { getAtom, resolveCoursActivities, findQuizGroup, resolveQuiz } from '@/lib/content'
+import { getAtom, resolveCoursActivities, findQuizGroup, compileQuiz } from '@/lib/content'
 import { getAtomTypeLabel } from '@/types/content'
 import { ActivityClient } from './activity-client'
 
@@ -46,9 +46,9 @@ export default async function ActivityPage({ params }: PageProps) {
   let quizData = null
 
   if (currentActivity.type === 'qcm') {
-    // Quiz group: resolve all QCM atoms
+    // Quiz group: compile all QCM atoms
     const quizAtomIds = currentActivity.quizAtomIds ?? findQuizGroup(moduleId, activityId) ?? [activityId]
-    quizData = resolveQuiz(quizAtomIds)
+    quizData = await compileQuiz(quizAtomIds)
   } else {
     // Lesson or exercise: compile MDX
     const atom = getAtom(activityId)

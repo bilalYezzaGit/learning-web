@@ -17,3 +17,7 @@ steps:
       - qcm-fl-proportionnalite
       - qcm-fl-piege-f-zero
       - qcm-fl-piege-lecture
+type: mono-module
+trimestre: 2
+modules: [fonctions-lineaires]
+priority: 0

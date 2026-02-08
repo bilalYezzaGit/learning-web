@@ -22,6 +22,7 @@
  * ```
  */
 
+import { cache } from 'react'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
@@ -32,10 +33,13 @@ import { mdxComponents } from '@/components/content/mdx-components'
 /**
  * Compile MDX source into a React element.
  *
+ * Wrapped with React.cache() for per-request deduplication —
+ * if the same source is compiled multiple times in one request, it's only done once.
+ *
  * - LaTeX: `$...$` (inline) and `$$...$$` (block) via remark-math + rehype-katex
  * - Components: Enonce, Solution, Methode, Hint, Erreurs, Variations, Graph, YouTube
  */
-export async function compileMdx(source: string) {
+export const compileMdx = cache(async (source: string) => {
   const { content } = await compileMDX({
     source,
     components: mdxComponents,
@@ -48,4 +52,4 @@ export async function compileMdx(source: string) {
   })
 
   return content
-}
+})

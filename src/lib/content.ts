@@ -21,10 +21,18 @@ import type {
   Programme,
   Step,
   ResolvedActivity,
-  ParsedQCMQuestion,
-  ResolvedQuiz,
+  CompiledQCMQuestion,
+  CompiledQuiz,
+  Trimestre,
+  SeriesType,
 } from '@/types/content'
 import { extractAtomIds, isQuizStep } from '@/types/content'
+import {
+  atomMetaSchema,
+  coursMoleculeSchema,
+  seriesMoleculeSchema,
+  programmeSchema,
+} from '@/lib/schemas/content'
 
 // =============================================================================
 // Paths
@@ -38,25 +46,18 @@ const MOLECULES_DIR = path.join(CONTENT_DIR, 'molecules')
 // Internal helpers
 // =============================================================================
 
-function readYaml<T>(filePath: string): T {
+function readYaml(filePath: string): Record<string, unknown> {
   const raw = fs.readFileSync(filePath, 'utf-8')
-  return parseYaml(raw) as T
+  return parseYaml(raw) as Record<string, unknown>
 }
 
 function parseAtomMeta(fileName: string): AtomMeta {
   const id = fileName.replace('.mdx', '')
   const raw = fs.readFileSync(path.join(ATOMS_DIR, fileName), 'utf-8')
   const { data } = matter(raw)
+  const parsed = atomMetaSchema.parse(data)
 
-  return {
-    id,
-    type: data.type,
-    title: data.title,
-    difficulty: data.difficulty ?? 1,
-    timeMinutes: data.timeMinutes ?? 5,
-    tags: data.tags ?? [],
-    ...(data.category && { category: data.category }),
-  }
+  return { id, ...parsed }
 }
 
 // =============================================================================
@@ -80,17 +81,9 @@ export const getAtom = cache((id: string): Atom => {
   const filePath = path.join(ATOMS_DIR, `${id}.mdx`)
   const raw = fs.readFileSync(filePath, 'utf-8')
   const { data, content } = matter(raw)
+  const parsed = atomMetaSchema.parse(data)
 
-  return {
-    id,
-    type: data.type,
-    title: data.title,
-    difficulty: data.difficulty ?? 1,
-    timeMinutes: data.timeMinutes ?? 5,
-    tags: data.tags ?? [],
-    ...(data.category && { category: data.category }),
-    content,
-  }
+  return { id, ...parsed, content }
 })
 
 /**
@@ -115,7 +108,7 @@ export const getAllCours = cache((): CoursMolecule[] => {
     .filter(f => f.endsWith('.yaml'))
     .map(f => {
       const slug = f.replace('.yaml', '')
-      const data = readYaml<Omit<CoursMolecule, 'slug'>>(path.join(dir, f))
+      const data = coursMoleculeSchema.parse(readYaml(path.join(dir, f)))
       return { slug, ...data }
     })
     .sort((a, b) => a.order - b.order)
@@ -126,7 +119,7 @@ export const getAllCours = cache((): CoursMolecule[] => {
  */
 export const getCours = cache((slug: string): CoursMolecule => {
   const filePath = path.join(MOLECULES_DIR, 'cours', `${slug}.yaml`)
-  const data = readYaml<Omit<CoursMolecule, 'slug'>>(filePath)
+  const data = coursMoleculeSchema.parse(readYaml(filePath))
   return { slug, ...data }
 })
 
@@ -145,7 +138,7 @@ export const getAllSeries = cache((): SeriesMolecule[] => {
     .filter(f => f.endsWith('.yaml'))
     .map(f => {
       const slug = f.replace('.yaml', '')
-      const data = readYaml<Omit<SeriesMolecule, 'slug'>>(path.join(dir, f))
+      const data = seriesMoleculeSchema.parse(readYaml(path.join(dir, f)))
       return { slug, ...data }
     })
 })
@@ -155,9 +148,23 @@ export const getAllSeries = cache((): SeriesMolecule[] => {
  */
 export const getSerie = cache((slug: string): SeriesMolecule => {
   const filePath = path.join(MOLECULES_DIR, 'series', `${slug}.yaml`)
-  const data = readYaml<Omit<SeriesMolecule, 'slug'>>(filePath)
+  const data = seriesMoleculeSchema.parse(readYaml(filePath))
   return { slug, ...data }
 })
+
+/**
+ * Get series filtered by trimestre.
+ */
+export function getSeriesByTrimestre(trimestre: Trimestre): SeriesMolecule[] {
+  return getAllSeries().filter(s => s.trimestre === trimestre)
+}
+
+/**
+ * Get series filtered by type.
+ */
+export function getSeriesByType(type: SeriesType): SeriesMolecule[] {
+  return getAllSeries().filter(s => s.type === type)
+}
 
 // =============================================================================
 // Programmes
@@ -174,8 +181,8 @@ export const getAllProgrammes = cache((): Programme[] => {
     .filter(f => f.endsWith('.yaml'))
     .map(f => {
       const id = f.replace('.yaml', '')
-      const data = readYaml<Omit<Programme, 'id'>>(path.join(dir, f))
-      return { id, ...data, series: data.series ?? [] }
+      const data = programmeSchema.parse(readYaml(path.join(dir, f)))
+      return { id, ...data }
     })
     .sort((a, b) => a.order - b.order)
 })
@@ -185,8 +192,8 @@ export const getAllProgrammes = cache((): Programme[] => {
  */
 export const getProgramme = cache((id: string): Programme => {
   const filePath = path.join(MOLECULES_DIR, 'programmes', `${id}.yaml`)
-  const data = readYaml<Omit<Programme, 'id'>>(filePath)
-  return { id, ...data, series: data.series ?? [] }
+  const data = programmeSchema.parse(readYaml(filePath))
+  return { id, ...data }
 })
 
 // =============================================================================
@@ -241,132 +248,53 @@ export const getAllTags = cache((): Map<string, number> => {
 })
 
 // =============================================================================
-// QCM parser
+// QCM compiler
 // =============================================================================
 
-/**
- * Convert $...$ LaTeX to <math>...</math> tags for ContentRenderer.
- * Also converts $$...$$ to <math-block>...</math-block>.
- */
-function latexToMathTags(text: string): string {
-  // Block math: $$...$$ → <math-block>...</math-block>
-  let result = text.replace(/\$\$([\s\S]+?)\$\$/g, '<math-block>$1</math-block>')
-  // Inline math: $...$ → <math>...</math>
-  result = result.replace(/\$(.+?)\$/g, '<math>$1</math>')
-  return result
-}
+import { compileMdx } from '@/lib/mdx'
 
 /**
- * Parse QCM atom MDX content into structured question data.
+ * Compile a QCM atom into a CompiledQCMQuestion.
  *
- * Supports the component format (v2):
- * ```
- * <Question>Question text</Question>
- * <Option>Wrong</Option>
- * <Option correct>Correct</Option>
- * <Explanation>Why</Explanation>
- * ```
+ * Extracts question, options, and explanation via regex on raw MDX source,
+ * then compiles each part through compileMdx() for proper LaTeX rendering.
+ * correctIndex comes from frontmatter (atom.correctOption).
  */
-export function parseQcmContent(atom: Atom): ParsedQCMQuestion {
+export async function compileQcmContent(atom: Atom): Promise<CompiledQCMQuestion> {
   const raw = atom.content.trim()
 
-  // Detect format: component-based (<Question>) vs legacy (checkbox)
-  if (raw.includes('<Question>')) {
-    return parseQcmComponents(atom, raw)
-  }
-
-  return parseQcmLegacy(atom, raw)
-}
-
-/**
- * Parse v2 component format using regex on raw MDX source.
- */
-function parseQcmComponents(atom: Atom, raw: string): ParsedQCMQuestion {
   // Extract <Question>...</Question>
   const questionMatch = raw.match(/<Question>([\s\S]*?)<\/Question>/)
-  const enonce = latexToMathTags((questionMatch?.[1] ?? '').trim())
+  const questionText = (questionMatch?.[1] ?? '').trim()
 
   // Extract all <Option>...</Option> and <Option correct>...</Option>
-  const options: string[] = []
-  let correctIndex = 0
-  const optionRegex = /<Option(\s+correct)?>([\s\S]*?)<\/Option>/g
+  const optionTexts: string[] = []
+  const optionRegex = /<Option(?:\s+correct)?>([\s\S]*?)<\/Option>/g
   let match
   while ((match = optionRegex.exec(raw)) !== null) {
-    if (match[1]) {
-      correctIndex = options.length
-    }
-    options.push(latexToMathTags((match[2] ?? '').trim()))
+    optionTexts.push((match[1] ?? '').trim())
   }
 
   // Extract <Explanation>...</Explanation>
   const explMatch = raw.match(/<Explanation>([\s\S]*?)<\/Explanation>/)
-  const explication = explMatch?.[1]?.trim() || undefined
+  const explanationText = explMatch?.[1]?.trim() || undefined
+
+  // Compile all parts in parallel via compileMdx
+  const [enonce, ...compiledOptions] = await Promise.all([
+    compileMdx(questionText),
+    ...optionTexts.map(text => compileMdx(text)),
+  ])
+
+  const explication = explanationText
+    ? await compileMdx(explanationText)
+    : undefined
 
   return {
     id: atom.id,
     enonce,
-    options,
-    correctIndex,
-    explication: explication ? latexToMathTags(explication) : undefined,
-    timeMinutes: atom.timeMinutes,
-  }
-}
-
-/**
- * Parse legacy checkbox format (v1).
- * ```
- * Question text
- * - [ ] Wrong
- * - [x] Correct
- * > Explanation
- * ```
- */
-function parseQcmLegacy(atom: Atom, raw: string): ParsedQCMQuestion {
-  const lines = raw.split('\n')
-
-  const enonceLines: string[] = []
-  const options: string[] = []
-  let correctIndex = 0
-  const explicLines: string[] = []
-  let phase: 'enonce' | 'options' | 'explic' = 'enonce'
-
-  for (const line of lines) {
-    const trimmed = line.trim()
-
-    // Check for option line
-    const optionMatch = trimmed.match(/^-\s+\[([ x])\]\s+(.+)$/)
-    if (optionMatch && optionMatch[2]) {
-      phase = 'options'
-      if (optionMatch[1] === 'x') {
-        correctIndex = options.length
-      }
-      options.push(latexToMathTags(optionMatch[2]))
-      continue
-    }
-
-    // Check for explanation (blockquote)
-    if (trimmed.startsWith('>')) {
-      phase = 'explic'
-      explicLines.push(trimmed.replace(/^>\s*/, ''))
-      continue
-    }
-
-    if (phase === 'enonce') {
-      enonceLines.push(line)
-    } else if (phase === 'explic') {
-      explicLines.push(trimmed)
-    }
-  }
-
-  const enonce = latexToMathTags(enonceLines.join('\n').trim())
-  const explication = explicLines.join(' ').trim() || undefined
-
-  return {
-    id: atom.id,
-    enonce,
-    options,
-    correctIndex,
-    explication: explication ? latexToMathTags(explication) : undefined,
+    options: compiledOptions,
+    correctIndex: atom.correctOption ?? 0,
+    explication,
     timeMinutes: atom.timeMinutes,
   }
 }
@@ -446,10 +374,13 @@ export const resolveSerieActivities = cache((slug: string): ResolvedActivity[] =
 })
 
 /**
- * Build a ResolvedQuiz from a list of QCM atom IDs (for QCMPlayer).
+ * Compile a quiz from a list of QCM atom IDs.
+ * Async because it uses compileMdx() for each question.
  */
-export function resolveQuiz(atomIds: string[]): ResolvedQuiz {
-  const questions = atomIds.map(id => parseQcmContent(getAtom(id)))
+export async function compileQuiz(atomIds: string[]): Promise<CompiledQuiz> {
+  const questions = await Promise.all(
+    atomIds.map(id => compileQcmContent(getAtom(id)))
+  )
   const firstId = atomIds[0] ?? 'quiz'
   return {
     id: firstId,

@@ -14,14 +14,14 @@ import { Button } from '@/components/ui/button'
 import { QCMPlayer, type QCMResult } from '@/components/patterns/qcm-player'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
-import type { AtomType, ResolvedQuiz } from '@/types/content'
+import type { AtomType, CompiledQuiz } from '@/types/content'
 
 interface SerieActivityClientProps {
   activityId: string
   activityType: AtomType
   serieSlug: string
   parcours: string
-  quizData: ResolvedQuiz | null
+  quizData: CompiledQuiz | null
   children: React.ReactNode
 }
 
@@ -79,26 +79,6 @@ export function SerieActivityClient({
   if (activityType === 'qcm' && quizData) {
     const previousProgress = getProgress(activityId)
 
-    const qcm = {
-      id: quizData.id,
-      title: quizData.title,
-      type: 'qcm' as const,
-      tags: [],
-      modules: [],
-      visible: true,
-      difficulty: 1,
-      timeMinutes: quizData.questions.reduce((sum, q) => sum + q.timeMinutes, 0),
-      questions: quizData.questions.map((q) => ({
-        id: q.id,
-        questionType: 'qcm' as const,
-        timeMinutes: q.timeMinutes,
-        enonce: q.enonce,
-        options: q.options,
-        correctIndex: q.correctIndex,
-        explication: q.explication,
-      })),
-    }
-
     return (
       <div>
         {previousProgress && previousProgress.score !== undefined && previousProgress.total ? (
@@ -110,7 +90,7 @@ export function SerieActivityClient({
           </div>
         ) : null}
         <QCMPlayer
-          qcm={qcm}
+          qcm={quizData}
           onComplete={handleQCMComplete}
           onExit={() => router.push(`/${parcours}/reviser/serie/${serieSlug}`)}
           showExit={false}

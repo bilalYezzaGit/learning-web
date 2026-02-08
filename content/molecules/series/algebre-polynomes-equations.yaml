@@ -16,3 +16,7 @@ steps:
       - qcm-algebre-racines-equation
       - qcm-algebre-piege-fraction
       - qcm-algebre-piege-discriminant-negatif
+type: mono-module
+trimestre: 1
+modules: [algebre]
+priority: 0

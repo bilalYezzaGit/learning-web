@@ -17,3 +17,7 @@ steps:
       - qcm-num1-puissance-negative
       - qcm-num1-racine-def
       - qcm-num1-racine-produit
+type: mono-module
+trimestre: 1
+modules: [numerique-1]
+priority: 0

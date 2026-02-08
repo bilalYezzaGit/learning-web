@@ -7,9 +7,9 @@
 
 import { notFound } from 'next/navigation'
 
-import { getSerie, resolveSerieActivities, getAtom, resolveQuiz } from '@/lib/content'
+import { getSerie, resolveSerieActivities, getAtom, compileQuiz } from '@/lib/content'
 import { compileMdx } from '@/lib/mdx'
-import type { ResolvedQuiz } from '@/types/content'
+import type { CompiledQuiz } from '@/types/content'
 import { SeriePlayer } from './serie-player'
 
 interface PageProps {
@@ -32,8 +32,8 @@ export default async function SeriePlayPage({ params }: PageProps) {
   const compiledActivities = await Promise.all(
     activities.map(async (activity) => {
       if (activity.type === 'qcm' && activity.quizAtomIds) {
-        // Quiz: resolve structured data
-        const quiz = resolveQuiz(activity.quizAtomIds)
+        // Quiz: compile structured data
+        const quiz = await compileQuiz(activity.quizAtomIds)
         return {
           id: activity.id,
           type: activity.type,
@@ -51,7 +51,7 @@ export default async function SeriePlayPage({ params }: PageProps) {
           type: activity.type,
           title: activity.title,
           timeMinutes: activity.timeMinutes,
-          quiz: null as ResolvedQuiz | null,
+          quiz: null as CompiledQuiz | null,
           content: (
             <article className="prose prose-stone dark:prose-invert max-w-none">
               {content}

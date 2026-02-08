@@ -18,6 +18,7 @@ export type ExerciseCategory =
   | 'approfondissement'
   | 'synthese'
   | 'probleme'
+  | 'demonstration'
 
 /** Atom frontmatter (metadata only, no MDX content) */
 export interface AtomMeta {
@@ -29,6 +30,8 @@ export interface AtomMeta {
   tags: string[]
   /** Exercise-specific */
   category?: ExerciseCategory
+  /** QCM-specific: 0-based index of the correct option */
+  correctOption?: number
 }
 
 /** Full atom with raw MDX content */
@@ -66,6 +69,12 @@ export interface CoursMolecule {
   sections: MoleculeSection[]
 }
 
+/** Series type */
+export type SeriesType = 'mono-module' | 'cross-module' | 'devoir-controle' | 'devoir-synthese'
+
+/** Trimestre */
+export type Trimestre = 1 | 2 | 3
+
 /** Series molecule — thematic revision */
 export interface SeriesMolecule {
   slug: string
@@ -75,6 +84,10 @@ export interface SeriesMolecule {
   estimatedMinutes: number
   tags: string[]
   steps: Step[]
+  type: SeriesType
+  trimestre: Trimestre
+  modules: string[]
+  priority: number
 }
 
 // =============================================================================
@@ -115,21 +128,21 @@ export interface ResolvedActivity extends TimelineActivity {
   quizAtomIds?: string[]
 }
 
-/** Parsed QCM question from atom MDX */
-export interface ParsedQCMQuestion {
+/** Compiled QCM question — MDX compiled to ReactNode */
+export interface CompiledQCMQuestion {
   id: string
-  enonce: string
-  options: string[]
+  enonce: React.ReactNode
+  options: React.ReactNode[]
   correctIndex: number
-  explication?: string
+  explication?: React.ReactNode
   timeMinutes: number
 }
 
-/** Resolved quiz group compatible with QCMPlayer */
-export interface ResolvedQuiz {
+/** Compiled quiz group for QCMPlayer */
+export interface CompiledQuiz {
   id: string
   title: string
-  questions: ParsedQCMQuestion[]
+  questions: CompiledQCMQuestion[]
 }
 
 // =============================================================================

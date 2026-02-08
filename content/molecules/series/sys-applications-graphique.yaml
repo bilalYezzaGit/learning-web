@@ -16,3 +16,7 @@ steps:
       - qcm-sys-nombre-solutions
       - qcm-sys-piege-pas-solution
       - qcm-sys-piege-infinite
+type: mono-module
+trimestre: 3
+modules: [systemes]
+priority: 0

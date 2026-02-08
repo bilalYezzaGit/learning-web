@@ -1,11 +1,14 @@
 /**
  * Content module barrel export
  *
- * Provides HTML content rendering with custom extensions for:
+ * Provides content extensions for:
  * - Math (KaTeX)
  * - Function graphs (Recharts)
  * - Sign/variation tables
  * - YouTube embeds
  */
 
-export { ContentRenderer } from './renderer'
+export { Graph } from './extensions/graph'
+export { Math } from './extensions/math'
+export { YouTube } from './extensions/youtube'
+export { VariationsTable } from './extensions/variations'

@@ -16,3 +16,7 @@ steps:
       - qcm-num1-piege-puissance-somme
       - qcm-num1-piege-racine-somme
       - qcm-num1-piege-signe
+type: mono-module
+trimestre: 1
+modules: [numerique-1]
+priority: 0

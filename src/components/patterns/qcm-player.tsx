@@ -19,9 +19,8 @@ import { ArrowRight, Check, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
-import { ContentRenderer } from '@/content'
 import { cn } from '@/lib/utils'
-import type { QCM, QCMQuestion } from '@/types/activity'
+import type { CompiledQuiz } from '@/types/content'
 
 // =============================================================================
 // Types
@@ -37,8 +36,8 @@ export interface QCMResult {
 }
 
 export interface QCMPlayerProps {
-  /** The QCM data to play */
-  qcm: QCM
+  /** The compiled quiz data to play */
+  qcm: CompiledQuiz
   /** Called when QCM is finished with results */
   onComplete?: (result: QCMResult) => void
   /** Called when user wants to exit */
@@ -198,7 +197,7 @@ export function QCMPlayer({
       {/* Question */}
       <div className="flex-1">
         <div className="prose prose-sm dark:prose-invert max-w-none">
-          <ContentRenderer html={currentQuestion.enonce} />
+          {currentQuestion.enonce}
         </div>
 
         <div className="mt-6 space-y-3">
@@ -248,7 +247,7 @@ export function QCMPlayer({
                   )}
                 </div>
                 <span className="flex-1">
-                  <ContentRenderer html={option} />
+                  {option}
                 </span>
                 <kbd className="hidden rounded border bg-muted px-2 py-0.5 text-xs text-muted-foreground sm:inline-block">
                   {index + 1}
@@ -263,7 +262,7 @@ export function QCMPlayer({
           <div aria-live="polite" className="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-950/20">
             <p className="text-sm font-medium text-blue-800 dark:text-blue-200">Explication</p>
             <div className="mt-1 text-sm text-blue-700 dark:text-blue-300">
-              <ContentRenderer html={currentQuestion.explication} />
+              {currentQuestion.explication}
             </div>
           </div>
         )}

@@ -14,3 +14,7 @@ steps:
       - qcm-qt-angle
       - qcm-qt-sens
       - qcm-qt-image-point
+type: mono-module
+trimestre: 2
+modules: [quart-de-tour]
+priority: 0

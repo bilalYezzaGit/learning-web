@@ -21,3 +21,7 @@ steps:
   - quiz:
       - qcm-der-signe-variations
       - qcm-der-piege-extremum
+type: mono-module
+trimestre: 2
+modules: [derivation]
+priority: 0

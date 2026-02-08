@@ -13,3 +13,7 @@ steps:
       - qcm-vt-def-vecteur
       - qcm-vt-egalite-def
       - qcm-vt-vecteur-oppose
+type: mono-module
+trimestre: 1
+modules: [vecteurs-translations]
+priority: 0

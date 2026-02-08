@@ -11,6 +11,9 @@ const withPWA = withPWAInit({
 const nextConfig: NextConfig = {
   // Strict mode for better React practices
   reactStrictMode: true,
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'recharts'],
+  },
 }
 
 export default withPWA(nextConfig)

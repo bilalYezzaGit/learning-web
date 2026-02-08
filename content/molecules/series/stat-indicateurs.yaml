@@ -17,3 +17,7 @@ steps:
       - qcm-stat-moyenne
       - qcm-stat-mediane-impair
       - qcm-stat-mode
+type: mono-module
+trimestre: 3
+modules: [statistiques]
+priority: 0

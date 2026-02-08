@@ -14,3 +14,7 @@ steps:
       - qcm-sv-chasles-base
       - qcm-sv-chasles-trois-points
       - qcm-sv-soustraction-def
+type: mono-module
+trimestre: 2
+modules: [somme-vecteurs]
+priority: 0

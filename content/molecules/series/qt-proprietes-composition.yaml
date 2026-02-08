@@ -17,3 +17,7 @@ steps:
       - qcm-qt-composee-demi-tour
       - qcm-qt-piege-sens
       - qcm-qt-piege-composee
+type: mono-module
+trimestre: 2
+modules: [quart-de-tour]
+priority: 0

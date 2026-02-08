@@ -13,3 +13,7 @@ steps:
       - qcm-der-definition-taux
       - qcm-der-tangente-coeff
       - qcm-der-derivabilite-continuite
+type: mono-module
+trimestre: 2
+modules: [derivation]
+priority: 0

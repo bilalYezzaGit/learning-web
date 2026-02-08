@@ -14,3 +14,7 @@ steps:
       - qcm-angles-inscrit-def
       - qcm-angles-inscrit-centre-relation
       - qcm-angles-piege-demi-cercle
+type: mono-module
+trimestre: 1
+modules: [angles]
+priority: 0

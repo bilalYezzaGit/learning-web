@@ -16,3 +16,7 @@ steps:
       - qcm-repere-distance-formule
       - qcm-repere-milieu-inverse
       - qcm-repere-parallelogramme
+type: mono-module
+trimestre: 2
+modules: [repere]
+priority: 0

@@ -12,7 +12,7 @@ import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { compileMdx } from '@/lib/mdx'
-import { getAtom, resolveSerieActivities, findSerieQuizGroup, resolveQuiz } from '@/lib/content'
+import { getAtom, resolveSerieActivities, findSerieQuizGroup, compileQuiz } from '@/lib/content'
 import { getAtomTypeLabel } from '@/types/content'
 import { SerieActivityClient } from './serie-activity-client'
 
@@ -47,7 +47,7 @@ export default async function SerieActivityPage({ params }: PageProps) {
 
   if (currentActivity.type === 'qcm') {
     const quizAtomIds = currentActivity.quizAtomIds ?? findSerieQuizGroup(id, activityId) ?? [activityId]
-    quizData = resolveQuiz(quizAtomIds)
+    quizData = await compileQuiz(quizAtomIds)
   } else {
     const atom = getAtom(activityId)
     const compiled = await compileMdx(atom.content)

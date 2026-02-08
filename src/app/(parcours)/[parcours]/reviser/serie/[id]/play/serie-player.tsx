@@ -19,14 +19,14 @@ import { QCMPlayer, type QCMResult } from '@/components/patterns/qcm-player'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
 import { getAtomTypeLabel } from '@/types/content'
-import type { AtomType, ResolvedQuiz } from '@/types/content'
+import type { AtomType, CompiledQuiz } from '@/types/content'
 
 interface CompiledActivity {
   id: string
   type: AtomType
   title: string
   timeMinutes: number
-  quiz: ResolvedQuiz | null
+  quiz: CompiledQuiz | null
   content: React.ReactNode
 }
 
@@ -123,29 +123,7 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
 
   // QCM activities
   if (currentActivity.type === 'qcm' && currentActivity.quiz) {
-    const quiz = currentActivity.quiz
     const previousProgress = getProgress(currentActivity.id)
-
-    // Adapt to QCMPlayer format
-    const qcm = {
-      id: quiz.id,
-      title: quiz.title,
-      type: 'qcm' as const,
-      tags: [],
-      modules: [],
-      visible: true,
-      difficulty: 1,
-      timeMinutes: quiz.questions.reduce((sum, q) => sum + q.timeMinutes, 0),
-      questions: quiz.questions.map((q) => ({
-        id: q.id,
-        questionType: 'qcm' as const,
-        timeMinutes: q.timeMinutes,
-        enonce: q.enonce,
-        options: q.options,
-        correctIndex: q.correctIndex,
-        explication: q.explication,
-      })),
-    }
 
     return (
       <div className="flex h-[calc(100vh-3.5rem)] flex-col">
@@ -177,7 +155,7 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
               </div>
             ) : null}
             <QCMPlayer
-              qcm={qcm}
+              qcm={currentActivity.quiz}
               onComplete={handleQCMComplete}
               onExit={() => router.push(`/${parcours}/reviser/serie/${serieSlug}`)}
               showExit={false}

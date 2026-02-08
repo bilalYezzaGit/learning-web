@@ -14,3 +14,7 @@ steps:
       - qcm-vt-translation-def
       - qcm-vt-conservation-distance
       - qcm-vt-piege-translation-reciproque
+type: mono-module
+trimestre: 1
+modules: [vecteurs-translations]
+priority: 0

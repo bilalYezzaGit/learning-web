@@ -13,14 +13,23 @@
  */
 
 import React from 'react'
+import dynamic from 'next/dynamic'
 
 import { Enonce, Solution, Methode, Hint, Erreurs } from './exercise-parts'
 import { Definition, Theorem, Property, Example, Remark, Attention } from './lesson-parts'
 import { Question, Option, Explanation } from './qcm-parts'
-import { Graph as GraphBase } from '@/content/extensions/graph'
 import { YouTube as YouTubeBase } from '@/content/extensions/youtube'
 import { VariationsTable } from '@/content/extensions/variations'
 import { TviExplorer } from '@/content/extensions/tvi-explorer'
+
+const GraphBase = dynamic(
+  () => import('@/content/extensions/graph').then(mod => mod.Graph),
+  {
+    loading: () => (
+      <div className="my-4 h-[400px] animate-pulse rounded-lg border border-stone-200 bg-stone-100 dark:border-stone-700 dark:bg-stone-800" />
+    ),
+  },
+)
 
 // =============================================================================
 // Utilities

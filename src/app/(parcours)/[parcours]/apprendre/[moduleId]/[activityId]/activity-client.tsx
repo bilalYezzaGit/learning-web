@@ -15,14 +15,14 @@ import { Button } from '@/components/ui/button'
 import { QCMPlayer, type QCMResult } from '@/components/patterns/qcm-player'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
-import type { AtomType, ResolvedQuiz } from '@/types/content'
+import type { AtomType, CompiledQuiz } from '@/types/content'
 
 interface ActivityClientProps {
   activityId: string
   activityType: AtomType
   moduleId: string
   parcours: string
-  quizData: ResolvedQuiz | null
+  quizData: CompiledQuiz | null
   children: React.ReactNode
 }
 
@@ -80,27 +80,6 @@ export function ActivityClient({
 
   // For QCM activities, show the player
   if (activityType === 'qcm' && quizData) {
-    // Adapt ResolvedQuiz to QCM format for QCMPlayer
-    const qcm = {
-      id: quizData.id,
-      title: quizData.title,
-      type: 'qcm' as const,
-      tags: [],
-      modules: [],
-      visible: true,
-      difficulty: 1,
-      timeMinutes: quizData.questions.reduce((sum, q) => sum + q.timeMinutes, 0),
-      questions: quizData.questions.map((q) => ({
-        id: q.id,
-        questionType: 'qcm' as const,
-        timeMinutes: q.timeMinutes,
-        enonce: q.enonce,
-        options: q.options,
-        correctIndex: q.correctIndex,
-        explication: q.explication,
-      })),
-    }
-
     if (qcmFinished) {
       return (
         <div className="text-center py-8">
@@ -133,7 +112,7 @@ export function ActivityClient({
             </Button>
           </div>
         ) : null}
-        <QCMPlayer qcm={qcm} onComplete={handleQCMComplete} showExit={false} />
+        <QCMPlayer qcm={quizData} onComplete={handleQCMComplete} showExit={false} />
       </div>
     )
   }

@@ -16,3 +16,7 @@ steps:
       - qcm-ss-aire-section
       - qcm-ss-piege-orientation
       - qcm-ss-piege-rapport
+type: mono-module
+trimestre: 2
+modules: [sections-solides]
+priority: 0
