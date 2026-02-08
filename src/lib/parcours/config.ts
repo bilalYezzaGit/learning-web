@@ -2,6 +2,7 @@
  * Parcours Configuration
  *
  * Static configuration for available parcours (user journeys).
+ * Only 1ère TC has content ready for the MVP launch.
  */
 
 export interface ParcoursConfig {
@@ -15,7 +16,7 @@ export interface ParcoursConfig {
 }
 
 /**
- * All available parcours
+ * All parcours — only 1ere-tc is available for MVP
  */
 export const PARCOURS_LIST: ParcoursConfig[] = [
   {
@@ -25,7 +26,7 @@ export const PARCOURS_LIST: ParcoursConfig[] = [
     section: 'math',
     description: 'Programme de mathématiques pour la 3ème année',
     order: 1,
-    available: true,
+    available: false,
   },
   {
     slug: '2nde-math',
@@ -34,7 +35,7 @@ export const PARCOURS_LIST: ParcoursConfig[] = [
     section: 'math',
     description: 'Programme de mathématiques pour la 2nde année',
     order: 2,
-    available: true,
+    available: false,
   },
   {
     slug: '1ere-tc',
@@ -50,9 +51,9 @@ export const PARCOURS_LIST: ParcoursConfig[] = [
     label: '1ère Maths',
     level: '1ere',
     section: 'math',
-    description: 'Programme de mathématiques pour la 1ère année',
+    description: 'Programme de mathématiques pour la 1ère année section Maths',
     order: 4,
-    available: true,
+    available: false,
   },
   {
     slug: 'term-math',
@@ -61,12 +62,12 @@ export const PARCOURS_LIST: ParcoursConfig[] = [
     section: 'math',
     description: 'Programme de mathématiques pour la Terminale',
     order: 5,
-    available: true,
+    available: false,
   },
 ]
 
 /**
- * Valid parcours slugs for route matching
+ * Valid parcours slugs for route matching (only available ones)
  */
 export const VALID_PARCOURS_SLUGS = PARCOURS_LIST.filter((p) => p.available).map(
   (p) => p.slug
@@ -87,8 +88,15 @@ export function isValidParcours(slug: string): boolean {
 }
 
 /**
- * Get available parcours for display
+ * Get available parcours for display (only those with content)
  */
 export function getAvailableParcours(): ParcoursConfig[] {
   return PARCOURS_LIST.filter((p) => p.available).sort((a, b) => a.order - b.order)
+}
+
+/**
+ * Get all parcours sorted by order (including unavailable)
+ */
+export function getAllParcours(): ParcoursConfig[] {
+  return [...PARCOURS_LIST].sort((a, b) => a.order - b.order)
 }

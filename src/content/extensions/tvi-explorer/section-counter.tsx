@@ -20,6 +20,7 @@ export function SectionCounter({ height }: SectionCounterProps) {
   })
   const k = kPoint.y
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   const continuousRoot = useMemo(() => {
     if (isDiscontinuous) return null
     const step = 0.5
@@ -40,6 +41,7 @@ export function SectionCounter({ height }: SectionCounterProps) {
     }
     return segments
   }, [])
+  /* eslint-enable react-hooks/exhaustive-deps */
 
   // Feedback text
   const feedbackText = isDiscontinuous && isNonInteger

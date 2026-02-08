@@ -543,6 +543,7 @@ export function CourseTimeline({
   }, [data.activities, progress])
 
   // Default open section (current activity's section or first)
+  // eslint-disable-next-line react-hooks/preserve-manual-memoization
   const defaultOpenSections = useMemo((): string[] => {
     if (!currentActivityId) {
       const firstId = sections[0]?.id

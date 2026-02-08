@@ -8,6 +8,7 @@ export {
   getParcoursConfig,
   isValidParcours,
   getAvailableParcours,
+  getAllParcours,
   type ParcoursConfig,
 } from './config'
 

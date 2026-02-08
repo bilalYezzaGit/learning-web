@@ -7,7 +7,7 @@
  */
 
 import * as React from 'react'
-import { doc, getDoc, setDoc, onSnapshot } from 'firebase/firestore'
+import { doc, setDoc, onSnapshot } from 'firebase/firestore'
 
 import { getDbInstance } from '@/lib/firebase/client'
 import { useAuth } from '@/lib/context'

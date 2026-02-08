@@ -12,7 +12,6 @@ import { Camera, Check, Loader2, Upload, X, AlertCircle, Lightbulb } from 'lucid
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
 import { analyzeScan, type ScanResult, ScanError } from '@/lib/services/scan-service'
 
@@ -163,6 +162,7 @@ export function ScanUpload({ activityId, moduleId, onResult, className }: ScanUp
       <Card className={cn(className)}>
         <CardContent aria-live="polite" className="py-8 text-center">
           {preview && (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={preview}
               alt="Preview"

@@ -18,13 +18,12 @@
  */
 
 import parse, {
-  domToReact,
   HTMLReactParserOptions,
   type DOMNode,
   type Element,
 } from 'html-react-parser'
 
-import { isElement, getTextContent, getAttr, getBoolAttr, parseList } from './utils'
+import { isElement, getTextContent, getAttr, getBoolAttr } from './utils'
 import { Math } from './extensions/math'
 import { Graph } from './extensions/graph'
 import { YouTube } from './extensions/youtube'
