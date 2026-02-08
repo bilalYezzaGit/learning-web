@@ -6,7 +6,7 @@ export default function LandingLayout({
   children: React.ReactNode
 }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" forcedTheme="dark" enableSystem={false}>
       {children}
     </ThemeProvider>
   )
