@@ -18,14 +18,14 @@ import { trackScanUploaded } from '@/lib/services/analytics-service'
 
 interface ScanUploadProps {
   activityId: string
-  moduleId: string
+  exerciseContent: string
   onResult?: (result: ScanResult) => void
   className?: string
 }
 
 type ScanState = 'idle' | 'uploading' | 'analyzing' | 'success' | 'error'
 
-export function ScanUpload({ activityId, moduleId, onResult, className }: ScanUploadProps) {
+export function ScanUpload({ activityId, exerciseContent, onResult, className }: ScanUploadProps) {
   const [state, setState] = React.useState<ScanState>('idle')
   const [error, setError] = React.useState<string | null>(null)
   const [result, setResult] = React.useState<ScanResult | null>(null)
@@ -52,7 +52,7 @@ export function ScanUpload({ activityId, moduleId, onResult, className }: ScanUp
       const scanResult = await analyzeScan({
         imageFile: file,
         activityId,
-        moduleId,
+        exerciseContent,
       })
 
       setResult(scanResult)

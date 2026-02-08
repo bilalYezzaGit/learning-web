@@ -26,6 +26,7 @@ interface ActivityClientProps {
   moduleId: string
   parcours: string
   quizData: CompiledQuiz | null
+  exerciseContent?: string
   children: React.ReactNode
 }
 
@@ -36,6 +37,7 @@ export function ActivityClient({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   parcours,
   quizData,
+  exerciseContent,
   children,
 }: ActivityClientProps) {
   const { userId } = useAuth()
@@ -137,7 +139,7 @@ export function ActivityClient({
           </h3>
           <ScanUpload
             activityId={activityId}
-            moduleId={moduleId}
+            exerciseContent={exerciseContent ?? ''}
           />
         </div>
 

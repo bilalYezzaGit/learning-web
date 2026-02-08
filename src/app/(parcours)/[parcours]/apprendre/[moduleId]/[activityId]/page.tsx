@@ -44,6 +44,7 @@ export default async function ActivityPage({ params }: PageProps) {
   // Render content based on type
   let content: React.ReactNode = null
   let quizData = null
+  let exerciseContent: string | undefined
 
   if (currentActivity.type === 'qcm') {
     // Quiz group: compile all QCM atoms
@@ -53,6 +54,9 @@ export default async function ActivityPage({ params }: PageProps) {
     // Lesson or exercise: compile MDX
     const atom = getAtom(activityId)
     content = await compileMdx(atom.content)
+    if (currentActivity.type === 'exercise') {
+      exerciseContent = atom.content
+    }
   }
 
   return (
@@ -82,6 +86,7 @@ export default async function ActivityPage({ params }: PageProps) {
             moduleId={moduleId}
             parcours={parcours}
             quizData={quizData}
+            exerciseContent={exerciseContent}
           >
             {content && (
               <article className="prose prose-stone dark:prose-invert max-w-none">
