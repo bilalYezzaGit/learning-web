@@ -60,7 +60,7 @@ export function setLocalQCMComplete(params: {
   contextId: string
 }): LocalProgressMap {
   const map = load()
-  const status: ProgressStatus = params.score / params.total >= 0.5 ? 'success' : 'retry'
+  const status: ProgressStatus = params.score / params.total >= 0.7 ? 'success' : 'retry'
   map.set(params.activityId, {
     activityId: params.activityId,
     activityType: 'qcm',

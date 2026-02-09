@@ -18,6 +18,7 @@ import { Separator } from '@/components/ui/separator'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
 import { trackExerciseCompleted, trackQcmCompleted } from '@/lib/services/analytics-service'
+import { toast } from 'sonner'
 import type { AtomType, CompiledQuiz } from '@/types/content'
 
 interface ActivityClientProps {
@@ -60,8 +61,8 @@ export function ActivityClient({
           contextType: 'module',
           contextId: moduleId,
         })
-      } catch (e) {
-        console.error('Failed to save exercise progress:', e)
+      } catch {
+        toast.error('Impossible de sauvegarder la progression.')
       }
     }
   }
@@ -77,8 +78,8 @@ export function ActivityClient({
           contextType: 'module',
           contextId: moduleId,
         })
-      } catch (e) {
-        console.error('Failed to save lesson progress:', e)
+      } catch {
+        toast.error('Impossible de sauvegarder la progression.')
       }
     }
   }
@@ -97,8 +98,8 @@ export function ActivityClient({
           contextType: 'module',
           contextId: moduleId,
         })
-      } catch (e) {
-        console.error('Failed to save QCM progress:', e)
+      } catch {
+        toast.error('Impossible de sauvegarder la progression.')
       }
     }
   }

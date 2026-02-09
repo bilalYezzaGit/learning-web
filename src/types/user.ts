@@ -27,6 +27,11 @@ export interface UserProfile {
   sectionSlug?: string
   /** Selected programme ID */
   programmeId?: string
+  /** Selected parcours (set by web signup) */
+  parcours?: {
+    slug: string
+    selectedAt: string
+  }
 }
 
 

@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { QCMPlayer, type QCMResult } from '@/components/patterns/qcm-player'
+import { toast } from 'sonner'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
 import { trackExerciseCompleted, trackQcmCompleted, trackSerieStarted } from '@/lib/services/analytics-service'
@@ -111,8 +112,8 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
           contextType: 'serie',
           contextId: serieSlug,
         })
-      } catch (e) {
-        console.error('Failed to save exercise progress:', e)
+      } catch {
+        toast.error('Impossible de sauvegarder la progression.')
       }
     }
   }
@@ -130,8 +131,8 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
           contextType: 'serie',
           contextId: serieSlug,
         })
-      } catch (e) {
-        console.error('Failed to save QCM progress:', e)
+      } catch {
+        toast.error('Impossible de sauvegarder la progression.')
       }
     }
 
