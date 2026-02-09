@@ -82,6 +82,7 @@ export default async function ParcoursDashboardPage({ params }: PageProps) {
             </CardHeader>
           </Link>
         </Card>
+
       </div>
     </div>
   )

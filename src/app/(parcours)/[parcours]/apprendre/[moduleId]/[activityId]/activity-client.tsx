@@ -4,17 +4,22 @@
  * Activity Client Wrapper
  *
  * Handles progress tracking and exercise completion.
- * Wraps server-rendered content with client-side interactivity.
+ * Integrates AI features deeply into each activity type:
+ * - QCM: AI remediation handled inside QCMPlayer
+ * - Exercise: Compact AI toolbar (hints, solution, generate similar) + scan
+ * - Lesson: Comprehension check at end (inline concept help on components)
  */
 
 import * as React from 'react'
 import Link from 'next/link'
-import { CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, Sparkles } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
 import { QCMPlayer, type QCMResult } from '@/components/patterns/qcm-player'
 import { ScanUpload } from '@/components/patterns/scan-upload'
-import { Separator } from '@/components/ui/separator'
+import { ExerciseAIToolbar } from '@/components/patterns/exercise-ai-toolbar'
+import { AIComprehensionCheck } from '@/components/patterns/ai-comprehension-check'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
 import { trackExerciseCompleted, trackQcmCompleted } from '@/lib/services/analytics-service'
@@ -27,6 +32,9 @@ interface ActivityClientProps {
   parcours: string
   quizData: CompiledQuiz | null
   exerciseContent?: string
+  lessonContent?: string
+  activityTitle?: string
+  activityTags?: string[]
   children: React.ReactNode
 }
 
@@ -38,6 +46,9 @@ export function ActivityClient({
   parcours,
   quizData,
   exerciseContent,
+  lessonContent,
+  activityTitle,
+  activityTags,
   children,
 }: ActivityClientProps) {
   const { userId } = useAuth()
@@ -47,6 +58,8 @@ export function ActivityClient({
 
   const activityCompleted = isCompleted(activityId) || completedInSession
   const previousProgress = getProgress(activityId)
+
+  const topicFromTags = activityTags?.[0] ?? activityTitle ?? ''
 
   const handleExerciseComplete = async () => {
     setCompletedInSession(true)
@@ -86,11 +99,11 @@ export function ActivityClient({
     }
   }
 
-  // For QCM activities, show the player
+  // For QCM activities — AI remediation is built into QCMPlayer
   if (activityType === 'qcm' && quizData) {
     if (qcmFinished) {
       return (
-        <div className="text-center py-8">
+        <div className="py-8 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-success/10">
             <CheckCircle2 className="h-8 w-8 text-success" aria-hidden="true" />
           </div>
@@ -125,11 +138,24 @@ export function ActivityClient({
     )
   }
 
-  // For exercises, add scan + completion button
+  // For exercises — compact AI toolbar + scan
   if (activityType === 'exercise') {
     return (
       <>
         {children}
+
+        {/* Integrated AI toolbar */}
+        <Separator className="my-8" />
+        <div className="space-y-3">
+          <h3 className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+            <Sparkles className="h-4 w-4 text-primary" />
+            Outils IA
+          </h3>
+          <ExerciseAIToolbar
+            exerciseContent={exerciseContent ?? ''}
+            topic={topicFromTags}
+          />
+        </div>
 
         {/* Scan section */}
         <Separator className="my-8" />
@@ -175,6 +201,17 @@ export function ActivityClient({
     )
   }
 
-  // For lessons, just show the content
-  return <>{children}</>
+  // For lessons — content + comprehension check at end
+  return (
+    <>
+      {children}
+
+      {/* Comprehension check at end of lesson */}
+      <Separator className="my-8" />
+      <AIComprehensionCheck
+        lessonContent={lessonContent ?? ''}
+        title={activityTitle ?? 'Leçon'}
+      />
+    </>
+  )
 }
