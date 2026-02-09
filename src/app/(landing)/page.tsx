@@ -338,26 +338,53 @@ export default function LandingPage() {
       </section>
 
       {/* ─── Footer ─── */}
-      <footer className="mt-auto border-t">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-4 px-4 py-8 text-sm text-muted-foreground md:flex-row md:justify-between md:px-6">
-          <span className="font-serif font-semibold text-foreground">
-            Learning OS
-          </span>
-          <div className="flex gap-6">
-            <Link
-              href="/terms"
-              className="transition-colors duration-200 hover:text-foreground"
-            >
-              Conditions
-            </Link>
-            <Link
-              href="/privacy"
-              className="transition-colors duration-200 hover:text-foreground"
-            >
-              Confidentialité
-            </Link>
+      <footer className="mt-auto border-t bg-muted/30">
+        <div className="mx-auto w-full max-w-7xl px-4 py-12 md:px-6">
+          <div className="grid gap-8 sm:grid-cols-3">
+            {/* Brand */}
+            <div className="space-y-3">
+              <span className="font-serif text-lg font-semibold text-foreground">
+                Learning OS
+              </span>
+              <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
+                Plateforme d&apos;apprentissage des mathématiques pour le lycée tunisien. Cours, exercices et révisions en accès libre.
+              </p>
+            </div>
+
+            {/* Navigation */}
+            <div className="space-y-3">
+              <p className="text-sm font-semibold text-foreground">Navigation</p>
+              <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                <Link href="/1ere-tc/apprendre" className="transition-colors hover:text-foreground">
+                  Parcours 1ère TC
+                </Link>
+                <Link href="/1ere-tc/reviser" className="transition-colors hover:text-foreground">
+                  Séries de révision
+                </Link>
+                <Link href="/signup" className="transition-colors hover:text-foreground">
+                  Créer un compte
+                </Link>
+              </div>
+            </div>
+
+            {/* Legal */}
+            <div className="space-y-3">
+              <p className="text-sm font-semibold text-foreground">Informations</p>
+              <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                <Link href="/terms" className="transition-colors hover:text-foreground">
+                  Conditions d&apos;utilisation
+                </Link>
+                <Link href="/privacy" className="transition-colors hover:text-foreground">
+                  Politique de confidentialité
+                </Link>
+              </div>
+            </div>
           </div>
-          <span>&copy; {new Date().getFullYear()} Learning OS</span>
+
+          <div className="mt-10 flex flex-col items-center gap-2 border-t pt-6 text-xs text-muted-foreground sm:flex-row sm:justify-between">
+            <span>&copy; {new Date().getFullYear()} Learning OS. Tous droits réservés.</span>
+            <span>Conçu pour les élèves du lycée tunisien</span>
+          </div>
         </div>
       </footer>
     </div>

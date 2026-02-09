@@ -75,8 +75,8 @@ export function PwaInstallPrompt() {
   if (!showPrompt) return null
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 p-4 sm:p-6">
-      <Card className="mx-auto max-w-md border-primary/20 bg-background shadow-lg">
+    <div className="fixed inset-x-0 bottom-4 z-50 px-4 sm:bottom-6 sm:px-6">
+      <Card className="mx-auto max-w-sm border-primary/20 bg-background/95 shadow-lg backdrop-blur-sm">
         <CardContent className="flex items-start gap-3 py-4">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
             <Download className="h-5 w-5 text-primary" aria-hidden="true" />
