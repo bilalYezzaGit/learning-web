@@ -4,9 +4,10 @@
  * Activity Client Wrapper
  *
  * Handles progress tracking and exercise completion.
- * Wraps server-rendered content with client-side interactivity.
- * Integrates AI features: hints, solution explainer, exercise generator,
- * concept simplifier, summary generator, and floating tutor chat.
+ * Integrates AI features deeply into each activity type:
+ * - QCM: AI remediation handled inside QCMPlayer
+ * - Exercise: Compact AI toolbar (hints, solution, generate similar) + scan
+ * - Lesson: Comprehension check at end (inline concept help on components)
  */
 
 import * as React from 'react'
@@ -17,12 +18,8 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { QCMPlayer, type QCMResult } from '@/components/patterns/qcm-player'
 import { ScanUpload } from '@/components/patterns/scan-upload'
-import { AIHintButton } from '@/components/patterns/ai-hint-button'
-import { AISolutionExplainer } from '@/components/patterns/ai-solution-explainer'
-import { AIExerciseGenerator } from '@/components/patterns/ai-exercise-generator'
-import { AIConceptSimplifier } from '@/components/patterns/ai-concept-simplifier'
-import { AISummaryGenerator } from '@/components/patterns/ai-summary-generator'
-import { AIFloatingButton } from '@/components/patterns/ai-floating-button'
+import { ExerciseAIToolbar } from '@/components/patterns/exercise-ai-toolbar'
+import { AIComprehensionCheck } from '@/components/patterns/ai-comprehension-check'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
 import { trackExerciseCompleted, trackQcmCompleted } from '@/lib/services/analytics-service'
@@ -58,7 +55,6 @@ export function ActivityClient({
   const { completeExercise, completeQCM, isCompleted, getProgress } = useProgress(userId ?? undefined)
   const [completedInSession, setCompletedInSession] = React.useState(false)
   const [qcmFinished, setQcmFinished] = React.useState(false)
-  const [showAITools, setShowAITools] = React.useState(false)
 
   const activityCompleted = isCompleted(activityId) || completedInSession
   const previousProgress = getProgress(activityId)
@@ -103,11 +99,11 @@ export function ActivityClient({
     }
   }
 
-  // For QCM activities, show the player
+  // For QCM activities — AI remediation is built into QCMPlayer
   if (activityType === 'qcm' && quizData) {
     if (qcmFinished) {
       return (
-        <div className="text-center py-8">
+        <div className="py-8 text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-success/10">
             <CheckCircle2 className="h-8 w-8 text-success" aria-hidden="true" />
           </div>
@@ -115,10 +111,6 @@ export function ActivityClient({
           <p className="mt-2 text-muted-foreground">
             Utilisez les boutons de navigation pour continuer.
           </p>
-          <AIFloatingButton
-            context={exerciseContent ?? lessonContent}
-            topic={topicFromTags}
-          />
         </div>
       )
     }
@@ -142,59 +134,27 @@ export function ActivityClient({
           </div>
         ) : null}
         <QCMPlayer qcm={quizData} onComplete={handleQCMComplete} showExit={false} />
-        <AIFloatingButton
-          context={exerciseContent ?? lessonContent}
-          topic={topicFromTags}
-        />
       </div>
     )
   }
 
-  // For exercises, add AI tools + scan + completion
+  // For exercises — compact AI toolbar + scan
   if (activityType === 'exercise') {
     return (
       <>
         {children}
 
-        {/* AI Tools Section */}
+        {/* Integrated AI toolbar */}
         <Separator className="my-8" />
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-              <Sparkles className="h-4 w-4 text-primary" />
-              Outils IA
-            </h3>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowAITools(!showAITools)}
-              className="text-xs"
-            >
-              {showAITools ? 'Masquer' : 'Afficher tout'}
-            </Button>
-          </div>
-
-          {/* Hint system — always visible for exercises */}
-          <AIHintButton
-            activityId={activityId}
+        <div className="space-y-3">
+          <h3 className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+            <Sparkles className="h-4 w-4 text-primary" />
+            Outils IA
+          </h3>
+          <ExerciseAIToolbar
             exerciseContent={exerciseContent ?? ''}
+            topic={topicFromTags}
           />
-
-          {/* Solution explainer */}
-          <AISolutionExplainer
-            activityId={activityId}
-            exerciseContent={exerciseContent ?? ''}
-          />
-
-          {showAITools && (
-            <>
-              {/* Exercise generator */}
-              <AIExerciseGenerator
-                originalExercise={exerciseContent ?? ''}
-                topic={topicFromTags}
-              />
-            </>
-          )}
         </div>
 
         {/* Scan section */}
@@ -237,46 +197,20 @@ export function ActivityClient({
             </p>
           )}
         </div>
-
-        {/* Floating AI button */}
-        <AIFloatingButton
-          context={exerciseContent}
-          topic={topicFromTags}
-        />
       </>
     )
   }
 
-  // For lessons, show content + AI features for lessons
+  // For lessons — content + comprehension check at end
   return (
     <>
       {children}
 
-      {/* Lesson AI tools */}
+      {/* Comprehension check at end of lesson */}
       <Separator className="my-8" />
-      <div className="space-y-4">
-        <h3 className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-          <Sparkles className="h-4 w-4 text-primary" />
-          Outils IA pour cette leçon
-        </h3>
-
-        {/* Concept simplifier */}
-        <AIConceptSimplifier
-          concept={activityTitle ?? topicFromTags}
-          lessonContent={lessonContent}
-        />
-
-        {/* Summary generator */}
-        <AISummaryGenerator
-          lessonContent={lessonContent ?? ''}
-          title={activityTitle ?? 'Leçon'}
-        />
-      </div>
-
-      {/* Floating AI button */}
-      <AIFloatingButton
-        context={lessonContent}
-        topic={topicFromTags}
+      <AIComprehensionCheck
+        lessonContent={lessonContent ?? ''}
+        title={activityTitle ?? 'Leçon'}
       />
     </>
   )

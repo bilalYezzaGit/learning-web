@@ -3,23 +3,24 @@
 /**
  * QCM Player Component
  *
- * Reusable interactive QCM player with keyboard shortcuts.
- * Can be used in modules, series, or standalone pages.
+ * Interactive QCM player with keyboard shortcuts and integrated AI remediation.
  *
  * Features:
  * - Keyboard shortcuts (1-4 to select, Enter to validate, Space to continue)
  * - Immediate feedback after validation
+ * - AI remediation on wrong answers: explains WHY the chosen answer is wrong
+ * - Post-quiz remediation panel for low scores
  * - Progress tracking and score
- * - Optional save callback for authenticated users
  */
 
 import * as React from 'react'
-import { ArrowRight, Check, X } from 'lucide-react'
+import { ArrowRight, Check, X, Loader2, AlertTriangle, BookOpen } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
+import { remediateWrongAnswer, AIError, type RemediationResult } from '@/lib/services/ai-service'
 import type { CompiledQuiz } from '@/types/content'
 
 // =============================================================================
@@ -36,22 +37,140 @@ export interface QCMResult {
 }
 
 export interface QCMPlayerProps {
-  /** The compiled quiz data to play */
   qcm: CompiledQuiz
-  /** Called when QCM is finished with results */
   onComplete?: (result: QCMResult) => void
-  /** Called when user wants to exit */
   onExit?: () => void
-  /** Show exit button */
   showExit?: boolean
-  /** Custom class name */
   className?: string
 }
 
 type QCMState = 'answering' | 'validated' | 'finished'
 
 // =============================================================================
-// Component
+// Inline Remediation Component (shown when wrong answer)
+// =============================================================================
+
+function WrongAnswerRemediation({
+  questionText,
+  options,
+  chosenIndex,
+  correctIndex,
+}: {
+  questionText: string
+  options: string[]
+  chosenIndex: number
+  correctIndex: number
+}) {
+  const [remediation, setRemediation] = React.useState<RemediationResult | null>(null)
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
+
+  const handleRemediate = async () => {
+    setIsLoading(true)
+    setError(null)
+    try {
+      const result = await remediateWrongAnswer({
+        questionText,
+        options,
+        chosenIndex,
+        correctIndex,
+      })
+      setRemediation(result)
+    } catch (e) {
+      setError(e instanceof AIError ? e.message : 'Erreur de connexion')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  if (!remediation) {
+    return (
+      <button
+        onClick={handleRemediate}
+        disabled={isLoading}
+        className="mt-2 flex items-center gap-1.5 text-xs font-medium text-destructive/80 hover:text-destructive transition-colors disabled:opacity-50"
+      >
+        {isLoading ? (
+          <Loader2 className="h-3 w-3 animate-spin" />
+        ) : (
+          <AlertTriangle className="h-3 w-3" />
+        )}
+        {isLoading ? 'Analyse de ton erreur...' : 'Comprendre mon erreur'}
+        {error && <span className="text-destructive/60 ml-1">- réessayer</span>}
+      </button>
+    )
+  }
+
+  return (
+    <div className="mt-3 space-y-2 rounded-lg border border-destructive/20 bg-destructive/5 p-3 text-left">
+      <div>
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-destructive/70">
+          Ton erreur
+        </p>
+        <p className="mt-0.5 text-sm text-foreground/90">{remediation.whyWrong}</p>
+      </div>
+      <div>
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+          Piège probable
+        </p>
+        <p className="mt-0.5 text-sm text-foreground/80">{remediation.misconception}</p>
+      </div>
+      <div>
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-success">
+          La bonne réponse
+        </p>
+        <p className="mt-0.5 text-sm text-foreground/90">{remediation.whyCorrect}</p>
+      </div>
+      <div className="flex items-center gap-1.5 rounded bg-primary/10 px-2 py-1">
+        <BookOpen className="h-3 w-3 text-primary" />
+        <span className="text-xs font-medium text-primary">
+          A revoir : {remediation.conceptToReview}
+        </span>
+      </div>
+    </div>
+  )
+}
+
+// =============================================================================
+// Post-Quiz Remediation (shown when score < 70%)
+// =============================================================================
+
+function PostQuizRemediation({
+  score,
+  total,
+  percentage,
+}: {
+  score: number
+  total: number
+  percentage: number
+}) {
+  if (percentage >= 70) return null
+
+  const wrongCount = total - score
+
+  return (
+    <div className="mt-6 rounded-lg border border-amber-500/30 bg-amber-500/5 p-4 text-left">
+      <div className="flex items-start gap-3">
+        <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" />
+        <div>
+          <p className="text-sm font-semibold text-amber-700 dark:text-amber-400">
+            {wrongCount} erreur{wrongCount > 1 ? 's' : ''} sur {total} questions
+          </p>
+          <p className="mt-1 text-xs text-foreground/70">
+            Revois les explications de chaque question pour comprendre tes erreurs.
+            Utilise le bouton &laquo; Comprendre mon erreur &raquo; sur chaque mauvaise réponse.
+          </p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Il faut 70% pour valider. Tu as obtenu {percentage}%.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// =============================================================================
+// Main QCM Player
 // =============================================================================
 
 export function QCMPlayer({
@@ -110,18 +229,15 @@ export function QCMPlayer({
       if (state === 'finished') return
 
       if (state === 'answering' && currentQuestion) {
-        // Number keys to select option
         const num = parseInt(e.key)
         const optionCount = currentQuestion.options?.length ?? 0
         if (num >= 1 && num <= optionCount) {
           setSelectedOption(num - 1)
         }
-        // Enter to validate
         if (e.key === 'Enter' && selectedOption !== null) {
           handleValidate()
         }
       } else if (state === 'validated') {
-        // Space or Enter to continue
         if (e.key === ' ' || e.key === 'Enter') {
           e.preventDefault()
           handleNext()
@@ -134,7 +250,7 @@ export function QCMPlayer({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, selectedOption, currentIndex, currentQuestion])
 
-  // Finished state - show score
+  // Finished state - show score + remediation
   if (state === 'finished') {
     const finalScore = score
     const total = qcm.questions.length
@@ -166,11 +282,12 @@ export function QCMPlayer({
             <p className="mt-1 tabular-nums text-muted-foreground">
               {percentage}% de bonnes réponses
             </p>
-            {!isSuccess && (
-              <p className="mt-2 text-sm text-muted-foreground">
-                Il faut 70% pour valider ce QCM.
-              </p>
-            )}
+
+            <PostQuizRemediation
+              score={finalScore}
+              total={total}
+              percentage={percentage}
+            />
           </CardContent>
         </Card>
       </div>
@@ -179,8 +296,13 @@ export function QCMPlayer({
 
   if (!currentQuestion) return null
 
-  // Handle different question types
   const options = currentQuestion.options ?? []
+  const isWrongAnswer =
+    state === 'validated' &&
+    selectedOption !== null &&
+    selectedOption !== currentQuestion.correctIndex
+
+  const optionTexts = options.map((_, i) => `Option ${i + 1}`)
 
   return (
     <div className={cn('flex flex-col', className)}>
@@ -266,6 +388,16 @@ export function QCMPlayer({
               {currentQuestion.explication}
             </div>
           </div>
+        )}
+
+        {/* AI Wrong Answer Remediation — only when wrong */}
+        {isWrongAnswer && selectedOption !== null && (
+          <WrongAnswerRemediation
+            questionText={`Question ${currentIndex + 1}`}
+            options={optionTexts}
+            chosenIndex={selectedOption}
+            correctIndex={currentQuestion.correctIndex}
+          />
         )}
       </div>
 

@@ -23,6 +23,7 @@ import {
 } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
+import { InlineConceptHelp } from '@/components/content/inline-concept-help'
 
 interface LessonPartProps {
   children: React.ReactNode
@@ -36,6 +37,7 @@ interface LessonPartConfig {
   bgClass: string
   iconClass: string
   badgeClass: string
+  conceptType?: 'definition' | 'theorem' | 'property'
 }
 
 function LessonPart({
@@ -76,6 +78,14 @@ function LessonPart({
       <div className="prose prose-stone dark:prose-invert max-w-none px-5 pt-2 pb-5">
         {children}
       </div>
+      {config.conceptType && (
+        <div className="px-5 pb-3">
+          <InlineConceptHelp
+            conceptType={config.conceptType}
+            conceptTitle={title ?? config.defaultTitle}
+          />
+        </div>
+      )}
     </aside>
   )
 }
@@ -88,6 +98,7 @@ const definitionConfig: LessonPartConfig = {
     'bg-gradient-to-r from-indigo-50/80 to-indigo-50/20 dark:from-indigo-950/30 dark:to-indigo-950/5',
   iconClass: 'text-indigo-600 dark:text-indigo-400',
   badgeClass: 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/50 dark:text-indigo-400',
+  conceptType: 'definition',
 }
 
 const theoremConfig: LessonPartConfig = {
@@ -98,6 +109,7 @@ const theoremConfig: LessonPartConfig = {
     'bg-gradient-to-r from-violet-50/80 to-violet-50/20 dark:from-violet-950/30 dark:to-violet-950/5',
   iconClass: 'text-violet-600 dark:text-violet-400',
   badgeClass: 'bg-violet-100 text-violet-600 dark:bg-violet-900/50 dark:text-violet-400',
+  conceptType: 'theorem',
 }
 
 const propertyConfig: LessonPartConfig = {
@@ -108,6 +120,7 @@ const propertyConfig: LessonPartConfig = {
     'bg-gradient-to-r from-sky-50/80 to-sky-50/20 dark:from-sky-950/30 dark:to-sky-950/5',
   iconClass: 'text-sky-600 dark:text-sky-400',
   badgeClass: 'bg-sky-100 text-sky-600 dark:bg-sky-900/50 dark:text-sky-400',
+  conceptType: 'property',
 }
 
 const exampleConfig: LessonPartConfig = {

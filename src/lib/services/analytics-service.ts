@@ -52,31 +52,3 @@ export function trackScanUploaded(activityId: string, isCorrect: boolean) {
 export function trackParcoursSelected(parcours: string) {
   logEvent('parcours_selected', { parcours })
 }
-
-export function trackAIChatMessage(topic?: string) {
-  logEvent('ai_chat_message', { topic })
-}
-
-export function trackAIHintRequested(activityId: string, level: number) {
-  logEvent('ai_hint_requested', { activity_id: activityId, level })
-}
-
-export function trackAIExerciseGenerated(topic: string, difficulty: string) {
-  logEvent('ai_exercise_generated', { topic, difficulty })
-}
-
-export function trackAISolutionExplained(activityId: string) {
-  logEvent('ai_solution_explained', { activity_id: activityId })
-}
-
-export function trackAIConceptSimplified(concept: string) {
-  logEvent('ai_concept_simplified', { concept })
-}
-
-export function trackAISummaryGenerated(title: string) {
-  logEvent('ai_summary_generated', { title })
-}
-
-export function trackAIWeaknessAnalyzed(parcours: string) {
-  logEvent('ai_weakness_analyzed', { parcours })
-}

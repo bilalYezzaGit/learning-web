@@ -1,21 +1,15 @@
 /**
  * AI Service — Client-side
  *
- * Calls Next.js API routes for all AI features.
- * Each function maps to a specific API endpoint.
+ * Calls Next.js API routes for deeply-integrated AI features.
+ * Each function maps to a specific learning workflow.
  */
 
 import type {
-  ChatMessage,
-  ChatResponse,
   HintResponse,
   GenerateExerciseResponse,
   GeneratedDifficulty,
   ExplainResponse,
-  SimplifyResponse,
-  SummaryResponse,
-  WeaknessResponse,
-  ProgressEntry,
 } from '@/types/ai'
 
 // =============================================================================
@@ -45,46 +39,125 @@ async function fetchAI<T>(endpoint: string, body: unknown): Promise<T> {
 }
 
 // =============================================================================
-// Chat Tutor
+// QCM Wrong Answer Remediation
 // =============================================================================
 
-export async function chatWithTutor({
-  messages,
-  context,
-  topic,
+export interface RemediationResult {
+  whyWrong: string
+  misconception: string
+  whyCorrect: string
+  conceptToReview: string
+}
+
+export async function remediateWrongAnswer({
+  questionText,
+  options,
+  chosenIndex,
+  correctIndex,
+  existingExplanation,
 }: {
-  messages: ChatMessage[]
-  context?: string
-  topic?: string
-}): Promise<ChatResponse> {
-  return fetchAI<ChatResponse>('chat', { messages, context, topic })
+  questionText: string
+  options: string[]
+  chosenIndex: number
+  correctIndex: number
+  existingExplanation?: string
+}): Promise<RemediationResult> {
+  return fetchAI<RemediationResult>('remediate', {
+    questionText,
+    options,
+    chosenIndex,
+    correctIndex,
+    existingExplanation,
+  })
 }
 
 // =============================================================================
-// Hint System
+// Inline Concept Help (Definition/Theorem/Property)
+// =============================================================================
+
+export interface ConceptExplanation {
+  simpleVersion: string
+  intuition: string
+  quickExample: string
+}
+
+export async function explainConcept({
+  conceptType,
+  conceptTitle,
+  conceptContent,
+}: {
+  conceptType: 'definition' | 'theorem' | 'property'
+  conceptTitle: string
+  conceptContent: string
+}): Promise<ConceptExplanation> {
+  return fetchAI<ConceptExplanation>('explain-concept', {
+    conceptType,
+    conceptTitle,
+    conceptContent,
+  })
+}
+
+// =============================================================================
+// Lesson Comprehension Check
+// =============================================================================
+
+export interface ComprehensionQuestion {
+  question: string
+  answer: string
+  hint: string
+}
+
+export interface ComprehensionCheckResult {
+  questions: ComprehensionQuestion[]
+}
+
+export async function generateComprehensionCheck({
+  lessonContent,
+  title,
+}: {
+  lessonContent: string
+  title: string
+}): Promise<ComprehensionCheckResult> {
+  return fetchAI<ComprehensionCheckResult>('comprehension-check', {
+    lessonContent,
+    title,
+  })
+}
+
+// =============================================================================
+// Exercise: Progressive Hints
 // =============================================================================
 
 export async function getHint({
   exerciseContent,
   hintLevel,
   previousHints,
-  studentWork,
 }: {
   exerciseContent: string
   hintLevel: number
   previousHints?: string[]
-  studentWork?: string
 }): Promise<HintResponse> {
   return fetchAI<HintResponse>('hint', {
     exerciseContent,
     hintLevel,
     previousHints,
-    studentWork,
   })
 }
 
 // =============================================================================
-// Exercise Generator
+// Exercise: Step-by-step Solution
+// =============================================================================
+
+export async function explainSolution({
+  exerciseContent,
+}: {
+  exerciseContent: string
+}): Promise<ExplainResponse> {
+  return fetchAI<ExplainResponse>('explain', { exerciseContent })
+}
+
+// =============================================================================
+// Exercise: Generate Similar
 // =============================================================================
 
 export async function generateExercises({
@@ -103,79 +176,5 @@ export async function generateExercises({
     topic,
     difficulty,
     count,
-  })
-}
-
-// =============================================================================
-// Solution Explainer
-// =============================================================================
-
-export async function explainSolution({
-  exerciseContent,
-  studentAnswer,
-}: {
-  exerciseContent: string
-  studentAnswer?: string
-}): Promise<ExplainResponse> {
-  return fetchAI<ExplainResponse>('explain', {
-    exerciseContent,
-    studentAnswer,
-  })
-}
-
-// =============================================================================
-// Concept Simplifier
-// =============================================================================
-
-export async function simplifyConcept({
-  concept,
-  lessonContent,
-}: {
-  concept: string
-  lessonContent?: string
-}): Promise<SimplifyResponse> {
-  return fetchAI<SimplifyResponse>('simplify', {
-    concept,
-    lessonContent,
-  })
-}
-
-// =============================================================================
-// Summary Generator
-// =============================================================================
-
-export async function generateSummary({
-  lessonContent,
-  title,
-  includeFormulas,
-  includeExamples,
-}: {
-  lessonContent: string
-  title: string
-  includeFormulas?: boolean
-  includeExamples?: boolean
-}): Promise<SummaryResponse> {
-  return fetchAI<SummaryResponse>('summary', {
-    lessonContent,
-    title,
-    includeFormulas,
-    includeExamples,
-  })
-}
-
-// =============================================================================
-// Weakness Analyzer
-// =============================================================================
-
-export async function analyzeWeaknesses({
-  progressData,
-  parcours,
-}: {
-  progressData: ProgressEntry[]
-  parcours: string
-}): Promise<WeaknessResponse> {
-  return fetchAI<WeaknessResponse>('analyze-weakness', {
-    progressData,
-    parcours,
   })
 }

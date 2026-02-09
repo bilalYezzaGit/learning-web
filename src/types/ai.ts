@@ -1,35 +1,14 @@
 /**
  * AI Feature Types
  *
- * Types for all AI-powered features:
- * - Math Tutor Chat
- * - Progressive Hints
- * - Exercise Generator
- * - Solution Explainer
- * - Concept Simplifier
- * - Summary Generator
- * - Weakness Analyzer
+ * Types for deeply integrated AI features:
+ * - Progressive Hints (exercise)
+ * - Exercise Generator (exercise)
+ * - Solution Explainer (exercise)
+ * - QCM Remediation (qcm-player)
+ * - Inline Concept Help (lesson parts)
+ * - Comprehension Check (lesson end)
  */
-
-// =============================================================================
-// Chat Tutor
-// =============================================================================
-
-export interface ChatMessage {
-  role: 'user' | 'assistant'
-  content: string
-  timestamp: number
-}
-
-export interface ChatRequest {
-  messages: ChatMessage[]
-  context?: string
-  topic?: string
-}
-
-export interface ChatResponse {
-  reply: string
-}
 
 // =============================================================================
 // Hint System
@@ -91,75 +70,4 @@ export interface ExplainResponse {
   steps: ExplainStep[]
   keyConceptsUsed: string[]
   commonMistakes: string[]
-}
-
-// =============================================================================
-// Concept Simplifier
-// =============================================================================
-
-export interface SimplifyRequest {
-  concept: string
-  lessonContent?: string
-}
-
-export interface SimplifyResponse {
-  simpleExplanation: string
-  analogy: string
-  realWorldExample: string
-  visualDescription: string
-  keyPoints: string[]
-}
-
-// =============================================================================
-// Summary Generator
-// =============================================================================
-
-export interface SummaryRequest {
-  lessonContent: string
-  title: string
-  includeFormulas?: boolean
-  includeExamples?: boolean
-}
-
-export interface SummaryResponse {
-  summary: string
-  keyFormulas: string[]
-  keyDefinitions: Array<{ term: string; definition: string }>
-  mnemonics: string[]
-  reviewQuestions: string[]
-}
-
-// =============================================================================
-// Weakness Analyzer
-// =============================================================================
-
-export interface ProgressEntry {
-  activityId: string
-  activityType: 'exercise' | 'qcm' | 'lesson'
-  status: string
-  score?: number
-  total?: number
-  attempts: number
-  tags?: string[]
-  title?: string
-}
-
-export interface WeaknessRequest {
-  progressData: ProgressEntry[]
-  parcours: string
-}
-
-export interface WeaknessArea {
-  topic: string
-  severity: 'faible' | 'moyen' | 'critique'
-  description: string
-  suggestedActions: string[]
-}
-
-export interface WeaknessResponse {
-  strengths: string[]
-  weaknesses: WeaknessArea[]
-  overallAnalysis: string
-  studyPlan: string[]
-  encouragement: string
 }

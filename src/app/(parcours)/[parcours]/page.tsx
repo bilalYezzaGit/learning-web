@@ -5,7 +5,7 @@
  */
 
 import Link from 'next/link'
-import { ArrowRight, BookOpen, Brain, Sparkles } from 'lucide-react'
+import { ArrowRight, BookOpen, Brain } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -50,7 +50,7 @@ export default async function ParcoursDashboardPage({ params }: PageProps) {
       </Card>
 
       {/* Quick Actions */}
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2">
         <Card className="transition-colors hover:bg-muted/50">
           <Link href={`/${parcours}/apprendre`} className="block">
             <CardHeader>
@@ -83,21 +83,6 @@ export default async function ParcoursDashboardPage({ params }: PageProps) {
           </Link>
         </Card>
 
-        <Card className="transition-colors hover:bg-muted/50 border-primary/20">
-          <Link href={`/${parcours}/ai`} className="block">
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                  <Sparkles className="h-5 w-5 text-primary" aria-hidden="true" />
-                </div>
-                <div>
-                  <CardTitle className="text-base">Assistant IA</CardTitle>
-                  <CardDescription>Tuteur, analyse et outils IA</CardDescription>
-                </div>
-              </div>
-            </CardHeader>
-          </Link>
-        </Card>
       </div>
     </div>
   )
