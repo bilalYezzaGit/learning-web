@@ -58,7 +58,7 @@ export function NavApprendre({ parcours, modules }: NavApprendreProps) {
                     asChild
                     isActive={pathname.startsWith(moduleUrl)}
                   >
-                    <Link href={moduleUrl}>
+                    <Link href={moduleUrl} title={mod.title}>
                       <span>{mod.title}</span>
                     </Link>
                   </SidebarMenuSubButton>
