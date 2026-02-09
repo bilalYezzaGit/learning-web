@@ -3,8 +3,14 @@
 /**
  * Activity Client Wrapper
  *
- * Handles progress tracking and exercise completion.
+ * Handles progress tracking, exercise completion, and AI features.
  * Wraps server-rendered content with client-side interactivity.
+ *
+ * AI features integrated:
+ * - SmartHints: Progressive hints before revealing solution
+ * - SolutionDecomposer: Step-by-step solution breakdown
+ * - ExerciseGenerator: Generate similar practice problems
+ * - ScanUpload: Photo scan analysis (existing)
  */
 
 import * as React from 'react'
@@ -14,6 +20,9 @@ import { CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { QCMPlayer, type QCMResult } from '@/components/patterns/qcm-player'
 import { ScanUpload } from '@/components/patterns/scan-upload'
+import { SmartHints } from '@/components/ai/smart-hints'
+import { SolutionDecomposer } from '@/components/ai/solution-decomposer'
+import { ExerciseGenerator } from '@/components/ai/exercise-generator'
 import { Separator } from '@/components/ui/separator'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
@@ -27,6 +36,10 @@ interface ActivityClientProps {
   parcours: string
   quizData: CompiledQuiz | null
   exerciseContent?: string
+  /** Tags from atom metadata for exercise generator */
+  exerciseTags?: string[]
+  /** Difficulty from atom metadata for exercise generator */
+  exerciseDifficulty?: number
   children: React.ReactNode
 }
 
@@ -38,6 +51,8 @@ export function ActivityClient({
   parcours,
   quizData,
   exerciseContent,
+  exerciseTags,
+  exerciseDifficulty,
   children,
 }: ActivityClientProps) {
   const { userId } = useAuth()
@@ -125,11 +140,27 @@ export function ActivityClient({
     )
   }
 
-  // For exercises, add scan + completion button
+  // For exercises, add AI tools + scan + completion
   if (activityType === 'exercise') {
     return (
       <>
         {children}
+
+        {/* AI Smart Hints — before revealing solution */}
+        {exerciseContent && (
+          <SmartHints
+            activityId={activityId}
+            exerciseContent={exerciseContent}
+          />
+        )}
+
+        {/* AI Solution Decomposer — step-by-step breakdown */}
+        {exerciseContent && (
+          <SolutionDecomposer
+            activityId={activityId}
+            exerciseContent={exerciseContent}
+          />
+        )}
 
         {/* Scan section */}
         <Separator className="my-8" />
@@ -146,10 +177,21 @@ export function ActivityClient({
         {/* Completion section */}
         <div className="mt-8 flex flex-col items-center justify-center border-t pt-6">
           {activityCompleted ? (
-            <div className="flex items-center gap-2 text-success">
-              <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
-              <span className="font-medium">Exercice terminé</span>
-            </div>
+            <>
+              <div className="flex items-center gap-2 text-success">
+                <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
+                <span className="font-medium">Exercice terminé</span>
+              </div>
+
+              {/* AI Exercise Generator — only after completion */}
+              {exerciseContent && (
+                <ExerciseGenerator
+                  originalExercise={exerciseContent}
+                  tags={exerciseTags ?? []}
+                  difficulty={exerciseDifficulty ?? 1}
+                />
+              )}
+            </>
           ) : (
             <>
               <p className="mb-3 text-sm text-muted-foreground">

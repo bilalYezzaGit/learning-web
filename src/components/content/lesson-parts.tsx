@@ -23,6 +23,7 @@ import {
 } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
+import { SimplifiableBlock } from '@/components/ai/simplifiable-block'
 
 interface LessonPartProps {
   children: React.ReactNode
@@ -36,6 +37,8 @@ interface LessonPartConfig {
   bgClass: string
   iconClass: string
   badgeClass: string
+  /** If set, enables the AI "Explique-moi autrement" feature */
+  simplifiableType?: 'definition' | 'theorem' | 'property' | 'attention'
 }
 
 function LessonPart({
@@ -44,6 +47,12 @@ function LessonPart({
   config,
 }: LessonPartProps & { config: LessonPartConfig }) {
   const Icon = config.icon
+
+  const contentBlock = (
+    <div className="prose prose-stone dark:prose-invert max-w-none px-5 pt-2 pb-5">
+      {children}
+    </div>
+  )
 
   return (
     <aside
@@ -73,9 +82,17 @@ function LessonPart({
           </span>
         </div>
       </div>
-      <div className="prose prose-stone dark:prose-invert max-w-none px-5 pt-2 pb-5">
-        {children}
-      </div>
+      {config.simplifiableType ? (
+        <div className="px-5 pt-2 pb-5">
+          <SimplifiableBlock conceptType={config.simplifiableType}>
+            <div className="prose prose-stone dark:prose-invert max-w-none">
+              {children}
+            </div>
+          </SimplifiableBlock>
+        </div>
+      ) : (
+        contentBlock
+      )}
     </aside>
   )
 }
@@ -88,6 +105,7 @@ const definitionConfig: LessonPartConfig = {
     'bg-gradient-to-r from-indigo-50/80 to-indigo-50/20 dark:from-indigo-950/30 dark:to-indigo-950/5',
   iconClass: 'text-indigo-600 dark:text-indigo-400',
   badgeClass: 'bg-indigo-100 text-indigo-600 dark:bg-indigo-900/50 dark:text-indigo-400',
+  simplifiableType: 'definition',
 }
 
 const theoremConfig: LessonPartConfig = {
@@ -98,6 +116,7 @@ const theoremConfig: LessonPartConfig = {
     'bg-gradient-to-r from-violet-50/80 to-violet-50/20 dark:from-violet-950/30 dark:to-violet-950/5',
   iconClass: 'text-violet-600 dark:text-violet-400',
   badgeClass: 'bg-violet-100 text-violet-600 dark:bg-violet-900/50 dark:text-violet-400',
+  simplifiableType: 'theorem',
 }
 
 const propertyConfig: LessonPartConfig = {
@@ -108,6 +127,7 @@ const propertyConfig: LessonPartConfig = {
     'bg-gradient-to-r from-sky-50/80 to-sky-50/20 dark:from-sky-950/30 dark:to-sky-950/5',
   iconClass: 'text-sky-600 dark:text-sky-400',
   badgeClass: 'bg-sky-100 text-sky-600 dark:bg-sky-900/50 dark:text-sky-400',
+  simplifiableType: 'property',
 }
 
 const exampleConfig: LessonPartConfig = {
@@ -139,6 +159,7 @@ const attentionConfig: LessonPartConfig = {
     'bg-gradient-to-r from-rose-50/80 to-rose-50/20 dark:from-rose-950/30 dark:to-rose-950/5',
   iconClass: 'text-rose-600 dark:text-rose-400',
   badgeClass: 'bg-rose-100 text-rose-600 dark:bg-rose-900/50 dark:text-rose-400',
+  simplifiableType: 'attention',
 }
 
 export function Definition(props: LessonPartProps) {

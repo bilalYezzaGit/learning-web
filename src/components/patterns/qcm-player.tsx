@@ -19,6 +19,7 @@ import { ArrowRight, Check, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
+import { QcmExplainer } from '@/components/ai/qcm-explainer'
 import { cn } from '@/lib/utils'
 import type { CompiledQuiz } from '@/types/content'
 
@@ -266,6 +267,16 @@ export function QCMPlayer({
               {currentQuestion.explication}
             </div>
           </div>
+        )}
+
+        {/* AI Wrong Answer Explainer — only shown after wrong answer */}
+        {state === 'validated' && selectedOption !== null && currentQuestion.rawEnonce && currentQuestion.rawOptions && (
+          <QcmExplainer
+            questionText={currentQuestion.rawEnonce}
+            options={currentQuestion.rawOptions}
+            selectedOptionIndex={selectedOption}
+            correctOptionIndex={currentQuestion.correctIndex}
+          />
         )}
       </div>
 

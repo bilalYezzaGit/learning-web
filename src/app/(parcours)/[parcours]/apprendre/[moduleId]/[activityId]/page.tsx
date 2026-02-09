@@ -44,6 +44,8 @@ export default async function ActivityPage({ params }: PageProps) {
   let content: React.ReactNode = null
   let quizData = null
   let exerciseContent: string | undefined
+  let exerciseTags: string[] | undefined
+  let exerciseDifficulty: number | undefined
 
   if (currentActivity.type === 'qcm') {
     // Quiz group: compile all QCM atoms
@@ -55,6 +57,8 @@ export default async function ActivityPage({ params }: PageProps) {
     content = await compileMdx(atom.content)
     if (currentActivity.type === 'exercise') {
       exerciseContent = atom.content
+      exerciseTags = atom.tags
+      exerciseDifficulty = atom.difficulty
     }
   }
 
@@ -73,6 +77,8 @@ export default async function ActivityPage({ params }: PageProps) {
             parcours={parcours}
             quizData={quizData}
             exerciseContent={exerciseContent}
+            exerciseTags={exerciseTags}
+            exerciseDifficulty={exerciseDifficulty}
           >
             {content && (
               <article className="prose prose-stone dark:prose-invert max-w-none">

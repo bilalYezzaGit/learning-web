@@ -296,6 +296,8 @@ export async function compileQcmContent(atom: Atom): Promise<CompiledQCMQuestion
     correctIndex: atom.correctOption ?? 0,
     explication,
     timeMinutes: atom.timeMinutes,
+    rawEnonce: questionText,
+    rawOptions: optionTexts,
   }
 }
 

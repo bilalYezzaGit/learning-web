@@ -136,6 +136,10 @@ export interface CompiledQCMQuestion {
   correctIndex: number
   explication?: React.ReactNode
   timeMinutes: number
+  /** Raw question text for AI features (QCM explainer) */
+  rawEnonce?: string
+  /** Raw option texts for AI features */
+  rawOptions?: string[]
 }
 
 /** Compiled quiz group for QCMPlayer */

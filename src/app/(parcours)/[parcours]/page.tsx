@@ -2,6 +2,7 @@
  * Parcours Dashboard Page
  *
  * Learner dashboard for a specific parcours.
+ * Includes AI Performance Coach for personalized insights.
  */
 
 import Link from 'next/link'
@@ -10,6 +11,7 @@ import { ArrowRight, BookOpen, Brain } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { getParcoursConfig } from '@/lib/parcours'
+import { DashboardCoach } from './dashboard-coach'
 
 interface PageProps {
   params: Promise<{ parcours: string }>
@@ -48,6 +50,9 @@ export default async function ParcoursDashboardPage({ params }: PageProps) {
           </div>
         </CardContent>
       </Card>
+
+      {/* AI Performance Coach */}
+      <DashboardCoach parcours={parcours} />
 
       {/* Quick Actions */}
       <div className="grid gap-4 sm:grid-cols-2">
