@@ -321,7 +321,7 @@ function ActivityItem({
       <div className="flex min-w-0 flex-1 flex-col gap-1 pt-0.5">
         <span
           className={cn(
-            'text-[13px] leading-snug',
+            'text-xs leading-snug',
             isCurrent
               ? 'font-medium text-primary'
               : activityProgress?.isCompleted
@@ -332,14 +332,14 @@ function ActivityItem({
           {activity.title}
         </span>
         <div className="flex items-center gap-2">
-          <span className="flex items-center gap-1 text-[11px] text-muted-foreground/70">
+          <span className="flex items-center gap-1 text-xs text-muted-foreground/70">
             <TypeIcon className="h-3 w-3" aria-hidden="true" />
             {TYPE_LABELS[activity.type]}
           </span>
           {activity.timeMinutes > 0 && (
             <>
-              <span className="text-[10px] text-muted-foreground/30" aria-hidden="true">|</span>
-              <span className="text-[11px] text-muted-foreground/50">
+              <span className="text-xs text-muted-foreground/30" aria-hidden="true">|</span>
+              <span className="text-xs text-muted-foreground/50">
                 {formatDuration(activity.timeMinutes)}
               </span>
             </>
@@ -349,10 +349,10 @@ function ActivityItem({
             activityProgress?.score !== undefined &&
             activityProgress?.total !== undefined && (
               <>
-                <span className="text-[10px] text-muted-foreground/30" aria-hidden="true">|</span>
+                <span className="text-xs text-muted-foreground/30" aria-hidden="true">|</span>
                 <span
                   className={cn(
-                    'text-[11px] font-medium tabular-nums',
+                    'text-xs font-medium tabular-nums',
                     activityProgress.isSuccess
                       ? 'text-success'
                       : 'text-warning'
@@ -392,12 +392,12 @@ function SectionAccordion({
       <AccordionTrigger className="px-4 py-2.5 hover:bg-muted/50 hover:no-underline [&>svg]:h-3.5 [&>svg]:w-3.5 [&>svg]:text-muted-foreground/50">
         <div className="flex flex-1 flex-col gap-1.5 pr-2">
           <div className="flex items-center justify-between">
-            <span className="text-[13px] font-semibold text-foreground">
+            <span className="text-xs font-semibold text-foreground">
               {section.label}
             </span>
             <span
               className={cn(
-                'text-[11px] tabular-nums',
+                'text-xs tabular-nums',
                 allDone
                   ? 'font-medium text-success'
                   : 'text-muted-foreground/60'
@@ -496,7 +496,7 @@ function TimelineHeader({
             <h2 className="text-balance text-sm font-semibold leading-snug text-foreground">
               {data.title}
             </h2>
-            <div className="mt-1.5 flex items-center gap-3 text-[11px] text-muted-foreground/70">
+            <div className="mt-1.5 flex items-center gap-3 text-xs text-muted-foreground/70">
               {hasDifficulty && (
                 <span className="flex items-center gap-1">
                   <Gauge className="h-3 w-3" aria-hidden="true" />
@@ -537,7 +537,7 @@ function TimelineHeader({
           />
           <span
             className={cn(
-              'text-[11px] font-medium tabular-nums',
+              'text-xs font-medium tabular-nums',
               allDone ? 'text-success' : 'text-muted-foreground/60'
             )}
           >
@@ -549,7 +549,7 @@ function TimelineHeader({
         {!allDone && (
           <Button
             size="sm"
-            className="w-full gap-2 text-[13px]"
+            className="w-full gap-2 text-xs"
             onClick={onContinue}
           >
             Continuer
