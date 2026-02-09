@@ -620,9 +620,8 @@ export function CourseTimeline({
     return Math.round((completed / totalActivities) * 100)
   }, [data.activities, progress])
 
-  // Default open section (current activity's section or first)
-  // eslint-disable-next-line react-hooks/preserve-manual-memoization
-  const defaultOpenSections = useMemo((): string[] => {
+  // Controlled accordion: track which sections are open
+  const [openSections, setOpenSections] = useState<string[]>(() => {
     if (!currentActivityId) {
       const firstId = sections[0]?.id
       return firstId ? [firstId] : []
@@ -634,7 +633,20 @@ export function CourseTimeline({
     }
     const firstId = sections[0]?.id
     return firstId ? [firstId] : []
-  }, [sections, currentActivityId])
+  })
+
+  // When current activity changes, ensure its section is open
+  useEffect(() => {
+    if (!currentActivityId) return
+    for (const section of sections) {
+      if (section.activities.some((a) => a.id === currentActivityId)) {
+        setOpenSections((prev) =>
+          prev.includes(section.id) ? prev : [...prev, section.id]
+        )
+        return
+      }
+    }
+  }, [currentActivityId, sections])
 
   // Auto-scroll to current activity
   useEffect(() => {
@@ -678,7 +690,8 @@ export function CourseTimeline({
         {hasSections ? (
           <Accordion
             type="multiple"
-            defaultValue={defaultOpenSections}
+            value={openSections}
+            onValueChange={setOpenSections}
             className="w-full"
           >
             {sections.map((section) => (
