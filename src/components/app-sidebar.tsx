@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { BookOpen, Brain, Home } from "lucide-react"
+import { BookOpen, Brain, Home, Sparkles } from "lucide-react"
 
 import { NavApprendre, type SidebarModule } from "@/components/nav-apprendre"
 import { NavUser } from "@/components/nav-user"
@@ -33,6 +33,7 @@ export function AppSidebar({ parcours, modules = [], ...props }: AppSidebarProps
   const base = parcours ? `/${parcours}` : ''
   const dashboardUrl = base || '/'
   const reviserUrl = `${base}/reviser`
+  const aiUrl = `${base}/ai`
 
   return (
     <Sidebar variant="inset" collapsible="icon" {...props}>
@@ -80,6 +81,17 @@ export function AppSidebar({ parcours, modules = [], ...props }: AppSidebarProps
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
+
+              {parcours && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={pathname.startsWith(aiUrl)}>
+                    <Link href={aiUrl}>
+                      <Sparkles className="h-4 w-4" aria-hidden="true" />
+                      <span>Assistant IA</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
