@@ -106,7 +106,7 @@ export function ReviserStats() {
       }
     })
 
-    const avgScore = qcmCount > 0 ? Math.round(totalPercentage / qcmCount) : 0
+    const avgScore = qcmCount > 0 ? Math.min(Math.round(totalPercentage / qcmCount), 100) : 0
 
     return { completed, avgScore, exercisesDone }
   }, [progress])

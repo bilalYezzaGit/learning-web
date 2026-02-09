@@ -8,6 +8,7 @@
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail as firebaseSendPasswordResetEmail,
   signOut as firebaseSignOut,
   onAuthStateChanged,
   type User,
@@ -56,6 +57,14 @@ export async function createAccount(
   const auth = getAuthInstance()
   const result = await createUserWithEmailAndPassword(auth, email, password)
   return result.user
+}
+
+/**
+ * Send password reset email
+ */
+export async function resetPassword(email: string): Promise<void> {
+  const auth = getAuthInstance()
+  await firebaseSendPasswordResetEmail(auth, email)
 }
 
 /**

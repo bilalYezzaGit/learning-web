@@ -136,7 +136,7 @@ export function PwaInstallPrompt() {
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8 shrink-0"
+            className="h-10 w-10 shrink-0"
             onClick={handleDismiss}
             aria-label="Fermer le bandeau d'installation"
           >

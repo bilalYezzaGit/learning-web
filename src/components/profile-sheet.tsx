@@ -229,7 +229,7 @@ function StatsTab({ userId }: { userId: string }) {
       }
     })
 
-    const avgScore = qcmWithScore > 0 ? Math.round(totalPercentage / qcmWithScore) : 0
+    const avgScore = qcmWithScore > 0 ? Math.min(Math.round(totalPercentage / qcmWithScore), 100) : 0
     const successRate = completed > 0 ? Math.round((success / completed) * 100) : 0
 
     return { completed, success, qcmDone, qcmSuccess, exercisesDone, avgScore, successRate }

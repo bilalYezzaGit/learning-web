@@ -95,16 +95,21 @@ export async function analyzeScan({
   imageFile,
   activityId,
   exerciseContent,
+  idToken,
 }: {
   imageFile: File
   activityId: string
   exerciseContent: string
+  idToken: string
 }): Promise<ScanResult> {
   const base64Image = await compressImage(imageFile)
 
   const response = await fetch('/api/scan', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${idToken}`,
+    },
     body: JSON.stringify({
       imageBase64: base64Image,
       activityId,

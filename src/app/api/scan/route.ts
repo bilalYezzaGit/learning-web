@@ -11,9 +11,32 @@
  */
 
 import { NextResponse } from 'next/server'
+import { headers } from 'next/headers'
 import Anthropic from '@anthropic-ai/sdk'
 
 const anthropic = new Anthropic()
+
+// Simple in-memory rate limiter: max 10 requests per IP per minute
+const rateMap = new Map<string, { count: number; resetAt: number }>()
+const RATE_LIMIT = 10
+const RATE_WINDOW_MS = 60_000
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now()
+  const entry = rateMap.get(ip)
+
+  if (!entry || now > entry.resetAt) {
+    rateMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS })
+    return true
+  }
+
+  if (entry.count >= RATE_LIMIT) {
+    return false
+  }
+
+  entry.count++
+  return true
+}
 
 const SYSTEM_PROMPT = `Tu es un professeur de mathématiques bienveillant et rigoureux pour des lycéens tunisiens.
 
@@ -77,6 +100,22 @@ interface ScanRequest {
 
 export async function POST(request: Request) {
   try {
+    // Rate limiting
+    const headersList = await headers()
+    const ip = headersList.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+    if (!checkRateLimit(ip)) {
+      return NextResponse.json(
+        { error: 'Trop de requêtes. Réessayez dans une minute.' },
+        { status: 429 }
+      )
+    }
+
+    // Auth check: require Firebase ID token (presence check for MVP)
+    const authHeader = headersList.get('authorization')
+    if (!authHeader?.startsWith('Bearer ') || authHeader.length < 100) {
+      return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    }
+
     const body = (await request.json()) as ScanRequest
 
     if (!body.imageBase64 || !body.activityId || !body.exerciseContent) {

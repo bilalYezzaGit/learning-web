@@ -15,6 +15,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { analyzeScan, type ScanResult, ScanError } from '@/lib/services/scan-service'
 import { trackScanUploaded } from '@/lib/services/analytics-service'
+import { useAuth } from '@/lib/context'
 
 interface ScanUploadProps {
   activityId: string
@@ -26,6 +27,7 @@ interface ScanUploadProps {
 type ScanState = 'idle' | 'uploading' | 'analyzing' | 'success' | 'error'
 
 export function ScanUpload({ activityId, exerciseContent, onResult, className }: ScanUploadProps) {
+  const { user } = useAuth()
   const [state, setState] = React.useState<ScanState>('idle')
   const [error, setError] = React.useState<string | null>(null)
   const [result, setResult] = React.useState<ScanResult | null>(null)
@@ -49,10 +51,18 @@ export function ScanUpload({ activityId, exerciseContent, onResult, className }:
     setError(null)
 
     try {
+      const idToken = await user?.getIdToken()
+      if (!idToken) {
+        setError('Vous devez être connecté pour utiliser cette fonctionnalité')
+        setState('error')
+        return
+      }
+
       const scanResult = await analyzeScan({
         imageFile: file,
         activityId,
         exerciseContent,
+        idToken,
       })
 
       setResult(scanResult)

@@ -8,6 +8,7 @@ export {
   subscribeToAuthState,
   signInWithEmail,
   createAccount,
+  resetPassword,
   signOut,
   type AuthStateListener,
 } from './auth-service'
