@@ -17,6 +17,7 @@ import Anthropic from '@anthropic-ai/sdk'
 const anthropic = new Anthropic()
 
 // Simple in-memory rate limiter: max 10 requests per IP per minute
+// Note: in-memory state resets per serverless invocation — best-effort for MVP
 const rateMap = new Map<string, { count: number; resetAt: number }>()
 const RATE_LIMIT = 10
 const RATE_WINDOW_MS = 60_000
@@ -110,9 +111,11 @@ export async function POST(request: Request) {
       )
     }
 
-    // Auth check: require Firebase ID token (presence check for MVP)
+    // Auth check: require Firebase ID token
+    // TODO: validate JWT with firebase-admin for proper verification
     const authHeader = headersList.get('authorization')
-    if (!authHeader?.startsWith('Bearer ') || authHeader.length < 100) {
+    const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null
+    if (!token || token.split('.').length !== 3) {
       return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
     }
 

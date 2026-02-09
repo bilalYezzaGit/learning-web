@@ -109,10 +109,17 @@ export function useProgress(userId: string | undefined) {
   // Reset progress mutation
   const resetProgressMutation = useMutation({
     mutationFn: async (activityId: string) => {
-      if (!serviceRef.current) {
-        throw new Error('Progress service not initialized')
+      if (serviceRef.current) {
+        await serviceRef.current.resetProgress(activityId)
+      } else {
+        // Anonymous: remove from localStorage
+        const map = getLocalProgress()
+        map.delete(activityId)
+        try {
+          localStorage.setItem('learning-progress', JSON.stringify(Array.from(map.entries())))
+        } catch { /* localStorage unavailable */ }
+        setProgress(new Map(map))
       }
-      await serviceRef.current.resetProgress(activityId)
     },
   })
 

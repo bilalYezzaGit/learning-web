@@ -27,13 +27,13 @@ export function ModuleProgressCard({
   parcours,
 }: ModuleProgressCardProps) {
   const { userId } = useAuth()
-  const { isCompleted } = useProgress(userId ?? undefined)
+  const { progress } = useProgress(userId ?? undefined)
 
   const progressPercent = React.useMemo(() => {
     if (activityIds.length === 0) return 0
-    const done = activityIds.filter((id) => isCompleted(id)).length
+    const done = activityIds.filter((id) => progress.has(id)).length
     return Math.round((done / activityIds.length) * 100)
-  }, [activityIds, isCompleted])
+  }, [activityIds, progress])
 
   return (
     <Link href={`/${parcours}/apprendre/${moduleId}`} className="group">

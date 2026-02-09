@@ -2,7 +2,7 @@
  * Local Progress Service
  *
  * localStorage-based progress storage for anonymous users.
- * Data is migrated to Firestore when user signs in.
+ * Note: local progress is not migrated to Firestore on sign-in (MVP).
  */
 
 import type { ActivityProgress, ProgressStatus } from '@/types'
@@ -61,7 +61,7 @@ export function setLocalQCMComplete(params: {
     activityId: params.activityId,
     activityType: 'qcm',
     status,
-    score: Math.round((params.score / params.total) * 100),
+    score: params.score,
     total: params.total,
     attempts: 1,
     lastDoneAt: new Date().toISOString(),
