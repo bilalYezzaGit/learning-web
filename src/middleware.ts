@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { VALID_PARCOURS_SLUGS } from '@/lib/parcours/config'
+import { ACTIVE_PARCOURS_SLUGS } from '@/lib/parcours/config'
 
 /**
- * Valid parcours slugs — imported from config (only available parcours)
+ * Active parcours slugs — only these have working routes
  */
-const VALID_PARCOURS = VALID_PARCOURS_SLUGS
+const VALID_PARCOURS = ACTIVE_PARCOURS_SLUGS
 
 /**
  * Global routes that don't require parcours prefix

@@ -21,7 +21,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { LandingHeader } from '@/components/landing-header'
-import { getAllParcours } from '@/lib/parcours'
+import { getVisibleParcours, DEFAULT_PARCOURS_SLUG } from '@/lib/parcours'
 
 const MATH_FORMULAS = [
   { text: 'f(x) = ax + b', className: 'left-[8%] top-[12%] -rotate-12 text-xl md:text-2xl' },
@@ -64,9 +64,9 @@ const STATS = [
 ]
 
 export default function LandingPage() {
-  const allParcours = getAllParcours()
-  const activeParcours = allParcours.find((p) => p.available)
-  const comingSoonParcours = allParcours.filter((p) => !p.available)
+  const visibleParcours = getVisibleParcours()
+  const activeParcours = visibleParcours.find((p) => p.active)
+  const comingSoonParcours = visibleParcours.filter((p) => !p.active)
 
   return (
     <div className="flex min-h-svh flex-col">
@@ -99,7 +99,7 @@ export default function LandingPage() {
             className="mb-8 border-primary/20 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary"
           >
             <GraduationCap className="mr-1.5 h-3.5 w-3.5" aria-hidden="true" />
-            Parcours 1ère TC disponible
+            {activeParcours ? `Parcours ${activeParcours.label} disponible` : 'Bientot disponible'}
           </Badge>
 
           <h1 className="mx-auto max-w-3xl text-balance font-serif text-4xl font-bold leading-[1.15] tracking-tight md:text-5xl lg:text-6xl">
@@ -115,8 +115,8 @@ export default function LandingPage() {
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <Button size="lg" className="gap-2 px-6 text-base" asChild>
-              <Link href="/1ere-tc/apprendre">
-                Explorer le parcours 1ère TC
+              <Link href={`/${DEFAULT_PARCOURS_SLUG}/apprendre`}>
+                {activeParcours ? `Explorer le parcours ${activeParcours.label}` : 'Explorer les cours'}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>
@@ -319,7 +319,7 @@ export default function LandingPage() {
               className="relative gap-2 px-6 text-base"
               asChild
             >
-              <Link href="/1ere-tc/apprendre">
+              <Link href={`/${DEFAULT_PARCOURS_SLUG}/apprendre`}>
                 Commence le premier chapitre
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
@@ -355,11 +355,11 @@ export default function LandingPage() {
             <div className="space-y-3">
               <p className="text-sm font-semibold text-foreground">Navigation</p>
               <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-                <Link href="/1ere-tc/apprendre" className="transition-colors hover:text-foreground">
-                  Parcours 1ère TC
+                <Link href={`/${DEFAULT_PARCOURS_SLUG}/apprendre`} className="transition-colors hover:text-foreground">
+                  {activeParcours ? `Parcours ${activeParcours.label}` : 'Parcours'}
                 </Link>
-                <Link href="/1ere-tc/reviser" className="transition-colors hover:text-foreground">
-                  Séries de révision
+                <Link href={`/${DEFAULT_PARCOURS_SLUG}/reviser`} className="transition-colors hover:text-foreground">
+                  Series de revision
                 </Link>
                 <Link href="/signup" className="transition-colors hover:text-foreground">
                   Créer un compte

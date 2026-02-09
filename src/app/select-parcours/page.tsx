@@ -13,14 +13,14 @@ import { Button } from '@/components/ui/button'
 import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { InteractiveCard } from '@/components/ui/interactive-card'
 import { useAuth } from '@/lib/context'
-import { useUserParcours, getAvailableParcours } from '@/lib/parcours'
+import { useUserParcours, getActiveParcours } from '@/lib/parcours'
 import { trackParcoursSelected } from '@/lib/services/analytics-service'
 
 export default function SelectParcoursPage() {
   const router = useRouter()
   const { isAuthenticated, isLoading: authLoading } = useAuth()
   const { setParcours, isLoading: parcoursLoading } = useUserParcours()
-  const availableParcours = getAvailableParcours()
+  const availableParcours = getActiveParcours()
 
   const handleSelect = async (slug: string) => {
     try {

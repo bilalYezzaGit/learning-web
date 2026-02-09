@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { useAuth } from '@/lib/context'
 import { useUserParcours } from '@/lib/parcours/use-user-parcours'
+import { DEFAULT_PARCOURS_SLUG } from '@/lib/parcours'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -50,7 +51,7 @@ export function LandingHeader() {
                 className="hidden sm:inline-flex"
                 asChild
               >
-                <Link href="/1ere-tc/apprendre">Parcours 1ère TC</Link>
+                <Link href={`/${DEFAULT_PARCOURS_SLUG}/apprendre`}>Parcours 1ere TC</Link>
               </Button>
               <Button variant="ghost" size="sm" asChild>
                 <Link href="/login">Se connecter</Link>

@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import { useAuth } from '@/lib/context'
-import { getAvailableParcours } from '@/lib/parcours'
+import { getActiveParcours } from '@/lib/parcours'
 import { doc, setDoc } from 'firebase/firestore'
 import { getDbInstance } from '@/lib/firebase/client'
 import { getFirebaseErrorMessage } from '@/lib/utils/firebase-errors'
@@ -33,7 +33,7 @@ export function SignupForm({
   const [showPassword, setShowPassword] = useState(false)
   const [selectedParcours, setSelectedParcours] = useState<string>('')
 
-  const availableParcours = getAvailableParcours()
+  const availableParcours = getActiveParcours()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

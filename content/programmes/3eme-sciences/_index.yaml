@@ -10,4 +10,4 @@ description: Programme de sciences pour la 3eme annee secondaire
 order: 2
 color: "#10B981"
 icon: science
-available: false
+# visibility managed in src/lib/parcours/config.ts

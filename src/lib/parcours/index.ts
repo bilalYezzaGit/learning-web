@@ -4,10 +4,12 @@
 
 export {
   PARCOURS_LIST,
-  VALID_PARCOURS_SLUGS,
+  ACTIVE_PARCOURS_SLUGS,
+  DEFAULT_PARCOURS_SLUG,
   getParcoursConfig,
-  isValidParcours,
-  getAvailableParcours,
+  isActiveParcours,
+  getActiveParcours,
+  getVisibleParcours,
   getAllParcours,
   type ParcoursConfig,
 } from './config'

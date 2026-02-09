@@ -1,10 +1,12 @@
 import type { MetadataRoute } from 'next'
 import { getAllCours, getAllSeries } from '@/lib/content'
+import { getActiveParcours } from '@/lib/parcours'
 
 const BASE_URL = 'https://www.aylansolutions.com'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
+  const activeParcoursList = getActiveParcours()
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [
@@ -26,37 +28,45 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.3,
     },
+  ]
+
+  // Parcours-level pages (apprendre + reviser for each active parcours)
+  const parcoursPages: MetadataRoute.Sitemap = activeParcoursList.flatMap((p) => [
     {
-      url: `${BASE_URL}/1ere-tc/apprendre`,
+      url: `${BASE_URL}/${p.slug}/apprendre`,
       lastModified: now,
-      changeFrequency: 'weekly',
+      changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/1ere-tc/reviser`,
+      url: `${BASE_URL}/${p.slug}/reviser`,
       lastModified: now,
-      changeFrequency: 'weekly',
+      changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
-  ]
+  ])
 
   // Dynamic module pages
   const allCours = getAllCours()
-  const modulePages: MetadataRoute.Sitemap = allCours.map((cours) => ({
-    url: `${BASE_URL}/1ere-tc/apprendre/${cours.slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }))
+  const modulePages: MetadataRoute.Sitemap = activeParcoursList.flatMap((p) =>
+    allCours.map((cours) => ({
+      url: `${BASE_URL}/${p.slug}/apprendre/${cours.slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }))
+  )
 
   // Dynamic serie pages
   const allSeries = getAllSeries()
-  const seriePages: MetadataRoute.Sitemap = allSeries.map((serie) => ({
-    url: `${BASE_URL}/1ere-tc/reviser/serie/${serie.slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }))
+  const seriePages: MetadataRoute.Sitemap = activeParcoursList.flatMap((p) =>
+    allSeries.map((serie) => ({
+      url: `${BASE_URL}/${p.slug}/reviser/serie/${serie.slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    }))
+  )
 
-  return [...staticPages, ...modulePages, ...seriePages]
+  return [...staticPages, ...parcoursPages, ...modulePages, ...seriePages]
 }

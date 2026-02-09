@@ -10,4 +10,4 @@ description: Programme de mathematiques pour la 3eme annee secondaire
 order: 1
 color: "#3B82F6"
 icon: calculate
-available: false
+# visibility managed in src/lib/parcours/config.ts

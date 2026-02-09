@@ -38,7 +38,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
-import { useUserParcours, getAvailableParcours } from '@/lib/parcours'
+import { useUserParcours, getActiveParcours } from '@/lib/parcours'
 
 // =============================================================================
 // ProfileSheet
@@ -364,7 +364,7 @@ function SettingsTab({ onClose }: { onClose: () => void }) {
   const { theme, setTheme } = useTheme()
   const router = useRouter()
   const { parcours, parcoursConfig, setParcours, isLoading } = useUserParcours()
-  const availableParcours = getAvailableParcours()
+  const availableParcours = getActiveParcours()
   const [changingParcours, setChangingParcours] = React.useState(false)
 
   const handleParcoursChange = async (slug: string) => {
