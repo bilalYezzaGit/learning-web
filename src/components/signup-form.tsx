@@ -20,6 +20,7 @@ import { useAuth } from '@/lib/context'
 import { getAvailableParcours } from '@/lib/parcours'
 import { doc, setDoc } from 'firebase/firestore'
 import { getDbInstance } from '@/lib/firebase/client'
+import { getFirebaseErrorMessage } from '@/lib/utils/firebase-errors'
 
 export function SignupForm({
   className,
@@ -75,7 +76,7 @@ export function SignupForm({
 
       router.push(`/${selectedParcours}`)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur lors de l\'inscription')
+      setError(getFirebaseErrorMessage(err))
     } finally {
       setIsLoading(false)
     }

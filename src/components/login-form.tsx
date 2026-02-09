@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input"
 import { doc, getDoc } from 'firebase/firestore'
 import { useAuth } from '@/lib/context'
 import { getDbInstance } from '@/lib/firebase/client'
+import { getFirebaseErrorMessage } from '@/lib/utils/firebase-errors'
 
 export function LoginForm({
   className,
@@ -51,7 +52,7 @@ export function LoginForm({
         router.push('/select-parcours')
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur de connexion')
+      setError(getFirebaseErrorMessage(err))
     } finally {
       setIsLoading(false)
     }
