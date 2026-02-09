@@ -27,8 +27,12 @@ export function PwaInstallPrompt() {
   const [isIos, setIsIos] = React.useState(false)
 
   React.useEffect(() => {
-    // Don't show if already dismissed or already installed
-    if (sessionStorage.getItem(DISMISSED_KEY)) return
+    // Don't show if already dismissed (within 30 days) or already installed
+    const dismissedAt = localStorage.getItem(DISMISSED_KEY)
+    if (dismissedAt) {
+      const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000
+      if (Date.now() - Number(dismissedAt) < THIRTY_DAYS) return
+    }
     if (window.matchMedia('(display-mode: standalone)').matches) return
 
     // Detect iOS
@@ -63,13 +67,14 @@ export function PwaInstallPrompt() {
     const { outcome } = await deferredPrompt.userChoice
     if (outcome === 'accepted') {
       setShowPrompt(false)
+      localStorage.setItem(DISMISSED_KEY, Date.now().toString())
     }
     setDeferredPrompt(null)
   }
 
   const handleDismiss = () => {
     setShowPrompt(false)
-    sessionStorage.setItem(DISMISSED_KEY, '1')
+    localStorage.setItem(DISMISSED_KEY, Date.now().toString())
   }
 
   if (!showPrompt) return null
