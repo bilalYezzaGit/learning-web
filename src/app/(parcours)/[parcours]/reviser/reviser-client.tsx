@@ -17,6 +17,7 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Progress } from '@/components/ui/progress'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
@@ -256,39 +257,39 @@ export function ReviserContent({
           />
         </div>
         <div className="flex gap-2">
-          <select
-            value={selectedModule}
-            onChange={(e) => setSelectedModule(e.target.value)}
-            className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground"
-            aria-label="Filtrer par module"
-          >
-            <option value="all">Tous les modules</option>
-            {availableModules.map((mod) => (
-              <option key={mod} value={mod}>{formatModuleName(mod)}</option>
-            ))}
-          </select>
-          <select
-            value={selectedDifficulty}
-            onChange={(e) => setSelectedDifficulty(e.target.value)}
-            className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground"
-            aria-label="Filtrer par difficulté"
-          >
-            <option value="all">Toute difficulté</option>
-            <option value="1">Facile</option>
-            <option value="2">Moyen</option>
-            <option value="3">Difficile</option>
-          </select>
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground"
-            aria-label="Trier par"
-          >
-            <option value="priority">Par défaut</option>
-            <option value="difficulty">Difficulté croissante</option>
-            <option value="difficulty-desc">Difficulté décroissante</option>
-            <option value="duration">Durée croissante</option>
-          </select>
+          <Select value={selectedModule} onValueChange={setSelectedModule}>
+            <SelectTrigger aria-label="Filtrer par module">
+              <SelectValue placeholder="Tous les modules" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Tous les modules</SelectItem>
+              {availableModules.map((mod) => (
+                <SelectItem key={mod} value={mod}>{formatModuleName(mod)}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
+            <SelectTrigger aria-label="Filtrer par difficulté">
+              <SelectValue placeholder="Toute difficulté" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Toute difficulté</SelectItem>
+              <SelectItem value="1">Facile</SelectItem>
+              <SelectItem value="2">Moyen</SelectItem>
+              <SelectItem value="3">Difficile</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={sortBy} onValueChange={setSortBy}>
+            <SelectTrigger aria-label="Trier par">
+              <SelectValue placeholder="Par défaut" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="priority">Par défaut</SelectItem>
+              <SelectItem value="difficulty">Difficulté croissante</SelectItem>
+              <SelectItem value="difficulty-desc">Difficulté décroissante</SelectItem>
+              <SelectItem value="duration">Durée croissante</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 

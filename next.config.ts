@@ -33,6 +33,8 @@ const securityHeaders = [
     value: 'camera=(self), microphone=(), geolocation=()',
   },
   {
+    // TODO: Replace unsafe-inline/unsafe-eval with nonces when Next.js supports it natively.
+    // Currently required for Next.js inline scripts and Tailwind CSS-in-JS.
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",

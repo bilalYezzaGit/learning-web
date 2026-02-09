@@ -20,9 +20,12 @@ interface SearchCommandProps {
 
 export function SearchCommand({ parcours, modules }: SearchCommandProps) {
   const [open, setOpen] = React.useState(false)
+  const [isMac, setIsMac] = React.useState(true)
   const router = useRouter()
 
   React.useEffect(() => {
+    setIsMac(navigator.platform.toUpperCase().includes('MAC'))
+
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
@@ -49,7 +52,7 @@ export function SearchCommand({ parcours, modules }: SearchCommandProps) {
         <Search className="h-4 w-4" aria-hidden="true" />
         <span className="hidden md:inline-flex flex-1">Rechercher…</span>
         <kbd className="hidden pointer-events-none h-5 select-none items-center gap-0.5 rounded border bg-muted px-1.5 text-[10px] font-medium md:inline-flex">
-          <span className="text-xs">⌘</span>K
+          <span className="text-xs">{isMac ? '⌘' : 'Ctrl'}</span>K
         </kbd>
       </button>
 

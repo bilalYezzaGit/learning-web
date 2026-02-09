@@ -43,22 +43,20 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
   const { userId } = useAuth()
   const { completeExercise, completeQCM, isCompleted, getProgress } = useProgress(userId ?? undefined)
 
-  const [currentIndex, setCurrentIndex] = React.useState(() => {
+  const [currentIndex, setCurrentIndex] = React.useState(0)
+  const [completedInSession, setCompletedInSession] = React.useState<Set<string>>(new Set())
+
+  // Restore persisted index on mount + track serie start
+  React.useEffect(() => {
     try {
       const saved = localStorage.getItem(`serie-play-${serieSlug}`)
       if (saved) {
         const idx = Number(saved)
-        if (idx >= 0 && idx < activities.length) return idx
+        if (idx >= 0 && idx < activities.length) setCurrentIndex(idx)
       }
-    } catch { /* SSR or localStorage unavailable */ }
-    return 0
-  })
-  const [completedInSession, setCompletedInSession] = React.useState<Set<string>>(new Set())
-
-  // Track serie start
-  React.useEffect(() => {
+    } catch { /* localStorage unavailable */ }
     trackSerieStarted(serieSlug)
-  }, [serieSlug])
+  }, [serieSlug, activities.length])
 
   // Persist current index
   React.useEffect(() => {

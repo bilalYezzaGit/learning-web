@@ -36,6 +36,8 @@ export function getLocalProgress(): LocalProgressMap {
 export function setLocalExerciseComplete(params: {
   activityId: string
   status: ProgressStatus
+  contextType: string
+  contextId: string
 }): LocalProgressMap {
   const map = load()
   map.set(params.activityId, {
@@ -44,7 +46,7 @@ export function setLocalExerciseComplete(params: {
     status: params.status,
     attempts: 1,
     lastDoneAt: new Date().toISOString(),
-    contexts: [],
+    contexts: [{ type: params.contextType, id: params.contextId, doneAt: new Date().toISOString() }],
   })
   save(map)
   return map
@@ -54,6 +56,8 @@ export function setLocalQCMComplete(params: {
   activityId: string
   score: number
   total: number
+  contextType: string
+  contextId: string
 }): LocalProgressMap {
   const map = load()
   const status: ProgressStatus = params.score / params.total >= 0.5 ? 'success' : 'retry'
@@ -65,7 +69,7 @@ export function setLocalQCMComplete(params: {
     total: params.total,
     attempts: 1,
     lastDoneAt: new Date().toISOString(),
-    contexts: [],
+    contexts: [{ type: params.contextType, id: params.contextId, doneAt: new Date().toISOString() }],
   })
   save(map)
   return map

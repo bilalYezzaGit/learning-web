@@ -22,60 +22,53 @@
 
 ## IMPORTANTS
 
-### 4. CSP avec `unsafe-inline` et `unsafe-eval`
-- **Fichier** : `next.config.ts:33-34`
-- **Problème** : Annule la protection XSS du CSP
-- **Fix** : Documenter comme dette technique MVP (nonces nécessaires avec Next.js)
-- **Status** : [ ] TODO
+### 4. ~~CSP avec `unsafe-inline` et `unsafe-eval`~~
+- **Fichier** : `next.config.ts`
+- **Fix** : Commentaire TODO ajouté documentant la dette technique. Requis par Next.js (inline scripts) et Tailwind.
+- **Status** : [x] DONE (documenté)
 
-### 5. `localStorage` dans initializer `useState` (hydration mismatch)
-- **Fichier** : `src/app/(parcours)/[parcours]/reviser/serie/[id]/play/serie-player.tsx:54-63`
-- **Problème** : SSR rend `0`, client peut trouver une valeur sauvegardée = mismatch
-- **Fix** : `useState(0)` + `useEffect` pour hydrater depuis localStorage
-- **Status** : [ ] TODO
+### 5. ~~`localStorage` dans initializer `useState` (hydration mismatch)~~
+- **Fichier** : `src/app/(parcours)/[parcours]/reviser/serie/[id]/play/serie-player.tsx`
+- **Fix** : `useState(0)` + `useEffect` pour restaurer depuis localStorage au mount
+- **Status** : [x] DONE
 
-### 6. `getLocalProgress()` potentiellement appelé côté serveur
-- **Fichier** : `src/lib/services/local-progress.ts` + `src/lib/hooks/use-progress.ts`
-- **Problème** : Si le hook est exécuté côté serveur, `localStorage` crash
-- **Fix** : Vérifier que `useProgress` est toujours client-only (il l'est via `use client` parents)
-- **Status** : [ ] À vérifier
+### 6. ~~`getLocalProgress()` potentiellement appelé côté serveur~~
+- **Vérification** : Tous les appels à `useProgress` sont dans des composants `'use client'` — OK, pas de risque SSR.
+- **Status** : [x] DONE (vérifié, pas de problème)
 
-### 7. `⌘K` hardcodé sans détection OS
-- **Fichier** : `src/components/search-command.tsx:836`
-- **Problème** : Affiche `⌘K` sur Windows/Linux
-- **Fix** : Détecter `navigator.platform` pour afficher `Ctrl` vs `⌘`
-- **Status** : [ ] TODO
+### 7. ~~`⌘K` hardcodé sans détection OS~~
+- **Fichier** : `src/components/search-command.tsx`
+- **Fix** : Détection via `navigator.platform`, affiche `Ctrl` sur Windows/Linux, `⌘` sur Mac
+- **Status** : [x] DONE
 
-### 8. Admin supprimé sans redirect
-- **Fichiers** : `src/app/admin/` supprimé, `src/middleware.ts`
-- **Problème** : Liens/bookmarks vers `/admin` donnent un 404
-- **Fix** : Vérifier s'il y a des liens, ajouter un redirect si nécessaire
-- **Status** : [ ] À vérifier
+### 8. ~~Admin supprimé sans redirect~~
+- **Vérification** : Aucun lien vers `/admin` dans le codebase. Pas de redirect nécessaire.
+- **Status** : [x] DONE (vérifié, pas de problème)
 
 ---
 
 ## MINEURS
 
-### 9. Selects natifs dans `reviser-client.tsx`
-- **Fix** : Remplacer par `Select` shadcn/ui
-- **Status** : [ ] Optionnel
+### 9. ~~Selects natifs dans `reviser-client.tsx`~~
+- **Fix** : Remplacés par `Select`/`SelectTrigger`/`SelectContent`/`SelectItem` shadcn/ui
+- **Status** : [x] DONE
 
-### 10. `setLocalExerciseComplete` ignore `contextType`/`contextId`
-- **Fix** : Aligner les signatures
-- **Status** : [ ] TODO
+### 10. ~~`setLocalExerciseComplete` ignore `contextType`/`contextId`~~
+- **Fix** : Signatures alignées, `contexts` peuplé avec `{ type, id, doneAt }`
+- **Status** : [x] DONE
 
-### 11. `EmptyState` créé mais jamais utilisé
-- **Fix** : Supprimer ou utiliser
-- **Status** : [ ] TODO
+### 11. ~~`EmptyState` créé mais jamais utilisé~~
+- **Fix** : `src/components/empty-state.tsx` supprimé
+- **Status** : [x] DONE
 
-### 12. `ConfirmDialog` créé mais jamais utilisé
-- **Fix** : Supprimer ou utiliser
-- **Status** : [ ] TODO
+### 12. ~~`ConfirmDialog` créé mais jamais utilisé~~
+- **Fix** : `src/components/confirm-dialog.tsx` supprimé
+- **Status** : [x] DONE
 
-### 13. Ellipses typographiques inconsistantes
-- **Fix** : Harmoniser `…` partout
-- **Status** : [ ] Optionnel
+### 13. ~~Ellipses typographiques inconsistantes~~
+- **Vérification** : Pas d'inconsistance réelle — `\u2026` et `…` sont le même caractère. Faux positif.
+- **Status** : [x] DONE (pas de problème)
 
-### 14. `ThemeProvider` — vérifier pas de double wrapping
-- **Fix** : Vérifier qu'il n'y a pas d'autre occurrence
-- **Status** : [ ] À vérifier
+### 14. ~~`ThemeProvider` — vérifier pas de double wrapping~~
+- **Vérification** : Un seul `ThemeProvider` dans `src/app/layout.tsx`. Pas de duplication.
+- **Status** : [x] DONE (vérifié, pas de problème)
