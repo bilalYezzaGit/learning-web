@@ -43,13 +43,29 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
   const { userId } = useAuth()
   const { completeExercise, completeQCM, isCompleted, getProgress } = useProgress(userId ?? undefined)
 
-  const [currentIndex, setCurrentIndex] = React.useState(0)
+  const [currentIndex, setCurrentIndex] = React.useState(() => {
+    try {
+      const saved = localStorage.getItem(`serie-play-${serieSlug}`)
+      if (saved) {
+        const idx = Number(saved)
+        if (idx >= 0 && idx < activities.length) return idx
+      }
+    } catch { /* SSR or localStorage unavailable */ }
+    return 0
+  })
   const [completedInSession, setCompletedInSession] = React.useState<Set<string>>(new Set())
 
   // Track serie start
   React.useEffect(() => {
     trackSerieStarted(serieSlug)
   }, [serieSlug])
+
+  // Persist current index
+  React.useEffect(() => {
+    try {
+      localStorage.setItem(`serie-play-${serieSlug}`, String(currentIndex))
+    } catch { /* localStorage unavailable */ }
+  }, [currentIndex, serieSlug])
 
   const totalActivities = activities.length
   const currentActivity = activities[currentIndex]
@@ -81,6 +97,7 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
   }
 
   const handleFinish = () => {
+    try { localStorage.removeItem(`serie-play-${serieSlug}`) } catch { /* ok */ }
     router.push(`/${parcours}/reviser/serie/${serieSlug}/result`)
   }
 

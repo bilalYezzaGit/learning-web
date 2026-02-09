@@ -11,8 +11,16 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
 import { compileMdx } from '@/lib/mdx'
-import { getAtom, atomExists, resolveCoursActivities, findQuizGroup, compileQuiz } from '@/lib/content'
+import { getAtom, atomExists, resolveCoursActivities, getCours, findQuizGroup, compileQuiz } from '@/lib/content'
 import { ActivityClient } from './activity-client'
 import { ActivityHeader } from './activity-header'
 
@@ -73,8 +81,32 @@ export default async function ActivityPage({ params }: PageProps) {
     }
   }
 
+  let coursTitle = moduleId
+  try {
+    coursTitle = getCours(moduleId).title
+  } catch { /* fallback to moduleId */ }
+
   return (
     <div className="flex h-full flex-col">
+      {/* Breadcrumb — desktop only (mobile has ActivityHeader) */}
+      <div className="hidden border-b px-4 py-3 lg:block lg:px-6">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href={`/${parcours}/apprendre`}>Apprendre</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href={`/${parcours}/apprendre/${moduleId}`}>{coursTitle}</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{currentActivity.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+
       {/* Slim mobile header with timeline toggle — hidden on desktop */}
       <ActivityHeader title={currentActivity.title} type={currentActivity.type} />
 

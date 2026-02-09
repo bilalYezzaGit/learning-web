@@ -181,6 +181,61 @@
     text-rendering: optimizeLegibility;
     touch-action: manipulation;
   }
+
+  /* Minimum touch target on mobile (44px per WCAG 2.5.8) */
+  @media (pointer: coarse) {
+    button,
+    a[role="button"],
+    [role="tab"],
+    [data-slot="button"] {
+      min-height: 2.75rem; /* 44px */
+      min-width: 2.75rem;
+    }
+  }
+}
+
+@media print {
+  /* Hide navigation, sidebars, buttons */
+  nav,
+  aside,
+  footer,
+  header,
+  [data-sidebar],
+  [data-slot="button"],
+  .fixed {
+    display: none !important;
+  }
+
+  /* Full-width content */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  main {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Prose styles for print */
+  .prose {
+    max-width: 100% !important;
+    font-size: 12pt !important;
+  }
+
+  /* Show link URLs */
+  .prose a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  /* Avoid breaking inside cards */
+  [data-slot="card"] {
+    break-inside: avoid;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

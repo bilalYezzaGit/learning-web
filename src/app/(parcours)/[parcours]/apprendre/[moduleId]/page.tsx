@@ -8,11 +8,19 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, BookOpen, Play, Target } from 'lucide-react'
+import { BookOpen, Play, Target } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
 import { getCours, resolveCoursActivities } from '@/lib/content'
 import { extractAtomIds } from '@/types/content'
 
@@ -52,14 +60,19 @@ export default async function ModuleDetailPage({ params }: PageProps) {
 
   return (
     <div className="flex h-full flex-col">
-      {/* Back button */}
+      {/* Breadcrumb */}
       <div className="border-b px-4 py-3 lg:px-6">
-        <Button variant="ghost" size="sm" asChild>
-          <Link href={`/${parcours}/apprendre`}>
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Retour aux modules
-          </Link>
-        </Button>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href={`/${parcours}/apprendre`}>Apprendre</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{cours.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       </div>
 
       {/* Welcome content */}

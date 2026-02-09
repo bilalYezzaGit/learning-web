@@ -8,6 +8,7 @@
 import { AppSidebar } from '@/components/app-sidebar'
 import { SiteHeader } from '@/components/site-header'
 import { ParcoursBanner } from '@/components/parcours-banner'
+import { EmailVerificationBanner } from '@/components/email-verification-banner'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { getParcoursConfig } from '@/lib/parcours'
 import { getAllProgrammes, getCours } from '@/lib/content'
@@ -44,6 +45,7 @@ export default async function ParcoursLayout({
       <AppSidebar parcours={parcours} modules={modules} />
       <SidebarInset className="max-h-svh overflow-hidden">
         <SiteHeader parcours={parcours} />
+        <EmailVerificationBanner />
         <ParcoursBanner urlParcours={parcours} />
         <div className="flex flex-1 min-h-0 flex-col overflow-auto">
           <div id="main-content" className="@container/main flex flex-1 min-h-0 flex-col gap-2">

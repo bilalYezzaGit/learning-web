@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { BookOpen, Brain } from 'lucide-react'
 
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { OnboardingBanner } from '@/components/onboarding-banner'
 import { getAllProgrammes, getCours, resolveCoursActivities } from '@/lib/content'
 import { getParcoursConfig } from '@/lib/parcours'
 import { DashboardClient } from './dashboard-client'
@@ -54,6 +55,8 @@ export default async function ParcoursDashboardPage({ params }: PageProps) {
 
   return (
     <div className="px-4 lg:px-6">
+      <OnboardingBanner />
+
       {/* Progress Dashboard - Client Component */}
       <DashboardClient parcours={parcours} modules={modules} />
 
