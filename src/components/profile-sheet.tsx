@@ -242,8 +242,8 @@ function StatsTab({ userId }: { userId: string }) {
         <Card>
           <CardContent className="py-3">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-100 dark:bg-green-900/30">
-                <CheckCircle className="h-4 w-4 text-green-600" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-success/10">
+                <CheckCircle className="h-4 w-4 text-success" />
               </div>
               <div>
                 <p className="tabular-nums text-xl font-bold">{stats.completed}</p>
@@ -256,8 +256,8 @@ function StatsTab({ userId }: { userId: string }) {
         <Card>
           <CardContent className="py-3">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30">
-                <GraduationCap className="h-4 w-4 text-blue-600" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-info/10">
+                <GraduationCap className="h-4 w-4 text-info" />
               </div>
               <div>
                 <p className="tabular-nums text-xl font-bold">{stats.avgScore}%</p>
@@ -270,8 +270,8 @@ function StatsTab({ userId }: { userId: string }) {
         <Card>
           <CardContent className="py-3">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/30">
-                <BookOpen className="h-4 w-4 text-amber-600" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-warning/10">
+                <BookOpen className="h-4 w-4 text-warning" />
               </div>
               <div>
                 <p className="tabular-nums text-xl font-bold">{stats.exercisesDone}</p>
@@ -284,8 +284,8 @@ function StatsTab({ userId }: { userId: string }) {
         <Card>
           <CardContent className="py-3">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-100 dark:bg-purple-900/30">
-                <Trophy className="h-4 w-4 text-purple-600" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
+                <Trophy className="h-4 w-4 text-primary" />
               </div>
               <div>
                 <p className="tabular-nums text-xl font-bold">{stats.successRate}%</p>
@@ -308,11 +308,11 @@ function StatsTab({ userId }: { userId: string }) {
           </div>
           <div className="flex items-center justify-between border-b py-2.5">
             <span className="text-sm text-muted-foreground">QCM réussis</span>
-            <span className="text-sm font-medium text-green-600">{stats.qcmSuccess}</span>
+            <span className="text-sm font-medium text-success">{stats.qcmSuccess}</span>
           </div>
           <div className="flex items-center justify-between py-2.5">
             <span className="text-sm text-muted-foreground">À revoir</span>
-            <span className="text-sm font-medium text-orange-600">{stats.qcmDone - stats.qcmSuccess}</span>
+            <span className="text-sm font-medium text-warning">{stats.qcmDone - stats.qcmSuccess}</span>
           </div>
         </CardContent>
       </Card>
@@ -423,7 +423,7 @@ function SettingsTab({ onClose }: { onClose: () => void }) {
             <div>
               <p className="text-sm font-medium">Parcours actuel</p>
               <p className="text-xs text-muted-foreground">
-                {isLoading ? 'Chargement...' : parcoursConfig?.label || 'Non défini'}
+                {isLoading ? 'Chargement…' : parcoursConfig?.label || 'Non défini'}
               </p>
             </div>
             <div>

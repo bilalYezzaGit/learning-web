@@ -182,7 +182,7 @@ export function ScanUpload({ activityId, exerciseContent, onResult, className }:
             />
           )}
           <Loader2 className="mx-auto mb-3 h-8 w-8 animate-spin text-primary" />
-          <p className="font-medium">Analyse en cours...</p>
+          <p className="font-medium">Analyse en cours…</p>
           <p className="mt-1 text-sm text-muted-foreground">
             L&apos;IA analyse votre travail
           </p>

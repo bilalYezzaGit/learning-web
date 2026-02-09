@@ -82,8 +82,8 @@ export function SerieActivityClient({
     return (
       <div>
         {previousProgress && previousProgress.score !== undefined && previousProgress.total ? (
-          <div className="mb-6 rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-950/20">
-            <p className="text-sm text-green-800 dark:text-green-200">
+          <div className="mb-6 rounded-lg border border-success/20 bg-success/10 p-4">
+            <p className="text-sm text-success-foreground">
               Déjà fait : {previousProgress.score}/{previousProgress.total} (
               {Math.round((previousProgress.score / previousProgress.total) * 100)}%)
             </p>
@@ -106,7 +106,7 @@ export function SerieActivityClient({
         {children}
         <div className="mt-6 flex items-center justify-center">
           {activityCompleted ? (
-            <div className="flex items-center gap-2 text-green-600">
+            <div className="flex items-center gap-2 text-success">
               <CheckCircle2 className="h-5 w-5" />
               <span className="font-medium">Exercice terminé</span>
             </div>

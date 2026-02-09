@@ -304,7 +304,7 @@ function ActivityItem({
       onClick={() => onActivityClick(activity.id)}
       data-activity-id={activity.id}
       className={cn(
-        'group flex w-full items-start gap-3 rounded-lg px-3 py-2.5 text-left transition-all duration-200',
+        'group flex w-full items-start gap-3 rounded-lg px-3 py-2.5 text-left transition-colors duration-200',
         isCurrent
           ? 'bg-primary/8 ring-1 ring-primary/20'
           : 'hover:bg-muted/60',
@@ -410,7 +410,7 @@ function SectionAccordion({
           <div className="h-1 w-full overflow-hidden rounded-full bg-border/50">
             <div
               className={cn(
-                'h-full rounded-full transition-all duration-500',
+                'h-full rounded-full transition-[width] duration-500',
                 allDone ? 'bg-success/50' : 'bg-primary/40'
               )}
               style={{ width: `${percent}%` }}

@@ -194,7 +194,7 @@ export default function LandingPage() {
           {/* Active parcours — 1ère TC */}
           {activeParcours && (
             <Link href={`/${activeParcours.slug}/apprendre`} className="group block">
-              <Card className="mx-auto mb-10 max-w-2xl cursor-pointer border-primary/30 bg-card shadow-sm transition-all duration-200 group-hover:shadow-lg group-hover:border-primary/50">
+              <Card className="mx-auto mb-10 max-w-2xl cursor-pointer border-primary/30 bg-card shadow-sm transition-[box-shadow,border-color] duration-200 group-hover:shadow-lg group-hover:border-primary/50">
                 <CardHeader className="pb-3">
                   <div className="flex items-center gap-4">
                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">

@@ -40,7 +40,7 @@ export default async function SerieLayout({ children, params }: LayoutProps) {
       />
 
       {/* Content Area */}
-      <main className="flex-1 overflow-auto">{children}</main>
+      <div className="flex-1 overflow-auto">{children}</div>
     </div>
   )
 }

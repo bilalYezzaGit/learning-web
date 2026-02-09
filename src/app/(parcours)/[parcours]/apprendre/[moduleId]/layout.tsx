@@ -44,7 +44,7 @@ export default async function ModuleLayout({ children, params }: LayoutProps) {
         activities={activities}
         sections={sections}
       >
-        <main id="main-content" className="flex-1 min-w-0 overflow-auto">{children}</main>
+        <div className="flex-1 min-w-0 overflow-auto">{children}</div>
       </CourseTimelineWrapper>
     </div>
   )
