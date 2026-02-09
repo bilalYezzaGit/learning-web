@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { logError } from '@/lib/services/error-logger'
 
 export default function Error({
   error,
@@ -13,7 +14,7 @@ export default function Error({
   reset: () => void
 }) {
   useEffect(() => {
-    console.error('Application error:', error)
+    logError(error, { component: 'RootErrorBoundary', metadata: { digest: error.digest } })
   }, [error])
 
   return (
