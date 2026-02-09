@@ -8,7 +8,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { ArrowRight, BookOpen, CheckCircle2, Clock, Trophy } from 'lucide-react'
+import { ArrowRight, BookOpen, CheckCircle2, Clock, Sparkles, Trophy } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -107,12 +107,42 @@ export function DashboardClient({ parcours, modules }: DashboardClientProps) {
     }
   }, [modules, progress, isCompleted])
 
-  if (!userId) return null
+  // Welcome card for unauthenticated users
+  if (!userId) {
+    return (
+      <Card className="border-primary/20 bg-primary/5">
+        <CardContent className="py-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-4">
+              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+                <Sparkles className="h-7 w-7" aria-hidden="true" />
+              </div>
+              <div>
+                <p className="text-lg font-semibold">Bienvenue sur Learning OS</p>
+                <p className="text-sm text-muted-foreground">
+                  {modules.length} modules disponibles &middot; Connectez-vous pour sauvegarder votre progression
+                </p>
+              </div>
+            </div>
+            <Button size="lg" asChild>
+              <Link href={`/${parcours}/apprendre`}>
+                Explorer les cours
+                <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+              </Link>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    )
+  }
+
+  // First visit: no progress yet
+  const hasProgress = stats.completedCount > 0
 
   return (
     <div className="space-y-6">
-      {/* "Continue where you left off" */}
-      {stats.lastActivity && stats.nextActivityId && (
+      {/* "Continue where you left off" or "Start your journey" */}
+      {hasProgress && stats.lastActivity && stats.nextActivityId ? (
         <Card className="border-primary/20 bg-primary/5">
           <CardContent className="py-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -124,7 +154,7 @@ export function DashboardClient({ parcours, modules }: DashboardClientProps) {
                   <p className="text-sm text-muted-foreground">Reprendre</p>
                   <p className="text-lg font-semibold">{stats.lastActivity.moduleTitle}</p>
                   <p className="text-sm text-muted-foreground">
-                    {stats.completedCount} activités complétées sur {stats.totalActivities}
+                    {stats.completedCount} activit&eacute;s compl&eacute;t&eacute;es sur {stats.totalActivities}
                   </p>
                 </div>
               </div>
@@ -137,10 +167,34 @@ export function DashboardClient({ parcours, modules }: DashboardClientProps) {
             </div>
           </CardContent>
         </Card>
+      ) : (
+        <Card className="border-primary/20 bg-primary/5">
+          <CardContent className="py-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+                  <Sparkles className="h-7 w-7" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-lg font-semibold">Commencez votre parcours</p>
+                  <p className="text-sm text-muted-foreground">
+                    {stats.totalActivities} activit&eacute;s &middot; {modules.length} modules &middot; Progressez &agrave; votre rythme
+                  </p>
+                </div>
+              </div>
+              <Button size="lg" asChild>
+                <Link href={`/${parcours}/apprendre`}>
+                  Commencer
+                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       )}
 
-      {/* Stats strip */}
-      <div className="grid gap-4 sm:grid-cols-3">
+      {/* Stats strip — only show when user has started */}
+      {hasProgress && <div className="grid gap-4 sm:grid-cols-3">
         <Card>
           <CardContent className="flex items-center gap-4 py-4">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
@@ -174,7 +228,7 @@ export function DashboardClient({ parcours, modules }: DashboardClientProps) {
             </div>
           </CardContent>
         </Card>
-      </div>
+      </div>}
 
       {/* Module progress */}
       {stats.moduleProgress.some((m) => m.done > 0) && (
