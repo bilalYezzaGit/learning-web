@@ -7,6 +7,7 @@ npm run dev          # Dev server (localhost:3000)
 npm run build        # Build production
 npm run lint         # ESLint
 npm run type-check   # TypeScript strict
+npm run test:specs   # Spec tests (66 rules)
 ```
 
 ## Structure
@@ -43,7 +44,7 @@ content/
 - Imports : alias `@/` uniquement
 - Server Components par defaut — `'use client'` uniquement si hooks/interactivite
 - Fichiers en kebab-case : `module-card.tsx`
-- Conventions detaillees → `.claude/rules/`
+- Conventions detaillees → `.claude/rules/` + `docs/specs/rules/`
 - Contenu pedagogique → `docs/CONTENT-CONVENTIONS.md`
 - Architecture contenu → `docs/chantiers/001-content-architecture.md`
 
@@ -51,14 +52,14 @@ content/
 
 - `/chantier` — Gestion des chantiers de developpement
 - `/audit` — Audit code TypeScript/React
-- `/audit-ui` — Audit UI/UX complet (3 agents paralleles)
+- `/check` — Verification des rules (auto + manual)
+- `/audit-ui` — Audit UI/UX complet (check + exploration Level 2)
 - `/component <Nom>` — Generer un composant DS
 - `/content` — Gestion du contenu pedagogique
 
 ## Agents specialises
 
 - `code-reviewer` — Review qualite TypeScript/React
-- `ui-reviewer` — Review UI/UX/a11y
 - `content-researcher` — Recherche web pedagogique
 - `content-creator` — Creation MDX/YAML expert
 - `content-reviewer` — Revue pedagogique + technique

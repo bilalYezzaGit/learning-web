@@ -1,69 +1,82 @@
-# UI/UX Specification System
+# Spec System
 
-Living specification for the Learning OS design system. Three linked files define **what** must be true, **how** to verify it, and **which tests cover which rules**.
+Two-level guardrail framework for development with Claude Code.
 
-## Files
+## Level 1 — Deterministic (pass/fail)
 
-| File | Purpose |
-|------|---------|
-| `aspects.md` | ~96 atomic UI/UX rules (what MUST be true) |
-| `tests.md` | ~25 executable test procedures (how to verify) |
-| `coverage.md` | Bidirectional mapping aspects <-> tests |
-| `CHANGELOG.md` | Dated log of spec changes |
+Rules are concrete, binary, testable assertions organized by domain.
+
+```
+docs/specs/rules/     14 domain files, ~66 rules
+scripts/specs/        16 test modules (mirror of rules/)
+```
+
+### Rule format
+
+```markdown
+- COL-001 [auto] Description of what must be true
+- COL-004 [manual] Description of what must be true
+  > Procedure: how to verify manually
+```
+
+- `[auto]` = verified by `npm run test:specs`
+- `[manual]` = verified by `/check` (Claude Code reads and checks)
+
+### Commands
+
+| Command | What it does |
+|---------|-------------|
+| `npm run test:specs` | Run all [auto] rules (~90%) |
+| `/check` | Run auto + manual rules (100%) |
+| `/audit-ui` | Full check + Level 2 exploration |
+
+### Adding a rule
+
+1. Add a line in the right `docs/specs/rules/*.md` file
+2. If `[auto]`: add a test function in `scripts/specs/*.mjs` (mirror file)
+3. Run `npm run test:specs` to verify
+
+## Level 2 — Exploratory (discovery)
+
+Skills used as reference material to discover new rules:
+
+| Skill | Purpose |
+|-------|---------|
+| `ui-ux-pro-max` | UX guidelines, accessibility, animation |
+| `frontend-design` | Creative design, typography, color theory |
+
+Level 2 feeds Level 1: audit finds issue → add rule → never regress.
+
+## File structure
+
+```
+docs/specs/
+├── rules/              14 domain files (source of truth)
+│   ├── colors.md       COL-xxx
+│   ├── typography.md   TYP-xxx
+│   ├── layout.md       LAY-xxx
+│   ├── accessibility.md A11-xxx
+│   ├── navigation.md   NAV-xxx
+│   ├── components.md   CMP-xxx
+│   ├── motion.md       MOT-xxx
+│   ├── content.md      CNT-xxx
+│   ├── print.md        PRT-xxx
+│   ├── brand.md        BRD-xxx
+│   ├── typescript.md   TSC-xxx
+│   ├── react.md        RCT-xxx
+│   ├── backend.md      BAK-xxx
+│   └── testing.md      TST-xxx (meta-rules)
+├── README.md           This file
+└── CHANGELOG.md        Dated log of changes
+
+scripts/specs/
+├── runner.mjs          Orchestrator (npm run test:specs)
+├── helpers.mjs         Shared utilities
+├── colors.mjs          Tests for COL-xxx
+├── ...                 (mirrors rules/ structure)
+└── testing.mjs         Meta-tests (TST-xxx)
+```
 
 ## ID scheme
 
-- **Aspects**: `A-{CAT}-{NNN}` — e.g. `A-COL-001`, `A-A11-003`
-- **Tests**: `T-{NNN}` — flat numbering (one test covers multiple categories)
-
-### Aspect categories (11)
-
-| Code | Category | ~Count |
-|------|----------|--------|
-| COL | Colors & Theming | 15 |
-| TYP | Typography | 10 |
-| SPC | Spacing & Layout | 8 |
-| RES | Responsive | 8 |
-| A11 | Accessibility | 15 |
-| NAV | Navigation | 6 |
-| CMP | Components | 12 |
-| MOT | Motion & Animation | 6 |
-| CNT | Content & MDX | 6 |
-| PRT | Print | 5 |
-| BRD | Brand & Identity | 5 |
-
-## Relation with existing docs
-
-```
-docs/audits/       -> INPUT (historical findings)
-docs/specs/        -> SOURCE OF TRUTH (what must be true)
-docs/chantiers/    -> ACTION (work to fix violations)
-```
-
-Audits inform aspects. Specs replace audits as the reference.
-
-## Iteration workflow
-
-### After a UI change
-
-1. Identify touched aspects via `coverage.md` reverse table
-2. Run only the concerned tests from `tests.md`
-3. If a test fails, the change introduced a regression
-
-### After an audit
-
-1. Compare audit findings against existing aspects
-2. Add new aspects + tests for uncovered findings
-3. Update `coverage.md` with new mappings
-4. Log changes in `CHANGELOG.md`
-
-### Detect obsolescence
-
-1. Verify referenced files in aspects still exist (`Glob` check)
-2. Remove or update aspects pointing to deleted files
-
-### Full regression check
-
-1. Run all 25 tests sequentially
-2. Report pass/fail per test with failing aspect IDs
-3. Failing aspects = work remaining (create chantier tasks)
+`{DOMAIN}-{NNN}` — e.g. `COL-001`, `A11-003`, `TSC-002`

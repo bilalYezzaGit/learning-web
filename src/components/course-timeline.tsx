@@ -636,17 +636,20 @@ export function CourseTimeline({
   })
 
   // When current activity changes, ensure its section is open
-  useEffect(() => {
-    if (!currentActivityId) return
-    for (const section of sections) {
-      if (section.activities.some((a) => a.id === currentActivityId)) {
-        setOpenSections((prev) =>
-          prev.includes(section.id) ? prev : [...prev, section.id]
-        )
-        return
+  const [prevActivityId, setPrevActivityId] = useState(currentActivityId)
+  if (prevActivityId !== currentActivityId) {
+    setPrevActivityId(currentActivityId)
+    if (currentActivityId) {
+      for (const section of sections) {
+        if (section.activities.some((a) => a.id === currentActivityId)) {
+          if (!openSections.includes(section.id)) {
+            setOpenSections((prev) => [...prev, section.id])
+          }
+          break
+        }
       }
     }
-  }, [currentActivityId, sections])
+  }
 
   // Auto-scroll to current activity
   useEffect(() => {

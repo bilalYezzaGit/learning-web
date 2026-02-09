@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "type-check": "tsc --noEmit",
-    "test:specs": "node scripts/test-specs.mjs"
+    "test:specs": "node scripts/specs/runner.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.74.0",
