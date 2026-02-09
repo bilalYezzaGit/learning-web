@@ -18,9 +18,25 @@ const lora = Lora({
 })
 
 export const metadata: Metadata = {
-  title: 'Learning OS',
-  description: "Application d'apprentissage des mathématiques — Lycée tunisien",
+  title: {
+    default: 'Learning OS — Maths du lycée tunisien',
+    template: '%s | Learning OS',
+  },
+  description: 'Cours structurés, exercices corrigés et séries de révision pour les mathématiques du lycée tunisien. 15 modules, 90+ activités, 100% gratuit.',
   manifest: '/manifest.json',
+  metadataBase: new URL('https://www.aylansolutions.com'),
+  openGraph: {
+    type: 'website',
+    locale: 'fr_FR',
+    siteName: 'Learning OS',
+    title: 'Learning OS — Maths du lycée tunisien',
+    description: 'Cours structurés, exercices corrigés et séries de révision. 15 modules pour la 1ère année Tronc Commun — accès libre.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Learning OS — Maths du lycée tunisien',
+    description: 'Cours structurés, exercices corrigés et séries de révision. 100% gratuit.',
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',

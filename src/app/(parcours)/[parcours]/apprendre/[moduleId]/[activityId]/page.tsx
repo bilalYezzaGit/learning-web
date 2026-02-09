@@ -5,18 +5,33 @@
  * Uses compileMdx for lessons/exercises, QCMPlayer for quizzes.
  */
 
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { compileMdx } from '@/lib/mdx'
-import { getAtom, resolveCoursActivities, findQuizGroup, compileQuiz } from '@/lib/content'
+import { getAtom, atomExists, resolveCoursActivities, findQuizGroup, compileQuiz } from '@/lib/content'
 import { ActivityClient } from './activity-client'
 import { ActivityHeader } from './activity-header'
 
 interface PageProps {
   params: Promise<{ parcours: string; moduleId: string; activityId: string }>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { activityId } = await params
+  try {
+    if (!atomExists(activityId)) return { title: 'Activité' }
+    const atom = getAtom(activityId)
+    return {
+      title: atom.title,
+      description: `${atom.type === 'lesson' ? 'Cours' : atom.type === 'exercise' ? 'Exercice' : 'QCM'} — ${atom.title}`,
+    }
+  } catch {
+    return { title: 'Activité' }
+  }
 }
 
 export default async function ActivityPage({ params }: PageProps) {

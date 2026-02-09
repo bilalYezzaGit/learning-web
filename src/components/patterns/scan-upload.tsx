@@ -167,7 +167,7 @@ export function ScanUpload({ activityId, exerciseContent, onResult, className }:
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={preview}
-              alt="Preview"
+              alt="Aperçu de votre travail"
               className="mx-auto mb-4 max-h-32 rounded-lg object-contain"
             />
           )}
@@ -213,6 +213,8 @@ export function ScanUpload({ activityId, exerciseContent, onResult, className }:
 
         {/* Drop zone */}
         <div
+          role="region"
+          aria-label="Zone de dépôt de photo"
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
           className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/25 bg-muted/30 px-6 py-8 text-center transition-colors hover:border-primary/50 hover:bg-muted/50"

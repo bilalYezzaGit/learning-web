@@ -6,6 +6,7 @@
  * Public - playable without authentication (score not saved).
  */
 
+import type { Metadata } from 'next'
 import { BookOpen } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
@@ -16,6 +17,16 @@ import type { Trimestre } from '@/types/content'
 
 interface PageProps {
   params: Promise<{ parcours: string }>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { parcours } = await params
+  const config = getParcoursConfig(parcours)
+  const label = config?.label ?? 'Réviser'
+  return {
+    title: `Réviser — ${label}`,
+    description: `Séries de révision pour le parcours ${label}. Exercices thématiques et devoirs types classés par trimestre et difficulté.`,
+  }
 }
 
 /** Determine the current trimestre based on the month (Tunisian school year) */

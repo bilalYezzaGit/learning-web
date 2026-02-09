@@ -5,6 +5,7 @@
  * Timeline is in layout.tsx.
  */
 
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, BookOpen, Play } from 'lucide-react'
@@ -15,6 +16,19 @@ import { getSerie, resolveSerieActivities } from '@/lib/content'
 
 interface PageProps {
   params: Promise<{ parcours: string; id: string }>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params
+  try {
+    const serie = getSerie(id)
+    return {
+      title: serie.title,
+      description: serie.description ?? `Série de révision — ${serie.title}`,
+    }
+  } catch {
+    return { title: 'Série' }
+  }
 }
 
 export default async function SerieDetailPage({ params }: PageProps) {

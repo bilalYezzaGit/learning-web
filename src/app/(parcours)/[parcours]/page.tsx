@@ -2,55 +2,63 @@
  * Parcours Dashboard Page
  *
  * Learner dashboard for a specific parcours.
+ * Shows progress tracking and quick actions.
  */
 
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, BookOpen, Brain } from 'lucide-react'
+import { BookOpen, Brain } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { getAllProgrammes, getCours, resolveCoursActivities } from '@/lib/content'
 import { getParcoursConfig } from '@/lib/parcours'
+import { DashboardClient } from './dashboard-client'
 
 interface PageProps {
   params: Promise<{ parcours: string }>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { parcours } = await params
+  const config = getParcoursConfig(parcours)
+  const label = config?.label ?? 'Tableau de bord'
+  return {
+    title: `Tableau de bord — ${label}`,
+    description: `Votre progression et vos statistiques pour le parcours ${label}. Reprenez votre apprentissage.`,
+  }
 }
 
 export default async function ParcoursDashboardPage({ params }: PageProps) {
   const { parcours } = await params
   const parcoursConfig = getParcoursConfig(parcours)
 
+  // Resolve modules with their activity IDs for progress tracking
+  const modules = (() => {
+    if (!parcoursConfig) return []
+
+    const programme = getAllProgrammes().find(
+      (p) => p.levelSlug === parcoursConfig.level && p.sectionSlug === parcoursConfig.section
+    )
+    if (!programme) return []
+
+    return programme.cours.map((slug) => {
+      const cours = getCours(slug)
+      const activities = resolveCoursActivities(slug)
+      return {
+        id: slug,
+        title: cours.title,
+        activityIds: activities.map((a) => a.id),
+      }
+    })
+  })()
+
   return (
     <div className="px-4 lg:px-6">
-      {/* Continue Learning - Main CTA */}
-      <Card className="mb-6 border-primary/20 bg-primary/5">
-        <CardContent className="py-6">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-                <BookOpen className="h-7 w-7" aria-hidden="true" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Reprendre</p>
-                <p className="text-lg font-semibold">
-                  {parcoursConfig ? `Programme ${parcoursConfig.label}` : 'Commencez votre apprentissage'}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  Explorez les modules disponibles
-                </p>
-              </div>
-            </div>
-            <Button size="lg" asChild>
-              <Link href={`/${parcours}/apprendre`}>
-                Continuer
-                <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-              </Link>
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Progress Dashboard - Client Component */}
+      <DashboardClient parcours={parcours} modules={modules} />
 
       {/* Quick Actions */}
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <Card className="transition-colors hover:bg-muted/50">
           <Link href={`/${parcours}/apprendre`} className="block">
             <CardHeader>
@@ -75,8 +83,8 @@ export default async function ParcoursDashboardPage({ params }: PageProps) {
                   <Brain className="h-5 w-5 text-primary" aria-hidden="true" />
                 </div>
                 <div>
-                  <CardTitle className="text-base">Réviser</CardTitle>
-                  <CardDescription>QCM et séries d&apos;entraînement</CardDescription>
+                  <CardTitle className="text-base">R&eacute;viser</CardTitle>
+                  <CardDescription>QCM et s&eacute;ries d&apos;entra&icirc;nement</CardDescription>
                 </div>
               </div>
             </CardHeader>

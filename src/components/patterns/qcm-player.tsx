@@ -142,7 +142,7 @@ export function QCMPlayer({
     const isSuccess = percentage >= 70
 
     return (
-      <div className={cn('py-8', className)}>
+      <div className={cn('py-8', className)} role="status" aria-live="polite">
         <Card className="mx-auto max-w-lg">
           <CardContent className="py-8 text-center">
             <div
@@ -192,7 +192,7 @@ export function QCMPlayer({
             {currentIndex + 1}/{qcm.questions.length}
           </span>
         </div>
-        <Progress value={progressPercent} className="mt-2 h-2" />
+        <Progress value={progressPercent} className="mt-2 h-2" aria-label={`Question ${currentIndex + 1} sur ${qcm.questions.length}`} />
       </div>
 
       {/* Question */}

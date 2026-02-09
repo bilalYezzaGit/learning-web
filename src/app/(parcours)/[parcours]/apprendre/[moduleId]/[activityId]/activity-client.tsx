@@ -66,6 +66,23 @@ export function ActivityClient({
     }
   }
 
+  const handleLessonComplete = async () => {
+    setCompletedInSession(true)
+
+    if (userId) {
+      try {
+        await completeExercise({
+          activityId,
+          status: 'success',
+          contextType: 'module',
+          contextId: moduleId,
+        })
+      } catch (e) {
+        console.error('Failed to save lesson progress:', e)
+      }
+    }
+  }
+
   const handleQCMComplete = async (result: QCMResult) => {
     setCompletedInSession(true)
     setQcmFinished(true)
@@ -104,11 +121,10 @@ export function ActivityClient({
 
     return (
       <div>
-        {previousProgress && previousProgress.score !== undefined && previousProgress.total ? (
+        {previousProgress && previousProgress.score !== undefined ? (
           <div className="mb-6 rounded-lg border border-success/25 bg-success/10 p-4">
             <p className="text-sm text-success-foreground">
-              Déjà fait : {previousProgress.score}/{previousProgress.total} (
-              {Math.round((previousProgress.score / previousProgress.total) * 100)}%)
+              Déjà fait : {previousProgress.score}%
             </p>
             <Button
               variant="outline"
@@ -175,6 +191,38 @@ export function ActivityClient({
     )
   }
 
-  // For lessons, just show the content
-  return <>{children}</>
+  // For lessons, show content + completion button
+  return (
+    <>
+      {children}
+
+      <div className="mt-8 flex flex-col items-center justify-center border-t pt-6">
+        {activityCompleted ? (
+          <div className="flex items-center gap-2 text-success">
+            <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
+            <span className="font-medium">Leçon terminée</span>
+          </div>
+        ) : (
+          <>
+            <p className="mb-3 text-sm text-muted-foreground">
+              Tu as fini de lire cette leçon ?
+            </p>
+            <Button onClick={handleLessonComplete} variant="outline">
+              <CheckCircle2 className="mr-2 h-4 w-4" aria-hidden="true" />
+              J&apos;ai lu cette leçon
+            </Button>
+          </>
+        )}
+
+        {!userId && (
+          <p className="mt-4 text-xs text-muted-foreground">
+            <Link href="/login" className="underline hover:text-foreground">
+              Connecte-toi
+            </Link>{' '}
+            pour sauvegarder ta progression.
+          </p>
+        )}
+      </div>
+    </>
+  )
 }
