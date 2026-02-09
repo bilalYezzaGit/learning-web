@@ -1,17 +1,18 @@
 /**
  * Apprendre Page (Parcours-specific)
  *
- * Learning hub with modules grid.
- * Filtered by parcours.
+ * Learning hub with sequential module list grouped by trimester.
+ * Server Component fetches and groups data, client component handles progress.
  */
 
 import type { Metadata } from 'next'
 import { BookOpen } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
-import { ModuleProgressCard } from '@/components/module-progress-card'
 import { getAllProgrammes, getCours, resolveCoursActivities } from '@/lib/content'
 import { getParcoursConfig } from '@/lib/parcours/config'
+
+import { ApprendreClient } from './apprendre-client'
 
 interface PageProps {
   params: Promise<{ parcours: string }>
@@ -39,21 +40,34 @@ export default async function ApprendrePage({ params }: PageProps) {
       )
     : allProgrammes
 
-  // Resolve cours molecules for each programme
-  const programmesWithCours = programmes.map((programme) => ({
-    ...programme,
-    modules: programme.cours.map((slug) => {
+  // Resolve enriched module data from all programmes
+  const modules = programmes.flatMap((programme) =>
+    programme.cours.map((slug) => {
       const cours = getCours(slug)
       const activities = resolveCoursActivities(slug)
       return {
         id: cours.slug,
         title: cours.title,
         description: cours.description,
+        trimester: cours.trimester,
+        order: cours.order,
+        estimatedMinutes: cours.estimatedMinutes,
         sectionsCount: cours.sections.length,
         activityIds: activities.map((a) => a.id),
       }
-    }),
-  }))
+    })
+  )
+
+  // Group by trimester
+  const trimesterGroups = ['T1', 'T2', 'T3']
+    .map((key) => ({
+      key,
+      label: `Trimestre ${key.slice(1)}`,
+      modules: modules
+        .filter((m) => m.trimester === key)
+        .sort((a, b) => a.order - b.order),
+    }))
+    .filter((g) => g.modules.length > 0)
 
   return (
     <div className="px-4 lg:px-6">
@@ -66,7 +80,7 @@ export default async function ApprendrePage({ params }: PageProps) {
         </p>
       </div>
 
-      {programmesWithCours.length === 0 ? (
+      {trimesterGroups.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center text-muted-foreground">
             <BookOpen className="mx-auto mb-4 h-12 w-12 opacity-50" aria-hidden="true" />
@@ -74,28 +88,7 @@ export default async function ApprendrePage({ params }: PageProps) {
           </CardContent>
         </Card>
       ) : (
-        <div className="space-y-6">
-          {programmesWithCours.map((programme) => (
-            <div key={programme.id}>
-              <h2 className="mb-4 font-serif text-lg font-semibold">
-                {programme.label}
-              </h2>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {programme.modules.map((mod) => (
-                  <ModuleProgressCard
-                    key={mod.id}
-                    moduleId={mod.id}
-                    title={mod.title}
-                    description={mod.description}
-                    sectionsCount={mod.sectionsCount}
-                    activityIds={mod.activityIds}
-                    parcours={parcours}
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+        <ApprendreClient parcours={parcours} trimesterGroups={trimesterGroups} />
       )}
     </div>
   )
