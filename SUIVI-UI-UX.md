@@ -9,14 +9,14 @@
 ## UI — De 78% vers 100%
 
 ### P0 — Bugs critiques
-- [ ] **UI-01** Fix PWA banner qui ne se ferme pas (close button broken)
-- [ ] **UI-02** Fix score moyen QCM 5538% (cap à 100%, Math.min)
+- [x] **UI-01** Fix PWA banner qui ne se ferme pas (close button broken)
+- [x] **UI-02** Fix score moyen QCM 5538% (cap à 100%, Math.min)
 
 ### P1 — Fonctionnalités manquantes
-- [ ] **UI-03** Rendre le dark mode toggle visible (bouton dans sidebar footer ou header)
-- [ ] **UI-04** Ajouter print styles (@media print dans globals.css)
-- [ ] **UI-05** Augmenter touch targets mobile (buttons min h-10 = 40px sur mobile)
-- [ ] **UI-06** Créer composant EmptyState générique réutilisable
+- [x] **UI-03** Rendre le dark mode toggle visible (bouton dans sidebar footer ou header)
+- [x] **UI-04** Ajouter print styles (@media print dans globals.css)
+- [x] **UI-05** Augmenter touch targets mobile (buttons min h-10 = 40px sur mobile)
+- [x] **UI-06** Créer composant EmptyState générique réutilisable
 
 ### P2 — Polish
 - [ ] **UI-07** Ajouter bottom navigation bar mobile (3 items: Dashboard, Apprendre, Réviser)
@@ -28,17 +28,17 @@
 ## UX — De 62% vers 100%
 
 ### P0 — Flows critiques manquants
-- [ ] **UX-01** Implémenter reset password (page + Firebase sendPasswordResetEmail)
-- [ ] **UX-02** Sécuriser /admin/* (middleware auth check)
-- [ ] **UX-03** Ajouter rate limiting + auth sur /api/scan
-- [ ] **UX-04** Cacher bouton "Google (bientôt)" sur login/signup
+- [x] **UX-01** Implémenter reset password (page + Firebase sendPasswordResetEmail)
+- [x] **UX-02** Sécuriser /admin/* (AdminGuard component)
+- [x] **UX-03** Ajouter rate limiting + auth sur /api/scan
+- [x] **UX-04** Cacher bouton "Google (bientôt)" sur login/signup
 
 ### P1 — Flows importants
-- [ ] **UX-05** Ajouter breadcrumbs sur pages module et activité
-- [ ] **UX-06** Persister état série play (currentIndex dans localStorage)
-- [ ] **UX-07** Ajouter confirmation dialog avant reset progress
-- [ ] **UX-08** Ajouter email verification post-signup (banner reminder)
-- [ ] **UX-09** Mini-onboarding (tooltip/banner first visit)
+- [x] **UX-05** Ajouter breadcrumbs sur pages module et activité
+- [x] **UX-06** Persister état série play (currentIndex dans localStorage)
+- [x] **UX-07** Ajouter confirmation dialog avant reset progress
+- [x] **UX-08** Ajouter email verification post-signup (banner reminder)
+- [x] **UX-09** Mini-onboarding (tooltip/banner first visit)
 
 ### P2 — Améliorations UX
 - [ ] **UX-10** Ajouter indicateur progression sur module cards (page Apprendre)
@@ -55,15 +55,17 @@
 
 ## Itérations
 
-### Itération 1 — [EN COURS]
+### Itération 1 — [TERMINÉ]
 - Focus: P0 UI + P0 UX (bugs + flows critiques)
 - Cibles: UI-01, UI-02, UX-01, UX-02, UX-03, UX-04
+- Commit: 7feab38
 
-### Itération 2
+### Itération 2 — [TERMINÉ]
 - Focus: P1 UI + P1 UX (fonctionnalités manquantes)
 - Cibles: UI-03 à UI-06, UX-05 à UX-09
+- Commit: 3878a95
 
-### Itération 3
+### Itération 3 — [EN COURS]
 - Focus: P2 (polish)
 - Cibles: UI-07 à UI-09, UX-10 à UX-14
 
@@ -77,7 +79,14 @@
 
 | # | Décision | Raison |
 |---|----------|--------|
-| | | |
+| 1 | AdminGuard client-side (email whitelist) au lieu de middleware | Pas de firebase-admin installé, et middleware Next.js ne peut pas vérifier JWT. Solution client-side suffisante pour MVP. |
+| 2 | Rate limiting in-memory (10 req/min/IP) | Pas besoin de Redis/DB pour MVP. Reset au redémarrage est acceptable. |
+| 3 | Auth token presence check (sans vérification crypto) | Pas de firebase-admin. Token présence + rate limiting suffit pour MVP. |
+| 4 | Suppression Google auth buttons (pas juste hide) | Bouton disabled avec "bientôt" crée une attente chez l'utilisateur. Mieux de supprimer entièrement. |
+| 5 | Touch targets via CSS @media (pointer:coarse) | Plus léger que modifier chaque composant. 44px min conforme WCAG 2.5.8. |
+| 6 | Breadcrumbs desktop-only sur activity page | Mobile a déjà ActivityHeader. Double nav serait redondant. |
+| 7 | ConfirmDialog wrapper au lieu d'AlertDialog direct | Réutilisable partout, moins de boilerplate. |
+| 8 | Onboarding banner en localStorage | Simple et suffisant pour MVP. Pas besoin de Firestore pour ça. |
 
 ---
 
@@ -85,4 +94,5 @@
 
 | Commit | Tâches | Fichiers |
 |--------|--------|----------|
-| | | |
+| 7feab38 | UI-01,02 UX-01,02,03,04 | 16 fichiers, +341 -57 |
+| 3878a95 | UI-03,04,05,06 UX-05,06,07,08,09 | 12 fichiers, +533 -11 |

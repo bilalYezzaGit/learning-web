@@ -10,7 +10,8 @@ import { Award, Home, RotateCcw } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { getSerie, resolveSerieActivities } from '@/lib/content'
+import { getSerie, resolveSerieActivities, getAtom, atomExists } from '@/lib/content'
+import { ResultDetails } from './result-details'
 
 interface PageProps {
   params: Promise<{ parcours: string; id: string }>
@@ -26,7 +27,12 @@ export default async function SerieResultPage({ params }: PageProps) {
     notFound()
   }
 
-  const totalActivities = resolveSerieActivities(id).length
+  const resolvedActivities = resolveSerieActivities(id)
+  const totalActivities = resolvedActivities.length
+  const activityInfos = resolvedActivities.map((a) => {
+    const title = atomExists(a.id) ? getAtom(a.id).title : a.id
+    return { id: a.id, title, type: a.type }
+  })
 
   return (
     <div className="mx-auto max-w-2xl px-4 lg:px-6">
@@ -55,6 +61,11 @@ export default async function SerieResultPage({ params }: PageProps) {
           </p>
         </CardContent>
       </Card>
+
+      {/* Per-activity detail */}
+      <div className="mb-8">
+        <ResultDetails activities={activityInfos} />
+      </div>
 
       {/* Actions */}
       <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">

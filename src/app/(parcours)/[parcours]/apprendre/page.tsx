@@ -6,11 +6,11 @@
  */
 
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import { BookOpen, ChevronRight } from 'lucide-react'
+import { BookOpen } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
-import { getAllProgrammes, getCours } from '@/lib/content'
+import { ModuleProgressCard } from '@/components/module-progress-card'
+import { getAllProgrammes, getCours, resolveCoursActivities } from '@/lib/content'
 import { getParcoursConfig } from '@/lib/parcours/config'
 
 interface PageProps {
@@ -44,11 +44,13 @@ export default async function ApprendrePage({ params }: PageProps) {
     ...programme,
     modules: programme.cours.map((slug) => {
       const cours = getCours(slug)
+      const activities = resolveCoursActivities(slug)
       return {
         id: cours.slug,
         title: cours.title,
         description: cours.description,
         sectionsCount: cours.sections.length,
+        activityIds: activities.map((a) => a.id),
       }
     }),
   }))
@@ -80,32 +82,15 @@ export default async function ApprendrePage({ params }: PageProps) {
               </h2>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {programme.modules.map((mod) => (
-                  <Link
+                  <ModuleProgressCard
                     key={mod.id}
-                    href={`/${parcours}/apprendre/${mod.id}`}
-                    className="group"
-                  >
-                    <Card className="h-full transition-colors group-hover:border-primary/50">
-                      <CardContent className="p-4">
-                        <div className="flex items-start justify-between">
-                          <div className="flex-1">
-                            <h3 className="font-medium group-hover:text-primary">
-                              {mod.title}
-                            </h3>
-                            {mod.description && (
-                              <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
-                                {mod.description}
-                              </p>
-                            )}
-                          </div>
-                          <ChevronRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                        </div>
-                        <p className="mt-3 text-xs text-muted-foreground">
-                          {mod.sectionsCount} sections
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </Link>
+                    moduleId={mod.id}
+                    title={mod.title}
+                    description={mod.description}
+                    sectionsCount={mod.sectionsCount}
+                    activityIds={mod.activityIds}
+                    parcours={parcours}
+                  />
                 ))}
               </div>
             </div>

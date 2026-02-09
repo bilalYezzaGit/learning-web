@@ -10,6 +10,11 @@ import * as React from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { queryKeys } from '@/lib/query/keys'
 import { ProgressService, type ProgressMap } from '@/lib/services'
+import {
+  getLocalProgress,
+  setLocalExerciseComplete,
+  setLocalQCMComplete,
+} from '@/lib/services/local-progress'
 import type { ActivityProgress, ProgressStatus } from '@/types'
 
 /**
@@ -40,7 +45,8 @@ export function useProgress(userId: string | undefined) {
   // Initialize service and subscribe to changes
   React.useEffect(() => {
     if (!userId) {
-      setProgress(new Map())
+      // Load from localStorage for anonymous users
+      setProgress(getLocalProgress())
       setIsLoading(false)
       return
     }
@@ -71,10 +77,13 @@ export function useProgress(userId: string | undefined) {
       contextType: string
       contextId: string
     }) => {
-      if (!serviceRef.current) {
-        throw new Error('Progress service not initialized')
+      if (serviceRef.current) {
+        await serviceRef.current.completeExercise(params)
+      } else {
+        // Anonymous: save to localStorage
+        const updated = setLocalExerciseComplete(params)
+        setProgress(updated)
       }
-      await serviceRef.current.completeExercise(params)
     },
   })
 
@@ -87,10 +96,13 @@ export function useProgress(userId: string | undefined) {
       contextType: string
       contextId: string
     }) => {
-      if (!serviceRef.current) {
-        throw new Error('Progress service not initialized')
+      if (serviceRef.current) {
+        await serviceRef.current.completeQCM(params)
+      } else {
+        // Anonymous: save to localStorage
+        const updated = setLocalQCMComplete(params)
+        setProgress(updated)
       }
-      await serviceRef.current.completeQCM(params)
     },
   })
 

@@ -3,12 +3,14 @@
 import { usePathname } from "next/navigation"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
+import { SearchCommand } from "@/components/search-command"
 
 interface SiteHeaderProps {
   parcours?: string
+  modules?: { id: string; title: string }[]
 }
 
-export function SiteHeader({ parcours }: SiteHeaderProps) {
+export function SiteHeader({ parcours, modules = [] }: SiteHeaderProps) {
   const pathname = usePathname()
 
   // Get the title based on the current path
@@ -43,6 +45,11 @@ export function SiteHeader({ parcours }: SiteHeaderProps) {
           className="mx-2 data-[orientation=vertical]:h-4"
         />
         <h1 className="text-base font-medium">{getTitle()}</h1>
+        {parcours && (
+          <div className="ml-auto">
+            <SearchCommand parcours={parcours} modules={modules} />
+          </div>
+        )}
       </div>
     </header>
   )

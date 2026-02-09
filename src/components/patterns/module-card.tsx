@@ -15,6 +15,7 @@ export interface ModuleCardProps extends React.HTMLAttributes<HTMLDivElement> {
   imageUrl?: string
   progress?: number
   activityCount?: number
+  priority?: boolean
   onClick?: () => void
 }
 
@@ -24,6 +25,7 @@ export function ModuleCard({
   imageUrl,
   progress = 0,
   activityCount,
+  priority = false,
   onClick,
   className,
   ...props
@@ -44,6 +46,7 @@ export function ModuleCard({
             src={imageUrl}
             alt={title}
             fill
+            priority={priority}
             className="object-cover"
           />
         ) : (

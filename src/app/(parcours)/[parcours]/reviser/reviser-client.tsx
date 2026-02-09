@@ -172,11 +172,12 @@ export function ReviserContent({
   const [search, setSearch] = React.useState('')
   const [selectedModule, setSelectedModule] = React.useState<string>('all')
   const [selectedDifficulty, setSelectedDifficulty] = React.useState<string>('all')
+  const [sortBy, setSortBy] = React.useState<string>('priority')
 
-  // Filter entries based on search, module, and difficulty
+  // Filter and sort entries
   const filterEntries = React.useCallback(
     (items: SeriesCatalogEntry[]) => {
-      return items.filter((entry) => {
+      const filtered = items.filter((entry) => {
         // Search filter
         if (search) {
           const q = search.toLowerCase()
@@ -195,8 +196,19 @@ export function ReviserContent({
 
         return true
       })
+
+      // Sort
+      if (sortBy === 'difficulty') {
+        filtered.sort((a, b) => a.difficulty - b.difficulty)
+      } else if (sortBy === 'duration') {
+        filtered.sort((a, b) => a.estimatedMinutes - b.estimatedMinutes)
+      } else if (sortBy === 'difficulty-desc') {
+        filtered.sort((a, b) => b.difficulty - a.difficulty)
+      }
+
+      return filtered
     },
-    [search, selectedModule, selectedDifficulty]
+    [search, selectedModule, selectedDifficulty, sortBy]
   )
 
   // Group entries by trimestre
@@ -265,6 +277,17 @@ export function ReviserContent({
             <option value="1">Facile</option>
             <option value="2">Moyen</option>
             <option value="3">Difficile</option>
+          </select>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground"
+            aria-label="Trier par"
+          >
+            <option value="priority">Par défaut</option>
+            <option value="difficulty">Difficulté croissante</option>
+            <option value="difficulty-desc">Difficulté décroissante</option>
+            <option value="duration">Durée croissante</option>
           </select>
         </div>
       </div>
