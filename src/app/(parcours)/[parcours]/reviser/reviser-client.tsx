@@ -240,6 +240,7 @@ export function ReviserContent({
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="pl-9"
+            aria-label="Rechercher une série"
           />
         </div>
         <div className="flex gap-2">
