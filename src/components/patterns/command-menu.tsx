@@ -74,7 +74,7 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
 
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
-      <CommandInput placeholder="Rechercher une page, un module..." />
+      <CommandInput placeholder="Rechercher une page, un module…" />
       <CommandList>
         <CommandEmpty>Aucun résultat trouvé.</CommandEmpty>
 
