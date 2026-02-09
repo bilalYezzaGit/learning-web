@@ -89,8 +89,8 @@ export function ReviserStats() {
 
   const stats = React.useMemo(() => {
     let completed = 0
-    let totalScore = 0
-    let totalPossible = 0
+    let totalPercentage = 0
+    let qcmCount = 0
     let exercisesDone = 0
 
     progress.forEach((p) => {
@@ -99,14 +99,14 @@ export function ReviserStats() {
         if (p.activityType === 'exercise') {
           exercisesDone++
         }
-        if (p.score !== undefined && p.total) {
-          totalScore += p.score
-          totalPossible += p.total
+        if (p.activityType === 'qcm' && p.score !== undefined) {
+          totalPercentage += p.score
+          qcmCount++
         }
       }
     })
 
-    const avgScore = totalPossible > 0 ? Math.round((totalScore / totalPossible) * 100) : 0
+    const avgScore = qcmCount > 0 ? Math.round(totalPercentage / qcmCount) : 0
 
     return { completed, avgScore, exercisesDone }
   }, [progress])
