@@ -44,13 +44,13 @@ export default async function ParcoursLayout({
   return (
     <SidebarProvider>
       <AppSidebar parcours={parcours} modules={modules} />
-      <SidebarInset className="max-h-svh overflow-hidden">
+      <SidebarInset className="max-h-[calc(100svh-3.5rem)] md:max-h-svh overflow-hidden">
         <SiteHeader parcours={parcours} modules={modules} />
         <EmailVerificationBanner />
         <ParcoursBanner urlParcours={parcours} />
         <div className="flex flex-1 min-h-0 flex-col overflow-auto">
           <div id="main-content" className="@container/main flex flex-1 min-h-0 flex-col gap-2">
-            <div className="flex flex-1 min-h-0 flex-col gap-4 py-4 pb-16 md:gap-6 md:py-6 md:pb-6">
+            <div className="flex flex-1 min-h-0 flex-col gap-4 py-4 md:gap-6 md:py-6">
               {children}
             </div>
           </div>

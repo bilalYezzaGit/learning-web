@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Lora, DM_Sans } from 'next/font/google'
 import './globals.css'
 
+import { ThemeProvider } from 'next-themes'
 import { QueryProvider } from '@/lib/query/provider'
 import { AuthProvider } from '@/lib/context'
 import { Toaster } from '@/components/ui/sonner'
@@ -69,13 +70,15 @@ export default function RootLayout({
         >
           Aller au contenu principal
         </a>
-        <QueryProvider>
-          <AuthProvider>
-            {children}
-            <Toaster />
-            <PwaInstallPrompt />
-          </AuthProvider>
-        </QueryProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <QueryProvider>
+            <AuthProvider>
+              {children}
+              <Toaster />
+              <PwaInstallPrompt />
+            </AuthProvider>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
