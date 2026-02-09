@@ -210,8 +210,8 @@ function StatsTab({ userId }: { userId: string }) {
     let qcmDone = 0
     let qcmSuccess = 0
     let exercisesDone = 0
-    let totalScore = 0
-    let totalPossible = 0
+    let totalPercentage = 0
+    let qcmWithScore = 0
 
     progress.forEach((p) => {
       completed++
@@ -220,16 +220,16 @@ function StatsTab({ userId }: { userId: string }) {
       if (p.activityType === 'qcm') {
         qcmDone++
         if (p.status === 'success') qcmSuccess++
-        if (p.score !== undefined && p.total) {
-          totalScore += p.score
-          totalPossible += p.total
+        if (p.score !== undefined) {
+          totalPercentage += p.score
+          qcmWithScore++
         }
       } else if (p.activityType === 'exercise') {
         exercisesDone++
       }
     })
 
-    const avgScore = totalPossible > 0 ? Math.round((totalScore / totalPossible) * 100) : 0
+    const avgScore = qcmWithScore > 0 ? Math.round(totalPercentage / qcmWithScore) : 0
     const successRate = completed > 0 ? Math.round((success / completed) * 100) : 0
 
     return { completed, success, qcmDone, qcmSuccess, exercisesDone, avgScore, successRate }
