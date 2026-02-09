@@ -5,6 +5,7 @@
  * Filtered by parcours.
  */
 
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BookOpen, ChevronRight } from 'lucide-react'
 
@@ -14,6 +15,16 @@ import { getParcoursConfig } from '@/lib/parcours/config'
 
 interface PageProps {
   params: Promise<{ parcours: string }>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { parcours } = await params
+  const config = getParcoursConfig(parcours)
+  const label = config?.label ?? 'Apprendre'
+  return {
+    title: `Apprendre — ${label}`,
+    description: `Explorez les modules de mathématiques du parcours ${label}. Cours structurés, exercices corrigés et QCM interactifs.`,
+  }
 }
 
 export default async function ApprendrePage({ params }: PageProps) {
