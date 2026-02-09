@@ -5,6 +5,7 @@
  * Shows progress tracking and quick actions.
  */
 
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BookOpen, Brain } from 'lucide-react'
 
@@ -15,6 +16,16 @@ import { DashboardClient } from './dashboard-client'
 
 interface PageProps {
   params: Promise<{ parcours: string }>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { parcours } = await params
+  const config = getParcoursConfig(parcours)
+  const label = config?.label ?? 'Tableau de bord'
+  return {
+    title: `Tableau de bord — ${label}`,
+    description: `Votre progression et vos statistiques pour le parcours ${label}. Reprenez votre apprentissage.`,
+  }
 }
 
 export default async function ParcoursDashboardPage({ params }: PageProps) {
