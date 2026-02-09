@@ -13,11 +13,13 @@
 import { NextResponse } from 'next/server'
 import { headers } from 'next/headers'
 import Anthropic from '@anthropic-ai/sdk'
+import { getAdminAuth } from '@/lib/firebase/admin'
 
 const anthropic = new Anthropic()
 
-// Simple in-memory rate limiter: max 10 requests per IP per minute
-// Note: in-memory state resets per serverless invocation — best-effort for MVP
+// Best-effort in-memory rate limiter: max 10 requests per IP per minute.
+// Resets on serverless cold starts — acceptable for MVP.
+const MAX_RATE_ENTRIES = 10_000
 const rateMap = new Map<string, { count: number; resetAt: number }>()
 const RATE_LIMIT = 10
 const RATE_WINDOW_MS = 60_000
@@ -27,6 +29,12 @@ function checkRateLimit(ip: string): boolean {
   const entry = rateMap.get(ip)
 
   if (!entry || now > entry.resetAt) {
+    // Purge expired entries if map grows too large
+    if (rateMap.size > MAX_RATE_ENTRIES) {
+      for (const [key, val] of rateMap) {
+        if (now > val.resetAt) rateMap.delete(key)
+      }
+    }
     rateMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS })
     return true
   }
@@ -111,12 +119,17 @@ export async function POST(request: Request) {
       )
     }
 
-    // Auth check: require Firebase ID token
-    // TODO: validate JWT with firebase-admin for proper verification
+    // Auth check: verify Firebase ID token
     const authHeader = headersList.get('authorization')
     const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null
-    if (!token || token.split('.').length !== 3) {
+    if (!token) {
       return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
+    }
+
+    try {
+      await getAdminAuth().verifyIdToken(token)
+    } catch {
+      return NextResponse.json({ error: 'Token invalide' }, { status: 401 })
     }
 
     const body = (await request.json()) as ScanRequest
