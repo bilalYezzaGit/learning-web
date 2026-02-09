@@ -5,6 +5,7 @@
  * Timeline is in layout.tsx.
  */
 
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowLeft, BookOpen, Play, Target } from 'lucide-react'
@@ -17,6 +18,19 @@ import { extractAtomIds } from '@/types/content'
 
 interface PageProps {
   params: Promise<{ parcours: string; moduleId: string }>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { moduleId } = await params
+  try {
+    const cours = getCours(moduleId)
+    return {
+      title: cours.title,
+      description: cours.description ?? `Module ${cours.title} — cours, exercices et QCM interactifs.`,
+    }
+  } catch {
+    return { title: 'Module' }
+  }
 }
 
 export default async function ModuleDetailPage({ params }: PageProps) {
