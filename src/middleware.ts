@@ -17,6 +17,8 @@ const GLOBAL_ROUTES = [
   '/reset-password',
   '/parametres',
   '/select-parcours',
+  '/terms',
+  '/privacy',
 ]
 
 /**
