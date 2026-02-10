@@ -48,7 +48,7 @@ export default async function ParcoursLayout({
         <SiteHeader parcours={parcours} modules={modules} />
         <EmailVerificationBanner />
         <ParcoursBanner urlParcours={parcours} />
-        <div className="flex flex-1 min-h-0 flex-col overflow-auto">
+        <div className="flex flex-1 min-h-0 flex-col overflow-auto pb-20 md:pb-0">
           <div id="main-content" className="@container/main flex flex-1 min-h-0 flex-col gap-2">
             <div className="flex flex-1 min-h-0 flex-col gap-4 py-4 md:gap-6 md:py-6">
               {children}

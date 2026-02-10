@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { logError } from '@/lib/services/error-logger'
@@ -13,6 +14,8 @@ export default function ReviserError({
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  const { parcours } = useParams<{ parcours: string }>()
+
   useEffect(() => {
     logError(error, { component: 'ReviserErrorBoundary', metadata: { digest: error.digest } })
   }, [error])
@@ -33,7 +36,7 @@ export default function ReviserError({
               Reessayer
             </Button>
             <Button variant="outline" asChild>
-              <Link href="./reviser">Retour aux series</Link>
+              <Link href={`/${parcours}/reviser`}>Retour aux series</Link>
             </Button>
           </div>
         </CardContent>

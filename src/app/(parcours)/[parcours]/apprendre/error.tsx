@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { logError } from '@/lib/services/error-logger'
@@ -13,6 +14,8 @@ export default function ApprendreError({
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  const { parcours } = useParams<{ parcours: string }>()
+
   useEffect(() => {
     logError(error, { component: 'ApprendreErrorBoundary', metadata: { digest: error.digest } })
   }, [error])
@@ -33,7 +36,7 @@ export default function ApprendreError({
               Reessayer
             </Button>
             <Button variant="outline" asChild>
-              <Link href="./apprendre">Retour aux modules</Link>
+              <Link href={`/${parcours}/apprendre`}>Retour aux modules</Link>
             </Button>
           </div>
         </CardContent>
