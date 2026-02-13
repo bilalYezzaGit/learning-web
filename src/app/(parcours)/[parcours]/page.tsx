@@ -1,8 +1,9 @@
 /**
- * Parcours Dashboard Page
+ * Parcours Dashboard Page — "Cockpit de progression"
  *
- * Learner dashboard for a specific parcours.
- * Shows progress tracking and quick actions.
+ * Enriched learner dashboard for a specific parcours.
+ * Server component resolves content metadata (modules, series, atoms),
+ * client component computes stats from user progress.
  */
 
 import type { Metadata } from 'next'
@@ -11,8 +12,17 @@ import { BookOpen, Brain } from 'lucide-react'
 
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { OnboardingBanner } from '@/components/onboarding-banner'
-import { getAllProgrammes, getCours, resolveCoursActivities } from '@/lib/content'
+import {
+  getAllProgrammes,
+  getAllAtoms,
+  getCours,
+  getSerie,
+  resolveCoursActivities,
+  resolveSerieActivities,
+} from '@/lib/content'
 import { getParcoursConfig } from '@/lib/parcours'
+import type { DashboardModuleInfo, DashboardSeriesInfo } from '@/types/dashboard'
+import type { DashboardAtomInfo } from '@/lib/dashboard'
 import { DashboardClient } from './dashboard-client'
 
 interface PageProps {
@@ -33,13 +43,15 @@ export default async function ParcoursDashboardPage({ params }: PageProps) {
   const { parcours } = await params
   const parcoursConfig = getParcoursConfig(parcours)
 
-  // Resolve modules with their activity IDs for progress tracking
-  const modules = (() => {
-    if (!parcoursConfig) return []
-
-    const programme = getAllProgrammes().find(
+  const programme = (() => {
+    if (!parcoursConfig) return null
+    return getAllProgrammes().find(
       (p) => p.levelSlug === parcoursConfig.level && p.sectionSlug === parcoursConfig.section
-    )
+    ) ?? null
+  })()
+
+  // Resolve modules with trimester + activity IDs
+  const modules: DashboardModuleInfo[] = (() => {
     if (!programme) return []
 
     return programme.cours.map((slug) => {
@@ -48,17 +60,58 @@ export default async function ParcoursDashboardPage({ params }: PageProps) {
       return {
         id: slug,
         title: cours.title,
+        trimester: cours.trimester,
         activityIds: activities.map((a) => a.id),
       }
     })
+  })()
+
+  // Resolve series with their activity IDs
+  const series: DashboardSeriesInfo[] = (() => {
+    if (!programme) return []
+
+    return programme.series.map((slug) => {
+      const serie = getSerie(slug)
+      const activities = resolveSerieActivities(slug)
+      return {
+        slug: serie.slug,
+        title: serie.title,
+        difficulty: serie.difficulty,
+        estimatedMinutes: serie.estimatedMinutes,
+        trimestre: serie.trimestre,
+        modules: serie.modules,
+        tags: serie.tags,
+        type: serie.type,
+        activityIds: activities.map((a) => a.id),
+      }
+    })
+  })()
+
+  // Collect atom metadata for tag-based analysis (only atoms referenced by modules)
+  const atoms: DashboardAtomInfo[] = (() => {
+    const referencedIds = new Set(modules.flatMap((m) => m.activityIds))
+    return getAllAtoms()
+      .filter((a) => referencedIds.has(a.id))
+      .map((a) => ({
+        id: a.id,
+        type: a.type,
+        title: a.title,
+        tags: a.tags,
+        difficulty: a.difficulty,
+      }))
   })()
 
   return (
     <div className="px-4 lg:px-6">
       <OnboardingBanner />
 
-      {/* Progress Dashboard - Client Component */}
-      <DashboardClient parcours={parcours} modules={modules} />
+      {/* Enriched Dashboard - Client Component */}
+      <DashboardClient
+        parcours={parcours}
+        modules={modules}
+        series={series}
+        atoms={atoms}
+      />
 
       {/* Quick Actions */}
       <div className="mt-6 grid gap-4 sm:grid-cols-2">

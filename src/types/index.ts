@@ -14,3 +14,18 @@ export type {
 
 // User
 export type { UserProfile } from './user'
+
+// Dashboard
+export type {
+  DashboardModuleInfo,
+  DashboardSeriesInfo,
+  NextActivity,
+  GlobalProgress,
+  ModuleProgress,
+  LearningStats,
+  LearningTag,
+  StrengthsAnalysis,
+  RecommendedSeries,
+  AnalysisStatus,
+  DashboardData,
+} from './dashboard'
