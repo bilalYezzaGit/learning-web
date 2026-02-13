@@ -50,41 +50,53 @@ export default async function ParcoursDashboardPage({ params }: PageProps) {
     ) ?? null
   })()
 
-  // Resolve modules with trimester + activity IDs
+  // Resolve modules with trimester + activity IDs (skip modules with broken content)
   const modules: DashboardModuleInfo[] = (() => {
     if (!programme) return []
 
-    return programme.cours.map((slug) => {
-      const cours = getCours(slug)
-      const activities = resolveCoursActivities(slug)
-      return {
-        id: slug,
-        title: cours.title,
-        trimester: cours.trimester,
-        activityIds: activities.map((a) => a.id),
+    const result: DashboardModuleInfo[] = []
+    for (const slug of programme.cours) {
+      try {
+        const cours = getCours(slug)
+        const activities = resolveCoursActivities(slug)
+        result.push({
+          id: slug,
+          title: cours.title,
+          trimester: cours.trimester,
+          activityIds: activities.map((a) => a.id),
+        })
+      } catch {
+        // Skip modules with broken atom references during build
       }
-    })
+    }
+    return result
   })()
 
-  // Resolve series with their activity IDs
+  // Resolve series with their activity IDs (skip series with broken content)
   const series: DashboardSeriesInfo[] = (() => {
     if (!programme) return []
 
-    return programme.series.map((slug) => {
-      const serie = getSerie(slug)
-      const activities = resolveSerieActivities(slug)
-      return {
-        slug: serie.slug,
-        title: serie.title,
-        difficulty: serie.difficulty,
-        estimatedMinutes: serie.estimatedMinutes,
-        trimestre: serie.trimestre,
-        modules: serie.modules,
-        tags: serie.tags,
-        type: serie.type,
-        activityIds: activities.map((a) => a.id),
+    const result: DashboardSeriesInfo[] = []
+    for (const slug of programme.series) {
+      try {
+        const serie = getSerie(slug)
+        const activities = resolveSerieActivities(slug)
+        result.push({
+          slug: serie.slug,
+          title: serie.title,
+          difficulty: serie.difficulty,
+          estimatedMinutes: serie.estimatedMinutes,
+          trimestre: serie.trimestre,
+          modules: serie.modules,
+          tags: serie.tags,
+          type: serie.type,
+          activityIds: activities.map((a) => a.id),
+        })
+      } catch {
+        // Skip series with missing YAML or broken atom references
       }
-    })
+    }
+    return result
   })()
 
   // Collect atom metadata for tag-based analysis (only atoms referenced by modules)
