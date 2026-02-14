@@ -63,8 +63,8 @@ export const tests = [
     name: 'No hardcoded Tailwind color classes',
     fn: () => {
       const pattern = /(bg|text|border|ring)-(red|green|blue|yellow|purple|pink|orange|teal|cyan|lime|fuchsia|rose|violet|indigo|emerald|sky|amber|stone)-\d{2,3}/
-      // Intentional color usage: lesson parts, exercise parts, mdx components
-      const excluded = ['lesson-parts.tsx', 'exercise-parts.tsx', 'mdx-components.tsx']
+      // Intentional color usage: lesson parts, exercise parts, mdx components, print content
+      const excluded = ['lesson-parts.tsx', 'exercise-parts.tsx', 'mdx-components.tsx', 'print-mdx-components.tsx', 'answer-zone.tsx']
       const files = tsxFiles.filter(
         (f) => !excluded.some((ex) => f.endsWith(ex)) && !f.includes('src/content/')
       )

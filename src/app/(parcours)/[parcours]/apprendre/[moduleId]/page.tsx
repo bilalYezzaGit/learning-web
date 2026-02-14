@@ -8,7 +8,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { BookOpen, Play, Target } from 'lucide-react'
+import { BookOpen, FileDown, Play, Target } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -117,14 +117,22 @@ export default async function ModuleDetailPage({ params }: PageProps) {
               )}
             </div>
 
-            {firstActivityId && (
-              <Button className="mt-6" size="lg" asChild>
-                <Link href={`/${parcours}/apprendre/${moduleId}/${firstActivityId}`}>
-                  <Play className="mr-2 h-4 w-4" />
-                  Commencer le module
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              {firstActivityId && (
+                <Button size="lg" asChild>
+                  <Link href={`/${parcours}/apprendre/${moduleId}/${firstActivityId}`}>
+                    <Play className="mr-2 h-4 w-4" />
+                    Commencer le module
+                  </Link>
+                </Button>
+              )}
+              <Button variant="outline" size="lg" asChild>
+                <Link href={`/${parcours}/imprimer/cours/${moduleId}`} target="_blank">
+                  <FileDown className="mr-2 h-4 w-4" />
+                  Version PDF
                 </Link>
               </Button>
-            )}
+            </div>
           </CardContent>
         </Card>
       </div>

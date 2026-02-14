@@ -8,7 +8,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, BookOpen, Play } from 'lucide-react'
+import { ArrowLeft, BookOpen, FileDown, Play } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -69,12 +69,20 @@ export default async function SerieDetailPage({ params }: PageProps) {
             <p className="mt-4 text-sm text-muted-foreground">
               {activities.length} activités · {serie.estimatedMinutes} min estimées
             </p>
-            <Button className="mt-6" size="lg" asChild>
-              <Link href={`/${parcours}/reviser/serie/${id}/play`}>
-                <Play className="mr-2 h-4 w-4" />
-                Commencer la série
-              </Link>
-            </Button>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <Button size="lg" asChild>
+                <Link href={`/${parcours}/reviser/serie/${id}/play`}>
+                  <Play className="mr-2 h-4 w-4" />
+                  Commencer la série
+                </Link>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <Link href={`/${parcours}/imprimer/serie/${id}`} target="_blank">
+                  <FileDown className="mr-2 h-4 w-4" />
+                  Version PDF
+                </Link>
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>

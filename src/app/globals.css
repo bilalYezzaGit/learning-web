@@ -197,12 +197,14 @@
 @media print {
   /* Hide navigation, sidebars, buttons */
   nav,
-  aside,
-  footer,
-  header,
   [data-sidebar],
   [data-slot="button"],
   .fixed {
+    display: none !important;
+  }
+
+  /* Hide elements marked for print-hiding */
+  .print-hide {
     display: none !important;
   }
 
@@ -234,6 +236,52 @@
 
   /* Avoid breaking inside cards */
   [data-slot="card"] {
+    break-inside: avoid;
+  }
+
+  /* ─── Print page styles ─── */
+
+  /* Print page: full-width, no margin */
+  .print-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1cm !important;
+  }
+
+  /* Hide solutions in print */
+  .print-solution-hidden {
+    display: none !important;
+  }
+
+  /* Answer zone: ensure visible borders */
+  .print-answer-zone {
+    border: 1px dashed #999 !important;
+    background: white !important;
+    break-inside: avoid;
+  }
+
+  /* QR codes: always visible in print */
+  .print-qr-code {
+    display: inline-block !important;
+  }
+
+  /* KaTeX in print: simplified styling */
+  .print-page .katex-display {
+    border: 1px solid #e5e5e5 !important;
+    background: #fafafa !important;
+    box-shadow: none !important;
+  }
+
+  /* Lesson parts in print: solid borders, no gradients */
+  .print-page aside {
+    background: #f8f8f8 !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  /* Page breaks */
+  .break-inside-avoid-page {
     break-inside: avoid;
   }
 }
