@@ -239,14 +239,29 @@
     break-inside: avoid;
   }
 
-  /* ─── Print page styles ─── */
+  /* ─── Booklet print styles ─── */
 
-  /* Print page: full-width, no margin */
-  .print-page {
+  /* Booklet: natural flow, A4 margins */
+  .print-booklet {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
-    padding: 1cm !important;
+    padding: 1.5cm 2cm !important;
+    overflow: visible !important;
+  }
+
+  /* Cover page */
+  .print-cover {
+    min-height: 0 !important;
+    padding-bottom: 2cm !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Remove ALL height constraints on print booklet ancestors */
+  .print-booklet,
+  .print-booklet * {
+    max-height: none !important;
+    overflow: visible !important;
   }
 
   /* Hide solutions in print */
@@ -267,14 +282,14 @@
   }
 
   /* KaTeX in print: simplified styling */
-  .print-page .katex-display {
+  .print-booklet .katex-display {
     border: 1px solid #e5e5e5 !important;
     background: #fafafa !important;
     box-shadow: none !important;
   }
 
   /* Lesson parts in print: solid borders, no gradients */
-  .print-page aside {
+  .print-booklet aside {
     background: #f8f8f8 !important;
     box-shadow: none !important;
     break-inside: avoid;
@@ -283,6 +298,11 @@
   /* Page breaks */
   .break-inside-avoid-page {
     break-inside: avoid;
+  }
+
+  /* Don't show link URLs inside booklet (QR codes replace this) */
+  .print-booklet .prose a::after {
+    content: none;
   }
 }
 

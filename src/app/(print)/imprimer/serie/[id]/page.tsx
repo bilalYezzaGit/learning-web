@@ -1,12 +1,9 @@
 /**
- * Print view for a serie (revision set)
+ * Print view for a serie (revision set) — Booklet format
  *
- * Renders all activities in a print-optimized flat layout:
- * - Lessons: fully expanded with all content visible
- * - Exercises: enonce + answer zone with QR code (solution hidden)
- * - QCMs: questions with numbered options + answer zone with QR code
- *
- * QR codes link to /scan/{atomId} for correction via the app.
+ * Lives outside the (parcours) route group so it renders without
+ * sidebar, header, or height constraints. Content flows naturally
+ * across multiple printed pages.
  */
 
 import type { Metadata } from 'next'
@@ -20,7 +17,7 @@ import { AnswerZone } from '@/components/print/answer-zone'
 import { QRCodeSVG } from '@/components/print/qr-code'
 
 interface PageProps {
-  params: Promise<{ parcours: string; id: string }>
+  params: Promise<{ id: string }>
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -73,57 +70,59 @@ export default async function PrintSeriePage({ params }: PageProps) {
   let qcmCounter = 0
 
   return (
-    <div className="print-page">
+    <>
       <PrintToolbar title={`${serie.title} — Version imprimable`} />
 
-      <div className="mx-auto max-w-4xl px-6 py-8 print:px-0 print:py-0">
-        {/* Header */}
-        <header className="mb-10 border-b-2 border-foreground pb-6 print:mb-8">
-          <div className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+      <article className="print-booklet mx-auto max-w-3xl px-8 py-10 print:max-w-none print:px-0 print:py-0">
+        {/* ── Cover page ── */}
+        <header className="print-cover mb-12 flex min-h-[50vh] flex-col justify-center border-b-2 border-foreground pb-8 print:min-h-0 print:break-after-page print:border-b-0 print:pb-0">
+          <div className="text-sm font-medium uppercase tracking-widest text-muted-foreground">
             Série de révision
           </div>
-          <h1 className="mt-1 text-3xl font-bold text-foreground print:text-2xl">
+          <h1 className="mt-2 text-4xl font-bold leading-tight text-foreground print:text-3xl">
             {serie.title}
           </h1>
           {serie.description && (
-            <p className="mt-2 text-base text-muted-foreground">{serie.description}</p>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+              {serie.description}
+            </p>
           )}
-          <div className="mt-4 flex gap-4 text-sm text-muted-foreground">
+
+          <div className="mt-8 flex gap-6 text-sm text-muted-foreground">
             <span>{activities.length} activités</span>
-            <span>·</span>
-            <span>{serie.estimatedMinutes} min estimées</span>
+            <span>~{serie.estimatedMinutes} min</span>
           </div>
         </header>
 
-        {/* Activities */}
+        {/* ── Activities ── */}
         {compiledActivities.map((ca, idx) => {
           if (ca.type === 'lesson') {
             return (
-              <article key={idx} className="mb-8 break-inside-avoid-page print:mb-6">
-                <h2 className="mb-3 text-lg font-semibold text-foreground">
+              <section key={idx} className="mb-10 print:mb-8">
+                <h2 className="mb-4 text-lg font-semibold text-foreground">
                   {ca.activity.title}
                 </h2>
-                <div className="prose prose-stone max-w-none prose-sm">
+                <div className="prose prose-stone max-w-none">
                   {ca.content}
                 </div>
-              </article>
+              </section>
             )
           }
 
           if (ca.type === 'exercise') {
             exerciseCounter++
             return (
-              <article key={idx} className="mb-8 break-inside-avoid-page print:mb-6">
-                <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold text-foreground">
+              <section key={idx} className="mb-10 break-inside-avoid-page print:mb-8">
+                <h2 className="mb-4 flex items-center gap-3 text-lg font-semibold text-foreground">
                   <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary">
                     {exerciseCounter}
                   </span>
                   {ca.activity.title}
-                  <span className="text-xs font-normal text-muted-foreground">
+                  <span className="text-sm font-normal text-muted-foreground">
                     ({ca.activity.timeMinutes} min)
                   </span>
                 </h2>
-                <div className="prose prose-stone max-w-none prose-sm">
+                <div className="prose prose-stone max-w-none">
                   {ca.content}
                 </div>
                 <AnswerZone
@@ -131,30 +130,30 @@ export default async function PrintSeriePage({ params }: PageProps) {
                   baseUrl={baseUrl}
                   lines={8}
                 />
-              </article>
+              </section>
             )
           }
 
           if (ca.type === 'qcm') {
             return (
-              <article key={idx} className="mb-8 break-inside-avoid-page print:mb-6">
-                <h2 className="mb-4 text-lg font-semibold text-foreground">
+              <section key={idx} className="mb-10 print:mb-8">
+                <h2 className="mb-5 text-lg font-semibold text-foreground">
                   QCM — {ca.questions.length} questions
                 </h2>
                 {ca.questions.map((q) => {
                   qcmCounter++
                   return (
-                    <div key={q.atomId} className="mb-6 break-inside-avoid rounded border border-border bg-muted/50 p-4 print:mb-4">
-                      <div className="mb-3 flex items-start justify-between gap-3">
+                    <div key={q.atomId} className="mb-6 break-inside-avoid rounded-lg border border-border bg-muted/30 p-5 print:mb-5">
+                      <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
-                          <div className="mb-2 text-sm font-semibold text-muted-foreground">
+                          <div className="mb-2 text-sm font-bold text-muted-foreground">
                             Question {qcmCounter}
                           </div>
                           <div className="prose prose-stone max-w-none prose-sm">
                             {q.enonce}
                           </div>
                         </div>
-                        <div className="shrink-0 print:block hidden">
+                        <div className="shrink-0">
                           <QRCodeSVG
                             value={`${baseUrl}/scan/${q.atomId}`}
                             size={48}
@@ -163,25 +162,23 @@ export default async function PrintSeriePage({ params }: PageProps) {
                         </div>
                       </div>
 
-                      {/* Options */}
-                      <div className="mt-3 space-y-2">
+                      <div className="mt-4 space-y-2.5">
                         {q.options.map((opt, optIdx) => (
-                          <label
+                          <div
                             key={optIdx}
-                            className="flex items-start gap-2 text-sm text-foreground"
+                            className="flex items-start gap-3 text-sm"
                           >
-                            <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-border text-xs font-medium">
+                            <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border text-xs font-semibold">
                               {String.fromCharCode(65 + optIdx)}
                             </span>
                             <span className="prose prose-stone prose-sm flex-1">
                               {opt}
                             </span>
-                          </label>
+                          </div>
                         ))}
                       </div>
 
-                      {/* Small answer line for QCM */}
-                      <div className="mt-3 border-t border-dotted border-border pt-2">
+                      <div className="mt-4 border-t border-dotted border-border pt-3">
                         <span className="text-xs text-muted-foreground">
                           Réponse : ______
                         </span>
@@ -189,20 +186,20 @@ export default async function PrintSeriePage({ params }: PageProps) {
                     </div>
                   )
                 })}
-              </article>
+              </section>
             )
           }
 
           return null
         })}
 
-        {/* Footer */}
-        <footer className="mt-12 border-t border-border pt-4 text-center text-xs text-muted-foreground print:mt-8">
-          <p>
-            Généré depuis l&apos;application · Scannez les QR codes pour corriger vos exercices
+        {/* ── Footer ── */}
+        <footer className="mt-16 border-t border-border pt-6 text-center print:mt-8 print:break-before-avoid">
+          <p className="text-xs text-muted-foreground">
+            Généré depuis Learning OS · Scannez les QR codes pour corriger vos exercices dans l&apos;application
           </p>
         </footer>
-      </div>
-    </div>
+      </article>
+    </>
   )
 }

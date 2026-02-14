@@ -77,7 +77,7 @@ export default async function SerieDetailPage({ params }: PageProps) {
                 </Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <Link href={`/${parcours}/imprimer/serie/${id}`} target="_blank">
+                <Link href={`/imprimer/serie/${id}`} target="_blank">
                   <FileDown className="mr-2 h-4 w-4" />
                   Version PDF
                 </Link>
