@@ -29,6 +29,10 @@ function isGlobalRoute(pathname: string): boolean {
   if (GLOBAL_ROUTES.includes(pathname)) {
     return true
   }
+  // Print routes (outside parcours layout)
+  if (pathname.startsWith('/imprimer/')) {
+    return true
+  }
   // Check for static files and API routes
   if (
     pathname.startsWith('/_next') ||
