@@ -2,7 +2,7 @@
  * Activity Content Page
  *
  * Shows activity content with navigation and progress tracking.
- * Uses compileMdx for lessons/exercises, QCMPlayer for quizzes.
+ * Reads pre-compiled HTML/JSON from generated content.
  */
 
 import type { Metadata } from 'next'
@@ -19,8 +19,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { compileMdx } from '@/lib/mdx'
-import { getAtom, atomExists, resolveCoursActivities, getCours, findQuizGroup, compileQuiz } from '@/lib/content'
+import { getCoursActivities, getCours, findQuizGroup, getCompiledQuiz, getAtomHtml } from '@/lib/content-loader'
+import { ContentRenderer } from '@/components/content/content-renderer'
 import { ActivityClient } from './activity-client'
 import { ActivityHeader } from './activity-header'
 
@@ -29,13 +29,14 @@ interface PageProps {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { activityId } = await params
+  const { moduleId, activityId } = await params
   try {
-    if (!atomExists(activityId)) return { title: 'Activité' }
-    const atom = getAtom(activityId)
+    const activities = getCoursActivities(moduleId)
+    const activity = activities.find(a => a.id === activityId)
+    if (!activity) return { title: 'Activité' }
     return {
-      title: atom.title,
-      description: `${atom.type === 'lesson' ? 'Cours' : atom.type === 'exercise' ? 'Exercice' : 'QCM'} — ${atom.title}`,
+      title: activity.title,
+      description: `${activity.type === 'lesson' ? 'Cours' : activity.type === 'exercise' ? 'Exercice' : 'QCM'} — ${activity.title}`,
     }
   } catch {
     return { title: 'Activité' }
@@ -48,7 +49,7 @@ export default async function ActivityPage({ params }: PageProps) {
   // Resolve the ordered activity list for navigation
   let activities
   try {
-    activities = resolveCoursActivities(moduleId)
+    activities = getCoursActivities(moduleId)
   } catch {
     notFound()
   }
@@ -64,21 +65,16 @@ export default async function ActivityPage({ params }: PageProps) {
   const nextActivity = currentIndex < activities.length - 1 ? activities[currentIndex + 1] : null
 
   // Render content based on type
-  let content: React.ReactNode = null
+  let htmlContent: string | null = null
   let quizData = null
-  let exerciseContent: string | undefined
 
   if (currentActivity.type === 'qcm') {
-    // Quiz group: compile all QCM atoms
+    // Quiz group: read pre-compiled QCM data
     const quizAtomIds = currentActivity.quizAtomIds ?? findQuizGroup(moduleId, activityId) ?? [activityId]
-    quizData = await compileQuiz(quizAtomIds)
+    quizData = getCompiledQuiz(quizAtomIds)
   } else {
-    // Lesson or exercise: compile MDX
-    const atom = getAtom(activityId)
-    content = await compileMdx(atom.content)
-    if (currentActivity.type === 'exercise') {
-      exerciseContent = atom.content
-    }
+    // Lesson or exercise: read pre-compiled HTML
+    htmlContent = getAtomHtml(activityId)
   }
 
   let coursTitle = moduleId
@@ -119,13 +115,9 @@ export default async function ActivityPage({ params }: PageProps) {
             moduleId={moduleId}
             parcours={parcours}
             quizData={quizData}
-            exerciseContent={exerciseContent}
+            exerciseContent={htmlContent ?? undefined}
           >
-            {content && (
-              <article className="prose prose-stone dark:prose-invert max-w-none">
-                {content}
-              </article>
-            )}
+            {htmlContent && <ContentRenderer html={htmlContent} />}
           </ActivityClient>
         </div>
       </div>

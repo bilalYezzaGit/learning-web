@@ -29,7 +29,7 @@ interface CompiledActivity {
   title: string
   timeMinutes: number
   quiz: CompiledQuiz | null
-  content: React.ReactNode
+  htmlContent: string | null
 }
 
 interface SeriePlayerProps {
@@ -228,8 +228,13 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
 
       <div className="flex-1 overflow-auto">
         <div className="mx-auto max-w-3xl px-4 lg:px-6 py-6">
-          {/* Pre-compiled content from Server Component */}
-          {currentActivity.content}
+          {/* Pre-compiled HTML content */}
+          {currentActivity.htmlContent && (
+            <article
+              className="prose prose-stone dark:prose-invert max-w-none"
+              dangerouslySetInnerHTML={{ __html: currentActivity.htmlContent }}
+            />
+          )}
 
           {/* Exercise completion button */}
           {currentActivity.type === 'exercise' && (

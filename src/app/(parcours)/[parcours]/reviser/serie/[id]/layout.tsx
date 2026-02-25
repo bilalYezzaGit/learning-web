@@ -7,7 +7,7 @@
 
 import { notFound } from 'next/navigation'
 
-import { getSerie, resolveSerieActivities } from '@/lib/content'
+import { getSerie, getSerieActivities } from '@/lib/content-loader'
 import { SerieTimelineWrapper } from './serie-timeline-wrapper'
 
 interface LayoutProps {
@@ -25,7 +25,7 @@ export default async function SerieLayout({ children, params }: LayoutProps) {
     notFound()
   }
 
-  const activities = resolveSerieActivities(id)
+  const activities = getSerieActivities(id)
 
   return (
     <div className="flex h-[calc(100svh-3.5rem)]">

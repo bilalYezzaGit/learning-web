@@ -7,21 +7,22 @@ export const domain = 'components'
 export const tests = [
   {
     id: 'CMP-001',
-    name: 'Lesson parts structure',
+    name: 'Content rendering pipeline',
     fn: () => {
-      const content = readFile('src/components/content/lesson-parts.tsx')
+      const renderer = readFile('src/components/content/content-renderer.tsx')
+      const loader = readFile('src/lib/content-loader.ts')
       const checks = [
-        ['definitionConfig', content.includes('definitionConfig') || content.includes('definition')],
-        ['theoremConfig', content.includes('theoremConfig') || content.includes('theorem')],
-        ['<aside', content.includes('<aside')],
-        ['prose wrapper', content.includes('prose')],
-        ['aria-hidden', content.includes('aria-hidden')],
+        ['ContentRenderer component', renderer.includes('ContentRenderer')],
+        ['dangerouslySetInnerHTML', renderer.includes('dangerouslySetInnerHTML')],
+        ['prose wrapper', renderer.includes('prose')],
+        ['content-loader getAtomHtml', loader.includes('getAtomHtml')],
+        ['content-loader getCompiledQuiz', loader.includes('getCompiledQuiz')],
       ]
       const failing = checks.filter(([, ok]) => !ok)
       return {
         pass: failing.length === 0,
         detail: failing.length === 0
-          ? 'All lesson part structural requirements met'
+          ? 'Content rendering pipeline properly configured'
           : `Missing: ${failing.map(([name]) => name).join(', ')}`,
       }
     },

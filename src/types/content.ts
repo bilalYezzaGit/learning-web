@@ -128,13 +128,13 @@ export interface ResolvedActivity extends TimelineActivity {
   quizAtomIds?: string[]
 }
 
-/** Compiled QCM question — MDX compiled to ReactNode */
+/** Compiled QCM question — pre-compiled HTML strings */
 export interface CompiledQCMQuestion {
   id: string
-  enonce: React.ReactNode
-  options: React.ReactNode[]
+  enonce: string
+  options: string[]
   correctIndex: number
-  explication?: React.ReactNode
+  explication?: string
   timeMinutes: number
 }
 

@@ -197,9 +197,10 @@ export function QCMPlayer({
 
       {/* Question */}
       <div className="flex-1">
-        <div className="prose prose-sm dark:prose-invert max-w-none">
-          {currentQuestion.enonce}
-        </div>
+        <div
+          className="prose prose-sm dark:prose-invert max-w-none"
+          dangerouslySetInnerHTML={{ __html: currentQuestion.enonce }}
+        />
 
         <div className="mt-6 space-y-3">
           {options.map((option, index) => {
@@ -247,9 +248,10 @@ export function QCMPlayer({
                     index + 1
                   )}
                 </div>
-                <span className="flex-1">
-                  {option}
-                </span>
+                <span
+                  className="flex-1"
+                  dangerouslySetInnerHTML={{ __html: option }}
+                />
                 <kbd className="hidden rounded border bg-muted px-2 py-0.5 text-xs text-muted-foreground sm:inline-block">
                   {index + 1}
                 </kbd>
@@ -262,9 +264,10 @@ export function QCMPlayer({
         {state === 'validated' && currentQuestion.explication && (
           <div aria-live="polite" className="mt-4 rounded-lg border border-info/25 bg-info/10 p-4">
             <p className="text-sm font-medium text-info-foreground">Explication</p>
-            <div className="mt-1 text-sm text-info-foreground">
-              {currentQuestion.explication}
-            </div>
+            <div
+              className="mt-1 text-sm text-info-foreground"
+              dangerouslySetInnerHTML={{ __html: currentQuestion.explication }}
+            />
           </div>
         )}
       </div>

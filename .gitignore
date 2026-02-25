@@ -1,7 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
+# dependencies (all levels)
+node_modules/
+
 /.pnp
 .pnp.*
 .yarn/*
@@ -13,8 +14,8 @@
 # testing
 /coverage
 
-# next.js
-/.next/
+# next.js (all levels)
+.next/
 /out/
 
 # production
@@ -32,6 +33,13 @@ yarn-error.log*
 
 # env files (if any future secrets are needed)
 .env*
+
+# Pipeline generated content
+/src/generated/
+
+# Python bytecode
+__pycache__/
+*.pyc
 
 # PWA generated files
 public/sw.js

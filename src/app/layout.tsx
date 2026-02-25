@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Lora, DM_Sans } from 'next/font/google'
+import 'katex/dist/katex.min.css'
 import './globals.css'
 
 import { ThemeProvider } from 'next-themes'

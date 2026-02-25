@@ -10,7 +10,7 @@ import { Award, Home, RotateCcw } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { getSerie, resolveSerieActivities, getAtom, atomExists } from '@/lib/content'
+import { getSerie, getSerieActivities } from '@/lib/content-loader'
 import { ResultDetails } from './result-details'
 
 interface PageProps {
@@ -27,12 +27,13 @@ export default async function SerieResultPage({ params }: PageProps) {
     notFound()
   }
 
-  const resolvedActivities = resolveSerieActivities(id)
+  const resolvedActivities = getSerieActivities(id)
   const totalActivities = resolvedActivities.length
-  const activityInfos = resolvedActivities.map((a) => {
-    const title = atomExists(a.id) ? getAtom(a.id).title : a.id
-    return { id: a.id, title, type: a.type }
-  })
+  const activityInfos = resolvedActivities.map((a) => ({
+    id: a.id,
+    title: a.title,
+    type: a.type,
+  }))
 
   return (
     <div className="mx-auto max-w-2xl px-4 lg:px-6">

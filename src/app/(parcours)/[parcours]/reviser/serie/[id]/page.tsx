@@ -12,7 +12,7 @@ import { ArrowLeft, BookOpen, Play } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { getSerie, resolveSerieActivities } from '@/lib/content'
+import { getSerie, getSerieActivities } from '@/lib/content-loader'
 
 interface PageProps {
   params: Promise<{ parcours: string; id: string }>
@@ -41,7 +41,7 @@ export default async function SerieDetailPage({ params }: PageProps) {
     notFound()
   }
 
-  const activities = resolveSerieActivities(id)
+  const activities = getSerieActivities(id)
 
   return (
     <div className="flex h-full flex-col">

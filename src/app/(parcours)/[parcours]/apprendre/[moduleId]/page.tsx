@@ -21,8 +21,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { getCours, resolveCoursActivities } from '@/lib/content'
-import { extractAtomIds } from '@/types/content'
+import { getCours, getCoursActivities } from '@/lib/content-loader'
 
 interface PageProps {
   params: Promise<{ parcours: string; moduleId: string }>
@@ -51,10 +50,10 @@ export default async function ModuleDetailPage({ params }: PageProps) {
     notFound()
   }
 
-  const activities = resolveCoursActivities(moduleId)
+  const activities = getCoursActivities(moduleId)
   const firstActivityId = activities[0]?.id
   const totalAtoms = cours.sections.reduce(
-    (sum, s) => sum + extractAtomIds(s.steps).length,
+    (sum, s) => sum + s.activities.length,
     0
   )
 

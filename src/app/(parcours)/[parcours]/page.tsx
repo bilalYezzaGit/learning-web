@@ -11,7 +11,7 @@ import { BookOpen, Brain } from 'lucide-react'
 
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { OnboardingBanner } from '@/components/onboarding-banner'
-import { getAllProgrammes, getCours, resolveCoursActivities } from '@/lib/content'
+import { getAllProgrammes, getCours, getCoursActivities } from '@/lib/content-loader'
 import { getParcoursConfig } from '@/lib/parcours'
 import { DashboardClient } from './dashboard-client'
 
@@ -44,7 +44,7 @@ export default async function ParcoursDashboardPage({ params }: PageProps) {
 
     return programme.cours.map((slug) => {
       const cours = getCours(slug)
-      const activities = resolveCoursActivities(slug)
+      const activities = getCoursActivities(slug)
       return {
         id: slug,
         title: cours.title,

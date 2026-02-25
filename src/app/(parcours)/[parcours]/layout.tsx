@@ -12,7 +12,7 @@ import { EmailVerificationBanner } from '@/components/email-verification-banner'
 import { MobileBottomNav } from '@/components/mobile-bottom-nav'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { getParcoursConfig } from '@/lib/parcours'
-import { getAllProgrammes, getCours } from '@/lib/content'
+import { getAllProgrammes, getCours } from '@/lib/content-loader'
 
 interface ParcoursLayoutProps {
   children: React.ReactNode

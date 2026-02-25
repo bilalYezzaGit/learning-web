@@ -2,7 +2,7 @@
  * Serie Activity Page
  *
  * Server Component that renders a single activity within the serie layout.
- * Handles lessons (MDX), exercises (MDX), and QCMs (parsed + QCMPlayer).
+ * Reads pre-compiled HTML/JSON from generated content.
  */
 
 import Link from 'next/link'
@@ -11,8 +11,8 @@ import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { compileMdx } from '@/lib/mdx'
-import { getAtom, resolveSerieActivities, findSerieQuizGroup, compileQuiz } from '@/lib/content'
+import { getSerieActivities, findSerieQuizGroup, getCompiledQuiz, getAtomHtml } from '@/lib/content-loader'
+import { ContentRenderer } from '@/components/content/content-renderer'
 import { getAtomTypeLabel } from '@/types/content'
 import { SerieActivityClient } from './serie-activity-client'
 
@@ -25,7 +25,7 @@ export default async function SerieActivityPage({ params }: PageProps) {
 
   let activities
   try {
-    activities = resolveSerieActivities(id)
+    activities = getSerieActivities(id)
   } catch {
     notFound()
   }
@@ -42,20 +42,14 @@ export default async function SerieActivityPage({ params }: PageProps) {
   const nextActivity = !isLast ? activities[currentIndex + 1] : null
 
   // Render content
-  let content: React.ReactNode = null
+  let htmlContent: string | null = null
   let quizData = null
 
   if (currentActivity.type === 'qcm') {
     const quizAtomIds = currentActivity.quizAtomIds ?? findSerieQuizGroup(id, activityId) ?? [activityId]
-    quizData = await compileQuiz(quizAtomIds)
+    quizData = getCompiledQuiz(quizAtomIds)
   } else {
-    const atom = getAtom(activityId)
-    const compiled = await compileMdx(atom.content)
-    content = (
-      <article className="prose prose-stone dark:prose-invert max-w-none">
-        {compiled}
-      </article>
-    )
+    htmlContent = getAtomHtml(activityId)
   }
 
   return (
@@ -83,7 +77,7 @@ export default async function SerieActivityPage({ params }: PageProps) {
             parcours={parcours}
             quizData={quizData}
           >
-            {content}
+            {htmlContent && <ContentRenderer html={htmlContent} />}
           </SerieActivityClient>
         </div>
       </div>

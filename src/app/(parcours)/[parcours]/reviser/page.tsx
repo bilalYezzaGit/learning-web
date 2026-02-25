@@ -10,7 +10,7 @@ import type { Metadata } from 'next'
 import { BookOpen } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
-import { getAllProgrammes, getSerie, resolveSerieActivities } from '@/lib/content'
+import { getAllProgrammes, getSerie, getSerieActivities } from '@/lib/content-loader'
 import { getParcoursConfig } from '@/lib/parcours'
 import { ReviserStats, ReviserContent } from './reviser-client'
 import type { Trimestre } from '@/types/content'
@@ -57,7 +57,7 @@ export default async function ReviserPage({ params }: PageProps) {
   const activityIdsMap = new Map(
     seriesList.map((serie) => [
       serie.slug,
-      resolveSerieActivities(serie.slug).map((a) => a.id),
+      getSerieActivities(serie.slug).map((a) => a.id),
     ])
   )
 
@@ -69,7 +69,7 @@ export default async function ReviserPage({ params }: PageProps) {
     difficulty: serie.difficulty,
     estimatedMinutes: serie.estimatedMinutes,
     tags: serie.tags,
-    activityCount: resolveSerieActivities(serie.slug).length,
+    activityCount: getSerieActivities(serie.slug).length,
     type: serie.type,
     trimestre: serie.trimestre,
     modules: serie.modules,

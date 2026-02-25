@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { getAllCours, getAllSeries } from '@/lib/content'
+import { getAllCours, getAllSeries } from '@/lib/content-loader'
 import { getActiveParcours } from '@/lib/parcours'
 
 const BASE_URL = 'https://www.aylansolutions.com'

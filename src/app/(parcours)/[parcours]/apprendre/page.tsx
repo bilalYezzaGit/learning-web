@@ -9,7 +9,7 @@ import type { Metadata } from 'next'
 import { BookOpen } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
-import { getAllProgrammes, getCours, resolveCoursActivities } from '@/lib/content'
+import { getAllProgrammes, getCours, getCoursActivities } from '@/lib/content-loader'
 import { getParcoursConfig } from '@/lib/parcours/config'
 
 import { ApprendreClient } from './apprendre-client'
@@ -44,7 +44,7 @@ export default async function ApprendrePage({ params }: PageProps) {
   const modules = programmes.flatMap((programme) =>
     programme.cours.map((slug) => {
       const cours = getCours(slug)
-      const activities = resolveCoursActivities(slug)
+      const activities = getCoursActivities(slug)
       return {
         id: cours.slug,
         title: cours.title,

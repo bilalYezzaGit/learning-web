@@ -8,7 +8,7 @@
 
 import { notFound } from 'next/navigation'
 
-import { getCours, resolveCoursActivities } from '@/lib/content'
+import { getCours, getCoursActivities } from '@/lib/content-loader'
 import { CourseTimelineWrapper } from './course-timeline-wrapper'
 
 interface LayoutProps {
@@ -26,9 +26,9 @@ export default async function ModuleLayout({ children, params }: LayoutProps) {
     notFound()
   }
 
-  const activities = resolveCoursActivities(moduleId)
+  const activities = getCoursActivities(moduleId)
   const sections = cours.sections.map((s, i) => ({
-    id: `section-${i}`,
+    id: s.id,
     label: s.label,
     order: i,
   }))
