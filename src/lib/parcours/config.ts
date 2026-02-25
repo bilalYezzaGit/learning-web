@@ -27,7 +27,7 @@ export const PARCOURS_LIST: ParcoursConfig[] = [
     description: 'Programme de mathematiques pour la 3eme annee',
     order: 1,
     visible: true,
-    active: false,
+    active: true,
   },
   {
     slug: '2nde-math',
@@ -47,7 +47,7 @@ export const PARCOURS_LIST: ParcoursConfig[] = [
     description: 'Programme de mathematiques pour la 1ere annee Tronc Commun',
     order: 3,
     visible: true,
-    active: true,
+    active: false,
   },
   {
     slug: '1ere-math',
