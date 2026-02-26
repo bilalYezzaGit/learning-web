@@ -28,6 +28,7 @@ sections:
   - label: "Theoreme des valeurs intermediaires"
     steps:
       - lesson-cont-tvi
+      - lesson-cont-figure-test
       - ex-cont-3
       - ex-cont-3b
       - ex-cont-3c

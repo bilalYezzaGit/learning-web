@@ -12,6 +12,7 @@ import remarkMath from 'remark-math'
 import remarkRehype from 'remark-rehype'
 import rehypeKatex from 'rehype-katex'
 import rehypeStringify from 'rehype-stringify'
+import { compileTypstToSvg } from './compile-typst.js'
 
 // ── Lesson part HTML configs (matching lesson-parts.tsx exactly) ──
 
@@ -248,6 +249,40 @@ function makeCollapsibleOpen(config: CollapsibleConfig): string {
   return `<details class="not-prose group/details mt-8 rounded-r-xl rounded-l-sm border-l-[3px] shadow-sm ${config.accentClass} ${config.bgClass}"><summary class="flex cursor-pointer select-none items-center gap-2.5 px-4 py-3 font-medium">${CHEVRON_SVG}<span class="h-5 w-5 shrink-0 ${config.iconClass}">${config.svgIcon}</span><span class="text-sm font-semibold">${escapeHtml(config.label)}</span></summary><div class="prose prose-stone dark:prose-invert max-w-none border-t px-5 py-4 ${config.borderClass}">`
 }
 
+// ── Typst code blocks → inline SVG ──
+// Strategy: replace ```typst blocks with placeholders BEFORE remark/rehype,
+// then swap placeholders back to SVG AFTER processing.
+// This protects SVG <style> tags from being mangled by the pipeline.
+
+const TYPST_BLOCK_RE = /```typst\n([\s\S]*?)```/g
+
+async function compileTypstBlocks(source: string): Promise<{ source: string; svgs: Map<string, string> }> {
+  const matches = [...source.matchAll(TYPST_BLOCK_RE)]
+  if (matches.length === 0) return { source, svgs: new Map() }
+
+  const svgs = new Map<string, string>()
+  let result = source
+  let i = 0
+  for (const match of matches) {
+    const code = match[1]!.trim()
+    const svg = await compileTypstToSvg(code)
+    const placeholder = `<!--TYPST_SVG_${i}-->`
+    const wrapped = `<div class="not-prose my-6 flex justify-center">${svg}</div>`
+    svgs.set(placeholder, wrapped)
+    result = result.replace(match[0], placeholder)
+    i++
+  }
+  return { source: result, svgs }
+}
+
+function restoreTypstSvgs(html: string, svgs: Map<string, string>): string {
+  let result = html
+  for (const [placeholder, svg] of svgs) {
+    result = result.replace(placeholder, svg)
+  }
+  return result
+}
+
 // ── Public API ──
 
 const processor = unified()
@@ -258,7 +293,8 @@ const processor = unified()
   .use(rehypeStringify, { allowDangerousHtml: true })
 
 export async function compileMdxToHtml(source: string): Promise<string> {
-  const preprocessed = preprocessSource(source)
+  const { source: withPlaceholders, svgs } = await compileTypstBlocks(source)
+  const preprocessed = preprocessSource(withPlaceholders)
   const result = await processor.process(preprocessed)
-  return String(result)
+  return restoreTypstSvgs(String(result), svgs)
 }

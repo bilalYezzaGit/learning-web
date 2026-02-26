@@ -1,0 +1,50 @@
+---
+type: lesson
+title: "Figure — Illustration du TVI"
+---
+
+Le theoreme des valeurs intermediaires affirme que si $f$ est continue sur $[a, b]$ et si $k$ est compris entre $f(a)$ et $f(b)$, alors il existe au moins un $c \in [a, b]$ tel que $f(c) = k$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-0.5, 0), (6.5, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -0.5), (0, 5), stroke: 0.8pt, mark: (end: ">", fill: black))
+
+  // Courbe f (bezier)
+  bezier((0.5, 1), (5.5, 4.2), (2, 4.5), (4, 0.5), stroke: 2pt + blue)
+
+  // Points a et b sur l'axe x
+  line((0.5, 0), (0.5, 1), stroke: (dash: "dashed", paint: gray))
+  line((5.5, 0), (5.5, 4.2), stroke: (dash: "dashed", paint: gray))
+
+  // f(a) et f(b) sur l'axe y
+  line((0, 1), (0.5, 1), stroke: (dash: "dashed", paint: gray))
+  line((0, 4.2), (5.5, 4.2), stroke: (dash: "dashed", paint: gray))
+
+  // Ligne horizontale y = k
+  line((-0.3, 2.5), (6.3, 2.5), stroke: (dash: "dotted", paint: red))
+
+  // Point c (intersection)
+  circle((2.8, 2.5), radius: 0.08, fill: red, stroke: red)
+
+  // Labels
+  content((0.5, -0.3), $a$)
+  content((5.5, -0.3), $b$)
+  content((2.8, -0.3), $c$)
+  content((-0.5, 1), $f(a)$)
+  content((-0.5, 4.2), $f(b)$)
+  content((-0.3, 2.5), anchor: "east", $k$)
+  content((6.5, -0.4), $x$)
+  content((-0.3, 5), $y$)
+
+  // Ligne verticale c
+  line((2.8, 0), (2.8, 2.5), stroke: (dash: "dashed", paint: red))
+})
+```
+
+Cette figure illustre le cas ou $f(a) < k < f(b)$. La continuite de $f$ garantit que la courbe « traverse » la droite $y = k$.
