@@ -181,20 +181,6 @@ function preprocessSource(source: string): string {
   result = result.replace(/<Explanation>/g, '')
   result = result.replace(/<\/Explanation>/g, '')
 
-  // Graph → widget marker
-  result = result.replace(
-    /<Graph\s+([^>]*?)\s*\/?\s*>/g,
-    (_match, attrs: string) => {
-      const expression = extractAttr(attrs, 'function') ?? extractAttr(attrs, 'fn') ?? ''
-      const range = extractAttr(attrs, 'range')
-      const yRange = extractAttr(attrs, 'yRange') ?? extractAttr(attrs, 'y-range')
-      const points = extractAttr(attrs, 'points')
-      const hideFormula = attrs.includes('hideFormula') || attrs.includes('hide-formula="true"')
-      const props = JSON.stringify({ expression, range, yRange, points, hideFormula })
-      return `<div data-widget="graph" data-props='${escapeAttr(props)}'></div>`
-    },
-  )
-
   // YouTube → widget marker
   result = result.replace(
     /<YouTube\s+([^>]*?)\s*\/?\s*>/g,
@@ -205,33 +191,6 @@ function preprocessSource(source: string): string {
       return `<div data-widget="youtube" data-props='${escapeAttr(props)}'></div>`
     },
   )
-
-  // TviExplorer → widget marker
-  result = result.replace(/<TviExplorer\s*\/?\s*>/g, '<div data-widget="tvi-explorer"></div>')
-
-  // Variations → widget marker
-  result = result.replace(
-    /<Variations\s+([^>]*?)>([\s\S]*?)<\/Variations>/g,
-    (_match, attrs: string, body: string) => {
-      const variable = extractAttr(attrs, 'var') ?? 'x'
-      const intervals = extractAttr(attrs, 'intervals') ?? '[]'
-      const rows: { label: string; kind: string; values: string }[] = []
-      const rowRegex = /<Row\s+([^>]*?)\/?\s*>/g
-      let rowMatch
-      while ((rowMatch = rowRegex.exec(body)) !== null) {
-        rows.push({
-          label: extractAttr(rowMatch[1]!, 'label') ?? '',
-          kind: extractAttr(rowMatch[1]!, 'kind') ?? 'sign',
-          values: extractAttr(rowMatch[1]!, 'values') ?? '[]',
-        })
-      }
-      const props = JSON.stringify({ variable, intervals, rows })
-      return `<div data-widget="variations" data-props='${escapeAttr(props)}'></div>`
-    },
-  )
-
-  // Clean up any remaining Row tags (standalone)
-  result = result.replace(/<Row\s+[^>]*?\/?>/g, '')
 
   return result
 }

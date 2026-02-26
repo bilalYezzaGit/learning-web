@@ -49,7 +49,26 @@ Donc $f$ est **paire**.
 
 </Example>
 
-<Graph function="x^2 + 1" range="[-3, 3]" yRange="[-1, 10]" />
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 2,
+    x-min: -3, x-max: 3,
+    y-min: -1, y-max: 10,
+    {
+      plot.add(domain: (-3, 3), x => calc.pow(x, 2) + 1,
+        style: (stroke: 2pt + blue), label: $f(x) = x^2 + 1$)
+    },
+  )
+})
+```
 
 ### Fonction impaire
 
@@ -94,7 +113,26 @@ On verifie bien que $f(0) = 0$.
 
 </Example>
 
-<Graph function="x^3 - x" range="[-2, 2]" yRange="[-2, 2]" />
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -2, x-max: 2,
+    y-min: -2, y-max: 2,
+    {
+      plot.add(domain: (-2, 2), x => calc.pow(x, 3) - x,
+        style: (stroke: 2pt + blue), label: $f(x) = x^3 - x$)
+    },
+  )
+})
+```
 
 ### Fonction ni paire ni impaire
 

@@ -152,7 +152,26 @@ Le sommet de $f$ est en $(0, 0)$. Le sommet de $h$ est en $(2, 3)$, et la parabo
 
 </Example>
 
-<Graph function="-(x - 2)^2 + 3" range="[-1, 5]" yRange="[-4, 4]" />
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -1, x-max: 5,
+    y-min: -4, y-max: 4,
+    {
+      plot.add(domain: (-1, 5), x => -calc.pow(x - 2, 2) + 3,
+        style: (stroke: 2pt + blue), label: $h(x) = -(x-2)^2 + 3$)
+    },
+  )
+})
+```
 
 <Attention>
 
