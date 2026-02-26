@@ -7,7 +7,7 @@ category: approfondissement
 tags: [derivation, derivabilite, continuite]
 ---
 
-<Enonce>
+:::enonce
 Soit $f$ définie par :
 
 $$f(x) = \begin{cases} x^2 + 1 & \text{si } x \leq 1 \\ 3x - 1 & \text{si } x > 1 \end{cases}$$
@@ -16,9 +16,9 @@ $$f(x) = \begin{cases} x^2 + 1 & \text{si } x \leq 1 \\ 3x - 1 & \text{si } x > 
 2. Calculer $f'_g(1)$ (dérivée à gauche) et $f'_d(1)$ (dérivée à droite).
 3. La fonction $f$ est-elle dérivable en $x = 1$ ?
 4. Interpréter géométriquement le résultat.
-</Enonce>
+:::
 
-<Solution>
+:::solution
 **1. Continuité en $x = 1$**
 
 Pour montrer que $f$ est continue en $1$, il faut vérifier que :
@@ -84,17 +84,17 @@ Il existe deux demi-tangentes :
 - À droite : pente $f'_d(1) = 3$
 
 Ces deux demi-tangentes ne sont pas alignées, d'où l'absence de tangente unique et donc l'absence de dérivabilité.
-</Solution>
+:::
 
-<Methode>
+:::methode
 Pour étudier la dérivabilité d'une fonction par morceaux en un point $a$ :
 
 1. **Vérifier la continuité** en $a$ (condition nécessaire)
 2. **Calculer $f'_g(a)$** : limite du taux d'accroissement quand $h \to 0^-$
 3. **Calculer $f'_d(a)$** : limite du taux d'accroissement quand $h \to 0^+$
 4. **Comparer** : si $f'_g(a) = f'_d(a)$, alors $f$ est dérivable en $a$ et $f'(a) = f'_g(a) = f'_d(a)$
-</Methode>
+:::
 
-<Hint>
+:::hint
 Pour calculer les dérivées à gauche et à droite, pensez à bien utiliser la bonne expression de $f(1+h)$ selon le signe de $h$.
-</Hint>
+:::

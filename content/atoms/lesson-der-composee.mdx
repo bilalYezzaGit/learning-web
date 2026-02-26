@@ -8,23 +8,23 @@ tags: [derivation, composee, chaine]
 
 ### Règle de la chaîne
 
-<Property title="Dérivée d'une fonction composée">
+:::property[Dérivée d'une fonction composée]
 
 Soient $u$ et $v$ deux fonctions dérivables. Si $v$ est dérivable en $u(x)$ et $u$ est dérivable en $x$, alors la fonction composée $v \circ u$ est dérivable en $x$ et :
 
 $$(v \circ u)'(x) = v'(u(x)) \times u'(x)$$
 
-</Property>
+:::
 
-<Remark>
+:::remark
 
 On dit qu'on "dérive de l'extérieur vers l'intérieur" :
 - Dérivée de la fonction extérieure $v$ **évaluée en** $u(x)$
 - Multipliée par la dérivée de la fonction intérieure $u$
 
-</Remark>
+:::
 
-<Example title="Dérivée de (2x + 1)⁵">
+:::example[Dérivée de (2x + 1)⁵]
 
 Posons $u(x) = 2x + 1$ et $v(t) = t^5$, donc $f(x) = v(u(x)) = (2x+1)^5$.
 
@@ -34,11 +34,11 @@ Par la règle de la chaîne :
 
 $$f'(x) = v'(u(x)) \times u'(x) = 5(2x+1)^4 \times 2 = 10(2x+1)^4$$
 
-</Example>
+:::
 
 ### Cas particulier : dérivée de u^n
 
-<Property title="Dérivée de u^n">
+:::property[Dérivée de u^n]
 
 Si $u$ est dérivable sur $I$ et $n \in \mathbb{N}^*$, alors :
 
@@ -46,9 +46,9 @@ $$(u^n)' = n u' u^{n-1}$$
 
 Autrement dit : **n fois dérivée de u fois u à la puissance n-1**.
 
-</Property>
+:::
 
-<Attention>
+:::attention
 
 Le facteur $u'$ est **essentiel** ! C'est l'erreur la plus fréquente d'oublier ce terme.
 
@@ -56,9 +56,9 @@ $$(u^n)' \neq nu^{n-1}$$
 
 Il faut : $(u^n)' = nu'u^{n-1}$
 
-</Attention>
+:::
 
-<Example title="Dérivée de (x² + 3x)⁴">
+:::example[Dérivée de (x² + 3x)⁴]
 
 Posons $u(x) = x^2 + 3x$, donc $f(x) = u^4$.
 
@@ -68,25 +68,25 @@ Par la formule :
 
 $$f'(x) = 4u'u^3 = 4(2x+3)(x^2+3x)^3$$
 
-</Example>
+:::
 
 ### Cas particulier : dérivée de √u
 
-<Property title="Dérivée de √u">
+:::property[Dérivée de √u]
 
 Si $u$ est dérivable sur $I$ et strictement positive sur $I$, alors :
 
 $$(\sqrt{u})' = \frac{u'}{2\sqrt{u}}$$
 
-</Property>
+:::
 
-<Attention>
+:::attention
 
 Encore une fois, ne pas oublier le facteur $u'$ au numérateur !
 
-</Attention>
+:::
 
-<Example title="Dérivée de √(x² + 1)">
+:::example[Dérivée de √(x² + 1)]
 
 Posons $u(x) = x^2 + 1$, donc $f(x) = \sqrt{u}$.
 
@@ -96,19 +96,19 @@ Par la formule (sur $\mathbb{R}$) :
 
 $$f'(x) = \frac{u'}{2\sqrt{u}} = \frac{2x}{2\sqrt{x^2+1}} = \frac{x}{\sqrt{x^2+1}}$$
 
-</Example>
+:::
 
 ### Cas particulier : dérivée de 1/u^n
 
-<Property title="Dérivée de 1/u^n">
+:::property[Dérivée de 1/u^n]
 
 Si $u$ est dérivable sur $I$ et ne s'annule pas sur $I$, et $n \in \mathbb{N}^*$, alors :
 
 $$\left(\frac{1}{u^n}\right)' = -\frac{nu'}{u^{n+1}}$$
 
-</Property>
+:::
 
-<Example title="Dérivée de 1/(3x - 2)²">
+:::example[Dérivée de 1/(3x - 2)²]
 
 Posons $u(x) = 3x - 2$, donc $f(x) = \frac{1}{u^2}$.
 
@@ -118,11 +118,11 @@ Par la formule (sur $\mathbb{R} \setminus \{\frac{2}{3}\}$) :
 
 $$f'(x) = -\frac{2u'}{u^3} = -\frac{2 \times 3}{(3x-2)^3} = -\frac{6}{(3x-2)^3}$$
 
-</Example>
+:::
 
 ### Applications combinées
 
-<Example title="Dérivée de (x² + 1)³(2x - 1)">
+:::example[Dérivée de (x² + 1)³(2x - 1)]
 
 Il faut combiner la règle du produit et celle de la composée.
 
@@ -146,10 +146,10 @@ $$f'(x) = (x^2+1)^2[6x(2x-1) + 2(x^2+1)]$$
 
 $$= (x^2+1)^2[12x^2 - 6x + 2x^2 + 2] = (x^2+1)^2(14x^2 - 6x + 2)$$
 
-</Example>
+:::
 
-<Remark>
+:::remark
 
 Pour les expressions complexes, il est souvent utile de **factoriser** le résultat pour obtenir une forme plus simple.
 
-</Remark>
+:::

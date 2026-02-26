@@ -7,14 +7,14 @@ category: application
 tags: [derivation, nombre-derive, definition]
 ---
 
-<Enonce>
+:::enonce
 Calculer par la définition (limite du taux d'accroissement) :
 
 1. $f'(2)$ pour $f(x) = x^2 - 3x + 1$
 2. $g'(1)$ pour $g(x) = \frac{1}{x+1}$
-</Enonce>
+:::
 
-<Solution>
+:::solution
 **1. Calcul de $f'(2)$ pour $f(x) = x^2 - 3x + 1$**
 
 On utilise la définition du nombre dérivé :
@@ -64,13 +64,13 @@ $$= \frac{-h}{2(2+h)} \times \frac{1}{h} = \frac{-1}{2(2+h)}$$
 Passons à la limite :
 
 $$g'(1) = \lim_{h \to 0} \frac{-1}{2(2+h)} = \frac{-1}{2 \times 2} = -\frac{1}{4}$$
-</Solution>
+:::
 
-<Methode>
+:::methode
 Pour calculer le nombre dérivé $f'(a)$ par définition :
 
 1. **Calculer $f(a)$** : valeur de la fonction au point $a$
 2. **Calculer $f(a+h)$** : valeur de la fonction au point $a+h$
 3. **Former le quotient** : $\frac{f(a+h) - f(a)}{h}$ et le simplifier pour faire disparaître $h$ au dénominateur
 4. **Passer à la limite** : calculer $\lim_{h \to 0}$ du quotient simplifié
-</Methode>
+:::

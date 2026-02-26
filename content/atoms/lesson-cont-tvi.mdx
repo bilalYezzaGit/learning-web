@@ -56,7 +56,7 @@ C'est exactement ce que dit le theoreme des valeurs intermediaires : une fonctio
 
 ### Le theoreme
 
-<Theorem title="Theoreme des valeurs intermediaires (TVI)">
+:::theorem[Theoreme des valeurs intermediaires (TVI)]
 
 Soit $f$ une fonction **continue** sur un intervalle $[a, b]$.
 
@@ -64,31 +64,31 @@ Pour tout reel $k$ compris entre $f(a)$ et $f(b)$, il existe au moins un $c \in 
 
 $$f(c) = k$$
 
-</Theorem>
+:::
 
-<Remark>
+:::remark
 
 Le TVI garantit l'**existence** d'une solution, mais pas son **unicite**. Il peut y avoir plusieurs valeurs de $c$ qui conviennent.
 
-</Remark>
+:::
 
 ### Corollaire : zeros d'une fonction
 
-<Property title="Corollaire du TVI (zeros)">
+:::property[Corollaire du TVI (zeros)]
 
 Si $f$ est **continue** sur $[a, b]$ et si $f(a)$ et $f(b)$ sont de **signes contraires**, alors il existe au moins un $c \in ]a, b[$ tel que $f(c) = 0$.
 
 $$f(a) \times f(b) < 0 \implies \exists\, c \in ]a,b[,\ f(c) = 0$$
 
-</Property>
+:::
 
 ### Unicite : le cas strictement monotone
 
-<Property title="TVI + monotonie stricte">
+:::property[TVI + monotonie stricte]
 
 Si $f$ est **continue** et **strictement monotone** sur $[a, b]$, alors pour tout $k$ compris entre $f(a)$ et $f(b)$, l'equation $f(x) = k$ admet une **unique** solution dans $[a, b]$.
 
-</Property>
+:::
 
 ```typst
 #import "@preview/vartable:0.2.3": tabvar
@@ -118,7 +118,7 @@ Pour montrer qu'une equation $f(x) = 0$ admet une solution dans $[a, b]$ :
 3. Verifier que $f(a) \times f(b) < 0$ (signes contraires)
 4. Conclure par le **TVI**
 
-<Example title="Application du TVI">
+:::example[Application du TVI]
 
 **Montrer que** $f(x) = x^3 - 3x + 1$ **admet une racine dans** $[0, 1]$.
 
@@ -133,7 +133,7 @@ Pour montrer qu'une equation $f(x) = 0$ admet une solution dans $[a, b]$ :
 
 **4.** $f$ est continue sur $[0, 1]$ et $f(0) \times f(1) < 0$, donc par le **TVI**, il existe $c \in ]0, 1[$ tel que $f(c) = 0$.
 
-</Example>
+:::
 
 ```typst
 #import "@preview/cetz:0.3.4": canvas, draw
@@ -160,7 +160,7 @@ Pour montrer qu'une equation $f(x) = 0$ admet une solution dans $[a, b]$ :
 
 Une fois l'existence etablie, on peut **affiner** l'encadrement en coupant l'intervalle en deux a chaque etape.
 
-<Example title="Dichotomie">
+:::example[Dichotomie]
 
 On sait que $f(x) = x^3 - 3x + 1$ s'annule dans $[0, 1]$. Affinons :
 
@@ -169,10 +169,10 @@ On sait que $f(x) = x^3 - 3x + 1$ s'annule dans $[0, 1]$. Affinons :
 
 On a encadre la racine : $c \in [0{,}25\,;\, 0{,}5]$.
 
-</Example>
+:::
 
-<Attention>
+:::attention
 
 Ne jamais oublier de **verifier la continuite** avant d'appliquer le TVI ! Le theoreme est **faux** si $f$ n'est pas continue. Par exemple, la fonction partie entiere saute de $0$ a $1$ sans passer par les valeurs intermediaires.
 
-</Attention>
+:::

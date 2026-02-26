@@ -12,7 +12,7 @@ Les transformations de courbes permettent d'obtenir le graphe d'une fonction a p
 
 ### Translations verticales
 
-<Property title="Translation verticale">
+:::property[Translation verticale]
 
 Soit $f$ une fonction et $k$ un reel.
 
@@ -22,9 +22,9 @@ La courbe de $g(x) = f(x) + k$ se deduit de la courbe de $f$ par une **translati
 - Vers le **haut** si $k > 0$
 - Vers le **bas** si $k < 0$
 
-</Property>
+:::
 
-<Example title="Translation verticale">
+:::example[Translation verticale]
 
 Soit $f(x) = x^2$ et $g(x) = x^2 + 2$.
 
@@ -32,11 +32,11 @@ La courbe de $g$ est la parabole de $f$ translatee de **2 unites vers le haut**.
 
 Le sommet de $f$ est en $(0, 0)$, celui de $g$ est en $(0, 2)$.
 
-</Example>
+:::
 
 ### Translations horizontales
 
-<Property title="Translation horizontale">
+:::property[Translation horizontale]
 
 Soit $f$ une fonction et $a$ un reel.
 
@@ -46,9 +46,9 @@ La courbe de $g(x) = f(x - a)$ se deduit de la courbe de $f$ par une **translati
 - Vers la **droite** si $a > 0$
 - Vers la **gauche** si $a < 0$
 
-</Property>
+:::
 
-<Attention title="Piege classique">
+:::attention[Piege classique]
 
 Pour $g(x) = f(x - a)$ avec $a > 0$ :
 
@@ -57,9 +57,9 @@ Pour $g(x) = f(x - a)$ avec $a > 0$ :
 
 **Exemple** : $g(x) = f(x - 2)$ signifie que $g(5) = f(3)$. Le point d'abscisse $3$ sur $f$ devient le point d'abscisse $5$ sur $g$, donc la courbe va vers la droite.
 
-</Attention>
+:::
 
-<Example title="Translation horizontale">
+:::example[Translation horizontale]
 
 Soit $f(x) = x^2$ et $h(x) = (x - 1)^2$.
 
@@ -67,11 +67,11 @@ La courbe de $h$ est la parabole de $f$ translatee de **1 unite vers la droite**
 
 Le sommet de $f$ est en $(0, 0)$, celui de $h$ est en $(1, 0)$.
 
-</Example>
+:::
 
 ### Symetrie par rapport a l'axe des abscisses
 
-<Property title="Symetrie / axe Ox">
+:::property[Symetrie / axe Ox]
 
 Soit $f$ une fonction.
 
@@ -79,9 +79,9 @@ La courbe de $g(x) = -f(x)$ se deduit de la courbe de $f$ par une **symetrie d'a
 
 Chaque point $M(x, y)$ de la courbe de $f$ donne le point $M'(x, -y)$ sur la courbe de $g$.
 
-</Property>
+:::
 
-<Example title="Symetrie / axe Ox">
+:::example[Symetrie / axe Ox]
 
 Soit $f(x) = x^2$ et $g(x) = -x^2$.
 
@@ -89,11 +89,11 @@ La courbe de $g$ est la parabole de $f$ "retournee" par rapport a l'axe des absc
 
 $f$ a un minimum en $(0, 0)$, $g$ a un maximum en $(0, 0)$.
 
-</Example>
+:::
 
 ### Symetrie par rapport a l'axe des ordonnees
 
-<Property title="Symetrie / axe Oy">
+:::property[Symetrie / axe Oy]
 
 Soit $f$ une fonction.
 
@@ -101,17 +101,17 @@ La courbe de $g(x) = f(-x)$ se deduit de la courbe de $f$ par une **symetrie d'a
 
 Chaque point $M(x, y)$ de la courbe de $f$ donne le point $M'(-x, y)$ sur la courbe de $g$.
 
-</Property>
+:::
 
-<Remark>
+:::remark
 
 Si $f$ est paire, alors $f(-x) = f(x)$, donc la courbe est invariante par symetrie / axe $(Oy)$.
 
 Si $f$ est impaire, alors $f(-x) = -f(x)$, donc la courbe est invariante par symetrie / origine $O$.
 
-</Remark>
+:::
 
-<Example title="Symetrie / axe Oy">
+:::example[Symetrie / axe Oy]
 
 Soit $f(x) = 2^x$ (exponentielle de base 2) et $g(x) = 2^{-x}$.
 
@@ -119,11 +119,11 @@ La courbe de $g$ est le "miroir" de la courbe de $f$ par rapport a l'axe des ord
 
 Si $f$ est croissante, $g$ est decroissante.
 
-</Example>
+:::
 
 ### Tableau recapitulatif
 
-<Property title="Resume des transformations">
+:::property[Resume des transformations]
 
 | Fonction | Transformation | Description |
 |----------|----------------|-------------|
@@ -132,13 +132,13 @@ Si $f$ est croissante, $g$ est decroissante.
 | $-f(x)$ | Symetrie / axe $Ox$ | Retournement vertical |
 | $f(-x)$ | Symetrie / axe $Oy$ | Retournement horizontal |
 
-</Property>
+:::
 
 ### Composition de transformations
 
 On peut combiner plusieurs transformations.
 
-<Example title="Composition de transformations">
+:::example[Composition de transformations]
 
 Soit $f(x) = x^2$ et $h(x) = -(x - 2)^2 + 3$.
 
@@ -150,7 +150,7 @@ On decompose :
 
 Le sommet de $f$ est en $(0, 0)$. Le sommet de $h$ est en $(2, 3)$, et la parabole est "retournee" (elle s'ouvre vers le bas).
 
-</Example>
+:::
 
 ```typst
 #import "@preview/cetz:0.3.4": canvas, draw
@@ -173,16 +173,16 @@ Le sommet de $f$ est en $(0, 0)$. Le sommet de $h$ est en $(2, 3)$, et la parabo
 })
 ```
 
-<Attention>
+:::attention
 
 L'ordre des transformations compte ! Par exemple :
 
 - $f(x - a) + k$ : d'abord translation horizontale, puis verticale
 - $f(x) + k - a$ serait different (somme dans la fonction)
 
-</Attention>
+:::
 
-<Remark>
+:::remark
 
 Ces transformations permettent de :
 
@@ -190,4 +190,4 @@ Ces transformations permettent de :
 - Etudier des familles de fonctions parametrees
 - Simplifier l'etude de fonctions complexes
 
-</Remark>
+:::

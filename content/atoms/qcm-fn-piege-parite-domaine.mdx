@@ -7,15 +7,23 @@ tags: [fonctions, parite, piege]
 correctOption: 2
 ---
 
-<Question>
+:::question
 Soit $f(x) = x^2$ definie sur $[0 ; 5]$. Cette fonction est :
-</Question>
+:::
 
-<Option>Paire</Option>
-<Option>Impaire</Option>
-<Option correct>Ni paire ni impaire</Option>
-<Option>A la fois paire et impaire</Option>
+:::option
+Paire
+:::
+:::option
+Impaire
+:::
+:::option{correct}
+Ni paire ni impaire
+:::
+:::option
+A la fois paire et impaire
+:::
 
-<Explanation>
+:::explanation
 C'est un piege classique. Bien que l'expression $f(x) = x^2$ verifie $f(-x) = x^2 = f(x)$ algebriquement, la fonction n'est **pas paire** car son domaine de definition $[0 ; 5]$ n'est pas symetrique par rapport a 0. Pour qu'une fonction soit paire, il faut que son domaine soit symetrique par rapport a 0 ET que $f(-x) = f(x)$ pour tout $x$ du domaine. Ici, si $x = 2 \in [0 ; 5]$, alors $-2 \notin [0 ; 5]$, donc la condition de parite ne peut pas etre verifiee.
-</Explanation>
+:::

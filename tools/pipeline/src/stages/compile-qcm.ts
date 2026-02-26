@@ -1,6 +1,6 @@
 /**
- * QCM compiler — extracts Question, Options, Explanation from MDX
- * and compiles each part to HTML separately.
+ * QCM compiler — extracts :::question, :::option, :::explanation
+ * directive blocks and compiles each part to HTML separately.
  */
 
 import { compileMdxToHtml } from './compile-mdx.js'
@@ -9,20 +9,20 @@ import type { RawAtom, CompiledQcm } from '../types.js'
 export async function compileQcm(atom: RawAtom): Promise<CompiledQcm> {
   const raw = atom.rawContent.trim()
 
-  // Extract <Question>...</Question>
-  const questionMatch = raw.match(/<Question>([\s\S]*?)<\/Question>/)
+  // Extract :::question ... :::
+  const questionMatch = raw.match(/^:::question\s*\n([\s\S]*?)\n:::\s*$/m)
   const questionText = (questionMatch?.[1] ?? '').trim()
 
-  // Extract all <Option>...</Option> and <Option correct>...</Option>
+  // Extract all :::option or :::option{correct} blocks
   const optionTexts: string[] = []
-  const optionRegex = /<Option(?:\s+correct)?>([\s\S]*?)<\/Option>/g
+  const optionRegex = /^:::option(?:\{correct\})?\s*\n([\s\S]*?)\n:::\s*$/gm
   let match
   while ((match = optionRegex.exec(raw)) !== null) {
     optionTexts.push((match[1] ?? '').trim())
   }
 
-  // Extract <Explanation>...</Explanation>
-  const explMatch = raw.match(/<Explanation>([\s\S]*?)<\/Explanation>/)
+  // Extract :::explanation ... :::
+  const explMatch = raw.match(/^:::explanation\s*\n([\s\S]*?)\n:::\s*$/m)
   const explanationText = explMatch?.[1]?.trim() ?? ''
 
   // Compile all parts to HTML

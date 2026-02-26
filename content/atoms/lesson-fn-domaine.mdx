@@ -10,13 +10,13 @@ tags: [fonctions, domaine-definition]
 
 Le **domaine de definition** d'une fonction $f$, note $D_f$, est l'ensemble de tous les reels $x$ pour lesquels $f(x)$ existe.
 
-<Definition title="Domaine de definition">
+:::definition[Domaine de definition]
 
 Le **domaine de definition** d'une fonction $f$ est l'ensemble :
 
 $$D_f = \{x \in \mathbb{R} \mid f(x) \text{ existe}\}$$
 
-</Definition>
+:::
 
 ### Regles de determination
 
@@ -24,27 +24,27 @@ $$D_f = \{x \in \mathbb{R} \mid f(x) \text{ existe}\}$$
 
 Une fonction polynomiale est definie sur $\mathbb{R}$ tout entier.
 
-<Example title="Fonction polynomiale">
+:::example[Fonction polynomiale]
 
 Soit $f(x) = 2x^3 - 5x^2 + 3x - 1$.
 
 $f$ est une fonction polynomiale, donc $D_f = \mathbb{R}$.
 
-</Example>
+:::
 
 #### Fonctions rationnelles
 
 Une fonction rationnelle est definie sauf aux valeurs qui annulent le denominateur.
 
-<Property>
+:::property
 
 Pour une fonction $f(x) = \frac{P(x)}{Q(x)}$ :
 
 $$D_f = \{x \in \mathbb{R} \mid Q(x) \neq 0\}$$
 
-</Property>
+:::
 
-<Example title="Fonction rationnelle">
+:::example[Fonction rationnelle]
 
 Soit $f(x) = \frac{3x + 1}{x^2 - 4}$.
 
@@ -52,21 +52,21 @@ Le denominateur s'annule pour $x^2 - 4 = 0$, donc $x = -2$ ou $x = 2$.
 
 $$D_f = \mathbb{R} \setminus \{-2, 2\} = ]-\infty, -2[ \cup ]-2, 2[ \cup ]2, +\infty[$$
 
-</Example>
+:::
 
 #### Fonctions avec racines carrees
 
 Pour une racine carree $\sqrt{u(x)}$, il faut que le radicande soit positif ou nul.
 
-<Property>
+:::property
 
 Pour une fonction $f(x) = \sqrt{u(x)}$ :
 
 $$D_f = \{x \in \mathbb{R} \mid u(x) \geq 0\}$$
 
-</Property>
+:::
 
-<Example title="Fonction avec racine carree">
+:::example[Fonction avec racine carree]
 
 Soit $f(x) = \sqrt{2x - 5}$.
 
@@ -74,13 +74,13 @@ Il faut $2x - 5 \geq 0$, donc $x \geq \frac{5}{2}$.
 
 $$D_f = \left[\frac{5}{2}, +\infty\right[$$
 
-</Example>
+:::
 
 ### Cas mixtes
 
 Lorsqu'une fonction combine plusieurs contraintes, le domaine de definition est l'**intersection** des domaines imposes par chaque contrainte.
 
-<Example title="Fonction mixte">
+:::example[Fonction mixte]
 
 Soit $f(x) = \frac{\sqrt{x + 1}}{x - 3}$.
 
@@ -91,15 +91,15 @@ L'intersection donne :
 
 $$D_f = [-1, 3[ \cup ]3, +\infty[$$
 
-</Example>
+:::
 
-<Attention>
+:::attention
 
 Ne jamais oublier d'exclure les valeurs qui annulent un denominateur, meme si elles sont deja exclues par une autre condition.
 
-</Attention>
+:::
 
-<Remark>
+:::remark
 
 En pratique, pour determiner $D_f$ :
 
@@ -107,4 +107,4 @@ En pratique, pour determiner $D_f$ :
 2. Resoudre les inequations associees
 3. Faire l'intersection de tous les ensembles obtenus
 
-</Remark>
+:::

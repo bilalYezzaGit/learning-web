@@ -12,33 +12,33 @@ La **parite** d'une fonction decrit son comportement par rapport a l'oppose d'un
 
 ### Condition prealable
 
-<Attention>
+:::attention
 
 Pour etudier la parite de $f$, il faut d'abord verifier que **son domaine de definition est symetrique par rapport a $0$**.
 
 C'est-a-dire : pour tout $x \in D_f$, on a $-x \in D_f$.
 
-</Attention>
+:::
 
 ### Fonction paire
 
-<Definition title="Fonction paire">
+:::definition[Fonction paire]
 
 Une fonction $f$ est **paire** si, pour tout $x \in D_f$ :
 
 $$f(-x) = f(x)$$
 
-</Definition>
+:::
 
-<Property title="Interpretation geometrique">
+:::property[Interpretation geometrique]
 
 La courbe representative d'une fonction paire est **symetrique par rapport a l'axe des ordonnees** (axe $Oy$).
 
 Si le point $M(x, y)$ appartient a la courbe, alors le point $M'(-x, y)$ appartient aussi a la courbe.
 
-</Property>
+:::
 
-<Example title="Fonction paire classique">
+:::example[Fonction paire classique]
 
 Soit $f(x) = x^2 + 1$.
 
@@ -47,7 +47,7 @@ Soit $f(x) = x^2 + 1$.
 
 Donc $f$ est **paire**.
 
-</Example>
+:::
 
 ```typst
 #import "@preview/cetz:0.3.4": canvas, draw
@@ -72,23 +72,23 @@ Donc $f$ est **paire**.
 
 ### Fonction impaire
 
-<Definition title="Fonction impaire">
+:::definition[Fonction impaire]
 
 Une fonction $f$ est **impaire** si, pour tout $x \in D_f$ :
 
 $$f(-x) = -f(x)$$
 
-</Definition>
+:::
 
-<Property title="Interpretation geometrique">
+:::property[Interpretation geometrique]
 
 La courbe representative d'une fonction impaire est **symetrique par rapport a l'origine** $O(0, 0)$.
 
 Si le point $M(x, y)$ appartient a la courbe, alors le point $M'(-x, -y)$ appartient aussi a la courbe.
 
-</Property>
+:::
 
-<Property title="Propriete importante">
+:::property[Propriete importante]
 
 Si $f$ est une fonction impaire definie en $0$, alors **necessairement** :
 
@@ -96,9 +96,9 @@ $$f(0) = 0$$
 
 **Demonstration** : Si $f$ est impaire, alors $f(-0) = -f(0)$, donc $f(0) = -f(0)$, d'ou $2f(0) = 0$, soit $f(0) = 0$.
 
-</Property>
+:::
 
-<Example title="Fonction impaire classique">
+:::example[Fonction impaire classique]
 
 Soit $f(x) = x^3 - x$.
 
@@ -111,7 +111,7 @@ Donc $f$ est **impaire**.
 
 On verifie bien que $f(0) = 0$.
 
-</Example>
+:::
 
 ```typst
 #import "@preview/cetz:0.3.4": canvas, draw
@@ -138,7 +138,7 @@ On verifie bien que $f(0) = 0$.
 
 Une fonction peut n'etre ni paire ni impaire.
 
-<Example title="Fonction sans parite">
+:::example[Fonction sans parite]
 
 Soit $f(x) = x^2 + x$.
 
@@ -150,11 +150,11 @@ On a $f(-1) \neq f(1)$ et $f(-1) \neq -f(1)$ (car $0 \neq -2$).
 
 Donc $f$ n'est **ni paire ni impaire**.
 
-</Example>
+:::
 
 ### Methodologie d'etude de la parite
 
-<Property title="Methode en 3 etapes">
+:::property[Methode en 3 etapes]
 
 Pour etudier la parite de $f$ :
 
@@ -167,9 +167,9 @@ Pour etudier la parite de $f$ :
    - Si $f(-x) = -f(x)$, alors $f$ est impaire
    - Sinon, $f$ n'est ni paire ni impaire
 
-</Property>
+:::
 
-<Example title="Etude complete de parite">
+:::example[Etude complete de parite]
 
 Soit $f(x) = \frac{x}{x^2 + 1}$.
 
@@ -185,9 +185,9 @@ $$f(-x) = \frac{-x}{x^2 + 1} = -\frac{x}{x^2 + 1} = -f(x)$$
 
 **Conclusion** : $f$ est **impaire**.
 
-</Example>
+:::
 
-<Attention>
+:::attention
 
 Pieges classiques :
 
@@ -195,4 +195,4 @@ Pieges classiques :
 - Confondre $f(-x) = -f(x)$ (impaire) avec $-f(-x) = f(x)$ (c'est la meme chose !)
 - Pour une fonction definie par morceaux, il faut verifier la parite sur tout le domaine
 
-</Attention>
+:::

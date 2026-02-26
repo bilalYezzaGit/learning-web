@@ -10,7 +10,7 @@ tags: [fonctions, variations, extremums, monotonie]
 
 #### Fonction croissante
 
-<Definition title="Fonction croissante">
+:::definition[Fonction croissante]
 
 Soit $f$ une fonction definie sur un intervalle $I$.
 
@@ -22,19 +22,19 @@ $f$ est **strictement croissante** sur $I$ si :
 
 $$x_1 < x_2 \Rightarrow f(x_1) < f(x_2)$$
 
-</Definition>
+:::
 
-<Remark>
+:::remark
 
 Une fonction croissante "ne descend jamais" : elle peut stagner (rester constante) mais ne diminue pas.
 
 Une fonction strictement croissante "monte toujours" : elle ne stagne jamais.
 
-</Remark>
+:::
 
 #### Fonction decroissante
 
-<Definition title="Fonction decroissante">
+:::definition[Fonction decroissante]
 
 Soit $f$ une fonction definie sur un intervalle $I$.
 
@@ -46,19 +46,19 @@ $f$ est **strictement decroissante** sur $I$ si :
 
 $$x_1 < x_2 \Rightarrow f(x_1) > f(x_2)$$
 
-</Definition>
+:::
 
 #### Fonction monotone
 
-<Definition title="Fonction monotone">
+:::definition[Fonction monotone]
 
 Une fonction est **monotone** sur $I$ si elle est croissante sur $I$ ou decroissante sur $I$.
 
-</Definition>
+:::
 
 ### Tableau de variations
 
-<Property title="Tableau de variations">
+:::property[Tableau de variations]
 
 Le **tableau de variations** d'une fonction resume graphiquement son sens de variation sur son domaine.
 
@@ -66,9 +66,9 @@ Le **tableau de variations** d'une fonction resume graphiquement son sens de var
 - Les fleches $\searrow$ indiquent la decroissance
 - Les valeurs aux extremites et aux points remarquables sont indiquees
 
-</Property>
+:::
 
-<Example title="Fonction definie par morceaux">
+:::example[Fonction definie par morceaux]
 
 Soit $f$ definie sur $[-1, 2]$ par : $f(x) = x^2$ sur $[-1, 0]$ et $f(x) = -x + 1$ sur $]0, 2]$.
 
@@ -86,13 +86,13 @@ Calcul des valeurs :
 |--------|------|---------|-----|---------|-----|
 | $f(x)$ | $1$  | $\searrow$ | $0$ | $\searrow$ | $-1$ |
 
-</Example>
+:::
 
 ### Maximum et minimum
 
 #### Definitions
 
-<Definition title="Maximum et minimum globaux">
+:::definition[Maximum et minimum globaux]
 
 Soit $f$ une fonction definie sur un ensemble $D$.
 
@@ -100,9 +100,9 @@ Soit $f$ une fonction definie sur un ensemble $D$.
 
 - $f$ admet un **minimum global** en $a \in D$ si, pour tout $x \in D$ : $f(x) \geq f(a)$
 
-</Definition>
+:::
 
-<Definition title="Maximum et minimum locaux">
+:::definition[Maximum et minimum locaux]
 
 Soit $f$ une fonction et $a \in D_f$.
 
@@ -110,17 +110,17 @@ Soit $f$ une fonction et $a \in D_f$.
 
 - $f$ admet un **minimum local** en $a$ s'il existe un intervalle $I$ contenant $a$ tel que, pour tout $x \in I \cap D_f$ : $f(x) \geq f(a)$
 
-</Definition>
+:::
 
-<Remark>
+:::remark
 
 - Un maximum **global** est le point le plus haut de toute la courbe
 - Un maximum **local** est le point le plus haut dans un "voisinage"
 - Un maximum global est forcement un maximum local, mais la reciproque est fausse
 
-</Remark>
+:::
 
-<Example title="Extremums locaux et globaux">
+:::example[Extremums locaux et globaux]
 
 Soit $f(x) = x^2$ definie sur $[-1, 2]$.
 
@@ -129,7 +129,7 @@ Soit $f(x) = x^2$ definie sur $[-1, 2]$.
 
 Il n'y a pas d'extremum local qui ne soit pas global dans cet exemple.
 
-</Example>
+:::
 
 ```typst
 #import "@preview/cetz:0.3.4": canvas, draw
@@ -154,7 +154,7 @@ Il n'y a pas d'extremum local qui ne soit pas global dans cet exemple.
 
 ### Majorant, minorant, borne superieure et inferieure
 
-<Definition title="Majorant et minorant">
+:::definition[Majorant et minorant]
 
 Soit $f$ une fonction definie sur $D$.
 
@@ -162,25 +162,25 @@ Soit $f$ une fonction definie sur $D$.
 
 - Un reel $m$ est un **minorant** de $f$ si, pour tout $x \in D$ : $f(x) \geq m$
 
-</Definition>
+:::
 
-<Definition title="Borne superieure et inferieure">
+:::definition[Borne superieure et inferieure]
 
 - La **borne superieure** (notee $\sup f$) est le plus petit des majorants, s'il existe
 
 - La **borne inferieure** (notee $\inf f$) est le plus grand des minorants, s'il existe
 
-</Definition>
+:::
 
-<Remark title="Difference entre maximum et borne superieure">
+:::remark[Difference entre maximum et borne superieure]
 
 - Le **maximum** est une valeur **atteinte** par $f$ : il existe $a \in D$ tel que $f(a) = \max f$
 
 - La **borne superieure** peut ne pas etre atteinte : c'est la limite "au-dessus de laquelle $f$ ne va jamais"
 
-</Remark>
+:::
 
-<Example title="Borne superieure non atteinte">
+:::example[Borne superieure non atteinte]
 
 Soit $f(x) = \frac{1}{x}$ sur $]0, +\infty[$.
 
@@ -189,18 +189,18 @@ Soit $f(x) = \frac{1}{x}$ sur $]0, +\infty[$.
 
 Par contre, $f$ a une borne inferieure : $\inf f = 0$ (mais $0$ n'est pas atteint, donc ce n'est pas un minimum).
 
-</Example>
+:::
 
-<Example title="Fonction avec maximum">
+:::example[Fonction avec maximum]
 
 Soit $g(x) = \frac{1}{x}$ sur $[1, +\infty[$.
 
 - $g$ admet un **maximum** en $x = 1$ : $g(1) = 1$, et $g(x) \leq 1$ pour tout $x \geq 1$
 - Donc $\max g = 1$ et $\sup g = 1$ (ici la borne superieure est atteinte)
 
-</Example>
+:::
 
-<Attention>
+:::attention
 
 Pieges frequents :
 
@@ -209,4 +209,4 @@ Pieges frequents :
 - Oublier de preciser l'intervalle d'etude des variations
 - Pour une fonction non monotone, il faut decouper en intervalles
 
-</Attention>
+:::
