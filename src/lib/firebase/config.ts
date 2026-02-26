@@ -22,10 +22,4 @@ export function getFirebaseConfig() {
   return firebaseConfig
 }
 
-/**
- * Check if Firebase is properly configured
- */
-export function isFirebaseConfigured(): boolean {
-  return Boolean(firebaseConfig.apiKey && firebaseConfig.projectId)
-}
 

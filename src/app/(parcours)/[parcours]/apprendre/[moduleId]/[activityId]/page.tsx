@@ -21,7 +21,7 @@ import {
 } from '@/components/ui/breadcrumb'
 import { getCoursActivities, getCours, findQuizGroup, getCompiledQuiz, getAtomHtml } from '@/lib/content-loader'
 import { ContentRenderer } from '@/components/content/content-renderer'
-import { ActivityClient } from './activity-client'
+import { ActivityClient } from '@/components/patterns/activity-client'
 import { ActivityHeader } from './activity-header'
 
 interface PageProps {
@@ -112,8 +112,8 @@ export default async function ActivityPage({ params }: PageProps) {
           <ActivityClient
             activityId={activityId}
             activityType={currentActivity.type}
-            moduleId={moduleId}
-            parcours={parcours}
+            contextType="module"
+            contextId={moduleId}
             quizData={quizData}
             exerciseContent={htmlContent ?? undefined}
           >

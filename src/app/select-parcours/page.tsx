@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button'
 import { CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { InteractiveCard } from '@/components/ui/interactive-card'
 import { useAuth } from '@/lib/context'
+import { toast } from 'sonner'
 import { useUserParcours, getActiveParcours } from '@/lib/parcours'
 import { trackParcoursSelected } from '@/lib/services/analytics-service'
 
@@ -27,8 +28,8 @@ export default function SelectParcoursPage() {
       trackParcoursSelected(slug)
       await setParcours(slug)
       router.push(`/${slug}`)
-    } catch (e) {
-      console.error('Failed to set parcours:', e)
+    } catch {
+      toast.error('Impossible de sauvegarder le parcours.')
     }
   }
 

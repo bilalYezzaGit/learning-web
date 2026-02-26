@@ -6,6 +6,7 @@
  */
 
 import type { ActivityProgress, ProgressStatus } from '@/types'
+import { SUCCESS_THRESHOLD } from '@/lib/constants'
 
 const STORAGE_KEY = 'learning-progress'
 
@@ -60,7 +61,7 @@ export function setLocalQCMComplete(params: {
   contextId: string
 }): LocalProgressMap {
   const map = load()
-  const status: ProgressStatus = params.score / params.total >= 0.7 ? 'success' : 'retry'
+  const status: ProgressStatus = params.score / params.total >= SUCCESS_THRESHOLD ? 'success' : 'retry'
   map.set(params.activityId, {
     activityId: params.activityId,
     activityType: 'qcm',
@@ -75,8 +76,3 @@ export function setLocalQCMComplete(params: {
   return map
 }
 
-export function clearLocalProgress(): void {
-  try {
-    localStorage.removeItem(STORAGE_KEY)
-  } catch { /* ok */ }
-}

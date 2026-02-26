@@ -9,7 +9,7 @@
 import { notFound } from 'next/navigation'
 
 import { getCours, getCoursActivities } from '@/lib/content-loader'
-import { CourseTimelineWrapper } from './course-timeline-wrapper'
+import { TimelineWrapper } from '@/components/timeline-wrapper'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -17,7 +17,7 @@ interface LayoutProps {
 }
 
 export default async function ModuleLayout({ children, params }: LayoutProps) {
-  const { moduleId } = await params
+  const { parcours, moduleId } = await params
 
   let cours
   try {
@@ -35,17 +35,19 @@ export default async function ModuleLayout({ children, params }: LayoutProps) {
 
   return (
     <div className="-my-4 md:-my-6 flex flex-1 min-h-0 overflow-hidden">
-      <CourseTimelineWrapper
-        coursSlug={cours.slug}
+      <TimelineWrapper
+        slug={cours.slug}
         title={cours.title}
         description={cours.description}
         estimatedMinutes={cours.estimatedMinutes}
-        objectives={cours.objectives}
         activities={activities}
+        baseUrl={`/${parcours}/apprendre/${moduleId}`}
         sections={sections}
+        objectives={cours.objectives}
+        enableMobileSheet
       >
         <div className="flex-1 min-w-0 overflow-auto">{children}</div>
-      </CourseTimelineWrapper>
+      </TimelineWrapper>
     </div>
   )
 }

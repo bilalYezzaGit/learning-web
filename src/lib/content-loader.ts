@@ -14,6 +14,8 @@ import type {
   Programme,
   Trimestre,
   SeriesType,
+  CompiledQCMQuestion,
+  CompiledQuiz,
 } from '@/types/content'
 
 // =============================================================================
@@ -55,23 +57,6 @@ export interface GeneratedSerie {
   successThreshold: number
 }
 
-/** Pre-compiled QCM question (HTML strings, not React nodes) */
-export interface CompiledQcmQuestion {
-  id: string
-  title: string
-  enonce: string
-  options: string[]
-  correctIndex: number
-  explication: string
-  timeMinutes: number
-}
-
-/** Compiled quiz group for the QCM player */
-export interface CompiledQuiz {
-  id: string
-  title: string
-  questions: CompiledQcmQuestion[]
-}
 
 // =============================================================================
 // Paths
@@ -153,13 +138,6 @@ export const getSerieActivities = cache((slug: string): ResolvedActivity[] => {
   return getSerie(slug).activities
 })
 
-export function getSeriesByTrimestre(trimestre: Trimestre): GeneratedSerie[] {
-  return getAllSeries().filter(s => s.trimestre === trimestre)
-}
-
-export function getSeriesByType(type: SeriesType): GeneratedSerie[] {
-  return getAllSeries().filter(s => s.type === type)
-}
 
 // =============================================================================
 // Atoms
@@ -174,15 +152,6 @@ export const getAtomHtml = cache((id: string): string => {
   return fs.readFileSync(filePath, 'utf-8')
 })
 
-/**
- * Check if an atom exists (HTML or QCM JSON).
- */
-export function atomExists(id: string): boolean {
-  return (
-    fileExists(path.join(GENERATED_DIR, 'atoms', `${id}.html`)) ||
-    fileExists(path.join(GENERATED_DIR, 'atoms', `${id}.json`))
-  )
-}
 
 // =============================================================================
 // QCM
@@ -191,10 +160,10 @@ export function atomExists(id: string): boolean {
 /**
  * Read a pre-compiled QCM question from generated JSON.
  */
-export const getCompiledQcm = cache((id: string): CompiledQcmQuestion => {
+export const getCompiledQcm = cache((id: string): CompiledQCMQuestion => {
   const filePath = path.join(GENERATED_DIR, 'atoms', `${id}.json`)
   if (!fileExists(filePath)) throw new Error(`QCM "${id}" not found`)
-  return readJson<CompiledQcmQuestion>(filePath)
+  return readJson<CompiledQCMQuestion>(filePath)
 })
 
 /**

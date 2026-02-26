@@ -1,10 +1,10 @@
 'use client'
 
 /**
- * Activity Client Wrapper
+ * Activity Client Wrapper (shared)
  *
- * Handles progress tracking and exercise completion.
- * Wraps server-rendered content with client-side interactivity.
+ * Handles progress tracking, QCM playback, and exercise completion.
+ * Used by both module (apprendre) and serie (reviser) activity pages.
  */
 
 import * as React from 'react'
@@ -24,21 +24,24 @@ import type { AtomType, CompiledQuiz } from '@/types/content'
 interface ActivityClientProps {
   activityId: string
   activityType: AtomType
-  moduleId: string
-  parcours: string
+  contextType: 'module' | 'serie'
+  contextId: string
   quizData: CompiledQuiz | null
+  /** Raw HTML content for ScanUpload (exercise only, optional) */
   exerciseContent?: string
+  /** URL for QCM exit button (optional, serie only) */
+  exitUrl?: string
   children: React.ReactNode
 }
 
 export function ActivityClient({
   activityId,
   activityType,
-  moduleId,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  parcours,
+  contextType,
+  contextId,
   quizData,
   exerciseContent,
+  exitUrl,
   children,
 }: ActivityClientProps) {
   const { userId } = useAuth()
@@ -49,34 +52,17 @@ export function ActivityClient({
   const activityCompleted = isCompleted(activityId) || completedInSession
   const previousProgress = getProgress(activityId)
 
-  const handleExerciseComplete = async () => {
+  const handleComplete = async () => {
     setCompletedInSession(true)
-    trackExerciseCompleted(activityId)
+    if (activityType === 'exercise') trackExerciseCompleted(activityId)
 
     if (userId) {
       try {
         await completeExercise({
           activityId,
           status: 'success',
-          contextType: 'module',
-          contextId: moduleId,
-        })
-      } catch {
-        toast.error('Impossible de sauvegarder la progression.')
-      }
-    }
-  }
-
-  const handleLessonComplete = async () => {
-    setCompletedInSession(true)
-
-    if (userId) {
-      try {
-        await completeExercise({
-          activityId,
-          status: 'success',
-          contextType: 'module',
-          contextId: moduleId,
+          contextType,
+          contextId,
         })
       } catch {
         toast.error('Impossible de sauvegarder la progression.')
@@ -95,8 +81,8 @@ export function ActivityClient({
           activityId,
           score: result.score,
           total: result.total,
-          contextType: 'module',
-          contextId: moduleId,
+          contextType,
+          contextId,
         })
       } catch {
         toast.error('Impossible de sauvegarder la progression.')
@@ -104,7 +90,7 @@ export function ActivityClient({
     }
   }
 
-  // For QCM activities, show the player
+  // QCM
   if (activityType === 'qcm' && quizData) {
     if (qcmFinished) {
       return (
@@ -112,7 +98,7 @@ export function ActivityClient({
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-success/10">
             <CheckCircle2 className="h-8 w-8 text-success" aria-hidden="true" />
           </div>
-          <h2 className="text-xl font-bold">QCM terminé !</h2>
+          <h2 className="text-xl font-bold">QCM termine !</h2>
           <p className="mt-2 text-muted-foreground">
             Utilisez les boutons de navigation pour continuer.
           </p>
@@ -125,7 +111,7 @@ export function ActivityClient({
         {previousProgress && previousProgress.score !== undefined ? (
           <div className="mb-6 rounded-lg border border-success/25 bg-success/10 p-4">
             <p className="text-sm text-success-foreground">
-              Déjà fait : {previousProgress.score}%
+              Deja fait : {previousProgress.score}%
             </p>
             <Button
               variant="outline"
@@ -137,42 +123,51 @@ export function ActivityClient({
             </Button>
           </div>
         ) : null}
-        <QCMPlayer qcm={quizData} onComplete={handleQCMComplete} showExit={false} />
+        <QCMPlayer
+          qcm={quizData}
+          onComplete={handleQCMComplete}
+          onExit={exitUrl ? () => window.location.assign(exitUrl) : undefined}
+          showExit={false}
+        />
       </div>
     )
   }
 
-  // For exercises, add scan + completion button
+  // Exercise
   if (activityType === 'exercise') {
     return (
       <>
         {children}
 
-        {/* Scan section */}
-        <Separator className="my-8" />
-        <div className="space-y-3">
-          <h3 className="text-sm font-medium text-muted-foreground">
-            Vérifier mon travail avec l&apos;IA
-          </h3>
-          <ScanUpload
-            activityId={activityId}
-            exerciseContent={exerciseContent ?? ''}
-          />
-        </div>
+        {/* Scan section (module only — shown when exerciseContent is provided) */}
+        {exerciseContent && (
+          <>
+            <Separator className="my-8" />
+            <div className="space-y-3">
+              <h3 className="text-sm font-medium text-muted-foreground">
+                Verifier mon travail avec l&apos;IA
+              </h3>
+              <ScanUpload
+                activityId={activityId}
+                exerciseContent={exerciseContent}
+              />
+            </div>
+          </>
+        )}
 
         {/* Completion section */}
         <div className="mt-8 flex flex-col items-center justify-center border-t pt-6">
           {activityCompleted ? (
             <div className="flex items-center gap-2 text-success">
               <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
-              <span className="font-medium">Exercice terminé</span>
+              <span className="font-medium">Exercice termine</span>
             </div>
           ) : (
             <>
               <p className="mb-3 text-sm text-muted-foreground">
                 Tu as fini cet exercice ?
               </p>
-              <Button onClick={handleExerciseComplete} variant="outline">
+              <Button onClick={handleComplete} variant="outline">
                 <CheckCircle2 className="mr-2 h-4 w-4" aria-hidden="true" />
                 J&apos;ai compris
               </Button>
@@ -192,7 +187,7 @@ export function ActivityClient({
     )
   }
 
-  // For lessons, show content + completion button
+  // Lesson
   return (
     <>
       {children}
@@ -201,16 +196,16 @@ export function ActivityClient({
         {activityCompleted ? (
           <div className="flex items-center gap-2 text-success">
             <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
-            <span className="font-medium">Leçon terminée</span>
+            <span className="font-medium">Lecon terminee</span>
           </div>
         ) : (
           <>
             <p className="mb-3 text-sm text-muted-foreground">
-              Tu as fini de lire cette leçon ?
+              Tu as fini de lire cette lecon ?
             </p>
-            <Button onClick={handleLessonComplete} variant="outline">
+            <Button onClick={handleComplete} variant="outline">
               <CheckCircle2 className="mr-2 h-4 w-4" aria-hidden="true" />
-              J&apos;ai lu cette leçon
+              J&apos;ai lu cette lecon
             </Button>
           </>
         )}

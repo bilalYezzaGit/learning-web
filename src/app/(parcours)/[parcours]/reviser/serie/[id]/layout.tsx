@@ -8,7 +8,7 @@
 import { notFound } from 'next/navigation'
 
 import { getSerie, getSerieActivities } from '@/lib/content-loader'
-import { SerieTimelineWrapper } from './serie-timeline-wrapper'
+import { TimelineWrapper } from '@/components/timeline-wrapper'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -16,7 +16,7 @@ interface LayoutProps {
 }
 
 export default async function SerieLayout({ children, params }: LayoutProps) {
-  const { id } = await params
+  const { parcours, id } = await params
 
   let serie
   try {
@@ -29,17 +29,15 @@ export default async function SerieLayout({ children, params }: LayoutProps) {
 
   return (
     <div className="flex h-[calc(100svh-3.5rem)]">
-      {/* Timeline Sidebar */}
-      <SerieTimelineWrapper
-        serieSlug={serie.slug}
+      <TimelineWrapper
+        slug={serie.slug}
         title={serie.title}
         description={serie.description}
         estimatedMinutes={serie.estimatedMinutes}
-        difficulty={serie.difficulty}
         activities={activities}
+        baseUrl={`/${parcours}/reviser/serie/${id}`}
+        difficulty={serie.difficulty}
       />
-
-      {/* Content Area */}
       <div className="flex-1 overflow-auto">{children}</div>
     </div>
   )

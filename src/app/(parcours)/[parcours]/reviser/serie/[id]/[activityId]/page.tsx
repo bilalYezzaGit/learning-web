@@ -14,7 +14,7 @@ import { Badge } from '@/components/ui/badge'
 import { getSerieActivities, findSerieQuizGroup, getCompiledQuiz, getAtomHtml } from '@/lib/content-loader'
 import { ContentRenderer } from '@/components/content/content-renderer'
 import { getAtomTypeLabel } from '@/types/content'
-import { SerieActivityClient } from './serie-activity-client'
+import { ActivityClient } from '@/components/patterns/activity-client'
 
 interface PageProps {
   params: Promise<{ parcours: string; id: string; activityId: string }>
@@ -70,15 +70,16 @@ export default async function SerieActivityPage({ params }: PageProps) {
       {/* Content */}
       <div className="flex-1 overflow-auto">
         <div className="mx-auto max-w-3xl px-4 py-6 lg:px-6">
-          <SerieActivityClient
+          <ActivityClient
             activityId={activityId}
             activityType={currentActivity.type}
-            serieSlug={id}
-            parcours={parcours}
+            contextType="serie"
+            contextId={id}
             quizData={quizData}
+            exitUrl={`/${parcours}/reviser/serie/${id}`}
           >
             {htmlContent && <ContentRenderer html={htmlContent} />}
-          </SerieActivityClient>
+          </ActivityClient>
         </div>
       </div>
 

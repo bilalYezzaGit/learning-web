@@ -20,7 +20,6 @@
  * ```
  */
 
-import { parseList } from '../utils'
 import { cn } from '@/lib/utils'
 
 interface RowData {
@@ -353,20 +352,3 @@ export function VariationsTable({
   )
 }
 
-/**
- * Helper to create VariationsTable from parsed HTML attributes
- */
-export function createVariationsFromAttribs(
-  attribs: Record<string, string>,
-  rowElements: Array<{ label: string; kind: string; values: string }>
-): VariationsProps {
-  return {
-    variable: attribs['var'] || 'x',
-    intervals: parseList(attribs['intervals'] || '[]'),
-    rows: rowElements.map((row) => ({
-      label: row.label,
-      kind: (row.kind === 'var' ? 'var' : 'sign') as 'sign' | 'var',
-      values: parseList(row.values),
-    })),
-  }
-}

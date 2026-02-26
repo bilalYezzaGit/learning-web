@@ -10,6 +10,7 @@ import * as React from 'react'
 import { doc, setDoc, onSnapshot } from 'firebase/firestore'
 
 import { getDbInstance } from '@/lib/firebase/client'
+import { logError } from '@/lib/services/error-logger'
 import { useAuth } from '@/lib/context'
 import { getParcoursConfig, type ParcoursConfig } from './config'
 
@@ -79,7 +80,7 @@ export function useUserParcours(): UseUserParcoursReturn {
         setIsLoading(false)
       },
       (error) => {
-        console.error('Error fetching user parcours:', error)
+        logError(error, { component: 'useUserParcours', action: 'firestoreListener' })
         setIsLoading(false)
       }
     )

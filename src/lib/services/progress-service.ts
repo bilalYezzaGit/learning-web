@@ -19,6 +19,8 @@ import {
 } from 'firebase/firestore'
 
 import { getDbInstance } from '@/lib/firebase/client'
+import { logError } from '@/lib/services/error-logger'
+import { SUCCESS_THRESHOLD } from '@/lib/constants'
 import type { ActivityProgress, ProgressStatus, ProgressContext } from '@/types'
 
 // =============================================================================
@@ -156,7 +158,7 @@ export class ProgressService {
         this.notifyListeners()
       },
       (error) => {
-        console.error('Progress listener error:', error)
+        logError(error, { component: 'ProgressService', action: 'firestoreListener' })
       }
     )
   }
@@ -254,9 +256,8 @@ export class ProgressService {
     const existing = this.cache.get(activityId)
     const now = new Date().toISOString()
 
-    // Success if score >= 70%
     const percentage = total > 0 ? Math.round((score / total) * 100) : 0
-    const status: ProgressStatus = percentage >= 70 ? 'success' : 'retry'
+    const status: ProgressStatus = percentage >= SUCCESS_THRESHOLD * 100 ? 'success' : 'retry'
 
     const newContext: ProgressContext = {
       type: contextType,
