@@ -37,6 +37,7 @@ export interface GeneratedCours {
   order: number
   estimatedMinutes: number
   objectives: string[]
+  visible: boolean
   sections: GeneratedCoursSection[]
   totalActivities: number
 }
@@ -52,6 +53,7 @@ export interface GeneratedSerie {
   trimestre: Trimestre
   modules: string[]
   priority: number
+  visible: boolean
   activities: ResolvedActivity[]
   totalActivities: number
   successThreshold: number

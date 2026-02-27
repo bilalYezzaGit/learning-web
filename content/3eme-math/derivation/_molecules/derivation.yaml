@@ -1,6 +1,7 @@
+kind: cours
+visible: true
 title: Derivation
 description: "Nombre derive, equation de la tangente, derivees usuelles, regles de derivation, composee, application aux variations"
-programme: 3eme-math
 trimester: T2
 order: 2
 estimatedMinutes: 240

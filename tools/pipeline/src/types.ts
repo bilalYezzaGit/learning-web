@@ -14,6 +14,8 @@ export interface RawAtom {
 /** Raw cours molecule from YAML */
 export interface RawCours {
   slug: string
+  kind: 'cours'
+  visible: boolean
   title: string
   description: string
   programme: string
@@ -27,6 +29,8 @@ export interface RawCours {
 /** Raw series molecule from YAML */
 export interface RawSerie {
   slug: string
+  kind: 'serie'
+  visible: boolean
   title: string
   description: string
   difficulty: number
@@ -37,6 +41,7 @@ export interface RawSerie {
   trimestre: number
   modules: string[]
   priority: number
+  successThreshold: number
 }
 
 /** Raw programme from YAML */
@@ -48,6 +53,7 @@ export interface RawProgramme {
   order: number
   color: string
   icon: string
+  visible: boolean
   cours: string[]
   series: string[]
 }
@@ -86,6 +92,7 @@ export interface ResolvedCours {
   order: number
   estimatedMinutes: number
   objectives: string[]
+  visible: boolean
   sections: {
     id: string
     label: string
@@ -106,6 +113,7 @@ export interface ResolvedSerie {
   trimestre: number
   modules: string[]
   priority: number
+  visible: boolean
   activities: ResolvedActivity[]
   totalActivities: number
   successThreshold: number
@@ -120,6 +128,7 @@ export interface Catalogue {
   order: number
   color: string
   icon: string
+  visible: boolean
   modules: {
     slug: string
     title: string
@@ -128,6 +137,7 @@ export interface Catalogue {
     totalActivities: number
     estimatedMinutes: number
     activityIds: string[]
+    visible: boolean
   }[]
   series: {
     slug: string
@@ -138,6 +148,7 @@ export interface Catalogue {
     totalActivities: number
     estimatedMinutes: number
     modules: string[]
+    visible: boolean
   }[]
 }
 

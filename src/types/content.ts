@@ -31,6 +31,7 @@ export interface Programme {
   order: number
   color: string
   icon: string
+  visible: boolean
   /** Ordered list of cours molecule slugs */
   cours: string[]
   /** Ordered list of series molecule slugs */

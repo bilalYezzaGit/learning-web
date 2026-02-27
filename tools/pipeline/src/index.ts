@@ -6,7 +6,7 @@
  */
 
 import { readAllAtoms } from './stages/read-atoms.js'
-import { readAllCours, readAllSeries, readAllProgrammes } from './stages/read-molecules.js'
+import { readAllContent } from './stages/read-molecules.js'
 import { validateContent } from './stages/validate.js'
 import { compileAllAtoms } from './stages/compile-all.js'
 import { resolveAllCours } from './stages/resolve-cours.js'
@@ -21,9 +21,7 @@ async function main() {
   // Phase 1 — Read
   console.log('[1/5] Reading content...')
   const atoms = readAllAtoms()
-  const cours = readAllCours()
-  const series = readAllSeries()
-  const programmes = readAllProgrammes()
+  const { programmes, cours, series } = readAllContent()
   console.log(`      ${atoms.length} atoms, ${cours.length} cours, ${series.length} series, ${programmes.length} programmes`)
 
   // Phase 1 — Validate

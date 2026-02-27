@@ -1,0 +1,7 @@
+label: "3eme annee - Math"
+levelSlug: 3eme
+sectionSlug: math
+order: 1
+color: "#3B82F6"
+icon: calculate
+visible: true

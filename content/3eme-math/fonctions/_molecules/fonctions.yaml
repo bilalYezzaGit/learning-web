@@ -1,6 +1,7 @@
+kind: cours
+visible: true
 title: Generalites sur les fonctions
 description: "Vocabulaire des fonctions, parite, sens de variation, extremums, transformations de courbes"
-programme: 3eme-math
 trimester: T1
 order: 3
 estimatedMinutes: 180

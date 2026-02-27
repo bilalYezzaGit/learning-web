@@ -57,6 +57,7 @@ export function resolveAllCours(coursList: RawCours[], atomMap: Map<string, RawA
       order: cours.order,
       estimatedMinutes: cours.estimatedMinutes,
       objectives: cours.objectives,
+      visible: cours.visible,
       sections,
       totalActivities,
     }

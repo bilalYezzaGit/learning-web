@@ -24,6 +24,7 @@ export function assembleCatalogues(
           totalActivities: c.totalActivities,
           estimatedMinutes: c.estimatedMinutes,
           activityIds,
+          visible: c.visible,
         }
       })
 
@@ -39,6 +40,7 @@ export function assembleCatalogues(
         totalActivities: s.totalActivities,
         estimatedMinutes: s.estimatedMinutes,
         modules: s.modules,
+        visible: s.visible,
       }))
 
     return {
@@ -49,6 +51,7 @@ export function assembleCatalogues(
       order: prog.order,
       color: prog.color,
       icon: prog.icon,
+      visible: prog.visible,
       modules,
       series,
     }

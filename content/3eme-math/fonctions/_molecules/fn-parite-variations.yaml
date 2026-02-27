@@ -1,3 +1,5 @@
+kind: serie
+visible: true
 title: "Parite et variations de fonctions"
 description: "Etude de la parite, du sens de variation et des extremums d'une fonction"
 difficulty: 2

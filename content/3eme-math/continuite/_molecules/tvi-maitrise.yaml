@@ -1,3 +1,5 @@
+kind: serie
+visible: true
 title: "TVI : theoreme des valeurs intermediaires"
 description: "Approfondis le TVI avec des exercices progressifs : application directe, equations, et problemes."
 difficulty: 2

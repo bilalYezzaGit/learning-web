@@ -1,6 +1,6 @@
 # Convention de contenu
 
-Version 2 — 2026-02-06
+Version 3 — 2026-02-27
 
 Ce document definit les regles strictes d'ecriture du contenu pedagogique. Tout contenu qui ne respecte pas ces regles doit etre corrige. La convention prime sur l'existant.
 
@@ -8,7 +8,7 @@ Ce document definit les regles strictes d'ecriture du contenu pedagogique. Tout 
 
 ## 1. Atomes — Regles generales
 
-Un atome = un fichier `.mdx` dans `content/atoms/`. C'est l'unite indivisible de contenu.
+Un atome = un fichier `.mdx` dans `content/{programme}/{module}/`. C'est l'unite indivisible de contenu.
 
 ### 1.1 Nommage du fichier (= ID de l'atome)
 
@@ -230,16 +230,43 @@ Les polynomes sont continus sur tout $\mathbb{R}$, sans exception.
 
 ## 3. Molecules
 
-Les molecules sont des fichiers YAML dans `content/molecules/`. Elles assemblent des atomes en vues ordonnees.
+Les molecules sont des fichiers YAML dans `content/{programme}/{module}/_molecules/`. Elles assemblent des atomes en vues ordonnees.
+
+### 3.0 Structure des repertoires
+
+```
+content/
+├── 3eme-math/                          # programme (contient _programme.yaml)
+│   ├── _programme.yaml                 # metadata du programme
+│   ├── continuite/                     # module
+│   │   ├── _molecules/
+│   │   │   ├── continuite.yaml         # cours (kind: cours)
+│   │   │   ├── continuite-fondamentaux.yaml  # serie (kind: serie)
+│   │   │   └── tvi-maitrise.yaml       # serie (kind: serie)
+│   │   ├── lesson-cont-definition.mdx
+│   │   ├── ex-cont-1.mdx
+│   │   └── qcm-cont-1.mdx
+│   ├── derivation/
+│   │   ├── _molecules/
+│   │   └── *.mdx
+│   └── fonctions/
+│       ├── _molecules/
+│       └── *.mdx
+├── 2nde-math/                          # futur programme
+│   └── ...
+```
+
+Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les atomes (`.mdx` dans les modules), et les molecules (`.yaml` dans `_molecules/`).
 
 ### 3.1 Molecule Cours
 
-Fichier : `content/molecules/cours/{slug}.yaml`
+Fichier : `content/{programme}/{module}/_molecules/{slug}.yaml`
 
 ```yaml
+kind: cours                             # obligatoire, discriminant
+visible: true                           # optionnel, defaut: true
 title: "Continuite"                     # obligatoire
 description: "Description courte"       # obligatoire
-programme: 3eme-math                    # obligatoire, ID du programme
 trimester: T1 | T2 | T3                # obligatoire
 order: 1                                # obligatoire, position dans le programme
 estimatedMinutes: 180                   # obligatoire, en minutes
@@ -258,17 +285,22 @@ sections:                               # obligatoire, >= 1 section
 ```
 
 **Regles** :
+- `kind: cours` est obligatoire (discriminant avec les series)
+- `visible: true` par defaut. Mettre `false` pour un brouillon non publie
+- Plus de champ `programme:` — le programme est deduit de la hierarchie de repertoires
 - Chaque section a un `label` et des `steps`
 - Un step est soit un ID d'atome (string), soit un objet `quiz:` avec une liste d'IDs QCM
 - Un groupe `quiz` contient entre 2 et 5 questions QCM
 - L'ordre des steps definit la sequence pedagogique
-- Tous les IDs d'atomes references doivent exister dans `content/atoms/`
+- Tous les IDs d'atomes references doivent exister dans le module correspondant
 
 ### 3.2 Molecule Serie
 
-Fichier : `content/molecules/series/{slug}.yaml`
+Fichier : `content/{programme}/{module}/_molecules/{slug}.yaml`
 
 ```yaml
+kind: serie                             # obligatoire, discriminant
+visible: true                           # optionnel, defaut: true
 title: "TVI : maitrise complete"       # obligatoire
 description: "Description courte"       # obligatoire
 difficulty: 1 | 2 | 3                  # obligatoire
@@ -281,9 +313,15 @@ steps:                                  # obligatoire, >= 2 steps
   - quiz:
       - qcm-cont-tvi-existence
       - qcm-cont-tvi-application
+type: mono-module                       # optionnel, defaut: mono-module
+trimestre: 1                            # obligatoire (1, 2, ou 3)
+modules: [continuite]                   # optionnel, modules associes
+priority: 0                             # optionnel, defaut: 0
 ```
 
 **Regles** :
+- `kind: serie` est obligatoire (discriminant avec les cours)
+- `visible: true` par defaut. Mettre `false` pour un brouillon non publie
 - Pas de sections (liste plate de steps)
 - Une serie est thematique : elle cible un sujet precis
 - Minimum 2 steps (sinon ce n'est pas une serie)
@@ -291,7 +329,7 @@ steps:                                  # obligatoire, >= 2 steps
 
 ### 3.3 Programme
 
-Fichier : `content/molecules/programmes/{id}.yaml`
+Fichier : `content/{id}/_programme.yaml`
 
 ```yaml
 label: "3eme annee - Math"             # obligatoire
@@ -300,20 +338,25 @@ sectionSlug: math                      # obligatoire
 order: 1                                # obligatoire
 color: "#3B82F6"                        # obligatoire, hex
 icon: calculate                         # obligatoire
-
-cours:                                  # obligatoire, >= 1
-  - continuite
-  - derivation
-
-series:                                 # obligatoire (peut etre vide)
-  - continuite-fondamentaux
-  - tvi-maitrise
+visible: true                           # optionnel, defaut: true
 ```
 
 **Regles** :
-- L'ID du programme (nom du fichier) correspond au slug de parcours
-- `cours` et `series` sont des listes ordonnees de slugs de molecules
-- Tous les slugs references doivent exister dans les dossiers correspondants
+- L'ID du programme (nom du repertoire) correspond au slug de parcours
+- Plus de listes `cours:` et `series:` — le pipeline les decouvre automatiquement en scannant les `_molecules/` des sous-modules
+- Les cours sont tries par `order`, les series par `priority`
+- `visible: true` par defaut. Mettre `false` pour un programme non publie
+
+### 3.4 Flag `visible`
+
+Le flag `visible` est present sur les programmes, cours, et series. Il permet un workflow draft/publish :
+
+| Valeur | Signification |
+|--------|--------------|
+| `true` (defaut) | Contenu publie, visible dans l'UI |
+| `false` | Brouillon, present dans le generated output mais filtre cote UI |
+
+Le flag est propage dans tout le generated output (`programmes.json`, `cours/{slug}.json`, `series/{slug}.json`, `catalogues/{id}.json`).
 
 ---
 

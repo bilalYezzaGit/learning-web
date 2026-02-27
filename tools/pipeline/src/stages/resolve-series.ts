@@ -50,9 +50,10 @@ export function resolveAllSeries(
       trimestre: serie.trimestre,
       modules: serie.modules,
       priority: serie.priority,
+      visible: serie.visible,
       activities,
       totalActivities: activities.length,
-      successThreshold: (serie as RawSerie & { successThreshold?: number }).successThreshold ?? 70,
+      successThreshold: serie.successThreshold,
     }
   })
 }

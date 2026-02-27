@@ -1,3 +1,5 @@
+kind: serie
+visible: true
 title: "Nombre derive et equation de la tangente"
 description: "Calcul du nombre derive par definition et determination d equations de tangentes"
 difficulty: 1

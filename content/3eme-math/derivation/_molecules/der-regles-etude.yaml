@@ -1,3 +1,5 @@
+kind: serie
+visible: true
 title: "Regles de derivation et etude de fonctions"
 description: "Maitriser les regles de derivation et les appliquer a l etude des variations"
 difficulty: 2
