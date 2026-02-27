@@ -1,5 +1,5 @@
 kind: serie
-visible: true
+visible: false
 title: "Continuite : les fondamentaux"
 description: "Maitrise les bases de la continuite : definition, prolongement et premiers exercices d application."
 difficulty: 1

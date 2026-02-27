@@ -19,6 +19,7 @@ const GLOBAL_ROUTES = [
   '/select-parcours',
   '/terms',
   '/privacy',
+  '/viewer',
 ]
 
 /**
