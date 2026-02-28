@@ -1,0 +1,145 @@
+---
+type: lesson
+title: "Continuite en un reel"
+difficulty: 1
+timeMinutes: 10
+tags: [continuite, definition, manuel]
+source: Manuel scolaire T1, Section 1, p.23-24
+---
+
+### 1. Continuite en un reel
+
+:::example[Activite 1]
+
+Soit $f$ la fonction definie pour tout reel $x$ par :
+
+$$f(x) = \begin{cases} 2x + 1 & \text{si } x > 1 \\ 3 & \text{si } x = 1 \\ 3x & \text{si } x < 1 \end{cases}$$
+
+1. Representer la fonction $f$ dans le plan muni d'un repere orthonorme $(O, \vec{i}, \vec{j})$.
+2. a. Representer sur l'axe des ordonnees, l'ensemble des reels $y$ tels que $|y - 3| < 0{,}1$.
+   b. En deduire graphiquement, une condition suffisante sur $x$ pour que $|f(x) - 3| < 0{,}1$.
+3. Donner graphiquement une condition suffisante sur $x$ pour que $|f(x) - 3| < 0{,}01$.
+
+:::
+
+L'activite precedente suggere que $f(x)$ peut etre rendu aussi proche que l'on veut de $f(1)$, des que $x$ est suffisamment proche de $1$. On dit que $f$ est continue en $1$.
+
+:::definition[Continuite en un point]
+
+Soit $f$ une fonction definie sur un intervalle ouvert $I$ et $a$ un reel de $I$.
+
+On dit que la fonction $f$ est **continue en $a$** si pour tout nombre $\beta > 0$, il existe un nombre $\alpha > 0$ tel que si $x$ appartient a $I$ et $|x - a| < \alpha$, alors $|f(x) - f(a)| < \beta$.
+
+:::
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-3, 0), (3.5, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -1.8), (0, 2), stroke: 0.8pt, mark: (end: ">", fill: black))
+
+  // y = 1 pour x > 0
+  line((0.15, 1), (3, 1), stroke: 1.5pt + blue)
+  circle((0, 1), radius: 0.07, fill: white, stroke: 1pt + blue)
+
+  // y = -1 pour x < 0
+  line((-0.15, -1), (-2.8, -1), stroke: 1.5pt + blue)
+  circle((0, -1), radius: 0.07, fill: white, stroke: 1pt + blue)
+
+  // f(0) = 0
+  circle((0, 0), radius: 0.07, fill: blue, stroke: 1pt + blue)
+
+  // Labels
+  content((-0.4, 1), $1$)
+  content((-0.5, -1), $-1$)
+  content((3.5, -0.3), $x$)
+  content((-0.4, 2), $y$)
+  content((0.4, -0.3), $O$)
+})
+```
+
+:::example[Activite 2]
+
+Le plan est muni d'un repere orthonorme $(O, \vec{i}, \vec{j})$. On a represente ci-dessus la fonction $f$ definie par :
+
+$$f(x) = \begin{cases} 1 & \text{si } x > 0 \\ 0 & \text{si } x = 0 \\ -1 & \text{si } x < 0 \end{cases}$$
+
+1. Reproduire la figure.
+2. Calculer $|f(x) - f(0)|$.
+3. Peut-on rendre la quantite $|f(x) - f(0)|$ aussi petite que l'on veut, en rapprochant $x$ de $0$ ?
+
+:::
+
+L'activite precedente illustre le cas d'une fonction non continue en $0$.
+
+:::remark[Vocabulaire]
+
+Une fonction non continue en $a$ est dite **discontinue** en $a$.
+
+:::
+
+### Interpretation graphique
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-0.5, 0), (5, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -0.5), (0, 3.5), stroke: 0.8pt, mark: (end: ">", fill: black))
+
+  // Courbe continue (forme de cloche)
+  bezier((0.3, 1.5), (4.5, 1.8), (1.5, 3.2), (3.5, 0.5), stroke: 1.5pt + blue)
+
+  // Projections en a
+  line((2.5, 0), (2.5, 1.35), stroke: (dash: "dashed", paint: gray))
+  line((0, 1.35), (2.5, 1.35), stroke: (dash: "dashed", paint: gray))
+
+  // Labels
+  content((2.5, -0.3), $a$)
+  content((-0.6, 1.35), $f(a)$)
+  content((1, 3), $C_f$)
+  content((-0.3, -0.3), $O$)
+})
+```
+
+Lorsque la representation graphique de $f$ sur un intervalle ouvert $I$ met en evidence un **trace continu** de la courbe, la fonction $f$ est continue en tout reel $a$ de $I$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-0.5, 0), (5, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -0.5), (0, 3.5), stroke: 0.8pt, mark: (end: ">", fill: black))
+
+  // Branche gauche (monte vers le saut)
+  bezier((0.3, 0.8), (2.5, 2.5), (1, 2), (2, 2.8), stroke: 1.5pt + blue)
+  circle((2.5, 2.5), radius: 0.06, fill: white, stroke: blue)
+
+  // Branche droite (repart plus bas)
+  bezier((2.5, 1.2), (4.5, 3), (3, 1.5), (4, 2.5), stroke: 1.5pt + blue)
+  circle((2.5, 1.2), radius: 0.06, fill: blue, stroke: blue)
+
+  // Projections en a
+  line((2.5, 0), (2.5, 1.2), stroke: (dash: "dashed", paint: gray))
+  line((0, 1.2), (2.5, 1.2), stroke: (dash: "dashed", paint: gray))
+
+  // Labels
+  content((2.5, -0.3), $a$)
+  content((-0.6, 1.2), $f(a)$)
+  content((2.8, 1.4), $A$)
+  content((4.2, 3.2), $C_f$)
+  content((-0.3, -0.3), $O$)
+})
+```
+
+Lorsque la representation graphique de $f$ sur un intervalle ouvert $I$ met en evidence un **saut** du trace de part et d'autre du point $A(a, f(a))$, la fonction $f$ est **discontinue** en $a$.

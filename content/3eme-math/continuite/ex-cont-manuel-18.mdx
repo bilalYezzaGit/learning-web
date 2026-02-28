@@ -1,0 +1,37 @@
+---
+type: exercise
+title: TVI - equation -2x^3 + 2x + 10 = 0 (18)
+difficulty: 2
+timeMinutes: 10
+category: application
+tags:
+  - continuite
+  - manuel
+  - tvi
+source: Manuel scolaire T1, Exercice 18, p.37
+---
+
+:::enonce
+Soit $f : x \mapsto -2x^3 + 2x + 10$.
+
+1. Justifier la continuite de $f$ sur $\mathbb{R}$.
+2. Montrer que l'equation $f(x) = 0$ admet une solution $\alpha$ dans $[1, 2]$.
+3. Donner une valeur approchee par defaut a $0{,}1$ pres de $\alpha$.
+:::
+
+:::solution
+1. $f$ est un polynome, donc continue sur $\mathbb{R}$.
+
+2. $f(1) = -2 + 2 + 10 = 10 > 0$ et $f(2) = -16 + 4 + 10 = -2 < 0$.
+
+$f$ est continue sur $[1, 2]$ et $f(1) \cdot f(2) < 0$. Par le TVI, l'equation $f(x) = 0$ admet au moins une solution $\alpha$ dans $[1, 2]$.
+
+3. $f(1{,}8) = -2(5{,}832) + 3{,}6 + 10 = -11{,}664 + 13{,}6 = 1{,}936 > 0$.
+$f(1{,}9) = -2(6{,}859) + 3{,}8 + 10 = -13{,}718 + 13{,}8 = 0{,}082 > 0$.
+$f(2{,}0) = -2 < 0$.
+Donc $\alpha \in [1{,}9 \; ; \; 2{,}0]$, soit $\alpha \approx 1{,}9$ a $0{,}1$ pres par defaut.
+:::
+
+:::methode
+Application standard du TVI avec affinage par pas de $0{,}1$.
+:::

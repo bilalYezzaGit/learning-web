@@ -1,0 +1,38 @@
+---
+type: exercise
+title: Justifier la continuite avec racine (3)
+difficulty: 1
+timeMinutes: 10
+category: application
+tags:
+  - continuite
+  - manuel
+  - racine
+source: Manuel scolaire T1, Exercice 3, p.35
+---
+
+:::enonce
+Dans chacun des cas suivants, justifier la continuite de la fonction $f$ en $a$.
+
+1. $f(x) = \sqrt{3x + 5}$ ; $a = \dfrac{2}{3}$.
+2. $f(x) = \sqrt{-2x + 3}$ ; $a = 0{,}01$.
+3. $f(x) = \sqrt{4x^2 + x + 1}$ ; $a = 1{,}25$.
+4. $f(x) = (x - 4)\sqrt{2x^2 + 3x + 5}$ ; $a = 10$.
+5. $f(x) = \sqrt{x^2 + 3} - 5\dfrac{x^2 + 2x + 2}{x^4 + 5x + 3}$ ; $a = -1$.
+:::
+
+:::solution
+1. $3x + 5$ est affine, continue en $\dfrac{2}{3}$ et vaut $3 \cdot \dfrac{2}{3} + 5 = 7 > 0$. Par le theoreme de $\sqrt{f}$, $f$ est continue en $a$.
+
+2. $-2x + 3$ est affine, continue en $0{,}01$ et vaut $-0{,}02 + 3 = 2{,}98 > 0$. Par le theoreme de $\sqrt{f}$, $f$ est continue en $a$.
+
+3. Posons $g(x) = 4x^2 + x + 1$. On a $\Delta = 1 - 16 = -15 < 0$, donc le trinome $4x^2 + x + 1 > 0$ pour tout $x \in \mathbb{R}$ (signe du coefficient de plus haut degre $a = 4 > 0$). Donc $g$ est definie et positive sur $\mathbb{R}$. De plus $g$ est un polynome, donc continue en $a = 1{,}25$. Par le theoreme de $\sqrt{f}$, $f = \sqrt{g}$ est continue en $a = 1{,}25$.
+
+4. Posons $g(x) = x - 4$ et $h(x) = 2x^2 + 3x + 5$. On a $\Delta = 9 - 40 = -31 < 0$, donc $h(x) > 0$ pour tout $x \in \mathbb{R}$ (signe de $a = 2 > 0$). Donc $h$ est definie et positive sur $\mathbb{R}$ et $10 \in \mathbb{R}$. $h$ est continue en $10$ donc $\sqrt{h}$ est continue en $a = 10$. De plus $g$ est continue en $a = 10$ (polynome). Par produit, $f = g \cdot \sqrt{h}$ est continue en $a = 10$.
+
+5. Posons $g(x) = x^2 + 3$ et $h(x) = \dfrac{-5(x^2 + 2x + 2)}{x^4 + 5x + 3}$. $g$ (polynome) est definie et positive sur $\mathbb{R}$, de plus $g$ est continue en $a = -1$, donc $\sqrt{g}$ est continue en $a = -1$. Pour $h$ : $(-1)^4 + 5(-1) + 3 = 1 - 5 + 3 = -1 \neq 0$, donc $h$ est une fonction rationnelle et $(-1) \in D_h$, d'ou $h$ est continue en $(-1)$. Par suite $f = \sqrt{g} + h$ est continue en $a = -1$.
+:::
+
+:::methode
+Pour les fonctions avec $\sqrt{\cdot}$ : verifier que l'expression sous la racine est positive en $a$ et continue en $a$, puis appliquer le theoreme de continuite de $\sqrt{f}$.
+:::

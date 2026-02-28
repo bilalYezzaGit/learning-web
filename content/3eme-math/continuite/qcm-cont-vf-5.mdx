@@ -1,0 +1,30 @@
+---
+type: qcm
+title: Vrai/Faux - |f| continue implique f continue
+difficulty: 2
+timeMinutes: 1
+tags:
+  - continuite
+  - manuel
+  - vrai-faux
+correctOption: 1
+---
+
+:::question
+Vrai ou Faux : Si $|f|$ est continue en $a$, alors $f$ est continue en $a$.
+:::
+
+:::option
+Vrai
+:::
+:::option{correct}
+Faux
+:::
+
+:::explanation
+Faux. Contre-exemple : $f(x) = \begin{cases} -x + 1 & \text{si } x \leq 0 \\ -1 & \text{si } x > 0 \end{cases}$
+
+$f$ n'est pas continue en $0$. Mais $|f(x)| = g(x) = \begin{cases} -x + 1 & \text{si } x \leq 0 \\ 1 & \text{si } x > 0 \end{cases}$
+
+$g$ est continue en $0$.
+:::

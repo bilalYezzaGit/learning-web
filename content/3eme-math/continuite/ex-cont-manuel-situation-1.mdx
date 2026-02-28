@@ -1,0 +1,44 @@
+---
+type: exercise
+title: Signe local d'une fonction continue (Situation 1)
+difficulty: 3
+timeMinutes: 20
+category: approfondissement
+tags:
+  - continuite
+  - manuel
+  - mobiliser-competences
+  - signe-local
+source: Manuel scolaire T1, Mobiliser ses competences, Situation 1, p.34
+---
+
+:::enonce
+On a represente la courbe d'une fonction $g$ definie sur un intervalle ouvert.
+
+1. Soit $a$ un reel tel que $g$ est continue en $a$ et $g(a) > 0$.
+   a. Representer l'ensemble des points $M(x, g(x))$ tels que $\dfrac{1}{2}g(a) < g(x) < \dfrac{3}{2}g(a)$.
+   b. Montrer qu'il existe un intervalle $]a - h, a + h[$ tel que pour tout $x \in ]a - h, a + h[$, on a $g(x) \in \left]\dfrac{1}{2}g(a), \dfrac{3}{2}g(a)\right[$.
+   c. En deduire que la fonction $g$ reste strictement positive sur cet intervalle.
+
+2. Soit $b$ un reel tel que $g$ est continue en $b$ et $g(b) < 0$. Montrer qu'il existe un intervalle $]b - h, b + h[$ sur lequel $g$ reste strictement negative.
+:::
+
+:::solution
+1. b. Posons $\beta = \dfrac{1}{2}g(a) > 0$. Comme $g$ est continue en $a$, pour $\beta > 0$, il existe $\alpha > 0$ tel que si $|x - a| < \alpha$, alors $|g(x) - g(a)| < \beta = \dfrac{1}{2}g(a)$.
+
+Cela signifie $g(a) - \dfrac{1}{2}g(a) < g(x) < g(a) + \dfrac{1}{2}g(a)$, soit $\dfrac{1}{2}g(a) < g(x) < \dfrac{3}{2}g(a)$.
+
+On prend $h = \alpha$. L'intervalle $]a - h, a + h[$ convient.
+
+c. Sur $]a - h, a + h[$, on a $g(x) > \dfrac{1}{2}g(a)$. Comme $g(a) > 0$, on a $\dfrac{1}{2}g(a) > 0$, donc $g(x) > 0$ sur tout l'intervalle.
+
+2. De maniere analogue, on pose $\beta = \dfrac{1}{2}|g(b)| = -\dfrac{1}{2}g(b) > 0$. Par continuite de $g$ en $b$, il existe $h > 0$ tel que pour $|x - b| < h$, on a $|g(x) - g(b)| < -\dfrac{1}{2}g(b)$.
+
+Cela donne $g(b) + \dfrac{1}{2}g(b) < g(x) < g(b) - \dfrac{1}{2}g(b)$, soit $\dfrac{3}{2}g(b) < g(x) < \dfrac{1}{2}g(b) < 0$.
+
+Donc $g$ reste strictement negative sur $]b - h, b + h[$.
+:::
+
+:::methode
+**Theoreme du signe local** : si $f$ est continue en $a$ et $f(a) \neq 0$, alors $f$ garde le signe de $f(a)$ au voisinage de $a$. La preuve utilise directement la definition de la continuite avec un choix judicieux de $\beta$.
+:::

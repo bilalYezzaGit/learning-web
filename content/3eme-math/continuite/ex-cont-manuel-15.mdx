@@ -1,0 +1,40 @@
+---
+type: exercise
+title: Continuite et TVI avec racine (15)
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags:
+  - continuite
+  - manuel
+  - tvi
+  - racine
+source: Manuel scolaire T1, Exercice 15, p.36
+---
+
+:::enonce
+Soit $f : x \mapsto -\dfrac{1}{2}x + \sqrt{2x - 1}$.
+
+1. Determiner l'ensemble de definition de $f$.
+2. Etudier la continuite de $f$ sur son ensemble de definition.
+3. Montrer que l'equation $f(x) = 0$ admet une solution $\alpha$ dans $\left[\dfrac{1}{2}, 1\right]$.
+4. Donner une valeur approchee par defaut a $0{,}1$ pres de $\alpha$.
+:::
+
+:::solution
+1. $f$ est definie lorsque $2x - 1 \geq 0$, soit $x \geq \dfrac{1}{2}$. Donc $D_f = \left[\dfrac{1}{2}, +\infty\right[$.
+
+2. Sur $\left]\dfrac{1}{2}, +\infty\right[$ : $-\dfrac{1}{2}x$ est affine donc continue. $2x - 1$ est un polynome positif et continu, donc $\sqrt{2x - 1}$ est continue par le theoreme de $\sqrt{f}$. Par somme, $f$ est continue sur $\left]\dfrac{1}{2}, +\infty\right[$. De plus $f$ est continue a droite en $\dfrac{1}{2}$, donc $f$ est continue sur $\left[\dfrac{1}{2}, +\infty\right[$.
+
+3. $f\left(\dfrac{1}{2}\right) = -\dfrac{1}{4} + \sqrt{0} = -\dfrac{1}{4} < 0$ et $f(1) = -\dfrac{1}{2} + \sqrt{1} = \dfrac{1}{2} > 0$.
+
+$f$ est continue sur $\left[\dfrac{1}{2}, 1\right]$ et $f\left(\dfrac{1}{2}\right) \cdot f(1) < 0$. Par le TVI, l'equation $f(x) = 0$ admet au moins une solution $\alpha$ dans $\left[\dfrac{1}{2}, 1\right]$.
+
+4. On calcule : $f(0{,}6) = -0{,}3 + \sqrt{0{,}2} \approx -0{,}3 + 0{,}447 = 0{,}147 > 0$.
+$f(0{,}5) = -0{,}25 < 0$.
+Donc $\alpha \in [0{,}5 \; ; \; 0{,}6]$, soit $\alpha \approx 0{,}5$ a $0{,}1$ pres par defaut.
+:::
+
+:::methode
+Pour appliquer le TVI : verifier la continuite sur l'intervalle, calculer $f$ aux bornes, constater un changement de signe. Pour affiner la valeur approchee, calculer $f$ en des points intermediaires.
+:::

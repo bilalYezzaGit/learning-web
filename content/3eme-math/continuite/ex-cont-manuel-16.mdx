@@ -1,0 +1,36 @@
+---
+type: exercise
+title: TVI - equation x^3 + 4x + 1 = 0 (16)
+difficulty: 2
+timeMinutes: 10
+category: application
+tags:
+  - continuite
+  - manuel
+  - tvi
+source: Manuel scolaire T1, Exercice 16, p.37
+---
+
+:::enonce
+Soit $f : x \mapsto x^3 + 4x + 1$.
+
+1. Justifier la continuite de $f$ sur $\mathbb{R}$.
+2. Montrer que l'equation $f(x) = 0$ admet une solution $\alpha$ dans $[-1, 0]$.
+3. Donner une valeur approchee par defaut a $0{,}1$ pres de $\alpha$.
+:::
+
+:::solution
+1. $f$ est un polynome, donc continue sur $\mathbb{R}$.
+
+2. $f(-1) = -1 - 4 + 1 = -4 < 0$ et $f(0) = 1 > 0$.
+
+$f$ est continue sur $[-1, 0]$ et $f(-1) \cdot f(0) < 0$. Par le TVI, l'equation $f(x) = 0$ admet au moins une solution $\alpha$ dans $[-1, 0]$.
+
+3. $f(-0{,}3) = -0{,}027 - 1{,}2 + 1 = -0{,}227 < 0$.
+$f(-0{,}2) = -0{,}008 - 0{,}8 + 1 = 0{,}192 > 0$.
+Donc $\alpha \in [-0{,}3 \; ; \; -0{,}2]$, soit $\alpha \approx -0{,}3$ a $0{,}1$ pres par defaut.
+:::
+
+:::methode
+Etapes du TVI : (1) verifier la continuite, (2) calculer $f$ aux bornes et constater le changement de signe, (3) conclure. Pour la valeur approchee, subdiviser l'intervalle par pas de $0{,}1$.
+:::

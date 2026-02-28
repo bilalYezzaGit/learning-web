@@ -1,0 +1,40 @@
+---
+type: exercise
+title: Image d'intervalles par -x^3 - 3x (14)
+difficulty: 1
+timeMinutes: 10
+category: application
+tags:
+  - continuite
+  - manuel
+  - image-intervalle
+source: Manuel scolaire T1, Exercice 14, p.36
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}$ par $f(x) = -x^3 - 3x$.
+
+1. Etudier les variations de la fonction $f$ sur $\mathbb{R}$.
+2. Quelles sont les images par $f$ des intervalles $I = [2, 3]$, $J = [-5, -3]$ et $K = ]3, 4]$ ?
+:::
+
+:::solution
+1. Soit $a$ et $b$ deux reels tels que $a \leq b$.
+
+$a \leq b \Rightarrow a^3 \leq b^3 \Rightarrow -b^3 \leq -a^3 \quad (1)$
+
+$a \leq b \Rightarrow -3b \leq -3a \quad (2)$
+
+En additionnant $(1)$ et $(2)$ membre a membre : $-b^3 - 3b \leq -a^3 - 3a$, soit $f(b) \leq f(a)$.
+
+Par suite $f$ est decroissante sur $\mathbb{R}$.
+
+2. Comme $f$ est decroissante :
+- $f(I) = f([2, 3])$ : $f(2) = -8 - 6 = -14$, $f(3) = -27 - 9 = -36$. Donc $f([2, 3]) = [-36, -14]$.
+- $f(J) = f([-5, -3])$ : $f(-5) = 125 + 15 = 140$, $f(-3) = 27 + 9 = 36$. Donc $f([-5, -3]) = [36, 140]$.
+- $f(K) = f(]3, 4])$ : $f(3) = -36$ (non atteint), $f(4) = -64 - 12 = -76$. Donc $f(]3, 4]) = [-76, -36[$.
+:::
+
+:::methode
+Pour une fonction decroissante, les images sont inversees : $f([a, b]) = [f(b), f(a)]$.
+:::

@@ -1,0 +1,155 @@
+---
+type: lesson
+title: "Continuite de la fonction racine de f"
+difficulty: 1
+timeMinutes: 8
+tags: [continuite, racine, manuel]
+source: Manuel scolaire T1, Section 5, p.26-27
+---
+
+### 5. Continuite de la fonction $\sqrt{f}$
+
+:::example[Activite 1]
+
+1. Representer la fonction $f : x \mapsto \sqrt{1 + x}$, dans le plan muni d'un repere $(O, \vec{i}, \vec{j})$.
+
+2. a. Montrer que $\sqrt{1 + x} - \sqrt{2} = \dfrac{x - 1}{\sqrt{1 + x} + \sqrt{2}}$.
+
+   b. En deduire que $\left|\sqrt{1 + x} - \sqrt{2}\right| \leq \dfrac{|x - 1|}{\sqrt{2}}$.
+
+   c. La fonction $f$ est-elle continue en $1$ ?
+
+:::
+
+:::example[Activite 2]
+
+Soit $f$ une fonction positive sur un intervalle ouvert $I$. Soit $a$ un reel de $I$ tel que $f$ soit continue en $a$.
+
+1. On suppose que $f(a) > 0$.
+
+   a. Montrer que pour tout reel $x$ de $I$, $\sqrt{f(x)} - \sqrt{f(a)} = \dfrac{f(x) - f(a)}{\sqrt{f(x)} + \sqrt{f(a)}}$.
+
+   b. En deduire que pour tout reel $x$ de $I$, $\left|\sqrt{f(x)} - \sqrt{f(a)}\right| \leq \dfrac{|f(x) - f(a)|}{\sqrt{f(a)}}$.
+
+   c. En deduire que $\sqrt{f}$ est continue en $a$.
+
+2. On suppose que $f(a) = 0$.
+
+   a. Ecrire la definition de la continuite de $f$ en $a$.
+
+   b. En deduire que $\sqrt{f}$ est continue en $a$.
+
+:::
+
+On a donc obtenu le theoreme ci-dessous.
+
+:::theorem[Theoreme]
+
+Soit $f$ une fonction definie et positive sur un intervalle ouvert $I$ et $a$ un reel de $I$.
+
+Si $f$ est continue en $a$, alors la fonction $\sqrt{f}$ est continue en $a$.
+
+:::
+
+:::example[Activite 3]
+
+Dans chacun des cas suivants, etudier la continuite de la fonction $f$ en $a$.
+
+1. $f(x) = \sqrt{\dfrac{x - 2}{x + 1}}$ ; $a = 3$.
+
+2. $f(x) = \sqrt{\dfrac{x^2 - 2x + 1}{x + 1}}$ ; $a = 1$.
+
+3. $f(x) = \sqrt{\dfrac{|x - 3|}{x + 2}}$ ; $a = 2$.
+
+:::
+
+:::example[Activite 4]
+
+Dans la figure ci-contre $ABCD$ est un carre de cote $1$, $M$ est un point du segment $[AB]$, distinct de $A$ et $B$ et tel que $DM = x$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Carre ABCD
+  line((0, 3), (3, 3), stroke: 1pt)
+  line((3, 3), (3, 0), stroke: 1pt)
+  line((3, 0), (0, 0), stroke: 1pt)
+  line((0, 0), (0, 3), stroke: 1pt)
+
+  // Point M sur [AB]
+  circle((2, 3), radius: 0.05, fill: black)
+
+  // Diagonale DM
+  line((0, 0), (2, 3), stroke: 1.2pt + blue)
+
+  // Labels
+  content((-0.3, 3.2), $A$)
+  content((3.3, 3.2), $B$)
+  content((3.3, -0.2), $C$)
+  content((-0.3, -0.2), $D$)
+  content((2, 3.3), $M$)
+  content((0.7, 1.7), $x$)
+})
+```
+
+On designe par $f$ la fonction $x \mapsto AM$.
+
+1. Donner l'ensemble de definition $I$ de $f$.
+
+2. Montrer que $f$ est continue en tout point de $I$.
+
+:::
+
+:::example[Activite 5]
+
+Dans le plan muni d'un repere orthonorme $(O, \vec{i}, \vec{j})$, on considere la droite $\mathcal{D}$ d'equation $y = 2x + 1$ et le point $A(0, 4)$.
+
+A tout reel $x$, on associe le point $P$ appartenant a la droite $\mathcal{D}$, d'abscisse $x$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-0.5, 0), (4, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -0.5), (0, 5.5), stroke: 0.8pt, mark: (end: ">", fill: black))
+
+  // Droite y = 2x + 1
+  line((-0.2, 0.6), (2.2, 5.4), stroke: 1.5pt + blue)
+
+  // Point A(0, 4)
+  circle((0, 4), radius: 0.06, fill: red, stroke: red)
+
+  // Point P sur la droite (exemple x=1.5, y=4)
+  circle((1.5, 4), radius: 0.06, fill: blue, stroke: blue)
+
+  // Segment AP
+  line((0, 4), (1.5, 4), stroke: (dash: "dashed", paint: red))
+  line((1.5, 0), (1.5, 4), stroke: (dash: "dashed", paint: gray))
+
+  // Labels
+  content((-0.4, 4), $A$)
+  content((1.7, 4.3), $P$)
+  content((2.4, 5.4), $y = 2x + 1$)
+  content((4, -0.3), $x$)
+  content((-0.3, 5.5), $y$)
+  content((0.3, -0.3), $O$)
+  content((-0.3, 0.8), $accent(j, ->)$)
+  content((0.6, -0.3), $accent(i, ->)$)
+})
+```
+
+1. Calculer $AP$ en fonction de $x$.
+
+2. Soit $f$ la fonction definie sur $\mathbb{R}$ par $f(x) = AP$.
+
+   a. Montrer que la fonction $f$ est continue pour tout reel $x$.
+
+   b. Montrer que la fonction $f$ admet un minimum sur $\mathbb{R}$ que l'on determinera.
+
+:::

@@ -1,0 +1,42 @@
+---
+type: exercise
+title: Ensemble de definition et continuite (8)
+difficulty: 1
+timeMinutes: 10
+category: application
+tags:
+  - continuite
+  - manuel
+  - ensemble-definition
+source: Manuel scolaire T1, Exercice 8, p.36
+---
+
+:::enonce
+Soit $f : x \mapsto \dfrac{x}{2x - |x + 1|}$.
+
+1. Determiner l'ensemble de definition de $f$.
+2. Etudier la continuite de $f$ sur son ensemble de definition.
+:::
+
+:::solution
+1. $f$ est definie lorsque $2x - |x + 1| \neq 0$.
+
+- Si $x \geq -1$ : $|x + 1| = x + 1$, donc $2x - (x + 1) = x - 1$. Annulation en $x = 1$.
+- Si $x < -1$ : $|x + 1| = -(x + 1) = -x - 1$, donc $2x - (-x - 1) = 3x + 1$. Annulation en $x = -\dfrac{1}{3}$, mais $-\dfrac{1}{3} \geq -1$, donc pas dans ce cas.
+
+L'ensemble de definition est $D_f = \mathbb{R} \setminus \{1\}$.
+
+2. Sur $]-\infty, -1[$ : $f(x) = \dfrac{x}{3x + 1}$, fonction rationnelle avec $3x + 1 \neq 0$ (car $x \neq -\dfrac{1}{3}$ et $-\dfrac{1}{3} \notin ]-\infty, -1[$). Donc $f$ est continue sur $]-\infty, -1[$.
+
+Sur $]-1, 1[$ : $f(x) = \dfrac{x}{x - 1}$, fonction rationnelle avec $x - 1 \neq 0$ (car $x < 1$). Donc $f$ est continue sur $]-1, 1[$.
+
+Sur $]1, +\infty[$ : $f(x) = \dfrac{x}{x - 1}$, fonction rationnelle avec $x - 1 \neq 0$. Donc $f$ est continue sur $]1, +\infty[$.
+
+En $x = -1$ : il faut verifier le raccordement. Par la gauche : $\dfrac{-1}{3(-1) + 1} = \dfrac{-1}{-2} = \dfrac{1}{2}$. Par la droite : $\dfrac{-1}{-1 - 1} = \dfrac{1}{2}$. Et $f(-1) = \dfrac{-1}{-1 - 1} = \dfrac{1}{2}$. Donc $f$ est continue en $-1$.
+
+$f$ est continue sur $\mathbb{R} \setminus \{1\}$.
+:::
+
+:::methode
+Pour les fonctions avec valeur absolue : distinguer les cas selon le signe de l'expression dans $|\cdot|$, etudier la continuite sur chaque morceau, puis verifier la continuite aux points de changement de signe.
+:::

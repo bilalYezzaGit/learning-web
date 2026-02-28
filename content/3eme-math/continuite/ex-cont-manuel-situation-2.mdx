@@ -1,0 +1,56 @@
+---
+type: exercise
+title: Dichotomie - trois solutions (Situation 2)
+difficulty: 3
+timeMinutes: 25
+category: approfondissement
+tags:
+  - continuite
+  - manuel
+  - mobiliser-competences
+  - tvi
+  - dichotomie
+source: Manuel scolaire T1, Mobiliser ses competences, Situation 2, p.34
+---
+
+:::enonce
+On considere la fonction $f$ definie sur $\mathbb{R}$ par $f(x) = 5x^3 - 10x^2 - 8x + 10$.
+
+1. a. Montrer que l'equation $f(x) = 0$ admet au moins une solution dans chacun des intervalles $[-2, -1]$, $[0, 1]$ et $[2, 3]$.
+   b. Montrer que l'equation $f(x) = 0$ admet dans $\mathbb{R}$ exactement trois solutions distinctes.
+
+2. Soit $\alpha$ la solution de l'equation $f(x) = 0$ sur l'intervalle $[0, 1]$. On se propose de donner un encadrement plus precis de $\alpha$.
+   a. Calculer $f\left(\dfrac{1}{2}\right)$ et en deduire que $\alpha \in \left[\dfrac{1}{2}, 1\right]$.
+   b. Calculer $f\left(\dfrac{3}{4}\right)$ et en deduire que $\alpha \in \left[\dfrac{3}{4}, 1\right]$.
+   c. Calculer $f\left(\dfrac{7}{8}\right)$ et en deduire que $\alpha \in \left[\dfrac{3}{4}, \dfrac{7}{8}\right]$.
+   d. Calculer $f\left(\dfrac{13}{16}\right)$ et en deduire que $\alpha \in \left[\dfrac{3}{4}, \dfrac{13}{16}\right]$.
+   e. Calculer $f\left(\dfrac{25}{32}\right)$ et en deduire que $\alpha \in \left[\dfrac{25}{32}, \dfrac{13}{16}\right]$.
+
+3. Soit $\beta$ la solution de $f(x) = 0$ sur $[-2, -1]$. Determiner un intervalle de longueur $0{,}04$ contenant $\beta$.
+
+4. Soit $\lambda$ la solution de $f(x) = 0$ sur $[2, 3]$. Determiner un intervalle de longueur $0{,}04$ contenant $\lambda$.
+:::
+
+:::solution
+1. a. $f(-2) = 5(-8) - 10(4) - 8(-2) + 10 = -40 - 40 + 16 + 10 = -54 < 0$.
+$f(-1) = -5 - 10 + 8 + 10 = 3 > 0$. Changement de signe, par le TVI, solution dans $[-2, -1]$.
+
+$f(0) = 10 > 0$.
+$f(1) = 5 - 10 - 8 + 10 = -3 < 0$. Changement de signe, par le TVI, solution dans $[0, 1]$.
+
+$f(2) = 40 - 40 - 16 + 10 = -6 < 0$.
+$f(3) = 135 - 90 - 24 + 10 = 31 > 0$. Changement de signe, par le TVI, solution dans $[2, 3]$.
+
+b. $f$ est un polynome de degre $3$, qui admet au plus $3$ racines reelles. On a trouve au moins $3$ solutions dans des intervalles disjoints, donc exactement $3$ solutions.
+
+2. a. $f\left(\dfrac{1}{2}\right) = 5\left(\dfrac{1}{8}\right) - 10\left(\dfrac{1}{4}\right) - 4 + 10 = \dfrac{5}{8} - \dfrac{10}{4} - 4 + 10 = 0{,}625 - 2{,}5 - 4 + 10 = 4{,}125 > 0$.
+Comme $f(1) = -3 < 0$ et $f\left(\dfrac{1}{2}\right) > 0$, par le TVI $\alpha \in \left[\dfrac{1}{2}, 1\right]$.
+
+b-e. Par dichotomie successive du meme type, on affine l'encadrement de $\alpha$ jusqu'a $\alpha \in \left[\dfrac{25}{32}, \dfrac{13}{16}\right] = [0{,}78125 \; ; \; 0{,}8125]$.
+
+3. et 4. Par la meme methode de dichotomie, on determine des intervalles de longueur $0{,}04$ pour $\beta$ et $\lambda$.
+:::
+
+:::methode
+**Methode de dichotomie** : a chaque etape, on divise l'intervalle en deux, on evalue $f$ au milieu, et on garde le sous-intervalle ou il y a changement de signe. Apres $n$ etapes, l'intervalle a une longueur de $\dfrac{b - a}{2^n}$.
+:::

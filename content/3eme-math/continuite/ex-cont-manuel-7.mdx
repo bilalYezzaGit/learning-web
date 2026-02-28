@@ -1,0 +1,45 @@
+---
+type: exercise
+title: Fonction impaire continue par morceaux (7)
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags:
+  - continuite
+  - manuel
+  - morceaux
+  - imparite
+source: Manuel scolaire T1, Exercice 7, p.36
+---
+
+:::enonce
+On considere la fonction $f$ definie sur $\mathbb{R}$ telle que :
+- la fonction $f$ est continue sur $\mathbb{R}$,
+- $f$ est impaire,
+- $f(x) = -x^2 + 3$ si $x \geq 2$,
+- la restriction de $f$ a $]-2, 0[$ est une fonction affine.
+
+1. Representer la fonction $f$ dans un repere.
+2. Donner l'expression de $f(x)$ pour tout $x \in \mathbb{R}$.
+:::
+
+:::solution
+1. Pour $x \geq 2$ : $f(x) = -x^2 + 3$. On a $f(2) = -4 + 3 = -1$.
+
+Comme $f$ est impaire : $f(-x) = -f(x)$, donc pour $x \leq -2$ (c'est-a-dire $-x \geq 2$) : $f(-x) = -(-x)^2 + 3 = -x^2 + 3$, d'ou $f(x) = -f(-x) = -(-x^2 + 3) = x^2 - 3$.
+On a $f(-2) = 4 - 3 = 1$. $A'(-2, 1)$ est le symetrique de $A(2, -1)$ par rapport a $O$.
+
+$O$ est centre de symetrie pour $(C_f)$.
+
+Sur $]-2, 0[$ : $f(x) = ax + b$. Comme $f$ est impaire : $f(0) = 0$, donc $b = 0$. Par continuite en $-2$ : $f(-2) = -2a = 1$, soit $a = -\dfrac{1}{2}$.
+
+Donc $f(x) = -\dfrac{1}{2}x$ sur $]-2, 2[$.
+
+2. $f(x) = \begin{cases} -x^2 + 3 & \text{si } x \geq 2 \\ -\dfrac{1}{2}x & \text{si } -2 < x < 2 \\ x^2 - 3 & \text{si } x \leq -2 \end{cases}$
+
+On peut verifier : $f$ est impaire et continue en $2$ et $-2$.
+:::
+
+:::methode
+Pour construire une fonction impaire par morceaux : utiliser $f(-x) = -f(x)$ pour deduire les morceaux symetriques. Pour la partie affine, utiliser la continuite aux points de raccordement et la condition $f(0) = 0$ (imparite).
+:::

@@ -1,0 +1,57 @@
+---
+type: exercise
+title: TVI complet - polynome degre 4 (20)
+difficulty: 3
+timeMinutes: 25
+category: approfondissement
+tags:
+  - continuite
+  - manuel
+  - tvi
+  - dichotomie
+source: Manuel scolaire T1, Exercice 20, p.37
+---
+
+:::enonce
+Dans le plan muni d'un repere, on a represente la fonction $f$ definie sur $\mathbb{R}$ par $f(x) = \dfrac{1}{2}x^4 - x^3 - 6x^2 + 5x + 10$.
+
+1. Justifier la continuite de $f$ sur $\mathbb{R}$.
+2. a. Calculer $f(-3)$ et $f(-2)$. En deduire que l'equation $f(x) = 0$ admet au moins une solution dans $[-3, -2]$.
+   b. Calculer $f(-1{,}5)$ et $f(-1)$. En deduire que l'equation $f(x) = 0$ admet au moins une solution dans $[-1{,}5, -1]$.
+   c. Calculer $f(1)$ et $f(2)$. En deduire que l'equation $f(x) = 0$ admet au moins une solution dans $[1, 2]$.
+   d. Calculer $f(4)$ et $f(4{,}5)$. En deduire que l'equation $f(x) = 0$ admet au moins une solution dans $[4, 4{,}5]$.
+3. Montrer que l'equation $f(x) = 0$ admet dans $\mathbb{R}$ exactement quatre solutions distinctes.
+4. Donner une valeur approchee a $0{,}1$ pres par defaut de chacune des solutions de l'equation $f(x) = 0$.
+:::
+
+:::solution
+1. $f$ est un polynome, donc continue sur $\mathbb{R}$.
+
+2. a. $f(-3) = \dfrac{81}{2} + 27 - 54 - 15 + 10 = 40{,}5 + 27 - 54 - 15 + 10 = 8{,}5 > 0$.
+$f(-2) = \dfrac{16}{2} + 8 - 24 - 10 + 10 = 8 + 8 - 24 - 10 + 10 = -8 < 0$.
+$f(-3) \cdot f(-2) < 0$, par le TVI, solution dans $[-3, -2]$.
+
+b. $f(-1{,}5) = \dfrac{1}{2}(5{,}0625) - (-3{,}375) - 6(2{,}25) + 5(-1{,}5) + 10 = 2{,}53 + 3{,}375 - 13{,}5 - 7{,}5 + 10 = -5{,}095 < 0$.
+$f(-1) = \dfrac{1}{2} + 1 - 6 - 5 + 10 = 0{,}5 > 0$.
+$f(-1{,}5) \cdot f(-1) < 0$, par le TVI, solution dans $[-1{,}5, -1]$.
+
+c. $f(1) = \dfrac{1}{2} - 1 - 6 + 5 + 10 = 8{,}5 > 0$.
+$f(2) = 8 - 8 - 24 + 10 + 10 = -4 < 0$.
+$f(1) \cdot f(2) < 0$, par le TVI, solution dans $[1, 2]$.
+
+d. $f(4) = 128 - 64 - 96 + 20 + 10 = -2 < 0$.
+$f(4{,}5) = \dfrac{1}{2}(410{,}0625) - 91{,}125 - 121{,}5 + 22{,}5 + 10 = 205{,}03 - 91{,}125 - 121{,}5 + 22{,}5 + 10 = 24{,}9 > 0$.
+$f(4) \cdot f(4{,}5) < 0$, par le TVI, solution dans $[4, 4{,}5]$.
+
+3. L'equation $f(x) = 0$ est du $4$eme degre donc elle admet au plus quatre solutions. Comme $\alpha_1$, $\alpha_2$, $\alpha_3$ et $\alpha_4$ sont des solutions distinctes de l'equation $f(x) = 0$ (dans des intervalles disjoints), l'equation $f(x) = 0$ admet exactement quatre solutions.
+
+4. Par dichotomie :
+- $f(-2{,}8) \times f(-2{,}7) < 0$, donc $-2{,}8 < \alpha_1 < -2{,}7$.
+- $f(-1{,}1) \times f(-1) = (-0{,}69)(0{,}5) < 0$, donc $-1{,}1 < \alpha_2 < -1$.
+- $f(1{,}7) \times f(1{,}8) = (0{,}42)(-1{,}02) < 0$, donc $1{,}7 < \alpha_3 < 1{,}8$.
+- $f(4) \times f(4{,}1) = (-2)(2{,}007) < 0$, donc $4 < \alpha_4 < 4{,}1$.
+:::
+
+:::methode
+Pour montrer le nombre exact de solutions : (1) trouver au moins $n$ solutions par le TVI dans des intervalles disjoints, (2) utiliser le fait qu'un polynome de degre $n$ a au plus $n$ racines reelles, (3) conclure a l'egalite.
+:::

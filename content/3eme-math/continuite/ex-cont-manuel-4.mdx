@@ -1,0 +1,40 @@
+---
+type: exercise
+title: Distance et continuite (4)
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags:
+  - continuite
+  - manuel
+  - geometrie
+source: Manuel scolaire T1, Exercice 4, p.35
+---
+
+:::enonce
+Le plan est muni d'un repere orthonorme. Les points $A(-2, 0)$ et $B(0, 1)$ sont fixes et le point $M$ d'abscisse $x$ varie sur la droite d'equation $y = x$.
+
+Soit la fonction $f : x \mapsto AM + BM$.
+
+1. Donner l'expression de $f(x)$.
+2. Justifier que $f$ est continue en tout reel.
+3. Determiner $x$ pour que le trajet $AM + BM$ soit minimal.
+:::
+
+:::solution
+1. Le point $M$ a pour coordonnees $(x, x)$ (car il est sur la droite $y = x$).
+
+$AM = \sqrt{(x - (-2))^2 + (x - 0)^2} = \sqrt{(x + 2)^2 + x^2} = \sqrt{2x^2 + 4x + 4}$
+
+$BM = \sqrt{(x - 0)^2 + (x - 1)^2} = \sqrt{x^2 + (x - 1)^2} = \sqrt{2x^2 - 2x + 1}$
+
+Donc $f(x) = \sqrt{2x^2 + 4x + 4} + \sqrt{2x^2 - 2x + 1}$.
+
+2. $2x^2 + 4x + 4 = 2(x + 1)^2 + 2 > 0$ pour tout $x$, et c'est un polynome continu. Par le theoreme de $\sqrt{f}$, $\sqrt{2x^2 + 4x + 4}$ est continue en tout reel. De meme, $2x^2 - 2x + 1 = 2(x - \frac{1}{2})^2 + \frac{1}{2} > 0$ pour tout $x$. Par somme, $f$ est continue en tout reel.
+
+3. Soit le point $C(1, 0)$. La droite d'equation $y = x$ est la mediatrice du segment $[BC]$, d'ou $BM = CM$. Donc $AM + BM = AM + CM$. Par l'inegalite triangulaire, $AM + CM \geq AC$, avec egalite si et seulement si $M \in [AC]$. Or $A(-2, 0)$ et $C(1, 0)$ sont sur l'axe des abscisses, et $[AC]$ coupe la droite $y = x$ en $M = O(0, 0)$. Donc le trajet $AM + BM$ est minimal pour $x = 0$.
+:::
+
+:::methode
+Pour montrer la continuite d'une fonction distance : exprimer la distance comme $\sqrt{P(x)}$ ou $P$ est un polynome, verifier que $P(x) > 0$ pour tout $x$, puis appliquer le theoreme de $\sqrt{f}$.
+:::

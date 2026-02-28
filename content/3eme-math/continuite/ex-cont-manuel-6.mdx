@@ -1,0 +1,40 @@
+---
+type: exercise
+title: Continuite par morceaux avec 1/x (6)
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags:
+  - continuite
+  - manuel
+  - morceaux
+source: Manuel scolaire T1, Exercice 6, p.35
+---
+
+:::enonce
+On considere la fonction $f$ definie sur $\mathbb{R}$ par :
+
+$$f(x) = \begin{cases} \dfrac{1}{x} & \text{si } x > 0 \\ -1 & \text{si } x \leq 0 \end{cases}$$
+
+1. Tracer la courbe representative de $f$ dans un repere.
+2. Justifier la continuite de $f$ sur $]0, +\infty[$.
+3. Justifier la continuite de $f$ sur $]-\infty, 0[$.
+4. Verifier, a l'aide du graphique, que $f$ n'est pas continue sur $\mathbb{R}$.
+5. Pour chacune des equations ci-dessous, determiner, a l'aide du graphique, le nombre de solutions : $f(x) = 1$ ; $f(x) = \dfrac{2}{5}$ ; $f(x) = -\dfrac{1}{2}$ ; $f(x) = 0$.
+:::
+
+:::solution
+1. Pour $x \leq 0$ : droite horizontale $y = -1$. Pour $x > 0$ : hyperbole $y = \dfrac{1}{x}$.
+
+2. Sur $]0, +\infty[$, $f(x) = \dfrac{1}{x}$ est une fonction rationnelle definie pour $x \neq 0$, donc continue sur $]0, +\infty[$.
+
+3. Sur $]-\infty, 0[$, $f(x) = -1$ est une fonction constante, donc continue sur $]-\infty, 0[$.
+
+4. En $x = 0$ : $f(0) = -1$. Par la droite : $\lim_{x \to 0^+} \dfrac{1}{x} = +\infty \neq f(0)$. Donc $f$ n'est pas continue a droite en $0$, donc $f$ n'est pas continue en $0$.
+
+5. $f(x) = 1$ : une solution ($x = 1$). $f(x) = \dfrac{2}{5}$ : une solution ($x = \dfrac{5}{2}$). $f(x) = -\dfrac{1}{2}$ : pas de solution (pour $x > 0$, $\dfrac{1}{x} > 0$ ; pour $x \leq 0$, $f(x) = -1 \neq -\dfrac{1}{2}$). $f(x) = 0$ : pas de solution (pour $x > 0$, $\dfrac{1}{x} > 0$ ; pour $x \leq 0$, $f(x) = -1 \neq 0$).
+:::
+
+:::methode
+Quand une fonction par morceaux n'est pas continue en un point de raccordement, certaines equations $f(x) = k$ peuvent ne pas avoir de solution meme si $k$ est entre deux valeurs prises par $f$ (le TVI ne s'applique pas).
+:::

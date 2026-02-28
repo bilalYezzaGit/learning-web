@@ -1,0 +1,110 @@
+kind: cours
+visible: false
+title: "Continuite - Manuel scolaire (transcription complete)"
+description: "Transcription fidele du chapitre Continuite du Manuel scolaire 3eme Math (CNP), T1 p.21-39. Cours, QCM, Vrai/Faux et exercices."
+trimester: T1
+order: 2
+estimatedMinutes: 240
+objectives:
+  - "Maitriser la definition formelle de la continuite en un point"
+  - "Connaitre la continuite des fonctions usuelles"
+  - "Savoir utiliser les theoremes sur |f|, sqrt(f), operations"
+  - "Comprendre la continuite a droite et a gauche"
+  - "Savoir etudier la continuite sur un intervalle"
+  - "Connaitre le theoreme de l image d un intervalle"
+  - "Appliquer le TVI et la methode de dichotomie"
+
+sections:
+  - label: "1. Continuite en un reel"
+    steps:
+      - lesson-cont-definition-formelle
+
+  - label: "2. Fonctions usuelles"
+    steps:
+      - lesson-cont-fonctions-usuelles
+
+  - label: "3. Continuite de |f|"
+    steps:
+      - lesson-cont-valeur-absolue
+
+  - label: "4. Operations sur les fonctions continues"
+    steps:
+      - lesson-cont-operations
+
+  - label: "5. Continuite de racine de f"
+    steps:
+      - lesson-cont-racine
+
+  - label: "6. Continuite a droite et a gauche"
+    steps:
+      - lesson-cont-droite-gauche
+
+  - label: "7. Continuite sur un intervalle"
+    steps:
+      - lesson-cont-intervalle
+
+  - label: "8. Image d un intervalle"
+    steps:
+      - lesson-cont-image-intervalle
+
+  - label: "9. TVI et resolution d equations"
+    steps:
+      - lesson-cont-tvi
+
+  - label: "QCM"
+    steps:
+      - quiz:
+          - qcm-cont-manuel-1
+          - qcm-cont-manuel-2
+          - qcm-cont-manuel-3
+          - qcm-cont-manuel-4
+          - qcm-cont-manuel-5
+
+  - label: "Vrai / Faux"
+    steps:
+      - quiz:
+          - qcm-cont-vf-1
+          - qcm-cont-vf-2
+          - qcm-cont-vf-3
+          - qcm-cont-vf-4
+          - qcm-cont-vf-5
+
+  - label: "Exercices - Continuite en un point"
+    steps:
+      - ex-cont-manuel-1
+      - ex-cont-manuel-2
+      - ex-cont-manuel-3
+
+  - label: "Exercices - Geometrie et continuite"
+    steps:
+      - ex-cont-manuel-4
+
+  - label: "Exercices - Fonctions par morceaux"
+    steps:
+      - ex-cont-manuel-5
+      - ex-cont-manuel-6
+      - ex-cont-manuel-7
+      - ex-cont-manuel-8
+
+  - label: "Exercices - Image d intervalles"
+    steps:
+      - ex-cont-manuel-9
+      - ex-cont-manuel-10
+      - ex-cont-manuel-11
+      - ex-cont-manuel-12
+      - ex-cont-manuel-13
+      - ex-cont-manuel-14
+
+  - label: "Exercices - TVI et dichotomie"
+    steps:
+      - ex-cont-manuel-15
+      - ex-cont-manuel-16
+      - ex-cont-manuel-17
+      - ex-cont-manuel-18
+      - ex-cont-manuel-19
+      - ex-cont-manuel-20
+
+  - label: "Mobiliser ses competences"
+    steps:
+      - ex-cont-manuel-situation-1
+      - ex-cont-manuel-situation-2

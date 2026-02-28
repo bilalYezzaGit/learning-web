@@ -1,0 +1,38 @@
+---
+type: exercise
+title: Continuite d'une fonction par morceaux (5)
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags:
+  - continuite
+  - manuel
+  - morceaux
+  - droite-gauche
+source: Manuel scolaire T1, Exercice 5, p.35
+---
+
+:::enonce
+On considere la fonction $f$ definie sur $\mathbb{R}$ par :
+
+$$f(x) = \begin{cases} \sqrt{2x - 4} & \text{si } x \geq 2 \\ x & \text{si } x < 2 \end{cases}$$
+
+1. Tracer la courbe representative de $f$ dans un repere.
+2. Justifier la continuite de $f$ sur $[2, +\infty[$.
+3. Justifier la continuite de $f$ sur $]-\infty, 2[$.
+4. Verifier, a l'aide du graphique, que $f$ n'est pas continue sur $\mathbb{R}$.
+:::
+
+:::solution
+1. Pour $x < 2$ : $f(x) = x$ (droite d'equation $y = x$). Pour $x \geq 2$ : $f(x) = \sqrt{2x - 4}$ (courbe de racine).
+
+2. Sur $[2, +\infty[$, $f(x) = \sqrt{2x - 4}$. La fonction $2x - 4$ est affine, positive sur $[2, +\infty[$, et continue. Par le theoreme de $\sqrt{f}$ (en incluant la continuite a droite en $2$), $f$ est continue sur $[2, +\infty[$.
+
+3. Sur $]-\infty, 2[$, $f(x) = x$ est une fonction affine, donc continue sur $]-\infty, 2[$.
+
+4. En $x = 2$ : $f(2) = \sqrt{2 \cdot 2 - 4} = 0$. Par la gauche : $\lim_{x \to 2^-} f(x) = \lim_{x \to 2^-} x = 2 \neq 0 = f(2)$. Donc $f$ n'est pas continue a gauche en $2$, donc $f$ n'est pas continue en $2$. La fonction n'est pas continue sur $\mathbb{R}$.
+:::
+
+:::methode
+Pour une fonction definie par morceaux : etudier la continuite sur chaque morceau separement, puis verifier la continuite aux points de raccordement en comparant les limites a gauche et a droite avec la valeur de la fonction.
+:::

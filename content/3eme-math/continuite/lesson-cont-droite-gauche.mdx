@@ -1,0 +1,129 @@
+---
+type: lesson
+title: "Continuite a droite et a gauche"
+difficulty: 1
+timeMinutes: 8
+tags: [continuite, droite-gauche, manuel]
+source: Manuel scolaire T1, Section 6, p.27-28
+---
+
+### 6. Continuite a droite. Continuite a gauche
+
+:::example[Activite 1]
+
+Soit $f$ la restriction a l'intervalle $]0, 3[$ de la fonction partie entiere $x \mapsto E(x)$.
+
+1. Representer graphiquement $f$ dans un repere $(O, \vec{i}, \vec{j})$.
+
+2. La fonction $f$ est-elle continue en $2$ ? Justifier graphiquement.
+
+3. Que peut-on dire de $|E(x) - 2|$, lorsque $x$ est suffisamment proche de $2$ en restant superieur a $2$ ?
+
+4. Que peut-on dire de $|E(x) - 2|$ lorsque $x$ se rapproche de $2$ en restant inferieur a $2$ ?
+
+:::
+
+:::example[Activite 2]
+
+Le plan est muni d'un repere $(O, \vec{i}, \vec{j})$.
+
+On a represente ci-contre, une fonction $g$ definie sur $\mathbb{R}$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-1, 0), (3, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -0.5), (0, 3.5), stroke: 0.8pt, mark: (end: ">", fill: black))
+
+  // Branche gauche (x < 1) : monte vers y = 2
+  bezier((-0.8, 0.5), (1, 2), (-0.2, 1), (0.6, 1.8), stroke: 1.5pt + blue)
+  circle((1, 2), radius: 0.06, fill: white, stroke: 1pt + blue)
+
+  // Branche droite (x >= 1) : repart de y = 1, monte vers C_g
+  bezier((1, 1), (2.8, 3.2), (1.5, 1.2), (2.2, 2.5), stroke: 1.5pt + blue)
+  circle((1, 1), radius: 0.06, fill: blue, stroke: 1pt + blue)
+
+  // Projections
+  line((1, 0), (1, 1), stroke: (dash: "dashed", paint: gray))
+  line((0, 1), (1, 1), stroke: (dash: "dashed", paint: gray))
+  line((0, 2), (1, 2), stroke: (dash: "dashed", paint: gray))
+
+  // Labels
+  content((1, -0.3), $1$)
+  content((-0.3, 1), $1$)
+  content((-0.3, 2), $2$)
+  content((-0.3, -0.3), $O$)
+  content((2.8, 3.5), text(fill: blue)[$C_g$])
+})
+```
+
+1. La fonction $g$ est-elle continue en $1$ ?
+
+2. Determiner graphiquement $g(1)$.
+
+3. Donner graphiquement une condition suffisante sur les reels $x$ inferieurs a $1$, pour que $|g(x) - g(1)| \leq 0{,}1$.
+
+4. Que peut-on conjecturer sur $|g(x) - g(1)|$ lorsque $x$ se rapproche de $1$ en restant superieur a $1$ ?
+
+:::
+
+:::definition[Continuite a droite et a gauche]
+
+Soit $f$ une fonction definie sur un intervalle $I$ et $a$ un reel de $I$.
+
+On dit que la fonction $f$ est **continue a droite en $a$** si, pour tout $\beta > 0$, il existe $\alpha > 0$ tel que si $x$ appartient a $I$ et $0 \leq x - a < \alpha$ alors $|f(x) - f(a)| < \beta$.
+
+On dit que la fonction $f$ est **continue a gauche en $a$** si, pour tout $\beta > 0$, il existe $\alpha > 0$ tel que si $x$ appartient a $I$ et $0 \leq a - x < \alpha$ alors $|f(x) - f(a)| < \beta$.
+
+:::
+
+Le theoreme qui suit, etablit le lien entre la continuite en un reel $a$ et la continuite a droite et a gauche en $a$ et se deduit des definitions.
+
+:::theorem[Theoreme]
+
+Soit $f$ une fonction definie sur un intervalle ouvert contenant $a$.
+
+$f$ est continue en $a$, si et seulement si, $f$ est continue a droite et a gauche en $a$.
+
+:::
+
+:::example[Activite 3]
+
+1. Soit la fonction $f : x \mapsto |x^2 + x|$. Etudier la continuite a droite (respectivement a gauche) de $f$ en $-1$.
+
+2. Soit la fonction $f : x \mapsto \sqrt{3x^2 + 4}$. Etudier la continuite a droite de $f$ en $2$.
+
+3. Soit la fonction $f : x \mapsto \sqrt{\dfrac{5x^3 - 2}{x + 1}}$. Etudier la continuite a gauche de $f$ en $3$.
+
+:::
+
+:::example[Activite 4]
+
+Soit $f$ la fonction $x \mapsto \sqrt{x}$.
+
+1. Representer graphiquement $f$ dans un repere $(O, \vec{i}, \vec{j})$.
+
+2. Montrer que $f$ est continue a droite en $0$.
+
+:::
+
+:::theorem[Theoreme (admis)]
+
+Soit $f$ une fonction definie et positive sur un intervalle $I$ et $a$ un reel de $I$.
+
+- Si $f$ est continue a droite en $a$, alors la fonction $\sqrt{f}$ est continue a droite en $a$.
+- Si $f$ est continue a gauche en $a$, alors la fonction $\sqrt{f}$ est continue a gauche en $a$.
+
+:::
+
+:::example[Activite 5]
+
+1. Soit la fonction $f : x \mapsto \sqrt{-2x + 1}$. Justifier que $f$ est continue a gauche en $0{,}5$.
+
+2. Soit la fonction $f : x \mapsto \sqrt{(3x + 5)(1 - x)}$. Justifier que $f$ est continue a droite en $-\dfrac{5}{3}$.
+
+:::

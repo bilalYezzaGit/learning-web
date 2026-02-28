@@ -1,0 +1,118 @@
+---
+type: lesson
+title: "Image d'un intervalle par une fonction continue"
+difficulty: 1
+timeMinutes: 8
+tags: [continuite, image-intervalle, manuel]
+source: Manuel scolaire T1, Section 8, p.30
+---
+
+### 8. Image d'un intervalle par une fonction continue
+
+:::remark
+
+Soit $f$ une fonction definie sur une partie $D$ de $\mathbb{R}$ et $A$ une partie de $D$. L'ensemble des reels $f(x)$ tels que $x$ appartient a $A$ est note $f(A)$.
+
+On ecrit alors $f(A) = \{f(x) \; ; \; x \in A\}$.
+
+:::
+
+:::example[Activite 1]
+
+On a represente ci-contre la fonction $f : x \mapsto (x - 1)^2$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 2,
+    x-min: -1, x-max: 5,
+    y-min: -1, y-max: 10,
+    {
+      plot.add(domain: (-0.5, 4.5), x => calc.pow(x - 1, 2),
+        style: (stroke: 1.5pt + blue))
+    },
+  )
+})
+```
+
+1. Justifier la continuite de $f$ sur $\mathbb{R}$.
+
+2. Reproduire le graphique ci-contre et representer chacun des ensembles de reels suivants :
+
+   $f\big([2, +\infty[\big)$ ; $f\big(]-0{,}2, 0]\big)$ ; $\{f(x) \; ; \; -0{,}5 \leq x \text{ et } x \neq 2\}$.
+
+   Lequel de ces ensembles n'est pas un intervalle ?
+
+3. Montrer que $f([3, 4]) = [4, 9]$.
+
+4. Resoudre graphiquement l'equation $f(x) = 5$.
+
+:::
+
+:::example[Activite 2]
+
+On a represente ci-contre la fonction $f : x \mapsto \dfrac{x + 1}{x - 2}$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 2,
+    y-tick-step: 2,
+    x-min: -4, x-max: 8,
+    y-min: -6, y-max: 8,
+    {
+      // Branche gauche (x < 2)
+      plot.add(domain: (-3.5, 1.5), x => (x + 1) / (x - 2),
+        style: (stroke: 1.5pt + blue))
+      // Branche droite (x > 2)
+      plot.add(domain: (2.5, 7.5), x => (x + 1) / (x - 2),
+        style: (stroke: 1.5pt + blue))
+    },
+  )
+})
+```
+
+1. Justifier la continuite de $f$ sur chacun des intervalles $]-\infty, 2[$ et $]2, +\infty[$.
+
+2. Reproduire le graphique ci-contre et representer les ensembles ci-dessous.
+
+   a. $f\big(]-1, 2[\big)$.
+
+   b. $f\big(]-3, 5[ \setminus \{2\}\big)$.
+
+:::
+
+:::example[Activite 3]
+
+1. Representer dans un repere $(O, \vec{i}, \vec{j})$ la fonction $f$ definie par :
+
+$$f(x) = \begin{cases} x & \text{si } x < 0 \\ 3 & \text{si } x = 0 \\ x^2 + 1 & \text{si } x > 0 \end{cases}$$
+
+2. Montrer graphiquement que $f$ n'est pas continue en $0$.
+
+3. Determiner $f(\mathbb{R})$. Cet ensemble est-il un intervalle ?
+
+4. Montrer que l'equation $f(x) = 0$ ne possede pas de solution.
+
+5. Que peut-on dire de l'equation $f(x) = a$ ; $a \neq 0$ ?
+
+:::
+
+:::theorem[Theoreme (admis)]
+
+L'image d'un intervalle par une fonction continue est un intervalle.
+
+:::

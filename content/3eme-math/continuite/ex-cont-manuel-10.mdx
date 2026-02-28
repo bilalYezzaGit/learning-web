@@ -1,0 +1,41 @@
+---
+type: exercise
+title: Image d'intervalles par un trinome (10)
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags:
+  - continuite
+  - manuel
+  - image-intervalle
+source: Manuel scolaire T1, Exercice 10, p.36
+---
+
+:::enonce
+Soit $f$ le trinome defini par $f(x) = x^2 - 4x + 1$.
+
+On designe par $C$ sa courbe representative dans un repere orthonorme.
+
+1. Tracer la courbe $C$.
+2. Quelles sont les images par $f$ des intervalles $I = [2, 3]$, $J = [0, 3]$ et $K = [0, +\infty[$ ?
+3. Determiner l'ensemble des antecedents par $f$ des reels de l'intervalle $[-2, 6]$.
+:::
+
+:::solution
+1. $f(x) = x^2 - 4x + 1 = (x - 2)^2 - 3$. Parabole de sommet $(2, -3)$ ouverte vers le haut.
+
+2. $f$ est decroissante sur $]-\infty, 2]$ et croissante sur $[2, +\infty[$.
+- $f(I) = f([2, 3])$ : $f(2) = -3$, $f(3) = 9 - 12 + 1 = -2$. Sur $[2, 3]$, $f$ est croissante, donc $f([2, 3]) = [-3, -2]$.
+- $f(J) = f([0, 3])$ : le minimum est $f(2) = -3$, $f(0) = 1$, $f(3) = -2$. Donc $f([0, 3]) = [-3, 1]$.
+- $f(K) = f([0, +\infty[)$ : le minimum est $f(2) = -3$ et $\lim_{x \to +\infty} f(x) = +\infty$. Aussi $f(0) = 1$. Donc $f([0, +\infty[) = [-3, +\infty[$.
+
+3. $-2 \leq f(x) \leq 6 \Leftrightarrow -2 \leq (x - 2)^2 - 3 \leq 6 \Leftrightarrow 1 \leq (x - 2)^2 \leq 9 \Leftrightarrow 1 \leq |x - 2| \leq 3$.
+
+Donc $\begin{cases} 1 \leq x - 2 \leq 3 \\ \text{ou} \\ 1 \leq -(x - 2) \leq 3 \end{cases} \Leftrightarrow \begin{cases} 3 \leq x \leq 5 \\ \text{ou} \\ -1 \leq x \leq 1 \end{cases}$
+
+L'ensemble des antecedents est $E = [-1, 1] \cup [3, 5]$.
+:::
+
+:::methode
+Utiliser la forme canonique du trinome pour identifier le sommet et les variations, puis en deduire les images des intervalles.
+:::
