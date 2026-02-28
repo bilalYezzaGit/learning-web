@@ -1,0 +1,116 @@
+---
+type: lesson
+title: "Theoreme des valeurs intermediaires"
+difficulty: 1
+timeMinutes: 8
+tags:
+  - continuite
+  - parascolaire
+  - tvi
+source: Parascolaire Analyse, Resume de cours, p.28-29
+---
+
+### Theoreme
+
+:::property[L'image d'un intervalle par une fonction continue est un intervalle]
+
+Soit $f$ definie sur un intervalle $A$. On note $f(A) = \{f(x) \mid x \in A\}$.
+
+Si $f$ est continue sur $A$, alors $f(A)$ est un **intervalle**.
+
+:::
+
+### Theoreme des valeurs intermediaires
+
+:::theorem[TVI]
+
+$f$ continue sur un intervalle $I$, $a$ et $b$ deux reels de $I$.
+
+Pour tout reel $k$ compris entre $f(a)$ et $f(b)$, il existe au moins un $c$ compris entre $a$ et $b$ tel que $f(c) = k$.
+
+:::
+
+### Cas particulier
+
+:::property[Corollaire (zeros)]
+
+Si $f$ est continue sur un intervalle $I$, $a$ et $b$ deux reels de $I$ avec $a < b$, et si $f(a) \cdot f(b) < 0$, alors l'equation $f(x) = 0$ admet au moins une solution dans $]a, b[$.
+
+:::
+
+:::remark
+
+Si on sait de plus que $f$ est strictement croissante ou strictement decroissante sur $[a, b]$, alors la solution est **unique**.
+
+:::
+
+### Interpretation graphique
+
+$f$ continue sur $[a, b]$ et $\zeta$ sa courbe. Pour tout reel $k$ compris entre $f(a)$ et $f(b)$, la droite $\Delta : y = k$ coupe au moins une fois la courbe $\zeta$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-0.5, 0), (7, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -0.5), (0, 5.5), stroke: 0.8pt, mark: (end: ">", fill: black))
+  content((7, -0.3), $x$)
+  content((-0.3, 5.5), $y$)
+  content((-0.3, -0.3), $O$)
+
+  // Smooth curve from (1, 1) to (6, 4.5) via bezier
+  bezier((1, 1), (6, 4.5), (2.5, 5), (4.5, 0.5), stroke: 1.5pt + blue)
+  content((6.2, 4.8), text(fill: blue, $zeta$))
+
+  // f(a) and f(b) values: f(a) = 1, f(b) = 4.5, k ~ 2.6
+  // Horizontal dashed line y = k (red)
+  line((-0.2, 2.6), (6.5, 2.6), stroke: (dash: "dashed", paint: red, thickness: 1.2pt))
+  content((6.7, 2.6), text(fill: red, $Delta : y = k$))
+
+  // Dashed projection from a to f(a)
+  line((1, 0), (1, 1), stroke: (dash: "dashed", paint: gray))
+  line((0, 1), (1, 1), stroke: (dash: "dashed", paint: gray))
+
+  // Dashed projection from b to f(b)
+  line((6, 0), (6, 4.5), stroke: (dash: "dashed", paint: gray))
+  line((0, 4.5), (6, 4.5), stroke: (dash: "dashed", paint: gray))
+
+  // Intersection point c (approximately x=3.5, y=2.6)
+  line((3.5, 0), (3.5, 2.6), stroke: (dash: "dashed", paint: gray))
+  line((0, 2.6), (3.5, 2.6), stroke: (dash: "dashed", paint: gray))
+  circle((3.5, 2.6), radius: 0.08, fill: red, stroke: 1pt + red)
+
+  // Dots on curve at a and b
+  circle((1, 1), radius: 0.07, fill: blue, stroke: 1pt + blue)
+  circle((6, 4.5), radius: 0.07, fill: blue, stroke: 1pt + blue)
+
+  // Labels on axes
+  content((1, -0.3), $a$)
+  content((3.5, -0.3), $c$)
+  content((6, -0.3), $b$)
+  content((-0.4, 1), $f(a)$)
+  content((-0.3, 2.6), $k$)
+  content((-0.4, 4.5), $f(b)$)
+})
+```
+
+:::attention
+
+Le theoreme des valeurs intermediaires assure l'existence d'au moins une solution a l'equation $f(x) = k$. Mais il n'indique pas comment la calculer ni le nombre de solutions de cette equation.
+
+:::
+
+### Exemple
+
+$f(x) = x^3 + 4x^2 + 4x + 2$. Montrer que l'equation $f(x) = 0$ admet au moins une solution dans $[-3, -1]$.
+
+$f(-3) = -27 + 36 - 12 + 2 = -1$ et $f(-1) = -1 + 4 - 4 + 2 = 1$.
+
+$f$ est une fonction polynome donc continue sur $\mathbb{R}$, donc $f$ est continue sur $[-3, -1]$.
+
+Comme $f(-3) \cdot f(-1) = (-1)(1) = -1 < 0$, donc il existe au moins un $c \in ]-3, -1[$ tel que $f(c) = 0$.
+
+Ainsi $c$ est une solution de $f(x) = 0$.

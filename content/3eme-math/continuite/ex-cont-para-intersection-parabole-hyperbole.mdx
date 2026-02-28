@@ -1,0 +1,80 @@
+---
+type: exercise
+title: Intersection d'une parabole et d'une hyperbole
+difficulty: 3
+timeMinutes: 20
+category: approfondissement
+tags:
+  - continuite
+  - parascolaire
+  - tvi
+  - graphique
+source: Parascolaire Analyse, Exercice 11, p.32
+---
+
+:::enonce
+On considere les fonctions $f$ et $g$ definies par $f(x) = x^2 + 1$ et $g(x) = -\dfrac{1}{x}$.
+
+1. Tracer dans un meme repere $(O, \vec{i}, \vec{j})$ la courbe representative de $f$ puis celle de $g$.
+2. a. Justifier que $f$ est continue sur $\mathbb{R}$.
+   b. Justifier que $g$ est continue sur $\mathbb{R}^*$.
+3. Determiner graphiquement le nombre de solutions de l'equation $f(x) = g(x)$ sur $[-2, 2]$.
+4. Montrer que l'equation $f(x) = g(x)$ admet au moins une solution $\alpha$ sur $[-2, 2]$ et determiner une valeur approchee de $\alpha$ a $10^{-2}$ pres par defaut.
+:::
+
+:::solution
+1. $\zeta_f$ est une parabole de sommet $S(0, 1)$ d'axe de systeme $(S, \vec{j})$.
+
+| $x$ | $0$ | $1$ | $2$ |
+|-----|-----|-----|-----|
+| $f(x)$ | $1$ | $2$ | $5$ |
+
+$\zeta_g$ est une hyperbole d'asymptotes $x = 0$ et $y = 0$, de centre de symetrie $O(0, 0)$.
+
+| $x$ | $\frac{1}{2}$ | $1$ | $2$ | $4$ |
+|-----|-----|-----|-----|-----|
+| $g(x)$ | $-2$ | $-1$ | $-\frac{1}{2}$ | $-\frac{1}{4}$ |
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -2.5, x-max: 2.5,
+    y-min: -5, y-max: 7,
+    {
+      plot.add(domain: (-2.5, 2.5), x => calc.pow(x, 2) + 1,
+        style: (stroke: 2pt + blue), label: $f(x) = x^2 + 1$)
+      plot.add(domain: (-2.5, -0.1), x => -1 / x,
+        style: (stroke: 2pt + red), label: $g(x) = -1\/x$)
+      plot.add(domain: (0.1, 2.5), x => -1 / x,
+        style: (stroke: 2pt + red))
+    },
+  )
+})
+```
+
+2. a. $f$ est une fonction polynome donc $f$ est continue sur $\mathbb{R}$.
+
+b. $g$ est une fonction rationnelle donc continue sur $\mathbb{R}^*$.
+
+3. $\zeta_f$ et $\zeta_g$ se coupent en un seul point $A(-0{,}8 \; ; \; 1{,}4)$ donc $f(x) = g(x)$ admet qu'une seule solution dans $[-2, 2]$.
+
+4. $f(x) = g(x) \Leftrightarrow x^2 + 1 = -\dfrac{1}{x} \Leftrightarrow x^3 + x + 1 = 0$ (pour $x \neq 0$).
+
+On pose $h(x) = x^3 + x + 1$. $h$ est continue sur $[-2, 2]$ (polynome). $h(-2) = -8 - 2 + 1 = -9 < 0$ et $h(2) = 8 + 2 + 1 = 11 > 0$.
+
+$h(-2) \times h(2) < 0$, donc par le TVI, l'equation $h(x) = 0$ admet au moins une solution dans $[-2, 2]$. Notons $\alpha$ cette solution.
+
+Par balayage de $[-2, 2]$ par pas de $0{,}1$ avec la calculatrice : $h(-0{,}7) < 0$ et $h(-0{,}6) > 0$ $\Rightarrow$ $-0{,}7 < \alpha < -0{,}6$.
+
+On affine : $h(-0{,}69) < 0$ et $h(-0{,}68) > 0$ $\Rightarrow$ $-0{,}69 < \alpha < -0{,}68$.
+
+Donc $\alpha \approx -0{,}69$ a $10^{-2}$ pres par defaut.
+:::

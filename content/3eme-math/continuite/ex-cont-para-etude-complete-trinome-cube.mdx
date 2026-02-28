@@ -1,0 +1,93 @@
+---
+type: exercise
+title: Etude complete - 2x^3 - 3x^2 - 1
+difficulty: 3
+timeMinutes: 25
+category: synthese
+tags:
+  - continuite
+  - parascolaire
+  - tvi
+  - variations
+  - image-intervalle
+source: Parascolaire Analyse, Exercice 16, p.34
+---
+
+:::enonce
+$f(x) = 2x^3 - 3x^2 - 1$ definie sur $\mathbb{R}$.
+
+1. Justifier la continuite de $f$ sur $\mathbb{R}$.
+2. a. Completer le tableau de variation de $f$.
+   b. Determiner les images des intervalles suivants par $f$ : $[0, 1]$ ; $]1, +\infty[$.
+3. a. Montrer que l'equation $f(x) = 0$ admet une seule solution sur $\mathbb{R}$.
+   b. Verifier que $\alpha \in [1{,}6 \; ; \; 1{,}7]$.
+4. Deduire alors le signe de $f(x)$ sur $\mathbb{R}$.
+:::
+
+:::solution
+1. $f$ est une fonction polynome donc $f$ est continue sur $\mathbb{R}$.
+
+2. a. $f(0) = -1$, $f(1) = 2 - 3 - 1 = -2$. $\lim_{x \to -\infty} f(x) = -\infty$, $\lim_{x \to +\infty} f(x) = +\infty$.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $0$, $1$, $+infinity$),
+  contents: (
+    (
+      (bottom, $-infinity$),
+      (top, $-1$),
+      (bottom, $-2$),
+      (top, $+infinity$),
+    ),
+  ),
+)
+```
+
+b. $f([0, 1]) = [-2, -1]$ (car $f$ decroissante sur $[0, 1]$, $f(0) = -1$, $f(1) = -2$).
+
+$f(]1, +\infty[) = ]-2, +\infty[$ (car $f$ strictement croissante sur $[1, +\infty[$).
+
+3. a. Sur $]-\infty, 0]$, $f$ est strictement croissante sur $]-\infty, 0]$ et $f(x) \leq f(0) = -1 < 0$, donc $f(x) < 0$ : pas de solution sur $]-\infty, 0]$.
+
+Sur $[0, 1]$, $f$ est strictement decroissante : $-2 \leq f(x) \leq -1 < 0$, donc $f(x) < 0$ : pas de solution sur $[0, 1]$.
+
+Sur $[1, +\infty[$, $f$ est strictement croissante, $f(1) = -2 < 0$ et $\lim_{x \to +\infty} f(x) = +\infty$. Donc $0 \in [-2, +\infty[$. Par le TVI, l'equation $f(x) = 0$ admet une unique solution $\alpha \in [1, +\infty[$ (unicite par stricte croissance).
+
+Finalement : $f(x) = 0 \Leftrightarrow x = \alpha$.
+
+b. $f(1{,}6) = 2(4{,}096) - 3(2{,}56) - 1 = 8{,}192 - 7{,}68 - 1 = -0{,}488 < 0$.
+
+$f(1{,}7) = 2(4{,}913) - 3(2{,}89) - 1 = 9{,}826 - 8{,}67 - 1 = 0{,}156 > 0$.
+
+$f(1{,}6) < f(\alpha) < f(1{,}7)$. Comme $f$ est strictement croissante sur $[1, +\infty[$, $1{,}6 < \alpha < 1{,}7$.
+
+4. Sur $]-\infty, 1]$ et d'apres le 3.a, on a $f(x) \leq -1$ donc $f(x) < 0$.
+
+D'autre part sur $[1, +\infty[$, $f$ est strictement croissante. Si $x \in [1, \alpha]$ alors $f(x) \leq f(\alpha) = 0$ $\Rightarrow$ $f(x) \leq 0$. Si $x \in [\alpha, +\infty[$ alors $f(\alpha) \leq f(x)$ $\Rightarrow$ $0 \leq f(x)$.
+
+**Conclusion** :
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f(x)$], "s"),
+  ),
+  domain: ($-infinity$, $alpha$, $+infinity$),
+  contents: (
+    (
+      $-$,
+      ("0", $+$),
+    ),
+  ),
+)
+```
+:::

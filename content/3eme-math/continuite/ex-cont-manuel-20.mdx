@@ -15,6 +15,29 @@ source: Manuel scolaire T1, Exercice 20, p.37
 :::enonce
 Dans le plan muni d'un repere, on a represente la fonction $f$ definie sur $\mathbb{R}$ par $f(x) = \dfrac{1}{2}x^4 - x^3 - 6x^2 + 5x + 10$.
 
+:::figure
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (10, 7),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 10,
+    x-min: -4, x-max: 5,
+    y-min: -30, y-max: 50,
+    {
+      plot.add(domain: (-4, 5), x => 0.5 * calc.pow(x, 4) - calc.pow(x, 3) - 6 * calc.pow(x, 2) + 5 * x + 10,
+        style: (stroke: 2pt + blue))
+    },
+  )
+})
+```
+:::
+
 1. Justifier la continuite de $f$ sur $\mathbb{R}$.
 2. a. Calculer $f(-3)$ et $f(-2)$. En deduire que l'equation $f(x) = 0$ admet au moins une solution dans $[-3, -2]$.
    b. Calculer $f(-1{,}5)$ et $f(-1)$. En deduire que l'equation $f(x) = 0$ admet au moins une solution dans $[-1{,}5, -1]$.

@@ -26,6 +26,29 @@ Soit $f : x \mapsto -\dfrac{2}{x - 1}$.
 
 2. $f$ est une hyperbole de centre $(1, 0)$. $f$ est croissante sur $]-\infty, 1[$ et sur $]1, +\infty[$.
 
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -3, x-max: 5,
+    y-min: -5, y-max: 5,
+    {
+      plot.add(domain: (-3, 0.9), x => -2 / (x - 1),
+        style: (stroke: 2pt + blue))
+      plot.add(domain: (1.1, 5), x => -2 / (x - 1),
+        style: (stroke: 2pt + blue))
+    },
+  )
+})
+```
+
 3. - $f(I) = f([2, 4])$ : $f(2) = -2$, $f(4) = -\dfrac{2}{3}$. $f$ est croissante sur $]1, +\infty[$, donc $f([2, 4]) = [-2, -\dfrac{2}{3}]$.
 - $f(J) = f([-1, 0])$ : $f(-1) = -\dfrac{2}{-2} = 1$, $f(0) = -\dfrac{2}{-1} = 2$. $f$ est croissante sur $]-\infty, 1[$, donc $f([-1, 0]) = [1, 2]$.
 - $f(K) = f(]-\infty, -3[)$ : $f(-3) = -\dfrac{2}{-4} = \dfrac{1}{2}$ (non atteint), $\lim_{x \to -\infty} f(x) = 0$ (non atteint). Donc $f(]-\infty, -3[) = ]0, \dfrac{1}{2}[$.

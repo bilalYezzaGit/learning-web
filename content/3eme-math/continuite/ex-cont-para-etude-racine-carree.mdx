@@ -1,0 +1,60 @@
+---
+type: exercise
+title: Etude complete - x^2 racine(x-3)
+difficulty: 3
+timeMinutes: 25
+category: synthese
+tags:
+  - continuite
+  - parascolaire
+  - racine
+  - tvi
+  - variations
+source: Parascolaire Analyse, Exercice 14, p.33
+---
+
+:::enonce
+Soit $f$ la fonction definie par $f(x) = x^2\sqrt{x - 3}$.
+
+1. a. Determiner $D$ le domaine de definition de $f$.
+   b. Etudier la continuite de $f$ sur $D$.
+   c. Etudier les variations de $f$ et dresser le tableau de variation de $f$.
+2. a. Montrer que l'equation $f(x) = 4$ possede une seule solution sur $]3, +\infty[$.
+   b. Donner un encadrement d'amplitude $10^{-2}$ de cette solution.
+:::
+
+:::solution
+1. a. $f(x) = x^2\sqrt{x - 3}$. Il faut que $x - 3 \geq 0$, d'ou $D = [3, +\infty[$.
+
+b. $x \mapsto x - 3$ est une fonction polynome continue sur $\mathbb{R}$, en particulier sur $[3, +\infty[$ ou elle est positive. Donc $x \mapsto \sqrt{x - 3}$ est continue sur $[3, +\infty[$. Et $x \mapsto x^2$ est une fonction polynome continue sur $\mathbb{R}$. Finalement $f$ est continue sur $D$ (produit de fonctions continues).
+
+c. Soient $a$ et $b$ deux reels de $D$ tel que $a \geq b$.
+Alors $a - 3 \geq b - 3$ donc $\sqrt{a - 3} \geq \sqrt{b - 3}$ et $a^2 \geq b^2$.
+Par suite $a^2\sqrt{a - 3} \geq b^2\sqrt{b - 3}$. Ainsi $f$ est strictement croissante sur $D$.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([variation de $f$], "v"),
+  ),
+  domain: ($3$, $+infinity$),
+  contents: (
+    (
+      (bottom, $0$),
+      (top, $+infinity$),
+    ),
+  ),
+)
+```
+
+$f(3) = 0$ et $\lim_{x \to +\infty} f(x) = +\infty$.
+
+2. a. D'apres le tableau de variation, $4 \in [0, +\infty[$ donc l'equation $f(x) = 4$ admet une unique solution $\alpha \in [3, +\infty[$ (car $f$ est strictement croissante).
+
+b. $f(3{,}17) = (3{,}17)^2 \cdot \sqrt{0{,}17} \approx 10{,}049 \times 0{,}412 \approx 4{,}14 > 4$ et $f(3{,}16) \approx 3{,}99 < 4$.
+
+Donc $3{,}16 < \alpha < 3{,}17$.
+:::

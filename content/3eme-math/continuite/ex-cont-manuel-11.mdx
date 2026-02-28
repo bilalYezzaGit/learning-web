@@ -26,6 +26,27 @@ Soit $f : x \mapsto \sqrt{x + 3} - 2$.
 
 2. $f$ est la courbe de $\sqrt{x}$ translatee de $3$ vers la gauche et $2$ vers le bas. $f(-3) = -2$, $f(0) = \sqrt{3} - 2 \approx -0{,}27$, $f(1) = 0$, $f(6) = 1$.
 
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -3, x-max: 6,
+    y-min: -2.5, y-max: 2,
+    {
+      plot.add(domain: (-2.99, 6), x => calc.sqrt(x + 3) - 2,
+        style: (stroke: 2pt + blue))
+    },
+  )
+})
+```
+
 3. $f$ est croissante sur $[-3, +\infty[$ (car $\sqrt{x}$ est croissante).
 - $f(I) = f([2, 3])$ : $f(2) = \sqrt{5} - 2$, $f(3) = \sqrt{6} - 2$. Donc $f([2, 3]) = [\sqrt{5} - 2, \sqrt{6} - 2]$.
 - $f(J) = f([0, 5])$ : $f(0) = \sqrt{3} - 2$, $f(5) = \sqrt{8} - 2 = 2\sqrt{2} - 2$. Donc $f([0, 5]) = [\sqrt{3} - 2, 2\sqrt{2} - 2]$.

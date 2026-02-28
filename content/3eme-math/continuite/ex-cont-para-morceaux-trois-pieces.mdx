@@ -1,0 +1,80 @@
+---
+type: exercise
+title: Continuite d'une fonction par morceaux a trois pieces
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags:
+  - continuite
+  - parascolaire
+  - morceaux
+  - droite-gauche
+source: Parascolaire Analyse, Exercice 6, p.31
+---
+
+:::enonce
+$$f(x) = \begin{cases} -x & \text{si } x \leq 0 \\ x^2 & \text{si } 0 < x < 1 \\ x - 1 & \text{si } x \geq 1 \end{cases}$$
+
+1. Tracer $\zeta$ la courbe representative de $f$ dans un repere.
+2. Justifier que $f$ est continue sur $]-\infty, 0]$, sur $]0, 1[$ puis sur $[1, +\infty[$.
+3. Justifier a l'aide du graphique que $f$ n'est pas continue en $1$.
+4. Determiner a l'aide du graphique le nombre de solutions de chacune des equations :
+   a. $f(x) = 1$
+   b. $f(x) = -1$
+:::
+
+:::solution
+1. Sur $]-\infty, 0]$ : demi-droite d'equation $y = -x$ ; sur $]0, 1[$ : branche de parabole $y = x^2$ ; sur $[1, +\infty[$ : demi-droite $y = x - 1$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-2.5, 0), (3.5, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -1.8), (0, 3.5), stroke: 0.8pt, mark: (end: ">", fill: black))
+  content((3.5, -0.3), $x$)
+  content((-0.3, 3.5), $y$)
+  content((-0.25, -0.3), $O$)
+
+  // Ticks on x-axis
+  for x in (-2, -1, 1, 2, 3) {
+    line((x, -0.1), (x, 0.1), stroke: 0.6pt)
+    content((x, -0.35), str(x), anchor: "north")
+  }
+
+  // Ticks on y-axis
+  for y in (-1, 1, 2, 3) {
+    line((-0.1, y), (0.1, y), stroke: 0.6pt)
+    content((-0.35, y), str(y), anchor: "east")
+  }
+
+  // Piece 1: y = -x for x <= 0
+  line((-2, 2), (0, 0), stroke: 1.5pt + blue)
+  circle((0, 0), radius: 0.07, fill: blue, stroke: 1pt + blue)
+
+  // Piece 2: y = x^2 for 0 < x < 1
+  bezier((0.05, 0.0025), (0.5, 0.25), (0.25, 0.0625), stroke: 1.5pt + blue)
+  bezier((0.5, 0.25), (0.95, 0.9025), (0.75, 0.5625), stroke: 1.5pt + blue)
+  circle((1, 1), radius: 0.07, fill: white, stroke: 1pt + blue)
+
+  // Piece 3: y = x - 1 for x >= 1
+  line((1, 0), (3, 2), stroke: 1.5pt + blue)
+  circle((1, 0), radius: 0.07, fill: blue, stroke: 1pt + blue)
+})
+```
+
+2. $x \mapsto -x$ continue sur $\mathbb{R}$ $\Rightarrow$ $f$ continue sur $]-\infty, 0]$.
+
+$x \mapsto x^2$ polynome $\Rightarrow$ continue sur $\mathbb{R}$, en particulier sur $]0, 1[$.
+
+$x \mapsto x - 1$ polynome $\Rightarrow$ continue sur $\mathbb{R}$, en particulier sur $[1, +\infty[$.
+
+3. La fonction $f$ ne peut etre tracee sans lever le crayon au point d'abscisse $1$. En effet, $\lim_{x \to 1^-} f(x) = \lim_{x \to 1^-} x^2 = 1$ mais $f(1) = 1 - 1 = 0$. Donc $f$ est discontinue en $1$.
+
+4. a. $f(x) = 1$ : la droite $y = 1$ coupe $\zeta_f$ en deux points $F$ et $E$, d'abscisses respectives $-1$ et $\sqrt{1} = 1$ (par la gauche). Donc **2 solutions**.
+
+b. $f(x) = -1$ : la droite $y = -1$ ne coupe pas $\zeta_f$. Donc **0 solution**.
+:::

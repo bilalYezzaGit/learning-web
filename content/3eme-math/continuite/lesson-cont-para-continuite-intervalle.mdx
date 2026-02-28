@@ -1,0 +1,142 @@
+---
+type: lesson
+title: "Continuite sur un intervalle"
+difficulty: 1
+timeMinutes: 6
+tags:
+  - continuite
+  - parascolaire
+source: Parascolaire Analyse, Resume de cours, p.27-28
+---
+
+### Illustration graphique
+
+On reconnait qu'une fonction est continue lorsque sa courbe representative peut etre tracee sans lever le crayon.
+
+- **Exemple** : $f(x) = x^2$ est continue sur $\mathbb{R}$. $\zeta_f$ est une parabole, elle peut etre tracee sans lever le crayon.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -2, x-max: 2,
+    y-min: -1, y-max: 4,
+    {
+      plot.add(domain: (-2, 2), x => calc.pow(x, 2),
+        style: (stroke: 2pt + blue))
+    },
+  )
+})
+```
+
+- **Contre-exemple** : $f(x) = E(x)$ (partie entiere). Lorsqu'on trace sa courbe, il faut lever le crayon en tout point d'abscisse entiere.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-1.5, 0), (5, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -1.8), (0, 4.2), stroke: 0.8pt, mark: (end: ">", fill: black))
+  content((5, -0.3), $x$)
+  content((-0.3, 4.2), $y$)
+  content((-0.3, -0.3), $O$)
+
+  // Tick marks on x-axis
+  for i in range(-1, 5) {
+    line((i, -0.1), (i, 0.1), stroke: 0.5pt)
+    if i != 0 { content((i, -0.35), text(size: 8pt, str(i))) }
+  }
+
+  // Tick marks on y-axis
+  for i in range(-1, 4) {
+    if i != 0 {
+      line((-0.1, i), (0.1, i), stroke: 0.5pt)
+      content((-0.35, i), text(size: 8pt, str(i)))
+    }
+  }
+
+  // Floor function segments: y = n on [n, n+1)
+  // Segment y = -1 on [-1, 0)
+  line((-1, -1), (0, -1), stroke: 1.5pt + blue)
+  circle((-1, -1), radius: 0.07, fill: blue, stroke: 1pt + blue)
+  circle((0, -1), radius: 0.07, fill: white, stroke: 1pt + blue)
+
+  // Segment y = 0 on [0, 1)
+  line((0, 0), (1, 0), stroke: 1.5pt + blue)
+  circle((0, 0), radius: 0.07, fill: blue, stroke: 1pt + blue)
+  circle((1, 0), radius: 0.07, fill: white, stroke: 1pt + blue)
+
+  // Segment y = 1 on [1, 2)
+  line((1, 1), (2, 1), stroke: 1.5pt + blue)
+  circle((1, 1), radius: 0.07, fill: blue, stroke: 1pt + blue)
+  circle((2, 1), radius: 0.07, fill: white, stroke: 1pt + blue)
+
+  // Segment y = 2 on [2, 3)
+  line((2, 2), (3, 2), stroke: 1.5pt + blue)
+  circle((2, 2), radius: 0.07, fill: blue, stroke: 1pt + blue)
+  circle((3, 2), radius: 0.07, fill: white, stroke: 1pt + blue)
+
+  // Segment y = 3 on [3, 4)
+  line((3, 3), (4, 3), stroke: 1.5pt + blue)
+  circle((3, 3), radius: 0.07, fill: blue, stroke: 1pt + blue)
+  circle((4, 3), radius: 0.07, fill: white, stroke: 1pt + blue)
+})
+```
+
+### Continuite a gauche et a droite
+
+:::property[Definitions]
+
+1. $f$ definie sur $[a, b[ = I$. $f$ est **continue a droite** en $a$ signifie que : pour tout $\beta > 0$, il existe $\alpha > 0$ tel que si $x \in I$ et $0 \leq x - a \leq \alpha$ alors $|f(x) - f(a)| < \beta$.
+
+2. $f$ definie sur $]b, a] = I$. $f$ est **continue a gauche** en $a$ signifie que : pour tout $\beta > 0$, il existe $\alpha > 0$ tel que si $x \in I$ et $0 < a - x < \alpha$ alors $|f(x) - f(a)| < \beta$.
+
+:::
+
+:::example
+
+$f(x) = \sqrt{x}$, $a = 0$, $D_f = [0, +\infty[$.
+
+Soit $\beta > 0$, existe-t-il $\alpha > 0$ tel que $0 \leq x \leq \alpha$ alors $|\sqrt{x} - \sqrt{0}| < \beta$ ?
+
+On sait que $|\sqrt{x}| < \beta \implies \sqrt{x} < \beta \implies 0 \leq x \leq \beta^2$.
+
+Ainsi on peut choisir $\alpha = \beta^2$, d'ou $f$ est continue a droite en $0$.
+
+:::
+
+:::property[Theoreme]
+
+$f$ definie sur $I$ intervalle ouvert contenant $a$. $f$ est **continue en $a$** si et seulement si $f$ est continue a droite et a gauche en $a$.
+
+:::
+
+### Continuite sur un intervalle
+
+- $f$ est continue sur $]a, b[$ $\iff$ $f$ est continue en tout point $x_0 \in ]a, b[$.
+- $f$ est continue sur $[a, b[$ $\iff$ $f$ est continue sur $]a, b[$ et a droite en $a$.
+- $f$ est continue sur $]a, b]$ $\iff$ $f$ est continue sur $]a, b[$ et a gauche en $b$.
+- $f$ est continue sur $[a, b]$ $\iff$ $f$ est continue sur $]a, b[$ et a droite en $a$ et a gauche en $b$.
+
+### Operations sur les fonctions continues sur un intervalle
+
+:::property[Theoremes]
+
+1. Toute fonction polynome est continue sur $\mathbb{R}$.
+2. Toute fonction rationnelle est continue sur son domaine de definition.
+3. $x \mapsto \sqrt{x}$ est continue sur $[0, +\infty[$.
+4. $f$ continue sur $I$ et positive $\implies \sqrt{f}$ est continue sur $I$.
+5. $f$ et $g$ continues sur $I$, $\alpha \in \mathbb{R}$ $\implies$ $f \times g$, $f + g$ et $\alpha f$ sont continues sur $I$.
+6. $f$ et $g$ continues sur $I$ et $g(x) \neq 0$ $\implies \dfrac{f}{g}$ est continue sur $I$.
+
+:::

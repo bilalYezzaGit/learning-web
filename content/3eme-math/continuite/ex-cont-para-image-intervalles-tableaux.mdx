@@ -1,0 +1,98 @@
+---
+type: exercise
+title: Image d'intervalles a partir de tableaux de variations
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags:
+  - continuite
+  - parascolaire
+  - image-intervalle
+source: Parascolaire Analyse, Exercice 13, p.33
+---
+
+:::enonce
+A partir des tableaux de variations suivants, trouver $f(I)$ dans chaque cas :
+
+**1.** $f$ decroissante sur $]-\infty, 2]$ de $+\infty$ a $-\infty$ puis croissante sur $[2, +\infty[$ de $-\infty$ a $1$. $I = ]-\infty, 2]$.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $2$, $+infinity$),
+  contents: (
+    (
+      (top, $+infinity$),
+      (bottom, $-infinity$),
+      (top, $1$),
+    ),
+  ),
+)
+```
+
+**2.** $f$ decroissante sur $[-2, 0]$ de $1$ a $-4$ puis croissante sur $[0, 3]$ de $-4$ a $1$ (non atteint).
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-2$, $0$, $3$),
+  contents: (
+    (
+      (top, $1$),
+      (bottom, $-4$),
+      (top, $1$),
+    ),
+  ),
+)
+```
+
+   a. $I = [-2, 0]$. b. $I = [0, 3]$. c. $I = [-2, 3]$.
+
+**3.** $f$ decroissante sur $]-\infty, 1]$ de $7$ a $2$ puis croissante sur $[1, 3]$ de $2$ a $5$ puis decroissante sur $[3, +\infty[$ de $5$ a $-\infty$.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $1$, $3$, $+infinity$),
+  contents: (
+    (
+      (top, $7$),
+      (bottom, $2$),
+      (top, $5$),
+      (bottom, $-infinity$),
+    ),
+  ),
+)
+```
+
+   a. $I = ]-\infty, 1]$. b. $I = [1, 3]$. c. $I = ]-\infty, 3]$. d. $I = [3, +\infty[$. e. $I = \mathbb{R}$.
+:::
+
+:::solution
+**1.** $f(]-\infty, 2]) = ]-\infty, 1]$.
+
+**2.** a. $f([-2, 0]) = [-4, 1]$.
+b. $f([0, 3]) = [-4, 1]$ (attention : $1$ n'est pas atteint, donc $[-4, 1[$).
+c. $f([-2, 3]) = [-4, 1]$.
+
+**3.** a. $f(]-\infty, 1]) = [2, 7[$. (d'apres les variations : $f$ decroit de $7$ a $2$, avec $7$ non atteint)
+b. $f([1, 3]) = [2, 5]$.
+c. $f(]-\infty, 3]) = [2, 7[$.
+d. $f([3, +\infty[) = ]-\infty, 5]$.
+e. $f(\mathbb{R}) = ]-\infty, 7[$.
+:::

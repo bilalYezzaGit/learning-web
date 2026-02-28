@@ -15,6 +15,29 @@ source: Manuel scolaire T1, Exercice 19, p.37
 :::enonce
 Soit $f$ la fonction definie par $f(x) = x^3 - 3\sqrt{x} + 1$.
 
+:::figure
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 0.5,
+    y-tick-step: 1,
+    x-min: 0, x-max: 2.5,
+    y-min: -2, y-max: 5,
+    {
+      plot.add(domain: (0.01, 2.5), x => calc.pow(x, 3) - 3 * calc.sqrt(x) + 1,
+        style: (stroke: 2pt + blue))
+    },
+  )
+})
+```
+:::
+
 1. Determiner graphiquement le nombre de solutions de l'equation $f(x) = 0$.
 2. Determiner graphiquement une valeur approchee a $0{,}5$ pres de chacune des solutions de l'equation $f(x) = 0$.
 3. Donner une valeur approchee a $0{,}1$ pres par defaut de chacune de ces solutions.

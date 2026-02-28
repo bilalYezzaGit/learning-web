@@ -27,6 +27,27 @@ On designe par $C$ sa courbe representative dans un repere orthonorme.
 :::solution
 1. $f(x) = \dfrac{1}{2}x^2 + 5$ est une parabole de sommet $(0, 5)$ ouverte vers le haut.
 
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 2,
+    x-min: -4, x-max: 4,
+    y-min: 0, y-max: 13,
+    {
+      plot.add(domain: (-4, 4), x => 0.5 * calc.pow(x, 2) + 5,
+        style: (stroke: 2pt + blue))
+    },
+  )
+})
+```
+
 2. $f(2) = 2 + 5 = 7$. $f(-2) = 2 + 5 = 7$. $f(0) = 5$. $f(\sqrt{3}) = \dfrac{3}{2} + 5 = \dfrac{13}{2}$. $f(-\sqrt{2}) = 1 + 5 = 6$.
 
 3. $f$ est decroissante sur $]-\infty, 0]$ et croissante sur $[0, +\infty[$.
