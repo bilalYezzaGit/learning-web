@@ -1,0 +1,28 @@
+---
+type: exercise
+title: TVI - equation cubique avec trinome
+difficulty: 2
+timeMinutes: 10
+category: application
+tags:
+  - continuite
+  - parascolaire
+  - tvi
+source: Parascolaire Analyse, Exercice 8, p.32
+---
+
+:::enonce
+Montrer que l'equation $x^3 + \dfrac{3}{2}x^2 + 1 = 0$ admet au moins une solution dans $[-2, 1]$.
+:::
+
+:::solution
+On pose $f(x) = x^3 + \dfrac{3}{2}x^2 + 1$. $f$ est une fonction polynome donc continue sur $\mathbb{R}$, en particulier sur $[-2, 1]$.
+
+$f(-2) = -8 + \dfrac{3}{2} \cdot 4 + 1 = -8 + 6 + 1 = -1 < 0$.
+
+$f(1) = 1 + \dfrac{3}{2} + 1 = \dfrac{7}{2} > 0$.
+
+$f(-2) \times f(1) = -1 \times \dfrac{7}{2} = -\dfrac{7}{2} < 0$.
+
+Par le TVI, il existe au moins un $c \in ]-2, 1[$ tel que $f(c) = 0$. Donc l'equation admet au moins une solution dans $[-2, 1]$.
+:::

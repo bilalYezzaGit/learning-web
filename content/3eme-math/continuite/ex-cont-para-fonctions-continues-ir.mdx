@@ -1,0 +1,30 @@
+---
+type: exercise
+title: Identifier les fonctions continues sur IR
+difficulty: 1
+timeMinutes: 10
+category: application
+tags:
+  - continuite
+  - parascolaire
+  - fonctions-usuelles
+source: Parascolaire Analyse, Exercice 4, p.31
+---
+
+:::enonce
+Parmi les fonctions suivantes, indiquer celles qui sont continues sur $\mathbb{R}$.
+
+$f(x) = 3x^2 - x - 3$, $g(x) = \dfrac{x - 1}{x^2 + 4}$, $h(x) = E(x)$, $\ell(x) = \dfrac{3}{x}$, $\varphi(x) = \dfrac{|x| + 3}{|x| + 1}$.
+:::
+
+:::solution
+- $f$ est une fonction polynome $\Rightarrow$ $f$ est continue sur $\mathbb{R}$.
+
+- $g$ est une fonction rationnelle. $x^2 + 4 > 0$ pour tout $x \in \mathbb{R}$, donc $D_g = \mathbb{R}$ $\Rightarrow$ $g$ est continue sur $\mathbb{R}$.
+
+- $\varphi$ est definie sur $\mathbb{R}$ ($|x| + 1 \geq 1 > 0$) et $|x|$ est continue sur $\mathbb{R}$ $\Rightarrow$ $\varphi$ est continue sur $\mathbb{R}$.
+
+**Conclusion** : $f$, $g$, $\varphi$ sont continues sur $\mathbb{R}$.
+
+**Remarque** : $h = E$ est continue sur $\mathbb{R} \setminus \mathbb{Z}$ ; $\ell$ est continue sur $\mathbb{R}^*$.
+:::

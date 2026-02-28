@@ -1,0 +1,31 @@
+---
+type: exercise
+title: Continuite et croissance de racine(x) + x
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags:
+  - continuite
+  - parascolaire
+  - racine
+  - tvi
+source: Parascolaire Analyse, Exercice 15, p.33
+---
+
+:::enonce
+$f(x) = \sqrt{x} + x$.
+
+a. Justifier la continuite de $f$ sur $[0, +\infty[$.
+b. Montrer que $f$ est strictement croissante sur $[0, +\infty[$.
+c. En deduire que l'equation $f(x) = 5$ admet une solution $\alpha$ sur $[3, 4]$.
+:::
+
+:::solution
+a. $u : x \mapsto \sqrt{x}$ est continue sur $[0, +\infty[$. $v : x \mapsto x$ est continue sur $\mathbb{R}$. Alors $f = u + v$ est continue sur $[0, +\infty[$.
+
+b. $u$ est strictement croissante sur $[0, +\infty[$ et $v$ est strictement croissante sur $[0, +\infty[$. Donc $f = u + v$ est strictement croissante sur $[0, +\infty[$.
+
+c. $f$ est continue sur $[3, 4]$ et $f(3) = \sqrt{3} + 3 \approx 4{,}7$ et $f(4) = \sqrt{4} + 4 = 6$.
+
+Comme $4{,}7 < 5 < 6$, $5$ est compris entre $f(3)$ et $f(4)$. D'apres le theoreme des valeurs intermediaires, il existe au moins un $\alpha \in [3, 4]$ tel que $f(\alpha) = 5$.
+:::

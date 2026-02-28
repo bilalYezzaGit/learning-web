@@ -37,6 +37,9 @@ yarn-error.log*
 # Pipeline generated content
 /src/generated/
 
+# Raw PDF extracted pages (temporary, extracted on demand)
+_raw/pages/
+
 # Python bytecode
 __pycache__/
 *.pyc

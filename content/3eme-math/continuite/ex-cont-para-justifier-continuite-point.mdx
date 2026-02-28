@@ -1,0 +1,35 @@
+---
+type: exercise
+title: Justifier la continuite en un point
+difficulty: 1
+timeMinutes: 15
+category: application
+tags:
+  - continuite
+  - parascolaire
+  - operations
+  - racine
+source: Parascolaire Analyse, Exercice 5, p.31
+---
+
+:::enonce
+Justifier la continuite de $f$ en un point $a$ :
+
+1. $f(x) = 2x + \sqrt{x + 3}$ ; $a = 0$.
+2. $f(x) = \dfrac{x - 1}{x + 2}$ ; $a = 2$.
+3. $f(x) = |x - 1| + 2x + 1$ ; $a = 1$.
+4. $f(x) = \dfrac{\sqrt{2x - 1}}{x - 1}$ ; $a = \dfrac{1}{2}$.
+5. $f(x) = \sqrt{3x^2 + x + 7}$ ; $a = -1{,}7$.
+:::
+
+:::solution
+1. $x \mapsto 2x$ est continue sur $\mathbb{R}$. $x \mapsto \sqrt{x + 3}$ est continue sur son domaine de definition $[-3, +\infty[$, en particulier en $0$. Par somme, $f$ est continue en $a = 0$.
+
+2. $f$ est une fonction rationnelle sur $D_f = \mathbb{R} \setminus \{-2\}$, donc $f$ est continue en $a = 2$.
+
+3. $x \mapsto x - 1$ continue sur $\mathbb{R}$ $\Rightarrow$ $x \mapsto |x - 1|$ continue sur $\mathbb{R}$. $x \mapsto 2x + 1$ polynome $\Rightarrow$ continue sur $\mathbb{R}$. D'ou $f$ est continue en $a = 1$ (par somme).
+
+4. $x \mapsto \sqrt{2x - 1}$ est continue sur $\left[\dfrac{1}{2}, +\infty\right[$. $x \mapsto \dfrac{1}{x - 1}$ est rationnelle $\Rightarrow$ continue sur $\mathbb{R} \setminus \{1\}$, en particulier en $\dfrac{1}{2}$. D'ou $f$ est continue en $a = \dfrac{1}{2}$.
+
+5. $f(x) = \sqrt{3x^2 + x + 7}$. On a $\Delta = 1 - 84 = -83 < 0$, donc $3x^2 + x + 7 > 0$ pour tout $x \in \mathbb{R}$ (signe de $a = 3 > 0$). $D_f = \mathbb{R}$. D'ou $f$ est continue en $a = -1{,}7$.
+:::

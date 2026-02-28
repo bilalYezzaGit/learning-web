@@ -1,0 +1,30 @@
+---
+type: exercise
+title: Equation irrationnelle et equation du 5eme degre
+difficulty: 3
+timeMinutes: 15
+category: approfondissement
+tags:
+  - continuite
+  - parascolaire
+  - tvi
+  - racine
+source: Parascolaire Analyse, Exercice 10, p.32
+---
+
+:::enonce
+1. Montrer que l'equation $\sqrt{x - 2} = \dfrac{8}{x^2}$ admet au moins une solution $\alpha$ dans $[3, +\infty[$.
+2. Verifier que $\alpha$ est aussi une solution de l'equation $x^5 - 2x^4 - 64 = 0$.
+:::
+
+:::solution
+1. On pose $f(x) = x^2\sqrt{x - 2}$. Il faut alors resoudre $f(x) = 8$.
+
+$f$ est le produit d'une fonction polynome ($x^2$, continue sur $\mathbb{R}$) et d'une racine carree ($\sqrt{x - 2}$, continue sur $[2, +\infty[$). Donc $f$ est continue sur $[2, +\infty[$.
+
+$f(2) = 4 \cdot \sqrt{0} = 0$ et $f(3) = 9 \cdot \sqrt{1} = 9$.
+
+Comme $0 < 8 < 9$, $8$ est compris entre $f(2)$ et $f(3)$. D'apres le TVI, l'equation $f(x) = 8$ admet au moins une solution $\alpha \in ]2, 3[ \subset [3, +\infty[$.
+
+2. On a $f(\alpha) = 8$, soit $\alpha^2\sqrt{\alpha - 2} = 8$. En elevant au carre : $\alpha^4(\alpha - 2) = 64$, d'ou $\alpha^5 - 2\alpha^4 - 64 = 0$. Ainsi $\alpha$ est une solution de l'equation $x^5 - 2x^4 - 64 = 0$.
+:::

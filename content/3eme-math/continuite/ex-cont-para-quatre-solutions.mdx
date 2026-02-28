@@ -1,0 +1,32 @@
+---
+type: exercise
+title: Equation de degre 4 - exactement 4 solutions
+difficulty: 3
+timeMinutes: 20
+category: approfondissement
+tags:
+  - continuite
+  - parascolaire
+  - tvi
+source: Parascolaire Analyse, Exercice 9, p.32
+---
+
+:::enonce
+$f(x) = x^4 - 4x^2 - x + 1$.
+
+1. Calculer $f(-2)$, $f(-1)$, $f(0)$, $f(1)$ et $f(3)$.
+2. Montrer que l'equation $f(x) = 0$ admet exactement $4$ solutions.
+:::
+
+:::solution
+1. $f(-2) = 16 - 16 + 2 + 1 = 3$. $f(-1) = 1 - 4 + 1 + 1 = -1$. $f(0) = 1$. $f(1) = 1 - 4 - 1 + 1 = -3$. $f(3) = 81 - 36 - 3 + 1 = 43$.
+
+2. $f$ est une fonction polynome $\Rightarrow$ $f$ est continue sur $\mathbb{R}$.
+
+- $f$ continue sur $[-2, -1]$ : $f(-2) \cdot f(-1) = 3 \times (-1) = -3 < 0$ $\Rightarrow$ il existe $\alpha \in ]-2, -1[$ tel que $f(\alpha) = 0$.
+- $f$ continue sur $[-1, 0]$ : $f(-1) \cdot f(0) = -1 \times 1 = -1 < 0$ $\Rightarrow$ il existe $\beta \in ]-1, 0[$ tel que $f(\beta) = 0$.
+- $f$ continue sur $[0, 1]$ : $f(0) \cdot f(1) = 1 \times (-3) = -3 < 0$ $\Rightarrow$ il existe $\delta \in ]0, 1[$ tel que $f(\delta) = 0$.
+- $f$ continue sur $[1, 3]$ : $f(1) \cdot f(3) = -3 \times 43 < 0$ $\Rightarrow$ il existe $\lambda \in ]1, 3[$ tel que $f(\lambda) = 0$.
+
+$f(x) = 0$ est une equation de $4$eme degre $\Rightarrow$ au plus $4$ solutions. Comme $\alpha$, $\beta$, $\delta$, $\lambda$ sont des solutions distinctes (dans des intervalles disjoints), l'equation $f(x) = 0$ admet exactement quatre solutions.
+:::

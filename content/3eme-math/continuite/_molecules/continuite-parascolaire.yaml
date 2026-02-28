@@ -1,0 +1,71 @@
+kind: cours
+visible: false
+title: "Continuite - Parascolaire Analyse (transcription complete)"
+description: "Transcription fidele du chapitre Continuite du Parascolaire Analyse 3eme Math. Resume de cours, QCM, Vrai/Faux et exercices corriges."
+trimester: T1
+order: 3
+estimatedMinutes: 180
+objectives:
+  - "Maitriser la definition formelle (epsilon-delta) de la continuite en un point"
+  - "Connaitre le tableau des fonctions usuelles continues"
+  - "Savoir utiliser les operations sur les fonctions continues"
+  - "Comprendre la continuite a droite et a gauche"
+  - "Savoir etudier la continuite sur un intervalle"
+  - "Appliquer le TVI et determiner le nombre de solutions"
+  - "Determiner l image d un intervalle par une fonction continue"
+
+sections:
+  - label: "1. Definition et operations"
+    steps:
+      - lesson-cont-para-definition-operations
+
+  - label: "2. Continuite sur un intervalle"
+    steps:
+      - lesson-cont-para-continuite-intervalle
+
+  - label: "3. Theoreme des valeurs intermediaires"
+    steps:
+      - lesson-cont-para-tvi
+
+  - label: "Vrai / Faux"
+    steps:
+      - quiz:
+          - qcm-cont-para-vf-1
+          - qcm-cont-para-vf-2
+          - qcm-cont-para-vf-3
+          - qcm-cont-para-vf-4
+          - qcm-cont-para-vf-5
+
+  - label: "QCM"
+    steps:
+      - quiz:
+          - qcm-cont-para-rationnelle-domaine
+          - qcm-cont-para-tvi-nombre-solutions
+          - qcm-cont-para-partie-entiere-intervalle
+          - qcm-cont-para-racine-valeur-absolue
+
+  - label: "Exercices - Continuite (lecture et justification)"
+    steps:
+      - ex-cont-para-graphique-continuite
+      - ex-cont-para-fonctions-continues-ir
+      - ex-cont-para-justifier-continuite-point
+      - ex-cont-para-morceaux-trois-pieces
+
+  - label: "Exercices - TVI et equations"
+    steps:
+      - ex-cont-para-tvi-equation-cube
+      - ex-cont-para-tvi-trinome-cube
+      - ex-cont-para-quatre-solutions
+      - ex-cont-para-racine-equation-cinquieme
+      - ex-cont-para-intersection-parabole-hyperbole
+
+  - label: "Exercices - Image d intervalles"
+    steps:
+      - ex-cont-para-lecture-graphique-images
+      - ex-cont-para-image-intervalles-tableaux
+
+  - label: "Exercices - Etudes completes"
+    steps:
+      - ex-cont-para-etude-racine-carree
+      - ex-cont-para-racine-plus-x
+      - ex-cont-para-etude-complete-trinome-cube
