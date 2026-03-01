@@ -3,8 +3,6 @@ import { Lora, DM_Sans } from 'next/font/google'
 import 'katex/dist/katex.min.css'
 import './globals.css'
 
-import { QueryProvider } from '@/lib/query/provider'
-import { AuthProvider } from '@/lib/context'
 import { Toaster } from '@/components/ui/sonner'
 import { PwaInstallPrompt } from '@/components/pwa-install-prompt'
 
@@ -70,13 +68,9 @@ export default function RootLayout({
         >
           Aller au contenu principal
         </a>
-        <QueryProvider>
-          <AuthProvider>
-            {children}
-            <Toaster />
-            <PwaInstallPrompt />
-          </AuthProvider>
-        </QueryProvider>
+        {children}
+        <Toaster />
+        <PwaInstallPrompt />
       </body>
     </html>
   )

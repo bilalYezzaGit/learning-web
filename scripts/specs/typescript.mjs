@@ -75,8 +75,6 @@ export const tests = [
       const matches = grepFiles(tsFiles, pattern).filter((m) => {
         // Exclude .d.ts files
         if (m.file.includes('.d.ts')) return false
-        // Exclude content extensions (use local relative imports by design)
-        if (m.file.includes('src/content/')) return false
         return true
       })
       return {

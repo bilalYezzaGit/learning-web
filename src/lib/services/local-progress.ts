@@ -34,45 +34,35 @@ export function getLocalProgress(): LocalProgressMap {
   return load()
 }
 
-export function setLocalExerciseComplete(params: {
+export function setLocalActivityComplete(params: {
   activityId: string
-  status: ProgressStatus
+  activityType: 'exercise' | 'qcm'
+  status?: ProgressStatus
+  score?: number
+  total?: number
   contextType: string
   contextId: string
 }): LocalProgressMap {
   const map = load()
-  map.set(params.activityId, {
-    activityId: params.activityId,
-    activityType: 'exercise',
-    status: params.status,
-    attempts: 1,
-    lastDoneAt: new Date().toISOString(),
-    contexts: [{ type: params.contextType, id: params.contextId, doneAt: new Date().toISOString() }],
-  })
-  save(map)
-  return map
-}
+  const now = new Date().toISOString()
 
-export function setLocalQCMComplete(params: {
-  activityId: string
-  score: number
-  total: number
-  contextType: string
-  contextId: string
-}): LocalProgressMap {
-  const map = load()
-  const status: ProgressStatus = params.score / params.total >= SUCCESS_THRESHOLD ? 'success' : 'retry'
+  let status: ProgressStatus
+  if (params.activityType === 'qcm' && params.score !== undefined && params.total !== undefined) {
+    status = params.score / params.total >= SUCCESS_THRESHOLD ? 'success' : 'retry'
+  } else {
+    status = params.status ?? 'success'
+  }
+
   map.set(params.activityId, {
     activityId: params.activityId,
-    activityType: 'qcm',
+    activityType: params.activityType,
     status,
-    score: params.score,
-    total: params.total,
+    ...(params.score !== undefined && { score: params.score }),
+    ...(params.total !== undefined && { total: params.total }),
     attempts: 1,
-    lastDoneAt: new Date().toISOString(),
-    contexts: [{ type: params.contextType, id: params.contextId, doneAt: new Date().toISOString() }],
+    lastDoneAt: now,
+    contexts: [{ type: params.contextType, id: params.contextId, doneAt: now }],
   })
   save(map)
   return map
 }
-

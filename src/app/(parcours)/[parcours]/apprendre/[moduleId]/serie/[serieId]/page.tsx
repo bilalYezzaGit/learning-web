@@ -1,18 +1,13 @@
 /**
- * Module Serie Detail Page
- *
- * Welcome screen for a serie within the module context.
- * Timeline is in layout.tsx.
+ * Module Serie Detail Page — Welcome screen
  */
 
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft, BookOpen, Play } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { getSerie, getSerieActivities } from '@/lib/content-loader'
+import { PageNav } from '@/app/(parcours)/_components/page-nav'
+import { getSerie, getSerieActivities, getCours } from '@/lib/content-loader'
+import { SerieWelcome } from '@/app/(parcours)/_components/serie-welcome'
 
 interface PageProps {
   params: Promise<{ parcours: string; moduleId: string; serieId: string }>
@@ -24,10 +19,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const serie = getSerie(serieId)
     return {
       title: serie.title,
-      description: serie.description ?? `Série — ${serie.title}`,
+      description: serie.description ?? `Serie — ${serie.title}`,
     }
   } catch {
-    return { title: 'Série' }
+    return { title: 'Serie' }
   }
 }
 
@@ -43,41 +38,28 @@ export default async function ModuleSerieDetailPage({ params }: PageProps) {
 
   const activities = getSerieActivities(serieId)
 
+  let coursTitle = moduleId
+  try {
+    coursTitle = getCours(moduleId).title
+  } catch { /* fallback to moduleId */ }
+
   return (
     <div className="flex h-full flex-col">
-      {/* Back button */}
-      <div className="border-b px-4 py-3 lg:px-6">
-        <Button variant="ghost" size="sm" asChild>
-          <Link href={`/${parcours}/apprendre/${moduleId}`}>
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Retour au module
-          </Link>
-        </Button>
-      </div>
-
-      {/* Welcome content */}
-      <div className="flex flex-1 items-center justify-center p-4 lg:p-6">
-        <Card className="max-w-md text-center">
-          <CardContent className="py-12">
-            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-              <BookOpen className="h-8 w-8 text-primary" />
-            </div>
-            <h1 className="text-xl font-semibold">{serie.title}</h1>
-            {serie.description && (
-              <p className="mt-2 text-muted-foreground">{serie.description}</p>
-            )}
-            <p className="mt-4 text-sm text-muted-foreground">
-              {activities.length} activités · {serie.estimatedMinutes} min estimées
-            </p>
-            <Button className="mt-6" size="lg" asChild>
-              <Link href={`/${parcours}/apprendre/${moduleId}/serie/${serieId}/play`}>
-                <Play className="mr-2 h-4 w-4" />
-                Commencer la série
-              </Link>
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
+      <PageNav
+        items={[
+          { label: 'Accueil', href: `/${parcours}` },
+          { label: coursTitle, href: `/${parcours}/apprendre/${moduleId}` },
+        ]}
+        current={serie.title}
+        compact
+      />
+      <SerieWelcome
+        title={serie.title}
+        description={serie.description}
+        activityCount={activities.length}
+        estimatedMinutes={serie.estimatedMinutes}
+        playUrl={`/${parcours}/apprendre/${moduleId}/serie/${serieId}/${activities[0]?.id}`}
+      />
     </div>
   )
 }

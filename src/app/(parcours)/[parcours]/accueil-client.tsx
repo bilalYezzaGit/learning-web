@@ -4,24 +4,18 @@
  * Accueil Client Component
  *
  * Main landing page for a parcours: modules grouped by trimester + cross-module series.
- * Shows a "Reprendre" card when user has progress, then all modules and revision series.
  */
 
-import * as React from 'react'
 import Link from 'next/link'
-import {
-  Check,
-  ChevronRight,
-  FileText,
-  Play,
-} from 'lucide-react'
+import { ChevronRight, FileText } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
 import { Separator } from '@/components/ui/separator'
+import { ModuleListItem } from '@/app/(parcours)/_components/module-list-item'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
+import { useModuleProgress } from '@/lib/hooks/use-module-progress'
 import { formatDuration, getDifficultyLabel } from '@/lib/utils/format'
 
 // =============================================================================
@@ -69,8 +63,6 @@ interface AccueilClientProps {
 // Helpers
 // =============================================================================
 
-type ModuleStatus = 'not-started' | 'in-progress' | 'completed'
-
 function getSerieTypeLabel(type: string): string {
   switch (type) {
     case 'cross-module':
@@ -94,24 +86,8 @@ export function AccueilClient({ parcours, trimesterGroups, crossModuleSeries }: 
   const { userId } = useAuth()
   const { progress } = useProgress(userId ?? undefined)
 
-  // Compute progress per module
-  const moduleStats = React.useMemo(() => {
-    const stats = new Map<string, { done: number; total: number; percentage: number; status: ModuleStatus }>()
-
-    for (const group of trimesterGroups) {
-      for (const mod of group.modules) {
-        const total = mod.activityIds.length
-        const done = mod.activityIds.filter((id) => progress.has(id)).length
-        const percentage = total > 0 ? Math.round((done / total) * 100) : 0
-        let status: ModuleStatus = 'not-started'
-        if (done > 0 && done < total) status = 'in-progress'
-        if (done > 0 && done >= total) status = 'completed'
-        stats.set(mod.id, { done, total, percentage, status })
-      }
-    }
-
-    return stats
-  }, [trimesterGroups, progress])
+  const allModules = trimesterGroups.flatMap((g) => g.modules)
+  const moduleStats = useModuleProgress(allModules, progress)
 
   return (
     <div className="space-y-8">
@@ -153,17 +129,26 @@ export function AccueilClient({ parcours, trimesterGroups, crossModuleSeries }: 
                   <CardContent className="p-0">
                     {group.modules.map((mod) => {
                       const stat = moduleStats.get(mod.id)
-                      const status = stat?.status ?? 'not-started'
-
                       return (
                         <ModuleListItem
                           key={mod.id}
                           module={mod}
-                          status={status}
+                          status={stat?.status ?? 'not-started'}
                           done={stat?.done ?? 0}
                           total={stat?.total ?? 0}
                           percentage={stat?.percentage ?? 0}
                           parcours={parcours}
+                          meta={
+                            <>
+                              <span>{mod.lessonCount} cours</span>
+                              <span>·</span>
+                              <span>{mod.exerciseCount} exercices</span>
+                              <span>·</span>
+                              <span>{mod.qcmCount} QCM</span>
+                              <span>·</span>
+                              <span>{formatDuration(mod.estimatedMinutes)}</span>
+                            </>
+                          }
                         />
                       )
                     })}
@@ -187,7 +172,7 @@ export function AccueilClient({ parcours, trimesterGroups, crossModuleSeries }: 
 
           <div className="grid gap-4 sm:grid-cols-2">
             {crossModuleSeries.map((serie) => (
-              <Link key={serie.id} href={`/${parcours}/reviser/serie/${serie.id}`}>
+              <Link key={serie.id} href={`/${parcours}/serie/${serie.id}`}>
                 <Card className="h-full transition-colors hover:bg-muted/50">
                   <CardContent className="py-4">
                     <div className="flex items-start gap-3">
@@ -226,109 +211,5 @@ export function AccueilClient({ parcours, trimesterGroups, crossModuleSeries }: 
         </section>
       )}
     </div>
-  )
-}
-
-// =============================================================================
-// Module List Item
-// =============================================================================
-
-interface ModuleListItemProps {
-  module: ModuleEntry
-  status: ModuleStatus
-  done: number
-  total: number
-  percentage: number
-  parcours: string
-}
-
-function ModuleListItem({
-  module: mod,
-  status,
-  done,
-  total,
-  percentage,
-  parcours,
-}: ModuleListItemProps) {
-  return (
-    <Link
-      href={`/${parcours}/apprendre/${mod.id}`}
-      className="flex items-center gap-4 border-b px-6 py-4 transition-colors last:border-b-0 hover:bg-muted/50"
-    >
-      {/* Left Icon */}
-      <div
-        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${
-          status === 'completed'
-            ? 'bg-success/10'
-            : status === 'in-progress'
-              ? 'bg-primary/10'
-              : 'bg-muted'
-        }`}
-      >
-        {status === 'completed' ? (
-          <Check className="h-5 w-5 text-success" aria-hidden="true" />
-        ) : status === 'in-progress' ? (
-          <Play className="h-5 w-5 text-primary" aria-hidden="true" />
-        ) : (
-          <span className="text-sm font-medium text-muted-foreground" aria-hidden="true">
-            {mod.order.toString().padStart(2, '0')}
-          </span>
-        )}
-      </div>
-
-      {/* Content */}
-      <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-center gap-2">
-          <p className={`font-medium ${status === 'completed' ? 'text-muted-foreground' : ''}`}>
-            {mod.title}
-          </p>
-          {status === 'completed' && (
-            <Badge variant="default" className="bg-success text-xs">
-              Termine
-            </Badge>
-          )}
-        </div>
-
-        {mod.description && (
-          <p className="mt-0.5 line-clamp-1 text-sm text-muted-foreground">
-            {mod.description}
-          </p>
-        )}
-
-        <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-          <span>{mod.lessonCount} cours</span>
-          <span>·</span>
-          <span>{mod.exerciseCount} exercices</span>
-          <span>·</span>
-          <span>{mod.qcmCount} QCM</span>
-          <span>·</span>
-          <span>{formatDuration(mod.estimatedMinutes)}</span>
-          {status === 'in-progress' && (
-            <>
-              <span>·</span>
-              <span className="tabular-nums">
-                {done}/{total} completees
-              </span>
-            </>
-          )}
-        </div>
-
-        {/* Progress bar for in-progress modules */}
-        {status === 'in-progress' && (
-          <div className="mt-2 flex items-center gap-2">
-            <Progress
-              value={percentage}
-              className="h-1.5 flex-1"
-              aria-label={`Progression du module ${mod.title} : ${percentage}%`}
-            />
-            <span className="tabular-nums text-xs font-medium text-primary">
-              {percentage}%
-            </span>
-          </div>
-        )}
-      </div>
-
-      <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground" aria-hidden="true" />
-    </Link>
   )
 }

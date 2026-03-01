@@ -11,18 +11,11 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
+import { PageNav } from '@/app/(parcours)/_components/page-nav'
 import { getCoursActivities, getCours, findQuizGroup, getCompiledQuiz, getAtomHtml } from '@/lib/content-loader'
-import { ContentRenderer } from '@/components/content/content-renderer'
-import { ActivityClient } from '@/components/patterns/activity-client'
-import { ActivityHeader } from './activity-header'
+import { ContentRenderer } from '@/app/(parcours)/_components/content-renderer'
+import { ActivityClient } from '@/app/(parcours)/_components/activity-client'
+import { TimelineToggle } from './timeline-toggle'
 
 interface PageProps {
   params: Promise<{ parcours: string; moduleId: string; activityId: string }>
@@ -84,27 +77,15 @@ export default async function ActivityPage({ params }: PageProps) {
 
   return (
     <div className="flex h-full flex-col">
-      {/* Breadcrumb — desktop only (mobile has ActivityHeader) */}
-      <div className="hidden border-b px-4 py-3 lg:block lg:px-6">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href={`/${parcours}`}>Accueil</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink href={`/${parcours}/apprendre/${moduleId}`}>{coursTitle}</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>{currentActivity.title}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </div>
-
-      {/* Slim mobile header with timeline toggle — hidden on desktop */}
-      <ActivityHeader title={currentActivity.title} type={currentActivity.type} />
+      <PageNav
+        items={[
+          { label: 'Accueil', href: `/${parcours}` },
+          { label: coursTitle, href: `/${parcours}/apprendre/${moduleId}` },
+        ]}
+        current={currentActivity.title}
+        compact
+        trailing={<TimelineToggle />}
+      />
 
       {/* Content */}
       <div className="flex-1 overflow-auto">

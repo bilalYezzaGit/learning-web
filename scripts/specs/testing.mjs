@@ -181,9 +181,17 @@ export const tests = [
       for (const tf of getTestFiles()) {
         if (tf.name === 'testing' || tf.name === 'health') continue
         const content = readFileSync(tf.path, 'utf-8')
+        // Files referenced in fileExists() calls are negative assertions (checking deletion)
+        const negativeAssertionPaths = new Set()
+        const negRe = /fileExists\(['"]([^'"]+)['"]\)/g
+        let negMatch
+        while ((negMatch = negRe.exec(content)) !== null) {
+          negativeAssertionPaths.add(negMatch[1])
+        }
         let match
         while ((match = pathPattern.exec(content)) !== null) {
           const path = match[0].slice(1, -1)
+          if (negativeAssertionPaths.has(path)) continue
           if (!existsSync(path)) {
             missing.push(`${tf.name}.mjs references ${path}`)
           }
@@ -218,8 +226,7 @@ export const tests = [
       const keyFiles = [
         'src/app/globals.css',
         'src/app/layout.tsx',
-        'src/components/app-sidebar.tsx',
-        'src/components/mobile-bottom-nav.tsx',
+        'src/app/(parcours)/_components/parcours-shell.tsx',
       ]
       const emptyFiles = keyFiles.filter((f) => {
         try {

@@ -1,8 +1,8 @@
 # Navigation
 
-> Sidebar structure, mobile nav, active state highlighting.
+> Header-only shell, no sidebar/bottom nav, breadcrumbs on module pages.
 
-- NAV-001 [auto] Sidebar: variant="inset" collapsible="icon" with SidebarHeader, SidebarContent, SidebarFooter
-- NAV-002 [auto] Mobile bottom nav: md:hidden, print:hidden, 3 items (Dashboard, Apprendre, Reviser), transition-colors
-- NAV-003 [auto] Active link: isActive prop on SidebarMenuButton, text-primary on mobile nav active items
-- NAV-004 [auto] Sidebar footer: contains NavUser component
+- NAV-001 [auto] Header-only shell: header element + NavUser, no aside, no Sheet (in parcours-shell.tsx)
+- NAV-002 [auto] No mobile bottom nav: mobile-bottom-nav.tsx must not exist
+- NAV-003 [auto] Module page: contains Breadcrumb navigation
+- NAV-004 [auto] Shell: contains NavUser component in header

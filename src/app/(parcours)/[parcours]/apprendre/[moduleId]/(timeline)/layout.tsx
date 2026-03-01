@@ -12,7 +12,7 @@
 import { notFound } from 'next/navigation'
 
 import { getCours, getCoursActivities } from '@/lib/content-loader'
-import { TimelineWrapper } from '@/components/timeline-wrapper'
+import { TimelineWrapper } from '@/app/(parcours)/_components/timeline-wrapper'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -37,7 +37,7 @@ export default async function TimelineLayout({ children, params }: LayoutProps) 
   }))
 
   return (
-    <div className="-my-4 md:-my-6 flex flex-1 min-h-0 overflow-hidden">
+    <div className="flex flex-1 min-h-0">
       <TimelineWrapper
         slug={cours.slug}
         title={cours.title}

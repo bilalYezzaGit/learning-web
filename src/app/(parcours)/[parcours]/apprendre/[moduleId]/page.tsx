@@ -8,19 +8,13 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
+import { PageNav } from '@/app/(parcours)/_components/page-nav'
 import {
   getCours,
   getCoursActivities,
   getAllProgrammes,
   getSerie,
+  getSerieActivities,
 } from '@/lib/content-loader'
 import { getParcoursConfig } from '@/lib/parcours'
 
@@ -105,6 +99,7 @@ export default async function ModuleDetailPage({ params }: PageProps) {
         description: diagnosticSerie.description,
         estimatedMinutes: diagnosticSerie.estimatedMinutes,
         questionCount: diagnosticSerie.totalActivities,
+        firstActivityId: getSerieActivities(diagnosticSerie.slug)[0]?.id ?? null,
       }
     : null
 
@@ -131,24 +126,14 @@ export default async function ModuleDetailPage({ params }: PageProps) {
   const totalActivities = activities.length
 
   return (
-    <div className="flex min-h-full flex-col">
-      {/* Breadcrumb */}
-      <div className="border-b px-4 py-3 lg:px-6">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href={`/${parcours}`}>Accueil</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>{cours.title}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </div>
+    <div className="flex flex-1 min-h-0 flex-col">
+      <PageNav
+        items={[{ label: 'Accueil', href: `/${parcours}` }]}
+        current={cours.title}
+      />
 
       {/* Content */}
-      <div className="flex-1">
+      <div className="flex-1 overflow-auto">
         <div className="mx-auto max-w-2xl p-4 lg:p-6">
           <ModuleAccueilClient
             parcours={parcours}

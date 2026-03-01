@@ -44,19 +44,17 @@ export const tests = [
     name: 'Parcours layout structure',
     fn: () => {
       const layout = readFile('src/app/(parcours)/[parcours]/layout.tsx')
+      const shell = readFile('src/app/(parcours)/_components/parcours-shell.tsx')
       const checks = [
-        ['SidebarProvider', layout.includes('SidebarProvider')],
-        ['AppSidebar', layout.includes('AppSidebar')],
-        ['SidebarInset', layout.includes('SidebarInset')],
-        ['id="main-content"', layout.includes('id="main-content"')],
-        ['@container/main', layout.includes('@container/main')],
-        ['MobileBottomNav', layout.includes('MobileBottomNav')],
+        ['ParcoursShell', layout.includes('ParcoursShell')],
+        ['id="main-content"', shell.includes('id="main-content"')],
+        ['@container/main', shell.includes('@container/main')],
       ]
       const failing = checks.filter(([, ok]) => !ok)
       return {
         pass: failing.length === 0,
         detail: failing.length === 0
-          ? 'All 6 structural elements present'
+          ? 'All structural elements present'
           : `Missing: ${failing.map(([name]) => name).join(', ')}`,
       }
     },

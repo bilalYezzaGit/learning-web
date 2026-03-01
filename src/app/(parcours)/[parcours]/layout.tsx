@@ -5,11 +5,7 @@
  * Reads programme modules from filesystem for the sidebar.
  */
 
-import { AppSidebar } from '@/components/app-sidebar'
-import { SiteHeader } from '@/components/site-header'
-import { EmailVerificationBanner } from '@/components/email-verification-banner'
-import { MobileBottomNav } from '@/components/mobile-bottom-nav'
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
+import { ParcoursShell, type ShellModule } from '@/app/(parcours)/_components/parcours-shell'
 import { getParcoursConfig } from '@/lib/parcours'
 import { getAllProgrammes, getCours } from '@/lib/content-loader'
 
@@ -25,8 +21,7 @@ export default async function ParcoursLayout({
   const { parcours } = await params
   const parcoursConfig = getParcoursConfig(parcours)
 
-  // Resolve sidebar modules from filesystem
-  const modules = (() => {
+  const modules: ShellModule[] = (() => {
     if (!parcoursConfig) return []
 
     const programme = getAllProgrammes().find(
@@ -41,20 +36,8 @@ export default async function ParcoursLayout({
   })()
 
   return (
-    <SidebarProvider>
-      <AppSidebar parcours={parcours} modules={modules} />
-      <SidebarInset className="max-h-[calc(100svh-3.5rem)] md:max-h-svh overflow-hidden">
-        <SiteHeader parcours={parcours} />
-        <EmailVerificationBanner />
-        <div className="flex flex-1 min-h-0 flex-col overflow-auto pb-20 md:pb-0">
-          <div id="main-content" className="@container/main flex flex-1 min-h-0 flex-col gap-2">
-            <div className="flex flex-1 min-h-0 flex-col gap-4 py-4 md:gap-6 md:py-6">
-              {children}
-            </div>
-          </div>
-        </div>
-      </SidebarInset>
-      <MobileBottomNav parcours={parcours} />
-    </SidebarProvider>
+    <ParcoursShell parcours={parcours} modules={modules}>
+      {children}
+    </ParcoursShell>
   )
 }

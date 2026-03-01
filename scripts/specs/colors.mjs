@@ -41,7 +41,7 @@ export const tests = [
       // Intentional color usage: lesson parts, exercise parts, mdx components
       const excluded = ['lesson-parts.tsx', 'exercise-parts.tsx', 'mdx-components.tsx']
       const files = tsxFiles.filter(
-        (f) => !excluded.some((ex) => f.endsWith(ex)) && !f.includes('src/content/')
+        (f) => !excluded.some((ex) => f.endsWith(ex))
       )
       const matches = grepFiles(files, pattern)
       return {

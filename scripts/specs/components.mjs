@@ -9,7 +9,7 @@ export const tests = [
     id: 'CMP-001',
     name: 'Content rendering pipeline',
     fn: () => {
-      const renderer = readFile('src/components/content/content-renderer.tsx')
+      const renderer = readFile('src/app/(parcours)/_components/content-renderer.tsx')
       const loader = readFile('src/lib/content-loader.ts')
       const checks = [
         ['ContentRenderer component', renderer.includes('ContentRenderer')],
@@ -72,20 +72,17 @@ export const tests = [
   },
   {
     id: 'CMP-005',
-    name: 'Providers nesting order',
+    name: 'Root layout is clean (no unnecessary providers)',
     fn: () => {
       const layout = readFile('src/app/layout.tsx')
-      const queryIdx = layout.indexOf('QueryProvider')
-      const authIdx = layout.indexOf('AuthProvider')
-      const allPresent = queryIdx !== -1 && authIdx !== -1
-      const correctOrder = queryIdx < authIdx
+      const authPresent = layout.includes('AuthProvider')
+      const queryPresent = layout.includes('QueryProvider')
+      const clean = !authPresent && !queryPresent
       return {
-        pass: allPresent && correctOrder,
-        detail: allPresent && correctOrder
-          ? 'QueryProvider > AuthProvider'
-          : !allPresent
-            ? `Missing providers: ${[queryIdx === -1 && 'QueryProvider', authIdx === -1 && 'AuthProvider'].filter(Boolean).join(', ')}`
-            : 'Incorrect nesting order',
+        pass: clean,
+        detail: clean
+          ? 'No provider wrappers (auth via useSyncExternalStore, no React Query)'
+          : `Unnecessary providers found: ${[authPresent && 'AuthProvider', queryPresent && 'QueryProvider'].filter(Boolean).join(', ')}`,
       }
     },
   },

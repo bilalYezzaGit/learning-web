@@ -20,7 +20,7 @@ export default function NotFound() {
               <Link href="/">Retour à l&apos;accueil</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href={`/${DEFAULT_PARCOURS_SLUG}/apprendre`}>Explorer les cours</Link>
+              <Link href={`/${DEFAULT_PARCOURS_SLUG}`}>Tableau de bord</Link>
             </Button>
           </div>
         </CardContent>

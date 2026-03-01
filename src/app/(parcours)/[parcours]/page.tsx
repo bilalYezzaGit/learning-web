@@ -9,7 +9,7 @@ import type { Metadata } from 'next'
 import { BookOpen } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
-import { OnboardingBanner } from '@/components/onboarding-banner'
+import { OnboardingBanner } from '@/app/(parcours)/_components/onboarding-banner'
 import { getAllProgrammes, getCours, getCoursActivities, getSerie } from '@/lib/content-loader'
 import { getParcoursConfig } from '@/lib/parcours'
 
@@ -98,7 +98,7 @@ export default async function ParcoursAccueilPage({ params }: PageProps) {
     : []
 
   return (
-    <div className="px-4 lg:px-6">
+    <div className="flex-1 overflow-auto px-4 py-4 lg:px-6 md:py-6">
       <OnboardingBanner />
 
       <div className="mb-8">

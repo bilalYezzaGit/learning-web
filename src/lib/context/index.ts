@@ -2,4 +2,4 @@
  * Context barrel export
  */
 
-export { AuthProvider, useAuth } from './auth-context'
+export { useAuth } from './auth-context'
