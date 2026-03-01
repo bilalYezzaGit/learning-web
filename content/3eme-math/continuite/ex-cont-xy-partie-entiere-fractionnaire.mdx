@@ -1,0 +1,101 @@
+---
+type: exercise
+title: Fonction partie fractionnaire x - E(x)
+difficulty: 2
+timeMinutes: 20
+category: approfondissement
+tags:
+  - continuite
+  - xy-plus
+  - partie-entiere
+  - morceaux
+source: XY Plus T1, Exercice 3, p.18
+---
+
+:::enonce
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = x - E(x)$ où $E(x)$ désigne la partie entière de $x$.
+
+1. Dans le plan rapporté à un repère orthonormé, tracer la courbe représentative de la restriction de $f$ à l'intervalle $[-3, 3]$.
+2. Étudier la continuité de $f$ sur $[-3, 3]$.
+:::
+
+:::solution
+1. Pour tout $x \in [n, n+1[$ où $n \in \mathbb{Z}$, on a $E(x) = n$, donc $f(x) = x - n$.
+
+- Si $x \in [-3, -2[$ : $E(x) = -3$ et $f(x) = x + 3$
+- Si $x \in [-2, -1[$ : $E(x) = -2$ et $f(x) = x + 2$
+- Si $x \in [-1, 0[$ : $E(x) = -1$ et $f(x) = x + 1$
+- Si $x \in [0, 1[$ : $E(x) = 0$ et $f(x) = x$
+- Si $x \in [1, 2[$ : $E(x) = 1$ et $f(x) = x - 1$
+- Si $x \in [2, 3[$ : $E(x) = 2$ et $f(x) = x - 2$
+- Si $x = 3$ : $E(3) = 3$ et $f(3) = 0$
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-3.8, 0), (3.8, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -0.5), (0, 1.8), stroke: 0.8pt, mark: (end: ">", fill: black))
+  content((3.6, -0.3), $x$)
+  content((-0.3, 1.6), $y$)
+  content((-0.3, -0.3), $O$)
+
+  // Ticks x
+  for x in (-3, -2, -1, 1, 2, 3) {
+    line((x, -0.08), (x, 0.08), stroke: 0.5pt)
+    content((x, -0.3), text(size: 7pt, str(x)))
+  }
+
+  // Ticks y
+  line((-0.08, 1), (0.08, 1), stroke: 0.5pt)
+  content((-0.3, 1), text(size: 7pt, "1"))
+
+  // Sawtooth segments: f(x) = x - n on [n, n+1[
+  // [-3, -2[: y = x + 3
+  line((-3, 0), (-2, 1), stroke: 1.5pt + blue)
+  circle((-3, 0), radius: 0.06, fill: blue, stroke: 1pt + blue)
+  circle((-2, 1), radius: 0.06, fill: white, stroke: 1pt + blue)
+
+  // [-2, -1[: y = x + 2
+  line((-2, 0), (-1, 1), stroke: 1.5pt + blue)
+  circle((-2, 0), radius: 0.06, fill: blue, stroke: 1pt + blue)
+  circle((-1, 1), radius: 0.06, fill: white, stroke: 1pt + blue)
+
+  // [-1, 0[: y = x + 1
+  line((-1, 0), (0, 1), stroke: 1.5pt + blue)
+  circle((-1, 0), radius: 0.06, fill: blue, stroke: 1pt + blue)
+  circle((0, 1), radius: 0.06, fill: white, stroke: 1pt + blue)
+
+  // [0, 1[: y = x
+  line((0, 0), (1, 1), stroke: 1.5pt + blue)
+  circle((0, 0), radius: 0.06, fill: blue, stroke: 1pt + blue)
+  circle((1, 1), radius: 0.06, fill: white, stroke: 1pt + blue)
+
+  // [1, 2[: y = x - 1
+  line((1, 0), (2, 1), stroke: 1.5pt + blue)
+  circle((1, 0), radius: 0.06, fill: blue, stroke: 1pt + blue)
+  circle((2, 1), radius: 0.06, fill: white, stroke: 1pt + blue)
+
+  // [2, 3[: y = x - 2
+  line((2, 0), (3, 1), stroke: 1.5pt + blue)
+  circle((2, 0), radius: 0.06, fill: blue, stroke: 1pt + blue)
+  circle((3, 1), radius: 0.06, fill: white, stroke: 1pt + blue)
+
+  // x = 3: f(3) = 0
+  circle((3, 0), radius: 0.06, fill: blue, stroke: 1pt + blue)
+})
+```
+
+2. La courbe de $f$ présente une rupture aux points d'abscisses entières.
+
+$f$ est continue sur chacun des intervalles $]n, n+1[$ où $n \in \mathbb{Z}$ (car $f(x) = x - n$ est affine sur chacun).
+
+$f$ est continue à droite en chaque entier $n$ car $\lim_{x \to n^+} f(x) = 0 = f(n)$.
+
+En revanche, $\lim_{x \to n^-} f(x) = 1 \neq 0 = f(n)$ pour tout $n \in \{-2, -1, 0, 1, 2\}$.
+
+Donc $f$ n'est pas continue à gauche aux entiers, et $f$ n'est pas continue sur $[-3, 3]$.
+:::

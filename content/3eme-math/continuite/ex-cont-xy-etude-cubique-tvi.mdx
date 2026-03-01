@@ -1,0 +1,87 @@
+---
+type: exercise
+title: Étude cubique x^3 - 3x^2 + 1 et TVI
+difficulty: 3
+timeMinutes: 25
+category: synthese
+tags:
+  - continuite
+  - xy-plus
+  - tvi
+  - image-intervalle
+  - dichotomie
+source: XY Plus T1, Exercice 5, p.19
+---
+
+:::enonce
+La figure ci-contre est la représentation graphique $\mathcal{C}_f$ dans un repère orthonormé de la fonction $f$ définie sur $\mathbb{R}$ par : $f(x) = x^3 - 3x^2 + 1$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -1.5, x-max: 3.5,
+    y-min: -4, y-max: 3,
+    {
+      plot.add(domain: (-1.5, 3.5), x => calc.pow(x, 3) - 3 * calc.pow(x, 2) + 1,
+        style: (stroke: 2pt + blue))
+    },
+  )
+})
+```
+
+1. En utilisant le graphique :
+   a. Déterminer les images des intervalles $[-1, 0]$, $[-1, 2]$ et $[0, 1]$ par $f$.
+   b. Justifier que :
+      - L'équation $f(x) = 4$ admet une unique solution dans $\mathbb{R}$
+      - L'équation $f(x) = -1$ admet exactement deux solutions dans $\mathbb{R}$
+      - L'équation $f(x) = 0$ admet exactement trois solutions dans $\mathbb{R}$
+2. a. Montrer que l'équation $f(x) = 0$ admet dans $]0, 1[$ une solution $\alpha$.
+   b. Donner un encadrement de $\alpha$ à $10^{-1}$.
+:::
+
+:::solution
+1. a. $f$ est croissante sur $]-\infty, 0]$ et décroissante sur $[0, 2]$ avec $f(0) = 1$ (maximum local) et $f(2) = -3$ (minimum local).
+
+$f(-1) = -1 - 3 + 1 = -3$, $f(0) = 1$, $f(1) = 1 - 3 + 1 = -1$, $f(2) = 8 - 12 + 1 = -3$.
+
+- $f([-1, 0])$ : $f$ croissante sur $[-1, 0]$, $f(-1) = -3$, $f(0) = 1$. Donc $f([-1, 0]) = [-3, 1]$.
+- $f([-1, 2])$ : $f(-1) = -3$, $f(0) = 1$ (max), $f(2) = -3$ (min). Donc $f([-1, 2]) = [-3, 1]$.
+- $f([0, 1])$ : $f$ décroissante sur $[0, 1]$, $f(0) = 1$, $f(1) = -1$. Donc $f([0, 1]) = [-1, 1]$.
+
+b. D'après le graphique :
+
+- La droite $y = 4$ coupe $\mathcal{C}_f$ en un unique point, donc l'équation $f(x) = 4$ admet **une unique solution** dans $\mathbb{R}$.
+- La droite $y = -1$ coupe $\mathcal{C}_f$ en deux points, donc l'équation $f(x) = -1$ admet **exactement deux solutions** dans $\mathbb{R}$.
+- La droite $y = 0$ (l'axe des abscisses) coupe $\mathcal{C}_f$ en trois points, donc l'équation $f(x) = 0$ admet **exactement trois solutions** dans $\mathbb{R}$.
+
+2. a. $f$ est une fonction polynôme donc continue sur $\mathbb{R}$, en particulier sur $[0, 1]$.
+
+$f(0) = 1 > 0$ et $f(1) = -1 < 0$, donc $f(0) \times f(1) < 0$.
+
+D'après le TVI, l'équation $f(x) = 0$ admet au moins une solution $\alpha$ dans $]0, 1[$.
+
+b. On utilise la méthode dichotomique en découpant $[0, 1]$ en dix intervalles de même amplitude $10^{-1}$ :
+
+| $x$ | $0$ | $0{,}1$ | $0{,}2$ | $0{,}3$ | $0{,}4$ | $0{,}5$ | $0{,}6$ | $0{,}7$ | $0{,}8$ | $0{,}9$ | $1$ |
+|-----|-----|---------|---------|---------|---------|---------|---------|---------|---------|---------|-----|
+| $f(x)$ | $1$ | $0{,}97$ | $0{,}88$ | $0{,}75$ | $0{,}58$ | $0{,}37$ | $0{,}13$ | $-0{,}13$ | $-0{,}41$ | $-0{,}70$ | $-1$ |
+
+On a $f(0{,}6) \times f(0{,}7) < 0$, d'où $0{,}6 < \alpha < 0{,}7$.
+:::
+
+:::methode
+Pour déterminer le nombre de solutions d'une équation $f(x) = k$ :
+
+1. Étudier les variations de $f$ (extrema locaux, limites)
+2. Compter les intersections de la courbe avec la droite $y = k$
+3. Pour l'existence par le TVI : vérifier continuité + changement de signe
+4. Pour l'encadrement : méthode dichotomique (balayage par subdivision)
+:::

@@ -1,0 +1,115 @@
+---
+type: exercise
+title: Valeur absolue et partie entière - continuité graphique
+difficulty: 3
+timeMinutes: 30
+category: synthese
+tags:
+  - continuite
+  - xy-plus
+  - valeur-absolue
+  - partie-entiere
+  - morceaux
+source: XY Plus T1, Exercice 7, p.19
+---
+
+:::enonce
+Soit $f$ la fonction définie par :
+
+$$f(x) = \begin{cases} 2|x + 2| - x + 2 & \text{si } x \in ]-\infty, -1[ \\ (2x - 1)E(x) + x & \text{si } x \in [-1, 2[ \end{cases}$$
+
+où $E(x)$ désigne la partie entière de $x$.
+
+1. Montrer que $f$ est une fonction affine par intervalles.
+2. Tracer $(\mathcal{C})$ la courbe de $f$ dans un repère orthonormé.
+3. Étudier graphiquement la continuité de $f$ en $-2$, $-1$, $0$ et $1$.
+:::
+
+:::solution
+1. **Pour $x \in ]-\infty, -1[$ :**
+
+Tableau de signes de $x + 2$ :
+
+- Si $x \in ]-\infty, -2]$ : $x + 2 \leq 0$, donc $|x + 2| = -(x + 2)$ et $f(x) = 2(-(x + 2)) - x + 2 = -2x - 4 - x + 2 = -3x - 2$.
+- Si $x \in ]-2, -1[$ : $x + 2 > 0$, donc $|x + 2| = x + 2$ et $f(x) = 2(x + 2) - x + 2 = 2x + 4 - x + 2 = x + 6$.
+
+**Pour $x \in [-1, 2[$ :**
+
+- Si $x \in [-1, 0[$ : $E(x) = -1$, donc $f(x) = (2x - 1)(-1) + x = -2x + 1 + x = -x + 1$.
+- Si $x \in [0, 1[$ : $E(x) = 0$, donc $f(x) = (2x - 1)(0) + x = x$.
+- Si $x \in [1, 2[$ : $E(x) = 1$, donc $f(x) = (2x - 1)(1) + x = 2x - 1 + x = 3x - 1$.
+
+Donc $f$ est une fonction affine par intervalles :
+
+$$f(x) = \begin{cases} -3x - 2 & \text{si } x \in ]-\infty, -2] \\ x + 6 & \text{si } x \in ]-2, -1[ \\ -x + 1 & \text{si } x \in [-1, 0[ \\ x & \text{si } x \in [0, 1[ \\ 3x - 1 & \text{si } x \in [1, 2[ \end{cases}$$
+
+2. Valeurs aux points clés : $f(-3) = 7$, $f(-2) = 4$, $f(-1) = 5$ (par $x + 6$, non atteint), $f(-1) = 2$ (valeur effective), $f(0) = 1$ (par $-x+1$, non atteint), $f(0) = 0$ (valeur effective), $f(1) = 1$ (par $x$, non atteint), $f(1) = 2$ (valeur effective).
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-4.5, 0), (2.5, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -1), (0, 7.5), stroke: 0.8pt, mark: (end: ">", fill: black))
+  content((2.3, -0.3), $x$)
+  content((-0.3, 7.3), $y$)
+  content((-0.3, -0.3), $O$)
+
+  // Ticks x
+  for x in (-4, -3, -2, -1, 1, 2) {
+    line((x, -0.1), (x, 0.1), stroke: 0.5pt)
+    content((x, -0.4), text(size: 7pt, str(x)))
+  }
+
+  // Ticks y
+  for y in (1, 2, 3, 4, 5, 6, 7) {
+    line((-0.1, y), (0.1, y), stroke: 0.5pt)
+    content((-0.4, y), text(size: 7pt, str(y)))
+  }
+
+  // Piece 1: y = -3x - 2 for x <= -2
+  line((-4, 10), (-2, 4), stroke: 1.5pt + blue)
+  circle((-2, 4), radius: 0.06, fill: blue, stroke: 1pt + blue)
+
+  // Piece 2: y = x + 6 for -2 < x < -1
+  line((-2, 4), (-1, 5), stroke: 1.5pt + blue)
+  circle((-2, 4), radius: 0.06, fill: white, stroke: 1pt + blue)
+  circle((-1, 5), radius: 0.06, fill: white, stroke: 1pt + blue)
+
+  // Note: at x=-2, both pieces give 4. Draw filled dot on top
+  circle((-2, 4), radius: 0.06, fill: blue, stroke: 1pt + blue)
+
+  // Piece 3: y = -x + 1 for -1 <= x < 0
+  line((-1, 2), (0, 1), stroke: 1.5pt + blue)
+  circle((-1, 2), radius: 0.06, fill: blue, stroke: 1pt + blue)
+  circle((0, 1), radius: 0.06, fill: white, stroke: 1pt + blue)
+
+  // Piece 4: y = x for 0 <= x < 1
+  line((0, 0), (1, 1), stroke: 1.5pt + blue)
+  circle((0, 0), radius: 0.06, fill: blue, stroke: 1pt + blue)
+  circle((1, 1), radius: 0.06, fill: white, stroke: 1pt + blue)
+
+  // Piece 5: y = 3x - 1 for 1 <= x < 2
+  line((1, 2), (2, 5), stroke: 1.5pt + blue)
+  circle((1, 2), radius: 0.06, fill: blue, stroke: 1pt + blue)
+
+  // Dashed lines showing discontinuities
+  line((-1, 2), (-1, 5), stroke: (dash: "dashed", paint: gray))
+  line((0, 0), (0, 1), stroke: (dash: "dashed", paint: gray))
+  line((1, 1), (1, 2), stroke: (dash: "dashed", paint: gray))
+})
+```
+
+3. La courbe de $f$ :
+
+- **En $x = -2$** : pas de rupture, donc $f$ est **continue** en $-2$. En effet, $\lim_{x \to -2^-} f(x) = -3(-2) - 2 = 4$ et $\lim_{x \to -2^+} f(x) = -2 + 6 = 4 = f(-2)$.
+
+- **En $x = -1$** : rupture (saut de $5$ à $2$), donc $f$ **n'est pas continue** en $-1$. En effet, $\lim_{x \to -1^-} f(x) = -1 + 6 = 5 \neq 2 = f(-1)$.
+
+- **En $x = 0$** : rupture (saut de $1$ à $0$), donc $f$ **n'est pas continue** en $0$. En effet, $\lim_{x \to 0^-} f(x) = -0 + 1 = 1 \neq 0 = f(0)$.
+
+- **En $x = 1$** : rupture (saut de $1$ à $2$), donc $f$ **n'est pas continue** en $1$. En effet, $\lim_{x \to 1^-} f(x) = 1 \neq 2 = f(1)$.
+:::

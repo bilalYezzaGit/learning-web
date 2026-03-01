@@ -1,0 +1,66 @@
+---
+type: exercise
+title: Continuité en un point - fonctions composées
+difficulty: 2
+timeMinutes: 20
+category: application
+tags:
+  - continuite
+  - xy-plus
+  - operations
+  - racine
+  - valeur-absolue
+source: XY Plus T1, Exercice 1, p.18
+---
+
+:::enonce
+Dans chacun des cas suivants, justifier que la fonction $f$ est continue au réel $a$ indiqué :
+
+1. $f(x) = \dfrac{3}{2}x^2 - x + 1$ ; $a = -\sqrt{2}$
+2. $f(x) = \dfrac{x + 2}{x - 4}$ ; $a = 0{,}7$
+3. $f(x) = \dfrac{|x - 3|}{|x^2 - 1|}$ ; $a = 3$
+4. $f(x) = |x|^2 - 4|x| - \dfrac{2}{x}$ ; $a = 15$
+5. $f(x) = \dfrac{x}{2x - |x + 1|}$ ; $a = -1$
+6. $f(x) = \sqrt{4x^2 - 4x - 3}$ ; $a = 2$
+7. $f(x) = \sqrt{\dfrac{x^2 - 2x + 1}{x + 1}}$ ; $a = 3$
+:::
+
+:::solution
+1. $f$ est une fonction polynôme, donc $f$ est continue en $a = -\sqrt{2}$.
+
+2. $f(x) = \dfrac{x + 2}{x - 4}$, $D_f = \mathbb{R} \setminus \{4\}$.
+
+$f$ est rationnelle et $0{,}7 \in D_f$, donc $f$ est continue en $a = 0{,}7$.
+
+3. On pose $g : x \mapsto \dfrac{x - 3}{x^2 - 1}$.
+
+La fonction $g$ est rationnelle définie sur $\mathbb{R} \setminus \{-1, 1\}$, donc $g$ est continue en $3$. D'où $f = |g|$ est continue en $3$.
+
+4. $f_1 : x \mapsto -4|x|$ est continue sur $\mathbb{R}$, $f_2 : x \mapsto |x|^2$ est continue sur $\mathbb{R}$ et $f_3 : x \mapsto \dfrac{-2}{x}$ est continue sur $\mathbb{R}^*$.
+
+D'où $f = f_1 + f_2 + f_3$ est continue sur $\mathbb{R}^*$, d'où $f$ est continue en $a = 15$.
+
+5. $f_1 : x \mapsto x$ est continue sur $\mathbb{R}$.
+
+$x \mapsto |x + 1|$ est continue sur $\mathbb{R}$, donc $f_2 : x \mapsto 2x - |x + 1|$ est continue sur $\mathbb{R}$.
+
+De plus $f_2(-1) = -2 - 0 = -2 \neq 0$, d'où $f = \dfrac{f_1}{f_2}$ est continue en $a = -1$.
+
+6. $u : x \mapsto 4x^2 - 4x - 3$ est une fonction polynôme donc continue en $2$.
+
+$u(2) = 16 - 8 - 3 = 5 \geq 0$, d'où $f$ est continue en $a = 2$.
+
+7. On pose $u(x) = \dfrac{x^2 - 2x + 1}{x + 1} = \dfrac{(x - 1)^2}{x + 1}$.
+
+La fonction $u$ est rationnelle définie sur $\mathbb{R} \setminus \{-1\}$, donc continue en $3$.
+
+$u(3) = \dfrac{4}{4} = 1 \geq 0$, d'où $f$ est continue en $a = 3$.
+:::
+
+:::methode
+Pour justifier la continuité de $f$ en un point $a$ :
+
+1. Vérifier que $a$ appartient au domaine de définition de $f$
+2. Décomposer $f$ en opérations sur des fonctions continues connues (polynôme, rationnelle, $|\cdot|$, $\sqrt{\cdot}$)
+3. Appliquer les théorèmes de stabilité : somme, produit, quotient (dénominateur non nul), composition
+:::

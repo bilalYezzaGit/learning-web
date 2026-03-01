@@ -1,0 +1,36 @@
+kind: cours
+visible: false
+title: "Continuite - XY Plus (transcription complete)"
+description: "Transcription fidele du chapitre Continuite du livre XY Plus T1 3eme Math. Resume de cours et exercices corriges avec figures detaillees."
+trimester: T1
+order: 4
+estimatedMinutes: 170
+objectives:
+  - "Connaitre la definition graphique de la continuite et les fonctions usuelles continues"
+  - "Maitriser les operations et la continuite a droite et a gauche"
+  - "Savoir etudier la continuite sur un intervalle"
+  - "Appliquer le TVI et la methode dichotomique"
+  - "Determiner les images d intervalles par une fonction continue"
+
+sections:
+  - label: "Resume de cours"
+    steps:
+      - lesson-cont-xy-definition-operations
+      - lesson-cont-xy-continuite-intervalle
+      - lesson-cont-xy-image-tvi
+
+  - label: "Exercices - Continuite en un point et sur R"
+    steps:
+      - ex-cont-xy-continuite-point-compose
+      - ex-cont-xy-continuite-ir
+
+  - label: "Exercices - Fonctions par morceaux"
+    steps:
+      - ex-cont-xy-morceaux-trois-intervalles
+      - ex-cont-xy-partie-entiere-fractionnaire
+      - ex-cont-xy-morceaux-racine-images
+      - ex-cont-xy-absolue-partie-entiere
+
+  - label: "Exercices - Etude complete et TVI"
+    steps:
+      - ex-cont-xy-etude-cubique-tvi

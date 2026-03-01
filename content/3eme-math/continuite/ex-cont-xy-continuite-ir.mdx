@@ -1,0 +1,51 @@
+---
+type: exercise
+title: Justifier la continuité sur R
+difficulty: 2
+timeMinutes: 15
+category: application
+tags:
+  - continuite
+  - xy-plus
+  - operations
+  - racine
+  - valeur-absolue
+source: XY Plus T1, Exercice 4, p.18
+---
+
+:::enonce
+Justifier que $f$ est continue sur $\mathbb{R}$ dans chacun des cas suivants :
+
+1. $f(x) = -x^3 + x^2 - x + 4$
+2. $f(x) = \dfrac{x + 3}{2x^2 + 5}$
+3. $f(x) = \sqrt{x^2 + 3x + 5} + x^3 + 1$
+4. $f(x) = |x^2 - 3x + 2|$
+5. $f(x) = |x + 3| - |5 - x|$
+6. $f(x) = \dfrac{|x + 5|}{\sqrt{x^2 + 1}}$
+:::
+
+:::solution
+1. $f$ est une fonction polynôme donc continue sur $\mathbb{R}$.
+
+2. $f$ est rationnelle et définie sur $\mathbb{R}$ car $2x^2 + 5 > 0$ pour tout $x$ ($\Delta < 0$ et $a > 0$). Donc $f$ est continue sur $\mathbb{R}$.
+
+3. La fonction $f_1 : x \mapsto x^3 + 1$ est polynôme donc continue sur $\mathbb{R}$.
+
+La fonction $x \mapsto x^2 + 3x + 5$ est polynôme donc continue sur $\mathbb{R}$. De plus, pour tout $x$, $x^2 + 3x + 5 > 0$ ($\Delta = 9 - 20 = -11 < 0$ et $a > 0$), donc la fonction $f_2 : x \mapsto \sqrt{x^2 + 3x + 5}$ est continue sur $\mathbb{R}$.
+
+$f = f_1 + f_2$, somme de deux fonctions continues sur $\mathbb{R}$, donc $f$ est continue sur $\mathbb{R}$.
+
+4. La fonction $g : x \mapsto x^2 - 3x + 2$ est polynôme donc continue sur $\mathbb{R}$. La fonction $f = |g|$ est continue sur $\mathbb{R}$.
+
+5. La fonction $x \mapsto x + 3$ est affine donc continue sur $\mathbb{R}$, d'où la fonction $f_1 : x \mapsto |x + 3|$ est continue sur $\mathbb{R}$.
+
+La fonction $x \mapsto 5 - x$ est affine donc continue sur $\mathbb{R}$, d'où la fonction $f_2 : x \mapsto |5 - x|$ est continue sur $\mathbb{R}$.
+
+$f = f_1 - f_2$, différence de deux fonctions continues sur $\mathbb{R}$, donc $f$ est continue sur $\mathbb{R}$.
+
+6. La fonction $x \mapsto x + 5$ est affine, continue sur $\mathbb{R}$ d'où $f_1 : x \mapsto |x + 5|$ est continue sur $\mathbb{R}$.
+
+La fonction $x \mapsto x^2 + 1$ est polynôme, donc continue sur $\mathbb{R}$. De plus $x^2 + 1 > 0$ pour tout $x$, donc la fonction $f_2 : x \mapsto \sqrt{x^2 + 1}$ est continue sur $\mathbb{R}$.
+
+De plus $f_2(x) \neq 0$ pour tout $x$, d'où $f = \dfrac{f_1}{f_2}$ est continue sur $\mathbb{R}$.
+:::
