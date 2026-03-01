@@ -5,9 +5,9 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { PageNav } from '@/components/page-nav'
+import { PageNav } from '@/app/(parcours)/_components/page-nav'
 import { getSerie, getSerieActivities, getCours } from '@/lib/content-loader'
-import { SerieWelcome } from '@/components/patterns/serie-welcome'
+import { SerieWelcome } from '@/app/(parcours)/_components/serie-welcome'
 
 interface PageProps {
   params: Promise<{ parcours: string; moduleId: string; serieId: string }>
@@ -58,7 +58,7 @@ export default async function ModuleSerieDetailPage({ params }: PageProps) {
         description={serie.description}
         activityCount={activities.length}
         estimatedMinutes={serie.estimatedMinutes}
-        playUrl={`/${parcours}/apprendre/${moduleId}/serie/${serieId}/play`}
+        playUrl={`/${parcours}/apprendre/${moduleId}/serie/${serieId}/${activities[0]?.id}`}
       />
     </div>
   )

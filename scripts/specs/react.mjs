@@ -35,12 +35,12 @@ export const tests = [
       const pattern = /from\s+['"]firebase\//
       // Known legacy: login-form, signup-form, email-verification-banner use Firebase directly
       const knownLegacy = [
-        'login-form.tsx',
-        'signup-form.tsx',
-        'email-verification-banner.tsx',
+        '(auth)/_components/login-form.tsx',
+        '(auth)/_components/signup-form.tsx',
+        '(parcours)/_components/email-verification-banner.tsx',
       ]
       const componentFiles = tsFiles.filter(
-        (f) => f.includes('src/components/') && !knownLegacy.some((k) => f.endsWith(k))
+        (f) => (f.includes('src/components/') || f.includes('_components/')) && !knownLegacy.some((k) => f.endsWith(k))
       )
       const matches = grepFiles(componentFiles, pattern)
       return {

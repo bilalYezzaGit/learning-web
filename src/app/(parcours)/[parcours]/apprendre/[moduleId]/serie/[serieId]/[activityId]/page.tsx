@@ -1,7 +1,7 @@
 /**
- * Serie Activity Page
+ * Module Serie Activity Page
  *
- * Server Component that renders a single activity within the serie layout.
+ * Server Component that renders a single activity within the module serie layout.
  * Reads pre-compiled HTML/JSON from generated content.
  */
 
@@ -12,28 +12,28 @@ import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { PageNav } from '@/app/(parcours)/_components/page-nav'
-import { getSerie, getSerieActivities, findSerieQuizGroup, getCompiledQuiz, getAtomHtml } from '@/lib/content-loader'
+import { getSerie, getSerieActivities, getCours, findSerieQuizGroup, getCompiledQuiz, getAtomHtml } from '@/lib/content-loader'
 import { ContentRenderer } from '@/app/(parcours)/_components/content-renderer'
 import { getAtomTypeLabel } from '@/types/content'
 import { ActivityClient } from '@/app/(parcours)/_components/activity-client'
 
 interface PageProps {
-  params: Promise<{ parcours: string; id: string; activityId: string }>
+  params: Promise<{ parcours: string; moduleId: string; serieId: string; activityId: string }>
 }
 
-export default async function SerieActivityPage({ params }: PageProps) {
-  const { parcours, id, activityId } = await params
+export default async function ModuleSerieActivityPage({ params }: PageProps) {
+  const { parcours, moduleId, serieId, activityId } = await params
 
   let serie
   try {
-    serie = getSerie(id)
+    serie = getSerie(serieId)
   } catch {
     notFound()
   }
 
   let activities
   try {
-    activities = getSerieActivities(id)
+    activities = getSerieActivities(serieId)
   } catch {
     notFound()
   }
@@ -49,23 +49,31 @@ export default async function SerieActivityPage({ params }: PageProps) {
   const prevActivity = !isFirst ? activities[currentIndex - 1] : null
   const nextActivity = !isLast ? activities[currentIndex + 1] : null
 
+  const baseUrl = `/${parcours}/apprendre/${moduleId}/serie/${serieId}`
+
   // Render content
   let htmlContent: string | null = null
   let quizData = null
 
   if (currentActivity.type === 'qcm') {
-    const quizAtomIds = currentActivity.quizAtomIds ?? findSerieQuizGroup(id, activityId) ?? [activityId]
+    const quizAtomIds = currentActivity.quizAtomIds ?? findSerieQuizGroup(serieId, activityId) ?? [activityId]
     quizData = getCompiledQuiz(quizAtomIds)
   } else {
     htmlContent = getAtomHtml(activityId)
   }
+
+  let coursTitle = moduleId
+  try {
+    coursTitle = getCours(moduleId).title
+  } catch { /* fallback to moduleId */ }
 
   return (
     <div className="flex h-full flex-col">
       <PageNav
         items={[
           { label: 'Accueil', href: `/${parcours}` },
-          { label: serie.title, href: `/${parcours}/serie/${id}` },
+          { label: coursTitle, href: `/${parcours}/apprendre/${moduleId}` },
+          { label: serie.title, href: baseUrl },
         ]}
         current={currentActivity.title}
         compact
@@ -91,9 +99,9 @@ export default async function SerieActivityPage({ params }: PageProps) {
             activityId={activityId}
             activityType={currentActivity.type}
             contextType="serie"
-            contextId={id}
+            contextId={serieId}
             quizData={quizData}
-            exitUrl={`/${parcours}/serie/${id}`}
+            exitUrl={baseUrl}
           >
             {htmlContent && <ContentRenderer html={htmlContent} />}
           </ActivityClient>
@@ -104,8 +112,8 @@ export default async function SerieActivityPage({ params }: PageProps) {
       <footer className="flex items-center justify-between border-t px-4 py-3 lg:px-6">
         {prevActivity ? (
           <Button variant="outline" asChild>
-            <Link href={`/${parcours}/serie/${id}/${prevActivity.id}`}>
-              <ArrowLeft className="mr-2 h-4 w-4" />
+            <Link href={`${baseUrl}/${prevActivity.id}`}>
+              <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" />
               Precedent
             </Link>
           </Button>
@@ -115,16 +123,16 @@ export default async function SerieActivityPage({ params }: PageProps) {
 
         {isLast ? (
           <Button asChild>
-            <Link href={`/${parcours}/serie/${id}/result`}>
+            <Link href={`${baseUrl}/result`}>
               Terminer
-              <CheckCircle className="ml-2 h-4 w-4" />
+              <CheckCircle className="ml-2 h-4 w-4" aria-hidden="true" />
             </Link>
           </Button>
         ) : nextActivity ? (
           <Button asChild>
-            <Link href={`/${parcours}/serie/${id}/${nextActivity.id}`}>
+            <Link href={`${baseUrl}/${nextActivity.id}`}>
               Suivant
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
             </Link>
           </Button>
         ) : null}

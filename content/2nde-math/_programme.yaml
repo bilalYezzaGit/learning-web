@@ -1,0 +1,8 @@
+label: "2nde annee - Math"
+levelSlug: 2nde
+sectionSlug: math
+order: 2
+color: "#8B5CF6"
+icon: calculate
+visible: true
+description: "Programme de mathematiques pour la 2nde annee"

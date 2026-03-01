@@ -37,7 +37,7 @@ export const tests = [
     id: 'A11-003',
     name: 'main-content target in parcours shell',
     fn: () => {
-      const shell = readFile('src/components/parcours-shell.tsx')
+      const shell = readFile('src/app/(parcours)/_components/parcours-shell.tsx')
       const hasTarget = shell.includes('id="main-content"')
       return {
         pass: hasTarget,
@@ -86,7 +86,7 @@ export const tests = [
     id: 'A11-006',
     name: 'Form inputs have labels',
     fn: () => {
-      const files = ['src/components/login-form.tsx', 'src/components/signup-form.tsx']
+      const files = ['src/app/(auth)/_components/login-form.tsx', 'src/app/(auth)/_components/signup-form.tsx']
       const issues = []
       for (const path of files) {
         const content = readFile(path)
@@ -106,7 +106,7 @@ export const tests = [
     id: 'A11-007',
     name: 'Error alerts use role="alert"',
     fn: () => {
-      const files = ['src/components/login-form.tsx', 'src/components/signup-form.tsx']
+      const files = ['src/app/(auth)/_components/login-form.tsx', 'src/app/(auth)/_components/signup-form.tsx']
       const issues = []
       for (const path of files) {
         const content = readFile(path)
@@ -139,7 +139,7 @@ export const tests = [
     name: 'Decorative icons have aria-hidden',
     fn: () => {
       const filesToCheck = [
-        'src/components/parcours-shell.tsx',
+        'src/app/(parcours)/_components/parcours-shell.tsx',
       ]
       const issues = []
       for (const path of filesToCheck) {

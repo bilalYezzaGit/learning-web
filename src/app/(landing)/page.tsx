@@ -20,7 +20,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { LandingHeader } from '@/components/landing-header'
+import { LandingHeader } from '@/app/(landing)/_components/landing-header'
 import { getVisibleParcours, DEFAULT_PARCOURS_SLUG } from '@/lib/parcours'
 
 const MATH_FORMULAS = [

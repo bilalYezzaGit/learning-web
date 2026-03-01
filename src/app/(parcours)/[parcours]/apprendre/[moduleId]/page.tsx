@@ -8,12 +8,13 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { PageNav } from '@/components/page-nav'
+import { PageNav } from '@/app/(parcours)/_components/page-nav'
 import {
   getCours,
   getCoursActivities,
   getAllProgrammes,
   getSerie,
+  getSerieActivities,
 } from '@/lib/content-loader'
 import { getParcoursConfig } from '@/lib/parcours'
 
@@ -98,6 +99,7 @@ export default async function ModuleDetailPage({ params }: PageProps) {
         description: diagnosticSerie.description,
         estimatedMinutes: diagnosticSerie.estimatedMinutes,
         questionCount: diagnosticSerie.totalActivities,
+        firstActivityId: getSerieActivities(diagnosticSerie.slug)[0]?.id ?? null,
       }
     : null
 

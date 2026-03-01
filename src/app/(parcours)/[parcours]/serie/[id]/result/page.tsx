@@ -6,9 +6,9 @@
 
 import { notFound } from 'next/navigation'
 
-import { PageNav } from '@/components/page-nav'
+import { PageNav } from '@/app/(parcours)/_components/page-nav'
 import { getCours, getSerie, getSerieActivities } from '@/lib/content-loader'
-import { SerieResult } from '@/components/patterns/serie-result'
+import { SerieResult } from '@/app/(parcours)/_components/serie-result'
 
 interface PageProps {
   params: Promise<{ parcours: string; id: string }>
@@ -44,7 +44,7 @@ export default async function SerieResultPage({ params }: PageProps) {
         serieTitle={serie.title}
         totalActivities={resolvedActivities.length}
         activityInfos={activityInfos}
-        playUrl={`/${parcours}/serie/${id}/play`}
+        playUrl={`/${parcours}/serie/${id}/${resolvedActivities[0]?.id}`}
         homeUrl={`/${parcours}`}
         homeLabel="Tableau de bord"
         isDiagnostic={isDiagnostic && !!diagnosticModuleId}

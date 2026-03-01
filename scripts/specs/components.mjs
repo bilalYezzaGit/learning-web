@@ -9,7 +9,7 @@ export const tests = [
     id: 'CMP-001',
     name: 'Content rendering pipeline',
     fn: () => {
-      const renderer = readFile('src/components/content/content-renderer.tsx')
+      const renderer = readFile('src/app/(parcours)/_components/content-renderer.tsx')
       const loader = readFile('src/lib/content-loader.ts')
       const checks = [
         ['ContentRenderer component', renderer.includes('ContentRenderer')],

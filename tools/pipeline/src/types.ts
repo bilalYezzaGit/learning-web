@@ -54,6 +54,7 @@ export interface RawProgramme {
   color: string
   icon: string
   visible: boolean
+  description?: string
   cours: string[]
   series: string[]
 }

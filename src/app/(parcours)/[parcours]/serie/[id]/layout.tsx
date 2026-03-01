@@ -8,7 +8,7 @@
 import { notFound } from 'next/navigation'
 
 import { getSerie, getSerieActivities } from '@/lib/content-loader'
-import { TimelineWrapper } from '@/components/timeline-wrapper'
+import { TimelineWrapper } from '@/app/(parcours)/_components/timeline-wrapper'
 
 interface LayoutProps {
   children: React.ReactNode

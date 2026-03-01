@@ -3,7 +3,7 @@
 import { PanelLeft } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { useTimeline } from '@/components/timeline-wrapper'
+import { useTimeline } from '@/app/(parcours)/_components/timeline-wrapper'
 
 export function TimelineToggle() {
   const timeline = useTimeline()

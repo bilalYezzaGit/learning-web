@@ -11,10 +11,10 @@ import { notFound } from 'next/navigation'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { PageNav } from '@/components/page-nav'
+import { PageNav } from '@/app/(parcours)/_components/page-nav'
 import { getCoursActivities, getCours, findQuizGroup, getCompiledQuiz, getAtomHtml } from '@/lib/content-loader'
-import { ContentRenderer } from '@/components/content/content-renderer'
-import { ActivityClient } from '@/components/patterns/activity-client'
+import { ContentRenderer } from '@/app/(parcours)/_components/content-renderer'
+import { ActivityClient } from '@/app/(parcours)/_components/activity-client'
 import { TimelineToggle } from './timeline-toggle'
 
 interface PageProps {

@@ -53,6 +53,7 @@ const programmeSchema = z.object({
   color: z.string().min(1),
   icon: z.string().min(1),
   visible: z.boolean().default(true),
+  description: z.string().optional(),
 })
 
 // ── Discovery ──

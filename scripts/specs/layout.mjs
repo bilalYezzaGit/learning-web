@@ -44,7 +44,7 @@ export const tests = [
     name: 'Parcours layout structure',
     fn: () => {
       const layout = readFile('src/app/(parcours)/[parcours]/layout.tsx')
-      const shell = readFile('src/components/parcours-shell.tsx')
+      const shell = readFile('src/app/(parcours)/_components/parcours-shell.tsx')
       const checks = [
         ['ParcoursShell', layout.includes('ParcoursShell')],
         ['id="main-content"', shell.includes('id="main-content"')],

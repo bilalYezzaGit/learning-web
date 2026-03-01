@@ -1,0 +1,8 @@
+label: "1ere annee - Tronc Commun"
+levelSlug: 1ere
+sectionSlug: tc
+order: 3
+color: "#F59E0B"
+icon: calculate
+visible: true
+description: "Programme de mathematiques pour la 1ere annee Tronc Commun"

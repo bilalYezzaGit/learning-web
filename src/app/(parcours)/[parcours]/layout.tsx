@@ -5,7 +5,7 @@
  * Reads programme modules from filesystem for the sidebar.
  */
 
-import { ParcoursShell, type ShellModule } from '@/components/parcours-shell'
+import { ParcoursShell, type ShellModule } from '@/app/(parcours)/_components/parcours-shell'
 import { getParcoursConfig } from '@/lib/parcours'
 import { getAllProgrammes, getCours } from '@/lib/content-loader'
 

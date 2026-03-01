@@ -9,7 +9,7 @@ export const tests = [
     id: 'NAV-001',
     name: 'Header-only shell (no sidebar)',
     fn: () => {
-      const shell = readFile('src/components/parcours-shell.tsx')
+      const shell = readFile('src/app/(parcours)/_components/parcours-shell.tsx')
       const checks = [
         ['header element', shell.includes('<header')],
         ['NavUser import', shell.includes('NavUser')],
@@ -56,7 +56,7 @@ export const tests = [
     id: 'NAV-004',
     name: 'Shell contains NavUser',
     fn: () => {
-      const shell = readFile('src/components/parcours-shell.tsx')
+      const shell = readFile('src/app/(parcours)/_components/parcours-shell.tsx')
       const has = shell.includes('NavUser')
       return {
         pass: has,

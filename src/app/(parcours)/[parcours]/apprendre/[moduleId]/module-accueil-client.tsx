@@ -65,6 +65,7 @@ interface DiagnosticEntry {
   description: string
   estimatedMinutes: number
   questionCount: number
+  firstActivityId: string | null
 }
 
 interface ModuleAccueilClientProps {
@@ -112,7 +113,7 @@ export function ModuleAccueilClient({
 
       {/* Diagnostic CTA */}
       {diagnostic && (
-        <Link href={`/${parcours}/apprendre/${moduleId}/serie/${diagnostic.id}/play`}>
+        <Link href={diagnostic.firstActivityId ? `/${parcours}/apprendre/${moduleId}/serie/${diagnostic.id}/${diagnostic.firstActivityId}` : `/${parcours}/apprendre/${moduleId}/serie/${diagnostic.id}`}>
           <Card className="border-primary/20 bg-primary/5 transition-colors hover:bg-primary/10">
             <CardContent className="py-4">
               <div className="flex items-center gap-4">

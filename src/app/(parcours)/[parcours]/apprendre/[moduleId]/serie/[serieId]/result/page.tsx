@@ -6,9 +6,9 @@
 
 import { notFound } from 'next/navigation'
 
-import { PageNav } from '@/components/page-nav'
+import { PageNav } from '@/app/(parcours)/_components/page-nav'
 import { getCours, getSerie, getSerieActivities } from '@/lib/content-loader'
-import { SerieResult } from '@/components/patterns/serie-result'
+import { SerieResult } from '@/app/(parcours)/_components/serie-result'
 
 interface PageProps {
   params: Promise<{ parcours: string; moduleId: string; serieId: string }>
@@ -53,7 +53,7 @@ export default async function ModuleSerieResultPage({ params }: PageProps) {
         serieTitle={serie.title}
         totalActivities={resolvedActivities.length}
         activityInfos={activityInfos}
-        playUrl={`/${parcours}/apprendre/${moduleId}/serie/${serieId}/play`}
+        playUrl={`/${parcours}/apprendre/${moduleId}/serie/${serieId}/${resolvedActivities[0]?.id}`}
         homeUrl={`/${parcours}/apprendre/${moduleId}`}
         homeLabel="Retour au module"
         isDiagnostic={isDiagnostic && !!diagnosticModuleId}

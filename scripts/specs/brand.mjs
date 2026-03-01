@@ -21,7 +21,7 @@ export const tests = [
     id: 'BRD-002',
     name: 'Sidebar brand display',
     fn: () => {
-      const shell = readFile('src/components/parcours-shell.tsx')
+      const shell = readFile('src/app/(parcours)/_components/parcours-shell.tsx')
       const checks = [
         ['font-serif', shell.includes('font-serif')],
         ['Learning text', shell.includes('Learning')],

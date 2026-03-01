@@ -1,11 +1,13 @@
 /**
  * Parcours Configuration
  *
- * Single source of truth for all parcours (user journeys).
+ * Reads from generated parcours.json (produced by the pipeline).
  *
  * - `visible`: shown on landing page, signup, etc. (even if not yet active = "coming soon")
  * - `active`: routes work, content is navigable, users can select it
  */
+
+import parcoursList from '@/generated/parcours.json'
 
 export interface ParcoursConfig {
   slug: string
@@ -18,58 +20,7 @@ export interface ParcoursConfig {
   active: boolean
 }
 
-export const PARCOURS_LIST: ParcoursConfig[] = [
-  {
-    slug: '3eme-math',
-    label: '3eme Maths',
-    level: '3eme',
-    section: 'math',
-    description: 'Programme de mathematiques pour la 3eme annee',
-    order: 1,
-    visible: true,
-    active: true,
-  },
-  {
-    slug: '2nde-math',
-    label: '2nde Maths',
-    level: '2nde',
-    section: 'math',
-    description: 'Programme de mathematiques pour la 2nde annee',
-    order: 2,
-    visible: true,
-    active: false,
-  },
-  {
-    slug: '1ere-tc',
-    label: '1ere TC',
-    level: '1ere',
-    section: 'tc',
-    description: 'Programme de mathematiques pour la 1ere annee Tronc Commun',
-    order: 3,
-    visible: true,
-    active: false,
-  },
-  {
-    slug: '1ere-math',
-    label: '1ere Maths',
-    level: '1ere',
-    section: 'math',
-    description: 'Programme de mathematiques pour la 1ere annee section Maths',
-    order: 4,
-    visible: true,
-    active: false,
-  },
-  {
-    slug: 'term-math',
-    label: 'Terminale Maths',
-    level: 'term',
-    section: 'math',
-    description: 'Programme de mathematiques pour la Terminale',
-    order: 5,
-    visible: true,
-    active: false,
-  },
-]
+export const PARCOURS_LIST: ParcoursConfig[] = parcoursList as ParcoursConfig[]
 
 /**
  * Active parcours slugs — only these have working routes

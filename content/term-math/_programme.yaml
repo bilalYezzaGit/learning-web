@@ -1,0 +1,8 @@
+label: "Terminale - Math"
+levelSlug: term
+sectionSlug: math
+order: 5
+color: "#10B981"
+icon: calculate
+visible: true
+description: "Programme de mathematiques pour la Terminale"

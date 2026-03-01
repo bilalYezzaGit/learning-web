@@ -9,7 +9,7 @@ import type { Metadata } from 'next'
 import { BookOpen } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
-import { OnboardingBanner } from '@/components/onboarding-banner'
+import { OnboardingBanner } from '@/app/(parcours)/_components/onboarding-banner'
 import { getAllProgrammes, getCours, getCoursActivities, getSerie } from '@/lib/content-loader'
 import { getParcoursConfig } from '@/lib/parcours'
 

@@ -42,6 +42,20 @@ export async function writeOutput(input: WriteInput): Promise<number> {
   writeJson(path.join(GENERATED_DIR, 'programmes.json'), input.programmes)
   count++
 
+  // Parcours (lightweight routing/UI list)
+  const parcoursList = input.programmes.map(p => ({
+    slug: p.id,
+    label: p.label,
+    level: p.levelSlug,
+    section: p.sectionSlug,
+    description: p.description,
+    order: p.order,
+    visible: p.visible,
+    active: input.resolvedCours.some(c => c.programme === p.id && c.visible),
+  }))
+  writeJson(path.join(GENERATED_DIR, 'parcours.json'), parcoursList)
+  count++
+
   // Catalogues
   for (const cat of input.catalogues) {
     writeJson(path.join(cataloguesDir, `${cat.id}.json`), cat)
@@ -84,6 +98,7 @@ export async function writeOutput(input: WriteInput): Promise<number> {
       cours: input.resolvedCours.length,
       series: input.resolvedSeries.length,
       programmes: input.programmes.length,
+      parcours: parcoursList.length,
       catalogues: input.catalogues.length,
     },
   })
