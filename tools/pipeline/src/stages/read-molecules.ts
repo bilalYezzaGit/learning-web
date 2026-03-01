@@ -38,7 +38,7 @@ const seriesMoleculeSchema = z.object({
   estimatedMinutes: z.number().int().min(1),
   tags: z.array(z.string()).default([]),
   steps: z.array(stepSchema).min(2),
-  type: z.enum(['mono-module', 'cross-module', 'devoir-controle', 'devoir-synthese']).default('mono-module'),
+  type: z.enum(['mono-module', 'cross-module', 'devoir-controle', 'devoir-synthese', 'diagnostic']).default('mono-module'),
   trimestre: z.union([z.literal(1), z.literal(2), z.literal(3)]),
   modules: z.array(z.string()).default([]),
   priority: z.number().int().default(0),

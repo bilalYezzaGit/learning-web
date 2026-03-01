@@ -66,6 +66,7 @@ function getTypeLabel(type: SeriesType): string {
     case 'cross-module': return 'Multi-module'
     case 'devoir-controle': return 'Devoir de contrôle'
     case 'devoir-synthese': return 'Devoir de synthèse'
+    case 'diagnostic': return 'Diagnostic'
   }
 }
 

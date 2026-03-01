@@ -5,6 +5,7 @@
  *
  * Interactive player for going through serie activities.
  * Receives pre-compiled content from the Server Component page.
+ * Used in both /reviser and /apprendre module contexts.
  */
 
 import * as React from 'react'
@@ -36,10 +37,10 @@ interface SeriePlayerProps {
   serieSlug: string
   serieTitle: string
   activities: CompiledActivity[]
-  parcours: string
+  baseUrl: string
 }
 
-export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: SeriePlayerProps) {
+export function SeriePlayer({ serieSlug, serieTitle, activities, baseUrl }: SeriePlayerProps) {
   const router = useRouter()
   const { userId } = useAuth()
   const { completeExercise, completeQCM, isCompleted, getProgress } = useProgress(userId ?? undefined)
@@ -75,7 +76,7 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
         <div className="text-center text-muted-foreground">
           <p className="text-lg font-medium">Activité non trouvée</p>
           <Button className="mt-4" asChild>
-            <Link href={`/${parcours}/reviser/serie/${serieSlug}`}>Retour</Link>
+            <Link href={baseUrl}>Retour</Link>
           </Button>
         </div>
       </div>
@@ -97,7 +98,7 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
 
   const handleFinish = () => {
     try { localStorage.removeItem(`serie-play-${serieSlug}`) } catch { /* ok */ }
-    router.push(`/${parcours}/reviser/serie/${serieSlug}/result`)
+    router.push(`${baseUrl}/result`)
   }
 
   const handleExerciseComplete = async () => {
@@ -153,7 +154,7 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
       <div className="flex h-[calc(100svh-3.5rem)] flex-col">
         <header className="flex items-center gap-4 border-b px-4 py-3">
           <Button variant="ghost" size="icon" asChild>
-            <Link href={`/${parcours}/reviser/serie/${serieSlug}`}>
+            <Link href={baseUrl}>
               <X className="h-5 w-5" aria-hidden="true" />
               <span className="sr-only">Quitter</span>
             </Link>
@@ -181,7 +182,7 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
             <QCMPlayer
               qcm={currentActivity.quiz}
               onComplete={handleQCMComplete}
-              onExit={() => router.push(`/${parcours}/reviser/serie/${serieSlug}`)}
+              onExit={() => router.push(baseUrl)}
               showExit={false}
             />
           </div>
@@ -195,7 +196,7 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, parcours }: Ser
     <div className="flex h-[calc(100svh-3.5rem)] flex-col">
       <header className="flex items-center gap-4 border-b px-4 py-3">
         <Button variant="ghost" size="icon" asChild>
-          <Link href={`/${parcours}/reviser/serie/${serieSlug}`}>
+          <Link href={baseUrl}>
             <X className="h-5 w-5" aria-hidden="true" />
             <span className="sr-only">Quitter</span>
           </Link>

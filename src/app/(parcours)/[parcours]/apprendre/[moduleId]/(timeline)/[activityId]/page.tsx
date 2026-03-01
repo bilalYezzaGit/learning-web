@@ -89,7 +89,7 @@ export default async function ActivityPage({ params }: PageProps) {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink href={`/${parcours}/apprendre`}>Apprendre</BreadcrumbLink>
+              <BreadcrumbLink href={`/${parcours}`}>Accueil</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>

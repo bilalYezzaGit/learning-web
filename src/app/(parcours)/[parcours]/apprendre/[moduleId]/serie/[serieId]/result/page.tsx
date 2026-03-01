@@ -1,7 +1,7 @@
 /**
- * Serie Result Page
+ * Module Serie Result Page
  *
- * Shows completion summary after finishing a serie.
+ * Shows completion summary after finishing a serie within the module context.
  * For diagnostic series, shows orientation based on score.
  */
 
@@ -16,20 +16,20 @@ import { ResultDetails } from '@/components/patterns/result-details'
 import { DiagnosticOrientation } from '@/components/patterns/diagnostic-orientation'
 
 interface PageProps {
-  params: Promise<{ parcours: string; id: string }>
+  params: Promise<{ parcours: string; moduleId: string; serieId: string }>
 }
 
-export default async function SerieResultPage({ params }: PageProps) {
-  const { parcours, id } = await params
+export default async function ModuleSerieResultPage({ params }: PageProps) {
+  const { parcours, moduleId, serieId } = await params
 
   let serie
   try {
-    serie = getSerie(id)
+    serie = getSerie(serieId)
   } catch {
     notFound()
   }
 
-  const resolvedActivities = getSerieActivities(id)
+  const resolvedActivities = getSerieActivities(serieId)
   const totalActivities = resolvedActivities.length
   const activityInfos = resolvedActivities.map((a) => ({
     id: a.id,
@@ -83,13 +83,13 @@ export default async function SerieResultPage({ params }: PageProps) {
         {/* Actions */}
         <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
           <Button variant="outline" asChild>
-            <Link href={`/${parcours}/reviser/serie/${id}/play`}>
+            <Link href={`/${parcours}/apprendre/${moduleId}/serie/${serieId}/play`}>
               <RotateCcw className="mr-2 h-4 w-4" aria-hidden="true" />
               Refaire le diagnostic
             </Link>
           </Button>
           <Button asChild>
-            <Link href={`/${parcours}/apprendre/${diagnosticModuleId}`}>
+            <Link href={`/${parcours}/apprendre/${moduleId}`}>
               <Home className="mr-2 h-4 w-4" aria-hidden="true" />
               Retour au module
             </Link>
@@ -99,7 +99,7 @@ export default async function SerieResultPage({ params }: PageProps) {
     )
   }
 
-  // Standard result page
+  // Standard result page (mono-module serie)
   return (
     <div className="mx-auto max-w-2xl px-4 lg:px-6">
       {/* Success Header */}
@@ -136,26 +136,16 @@ export default async function SerieResultPage({ params }: PageProps) {
       {/* Actions */}
       <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
         <Button variant="outline" asChild>
-          <Link href={`/${parcours}/reviser/serie/${id}/play`}>
+          <Link href={`/${parcours}/apprendre/${moduleId}/serie/${serieId}/play`}>
             <RotateCcw className="mr-2 h-4 w-4" aria-hidden="true" />
             Refaire la série
           </Link>
         </Button>
         <Button asChild>
-          <Link href={`/${parcours}/reviser`}>
+          <Link href={`/${parcours}/apprendre/${moduleId}`}>
             <Home className="mr-2 h-4 w-4" aria-hidden="true" />
-            Autres séries
+            Retour au module
           </Link>
-        </Button>
-      </div>
-
-      {/* Guest CTA */}
-      <div className="mt-8 rounded-lg border bg-muted/30 p-4 text-center">
-        <p className="text-sm text-muted-foreground">
-          Connecte-toi pour sauvegarder ta progression et suivre tes statistiques.
-        </p>
-        <Button variant="link" className="mt-1" asChild>
-          <Link href="/login">Se connecter</Link>
         </Button>
       </div>
     </div>

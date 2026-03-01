@@ -61,8 +61,8 @@ export default async function ReviserPage({ params }: PageProps) {
     ])
   )
 
-  // Build enriched catalog entries
-  const catalogEntries = seriesList.map((serie) => ({
+  // Build enriched catalog entries (exclude diagnostics — they appear on module pages)
+  const catalogEntries = seriesList.filter((serie) => serie.type !== 'diagnostic' && serie.type !== 'mono-module').map((serie) => ({
     id: serie.slug,
     title: serie.title,
     description: serie.description,

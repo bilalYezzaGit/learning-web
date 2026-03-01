@@ -1,8 +1,9 @@
 /**
- * Serie Player Page
+ * Module Serie Player Page
  *
  * Server Component that pre-resolves all activities and passes
  * pre-compiled content to the interactive client player.
+ * Module context: URLs point back to the module.
  */
 
 import { notFound } from 'next/navigation'
@@ -12,20 +13,20 @@ import type { CompiledQuiz } from '@/types/content'
 import { SeriePlayer } from '@/components/patterns/serie-player'
 
 interface PageProps {
-  params: Promise<{ parcours: string; id: string }>
+  params: Promise<{ parcours: string; moduleId: string; serieId: string }>
 }
 
-export default async function SeriePlayPage({ params }: PageProps) {
-  const { parcours, id } = await params
+export default async function ModuleSeriePlayPage({ params }: PageProps) {
+  const { parcours, moduleId, serieId } = await params
 
   let serie
   try {
-    serie = getSerie(id)
+    serie = getSerie(serieId)
   } catch {
     notFound()
   }
 
-  const activities = getSerieActivities(id)
+  const activities = getSerieActivities(serieId)
 
   // Pre-load all activity content
   const compiledActivities = activities.map((activity) => {
@@ -56,10 +57,10 @@ export default async function SeriePlayPage({ params }: PageProps) {
 
   return (
     <SeriePlayer
-      serieSlug={id}
+      serieSlug={serieId}
       serieTitle={serie.title}
       activities={compiledActivities}
-      baseUrl={`/${parcours}/reviser/serie/${id}`}
+      baseUrl={`/${parcours}/apprendre/${moduleId}/serie/${serieId}`}
     />
   )
 }

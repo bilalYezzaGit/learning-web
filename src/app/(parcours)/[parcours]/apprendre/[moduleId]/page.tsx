@@ -1,18 +1,13 @@
 /**
- * Module Detail Page
+ * Module Page
  *
- * Welcome screen for the module.
- * Timeline is in layout.tsx.
+ * Direct landing for a module: shows notions (sections) and series.
+ * No intermediate pages — sections link directly into the timeline.
  */
 
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { BookOpen, Play, Target } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -21,7 +16,15 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { getCours, getCoursActivities } from '@/lib/content-loader'
+import {
+  getCours,
+  getCoursActivities,
+  getAllProgrammes,
+  getSerie,
+} from '@/lib/content-loader'
+import { getParcoursConfig } from '@/lib/parcours'
+
+import { ModuleAccueilClient } from './module-accueil-client'
 
 interface PageProps {
   params: Promise<{ parcours: string; moduleId: string }>
@@ -51,20 +54,90 @@ export default async function ModuleDetailPage({ params }: PageProps) {
   }
 
   const activities = getCoursActivities(moduleId)
-  const firstActivityId = activities[0]?.id
-  const totalAtoms = cours.sections.reduce(
-    (sum, s) => sum + s.activities.length,
-    0
-  )
+
+  // Enriched sections with per-type counts
+  const sections = cours.sections.map((s, i) => {
+    const lessonCount = s.activities.filter((a) => a.type === 'lesson').length
+    const exerciseCount = s.activities.filter((a) => a.type === 'exercise').length
+    const qcmCount = s.activities.filter((a) => a.type === 'qcm').length
+
+    return {
+      id: s.id,
+      label: s.label,
+      order: i + 1,
+      lessonCount,
+      exerciseCount,
+      qcmCount,
+      firstActivityId: s.activities[0]?.id ?? null,
+      activityIds: s.activities.map((a) => a.id),
+    }
+  })
+
+  // Find programme for this parcours to access series
+  const parcoursConfig = getParcoursConfig(parcours)
+  const programme = (() => {
+    if (!parcoursConfig) return null
+    return getAllProgrammes().find(
+      (p) => p.levelSlug === parcoursConfig.level && p.sectionSlug === parcoursConfig.section
+    ) ?? null
+  })()
+
+  // All series for this module
+  const allModuleSeries = programme
+    ? programme.series
+        .map((slug) => {
+          try {
+            return getSerie(slug)
+          } catch {
+            return null
+          }
+        })
+        .filter((s) => s !== null)
+        .filter((s) => s.modules.includes(moduleId) && s.visible)
+    : []
+
+  // Extract diagnostic (if any) — separate from regular series
+  const diagnosticSerie = allModuleSeries.find((s) => s.type === 'diagnostic') ?? null
+  const diagnostic = diagnosticSerie
+    ? {
+        id: diagnosticSerie.slug,
+        title: diagnosticSerie.title,
+        description: diagnosticSerie.description,
+        estimatedMinutes: diagnosticSerie.estimatedMinutes,
+        questionCount: diagnosticSerie.totalActivities,
+      }
+    : null
+
+  // Regular series (exclude diagnostics)
+  const moduleSeries = allModuleSeries
+    .filter((s) => s.type !== 'diagnostic')
+    .map((s) => ({
+      id: s.slug,
+      title: s.title,
+      description: s.description,
+      difficulty: s.difficulty,
+      estimatedMinutes: s.estimatedMinutes,
+      activityCount: s.totalActivities,
+    }))
+
+  // Course info
+  const coursInfo = {
+    title: cours.title,
+    description: cours.description,
+    objectives: cours.objectives,
+    estimatedMinutes: cours.estimatedMinutes,
+  }
+
+  const totalActivities = activities.length
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex min-h-full flex-col">
       {/* Breadcrumb */}
       <div className="border-b px-4 py-3 lg:px-6">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink href={`/${parcours}/apprendre`}>Apprendre</BreadcrumbLink>
+              <BreadcrumbLink href={`/${parcours}`}>Accueil</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
@@ -74,58 +147,19 @@ export default async function ModuleDetailPage({ params }: PageProps) {
         </Breadcrumb>
       </div>
 
-      {/* Welcome content */}
-      <div className="flex flex-1 items-center justify-center p-4 lg:p-6">
-        <Card className="max-w-md text-center">
-          <CardContent className="py-12">
-            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-              <BookOpen className="h-8 w-8 text-primary" />
-            </div>
-            <h1 className="text-xl font-semibold">{cours.title}</h1>
-            {cours.description && (
-              <p className="mt-2 text-muted-foreground">{cours.description}</p>
-            )}
-
-            {/* Objectives */}
-            {cours.objectives && cours.objectives.length > 0 && (
-              <div className="mt-6 text-left">
-                <div className="mb-2 flex items-center gap-2 text-sm font-medium">
-                  <Target className="h-4 w-4" />
-                  Objectifs
-                </div>
-                <ul className="space-y-1 text-sm text-muted-foreground">
-                  {cours.objectives.map((obj, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="text-primary">•</span>
-                      {obj}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            <div className="mt-4 flex flex-wrap justify-center gap-2">
-              <Badge variant="secondary">
-                {cours.sections.length} sections
-              </Badge>
-              <Badge variant="secondary">
-                {totalAtoms} activités
-              </Badge>
-              {cours.estimatedMinutes && (
-                <Badge variant="outline">{cours.estimatedMinutes} min</Badge>
-              )}
-            </div>
-
-            {firstActivityId && (
-              <Button className="mt-6" size="lg" asChild>
-                <Link href={`/${parcours}/apprendre/${moduleId}/${firstActivityId}`}>
-                  <Play className="mr-2 h-4 w-4" />
-                  Commencer le module
-                </Link>
-              </Button>
-            )}
-          </CardContent>
-        </Card>
+      {/* Content */}
+      <div className="flex-1">
+        <div className="mx-auto max-w-2xl p-4 lg:p-6">
+          <ModuleAccueilClient
+            parcours={parcours}
+            moduleId={moduleId}
+            coursInfo={coursInfo}
+            sections={sections}
+            totalActivities={totalActivities}
+            moduleSeries={moduleSeries}
+            diagnostic={diagnostic}
+          />
+        </div>
       </div>
     </div>
   )

@@ -13,7 +13,7 @@
 export type AtomType = 'lesson' | 'exercise' | 'qcm'
 
 /** Series type */
-export type SeriesType = 'mono-module' | 'cross-module' | 'devoir-controle' | 'devoir-synthese'
+export type SeriesType = 'mono-module' | 'cross-module' | 'devoir-controle' | 'devoir-synthese' | 'diagnostic'
 
 /** Trimestre */
 export type Trimestre = 1 | 2 | 3

@@ -11,10 +11,9 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { ArrowRight, BookOpen, Check, ChevronRight, Play } from 'lucide-react'
+import { Check, ChevronRight, Play } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { Separator } from '@/components/ui/separator'
@@ -88,83 +87,8 @@ export function ApprendreClient({ parcours, trimesterGroups }: ApprendreClientPr
     return stats
   }, [trimesterGroups, progress])
 
-  // Find the current module (first incomplete)
-  const currentModuleId = React.useMemo(() => {
-    for (const group of trimesterGroups) {
-      for (const mod of group.modules) {
-        const stat = moduleStats.get(mod.id)
-        if (!stat || stat.status !== 'completed') return mod.id
-      }
-    }
-    return null
-  }, [trimesterGroups, moduleStats])
-
-  // Global stats
-  const globalStats = React.useMemo(() => {
-    let totalDone = 0
-    let totalActivities = 0
-    for (const stat of moduleStats.values()) {
-      totalDone += stat.done
-      totalActivities += stat.total
-    }
-    const percentage = totalActivities > 0 ? Math.round((totalDone / totalActivities) * 100) : 0
-    return { totalDone, totalActivities, percentage }
-  }, [moduleStats])
-
-  // Current module data for the "Reprendre" card (derived from memoized values)
-  let currentModule: (ModuleEntry & { stat: { done: number; total: number; percentage: number } }) | null = null
-  if (currentModuleId) {
-    for (const group of trimesterGroups) {
-      const mod = group.modules.find((m) => m.id === currentModuleId)
-      if (mod) {
-        const stat = moduleStats.get(mod.id)
-        if (stat) {
-          currentModule = { ...mod, stat }
-        }
-        break
-      }
-    }
-  }
-
-  const hasProgress = globalStats.totalDone > 0
-
   return (
     <div className="space-y-8">
-      {/* Stats Card — "Reprendre" */}
-      {hasProgress && currentModule && currentModule.stat && (
-        <Card className="border-primary/20 bg-primary/5">
-          <CardContent className="py-6">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary text-primary-foreground">
-                  <BookOpen className="h-7 w-7" aria-hidden="true" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Reprendre</p>
-                  <p className="text-lg font-semibold">{currentModule.title}</p>
-                  <div className="mt-1 flex items-center gap-3">
-                    <Progress
-                      value={currentModule.stat.percentage}
-                      className="h-1.5 w-32"
-                      aria-label={`Progression : ${currentModule.stat.percentage}%`}
-                    />
-                    <span className="tabular-nums text-sm text-muted-foreground">
-                      {currentModule.stat.done}/{currentModule.stat.total} activit&eacute;s &middot; {currentModule.stat.percentage}%
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <Button size="lg" asChild>
-                <Link href={`/${parcours}/apprendre/${currentModule.id}`}>
-                  Continuer
-                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                </Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
       {/* Trimester Groups */}
       {trimesterGroups.map((group) => {
         const completedCount = group.modules.filter(
@@ -195,7 +119,6 @@ export function ApprendreClient({ parcours, trimesterGroups }: ApprendreClientPr
               <CardContent className="p-0">
                 {group.modules.map((mod) => {
                   const stat = moduleStats.get(mod.id)
-                  const isCurrent = mod.id === currentModuleId
                   const status = stat?.status ?? 'not-started'
 
                   return (
@@ -206,7 +129,6 @@ export function ApprendreClient({ parcours, trimesterGroups }: ApprendreClientPr
                       done={stat?.done ?? 0}
                       total={stat?.total ?? 0}
                       percentage={stat?.percentage ?? 0}
-                      isCurrent={isCurrent}
                       parcours={parcours}
                     />
                   )
@@ -230,7 +152,6 @@ interface ModuleListItemProps {
   done: number
   total: number
   percentage: number
-  isCurrent: boolean
   parcours: string
 }
 
@@ -240,16 +161,13 @@ function ModuleListItem({
   done,
   total,
   percentage,
-  isCurrent,
   parcours,
 }: ModuleListItemProps) {
   return (
     <Link
       href={`/${parcours}/apprendre/${mod.id}`}
-      className={`flex items-center gap-4 border-b px-6 py-4 transition-colors last:border-b-0 hover:bg-muted/50 ${
-        isCurrent ? 'border-l-4 border-l-primary bg-primary/5' : ''
-      }`}
-      {...(isCurrent ? { 'aria-current': 'step' as const } : {})}
+      className="flex items-center gap-4 border-b px-6 py-4 transition-colors last:border-b-0 hover:bg-muted/50
+      "
     >
       {/* Left Icon */}
       <div
@@ -328,14 +246,7 @@ function ModuleListItem({
         )}
       </div>
 
-      {/* Right action */}
-      {isCurrent ? (
-        <Badge variant="default" className="shrink-0">
-          Continuer
-        </Badge>
-      ) : (
-        <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground" aria-hidden="true" />
-      )}
+      <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground" aria-hidden="true" />
     </Link>
   )
 }
