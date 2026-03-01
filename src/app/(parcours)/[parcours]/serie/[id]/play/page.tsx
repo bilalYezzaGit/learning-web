@@ -1,5 +1,5 @@
 /**
- * Module Serie Player Page
+ * Serie Player Page
  *
  * Pre-resolves all activities and passes pre-compiled content to the client player.
  */
@@ -11,28 +11,28 @@ import { compileSerieActivities } from '@/lib/content-helpers'
 import { SeriePlayer } from '@/components/patterns/serie-player'
 
 interface PageProps {
-  params: Promise<{ parcours: string; moduleId: string; serieId: string }>
+  params: Promise<{ parcours: string; id: string }>
 }
 
-export default async function ModuleSeriePlayPage({ params }: PageProps) {
-  const { parcours, moduleId, serieId } = await params
+export default async function SeriePlayPage({ params }: PageProps) {
+  const { parcours, id } = await params
 
   let serie
   try {
-    serie = getSerie(serieId)
+    serie = getSerie(id)
   } catch {
     notFound()
   }
 
-  const activities = getSerieActivities(serieId)
+  const activities = getSerieActivities(id)
   const compiledActivities = compileSerieActivities(activities)
 
   return (
     <SeriePlayer
-      serieSlug={serieId}
+      serieSlug={id}
       serieTitle={serie.title}
       activities={compiledActivities}
-      baseUrl={`/${parcours}/apprendre/${moduleId}/serie/${serieId}`}
+      baseUrl={`/${parcours}/serie/${id}`}
     />
   )
 }

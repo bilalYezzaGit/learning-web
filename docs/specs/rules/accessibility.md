@@ -9,7 +9,7 @@
 - A11-005 [auto] No main tag in layout files — prevents nested landmarks
 - A11-006 [auto] Form inputs have labels: htmlFor/id pairing or FieldLabel component
 - A11-007 [auto] Error alerts use role="alert" for screen reader announcement
-- A11-009 [auto] Mobile nav has aria-label="Navigation mobile"
+- A11-009 [auto] No mobile bottom nav (removed — navigation is header-only)
 - A11-010 [auto] Decorative icons have aria-hidden="true" (Lucide icons in interactive contexts)
 - A11-011 [manual] Password toggle buttons have aria-label and icons have aria-hidden
   > Read login-form.tsx and signup-form.tsx, verify toggle button accessibility

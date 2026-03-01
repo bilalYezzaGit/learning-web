@@ -14,7 +14,6 @@ import {
   RotateCcw,
   ChevronUp,
   Clock,
-  ArrowRight,
   Gauge,
   BookOpen,
   PenLine,
@@ -137,17 +136,6 @@ function getSectionProgress(
     progress.some((p) => p.activityId === a.id && p.isCompleted)
   ).length
   return { completed, total }
-}
-
-function findNextActivity(
-  activities: TimelineActivity[],
-  progress: ActivityProgress[]
-): string | undefined {
-  for (const activity of activities) {
-    const p = getActivityProgress(activity.id, progress)
-    if (!p?.isCompleted) return activity.id
-  }
-  return undefined
 }
 
 function groupActivitiesBySections(
@@ -470,11 +458,9 @@ function FlatActivityList({
 function TimelineHeader({
   data,
   progressPercent,
-  onContinue,
 }: {
   data: TimelineData
   progressPercent: number
-  onContinue: () => void
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const hasObjectives = data.objectives && data.objectives.length > 0
@@ -538,18 +524,6 @@ function TimelineHeader({
             {progressPercent}%
           </span>
         </div>
-
-        {/* Continue button always visible */}
-        {!allDone && (
-          <Button
-            size="sm"
-            className="w-full gap-2 text-xs"
-            onClick={onContinue}
-          >
-            Continuer
-            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-          </Button>
-        )}
 
         {/* Collapsible details */}
         <CollapsibleContent className="overflow-hidden transition-colors data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
@@ -663,11 +637,6 @@ export function CourseTimeline({
     return () => clearTimeout(timer)
   }, [currentActivityId])
 
-  const handleContinue = () => {
-    const nextId = findNextActivity(data.activities, progress)
-    if (nextId) onActivityClick(nextId)
-  }
-
   const handleActivityClick = (id: string) => {
     onActivityClick(id)
     setSheetOpen(false)
@@ -678,7 +647,6 @@ export function CourseTimeline({
       <TimelineHeader
         data={data}
         progressPercent={progressPercent}
-        onContinue={handleContinue}
       />
 
       <div className="mx-4 h-px bg-border/40" />

@@ -7,14 +7,27 @@
  * Maps resolved activities + user progress to TimelineData format.
  */
 
+import { createContext, useContext, useMemo, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { useMemo, useState } from 'react'
 
 import { CourseTimeline, type TimelineData } from '@/components/course-timeline'
-import { TimelineProvider } from '@/lib/context/timeline-context'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
 import type { ResolvedActivity } from '@/types/content'
+
+// ── Timeline context (inline, replaces timeline-context.tsx) ────────────────
+
+interface TimelineContextValue {
+  openTimeline: () => void
+}
+
+const TimelineContext = createContext<TimelineContextValue | null>(null)
+
+export function useTimeline() {
+  return useContext(TimelineContext)
+}
+
+// ── Component ───────────────────────────────────────────────────────────────
 
 interface TimelineWrapperProps {
   slug: string
@@ -22,17 +35,11 @@ interface TimelineWrapperProps {
   description: string
   estimatedMinutes: number
   activities: ResolvedActivity[]
-  /** Base URL for activity links (e.g. "/3eme-math/apprendre/continuite") */
   baseUrl: string
-  /** Module sections (undefined for series) */
   sections?: Array<{ id: string; label: string; order: number }>
-  /** Module objectives (undefined for series) */
   objectives?: string[]
-  /** Serie difficulty (undefined for modules) */
   difficulty?: number
-  /** Enable mobile sheet toggle via TimelineProvider (modules only) */
   enableMobileSheet?: boolean
-  /** When provided, children are rendered after the timeline (inside TimelineProvider if enabled) */
   children?: React.ReactNode
 }
 
@@ -55,7 +62,6 @@ export function TimelineWrapper({
   const { progress: userProgress } = useProgress(userId || '')
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  // Extract current activity ID from pathname by stripping the baseUrl prefix
   const currentActivityId = useMemo(() => {
     if (!pathname.startsWith(baseUrl)) return undefined
     const rest = pathname.slice(baseUrl.length).replace(/^\//, '')
@@ -79,7 +85,6 @@ export function TimelineWrapper({
     [slug, title, description, estimatedMinutes, activities, sections, objectives, difficulty]
   )
 
-  // Map user progress to timeline format
   const activityProgress = useMemo(() => {
     const result: Array<{
       activityId: string
@@ -120,10 +125,10 @@ export function TimelineWrapper({
 
   if (enableMobileSheet) {
     return (
-      <TimelineProvider onOpen={() => setMobileOpen(true)}>
+      <TimelineContext.Provider value={{ openTimeline: () => setMobileOpen(true) }}>
         {timeline}
         {children}
-      </TimelineProvider>
+      </TimelineContext.Provider>
     )
   }
 

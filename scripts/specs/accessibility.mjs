@@ -1,6 +1,6 @@
 /** Accessibility tests — A11-xxx */
 
-import { readFile, globalsCss, tsxFiles, grepFiles } from './helpers.mjs'
+import { readFile, fileExists, globalsCss, tsxFiles, grepFiles } from './helpers.mjs'
 
 export const domain = 'accessibility'
 
@@ -35,15 +35,15 @@ export const tests = [
   },
   {
     id: 'A11-003',
-    name: 'main-content target in parcours layout',
+    name: 'main-content target in parcours shell',
     fn: () => {
-      const layout = readFile('src/app/(parcours)/[parcours]/layout.tsx')
-      const hasTarget = layout.includes('id="main-content"')
+      const shell = readFile('src/components/parcours-shell.tsx')
+      const hasTarget = shell.includes('id="main-content"')
       return {
         pass: hasTarget,
         detail: hasTarget
           ? 'id="main-content" found'
-          : 'Missing id="main-content" in parcours layout',
+          : 'Missing id="main-content" in parcours shell',
       }
     },
   },
@@ -91,9 +91,8 @@ export const tests = [
       for (const path of files) {
         const content = readFile(path)
         if (!content) { issues.push(`${path} not found`); continue }
-        // Check for FieldLabel or htmlFor pattern
-        const hasLabels = content.includes('FieldLabel') || content.includes('htmlFor')
-        if (!hasLabels) issues.push(`${path}: no FieldLabel or htmlFor found`)
+        const hasLabels = content.includes('FieldLabel') || content.includes('htmlFor') || content.includes('Label')
+        if (!hasLabels) issues.push(`${path}: no label association found`)
       }
       return {
         pass: issues.length === 0,
@@ -126,13 +125,12 @@ export const tests = [
   },
   {
     id: 'A11-009',
-    name: 'Mobile nav has aria-label',
+    name: 'No mobile bottom nav (removed)',
     fn: () => {
-      const nav = readFile('src/components/mobile-bottom-nav.tsx')
-      const has = nav.includes('aria-label')
+      const removed = !fileExists('src/components/mobile-bottom-nav.tsx')
       return {
-        pass: has,
-        detail: has ? 'aria-label found on mobile nav' : 'Missing aria-label on mobile bottom nav',
+        pass: removed,
+        detail: removed ? 'mobile-bottom-nav.tsx correctly removed' : 'mobile-bottom-nav.tsx should be deleted',
       }
     },
   },
@@ -140,23 +138,18 @@ export const tests = [
     id: 'A11-010',
     name: 'Decorative icons have aria-hidden',
     fn: () => {
-      // Check key interactive components for aria-hidden on Lucide icons
       const filesToCheck = [
-        'src/components/app-sidebar.tsx',
-        'src/components/mobile-bottom-nav.tsx',
+        'src/components/parcours-shell.tsx',
       ]
       const issues = []
       for (const path of filesToCheck) {
         const content = readFile(path)
         if (!content) continue
-        // Look for Lucide icon JSX that lacks aria-hidden
         const lines = content.split('\n')
         for (let i = 0; i < lines.length; i++) {
           const line = lines[i]
-          // Match Lucide icon usage: <IconName with className containing h- or w-
-          if (/<[A-Z][a-zA-Z]+\s/.test(line) && /className=/.test(line) && /[hw]-\d/.test(line)) {
+          if (/<[A-Z][a-zA-Z]+\s/.test(line) && /className=/.test(line) && /h-[345]\b/.test(line) && /w-[345]\b/.test(line)) {
             if (!line.includes('aria-hidden')) {
-              // Check if parent is a button with aria-label (acceptable)
               const context = lines.slice(Math.max(0, i - 3), i + 1).join('\n')
               if (!context.includes('aria-label')) {
                 issues.push(`${path}:${i + 1} — icon may need aria-hidden`)

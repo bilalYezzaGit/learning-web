@@ -34,13 +34,3 @@ export function logError(error: unknown, context?: ErrorContext): void {
   console.error('[Learning Error]', JSON.stringify(entry))
 }
 
-export function logWarning(message: string, context?: ErrorContext): void {
-  const entry = {
-    level: 'warning' as const,
-    timestamp: new Date().toISOString(),
-    message,
-    ...context,
-  }
-
-  console.warn('[Learning Warning]', JSON.stringify(entry))
-}

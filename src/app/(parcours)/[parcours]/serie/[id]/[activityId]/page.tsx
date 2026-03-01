@@ -11,7 +11,8 @@ import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { getSerieActivities, findSerieQuizGroup, getCompiledQuiz, getAtomHtml } from '@/lib/content-loader'
+import { PageNav } from '@/components/page-nav'
+import { getSerie, getSerieActivities, findSerieQuizGroup, getCompiledQuiz, getAtomHtml } from '@/lib/content-loader'
 import { ContentRenderer } from '@/components/content/content-renderer'
 import { getAtomTypeLabel } from '@/types/content'
 import { ActivityClient } from '@/components/patterns/activity-client'
@@ -22,6 +23,13 @@ interface PageProps {
 
 export default async function SerieActivityPage({ params }: PageProps) {
   const { parcours, id, activityId } = await params
+
+  let serie
+  try {
+    serie = getSerie(id)
+  } catch {
+    notFound()
+  }
 
   let activities
   try {
@@ -54,8 +62,17 @@ export default async function SerieActivityPage({ params }: PageProps) {
 
   return (
     <div className="flex h-full flex-col">
-      {/* Activity Header */}
-      <div className="border-b px-4 py-3 lg:px-6">
+      <PageNav
+        items={[
+          { label: 'Accueil', href: `/${parcours}` },
+          { label: serie.title, href: `/${parcours}/serie/${id}` },
+        ]}
+        current={currentActivity.title}
+        compact
+      />
+
+      {/* Activity subheader */}
+      <div className="border-b px-4 py-2 lg:px-6">
         <div className="flex items-center gap-2">
           <Badge variant="outline" className="text-xs capitalize">
             {getAtomTypeLabel(currentActivity.type)}
@@ -76,7 +93,7 @@ export default async function SerieActivityPage({ params }: PageProps) {
             contextType="serie"
             contextId={id}
             quizData={quizData}
-            exitUrl={`/${parcours}/reviser/serie/${id}`}
+            exitUrl={`/${parcours}/serie/${id}`}
           >
             {htmlContent && <ContentRenderer html={htmlContent} />}
           </ActivityClient>
@@ -87,9 +104,9 @@ export default async function SerieActivityPage({ params }: PageProps) {
       <footer className="flex items-center justify-between border-t px-4 py-3 lg:px-6">
         {prevActivity ? (
           <Button variant="outline" asChild>
-            <Link href={`/${parcours}/reviser/serie/${id}/${prevActivity.id}`}>
+            <Link href={`/${parcours}/serie/${id}/${prevActivity.id}`}>
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Précédent
+              Precedent
             </Link>
           </Button>
         ) : (
@@ -98,14 +115,14 @@ export default async function SerieActivityPage({ params }: PageProps) {
 
         {isLast ? (
           <Button asChild>
-            <Link href={`/${parcours}/reviser/serie/${id}/result`}>
+            <Link href={`/${parcours}/serie/${id}/result`}>
               Terminer
               <CheckCircle className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         ) : nextActivity ? (
           <Button asChild>
-            <Link href={`/${parcours}/reviser/serie/${id}/${nextActivity.id}`}>
+            <Link href={`/${parcours}/serie/${id}/${nextActivity.id}`}>
               Suivant
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>

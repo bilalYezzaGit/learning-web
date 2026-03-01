@@ -35,7 +35,7 @@ export default async function SerieLayout({ children, params }: LayoutProps) {
         description={serie.description}
         estimatedMinutes={serie.estimatedMinutes}
         activities={activities}
-        baseUrl={`/${parcours}/reviser/serie/${id}`}
+        baseUrl={`/${parcours}/serie/${id}`}
         difficulty={serie.difficulty}
       />
       <div className="flex-1 overflow-auto">{children}</div>

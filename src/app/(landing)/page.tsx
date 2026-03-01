@@ -115,7 +115,7 @@ export default function LandingPage() {
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <Button size="lg" className="gap-2 px-6 text-base" asChild>
-              <Link href={`/${DEFAULT_PARCOURS_SLUG}/apprendre`}>
+              <Link href={`/${DEFAULT_PARCOURS_SLUG}`}>
                 {activeParcours ? `Explorer le parcours ${activeParcours.label}` : 'Explorer les cours'}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
@@ -193,7 +193,7 @@ export default function LandingPage() {
 
           {/* Active parcours — 1ère TC */}
           {activeParcours && (
-            <Link href={`/${activeParcours.slug}/apprendre`} className="group block">
+            <Link href={`/${activeParcours.slug}`} className="group block">
               <Card className="mx-auto mb-10 max-w-2xl cursor-pointer border-primary/30 bg-card shadow-sm transition-[box-shadow,border-color] duration-200 group-hover:shadow-lg group-hover:border-primary/50">
                 <CardHeader className="pb-3">
                   <div className="flex items-center gap-4">
@@ -319,7 +319,7 @@ export default function LandingPage() {
               className="relative gap-2 px-6 text-base"
               asChild
             >
-              <Link href={`/${DEFAULT_PARCOURS_SLUG}/apprendre`}>
+              <Link href={`/${DEFAULT_PARCOURS_SLUG}`}>
                 Commence le premier chapitre
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
@@ -355,11 +355,8 @@ export default function LandingPage() {
             <div className="space-y-3">
               <p className="text-sm font-semibold text-foreground">Navigation</p>
               <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-                <Link href={`/${DEFAULT_PARCOURS_SLUG}/apprendre`} className="transition-colors hover:text-foreground">
+                <Link href={`/${DEFAULT_PARCOURS_SLUG}`} className="transition-colors hover:text-foreground">
                   {activeParcours ? `Parcours ${activeParcours.label}` : 'Parcours'}
-                </Link>
-                <Link href={`/${DEFAULT_PARCOURS_SLUG}/reviser`} className="transition-colors hover:text-foreground">
-                  Series de revision
                 </Link>
                 <Link href="/signup" className="transition-colors hover:text-foreground">
                   Créer un compte

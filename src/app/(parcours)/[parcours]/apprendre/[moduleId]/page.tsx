@@ -8,14 +8,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
+import { PageNav } from '@/components/page-nav'
 import {
   getCours,
   getCoursActivities,
@@ -132,20 +125,10 @@ export default async function ModuleDetailPage({ params }: PageProps) {
 
   return (
     <div className="flex min-h-full flex-col">
-      {/* Breadcrumb */}
-      <div className="border-b px-4 py-3 lg:px-6">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href={`/${parcours}`}>Accueil</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>{cours.title}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </div>
+      <PageNav
+        items={[{ label: 'Accueil', href: `/${parcours}` }]}
+        current={cours.title}
+      />
 
       {/* Content */}
       <div className="flex-1">

@@ -51,7 +51,7 @@ export function LandingHeader() {
                 className="hidden sm:inline-flex"
                 asChild
               >
-                <Link href={`/${DEFAULT_PARCOURS_SLUG}/apprendre`}>Parcours 1ere TC</Link>
+                <Link href={`/${DEFAULT_PARCOURS_SLUG}`}>Parcours 1ere TC</Link>
               </Button>
               <Button variant="ghost" size="sm" asChild>
                 <Link href="/login">Se connecter</Link>

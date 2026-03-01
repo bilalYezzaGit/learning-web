@@ -37,8 +37,8 @@ export function OnboardingBanner() {
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium">Bienvenue sur Learning !</p>
           <p className="mt-0.5 text-xs text-muted-foreground">
-            Explorez vos cours dans &quot;Apprendre&quot; et testez-vous avec les séries dans &quot;Réviser&quot;.
-            Votre progression est sauvegardée automatiquement.
+            Explorez vos cours et testez-vous avec les series de revision depuis le tableau de bord.
+            Votre progression est sauvegardee automatiquement.
           </p>
         </div>
         <Button

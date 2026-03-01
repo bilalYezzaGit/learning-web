@@ -1,77 +1,68 @@
 /** Navigation tests — NAV-xxx */
 
-import { readFile } from './helpers.mjs'
+import { readFile, fileExists } from './helpers.mjs'
 
 export const domain = 'navigation'
 
 export const tests = [
   {
     id: 'NAV-001',
-    name: 'Sidebar structure',
+    name: 'Header-only shell (no sidebar)',
     fn: () => {
-      const sidebar = readFile('src/components/app-sidebar.tsx')
+      const shell = readFile('src/components/parcours-shell.tsx')
       const checks = [
-        ['variant="inset"', sidebar.includes('variant="inset"')],
-        ['collapsible="icon"', sidebar.includes('collapsible="icon"')],
-        ['SidebarHeader', sidebar.includes('SidebarHeader')],
-        ['SidebarContent', sidebar.includes('SidebarContent')],
-        ['SidebarFooter', sidebar.includes('SidebarFooter')],
+        ['header element', shell.includes('<header')],
+        ['NavUser import', shell.includes('NavUser')],
+        ['no aside', !shell.includes('<aside')],
+        ['no Sheet', !shell.includes('Sheet')],
       ]
       const failing = checks.filter(([, ok]) => !ok)
       return {
         pass: failing.length === 0,
         detail: failing.length === 0
-          ? 'All sidebar structural elements present'
-          : `Missing: ${failing.map(([name]) => name).join(', ')}`,
+          ? 'Header-only shell: header + NavUser, no sidebar'
+          : `Failing: ${failing.map(([name]) => name).join(', ')}`,
       }
     },
   },
   {
     id: 'NAV-002',
-    name: 'Mobile bottom nav structure',
+    name: 'No mobile bottom nav',
     fn: () => {
-      const nav = readFile('src/components/mobile-bottom-nav.tsx')
-      const checks = [
-        ['md:hidden', nav.includes('md:hidden')],
-        ['print:hidden', nav.includes('print:hidden')],
-        ['transition-colors', nav.includes('transition-colors')],
-        ['text-primary', nav.includes('text-primary')],
-        ['text-muted-foreground', nav.includes('text-muted-foreground')],
-      ]
-      const failing = checks.filter(([, ok]) => !ok)
+      const exists = fileExists('src/components/mobile-bottom-nav.tsx')
       return {
-        pass: failing.length === 0,
-        detail: failing.length === 0
-          ? 'All mobile nav requirements present'
-          : `Missing: ${failing.map(([name]) => name).join(', ')}`,
+        pass: !exists,
+        detail: exists
+          ? 'mobile-bottom-nav.tsx should be deleted'
+          : 'mobile-bottom-nav.tsx correctly removed',
       }
     },
   },
   {
     id: 'NAV-003',
-    name: 'Active link highlighting',
+    name: 'Module page has breadcrumbs',
     fn: () => {
-      const sidebar = readFile('src/components/app-sidebar.tsx')
-      const hasIsActive = sidebar.includes('isActive')
+      const page = readFile('src/app/(parcours)/[parcours]/apprendre/[moduleId]/page.tsx')
+      const hasPageNav = page.includes('PageNav')
       return {
-        pass: hasIsActive,
-        detail: hasIsActive
-          ? 'isActive prop used for route highlighting'
-          : 'Missing isActive prop in sidebar',
+        pass: hasPageNav,
+        detail: hasPageNav
+          ? 'Module page has PageNav breadcrumb navigation'
+          : 'Missing PageNav in module page',
       }
     },
   },
   {
     id: 'NAV-004',
-    name: 'Sidebar footer with NavUser',
+    name: 'Shell contains NavUser',
     fn: () => {
-      const sidebar = readFile('src/components/app-sidebar.tsx')
-      const has = sidebar.includes('NavUser')
+      const shell = readFile('src/components/parcours-shell.tsx')
+      const has = shell.includes('NavUser')
       return {
         pass: has,
         detail: has
-          ? 'NavUser present in footer'
-          : 'Missing NavUser in sidebar footer',
+          ? 'NavUser present in shell header'
+          : 'Missing NavUser in shell',
       }
     },
   },

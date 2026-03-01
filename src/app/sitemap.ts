@@ -30,21 +30,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  // Parcours-level pages (apprendre + reviser for each active parcours)
-  const parcoursPages: MetadataRoute.Sitemap = activeParcoursList.flatMap((p) => [
-    {
-      url: `${BASE_URL}/${p.slug}/apprendre`,
-      lastModified: now,
-      changeFrequency: 'weekly' as const,
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/${p.slug}/reviser`,
-      lastModified: now,
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    },
-  ])
+  // Parcours dashboard pages
+  const parcoursPages: MetadataRoute.Sitemap = activeParcoursList.map((p) => ({
+    url: `${BASE_URL}/${p.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  }))
 
   // Dynamic module pages
   const allCours = getAllCours()
@@ -61,7 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const allSeries = getAllSeries()
   const seriePages: MetadataRoute.Sitemap = activeParcoursList.flatMap((p) =>
     allSeries.map((serie) => ({
-      url: `${BASE_URL}/${p.slug}/reviser/serie/${serie.slug}`,
+      url: `${BASE_URL}/${p.slug}/serie/${serie.slug}`,
       lastModified: now,
       changeFrequency: 'monthly' as const,
       priority: 0.6,

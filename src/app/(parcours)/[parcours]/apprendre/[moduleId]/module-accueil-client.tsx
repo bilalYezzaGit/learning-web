@@ -5,7 +5,7 @@
  *
  * Two-section layout:
  * 1. Notions du chapitre — sections linking directly into timeline
- * 2. S'entrainer — series cards linking to /reviser/serie/{id}
+ * 2. S'entrainer — series cards linking to /serie/{id}
  */
 
 import * as React from 'react'

@@ -4,22 +4,14 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Eye, EyeOff } from 'lucide-react'
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-} from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { AuthFormCard } from '@/components/patterns/auth-form-card'
 import { useAuth } from '@/lib/context'
 import { getActiveParcours } from '@/lib/parcours'
-import { doc, setDoc } from 'firebase/firestore'
-import { getDbInstance } from '@/lib/firebase/client'
+import { saveUserParcours } from '@/lib/services/user-service'
 import { getFirebaseErrorMessage } from '@/lib/utils/firebase-errors'
 
 export function SignupForm({
@@ -50,7 +42,7 @@ export function SignupForm({
     }
 
     if (password.length < 8) {
-      setError('Le mot de passe doit contenir au moins 8 caractères')
+      setError('Le mot de passe doit contenir au moins 8 caracteres')
       return
     }
 
@@ -63,17 +55,7 @@ export function SignupForm({
 
     try {
       const user = await signUp(email, password)
-
-      const db = getDbInstance()
-      const userRef = doc(db, 'users', user.uid)
-      await setDoc(userRef, {
-        parcours: {
-          slug: selectedParcours,
-          selectedAt: new Date().toISOString(),
-        },
-        createdAt: new Date().toISOString(),
-      }, { merge: true })
-
+      await saveUserParcours(user.uid, selectedParcours)
       router.push(`/${selectedParcours}`)
     } catch (err) {
       setError(getFirebaseErrorMessage(err))
@@ -83,137 +65,109 @@ export function SignupForm({
   }
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card className="overflow-hidden p-0">
-        <CardContent className="grid p-0 md:grid-cols-2">
-          <form className="p-6 md:p-8" onSubmit={handleSubmit}>
-            <FieldGroup>
-              <div className="flex flex-col items-center gap-2 text-center">
-                <h1 className="text-2xl font-bold">Créer un compte</h1>
-                <p className="text-muted-foreground text-sm text-balance">
-                  Entrez vos informations pour créer votre compte
-                </p>
-              </div>
+    <AuthFormCard className={className} rightPanelSubtitle="Commencez votre apprentissage" {...props}>
+      <form className="p-6 md:p-8" onSubmit={handleSubmit}>
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col items-center gap-2 text-center">
+            <h1 className="text-2xl font-bold">Creer un compte</h1>
+            <p className="text-muted-foreground text-sm text-balance">
+              Entrez vos informations pour creer votre compte
+            </p>
+          </div>
 
-              {error && (
-                <div role="alert" className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
-                  {error}
-                </div>
-              )}
+          {error && (
+            <div role="alert" className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+              {error}
+            </div>
+          )}
 
-              <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="exemple@email.com"
+              autoComplete="email"
+              spellCheck={false}
+              required
+              disabled={isLoading}
+            />
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="password">Mot de passe</Label>
+              <div className="relative">
                 <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="exemple@email.com"
-                  autoComplete="email"
-                  spellCheck={false}
+                  id="password"
+                  name="password"
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="new-password"
                   required
                   disabled={isLoading}
+                  className="pr-10"
                 />
-              </Field>
-
-              <Field className="grid gap-4 sm:grid-cols-2">
-                <Field>
-                  <FieldLabel htmlFor="password">Mot de passe</FieldLabel>
-                  <div className="relative">
-                    <Input
-                      id="password"
-                      name="password"
-                      type={showPassword ? 'text' : 'password'}
-                      autoComplete="new-password"
-                      required
-                      disabled={isLoading}
-                      className="pr-10"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                      aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
-                    >
-                      {showPassword ? (
-                        <EyeOff className="h-4 w-4" aria-hidden="true" />
-                      ) : (
-                        <Eye className="h-4 w-4" aria-hidden="true" />
-                      )}
-                    </button>
-                  </div>
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="confirm-password">Confirmer</FieldLabel>
-                  <Input
-                    id="confirm-password"
-                    name="confirm-password"
-                    type={showPassword ? 'text' : 'password'}
-                    autoComplete="new-password"
-                    required
-                    disabled={isLoading}
-                  />
-                </Field>
-              </Field>
-              <FieldDescription className="text-xs">
-                Minimum 8 caractères
-              </FieldDescription>
-
-              <Field>
-                <FieldLabel>Parcours</FieldLabel>
-                <RadioGroup
-                  value={selectedParcours}
-                  onValueChange={setSelectedParcours}
-                  disabled={isLoading}
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  aria-label={showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
                 >
-                  {availableParcours.map((parcours) => (
-                    <div key={parcours.slug} className="flex min-h-11 items-center gap-2">
-                      <RadioGroupItem value={parcours.slug} id={`parcours-${parcours.slug}`} />
-                      <Label htmlFor={`parcours-${parcours.slug}`} className="flex-1 cursor-pointer font-normal">
-                        {parcours.label}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </Field>
-
-              <Field>
-                <Button type="submit" disabled={isLoading} className="w-full">
-                  {isLoading ? 'Cr\u00e9ation\u2026' : 'S\'inscrire'}
-                </Button>
-              </Field>
-
-              <FieldDescription className="text-center">
-                Déjà un compte ?{' '}
-                <Link href="/login" className="underline underline-offset-2 hover:text-primary">
-                  Se connecter
-                </Link>
-              </FieldDescription>
-            </FieldGroup>
-          </form>
-
-          <div className="bg-primary relative hidden md:block">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-primary-foreground text-center p-8">
-                <h2 className="text-3xl font-bold mb-4">Learning</h2>
-                <p className="text-lg opacity-90">
-                  Commencez votre apprentissage
-                </p>
+                  {showPassword ? (
+                    <EyeOff className="h-4 w-4" aria-hidden="true" />
+                  ) : (
+                    <Eye className="h-4 w-4" aria-hidden="true" />
+                  )}
+                </button>
               </div>
             </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="confirm-password">Confirmer</Label>
+              <Input
+                id="confirm-password"
+                name="confirm-password"
+                type={showPassword ? 'text' : 'password'}
+                autoComplete="new-password"
+                required
+                disabled={isLoading}
+              />
+            </div>
           </div>
-        </CardContent>
-      </Card>
+          <p className="text-xs text-muted-foreground -mt-4">
+            Minimum 8 caracteres
+          </p>
 
-      <FieldDescription className="px-6 text-center text-xs text-muted-foreground">
-        En continuant, vous acceptez nos{' '}
-        <Link href="/terms" className="underline hover:text-primary">
-          Conditions d&apos;utilisation
-        </Link>{' '}
-        et notre{' '}
-        <Link href="/privacy" className="underline hover:text-primary">
-          Politique de confidentialité
-        </Link>
-      </FieldDescription>
-    </div>
+          <div className="flex flex-col gap-2">
+            <Label>Parcours</Label>
+            <RadioGroup
+              value={selectedParcours}
+              onValueChange={setSelectedParcours}
+              disabled={isLoading}
+            >
+              {availableParcours.map((parcours) => (
+                <div key={parcours.slug} className="flex min-h-11 items-center gap-2">
+                  <RadioGroupItem value={parcours.slug} id={`parcours-${parcours.slug}`} />
+                  <Label htmlFor={`parcours-${parcours.slug}`} className="flex-1 cursor-pointer font-normal">
+                    {parcours.label}
+                  </Label>
+                </div>
+              ))}
+            </RadioGroup>
+          </div>
+
+          <Button type="submit" disabled={isLoading} className="w-full">
+            {isLoading ? 'Creation\u2026' : 'S\'inscrire'}
+          </Button>
+
+          <p className="text-center text-sm text-muted-foreground">
+            Deja un compte ?{' '}
+            <Link href="/login" className="underline underline-offset-2 hover:text-primary">
+              Se connecter
+            </Link>
+          </p>
+        </div>
+      </form>
+    </AuthFormCard>
   )
 }

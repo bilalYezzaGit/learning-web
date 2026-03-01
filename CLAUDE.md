@@ -7,7 +7,7 @@ npm run dev          # Dev server (localhost:3000)
 npm run build        # Build production
 npm run lint         # ESLint
 npm run type-check   # TypeScript strict
-npm run test:specs   # Spec tests (66 rules)
+npm run test:specs   # Spec tests (64 rules)
 ```
 
 ## Structure
@@ -19,7 +19,7 @@ src/
 │   ├── (main)/      # Routes principales
 │   └── layout.tsx   # Root layout
 ├── components/       # Design System (ui/, patterns/, sections/)
-├── lib/              # Core (firebase/, services/, stores/, hooks/, utils/)
+├── lib/              # Core (firebase/, services/, hooks/, utils/)
 ├── content/          # Extensions rendering (math, graph)
 └── types/            # TypeScript interfaces
 content/
@@ -34,7 +34,7 @@ content/
 | Framework | Next.js 16+ (App Router) |
 | Language | TypeScript strict |
 | Styling | Tailwind CSS + shadcn/ui |
-| State | Zustand |
+| State | useSyncExternalStore + Firestore listeners |
 | Backend | Firebase (Auth, Firestore, Functions) |
 | Math | KaTeX |
 | Charts | Recharts |

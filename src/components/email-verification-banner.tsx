@@ -2,10 +2,9 @@
 
 import * as React from 'react'
 import { Mail, X } from 'lucide-react'
-import { sendEmailVerification } from 'firebase/auth'
-
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/lib/context'
+import { sendVerificationEmail } from '@/lib/services/user-service'
 
 export function EmailVerificationBanner() {
   const { user, isAuthenticated } = useAuth()
@@ -20,7 +19,7 @@ export function EmailVerificationBanner() {
   const handleResend = async () => {
     setSending(true)
     try {
-      await sendEmailVerification(user)
+      await sendVerificationEmail(user)
       setSent(true)
     } catch {
       // Silently fail — Firebase may throttle

@@ -21,11 +21,11 @@ export const tests = [
     id: 'BRD-002',
     name: 'Sidebar brand display',
     fn: () => {
-      const sidebar = readFile('src/components/app-sidebar.tsx')
+      const shell = readFile('src/components/parcours-shell.tsx')
       const checks = [
-        ['font-serif', sidebar.includes('font-serif')],
-        ['Learning text', sidebar.includes('Learning')],
-        ['Badge', sidebar.includes('Badge')],
+        ['font-serif', shell.includes('font-serif')],
+        ['Learning text', shell.includes('Learning')],
+        ['Badge', shell.includes('Badge')],
       ]
       const failing = checks.filter(([, ok]) => !ok)
       return {

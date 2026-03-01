@@ -1,5 +1,5 @@
 /**
- * Module Serie Result Page
+ * Serie Result Page
  *
  * Shows completion summary. For diagnostic series, shows orientation.
  */
@@ -11,20 +11,20 @@ import { getCours, getSerie, getSerieActivities } from '@/lib/content-loader'
 import { SerieResult } from '@/components/patterns/serie-result'
 
 interface PageProps {
-  params: Promise<{ parcours: string; moduleId: string; serieId: string }>
+  params: Promise<{ parcours: string; id: string }>
 }
 
-export default async function ModuleSerieResultPage({ params }: PageProps) {
-  const { parcours, moduleId, serieId } = await params
+export default async function SerieResultPage({ params }: PageProps) {
+  const { parcours, id } = await params
 
   let serie
   try {
-    serie = getSerie(serieId)
+    serie = getSerie(id)
   } catch {
     notFound()
   }
 
-  const resolvedActivities = getSerieActivities(serieId)
+  const resolvedActivities = getSerieActivities(id)
   const activityInfos = resolvedActivities.map((a) => ({ id: a.id, title: a.title, type: a.type }))
   const isDiagnostic = serie.type === 'diagnostic'
 
@@ -34,28 +34,19 @@ export default async function ModuleSerieResultPage({ params }: PageProps) {
     try { return getCours(diagnosticModuleId).title } catch { return null }
   })()
 
-  let coursTitle = moduleId
-  try {
-    coursTitle = getCours(moduleId).title
-  } catch { /* fallback to moduleId */ }
-
   return (
     <div className="flex h-full flex-col">
       <PageNav
-        items={[
-          { label: 'Accueil', href: `/${parcours}` },
-          { label: coursTitle, href: `/${parcours}/apprendre/${moduleId}` },
-        ]}
+        items={[{ label: 'Accueil', href: `/${parcours}` }]}
         current="Resultat"
-        compact
       />
       <SerieResult
         serieTitle={serie.title}
         totalActivities={resolvedActivities.length}
         activityInfos={activityInfos}
-        playUrl={`/${parcours}/apprendre/${moduleId}/serie/${serieId}/play`}
-        homeUrl={`/${parcours}/apprendre/${moduleId}`}
-        homeLabel="Retour au module"
+        playUrl={`/${parcours}/serie/${id}/play`}
+        homeUrl={`/${parcours}`}
+        homeLabel="Tableau de bord"
         isDiagnostic={isDiagnostic && !!diagnosticModuleId}
         diagnosticProps={isDiagnostic && diagnosticModuleId ? {
           parcours,
@@ -63,6 +54,7 @@ export default async function ModuleSerieResultPage({ params }: PageProps) {
           moduleTitle: diagnosticModuleTitle ?? diagnosticModuleId,
           qcmActivityIds: resolvedActivities.filter((a) => a.type === 'qcm').map((a) => a.id),
         } : undefined}
+        showGuestCta
       />
     </div>
   )
