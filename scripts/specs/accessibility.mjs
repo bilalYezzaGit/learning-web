@@ -7,16 +7,15 @@ export const domain = 'accessibility'
 export const tests = [
   {
     id: 'A11-001',
-    name: 'html lang="fr" and suppressHydrationWarning',
+    name: 'html lang="fr"',
     fn: () => {
       const layout = readFile('src/app/layout.tsx')
       const hasLang = layout.includes('lang="fr"')
-      const hasSuppress = layout.includes('suppressHydrationWarning')
       return {
-        pass: hasLang && hasSuppress,
-        detail: hasLang && hasSuppress
-          ? 'Both attributes present'
-          : `Missing: ${[!hasLang && 'lang="fr"', !hasSuppress && 'suppressHydrationWarning'].filter(Boolean).join(', ')}`,
+        pass: hasLang,
+        detail: hasLang
+          ? 'lang="fr" present'
+          : 'Missing lang="fr"',
       }
     },
   },
@@ -122,21 +121,6 @@ export const tests = [
         detail: issues.length === 0
           ? 'role="alert" present in all auth forms'
           : issues.join('; '),
-      }
-    },
-  },
-  {
-    id: 'A11-008',
-    name: 'Theme provider system default',
-    fn: () => {
-      const layout = readFile('src/app/layout.tsx')
-      const hasSystem = layout.includes('defaultTheme="system"') || layout.includes("defaultTheme='system'")
-      const hasEnable = layout.includes('enableSystem')
-      return {
-        pass: hasSystem && hasEnable,
-        detail: hasSystem && hasEnable
-          ? 'ThemeProvider with system default'
-          : `Missing: ${[!hasSystem && 'defaultTheme="system"', !hasEnable && 'enableSystem'].filter(Boolean).join(', ')}`,
       }
     },
   },

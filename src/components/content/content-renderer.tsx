@@ -18,7 +18,7 @@ interface ContentRendererProps {
 export function ContentRenderer({ html, className }: ContentRendererProps) {
   return (
     <article
-      className={cn('prose prose-stone dark:prose-invert max-w-none', className)}
+      className={cn('prose prose-stone max-w-none', className)}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )

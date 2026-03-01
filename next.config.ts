@@ -52,7 +52,7 @@ const nextConfig: NextConfig = {
   // Strict mode for better React practices
   reactStrictMode: true,
   experimental: {
-    optimizePackageImports: ['lucide-react', 'recharts'],
+    optimizePackageImports: ['lucide-react'],
   },
   async headers() {
     return [

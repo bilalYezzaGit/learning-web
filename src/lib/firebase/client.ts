@@ -6,14 +6,13 @@
  *
  * Usage:
  * ```ts
- * import { auth, db, functions } from '@/lib/firebase/client'
+ * import { getAuthInstance, getDbInstance } from '@/lib/firebase/client'
  * ```
  */
 
 import { initializeApp, getApps, type FirebaseApp } from 'firebase/app'
 import { getAuth, type Auth } from 'firebase/auth'
 import { getFirestore, type Firestore } from 'firebase/firestore'
-import { getFunctions, type Functions } from 'firebase/functions'
 import { getAnalytics, isSupported, type Analytics } from 'firebase/analytics'
 
 import { getFirebaseConfig } from './config'
@@ -30,7 +29,6 @@ function getApp(): FirebaseApp {
 // Lazy-initialized instances
 let _auth: Auth | null = null
 let _db: Firestore | null = null
-let _functions: Functions | null = null
 let _analytics: Analytics | null = null
 
 /**
@@ -51,16 +49,6 @@ export function getDbInstance(): Firestore {
     _db = getFirestore(getApp())
   }
   return _db
-}
-
-/**
- * Cloud Functions instance (us-central1)
- */
-export function getFunctionsInstance(): Functions {
-  if (!_functions) {
-    _functions = getFunctions(getApp(), 'us-central1')
-  }
-  return _functions
 }
 
 /**

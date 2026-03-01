@@ -10,7 +10,7 @@ export default function TermsPage() {
   return (
     <div className="bg-muted flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
       <Card className="mx-auto w-full max-w-2xl">
-        <CardContent className="prose prose-stone dark:prose-invert max-w-none p-6 md:p-10">
+        <CardContent className="prose prose-stone max-w-none p-6 md:p-10">
           <h1>Conditions d&apos;utilisation</h1>
           <p className="text-muted-foreground">Derniere mise a jour : fevrier 2026</p>
 

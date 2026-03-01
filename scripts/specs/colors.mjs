@@ -34,31 +34,6 @@ export const tests = [
     },
   },
   {
-    id: 'COL-002',
-    name: 'Dark mode color variables',
-    fn: () => {
-      const required = [
-        ['--primary', 'oklch(0.68 0.11 35)'],
-        ['--background', 'oklch(0.17 0.015 50)'],
-        ['--ring', 'oklch(0.68 0.11 35)'],
-        ['--success', 'oklch(0.60 0.12 155)'],
-        ['--info', 'oklch(0.60 0.10 235)'],
-        ['--warning', 'oklch(0.72 0.12 80)'],
-        ['--destructive', 'oklch(0.704 0.191 22.216)'],
-        ['--sidebar', 'oklch('],
-      ]
-      const missing = required.filter(
-        ([key, val]) => !cssBlockContains(globalsCss, '.dark {', `${key}: ${val}`)
-      )
-      return {
-        pass: missing.length === 0,
-        detail: missing.length === 0
-          ? 'All 8 values present in .dark'
-          : `Missing: ${missing.map(([k]) => k).join(', ')}`,
-      }
-    },
-  },
-  {
     id: 'COL-003',
     name: 'No hardcoded Tailwind color classes',
     fn: () => {

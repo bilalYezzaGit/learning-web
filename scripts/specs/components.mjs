@@ -75,17 +75,16 @@ export const tests = [
     name: 'Providers nesting order',
     fn: () => {
       const layout = readFile('src/app/layout.tsx')
-      const themeIdx = layout.indexOf('ThemeProvider')
       const queryIdx = layout.indexOf('QueryProvider')
       const authIdx = layout.indexOf('AuthProvider')
-      const allPresent = themeIdx !== -1 && queryIdx !== -1 && authIdx !== -1
-      const correctOrder = themeIdx < queryIdx && queryIdx < authIdx
+      const allPresent = queryIdx !== -1 && authIdx !== -1
+      const correctOrder = queryIdx < authIdx
       return {
         pass: allPresent && correctOrder,
         detail: allPresent && correctOrder
-          ? 'ThemeProvider > QueryProvider > AuthProvider'
+          ? 'QueryProvider > AuthProvider'
           : !allPresent
-            ? `Missing providers: ${[themeIdx === -1 && 'ThemeProvider', queryIdx === -1 && 'QueryProvider', authIdx === -1 && 'AuthProvider'].filter(Boolean).join(', ')}`
+            ? `Missing providers: ${[queryIdx === -1 && 'QueryProvider', authIdx === -1 && 'AuthProvider'].filter(Boolean).join(', ')}`
             : 'Incorrect nesting order',
       }
     },

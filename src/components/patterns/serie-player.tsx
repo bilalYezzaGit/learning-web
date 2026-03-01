@@ -232,7 +232,7 @@ export function SeriePlayer({ serieSlug, serieTitle, activities, baseUrl }: Seri
           {/* Pre-compiled HTML content */}
           {currentActivity.htmlContent && (
             <article
-              className="prose prose-stone dark:prose-invert max-w-none"
+              className="prose prose-stone max-w-none"
               dangerouslySetInnerHTML={{ __html: currentActivity.htmlContent }}
             />
           )}

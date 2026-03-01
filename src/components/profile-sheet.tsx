@@ -15,13 +15,10 @@ import {
   CheckCircle,
   GraduationCap,
   LogOut,
-  Moon,
   Settings,
-  Sun,
   Trophy,
   User,
 } from 'lucide-react'
-import { useTheme } from 'next-themes'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -37,6 +34,7 @@ import {
 } from '@/components/ui/sheet'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useAuth } from '@/lib/context'
+import { logError } from '@/lib/services/error-logger'
 import { useProgress } from '@/lib/hooks/use-progress'
 import { useUserParcours, getActiveParcours } from '@/lib/parcours'
 
@@ -361,7 +359,6 @@ function ProfilTab({
 // =============================================================================
 
 function SettingsTab({ onClose }: { onClose: () => void }) {
-  const { theme, setTheme } = useTheme()
   const router = useRouter()
   const { parcours, parcoursConfig, setParcours, isLoading } = useUserParcours()
   const availableParcours = getActiveParcours()
@@ -374,7 +371,7 @@ function SettingsTab({ onClose }: { onClose: () => void }) {
       onClose()
       router.push(`/${slug}`)
     } catch (e) {
-      console.error('Failed to change parcours:', e)
+      logError(e, { component: 'SettingsTab', action: 'change-parcours' })
     } finally {
       setChangingParcours(false)
     }
@@ -382,38 +379,6 @@ function SettingsTab({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="space-y-4">
-      <Card>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-sm">Apparence</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium">Thème</p>
-              <p className="text-xs text-muted-foreground">Choisissez votre préférence</p>
-            </div>
-            <div className="flex gap-1.5">
-              <Button
-                variant={theme === 'light' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setTheme('light')}
-              >
-                <Sun className="mr-1.5 h-3.5 w-3.5" />
-                Clair
-              </Button>
-              <Button
-                variant={theme === 'dark' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setTheme('dark')}
-              >
-                <Moon className="mr-1.5 h-3.5 w-3.5" />
-                Sombre
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="text-sm">Parcours</CardTitle>

@@ -21,6 +21,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
+import { getDifficultyLabel } from '@/lib/utils/format'
 import type { SeriesType, Trimestre } from '@/types/content'
 
 /** Enriched serie metadata for the list */
@@ -41,15 +42,6 @@ interface SeriesCatalogEntry {
 // =============================================================================
 // Label helpers
 // =============================================================================
-
-function getDifficultyLabel(difficulty: number): string {
-  switch (difficulty) {
-    case 1: return 'Facile'
-    case 2: return 'Moyen'
-    case 3: return 'Difficile'
-    default: return 'Moyen'
-  }
-}
 
 function getDifficultyVariant(difficulty: number): 'default' | 'secondary' | 'destructive' {
   switch (difficulty) {

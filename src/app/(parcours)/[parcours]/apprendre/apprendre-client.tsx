@@ -19,6 +19,7 @@ import { Progress } from '@/components/ui/progress'
 import { Separator } from '@/components/ui/separator'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
+import { formatDuration } from '@/lib/utils/format'
 
 // =============================================================================
 // Types
@@ -44,18 +45,6 @@ interface TrimesterGroup {
 interface ApprendreClientProps {
   parcours: string
   trimesterGroups: TrimesterGroup[]
-}
-
-// =============================================================================
-// Helpers
-// =============================================================================
-
-function formatDuration(minutes: number): string {
-  if (minutes < 60) return `${minutes} min`
-  const hours = Math.floor(minutes / 60)
-  const remaining = minutes % 60
-  if (remaining === 0) return `${hours}h`
-  return `${hours}h${remaining.toString().padStart(2, '0')}`
 }
 
 type ModuleStatus = 'not-started' | 'in-progress' | 'completed'

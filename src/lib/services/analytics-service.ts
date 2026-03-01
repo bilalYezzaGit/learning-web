@@ -8,7 +8,6 @@
  * Events tracked:
  * - page_view (automatic via Firebase)
  * - serie_started: user starts a revision serie
- * - serie_completed: user finishes a serie
  * - qcm_completed: user finishes a QCM (with score)
  * - exercise_completed: user marks an exercise as done
  * - scan_uploaded: user uploads a photo for AI analysis
@@ -31,10 +30,6 @@ async function logEvent(eventName: string, params?: Record<string, unknown>) {
 
 export function trackSerieStarted(serieId: string) {
   logEvent('serie_started', { serie_id: serieId })
-}
-
-export function trackSerieCompleted(serieId: string, score?: number, total?: number) {
-  logEvent('serie_completed', { serie_id: serieId, score, total })
 }
 
 export function trackQcmCompleted(activityId: string, score: number, total: number) {

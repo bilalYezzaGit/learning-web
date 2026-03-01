@@ -39,6 +39,7 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
+import { formatDuration } from '@/lib/utils/format'
 import type { TimelineActivity } from '@/types/content'
 import type { AtomType } from '@/types/content'
 
@@ -119,13 +120,6 @@ const DIFFICULTY_LABELS: Record<number, string> = {
 // =============================================================================
 // Helpers
 // =============================================================================
-
-function formatDuration(minutes: number): string {
-  if (minutes < 60) return `${minutes} min`
-  const h = Math.floor(minutes / 60)
-  const m = minutes % 60
-  return m > 0 ? `${h}h${m.toString().padStart(2, '0')}` : `${h}h`
-}
 
 function getActivityProgress(
   activityId: string,
@@ -558,7 +552,7 @@ function TimelineHeader({
         )}
 
         {/* Collapsible details */}
-        <CollapsibleContent className="overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+        <CollapsibleContent className="overflow-hidden transition-colors data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
           <div className="flex flex-col gap-3 pt-1 pb-1">
             {data.description && (
               <p className="text-xs leading-relaxed text-muted-foreground">

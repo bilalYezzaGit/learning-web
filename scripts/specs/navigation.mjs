@@ -63,19 +63,15 @@ export const tests = [
   },
   {
     id: 'NAV-004',
-    name: 'Sidebar footer with theme toggle and NavUser',
+    name: 'Sidebar footer with NavUser',
     fn: () => {
       const sidebar = readFile('src/components/app-sidebar.tsx')
-      const checks = [
-        ['aria-label on toggle', sidebar.includes('aria-label')],
-        ['NavUser', sidebar.includes('NavUser')],
-      ]
-      const failing = checks.filter(([, ok]) => !ok)
+      const has = sidebar.includes('NavUser')
       return {
-        pass: failing.length === 0,
-        detail: failing.length === 0
-          ? 'Theme toggle and NavUser present in footer'
-          : `Missing: ${failing.map(([name]) => name).join(', ')}`,
+        pass: has,
+        detail: has
+          ? 'NavUser present in footer'
+          : 'Missing NavUser in sidebar footer',
       }
     },
   },

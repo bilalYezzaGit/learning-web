@@ -38,7 +38,7 @@ export function Math({ latex, block = false }: MathProps) {
 
     if (block) {
       return (
-        <div className="not-prose my-6 flex items-stretch overflow-hidden rounded-lg border border-stone-200/80 bg-gradient-to-r from-stone-50 to-white shadow-sm dark:border-stone-700/50 dark:from-stone-900/80 dark:to-stone-900/40">
+        <div className="not-prose my-6 flex items-stretch overflow-hidden rounded-lg border border-stone-200/80 bg-gradient-to-r from-stone-50 to-white shadow-sm">
           <div className="w-1 shrink-0 bg-primary/60" aria-hidden="true" />
           <div
             className="flex-1 overflow-x-auto px-6 py-5 text-center"
@@ -57,7 +57,7 @@ export function Math({ latex, block = false }: MathProps) {
   } catch {
     // Fallback for parse errors
     return (
-      <code className="rounded bg-red-100 px-1 font-mono text-sm text-red-700 dark:bg-red-900/30 dark:text-red-400">
+      <code className="rounded bg-red-100 px-1 font-mono text-sm text-red-700">
         {decoded}
       </code>
     )

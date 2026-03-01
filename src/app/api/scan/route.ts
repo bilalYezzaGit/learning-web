@@ -14,6 +14,7 @@ import { NextResponse } from 'next/server'
 import { headers } from 'next/headers'
 import Anthropic from '@anthropic-ai/sdk'
 import { getAdminAuth } from '@/lib/firebase/admin'
+import { logError } from '@/lib/services/error-logger'
 
 const anthropic = new Anthropic()
 
@@ -187,7 +188,7 @@ export async function POST(request: Request) {
       suggestions: result.suggestions ?? [],
     })
   } catch (e) {
-    console.error('Scan analysis error:', e)
+    logError(e, { component: 'api/scan', action: 'analyze' })
     const message = e instanceof Error ? e.message : 'Unknown error'
     return NextResponse.json({ error: message }, { status: 500 })
   }

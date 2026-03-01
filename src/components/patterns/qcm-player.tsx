@@ -198,7 +198,7 @@ export function QCMPlayer({
       {/* Question */}
       <div className="flex-1">
         <div
-          className="prose prose-sm dark:prose-invert max-w-none"
+          className="prose prose-sm max-w-none"
           dangerouslySetInnerHTML={{ __html: currentQuestion.enonce }}
         />
 
