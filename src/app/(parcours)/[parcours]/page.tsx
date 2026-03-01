@@ -98,7 +98,7 @@ export default async function ParcoursAccueilPage({ params }: PageProps) {
     : []
 
   return (
-    <div className="px-4 lg:px-6">
+    <div className="flex-1 overflow-auto px-4 py-4 lg:px-6 md:py-6">
       <OnboardingBanner />
 
       <div className="mb-8">

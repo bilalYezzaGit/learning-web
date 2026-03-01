@@ -31,7 +31,7 @@ export function ParcoursShell({ parcours, children }: ParcoursShellProps) {
   const base = `/${parcours}`
 
   return (
-    <div className="flex min-h-svh flex-col">
+    <div className="flex h-svh flex-col">
       <header className="flex h-(--header-height) shrink-0 items-center justify-between border-b px-4 lg:px-6">
         {/* Brand */}
         <Link href={base} className="flex items-center gap-2">
@@ -54,12 +54,8 @@ export function ParcoursShell({ parcours, children }: ParcoursShellProps) {
 
       <EmailVerificationBanner />
 
-      <div className="flex flex-1 min-h-0 flex-col overflow-auto">
-        <div id="main-content" className="@container/main flex flex-1 min-h-0 flex-col gap-2">
-          <div className="flex flex-1 min-h-0 flex-col gap-4 py-4 md:gap-6 md:py-6">
-            {children}
-          </div>
-        </div>
+      <div id="main-content" className="@container/main flex flex-1 min-h-0 flex-col">
+        {children}
       </div>
     </div>
   )

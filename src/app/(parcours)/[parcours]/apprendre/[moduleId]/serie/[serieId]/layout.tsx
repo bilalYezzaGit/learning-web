@@ -28,7 +28,7 @@ export default async function ModuleSerieLayout({ children, params }: LayoutProp
   const activities = getSerieActivities(serieId)
 
   return (
-    <div className="flex h-[calc(100svh-3.5rem)]">
+    <div className="flex flex-1 min-h-0">
       <TimelineWrapper
         slug={serie.slug}
         title={serie.title}
