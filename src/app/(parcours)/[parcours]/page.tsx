@@ -6,7 +6,7 @@
  */
 
 import type { Metadata } from 'next'
-import { BookOpen } from 'lucide-react'
+import { BookOpen, GraduationCap } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
 import { OnboardingBanner } from '@/app/(parcours)/_components/onboarding-banner'
@@ -97,17 +97,43 @@ export default async function ParcoursAccueilPage({ params }: PageProps) {
         }))
     : []
 
+  const totalModules = modules.length
+  const totalActivities = modules.reduce(
+    (sum, m) => sum + m.lessonCount + m.exerciseCount + m.qcmCount,
+    0
+  )
+
   return (
     <div className="flex-1 overflow-auto px-4 py-4 lg:px-6 md:py-6">
       <OnboardingBanner />
 
-      <div className="mb-8">
-        <h1 className="text-balance font-serif text-2xl font-semibold text-foreground">
-          {parcoursConfig?.label ?? 'Accueil'}
-        </h1>
-        <p className="mt-1 text-muted-foreground">
-          Choisissez un module pour commencer
-        </p>
+      {/* Hero section */}
+      <div className="mb-8 overflow-hidden rounded-xl border bg-gradient-to-br from-primary/5 via-card to-accent/5 p-6">
+        <div className="flex items-start gap-4">
+          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+            <GraduationCap className="h-7 w-7 text-primary" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <h1 className="text-balance font-serif text-2xl font-semibold text-foreground">
+              {parcoursConfig?.label ?? 'Accueil'}
+            </h1>
+            <p className="mt-1 text-muted-foreground">
+              Choisissez un module pour commencer
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3 text-sm text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1">
+                <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
+                {totalModules} modules
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1">
+                {totalActivities} activites
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1">
+                {trimesterGroups.length} trimestres
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
 
       {trimesterGroups.length === 0 ? (

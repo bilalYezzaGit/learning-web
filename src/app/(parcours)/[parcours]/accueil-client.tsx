@@ -4,15 +4,15 @@
  * Accueil Client Component
  *
  * Main landing page for a parcours: modules grouped by trimester + cross-module series.
+ * Redesigned with card grid layout and module image placeholders.
  */
 
 import Link from 'next/link'
-import { ChevronRight, FileText } from 'lucide-react'
+import { Clock, FileText, Layers } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
-import { ModuleListItem } from '@/app/(parcours)/_components/module-list-item'
+import { Progress } from '@/components/ui/progress'
+import { ModuleCard } from '@/app/(parcours)/_components/module-card'
 import { useAuth } from '@/lib/context'
 import { useProgress } from '@/lib/hooks/use-progress'
 import { useModuleProgress } from '@/lib/hooks/use-module-progress'
@@ -90,17 +90,10 @@ export function AccueilClient({ parcours, trimesterGroups, crossModuleSeries }: 
   const moduleStats = useModuleProgress(allModules, progress)
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       {/* Programme — modules grouped by trimester */}
       <section aria-labelledby="programme-heading">
-        <div className="mb-4 flex items-center gap-3">
-          <h2 id="programme-heading" className="font-serif text-xl font-semibold">
-            Programme
-          </h2>
-          <Separator className="flex-1" />
-        </div>
-
-        <div className="space-y-6">
+        <div className="space-y-8">
           {trimesterGroups.map((group) => {
             const completedCount = group.modules.filter(
               (m) => moduleStats.get(m.id)?.status === 'completed'
@@ -110,50 +103,59 @@ export function AccueilClient({ parcours, trimesterGroups, crossModuleSeries }: 
             const hasStarted = group.modules.some(
               (m) => moduleStats.get(m.id)?.status !== 'not-started'
             )
+            const groupPercentage = group.modules.length > 0
+              ? Math.round((completedCount / group.modules.length) * 100)
+              : 0
 
             return (
               <div key={group.key}>
-                {/* Trimester sub-header */}
-                <div className="mb-3 flex items-center gap-3">
-                  <h3 className="text-sm font-semibold text-muted-foreground">
-                    {group.label}
-                  </h3>
+                {/* Trimester header */}
+                <div className="mb-4 flex flex-wrap items-center gap-3">
+                  <div className="flex items-center gap-2">
+                    <Layers className="h-4 w-4 text-primary" aria-hidden="true" />
+                    <h3 className="font-serif text-lg font-semibold text-foreground">
+                      {group.label}
+                    </h3>
+                  </div>
                   <Badge variant={allCompleted ? 'default' : 'secondary'} className={allCompleted ? 'bg-success' : ''}>
                     {hasStarted ? `${completedCount}/${group.modules.length} modules` : `${group.modules.length} modules`}
                   </Badge>
-                  <span className="text-xs text-muted-foreground">~{formatDuration(totalMinutes)}</span>
+                  <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3" aria-hidden="true" />
+                    ~{formatDuration(totalMinutes)}
+                  </span>
+                  {/* Trimester progress */}
+                  {hasStarted && !allCompleted && (
+                    <div className="flex items-center gap-2">
+                      <Progress
+                        value={groupPercentage}
+                        className="h-1.5 w-20"
+                        aria-label={`Progression ${group.label} : ${groupPercentage}%`}
+                      />
+                      <span className="tabular-nums text-xs font-medium text-primary">
+                        {groupPercentage}%
+                      </span>
+                    </div>
+                  )}
                 </div>
 
-                {/* Module cards */}
-                <Card>
-                  <CardContent className="p-0">
-                    {group.modules.map((mod) => {
-                      const stat = moduleStats.get(mod.id)
-                      return (
-                        <ModuleListItem
-                          key={mod.id}
-                          module={mod}
-                          status={stat?.status ?? 'not-started'}
-                          done={stat?.done ?? 0}
-                          total={stat?.total ?? 0}
-                          percentage={stat?.percentage ?? 0}
-                          parcours={parcours}
-                          meta={
-                            <>
-                              <span>{mod.lessonCount} cours</span>
-                              <span>·</span>
-                              <span>{mod.exerciseCount} exercices</span>
-                              <span>·</span>
-                              <span>{mod.qcmCount} QCM</span>
-                              <span>·</span>
-                              <span>{formatDuration(mod.estimatedMinutes)}</span>
-                            </>
-                          }
-                        />
-                      )
-                    })}
-                  </CardContent>
-                </Card>
+                {/* Module cards grid */}
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {group.modules.map((mod) => {
+                    const stat = moduleStats.get(mod.id)
+                    return (
+                      <ModuleCard
+                        key={mod.id}
+                        module={mod}
+                        status={stat?.status ?? 'not-started'}
+                        done={stat?.done ?? 0}
+                        total={stat?.total ?? 0}
+                        percentage={stat?.percentage ?? 0}
+                        parcours={parcours}
+                      />
+                    )
+                  })}
+                </div>
               </div>
             )
           })}
@@ -163,48 +165,54 @@ export function AccueilClient({ parcours, trimesterGroups, crossModuleSeries }: 
       {/* Cross-module series */}
       {crossModuleSeries.length > 0 && (
         <section aria-labelledby="revisions-heading">
-          <div className="mb-4 flex items-center gap-3">
-            <h2 id="revisions-heading" className="font-serif text-xl font-semibold">
+          <div className="mb-4 flex items-center gap-2">
+            <FileText className="h-4 w-4 text-primary" aria-hidden="true" />
+            <h2 id="revisions-heading" className="font-serif text-lg font-semibold">
               Revisions transversales
             </h2>
-            <Separator className="flex-1" />
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {crossModuleSeries.map((serie) => (
-              <Link key={serie.id} href={`/${parcours}/serie/${serie.id}`}>
-                <Card className="h-full transition-colors hover:bg-muted/50">
-                  <CardContent className="py-4">
-                    <div className="flex items-start gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted">
-                        <FileText className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <p className="font-medium">{serie.title}</p>
-                          <Badge variant="secondary" className="text-xs">
-                            {getSerieTypeLabel(serie.type)}
-                          </Badge>
-                        </div>
-                        {serie.description && (
-                          <p className="mt-1 line-clamp-1 text-sm text-muted-foreground">
-                            {serie.description}
-                          </p>
-                        )}
-                        <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                          <span>{serie.activityCount} activites</span>
-                          <span>·</span>
-                          <span>{formatDuration(serie.estimatedMinutes)}</span>
-                          <span>·</span>
-                          <span>{getDifficultyLabel(serie.difficulty)}</span>
-                          <span>·</span>
-                          <span>T{serie.trimestre}</span>
-                        </div>
-                      </div>
-                      <ChevronRight className="mt-1 h-5 w-5 shrink-0 text-muted-foreground" aria-hidden="true" />
+              <Link
+                key={serie.id}
+                href={`/${parcours}/serie/${serie.id}`}
+                className="group flex flex-col overflow-hidden rounded-xl border bg-card shadow-sm transition-shadow hover:shadow-md focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+              >
+                {/* Colored top stripe */}
+                <div className="h-2 bg-gradient-to-r from-info/60 to-info/30" />
+
+                <div className="flex flex-1 flex-col p-4">
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-info/10">
+                      <FileText className="h-5 w-5 text-info" aria-hidden="true" />
                     </div>
-                  </CardContent>
-                </Card>
+                    <div className="min-w-0 flex-1">
+                      <p className="font-medium leading-snug group-hover:text-primary transition-colors">
+                        {serie.title}
+                      </p>
+                      <Badge variant="secondary" className="mt-1 text-xs">
+                        {getSerieTypeLabel(serie.type)}
+                      </Badge>
+                    </div>
+                  </div>
+
+                  {serie.description && (
+                    <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">
+                      {serie.description}
+                    </p>
+                  )}
+
+                  <div className="mt-auto flex flex-wrap items-center gap-2 pt-3 text-xs text-muted-foreground">
+                    <span>{serie.activityCount} activites</span>
+                    <span>·</span>
+                    <span>{formatDuration(serie.estimatedMinutes)}</span>
+                    <span>·</span>
+                    <span>{getDifficultyLabel(serie.difficulty)}</span>
+                    <span>·</span>
+                    <span>T{serie.trimestre}</span>
+                  </div>
+                </div>
               </Link>
             ))}
           </div>

@@ -1,37 +1,45 @@
 import { Skeleton } from '@/components/ui/skeleton'
-import { Card, CardContent } from '@/components/ui/card'
 
 export default function DashboardLoading() {
   return (
-    <div className="px-4 lg:px-6">
-      {/* Hero card skeleton */}
-      <Card className="mb-6">
-        <CardContent className="py-6">
-          <div className="flex items-center gap-4">
-            <Skeleton className="h-14 w-14 rounded-xl" />
-            <div className="flex-1 space-y-2">
-              <Skeleton className="h-4 w-20" />
-              <Skeleton className="h-6 w-48" />
-              <Skeleton className="h-4 w-32" />
+    <div className="px-4 py-4 lg:px-6 md:py-6">
+      {/* Hero skeleton */}
+      <div className="mb-8 rounded-xl border bg-gradient-to-br from-primary/5 via-card to-accent/5 p-6">
+        <div className="flex items-start gap-4">
+          <Skeleton className="h-14 w-14 shrink-0 rounded-xl" />
+          <div className="flex-1 space-y-2">
+            <Skeleton className="h-7 w-48" />
+            <Skeleton className="h-4 w-64" />
+            <div className="flex gap-3 pt-1">
+              <Skeleton className="h-7 w-24 rounded-full" />
+              <Skeleton className="h-7 w-24 rounded-full" />
+              <Skeleton className="h-7 w-24 rounded-full" />
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      {/* Quick actions skeleton */}
-      <div className="grid gap-4 sm:grid-cols-2">
-        {[1, 2].map((i) => (
-          <Card key={i}>
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3">
-                <Skeleton className="h-10 w-10 rounded-lg" />
-                <div className="space-y-2">
-                  <Skeleton className="h-5 w-24" />
-                  <Skeleton className="h-4 w-40" />
-                </div>
+      {/* Trimester header skeleton */}
+      <div className="mb-4 flex items-center gap-3">
+        <Skeleton className="h-5 w-32" />
+        <Skeleton className="h-5 w-20 rounded-full" />
+      </div>
+
+      {/* Module cards grid skeleton */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="overflow-hidden rounded-xl border bg-card shadow-sm">
+            <Skeleton className="h-32 w-full rounded-none" />
+            <div className="space-y-3 p-4">
+              <Skeleton className="h-5 w-3/4" />
+              <Skeleton className="h-4 w-full" />
+              <div className="flex gap-3">
+                <Skeleton className="h-3 w-16" />
+                <Skeleton className="h-3 w-20" />
+                <Skeleton className="h-3 w-14" />
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         ))}
       </div>
     </div>
