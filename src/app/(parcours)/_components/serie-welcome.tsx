@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { BookOpen, Play } from 'lucide-react'
+import { BookOpen, Play, Printer } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -10,6 +10,7 @@ interface SerieWelcomeProps {
   activityCount: number
   estimatedMinutes: number
   playUrl: string
+  serieSlug: string
 }
 
 export function SerieWelcome({
@@ -18,6 +19,7 @@ export function SerieWelcome({
   activityCount,
   estimatedMinutes,
   playUrl,
+  serieSlug,
 }: SerieWelcomeProps) {
   return (
     <div className="flex flex-1 items-center justify-center p-4 lg:p-6">
@@ -33,12 +35,20 @@ export function SerieWelcome({
           <p className="mt-4 text-sm text-muted-foreground">
             {activityCount} activites · {estimatedMinutes} min estimees
           </p>
-          <Button className="mt-6" size="lg" asChild>
-            <Link href={playUrl}>
-              <Play className="mr-2 h-4 w-4" />
-              Commencer la serie
-            </Link>
-          </Button>
+          <div className="mt-6 flex flex-col items-center gap-3">
+            <Button size="lg" asChild>
+              <Link href={playUrl}>
+                <Play className="mr-2 h-4 w-4" />
+                Commencer la serie
+              </Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link href={`/print/serie/${serieSlug}`}>
+                <Printer className="mr-2 h-3.5 w-3.5" />
+                Imprimer le livret
+              </Link>
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </div>

@@ -17,6 +17,7 @@ import {
   Dumbbell,
   FileText,
   Play,
+  Printer,
   Target,
   Zap,
 } from 'lucide-react'
@@ -102,12 +103,19 @@ export function ModuleAccueilClient({
         {coursInfo.description && (
           <p className="mt-1 text-muted-foreground">{coursInfo.description}</p>
         )}
-        <div className="mt-3 flex flex-wrap gap-2">
+        <div className="mt-3 flex flex-wrap items-center gap-2">
           <Badge variant="secondary">{sections.length} sections</Badge>
           <Badge variant="secondary">{totalActivities} activites</Badge>
           {coursInfo.estimatedMinutes > 0 && (
             <Badge variant="outline">{formatDuration(coursInfo.estimatedMinutes)}</Badge>
           )}
+          <Link
+            href={`/print/cours/${moduleId}`}
+            className="ml-auto flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          >
+            <Printer className="h-3.5 w-3.5" aria-hidden="true" />
+            Livret
+          </Link>
         </div>
       </div>
 

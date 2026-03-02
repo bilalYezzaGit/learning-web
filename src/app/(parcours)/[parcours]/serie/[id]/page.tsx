@@ -50,6 +50,7 @@ export default async function SerieDetailPage({ params }: PageProps) {
         activityCount={activities.length}
         estimatedMinutes={serie.estimatedMinutes}
         playUrl={`/${parcours}/serie/${id}/${activities[0]?.id}`}
+        serieSlug={id}
       />
     </div>
   )

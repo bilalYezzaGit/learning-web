@@ -1,0 +1,159 @@
+/**
+ * Print-specific styles for booklet generation.
+ *
+ * These styles optimize the layout for A4 paper printing,
+ * handling page breaks, margins, and print-only adjustments.
+ */
+
+/* ─── Screen: toolbar spacing ─── */
+@media screen {
+  .print-booklet {
+    padding-top: 4rem; /* Space for fixed toolbar */
+  }
+}
+
+/* ─── Print: page setup ─── */
+@media print {
+  @page {
+    size: A4;
+    margin: 18mm 15mm 20mm 15mm;
+  }
+
+  /* Reset everything for print */
+  .print-booklet {
+    padding-top: 0 !important;
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Cover page: always starts on a new page */
+  .print-cover {
+    page-break-after: always;
+    break-after: page;
+    min-height: 100vh;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Section headers: avoid orphans */
+  .print-section-header {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Atoms: avoid breaking inside */
+  .print-atom {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Exercise: try to keep together but allow break if too long */
+  .print-exercise {
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+
+  /* QCM: keep together */
+  .print-qcm {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Writing lines: visible in print */
+  .print-writing-lines {
+    min-height: 10em;
+  }
+
+  /* Lesson parts (aside blocks): print-friendly */
+  .print-atom aside.not-prose {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* KaTeX display math: simplified for print */
+  .print-atom .katex-display {
+    border: 1px solid #e5e5e5 !important;
+    background: #fafafa !important;
+    box-shadow: none !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Hide interactive elements */
+  .print-no-print,
+  .print-toolbar {
+    display: none !important;
+  }
+
+  /* Open all <details> in print */
+  .print-atom details {
+    display: none !important;
+  }
+
+  /* Footer page: starts on new page */
+  .print-booklet-footer {
+    page-break-before: always;
+    break-before: page;
+  }
+
+  /* Prose adjustments for print */
+  .print-atom .prose {
+    max-width: 100% !important;
+    font-size: 10.5pt !important;
+    line-height: 1.6 !important;
+  }
+
+  .print-atom .prose h3 {
+    font-size: 12pt !important;
+    margin-top: 1em !important;
+    margin-bottom: 0.5em !important;
+  }
+
+  /* Links: don't show URL in print for booklet (cleaner) */
+  .print-atom .prose a::after {
+    content: none !important;
+  }
+
+  /* Tables: print-friendly */
+  .print-atom .prose table {
+    box-shadow: none !important;
+    font-size: 9pt !important;
+  }
+
+  /* Preserve lesson part colors */
+  .print-atom aside {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* QR codes: always visible */
+  .print-atom [class*="qr"],
+  .print-cover [class*="qr"] {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+/* ─── Screen: preview styles ─── */
+@media screen {
+  .print-page-content {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  /* Simulate page breaks visually */
+  .print-cover {
+    border-bottom: 2px dashed #d6d3d1;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .print-booklet-footer {
+    border-top: 2px dashed #d6d3d1;
+    margin-top: 2rem;
+    padding-top: 2rem;
+  }
+}

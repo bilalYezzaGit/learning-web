@@ -59,6 +59,7 @@ export default async function ModuleSerieDetailPage({ params }: PageProps) {
         activityCount={activities.length}
         estimatedMinutes={serie.estimatedMinutes}
         playUrl={`/${parcours}/apprendre/${moduleId}/serie/${serieId}/${activities[0]?.id}`}
+        serieSlug={serieId}
       />
     </div>
   )
