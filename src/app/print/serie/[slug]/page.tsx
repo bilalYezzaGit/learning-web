@@ -23,6 +23,7 @@ import {
 import { generateQrSvg, buildAtomUrl, buildMoleculeUrl } from '@/lib/qr'
 import { PrintToolbar } from '@/app/print/_components/print-toolbar'
 import { PrintCover } from '@/app/print/_components/print-cover'
+import { PrintPageHeader } from '@/app/print/_components/print-page-header'
 import { PrintExercise, PrintLesson, PrintQcm } from '@/app/print/_components/print-atom'
 import { PrintFooter } from '@/app/print/_components/print-footer'
 
@@ -142,6 +143,7 @@ export default async function PrintSeriePage({ params }: PageProps) {
       />
 
       <div className="print-page-content">
+        <PrintPageHeader title={serie.title} kind="serie" />
         {renderedAtoms}
       </div>
 
