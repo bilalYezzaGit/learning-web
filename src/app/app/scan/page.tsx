@@ -1,36 +1,80 @@
 /**
  * Scan / Pair Page — scan a QR code or enter a booklet code.
  *
- * PR1: manual code entry only.
- * PR2: camera QR scanner + Firestore pairing.
+ * Features:
+ * - Camera QR scanning via BarcodeDetector API
+ * - Manual code entry
+ * - Firestore pairing for authenticated users
+ * - Booklet validation against content pipeline
  */
 
 'use client'
 
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
-import { QrCode, Keyboard, ArrowRight, AlertCircle } from 'lucide-react'
+import { QrCode, Keyboard, ArrowRight, AlertCircle, Loader2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { useAuth } from '@/lib/context'
+import { pairBooklet } from '@/lib/services/booklet-service'
+import { QrScanner } from '@/app/app/_components/qr-scanner'
 
 export default function ScanPage() {
   const router = useRouter()
+  const { userId } = useAuth()
   const [code, setCode] = React.useState('')
   const [error, setError] = React.useState<string | null>(null)
+  const [isPairing, setIsPairing] = React.useState(false)
   const [mode, setMode] = React.useState<'camera' | 'manual'>('manual')
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const trimmed = code.trim().toUpperCase()
+  const handlePairAndNavigate = React.useCallback(async (bookletCode: string) => {
+    const trimmed = bookletCode.trim().toUpperCase()
     if (!trimmed) {
       setError('Entrez un code')
       return
     }
-    // Navigate to the booklet — PR2 will validate against Firestore
-    router.push(`/app/mes-livrets/${trimmed}`)
+
+    setIsPairing(true)
+    setError(null)
+
+    try {
+      // For authenticated users, save pairing to Firestore
+      if (userId) {
+        const parts = trimmed.split('-')
+        const moduleSlug = parts[0]?.toLowerCase() ?? ''
+        const programmePrefix = parts[1]?.toLowerCase() ?? ''
+        // Reconstruct programmeId (e.g. "3M" -> "3eme-math")
+        const programmeId = programmePrefix.startsWith('3')
+          ? '3eme-math'
+          : programmePrefix.startsWith('2')
+            ? '2nde-math'
+            : '1ere-tc'
+
+        await pairBooklet(userId, {
+          code: trimmed,
+          moduleSlug,
+          programmeId,
+        })
+      }
+
+      router.push(`/app/mes-livrets/${trimmed}`)
+    } catch {
+      setError('Erreur lors de l\'association. Reessayez.')
+      setIsPairing(false)
+    }
+  }, [userId, router])
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    handlePairAndNavigate(code)
   }
+
+  const handleQrScan = React.useCallback((scannedCode: string) => {
+    setCode(scannedCode)
+    handlePairAndNavigate(scannedCode)
+  }, [handlePairAndNavigate])
 
   return (
     <div className="px-4 py-5">
@@ -62,22 +106,12 @@ export default function ScanPage() {
       </div>
 
       {mode === 'camera' ? (
-        /* Camera placeholder — PR2 */
         <Card>
-          <CardContent className="py-16 text-center">
-            <QrCode className="mx-auto mb-4 h-16 w-16 text-muted-foreground/30" aria-hidden="true" />
-            <p className="text-lg font-medium text-muted-foreground">
-              Scanner QR
-            </p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              La camera sera disponible dans la prochaine version.
-              <br />
-              Utilisez le mode &laquo; Code manuel &raquo; pour l&apos;instant.
-            </p>
+          <CardContent className="py-4">
+            <QrScanner onScan={handleQrScan} />
           </CardContent>
         </Card>
       ) : (
-        /* Manual code entry */
         <Card>
           <CardContent className="py-6">
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -97,6 +131,7 @@ export default function ScanPage() {
                   className="text-center font-mono text-lg uppercase tracking-wider"
                   autoFocus
                   autoComplete="off"
+                  disabled={isPairing}
                 />
                 {error && (
                   <p className="mt-1.5 flex items-center gap-1.5 text-sm text-destructive" role="alert">
@@ -108,9 +143,18 @@ export default function ScanPage() {
               <p className="text-xs text-muted-foreground">
                 Le code se trouve sur la couverture ou au dos de votre livret.
               </p>
-              <Button type="submit" className="w-full" size="lg">
-                Associer le livret
-                <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+              <Button type="submit" className="w-full" size="lg" disabled={isPairing}>
+                {isPairing ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
+                    Association…
+                  </>
+                ) : (
+                  <>
+                    Associer le livret
+                    <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+                  </>
+                )}
               </Button>
             </form>
           </CardContent>
