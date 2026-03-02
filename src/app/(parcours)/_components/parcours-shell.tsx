@@ -13,6 +13,7 @@ import { BookOpen } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { NavUser } from '@/app/(parcours)/_components/nav-user'
 import { EmailVerificationBanner } from '@/app/(parcours)/_components/email-verification-banner'
+import { PaperFirstBanner } from '@/app/(parcours)/_components/paper-first-banner'
 import { getParcoursConfig } from '@/lib/parcours'
 
 export interface ShellModule {
@@ -53,6 +54,7 @@ export function ParcoursShell({ parcours, children }: ParcoursShellProps) {
       </header>
 
       <EmailVerificationBanner />
+      <PaperFirstBanner />
 
       <div id="main-content" className="@container/main flex flex-1 min-h-0 flex-col">
         {children}
