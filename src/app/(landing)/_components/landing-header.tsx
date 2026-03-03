@@ -3,19 +3,12 @@
 import Link from 'next/link'
 
 import { useAuth } from '@/lib/context'
-import { useUserParcours } from '@/lib/parcours/use-user-parcours'
-import { DEFAULT_PARCOURS_SLUG } from '@/lib/parcours'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export function LandingHeader() {
-  const { user, isLoading: authLoading, isAuthenticated } = useAuth()
-  const { parcours, isLoading: parcoursLoading } = useUserParcours()
-
-  const isLoading = authLoading || (isAuthenticated && parcoursLoading)
-
-  const dashboardHref = parcours?.slug ? `/${parcours.slug}` : '/select-parcours'
+  const { user, isLoading, isAuthenticated } = useAuth()
 
   const initials = user?.email
     ? user.email.slice(0, 2).toUpperCase()
@@ -37,7 +30,7 @@ export function LandingHeader() {
           ) : isAuthenticated ? (
             <div className="flex items-center gap-2">
               <Button size="sm" asChild>
-                <Link href={dashboardHref}>Mon parcours</Link>
+                <Link href="/app/mes-livrets">Mes livrets</Link>
               </Button>
               <Avatar className="h-8 w-8">
                 <AvatarFallback className="text-xs">{initials}</AvatarFallback>
@@ -45,14 +38,6 @@ export function LandingHeader() {
             </div>
           ) : (
             <>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="hidden sm:inline-flex"
-                asChild
-              >
-                <Link href={`/${DEFAULT_PARCOURS_SLUG}`}>Parcours 1ere TC</Link>
-              </Button>
               <Button variant="ghost" size="sm" asChild>
                 <Link href="/login">Se connecter</Link>
               </Button>

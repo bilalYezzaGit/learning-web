@@ -68,10 +68,12 @@ export default async function QcmSessionPage({ params, searchParams }: PageProps
   return (
     <div className="px-4 py-5">
       <QcmSessionPlayer
-        moduleSlug={moduleSlug}
         moduleTitle={moduleTitle}
         questions={questions}
         timeLimitMinutes={timeLimitMinutes}
+        restartHref={`/app/qcm/session/${moduleSlug}?count=${questionCount}&time=${timeLimitMinutes}`}
+        exitHref="/app/qcm"
+        exitLabel="Retour aux QCM"
       />
     </div>
   )

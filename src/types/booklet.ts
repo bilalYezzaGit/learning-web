@@ -69,9 +69,18 @@ export interface QcmSessionConfig {
 
 /**
  * Generate a booklet code from module + programme.
+ *
+ * Uses full slug (with hyphens removed) to avoid collisions between
+ * variants like "continuite" vs "continuite-manuel-complet".
+ *
+ * Examples:
+ *   continuite + 3eme-math           → CONTINUITE-3E-001
+ *   continuite-manuel-complet + 3eme-math → CONTINUITEMANUELCOMPLET-3E-001
+ *   derivation + 3eme-math           → DERIVATION-3E-001
+ *   fonctions + 3eme-math            → FONCTIONS-3E-001
  */
 export function generateBookletCode(moduleSlug: string, programmeId: string): string {
-  const modulePrefix = moduleSlug.slice(0, 4).toUpperCase()
+  const modulePrefix = moduleSlug.replace(/-/g, '').toUpperCase()
   const programmePrefix = programmeId.replace(/-/g, '').slice(0, 2).toUpperCase()
   return `${modulePrefix}-${programmePrefix}-001`
 }

@@ -3,11 +3,12 @@
  *
  * Provides:
  * - Lightweight header (brand + user)
- * - Bottom navigation (mobile only)
- * - Safe area padding for bottom nav
+ * - Bottom navigation (mobile only, hidden on booklet detail)
+ * - Conditional bottom padding via AppMain
  */
 
 import { AppHeader } from '@/app/app/_components/app-header'
+import { AppMain } from '@/app/app/_components/app-main'
 import { BottomNav } from '@/app/app/_components/bottom-nav'
 
 export default function AppLayout({
@@ -16,9 +17,7 @@ export default function AppLayout({
   return (
     <div className="flex h-svh flex-col">
       <AppHeader />
-      <main id="main-content" className="flex-1 overflow-auto pb-16 lg:pb-0">
-        {children}
-      </main>
+      <AppMain>{children}</AppMain>
       <BottomNav />
     </div>
   )

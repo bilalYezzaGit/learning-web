@@ -1,0 +1,79 @@
+---
+type: resume
+title: "Fiche de revision : Continuite"
+difficulty: 0
+timeMinutes: 5
+tags: [continuite, tvi, resume]
+---
+
+## Continuite en un point
+
+:::definition[Continuite en un point]
+
+Soit $f$ une fonction definie sur un intervalle $I$ et $a \in I$.
+
+$f$ est **continue en $a$** si et seulement si :
+
+$$\lim_{x \to a} f(x) = f(a)$$
+
+:::
+
+:::property[Operations sur les fonctions continues]
+
+Si $f$ et $g$ sont continues en $a$, alors :
+
+- $f + g$, $f - g$, $f \times g$ sont continues en $a$
+- $\dfrac{f}{g}$ est continue en $a$ si $g(a) \neq 0$
+- $g \circ f$ est continue en $a$
+
+:::
+
+:::remark
+
+Les fonctions polynomiales, rationnelles (hors annulation du denominateur), $\sqrt{x}$, $|x|$, $\sin x$, $\cos x$ sont continues sur leur domaine de definition.
+
+:::
+
+## Prolongement par continuite
+
+:::definition[Prolongement par continuite]
+
+Soit $f$ definie sur $I$ sauf peut-etre en $a \in I$.
+
+Si $\lim_{x \to a} f(x) = \ell$ existe et est finie, on definit :
+
+$$\tilde{f}(x) = \begin{cases} f(x) & \text{si } x \neq a \\ \ell & \text{si } x = a \end{cases}$$
+
+La fonction $\tilde{f}$ est alors **continue en $a$**.
+
+:::
+
+## Theoreme des valeurs intermediaires
+
+:::theorem[Theoreme des valeurs intermediaires (TVI)]
+
+Soit $f$ **continue** sur $[a, b]$.
+
+Pour tout $k$ compris entre $f(a)$ et $f(b)$, il existe au moins un $c \in [a, b]$ tel que :
+
+$$f(c) = k$$
+
+:::
+
+:::property[Corollaire — zeros d'une fonction]
+
+Si $f$ est continue sur $[a, b]$ et $f(a) \times f(b) < 0$, alors il existe au moins un $c \in ]a, b[$ tel que $f(c) = 0$.
+
+:::
+
+:::property[TVI + monotonie stricte = unicite]
+
+Si $f$ est **continue** et **strictement monotone** sur $[a, b]$, alors pour tout $k$ compris entre $f(a)$ et $f(b)$, l'equation $f(x) = k$ admet une **unique** solution dans $[a, b]$.
+
+:::
+
+:::attention
+
+Toujours **verifier la continuite** avant d'appliquer le TVI. Le theoreme est faux si $f$ n'est pas continue.
+
+:::

@@ -9,7 +9,7 @@
 import Link from 'next/link'
 import { BookOpen } from 'lucide-react'
 
-import { NavUser } from '@/app/(parcours)/_components/nav-user'
+import { NavUser } from '@/app/app/_components/nav-user'
 
 export function AppHeader() {
   return (

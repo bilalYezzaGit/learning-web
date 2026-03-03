@@ -1,12 +1,14 @@
 'use client'
 
 /**
- * QR Scanner — uses BarcodeDetector API + getUserMedia to scan QR codes.
+ * QR Scanner — uses qr-scanner (Nimiq) for cross-browser QR scanning.
  *
- * Falls back to a "not supported" message on browsers without BarcodeDetector.
+ * Works on iOS Safari, Android Chrome, and desktop browsers.
+ * Uses native BarcodeDetector when available, falls back to JS-based WebWorker decoding.
  */
 
 import * as React from 'react'
+import QrScannerLib from 'qr-scanner'
 import { Camera, CameraOff } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -17,137 +19,107 @@ interface QrScannerProps {
 
 export function QrScanner({ onScan }: QrScannerProps) {
   const videoRef = React.useRef<HTMLVideoElement>(null)
-  const streamRef = React.useRef<MediaStream | null>(null)
-  const rafRef = React.useRef<number>(0)
+  const scannerRef = React.useRef<QrScannerLib | null>(null)
   const [error, setError] = React.useState<string | null>(null)
   const [isActive, setIsActive] = React.useState(false)
   const hasScannedRef = React.useRef(false)
 
   const stopCamera = React.useCallback(() => {
-    cancelAnimationFrame(rafRef.current)
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach((t) => t.stop())
-      streamRef.current = null
-    }
+    scannerRef.current?.stop()
     setIsActive(false)
   }, [])
 
   const startCamera = React.useCallback(async () => {
-    // Check BarcodeDetector support
-    if (!('BarcodeDetector' in window)) {
-      setError('Votre navigateur ne supporte pas le scanner QR. Utilisez Chrome ou Edge.')
-      return
-    }
+    if (!videoRef.current) return
 
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'environment' },
-      })
-      streamRef.current = stream
+      const scanner = new QrScannerLib(
+        videoRef.current,
+        (result) => {
+          if (hasScannedRef.current) return
+          const code = extractCodeFromValue(result.data)
+          if (code) {
+            hasScannedRef.current = true
+            scanner.stop()
+            setIsActive(false)
+            onScan(code)
+          }
+        },
+        {
+          preferredCamera: 'environment',
+          highlightScanRegion: true,
+          highlightCodeOutline: true,
+          returnDetailedScanResult: true,
+        },
+      )
 
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream
-        await videoRef.current.play()
-      }
-
+      scannerRef.current = scanner
+      await scanner.start()
       setIsActive(true)
       setError(null)
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const detector = new (window as any).BarcodeDetector({ formats: ['qr_code'] })
-
-      const scan = async () => {
-        if (!videoRef.current || !streamRef.current || hasScannedRef.current) return
-
-        try {
-          const barcodes: Array<{ rawValue: string }> = await detector.detect(videoRef.current)
-          if (barcodes.length > 0 && barcodes[0]) {
-            const value = barcodes[0].rawValue
-            // Extract code from URL or use raw value
-            const code = extractCodeFromValue(value)
-            if (code) {
-              hasScannedRef.current = true
-              stopCamera()
-              onScan(code)
-              return
-            }
-          }
-        } catch {
-          // Detection failed for this frame, continue scanning
-        }
-
-        rafRef.current = requestAnimationFrame(scan)
-      }
-
-      rafRef.current = requestAnimationFrame(scan)
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Erreur camera'
-      if (message.includes('NotAllowedError') || message.includes('Permission')) {
+      const message = err instanceof Error ? err.message : String(err)
+      if (message.includes('NotAllowedError') || message.includes('Permission') || message.includes('denied')) {
         setError('Acces camera refuse. Autorisez la camera dans les parametres du navigateur.')
+      } else if (message.includes('not found') || message.includes('Requested device not found')) {
+        setError('Aucune camera detectee. Verifiez que votre appareil a une camera.')
       } else {
         setError(`Impossible d'acceder a la camera: ${message}`)
       }
     }
-  }, [onScan, stopCamera])
+  }, [onScan])
 
   // Cleanup on unmount
   React.useEffect(() => {
     return () => {
-      cancelAnimationFrame(rafRef.current)
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach((t) => t.stop())
-      }
+      scannerRef.current?.destroy()
+      scannerRef.current = null
     }
   }, [])
 
-  if (error) {
-    return (
-      <div className="flex flex-col items-center gap-4 py-12 text-center">
-        <CameraOff className="h-12 w-12 text-muted-foreground/30" aria-hidden="true" />
-        <p className="text-sm text-destructive" role="alert">{error}</p>
-        <Button variant="outline" onClick={startCamera}>
-          Reessayer
-        </Button>
-      </div>
-    )
-  }
-
-  if (!isActive) {
-    return (
-      <div className="flex flex-col items-center gap-4 py-12 text-center">
-        <Camera className="h-12 w-12 text-muted-foreground/30" aria-hidden="true" />
-        <p className="text-sm text-muted-foreground">
-          Placez le QR code du livret devant la camera
-        </p>
-        <Button onClick={startCamera}>
-          <Camera className="mr-2 h-4 w-4" aria-hidden="true" />
-          Activer la camera
-        </Button>
-      </div>
-    )
-  }
-
   return (
-    <div className="relative overflow-hidden rounded-lg">
-      <video
-        ref={videoRef}
-        className="w-full rounded-lg"
-        playsInline
-        muted
-        aria-label="Camera pour scanner le QR code"
-      />
-      {/* Scan overlay */}
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <div className="h-48 w-48 rounded-2xl border-2 border-primary/60 shadow-[0_0_0_9999px_rgba(0,0,0,0.3)]" />
+    <div>
+      {/* Video is always mounted so the ref is available for qr-scanner */}
+      <div className={isActive ? 'relative overflow-hidden rounded-lg' : 'hidden'}>
+        <video
+          ref={videoRef}
+          className="w-full rounded-lg"
+          aria-label="Camera pour scanner le QR code"
+        />
+        <Button
+          variant="secondary"
+          size="sm"
+          className="absolute bottom-3 right-3 z-10"
+          onClick={stopCamera}
+        >
+          Arreter
+        </Button>
       </div>
-      <Button
-        variant="secondary"
-        size="sm"
-        className="absolute bottom-3 right-3"
-        onClick={stopCamera}
-      >
-        Arreter
-      </Button>
+
+      {/* Error state */}
+      {!isActive && error && (
+        <div className="flex flex-col items-center gap-4 py-12 text-center">
+          <CameraOff className="h-12 w-12 text-muted-foreground/30" aria-hidden="true" />
+          <p className="text-sm text-destructive" role="alert">{error}</p>
+          <Button variant="outline" onClick={() => { setError(null); startCamera() }}>
+            Reessayer
+          </Button>
+        </div>
+      )}
+
+      {/* Initial state */}
+      {!isActive && !error && (
+        <div className="flex flex-col items-center gap-4 py-12 text-center">
+          <Camera className="h-12 w-12 text-muted-foreground/30" aria-hidden="true" />
+          <p className="text-sm text-muted-foreground">
+            Placez le QR code du livret devant la camera
+          </p>
+          <Button onClick={startCamera}>
+            <Camera className="mr-2 h-4 w-4" aria-hidden="true" />
+            Activer la camera
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

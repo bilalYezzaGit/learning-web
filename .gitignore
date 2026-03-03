@@ -37,6 +37,9 @@ yarn-error.log*
 # Pipeline generated content
 /src/generated/
 
+# Generated PDFs
+public/pdfs/
+
 # Raw PDF extracted pages (temporary, extracted on demand)
 _raw/pages/
 

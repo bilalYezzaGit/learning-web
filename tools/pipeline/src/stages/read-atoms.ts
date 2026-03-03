@@ -7,7 +7,7 @@ import type { RawAtom } from '../types.js'
 
 const atomMetaSchema = z
   .object({
-    type: z.enum(['lesson', 'exercise', 'qcm']),
+    type: z.enum(['lesson', 'exercise', 'qcm', 'resume']),
     title: z.string().min(1),
     difficulty: z.number().int().min(0).max(3).default(1),
     timeMinutes: z.number().int().min(1).default(5),

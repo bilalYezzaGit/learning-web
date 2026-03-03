@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { AuthFormCard } from '@/app/(auth)/_components/auth-form-card'
 import { useAuth } from '@/lib/context'
-import { getUserParcoursSlug } from '@/lib/services/user-service'
 import { getFirebaseErrorMessage } from '@/lib/utils/firebase-errors'
 
 export function LoginForm({
@@ -32,14 +31,8 @@ export function LoginForm({
     const password = formData.get('password') as string
 
     try {
-      const user = await signIn(email, password)
-      const parcoursSlug = await getUserParcoursSlug(user.uid)
-
-      if (parcoursSlug) {
-        router.push(`/${parcoursSlug}`)
-      } else {
-        router.push('/select-parcours')
-      }
+      await signIn(email, password)
+      router.push('/app/mes-livrets')
     } catch (err) {
       setError(getFirebaseErrorMessage(err))
     } finally {

@@ -1,82 +1,26 @@
 /**
- * QCM Loader — loads and shuffles QCM questions from raw MDX for quick sessions.
+ * QCM Loader — loads and shuffles compiled QCM questions for quick sessions.
  *
- * Reads QCM files directly from content/ directory.
- * Used by the paper-first app for timed QCM sessions.
+ * Uses pre-compiled QCM JSON from the pipeline (with rendered KaTeX HTML).
  */
 
 import fs from 'fs'
 import path from 'path'
 import { cache } from 'react'
 
+import { getCompiledQcm } from '@/lib/content-loader'
+
 const CONTENT_DIR = path.join(process.cwd(), 'content')
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
-export interface RawQcmQuestion {
+export interface QcmQuestion {
   id: string
   title: string
-  question: string
-  options: string[]
+  questionHtml: string
+  optionHtmls: string[]
   correctIndex: number
-  explanation?: string
-  difficulty: number
-  timeMinutes: number
-}
-
-// ── Parser ─────────────────────────────────────────────────────────────────
-
-function parseQcmMdx(content: string, id: string): RawQcmQuestion | null {
-  // Parse frontmatter
-  const fmMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)
-  if (!fmMatch) return null
-
-  const yamlBlock = fmMatch[1] ?? ''
-  const body = fmMatch[2] ?? ''
-
-  const fm: Record<string, string> = {}
-  for (const line of yamlBlock.split('\n')) {
-    const kv = line.match(/^(\w+):\s*(.+)$/)
-    if (kv && kv[1] && kv[2]) fm[kv[1]] = kv[2].replace(/^["']|["']$/g, '')
-  }
-
-  // Extract question
-  const questionMatch = body.match(/:::question\n([\s\S]*?):::/)
-  const question = questionMatch?.[1]?.trim() ?? ''
-
-  // Extract options
-  const optionRegex = /:::option(\{correct\})?\n([\s\S]*?):::/g
-  const options: string[] = []
-  let correctIndex = -1
-  let match: RegExpExecArray | null
-
-  while ((match = optionRegex.exec(body)) !== null) {
-    if (match[1]) correctIndex = options.length
-    const optionText = match[2]?.trim() ?? ''
-    options.push(optionText)
-  }
-
-  // Fallback to correctOption from frontmatter
-  if (correctIndex === -1 && fm.correctOption) {
-    correctIndex = parseInt(fm.correctOption, 10)
-  }
-
-  // Extract explanation
-  const explMatch = body.match(/:::explanation\n([\s\S]*?):::/)
-  const explanation = explMatch?.[1]?.trim()
-
-  if (!question || options.length < 2 || correctIndex === -1) return null
-
-  return {
-    id,
-    title: fm.title ?? id,
-    question,
-    options,
-    correctIndex,
-    explanation,
-    difficulty: parseInt(fm.difficulty ?? '1', 10),
-    timeMinutes: parseInt(fm.timeMinutes ?? '1', 10),
-  }
+  explanationHtml?: string
 }
 
 // ── File finder ────────────────────────────────────────────────────────────
@@ -97,26 +41,34 @@ function findModuleDir(moduleSlug: string): string | undefined {
 // ── Public API ─────────────────────────────────────────────────────────────
 
 /**
- * Get all QCM questions for a module.
+ * Get all compiled QCM questions for a module.
  */
-export const getModuleQcmQuestions = cache((moduleSlug: string): RawQcmQuestion[] => {
+export const getModuleQcmQuestions = cache((moduleSlug: string): QcmQuestion[] => {
   const dir = findModuleDir(moduleSlug)
   if (!dir) return []
 
-  const qcmFiles = fs.readdirSync(dir)
+  const qcmIds = fs.readdirSync(dir)
     .filter((f) => f.startsWith('qcm-') && f.endsWith('.mdx'))
+    .map((f) => f.replace('.mdx', ''))
     .sort()
 
-  return qcmFiles
-    .map((file) => {
+  return qcmIds
+    .map((id) => {
       try {
-        const content = fs.readFileSync(path.join(dir, file), 'utf-8')
-        return parseQcmMdx(content, file.replace('.mdx', ''))
+        const compiled = getCompiledQcm(id)
+        return {
+          id: compiled.id,
+          title: compiled.title,
+          questionHtml: compiled.enonce,
+          optionHtmls: compiled.options,
+          correctIndex: compiled.correctIndex,
+          explanationHtml: compiled.explication || undefined,
+        }
       } catch {
         return null
       }
     })
-    .filter(Boolean) as RawQcmQuestion[]
+    .filter(Boolean) as QcmQuestion[]
 })
 
 /**
@@ -139,7 +91,7 @@ export function shuffle<T>(arr: T[]): T[] {
 export function selectRandomQuestions(
   moduleSlug: string,
   count: number,
-): RawQcmQuestion[] {
+): QcmQuestion[] {
   const all = getModuleQcmQuestions(moduleSlug)
   const shuffled = shuffle(all)
   return shuffled.slice(0, Math.min(count, shuffled.length))

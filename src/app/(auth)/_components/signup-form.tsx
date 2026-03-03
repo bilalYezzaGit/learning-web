@@ -7,11 +7,8 @@ import { Eye, EyeOff } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { AuthFormCard } from '@/app/(auth)/_components/auth-form-card'
 import { useAuth } from '@/lib/context'
-import { getActiveParcours } from '@/lib/parcours'
-import { saveUserParcours } from '@/lib/services/user-service'
 import { getFirebaseErrorMessage } from '@/lib/utils/firebase-errors'
 
 export function SignupForm({
@@ -23,9 +20,6 @@ export function SignupForm({
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showPassword, setShowPassword] = useState(false)
-  const [selectedParcours, setSelectedParcours] = useState<string>('')
-
-  const availableParcours = getActiveParcours()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -46,17 +40,11 @@ export function SignupForm({
       return
     }
 
-    if (!selectedParcours) {
-      setError('Veuillez choisir un parcours')
-      return
-    }
-
     setIsLoading(true)
 
     try {
-      const user = await signUp(email, password)
-      await saveUserParcours(user.uid, selectedParcours)
-      router.push(`/${selectedParcours}`)
+      await signUp(email, password)
+      router.push('/app/mes-livrets')
     } catch (err) {
       setError(getFirebaseErrorMessage(err))
     } finally {
@@ -137,24 +125,6 @@ export function SignupForm({
           <p className="text-xs text-muted-foreground -mt-4">
             Minimum 8 caracteres
           </p>
-
-          <div className="flex flex-col gap-2">
-            <Label>Parcours</Label>
-            <RadioGroup
-              value={selectedParcours}
-              onValueChange={setSelectedParcours}
-              disabled={isLoading}
-            >
-              {availableParcours.map((parcours) => (
-                <div key={parcours.slug} className="flex min-h-11 items-center gap-2">
-                  <RadioGroupItem value={parcours.slug} id={`parcours-${parcours.slug}`} />
-                  <Label htmlFor={`parcours-${parcours.slug}`} className="flex-1 cursor-pointer font-normal">
-                    {parcours.label}
-                  </Label>
-                </div>
-              ))}
-            </RadioGroup>
-          </div>
 
           <Button type="submit" disabled={isLoading} className="w-full">
             {isLoading ? 'Creation\u2026' : 'S\'inscrire'}

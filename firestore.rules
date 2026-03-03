@@ -1,0 +1,102 @@
+rules_version = '2';
+
+/**
+ * Firestore Security Rules - Learning OS Platform
+ *
+ * User data stored in /users/{uid}/*:
+ * - Activity progress
+ * - Paired booklets
+ * - Scan history (written by Cloud Functions only)
+ * Invitation codes in /invitationCodes/{code}
+ * All user data is user-private (owner only)
+ */
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ========================================
+    // Helper Functions
+    // ========================================
+
+    // Check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Check if user is the owner of the document
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Check if request has valid data structure
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    // ========================================
+    // Invitation Codes
+    // ========================================
+
+    match /invitationCodes/{code} {
+      // Anyone can read (to validate code before auth)
+      allow read: if true;
+      // Only Cloud Functions can write (admin SDK bypasses rules)
+      allow write: if false;
+    }
+
+    // ========================================
+    // User Data - Private to Owner
+    // ========================================
+
+    match /users/{userId} {
+      // User profile - read by owner, write with restrictions
+      allow read: if isOwner(userId);
+
+      // Allow create (first profile setup)
+      allow create: if isOwner(userId)
+        && !request.resource.data.keys().hasAny(['isBetaTester']);
+
+      // Allow update but protect isBetaTester field
+      allow update: if isOwner(userId)
+        && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['isBetaTester']));
+
+      // Activity Progress
+      // Stores completion status for exercises and QCMs
+      match /activityProgress/{activityId} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId)
+          && hasRequiredFields(['status', 'lastDoneAt']);
+        allow update: if isOwner(userId);
+        allow delete: if isOwner(userId);
+      }
+
+      // Scan History
+      // Stores scanned worksheets and AI feedback
+      match /scanHistory/{scanId} {
+        allow read: if isOwner(userId);
+        // Only Cloud Functions can create (they handle image upload)
+        allow create: if false;
+        // Users cannot modify or delete scan history
+        allow update, delete: if false;
+      }
+
+      // Paired Booklets
+      // Stores booklet pairing data
+      match /booklets/{code} {
+        allow read: if isOwner(userId);
+        allow create: if isOwner(userId)
+          && hasRequiredFields(['code', 'moduleSlug', 'programmeId', 'pairedAt', 'lastOpenedAt']);
+        allow update: if isOwner(userId);
+        allow delete: if isOwner(userId);
+      }
+
+    }
+
+    // ========================================
+    // Default: Deny all other access
+    // ========================================
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

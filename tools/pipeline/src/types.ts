@@ -1,7 +1,7 @@
 /** Raw atom read from MDX file (frontmatter + raw content) */
 export interface RawAtom {
   id: string
-  type: 'lesson' | 'exercise' | 'qcm'
+  type: 'lesson' | 'exercise' | 'qcm' | 'resume'
   title: string
   difficulty: number
   timeMinutes: number
@@ -76,7 +76,7 @@ export interface CompiledQcm {
 /** Resolved activity in a timeline */
 export interface ResolvedActivity {
   id: string
-  type: 'lesson' | 'exercise' | 'qcm'
+  type: 'lesson' | 'exercise' | 'qcm' | 'resume'
   title: string
   timeMinutes: number
   sectionId?: string

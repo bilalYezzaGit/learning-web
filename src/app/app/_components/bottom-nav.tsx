@@ -22,6 +22,10 @@ const NAV_ITEMS = [
 export function BottomNav() {
   const pathname = usePathname()
 
+  // Hide bottom nav when inside a booklet detail page (full-screen experience)
+  const isBookletDetail = /^\/app\/mes-livrets\/[^/]+/.test(pathname)
+  if (isBookletDetail) return null
+
   return (
     <nav
       className="fixed right-0 bottom-0 left-0 z-40 border-t bg-background/95 backdrop-blur-sm lg:hidden"

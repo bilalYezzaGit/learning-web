@@ -5,9 +5,6 @@ import {
   BarChart3,
   ArrowRight,
   GraduationCap,
-  Clock,
-  CheckCircle2,
-  Lock,
   Sparkles,
 } from 'lucide-react'
 
@@ -16,12 +13,8 @@ import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
 } from '@/components/ui/card'
 import { LandingHeader } from '@/app/(landing)/_components/landing-header'
-import { getVisibleParcours, DEFAULT_PARCOURS_SLUG } from '@/lib/parcours'
 
 const MATH_FORMULAS = [
   { text: 'f(x) = ax + b', className: 'left-[8%] top-[12%] -rotate-12 text-xl md:text-2xl' },
@@ -64,10 +57,6 @@ const STATS = [
 ]
 
 export default function LandingPage() {
-  const visibleParcours = getVisibleParcours()
-  const activeParcours = visibleParcours.find((p) => p.active)
-  const comingSoonParcours = visibleParcours.filter((p) => !p.active)
-
   return (
     <div className="flex min-h-svh flex-col">
       <LandingHeader />
@@ -99,7 +88,7 @@ export default function LandingPage() {
             className="mb-8 border-primary/20 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary"
           >
             <GraduationCap className="mr-1.5 h-3.5 w-3.5" aria-hidden="true" />
-            {activeParcours ? `Parcours ${activeParcours.label} disponible` : 'Bientot disponible'}
+            Parcours 1ère TC disponible
           </Badge>
 
           <h1 className="mx-auto max-w-3xl text-balance font-serif text-4xl font-bold leading-[1.15] tracking-tight md:text-5xl lg:text-6xl">
@@ -115,8 +104,8 @@ export default function LandingPage() {
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <Button size="lg" className="gap-2 px-6 text-base" asChild>
-              <Link href={`/${DEFAULT_PARCOURS_SLUG}`}>
-                {activeParcours ? `Explorer le parcours ${activeParcours.label}` : 'Explorer les cours'}
+              <Link href="/app/mes-livrets">
+                Commencer
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>
@@ -179,110 +168,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── Parcours ─── */}
-      <section className="bg-muted/40 px-4 py-24 md:px-6">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-14 text-center">
-            <h2 className="text-balance font-serif text-3xl font-semibold md:text-4xl">
-              Nos parcours
-            </h2>
-            <p className="mx-auto mt-4 max-w-lg text-lg text-muted-foreground">
-              Le parcours 1ère TC est prêt. Les autres niveaux arrivent bientôt.
-            </p>
-          </div>
-
-          {/* Active parcours — 1ère TC */}
-          {activeParcours && (
-            <Link href={`/${activeParcours.slug}`} className="group block">
-              <Card className="mx-auto mb-10 max-w-2xl cursor-pointer border-primary/30 bg-card shadow-sm transition-[box-shadow,border-color] duration-200 group-hover:shadow-lg group-hover:border-primary/50">
-                <CardHeader className="pb-3">
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                      <BookOpen
-                        className="h-6 w-6 text-primary"
-                        aria-hidden="true"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <CardTitle className="font-serif text-xl">
-                          {activeParcours.label}
-                        </CardTitle>
-                        <Badge
-                          variant="secondary"
-                          className="border-success/20 bg-success/10 text-success"
-                        >
-                          <CheckCircle2
-                            className="mr-1 h-3 w-3"
-                            aria-hidden="true"
-                          />
-                          Disponible
-                        </Badge>
-                      </div>
-                      <CardDescription className="mt-1">
-                        {activeParcours.description}
-                      </CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="flex flex-wrap items-center gap-5 text-sm text-muted-foreground">
-                    <span className="flex items-center gap-1.5">
-                      <BookOpen className="h-4 w-4" aria-hidden="true" />
-                      15 modules
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <Brain className="h-4 w-4" aria-hidden="true" />
-                      90+ activités
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <Clock className="h-4 w-4" aria-hidden="true" />
-                      Accès libre
-                    </span>
-                  </div>
-                  <div className="mt-5">
-                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition-colors group-hover:underline">
-                      Explorer le parcours
-                      <ArrowRight
-                        className="h-4 w-4 transition-transform group-hover:translate-x-1"
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          )}
-
-          {/* Coming soon parcours */}
-          <div className="mx-auto grid max-w-2xl gap-3 sm:grid-cols-2">
-            {comingSoonParcours.map((parcours) => (
-              <Card
-                key={parcours.slug}
-                className="border-border/60 bg-card/60 opacity-60"
-              >
-                <CardHeader className="pb-2">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="font-serif text-base">
-                      {parcours.label}
-                    </CardTitle>
-                    <Badge variant="outline" className="text-xs text-muted-foreground">
-                      <Lock className="mr-1 h-3 w-3" aria-hidden="true" />
-                      Bientôt
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <p className="text-sm text-muted-foreground">
-                    {parcours.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ─── Final CTA ─── */}
       <section className="mx-auto w-full max-w-5xl px-4 py-24 md:px-6">
         <Card className="mx-auto max-w-2xl overflow-hidden border-0 bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-xl">
@@ -319,7 +204,7 @@ export default function LandingPage() {
               className="relative gap-2 px-6 text-base"
               asChild
             >
-              <Link href={`/${DEFAULT_PARCOURS_SLUG}`}>
+              <Link href="/app/mes-livrets">
                 Commence le premier chapitre
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
@@ -355,8 +240,8 @@ export default function LandingPage() {
             <div className="space-y-3">
               <p className="text-sm font-semibold text-foreground">Navigation</p>
               <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-                <Link href={`/${DEFAULT_PARCOURS_SLUG}`} className="transition-colors hover:text-foreground">
-                  {activeParcours ? `Parcours ${activeParcours.label}` : 'Parcours'}
+                <Link href="/app/mes-livrets" className="transition-colors hover:text-foreground">
+                  Mes livrets
                 </Link>
                 <Link href="/signup" className="transition-colors hover:text-foreground">
                   Créer un compte

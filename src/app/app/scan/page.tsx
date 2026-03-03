@@ -1,11 +1,11 @@
 /**
  * Scan / Pair Page — scan a QR code or enter a booklet code.
  *
- * Features:
- * - Camera QR scanning via BarcodeDetector API
- * - Manual code entry
- * - Firestore pairing for authenticated users
- * - Booklet validation against content pipeline
+ * Flow:
+ * 1. User scans QR or enters code manually
+ * 2. Code is validated server-side via /api/booklet/validate
+ * 3. If valid + user authenticated, pairing is saved to Firestore
+ * 4. Redirect to booklet detail page
  */
 
 'use client'
@@ -40,28 +40,30 @@ export default function ScanPage() {
     setError(null)
 
     try {
-      // For authenticated users, save pairing to Firestore
-      if (userId) {
-        const parts = trimmed.split('-')
-        const moduleSlug = parts[0]?.toLowerCase() ?? ''
-        const programmePrefix = parts[1]?.toLowerCase() ?? ''
-        // Reconstruct programmeId (e.g. "3M" -> "3eme-math")
-        const programmeId = programmePrefix.startsWith('3')
-          ? '3eme-math'
-          : programmePrefix.startsWith('2')
-            ? '2nde-math'
-            : '1ere-tc'
+      // 1. Validate the code server-side
+      const res = await fetch(`/api/booklet/validate?code=${encodeURIComponent(trimmed)}`)
+      if (!res.ok) {
+        setError('Code invalide. Verifiez le code sur votre livret.')
+        setIsPairing(false)
+        return
+      }
 
+      const booklet: { code: string; moduleSlug: string; programmeId: string } = await res.json()
+
+      // 2. Pair to Firestore if authenticated
+      if (userId) {
         await pairBooklet(userId, {
-          code: trimmed,
-          moduleSlug,
-          programmeId,
+          code: booklet.code,
+          moduleSlug: booklet.moduleSlug,
+          programmeId: booklet.programmeId,
         })
       }
 
-      router.push(`/app/mes-livrets/${trimmed}`)
-    } catch {
-      setError('Erreur lors de l\'association. Reessayez.')
+      // 3. Navigate to booklet detail
+      router.push(`/app/mes-livrets/${booklet.code}`)
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Erreur inconnue'
+      setError(`Erreur lors de l'association: ${message}`)
       setIsPairing(false)
     }
   }, [userId, router])
@@ -122,7 +124,7 @@ export default function ScanPage() {
                 <Input
                   id="booklet-code"
                   type="text"
-                  placeholder="ex: CONT-3M-001"
+                  placeholder="ex: CONTINUITE-3E-001"
                   value={code}
                   onChange={(e) => {
                     setCode(e.target.value)
@@ -135,7 +137,7 @@ export default function ScanPage() {
                 />
                 {error && (
                   <p className="mt-1.5 flex items-center gap-1.5 text-sm text-destructive" role="alert">
-                    <AlertCircle className="h-3.5 w-3.5" aria-hidden="true" />
+                    <AlertCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
                     {error}
                   </p>
                 )}

@@ -10,7 +10,7 @@
 // =============================================================================
 
 /** Activity types */
-export type AtomType = 'lesson' | 'exercise' | 'qcm'
+export type AtomType = 'lesson' | 'exercise' | 'qcm' | 'resume'
 
 /** Series type */
 export type SeriesType = 'mono-module' | 'cross-module' | 'devoir-controle' | 'devoir-synthese' | 'diagnostic'
@@ -61,6 +61,7 @@ export interface ResolvedActivity extends TimelineActivity {
 /** Compiled QCM question — pre-compiled HTML strings */
 export interface CompiledQCMQuestion {
   id: string
+  title: string
   enonce: string
   options: string[]
   correctIndex: number
@@ -85,5 +86,6 @@ export function getAtomTypeLabel(type: AtomType): string {
     case 'exercise': return 'Exercice'
     case 'qcm': return 'QCM'
     case 'lesson': return 'Cours'
+    case 'resume': return 'Resume'
   }
 }

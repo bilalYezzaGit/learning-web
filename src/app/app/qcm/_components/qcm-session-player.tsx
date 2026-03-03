@@ -8,6 +8,7 @@
  * - Question-by-question flow
  * - Score summary at the end
  * - Keyboard shortcuts (1-4, Enter, Space)
+ * - Rendered HTML with KaTeX math
  */
 
 import * as React from 'react'
@@ -24,17 +25,19 @@ import { cn } from '@/lib/utils'
 interface Question {
   id: string
   title: string
-  question: string
-  options: string[]
+  questionHtml: string
+  optionHtmls: string[]
   correctIndex: number
-  explanation?: string
+  explanationHtml?: string
 }
 
 interface QcmSessionPlayerProps {
-  moduleSlug: string
   moduleTitle: string
   questions: Question[]
   timeLimitMinutes: number
+  restartHref: string
+  exitHref: string
+  exitLabel: string
 }
 
 type SessionState = 'playing' | 'validated' | 'finished' | 'timeout'
@@ -42,10 +45,12 @@ type SessionState = 'playing' | 'validated' | 'finished' | 'timeout'
 // ── Component ──────────────────────────────────────────────────────────────
 
 export function QcmSessionPlayer({
-  moduleSlug,
   moduleTitle,
   questions,
   timeLimitMinutes,
+  restartHref,
+  exitHref,
+  exitLabel,
 }: QcmSessionPlayerProps) {
   const [currentIndex, setCurrentIndex] = React.useState(0)
   const [selectedOption, setSelectedOption] = React.useState<number | null>(null)
@@ -108,7 +113,7 @@ export function QcmSessionPlayer({
 
       if (state === 'playing' && currentQuestion) {
         const num = parseInt(e.key)
-        if (num >= 1 && num <= currentQuestion.options.length) {
+        if (num >= 1 && num <= currentQuestion.optionHtmls.length) {
           setSelectedOption(num - 1)
         }
         if (e.key === 'Enter' && selectedOption !== null) {
@@ -140,7 +145,9 @@ export function QcmSessionPlayer({
       <ResultScreen
         score={score}
         total={answeredCount}
-        moduleSlug={moduleSlug}
+        restartHref={restartHref}
+        exitHref={exitHref}
+        exitLabel={exitLabel}
         title="Temps ecoule !"
         subtitle={`Tu as repondu a ${answeredCount} question${answeredCount > 1 ? 's' : ''} sur ${questions.length}`}
       />
@@ -153,7 +160,9 @@ export function QcmSessionPlayer({
       <ResultScreen
         score={score}
         total={questions.length}
-        moduleSlug={moduleSlug}
+        restartHref={restartHref}
+        exitHref={exitHref}
+        exitLabel={exitLabel}
         title={score / questions.length >= 0.7 ? 'Bravo !' : 'Continue tes efforts !'}
       />
     )
@@ -185,13 +194,16 @@ export function QcmSessionPlayer({
       {/* Question */}
       <Card>
         <CardContent className="py-5">
-          <p className="text-sm leading-relaxed">{currentQuestion.question}</p>
+          <div
+            className="prose prose-stone max-w-none text-sm"
+            dangerouslySetInnerHTML={{ __html: currentQuestion.questionHtml }}
+          />
         </CardContent>
       </Card>
 
       {/* Options */}
       <div className="mt-4 space-y-2">
-        {currentQuestion.options.map((option, index) => {
+        {currentQuestion.optionHtmls.map((optionHtml, index) => {
           const isSelected = selectedOption === index
           const isCorrect = index === currentQuestion.correctIndex
           const showResult = state === 'validated'
@@ -236,17 +248,23 @@ export function QcmSessionPlayer({
                   index + 1
                 )}
               </div>
-              <span className="flex-1">{option}</span>
+              <span
+                className="prose prose-stone flex-1 text-sm [&_p]:m-0"
+                dangerouslySetInnerHTML={{ __html: optionHtml }}
+              />
             </button>
           )
         })}
       </div>
 
       {/* Explanation */}
-      {state === 'validated' && currentQuestion.explanation && (
+      {state === 'validated' && currentQuestion.explanationHtml && (
         <div aria-live="polite" className="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-3">
           <p className="text-xs font-medium text-blue-600">Explication</p>
-          <p className="mt-1 text-sm text-blue-900">{currentQuestion.explanation}</p>
+          <div
+            className="prose prose-stone mt-1 max-w-none text-sm text-blue-900 [&_p]:m-0"
+            dangerouslySetInnerHTML={{ __html: currentQuestion.explanationHtml }}
+          />
         </div>
       )}
 
@@ -276,13 +294,17 @@ export function QcmSessionPlayer({
 function ResultScreen({
   score,
   total,
-  moduleSlug,
+  restartHref,
+  exitHref,
+  exitLabel,
   title,
   subtitle,
 }: {
   score: number
   total: number
-  moduleSlug: string
+  restartHref: string
+  exitHref: string
+  exitLabel: string
   title: string
   subtitle?: string
 }) {
@@ -318,14 +340,14 @@ function ResultScreen({
 
           <div className="mt-6 flex flex-col gap-2">
             <Button asChild>
-              <Link href={`/app/qcm/session/${moduleSlug}`}>
+              <Link href={restartHref}>
                 Recommencer
               </Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/app/qcm">
+              <Link href={exitHref}>
                 <ArrowLeft className="mr-2 h-4 w-4" aria-hidden="true" />
-                Retour aux QCM
+                {exitLabel}
               </Link>
             </Button>
           </div>

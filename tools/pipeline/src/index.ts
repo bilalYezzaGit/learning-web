@@ -13,19 +13,20 @@ import { resolveAllCours } from './stages/resolve-cours.js'
 import { resolveAllSeries } from './stages/resolve-series.js'
 import { assembleCatalogues } from './stages/assemble-catalogues.js'
 import { writeOutput } from './stages/write-output.js'
+import { generateAllPdfs } from './stages/generate-pdfs.js'
 
 async function main() {
   const startTime = Date.now()
   console.log('')
 
   // Phase 1 — Read
-  console.log('[1/5] Reading content...')
+  console.log('[1/6] Reading content...')
   const atoms = readAllAtoms()
   const { programmes, cours, series } = readAllContent()
   console.log(`      ${atoms.length} atoms, ${cours.length} cours, ${series.length} series, ${programmes.length} programmes`)
 
-  // Phase 1 — Validate
-  console.log('[2/5] Validating references...')
+  // Phase 2 — Validate
+  console.log('[2/6] Validating references...')
   const errors = validateContent(atoms, cours, series, programmes)
   const realErrors = errors.filter(e => e.severity === 'error')
   const warnings = errors.filter(e => e.severity === 'warning')
@@ -45,21 +46,21 @@ async function main() {
     }
   }
 
-  // Phase 2 — Compile atoms
-  console.log('[3/5] Compiling atoms...')
+  // Phase 3 — Compile atoms
+  console.log('[3/6] Compiling atoms...')
   const { htmlFiles, qcmFiles } = await compileAllAtoms(atoms)
   console.log(`      ${htmlFiles.size} HTML + ${qcmFiles.size} QCM compiled`)
 
-  // Phase 3 — Resolve molecules
-  console.log('[4/5] Resolving molecules...')
+  // Phase 4 — Resolve molecules
+  console.log('[4/6] Resolving molecules...')
   const atomMap = new Map(atoms.map(a => [a.id, a]))
   const resolvedCours = resolveAllCours(cours, atomMap)
   const resolvedSeries = resolveAllSeries(series, atomMap)
   const catalogues = assembleCatalogues(programmes, resolvedCours, resolvedSeries)
   console.log(`      ${resolvedCours.length} cours, ${resolvedSeries.length} series, ${catalogues.length} catalogues`)
 
-  // Phase 4 — Write output
-  console.log('[5/5] Writing output...')
+  // Phase 5 — Write output
+  console.log('[5/6] Writing output...')
   const fileCount = await writeOutput({
     programmes,
     catalogues,
@@ -69,6 +70,11 @@ async function main() {
     qcmFiles,
   })
   console.log(`      ${fileCount} files written to src/generated/`)
+
+  // Phase 6 — Generate PDFs
+  console.log('[6/6] Generating PDFs...')
+  const pdfCount = await generateAllPdfs({ atoms, resolvedCours, resolvedSeries, programmes })
+  console.log(`      ${pdfCount} PDFs generated to public/pdfs/`)
 
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1)
   console.log(`\nDone in ${elapsed}s\n`)

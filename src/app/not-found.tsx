@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { DEFAULT_PARCOURS_SLUG } from '@/lib/parcours'
 
 export default function NotFound() {
   return (
@@ -20,7 +19,7 @@ export default function NotFound() {
               <Link href="/">Retour à l&apos;accueil</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href={`/${DEFAULT_PARCOURS_SLUG}`}>Tableau de bord</Link>
+              <Link href="/app/mes-livrets">Mes livrets</Link>
             </Button>
           </div>
         </CardContent>
