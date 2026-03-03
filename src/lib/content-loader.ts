@@ -12,8 +12,6 @@ import { cache } from 'react'
 import type {
   ResolvedActivity,
   Programme,
-  Trimestre,
-  SeriesType,
   CompiledQCMQuestion,
   CompiledQuiz,
 } from '@/types/content'
@@ -42,24 +40,6 @@ export interface GeneratedCours {
   totalActivities: number
 }
 
-export interface GeneratedSerie {
-  slug: string
-  title: string
-  description: string
-  difficulty: number
-  estimatedMinutes: number
-  tags: string[]
-  type: SeriesType
-  trimestre: Trimestre
-  modules: string[]
-  priority: number
-  visible: boolean
-  activities: ResolvedActivity[]
-  totalActivities: number
-  successThreshold: number
-}
-
-
 // =============================================================================
 // Paths
 // =============================================================================
@@ -87,25 +67,9 @@ export const getAllProgrammes = cache((): Programme[] => {
   return readJson<Programme[]>(path.join(GENERATED_DIR, 'programmes.json'))
 })
 
-export const getProgramme = cache((id: string): Programme => {
-  const programmes = getAllProgrammes()
-  const found = programmes.find(p => p.id === id)
-  if (!found) throw new Error(`Programme "${id}" not found`)
-  return found
-})
-
 // =============================================================================
 // Cours
 // =============================================================================
-
-export const getAllCours = cache((): GeneratedCours[] => {
-  const dir = path.join(GENERATED_DIR, 'cours')
-  if (!fs.existsSync(dir)) return []
-  return fs.readdirSync(dir)
-    .filter(f => f.endsWith('.json'))
-    .map(f => readJson<GeneratedCours>(path.join(dir, f)))
-    .sort((a, b) => a.order - b.order)
-})
 
 export const getCours = cache((slug: string): GeneratedCours => {
   const filePath = path.join(GENERATED_DIR, 'cours', `${slug}.json`)
@@ -117,29 +81,6 @@ export const getCoursActivities = cache((slug: string): ResolvedActivity[] => {
   const cours = getCours(slug)
   return cours.sections.flatMap(s => s.activities)
 })
-
-// =============================================================================
-// Series
-// =============================================================================
-
-export const getAllSeries = cache((): GeneratedSerie[] => {
-  const dir = path.join(GENERATED_DIR, 'series')
-  if (!fs.existsSync(dir)) return []
-  return fs.readdirSync(dir)
-    .filter(f => f.endsWith('.json'))
-    .map(f => readJson<GeneratedSerie>(path.join(dir, f)))
-})
-
-export const getSerie = cache((slug: string): GeneratedSerie => {
-  const filePath = path.join(GENERATED_DIR, 'series', `${slug}.json`)
-  if (!fileExists(filePath)) throw new Error(`Serie "${slug}" not found`)
-  return readJson<GeneratedSerie>(filePath)
-})
-
-export const getSerieActivities = cache((slug: string): ResolvedActivity[] => {
-  return getSerie(slug).activities
-})
-
 
 // =============================================================================
 // Atoms
@@ -162,7 +103,6 @@ export const getAtomRawContent = cache((id: string): string | null => {
   if (!fileExists(filePath)) return null
   return fs.readFileSync(filePath, 'utf-8')
 })
-
 
 // =============================================================================
 // QCM
@@ -188,36 +128,4 @@ export function getCompiledQuiz(atomIds: string[]): CompiledQuiz {
     title: `QCM (${atomIds.length} questions)`,
     questions,
   }
-}
-
-// =============================================================================
-// Quiz group finders
-// =============================================================================
-
-/**
- * Find the quiz group containing a given activity ID in a cours.
- */
-export function findQuizGroup(coursSlug: string, activityId: string): string[] | undefined {
-  const cours = getCours(coursSlug)
-  for (const section of cours.sections) {
-    for (const activity of section.activities) {
-      if (activity.type === 'qcm' && activity.quizAtomIds?.includes(activityId)) {
-        return activity.quizAtomIds
-      }
-    }
-  }
-  return undefined
-}
-
-/**
- * Find the quiz group containing a given activity ID in a serie.
- */
-export function findSerieQuizGroup(serieSlug: string, activityId: string): string[] | undefined {
-  const serie = getSerie(serieSlug)
-  for (const activity of serie.activities) {
-    if (activity.type === 'qcm' && activity.quizAtomIds?.includes(activityId)) {
-      return activity.quizAtomIds
-    }
-  }
-  return undefined
 }

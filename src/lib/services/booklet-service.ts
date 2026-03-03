@@ -8,10 +8,8 @@
 import {
   collection,
   doc,
-  getDoc,
   getDocs,
   setDoc,
-  deleteDoc,
   serverTimestamp,
 } from 'firebase/firestore'
 
@@ -58,33 +56,6 @@ export async function getUserBooklets(userId: string): Promise<UserBooklet[]> {
   })
 }
 
-/**
- * Check if a user has paired a specific booklet.
- */
-export async function isBookletPaired(userId: string, code: string): Promise<boolean> {
-  const db = getDbInstance()
-  const ref = doc(db, 'users', userId, 'booklets', code)
-  const snap = await getDoc(ref)
-  return snap.exists()
-}
-
-/**
- * Update the lastOpenedAt timestamp for a paired booklet.
- */
-export async function touchBooklet(userId: string, code: string): Promise<void> {
-  const db = getDbInstance()
-  const ref = doc(db, 'users', userId, 'booklets', code)
-  await setDoc(ref, { lastOpenedAt: serverTimestamp() }, { merge: true })
-}
-
-/**
- * Unpair a booklet from a user.
- */
-export async function unpairBooklet(userId: string, code: string): Promise<void> {
-  const db = getDbInstance()
-  const ref = doc(db, 'users', userId, 'booklets', code)
-  await deleteDoc(ref)
-}
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 

@@ -6,19 +6,6 @@
  */
 
 // =============================================================================
-// Core enums
-// =============================================================================
-
-/** Activity types */
-export type AtomType = 'lesson' | 'exercise' | 'qcm' | 'resume'
-
-/** Series type */
-export type SeriesType = 'mono-module' | 'cross-module' | 'devoir-controle' | 'devoir-synthese' | 'diagnostic'
-
-/** Trimestre */
-export type Trimestre = 1 | 2 | 3
-
-// =============================================================================
 // Programmes
 // =============================================================================
 
@@ -40,20 +27,16 @@ export interface Programme {
 }
 
 // =============================================================================
-// Resolved types (for pages + timeline)
+// Resolved types (for pages)
 // =============================================================================
 
-/** Minimal activity data needed by CourseTimeline */
-export interface TimelineActivity {
+/** Flat activity entry in a resolved molecule (for navigation) */
+export interface ResolvedActivity {
   id: string
-  type: AtomType
+  type: 'lesson' | 'exercise' | 'qcm' | 'resume'
   title: string
   timeMinutes: number
   sectionId?: string
-}
-
-/** Flat activity entry in a resolved molecule (for navigation) */
-export interface ResolvedActivity extends TimelineActivity {
   /** For quiz groups, the list of QCM atom IDs */
   quizAtomIds?: string[]
 }
@@ -74,18 +57,4 @@ export interface CompiledQuiz {
   id: string
   title: string
   questions: CompiledQCMQuestion[]
-}
-
-// =============================================================================
-// Helpers
-// =============================================================================
-
-/** Get atom type label in French */
-export function getAtomTypeLabel(type: AtomType): string {
-  switch (type) {
-    case 'exercise': return 'Exercice'
-    case 'qcm': return 'QCM'
-    case 'lesson': return 'Cours'
-    case 'resume': return 'Resume'
-  }
 }

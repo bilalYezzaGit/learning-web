@@ -44,28 +44,6 @@ export interface UserBooklet {
   lastOpenedAt: string
 }
 
-/**
- * QR code pairing payload — encoded in the QR code URL.
- * URL format: https://www.aylansolutions.com/app/scan?code=CONT-3M-001
- */
-export interface PairingPayload {
-  code: string
-  moduleSlug: string
-  programmeId: string
-  version: number
-}
-
-/**
- * Quick QCM session configuration.
- */
-export interface QcmSessionConfig {
-  /** Module to draw questions from (or "all" for mixed) */
-  moduleSlug: string | 'all'
-  /** Number of questions */
-  questionCount: 5 | 10 | 20
-  /** Time limit in minutes (0 = no limit) */
-  timeLimitMinutes: number
-}
 
 /**
  * Generate a booklet code from module + programme.

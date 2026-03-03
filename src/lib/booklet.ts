@@ -58,17 +58,3 @@ export const getBookletByCode = cache((code: string): BookletDefinition | undefi
   return getAllBooklets().find((b) => b.code === code)
 })
 
-/**
- * Get a booklet definition by module slug.
- */
-export const getBookletByModule = cache((moduleSlug: string): BookletDefinition | undefined => {
-  return getAllBooklets().find((b) => b.moduleSlug === moduleSlug)
-})
-
-/**
- * Resolve a pairing code to a booklet definition.
- * Returns undefined if the code is invalid.
- */
-export function resolveBookletCode(code: string): BookletDefinition | undefined {
-  return getBookletByCode(code.toUpperCase().trim())
-}
