@@ -10,6 +10,7 @@ interface WriteInput {
   resolvedSeries: ResolvedSerie[]
   htmlFiles: Map<string, string>
   qcmFiles: Map<string, CompiledQcm>
+  rawMdxFiles: Map<string, string>
 }
 
 function ensureDir(dir: string) {
@@ -86,6 +87,12 @@ export async function writeOutput(input: WriteInput): Promise<number> {
     count++
   }
 
+  // Raw MDX files (for exercise scan/correction API)
+  for (const [id, mdx] of input.rawMdxFiles) {
+    fs.writeFileSync(path.join(atomsDir, `${id}.mdx`), mdx, 'utf-8')
+    count++
+  }
+
   // Manifest
   writeJson(path.join(GENERATED_DIR, 'manifest.json'), {
     generatedAt: new Date().toISOString(),
@@ -94,6 +101,7 @@ export async function writeOutput(input: WriteInput): Promise<number> {
         total: input.htmlFiles.size + input.qcmFiles.size,
         html: input.htmlFiles.size,
         qcm: input.qcmFiles.size,
+        rawMdx: input.rawMdxFiles.size,
       },
       cours: input.resolvedCours.length,
       series: input.resolvedSeries.length,

@@ -154,6 +154,15 @@ export const getAtomHtml = cache((id: string): string => {
   return fs.readFileSync(filePath, 'utf-8')
 })
 
+/**
+ * Get raw MDX content for an exercise atom (used by scan/correction API).
+ */
+export const getAtomRawContent = cache((id: string): string | null => {
+  const filePath = path.join(GENERATED_DIR, 'atoms', `${id}.mdx`)
+  if (!fileExists(filePath)) return null
+  return fs.readFileSync(filePath, 'utf-8')
+})
+
 
 // =============================================================================
 // QCM

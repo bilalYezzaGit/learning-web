@@ -7,9 +7,11 @@ const CONCURRENCY = 20
 export async function compileAllAtoms(atoms: RawAtom[]): Promise<{
   htmlFiles: Map<string, string>
   qcmFiles: Map<string, CompiledQcm>
+  rawMdxFiles: Map<string, string>
 }> {
   const htmlFiles = new Map<string, string>()
   const qcmFiles = new Map<string, CompiledQcm>()
+  const rawMdxFiles = new Map<string, string>()
 
   // Process in batches for controlled concurrency
   for (let i = 0; i < atoms.length; i += CONCURRENCY) {
@@ -17,6 +19,11 @@ export async function compileAllAtoms(atoms: RawAtom[]): Promise<{
     await Promise.all(
       batch.map(async (atom) => {
         try {
+          // Save raw MDX for exercises (used by scan/correction API)
+          if (atom.type === 'exercise') {
+            rawMdxFiles.set(atom.id, atom.rawContent)
+          }
+
           if (atom.type === 'qcm') {
             const compiled = await compileQcm(atom)
             qcmFiles.set(atom.id, compiled)
@@ -37,5 +44,5 @@ export async function compileAllAtoms(atoms: RawAtom[]): Promise<{
   }
 
   process.stdout.write('\n')
-  return { htmlFiles, qcmFiles }
+  return { htmlFiles, qcmFiles, rawMdxFiles }
 }

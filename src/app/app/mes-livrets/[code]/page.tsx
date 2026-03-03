@@ -96,7 +96,7 @@ export default async function BookletHubPage({ params }: PageProps) {
             bgClass="bg-violet-50"
             title="Scanner mon travail"
             description="Photo → correction IA"
-            href="/app/scan"
+            href={`/app/mes-livrets/${booklet.code}/scan`}
           />
         </div>
       </div>

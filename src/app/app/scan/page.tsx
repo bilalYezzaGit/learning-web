@@ -19,7 +19,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { useAuth } from '@/lib/context'
 import { pairBooklet } from '@/lib/services/booklet-service'
-import { QrScanner } from '@/app/app/_components/qr-scanner'
+import { QrScanner, type ScanResult } from '@/app/app/_components/qr-scanner'
 
 export default function ScanPage() {
   const router = useRouter()
@@ -73,10 +73,17 @@ export default function ScanPage() {
     handlePairAndNavigate(code)
   }
 
-  const handleQrScan = React.useCallback((scannedCode: string) => {
-    setCode(scannedCode)
-    handlePairAndNavigate(scannedCode)
-  }, [handlePairAndNavigate])
+  const handleQrScan = React.useCallback((result: ScanResult) => {
+    if (result.type === 'exercise') {
+      // Exercise QR — redirect to exercise page via the /app/ex redirect
+      router.push(`/app/ex?b=${encodeURIComponent(result.bookletCode)}&e=${encodeURIComponent(result.exerciseId)}`)
+      return
+    }
+
+    // Booklet pairing QR
+    setCode(result.code)
+    handlePairAndNavigate(result.code)
+  }, [handlePairAndNavigate, router])
 
   return (
     <div className="px-4 py-5">

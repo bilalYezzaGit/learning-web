@@ -22,8 +22,22 @@ import { convertMdxToTypst, extractQcmOptions } from '../pdf/mdx-to-typst.js'
 import { generateLivretTypst } from '../pdf/livret-template.js'
 import type { LivretSection, LivretSerie } from '../pdf/livret-template.js'
 import { compileTypstToPdf } from '../pdf/compile-pdf.js'
+import {
+  generateExerciseQrTypst,
+  generateBookletQrTypst,
+} from '../pdf/qr-generator.js'
 
 const PDFS_DIR = path.join(PROJECT_ROOT, 'public', 'pdfs')
+
+/**
+ * Generate a booklet code from module slug + programme ID.
+ * Mirrors src/types/booklet.ts generateBookletCode().
+ */
+function generateBookletCode(moduleSlug: string, programmeId: string): string {
+  const modulePrefix = moduleSlug.replace(/-/g, '').toUpperCase()
+  const programmePrefix = programmeId.replace(/-/g, '').slice(0, 2).toUpperCase()
+  return `${modulePrefix}-${programmePrefix}-001`
+}
 
 interface GeneratePdfsInput {
   atoms: RawAtom[]
@@ -35,10 +49,11 @@ interface GeneratePdfsInput {
 /**
  * Convert a single atom's raw content to Typst, wrapped in the appropriate frame.
  */
-function convertAtomToTypst(
+async function convertAtomToTypst(
   atom: RawAtom,
   exerciseNumber: { value: number },
-): string {
+  bookletCode?: string,
+): Promise<string> {
   if (atom.type === 'lesson') {
     return convertMdxToTypst(atom.rawContent, 'lesson')
   }
@@ -46,6 +61,10 @@ function convertAtomToTypst(
   if (atom.type === 'exercise') {
     const content = convertMdxToTypst(atom.rawContent, 'exercise')
     const num = exerciseNumber.value++
+    if (bookletCode) {
+      const qrTypst = await generateExerciseQrTypst(bookletCode, atom.id)
+      return `#exercise-frame(${num}, [${atom.title}], [\n${content}\n], qr: ${qrTypst})`
+    }
     return `#exercise-frame(${num}, [${atom.title}], [\n${content}\n])`
   }
 
@@ -92,12 +111,13 @@ function convertQcmGroup(
 /**
  * Process all steps in a section/serie and produce Typst content.
  */
-function processSteps(
+async function processSteps(
   steps: RawStep[],
   atomMap: Map<string, RawAtom>,
   exerciseCounter: { value: number },
   qcmCounter: { value: number },
-): string {
+  bookletCode?: string,
+): Promise<string> {
   const parts: string[] = []
 
   for (const step of steps) {
@@ -107,7 +127,7 @@ function processSteps(
     } else {
       const atom = atomMap.get(step)
       if (!atom) continue
-      const typst = convertAtomToTypst(atom, exerciseCounter)
+      const typst = await convertAtomToTypst(atom, exerciseCounter, bookletCode)
       if (typst) parts.push(typst)
     }
   }
@@ -165,14 +185,20 @@ export async function generateAllPdfs(input: GeneratePdfsInput): Promise<number>
       const coursData = findRawCoursSections(cours)
       if (!coursData) continue
 
+      // ── Compute booklet code ──
+      const bookletCode = generateBookletCode(cours.slug, programme.id)
+
       // ── Build sections ──
       const exerciseCounter = { value: 1 }
       const qcmCounter = { value: 1 }
 
-      const sections: LivretSection[] = coursData.rawSections.map(section => ({
-        label: section.label,
-        content: processSteps(section.steps, atomMap, exerciseCounter, qcmCounter),
-      }))
+      const sections: LivretSection[] = []
+      for (const section of coursData.rawSections) {
+        sections.push({
+          label: section.label,
+          content: await processSteps(section.steps, atomMap, exerciseCounter, qcmCounter, bookletCode),
+        })
+      }
 
       // ── Find related series ──
       const relatedSeries = resolvedSeries.filter(
@@ -180,8 +206,8 @@ export async function generateAllPdfs(input: GeneratePdfsInput): Promise<number>
       )
 
       // Build series content using the same approach
-      const seriesData: LivretSerie[] = relatedSeries.map(serie => {
-        // Reconstruct steps from activities
+      const seriesData: LivretSerie[] = []
+      for (const serie of relatedSeries) {
         const steps: RawStep[] = serie.activities.map(a => {
           if (a.type === 'qcm' && a.quizAtomIds) {
             return { quiz: a.quizAtomIds }
@@ -192,13 +218,16 @@ export async function generateAllPdfs(input: GeneratePdfsInput): Promise<number>
         const serieExerciseCounter = { value: 1 }
         const serieQcmCounter = { value: 1 }
 
-        return {
+        seriesData.push({
           title: serie.title,
           description: serie.description,
           difficulty: serie.difficulty,
-          content: processSteps(steps, atomMap, serieExerciseCounter, serieQcmCounter),
-        }
-      })
+          content: await processSteps(steps, atomMap, serieExerciseCounter, serieQcmCounter, bookletCode),
+        })
+      }
+
+      // ── Generate cover QR ──
+      const coverQr = await generateBookletQrTypst(bookletCode)
 
       // ── Assemble livret ──
       const typstSource = generateLivretTypst({
@@ -211,6 +240,8 @@ export async function generateAllPdfs(input: GeneratePdfsInput): Promise<number>
         totalActivities: cours.totalActivities,
         sections,
         series: seriesData,
+        coverQr,
+        bookletCode,
       })
 
       // ── Compile to PDF ──

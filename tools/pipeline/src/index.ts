@@ -48,8 +48,8 @@ async function main() {
 
   // Phase 3 — Compile atoms
   console.log('[3/6] Compiling atoms...')
-  const { htmlFiles, qcmFiles } = await compileAllAtoms(atoms)
-  console.log(`      ${htmlFiles.size} HTML + ${qcmFiles.size} QCM compiled`)
+  const { htmlFiles, qcmFiles, rawMdxFiles } = await compileAllAtoms(atoms)
+  console.log(`      ${htmlFiles.size} HTML + ${qcmFiles.size} QCM + ${rawMdxFiles.size} raw MDX compiled`)
 
   // Phase 4 — Resolve molecules
   console.log('[4/6] Resolving molecules...')
@@ -68,6 +68,7 @@ async function main() {
     resolvedSeries,
     htmlFiles,
     qcmFiles,
+    rawMdxFiles,
   })
   console.log(`      ${fileCount} files written to src/generated/`)
 

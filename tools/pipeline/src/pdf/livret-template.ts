@@ -27,6 +27,10 @@ export interface LivretData {
   totalActivities: number
   sections: LivretSection[]
   series: LivretSerie[]
+  /** Typst markup for the cover QR code (booklet pairing) */
+  coverQr?: string
+  /** Booklet code displayed on cover (e.g. "CONT-3E-001") */
+  bookletCode?: string
 }
 
 function difficultyStars(level: number): string {
@@ -180,7 +184,7 @@ ${serie.content}
 )
 
 // ── Exercise frame ──
-#let exercise-frame(number, title, body) = block(
+#let exercise-frame(number, title, body, qr: none) = block(
   width: 100%,
   inset: 12pt,
   stroke: 0.5pt + luma(200),
@@ -188,10 +192,24 @@ ${serie.content}
   above: 1.2em,
   below: 1.2em,
   {
-    text(weight: "bold")[Exercice #number — #title]
-    parbreak()
-    body
-    v(5em) // espace de redaction
+    if qr != none {
+      grid(
+        columns: (1fr, auto),
+        column-gutter: 8pt,
+        {
+          text(weight: "bold")[Exercice #number — #title]
+          parbreak()
+          body
+          v(5em)
+        },
+        align(top, qr)
+      )
+    } else {
+      text(weight: "bold")[Exercice #number — #title]
+      parbreak()
+      body
+      v(5em)
+    }
   }
 )
 
@@ -256,7 +274,15 @@ ${serie.content}
   ]
   #v(1fr)
   #align(center)[
+    ${data.coverQr && data.bookletCode ? `
+    #text(size: 9pt, fill: luma(100))[Code livret : #text(weight: "bold")[${data.bookletCode}]]
+    #v(0.5em)
+    #${data.coverQr}
+    #v(0.5em)
+    #text(size: 8pt, fill: luma(150))[Scannez pour associer ce livret]
+    ` : `
     #text(size: 9pt, fill: luma(150))[Livret eleve — Version enonces]
+    `}
   ]
 ]
 

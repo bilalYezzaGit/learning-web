@@ -5,6 +5,8 @@
  *
  * Works on iOS Safari, Android Chrome, and desktop browsers.
  * Uses native BarcodeDetector when available, falls back to JS-based WebWorker decoding.
+ *
+ * Requires CSP `worker-src 'self' blob:` for the WebWorker fallback.
  */
 
 import * as React from 'react'
@@ -13,8 +15,12 @@ import { Camera, CameraOff } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
+export type ScanResult =
+  | { type: 'booklet'; code: string }
+  | { type: 'exercise'; bookletCode: string; exerciseId: string }
+
 interface QrScannerProps {
-  onScan: (code: string) => void
+  onScan: (result: ScanResult) => void
 }
 
 export function QrScanner({ onScan }: QrScannerProps) {
@@ -32,17 +38,20 @@ export function QrScanner({ onScan }: QrScannerProps) {
   const startCamera = React.useCallback(async () => {
     if (!videoRef.current) return
 
+    // Reset state for re-scans
+    hasScannedRef.current = false
+
     try {
       const scanner = new QrScannerLib(
         videoRef.current,
         (result) => {
           if (hasScannedRef.current) return
-          const code = extractCodeFromValue(result.data)
-          if (code) {
+          const parsed = parseScanResult(result.data)
+          if (parsed) {
             hasScannedRef.current = true
             scanner.stop()
             setIsActive(false)
-            onScan(code)
+            onScan(parsed)
           }
         },
         {
@@ -125,17 +134,31 @@ export function QrScanner({ onScan }: QrScannerProps) {
 }
 
 /**
- * Extract booklet code from a QR value.
+ * Parse a QR value into a scan result.
  * Supports:
+ * - Exercise URL: /app/ex?b=CODE&e=EXERCISE_ID
+ * - Pairing URL: /app/scan?code=CODE
  * - Direct code: "CONT-3M-001"
- * - URL with ?code= param: "https://aylansolutions.com/app/scan?code=CONT-3M-001"
  */
-function extractCodeFromValue(value: string): string | null {
+function parseScanResult(value: string): ScanResult | null {
   // Try URL parse
   try {
     const url = new URL(value)
+
+    // Exercise QR: /app/ex?b=...&e=...
+    if (url.pathname === '/app/ex') {
+      const b = url.searchParams.get('b')
+      const e = url.searchParams.get('e')
+      if (b && e) {
+        return { type: 'exercise', bookletCode: b.toUpperCase().trim(), exerciseId: e.trim() }
+      }
+    }
+
+    // Pairing QR: /app/scan?code=...
     const code = url.searchParams.get('code')
-    if (code) return code.toUpperCase().trim()
+    if (code) {
+      return { type: 'booklet', code: code.toUpperCase().trim() }
+    }
   } catch {
     // Not a URL
   }
@@ -143,7 +166,7 @@ function extractCodeFromValue(value: string): string | null {
   // Raw code (uppercase alphanumeric with hyphens)
   const trimmed = value.toUpperCase().trim()
   if (/^[A-Z0-9-]+$/.test(trimmed) && trimmed.length >= 4) {
-    return trimmed
+    return { type: 'booklet', code: trimmed }
   }
 
   return null
