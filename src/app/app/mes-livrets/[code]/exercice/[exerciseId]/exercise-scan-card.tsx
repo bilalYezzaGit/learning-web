@@ -21,6 +21,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { useAuth } from '@/lib/context'
+import { toast } from 'sonner'
 
 type ScanState = 'idle' | 'capturing' | 'analyzing' | 'result'
 
@@ -94,9 +95,11 @@ export function ExerciseScanCard({ exerciseId, exerciseContent }: ExerciseScanCa
       const data: AnalysisResult = await res.json()
       setResult(data)
       setState('result')
+      toast.success('Analyse termin\u00e9e')
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Erreur inconnue'
       setError(message)
+      toast.error('Erreur lors de l\'analyse')
       setState('capturing')
     }
   }
@@ -175,7 +178,7 @@ export function ExerciseScanCard({ exerciseId, exerciseContent }: ExerciseScanCa
         {state === 'analyzing' && (
           <div className="flex flex-col items-center gap-4 py-8 text-center">
             <Loader2 className="h-8 w-8 animate-spin text-primary" aria-hidden="true" />
-            <p className="text-sm text-muted-foreground">Analyse en cours...</p>
+            <p className="text-sm text-muted-foreground">Analyse en cours&hellip;</p>
           </div>
         )}
 

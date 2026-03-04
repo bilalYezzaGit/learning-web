@@ -35,15 +35,15 @@ export const tests = [
   },
   {
     id: 'A11-003',
-    name: 'main-content target in parcours shell',
+    name: 'main-content target in app main',
     fn: () => {
-      const shell = readFile('src/app/(parcours)/_components/parcours-shell.tsx')
-      const hasTarget = shell.includes('id="main-content"')
+      const main = readFile('src/app/app/_components/app-main.tsx')
+      const hasTarget = main.includes('id="main-content"')
       return {
         pass: hasTarget,
         detail: hasTarget
           ? 'id="main-content" found'
-          : 'Missing id="main-content" in parcours shell',
+          : 'Missing id="main-content" in app main',
       }
     },
   },
@@ -139,7 +139,7 @@ export const tests = [
     name: 'Decorative icons have aria-hidden',
     fn: () => {
       const filesToCheck = [
-        'src/app/(parcours)/_components/parcours-shell.tsx',
+        'src/app/app/_components/app-header.tsx',
       ]
       const issues = []
       for (const path of filesToCheck) {

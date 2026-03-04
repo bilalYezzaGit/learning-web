@@ -18,7 +18,7 @@ export function LandingHeader() {
     <header className="border-b bg-background/80 backdrop-blur-sm">
       <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between px-4 md:px-6">
         <Link href="/" className="font-serif text-lg font-bold text-foreground">
-          Learning<span className="text-primary">&nbsp;OS</span>
+          Aylan
         </Link>
 
         <nav className="flex items-center gap-2">

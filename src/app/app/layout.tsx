@@ -10,6 +10,7 @@
 import { AppHeader } from '@/app/app/_components/app-header'
 import { AppMain } from '@/app/app/_components/app-main'
 import { BottomNav } from '@/app/app/_components/bottom-nav'
+import { OnboardingOverlay } from '@/app/app/_components/onboarding-overlay'
 
 export default function AppLayout({
   children,
@@ -19,6 +20,7 @@ export default function AppLayout({
       <AppHeader />
       <AppMain>{children}</AppMain>
       <BottomNav />
+      <OnboardingOverlay />
     </div>
   )
 }

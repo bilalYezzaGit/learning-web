@@ -226,7 +226,7 @@ export const tests = [
       const keyFiles = [
         'src/app/globals.css',
         'src/app/layout.tsx',
-        'src/app/(parcours)/_components/parcours-shell.tsx',
+        'src/app/app/_components/app-header.tsx',
       ]
       const emptyFiles = keyFiles.filter((f) => {
         try {

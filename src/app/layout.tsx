@@ -18,28 +18,28 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Learning OS — Maths du lycée tunisien',
-    template: '%s | Learning OS',
+    default: 'Aylan — Augmente ton livret de maths',
+    template: '%s | Aylan',
   },
-  description: 'Cours structurés, exercices corrigés et séries de révision pour les mathématiques du lycée tunisien. 15 modules, 90+ activités, 100% gratuit.',
+  description: 'Scanne ton livret, obtiens une correction IA et suis ta progression. 3 modules disponibles.',
   manifest: '/manifest.json',
   metadataBase: new URL('https://www.aylansolutions.com'),
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    siteName: 'Learning OS',
-    title: 'Learning OS — Maths du lycée tunisien',
-    description: 'Cours structurés, exercices corrigés et séries de révision. 15 modules pour la 1ère année Tronc Commun — accès libre.',
+    siteName: 'Aylan',
+    title: 'Aylan — Augmente ton livret de maths',
+    description: 'Scanne ton livret de maths, obtiens une correction IA personnalisée et suis ta progression.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Learning OS — Maths du lycée tunisien',
-    description: 'Cours structurés, exercices corrigés et séries de révision. 100% gratuit.',
+    title: 'Aylan — Augmente ton livret de maths',
+    description: 'Scanne ton livret, correction IA et suivi de progression. Gratuit.',
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Learning OS',
+    title: 'Aylan',
   },
   icons: {
     icon: '/icons/Icon-192.png',

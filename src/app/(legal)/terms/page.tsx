@@ -16,13 +16,13 @@ export default function TermsPage() {
 
           <h2>1. Acceptation des conditions</h2>
           <p>
-            En accedant a Learning OS, vous acceptez les presentes conditions d&apos;utilisation.
+            En accedant a Aylan, vous acceptez les presentes conditions d&apos;utilisation.
             La plateforme est un outil educatif gratuit destine aux eleves du lycee tunisien.
           </p>
 
           <h2>2. Description du service</h2>
           <p>
-            Learning OS propose des cours de mathematiques structures, des exercices interactifs
+            Aylan propose des cours de mathematiques structures, des exercices interactifs
             et des series de revision. Le contenu est conforme au programme officiel tunisien.
           </p>
 
@@ -34,14 +34,14 @@ export default function TermsPage() {
 
           <h2>4. Propriete intellectuelle</h2>
           <p>
-            Le contenu pedagogique (cours, exercices, QCM) est la propriete de Learning OS.
+            Le contenu pedagogique (cours, exercices, QCM) est la propriete de Aylan.
             Toute reproduction a des fins commerciales est interdite. L&apos;utilisation a des fins
             educatives personnelles est libre.
           </p>
 
           <h2>5. Limitation de responsabilite</h2>
           <p>
-            Learning OS est fourni en l&apos;etat. Nous ne garantissons pas l&apos;absence d&apos;erreurs
+            Aylan est fourni en l&apos;etat. Nous ne garantissons pas l&apos;absence d&apos;erreurs
             dans le contenu pedagogique. La plateforme ne remplace pas l&apos;enseignement scolaire.
           </p>
 

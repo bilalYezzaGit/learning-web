@@ -16,7 +16,7 @@ export default function PrivacyPage() {
 
           <h2>1. Donnees collectees</h2>
           <p>
-            Learning OS collecte uniquement les donnees necessaires au fonctionnement du service :
+            Aylan collecte uniquement les donnees necessaires au fonctionnement du service :
           </p>
           <ul>
             <li><strong>Email</strong> — pour l&apos;authentification</li>
@@ -49,7 +49,7 @@ export default function PrivacyPage() {
 
           <h2>5. Cookies</h2>
           <p>
-            Learning OS utilise des cookies techniques uniquement (authentification,
+            Aylan utilise des cookies techniques uniquement (authentification,
             preferences d&apos;interface). Aucun cookie de tracking ou publicitaire n&apos;est utilise.
           </p>
 

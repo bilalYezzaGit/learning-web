@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -63,6 +64,15 @@ export function QcmSessionPlayer({
   React.useEffect(() => {
     startTimeRef.current = Date.now()
   }, [])
+
+  // Toast notifications on session end
+  React.useEffect(() => {
+    if (state === 'finished') {
+      toast.success(`QCM termin\u00e9 ! Score : ${score}/${questions.length}`)
+    } else if (state === 'timeout') {
+      toast.error('Temps \u00e9coul\u00e9 !')
+    }
+  }, [state, score, questions.length])
 
   const currentQuestion = questions[currentIndex]
   const isLastQuestion = currentIndex === questions.length - 1

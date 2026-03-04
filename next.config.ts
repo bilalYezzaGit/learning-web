@@ -45,6 +45,8 @@ const securityHeaders = [
       "font-src 'self' data:",
       "connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.cloudfunctions.net wss://*.firebaseio.com https://api.anthropic.com",
       "frame-src 'self' https://*.firebaseapp.com",
+      "form-action 'self'",
+      "base-uri 'self'",
     ].join('; '),
   },
 ]

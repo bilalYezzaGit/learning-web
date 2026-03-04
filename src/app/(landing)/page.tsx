@@ -5,6 +5,7 @@ import {
   BarChart3,
   ArrowRight,
   GraduationCap,
+  QrCode,
   Sparkles,
 } from 'lucide-react'
 
@@ -31,29 +32,29 @@ const MATH_FORMULAS = [
 
 const FEATURES = [
   {
-    icon: BookOpen,
-    title: 'Cours structurés',
+    icon: QrCode,
+    title: 'Scanne ton livret',
     description:
-      'Des leçons claires avec des exemples détaillés, des formules interactives et des rappels visuels. Comme un bon cahier, en mieux.',
+      'Un QR code sur chaque exercice. Scanne-le pour accéder au contenu augmenté : correction IA, QCM et explications.',
   },
   {
     icon: Brain,
-    title: 'Exercices interactifs',
+    title: 'Correction IA',
     description:
-      'QCM, problèmes et calculs avec correction immédiate. Chaque erreur devient une occasion d\u2019apprendre.',
+      'Prends en photo ton travail et reçois un feedback personnalisé. L\'IA analyse ta démarche et te guide.',
   },
   {
     icon: BarChart3,
-    title: 'Séries de révision',
+    title: 'Suis ta progression',
     description:
-      'Des séries thématiques et des devoirs types pour se préparer aux contrôles. Progresse à ton rythme.',
+      'Chaque exercice terminé, chaque QCM réussi s\'ajoute à ton tableau de bord. Visualise tes progrès.',
   },
 ]
 
 const STATS = [
-  { value: '15', label: 'modules', icon: BookOpen },
+  { value: '3', label: 'modules', icon: BookOpen },
   { value: '90+', label: 'activités', icon: Brain },
-  { value: '100%', label: 'gratuit', icon: Sparkles },
+  { value: 'IA', label: 'correction', icon: Sparkles },
 ]
 
 export default function LandingPage() {
@@ -92,20 +93,20 @@ export default function LandingPage() {
           </Badge>
 
           <h1 className="mx-auto max-w-3xl text-balance font-serif text-4xl font-bold leading-[1.15] tracking-tight md:text-5xl lg:text-6xl">
-            Les maths du lycée,{' '}
-            <span className="text-primary">expliquées avec soin</span>
+            Augmente ton livret de maths{' '}
+            <span className="text-primary">avec l&apos;IA</span>
           </h1>
 
           <p className="mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Cours structurés, exercices corrigés et séries de révision.
-            15&nbsp;modules pour la 1ère année Tronc Commun&nbsp;&mdash; accès
-            libre, sans inscription.
+            Scanne le QR code de ton livret, obtiens une correction IA
+            personnalisée et suis ta progression.
+            Gratuit et sans pub.
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <Button size="lg" className="gap-2 px-6 text-base" asChild>
               <Link href="/app/mes-livrets">
-                Commencer
+                Scanne ton livret
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>
@@ -138,11 +139,11 @@ export default function LandingPage() {
       <section className="mx-auto w-full max-w-5xl px-4 py-24 md:px-6">
         <div className="mb-14 text-center">
           <h2 className="text-balance font-serif text-3xl font-semibold md:text-4xl">
-            Tout pour réussir en maths
+            Le livret papier, version augmentée
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-lg text-muted-foreground">
-            Une méthode complète, du cours à la révision, conçue pour
-            le programme tunisien.
+            Ton livret reste au centre. L&apos;app ajoute la correction IA,
+            les QCM interactifs et le suivi de progression.
           </p>
         </div>
         <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-3">
@@ -192,20 +193,15 @@ export default function LandingPage() {
             </div>
 
             <h2 className="relative text-balance font-serif text-2xl font-semibold md:text-3xl">
-              Prêt à commencer ?
+              Prêt à augmenter ton livret ?
             </h2>
             <p className="relative max-w-md text-balance text-primary-foreground/80">
-              Le premier chapitre t&apos;attend. Pas d&apos;inscription, pas de
-              barrière&nbsp;&mdash; juste toi et les maths.
+              Scanne le QR code de ton livret pour commencer.
+              Pas d&apos;inscription obligatoire.
             </p>
-            <Button
-              size="lg"
-              variant="secondary"
-              className="relative gap-2 px-6 text-base"
-              asChild
-            >
-              <Link href="/app/mes-livrets">
-                Commence le premier chapitre
+            <Button size="lg" variant="secondary" className="relative gap-2 px-6 text-base" asChild>
+              <Link href="/app/scan">
+                Scanne mon livret
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>
@@ -229,10 +225,10 @@ export default function LandingPage() {
             {/* Brand */}
             <div className="space-y-3">
               <span className="font-serif text-lg font-semibold text-foreground">
-                Learning OS
+                Aylan
               </span>
               <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-                Plateforme d&apos;apprentissage des mathématiques pour le lycée tunisien. Cours, exercices et révisions en accès libre.
+                Augmente ton livret de maths avec la correction IA, les QCM interactifs et le suivi de progression.
               </p>
             </div>
 
@@ -264,7 +260,7 @@ export default function LandingPage() {
           </div>
 
           <div className="mt-10 flex flex-col items-center gap-2 border-t pt-6 text-xs text-muted-foreground sm:flex-row sm:justify-between">
-            <span>&copy; {new Date().getFullYear()} Learning OS. Tous droits réservés.</span>
+            <span>&copy; {new Date().getFullYear()} Aylan. Tous droits réservés.</span>
             <span>Conçu pour les élèves du lycée tunisien</span>
           </div>
         </div>

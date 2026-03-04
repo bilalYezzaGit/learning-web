@@ -1,3 +1,5 @@
+'use client'
+
 /**
  * Scan / Pair Page — scan a QR code or enter a booklet code.
  *
@@ -8,8 +10,6 @@
  * 4. Redirect to booklet detail page
  */
 
-'use client'
-
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { QrCode, Keyboard, ArrowRight, AlertCircle, Loader2 } from 'lucide-react'
@@ -18,6 +18,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { useAuth } from '@/lib/context'
+import { toast } from 'sonner'
 import { pairBooklet } from '@/lib/services/booklet-service'
 import { QrScanner, type ScanResult } from '@/app/app/_components/qr-scanner'
 
@@ -61,9 +62,11 @@ export default function ScanPage() {
 
       // 3. Navigate to booklet detail
       router.push(`/app/mes-livrets/${booklet.code}`)
+      toast.success('Livret associ\u00e9 avec succ\u00e8s !')
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Erreur inconnue'
       setError(`Erreur lors de l'association: ${message}`)
+      toast.error('Erreur lors de l\'association')
       setIsPairing(false)
     }
   }, [userId, router])

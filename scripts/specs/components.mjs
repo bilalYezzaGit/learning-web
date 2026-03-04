@@ -9,12 +9,8 @@ export const tests = [
     id: 'CMP-001',
     name: 'Content rendering pipeline',
     fn: () => {
-      const renderer = readFile('src/app/(parcours)/_components/content-renderer.tsx')
       const loader = readFile('src/lib/content-loader.ts')
       const checks = [
-        ['ContentRenderer component', renderer.includes('ContentRenderer')],
-        ['dangerouslySetInnerHTML', renderer.includes('dangerouslySetInnerHTML')],
-        ['prose wrapper', renderer.includes('prose')],
         ['content-loader getAtomHtml', loader.includes('getAtomHtml')],
         ['content-loader getCompiledQuiz', loader.includes('getCompiledQuiz')],
       ]

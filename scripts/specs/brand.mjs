@@ -10,28 +10,28 @@ export const tests = [
     name: 'App title in metadata',
     fn: () => {
       const layout = readFile('src/app/layout.tsx')
-      const has = layout.includes('Learning OS')
+      const has = layout.includes('Aylan')
       return {
         pass: has,
-        detail: has ? '"Learning OS" found in metadata' : 'Missing "Learning OS" in layout metadata',
+        detail: has ? '"Aylan" found in metadata' : 'Missing "Aylan" in layout metadata',
       }
     },
   },
   {
     id: 'BRD-002',
-    name: 'Sidebar brand display',
+    name: 'Header brand display',
     fn: () => {
-      const shell = readFile('src/app/(parcours)/_components/parcours-shell.tsx')
+      const header = readFile('src/app/app/_components/app-header.tsx')
       const checks = [
-        ['font-serif', shell.includes('font-serif')],
-        ['Learning text', shell.includes('Learning')],
-        ['Badge', shell.includes('Badge')],
+        ['font-serif', header.includes('font-serif')],
+        ['Aylan text', header.includes('Aylan')],
+        ['BookOpen icon', header.includes('BookOpen')],
       ]
       const failing = checks.filter(([, ok]) => !ok)
       return {
         pass: failing.length === 0,
         detail: failing.length === 0
-          ? 'Sidebar brand elements present'
+          ? 'Header brand elements present'
           : `Missing: ${failing.map(([name]) => name).join(', ')}`,
       }
     },

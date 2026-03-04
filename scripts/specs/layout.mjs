@@ -41,14 +41,14 @@ export const tests = [
   },
   {
     id: 'LAY-003',
-    name: 'Parcours layout structure',
+    name: 'App layout structure',
     fn: () => {
-      const layout = readFile('src/app/(parcours)/[parcours]/layout.tsx')
-      const shell = readFile('src/app/(parcours)/_components/parcours-shell.tsx')
+      const layout = readFile('src/app/app/layout.tsx')
+      const main = readFile('src/app/app/_components/app-main.tsx')
       const checks = [
-        ['ParcoursShell', layout.includes('ParcoursShell')],
-        ['id="main-content"', shell.includes('id="main-content"')],
-        ['@container/main', shell.includes('@container/main')],
+        ['AppHeader', layout.includes('AppHeader')],
+        ['AppMain', layout.includes('AppMain')],
+        ['id="main-content"', main.includes('id="main-content"')],
       ]
       const failing = checks.filter(([, ok]) => !ok)
       return {

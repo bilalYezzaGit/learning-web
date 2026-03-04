@@ -1,7 +1,7 @@
 {
-  "name": "Learning OS",
-  "short_name": "Learning OS",
-  "description": "Application d'apprentissage des mathématiques",
+  "name": "Aylan",
+  "short_name": "Aylan",
+  "description": "Augmente ton livret de maths avec l'IA",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FBFBFA",

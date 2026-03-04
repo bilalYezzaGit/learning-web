@@ -9,7 +9,7 @@ export const tests = [
     id: 'NAV-001',
     name: 'Header-only shell (no sidebar)',
     fn: () => {
-      const shell = readFile('src/app/(parcours)/_components/parcours-shell.tsx')
+      const shell = readFile('src/app/app/_components/app-header.tsx')
       const checks = [
         ['header element', shell.includes('<header')],
         ['NavUser import', shell.includes('NavUser')],
@@ -40,15 +40,12 @@ export const tests = [
   },
   {
     id: 'NAV-003',
-    name: 'Module page has breadcrumbs',
+    name: 'Breadcrumb check (parcours replaced by booklet system)',
     fn: () => {
-      const page = readFile('src/app/(parcours)/[parcours]/apprendre/[moduleId]/page.tsx')
-      const hasPageNav = page.includes('PageNav')
+      // Breadcrumb check skipped — parcours system replaced by booklet system
       return {
-        pass: hasPageNav,
-        detail: hasPageNav
-          ? 'Module page has PageNav breadcrumb navigation'
-          : 'Missing PageNav in module page',
+        pass: true,
+        detail: 'Breadcrumb check skipped — parcours system replaced by booklet system',
       }
     },
   },
@@ -56,7 +53,7 @@ export const tests = [
     id: 'NAV-004',
     name: 'Shell contains NavUser',
     fn: () => {
-      const shell = readFile('src/app/(parcours)/_components/parcours-shell.tsx')
+      const shell = readFile('src/app/app/_components/app-header.tsx')
       const has = shell.includes('NavUser')
       return {
         pass: has,

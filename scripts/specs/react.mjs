@@ -37,7 +37,6 @@ export const tests = [
       const knownLegacy = [
         '(auth)/_components/login-form.tsx',
         '(auth)/_components/signup-form.tsx',
-        '(parcours)/_components/email-verification-banner.tsx',
       ]
       const componentFiles = tsFiles.filter(
         (f) => (f.includes('src/components/') || f.includes('_components/')) && !knownLegacy.some((k) => f.endsWith(k))
