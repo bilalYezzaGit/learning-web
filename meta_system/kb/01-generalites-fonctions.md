@@ -117,7 +117,7 @@ version: 0.1
 | D4 | f impaire : Df symetrique et f(-x) = -f(x) pour tout x dans Df | definition | Prax1, S3 |
 | D5 | f majoree par M sur D : pour tout x dans D, f(x) <= M | definition | Prax3, S5 |
 | D6 | f admet un maximum f(x0) sur D : pour tout x dans D, f(x) <= f(x0) | definition | Prax4, S6 |
-| T1 | f et g croissantes sur I => f + g croissante sur I | demontre | Prax5, S7 |
+| T1 | f et g croissantes sur I => f + g croissante sur I | demontre | Prax5a, S7 |
 | T2 | f croissante et positive sur I => sqrt(f) croissante sur I | demontre | Prax6, S8 |
 | T3 | f decroissante et positive sur I => sqrt(f) decroissante sur I | demontre | Prax6, S8 |
 | T4 | f majoree sur I => sqrt(f) majoree sur I | demontre | Prax6 |
@@ -144,16 +144,17 @@ version: 0.1
 
 ### Skills (procedures a maitriser)
 - S1: Determiner l'ensemble de definition d'une fonction — notion: N1 — difficulte: 1 — entraine via: Prax0
-- S2: Prouver la monotonie par la definition — notion: N2 — difficulte: 2 — entraine via: Prax2
+- S2: Prouver la monotonie par la definition — notion: N2 — difficulte: 2 — entraine via: Prax2a, Prax2b
 - S3: Etudier la parite d'une fonction — notion: N3 — difficulte: 1 — entraine via: Prax1
-- S4: Montrer qu'une fonction est bornee (trouver M et m) — notion: N5 — difficulte: 2 — entraine via: Prax3
+- S4: Montrer qu'une fonction est bornee (trouver M et m) — notion: N5 — difficulte: 2 — entraine via: Prax3a, Prax3b, Prax3c
 - S5: Determiner le max/min d'une fonction sur un intervalle — notion: N5 — difficulte: 2 — entraine via: Prax4
-- S6: Lire un tableau de variations et en deduire max/min — notion: N2, N5 — difficulte: 1 — entraine via: Prax4
-- S7: Utiliser les operations pour deduire les variations — notion: N6 — difficulte: 2 — entraine via: Prax5
+- S6: Lire un tableau de variations et en deduire max/min — notion: N2, N5 — difficulte: 1 — entraine via: Prax3c
+- S7: Utiliser les operations pour deduire les variations — notion: N6 — difficulte: 2 — entraine via: Prax5a, Prax5b, Prax5c
 - S8: Etudier les variations de sqrt(f) a partir de celles de f — notion: N7 — difficulte: 2 — entraine via: Prax6
-- S9: Tracer une courbe par transformation a partir d'une courbe de reference — notion: N9 — difficulte: 1 — entraine via: Prax7
-- S10: Resoudre graphiquement une equation ou inequation — notion: N10 — difficulte: 1 — entraine via: Prax8
-- S11: Donner l'expression d'une fonction affine par morceaux (avec valeur absolue) — notion: N8 — difficulte: 1 — entraine via: Prax9
+- S9: Tracer une courbe par transformation a partir d'une courbe de reference — notion: N9 — difficulte: 1 — entraine via: Prax7a, Prax7b, Prax7c, Prax7d, Prax7e
+- S10: Resoudre graphiquement une equation ou inequation — notion: N10 — difficulte: 1 — entraine via: Prax8a, Prax8b
+- S11: Donner l'expression d'une fonction affine par morceaux (avec valeur absolue) — notion: N8 — difficulte: 1 — entraine via: Prax9a
+- S12: Travailler avec la partie entiere E(x) — notion: N8.3 — difficulte: 1 — entraine via: Prax9b
 
 ### Principles (comprendre en profondeur)
 - P1: La monotonie par la definition est une competence fondamentale qui sera replacee par la derivee — mais la definition reste necessaire quand la derivee ne s'applique pas
@@ -185,6 +186,11 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 
 ## 8) Praxeologies — patterns d'exercices
 
+> **Regle de granularite** : une praxeologie = un type de tache + une technique.
+> Si deux exercices utilisent des techniques differentes (theoremes differents, methodes differentes),
+> ce sont deux praxeologies distinctes. Notation Prax5a, Prax5b pour regrouper
+> des variantes d'un meme theme.
+
 ### Prax0 — Determiner l'ensemble de definition
 - **Notions mobilisees** : N1
 - **Type de tache (T)** : Trouver Df pour une fonction donnee (fraction, racine, composee)
@@ -203,23 +209,50 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 - **Exemples canoniques** : f(x) = x^2+2 (paire), f(x) = (x^3-x)/(|x|+4) (impaire), f(x) = sqrt(x)-1 (ni l'un ni l'autre car Df non symetrique)
 - **Difficulte** : 1
 
-### Prax2 — Prouver la monotonie par la definition
-- **Notions mobilisees** : N2.1, N2.2, N2.3
-- **Type de tache (T)** : Montrer qu'une fonction est croissante (ou decroissante) sur un intervalle I
-- **Technique (tau)** : Methode 1 — Prendre a, b dans I avec a <= b, montrer que f(a) <= f(b) (ou f(a) >= f(b)) par manipulation d'inegalites. Methode 2 — Calculer le taux de variation T = (f(b)-f(a))/(b-a) et determiner son signe.
-- **Technologie (theta)** : La monotonie est une propriete globale sur I. Le taux de variation a le meme signe que f(b)-f(a) car b-a > 0.
-- **Variables didactiques** : type de fonction (polynome, rationnelle, irrationnelle), methode imposee ou au choix, sens de variation a determiner ou donne
-- **Exemples canoniques** : f(x) = -4/(x+3) + 1 sur ]-3, +inf[ (croissante), f(x) = x/(x-2) sur ]2,4] par taux de variation
+### Prax2a — Prouver la monotonie par comparaison directe
+- **Notions mobilisees** : N2.1, N2.2
+- **Type de tache (T)** : Montrer que f est croissante (ou decroissante) sur I par la definition
+- **Technique (tau)** : Prendre a, b dans I avec a <= b. Calculer f(b) - f(a). Factoriser / mettre au meme denominateur. Determiner le signe (en utilisant a <= b et les contraintes de I). Conclure f(a) <= f(b) donc f croissante.
+- **Technologie (theta)** : Definition directe de la monotonie : pour tout a <= b dans I, f(a) <= f(b)
+- **Variables didactiques** : type de fonction (polynome, rationnelle, irrationnelle), factorisation facile ou delicate, signe dependant de I
+- **Exemples canoniques** : f(x) = -4/(x+3) + 1 sur ]-3, +inf[ (croissante), f(x) = x^2 sur R+ (croissante)
 - **Difficulte** : 2
 
-### Prax3 — Montrer qu'une fonction est majoree/minoree/bornee
-- **Notions mobilisees** : N5.1, N5.2, N5.3
-- **Type de tache (T)** : Prouver que pour tout x dans D, m <= f(x) <= M
-- **Technique (tau)** : Methode 1 — Etudier le signe de f(x) - M (montrer <= 0) et f(x) - m (montrer >= 0), souvent via identite remarquable. Methode 2 — Enchainer des inegalites a partir d'une inegalite connue (x^2 >= 0, |cos x| <= 1). Methode 3 — Utiliser le tableau de variations si disponible.
-- **Technologie (theta)** : f(x) - M = -(carre) / (positif) <= 0 est le pattern typique
-- **Variables didactiques** : bornes a trouver ou donnees, technique imposee ou libre, fonction avec cos/sin (combiner avec |cos x| <= 1)
-- **Exemples canoniques** : f(x) = x/(1+x^2) bornee par [-1/2, 1/2], f(x) = x^2/(1+x+x^2) bornee par [0, 4/3]
+### Prax2b — Prouver la monotonie par le taux de variation
+- **Notions mobilisees** : N2.1, N2.3
+- **Type de tache (T)** : Montrer que f est croissante (ou decroissante) sur I via le signe du taux de variation
+- **Technique (tau)** : Prendre a, b dans I avec a < b. Calculer T = (f(b)-f(a))/(b-a). Simplifier et determiner le signe de T. Comme b-a > 0, le signe de T est celui de f(b)-f(a). Conclure.
+- **Technologie (theta)** : T > 0 => f(b) > f(a) => f croissante. T a le meme signe que f(b)-f(a) car b-a > 0.
+- **Variables didactiques** : fonction rationnelle (simplification du quotient), sens donne ou a determiner
+- **Exemples canoniques** : f(x) = x/(x-2) sur ]2,4] par T = -2/((b-2)(a-2)) < 0
 - **Difficulte** : 2
+
+### Prax3a — Majoration/minoration par le signe de f(x) - M
+- **Notions mobilisees** : N5.1, N5.3
+- **Type de tache (T)** : Prouver que f(x) <= M (ou f(x) >= m) pour tout x dans D
+- **Technique (tau)** : Calculer f(x) - M. Transformer en une expression dont le signe est evident : -(carre)/(positif), ou -(identite remarquable)/(positif). Conclure f(x) - M <= 0.
+- **Technologie (theta)** : f(x) - M = -(x-a)^2 / Q(x) <= 0 est le pattern typique des fractions rationnelles bornees
+- **Variables didactiques** : bornes M donnees ou a trouver, identite remarquable visible ou cachee
+- **Exemples canoniques** : f(x) = x/(1+x^2), montrer f(x) <= 1/2 via f(x)-1/2 = -(x-1)^2/(2(1+x^2))
+- **Difficulte** : 2
+
+### Prax3b — Majoration/minoration par enchainement d'inegalites
+- **Notions mobilisees** : N5.1, N5.3
+- **Type de tache (T)** : Encadrer f(x) a partir d'inegalites connues
+- **Technique (tau)** : Partir d'une inegalite de base (x^2 >= 0, 0 <= cos^2(x) <= 1, |x| >= 0). Enchainer les operations compatibles avec les inegalites (ajouter, multiplier par un positif, prendre l'inverse en changeant le sens). Arriver a m <= f(x) <= M.
+- **Technologie (theta)** : Les inegalites se conservent par addition et par multiplication par un positif. L'inverse renverse le sens.
+- **Variables didactiques** : nombre d'etapes, presence de fonctions trigonometriques, inegalite de depart a identifier
+- **Exemples canoniques** : 0 <= x^2 => 1 <= 1+x^2 => 1/(1+x^2) <= 1
+- **Difficulte** : 1-2
+
+### Prax3c — Majoration/minoration par tableau de variations
+- **Notions mobilisees** : N5.1, N5.2, N2
+- **Type de tache (T)** : Deduire les bornes de f a partir de son tableau de variations
+- **Technique (tau)** : Lire le tableau de variations. Identifier les extrema locaux et les valeurs aux bornes de l'intervalle. En deduire le maximum et le minimum globaux sur I.
+- **Technologie (theta)** : Le tableau de variations donne les extrema locaux ; sur un intervalle ferme, le max/min global est atteint soit aux bornes soit aux extrema locaux.
+- **Variables didactiques** : intervalle ferme ou ouvert, limites infinies aux bornes, plusieurs extrema locaux
+- **Exemples canoniques** : f croissante de 1 a 5 sur [0,3] puis decroissante de 5 a 2 sur [3,7] => max = 5, min = 1
+- **Difficulte** : 1
 
 ### Prax4 — Determiner le maximum ou minimum
 - **Notions mobilisees** : N5.2, N2
@@ -230,49 +263,121 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 - **Exemples canoniques** : f(x) = 3(x-4)^2 + 8 minimum en x=4, f(x) = -2x^3 + 42x^2 maximum sur [14,20]
 - **Difficulte** : 2
 
-### Prax5 — Variations par operations sur les fonctions
-- **Notions mobilisees** : N6.1, N6.2, N6.3, N2
-- **Type de tache (T)** : Deduire les variations de f a partir de sa decomposition en somme/produit de fonctions connues
-- **Technique (tau)** : Decomposer f = u + v (ou f = lambda.u). Si u et v sont toutes deux croissantes (resp. decroissantes) sur I, alors f aussi. Si f = lambda.u avec lambda > 0, meme sens ; lambda < 0, sens contraire.
-- **Technologie (theta)** : T1 (somme de fonctions monotones de meme sens). ATTENTION : ne marche PAS pour le produit en general.
-- **Variables didactiques** : nombre de termes, presence de 1/x ou sqrt(x), sens opposes (impossibilite de conclure)
-- **Exemples canoniques** : f(x) = -x + 1/x (somme de deux decroissantes sur R+*), f(x) = (x^2+3).sqrt(x) (produit de positives croissantes sur R+)
+### Prax5a — Variations d'une somme de fonctions monotones
+- **Notions mobilisees** : N6.1, N6.2
+- **Type de tache (T)** : Deduire les variations de f = u + v a partir des variations de u et v
+- **Technique (tau)** : Identifier u et v telles que f = u + v. Verifier que u et v sont monotones de meme sens sur I. Conclure : somme de croissantes => croissante (resp. decroissantes => decroissante).
+- **Technologie (theta)** : Theoreme T1 — la somme conserve le sens de variation quand les deux fonctions varient dans le meme sens
+- **Variables didactiques** : nombre de termes, presence de fonctions de reference (1/x, sqrt(x)), sens opposes (impossibilite de conclure directement)
+- **Exemples canoniques** : f(x) = -x + 1/x sur R+* (somme de deux decroissantes), f(x) = x + sqrt(x) sur R+ (somme de deux croissantes)
 - **Difficulte** : 2
+
+### Prax5b — Variations d'un produit de fonctions positives
+- **Notions mobilisees** : N6.1, N2
+- **Type de tache (T)** : Deduire les variations de f = u.v quand u et v sont positives et monotones de meme sens
+- **Technique (tau)** : Verifier que u >= 0 et v >= 0 sur I. Verifier que u et v sont monotones de meme sens. Conclure : produit de positives croissantes => croissante. ATTENTION : sans positivite, la regle est FAUSSE.
+- **Technologie (theta)** : Si u, v >= 0 et croissantes : pour a <= b, u(a).v(a) <= u(b).v(a) <= u(b).v(b) car on multiplie par des positifs
+- **Variables didactiques** : positivite evidente ou a verifier, fonctions qui changent de signe (piege)
+- **Exemples canoniques** : f(x) = (x^2+3).sqrt(x) sur R+ (produit de positives croissantes), g(x) = x(x-2) sur R (PIEGE : x-2 < 0 pour x < 2)
+- **Difficulte** : 2
+
+### Prax5c — Variations de lambda.f (multiplication par un scalaire)
+- **Notions mobilisees** : N6.3, N2
+- **Type de tache (T)** : Deduire les variations de g = lambda.f a partir de celles de f
+- **Technique (tau)** : Si lambda > 0, g a le meme sens de variation que f. Si lambda < 0, g a le sens contraire.
+- **Technologie (theta)** : Multiplier par un positif conserve les inegalites, multiplier par un negatif les inverse
+- **Variables didactiques** : lambda entier ou fractionnaire, lambda negatif (inversion du sens), combinaison avec Prax5a
+- **Exemples canoniques** : f(x) = -3/x sur R+* (= (-3) . (1/x), 1/x decroissante, lambda = -3 < 0 => f croissante)
+- **Difficulte** : 1
 
 ### Prax6 — Etude de sqrt(f)
 - **Notions mobilisees** : N7.1, N7.2, N7.3, N1
 - **Type de tache (T)** : Determiner Df, etudier les variations de g(x) = sqrt(f(x))
 - **Technique (tau)** : (1) Df = {x : f(x) >= 0}. (2) Appliquer T2/T3 : si f positive et croissante (resp. decroissante) alors sqrt(f) aussi.
 - **Technologie (theta)** : Theoremes T2, T3, T4 — la racine carree conserve la monotonie et la majoration (quand f >= 0)
-- **Variables didactiques** : f polynomiale ou rationnelle, enchainement avec Prax5
+- **Variables didactiques** : f polynomiale ou rationnelle, enchainement avec Prax5a
 - **Exemples canoniques** : g(x) = sqrt(x+1) (croissante), h(x) = sqrt(x(1-x)) (variations non triviales)
 - **Difficulte** : 2
 
-### Prax7 — Construction de courbes par transformation
-- **Notions mobilisees** : N9.1, N9.2, N9.3, N9.4, N9.5
-- **Type de tache (T)** : Tracer la courbe de g a partir de celle de f, en identifiant la transformation geometrique
-- **Technique (tau)** : Identifier la relation entre g et f (g(x) = f(x)+b, f(x-a), -f(x), |f(x)|, f(|x|)). En deduire la transformation (translation, symetrie, rabattement).
-- **Technologie (theta)** : Les transformations sont la lecture geometrique des operations algebriques
-- **Variables didactiques** : type de transformation, composition de transformations, courbe de depart donnee ou a tracer
-- **Exemples canoniques** : f(x) = (1-3x)/x = 1/x - 3 => translation de y=1/x par -3j ; f(x) = sqrt(x+1) => translation de y=sqrt(x) par -i
+### Prax7a — Construction de courbe par translation verticale
+- **Notions mobilisees** : N9.1
+- **Type de tache (T)** : Tracer la courbe de g(x) = f(x) + b a partir de celle de f
+- **Technique (tau)** : Identifier b dans g(x) = f(x) + b. Translater chaque point de Cf du vecteur b.j (vers le haut si b > 0, vers le bas si b < 0).
+- **Technologie (theta)** : Ajouter b a l'ordonnee = translater verticalement de b unites
+- **Variables didactiques** : b positif ou negatif, decomposition prealable pour faire apparaitre f(x) + b
+- **Exemples canoniques** : g(x) = 1/x - 3 => Cf translatee de -3j par rapport a y = 1/x
 - **Difficulte** : 1
 
-### Prax8 — Resolution graphique
-- **Notions mobilisees** : N10.1, N10.2
-- **Type de tache (T)** : Resoudre graphiquement f(x) = g(x) ou f(x) <= g(x)
-- **Technique (tau)** : Tracer Cf et Cg. Equations : lire les abscisses des points d'intersection. Inequations : lire les intervalles ou une courbe est au-dessus/au-dessous de l'autre.
-- **Technologie (theta)** : f(x) = g(x) <=> le point (x, f(x)) est sur les deux courbes. f(x) <= g(x) <=> Cf est en dessous de Cg.
-- **Variables didactiques** : nombre de solutions, precision demandee, reformulation prealable (ramener a f(x) <= g(x))
-- **Exemples canoniques** : (1-3x)/x = -2x^2 (3 solutions), sqrt(x+1)-1 <= 2x
+### Prax7b — Construction de courbe par translation horizontale
+- **Notions mobilisees** : N9.2
+- **Type de tache (T)** : Tracer la courbe de g(x) = f(x - a) a partir de celle de f
+- **Technique (tau)** : Identifier a dans g(x) = f(x - a). Translater chaque point de Cf du vecteur a.i (vers la droite si a > 0, vers la gauche si a < 0).
+- **Technologie (theta)** : Remplacer x par x-a decale la courbe de a unites vers la droite
+- **Variables didactiques** : a positif ou negatif, ecriture sous forme f(x-a) pas toujours evidente
+- **Exemples canoniques** : g(x) = sqrt(x+1) = sqrt(x-(-1)) => Cf de sqrt(x) translatee de -i
+- **Difficulte** : 1
+
+### Prax7c — Construction de courbe par symetrie / Ox
+- **Notions mobilisees** : N9.3
+- **Type de tache (T)** : Tracer la courbe de g(x) = -f(x) a partir de celle de f
+- **Technique (tau)** : Prendre la symetrique de chaque point de Cf par rapport a l'axe Ox (changer le signe de l'ordonnee).
+- **Technologie (theta)** : g(x) = -f(x) => le point (x, g(x)) est le symetrique de (x, f(x)) par rapport a Ox
+- **Variables didactiques** : identification du facteur -1, combinaison avec translation
+- **Exemples canoniques** : g(x) = -x^2 => symetrie de la parabole y = x^2 par rapport a Ox
+- **Difficulte** : 1
+
+### Prax7d — Construction de courbe par rabattement |f(x)|
+- **Notions mobilisees** : N9.4
+- **Type de tache (T)** : Tracer la courbe de g(x) = |f(x)| a partir de celle de f
+- **Technique (tau)** : Garder la partie de Cf qui est au-dessus de Ox (f(x) >= 0). Rabattre la partie en dessous de Ox par symetrie / Ox (f(x) < 0 => |f(x)| = -f(x) > 0).
+- **Technologie (theta)** : |f(x)| = f(x) si f(x) >= 0, |f(x)| = -f(x) si f(x) < 0
+- **Variables didactiques** : nombre de passages par 0, combinaison avec d'autres transformations
+- **Exemples canoniques** : g(x) = |x^2 - 1| => rabattement de la partie negative de la parabole y = x^2-1
+- **Difficulte** : 1
+
+### Prax7e — Construction de courbe par symetrisation f(|x|)
+- **Notions mobilisees** : N9.5
+- **Type de tache (T)** : Tracer la courbe de g(x) = f(|x|) a partir de celle de f
+- **Technique (tau)** : Tracer Cf sur R+ (partie droite). Completer par symetrie par rapport a l'axe Oy pour obtenir la partie gauche. La courbe obtenue est toujours symetrique / Oy (g est paire).
+- **Technologie (theta)** : f(|x|) = f(x) si x >= 0 et f(|x|) = f(-x) si x < 0, donc g(-x) = f(|-x|) = f(|x|) = g(x) => g paire
+- **Variables didactiques** : f definie seulement sur R+ ou sur R entier, lien avec la parite
+- **Exemples canoniques** : g(x) = |x|^2 - |x| = x^2 - |x| => parabole symetrisee
+- **Difficulte** : 1
+
+### Prax8a — Resolution graphique d'equations
+- **Notions mobilisees** : N10.1
+- **Type de tache (T)** : Resoudre graphiquement f(x) = g(x) (ou f(x) = k)
+- **Technique (tau)** : Tracer Cf et Cg (ou Cf et la droite y = k). Lire les abscisses des points d'intersection. Donner le nombre de solutions et leurs valeurs (exactes ou approchees).
+- **Technologie (theta)** : f(x) = g(x) <=> le point (x, f(x)) appartient aux deux courbes
+- **Variables didactiques** : nombre de solutions, precision demandee, reformulation prealable (ramener a f(x) = k)
+- **Exemples canoniques** : (1-3x)/x = -2x^2 => 3 points d'intersection
+- **Difficulte** : 1
+
+### Prax8b — Resolution graphique d'inequations
+- **Notions mobilisees** : N10.2
+- **Type de tache (T)** : Resoudre graphiquement f(x) <= g(x) (ou f(x) >= k)
+- **Technique (tau)** : Tracer Cf et Cg. Identifier les zones ou Cf est en dessous de Cg (pour <=) ou au-dessus (pour >=). Lire les intervalles solutions sur l'axe des abscisses.
+- **Technologie (theta)** : f(x) <= g(x) <=> le point (x, f(x)) est en dessous ou sur Cg
+- **Variables didactiques** : intervalles ouverts ou fermes, reformulation prealable, positions relatives a lire
+- **Exemples canoniques** : sqrt(x+1) - 1 <= 2x => lire l'intervalle ou la courbe est en dessous de la droite
 - **Difficulte** : 1-2
 
-### Prax9 — Fonctions affines par morceaux et partie entiere
-- **Notions mobilisees** : N8.1, N8.2, N8.3
-- **Type de tache (T)** : Donner l'expression d'une fonction definie par morceaux (souvent avec |.|) et/ou tracer sa courbe. Pour E(x) : determiner E(x) sur chaque intervalle [n, n+1[.
-- **Technique (tau)** : Lever la valeur absolue en distinguant les cas (signe de l'argument). Pour E(x) : encadrer x entre deux entiers consecutifs.
-- **Technologie (theta)** : |a| = a si a >= 0, |a| = -a si a < 0. E(x) = n <=> n <= x < n+1.
-- **Variables didactiques** : nombre de valeurs absolues, combinaisons E(x) - 2E(x/2), fonctions type f(x) = E(x) + sqrt(x - E(x))
-- **Exemples canoniques** : f(x) = |2x-1| - 3x, g(x) = 2 - 2|x|, f(x) = E(x) - 2E(x/2)
+### Prax9a — Ecriture d'une fonction avec valeurs absolues par morceaux
+- **Notions mobilisees** : N8.1, N8.2
+- **Type de tache (T)** : Donner l'expression sans valeur absolue d'une fonction definie avec |.|, et tracer sa courbe
+- **Technique (tau)** : Identifier les expressions dans les |.|. Determiner les valeurs de changement de signe. Lever chaque valeur absolue sur chaque intervalle. Simplifier l'expression par morceaux.
+- **Technologie (theta)** : |a| = a si a >= 0, |a| = -a si a < 0
+- **Variables didactiques** : nombre de valeurs absolues (1 ou 2), expressions lineaires ou non, combinaison avec d'autres termes
+- **Exemples canoniques** : f(x) = |2x-1| - 3x, g(x) = 2 - 2|x|, h(x) = |x-1| + |x+2|
+- **Difficulte** : 1
+
+### Prax9b — Fonctions avec partie entiere E(x)
+- **Notions mobilisees** : N8.3
+- **Type de tache (T)** : Determiner l'expression de f sur chaque intervalle [n, n+1[ et tracer sa courbe (escalier)
+- **Technique (tau)** : Encadrer x entre deux entiers consecutifs : n <= x < n+1 => E(x) = n. Remplacer E(x) par n dans l'expression de f. Tracer segment par segment avec points fermes a gauche, ouverts a droite.
+- **Technologie (theta)** : E(x) = n <=> n <= x < n+1. La courbe est en escalier, continue a gauche.
+- **Variables didactiques** : expression simple E(x) ou composee E(x) - 2E(x/2), combinaison avec sqrt ou d'autres fonctions
+- **Exemples canoniques** : f(x) = E(x), f(x) = x - E(x) (partie fractionnaire), f(x) = E(x) - 2E(x/2)
 - **Difficulte** : 1-2
 
 ### Prax10 — Probleme de modelisation avec optimisation

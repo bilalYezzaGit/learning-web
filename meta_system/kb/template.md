@@ -85,10 +85,16 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 
 ## 8) Praxeologies — patterns d'exercices
 
+> **Regle de granularite** : une praxeologie = un type de tache + une technique.
+> Si deux exercices utilisent des techniques differentes (theoremes differents, methodes differentes),
+> ce sont deux praxeologies distinctes. Utiliser la notation Prax5a, Prax5b pour regrouper
+> des variantes d'un meme theme.
+> Le champ "Technique" doit decrire UNE SEULE methode — jamais "Methode 1 / Methode 2".
+
 ### Prax1 — [Nom court]
 - **Notions mobilisees** : N1, N2.1
 - **Type de tache (T)** : ce qu'on demande a l'eleve
-- **Technique (tau)** : la methode a appliquer
+- **Technique (tau)** : UNE methode precise a appliquer (pas d'alternatives)
 - **Technologie (theta)** : pourquoi la technique fonctionne
 - **Variables didactiques** : parametres qu'on peut varier pour changer la difficulte
 - **Exemples canoniques** : les classiques tunisiens pour ce type
