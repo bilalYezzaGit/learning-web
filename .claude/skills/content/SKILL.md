@@ -1,12 +1,12 @@
 ---
 name: content
-description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/atoms/ or content/molecules/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon, module.
+description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/{programme}/{module}/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon, module.
 argument-hint: "[action] [details]"
 ---
 
 # Content Management
 
-Skill de gestion du contenu pedagogique : atomes MDX (`content/atoms/`) et molecules YAML (`content/molecules/`).
+Skill de gestion du contenu pedagogique : atomes MDX (`content/{programme}/{module}/`) et molecules YAML (`content/{programme}/{module}/_molecules/`).
 
 ## Routing
 
@@ -14,16 +14,10 @@ Determine l'action a partir de `$ARGUMENTS` ou du contexte utilisateur :
 
 | Intent | Workflow | Quand |
 |--------|----------|-------|
-| **Create programme** | [actions/create-programme.md](actions/create-programme.md) | "create-programme", "tous les modules", "programme complet" |
-| **Create module** | [actions/create-module.md](actions/create-module.md) | "create-module", "module complet", "creer le module" |
 | **Creer** | [Creation](#creation-workflow) | ajouter, creer, nouveau, ecrire un atome/molecule |
 | **Editer** | [Edition](#edition-workflow) | modifier, corriger, editer, renommer |
 | **Valider** | [Validation](#validation-workflow) | valider, verifier, checker, audit |
 | **Lister** | [Listing](#listing-workflow) | lister, inventaire, combien, quels atomes |
-
-**Priority de routing** :
-1. Si `$ARGUMENTS` commence par `create-programme` → [actions/create-programme.md](actions/create-programme.md) — pipeline complet pour TOUS les modules d'un programme (recherche mutualisee + creation par batch + review globale)
-2. Si `$ARGUMENTS` commence par `create-module` → [actions/create-module.md](actions/create-module.md) — pipeline pour UN module (recherche + creation + review)
 
 ---
 
@@ -59,7 +53,7 @@ Determine l'action a partir de `$ARGUMENTS` ou du contexte utilisateur :
 
 4. **Si renommage d'ID** : chercher les molecules qui referencent cet ID et les mettre a jour
    ```
-   Grep pattern: ancien-id dans content/molecules/**/*.yaml
+   Grep pattern: ancien-id dans content/**/_molecules/*.yaml
    ```
 
 5. **Ecrit le fichier** modifie
@@ -84,8 +78,8 @@ Determine l'action a partir de `$ARGUMENTS` ou du contexte utilisateur :
 - [ ] `tags` contient au moins 1 tag
 - [ ] `category` present ssi `type: exercise`
 - [ ] Structure MDX correcte pour le type (voir section type)
-- [ ] Exercises : `<Enonce>` + `<Solution>` obligatoires
-- [ ] QCM : `<Question>` + 2-5 `<Option>` (une seule `correct`) + `<Explanation>`
+- [ ] Exercises : `:::enonce` + `:::solution` obligatoires
+- [ ] QCM : `:::question` + 2-5 `:::option` (une seule `{correct}`) + `:::explanation`
 - [ ] LaTeX : `$...$` inline et `$$...$$` bloc (pas de HTML)
 - [ ] Headings commencent a `###`
 - [ ] Pas de composants non autorises
@@ -93,9 +87,9 @@ Determine l'action a partir de `$ARGUMENTS` ou du contexte utilisateur :
 ### Checklist molecule
 
 - [ ] Tous les champs obligatoires presents
-- [ ] Tous les IDs d'atomes references existent dans `content/atoms/`
+- [ ] Tous les IDs d'atomes references existent dans le module correspondant
 - [ ] Groupes `quiz` : 2 a 5 QCM
-- [ ] Cours : `programme`, `trimester`, `order` presents
+- [ ] Cours : `trimester`, `order` presents
 - [ ] Serie : `difficulty`, `tags` presents, minimum 2 steps
 
 4. **Rapporte** les problemes trouves avec fichier:ligne et suggestion de fix
@@ -108,15 +102,14 @@ Utilise Glob et Grep pour repondre aux questions d'inventaire :
 
 | Question | Commande |
 |----------|----------|
-| Tous les atomes | `Glob: content/atoms/*.mdx` |
-| Atomes d'un topic | `Glob: content/atoms/*-{topic}-*.mdx` |
-| Atomes d'un type | `Glob: content/atoms/{type}-*.mdx` |
-| Atomes avec un tag | `Grep: pattern "- {tag}" dans content/atoms/` |
-| Molecules cours | `Glob: content/molecules/cours/*.yaml` |
-| Molecules series | `Glob: content/molecules/series/*.yaml` |
-| Programmes | `Glob: content/molecules/programmes/*.yaml` |
-| Atomes orphelins | Glob tous les atomes, Grep tous les IDs dans molecules, diff |
-| References a un atome | `Grep: pattern "{atom-id}" dans content/molecules/` |
+| Tous les atomes | `Glob: content/**/*.mdx` |
+| Atomes d'un topic | `Glob: content/**/*-{topic}-*.mdx` |
+| Atomes d'un type | `Glob: content/**/{type}-*.mdx` |
+| Atomes avec un tag | `Grep: pattern "- {tag}" dans content/` glob `*.mdx` |
+| Molecules cours/series | `Glob: content/**/_molecules/*.yaml` |
+| Programmes | `Glob: content/*/_programme.yaml` |
+| Atomes orphelins | Glob tous les atomes, Grep tous les IDs dans `_molecules/`, diff |
+| References a un atome | `Grep: pattern "{atom-id}" dans content/**/_molecules/` |
 
 ---
 
@@ -125,10 +118,9 @@ Utilise Glob et Grep pour repondre aux questions d'inventaire :
 ### Nommage des fichiers
 
 ```
-Atomes:    content/atoms/{type}-{topic}-{slug}.mdx
-Cours:     content/molecules/cours/{slug}.yaml
-Series:    content/molecules/series/{slug}.yaml
-Programme: content/molecules/programmes/{id}.yaml
+Atomes:    content/{programme}/{module}/{type}-{topic}-{slug}.mdx
+Molecules: content/{programme}/{module}/_molecules/{slug}.yaml
+Programme: content/{programme}/_programme.yaml
 ```
 
 ### Frontmatter par type
@@ -144,27 +136,26 @@ Programme: content/molecules/programmes/{id}.yaml
 
 Categories exercice : `application`, `approfondissement`, `synthese`, `probleme`
 
-### Composants MDX autorises par type
+### Directives autorisees par type
 
-| Composant | lesson | exercise | qcm |
+| Directive | lesson | exercise | qcm |
 |-----------|--------|----------|-----|
-| `<Definition>` | optionnel | - | - |
-| `<Theorem>` | optionnel | - | - |
-| `<Property>` | optionnel | - | - |
-| `<Example>` | optionnel | - | - |
-| `<Remark>` | optionnel | - | - |
-| `<Attention>` | optionnel | - | - |
-| `<Enonce>` | - | **obligatoire** | - |
-| `<Solution>` | - | **obligatoire** | - |
-| `<Methode>` | - | optionnel | - |
-| `<Hint>` | - | optionnel | - |
-| `<Erreurs>` | - | optionnel | - |
-| `<Question>` | - | - | **obligatoire** |
-| `<Option>` | - | - | **2-5, une correct** |
-| `<Explanation>` | - | - | **obligatoire** |
-| `<Graph>` | oui | oui | - |
-| `<Variations>` | oui | oui | - |
-| `<YouTube>` | oui | - | - |
+| `:::definition[Titre]` | optionnel | - | - |
+| `:::theorem[Titre]` | optionnel | - | - |
+| `:::property[Titre]` | optionnel | - | - |
+| `:::example[Titre]` | optionnel | - | - |
+| `:::remark` | optionnel | - | - |
+| `:::attention[Titre]` | optionnel | - | - |
+| `:::enonce` | - | **obligatoire** | - |
+| `:::solution` | - | **obligatoire** | - |
+| `:::methode` | - | optionnel | - |
+| `:::hint` | - | optionnel | - |
+| `:::erreurs` | - | optionnel | - |
+| `:::question` | - | - | **obligatoire** |
+| `:::option` / `{correct}` | - | - | **2-5, une correct** |
+| `:::explanation` | - | - | **obligatoire** |
+| ` ```typst ` | oui | oui | - |
+| `::youtube{...}` | oui | - | - |
 
 ### Vocabulaire controle — Topics
 

@@ -10,9 +10,24 @@ tags: [fonctions, bornes, tableau-variations]
 :::enonce
 On considere une fonction $f$ definie sur $[0, 7]$ dont le tableau de variations est le suivant :
 
-| $x$ | $0$ | | $3$ | | $7$ |
-|---|---|---|---|---|---|
-| $f(x)$ | $1$ | $\nearrow$ | $5$ | $\searrow$ | $2$ |
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([variation de $f$], "v"),
+  ),
+  domain: ($0$, $3$, $7$),
+  contents: (
+    (
+      (bottom, $1$),
+      (top, $5$),
+      (bottom, $2$),
+    ),
+  ),
+)
+```
 
 1. Determiner le maximum de $f$ sur $[0, 7]$ et la valeur en laquelle il est atteint.
 2. Determiner le minimum de $f$ sur $[0, 7]$ et la valeur en laquelle il est atteint.

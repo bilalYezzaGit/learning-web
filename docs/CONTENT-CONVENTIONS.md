@@ -132,9 +132,9 @@ Structure libre en Markdown. Conventions :
 - Commencer par `###` (heading 3), jamais `#` ou `##` (reserves au layout de page)
 - Les definitions importantes sont en **gras**
 - Les formules cles sont en bloc LaTeX (`$$...$$`)
-- Pas de composants d'exercice (`<Enonce>`, `<Solution>`) — c'est du cours, pas un exercice
-- Composants de structure : `<Definition>`, `<Theorem>`, `<Property>`, `<Example>`, `<Remark>`, `<Attention>`
-- Composants enrichis : `<Graph>`, `<Variations>`, `<YouTube>`
+- Pas de directives d'exercice (`:::enonce`, `:::solution`) — c'est du cours, pas un exercice
+- Directives de structure : `:::definition[Titre]`, `:::theorem[Titre]`, `:::property[Titre]`, `:::example[Titre]`, `:::remark`, `:::attention[Titre]`
+- Contenu enrichi : blocs Typst (` ```typst `) pour graphiques (`cetz-plot`) et tableaux de variations (`vartable`), `::youtube{id="..." title="..."}`
 
 ```mdx
 ---
@@ -156,44 +156,44 @@ $$\lim_{x \to a} f(x) = f(a)$$
 
 ### 2.2 Exercise
 
-Structure obligatoire avec composants MDX :
+Structure obligatoire avec directives :
 
 ```mdx
-<Enonce>
+:::enonce
 Texte de l'enonce. Peut contenir du LaTeX, des listes, etc.
-</Enonce>
+:::
 
-<Solution>
+:::solution
 Solution detaillee.
-</Solution>
+:::
 ```
 
-Composants optionnels (apres `<Solution>`) :
+Directives optionnelles (apres `:::solution`) :
 
 ```mdx
-<Methode>
+:::methode
 Rappel de la methode generale applicable.
-</Methode>
+:::
 
-<Hint>
+:::hint
 Indication pour aider l'eleve a demarrer.
-</Hint>
+:::
 
-<Erreurs>
+:::erreurs
 Erreurs frequentes a eviter.
-</Erreurs>
+:::
 ```
 
 **Regles** :
-- `<Enonce>` et `<Solution>` sont **obligatoires**
-- `<Methode>`, `<Hint>`, `<Erreurs>` sont optionnels
-- Ordre strict : Enonce → Solution → Methode → Hint → Erreurs
-- Pas de contenu hors des composants (pas de texte "flottant" avant ou apres)
-- Un seul `<Enonce>`, un seul `<Solution>` par atome
+- `:::enonce` et `:::solution` sont **obligatoires**
+- `:::methode`, `:::hint`, `:::erreurs` sont optionnels
+- Ordre strict : enonce → solution → methode → hint → erreurs
+- Pas de contenu hors des directives (pas de texte "flottant" avant ou apres)
+- Un seul `:::enonce`, un seul `:::solution` par atome
 
 ### 2.3 QCM
 
-Une seule question par atome. Format composants MDX :
+Une seule question par atome. Format directives :
 
 ```mdx
 ---
@@ -204,26 +204,37 @@ timeMinutes: 1
 tags: [continuite, polynomes]
 ---
 
-<Question>
+:::question
 Une fonction polynome est continue sur :
-</Question>
+:::
 
-<Option>$\mathbb{R}^+$ seulement</Option>
-<Option>$\mathbb{R}^*$</Option>
-<Option correct>$\mathbb{R}$</Option>
-<Option>Un intervalle borne</Option>
+:::option
+$\mathbb{R}^+$ seulement
+:::
 
-<Explanation>
+:::option
+$\mathbb{R}^*$
+:::
+
+:::option{correct}
+$\mathbb{R}$
+:::
+
+:::option
+Un intervalle borne
+:::
+
+:::explanation
 Les polynomes sont continus sur tout $\mathbb{R}$, sans exception.
-</Explanation>
+:::
 ```
 
 **Regles** :
-- `<Question>` obligatoire, une seule, contient l'enonce
-- De **2 a 5 `<Option>`**, une seule avec l'attribut `correct`
-- `<Explanation>` obligatoire, une seule, contient l'explication pedagogique
-- Ordre strict : Question → Options → Explanation
-- Pas de contenu hors des composants
+- `:::question` obligatoire, une seule, contient l'enonce
+- De **2 a 5 `:::option`**, une seule avec l'attribut `{correct}`
+- `:::explanation` obligatoire, une seule, contient l'explication pedagogique
+- Ordre strict : question → options → explanation
+- Pas de contenu hors des directives
 - L'explication doit etre pedagogique, pas juste "C'est la bonne reponse"
 
 ---
@@ -377,362 +388,385 @@ Tout le contenu mathematique utilise la syntaxe LaTeX standard.
 
 ---
 
-## 5. Composants MDX — Reference detaillee
+## 5. Directives MDX — Reference detaillee
 
-Seuls les composants listes ci-dessous sont autorises dans le contenu MDX. Tout autre composant est interdit (pas de `<Geogebra>`, `<Simulation>`, `<Manim>`, etc.).
+Toute la syntaxe de contenu utilise `remark-directive` (syntaxe `:::directive`). Seules les directives listees ci-dessous sont autorisees. Tout autre nom de directive est interdit.
 
 ### 5.1 Exercice
 
-#### `<Enonce>`
+#### `:::enonce`
 
 Enonce de l'exercice. Contient la question posee a l'eleve.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX) |
+| **Attributs** | aucun |
 | **Obligatoire** | Oui |
 | **Types autorises** | `exercise` |
 | **Rendu** | Bloc visible directement, sans collapse |
 
 **Exemple** :
 ```mdx
-<Enonce>
+:::enonce
 Soit $f(x) = x^2 - 3x + 2$. Determiner les racines de $f$.
-</Enonce>
+:::
 ```
 
-#### `<Solution>`
+#### `:::solution`
 
 Solution detaillee de l'exercice. Masquee par defaut, l'eleve clique pour reveler.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX) |
+| **Attributs** | aucun |
 | **Obligatoire** | Oui |
 | **Types autorises** | `exercise` |
 | **Rendu** | Bloc `<details>` vert avec icone, collapse ferme par defaut |
 
 **Exemple** :
 ```mdx
-<Solution>
+:::solution
 On cherche les racines : $\Delta = 9 - 8 = 1 > 0$.
 
 $$x_1 = \frac{3 - 1}{2} = 1 \quad ; \quad x_2 = \frac{3 + 1}{2} = 2$$
-</Solution>
+:::
 ```
 
-#### `<Methode>`
+#### `:::methode`
 
 Rappel de la methode generale applicable a ce type d'exercice.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX) |
+| **Attributs** | aucun |
 | **Obligatoire** | Non |
 | **Types autorises** | `exercise` |
 | **Rendu** | Bloc `<details>` bleu avec icone livre, collapse ferme par defaut |
 
 **Exemple** :
 ```mdx
-<Methode>
+:::methode
 Pour trouver les racines d'un polynome du second degre $ax^2 + bx + c$ :
 
 1. Calculer le discriminant $\Delta = b^2 - 4ac$
 2. Si $\Delta > 0$ : deux racines $x_{1,2} = \frac{-b \pm \sqrt{\Delta}}{2a}$
-</Methode>
+:::
 ```
 
-#### `<Hint>`
+#### `:::hint`
 
 Indication pour aider l'eleve a demarrer sans donner la solution.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX) |
+| **Attributs** | aucun |
 | **Obligatoire** | Non |
 | **Types autorises** | `exercise` |
 | **Rendu** | Bloc `<details>` ambre avec icone ampoule, collapse ferme par defaut |
 
 **Exemple** :
 ```mdx
-<Hint>
+:::hint
 Pensez a calculer le discriminant d'abord.
-</Hint>
+:::
 ```
 
-#### `<Erreurs>`
+#### `:::erreurs`
 
 Erreurs frequentes que les eleves commettent sur ce type d'exercice.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX) |
+| **Attributs** | aucun |
 | **Obligatoire** | Non |
 | **Types autorises** | `exercise` |
 | **Rendu** | Bloc `<details>` rouge avec icone alerte, collapse ferme par defaut |
 
 **Exemple** :
 ```mdx
-<Erreurs>
+:::erreurs
 - Oublier de verifier le signe du discriminant avant d'appliquer la formule
 - Confondre $-b$ avec $b$ dans la formule
-</Erreurs>
+:::
 ```
 
 ### 5.2 QCM
 
-#### `<Question>`
+#### `:::question`
 
 Enonce de la question QCM. Contient le texte de la question posee.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX) |
+| **Attributs** | aucun |
 | **Obligatoire** | Oui |
 | **Types autorises** | `qcm` |
 | **Rendu** | Data carrier — le contenu est extrait par le parser, pas rendu directement |
 
 **Exemple** :
 ```mdx
-<Question>
+:::question
 La derivee de $f(x) = x^3$ est :
-</Question>
+:::
 ```
 
-#### `<Option>`
+#### `:::option` / `:::option{correct}`
 
-Une option de reponse dans un QCM. De 2 a 5 par atome, une seule avec `correct`.
+Une option de reponse dans un QCM. De 2 a 5 par atome, une seule avec `{correct}`.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX), `correct` (boolean, optionnel) |
+| **Attributs** | `{correct}` (optionnel, marque la bonne reponse) |
 | **Obligatoire** | Oui (2 a 5) |
 | **Types autorises** | `qcm` |
 | **Rendu** | Data carrier — extrait par le parser |
 
 **Exemple** :
 ```mdx
-<Option>$x^2$</Option>
-<Option correct>$3x^2$</Option>
-<Option>$3x^3$</Option>
-<Option>$x^4$</Option>
+:::option
+$x^2$
+:::
+
+:::option{correct}
+$3x^2$
+:::
+
+:::option
+$3x^3$
+:::
+
+:::option
+$x^4$
+:::
 ```
 
-#### `<Explanation>`
+#### `:::explanation`
 
 Explication pedagogique de la bonne reponse. Affichee apres que l'eleve a repondu.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX) |
+| **Attributs** | aucun |
 | **Obligatoire** | Oui |
 | **Types autorises** | `qcm` |
 | **Rendu** | Data carrier — extrait par le parser |
 
 **Exemple** :
 ```mdx
-<Explanation>
+:::explanation
 On applique la regle $(x^n)' = nx^{n-1}$, donc $(x^3)' = 3x^2$.
-</Explanation>
+:::
 ```
 
 ### 5.3 Contenu enrichi
 
-#### `<Graph>`
+#### Blocs Typst
 
-Affiche le graphe d'une fonction mathematique avec des axes et une grille.
+Graphiques de fonctions et tableaux de variations sont rendus via des blocs de code Typst (` ```typst `). Le pipeline compile le Typst en SVG statique.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `function` ou `fn` (expression), `range` (intervalle x), `yRange` ou `y-range` (intervalle y, optionnel), `points` (points remarquables, optionnel), `hideFormula` ou `hide-formula` (boolean, optionnel) |
+| **Syntaxe** | Bloc de code ` ```typst ... ``` ` |
 | **Obligatoire** | Non |
 | **Types autorises** | `lesson`, `exercise` |
-| **Rendu** | Graphique interactif (Recharts) avec axes, grille, et courbe |
+| **Rendu** | SVG statique inline |
 
-**Exemple** :
-```mdx
-<Graph function="x^2 - 1" range="[-3, 3]" yRange="[-2, 8]" />
+**Graphique de fonction** (cetz-plot) :
+````mdx
+```typst
+#import "@preview/cetz:0.3.4"
+#import "@preview/cetz-plot:0.1.1": plot
+#cetz.canvas({
+  plot.plot(size: (8, 5), x-tick-step: 1, y-tick-step: 1, {
+    plot.add(domain: (-3, 3), x => calc.pow(x, 2) - 1)
+  })
+})
 ```
+````
 
-#### `<Variations>` + `<Row>`
+**Tableau de variations** (vartable) :
+````mdx
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+#tabvar(
+  init: (variable: $x$, label: [Variations de $f$]),
+  ($-oo$, (), $-1$, (), $2$, (), $+oo$),
+  ($f'(x)$, $+$, $0$, $-$, $0$, $+$),
+  ($f(x)$, $-oo$, arr(from: $-oo$, to: $3$), $3$, arr(from: $3$, to: $-1$), $-1$, arr(from: $-1$, to: $+oo$), $+oo$),
+)
+```
+````
 
-Tableau de variations d'une fonction (signe de la derivee + variations de f).
+Voir `.claude/skills/content/references/typst-snippets.md` pour les snippets copier-coller.
+
+#### `:::figure`
+
+Bloc figure avec legende optionnelle.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props (Variations)** | `var` (variable, defaut `"x"`), `intervals` (bornes du tableau) |
-| **Props (Row)** | `label` (nom de la ligne), `kind` (`"sign"` ou `"var"`), `values` (valeurs entre les bornes) |
+| **Attributs** | aucun |
 | **Obligatoire** | Non |
 | **Types autorises** | `lesson`, `exercise` |
-| **Rendu** | Tableau de variations formate avec fleches et signes |
+| **Rendu** | Bloc `<figure>` semantique |
 
-**Exemple** :
-```mdx
-<Variations var="x" intervals="[-∞, -1, 2, +∞]">
-  <Row label="f'(x)" kind="sign" values="[+, 0, -, 0, +]" />
-  <Row label="f(x)" kind="var" values="[-∞, ↗, 3, ↘, -1, ↗, +∞]" />
-</Variations>
-```
+#### `::youtube{id="..." title="..."}`
 
-#### `<YouTube>`
-
-Integre une video YouTube. Rendu responsive avec ratio 16:9.
+Integre une video YouTube. Directive feuille (leaf directive, `::` sans fermeture).
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `id` (ID de la video YouTube), `title` (titre accessible, optionnel) |
+| **Attributs** | `id` (ID de la video YouTube), `title` (titre accessible, optionnel) |
 | **Obligatoire** | Non |
 | **Types autorises** | `lesson` |
-| **Rendu** | iframe YouTube responsive |
+| **Rendu** | iframe YouTube responsive (ratio 16:9) |
 
 **Exemple** :
 ```mdx
-<YouTube id="dQw4w9WgXcQ" title="Introduction a la continuite" />
+::youtube{id="dQw4w9WgXcQ" title="Introduction a la continuite"}
 ```
 
 ### 5.4 Lesson Parts
 
-Composants de structure pour les lecons. Toujours visibles (pas de collapse). Definis dans `src/components/content/lesson-parts.tsx`.
+Directives de structure pour les lecons. Toujours visibles (pas de collapse). Transformees en HTML style par le plugin `remark-directive` dans `tools/pipeline/src/stages/compile-mdx.ts`.
 
-#### `<Definition>`
+#### `:::definition[Titre]`
 
 Definition formelle d'un concept mathematique.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX), `title` (string, optionnel — defaut : "Definition") |
+| **Attributs** | Titre entre crochets (optionnel — defaut : "Definition") |
 | **Obligatoire** | Non |
 | **Types autorises** | `lesson` |
 | **Rendu** | Bloc `<aside>` indigo avec icone BookText, toujours visible |
 
 **Exemple** :
 ```mdx
-<Definition title="Continuite en un point">
+:::definition[Continuite en un point]
 On dit que $f$ est **continue en $a$** si $\lim_{x \to a} f(x) = f(a)$.
-</Definition>
+:::
 ```
 
-#### `<Theorem>`
+#### `:::theorem[Titre]`
 
 Enonce d'un theoreme.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX), `title` (string, optionnel — defaut : "Theoreme") |
+| **Attributs** | Titre entre crochets (optionnel — defaut : "Theoreme") |
 | **Obligatoire** | Non |
 | **Types autorises** | `lesson` |
 | **Rendu** | Bloc `<aside>` violet avec icone ShieldCheck, toujours visible |
 
 **Exemple** :
 ```mdx
-<Theorem title="Theoreme des valeurs intermediaires">
+:::theorem[Theoreme des valeurs intermediaires]
 Soit $f$ continue sur $[a, b]$. Pour tout $k$ entre $f(a)$ et $f(b)$, il existe $c \in [a, b]$ tel que $f(c) = k$.
-</Theorem>
+:::
 ```
 
-#### `<Property>`
+#### `:::property[Titre]`
 
 Propriete ou corollaire.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX), `title` (string, optionnel — defaut : "Propriete") |
+| **Attributs** | Titre entre crochets (optionnel — defaut : "Propriete") |
 | **Obligatoire** | Non |
 | **Types autorises** | `lesson` |
 | **Rendu** | Bloc `<aside>` sky avec icone Puzzle, toujours visible |
 
 **Exemple** :
 ```mdx
-<Property title="Corollaire du TVI">
+:::property[Corollaire du TVI]
 Si $f(a) \times f(b) < 0$, alors il existe $c$ tel que $f(c) = 0$.
-</Property>
+:::
 ```
 
-#### `<Example>`
+#### `:::example[Titre]`
 
 Exemple travaille avec solution detaillee.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX), `title` (string, optionnel — defaut : "Exemple") |
+| **Attributs** | Titre entre crochets (optionnel — defaut : "Exemple") |
 | **Obligatoire** | Non |
 | **Types autorises** | `lesson` |
 | **Rendu** | Bloc `<aside>` emerald avec icone PenLine, toujours visible |
 
 **Exemple** :
 ```mdx
-<Example title="Application du TVI">
+:::example[Application du TVI]
 Montrer que $x^3 - 3x + 1 = 0$ admet une solution dans $[0, 1]$.
-</Example>
+:::
 ```
 
-#### `<Remark>`
+#### `:::remark`
 
 Note pedagogique ou precision importante.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX), `title` (string, optionnel — defaut : "Remarque") |
+| **Attributs** | Titre entre crochets (optionnel — defaut : "Remarque") |
 | **Obligatoire** | Non |
 | **Types autorises** | `lesson` |
 | **Rendu** | Bloc `<aside>` amber avec icone Info, toujours visible |
 
 **Exemple** :
 ```mdx
-<Remark>
+:::remark
 Le TVI garantit l'existence, pas l'unicite.
-</Remark>
+:::
 ```
 
-#### `<Attention>`
+#### `:::attention[Titre]`
 
 Piege ou erreur courante a eviter.
 
 | Propriete | Valeur |
 |-----------|--------|
-| **Props** | `children` (contenu MDX), `title` (string, optionnel — defaut : "Attention") |
+| **Attributs** | Titre entre crochets (optionnel — defaut : "Attention") |
 | **Obligatoire** | Non |
 | **Types autorises** | `lesson` |
 | **Rendu** | Bloc `<aside>` rose avec icone TriangleAlert, toujours visible |
 
 **Exemple** :
 ```mdx
-<Attention>
+:::attention
 Ne jamais oublier de verifier la continuite avant d'appliquer le TVI !
-</Attention>
+:::
 ```
 
 ---
 
-## 6. Extensibilite — Ajouter un nouveau composant
+## 6. Extensibilite — Ajouter une nouvelle directive
 
-### Ou vivent les composants
+### Ou vivent les directives
+
+Les directives sont gerees dans le pipeline de compilation, pas comme des composants React :
 
 ```
-src/
-├── components/content/
-│   ├── exercise-parts.tsx      # Enonce, Solution, Methode, Hint, Erreurs
-│   ├── lesson-parts.tsx        # Definition, Theorem, Property, Example, Remark, Attention
-│   ├── qcm-parts.tsx           # Question, Option, Explanation
-│   └── mdx-components.tsx      # Registre central
-└── content/extensions/
-    ├── graph.tsx                # Graph
-    ├── youtube.tsx              # YouTube
-    └── variations.tsx           # VariationsTable
+tools/pipeline/src/stages/
+├── compile-mdx.ts              # Plugin remark-directive : transforme :::directive en HTML
+│   ├── LESSON_PARTS            # definition, theorem, property, example, remark, attention
+│   ├── EXERCISE_PARTS          # enonce, solution, methode, hint, erreurs
+│   └── leaf directives         # ::youtube{...}
+├── compile-qcm.ts              # Parser QCM : question, option, explanation
+└── compile-typst.ts            # Blocs ```typst``` → SVG
 ```
 
-### Le registre MDX
+### Le plugin remark-directive
 
-Tous les composants disponibles dans le contenu MDX sont enregistres dans `src/components/content/mdx-components.tsx`. Ce fichier exporte un objet `mdxComponents` passe a `compileMDX()`.
+Le fichier `compile-mdx.ts` utilise `remark-directive` pour parser les blocs `:::nom` du Markdown, puis un plugin remark custom transforme chaque directive reconnue en HTML style (blocs `<aside>`, `<details>`, etc.). Les directives QCM (`:::question`, `:::option`, `:::explanation`) sont gerees separement dans `compile-qcm.ts`.
 
-### Procedure pour ajouter un nouveau composant
+### Procedure pour ajouter une nouvelle directive
 
-1. **Creer le composant** dans `src/components/content/` (partie structurelle) ou `src/content/extensions/` (rendu visuel riche)
-2. **Creer un adaptateur** dans `mdx-components.tsx` si les props MDX different des props du composant
-3. **Enregistrer** dans l'objet `mdxComponents` de `mdx-components.tsx`
-4. **Documenter** dans la section 5 de ce document (description, props, rendu, exemple, types autorises)
+1. **Ajouter le handler** dans le plugin remark de `compile-mdx.ts` (container directive pour `:::bloc ... :::`, leaf directive pour `::bloc{attrs}`)
+2. **Definir le rendu HTML** (classes, icones, comportement collapse ou visible)
+3. **Documenter** dans la section 5 de ce document (description, attributs, rendu, exemple, types autorises)
 
-Un composant non documente ici est considere comme non autorise dans le contenu.
+Une directive non documentee ici est consideree comme non autorisee dans le contenu.
 
 ---
 
@@ -817,9 +851,9 @@ Un atome est valide si :
 - [ ] `tags` contient au moins 1 tag
 - [ ] `category` est present si et seulement si `type: exercise`
 - [ ] Le contenu suit la structure obligatoire du type (voir section 2)
-- [ ] Les exercises ont `<Enonce>` et `<Solution>`
-- [ ] Les QCM ont `<Question>`, de 2 a 5 `<Option>` (une seule avec `correct`), et `<Explanation>`
+- [ ] Les exercises ont `:::enonce` et `:::solution`
+- [ ] Les QCM ont `:::question`, de 2 a 5 `:::option` (une seule avec `{correct}`), et `:::explanation`
 - [ ] Le LaTeX utilise `$...$` et `$$...$$` (pas de balises HTML)
 - [ ] Les headings commencent a `###`
-- [ ] Pas de composants non autorises
-- [ ] Tout nouveau composant est documente dans la section 5
+- [ ] Pas de directives non autorisees
+- [ ] Toute nouvelle directive est documentee dans la section 5
