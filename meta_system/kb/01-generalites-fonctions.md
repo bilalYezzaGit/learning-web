@@ -143,17 +143,17 @@ version: 0.1
 - F6: Distinction majorant/maximum : le majorant n'est pas forcement atteint, le maximum si
 
 ### Skills (procedures a maitriser)
-- S1: Determiner l'ensemble de definition d'une fonction — difficulte: 1 — entraine via: Prax0
-- S2: Prouver la monotonie par la definition — difficulte: 2 — entraine via: Prax2
-- S3: Etudier la parite d'une fonction — difficulte: 1 — entraine via: Prax1
-- S4: Montrer qu'une fonction est bornee (trouver M et m) — difficulte: 2 — entraine via: Prax3
-- S5: Determiner le max/min d'une fonction sur un intervalle — difficulte: 2 — entraine via: Prax4
-- S6: Lire un tableau de variations et en deduire max/min — difficulte: 1 — entraine via: Prax4
-- S7: Utiliser les operations pour deduire les variations (somme de decroissantes = decroissante) — difficulte: 2 — entraine via: Prax5
-- S8: Etudier les variations de sqrt(f) a partir de celles de f — difficulte: 2 — entraine via: Prax6
-- S9: Tracer une courbe par transformation a partir d'une courbe de reference — difficulte: 1 — entraine via: Prax7
-- S10: Resoudre graphiquement une equation ou inequation — difficulte: 1 — entraine via: Prax8
-- S11: Donner l'expression d'une fonction affine par morceaux (avec valeur absolue) — difficulte: 1 — entraine via: Prax9
+- S1: Determiner l'ensemble de definition d'une fonction — notion: N1 — difficulte: 1 — entraine via: Prax0
+- S2: Prouver la monotonie par la definition — notion: N2 — difficulte: 2 — entraine via: Prax2
+- S3: Etudier la parite d'une fonction — notion: N3 — difficulte: 1 — entraine via: Prax1
+- S4: Montrer qu'une fonction est bornee (trouver M et m) — notion: N5 — difficulte: 2 — entraine via: Prax3
+- S5: Determiner le max/min d'une fonction sur un intervalle — notion: N5 — difficulte: 2 — entraine via: Prax4
+- S6: Lire un tableau de variations et en deduire max/min — notion: N2, N5 — difficulte: 1 — entraine via: Prax4
+- S7: Utiliser les operations pour deduire les variations — notion: N6 — difficulte: 2 — entraine via: Prax5
+- S8: Etudier les variations de sqrt(f) a partir de celles de f — notion: N7 — difficulte: 2 — entraine via: Prax6
+- S9: Tracer une courbe par transformation a partir d'une courbe de reference — notion: N9 — difficulte: 1 — entraine via: Prax7
+- S10: Resoudre graphiquement une equation ou inequation — notion: N10 — difficulte: 1 — entraine via: Prax8
+- S11: Donner l'expression d'une fonction affine par morceaux (avec valeur absolue) — notion: N8 — difficulte: 1 — entraine via: Prax9
 
 ### Principles (comprendre en profondeur)
 - P1: La monotonie par la definition est une competence fondamentale qui sera replacee par la derivee — mais la definition reste necessaire quand la derivee ne s'applique pas
@@ -186,6 +186,7 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 ## 8) Praxeologies — patterns d'exercices
 
 ### Prax0 — Determiner l'ensemble de definition
+- **Notions mobilisees** : N1
 - **Type de tache (T)** : Trouver Df pour une fonction donnee (fraction, racine, composee)
 - **Technique (tau)** : Poser les conditions d'existence : denominateur != 0, radicande >= 0. Resoudre les inequations obtenues. Intersecter les domaines si composition.
 - **Technologie (theta)** : f(x) existe ssi toutes les operations sont definies
@@ -194,6 +195,7 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 - **Difficulte** : 0-1
 
 ### Prax1 — Etudier la parite
+- **Notions mobilisees** : N3, N1
 - **Type de tache (T)** : Determiner si f est paire, impaire, ou ni l'un ni l'autre
 - **Technique (tau)** : (1) Verifier que Df est symetrique par rapport a 0. Si non => ni paire ni impaire, STOP. (2) Calculer f(-x). (3) Comparer avec f(x) et -f(x).
 - **Technologie (theta)** : La condition Df symetrique est une condition PREALABLE, pas optionnelle
@@ -202,6 +204,7 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 - **Difficulte** : 1
 
 ### Prax2 — Prouver la monotonie par la definition
+- **Notions mobilisees** : N2.1, N2.2, N2.3
 - **Type de tache (T)** : Montrer qu'une fonction est croissante (ou decroissante) sur un intervalle I
 - **Technique (tau)** : Methode 1 — Prendre a, b dans I avec a <= b, montrer que f(a) <= f(b) (ou f(a) >= f(b)) par manipulation d'inegalites. Methode 2 — Calculer le taux de variation T = (f(b)-f(a))/(b-a) et determiner son signe.
 - **Technologie (theta)** : La monotonie est une propriete globale sur I. Le taux de variation a le meme signe que f(b)-f(a) car b-a > 0.
@@ -210,6 +213,7 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 - **Difficulte** : 2
 
 ### Prax3 — Montrer qu'une fonction est majoree/minoree/bornee
+- **Notions mobilisees** : N5.1, N5.2, N5.3
 - **Type de tache (T)** : Prouver que pour tout x dans D, m <= f(x) <= M
 - **Technique (tau)** : Methode 1 — Etudier le signe de f(x) - M (montrer <= 0) et f(x) - m (montrer >= 0), souvent via identite remarquable. Methode 2 — Enchainer des inegalites a partir d'une inegalite connue (x^2 >= 0, |cos x| <= 1). Methode 3 — Utiliser le tableau de variations si disponible.
 - **Technologie (theta)** : f(x) - M = -(carre) / (positif) <= 0 est le pattern typique
@@ -218,6 +222,7 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 - **Difficulte** : 2
 
 ### Prax4 — Determiner le maximum ou minimum
+- **Notions mobilisees** : N5.2, N2
 - **Type de tache (T)** : Montrer que f admet un extremum en x0 sur I et donner sa valeur
 - **Technique (tau)** : Montrer que f(x) - f(x0) a un signe constant sur I. Souvent f(x) - f(x0) = k(x - x0)^2 (signe evident) ou f(x) - f(x0) = produit de facteurs dont on connait le signe sur I.
 - **Technologie (theta)** : f(x0) est un maximum ssi pour tout x dans I, f(x) <= f(x0), cad f(x) - f(x0) <= 0 sur I
@@ -226,6 +231,7 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 - **Difficulte** : 2
 
 ### Prax5 — Variations par operations sur les fonctions
+- **Notions mobilisees** : N6.1, N6.2, N6.3, N2
 - **Type de tache (T)** : Deduire les variations de f a partir de sa decomposition en somme/produit de fonctions connues
 - **Technique (tau)** : Decomposer f = u + v (ou f = lambda.u). Si u et v sont toutes deux croissantes (resp. decroissantes) sur I, alors f aussi. Si f = lambda.u avec lambda > 0, meme sens ; lambda < 0, sens contraire.
 - **Technologie (theta)** : T1 (somme de fonctions monotones de meme sens). ATTENTION : ne marche PAS pour le produit en general.
@@ -234,6 +240,7 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 - **Difficulte** : 2
 
 ### Prax6 — Etude de sqrt(f)
+- **Notions mobilisees** : N7.1, N7.2, N7.3, N1
 - **Type de tache (T)** : Determiner Df, etudier les variations de g(x) = sqrt(f(x))
 - **Technique (tau)** : (1) Df = {x : f(x) >= 0}. (2) Appliquer T2/T3 : si f positive et croissante (resp. decroissante) alors sqrt(f) aussi.
 - **Technologie (theta)** : Theoremes T2, T3, T4 — la racine carree conserve la monotonie et la majoration (quand f >= 0)
@@ -242,6 +249,7 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 - **Difficulte** : 2
 
 ### Prax7 — Construction de courbes par transformation
+- **Notions mobilisees** : N9.1, N9.2, N9.3, N9.4, N9.5
 - **Type de tache (T)** : Tracer la courbe de g a partir de celle de f, en identifiant la transformation geometrique
 - **Technique (tau)** : Identifier la relation entre g et f (g(x) = f(x)+b, f(x-a), -f(x), |f(x)|, f(|x|)). En deduire la transformation (translation, symetrie, rabattement).
 - **Technologie (theta)** : Les transformations sont la lecture geometrique des operations algebriques
@@ -250,6 +258,7 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 - **Difficulte** : 1
 
 ### Prax8 — Resolution graphique
+- **Notions mobilisees** : N10.1, N10.2
 - **Type de tache (T)** : Resoudre graphiquement f(x) = g(x) ou f(x) <= g(x)
 - **Technique (tau)** : Tracer Cf et Cg. Equations : lire les abscisses des points d'intersection. Inequations : lire les intervalles ou une courbe est au-dessus/au-dessous de l'autre.
 - **Technologie (theta)** : f(x) = g(x) <=> le point (x, f(x)) est sur les deux courbes. f(x) <= g(x) <=> Cf est en dessous de Cg.
@@ -258,6 +267,7 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 - **Difficulte** : 1-2
 
 ### Prax9 — Fonctions affines par morceaux et partie entiere
+- **Notions mobilisees** : N8.1, N8.2, N8.3
 - **Type de tache (T)** : Donner l'expression d'une fonction definie par morceaux (souvent avec |.|) et/ou tracer sa courbe. Pour E(x) : determiner E(x) sur chaque intervalle [n, n+1[.
 - **Technique (tau)** : Lever la valeur absolue en distinguant les cas (signe de l'argument). Pour E(x) : encadrer x entre deux entiers consecutifs.
 - **Technologie (theta)** : |a| = a si a >= 0, |a| = -a si a < 0. E(x) = n <=> n <= x < n+1.
@@ -266,6 +276,7 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 - **Difficulte** : 1-2
 
 ### Prax10 — Probleme de modelisation avec optimisation
+- **Notions mobilisees** : N2, N5.2, N6, N7
 - **Type de tache (T)** : Modeliser une situation concrete par une fonction, etudier ses variations, trouver un optimum
 - **Technique (tau)** : Traduire le probleme en fonction f(x). Ecrire f sous forme canonique ou decomposee. Etudier les variations. En deduire le maximum/minimum.
 - **Technologie (theta)** : La forme canonique a(x-alpha)^2 + beta donne directement l'extremum

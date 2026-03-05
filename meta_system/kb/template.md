@@ -62,8 +62,8 @@ version: 0.1
 - F2: ...
 
 ### Skills (procedures a maitriser)
-- S1: ... — difficulte: 0|1|2|3 — entraine via: Prax1, Prax2
-- S2: ... — difficulte: 0|1|2|3 — entraine via: Prax3
+- S1: ... — notion: N1 — difficulte: 0|1|2|3 — entraine via: Prax1, Prax2
+- S2: ... — notion: N2 — difficulte: 0|1|2|3 — entraine via: Prax3
 
 ### Principles (comprendre en profondeur)
 - P1: ...
@@ -86,6 +86,7 @@ Les exemples "classiques" qui reviennent dans tous les manuels et au Bac tunisie
 ## 8) Praxeologies — patterns d'exercices
 
 ### Prax1 — [Nom court]
+- **Notions mobilisees** : N1, N2.1
 - **Type de tache (T)** : ce qu'on demande a l'eleve
 - **Technique (tau)** : la methode a appliquer
 - **Technologie (theta)** : pourquoi la technique fonctionne
