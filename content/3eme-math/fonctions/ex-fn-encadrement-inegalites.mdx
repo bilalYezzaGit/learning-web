@@ -1,0 +1,69 @@
+---
+type: exercise
+title: "Encadrement d'une fonction par enchainement d'inegalites"
+difficulty: 2
+timeMinutes: 10
+category: approfondissement
+tags: [fonctions, bornes, encadrement]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}$ par :
+
+$$f(x) = \frac{1}{1 + x^2}$$
+
+En partant de l'inegalite $x^2 \geq 0$, montrer par enchainement d'inegalites que :
+
+$$0 < f(x) \leq 1$$
+
+pour tout $x \in \mathbb{R}$.
+:::
+
+:::solution
+Partons de l'inegalite fondamentale : pour tout $x \in \mathbb{R}$,
+
+$$x^2 \geq 0$$
+
+**Etape 1** : Ajoutons $1$ aux deux membres :
+
+$$1 + x^2 \geq 1$$
+
+En particulier, $1 + x^2 \geq 1 > 0$, donc $1 + x^2$ est strictement positif.
+
+**Etape 2** : Prenons l'inverse. Comme $1 + x^2 \geq 1 > 0$, l'inverse renverse le sens de l'inegalite :
+
+$$\frac{1}{1 + x^2} \leq \frac{1}{1} = 1$$
+
+**Etape 3** : D'autre part, comme $1 + x^2 > 0$, on a :
+
+$$\frac{1}{1 + x^2} > 0$$
+
+**Conclusion** : Pour tout $x \in \mathbb{R}$ :
+
+$$0 < f(x) \leq 1$$
+
+De plus, $f(0) = \frac{1}{1 + 0} = 1$, donc la borne superieure $1$ est atteinte : $1$ est le **maximum** de $f$ sur $\mathbb{R}$.
+
+La borne inferieure $0$ n'est jamais atteinte (car $\frac{1}{1+x^2} = 0$ n'a pas de solution), donc $0$ est un minorant mais pas un minimum.
+:::
+
+:::methode
+Pour encadrer une fonction par enchainement d'inegalites :
+
+1. Partir d'une inegalite de base connue ($x^2 \geq 0$, $|x| \geq 0$, etc.)
+2. Enchainer les operations compatibles :
+   - Addition/soustraction : conserve le sens
+   - Multiplication par un positif : conserve le sens
+   - Inverse : **renverse** le sens (attention : les deux membres doivent etre de meme signe)
+3. Verifier si les bornes sont atteintes (maximum/minimum) ou non (majorant/minorant)
+:::
+
+:::hint
+Partez de $x^2 \geq 0$, ajoutez $1$, puis prenez l'inverse en faisant attention au sens de l'inegalite.
+:::
+
+:::erreurs
+- Oublier que l'inverse renverse le sens de l'inegalite : $a \leq b$ n'implique pas $\frac{1}{a} \leq \frac{1}{b}$
+- Ne pas verifier que les quantites sont strictement positives avant de prendre l'inverse
+- Confondre majorant (pas forcement atteint) et maximum (atteint)
+:::

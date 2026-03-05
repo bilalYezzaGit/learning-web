@@ -1,0 +1,56 @@
+---
+type: exercise
+title: "Minimum d'une fonction par forme canonique"
+difficulty: 2
+timeMinutes: 10
+category: approfondissement
+tags: [fonctions, extremums, forme-canonique]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}$ par :
+
+$$f(x) = 3(x - 4)^2 + 8$$
+
+1. Montrer que pour tout $x \in \mathbb{R}$, $f(x) \geq 8$.
+2. En deduire que $f$ admet un minimum sur $\mathbb{R}$. Preciser sa valeur et la valeur de $x$ en laquelle il est atteint.
+:::
+
+:::solution
+**1.** Pour tout $x \in \mathbb{R}$, calculons $f(x) - 8$ :
+
+$$f(x) - 8 = 3(x - 4)^2 + 8 - 8 = 3(x - 4)^2$$
+
+Or, pour tout $x \in \mathbb{R}$ :
+
+- $(x - 4)^2 \geq 0$ (un carre est toujours positif ou nul)
+- $3 > 0$
+
+Donc $3(x - 4)^2 \geq 0$, c'est-a-dire $f(x) - 8 \geq 0$.
+
+**Par consequent, pour tout $x \in \mathbb{R}$, $f(x) \geq 8$.**
+
+**2.** D'apres la question precedente, $8$ est un minorant de $f$ sur $\mathbb{R}$.
+
+De plus, cette borne est atteinte : pour $x = 4$,
+
+$$f(4) = 3(4 - 4)^2 + 8 = 3 \times 0 + 8 = 8$$
+
+Ainsi, pour tout $x \in \mathbb{R}$, $f(x) \geq f(4) = 8$, et $f(4) = 8$.
+
+**Donc $f$ admet un minimum egal a $8$, atteint en $x = 4$.**
+:::
+
+:::methode
+Pour determiner l'extremum d'une fonction donnee sous forme canonique $f(x) = a(x - \alpha)^2 + \beta$ :
+
+1. Calculer $f(x) - \beta = a(x - \alpha)^2$
+2. Determiner le signe :
+   - Si $a > 0$ : $f(x) - \beta \geq 0$, donc $f(x) \geq \beta$ et $f$ admet un **minimum** $\beta$ en $x = \alpha$
+   - Si $a < 0$ : $f(x) - \beta \leq 0$, donc $f(x) \leq \beta$ et $f$ admet un **maximum** $\beta$ en $x = \alpha$
+3. Verifier que la borne est atteinte en calculant $f(\alpha)$
+:::
+
+:::hint
+Calculez $f(x) - 8$ et utilisez le fait qu'un carre est toujours positif ou nul.
+:::

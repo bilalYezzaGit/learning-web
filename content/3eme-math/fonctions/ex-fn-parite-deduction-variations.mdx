@@ -1,0 +1,79 @@
+---
+type: exercise
+title: "Deduction des variations sur R- a partir de la parite et des variations sur R+"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [fonctions, parite, monotonie]
+---
+
+:::enonce
+Soit $f$ une fonction definie sur $\mathbb{R}$, **impaire** et **croissante sur $\mathbb{R}^+$**.
+
+1. Rappeler ce que signifie "$f$ est impaire".
+2. Montrer que $f$ est croissante sur $\mathbb{R}^-$.
+
+*Indication : prendre $a, b \in \mathbb{R}^-$ avec $a \leq b$ et utiliser $-a, -b \in \mathbb{R}^+$.*
+:::
+
+:::solution
+**1.** $f$ est impaire signifie :
+
+- Le domaine $D_f$ est symetrique par rapport a $0$ : pour tout $x \in D_f$, $-x \in D_f$
+- Pour tout $x \in D_f$ : $f(-x) = -f(x)$
+
+Ici $D_f = \mathbb{R}$ qui est bien symetrique par rapport a $0$.
+
+**2.** Soient $a$ et $b$ deux reels de $\mathbb{R}^-$ tels que $a \leq b$.
+
+Comme $a \leq b \leq 0$, en multipliant par $-1$ (ce qui inverse le sens de l'inegalite) :
+
+$$-a \geq -b \geq 0$$
+
+Donc $-b \leq -a$ et $-a, -b \in \mathbb{R}^+$.
+
+Comme $f$ est croissante sur $\mathbb{R}^+$ et $-b \leq -a$ (avec $-b, -a \in \mathbb{R}^+$), on a :
+
+$$f(-b) \leq f(-a)$$
+
+Or $f$ est impaire, donc $f(-b) = -f(b)$ et $f(-a) = -f(a)$. D'ou :
+
+$$-f(b) \leq -f(a)$$
+
+En multipliant par $-1$ (ce qui inverse le sens de l'inegalite) :
+
+$$f(b) \geq f(a)$$
+
+C'est-a-dire $f(a) \leq f(b)$.
+
+**Ainsi, pour tout $a, b \in \mathbb{R}^-$ avec $a \leq b$, on a $f(a) \leq f(b)$.**
+
+**Par consequent, $f$ est croissante sur $\mathbb{R}^-$.**
+:::
+
+:::methode
+Pour deduire les variations d'une fonction impaire sur $\mathbb{R}^-$ a partir de celles sur $\mathbb{R}^+$ :
+
+1. Prendre $a \leq b$ dans $\mathbb{R}^-$
+2. Passer a $-a \geq -b$ dans $\mathbb{R}^+$ (inversion du sens)
+3. Appliquer la monotonie connue sur $\mathbb{R}^+$
+4. Utiliser $f(-x) = -f(x)$ pour revenir a $f(a)$ et $f(b)$
+5. Conclure sur le sens de variation
+
+**Resultat general** :
+- $f$ impaire et croissante sur $\mathbb{R}^+$ $\Rightarrow$ $f$ croissante sur $\mathbb{R}^-$
+- $f$ impaire et decroissante sur $\mathbb{R}^+$ $\Rightarrow$ $f$ decroissante sur $\mathbb{R}^-$
+
+*La parite impaire conserve le sens de variation.*
+:::
+
+:::hint
+Posez $a' = -a$ et $b' = -b$. Comme $a \leq b \leq 0$, que valent $a'$ et $b'$ ? Utilisez la croissance de $f$ sur $\mathbb{R}^+$ pour $a'$ et $b'$, puis l'imparite pour revenir a $f(a)$ et $f(b)$.
+:::
+
+:::erreurs
+- Confondre le resultat pour les fonctions paires et impaires :
+  - $f$ **impaire** : conserve le sens de variation (croissante sur $\mathbb{R}^+$ $\Rightarrow$ croissante sur $\mathbb{R}^-$)
+  - $f$ **paire** : inverse le sens de variation (croissante sur $\mathbb{R}^+$ $\Rightarrow$ decroissante sur $\mathbb{R}^-$)
+- Se tromper dans les changements de sens lors de la multiplication par $-1$
+:::

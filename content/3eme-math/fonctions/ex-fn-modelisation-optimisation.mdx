@@ -1,0 +1,161 @@
+---
+type: exercise
+title: "Optimisation d'un rectangle inscrit dans un cercle"
+difficulty: 3
+timeMinutes: 20
+category: synthese
+tags: [fonctions, optimisation, modelisation, racine-carree, extremums]
+---
+
+:::enonce
+Dans le plan muni d'un repere orthonorme $(O, \vec{i}, \vec{j})$, on considere le cercle $\mathcal{C}$ de centre $O$ et de rayon $1$.
+
+Un rectangle $ABCD$ est inscrit dans le cercle $\mathcal{C}$, avec ses cotes paralleles aux axes. Le sommet $A$ se trouve dans le premier quadrant et a pour coordonnees $(x, y)$ avec $x > 0$ et $y > 0$.
+
+1. Justifier que $y = \sqrt{1 - x^2}$ et preciser le domaine de variation de $x$.
+2. Exprimer l'aire $S(x)$ du rectangle $ABCD$ en fonction de $x$ et montrer que :
+
+$$S(x) = 4x\sqrt{1 - x^2}$$
+
+3. On pose $g(x) = [S(x)]^2 = 16x^2(1 - x^2)$. Montrer que :
+
+$$g(x) = -16\left(x^2 - \frac{1}{2}\right)^2 + 4$$
+
+4. En deduire que $g$ admet un maximum. Pour quelle valeur de $x$ ce maximum est-il atteint ?
+5. En deduire la valeur maximale de $S(x)$ et les dimensions du rectangle d'aire maximale. Quelle est la nature de ce rectangle ?
+:::
+
+:::solution
+**1. Expression de $y$ et domaine de $x$**
+
+Le point $A = (x, y)$ appartient au cercle $\mathcal{C}$ d'equation $x^2 + y^2 = 1$.
+
+Comme $y > 0$, on en deduit :
+
+$$y = \sqrt{1 - x^2}$$
+
+Pour que $y$ existe et soit strictement positive, il faut $1 - x^2 > 0$, soit $x^2 < 1$.
+
+Comme $x > 0$, on obtient :
+
+$$x \in \;]0, 1[$$
+
+**2. Expression de l'aire**
+
+Par symetrie du rectangle par rapport aux axes, les quatre sommets sont :
+
+$$A = (x, y), \quad B = (-x, y), \quad C = (-x, -y), \quad D = (x, -y)$$
+
+Les dimensions du rectangle sont :
+- Longueur : $AB = 2x$
+- Largeur : $AD = 2y$
+
+L'aire vaut donc :
+
+$$S(x) = AB \times AD = 2x \times 2y = 4xy$$
+
+En remplacant $y = \sqrt{1 - x^2}$ :
+
+$$S(x) = 4x\sqrt{1 - x^2}$$
+
+**3. Forme canonique de $g(x)$**
+
+On pose $g(x) = [S(x)]^2$. Comme $S(x) > 0$ sur $]0, 1[$, on a :
+
+$$g(x) = 16x^2(1 - x^2) = 16x^2 - 16x^4$$
+
+Posons $u = x^2$. Alors :
+
+$$g = 16u - 16u^2 = -16(u^2 - u) = -16\left(u^2 - u + \frac{1}{4} - \frac{1}{4}\right)$$
+
+$$= -16\left(u - \frac{1}{2}\right)^2 + 16 \times \frac{1}{4}$$
+
+$$= -16\left(u - \frac{1}{2}\right)^2 + 4$$
+
+En revenant a la variable $x$ (avec $u = x^2$) :
+
+$$g(x) = -16\left(x^2 - \frac{1}{2}\right)^2 + 4$$
+
+**4. Maximum de $g$**
+
+La forme canonique montre que :
+
+$$g(x) = 4 - 16\left(x^2 - \frac{1}{2}\right)^2$$
+
+Or $\left(x^2 - \frac{1}{2}\right)^2 \geq 0$ pour tout $x$, donc :
+
+$$g(x) \leq 4 \quad \text{pour tout } x \in \;]0, 1[$$
+
+L'egalite a lieu lorsque $x^2 - \frac{1}{2} = 0$, soit $x^2 = \frac{1}{2}$.
+
+Comme $x > 0$ :
+
+$$x = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2}$$
+
+On verifie que $\frac{\sqrt{2}}{2} \in \;]0, 1[$ : c'est bien le cas.
+
+Donc $g$ admet un **maximum** egal a $4$, atteint en $x = \frac{\sqrt{2}}{2}$.
+
+**5. Aire maximale et nature du rectangle**
+
+La fonction $t \mapsto \sqrt{t}$ est strictement croissante sur $[0, +\infty[$. Comme $S(x) = \sqrt{g(x)}$ (car $S(x) > 0$), le maximum de $S$ est atteint au meme point que celui de $g$.
+
+Donc :
+
+$$S_{\max} = \sqrt{g_{\max}} = \sqrt{4} = 2$$
+
+Ce maximum est atteint en $x = \frac{\sqrt{2}}{2}$.
+
+Les dimensions du rectangle d'aire maximale sont :
+
+$$\text{Longueur} = 2x = 2 \times \frac{\sqrt{2}}{2} = \sqrt{2}$$
+
+$$\text{Largeur} = 2y = 2\sqrt{1 - \frac{1}{2}} = 2 \times \frac{\sqrt{2}}{2} = \sqrt{2}$$
+
+Les deux cotes sont egaux : $\sqrt{2} = \sqrt{2}$.
+
+**Graphique de l'aire $S(x)$ :**
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $S(x)$,
+    x-tick-step: 0.2,
+    y-tick-step: 0.5,
+    x-min: -0.1, x-max: 1.1,
+    y-min: -0.2, y-max: 2.5,
+    {
+      plot.add(domain: (0.01, 0.99), x => 4 * x * calc.sqrt(1 - calc.pow(x, 2)),
+        style: (stroke: 2pt + blue), label: $S(x) = 4x sqrt(1-x^2)$)
+    },
+  )
+})
+```
+
+**Conclusion** : Le rectangle d'aire maximale est un **carre** de cote $\sqrt{2}$, et son aire maximale vaut $2$.
+:::
+
+:::methode
+Pour resoudre un probleme d'optimisation avec une racine carree :
+
+1. **Modeliser** : exprimer la grandeur a optimiser comme une fonction $S(x)$
+2. **Lever la racine** : etudier $g(x) = [S(x)]^2$ plutot que $S(x)$ directement
+3. **Forme canonique** : ecrire $g(x) = a(u - \alpha)^2 + \beta$ (avec un changement de variable $u = x^2$ si necessaire)
+4. **Conclure** : le maximum de $g$ donne celui de $S$ car $\sqrt{\cdot}$ est croissante
+:::
+
+:::hint
+Pour eviter la difficulte de la racine carree dans $S(x)$, etudiez $[S(x)]^2$ a la place. Cherchez a ecrire $16x^2(1 - x^2)$ sous forme canonique en posant $u = x^2$.
+:::
+
+:::erreurs
+- **Oublier le domaine** : ne pas verifier que $x \in \;]0, 1[$ pour que $\sqrt{1 - x^2}$ existe et que le rectangle ait un sens
+- **Ne pas justifier que c'est un maximum** : la forme $-16(\cdots)^2 + 4$ montre que c'est bien un maximum (et non un minimum) car le coefficient du carre est negatif
+- **Confondre $S$ et $S^2$** : le maximum de $S^2$ est $4$, donc le maximum de $S$ est $\sqrt{4} = 2$ (et non $4$)
+- **Oublier de conclure sur la nature** : calculer les deux dimensions pour montrer que le rectangle optimal est un carre
+:::

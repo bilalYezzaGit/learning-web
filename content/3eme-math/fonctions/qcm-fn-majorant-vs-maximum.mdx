@@ -1,0 +1,33 @@
+---
+type: qcm
+title: "Majorant ou maximum ?"
+difficulty: 1
+timeMinutes: 1
+tags: [fonctions, bornes, majorant, maximum]
+correctOption: 1
+---
+
+:::question
+Soit $f$ definie sur $\mathbb{R}$ par $f(x) = \dfrac{2}{x^2 + 4}$. On montre que $0 \leq f(x) \leq \dfrac{1}{2}$ pour tout $x \in \mathbb{R}$. Que peut-on dire ?
+:::
+
+:::option
+$0$ est le minimum de $f$
+:::
+:::option{correct}
+$\dfrac{1}{2}$ est le maximum de $f$
+:::
+:::option
+$f$ est bornee donc elle admet un minimum et un maximum
+:::
+:::option
+$\dfrac{1}{2}$ est un majorant de $f$ mais pas son maximum
+:::
+
+:::explanation
+La bonne reponse est que $\dfrac{1}{2}$ est le **maximum** de $f$, car cette valeur est **atteinte** en $x = 0$ : $f(0) = \dfrac{2}{0 + 4} = \dfrac{1}{2}$.
+
+- **Option A** est fausse : $0$ est un minorant de $f$, mais ce n'est pas le minimum car $f(x) = 0$ n'a aucune solution (le numerateur est $2 \neq 0$). La valeur $0$ n'est jamais atteinte.
+- **Option C** est fausse : une fonction bornee n'admet pas forcement un minimum et un maximum. Il faut verifier que les bornes sont **atteintes**.
+- **Option D** est incomplete : $\dfrac{1}{2}$ est bien un majorant, mais comme il est atteint, c'est plus precis de dire que c'est le maximum.
+:::

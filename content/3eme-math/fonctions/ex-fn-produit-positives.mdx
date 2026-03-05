@@ -1,0 +1,88 @@
+---
+type: exercise
+title: "Variations d'un produit de fonctions positives croissantes"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [fonctions, operations, produit, variations]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}^+$ par :
+
+$$f(x) = (x^2 + 3)\sqrt{x}$$
+
+1. Justifier que $f$ est bien definie sur $\mathbb{R}^+$.
+2. On pose $u(x) = x^2 + 3$ et $v(x) = \sqrt{x}$. Montrer que $u$ et $v$ sont positives sur $\mathbb{R}^+$.
+3. Montrer que $u$ et $v$ sont croissantes sur $\mathbb{R}^+$.
+4. En deduire que $f$ est croissante sur $\mathbb{R}^+$.
+:::
+
+:::solution
+**1.** La fonction $\sqrt{x}$ est definie pour $x \geq 0$, donc sur $\mathbb{R}^+$. La fonction $x^2 + 3$ est definie sur $\mathbb{R}$. Par suite, $f(x) = (x^2 + 3)\sqrt{x}$ est bien definie sur $\mathbb{R}^+$.
+
+**2.** Pour tout $x \in \mathbb{R}^+$ :
+
+- $u(x) = x^2 + 3 \geq 0 + 3 = 3 > 0$, donc $u$ est **strictement positive** sur $\mathbb{R}^+$
+- $v(x) = \sqrt{x} \geq 0$, donc $v$ est **positive** sur $\mathbb{R}^+$
+
+**3.** Montrons que $u$ est croissante sur $\mathbb{R}^+$ :
+
+Soient $a$ et $b$ deux reels de $\mathbb{R}^+$ tels que $a \leq b$.
+
+$$u(b) - u(a) = (b^2 + 3) - (a^2 + 3) = b^2 - a^2 = (b - a)(b + a)$$
+
+Comme $a \geq 0$ et $b \geq 0$, on a $b + a \geq 0$. Comme $a \leq b$, on a $b - a \geq 0$.
+
+Donc $u(b) - u(a) = (b - a)(b + a) \geq 0$, c'est-a-dire $u(b) \geq u(a)$.
+
+**Par consequent, $u$ est croissante sur $\mathbb{R}^+$.**
+
+Montrons que $v$ est croissante sur $\mathbb{R}^+$ :
+
+Soient $a$ et $b$ deux reels de $\mathbb{R}^+$ tels que $a \leq b$.
+
+Comme la fonction racine carree est croissante sur $\mathbb{R}^+$ (fonction de reference), on a $\sqrt{a} \leq \sqrt{b}$, c'est-a-dire $v(a) \leq v(b)$.
+
+**Par consequent, $v$ est croissante sur $\mathbb{R}^+$.**
+
+**4.** On a montre que sur $\mathbb{R}^+$ :
+
+- $u$ est positive et croissante
+- $v$ est positive et croissante
+
+Soient $a$ et $b$ deux reels de $\mathbb{R}^+$ tels que $a \leq b$. Alors :
+
+$$f(b) - f(a) = u(b) \cdot v(b) - u(a) \cdot v(a)$$
+
+On ecrit :
+
+$$f(b) - f(a) = u(b) \cdot v(b) - u(a) \cdot v(b) + u(a) \cdot v(b) - u(a) \cdot v(a)$$
+
+$$= v(b)\big[u(b) - u(a)\big] + u(a)\big[v(b) - v(a)\big]$$
+
+- $v(b) \geq 0$ et $u(b) - u(a) \geq 0$ (car $v$ positive et $u$ croissante), donc $v(b)[u(b) - u(a)] \geq 0$
+- $u(a) \geq 0$ et $v(b) - v(a) \geq 0$ (car $u$ positive et $v$ croissante), donc $u(a)[v(b) - v(a)] \geq 0$
+
+D'ou $f(b) - f(a) \geq 0$, c'est-a-dire $f(b) \geq f(a)$.
+
+**Par consequent, $f$ est croissante sur $\mathbb{R}^+$.**
+:::
+
+:::methode
+Pour montrer que le produit $f = u \cdot v$ est croissant :
+
+1. Verifier que $u \geq 0$ et $v \geq 0$ sur l'intervalle
+2. Verifier que $u$ et $v$ sont croissantes sur l'intervalle
+3. Utiliser la decomposition : $u(b)v(b) - u(a)v(a) = v(b)[u(b)-u(a)] + u(a)[v(b)-v(a)]$
+4. Chaque terme est positif (positif $\times$ positif), donc la somme est positive
+:::
+
+:::hint
+Decomposez la difference $f(b) - f(a)$ en ajoutant et retranchant $u(a) \cdot v(b)$.
+:::
+
+:::erreurs
+- Affirmer que le produit de deux fonctions croissantes est croissant sans verifier la positivite : c'est **faux** en general ! Contre-exemple : $x$ et $x - 2$ sont croissantes sur $\mathbb{R}$ mais $x(x-2) = x^2 - 2x$ n'est pas croissante sur $\mathbb{R}$
+- Oublier de justifier la positivite de $u$ et $v$ sur l'intervalle considere
+:::

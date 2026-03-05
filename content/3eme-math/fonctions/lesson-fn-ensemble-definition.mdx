@@ -1,0 +1,113 @@
+---
+type: lesson
+title: "Ensemble de definition d'une fonction"
+difficulty: 1
+timeMinutes: 5
+tags: [fonctions, domaine-definition]
+---
+
+### Ensemble de definition
+
+:::definition[Ensemble de definition]
+
+L'**ensemble de definition** d'une fonction $f$, note $D_f$, est l'ensemble de tous les reels $x$ pour lesquels $f(x)$ a un sens (existe et est unique).
+
+$$D_f = \{x \in \mathbb{R} \mid f(x) \text{ existe}\}$$
+
+:::
+
+### Determination de $D_f$ selon le type de fonction
+
+#### Fonctions rationnelles
+
+:::property[Denominateur non nul]
+
+Pour une fonction de la forme $f(x) = \frac{P(x)}{Q(x)}$, on doit avoir :
+
+$$Q(x) \neq 0$$
+
+Le domaine est donc $D_f = \{x \in \mathbb{R} \mid Q(x) \neq 0\}$.
+
+:::
+
+:::example[Fonction rationnelle]
+
+Soit $f(x) = \frac{5x - 1}{x + 3}$.
+
+Le denominateur s'annule pour $x + 3 = 0$, soit $x = -3$.
+
+$$D_f = \mathbb{R} \setminus \{-3\}$$
+
+:::
+
+#### Fonctions irrationnelles
+
+:::property[Radicande positif ou nul]
+
+Pour une fonction de la forme $f(x) = \sqrt{u(x)}$, on doit avoir :
+
+$$u(x) \geq 0$$
+
+Le domaine est donc $D_f = \{x \in \mathbb{R} \mid u(x) \geq 0\}$.
+
+:::
+
+:::example[Fonction avec racine carree]
+
+Soit $g(x) = \sqrt{1 - x}$.
+
+Il faut $1 - x \geq 0$, donc $x \leq 1$.
+
+$$D_g = ]-\infty, 1]$$
+
+:::
+
+#### Fonctions composees (conditions cumulees)
+
+:::property[Intersection des conditions]
+
+Lorsqu'une fonction combine plusieurs contraintes (denominateur, racine, etc.), le domaine est l'**intersection** de tous les ensembles imposes par chaque condition.
+
+:::
+
+:::example[Fonction composee]
+
+Soit $h(x) = \frac{1}{\sqrt{|x - 1|}}$.
+
+- La racine carree impose $|x - 1| \geq 0$ : toujours vrai
+- Le denominateur impose $\sqrt{|x - 1|} \neq 0$, donc $|x - 1| \neq 0$, soit $x \neq 1$
+
+$$D_h = \mathbb{R} \setminus \{1\}$$
+
+:::
+
+:::example[Conditions multiples]
+
+Soit $f(x) = \frac{\sqrt{x + 1}}{x - 3}$.
+
+- La racine impose $x + 1 \geq 0$, donc $x \geq -1$
+- Le denominateur impose $x - 3 \neq 0$, donc $x \neq 3$
+
+L'intersection donne :
+
+$$D_f = [-1, 3[ \cup ]3, +\infty[$$
+
+:::
+
+### Methode pratique
+
+:::remark
+
+Pour determiner $D_f$ :
+
+1. Identifier toutes les contraintes (denominateurs $\neq 0$, radicandes $\geq 0$)
+2. Resoudre chaque inequation ou equation separement
+3. Faire l'intersection de tous les ensembles obtenus
+
+:::
+
+:::attention
+
+Ne jamais oublier de combiner **toutes** les conditions. Par exemple, dans $\frac{\sqrt{u(x)}}{v(x)}$, il faut $u(x) \geq 0$ **et** $v(x) \neq 0$ simultanement.
+
+:::

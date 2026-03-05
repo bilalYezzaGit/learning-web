@@ -1,0 +1,173 @@
+---
+type: lesson
+title: "Parite et symetrie d'une fonction"
+difficulty: 1
+timeMinutes: 5
+tags: [fonctions, parite, symetrie]
+---
+
+### Condition prealable
+
+:::attention
+
+Avant d'etudier la parite d'une fonction $f$, il faut **d'abord** verifier que son domaine de definition $D_f$ est **symetrique par rapport a $0$**.
+
+C'est-a-dire : pour tout $x \in D_f$, on a $-x \in D_f$.
+
+Si $D_f$ n'est pas symetrique, alors $f$ n'est **ni paire ni impaire**. On s'arrete la.
+
+:::
+
+### Fonction paire
+
+:::definition[Fonction paire]
+
+Soit $f$ une fonction dont le domaine $D_f$ est symetrique par rapport a $0$.
+
+$f$ est **paire** si, pour tout $x \in D_f$ :
+
+$$f(-x) = f(x)$$
+
+:::
+
+:::property[Interpretation geometrique]
+
+La courbe representative $\mathcal{C}_f$ d'une fonction paire est **symetrique par rapport a l'axe des ordonnees** $(Oy)$.
+
+:::
+
+:::example[Fonction paire]
+
+Soit $f(x) = x^2 + 2$.
+
+- $D_f = \mathbb{R}$ : symetrique par rapport a $0$
+- $f(-x) = (-x)^2 + 2 = x^2 + 2 = f(x)$
+
+Donc $f$ est **paire**.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 2,
+    x-min: -3, x-max: 3,
+    y-min: -1, y-max: 10,
+    {
+      plot.add(domain: (-3, 3), x => calc.pow(x, 2) + 2,
+        style: (stroke: 2pt + blue), label: $f(x) = x^2 + 2$)
+    },
+  )
+})
+```
+
+:::
+
+### Fonction impaire
+
+:::definition[Fonction impaire]
+
+Soit $f$ une fonction dont le domaine $D_f$ est symetrique par rapport a $0$.
+
+$f$ est **impaire** si, pour tout $x \in D_f$ :
+
+$$f(-x) = -f(x)$$
+
+:::
+
+:::property[Interpretation geometrique]
+
+La courbe representative $\mathcal{C}_f$ d'une fonction impaire est **symetrique par rapport a l'origine** $O$.
+
+:::
+
+:::property[Fonction impaire et valeur en zero]
+
+Si $f$ est impaire et definie en $0$, alors :
+
+$$f(0) = 0$$
+
+**Demonstration** : $f(-0) = -f(0)$, donc $f(0) = -f(0)$, d'ou $2f(0) = 0$, soit $f(0) = 0$.
+
+:::
+
+:::example[Fonction impaire]
+
+Soit $f(x) = \frac{x^3 - x}{|x| + 4}$.
+
+- $D_f = \mathbb{R}$ : symetrique par rapport a $0$
+- Calculons $f(-x)$ :
+
+$$f(-x) = \frac{(-x)^3 - (-x)}{|-x| + 4} = \frac{-x^3 + x}{|x| + 4} = -\frac{x^3 - x}{|x| + 4} = -f(x)$$
+
+Donc $f$ est **impaire**. On verifie : $f(0) = 0$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 2,
+    x-min: -2, x-max: 2,
+    y-min: -8, y-max: 8,
+    {
+      plot.add(domain: (-2, 2), x => calc.pow(x, 3),
+        style: (stroke: 2pt + red), label: $f(x) = x^3$)
+    },
+  )
+})
+```
+
+:::
+
+### Fonction ni paire ni impaire
+
+:::example[Domaine non symetrique]
+
+Soit $f(x) = \sqrt{x} - 1$.
+
+$D_f = [0, +\infty[$. Ce domaine n'est pas symetrique par rapport a $0$ (par exemple, $1 \in D_f$ mais $-1 \notin D_f$).
+
+Donc $f$ n'est **ni paire ni impaire**.
+
+:::
+
+### Reduction de l'intervalle d'etude
+
+:::property[Reduction a $\mathbb{R}^+ \cap D_f$]
+
+Si $f$ est paire ou impaire, on peut **reduire l'etude** a $\mathbb{R}^+ \cap D_f$ (la partie positive du domaine) :
+
+- Si $f$ est **paire** : on etudie $f$ sur $\mathbb{R}^+$, puis on complete par symetrie / axe $Oy$
+- Si $f$ est **impaire** : on etudie $f$ sur $\mathbb{R}^+$, puis on complete par symetrie / origine $O$
+
+:::
+
+:::remark
+
+La reduction de l'intervalle d'etude est un outil puissant : elle divise le travail par deux. C'est pourquoi l'etude de la parite est en general la **premiere etape** de toute etude de fonction.
+
+:::
+
+### Methode en 3 etapes
+
+:::property[Methode d'etude de la parite]
+
+1. **Verifier** que $D_f$ est symetrique par rapport a $0$. Si non : ni paire ni impaire, STOP.
+2. **Calculer** $f(-x)$ et simplifier.
+3. **Comparer** $f(-x)$ avec $f(x)$ et $-f(x)$ :
+   - Si $f(-x) = f(x)$ : $f$ est paire
+   - Si $f(-x) = -f(x)$ : $f$ est impaire
+   - Sinon : $f$ n'est ni paire ni impaire
+
+:::

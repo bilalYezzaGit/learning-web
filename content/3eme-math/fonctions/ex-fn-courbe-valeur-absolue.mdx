@@ -1,0 +1,168 @@
+---
+type: exercise
+title: "Construction de courbes par valeur absolue : rabattement et symetrisation"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [fonctions, transformations, valeur-absolue]
+---
+
+:::enonce
+**Partie A — Rabattement $|f(x)|$**
+
+Soit $f(x) = x^2 - 1$.
+
+1. Determiner les valeurs de $x$ pour lesquelles $f(x) < 0$.
+2. Decrire comment obtenir la courbe de $g(x) = |x^2 - 1|$ a partir de la courbe de $f$.
+
+**Partie B — Symetrisation $f(|x|)$**
+
+Soit $f$ une fonction definie sur $\mathbb{R}$.
+
+3. Montrer que la fonction $h(x) = f(|x|)$ est paire.
+4. En deduire comment tracer la courbe de $h$ a partir de celle de $f$.
+:::
+
+:::solution
+**Partie A — Rabattement $|f(x)|$**
+
+**1.** On resout $f(x) < 0$, c'est-a-dire $x^2 - 1 < 0$.
+
+$$x^2 - 1 < 0 \iff x^2 < 1 \iff -1 < x < 1$$
+
+Donc $f(x) < 0$ pour $x \in ]-1, 1[$.
+
+**2.** Par definition de la valeur absolue :
+
+$$g(x) = |f(x)| = \begin{cases} f(x) & \text{si } f(x) \geq 0 \\ -f(x) & \text{si } f(x) < 0 \end{cases}$$
+
+Concretement :
+
+$$g(x) = |x^2 - 1| = \begin{cases} x^2 - 1 & \text{si } x \leq -1 \text{ ou } x \geq 1 \\ 1 - x^2 & \text{si } -1 < x < 1 \end{cases}$$
+
+Pour obtenir $\mathcal{C}_g$ a partir de $\mathcal{C}_f$ :
+
+- **Garder** la partie de $\mathcal{C}_f$ qui est au-dessus ou sur l'axe $Ox$ (c'est-a-dire pour $x \leq -1$ et $x \geq 1$)
+- **Rabattre** par symetrie par rapport a l'axe $Ox$ la partie de $\mathcal{C}_f$ qui est en dessous de $Ox$ (c'est-a-dire pour $-1 < x < 1$)
+
+La courbe obtenue est toujours au-dessus ou sur l'axe $Ox$.
+
+**Partie B — Symetrisation $f(|x|)$**
+
+**3.** Montrons que $h$ est paire.
+
+Le domaine de $h$ : $h(x) = f(|x|)$ est defini pour tout $x$ tel que $|x| \in D_f$. Comme $|{-x}| = |x|$, si $x \in D_h$ alors $-x \in D_h$. Donc $D_h$ est symetrique par rapport a $0$.
+
+Pour tout $x \in D_h$ :
+
+$$h(-x) = f(|-x|) = f(|x|) = h(x)$$
+
+Donc $h(-x) = h(x)$ pour tout $x \in D_h$.
+
+**Par consequent, $h$ est paire.**
+
+**4.** Puisque $h$ est paire, sa courbe $\mathcal{C}_h$ est symetrique par rapport a l'axe $Oy$.
+
+Pour tracer $\mathcal{C}_h$ a partir de $\mathcal{C}_f$ :
+
+- **Tracer** la partie de $\mathcal{C}_f$ correspondant a $x \geq 0$ (la partie droite)
+- **Completer** par symetrie par rapport a l'axe $Oy$ pour obtenir la partie gauche ($x < 0$)
+
+La courbe $\mathcal{C}_h$ est toujours symetrique par rapport a l'axe des ordonnees.
+
+**Graphique 1 : $g(x) = |f(x)| = |x^2 - 1|$ (rabattement)**
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -2.5, x-max: 2.5,
+    y-min: -1.5, y-max: 3,
+    {
+      // f(x) = x² - 1 en pointillés bleus (référence)
+      plot.add(
+        domain: (-2.5, 2.5),
+        x => calc.pow(x, 2) - 1,
+        style: (stroke: (paint: blue, dash: "dashed", thickness: 1.5pt)),
+        label: $f(x) = x^2 - 1$
+      )
+
+      // g(x) = |x² - 1| en rouge solide
+      plot.add(
+        domain: (-2.5, 2.5),
+        x => calc.abs(calc.pow(x, 2) - 1),
+        style: (stroke: 2pt + red),
+        label: $g(x) = |x^2 - 1|$
+      )
+    },
+  )
+})
+```
+
+**Graphique 2 : $h(x) = f(|x|) = |x|^2 - 1 = x^2 - 1$ (symetrisation)**
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -2.5, x-max: 2.5,
+    y-min: -1.5, y-max: 3,
+    {
+      // h(x) = f(|x|) = |x|² - 1 = x² - 1
+      // La fonction est identique à f car f est déjà paire
+      plot.add(
+        domain: (-2.5, 2.5),
+        x => calc.pow(calc.abs(x), 2) - 1,
+        style: (stroke: 2pt + green),
+        label: $h(x) = f(|x|) = x^2 - 1$
+      )
+
+      // Axe de symétrie Oy en pointillés
+      plot.add-vline(
+        0,
+        style: (stroke: (paint: gray, dash: "dotted", thickness: 1pt))
+      )
+    },
+  )
+})
+```
+
+*Note : Pour cet exemple particulier, $h(x) = f(|x|) = |x|^2 - 1 = x^2 - 1$ est identique a $f(x)$ car $f$ est deja une fonction paire. La symetrisation ne change pas la courbe.*
+:::
+
+:::methode
+Deux transformations par valeur absolue :
+
+**$|f(x)|$ (rabattement)** :
+1. Tracer $\mathcal{C}_f$
+2. Garder ce qui est au-dessus de $Ox$
+3. Rabattre ce qui est en dessous par symetrie / $Ox$
+
+**$f(|x|)$ (symetrisation)** :
+1. Tracer $\mathcal{C}_f$ pour $x \geq 0$
+2. Completer par symetrie / $Oy$
+:::
+
+:::hint
+Pour la partie A, commencez par trouver ou $f$ est negative. Pour la partie B, calculez $h(-x)$ en utilisant $|-x| = |x|$.
+:::
+
+:::erreurs
+- Confondre $|f(x)|$ et $f(|x|)$ : ce sont deux transformations differentes
+- Pour $|f(x)|$ : oublier de determiner ou $f(x) < 0$ avant de rabattre
+- Pour $f(|x|)$ : oublier que la courbe obtenue est toujours symetrique par rapport a $Oy$
+:::

@@ -1,0 +1,109 @@
+---
+type: exercise
+title: "Decomposition et translation de courbe d'une fonction rationnelle"
+difficulty: 2
+timeMinutes: 10
+category: approfondissement
+tags: [fonctions, transformations, translation]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R} \setminus \{0\}$ par :
+
+$$f(x) = \frac{1 - 3x}{x}$$
+
+1. Montrer que pour tout $x \neq 0$ : $f(x) = \frac{1}{x} - 3$.
+2. Soit $g(x) = \frac{1}{x}$. Exprimer la relation entre les courbes $\mathcal{C}_f$ et $\mathcal{C}_g$.
+3. En deduire comment obtenir $\mathcal{C}_f$ a partir de $\mathcal{C}_g$ par une transformation geometrique. Preciser le vecteur de translation.
+:::
+
+:::solution
+**1.** Pour tout $x \neq 0$ :
+
+$$f(x) = \frac{1 - 3x}{x} = \frac{1}{x} - \frac{3x}{x} = \frac{1}{x} - 3$$
+
+**Ainsi, $f(x) = \frac{1}{x} - 3$ pour tout $x \in \mathbb{R} \setminus \{0\}$.**
+
+**2.** On a $f(x) = g(x) - 3$ ou $g(x) = \frac{1}{x}$.
+
+Soit $M(x, y)$ un point de $\mathcal{C}_f$. Alors $y = f(x) = g(x) - 3$.
+
+Posons $y' = g(x) = y + 3$. Le point $M'(x, y') = (x, y + 3)$ appartient a $\mathcal{C}_g$.
+
+Reciproquement, si $M'(x, y')$ est sur $\mathcal{C}_g$, alors le point $M(x, y' - 3)$ est sur $\mathcal{C}_f$.
+
+**La courbe $\mathcal{C}_f$ s'obtient en translatant chaque point de $\mathcal{C}_g$ de $-3$ unites verticalement.**
+
+**3.** La transformation qui envoie $\mathcal{C}_g$ sur $\mathcal{C}_f$ est la **translation de vecteur $-3\vec{j}$**, c'est-a-dire le vecteur $\vec{v} = (0, -3)$.
+
+Concretement :
+- L'hyperbole $\mathcal{C}_g$ a pour centre de symetrie l'origine $O$ et pour asymptotes les axes $Ox$ et $Oy$
+- L'hyperbole $\mathcal{C}_f$ a pour centre de symetrie le point $(0, -3)$ et pour asymptote horizontale la droite $y = -3$, tandis que l'asymptote verticale reste $x = 0$
+
+**Representation graphique :**
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (9, 7),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -4, x-max: 4,
+    y-min: -6, y-max: 2,
+    {
+      // g(x) = 1/x en bleu
+      plot.add(
+        domain: (-4, -0.15),
+        x => 1 / x,
+        style: (stroke: 2pt + blue),
+        label: $g(x) = 1/x$
+      )
+      plot.add(
+        domain: (0.15, 4),
+        x => 1 / x,
+        style: (stroke: 2pt + blue)
+      )
+
+      // f(x) = 1/x - 3 en rouge
+      plot.add(
+        domain: (-4, -0.15),
+        x => 1 / x - 3,
+        style: (stroke: 2pt + red),
+        label: $f(x) = 1/x - 3$
+      )
+      plot.add(
+        domain: (0.15, 4),
+        x => 1 / x - 3,
+        style: (stroke: 2pt + red)
+      )
+
+      // Asymptote horizontale y = -3 en pointillés
+      plot.add-hline(
+        -3,
+        style: (stroke: (paint: gray, dash: "dashed", thickness: 1pt)),
+        label: $y = -3$
+      )
+    },
+  )
+})
+```
+:::
+
+:::methode
+Pour identifier une translation a partir d'une expression :
+
+1. **Decomposer** $f(x)$ sous la forme $g(x) + b$ (ou $g(x-a)$) par division ou simplification
+2. **Identifier** la fonction de reference $g$ et la constante $b$ (ou $a$)
+3. **Conclure** :
+   - $f(x) = g(x) + b$ : translation de vecteur $b\vec{j}$ (verticale)
+   - $f(x) = g(x - a)$ : translation de vecteur $a\vec{i}$ (horizontale)
+:::
+
+:::hint
+Decomposez la fraction $\frac{1-3x}{x}$ en separant les deux termes du numerateur.
+:::

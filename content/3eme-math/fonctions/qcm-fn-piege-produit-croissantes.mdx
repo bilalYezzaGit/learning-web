@@ -1,0 +1,23 @@
+---
+type: qcm
+title: "Produit de fonctions croissantes"
+difficulty: 1
+timeMinutes: 1
+tags: [fonctions, operations, produit]
+correctOption: 1
+---
+
+:::question
+Les fonctions $f(x) = x$ et $g(x) = x - 2$ sont croissantes sur $\mathbb{R}$. La fonction $h(x) = f(x) \cdot g(x) = x(x - 2) = x^2 - 2x$ est :
+:::
+
+:::option
+Croissante sur $\mathbb{R}$
+:::
+:::option{correct}
+Decroissante sur $]-\infty ; 1]$ puis croissante sur $[1 ; +\infty[$
+:::
+
+:::explanation
+Le produit de deux fonctions croissantes n'est **pas forcement croissant**. C'est une erreur frequente d'etendre la regle de la somme au produit. Ici $h(x) = x^2 - 2x = (x - 1)^2 - 1$. La forme canonique montre que $h$ admet un minimum en $x = 1$, donc $h$ est decroissante sur $]-\infty ; 1]$ puis croissante sur $[1 ; +\infty[$. La regle correcte est : le produit de deux fonctions **positives** et croissantes est croissant. Mais ici $g(x) = x - 2 < 0$ pour $x < 2$, donc la condition de positivite n'est pas remplie.
+:::

@@ -1,0 +1,157 @@
+---
+type: lesson
+title: "Majorant, minorant, bornes et extremums"
+difficulty: 1
+timeMinutes: 6
+tags: [fonctions, bornes, extremums]
+---
+
+### Majorant et minorant
+
+:::definition[Fonction majoree]
+
+Soit $f$ une fonction definie sur un ensemble $D$.
+
+$f$ est **majoree** sur $D$ s'il existe un reel $M$ tel que, pour tout $x \in D$ :
+
+$$f(x) \leq M$$
+
+Le reel $M$ est appele un **majorant** de $f$ sur $D$.
+
+:::
+
+:::definition[Fonction minoree]
+
+$f$ est **minoree** sur $D$ s'il existe un reel $m$ tel que, pour tout $x \in D$ :
+
+$$f(x) \geq m$$
+
+Le reel $m$ est appele un **minorant** de $f$ sur $D$.
+
+:::
+
+:::remark
+
+Un majorant (ou minorant) n'est **pas unique**. Si $M$ est un majorant de $f$, alors tout reel $M' \geq M$ est aussi un majorant de $f$.
+
+:::
+
+### Maximum et minimum
+
+:::definition[Maximum]
+
+$f$ admet un **maximum** $f(x_0)$ sur $D$ s'il existe $x_0 \in D$ tel que, pour tout $x \in D$ :
+
+$$f(x) \leq f(x_0)$$
+
+On note $\max_D f = f(x_0)$.
+
+:::
+
+:::definition[Minimum]
+
+$f$ admet un **minimum** $f(x_0)$ sur $D$ s'il existe $x_0 \in D$ tel que, pour tout $x \in D$ :
+
+$$f(x) \geq f(x_0)$$
+
+On note $\min_D f = f(x_0)$.
+
+:::
+
+### Distinction majorant / maximum
+
+:::attention[Difference fondamentale]
+
+- Un **majorant** $M$ n'est pas forcement **atteint** par $f$ : il peut n'exister aucun $x_0$ tel que $f(x_0) = M$
+- Un **maximum** est une valeur **atteinte** par $f$ en un point $x_0 \in D$, et c'est aussi un majorant
+
+Tout maximum est un majorant, mais la reciproque est fausse.
+
+:::
+
+:::example[Majorant non atteint]
+
+Soit $f(x) = \frac{2}{x^2 + 4}$ definie sur $\mathbb{R}$.
+
+On a $x^2 + 4 \geq 4$ pour tout $x$, donc $f(x) = \frac{2}{x^2 + 4} \leq \frac{2}{4} = \frac{1}{2}$.
+
+Le reel $\frac{1}{2}$ est un majorant. De plus, $f(0) = \frac{2}{4} = \frac{1}{2}$, donc cette valeur est **atteinte**.
+
+Ainsi $\frac{1}{2}$ est le **maximum** de $f$ (atteint en $x = 0$).
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 0.1,
+    x-min: -5, x-max: 5,
+    y-min: -0.1, y-max: 0.6,
+    {
+      plot.add(domain: (-5, 5), x => 2 / (calc.pow(x, 2) + 4),
+        style: (stroke: 2pt + blue), label: $f(x) = 2/(x^2+4)$)
+    },
+  )
+})
+```
+
+:::
+
+:::example[Borne inferieure non atteinte]
+
+Pour la meme fonction $f(x) = \frac{2}{x^2 + 4}$ :
+
+On a $f(x) > 0$ pour tout $x \in \mathbb{R}$, donc $0$ est un minorant.
+
+Mais $f(x) = 0$ n'a pas de solution (car $\frac{2}{x^2+4} > 0$ toujours). Le nombre $0$ est un minorant mais **pas un minimum** (il n'est pas atteint).
+
+:::
+
+### Fonction bornee
+
+:::definition[Fonction bornee]
+
+$f$ est **bornee** sur $D$ si elle est a la fois **majoree** et **minoree** sur $D$.
+
+C'est-a-dire : il existe $m$ et $M$ reels tels que, pour tout $x \in D$ :
+
+$$m \leq f(x) \leq M$$
+
+:::
+
+:::attention
+
+Avoir un maximum ne suffit pas pour etre bornee. Il faut aussi etre minoree.
+
+**Contre-exemple** : $f(x) = -x^2$ sur $\mathbb{R}$ admet un maximum en $0$ ($f(0) = 0$), mais $f$ n'est pas minoree ($f(x) \to -\infty$ quand $|x| \to +\infty$). Donc $f$ n'est **pas bornee**.
+
+:::
+
+### Technique de majoration/minoration
+
+:::property[Methode par le signe de $f(x) - M$]
+
+Pour montrer que $f(x) \leq M$ pour tout $x \in D$ :
+
+1. Calculer $f(x) - M$
+2. Transformer en une expression dont le signe est evident (par exemple $-(x - a)^2 / Q(x)$ avec $Q(x) > 0$)
+3. Conclure que $f(x) - M \leq 0$, donc $f(x) \leq M$
+
+:::
+
+:::example[Majoration classique]
+
+Soit $f(x) = \frac{x}{1 + x^2}$. Montrer que $f(x) \leq \frac{1}{2}$ pour tout $x \in \mathbb{R}$.
+
+$$f(x) - \frac{1}{2} = \frac{x}{1 + x^2} - \frac{1}{2} = \frac{2x - (1 + x^2)}{2(1 + x^2)} = \frac{-(x^2 - 2x + 1)}{2(1 + x^2)} = \frac{-(x - 1)^2}{2(1 + x^2)}$$
+
+Or $(x - 1)^2 \geq 0$ et $2(1 + x^2) > 0$, donc $f(x) - \frac{1}{2} \leq 0$.
+
+D'ou $f(x) \leq \frac{1}{2}$ pour tout $x \in \mathbb{R}$, avec egalite en $x = 1$.
+
+:::

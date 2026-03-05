@@ -1,0 +1,92 @@
+---
+type: exercise
+title: "Preuve de monotonie par la definition"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [fonctions, monotonie]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $]-3, +\infty[$ par :
+
+$$f(x) = \frac{-4}{x + 3} + 1$$
+
+Montrer que $f$ est croissante sur $]-3, +\infty[$.
+:::
+
+:::solution
+Soient $a$ et $b$ deux reels de $]-3, +\infty[$ tels que $a \leq b$.
+
+Calculons $f(b) - f(a)$ :
+
+$$f(b) - f(a) = \left(\frac{-4}{b + 3} + 1\right) - \left(\frac{-4}{a + 3} + 1\right)$$
+
+$$= \frac{-4}{b + 3} + 1 + \frac{4}{a + 3} - 1$$
+
+$$= \frac{-4}{b + 3} + \frac{4}{a + 3}$$
+
+$$= 4 \left(\frac{1}{a + 3} - \frac{1}{b + 3}\right)$$
+
+Mettons au meme denominateur :
+
+$$= 4 \times \frac{(b + 3) - (a + 3)}{(a + 3)(b + 3)}$$
+
+$$= \frac{4(b - a)}{(a + 3)(b + 3)}$$
+
+Determinons le signe de cette expression :
+
+- $a \leq b$, donc $b - a \geq 0$
+- $a > -3$, donc $a + 3 > 0$
+- $b > -3$, donc $b + 3 > 0$
+
+Par suite :
+
+$$f(b) - f(a) = \frac{4(b - a)}{(a + 3)(b + 3)} \geq 0$$
+
+D'ou $f(b) \geq f(a)$.
+
+**Par consequent, $f$ est croissante sur $]-3, +\infty[$.**
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -3, x-max: 7,
+    y-min: -5, y-max: 2,
+    {
+      plot.add(domain: (-2.5, 6), x => -4 / (x + 3) + 1,
+        style: (stroke: 2pt + blue), label: $f(x) = -4/(x+3) + 1$)
+    },
+  )
+})
+```
+
+:::
+
+:::methode
+Pour prouver que $f$ est croissante sur $I$ par la definition :
+
+1. Prendre $a, b \in I$ avec $a \leq b$
+2. Calculer $f(b) - f(a)$
+3. Factoriser ou mettre au meme denominateur
+4. Determiner le signe en utilisant $a \leq b$ et les contraintes de $I$
+5. Conclure : $f(b) - f(a) \geq 0$ donc $f(a) \leq f(b)$, donc $f$ est croissante
+:::
+
+:::hint
+Pensez a mettre $\frac{-4}{b+3}$ et $\frac{4}{a+3}$ au meme denominateur. Le numerateur fera apparaitre le facteur $b - a$ dont le signe est connu.
+:::
+
+:::erreurs
+- Prendre $a$ et $b$ dans le mauvais ordre : il faut $a \leq b$ pour montrer la croissance
+- Oublier de verifier que le denominateur $(a+3)(b+3)$ est strictement positif sur $]-3, +\infty[$
+- Conclure "croissante" sans avoir montre que $f(b) - f(a) \geq 0$
+:::

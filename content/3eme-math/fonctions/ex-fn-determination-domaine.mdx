@@ -1,0 +1,74 @@
+---
+type: exercise
+title: "Determination de domaines de definition"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [fonctions, domaine-definition]
+---
+
+:::enonce
+Determiner le domaine de definition de chacune des fonctions suivantes :
+
+a) $f(x) = \frac{5x - 1}{x + 3}$
+
+b) $g(x) = \sqrt{1 - x}$
+
+c) $h(x) = \frac{1}{\sqrt{|x - 1|}}$
+:::
+
+:::solution
+**a)** $f(x) = \frac{5x - 1}{x + 3}$
+
+$f(x)$ est une fraction rationnelle. Le denominateur doit etre non nul :
+
+$$x + 3 \neq 0 \iff x \neq -3$$
+
+Le domaine de definition est :
+
+$$D_f = \mathbb{R} \setminus \{-3\}$$
+
+**b)** $g(x) = \sqrt{1 - x}$
+
+Pour que la racine carree soit definie, il faut que le radicande soit positif ou nul :
+
+$$1 - x \geq 0 \iff -x \geq -1 \iff x \leq 1$$
+
+Le domaine de definition est :
+
+$$D_g = ]-\infty, 1]$$
+
+**c)** $h(x) = \frac{1}{\sqrt{|x - 1|}}$
+
+Il faut que $\sqrt{|x - 1|}$ existe **et** soit non nulle (car elle est au denominateur).
+
+- La racine carree existe si $|x - 1| \geq 0$, ce qui est toujours vrai.
+- Elle est non nulle si $|x - 1| > 0$, c'est-a-dire $|x - 1| \neq 0$, soit $x \neq 1$.
+
+Donc on a la condition stricte :
+
+$$|x - 1| > 0 \iff x \neq 1$$
+
+Le domaine de definition est :
+
+$$D_h = \mathbb{R} \setminus \{1\}$$
+:::
+
+:::methode
+Pour determiner le domaine de definition d'une fonction :
+
+1. **Fractions** : le denominateur doit etre non nul
+2. **Racines carrees** : le radicande doit etre $\geq 0$
+3. **Racines au denominateur** : le radicande doit etre strictement positif ($> 0$)
+4. **Fonctions composees** : combiner toutes les conditions d'existence (intersection)
+:::
+
+:::hint
+Pour la fonction $h$, la valeur absolue $|x - 1|$ est toujours $\geq 0$. Mais attention : ici la racine est au denominateur, donc il faut $|x - 1| > 0$.
+:::
+
+:::erreurs
+- Oublier d'exclure les valeurs qui annulent un denominateur
+- Confondre $\geq 0$ (racine simple) et $> 0$ (racine au denominateur)
+- Pour $h(x) = \frac{1}{\sqrt{|x-1|}}$, croire que $|x-1| \geq 0$ suffit alors qu'il faut $|x-1| > 0$
+:::

@@ -1,0 +1,260 @@
+---
+type: lesson
+title: "Transformations de courbes"
+difficulty: 1
+timeMinutes: 7
+tags: [fonctions, transformations, courbes]
+---
+
+### Introduction
+
+A partir de la courbe representative $\mathcal{C}_f$ d'une fonction $f$, on peut obtenir les courbes de fonctions derivees de $f$ par des operations algebriques simples. Chaque operation correspond a une transformation geometrique.
+
+### Translation verticale : $g(x) = f(x) + b$
+
+:::property[Translation verticale]
+
+La courbe de $g(x) = f(x) + b$ se deduit de $\mathcal{C}_f$ par une **translation de vecteur** $b\vec{j}$ :
+
+- Si $b > 0$ : la courbe monte de $b$ unites
+- Si $b < 0$ : la courbe descend de $|b|$ unites
+
+Chaque point $(x, f(x))$ devient $(x, f(x) + b)$.
+
+:::
+
+:::example
+
+Soit $f(x) = \frac{1}{x}$ et $g(x) = \frac{1}{x} - 3$.
+
+La courbe de $g$ est celle de $f$ translatee de $3$ unites vers le bas.
+
+L'asymptote horizontale $y = 0$ de $f$ devient $y = -3$ pour $g$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -3, x-max: 3,
+    y-min: -1, y-max: 10,
+    {
+      plot.add(domain: (-3, 3), x => calc.pow(x, 2),
+        style: (stroke: 2pt + blue), label: $f(x) = x^2$)
+      plot.add(domain: (-3, 3), x => calc.pow(x, 2) + 2,
+        style: (stroke: 2pt + red), label: $g(x) = f(x) + 2$)
+    },
+  )
+})
+```
+
+:::
+
+### Translation horizontale : $g(x) = f(x - a)$
+
+:::property[Translation horizontale]
+
+La courbe de $g(x) = f(x - a)$ se deduit de $\mathcal{C}_f$ par une **translation de vecteur** $a\vec{i}$ :
+
+- Si $a > 0$ : la courbe se deplace vers la **droite** de $a$ unites
+- Si $a < 0$ : la courbe se deplace vers la **gauche** de $|a|$ unites
+
+Chaque point $(x, f(x))$ de $\mathcal{C}_f$ donne le point $(x + a, f(x))$ sur la courbe de $g$.
+
+:::
+
+:::attention[Piege classique]
+
+Le signe dans $f(x - a)$ est **oppose** au sens du deplacement :
+
+$g(x) = f(x - 2)$ : la courbe va vers la **droite** (le $-2$ correspond a $a = +2$)
+
+$g(x) = f(x + 1) = f(x - (-1))$ : la courbe va vers la **gauche** (car $a = -1$)
+
+:::
+
+:::example
+
+Soit $g(x) = \sqrt{x + 1} = \sqrt{x - (-1)}$.
+
+La courbe de $g$ est celle de $f(x) = \sqrt{x}$ translatee de $1$ unite vers la **gauche** (car $a = -1$).
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -2, x-max: 5,
+    y-min: -1, y-max: 5,
+    {
+      plot.add(domain: (-2, 5), x => calc.pow(x - 2, 2),
+        style: (stroke: 2pt + blue), label: $f(x) = x^2$)
+      plot.add(domain: (-2, 5), x => calc.pow(x, 2),
+        style: (stroke: 2pt + red), label: $g(x) = f(x-2)$)
+    },
+  )
+})
+```
+
+:::
+
+### Symetrie par rapport a $Ox$ : $g(x) = -f(x)$
+
+:::property[Symetrie / axe $Ox$]
+
+La courbe de $g(x) = -f(x)$ se deduit de $\mathcal{C}_f$ par une **symetrie par rapport a l'axe des abscisses** $(Ox)$.
+
+Chaque point $(x, f(x))$ devient $(x, -f(x))$.
+
+:::
+
+:::example
+
+Soit $f(x) = x^2$ et $g(x) = -x^2$.
+
+La parabole $f$ (ouverte vers le haut) donne la parabole $g$ (ouverte vers le bas) par symetrie / $Ox$.
+
+Le minimum de $f$ en $(0, 0)$ devient le maximum de $g$ en $(0, 0)$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 2,
+    x-min: -3, x-max: 3,
+    y-min: -10, y-max: 10,
+    {
+      plot.add(domain: (-3, 3), x => calc.pow(x, 2),
+        style: (stroke: 2pt + blue), label: $f(x) = x^2$)
+      plot.add(domain: (-3, 3), x => -calc.pow(x, 2),
+        style: (stroke: 2pt + red), label: $g(x) = -f(x)$)
+    },
+  )
+})
+```
+
+:::
+
+### Rabattement : $g(x) = |f(x)|$
+
+:::property[Rabattement de la partie negative]
+
+La courbe de $g(x) = |f(x)|$ se construit a partir de $\mathcal{C}_f$ en deux etapes :
+
+1. **Garder** la partie de $\mathcal{C}_f$ qui est **au-dessus** de l'axe $Ox$ (la ou $f(x) \geq 0$)
+2. **Rabattre** la partie **en dessous** de $Ox$ par symetrie par rapport a $Ox$ (la ou $f(x) < 0$, on remplace par $-f(x) > 0$)
+
+La courbe obtenue est **toujours au-dessus** de l'axe $Ox$.
+
+:::
+
+:::example
+
+Soit $g(x) = |x^2 - 1|$.
+
+La parabole $f(x) = x^2 - 1$ passe sous l'axe $Ox$ entre $-1$ et $1$.
+
+- Pour $x \leq -1$ ou $x \geq 1$ : $f(x) \geq 0$, donc $g(x) = x^2 - 1$ (on garde la courbe)
+- Pour $-1 < x < 1$ : $f(x) < 0$, donc $g(x) = -(x^2 - 1) = 1 - x^2$ (on rabat vers le haut)
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -2, x-max: 2,
+    y-min: -2, y-max: 4,
+    {
+      plot.add(domain: (-2, 2), x => calc.pow(x, 2) - 1,
+        style: (stroke: 2pt + blue, stroke-dasharray: (4, 2)), label: $f(x) = x^2 - 1$)
+      plot.add(domain: (-2, 2), x => calc.abs(calc.pow(x, 2) - 1),
+        style: (stroke: 2pt + red), label: $g(x) = |f(x)|$)
+    },
+  )
+})
+```
+
+:::
+
+### Symetrisation : $g(x) = f(|x|)$
+
+:::property[Symetrisation par rapport a $Oy$]
+
+La courbe de $g(x) = f(|x|)$ se construit en deux etapes :
+
+1. **Tracer** $\mathcal{C}_f$ sur $\mathbb{R}^+$ (la partie droite)
+2. **Completer** par symetrie par rapport a l'axe $Oy$ pour obtenir la partie gauche
+
+La fonction $g$ est toujours **paire** : $g(-x) = f(|-x|) = f(|x|) = g(x)$.
+
+:::
+
+:::example
+
+Soit $f(x) = x^2 - x$ et $g(x) = f(|x|) = |x|^2 - |x| = x^2 - |x|$.
+
+- Sur $\mathbb{R}^+$ : $g(x) = x^2 - x$ (c'est $f$ elle-meme)
+- Sur $\mathbb{R}^-$ : $g(x) = x^2 - (-x) = x^2 + x$ (image miroir par rapport a $Oy$)
+
+La courbe de $g$ est symetrique par rapport a l'axe $Oy$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -2, x-max: 2,
+    y-min: -2, y-max: 4,
+    {
+      plot.add(domain: (-2, 2), x => calc.pow(x, 2) - calc.abs(x),
+        style: (stroke: 2pt + blue), label: $g(x) = f(|x|) = x^2 - |x|$)
+    },
+  )
+})
+```
+
+:::
+
+### Resume
+
+:::property[Tableau recapitulatif des transformations]
+
+| Fonction | Transformation |
+|----------|----------------|
+| $f(x) + b$ | Translation verticale de $b\vec{j}$ |
+| $f(x - a)$ | Translation horizontale de $a\vec{i}$ |
+| $-f(x)$ | Symetrie / axe $Ox$ |
+| $\lvert f(x)\rvert$ | Rabattement de la partie negative vers le haut |
+| $f(\lvert x\rvert)$ | Symetrisation / axe $Oy$ (resultat toujours pair) |
+
+:::

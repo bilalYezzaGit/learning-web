@@ -1,0 +1,142 @@
+---
+type: lesson
+title: "Resolution graphique d'equations et d'inequations"
+difficulty: 1
+timeMinutes: 5
+tags: [fonctions, equations, inequations, graphique]
+---
+
+### Equations : $f(x) = g(x)$
+
+:::property[Resolution graphique d'une equation]
+
+Resoudre graphiquement l'equation $f(x) = g(x)$ revient a trouver les **abscisses des points d'intersection** des courbes $\mathcal{C}_f$ et $\mathcal{C}_g$.
+
+Si un point $M$ appartient a la fois a $\mathcal{C}_f$ et a $\mathcal{C}_g$, alors son abscisse $x_0$ verifie $f(x_0) = g(x_0)$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -1, x-max: 4,
+    y-min: -1, y-max: 3,
+    {
+      plot.add(domain: (-1, 4), x => calc.sqrt(x + 1),
+        style: (stroke: 2pt + blue), label: $f(x) = sqrt(x+1)$)
+      plot.add(domain: (-1, 4), x => x / 2,
+        style: (stroke: 2pt + red), label: $g(x) = x/2$)
+    },
+  )
+})
+```
+
+:::
+
+:::example[Equation $f(x) = k$]
+
+Resoudre graphiquement $f(x) = 2$ (avec $f$ donnee par son graphe) revient a tracer la droite horizontale $y = 2$ et lire les abscisses des points d'intersection avec $\mathcal{C}_f$.
+
+Si la droite coupe la courbe en 3 points d'abscisses $x_1$, $x_2$, $x_3$, alors l'equation a **3 solutions** : $x_1$, $x_2$, $x_3$.
+
+:::
+
+:::remark
+
+La precision de la resolution depend de la qualite du graphique. On obtient souvent des valeurs **approchees**. Pour les valeurs exactes, il faut resoudre algebriquement.
+
+:::
+
+### Cas particulier : $f(x) = 0$
+
+:::property[Zeros d'une fonction]
+
+Les solutions de $f(x) = 0$ sont les **abscisses des points d'intersection** de $\mathcal{C}_f$ avec l'axe des abscisses $(Ox)$.
+
+Ce sont les valeurs de $x$ ou la courbe **coupe** ou **touche** l'axe $Ox$.
+
+:::
+
+### Inequations : $f(x) \leq g(x)$
+
+:::property[Resolution graphique d'une inequation]
+
+Resoudre graphiquement $f(x) \leq g(x)$ revient a determiner les intervalles ou la courbe $\mathcal{C}_f$ est **en dessous ou confondue** avec la courbe $\mathcal{C}_g$.
+
+:::
+
+:::definition[Positions relatives]
+
+Soit $I$ un intervalle du domaine commun de $f$ et $g$.
+
+- $\mathcal{C}_f$ est **au-dessus** de $\mathcal{C}_g$ sur $I$ si $f(x) \geq g(x)$ pour tout $x \in I$
+- $\mathcal{C}_f$ est **en dessous** de $\mathcal{C}_g$ sur $I$ si $f(x) \leq g(x)$ pour tout $x \in I$
+
+:::
+
+:::example[Inequation $f(x) \leq g(x)$]
+
+On dispose des courbes de $f$ et $g$ qui se coupent en $x = -1$ et $x = 3$.
+
+On observe que $\mathcal{C}_f$ est en dessous de $\mathcal{C}_g$ pour $x \in [-1, 3]$.
+
+L'ensemble solution de $f(x) \leq g(x)$ est donc $S = [-1, 3]$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -2, x-max: 4,
+    y-min: -2, y-max: 4,
+    {
+      plot.add(domain: (-2, 4), x => calc.pow(x - 1, 2) - 2,
+        style: (stroke: 2pt + blue), label: $f(x)$)
+      plot.add(domain: (-2, 4), x => 0.5 * x,
+        style: (stroke: 2pt + red), label: $g(x)$)
+    },
+  )
+})
+```
+
+:::
+
+### Cas particulier : $f(x) \leq 0$
+
+:::property[Signe d'une fonction]
+
+Les solutions de $f(x) \leq 0$ correspondent aux intervalles ou la courbe $\mathcal{C}_f$ est **en dessous ou sur** l'axe des abscisses.
+
+Les solutions de $f(x) \geq 0$ correspondent aux intervalles ou la courbe $\mathcal{C}_f$ est **au-dessus ou sur** l'axe des abscisses.
+
+:::
+
+### Methode pratique
+
+:::property[Etapes de la resolution graphique]
+
+1. **Tracer** les courbes $\mathcal{C}_f$ et $\mathcal{C}_g$ (ou $\mathcal{C}_f$ et la droite $y = k$) dans un meme repere
+2. **Reperer** les points d'intersection (pour les equations) ou les positions relatives (pour les inequations)
+3. **Lire** les abscisses des points d'intersection et les intervalles ou une courbe est au-dessus ou en dessous de l'autre
+4. **Ecrire** l'ensemble des solutions
+
+:::
+
+:::attention
+
+- Faire attention aux bornes : verifier si les points d'intersection sont **inclus ou exclus** (inegalite large $\leq$ ou stricte $<$)
+- Ne pas oublier de preciser le domaine de definition : les solutions doivent appartenir a $D_f \cap D_g$
+
+:::

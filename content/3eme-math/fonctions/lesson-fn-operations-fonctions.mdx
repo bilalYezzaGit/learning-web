@@ -1,0 +1,124 @@
+---
+type: lesson
+title: "Operations sur les fonctions et variations"
+difficulty: 1
+timeMinutes: 7
+tags: [fonctions, operations, variations]
+---
+
+### Somme de fonctions
+
+:::theorem[Variations de la somme]
+
+Soient $f$ et $g$ deux fonctions definies sur un intervalle $I$.
+
+Si $f$ et $g$ sont **croissantes** sur $I$, alors $f + g$ est **croissante** sur $I$.
+
+Si $f$ et $g$ sont **decroissantes** sur $I$, alors $f + g$ est **decroissante** sur $I$.
+
+:::
+
+:::example[Somme de deux croissantes]
+
+Soit $h(x) = x + \sqrt{x}$ sur $[0, +\infty[$.
+
+- $f(x) = x$ est croissante sur $[0, +\infty[$
+- $g(x) = \sqrt{x}$ est croissante sur $[0, +\infty[$
+
+Donc $h = f + g$ est **croissante** sur $[0, +\infty[$.
+
+:::
+
+:::example[Somme de deux decroissantes]
+
+Soit $h(x) = -x + \frac{1}{x}$ sur $]0, +\infty[$.
+
+- $f(x) = -x$ est decroissante sur $]0, +\infty[$
+- $g(x) = \frac{1}{x}$ est decroissante sur $]0, +\infty[$
+
+Donc $h = f + g$ est **decroissante** sur $]0, +\infty[$.
+
+:::
+
+:::remark
+
+Si $f$ est croissante et $g$ est decroissante (sens opposes), on **ne peut pas conclure** directement sur les variations de $f + g$. Il faut alors utiliser la definition ou un autre argument.
+
+:::
+
+### Multiplication par un scalaire
+
+:::theorem[Variations de $\lambda \cdot f$]
+
+Soit $f$ une fonction definie sur un intervalle $I$ et $\lambda$ un reel non nul.
+
+- Si $\lambda > 0$ : $\lambda f$ a le **meme sens de variation** que $f$
+- Si $\lambda < 0$ : $\lambda f$ a le **sens de variation contraire** a celui de $f$
+
+:::
+
+:::example[Multiplication par un negatif]
+
+Soit $f(x) = \frac{1}{x}$, decroissante sur $]0, +\infty[$.
+
+Alors $g(x) = \frac{-3}{x} = (-3) \cdot f(x)$.
+
+Comme $\lambda = -3 < 0$, la fonction $g$ a le sens contraire de $f$.
+
+Donc $g$ est **croissante** sur $]0, +\infty[$.
+
+:::
+
+### Produit de fonctions : un piege classique
+
+:::attention[Le produit ne conserve PAS la monotonie en general]
+
+**La regle de la somme ne s'etend PAS au produit.**
+
+Si $f$ et $g$ sont croissantes sur $I$, il est **faux** en general de dire que $f \cdot g$ est croissante sur $I$.
+
+:::
+
+:::property[Produit de fonctions positives]
+
+Si $f$ et $g$ sont **positives** et **croissantes** sur $I$, alors $f \cdot g$ est **croissante** sur $I$.
+
+La positivite est une condition indispensable.
+
+:::
+
+:::example[Contre-exemple : produit sans positivite]
+
+$f(x) = x$ et $g(x) = x - 2$ sont toutes deux croissantes sur $\mathbb{R}$.
+
+Pourtant $h(x) = f(x) \cdot g(x) = x(x-2) = x^2 - 2x$.
+
+$h(x) = (x-1)^2 - 1$ : cette fonction est **decroissante** sur $]-\infty, 1]$ puis **croissante** sur $[1, +\infty[$. Elle n'est pas monotone sur $\mathbb{R}$.
+
+Le probleme vient du fait que $g(x) = x - 2 < 0$ pour $x < 2$.
+
+:::
+
+:::remark
+
+De meme, $f$ croissante n'implique pas $f^2$ croissante. C'est vrai seulement si $f \geq 0$ sur $I$.
+
+**Contre-exemple** : $u(x) = x - 1$ est croissante sur $]0, +\infty[$.
+
+$u^2(x) = (x-1)^2$ est decroissante sur $]0, 1]$ (car $u$ est negative sur cet intervalle) puis croissante sur $[1, +\infty[$ (car $u$ est positive).
+
+:::
+
+### Resume des regles
+
+:::property[Tableau recapitulatif]
+
+| Operation | Condition | Resultat |
+|-----------|-----------|----------|
+| $f + g$ | $f$ et $g$ de meme sens | Meme sens |
+| $\lambda f$ ($\lambda > 0$) | — | Meme sens que $f$ |
+| $\lambda f$ ($\lambda < 0$) | — | Sens contraire a $f$ |
+| $f \cdot g$ | $f, g \geq 0$ et meme sens | Meme sens |
+| $f \cdot g$ | Sans positivite | **Pas de regle** |
+
+:::

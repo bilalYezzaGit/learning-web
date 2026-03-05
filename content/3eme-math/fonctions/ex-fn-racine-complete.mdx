@@ -1,0 +1,124 @@
+---
+type: exercise
+title: "Etude complete d'une fonction composee avec racine carree"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [fonctions, racine-carree, etude-complete]
+---
+
+:::enonce
+Soit $h$ la fonction definie par :
+
+$$h(x) = \sqrt{x(1 - x)}$$
+
+1. Determiner l'ensemble de definition $D_h$ de $h$.
+2. Etudier la parite de $h$.
+3. On pose $\varphi(x) = x(1 - x)$. Montrer que $\varphi$ est croissante sur $\left[0, \frac{1}{2}\right]$ et decroissante sur $\left[\frac{1}{2}, 1\right]$.
+4. En deduire les variations de $h$ sur $D_h$.
+5. Determiner le maximum de $h$ et la valeur en laquelle il est atteint.
+:::
+
+:::solution
+**1.** La fonction $h(x) = \sqrt{x(1-x)}$ est definie lorsque le radicande est positif ou nul :
+
+$$x(1 - x) \geq 0$$
+
+Etudions le signe de $x(1-x)$ :
+- $x(1-x) = 0$ pour $x = 0$ ou $x = 1$
+- Le coefficient de $x^2$ est $-1 < 0$ (car $x(1-x) = -x^2 + x$)
+- Donc $x(1-x) \geq 0$ pour $x \in [0, 1]$
+
+**$D_h = [0, 1]$.**
+
+**2.** Verifions si $D_h$ est symetrique par rapport a $0$ :
+
+$D_h = [0, 1]$. Pour $x = 1 \in D_h$, on a $-1 \notin D_h$. Donc $D_h$ n'est pas symetrique par rapport a $0$.
+
+**$h$ n'est ni paire ni impaire.**
+
+**3.** Soit $\varphi(x) = x(1 - x) = -x^2 + x$.
+
+*Monotonie sur $\left[0, \frac{1}{2}\right]$ :*
+
+Soient $a$ et $b$ dans $\left[0, \frac{1}{2}\right]$ avec $a \leq b$.
+
+$$\varphi(b) - \varphi(a) = (b - b^2) - (a - a^2) = (b - a) - (b^2 - a^2) = (b - a) - (b - a)(b + a)$$
+
+$$= (b - a)(1 - a - b)$$
+
+Comme $a \leq b \leq \frac{1}{2}$, on a $a + b \leq 1$, donc $1 - a - b \geq 0$. De plus $b - a \geq 0$.
+
+D'ou $\varphi(b) - \varphi(a) \geq 0$.
+
+**$\varphi$ est croissante sur $\left[0, \frac{1}{2}\right]$.**
+
+*Monotonie sur $\left[\frac{1}{2}, 1\right]$ :*
+
+Soient $a$ et $b$ dans $\left[\frac{1}{2}, 1\right]$ avec $a \leq b$.
+
+$$\varphi(b) - \varphi(a) = (b - a)(1 - a - b)$$
+
+Comme $a \geq \frac{1}{2}$ et $b \geq \frac{1}{2}$, on a $a + b \geq 1$, donc $1 - a - b \leq 0$. De plus $b - a \geq 0$.
+
+D'ou $\varphi(b) - \varphi(a) \leq 0$.
+
+**$\varphi$ est decroissante sur $\left[\frac{1}{2}, 1\right]$.**
+
+**4.** Puisque $\varphi(x) \geq 0$ sur $[0, 1]$ (c'est la condition d'existence de $h$) et que la fonction racine carree conserve la monotonie des fonctions positives :
+
+- $\varphi$ est positive et croissante sur $\left[0, \frac{1}{2}\right]$, donc $h = \sqrt{\varphi}$ est **croissante** sur $\left[0, \frac{1}{2}\right]$
+- $\varphi$ est positive et decroissante sur $\left[\frac{1}{2}, 1\right]$, donc $h = \sqrt{\varphi}$ est **decroissante** sur $\left[\frac{1}{2}, 1\right]$
+
+**5.** D'apres les variations de $h$ :
+
+- $h$ croit de $h(0) = 0$ a $h\!\left(\frac{1}{2}\right)$ sur $\left[0, \frac{1}{2}\right]$
+- $h$ decroit de $h\!\left(\frac{1}{2}\right)$ a $h(1) = 0$ sur $\left[\frac{1}{2}, 1\right]$
+
+Calculons :
+
+$$h\!\left(\frac{1}{2}\right) = \sqrt{\frac{1}{2} \cdot \left(1 - \frac{1}{2}\right)} = \sqrt{\frac{1}{2} \cdot \frac{1}{2}} = \sqrt{\frac{1}{4}} = \frac{1}{2}$$
+
+**Graphique de la fonction :**
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 0.2,
+    y-tick-step: 0.1,
+    x-min: -0.2, x-max: 1.2,
+    y-min: -0.1, y-max: 0.6,
+    {
+      plot.add(domain: (0.001, 0.999), x => calc.sqrt(x * (1 - x)),
+        style: (stroke: 2pt + blue), label: $h(x) = sqrt(x(1-x))$)
+    },
+  )
+})
+```
+
+**Le maximum de $h$ est $\frac{1}{2}$, atteint en $x = \frac{1}{2}$.**
+:::
+
+:::methode
+Pour etudier $h(x) = \sqrt{\varphi(x)}$ :
+
+1. **Domaine** : resoudre $\varphi(x) \geq 0$
+2. **Parite** : verifier si $D_h$ est symetrique (sinon, STOP)
+3. **Variations** : etudier d'abord les variations de $\varphi$, puis appliquer le theoreme : "$\varphi$ positive et croissante $\Rightarrow$ $\sqrt{\varphi}$ croissante"
+4. **Extremum** : le maximum/minimum de $h$ correspond a celui de $\varphi$ (la racine carree conserve l'ordre)
+:::
+
+:::hint
+Factorisez $\varphi(b) - \varphi(a)$ sous la forme $(b-a)(1-a-b)$ pour determiner le signe selon l'intervalle.
+:::
+
+:::erreurs
+- Oublier la condition $\varphi(x) \geq 0$ pour appliquer le theoreme de conservation de la monotonie par la racine carree
+- Affirmer que $h$ est paire sans verifier la symetrie du domaine : ici $D_h = [0,1]$ n'est pas symetrique
+:::

@@ -1,0 +1,153 @@
+---
+type: lesson
+title: "Sens de variation d'une fonction"
+difficulty: 1
+timeMinutes: 7
+tags: [fonctions, monotonie, variations]
+---
+
+### Definitions
+
+#### Fonction croissante
+
+:::definition[Fonction croissante]
+
+Soit $f$ une fonction definie sur un intervalle $I$.
+
+$f$ est **croissante** sur $I$ si, pour tous $a, b \in I$ :
+
+$$a \leq b \Rightarrow f(a) \leq f(b)$$
+
+$f$ est **strictement croissante** sur $I$ si :
+
+$$a < b \Rightarrow f(a) < f(b)$$
+
+:::
+
+#### Fonction decroissante
+
+:::definition[Fonction decroissante]
+
+Soit $f$ une fonction definie sur un intervalle $I$.
+
+$f$ est **decroissante** sur $I$ si, pour tous $a, b \in I$ :
+
+$$a \leq b \Rightarrow f(a) \geq f(b)$$
+
+$f$ est **strictement decroissante** sur $I$ si :
+
+$$a < b \Rightarrow f(a) > f(b)$$
+
+:::
+
+:::definition[Fonction monotone]
+
+Une fonction est **monotone** sur $I$ si elle est croissante sur $I$ ou decroissante sur $I$.
+
+:::
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -3, x-max: 6,
+    y-min: -4, y-max: 2,
+    {
+      plot.add(domain: (-2.5, 5), x => -4 / (x + 3) + 1,
+        style: (stroke: 2pt + blue), label: $f(x) = -4/(x+3) + 1$)
+    },
+  )
+})
+```
+
+### Preuve par la definition
+
+:::property[Methode de preuve de la monotonie]
+
+Pour montrer que $f$ est croissante sur $I$ par la definition :
+
+1. Prendre $a$ et $b$ dans $I$ avec $a \leq b$
+2. Calculer $f(b) - f(a)$
+3. Factoriser ou mettre au meme denominateur
+4. Determiner le signe de $f(b) - f(a)$ (en utilisant $a \leq b$ et les contraintes de $I$)
+5. Conclure : si $f(b) - f(a) \geq 0$, alors $f(a) \leq f(b)$, donc $f$ est croissante sur $I$
+
+:::
+
+:::example[Preuve de croissance]
+
+Montrer que $f(x) = x^2$ est croissante sur $[0, +\infty[$.
+
+Soient $a$ et $b$ deux reels de $[0, +\infty[$ tels que $a \leq b$.
+
+$$f(b) - f(a) = b^2 - a^2 = (b - a)(b + a)$$
+
+Or $a \leq b$ donc $b - a \geq 0$. De plus $a \geq 0$ et $b \geq 0$ donc $b + a \geq 0$.
+
+Par suite $f(b) - f(a) = (b - a)(b + a) \geq 0$, d'ou $f(a) \leq f(b)$.
+
+Par consequent, $f$ est **croissante** sur $[0, +\infty[$.
+
+:::
+
+### Taux de variation
+
+:::definition[Taux de variation]
+
+Soient $a$ et $b$ deux reels distincts de $I$. Le **taux de variation** de $f$ entre $a$ et $b$ est :
+
+$$T = \frac{f(b) - f(a)}{b - a}$$
+
+:::
+
+:::property[Lien avec la monotonie]
+
+Si $a < b$ (donc $b - a > 0$), le signe de $T$ est celui de $f(b) - f(a)$ :
+
+- $T > 0 \Rightarrow f(b) > f(a)$ : $f$ "monte" entre $a$ et $b$
+- $T < 0 \Rightarrow f(b) < f(a)$ : $f$ "descend" entre $a$ et $b$
+
+Si $T \geq 0$ pour tous $a < b$ dans $I$, alors $f$ est croissante sur $I$.
+
+:::
+
+:::example[Preuve par le taux de variation]
+
+Montrer que $f(x) = \frac{x}{x - 2}$ est decroissante sur $]2, +\infty[$.
+
+Soient $a$ et $b$ dans $]2, +\infty[$ tels que $a < b$.
+
+$$T = \frac{f(b) - f(a)}{b - a} = \frac{\frac{b}{b-2} - \frac{a}{a-2}}{b - a}$$
+
+Calcul du numerateur :
+
+$$f(b) - f(a) = \frac{b(a-2) - a(b-2)}{(b-2)(a-2)} = \frac{ba - 2b - ab + 2a}{(b-2)(a-2)} = \frac{-2(b-a)}{(b-2)(a-2)}$$
+
+Donc :
+
+$$T = \frac{-2(b-a)}{(b-a)(b-2)(a-2)} = \frac{-2}{(b-2)(a-2)}$$
+
+Or $a > 2$ et $b > 2$, donc $(a-2) > 0$ et $(b-2) > 0$. D'ou $T < 0$.
+
+Par consequent, $f$ est **decroissante** sur $]2, +\infty[$.
+
+:::
+
+:::attention
+
+Pour le taux de variation, toujours poser $a < b$ pour que $b - a > 0$. Ainsi le signe de $T$ est directement celui de $f(b) - f(a)$.
+
+:::
+
+:::remark
+
+La preuve de monotonie par la definition (ou par le taux de variation) est une competence fondamentale de ce module. Elle sera remplacee par l'etude du signe de la derivee dans les modules suivants.
+
+:::

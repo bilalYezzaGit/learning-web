@@ -1,0 +1,120 @@
+---
+type: exercise
+title: "Ecriture sans valeur absolue par morceaux"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [fonctions, valeur-absolue, morceaux]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}$ par :
+
+$$f(x) = |2x - 1| - 3x$$
+
+1. Ecrire $f(x)$ sans valeur absolue sur chaque intervalle.
+2. En deduire l'expression simplifiee de $f$ sur chaque morceau.
+:::
+
+:::solution
+**1. Determination du point de changement**
+
+L'expression dans la valeur absolue est $2x - 1$.
+
+On cherche quand $2x - 1$ change de signe :
+
+$$2x - 1 = 0 \iff x = \frac{1}{2}$$
+
+Le point de changement est $x = \frac{1}{2}$.
+
+**Signe de $2x - 1$ :**
+
+- Si $x < \frac{1}{2}$ : $2x - 1 < 0$, donc $|2x - 1| = -(2x - 1) = 1 - 2x$
+- Si $x \geq \frac{1}{2}$ : $2x - 1 \geq 0$, donc $|2x - 1| = 2x - 1$
+
+**2. Expression de $f$ sur chaque morceau**
+
+**Cas 1 : $x < \frac{1}{2}$**
+
+$$f(x) = (1 - 2x) - 3x = 1 - 2x - 3x = 1 - 5x$$
+
+**Cas 2 : $x \geq \frac{1}{2}$**
+
+$$f(x) = (2x - 1) - 3x = 2x - 1 - 3x = -x - 1$$
+
+**Resume :**
+
+$$f(x) = \begin{cases} 1 - 5x & \text{si } x < \frac{1}{2} \\ -x - 1 & \text{si } x \geq \frac{1}{2} \end{cases}$$
+
+**Verification** : en $x = \frac{1}{2}$, les deux expressions donnent :
+- $1 - 5 \times \frac{1}{2} = 1 - \frac{5}{2} = -\frac{3}{2}$
+- $-\frac{1}{2} - 1 = -\frac{3}{2}$
+
+Les deux morceaux se raccordent bien en $x = \frac{1}{2}$.
+
+**Representation graphique :**
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-1.5, 0), (2.5, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -4), (0, 3.5), stroke: 0.8pt, mark: (end: ">", fill: black))
+  content((2.4, -0.3), $x$)
+  content((-0.3, 3.3), $y$)
+  content((-0.3, -0.3), $O$)
+
+  // Graduations
+  for i in (-1, 1, 2) {
+    line((i, -0.1), (i, 0.1), stroke: 0.5pt)
+    content((i, -0.4), text(size: 8pt, str(i)))
+  }
+  for j in (-3, -2, -1, 1, 2, 3) {
+    line((-0.1, j), (0.1, j), stroke: 0.5pt)
+    content((-0.4, j), text(size: 8pt, str(j)))
+  }
+
+  // Point de changement x = 0.5
+  line((0.5, -0.15), (0.5, 0.15), stroke: 1pt + red)
+  content((0.5, -0.7), text(size: 8pt, fill: red, $1/2$))
+
+  // Partie 1: f(x) = 1 - 5x pour x < 0.5
+  line((-1, 6), (0.5, -1.5), stroke: 2pt + blue)
+
+  // Partie 2: f(x) = -x - 1 pour x >= 0.5
+  line((0.5, -1.5), (2, -3), stroke: 2pt + green)
+
+  // Point de raccordement
+  circle((0.5, -1.5), radius: 0.08, fill: blue, stroke: 1pt + blue)
+
+  // Légende
+  content((1.5, 2.5), text(size: 9pt, fill: blue, $1-5x$))
+  content((1.5, -3.5), text(size: 9pt, fill: green, $-x-1$))
+})
+```
+:::
+
+:::methode
+Pour ecrire une fonction $f(x) = |A(x)| + B(x)$ sans valeur absolue :
+
+1. **Trouver le point de changement** : resoudre $A(x) = 0$
+2. **Determiner le signe de $A(x)$** sur chaque intervalle
+3. **Lever la valeur absolue** :
+   - Si $A(x) \geq 0$ : $|A(x)| = A(x)$
+   - Si $A(x) < 0$ : $|A(x)| = -A(x)$
+4. **Simplifier** l'expression sur chaque morceau
+5. **Verifier** le raccordement au point de changement
+:::
+
+:::hint
+Trouvez d'abord quand $2x - 1 = 0$, puis determinez le signe de $2x - 1$ de part et d'autre de cette valeur.
+:::
+
+:::erreurs
+- Oublier le signe moins dans $|2x - 1| = -(2x - 1) = 1 - 2x$ quand $2x - 1 < 0$
+- Se tromper en ecrivant $|2x - 1| = 2x + 1$ au lieu de $1 - 2x$ (il faut changer le signe de toute l'expression, pas seulement d'un terme)
+- Ne pas verifier que les deux morceaux donnent la meme valeur au point de changement $x = \frac{1}{2}$
+:::

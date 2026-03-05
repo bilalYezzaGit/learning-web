@@ -1,0 +1,57 @@
+---
+type: exercise
+title: "Variations d'une fonction multipliee par un scalaire negatif"
+difficulty: 2
+timeMinutes: 8
+category: approfondissement
+tags: [fonctions, operations, scalaire, variations]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $]0, +\infty[$ par :
+
+$$f(x) = \frac{-3}{x}$$
+
+1. Ecrire $f$ sous la forme $f(x) = \lambda \cdot g(x)$ ou $g$ est une fonction de reference et $\lambda$ un reel.
+2. Rappeler le sens de variation de $g$ sur $]0, +\infty[$.
+3. En deduire le sens de variation de $f$ sur $]0, +\infty[$.
+:::
+
+:::solution
+**1.** On ecrit :
+
+$$f(x) = \frac{-3}{x} = (-3) \times \frac{1}{x}$$
+
+Donc $f(x) = \lambda \cdot g(x)$ avec $\lambda = -3$ et $g(x) = \frac{1}{x}$.
+
+**2.** La fonction $g(x) = \frac{1}{x}$ est une fonction de reference. Elle est **strictement decroissante** sur $]0, +\infty[$.
+
+*Rappel de la preuve* : soient $a$ et $b$ deux reels de $]0, +\infty[$ tels que $a < b$.
+
+$$g(b) - g(a) = \frac{1}{b} - \frac{1}{a} = \frac{a - b}{ab}$$
+
+Comme $a < b$, on a $a - b < 0$. Comme $a > 0$ et $b > 0$, on a $ab > 0$. Donc $g(b) - g(a) < 0$, c'est-a-dire $g(b) < g(a)$. Ainsi $g$ est strictement decroissante sur $]0, +\infty[$.
+
+**3.** On a $f = \lambda \cdot g$ avec $\lambda = -3 < 0$.
+
+La regle est : multiplier par un scalaire negatif **inverse** le sens de variation.
+
+Comme $g$ est strictement decroissante sur $]0, +\infty[$ et $\lambda = -3 < 0$, on en deduit que $f = (-3) \cdot g$ est **strictement croissante** sur $]0, +\infty[$.
+
+**Par consequent, $f$ est strictement croissante sur $]0, +\infty[$.**
+:::
+
+:::methode
+Pour determiner les variations de $\lambda \cdot g$ :
+
+1. Identifier la fonction de reference $g$ et le scalaire $\lambda$
+2. Rappeler les variations de $g$
+3. Appliquer la regle :
+   - Si $\lambda > 0$ : $\lambda \cdot g$ a le **meme** sens de variation que $g$
+   - Si $\lambda < 0$ : $\lambda \cdot g$ a le sens de variation **contraire** a $g$
+:::
+
+:::erreurs
+- Oublier que multiplier par un negatif **inverse** le sens des inegalites, et donc le sens de variation
+- Confondre le signe de $\lambda$ avec le signe de $f(x)$ : ici $\lambda < 0$ mais $f$ peut etre positive ou negative selon $x$
+:::

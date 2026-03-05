@@ -1,0 +1,23 @@
+---
+type: qcm
+title: "Carre d'une fonction croissante"
+difficulty: 1
+timeMinutes: 1
+tags: [fonctions, operations, carre]
+correctOption: 1
+---
+
+:::question
+La fonction $u(x) = x - \dfrac{1}{x}$ est croissante sur $]0 ; +\infty[$. La fonction $u^2$ est-elle croissante sur $]0 ; +\infty[$ ?
+:::
+
+:::option
+Oui, car $u$ est croissante
+:::
+:::option{correct}
+Non : $u^2$ est decroissante sur $]0 ; 1]$ puis croissante sur $[1 ; +\infty[$
+:::
+
+:::explanation
+La regle "$f$ croissante implique $f^2$ croissante" est **fausse** en general. Elle n'est vraie que si $f \geq 0$ sur l'intervalle considere. Ici $u(x) = x - \dfrac{1}{x}$ change de signe en $x = 1$ : pour $x \in \,]0 ; 1[$, on a $u(x) < 0$, et pour $x > 1$, on a $u(x) > 0$. Donc $u^2$ est decroissante la ou $u$ est croissante et negative ($]0 ; 1]$), puis croissante la ou $u$ est croissante et positive ($[1 ; +\infty[$). Le carre inverse les inegalites pour les valeurs negatives.
+:::

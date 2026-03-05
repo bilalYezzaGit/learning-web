@@ -1,0 +1,113 @@
+---
+type: exercise
+title: "Fonction partie entiere et courbe en escalier"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [fonctions, partie-entiere]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}$ par $f(x) = E(x)$, ou $E(x)$ designe la partie entiere de $x$.
+
+1. Rappeler la definition de $E(x)$ et donner sa valeur pour $x = 2{,}7$, $x = -1{,}3$ et $x = 4$.
+2. Exprimer $f(x)$ sur chaque intervalle $[n, n+1[$ pour $n \in \mathbb{Z}$.
+3. Decrire l'allure de la courbe de $f$ (nature, points ouverts et fermes).
+:::
+
+:::solution
+**1. Definition et exemples**
+
+La partie entiere $E(x)$ est le plus grand entier inferieur ou egal a $x$. Autrement dit :
+
+$$E(x) = n \iff n \leq x < n + 1 \quad (n \in \mathbb{Z})$$
+
+Exemples :
+- $E(2{,}7) = 2$ car $2 \leq 2{,}7 < 3$
+- $E(-1{,}3) = -2$ car $-2 \leq -1{,}3 < -1$
+- $E(4) = 4$ car $4 \leq 4 < 5$
+
+**2. Expression sur chaque intervalle**
+
+Pour tout $n \in \mathbb{Z}$ et tout $x \in [n, n+1[$ :
+
+$$f(x) = E(x) = n$$
+
+Ainsi :
+- Sur $[-2, -1[$ : $f(x) = -2$
+- Sur $[-1, 0[$ : $f(x) = -1$
+- Sur $[0, 1[$ : $f(x) = 0$
+- Sur $[1, 2[$ : $f(x) = 1$
+- Sur $[2, 3[$ : $f(x) = 2$
+- et ainsi de suite...
+
+**3. Allure de la courbe**
+
+La courbe de $f$ est un **escalier** :
+
+- Sur chaque intervalle $[n, n+1[$, la courbe est un **segment horizontal** d'ordonnee $n$
+- A chaque entier $n$, le point $(n, n)$ est **ferme** (rond plein) : la valeur $f(n) = n$ est atteinte
+- Le point $(n+1, n)$ est **ouvert** (rond vide) : la valeur $n$ n'est pas atteinte en $x = n+1$ (car $f(n+1) = n+1$)
+- La courbe "saute" d'une marche a la suivante a chaque entier
+
+**Representation graphique (sur $[-3, 3]$) :**
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-3.5, 0), (3.5, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -3.5), (0, 3.5), stroke: 0.8pt, mark: (end: ">", fill: black))
+  content((3.3, -0.3), $x$)
+  content((-0.3, 3.3), $y$)
+  content((-0.3, -0.3), $O$)
+
+  // Graduations
+  for i in (-3, -2, -1, 1, 2, 3) {
+    line((i, -0.1), (i, 0.1), stroke: 0.5pt)
+    content((i, -0.35), text(size: 8pt, str(i)))
+    line((-0.1, i), (0.1, i), stroke: 0.5pt)
+    content((-0.35, i), text(size: 8pt, str(i)))
+  }
+
+  // Escalier
+  let steps = ((-3, -3), (-2, -2), (-1, -1), (0, 0), (1, 1), (2, 2))
+
+  for (n, y) in steps {
+    // Segment horizontal [n, n+1[
+    line((n, y), (n + 1, y), stroke: 2pt + blue)
+
+    // Point fermé à gauche (n, y)
+    circle((n, y), radius: 0.08, fill: blue, stroke: 1pt + blue)
+
+    // Point ouvert à droite (n+1, y)
+    circle((n + 1, y), radius: 0.08, fill: white, stroke: 1.5pt + blue)
+  }
+
+  // Dernier segment à droite
+  line((3, 3), (3.3, 3), stroke: 2pt + blue)
+  circle((3, 3), radius: 0.08, fill: blue, stroke: 1pt + blue)
+})
+```
+:::
+
+:::methode
+Pour travailler avec la partie entiere $E(x)$ :
+
+1. **Encadrer** $x$ entre deux entiers consecutifs : $n \leq x < n + 1$
+2. **En deduire** $E(x) = n$
+3. **Pour tracer** : dessiner des segments horizontaux sur chaque $[n, n+1[$, avec point ferme a gauche et point ouvert a droite
+:::
+
+:::hint
+Pour $E(-1{,}3)$, attention : ce n'est pas $-1$ ! Il faut trouver l'entier $n$ tel que $n \leq -1{,}3 < n + 1$.
+:::
+
+:::erreurs
+- Croire que $E(-1{,}3) = -1$ alors que $E(-1{,}3) = -2$ (la partie entiere arrondit vers le bas, pas vers zero)
+- Confondre la troncature (qui arrondit vers zero) et la partie entiere (qui arrondit vers $-\infty$)
+- Oublier que l'intervalle est ferme a gauche et ouvert a droite : $[n, n+1[$, ce qui determine quels points sont pleins ou vides sur la courbe
+:::

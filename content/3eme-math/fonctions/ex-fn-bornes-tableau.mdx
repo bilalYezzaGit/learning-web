@@ -1,0 +1,98 @@
+---
+type: exercise
+title: "Lecture des bornes d'une fonction depuis un tableau de variations"
+difficulty: 2
+timeMinutes: 8
+category: approfondissement
+tags: [fonctions, bornes, tableau-variations]
+---
+
+:::enonce
+On considere une fonction $f$ definie sur $[0, 7]$ dont le tableau de variations est le suivant :
+
+| $x$ | $0$ | | $3$ | | $7$ |
+|---|---|---|---|---|---|
+| $f(x)$ | $1$ | $\nearrow$ | $5$ | $\searrow$ | $2$ |
+
+1. Determiner le maximum de $f$ sur $[0, 7]$ et la valeur en laquelle il est atteint.
+2. Determiner le minimum de $f$ sur $[0, 7]$ et la valeur en laquelle il est atteint.
+3. $f$ est-elle bornee sur $[0, 7]$ ? Justifier.
+4. Donner un encadrement de $f(x)$ pour tout $x \in [0, 7]$.
+:::
+
+:::solution
+**1.** D'apres le tableau de variations :
+
+- $f$ est croissante sur $[0, 3]$ : elle passe de $f(0) = 1$ a $f(3) = 5$
+- $f$ est decroissante sur $[3, 7]$ : elle passe de $f(3) = 5$ a $f(7) = 2$
+
+La plus grande valeur atteinte par $f$ est $f(3) = 5$.
+
+Pour tout $x \in [0, 7]$ :
+- Si $x \in [0, 3]$ : $f$ croissante donc $f(x) \leq f(3) = 5$
+- Si $x \in [3, 7]$ : $f$ decroissante donc $f(x) \leq f(3) = 5$
+
+D'ou $f(x) \leq 5$ pour tout $x \in [0, 7]$, et $f(3) = 5$.
+
+**Le maximum de $f$ sur $[0, 7]$ est $5$, atteint en $x = 3$.**
+
+**2.** Les valeurs aux extremites de l'intervalle sont $f(0) = 1$ et $f(7) = 2$.
+
+La plus petite valeur atteinte par $f$ est $f(0) = 1$.
+
+Pour tout $x \in [0, 7]$ :
+- Si $x \in [0, 3]$ : $f$ croissante donc $f(x) \geq f(0) = 1$
+- Si $x \in [3, 7]$ : $f$ decroissante, mais $f(7) = 2 \geq 1$, donc $f(x) \geq f(7) = 2 \geq 1$
+
+D'ou $f(x) \geq 1$ pour tout $x \in [0, 7]$, et $f(0) = 1$.
+
+**Le minimum de $f$ sur $[0, 7]$ est $1$, atteint en $x = 0$.**
+
+**3.** $f$ est majoree par $5$ et minoree par $1$ sur $[0, 7]$, donc **$f$ est bornee sur $[0, 7]$**.
+
+**Graphique de la fonction :**
+
+Une fonction compatible avec ce tableau de variations peut etre representee ainsi :
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -0.5, x-max: 7.5,
+    y-min: 0, y-max: 6,
+    {
+      plot.add(domain: (0, 3), x => 1 + 4/9 * calc.pow(x, 2),
+        style: (stroke: 2pt + blue), label: $f(x)$)
+      plot.add(domain: (3, 7), x => 5 - 3/16 * calc.pow(x - 3, 2),
+        style: (stroke: 2pt + blue))
+    },
+  )
+})
+```
+
+**4.** Pour tout $x \in [0, 7]$ :
+
+$$1 \leq f(x) \leq 5$$
+:::
+
+:::methode
+Pour lire les bornes d'une fonction a partir de son tableau de variations :
+
+1. Reperer les valeurs aux extremites de l'intervalle et aux extrema locaux
+2. Le **maximum global** est la plus grande de toutes ces valeurs
+3. Le **minimum global** est la plus petite de toutes ces valeurs
+4. Sur un intervalle ferme, une fonction continue atteint ses bornes
+:::
+
+:::erreurs
+- Confondre extremum local et extremum global : le maximum local en $x = 3$ est ici aussi le maximum global, mais ce n'est pas toujours le cas
+- Oublier de comparer les valeurs aux bornes de l'intervalle avec les extrema locaux
+- Confondre "bornee" (majoree ET minoree) avec "majoree" seule
+:::

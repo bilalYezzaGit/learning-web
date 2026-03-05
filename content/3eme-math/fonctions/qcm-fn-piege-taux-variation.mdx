@@ -1,0 +1,31 @@
+---
+type: qcm
+title: "Formule du taux de variation"
+difficulty: 1
+timeMinutes: 1
+tags: [fonctions, monotonie, taux-variation]
+correctOption: 1
+---
+
+:::question
+Soient $a$ et $b$ deux reels d'un intervalle $I$ avec $a < b$. Le taux de variation de $f$ entre $a$ et $b$ est :
+:::
+
+:::option
+$T = \dfrac{f(a) - f(b)}{a - b}$
+:::
+:::option{correct}
+$T = \dfrac{f(b) - f(a)}{b - a}$
+:::
+:::option
+$T = \dfrac{f(a) - f(b)}{b - a}$
+:::
+
+:::explanation
+La formule correcte du taux de variation est $T = \dfrac{f(b) - f(a)}{b - a}$.
+
+- **L'option A** donne $\dfrac{f(a) - f(b)}{a - b}$. En simplifiant, on obtient $\dfrac{-(f(b) - f(a))}{-(b - a)} = \dfrac{f(b) - f(a)}{b - a}$, ce qui est numeriquement egal a la bonne formule. Cependant, cette ecriture est trompeuse car elle masque que $b - a > 0$, ce qui est essentiel pour determiner le signe de $T$ directement.
+- **L'option C** donne $\dfrac{f(a) - f(b)}{b - a}$ qui est l'**oppose** du taux de variation, une erreur de signe frequente.
+
+La convention standard est de toujours ecrire $T = \dfrac{f(b) - f(a)}{b - a}$ avec $a < b$, car le denominateur $b - a > 0$ permet de lire directement le signe de $T$ comme celui de $f(b) - f(a)$.
+:::

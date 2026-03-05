@@ -1,0 +1,75 @@
+kind: cours
+visible: true
+title: "Generalites sur les fonctions — Livret complet"
+description: "Livret pedagogique complet couvrant les generalites sur les fonctions : domaine, variations, parite, bornes, operations, racine carree, morceaux, transformations et resolution graphique"
+trimester: T1
+order: 2
+estimatedMinutes: 300
+objectives:
+  - "Determiner l'ensemble de definition d'une fonction"
+  - "Prouver la monotonie par la definition ou le taux de variation"
+  - "Etudier la parite et reduire l'intervalle d'etude"
+  - "Majorer, minorer une fonction et distinguer majorant de maximum"
+  - "Utiliser les operations sur les fonctions pour deduire les variations"
+  - "Etudier les variations de sqrt(f)"
+  - "Ecrire une fonction par morceaux et travailler avec la partie entiere"
+  - "Construire des courbes par transformations"
+  - "Resoudre graphiquement des equations et inequations"
+
+sections:
+  - label: "Resume du cours"
+    steps:
+      - lesson-fn-ensemble-definition
+      - lesson-fn-sens-variation
+      - lesson-fn-parite-symetrie
+      - lesson-fn-bornes-extremums
+      - lesson-fn-operations-fonctions
+      - lesson-fn-racine-carree
+      - lesson-fn-affines-morceaux
+      - lesson-fn-transformations-courbes
+      - lesson-fn-resolution-graphique
+
+  - label: "Exercices guides"
+    steps:
+      - ex-fn-determination-domaine
+      - ex-fn-etude-parite
+      - ex-fn-monotonie-definition
+      - ex-fn-majoration-signe
+      - ex-fn-somme-monotone
+      - ex-fn-racine-variations
+      - ex-fn-valeur-absolue-morceaux
+      - ex-fn-partie-entiere-calcul
+
+  - label: "Exercices d'entrainement"
+    steps:
+      - ex-fn-monotonie-taux
+      - ex-fn-encadrement-inegalites
+      - ex-fn-bornes-tableau
+      - ex-fn-extremum-forme-canonique
+      - ex-fn-produit-positives
+      - ex-fn-scalaire-variations
+      - ex-fn-racine-complete
+      - ex-fn-translation-courbe
+      - ex-fn-courbe-valeur-absolue
+      - ex-fn-equation-graphique
+      - ex-fn-inequation-graphique
+      - ex-fn-parite-deduction-variations
+
+  - label: "QCM diagnostiques"
+    steps:
+      - quiz:
+          - qcm-fn-parite-domaine-symetrique
+          - qcm-fn-majorant-vs-maximum
+          - qcm-fn-piege-maximum-bornee
+          - qcm-fn-piege-produit-croissantes
+          - qcm-fn-piege-carre-croissante
+      - quiz:
+          - qcm-fn-piege-racine-positive
+          - qcm-fn-piege-taux-variation
+          - qcm-fn-somme-variations
+          - qcm-fn-partie-entiere-valeur
+          - qcm-fn-rabattement-courbe
+
+  - label: "Probleme de synthese"
+    steps:
+      - ex-fn-modelisation-optimisation

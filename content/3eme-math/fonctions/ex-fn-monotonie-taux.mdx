@@ -1,0 +1,69 @@
+---
+type: exercise
+title: "Monotonie par le taux de variation d'une fonction rationnelle"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [fonctions, monotonie, taux-variation]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $]2, 4]$ par :
+
+$$f(x) = \frac{x}{x - 2}$$
+
+En utilisant le taux de variation, montrer que $f$ est strictement decroissante sur $]2, 4]$.
+:::
+
+:::solution
+Soient $a$ et $b$ deux reels de $]2, 4]$ tels que $a < b$.
+
+Calculons le taux de variation :
+
+$$T = \frac{f(b) - f(a)}{b - a} = \frac{\dfrac{b}{b-2} - \dfrac{a}{a-2}}{b - a}$$
+
+Mettons au meme denominateur le numerateur :
+
+$$f(b) - f(a) = \frac{b(a-2) - a(b-2)}{(b-2)(a-2)} = \frac{ba - 2b - ab + 2a}{(b-2)(a-2)} = \frac{2a - 2b}{(b-2)(a-2)}$$
+
+D'ou :
+
+$$f(b) - f(a) = \frac{2(a - b)}{(b-2)(a-2)}$$
+
+Et le taux de variation :
+
+$$T = \frac{f(b) - f(a)}{b - a} = \frac{2(a - b)}{(b - a)(b-2)(a-2)} = \frac{-2}{(b-2)(a-2)}$$
+
+Determinons le signe de $T$ :
+
+- Comme $a \in ]2, 4]$, on a $a - 2 > 0$
+- Comme $b \in ]2, 4]$, on a $b - 2 > 0$
+- Donc $(b-2)(a-2) > 0$
+
+Par suite :
+
+$$T = \frac{-2}{(b-2)(a-2)} < 0$$
+
+Comme $b - a > 0$, le signe de $T$ est celui de $f(b) - f(a)$, donc $f(b) - f(a) < 0$, c'est-a-dire $f(b) < f(a)$.
+
+**Par consequent, $f$ est strictement decroissante sur $]2, 4]$.**
+:::
+
+:::methode
+Pour prouver la monotonie par le taux de variation :
+
+1. Poser $a, b \in I$ avec $a < b$
+2. Calculer $T = \frac{f(b) - f(a)}{b - a}$
+3. Simplifier $T$ jusqu'a obtenir une expression dont le signe est evident
+4. Conclure : $T > 0 \Rightarrow f$ croissante ; $T < 0 \Rightarrow f$ decroissante
+:::
+
+:::hint
+Calculez $f(b) - f(a)$ en mettant les deux fractions au meme denominateur $(b-2)(a-2)$, puis simplifiez par $b - a$.
+:::
+
+:::erreurs
+- Inverser l'ordre dans le taux de variation : toujours calculer $\frac{f(b)-f(a)}{b-a}$ avec $a < b$
+- Oublier de verifier le signe de chaque facteur du denominateur en utilisant les contraintes de l'intervalle
+- Confondre $a - b$ et $b - a$ lors de la simplification
+:::

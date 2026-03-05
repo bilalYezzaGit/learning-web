@@ -1,0 +1,123 @@
+---
+type: exercise
+title: "Etude de parite de fonctions"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [fonctions, parite]
+---
+
+:::enonce
+Etudier la parite de chacune des fonctions suivantes :
+
+a) $f(x) = x^2 + 2$
+
+b) $g(x) = \frac{x^3 - x}{|x| + 4}$
+
+c) $h(x) = \sqrt{x} - 1$
+:::
+
+:::solution
+**a)** $f(x) = x^2 + 2$
+
+**Etape 1** : Le domaine de definition est $D_f = \mathbb{R}$, qui est symetrique par rapport a $0$.
+
+**Etape 2** : Calculons $f(-x)$ :
+
+$$f(-x) = (-x)^2 + 2 = x^2 + 2$$
+
+**Etape 3** : On constate que $f(-x) = f(x)$ pour tout $x \in \mathbb{R}$.
+
+**Conclusion** : $f$ est **paire**. Sa courbe est symetrique par rapport a l'axe des ordonnees.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 2,
+    x-min: -3, x-max: 3,
+    y-min: 0, y-max: 12,
+    {
+      plot.add(domain: (-3, 3), x => calc.pow(x, 2) + 2,
+        style: (stroke: 2pt + blue), label: $f(x) = x^2 + 2$)
+    },
+  )
+})
+```
+
+---
+
+**b)** $g(x) = \frac{x^3 - x}{|x| + 4}$
+
+**Etape 1** : Le denominateur $|x| + 4 > 0$ pour tout $x \in \mathbb{R}$, donc $D_g = \mathbb{R}$, qui est symetrique par rapport a $0$.
+
+**Etape 2** : Calculons $g(-x)$ :
+
+$$g(-x) = \frac{(-x)^3 - (-x)}{|-x| + 4} = \frac{-x^3 + x}{|x| + 4} = -\frac{x^3 - x}{|x| + 4}$$
+
+**Etape 3** : On constate que $g(-x) = -g(x)$ pour tout $x \in \mathbb{R}$.
+
+**Conclusion** : $g$ est **impaire**. Sa courbe est symetrique par rapport a l'origine $O$.
+
+De plus, $g(0) = \frac{0 - 0}{0 + 4} = 0$, ce qui est coherent (une fonction impaire definie en $0$ verifie toujours $f(0) = 0$).
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -5, x-max: 5,
+    y-min: -3, y-max: 3,
+    {
+      plot.add(domain: (-5, 5), x => (calc.pow(x, 3) - x) / (calc.abs(x) + 4),
+        style: (stroke: 2pt + red), label: $g(x) = (x^3-x)/(|x|+4)$)
+    },
+  )
+})
+```
+
+---
+
+**c)** $h(x) = \sqrt{x} - 1$
+
+**Etape 1** : Le domaine de definition est $D_h = [0, +\infty[$.
+
+Verifions la symetrie : par exemple, $1 \in D_h$ mais $-1 \notin D_h$.
+
+Le domaine n'est **pas symetrique** par rapport a $0$.
+
+**Conclusion** : $h$ n'est **ni paire ni impaire**.
+:::
+
+:::methode
+Pour etudier la parite d'une fonction $f$ :
+
+1. **Verifier d'abord que $D_f$ est symetrique** par rapport a $0$. Si ce n'est pas le cas, $f$ n'est ni paire ni impaire (STOP)
+2. **Calculer $f(-x)$** en remplacant $x$ par $-x$
+3. **Comparer** $f(-x)$ avec $f(x)$ et $-f(x)$ :
+   - $f(-x) = f(x)$ pour tout $x$ : $f$ est **paire**
+   - $f(-x) = -f(x)$ pour tout $x$ : $f$ est **impaire**
+   - Sinon : $f$ n'est ni paire ni impaire
+:::
+
+:::hint
+Commencer toujours par la question : "Le domaine est-il symetrique par rapport a $0$ ?" Si la reponse est non, inutile de calculer $f(-x)$.
+:::
+
+:::erreurs
+- Oublier de verifier la symetrie de $D_f$ avant de calculer $f(-x)$. Une fonction definie sur $[0, +\infty[$ ne peut etre ni paire ni impaire.
+- Confondre $(-x)^2 = x^2$ (exposant pair) et $(-x)^3 = -x^3$ (exposant impair)
+- Oublier que $|-x| = |x|$ pour la valeur absolue
+:::

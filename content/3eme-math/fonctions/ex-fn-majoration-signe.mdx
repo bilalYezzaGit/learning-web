@@ -1,0 +1,97 @@
+---
+type: exercise
+title: "Majoration par etude du signe de f(x) - M"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [fonctions, bornes, majoration]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}$ par :
+
+$$f(x) = \frac{x}{1 + x^2}$$
+
+Montrer que pour tout $x \in \mathbb{R}$, on a $f(x) \leq \frac{1}{2}$.
+:::
+
+:::solution
+Pour montrer que $f(x) \leq \frac{1}{2}$, on etudie le signe de $f(x) - \frac{1}{2}$.
+
+Calculons $f(x) - \frac{1}{2}$ :
+
+$$f(x) - \frac{1}{2} = \frac{x}{1 + x^2} - \frac{1}{2}$$
+
+Mettons au meme denominateur :
+
+$$= \frac{2x}{2(1 + x^2)} - \frac{1 + x^2}{2(1 + x^2)}$$
+
+$$= \frac{2x - 1 - x^2}{2(1 + x^2)}$$
+
+$$= \frac{-(x^2 - 2x + 1)}{2(1 + x^2)}$$
+
+On reconnait l'identite remarquable $(x - 1)^2 = x^2 - 2x + 1$ :
+
+$$f(x) - \frac{1}{2} = \frac{-(x - 1)^2}{2(1 + x^2)}$$
+
+Determinons le signe :
+
+- Le numerateur $-(x - 1)^2 \leq 0$ car un carre est toujours positif
+- Le denominateur $2(1 + x^2) > 0$ car $1 + x^2 \geq 1 > 0$
+
+Par suite :
+
+$$f(x) - \frac{1}{2} = \frac{-(x - 1)^2}{2(1 + x^2)} \leq 0$$
+
+D'ou :
+
+$$f(x) \leq \frac{1}{2} \quad \text{pour tout } x \in \mathbb{R}$$
+
+**Remarque** : l'egalite a lieu lorsque $(x - 1)^2 = 0$, c'est-a-dire en $x = 1$. On a bien $f(1) = \frac{1}{1+1} = \frac{1}{2}$, donc $\frac{1}{2}$ est le **maximum** de $f$ sur $\mathbb{R}$.
+
+**Graphique de la fonction :**
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 0.2,
+    x-min: -4, x-max: 4,
+    y-min: -0.7, y-max: 0.7,
+    {
+      plot.add(domain: (-4, 4), x => x / (1 + calc.pow(x, 2)),
+        style: (stroke: 2pt + blue), label: $f(x) = frac(x, 1+x^2)$)
+      plot.add-hline(0.5, style: (stroke: (dash: "dashed", paint: red)))
+      plot.add-hline(-0.5, style: (stroke: (dash: "dashed", paint: red)))
+    },
+  )
+})
+```
+
+On observe bien que la fonction atteint son maximum $\frac{1}{2}$ en $x = 1$ et son minimum $-\frac{1}{2}$ en $x = -1$ (par symetrie).
+:::
+
+:::methode
+Pour montrer que $f(x) \leq M$ pour tout $x$ :
+
+1. Calculer $f(x) - M$ et mettre au meme denominateur
+2. Factoriser le numerateur (chercher une identite remarquable)
+3. Montrer que le signe est $\leq 0$ : typiquement $\frac{-(\text{carre})}{\text{positif}} \leq 0$
+4. Conclure $f(x) - M \leq 0$ donc $f(x) \leq M$
+:::
+
+:::hint
+Calculez $f(x) - \frac{1}{2}$ en mettant tout au meme denominateur. Essayez de faire apparaitre un carre parfait au numerateur.
+:::
+
+:::erreurs
+- Oublier de mettre au meme denominateur avant de simplifier
+- Ne pas reconnaitre l'identite remarquable $x^2 - 2x + 1 = (x-1)^2$
+- Confondre majorant et maximum : ici $\frac{1}{2}$ est bien atteint en $x = 1$, donc c'est un maximum (pas seulement un majorant)
+:::

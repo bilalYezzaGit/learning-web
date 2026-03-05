@@ -1,0 +1,26 @@
+---
+type: qcm
+title: "Parite et domaine non symetrique"
+difficulty: 1
+timeMinutes: 1
+tags: [fonctions, parite]
+correctOption: 2
+---
+
+:::question
+Soit $f$ definie sur $[-1 ; +\infty[$ par $f(x) = \dfrac{3x}{1 + |x|}$. On verifie que pour tout $x$ ou $f(x)$ et $f(-x)$ sont tous deux definis, on a $f(-x) = -f(x)$. La fonction $f$ est :
+:::
+
+:::option
+Paire
+:::
+:::option
+Impaire
+:::
+:::option{correct}
+Ni paire ni impaire
+:::
+
+:::explanation
+Bien que l'egalite $f(-x) = -f(x)$ soit verifiee la ou les deux expressions existent, cela ne suffit pas pour conclure que $f$ est impaire. La **condition prealable** est que $D_f$ soit symetrique par rapport a $0$. Or $D_f = [-1 ; +\infty[$, qui n'est pas symetrique : par exemple $3 \in D_f$ mais $-3 \notin D_f$. Donc $f$ n'est ni paire ni impaire. C'est l'erreur E1 classique : oublier de verifier la symetrie du domaine avant de conclure sur la parite.
+:::

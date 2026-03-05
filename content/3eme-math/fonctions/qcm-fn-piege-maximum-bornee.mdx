@@ -1,0 +1,23 @@
+---
+type: qcm
+title: "Maximum implique-t-il bornee ?"
+difficulty: 1
+timeMinutes: 1
+tags: [fonctions, bornes, extremums]
+correctOption: 1
+---
+
+:::question
+Soit $f(x) = -x^2$ definie sur $\mathbb{R}$. On sait que $f$ admet un maximum en $x = 0$ avec $f(0) = 0$. La fonction $f$ est-elle bornee ?
+:::
+
+:::option
+Oui, car elle admet un maximum
+:::
+:::option{correct}
+Non, car $f$ n'est pas minoree
+:::
+
+:::explanation
+Une fonction est **bornee** si elle est a la fois **majoree ET minoree**. Ici $f$ admet un maximum ($f(x) \leq 0$ pour tout $x$), donc elle est majoree. Mais $f(x) = -x^2 \to -\infty$ quand $x \to \pm\infty$, donc $f$ n'est pas minoree. Par consequent $f$ n'est pas bornee. L'option A revele la confusion classique : croire qu'avoir un maximum suffit pour etre bornee, en oubliant qu'il faut aussi etre minoree.
+:::

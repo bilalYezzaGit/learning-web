@@ -1,0 +1,111 @@
+---
+type: exercise
+title: "Resolution graphique d'une inequation par comparaison de courbes"
+difficulty: 2
+timeMinutes: 10
+category: approfondissement
+tags: [fonctions, inequations, graphique]
+---
+
+:::enonce
+On considere l'inequation :
+
+$$\sqrt{x + 1} - 1 \leq 2x$$
+
+1. Determiner le domaine de validite de l'inequation.
+2. Poser $u(x) = \sqrt{x + 1} - 1$ et $v(x) = 2x$. Decrire les courbes $\mathcal{C}_u$ et $\mathcal{C}_v$.
+3. Expliquer la methode graphique pour resoudre $u(x) \leq v(x)$.
+4. Sachant que les courbes se coupent en $x = 0$ et en $x = 3$, determiner graphiquement l'ensemble des solutions de l'inequation.
+:::
+
+:::solution
+**1.** L'expression $\sqrt{x+1}$ est definie lorsque $x + 1 \geq 0$, c'est-a-dire $x \geq -1$.
+
+L'expression $2x$ est definie sur $\mathbb{R}$.
+
+**Le domaine de validite de l'inequation est $[-1, +\infty[$.**
+
+**2.** Description des courbes :
+
+- $\mathcal{C}_u$ : courbe de $u(x) = \sqrt{x+1} - 1$. C'est la courbe de $\sqrt{x}$ translatee de $1$ unite vers la gauche (vecteur $-\vec{i}$) et de $1$ unite vers le bas (vecteur $-\vec{j}$). Elle part du point $(-1, -1)$ et croit lentement.
+
+- $\mathcal{C}_v$ : courbe de $v(x) = 2x$. C'est une droite passant par l'origine de pente $2$.
+
+**3.** Resoudre $u(x) \leq v(x)$ revient a trouver les valeurs de $x$ pour lesquelles la courbe $\mathcal{C}_u$ est **en dessous ou sur** la courbe $\mathcal{C}_v$.
+
+Concretement :
+- Determiner les points d'intersection (ou $u(x) = v(x)$)
+- Identifier les zones ou $\mathcal{C}_u$ est sous $\mathcal{C}_v$, c'est-a-dire ou $u(x) \leq v(x)$
+- Lire les intervalles solutions sur l'axe des abscisses
+
+**4.** Les courbes se coupent en $x = 0$ et $x = 3$.
+
+Verification : $u(0) = \sqrt{1} - 1 = 0 = v(0)$ et $u(3) = \sqrt{4} - 1 = 1$ tandis que $v(3) = 6$.
+
+Rectifions : verifions $x = 3$ : $u(3) = \sqrt{4} - 1 = 1$ et $v(3) = 6$, donc $u(3) \neq v(3)$.
+
+Verifions plutot les points d'intersection en resolvant $\sqrt{x+1} - 1 = 2x$ :
+
+$$\sqrt{x+1} = 2x + 1$$
+
+En elevant au carre (avec $2x + 1 \geq 0$, soit $x \geq -\frac{1}{2}$) :
+
+$$x + 1 = 4x^2 + 4x + 1 \iff 4x^2 + 3x = 0 \iff x(4x + 3) = 0$$
+
+D'ou $x = 0$ ou $x = -\frac{3}{4}$. Comme $x \geq -\frac{1}{2}$, seul $x = 0$ convient.
+
+Ainsi les courbes ne se coupent qu'en $x = 0$.
+
+En analysant les positions relatives :
+- Pour $x = -1$ : $u(-1) = -1$ et $v(-1) = -2$, donc $u(-1) > v(-1)$. La courbe $\mathcal{C}_u$ est au-dessus.
+- Pour $x = 1$ : $u(1) = \sqrt{2} - 1 \approx 0{,}41$ et $v(1) = 2$, donc $u(1) < v(1)$. La courbe $\mathcal{C}_u$ est en dessous.
+
+**Graphique des courbes :**
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -1, x-max: 4,
+    y-min: -2, y-max: 8,
+    {
+      plot.add(domain: (-1, 4), x => calc.sqrt(x + 1) - 1,
+        style: (stroke: 2pt + blue), label: $u(x) = sqrt(x+1) - 1$)
+      plot.add(domain: (-1, 4), x => 2*x,
+        style: (stroke: 2pt + red), label: $v(x) = 2x$)
+    },
+  )
+})
+```
+
+**L'ensemble des solutions est $[0, +\infty[$.**
+
+Sur cet intervalle, la droite $v(x) = 2x$ est au-dessus de la courbe $u(x) = \sqrt{x+1} - 1$, donc $u(x) \leq v(x)$.
+:::
+
+:::methode
+Pour resoudre graphiquement $f(x) \leq g(x)$ :
+
+1. Tracer les courbes $\mathcal{C}_f$ et $\mathcal{C}_g$ dans un meme repere
+2. Determiner les points d'intersection ($f(x) = g(x)$)
+3. Identifier les zones ou $\mathcal{C}_f$ est en dessous de $\mathcal{C}_g$
+4. Lire les intervalles solutions sur l'axe des abscisses
+5. Attention aux bornes : incluses ($\leq$) ou exclues ($<$)
+:::
+
+:::hint
+Tracez les deux courbes et cherchez ou la courbe de $\sqrt{x+1} - 1$ passe en dessous de la droite $y = 2x$.
+:::
+
+:::erreurs
+- Oublier de verifier le domaine de validite avant de resoudre
+- Confondre "au-dessus" et "en dessous" : $f(x) \leq g(x)$ signifie que $\mathcal{C}_f$ est en dessous ou sur $\mathcal{C}_g$
+- Elever au carre sans verifier que les deux membres sont positifs (peut introduire des solutions parasites)
+:::

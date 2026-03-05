@@ -1,0 +1,132 @@
+---
+type: lesson
+title: "Fonction racine carree composee"
+difficulty: 1
+timeMinutes: 5
+tags: [fonctions, racine-carree, variations]
+---
+
+### Condition d'existence
+
+:::property[Domaine de $\sqrt{f}$]
+
+Pour que la fonction $g(x) = \sqrt{f(x)}$ soit definie, il faut que :
+
+$$f(x) \geq 0$$
+
+Le domaine de $g$ est donc :
+
+$$D_g = \{x \in D_f \mid f(x) \geq 0\}$$
+
+:::
+
+:::example
+
+Soit $g(x) = \sqrt{x^2 - 4}$.
+
+Il faut $x^2 - 4 \geq 0$, c'est-a-dire $x^2 \geq 4$, soit $|x| \geq 2$.
+
+$$D_g = ]-\infty, -2] \cup [2, +\infty[$$
+
+:::
+
+### Conservation de la monotonie
+
+:::theorem[Croissance de $\sqrt{f}$]
+
+Soit $f$ une fonction definie sur un intervalle $I$.
+
+Si $f$ est **positive** et **croissante** sur $I$, alors $\sqrt{f}$ est **croissante** sur $I$.
+
+:::
+
+:::theorem[Decroissance de $\sqrt{f}$]
+
+Si $f$ est **positive** et **decroissante** sur $I$, alors $\sqrt{f}$ est **decroissante** sur $I$.
+
+:::
+
+:::remark
+
+En resume : la racine carree **conserve le sens de variation** de $f$, a condition que $f$ soit positive sur l'intervalle considere.
+
+:::
+
+:::example[Application directe]
+
+Soit $g(x) = \sqrt{x + 1}$ definie sur $[-1, +\infty[$.
+
+La fonction $f(x) = x + 1$ est :
+
+- **Positive** sur $[-1, +\infty[$ (car $f(x) \geq 0$ pour $x \geq -1$)
+- **Croissante** sur $[-1, +\infty[$
+
+Par le theoreme, $g(x) = \sqrt{f(x)} = \sqrt{x + 1}$ est **croissante** sur $[-1, +\infty[$.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 0.5,
+    x-min: -1, x-max: 5,
+    y-min: -0.5, y-max: 3,
+    {
+      plot.add(domain: (-1, 5), x => calc.sqrt(x + 1),
+        style: (stroke: 2pt + blue), label: $g(x) = sqrt(x+1)$)
+    },
+  )
+})
+```
+
+:::
+
+### Conservation de la majoration
+
+:::theorem[Majoration de $\sqrt{f}$]
+
+Si $f$ est **majoree** par $M$ sur $I$ (avec $M \geq 0$), alors $\sqrt{f}$ est **majoree** par $\sqrt{M}$ sur $I$.
+
+:::
+
+:::example
+
+Soit $f(x) = 4 - x^2$ sur $[-2, 2]$.
+
+On a $f(x) \leq 4$ pour tout $x \in [-2, 2]$ (car $x^2 \geq 0$).
+
+Donc $g(x) = \sqrt{4 - x^2} \leq \sqrt{4} = 2$ pour tout $x \in [-2, 2]$.
+
+La fonction $g$ est majoree par $2$.
+
+:::
+
+### Etude complete
+
+:::example[Etude de $g(x) = \sqrt{x(1 - x)}$]
+
+**Domaine** : Il faut $x(1 - x) \geq 0$.
+
+Le produit $x(1-x)$ est positif quand $x$ et $1-x$ sont de meme signe, c'est-a-dire pour $x \in [0, 1]$.
+
+$$D_g = [0, 1]$$
+
+**Variations** : Posons $f(x) = x(1-x) = -x^2 + x = -(x - \frac{1}{2})^2 + \frac{1}{4}$.
+
+- Sur $[0, \frac{1}{2}]$ : $f$ est positive et croissante, donc $\sqrt{f}$ est croissante
+- Sur $[\frac{1}{2}, 1]$ : $f$ est positive et decroissante, donc $\sqrt{f}$ est decroissante
+
+$g$ admet un maximum en $x = \frac{1}{2}$ : $g(\frac{1}{2}) = \sqrt{\frac{1}{4}} = \frac{1}{2}$.
+
+:::
+
+:::attention
+
+Ne jamais oublier la condition $f \geq 0$ avant d'appliquer les theoremes. La racine carree n'est definie que pour des valeurs positives ou nulles.
+
+:::

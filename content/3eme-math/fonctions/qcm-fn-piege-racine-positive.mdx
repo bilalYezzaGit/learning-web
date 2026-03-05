@@ -1,0 +1,31 @@
+---
+type: qcm
+title: "Condition pour que racine de f soit croissante"
+difficulty: 1
+timeMinutes: 1
+tags: [fonctions, racine-carree, variations]
+correctOption: 2
+---
+
+:::question
+Pour que $\sqrt{f}$ soit croissante sur un intervalle $I$, il faut que :
+:::
+
+:::option
+$f$ soit croissante sur $I$
+:::
+:::option
+$f$ soit positive sur $I$
+:::
+:::option{correct}
+$f$ soit positive ET croissante sur $I$
+:::
+
+:::explanation
+Le theoreme T2 stipule : si $f$ est **positive** et **croissante** sur $I$, alors $\sqrt{f}$ est croissante sur $I$. Les deux conditions sont necessaires :
+
+- **L'option A** (seulement croissante) est insuffisante : si $f$ prend des valeurs negatives, $\sqrt{f}$ n'est meme pas definie sur tout $I$.
+- **L'option B** (seulement positive) est insuffisante : si $f$ est positive mais decroissante, alors $\sqrt{f}$ est decroissante (pas croissante).
+
+Il faut donc les **deux conditions simultanement** : $f \geq 0$ sur $I$ (pour que $\sqrt{f}$ existe) ET $f$ croissante sur $I$ (pour que $\sqrt{f}$ conserve la croissance).
+:::

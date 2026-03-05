@@ -1,0 +1,64 @@
+---
+type: exercise
+title: "Variations d'une somme de fonctions monotones"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [fonctions, operations, variations]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $]0, +\infty[$ par :
+
+$$f(x) = -x + \frac{1}{x}$$
+
+En decomposant $f$ comme somme de deux fonctions, montrer que $f$ est decroissante sur $]0, +\infty[$.
+:::
+
+:::solution
+On decompose $f$ en somme de deux fonctions :
+
+$$f(x) = u(x) + v(x) \quad \text{avec} \quad u(x) = -x \quad \text{et} \quad v(x) = \frac{1}{x}$$
+
+**Etude de $u(x) = -x$ sur $]0, +\infty[$ :**
+
+Soient $a, b \in \,]0, +\infty[$ avec $a \leq b$. On a :
+
+$$u(b) - u(a) = -b - (-a) = a - b \leq 0$$
+
+Donc $u$ est **decroissante** sur $]0, +\infty[$.
+
+**Etude de $v(x) = \frac{1}{x}$ sur $]0, +\infty[$ :**
+
+Soient $a, b \in \,]0, +\infty[$ avec $a \leq b$. On a :
+
+$$v(b) - v(a) = \frac{1}{b} - \frac{1}{a} = \frac{a - b}{ab}$$
+
+Comme $a \leq b$, on a $a - b \leq 0$. De plus, $a > 0$ et $b > 0$, donc $ab > 0$.
+
+Par suite $v(b) - v(a) = \frac{a - b}{ab} \leq 0$, donc $v$ est **decroissante** sur $]0, +\infty[$.
+
+**Conclusion :**
+
+$f = u + v$ est la somme de deux fonctions decroissantes sur $]0, +\infty[$.
+
+Par le theoreme sur la somme de fonctions monotones de meme sens : **$f$ est decroissante sur $]0, +\infty[$**.
+:::
+
+:::methode
+Pour utiliser le theoreme sur la somme (T1) :
+
+1. **Decomposer** $f$ en $f = u + v$ avec des fonctions connues ou simples
+2. **Verifier** que $u$ et $v$ varient dans le **meme sens** sur $I$
+3. **Conclure** : somme de croissantes $\Rightarrow$ croissante, somme de decroissantes $\Rightarrow$ decroissante
+:::
+
+:::hint
+Identifiez $u(x) = -x$ et $v(x) = \frac{1}{x}$. Ces deux fonctions de reference sont-elles croissantes ou decroissantes sur $]0, +\infty[$ ?
+:::
+
+:::erreurs
+- Confondre les variations de $\frac{1}{x}$ sur $\mathbb{R}^*$ (decroissante sur chaque intervalle) et sur un intervalle precis
+- Oublier que le theoreme ne s'applique que si les deux fonctions varient dans le **meme sens**. Si elles varient en sens contraire, on ne peut pas conclure directement
+- Appliquer par erreur la regle de la somme au produit : "somme de decroissantes = decroissante" est vrai, mais "produit de decroissantes = decroissante" est **faux** en general
+:::

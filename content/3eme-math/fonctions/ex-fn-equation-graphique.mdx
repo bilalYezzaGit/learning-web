@@ -1,0 +1,112 @@
+---
+type: exercise
+title: "Resolution graphique d'une equation par intersection de courbes"
+difficulty: 2
+timeMinutes: 10
+category: approfondissement
+tags: [fonctions, equations, graphique]
+---
+
+:::enonce
+On considere l'equation :
+
+$$\frac{1 - 3x}{x} = -2x^2$$
+
+1. Montrer que cette equation peut se reecrire sous la forme $\frac{1}{x} - 3 = -2x^2$.
+2. Poser $u(x) = \frac{1}{x} - 3$ et $v(x) = -2x^2$. Quel est le domaine de resolution de l'equation ?
+3. Decrire la methode graphique pour determiner le nombre de solutions de l'equation $u(x) = v(x)$.
+4. Sachant que les courbes $\mathcal{C}_u$ et $\mathcal{C}_v$ admettent exactement $3$ points d'intersection, que peut-on conclure sur le nombre de solutions de l'equation initiale ?
+:::
+
+:::solution
+**1.** Pour tout $x \neq 0$ :
+
+$$\frac{1 - 3x}{x} = \frac{1}{x} - \frac{3x}{x} = \frac{1}{x} - 3$$
+
+Donc l'equation $\frac{1-3x}{x} = -2x^2$ est equivalente a :
+
+$$\frac{1}{x} - 3 = -2x^2$$
+
+**2.** On pose $u(x) = \frac{1}{x} - 3$ et $v(x) = -2x^2$.
+
+- $u$ est definie sur $\mathbb{R} \setminus \{0\}$
+- $v$ est definie sur $\mathbb{R}$
+
+Le domaine de resolution est $D = \mathbb{R} \setminus \{0\}$ (intersection des deux domaines, et aussi domaine de l'equation initiale car $x$ est au denominateur).
+
+**3.** Pour resoudre graphiquement $u(x) = v(x)$ :
+
+- Tracer la courbe $\mathcal{C}_u$ de $u(x) = \frac{1}{x} - 3$ dans un repere $(O, \vec{i}, \vec{j})$. C'est l'hyperbole $y = \frac{1}{x}$ translatee de $-3$ unites vers le bas (asymptote horizontale $y = -3$, asymptote verticale $x = 0$).
+
+- Tracer la courbe $\mathcal{C}_v$ de $v(x) = -2x^2$. C'est une parabole retournee (ouverture vers le bas), passant par l'origine, avec un maximum en $(0, 0)$.
+
+- Lire les **abscisses des points d'intersection** de $\mathcal{C}_u$ et $\mathcal{C}_v$ : ce sont les solutions de l'equation.
+
+**Representation graphique :**
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (9, 7),
+    x-label: $x$,
+    y-label: $y$,
+    x-tick-step: 1,
+    y-tick-step: 1,
+    x-min: -3, x-max: 3,
+    y-min: -8, y-max: 2,
+    {
+      // u(x) = 1/x - 3 en bleu (hyperbole translatée)
+      plot.add(
+        domain: (-3, -0.15),
+        x => 1 / x - 3,
+        style: (stroke: 2pt + blue),
+        label: $u(x) = 1/x - 3$
+      )
+      plot.add(
+        domain: (0.15, 3),
+        x => 1 / x - 3,
+        style: (stroke: 2pt + blue)
+      )
+
+      // v(x) = -2x² en rouge (parabole retournée)
+      plot.add(
+        domain: (-3, 3),
+        x => -2 * calc.pow(x, 2),
+        style: (stroke: 2pt + red),
+        label: $v(x) = -2x^2$
+      )
+
+      // Asymptote horizontale y = -3 en pointillés
+      plot.add-hline(
+        -3,
+        style: (stroke: (paint: gray, dash: "dashed", thickness: 1pt)),
+        label: $y = -3$
+      )
+    },
+  )
+})
+```
+
+*Le graphique montre que les deux courbes se coupent en 3 points : 2 dans la branche de gauche de l'hyperbole (pour $x < 0$) et 1 dans la branche de droite (pour $x > 0$).*
+
+**4.** Si les courbes $\mathcal{C}_u$ et $\mathcal{C}_v$ admettent exactement $3$ points d'intersection, cela signifie qu'il existe exactement $3$ valeurs de $x$ (dans $\mathbb{R} \setminus \{0\}$) pour lesquelles $u(x) = v(x)$.
+
+**L'equation initiale $\frac{1-3x}{x} = -2x^2$ admet donc exactement $3$ solutions.**
+:::
+
+:::methode
+Pour resoudre graphiquement une equation $f(x) = g(x)$ :
+
+1. **Reecrire** l'equation sous une forme exploitable (decomposer, simplifier)
+2. **Identifier** les fonctions de reference a tracer
+3. **Tracer** les courbes dans un meme repere
+4. **Lire** les abscisses des points d'intersection
+5. Le nombre de points d'intersection = le nombre de solutions
+:::
+
+:::hint
+Decomposez la fraction du membre gauche pour faire apparaitre $\frac{1}{x} - 3$, puis identifiez les deux courbes a tracer.
+:::

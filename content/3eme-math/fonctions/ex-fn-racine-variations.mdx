@@ -1,0 +1,76 @@
+---
+type: exercise
+title: "Variations de la racine d'une fonction"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [fonctions, racine-carree, variations]
+---
+
+:::enonce
+Soit $g$ la fonction definie par :
+
+$$g(x) = \sqrt{x + 1}$$
+
+1. Determiner le domaine de definition de $g$.
+2. En posant $f(x) = x + 1$, montrer que $g$ est croissante sur $D_g$.
+:::
+
+:::solution
+**1. Domaine de definition**
+
+$g(x) = \sqrt{x + 1}$ est definie lorsque le radicande est positif ou nul :
+
+$$x + 1 \geq 0 \iff x \geq -1$$
+
+Donc :
+
+$$D_g = [-1, +\infty[$$
+
+**2. Monotonie de $g$**
+
+On pose $f(x) = x + 1$, de sorte que $g(x) = \sqrt{f(x)}$.
+
+**Etape 1 : $f$ est positive sur $D_g$.**
+
+Pour tout $x \in [-1, +\infty[$, on a $x \geq -1$, donc :
+
+$$f(x) = x + 1 \geq 0$$
+
+**Etape 2 : $f$ est croissante sur $D_g$.**
+
+Soient $a, b \in [-1, +\infty[$ avec $a \leq b$. On a :
+
+$$f(b) - f(a) = (b + 1) - (a + 1) = b - a \geq 0$$
+
+Donc $f$ est croissante sur $[-1, +\infty[$.
+
+**Etape 3 : Application du theoreme T2.**
+
+$f$ est **positive** et **croissante** sur $[-1, +\infty[$, donc par le theoreme de conservation de la monotonie par la racine carree :
+
+$$g(x) = \sqrt{f(x)} \text{ est croissante sur } [-1, +\infty[$$
+
+**Par consequent, $g$ est croissante sur $D_g = [-1, +\infty[$.**
+:::
+
+:::methode
+Pour etudier les variations de $g(x) = \sqrt{f(x)}$ :
+
+1. **Determiner $D_g$** : l'ensemble des $x$ tels que $f(x) \geq 0$
+2. **Verifier que $f$ est positive** sur $D_g$ (condition du theoreme)
+3. **Etudier les variations de $f$** sur $D_g$
+4. **Appliquer le theoreme T2/T3** :
+   - $f$ positive et croissante $\Rightarrow$ $\sqrt{f}$ croissante
+   - $f$ positive et decroissante $\Rightarrow$ $\sqrt{f}$ decroissante
+:::
+
+:::hint
+Posez $f(x) = x + 1$ et verifiez les deux conditions du theoreme : $f \geq 0$ sur $D_g$ et $f$ croissante.
+:::
+
+:::erreurs
+- Oublier la condition "$f$ positive" : le theoreme "$f$ croissante $\Rightarrow$ $\sqrt{f}$ croissante" est vrai uniquement si $f \geq 0$
+- Appliquer le theoreme sans preciser l'intervalle d'etude
+- Confondre le domaine de $f$ et le domaine de $g = \sqrt{f}$ : $g$ n'est definie que la ou $f(x) \geq 0$
+:::

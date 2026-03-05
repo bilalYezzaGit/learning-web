@@ -10,7 +10,7 @@ type AtomType = 'lesson' | 'exercise' | 'qcm'
 // ── Directive stripping (student version) ──
 
 /** Directives that are completely removed in the student version */
-const STRIPPED_DIRECTIVES = ['solution', 'methode', 'hint']
+const STRIPPED_DIRECTIVES = ['solution', 'methode', 'hint', 'erreurs']
 
 /**
  * Remove :::directive ... ::: blocks for stripped directives.
