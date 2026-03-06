@@ -1,0 +1,39 @@
+titre: "Mathematiques 3eme annee — Tome 2"
+editeur: CNP (Centre National Pedagogique)
+edition: 2023
+programme: 3eme-math
+fichier: Manuel_scolaire_3_math_section_math_t2.pdf
+pages_total: 216
+type: manuel
+
+structure:
+  - "Pour commencer — Consolidation des acquis anterieurs"
+  - "Cours — Activites + resultats a retenir"
+  - "QCM - Vrai ou faux — Auto-evaluation"
+  - "Mobiliser ses competences — Problemes integratifs"
+  - "Exercices et problemes — Exercices autonomes + activites avec ordinateur"
+  - "Math-culture — Histoire des mathematiques"
+
+modules:
+  - slug: produit-scalaire-plan
+    pages: "5-24"
+  - slug: angles-orientes
+    pages: "25-48"
+  - slug: trigonometrie
+    pages: "49-69"
+  - slug: rotations
+    pages: "70-90"
+  - slug: nombres-complexes
+    pages: "91-108"
+  - slug: denombrement
+    pages: "109-125"
+  - slug: divisibilite-N
+    pages: "126-142"
+  - slug: nombres-premiers
+    pages: "143-155"
+  - slug: vecteurs-espace
+    pages: "156-175"
+  - slug: produit-scalaire-vectoriel-espace
+    pages: "176-196"
+  - slug: equations-droites-plans-sphere
+    pages: "197-216"

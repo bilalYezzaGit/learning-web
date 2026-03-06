@@ -1,0 +1,36 @@
+titre: "Corrige du manuel scolaire 3eme Mathematiques — Tome 2"
+editeur: Chams Edition (CMS)
+edition: 2023
+programme: 3eme-math
+fichier: Corrige_manuel_scolaire_3_math_section_math_t2.pdf
+pages_total: 240
+type: corrige
+
+# ATTENTION : les tomes du corrige ne correspondent PAS aux tomes du manuel.
+# Le corrige T2 couvre des modules du Manuel T1 ET du Manuel T2.
+notes:
+  - "Decoupe differente du Manuel : melange Manuel T1 (Ch7-12) + Manuel T2 (Ch5-6, Ch9-11)"
+
+modules:
+  - slug: exemples-etude-fonctions
+    pages: "1-40"
+  - slug: fonctions-trigonometriques
+    pages: "41-65"
+  - slug: suites-reelles
+    pages: "66-89"
+  - slug: limites-suites-reelles
+    pages: "90-113"
+  - slug: statistiques
+    pages: "114-132"
+  - slug: probabilites
+    pages: "133-144"
+  - slug: nombres-complexes
+    pages: "145-163"
+  - slug: denombrement
+    pages: "164-173"
+  - slug: vecteurs-espace
+    pages: "174-191"
+  - slug: produit-scalaire-vectoriel-espace
+    pages: "192-213"
+  - slug: equations-droites-plans-sphere
+    pages: "214-240"

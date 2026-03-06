@@ -1,0 +1,38 @@
+titre: "Corrige du manuel scolaire 3eme Mathematiques — Tome 1"
+editeur: Chams Edition (CMS)
+edition: 2023
+programme: 3eme-math
+fichier: Corrige_manuel_scolaire_3_math_section_math_t1.pdf
+pages_total: 190
+type: corrige
+
+# ATTENTION : les tomes du corrige ne correspondent PAS aux tomes du manuel.
+# Le corrige T1 couvre des modules du Manuel T1 ET du Manuel T2.
+notes:
+  - "Decoupe differente du Manuel : melange Manuel T1 (Ch1-6) + Manuel T2 (Ch1-4, Ch7-8)"
+
+modules:
+  - slug: generalites-fonctions
+    pages: "1-15"
+  - slug: continuite
+    pages: "16-26"
+  - slug: limites-continuite
+    pages: "27-40"
+  - slug: limites-comportements-asymptotiques
+    pages: "41-58"
+  - slug: nombre-derive
+    pages: "59-71"
+  - slug: fonction-derivee
+    pages: "72-91"
+  - slug: produit-scalaire-plan
+    pages: "92-108"
+  - slug: angles-orientes
+    pages: "109-123"
+  - slug: trigonometrie
+    pages: "124-146"
+  - slug: rotations
+    pages: "147-160"
+  - slug: divisibilite-N
+    pages: "161-172"
+  - slug: nombres-premiers
+    pages: "173-190"

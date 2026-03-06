@@ -1,0 +1,41 @@
+titre: "Mathematiques 3eme annee — Tome 1"
+editeur: CNP (Centre National Pedagogique)
+edition: 2023
+programme: 3eme-math
+fichier: Manuel_scolaire_3_math_section_math_t1.pdf
+pages_total: 238
+type: manuel
+
+structure:
+  - "Pour commencer — Consolidation des acquis anterieurs"
+  - "Cours — Activites + resultats a retenir"
+  - "QCM - Vrai ou faux — Auto-evaluation"
+  - "Mobiliser ses competences — Problemes integratifs"
+  - "Exercices et problemes — Exercices autonomes + activites avec ordinateur"
+  - "Math-culture — Histoire des mathematiques"
+
+modules:
+  - slug: generalites-fonctions
+    pages: "5-20"
+  - slug: continuite
+    pages: "21-39"
+  - slug: limites-continuite
+    pages: "40-55"
+  - slug: limites-comportements-asymptotiques
+    pages: "56-79"
+  - slug: nombre-derive
+    pages: "80-99"
+  - slug: fonction-derivee
+    pages: "100-117"
+  - slug: exemples-etude-fonctions
+    pages: "118-135"
+  - slug: fonctions-trigonometriques
+    pages: "136-155"
+  - slug: suites-reelles
+    pages: "156-172"
+  - slug: limites-suites-reelles
+    pages: "173-191"
+  - slug: statistiques
+    pages: "192-220"
+  - slug: probabilites
+    pages: "221-238"

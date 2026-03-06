@@ -1,0 +1,40 @@
+titre: "XY Plus 3eme Mathematiques — Tome 2"
+editeur: CAEU Med Ali (Zied Belhadj, Lassaad Kallel)
+edition: 2023
+programme: 3eme-math
+fichier: xy_plus_3em_math_tome2.pdf
+pages_total: 255
+type: exercices
+
+structure:
+  - "Resume de cours — Rappel des resultats essentiels"
+  - "Enonces — Exercices et problemes corriges, par difficulte croissante"
+  - "Corriges — Solutions detaillees"
+
+notes:
+  - "Meme decoupage par tome que le Manuel (T2 = modules 13-23)"
+  - "PDF image (scanne), pas de texte extractible. Lecture visuelle uniquement."
+
+modules:
+  - slug: produit-scalaire-plan
+    pages: "5-20"
+  - slug: angles-orientes
+    pages: "21-40"
+  - slug: trigonometrie
+    pages: "41-68"
+  - slug: rotations
+    pages: "69-88"
+  - slug: nombres-complexes
+    pages: "89-123"
+  - slug: denombrement
+    pages: "124-147"
+  - slug: divisibilite-N
+    pages: "148-162"
+  - slug: nombres-premiers
+    pages: "163-170"
+  - slug: vecteurs-espace
+    pages: "171-186"
+  - slug: produit-scalaire-vectoriel-espace
+    pages: "187-209"
+  - slug: equations-droites-plans-sphere
+    pages: "210-254"

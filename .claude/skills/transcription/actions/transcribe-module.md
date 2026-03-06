@@ -53,12 +53,12 @@ Pipeline complet pour transcrire un module depuis les PDF sources vers des fichi
 
 ### Etape 1 : Identifier les plages de pages
 
-Lire `_raw/CARTOGRAPHIE.md` pour le module demande. Chaque module a 4 sources :
+Lire les fiches sources dans `_raw/sources/*.yaml` pour le module demande. Chercher le slug du module dans chaque fiche pour obtenir les plages de pages. Chaque module a jusqu'a 4 sources :
 
 | Source | Fichier PDF | Particularites |
 |--------|-------------|----------------|
 | Manuel scolaire (CNP) | `Manuel_scolaire_3_math_section_math_t1.pdf` ou `_t2.pdf` | T1 = modules 1-12, T2 = modules 13-23 |
-| Corrige (CMS) | `Corrige_manuel_scolaire_3_math_section_math_t1.pdf` ou `_t2.pdf` | **ATTENTION** : les tomes ne correspondent PAS au Manuel ! Consulter la table de correspondance dans CARTOGRAPHIE.md |
+| Corrige (CMS) | `Corrige_manuel_scolaire_3_math_section_math_t1.pdf` ou `_t2.pdf` | **ATTENTION** : les tomes ne correspondent PAS au Manuel ! Consulter les fiches `_raw/sources/corrige-3eme-t*.yaml` |
 | Parascolaire (Kounouz) | `Parascolaire_Analyse_...` ou `Parascolaire_Proba_Geo_...` | Analyse = modules 1-10, Geo&Proba = modules 11-23 |
 | XY Plus (CAEU) | `xy_plus_3em_math_tome1.pdf` ou `_tome2.pdf` | T1 = modules 1-12, T2 = modules 13-23 (meme decoupage que Manuel) |
 
@@ -67,14 +67,14 @@ Lire `_raw/CARTOGRAPHIE.md` pour le module demande. Chaque module a 4 sources :
 Lancer **3 agents** en parallele (un par source secondaire), pendant que le main thread travaille sur le Manuel :
 
 ```
-Agent principal : Manuel scolaire → _raw/reference/XX-nom/transcription-manuel.typ
-Agent 1         : Corrige         → _raw/reference/XX-nom/transcription-corrige.typ
-Agent 2         : Parascolaire    → _raw/reference/XX-nom/transcription-parascolaire.typ
-Agent 3         : XY Plus         → _raw/reference/XX-nom/transcription-xyplus.typ
+Agent principal : Manuel scolaire → _raw/reference/{programme}/{module}/transcription-manuel.typ
+Agent 1         : Corrige         → _raw/reference/{programme}/{module}/transcription-corrige.typ
+Agent 2         : Parascolaire    → _raw/reference/{programme}/{module}/transcription-parascolaire.typ
+Agent 3         : XY Plus         → _raw/reference/{programme}/{module}/transcription-xyplus.typ
 ```
 
 Chaque agent doit :
-1. Creer le repertoire `_raw/reference/XX-nom/` si necessaire
+1. Creer le repertoire `_raw/reference/{programme}/{module}/` si necessaire
 2. Extraire les pages PNG (`pdftoppm -png -r 150`)
 3. Lire visuellement par chunks de 5 pages
 4. Ecrire le fichier .typ avec tout le contenu
@@ -96,7 +96,7 @@ Script de merge : utiliser un script Python regex-based (voir Module 1 comme ref
 ### Etape 4 : Renommer et nettoyer
 
 ```
-_raw/reference/XX-nom/
+_raw/reference/{programme}/{module}/
   manuel.typ         # Manuel + Corrige fusionne
   parascolaire.typ   # Autonome
   xyplus.typ         # Autonome
@@ -176,33 +176,35 @@ $cases(...)$          // systeme d'equations
 
 ---
 
-## Correspondance numeros de modules → noms de dossiers
+## Correspondance numeros de modules → dossiers
 
-| # | Dossier |
-|---|---------|
-| 1 | `01-generalites-fonctions` |
-| 2 | `02-continuite` |
-| 3 | `03-limites-continuite` |
-| 4 | `04-limites-comportements-asymptotiques` |
-| 5 | `05-nombre-derive` |
-| 6 | `06-fonction-derivee` |
-| 7 | `07-exemples-etude-fonctions` |
-| 8 | `08-fonctions-trigonometriques` |
-| 9 | `09-suites-reelles` |
-| 10 | `10-limites-suites-reelles` |
-| 11 | `11-statistiques` |
-| 12 | `12-probabilites` |
-| 13 | `13-produit-scalaire-plan` |
-| 14 | `14-angles-orientes` |
-| 15 | `15-trigonometrie` |
-| 16 | `16-rotations` |
-| 17 | `17-nombres-complexes` |
-| 18 | `18-denombrement` |
-| 19 | `19-divisibilite-N` |
-| 20 | `20-nombres-premiers` |
-| 21 | `21-vecteurs-espace` |
-| 22 | `22-produit-scalaire-vectoriel-espace` |
-| 23 | `23-equations-droites-plans-sphere` |
+Programme : `3eme-math` — chemin : `_raw/reference/3eme-math/{slug}/`
+
+| # | Slug |
+|---|------|
+| 1 | `generalites-fonctions` |
+| 2 | `continuite` |
+| 3 | `limites-continuite` |
+| 4 | `limites-comportements-asymptotiques` |
+| 5 | `nombre-derive` |
+| 6 | `fonction-derivee` |
+| 7 | `exemples-etude-fonctions` |
+| 8 | `fonctions-trigonometriques` |
+| 9 | `suites-reelles` |
+| 10 | `limites-suites-reelles` |
+| 11 | `statistiques` |
+| 12 | `probabilites` |
+| 13 | `produit-scalaire-plan` |
+| 14 | `angles-orientes` |
+| 15 | `trigonometrie` |
+| 16 | `rotations` |
+| 17 | `nombres-complexes` |
+| 18 | `denombrement` |
+| 19 | `divisibilite-N` |
+| 20 | `nombres-premiers` |
+| 21 | `vecteurs-espace` |
+| 22 | `produit-scalaire-vectoriel-espace` |
+| 23 | `equations-droites-plans-sphere` |
 
 ---
 

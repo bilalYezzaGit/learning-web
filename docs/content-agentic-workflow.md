@@ -8,24 +8,25 @@ Document vivant qui cartographie le systeme de contenu pilote par LLM.
 
 | Ressource | Chemin | Role | Utilise dans |
 |-----------|--------|------|--------------|
-| **--- Sources & extraction ---** | | | |
-| PDFs bruts | `_raw/` + `_raw/CARTOGRAPHIE.md` | Sources PDF manuels tunisiens | WF1 — entree, extraction pages |
-| Skill /transcription | `.claude/skills/transcription/SKILL.md` | Transcription PDF -> Typst | WF1 — declencheur transcription |
-| Skill /source | `.claude/skills/source/SKILL.md` | Gestion sources pedagogiques web | pre-WF1 — veille et scan de sources |
-| Sources web | `docs/content-intelligence/sources/registry.md` | Registre de sources pedagogiques | pre-WF1 — reference lors de la recherche |
-| References Typst | `_raw/reference/{module}/` | Transcriptions PDF -> Typst | WF1 — sortie transcription, entree KB |
+| **--- Indexation & transcription (WF0) ---** | | | |
+| PDFs bruts | `_raw/*.pdf` | Sources PDF manuels tunisiens | WF0 [0a] — entree indexation |
+| Fiches sources | `_raw/sources/{slug}.yaml` | Cartographie structuree par PDF (1 fiche = 1 PDF) | WF0 [0a] — sortie ; WF0 [0b] — plages de pages |
+| Skill /transcription | `.claude/skills/transcription/SKILL.md` | Transcription PDF -> Typst | WF0 [0b] — declencheur transcription |
+| Skill /source | `.claude/skills/source/SKILL.md` | Gestion sources pedagogiques web | pre-WF0 — veille et scan de sources |
+| Sources web | `docs/content-intelligence/sources/registry.md` | Registre de sources pedagogiques | pre-WF0 — reference lors de la recherche |
+| References Typst | `_raw/reference/{programme}/{module}/` | Transcriptions PDF -> Typst | WF0 [0b] — sortie ; WF1 — entree |
+| **--- Knowledge Base (WF1) ---** | | | |
 | Referentiels | `docs/referentiels/` | Conventions redaction maths tunisiennes | WF1 — reference KB ; WF3 [3a] — reference generation |
-| **--- Knowledge Base ---** | | | |
 | KB template | `meta_system/kb/template.md` | Modele pour creer une KB module | WF1 — template de creation |
 | KB modules | `meta_system/kb/{nn}-{slug}.md` | Savoir structure par module (1 existant) | WF1 — sortie ; WF2 [2a] — entree analyse praxeologies |
-| **--- Planning ---** | | | |
+| **--- Planning (WF2) ---** | | | |
 | Planning template | `meta_system/planning/template.yaml` | Schema du manifeste de livret | WF2 [2b] — template de creation |
 | Planning modules | `content/{prog}/{mod}/_planning.yaml` | Manifeste par module (avant generation) | WF2 — sortie ; WF3 [3a] — spec de generation ; WF4 [4a] — verification couverture |
-| **--- Generation ---** | | | |
+| **--- Generation (WF3) ---** | | | |
 | Templates atomes | `.claude/skills/content/references/templates.md` | Templates copier-coller par type | WF3 [3a] — structure MDX de chaque atome |
 | Snippets Typst | `.claude/skills/content/references/typst-snippets.md` | Snippets vartable, cetz-plot, cetz | WF3 [3a] — graphiques et tableaux de variation |
 | Conventions | `docs/CONTENT-CONVENTIONS.md` | Source de verite syntaxe + structure | WF3 [3a] — reference nommage ; WF4 [4a] — reference validation |
-| **--- Validation ---** | | | |
+| **--- Validation (WF4) ---** | | | |
 | Pipeline | `tools/pipeline/` | Compilation MDX -> HTML/JSON + PDFs | WF4 [4a] — `npm run generate` compilation + validation |
 | Validation refs | `scripts/validate-content.mjs` | Integrite molecules -> atomes | WF4 [4a] — verification references croisees |
 | **--- Transversal ---** | | | |
@@ -39,13 +40,14 @@ Document vivant qui cartographie le systeme de contenu pilote par LLM.
 
 ```mermaid
 flowchart TD
-    PDFs["_raw/*.pdf"] -->|"/transcription"| Typst["References Typst\n_raw/reference/*.typ"]
-    Typst -->|"prompt libre"| KB["KB module\nmeta_system/kb/*.md"]
-    KB -->|"/content plan"| Plan["_planning.yaml\n(draft)"]
+    PDF["PDF brut"] -->|"WF0a : indexer"| Fiche[("Fiche source YAML\n_raw/sources/*.yaml")]
+    Fiche -->|"WF0b : transcrire\n/transcription"| Typst[("References Typst\n_raw/reference/{prog}/{mod}/*.typ")]
+    Typst -->|"WF1 : creer KB\nprompt libre"| KB[("KB module\nmeta_system/kb/*.md")]
+    KB -->|"WF2 : planifier\n/content plan"| Plan["_planning.yaml\n(draft)"]
     Plan --> Review{"Review\nhumain"}
     Review -->|"ajuste"| Plan
     Review -->|"valide"| PlanV["_planning.yaml\n(validated)"]
-    PlanV -->|"/content creer"| Contenu["Atomes MDX\n+ Molecules YAML"]
+    PlanV -->|"WF3 : generer\n/content creer"| Contenu["Atomes MDX\n+ Molecules YAML"]
     Contenu --> V4a["4a Syntaxe\nnpm run generate"]
     V4a --> V4b["4b Maths\nagent LLM"]
     V4b --> V4c["4c Pedagogie\nagent LLM"]
@@ -54,45 +56,79 @@ flowchart TD
 
 ---
 
-### WF1 -- Creer une KB module
+### WF0 -- Indexer & transcrire les sources
+
+Workflow d'alimentation du stock de references. Deux sous-etapes independantes.
 
 ```mermaid
 flowchart TD
-    CARTO["_raw/CARTOGRAPHIE.md"] --> Extract["Extraire pages PDF\npdftoppm -png -r 150"]
-    PDF["_raw/*.pdf"] -.-> Extract
-    Extract --> Read["Lire visuellement les pages"]
-    Read --> Transcribe["Transcrire en Typst\n/transcription"]
-    Transcribe --> TYPST[("_raw/reference/{module}/*.typ")]
-    TYPST --> Fill["Remplir le template KB"]
-    TPL["meta_system/kb/template.md"] -.-> Fill
-    REF["docs/referentiels/"] -.-> Fill
-    Fill --> KB[("meta_system/kb/{nn}-{slug}.md")]
+    PDF["PDF brut\n_raw/*.pdf"] --> Index["0a — Indexer\nparcourir le PDF, identifier\nmodules et plages de pages"]
+    Index --> Fiche[("Fiche source YAML\n_raw/sources/{slug}.yaml")]
+    Fiche --> Demande{"Module\ndemande ?"}
+    Demande -->|"oui"| Extract["0b — Extraire pages PNG\npdftoppm -png -r 150"]
+    Fiche -.-> Extract
+    Extract --> Read["Lire visuellement\npar chunks de 5 pages"]
+    Read --> Transcribe["Transcrire en Typst"]
+    CONV["Conventions Typst\n(skill /transcription)"] -.-> Transcribe
+    Transcribe --> TYPST[("Fichier .typ\n_raw/reference/{prog}/{mod}/")]
+    Demande -->|"pas maintenant"| Stock["Stock indexe\n(transcription a la demande)"]
 ```
 
-Entree : identifiant module dans CARTOGRAPHIE.md
+Entree : fichier PDF brut
+Sortie 0a : `_raw/sources/{slug}.yaml` (fiche d'indexation)
+Sortie 0b : `_raw/reference/{programme}/{module}/*.typ` (transcription a la demande)
+
+#### Declencheurs
+
+| Etape | Declencheur | Ressources chargees |
+|-------|-------------|---------------------|
+| 0a — Indexer un PDF | `/transcription index <pdf>` | PDF brut (table des matieres) |
+| 0b — Transcrire un module | `/transcription {module}` | `_raw/sources/*.yaml` (plages de pages), PDFs source |
+
+#### Exemples de prompts
+
+```
+/transcription index Parascolaire_Analyse_3eme_sec_Section_Math_ocr.pdf
+```
+
+```
+/transcription continuite
+```
+
+---
+
+### WF1 -- Creer une KB module
+
+Prerequis : les transcriptions .typ du module doivent exister dans `_raw/reference/`. Si elles manquent, retourner au WF0b.
+
+```mermaid
+flowchart TD
+    TYPST[("References Typst\n_raw/reference/{prog}/{mod}/*.typ")] --> Analyse["Analyser les transcriptions\nmanuel + parascolaire + xyplus"]
+    TPL["meta_system/kb/template.md"] -.-> Synth
+    REF["docs/referentiels/"] -.-> Synth
+    Analyse --> Synth["Synthetiser en KB\naxiomatique, praxeologies, misconceptions"]
+    Synth --> KB[("KB module\nmeta_system/kb/{nn}-{slug}.md")]
+```
+
+Entree : fichiers .typ existants pour le module
 Sortie : `meta_system/kb/{nn}-{slug}.md`
 
 #### Declencheurs
 
 | Etape | Declencheur | Ressources chargees |
 |-------|-------------|---------------------|
-| Transcrire les PDFs | `/transcription {module}` | `_raw/CARTOGRAPHIE.md`, PDFs source |
-| Creer la KB | prompt libre | `meta_system/kb/template.md`, `_raw/reference/{module}/*.typ` |
+| Creer la KB | prompt libre | `meta_system/kb/template.md`, `_raw/reference/{prog}/{mod}/*.typ`, `docs/referentiels/` |
 
 #### Exemples de prompts
 
 ```
-/transcription continuite
-```
-
-```
 Cree la KB du module continuite a partir des transcriptions Typst
-dans _raw/reference/02-continuite/
+dans _raw/reference/3eme-math/continuite/
 ```
 
 #### Lacunes identifiees
 
-- Pas de skill dedie pour la creation de KB (la transcription et la KB sont deux etapes distinctes mais seule la transcription a un skill)
+- Pas de skill dedie pour la creation de KB
 
 ---
 
@@ -246,6 +282,7 @@ formules, calculs, solutions
 | Atomes MDX | 185 (continuite: 95, fonctions: 64, derivation: 26) |
 | Molecules YAML | 14 (continuite: 7, fonctions: 4, derivation: 3) |
 | KB modules | 1/23 (generalites-fonctions) |
+| Fiches sources | 8 (tous les PDFs 3eme-math indexes) |
 | References Typst | 7 modules transcrits (21 fichiers .typ) |
 | Plannings | 0 (workflow defini, pas encore execute) |
 
@@ -255,7 +292,7 @@ formules, calculs, solutions
 
 | # | Lacune | Workflows impactes | Priorite |
 |---|--------|--------------------|----------|
-| L1 | Pas de skill dedie pour creer une KB (distinct de `/transcription`) | WF1 | basse |
+| ~~L1~~ | ~~Pas de skill dedie pour l'indexation de PDF (WF0a)~~ | ~~WF0~~ | resolue |
 | L2 | Planning jamais teste en conditions reelles | WF2 | **haute** |
 | L3 | `/content creer` ne lit pas `_planning.yaml` comme source | WF3 | **haute** |
 | L4 | Pas d'orchestration multi-atomes (reprise, progression) | WF3 | moyenne |
