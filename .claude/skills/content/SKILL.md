@@ -1,6 +1,6 @@
 ---
 name: content
-description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/{programme}/{module}/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon, module.
+description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/{programme}/{module}/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon, module, planifier, planning, plan.
 argument-hint: "[action] [details]"
 ---
 
@@ -17,7 +17,60 @@ Determine l'action a partir de `$ARGUMENTS` ou du contexte utilisateur :
 | **Creer** | [Creation](#creation-workflow) | ajouter, creer, nouveau, ecrire un atome/molecule |
 | **Editer** | [Edition](#edition-workflow) | modifier, corriger, editer, renommer |
 | **Valider** | [Validation](#validation-workflow) | valider, verifier, checker, audit |
+| **Planifier** | [Planning](#planning-workflow) | planifier, planning, plan livret |
 | **Lister** | [Listing](#listing-workflow) | lister, inventaire, combien, quels atomes |
+
+---
+
+## Planning workflow
+
+Genere un planning de livret a partir d'une KB module. Le planning declare tous les atomes et molecules AVANT generation.
+
+### Pre-requis
+
+- KB module existante dans `meta_system/kb/`
+- Si pas de KB : creer d'abord la KB (voir `meta_system/kb/template.md`)
+
+### Etapes
+
+1. **Charge la KB module** : Read `meta_system/kb/{nn}-{slug}.md`
+
+2. **Charge le template planning** : Read `meta_system/planning/template.yaml`
+
+3. **Analyse les praxeologies** de la KB (section 8) :
+   - Lister toutes les praxeologies avec leur difficulte
+   - Identifier les groupements thematiques naturels
+
+4. **Genere le planning** `content/{programme}/{module}/_planning.yaml` :
+   - Declarer chaque praxeologie dans la section `praxeologies:`
+   - Concevoir les molecules (1 cours + 1-3 series)
+   - Pour le cours : organiser en sections thematiques
+   - Pour chaque section : declarer les atomes (lecons, exercices, QCM)
+   - Pour chaque atome : slug, type, title, praxeologies, contenu (2-3 phrases), difficulte, timeMinutes
+   - Pour les series : liste plate d'atomes
+
+5. **Verifie la couverture** :
+   - Chaque praxeologie de la KB est couverte par au moins 1 atome
+   - Equilibre des types : ~60% exercices, ~25% lecons, ~15% QCM
+   - Progression de difficulte coherente dans chaque molecule
+
+6. **Ecrit le fichier** `_planning.yaml` avec `status: draft`
+
+7. **Presente le planning a l'humain** pour validation :
+   - Resume : nombre de molecules, nombre d'atomes par type, praxeologies couvertes
+   - Demander validation ou ajustements
+
+8. **Apres validation humaine** : mettre `status: validated`
+
+### Checklist planning
+
+- [ ] Toutes les praxeologies de la KB sont couvertes
+- [ ] Slugs conformes au nommage (`{type}-{topic}-{slug}`)
+- [ ] Topics du vocabulaire controle
+- [ ] Chaque atome a un champ `contenu` de 2-3 phrases
+- [ ] Difficultes coherentes avec la KB
+- [ ] Categories presentes pour tous les exercices
+- [ ] QCM regroupables en blocs de 2-5 par theme
 
 ---
 

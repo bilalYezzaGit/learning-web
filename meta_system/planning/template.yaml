@@ -1,0 +1,131 @@
+# ============================================================================
+# PLANNING DE LIVRET — Template
+# ============================================================================
+#
+# Ce fichier declare TOUS les atomes et molecules a generer pour un module.
+# Il est cree par le LLM a partir d'une KB module, puis valide par un humain
+# AVANT toute generation de contenu MDX.
+#
+# Emplacement : content/{programme}/{module}/_planning.yaml
+#
+# Workflow :
+#   1. LLM genere ce fichier a partir de la KB
+#   2. Humain review et ajuste (slugs, couverture, difficulte, contenu)
+#   3. Statut passe a "validated"
+#   4. LLM genere chaque atome selon ce manifeste
+#   5. Validation multi-paliers du contenu genere
+#
+# ============================================================================
+
+kind: planning
+module: "{slug-module}"                           # Ex: continuite
+programme: "{slug-programme}"                     # Ex: 3eme-math
+kb_source: "meta_system/kb/{nn}-{slug}.md"        # Chemin vers la KB source
+status: draft                                     # draft | validated | generated
+
+# ----------------------------------------------------------------------------
+# Praxeologies couvertes
+# ----------------------------------------------------------------------------
+# Liste exhaustive des praxeologies de la KB que ce livret couvre.
+# Permet de verifier la couverture : aucune praxeologie ne doit etre oubliee.
+
+praxeologies:
+  - id: Prax0
+    nom: "{Type de tache — copie depuis la KB}"
+    difficulte: 1                                 # 0-3, copie depuis la KB
+
+# ----------------------------------------------------------------------------
+# Molecules
+# ----------------------------------------------------------------------------
+# Chaque molecule correspond a un fichier YAML dans _molecules/.
+# Un planning declare generalement : 1 cours + 1-3 series.
+
+molecules:
+
+  # --------------------------------------------------------------------------
+  # Cours
+  # --------------------------------------------------------------------------
+  - slug: "{module}"                              # Slug de la molecule
+    kind: cours
+    title: "{Titre du cours}"
+    description: "{1-2 phrases}"
+    trimester: T1                                 # T1, T2 ou T3
+    order: 1                                      # Ordre dans le programme
+
+    sections:
+      - label: "{Nom de la section thematique}"
+        atoms:
+
+          # --- Lecon ---
+          - slug: "lesson-{topic}-{slug}"
+            type: lesson
+            title: "{Titre de la lecon}"
+            praxeologies: [Prax0]                 # Praxeologies couvertes
+            contenu: >-
+              {2-3 phrases decrivant le contenu : definitions, theoremes,
+              proprietes, exemples illustratifs. Assez precis pour qu'un
+              humain sache exactement ce qui sera genere.}
+            difficulte: 1
+            timeMinutes: 8                        # 3-10 pour une lecon
+
+          # --- Exercice ---
+          - slug: "ex-{topic}-{slug}"
+            type: exercise
+            title: "{Titre de l'exercice}"
+            praxeologies: [Prax0]
+            category: application                 # application | approfondissement | synthese | probleme
+            contenu: >-
+              {Description precise : combien de questions, quel type de
+              fonctions, quelle technique attendue, quel resultat.}
+            difficulte: 1
+            timeMinutes: 15                       # 5-20 pour un exercice
+
+          # --- QCM (grouper 2-5 par bloc quiz dans la molecule finale) ---
+          - slug: "qcm-{topic}-{slug}"
+            type: qcm
+            title: "{Titre du QCM}"
+            praxeologies: [Prax0]
+            contenu: "{Ce que le QCM teste en 1 phrase}"
+            difficulte: 1
+            timeMinutes: 2                        # 1-2 pour un QCM
+
+      - label: "{Section suivante}"
+        atoms:
+          - slug: "..."
+            # ...
+
+  # --------------------------------------------------------------------------
+  # Serie
+  # --------------------------------------------------------------------------
+  - slug: "{module}-{theme}"                      # Ex: continuite-fondamentaux
+    kind: serie
+    title: "{Titre de la serie}"
+    description: "{1-2 phrases}"
+    difficulte: 1                                 # Difficulte dominante de la serie
+    tags: ["{tag1}", "{tag2}"]
+
+    # Les series n'ont pas de sections, juste une liste plate d'atomes.
+    # Les atomes deja declares dans le cours peuvent etre references par slug seul.
+    atoms:
+      - slug: "ex-{topic}-{slug}"
+        type: exercise
+        title: "{Titre}"
+        praxeologies: [Prax0]
+        category: application
+        contenu: "{Description}"
+        difficulte: 1
+        timeMinutes: 15
+
+# ============================================================================
+# Notes pour le LLM generateur
+# ============================================================================
+#
+# 1. Chaque atome du planning doit avoir un slug UNIQUE dans le module
+# 2. Le champ `contenu` est la spec — le LLM s'y tient lors de la generation
+# 3. Les `praxeologies` referencent les IDs de la KB (Prax0, Prax1, etc.)
+# 4. Un atome peut couvrir plusieurs praxeologies (ex: exercice de synthese)
+# 5. Les QCM du cours seront groupes en blocs `quiz:` dans la molecule finale
+# 6. Respecter le vocabulaire controle des topics (voir SKILL.md Quick Reference)
+# 7. Viser un equilibre : ~60% exercices, ~25% lecons, ~15% QCM
+#
+# ============================================================================

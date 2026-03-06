@@ -8,6 +8,7 @@ npm run build        # Build production
 npm run lint         # ESLint
 npm run type-check   # TypeScript strict
 npm run test:specs   # Spec tests (64 rules)
+npm run generate     # Pipeline contenu (MDX → HTML/JSON)
 ```
 
 ## Structure
@@ -23,8 +24,11 @@ src/
 ├── content/          # Extensions rendering (math, graph)
 └── types/            # TypeScript interfaces
 content/
-├── atoms/            # ~114 atomes MDX (lessons, exercises, qcm)
-└── molecules/        # Assemblages YAML (cours, series, programmes)
+├── {programme}/          # Ex: 3eme-math/
+│   ├── _programme.yaml   # Metadata programme
+│   └── {module}/         # Ex: continuite/
+│       ├── _molecules/   # Cours + series YAML
+│       └── *.mdx         # Atomes
 ```
 
 ## Stack
@@ -37,7 +41,7 @@ content/
 | State | useSyncExternalStore + Firestore listeners |
 | Backend | Firebase (Auth, Firestore, Functions) |
 | Math | KaTeX |
-| Charts | Recharts |
+| Pipeline | remark-directive + Typst |
 
 ## Conventions
 
@@ -47,6 +51,7 @@ content/
 - Conventions detaillees → `.claude/rules/` + `docs/specs/rules/`
 - Contenu pedagogique → `docs/CONTENT-CONVENTIONS.md`
 - Architecture contenu → `docs/chantiers/001-content-architecture.md`
+- Systeme de contenu → `docs/content-agentic-workflow.md`
 
 ## Skills
 
@@ -56,14 +61,6 @@ content/
 - `/audit-ui` — Audit UI/UX complet (check + exploration Level 2)
 - `/component <Nom>` — Generer un composant DS
 - `/content` — Gestion du contenu pedagogique
-
-## Agents specialises
-
-- `code-reviewer` — Review qualite TypeScript/React
-- `content-researcher` — Recherche web pedagogique
-- `content-creator` — Creation MDX/YAML expert
-- `content-reviewer` — Revue pedagogique + technique
-- `researcher` — Exploration codebase
 
 ## Regles critiques
 
