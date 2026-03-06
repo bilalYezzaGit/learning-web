@@ -1,6 +1,6 @@
 ---
 name: content
-description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/{programme}/{module}/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon, module, planifier, planning, plan.
+description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/{programme}/{module}/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon, module, planifier, planning, plan, kb, knowledge base, base de connaissances.
 argument-hint: "[action] [details]"
 ---
 
@@ -18,6 +18,7 @@ Determine l'action a partir de `$ARGUMENTS` ou du contexte utilisateur :
 | **Editer** | [Edition](#edition-workflow) | modifier, corriger, editer, renommer |
 | **Valider** | [Validation](#validation-workflow) | valider, verifier, checker, audit |
 | **Planifier** | [Planning](#planning-workflow) | planifier, planning, plan livret |
+| **KB** | [Knowledge Base](#kb-workflow) | kb, knowledge base, creer KB, base de connaissances |
 | **Lister** | [Listing](#listing-workflow) | lister, inventaire, combien, quels atomes |
 
 ---
@@ -71,6 +72,17 @@ Genere un planning de livret a partir d'une KB module. Le planning declare tous 
 - [ ] Difficultes coherentes avec la KB
 - [ ] Categories presentes pour tous les exercices
 - [ ] QCM regroupables en blocs de 2-5 par theme
+
+---
+
+## KB workflow
+
+Cree une Knowledge Base module a partir des transcriptions Typst.
+
+Prerequis : transcriptions .typ dans `_raw/reference/{programme}/{module}/`.
+Si absentes : utiliser `/transcription {module}` d'abord.
+
+Voir [actions/create-kb.md](actions/create-kb.md) pour le pipeline complet.
 
 ---
 

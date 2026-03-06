@@ -30,7 +30,7 @@ Document vivant qui cartographie le systeme de contenu pilote par LLM.
 | Pipeline | `tools/pipeline/` | Compilation MDX -> HTML/JSON + PDFs | WF4 [4a] — `npm run generate` compilation + validation |
 | Validation refs | `scripts/validate-content.mjs` | Integrite molecules -> atomes | WF4 [4a] — verification references croisees |
 | **--- Transversal ---** | | | |
-| Skill /content | `.claude/skills/content/SKILL.md` | Routeur workflow contenu | WF2 — `/content plan` ; WF3 — `/content creer` ; WF4 — `/content valider` |
+| Skill /content | `.claude/skills/content/SKILL.md` | Routeur workflow contenu | WF1 — `/content kb` ; WF2 — `/content plan` ; WF3 — `/content creer` ; WF4 — `/content valider` |
 
 ---
 
@@ -42,7 +42,7 @@ Document vivant qui cartographie le systeme de contenu pilote par LLM.
 flowchart TD
     PDF["PDF brut"] -->|"WF0a : indexer"| Fiche[("Fiche source YAML\n_raw/sources/*.yaml")]
     Fiche -->|"WF0b : transcrire\n/transcription"| Typst[("References Typst\n_raw/reference/{prog}/{mod}/*.typ")]
-    Typst -->|"WF1 : creer KB\nprompt libre"| KB[("KB module\nmeta_system/kb/*.md")]
+    Typst -->|"WF1 : creer KB\n/content kb"| KB[("KB module\nmeta_system/kb/*.md")]
     KB -->|"WF2 : planifier\n/content plan"| Plan["_planning.yaml\n(draft)"]
     Plan --> Review{"Review\nhumain"}
     Review -->|"ajuste"| Plan
@@ -117,18 +117,17 @@ Sortie : `meta_system/kb/{nn}-{slug}.md`
 
 | Etape | Declencheur | Ressources chargees |
 |-------|-------------|---------------------|
-| Creer la KB | prompt libre | `meta_system/kb/template.md`, `_raw/reference/{prog}/{mod}/*.typ`, `docs/referentiels/` |
+| Creer la KB | `/content kb {module}` | `meta_system/kb/template.md`, `_raw/reference/{prog}/{mod}/*.typ`, `docs/referentiels/` |
 
 #### Exemples de prompts
 
 ```
-Cree la KB du module continuite a partir des transcriptions Typst
-dans _raw/reference/3eme-math/continuite/
+/content kb continuite
 ```
 
-#### Lacunes identifiees
-
-- Pas de skill dedie pour la creation de KB
+```
+/content kb fonction-derivee
+```
 
 ---
 
