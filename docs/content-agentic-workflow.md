@@ -194,8 +194,9 @@ Sortie : atomes MDX + molecules YAML dans `content/{programme}/{module}/`
 
 | Etape | Declencheur | Ressources chargees |
 |-------|-------------|---------------------|
-| Generer un atome | `/content creer {type} {module}` | `_planning.yaml`, `references/templates.md`, `references/typst-snippets.md` |
-| Generer tout le livret | prompt libre | idem + orchestration manuelle |
+| Generer depuis le planning | `/content creer {module}` | `_planning.yaml`, KB, templates, typst-snippets, conventions |
+| Generer une section | `/content creer section {label} {module}` | idem, filtre par section |
+| Generer un atome libre | `/content creer {type} {slug}` | templates, conventions |
 | Compiler le resultat | `npm run generate` | `tools/pipeline/` |
 
 #### Exemples de prompts
@@ -211,9 +212,9 @@ du planning continuite
 
 #### Lacunes identifiees
 
-- Pas d'orchestration multi-atomes : le LLM genere atome par atome dans une seule conversation, sans reprise possible si interruption
-- Pas de suivi de progression (quels atomes du planning sont deja generes, lesquels restent)
-- Le skill `/content creer` ne sait pas encore lire `_planning.yaml` comme source
+- ~~Le skill `/content creer` ne sait pas encore lire `_planning.yaml` comme source~~ — resolu
+- Pas d'orchestration multi-atomes — **partiellement resolu** (progression par Glob, reprise possible)
+- Le suivi de progression est manuel (pas de fichier de tracking automatique)
 
 ---
 
@@ -293,7 +294,7 @@ formules, calculs, solutions
 |---|--------|--------------------|----------|
 | ~~L1~~ | ~~Pas de skill dedie pour l'indexation de PDF (WF0a)~~ | ~~WF0~~ | resolue |
 | L2 | Planning jamais teste en conditions reelles | WF2 | **haute** |
-| L3 | `/content creer` ne lit pas `_planning.yaml` comme source | WF3 | **haute** |
-| L4 | Pas d'orchestration multi-atomes (reprise, progression) | WF3 | moyenne |
+| ~~L3~~ | ~~`/content creer` ne lit pas `_planning.yaml` comme source~~ | ~~WF3~~ | resolue |
+| L4 | Pas d'orchestration multi-atomes (reprise, progression) — partiellement resolu (progression par Glob) | WF3 | moyenne |
 | L5 | Paliers validation maths + pedagogie inexistants | WF4 | moyenne |
 | L6 | Pas de verification automatique planning -> atomes generes | WF4 | basse |

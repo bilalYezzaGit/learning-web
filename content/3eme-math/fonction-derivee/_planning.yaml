@@ -1,0 +1,482 @@
+kind: planning
+module: "fonction-derivee"
+programme: "3eme-math"
+kb_source: "meta_system/kb/06-fonction-derivee.md"
+status: draft
+
+# ============================================================================
+# Design intent
+# ============================================================================
+# Resume de cours COURT (3 lecons compactes) + problemes complets multi-etapes.
+# PAS d'exercices d'application directe (pas de "calculer f'").
+# Les exercices sont tous des PROBLEMES complets (category: probleme ou synthese)
+# combinant derivation, variations, extrema, tangentes, optimisation.
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Praxeologies couvertes
+# ----------------------------------------------------------------------------
+
+praxeologies:
+  - id: Prax1
+    nom: "Calculer la derivee d'une fonction simple"
+    difficulte: 1
+  - id: Prax2a
+    nom: "Calculer la derivee d'un produit ou quotient"
+    difficulte: 2
+  - id: Prax2b
+    nom: "Calculer la derivee avec sqrt(f)"
+    difficulte: 2
+  - id: Prax2c
+    nom: "Calculer la derivee de f(ax+b)"
+    difficulte: 1
+  - id: Prax2d
+    nom: "Calculer des derivees successives et conjecturer une formule"
+    difficulte: 3
+  - id: Prax3
+    nom: "Etudier la derivabilite d'une fonction avec racines ou valeurs absolues"
+    difficulte: 2
+  - id: Prax4
+    nom: "Etudier les variations a l'aide de la derivee"
+    difficulte: 2
+  - id: Prax5
+    nom: "Determiner les extrema a partir du tableau de variation"
+    difficulte: 2
+  - id: Prax6
+    nom: "Determiner les extrema avec parametres"
+    difficulte: 3
+  - id: Prax7a
+    nom: "Probleme d'optimisation geometrique"
+    difficulte: 3
+  - id: Prax7b
+    nom: "Probleme d'optimisation economique / pratique"
+    difficulte: 3
+  - id: Prax8
+    nom: "Prouver une inegalite a l'aide de la derivee"
+    difficulte: 3
+  - id: Prax9
+    nom: "Lire graphiquement la derivee et reciproquement"
+    difficulte: 2
+  - id: Prax10
+    nom: "Etudier les tangentes et leur position par rapport a la courbe"
+    difficulte: 3
+
+# ----------------------------------------------------------------------------
+# Molecules
+# ----------------------------------------------------------------------------
+
+molecules:
+
+  # ==========================================================================
+  # COURS (resume compact)
+  # ==========================================================================
+  - slug: "fonction-derivee"
+    kind: cours
+    title: "Fonction derivee"
+    description: >-
+      Resume compact des outils de derivation : formules, lien
+      derivee-variations, extrema, tableau de variation.
+    trimester: T1
+    order: 6
+
+    sections:
+
+      # --- Section 1 : Formules de derivation ---
+      - label: "Formules de derivation"
+        atoms:
+          - slug: "lesson-der-formules-derivation"
+            type: lesson
+            title: "Fonction derivee et formules de derivation"
+            praxeologies: [Prax1, Prax2a, Prax2b, Prax2c]
+            contenu: >-
+              Definition de la fonction derivee f' sur un intervalle I.
+              Tableau des derivees usuelles (x^n, 1/x, 1/x^n, sqrt(x)).
+              Toutes les operations : somme, produit, quotient, puissance,
+              inverse, (sqrt(f))' = f'/(2.sqrt(f)), g(x)=f(ax+b) => g'(x)=a.f'(ax+b).
+              Derivees successives f'', f^(n). Exemples illustratifs courts.
+            difficulte: 1
+            timeMinutes: 10
+
+          - slug: "qcm-der-formules-quotient"
+            type: qcm
+            title: "Derivee d'un quotient"
+            praxeologies: [Prax2a]
+            contenu: >-
+              QCM testant la formule (u/v)' avec un piege classique
+              (signe + au lieu de -). Fonction rationnelle simple.
+            difficulte: 1
+            timeMinutes: 2
+
+          - slug: "qcm-der-derivee-racine"
+            type: qcm
+            title: "Derivee d'une racine composee"
+            praxeologies: [Prax2b]
+            contenu: >-
+              QCM sur (sqrt(f))'. Piege : oubli du facteur f' ou
+              application quand f s'annule.
+            difficulte: 1
+            timeMinutes: 2
+
+      # --- Section 2 : Variations et extrema ---
+      - label: "Variations et extrema"
+        atoms:
+          - slug: "lesson-der-variations-extrema"
+            type: lesson
+            title: "Derivee, sens de variation et extrema"
+            praxeologies: [Prax4, Prax5]
+            contenu: >-
+              Theoremes (admis) : f'>=0 <=> f croissante, f'<=0 <=> f decroissante.
+              Lien derivee-parite : f paire => f' impaire.
+              Extremum local (definition, voisinage), extremum absolu.
+              Condition necessaire : f'(a)=0 (demonstree). Contre-exemple x^3.
+              Condition suffisante : changement de signe de f' (admise).
+              Exemples : f(x)=-x^3+3x (deux extrema), f(x)=x^3 (pas d'extremum).
+            difficulte: 1
+            timeMinutes: 8
+
+          - slug: "qcm-der-extremum-condition"
+            type: qcm
+            title: "Condition necessaire vs suffisante pour un extremum"
+            praxeologies: [Prax5]
+            contenu: >-
+              QCM sur le piege f'(a)=0 n'implique pas extremum.
+              Contre-exemple f(x)=x^3 en 0.
+            difficulte: 2
+            timeMinutes: 2
+
+      # --- Section 3 : Tableau de variation ---
+      - label: "Tableau de variation"
+        atoms:
+          - slug: "lesson-der-tableau-variation"
+            type: lesson
+            title: "Construction et lecture du tableau de variation"
+            praxeologies: [Prax4, Prax5, Prax9]
+            contenu: >-
+              Methode complete : calculer f', factoriser, tableau de signes,
+              fleches de variation, valeurs aux bornes et aux zeros de f'.
+              Lecture inverse : du tableau deduire les extrema, le nombre de
+              solutions de f(x)=k, les encadrements de f(x).
+              Exemple complet traite : f(x) = 2x^3 - 3x^2 - 12x + 1.
+            difficulte: 1
+            timeMinutes: 8
+
+          - slug: "qcm-der-lecture-graphique"
+            type: qcm
+            title: "Identifier la courbe de f' a partir de celle de f"
+            praxeologies: [Prax9]
+            contenu: >-
+              Courbe de f donnee (cubique avec max/min locaux).
+              3 courbes candidates pour f'. Identifier la bonne
+              en reliant extrema de f aux zeros de f'.
+            difficulte: 1
+            timeMinutes: 2
+
+  # ==========================================================================
+  # SERIE 1 : Problemes d'etude de variations
+  # ==========================================================================
+  - slug: "fonction-derivee-variations"
+    kind: serie
+    title: "Problemes d'etude de variations"
+    description: >-
+      Problemes complets combinant derivation, variations, extrema,
+      derivabilite et tangentes. Chaque probleme est multi-etapes.
+    difficulte: 2
+    tags: ["derivee", "variations", "extrema", "tangente"]
+
+    atoms:
+      - slug: "ex-der-etude-rationnelle-parametree"
+        type: exercise
+        title: "Etude d'une fonction rationnelle parametree"
+        praxeologies: [Prax2a, Prax4, Prax5, Prax6]
+        category: probleme
+        contenu: >-
+          Soit f_m(x) = (x^2 + mx - 3)/(x-1), m reel.
+          1) Calculer f'_m(x).
+          2) Pour quelle valeur de m, f admet-elle un extremum en 2 ?
+          3) Pour quelles valeurs de m, f_m n'admet pas d'extremum ?
+          4) Pour m=3 : etudier les variations, dresser le tableau complet,
+          determiner les tangentes paralleles a une droite D donnee.
+        difficulte: 2
+        timeMinutes: 20
+
+      - slug: "ex-der-derivabilite-morceaux"
+        type: exercise
+        title: "Derivabilite d'une fonction definie par morceaux"
+        praxeologies: [Prax3, Prax4, Prax5]
+        category: probleme
+        contenu: >-
+          f(x) = (x^2-ax)/(x^2+1) si x>1, f(x) = (1-ax^2)/(x-2) si x<=1.
+          1) Determiner a pour que f soit continue en 1.
+          2) Etudier la derivabilite de f en 1 (derivees a gauche et a droite).
+          3) Calculer f' sur chacun des intervalles et dresser le tableau de
+          variation complet. Preciser les extrema.
+        difficulte: 2
+        timeMinutes: 20
+
+      - slug: "ex-der-tangentes-cubique"
+        type: exercise
+        title: "Tangentes a une courbe cubique"
+        praxeologies: [Prax2a, Prax4, Prax10]
+        category: probleme
+        contenu: >-
+          f(x) = (x-2)^2(x+3). C_f sa courbe dans un repere orthonorme.
+          D la droite x+y+3=0.
+          1) D est-elle tangente a C_f ? Si oui, determiner le point de contact.
+          2) Existe-t-il des tangentes a C_f paralleles a D ? Les determiner.
+          3) Determiner les tangentes a C_f issues du point A(2,0).
+          4) Dresser le tableau de variation de f et preciser les extrema.
+        difficulte: 2
+        timeMinutes: 20
+
+      - slug: "ex-der-fonction-valeur-absolue"
+        type: exercise
+        title: "Derivabilite et variations avec valeur absolue"
+        praxeologies: [Prax3, Prax4, Prax5]
+        category: probleme
+        contenu: >-
+          f(x) = (x^2 + 4|x| + 3)/(|x| - 1).
+          1) Preciser le domaine de definition.
+          2) Etudier la derivabilite de f en 0.
+          3) Montrer que f est derivable sur R\{0,-1,1} et preciser f'.
+          4) Dresser le tableau de variation complet.
+          5) En quels points la tangente est parallele a D: x+y=0 ?
+        difficulte: 2
+        timeMinutes: 20
+
+      - slug: "ex-der-derivee-graphique-reciproque"
+        type: exercise
+        title: "Lecture graphique et lien f - f'"
+        praxeologies: [Prax9, Prax4, Prax5]
+        category: approfondissement
+        contenu: >-
+          On donne le graphique d'une fonction f definie et derivable sur
+          [-1.5, 4.5] avec ses tangentes en deux points A et B.
+          1) Lire graphiquement f(1), f'(1) et f'(3/2).
+          2) Donner l'equation de la tangente au point d'abscisse 1.
+          3) Parmi trois courbes proposees, identifier la representation de f'.
+          4) Dresser le tableau de variation de f. En deduire le signe de f'
+          sur ]-1.5, 4.5[.
+          5) Si f' est la derivee d'une fonction g, dresser le tableau de
+          variation de g.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-der-derivees-successives-recurrence"
+        type: exercise
+        title: "Derivees successives et conjecture"
+        praxeologies: [Prax2d, Prax2a]
+        category: probleme
+        contenu: >-
+          1) Soit f(x) = 1/(x+a), a reel.
+          a) Verifier que f est derivable sur R\{-a} et calculer f'(x).
+          b) Calculer f''(x), f'''(x), f^(4)(x).
+          c) Conjecturer une formule pour f^(k)(x), k >= 2.
+          d) (Bonus) Prouver par recurrence.
+          2) Soit g(x) = (1+x)/(1-x).
+          a) Montrer que g(x) = -1 + 2/(1-x).
+          b) En deduire g^(k)(x) pour tout k >= 1.
+        difficulte: 3
+        timeMinutes: 20
+
+      - slug: "ex-der-vrai-faux-justifie"
+        type: exercise
+        title: "Vrai ou faux sur la derivee et les extrema"
+        praxeologies: [Prax3, Prax4, Prax5]
+        category: approfondissement
+        contenu: >-
+          Repondre par vrai ou faux en justifiant.
+          1) x->|x| est derivable sur R.
+          2) x->sqrt(2x^2+1) est derivable sur ]-inf, 1/2].
+          3) Si f'(a)=0 alors f admet un minimum en a.
+          4) Si f' = g' sur un intervalle I alors f = g sur I.
+          5) f derivable sur ]0,+inf[, f' >= 0 sur ]a,b[ et f(b)=0 :
+          alors f <= 0 sur [a,b].
+          Chaque reponse doit etre justifiee par une preuve ou un
+          contre-exemple.
+        difficulte: 2
+        timeMinutes: 15
+
+  # ==========================================================================
+  # SERIE 2 : Problemes de synthese et optimisation
+  # ==========================================================================
+  - slug: "fonction-derivee-optimisation"
+    kind: serie
+    title: "Problemes de synthese et d'optimisation"
+    description: >-
+      Problemes complets de niveau synthese : optimisation geometrique
+      et pratique, inegalites par la derivee, etudes parametriques.
+    difficulte: 3
+    tags: ["derivee", "optimisation", "inegalite", "synthese"]
+
+    atoms:
+      - slug: "ex-der-rectangle-perimetre-max"
+        type: exercise
+        title: "Rectangle de perimetre maximal inscrit dans un cercle"
+        praxeologies: [Prax7a, Prax4, Prax5, Prax2b]
+        category: probleme
+        contenu: >-
+          Soit C un cercle de rayon 1. On inscrit un rectangle dans C.
+          1) Exprimer y en fonction de x et en deduire le perimetre p(x).
+          2) Etudier sur [0,1] les variations de p (derivee avec sqrt).
+          3) En deduire les dimensions du rectangle de perimetre maximal.
+          4) Faire une figure et montrer que c'est un carre.
+        difficulte: 3
+        timeMinutes: 20
+
+      - slug: "ex-der-optimisation-bus"
+        type: exercise
+        title: "Revenu maximal d'une compagnie de bus"
+        praxeologies: [Prax7b, Prax4, Prax5]
+        category: probleme
+        contenu: >-
+          Une compagnie loue des bus de 60 places a des groupes de 15+.
+          Tarif : 90 dinars/pers pour 15 pers, reduit de n dinars si n pers
+          s'ajoutent. R(n) = (15+n)(90-n).
+          1) Verifier l'expression de R(n).
+          2) Etudier les variations de f(x)=(15+x)(90-x) sur [0,65].
+          3) Trouver le reel x_0 ou f atteint son maximum.
+          4) Encadrer x_0 entre deux entiers m et m+1. Comparer f(m) et f(m+1).
+          5) Conclure : quel effectif maximise le revenu ?
+        difficulte: 3
+        timeMinutes: 15
+
+      - slug: "ex-der-inegalite-racine"
+        type: exercise
+        title: "Inegalites avec racine et derivee"
+        praxeologies: [Prax8, Prax4]
+        category: probleme
+        contenu: >-
+          1) a) Montrer que 1-x <= 1/(1+x) pour tout x >= 0.
+          b) En deduire que 1-x <= 1/sqrt(1+x) pour tout x >= 0.
+          2) Montrer que sqrt(1+x) <= 1 + x/2 pour tout x >= 0.
+          3) Soit f(x) = 1 + x/4 - 1/x^2 - (3/7)x.
+          a) Calculer f'. b) Utiliser la question 1 pour deduire le signe de f'.
+          c) En deduire que 1 + x/4 <= sqrt(1+x) pour x >= 0 (encadrement).
+        difficulte: 3
+        timeMinutes: 20
+
+      - slug: "ex-der-polynome-degre4"
+        type: exercise
+        title: "Etude complete d'un polynome de degre 4"
+        praxeologies: [Prax1, Prax4, Prax5, Prax8]
+        category: synthese
+        contenu: >-
+          f(x) = -x^4 + 6x^2 - 9x + 1.
+          1) Limites en +inf et -inf.
+          2) Calculer f'(x) et etudier son signe.
+          3) a) Tableau de variation. b) Extrema locaux.
+          c) Montrer que f(x)=0 admet exactement 3 racines (utiliser le TVI
+          et le tableau). d) Encadrer chaque racine a 10^{-1} pres.
+          4) Discussion : nombre de solutions de f(x)=m selon m reel.
+        difficulte: 3
+        timeMinutes: 20
+
+      - slug: "ex-der-triangle-aire-maximale"
+        type: exercise
+        title: "Triangle d'aire maximale inscrit dans un cercle"
+        praxeologies: [Prax7a, Prax2b, Prax4, Prax5]
+        category: probleme
+        contenu: >-
+          Soit C un cercle de rayon 1, A un point fixe sur C, H le projete
+          de O sur la droite perpendiculaire en H.
+          1) Calculer l'aire f(x) = (1-x).sqrt(1-x^2) du triangle AMM'.
+          2) Etudier la derivabilite de f en -1 et 1. Tangentes en ces points.
+          3) Dresser le tableau de variation de f sur [-1,1].
+          4) Montrer que le triangle d'aire maximale est equilateral.
+        difficulte: 3
+        timeMinutes: 20
+
+      - slug: "ex-der-distance-minimale-parabole"
+        type: exercise
+        title: "Distance minimale d'un point a une parabole"
+        praxeologies: [Prax7a, Prax4, Prax5]
+        category: probleme
+        contenu: >-
+          P est la parabole y=x^2. A(0,1) est un point fixe. M un point
+          de P d'abscisse x.
+          1) Montrer que AM^2 = x^4 - x^2 + 1.
+          2) Etudier les variations de f(x) = x^4 - x^2 + 1.
+          3) AM minimale <=> AM^2 minimal. Trouver les positions de M.
+          4) Calculer la distance minimale.
+        difficulte: 3
+        timeMinutes: 15
+
+      - slug: "ex-der-casserole-metal-minimal"
+        type: exercise
+        title: "Casserole de contenance fixe a metal minimal"
+        praxeologies: [Prax7a, Prax4, Prax5]
+        category: probleme
+        contenu: >-
+          Casserole cylindrique de contenance 1L.
+          x = rayon du cercle interieur, h = hauteur.
+          1) Exprimer h en fonction de x.
+          2) Montrer que la surface S(x) = pi.x^2 + 2000/x.
+          3) Etudier les variations de S.
+          4) En deduire que le metal est minimal quand h = x
+          (la hauteur egale le rayon).
+        difficulte: 3
+        timeMinutes: 15
+
+      - slug: "ex-der-famille-fonctions-extrema"
+        type: exercise
+        title: "Famille de fonctions parametrees et extrema"
+        praxeologies: [Prax6, Prax4, Prax5]
+        category: probleme
+        contenu: >-
+          f_m(x) = (2m-3)x^3 + 3x^2 - 3mx + m, m reel.
+          1) Pour quelles valeurs de m, f_m possede un seul extremum ?
+          2) Pour quelles valeurs de m, f_m est decroissante sur tout R ?
+          3) Pour m = 1 : etudier les variations de g(x) = -x^3 + 3|x^2-x| + 1.
+          Dresser le tableau complet. Preciser les points anguleux et les
+          vecteurs directeurs des demi-tangentes.
+        difficulte: 3
+        timeMinutes: 20
+
+      - slug: "ex-der-extremum-quadratique-lieu"
+        type: exercise
+        title: "Famille de paraboles et lieu des extrema"
+        praxeologies: [Prax6, Prax4, Prax5]
+        category: synthese
+        contenu: >-
+          f(x) = ax^2 + bx + c, a non nul.
+          1) Determiner b et c en fonction de a sachant que la courbe
+          passe par A(1,0) et B(0,1).
+          2) Calculer les coordonnees de l'extremum de f pour chaque a.
+          3) a) Quel est l'ensemble des points associes a ces extrema
+          quand a varie ? b) Dresser le tableau de variation de la fonction
+          qui decrit cet ensemble.
+        difficulte: 3
+        timeMinutes: 15
+
+# ============================================================================
+# Resume du planning
+# ============================================================================
+#
+# Cours : 3 lecons + 4 QCM = 7 atomes
+# Serie 1 (variations) : 7 problemes
+# Serie 2 (synthese/optimisation) : 9 problemes
+# ---
+# Total : 23 atomes (3 lesson, 4 qcm, 16 exercise)
+#
+# Repartition :
+#   lesson : 13% (3/23)
+#   qcm    : 17% (4/23)
+#   exercise : 70% (16/23) — tous category probleme/synthese/approfondissement
+#
+# Praxeologies couvertes : 14/14 (100%)
+#   Prax1  -> lesson-der-formules, ex-der-polynome-degre4
+#   Prax2a -> lesson-der-formules, ex-der-etude-rationnelle, ex-der-tangentes
+#   Prax2b -> lesson-der-formules, qcm-der-derivee-racine, ex-der-rectangle, ex-der-triangle
+#   Prax2c -> lesson-der-formules
+#   Prax2d -> ex-der-derivees-successives
+#   Prax3  -> ex-der-derivabilite-morceaux, ex-der-valeur-absolue, ex-der-vrai-faux
+#   Prax4  -> lesson-der-variations, tous les exercices
+#   Prax5  -> lesson-der-variations, qcm-der-extremum, tous les problemes
+#   Prax6  -> ex-der-etude-rationnelle, ex-der-famille-fonctions, ex-der-extremum-lieu
+#   Prax7a -> ex-der-rectangle, ex-der-triangle, ex-der-distance, ex-der-casserole
+#   Prax7b -> ex-der-optimisation-bus
+#   Prax8  -> ex-der-inegalite-racine, ex-der-polynome-degre4
+#   Prax9  -> lesson-der-tableau, qcm-der-lecture-graphique, ex-der-derivee-graphique
+#   Prax10 -> ex-der-tangentes-cubique
+#
+# ============================================================================

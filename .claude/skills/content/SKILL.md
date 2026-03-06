@@ -88,6 +88,21 @@ Voir [actions/create-kb.md](actions/create-kb.md) pour le pipeline complet.
 
 ## Creation workflow
 
+### Etape 0 — Detecter un planning
+
+Avant toute creation, verifier si un planning valide existe pour le module cible :
+
+```
+Glob: content/{programme}/{module}/_planning.yaml
+```
+
+- **Si planning avec `status: validated`** : utiliser le pipeline planning.
+  Voir [actions/create-from-planning.md](actions/create-from-planning.md).
+- **Si planning avec `status: draft`** : informer que le planning doit etre valide d'abord.
+- **Si pas de planning** : continuer avec le workflow generique ci-dessous.
+
+### Workflow generique (sans planning)
+
 1. **Determine le type** a creer :
    - Atome : `lesson`, `exercise`, `qcm`
    - Molecule : `cours`, `serie`
