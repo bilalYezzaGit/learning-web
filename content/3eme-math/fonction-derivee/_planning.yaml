@@ -2,7 +2,7 @@ kind: planning
 module: "fonction-derivee"
 programme: "3eme-math"
 kb_source: "meta_system/kb/06-fonction-derivee.md"
-status: draft
+status: generated
 
 # ============================================================================
 # Design intent
@@ -199,7 +199,7 @@ molecules:
         difficulte: 2
         timeMinutes: 20
 
-      - slug: "ex-der-derivabilite-morceaux"
+      - slug: "ex-der-derivabilite-morceaux-parametree"
         type: exercise
         title: "Derivabilite d'une fonction definie par morceaux"
         praxeologies: [Prax3, Prax4, Prax5]
@@ -469,7 +469,7 @@ molecules:
 #   Prax2b -> lesson-der-formules, qcm-der-derivee-racine, ex-der-rectangle, ex-der-triangle
 #   Prax2c -> lesson-der-formules
 #   Prax2d -> ex-der-derivees-successives
-#   Prax3  -> ex-der-derivabilite-morceaux, ex-der-valeur-absolue, ex-der-vrai-faux
+#   Prax3  -> ex-der-derivabilite-morceaux-parametree, ex-der-valeur-absolue, ex-der-vrai-faux
 #   Prax4  -> lesson-der-variations, tous les exercices
 #   Prax5  -> lesson-der-variations, qcm-der-extremum, tous les problemes
 #   Prax6  -> ex-der-etude-rationnelle, ex-der-famille-fonctions, ex-der-extremum-lieu

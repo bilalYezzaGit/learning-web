@@ -1,0 +1,86 @@
+---
+type: exercise
+title: "Derivees successives et conjecture"
+difficulty: 3
+timeMinutes: 20
+category: probleme
+tags: [derivation, derivees-successives, recurrence]
+---
+
+:::enonce
+**Partie 1.** Soit $a$ un reel et $f$ la fonction definie sur $\mathbb{R} \setminus \{-a\}$ par $f(x) = \dfrac{1}{x + a}$.
+
+1. Verifier que $f$ est derivable sur $\mathbb{R} \setminus \{-a\}$ et calculer $f'(x)$.
+2. Calculer $f''(x)$, $f'''(x)$ et $f^{(4)}(x)$.
+3. Conjecturer une formule pour $f^{(k)}(x)$, $k \geq 1$.
+4. *(Bonus)* Prouver cette formule par recurrence.
+
+**Partie 2.** Soit $g$ la fonction definie sur $\mathbb{R} \setminus \{1\}$ par $g(x) = \dfrac{1 + x}{1 - x}$.
+
+1. Montrer que $g(x) = -1 + \dfrac{2}{1 - x}$.
+2. En deduire $g^{(k)}(x)$ pour tout $k \geq 1$.
+:::
+
+:::solution
+**Partie 1.**
+
+**1.** $f(x) = (x+a)^{-1}$ est derivable sur $\mathbb{R} \setminus \{-a\}$ comme inverse d'une fonction affine non nulle.
+
+$$f'(x) = \frac{-1}{(x+a)^2}$$
+
+**2.** Derivees successives :
+
+$$f''(x) = \frac{2}{(x+a)^3}$$
+
+$$f'''(x) = \frac{-6}{(x+a)^4} = \frac{-3!}{(x+a)^4}$$
+
+$$f^{(4)}(x) = \frac{24}{(x+a)^5} = \frac{4!}{(x+a)^5}$$
+
+**3.** On observe la structure :
+- Numerateur : alternance de signe, factorielle
+- Denominateur : puissance croissante
+
+**Conjecture** : pour tout $k \geq 1$ :
+
+$$f^{(k)}(x) = \frac{(-1)^k \cdot k!}{(x+a)^{k+1}}$$
+
+**4.** *Preuve par recurrence :*
+
+**Initialisation** : pour $k = 1$, $f'(x) = \dfrac{-1}{(x+a)^2} = \dfrac{(-1)^1 \cdot 1!}{(x+a)^2}$. Vrai.
+
+**Heredite** : supposons la formule vraie au rang $k$. Alors :
+
+$$f^{(k+1)}(x) = \left(f^{(k)}(x)\right)' = \left(\frac{(-1)^k \cdot k!}{(x+a)^{k+1}}\right)'$$
+
+$$= (-1)^k \cdot k! \times \frac{-(k+1)}{(x+a)^{k+2}} = \frac{(-1)^{k+1} \cdot (k+1)!}{(x+a)^{k+2}}$$
+
+C'est bien la formule au rang $k+1$. La conjecture est prouvee.
+
+**Partie 2.**
+
+**1.** Division euclidienne ou verification directe :
+
+$$-1 + \frac{2}{1-x} = \frac{-(1-x) + 2}{1-x} = \frac{-1 + x + 2}{1-x} = \frac{1+x}{1-x} = g(x)$$
+
+**2.** $g(x) = -1 + 2 \times \dfrac{1}{1-x} = -1 + 2h(x)$ ou $h(x) = \dfrac{1}{1-x}$.
+
+Par la partie 1 avec $a$ remplace par $-1$ : $h(x) = \dfrac{1}{x - (-1)} = \dfrac{1}{x+a}$ avec $a = -1$.
+
+Attention : $h(x) = \dfrac{1}{1-x} = \dfrac{-1}{x-1}$, donc $h(x) = -\dfrac{1}{x-1}$.
+
+Par la formule de la partie 1 avec $a = -1$ (c'est-a-dire $\dfrac{1}{x+(-1)} = \dfrac{1}{x-1}$) :
+
+$$\left(\frac{1}{x-1}\right)^{(k)} = \frac{(-1)^k \cdot k!}{(x-1)^{k+1}}$$
+
+Donc $h^{(k)}(x) = \left(-\dfrac{1}{x-1}\right)^{(k)} = -\dfrac{(-1)^k \cdot k!}{(x-1)^{k+1}} = \dfrac{(-1)^{k+1} \cdot k!}{(x-1)^{k+1}}$.
+
+Finalement :
+
+$$g^{(k)}(x) = 2 \cdot h^{(k)}(x) = \frac{2 \cdot (-1)^{k+1} \cdot k!}{(x-1)^{k+1}}$$
+
+Ou de maniere equivalente :
+
+$$g^{(k)}(x) = \frac{2 \cdot k!}{(1-x)^{k+1}}$$
+
+(car $\dfrac{(-1)^{k+1}}{(x-1)^{k+1}} = \dfrac{1}{(1-x)^{k+1}}$).
+:::

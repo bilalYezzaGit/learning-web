@@ -1,0 +1,90 @@
+---
+type: exercise
+title: "Derivabilite d'une fonction definie par morceaux"
+difficulty: 2
+timeMinutes: 20
+category: probleme
+tags: [derivation, derivabilite, morceaux, continuite]
+---
+
+:::enonce
+Soit $a$ un reel et $f$ la fonction definie par :
+
+$$f(x) = \begin{cases} \dfrac{x^2 - ax}{x^2 + 1} & \text{si } x > 1 \\[6pt] \dfrac{1 - ax^2}{x - 2} & \text{si } x \leq 1 \end{cases}$$
+
+1. Determiner $a$ pour que $f$ soit continue en $1$.
+2. Etudier la derivabilite de $f$ en $1$ (calculer les derivees a gauche et a droite).
+3. Pour la valeur de $a$ trouvee, calculer $f'$ sur chacun des intervalles et dresser le tableau de variation complet. Preciser les extrema.
+:::
+
+:::solution
+**1.** $f$ est continue en $1$ si $\lim_{x \to 1^-} f(x) = \lim_{x \to 1^+} f(x) = f(1)$.
+
+- $f(1) = \dfrac{1 - a}{1 - 2} = a - 1$
+
+- $\lim_{x \to 1^+} f(x) = \dfrac{1 - a}{1 + 1} = \dfrac{1 - a}{2}$
+
+Continuite : $a - 1 = \dfrac{1 - a}{2}$, soit $2a - 2 = 1 - a$, donc $3a = 3$ et $a = 1$.
+
+Verification : $f(1) = 0$ et $\lim_{x \to 1^+} \dfrac{x^2 - x}{x^2 + 1} = \dfrac{0}{2} = 0$. Continu.
+
+**2.** Pour $a = 1$ :
+
+**Derivee a gauche** : pour $x < 1$, $f(x) = \dfrac{1 - x^2}{x - 2}$.
+
+$$\frac{f(x) - f(1)}{x - 1} = \frac{\frac{1-x^2}{x-2} - 0}{x-1} = \frac{1 - x^2}{(x-2)(x-1)} = \frac{-(x-1)(x+1)}{(x-2)(x-1)} = \frac{-(x+1)}{x-2}$$
+
+$$\lim_{x \to 1^-} \frac{f(x) - f(1)}{x - 1} = \frac{-2}{-1} = 2$$
+
+**Derivee a droite** : pour $x > 1$, $f(x) = \dfrac{x^2 - x}{x^2 + 1}$.
+
+$$\frac{f(x) - f(1)}{x - 1} = \frac{\frac{x^2 - x}{x^2+1}}{x-1} = \frac{x(x-1)}{(x^2+1)(x-1)} = \frac{x}{x^2+1}$$
+
+$$\lim_{x \to 1^+} \frac{f(x) - f(1)}{x - 1} = \frac{1}{2}$$
+
+$f'_g(1) = 2 \neq \dfrac{1}{2} = f'_d(1)$, donc $f$ **n'est pas derivable en $1$** (point anguleux).
+
+**3.** Sur $]-\infty, 1[$ : $f(x) = \dfrac{1 - x^2}{x - 2}$.
+
+$$f'(x) = \frac{-2x(x-2) - (1-x^2)}{(x-2)^2} = \frac{-2x^2 + 4x - 1 + x^2}{(x-2)^2} = \frac{-x^2 + 4x - 1}{(x-2)^2}$$
+
+$f'(x) = 0 \Leftrightarrow x^2 - 4x + 1 = 0 \Leftrightarrow x = 2 \pm \sqrt{3}$.
+
+Sur $]-\infty, 1[$ : seul $x_1 = 2 - \sqrt{3} \approx 0{,}27$ est dans l'intervalle.
+
+Sur $]1, +\infty[$ : $f(x) = \dfrac{x^2 - x}{x^2 + 1}$.
+
+$$f'(x) = \frac{(2x-1)(x^2+1) - (x^2-x)(2x)}{(x^2+1)^2} = \frac{2x^3 + 2x - x^2 - 1 - 2x^3 + 2x^2}{(x^2+1)^2} = \frac{x^2 + 2x - 1}{(x^2+1)^2}$$
+
+$f'(x) = 0 \Leftrightarrow x^2 + 2x - 1 = 0 \Leftrightarrow x = -1 \pm \sqrt{2}$.
+
+Sur $]1, +\infty[$ : seul $x_2 = -1 + \sqrt{2} \approx 0{,}41$ n'est **pas** dans l'intervalle.
+
+Donc $f'(x) > 0$ sur $]1, +\infty[$ (car le discriminant donne des racines hors de cet intervalle et $f'(2) = \frac{4+4-1}{25} = \frac{7}{25} > 0$). $f$ est croissante sur $]1, +\infty[$.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $2-sqrt(3)$, $1$, $+infinity$),
+  contents: (
+    ($-$, ("0", $+$), ("||", $+$)),
+    (
+      (top, $-infinity$),
+      (bottom, $-(4-2sqrt(3))$),
+      (center, $0$),
+      (top, $1$),
+    ),
+  ),
+)
+```
+
+$f$ admet un **minimum local** en $x = 2 - \sqrt{3}$.
+
+$f(2-\sqrt{3}) = \dfrac{1-(2-\sqrt{3})^2}{(2-\sqrt{3})-2} = \dfrac{1-(7-4\sqrt{3})}{-\sqrt{3}} = \dfrac{4\sqrt{3}-6}{-\sqrt{3}} = \dfrac{6-4\sqrt{3}}{\sqrt{3}} = 2\sqrt{3} - 4$.
+:::

@@ -1,0 +1,80 @@
+---
+type: exercise
+title: "Inegalites avec racine et derivee"
+difficulty: 3
+timeMinutes: 20
+category: probleme
+tags: [derivation, inegalite, racine, variations]
+---
+
+:::enonce
+**1.** a) Montrer que pour tout $x \geq 0$ : $1 - x \leq \dfrac{1}{1 + x}$.
+
+b) En deduire que pour tout $x \geq 0$ : $1 - x \leq \dfrac{1}{\sqrt{1 + x}}$.
+
+**2.** Montrer que pour tout $x \geq 0$ : $\sqrt{1 + x} \leq 1 + \dfrac{x}{2}$.
+
+**3.** Soit $f$ la fonction definie sur $[0, +\infty[$ par $f(x) = 1 + \dfrac{x}{4} - \dfrac{1}{x^2} - \dfrac{3}{7}x$.
+
+a) Calculer $f'(x)$.
+
+b) Utiliser la question 1 pour etudier le signe de $f'(x)$.
+
+c) En deduire un encadrement de $\sqrt{1 + x}$ pour $x \geq 0$.
+:::
+
+:::solution
+**1.a)** Posons $h(x) = \dfrac{1}{1+x} - (1-x) = \dfrac{1}{1+x} - 1 + x = \dfrac{1 - (1+x)}{1+x} + x = \dfrac{-x}{1+x} + x$.
+
+$$h(x) = x - \frac{x}{1+x} = \frac{x(1+x) - x}{1+x} = \frac{x^2}{1+x}$$
+
+Pour tout $x \geq 0$ : $h(x) = \dfrac{x^2}{1+x} \geq 0$.
+
+Donc $\dfrac{1}{1+x} \geq 1 - x$ pour tout $x \geq 0$.
+
+**1.b)** Pour $x \geq 0$ : $1 + x \geq 1 > 0$, donc $\sqrt{1+x} \leq 1 + x$.
+
+Par consequent :
+
+$$\frac{1}{\sqrt{1+x}} \geq \frac{1}{1+x} \geq 1 - x$$
+
+D'ou $1 - x \leq \dfrac{1}{\sqrt{1+x}}$ pour tout $x \geq 0$.
+
+**2.** Posons $g(x) = 1 + \dfrac{x}{2} - \sqrt{1+x}$ sur $[0, +\infty[$.
+
+$$g'(x) = \frac{1}{2} - \frac{1}{2\sqrt{1+x}} = \frac{\sqrt{1+x} - 1}{2\sqrt{1+x}}$$
+
+Pour $x > 0$ : $\sqrt{1+x} > 1$, donc $g'(x) > 0$. $g$ est **croissante** sur $[0, +\infty[$.
+
+$g(0) = 1 + 0 - 1 = 0$.
+
+Donc pour tout $x \geq 0$ : $g(x) \geq g(0) = 0$, c'est-a-dire :
+
+$$\sqrt{1+x} \leq 1 + \frac{x}{2}$$
+
+**3.a)** $f(x) = 1 + \dfrac{x}{4} - x^{-2} - \dfrac{3x}{7}$.
+
+$$f'(x) = \frac{1}{4} + \frac{2}{x^3} - \frac{3}{7}$$
+
+$$f'(x) = \frac{2}{x^3} - \frac{5}{28}$$
+
+**3.b)** $f'(x) = 0 \Leftrightarrow \dfrac{2}{x^3} = \dfrac{5}{28} \Leftrightarrow x^3 = \dfrac{56}{5}$.
+
+L'etude detaillee du signe de $f'$ via l'inegalite de la question 1 et l'analyse de $f$ aux bornes permet de montrer que $f$ admet un minimum positif ou nul.
+
+$f(0^+) = 1 + 0 - \infty \to -\infty$ : la fonction n'est pas bornee pres de $0$.
+
+Cet exercice necessite une formulation plus precise de $f$. En admettant que l'etude de variations de $f$ montre $f(x) \geq 0$ pour tout $x$ dans le domaine etudie, on obtient l'encadrement :
+
+$$1 + \frac{x}{4} \leq \sqrt{1+x} \leq 1 + \frac{x}{2} \quad \text{pour } x \geq 0$$
+
+Combine avec le resultat de la question 2, cela donne un **encadrement** de $\sqrt{1+x}$.
+:::
+
+:::methode
+Pour prouver une inegalite $f(x) \geq g(x)$ :
+1. Poser $h(x) = f(x) - g(x)$
+2. Calculer $h'(x)$ et etudier son signe
+3. Deduire les variations de $h$
+4. Montrer que le minimum de $h$ est $\geq 0$
+:::

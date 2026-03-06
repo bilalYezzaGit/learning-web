@@ -1,0 +1,36 @@
+---
+type: qcm
+title: "Derivee d'une racine composee"
+difficulty: 1
+timeMinutes: 2
+tags: [derivation, racine, formules]
+correctOption: 2
+---
+
+:::question
+Soit $f(x) = \sqrt{3x^2 + 1}$. La derivee $f'(x)$ est :
+:::
+
+:::option
+$f'(x) = \dfrac{1}{2\sqrt{3x^2 + 1}}$
+:::
+
+:::option
+$f'(x) = \dfrac{6x}{\sqrt{3x^2 + 1}}$
+:::
+
+:::option{correct}
+$f'(x) = \dfrac{3x}{\sqrt{3x^2 + 1}}$
+:::
+
+:::option
+$f'(x) = \dfrac{3x}{2(3x^2 + 1)}$
+:::
+
+:::explanation
+On applique $\left(\sqrt{u}\right)' = \dfrac{u'}{2\sqrt{u}}$ avec $u(x) = 3x^2 + 1$, donc $u'(x) = 6x$ :
+
+$$f'(x) = \frac{6x}{2\sqrt{3x^2+1}} = \frac{3x}{\sqrt{3x^2+1}}$$
+
+Piege : oublier le facteur $u' = 6x$ au numerateur (premiere option) ou oublier la racine au denominateur.
+:::

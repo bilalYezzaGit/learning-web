@@ -1,0 +1,30 @@
+kind: cours
+title: "Fonction derivee"
+description: "Resume compact des outils de derivation : formules, lien derivee-variations, extrema, tableau de variation."
+trimester: T1
+order: 6
+estimatedMinutes: 40
+objectives:
+  - "Maitriser les formules de derivation (usuelles, operations, sqrt(f), f(ax+b))"
+  - "Exploiter le signe de la derivee pour etudier les variations d'une fonction"
+  - "Determiner les extrema locaux et globaux et dresser un tableau de variation complet"
+
+sections:
+  - label: "Formules de derivation"
+    steps:
+      - lesson-der-formules-derivation
+      - quiz:
+          - qcm-der-formules-quotient
+          - qcm-der-derivee-racine
+
+  - label: "Variations et extrema"
+    steps:
+      - lesson-der-variations-extrema
+      - quiz:
+          - qcm-der-extremum-condition
+
+  - label: "Tableau de variation"
+    steps:
+      - lesson-der-tableau-variation
+      - quiz:
+          - qcm-der-lecture-graphique

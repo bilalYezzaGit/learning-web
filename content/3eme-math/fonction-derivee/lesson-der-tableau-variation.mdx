@@ -1,0 +1,72 @@
+---
+type: lesson
+title: "Construction et lecture du tableau de variation"
+difficulty: 1
+timeMinutes: 8
+tags: [derivation, tableau-de-variation, variations]
+---
+
+### Methode de construction
+
+Pour dresser le tableau de variation de $f$ derivable sur $I$ :
+
+1. **Calculer** $f'(x)$
+2. **Factoriser** $f'(x)$ (mettre en facteur, discriminant, racines evidentes)
+3. **Tableau de signes** de $f'$ : reperer les zeros et le signe sur chaque intervalle
+4. **Fleches de variation** : $f' > 0 \Rightarrow$ fleche montante, $f' < 0 \Rightarrow$ fleche descendante
+5. **Valeurs** : calculer $f$ aux bornes du domaine et aux zeros de $f'$
+
+### Exemple complet
+
+:::example[$f(x) = 2x^3 - 3x^2 - 12x + 1$]
+**Etape 1** : $f'(x) = 6x^2 - 6x - 12$
+
+**Etape 2** : $f'(x) = 6(x^2 - x - 2) = 6(x-2)(x+1)$
+
+**Etape 3** : $f'(x) = 0 \Leftrightarrow x = -1$ ou $x = 2$
+
+**Etape 4-5** :
+
+- $f(-1) = -2 - 3 + 12 + 1 = 8$
+- $f(2) = 16 - 12 - 24 + 1 = -19$
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $-1$, $2$, $+infinity$),
+  contents: (
+    ($+$, ("0", $-$), ("0", $+$)),
+    (
+      (bottom, $-infinity$),
+      (top, $8$),
+      (bottom, $-19$),
+      (top, $+infinity$),
+    ),
+  ),
+)
+```
+
+$f$ admet un **maximum local** en $-1$ egal a $8$ et un **minimum local** en $2$ egal a $-19$.
+:::
+
+### Lecture du tableau de variation
+
+A partir du tableau, on peut deduire :
+
+- Les **extrema** : valeurs aux sommets des fleches
+- Le **nombre de solutions** de $f(x) = k$ : compter les intersections de la droite $y = k$ avec les fleches
+- Les **encadrements** : si $f$ est croissante sur $[a, b]$, alors $f(a) \leq f(x) \leq f(b)$ pour tout $x \in [a, b]$
+
+:::example[Nombre de solutions]
+D'apres le tableau ci-dessus :
+
+- $f(x) = 0$ admet **3 solutions** (une dans $]-\infty, -1[$, une dans $]-1, 2[$, une dans $]2, +\infty[$)
+- $f(x) = 8$ admet **2 solutions** ($x = -1$ et une dans $]2, +\infty[$)
+- $f(x) = 10$ admet **1 solution** (dans $]2, +\infty[$)
+:::

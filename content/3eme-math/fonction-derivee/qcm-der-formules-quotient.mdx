@@ -1,0 +1,36 @@
+---
+type: qcm
+title: "Derivee d'un quotient"
+difficulty: 1
+timeMinutes: 2
+tags: [derivation, quotient, formules]
+correctOption: 2
+---
+
+:::question
+Soit $f(x) = \dfrac{x+1}{x-1}$. La derivee $f'(x)$ est :
+:::
+
+:::option
+$f'(x) = 1$
+:::
+
+:::option
+$f'(x) = \dfrac{2}{(x-1)^2}$
+:::
+
+:::option{correct}
+$f'(x) = \dfrac{-2}{(x-1)^2}$
+:::
+
+:::option
+$f'(x) = \dfrac{2x}{(x-1)^2}$
+:::
+
+:::explanation
+On applique la formule du quotient $\left(\dfrac{u}{v}\right)' = \dfrac{u'v - uv'}{v^2}$ avec $u(x) = x+1$ et $v(x) = x-1$ :
+
+$$f'(x) = \frac{1 \times (x-1) - (x+1) \times 1}{(x-1)^2} = \frac{x - 1 - x - 1}{(x-1)^2} = \frac{-2}{(x-1)^2}$$
+
+Le piege classique : ecrire $u'v + uv'$ (signe $+$) au lieu de $u'v - uv'$ (signe $-$).
+:::

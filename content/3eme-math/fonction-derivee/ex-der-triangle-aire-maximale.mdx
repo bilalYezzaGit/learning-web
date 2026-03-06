@@ -1,0 +1,100 @@
+---
+type: exercise
+title: "Triangle d'aire maximale inscrit dans un cercle"
+difficulty: 3
+timeMinutes: 20
+category: probleme
+tags: [derivation, optimisation, geometrie, racine, derivabilite]
+---
+
+:::enonce
+Soit $\mathcal{C}$ un cercle de centre $O$ et de rayon $1$. Soit $A$ un point fixe sur $\mathcal{C}$. On considere la corde $[MM']$ perpendiculaire au diametre passant par $A$. Soit $H$ le pied de la perpendiculaire abaissee de $O$ sur la corde $[MM']$, et on pose $x = OH$ avec $-1 \leq x \leq 1$.
+
+1. Montrer que l'aire du triangle $AMM'$ est $f(x) = (1 - x)\sqrt{1 - x^2}$.
+2. Etudier la derivabilite de $f$ en $-1$ et $1$. Interpreter geometriquement.
+3. Dresser le tableau de variation de $f$ sur $[-1, 1]$.
+4. Montrer que le triangle d'aire maximale est equilateral.
+:::
+
+:::solution
+**1.** Dans le cercle de rayon $1$ : $OH = x$ et $HM = \sqrt{1 - x^2}$ (Pythagore dans le triangle $OHM$).
+
+La corde $MM'$ a pour longueur $2\sqrt{1 - x^2}$.
+
+Le point $A$ est a l'extremite du diametre, donc $OA = 1$ et la distance de $A$ a la corde est $AH = 1 - x$ (si $A$ est du cote des $x$ positifs, $H$ est entre $O$ et $A$ quand $x > 0$).
+
+L'aire du triangle $AMM'$ est :
+
+$$f(x) = \frac{1}{2} \times MM' \times AH = \frac{1}{2} \times 2\sqrt{1-x^2} \times (1-x) = (1-x)\sqrt{1-x^2}$$
+
+**2.** En $x = 1$ : $f(1) = 0$.
+
+$$\frac{f(x) - f(1)}{x - 1} = \frac{(1-x)\sqrt{1-x^2}}{x-1} = -\sqrt{1-x^2}$$
+
+$\lim_{x \to 1^-} -\sqrt{1-x^2} = 0$. Donc $f'_g(1) = 0$.
+
+Mais $f$ n'est definie que sur $[-1, 1]$, donc $f$ est derivable a gauche en $1$ avec $f'_g(1) = 0$.
+
+En $x = -1$ : $f(-1) = 0$.
+
+$$\frac{f(x) - f(-1)}{x - (-1)} = \frac{(1-x)\sqrt{1-x^2}}{x+1} = \frac{(1-x)\sqrt{(1-x)(1+x)}}{x+1}$$
+
+$$= (1-x) \times \frac{\sqrt{1-x} \times \sqrt{1+x}}{x+1} = (1-x) \times \frac{\sqrt{1-x}}{\sqrt{1+x}}$$
+
+$\lim_{x \to -1^+} (1-x) \times \dfrac{\sqrt{1-x}}{\sqrt{1+x}} = 2 \times \dfrac{\sqrt{2}}{0^+} = +\infty$
+
+Le taux de variation tend vers $+\infty$ : $f$ **n'est pas derivable en $-1$** (tangente verticale).
+
+*Geometriquement* : en $x = -1$, les points $M$ et $M'$ coincident avec le point diametralement oppose a $A$ ; le "triangle" est degenere. En $x = 1$, les points $M$ et $M'$ coincident avec $A$.
+
+**3.** Sur $]-1, 1[$ :
+
+$f(x) = (1-x)\sqrt{1-x^2} = (1-x)\sqrt{(1-x)(1+x)} = (1-x)^{3/2}(1+x)^{1/2}$
+
+$$f'(x) = \frac{-3}{2}(1-x)^{1/2}(1+x)^{1/2} + (1-x)^{3/2} \times \frac{1}{2}(1+x)^{-1/2}$$
+
+$$= \frac{\sqrt{1-x}}{2\sqrt{1+x}}\left[-3(1+x) + (1-x)\right] = \frac{\sqrt{1-x}}{2\sqrt{1+x}} \times (-3 - 3x + 1 - x)$$
+
+$$f'(x) = \frac{\sqrt{1-x}}{2\sqrt{1+x}} \times (-2 - 4x) = \frac{-2(1 + 2x)\sqrt{1-x}}{2\sqrt{1+x}}$$
+
+$$f'(x) = \frac{-(1+2x)\sqrt{1-x}}{\sqrt{1+x}}$$
+
+$f'(x) = 0 \Leftrightarrow 1 + 2x = 0 \Leftrightarrow x = -\dfrac{1}{2}$
+
+Signe : pour $x \in ]-1, -\dfrac{1}{2}[$ : $1 + 2x < 0$ donc $f'(x) > 0$.
+
+Pour $x \in ]-\dfrac{1}{2}, 1[$ : $1 + 2x > 0$ donc $f'(x) < 0$.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-1$, $-1/2$, $1$),
+  contents: (
+    ($+$, ("0", $-$)),
+    (
+      (bottom, $0$),
+      (top, $3sqrt(3)/4$),
+      (bottom, $0$),
+    ),
+  ),
+)
+```
+
+$f\left(-\dfrac{1}{2}\right) = \left(1 + \dfrac{1}{2}\right)\sqrt{1 - \dfrac{1}{4}} = \dfrac{3}{2} \times \dfrac{\sqrt{3}}{2} = \dfrac{3\sqrt{3}}{4}$
+
+**4.** Le maximum est atteint en $x = -\dfrac{1}{2}$.
+
+La demi-corde vaut $HM = \sqrt{1 - \dfrac{1}{4}} = \dfrac{\sqrt{3}}{2}$, donc $MM' = \sqrt{3}$.
+
+La distance $AH = 1 - (-\dfrac{1}{2}) = \dfrac{3}{2}$.
+
+Le cote $AM$ : $AM^2 = AH^2 + HM^2 = \dfrac{9}{4} + \dfrac{3}{4} = 3$, donc $AM = \sqrt{3}$.
+
+De meme $AM' = \sqrt{3}$. Le triangle a trois cotes egaux a $\sqrt{3}$ : il est **equilateral**.
+:::

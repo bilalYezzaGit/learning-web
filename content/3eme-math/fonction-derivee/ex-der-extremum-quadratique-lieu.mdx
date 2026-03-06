@@ -1,0 +1,91 @@
+---
+type: exercise
+title: "Famille de paraboles et lieu des extrema"
+difficulty: 3
+timeMinutes: 15
+category: synthese
+tags: [derivation, parametres, extrema, parabole, lieu]
+---
+
+:::enonce
+Soit $f$ la fonction definie par $f(x) = ax^2 + bx + c$ ou $a \neq 0$.
+
+On suppose que la courbe de $f$ passe par les points $A(1, 0)$ et $B(0, 1)$.
+
+1. Determiner $b$ et $c$ en fonction de $a$.
+2. Calculer les coordonnees du sommet (extremum) de la parabole pour chaque valeur de $a$.
+3. a) Quel est l'ensemble des points $S(X, Y)$ associes aux sommets quand $a$ varie dans $\mathbb{R}^*$ ?
+
+   b) Dresser le tableau de variation de la fonction qui decrit cet ensemble.
+:::
+
+:::solution
+**1.** $f$ passe par $B(0, 1)$ : $f(0) = c = 1$.
+
+$f$ passe par $A(1, 0)$ : $f(1) = a + b + c = 0$, donc $a + b + 1 = 0$, soit $b = -a - 1$.
+
+Conclusion : $f(x) = ax^2 - (a+1)x + 1$.
+
+**2.** $f'(x) = 2ax - (a+1)$.
+
+$f'(x) = 0 \Leftrightarrow x = \dfrac{a+1}{2a}$
+
+L'abscisse du sommet est $X = \dfrac{a+1}{2a} = \dfrac{1}{2} + \dfrac{1}{2a}$.
+
+L'ordonnee du sommet est :
+
+$$Y = f(X) = a\left(\frac{a+1}{2a}\right)^2 - (a+1)\left(\frac{a+1}{2a}\right) + 1$$
+
+$$= \frac{(a+1)^2}{4a} - \frac{(a+1)^2}{2a} + 1 = -\frac{(a+1)^2}{4a} + 1$$
+
+$$Y = 1 - \frac{(a+1)^2}{4a}$$
+
+**3.a)** Parametrons par $X$ : $X = \dfrac{a+1}{2a}$, donc $2aX = a + 1$, soit $a(2X-1) = 1$, d'ou $a = \dfrac{1}{2X-1}$ (valable si $X \neq \dfrac{1}{2}$).
+
+$(a+1)^2 = \left(\dfrac{1}{2X-1} + 1\right)^2 = \left(\dfrac{2X}{2X-1}\right)^2 = \dfrac{4X^2}{(2X-1)^2}$
+
+$$Y = 1 - \frac{4X^2}{4(2X-1)^2} \times (2X-1) = 1 - \frac{4X^2}{4a(2X-1)^2} \times \ldots$$
+
+Reprenons directement : $Y = 1 - \dfrac{(a+1)^2}{4a}$ avec $a = \dfrac{1}{2X-1}$.
+
+$$\frac{(a+1)^2}{4a} = \frac{\left(\frac{2X}{2X-1}\right)^2}{4 \times \frac{1}{2X-1}} = \frac{4X^2}{(2X-1)^2} \times \frac{2X-1}{4} = \frac{X^2}{2X-1}$$
+
+$$Y = 1 - \frac{X^2}{2X-1} = \frac{2X - 1 - X^2}{2X-1} = \frac{-(X^2 - 2X + 1)}{2X-1} = \frac{-(X-1)^2}{2X-1}$$
+
+L'ensemble des sommets est la courbe d'equation $Y = \dfrac{-(X-1)^2}{2X-1}$ pour $X \neq \dfrac{1}{2}$.
+
+**3.b)** Posons $h(X) = \dfrac{-(X-1)^2}{2X-1}$.
+
+$$h'(X) = \frac{-2(X-1)(2X-1) - (-(X-1)^2) \times 2}{(2X-1)^2} = \frac{(X-1)\left[-2(2X-1) + 2(X-1)\right]}{(2X-1)^2}$$
+
+$$= \frac{(X-1)(-4X+2+2X-2)}{(2X-1)^2} = \frac{(X-1)(-2X)}{(2X-1)^2} = \frac{-2X(X-1)}{(2X-1)^2}$$
+
+$h'(X) = 0 \Leftrightarrow X = 0$ ou $X = 1$.
+
+$h(0) = \dfrac{-(0-1)^2}{-1} = 1$ et $h(1) = 0$.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $X$,
+  label: (
+    ([signe de $h'(X)$], "s"),
+    ([variation de $h$], "v"),
+  ),
+  domain: ($-infinity$, $0$, $1/2$, $1$, $+infinity$),
+  contents: (
+    ($-$, ("0", $+$), ("||", $+$), ("0", $-$)),
+    (
+      (top, $0$),
+      (bottom, $1$),
+      (center, $||$),
+      (top, $0$),
+      (bottom, $-infinity$),
+    ),
+  ),
+)
+```
+
+Le lieu des sommets admet un **minimum** en $X = 0$ ($Y = 1$, point $B$) et passe par $A(1, 0)$.
+:::

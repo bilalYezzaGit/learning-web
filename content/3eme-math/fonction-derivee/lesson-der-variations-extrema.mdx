@@ -1,0 +1,75 @@
+---
+type: lesson
+title: "Derivee, sens de variation et extrema"
+difficulty: 1
+timeMinutes: 8
+tags: [derivation, variations, extrema]
+---
+
+### Lien derivee — sens de variation
+
+:::theorem[Sens de variation]
+Soit $f$ une fonction derivable sur un intervalle $I$.
+
+- $f' \geq 0$ sur $I$ $\Longleftrightarrow$ $f$ est **croissante** sur $I$
+- $f' \leq 0$ sur $I$ $\Longleftrightarrow$ $f$ est **decroissante** sur $I$
+- $f' = 0$ sur $I$ $\Longleftrightarrow$ $f$ est **constante** sur $I$
+:::
+
+:::remark
+Ce sont des **equivalences**. $f$ strictement croissante correspond a $f' \geq 0$ avec $f'$ qui ne s'annule qu'en des points isoles.
+:::
+
+:::property[Derivee et parite]
+- Si $f$ est **paire** et derivable, alors $f'$ est **impaire**.
+- Si $f$ est **impaire** et derivable, alors $f'$ est **paire**.
+:::
+
+### Extrema
+
+:::definition[Extremum local]
+$f$ admet un **maximum local** en $a$ s'il existe un intervalle ouvert $J$ contenant $a$ tel que $f(x) \leq f(a)$ pour tout $x \in J \cap D_f$.
+
+$f$ admet un **minimum local** en $a$ si $f(x) \geq f(a)$ pour tout $x \in J \cap D_f$.
+:::
+
+:::definition[Extremum absolu]
+$f$ admet un **maximum absolu** en $a$ si $f(x) \leq f(a)$ pour tout $x \in D_f$.
+:::
+
+### Conditions d'existence d'un extremum
+
+:::theorem[Condition necessaire]
+Si $f$ est derivable sur un intervalle ouvert $I$ et admet un extremum local en $a \in I$, alors :
+
+$$f'(a) = 0$$
+:::
+
+:::attention
+La reciproque est **fausse** ! $f'(a) = 0$ ne garantit pas un extremum.
+
+**Contre-exemple** : $f(x) = x^3$. On a $f'(0) = 0$, mais $f$ n'admet **pas** d'extremum en $0$ car $f'(x) = 3x^2 \geq 0$ pour tout $x$ : $f$ est croissante sur $\mathbb{R}$.
+:::
+
+:::theorem[Condition suffisante]
+Si $f'(a) = 0$ et $f'$ **change de signe** en $a$ :
+
+- $f'$ passe de $+$ a $-$ en $a$ $\Rightarrow$ $f$ admet un **maximum local** en $a$
+- $f'$ passe de $-$ a $+$ en $a$ $\Rightarrow$ $f$ admet un **minimum local** en $a$
+:::
+
+### Exemple
+
+:::example[Extrema de $f(x) = -x^3 + 3x$]
+$f'(x) = -3x^2 + 3 = -3(x^2 - 1) = -3(x-1)(x+1)$
+
+$f'(x) = 0 \Leftrightarrow x = -1$ ou $x = 1$.
+
+- Pour $x < -1$ : $f'(x) < 0$ (decroissante)
+- Pour $-1 < x < 1$ : $f'(x) > 0$ (croissante)
+- Pour $x > 1$ : $f'(x) < 0$ (decroissante)
+
+$f'$ passe de $-$ a $+$ en $-1$ : **minimum local** $f(-1) = -2$.
+
+$f'$ passe de $+$ a $-$ en $1$ : **maximum local** $f(1) = 2$.
+:::

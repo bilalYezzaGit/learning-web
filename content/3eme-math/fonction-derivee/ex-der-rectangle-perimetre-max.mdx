@@ -1,0 +1,76 @@
+---
+type: exercise
+title: "Rectangle de perimetre maximal inscrit dans un cercle"
+difficulty: 3
+timeMinutes: 20
+category: probleme
+tags: [derivation, optimisation, geometrie, racine]
+---
+
+:::enonce
+Soit $\mathcal{C}$ un cercle de rayon $1$ et de centre $O$. On inscrit un rectangle $ABCD$ dans $\mathcal{C}$. On note $x$ la demi-longueur d'un cote du rectangle, avec $0 < x < 1$.
+
+1. Exprimer la demi-largeur $y$ en fonction de $x$, puis en deduire l'expression du perimetre $p(x)$.
+2. Etudier sur $]0, 1[$ les variations de $p$.
+3. En deduire les dimensions du rectangle de perimetre maximal.
+4. Montrer que ce rectangle est un carre.
+:::
+
+:::solution
+**1.** Le rectangle est inscrit dans un cercle de rayon $1$, donc la diagonale du rectangle est un diametre de longueur $2$.
+
+Si $x$ est la demi-longueur et $y$ la demi-largeur, le theoreme de Pythagore donne :
+
+$$x^2 + y^2 = 1 \quad \Rightarrow \quad y = \sqrt{1 - x^2}$$
+
+Le perimetre est $p(x) = 2(2x + 2y) = 4\left(x + \sqrt{1 - x^2}\right)$.
+
+On etudie $f(x) = x + \sqrt{1 - x^2}$ sur $]0, 1[$ (le perimetre est $p = 4f$).
+
+**2.** $f'(x) = 1 + \dfrac{-2x}{2\sqrt{1 - x^2}} = 1 - \dfrac{x}{\sqrt{1 - x^2}}$
+
+$f'(x) = \dfrac{\sqrt{1 - x^2} - x}{\sqrt{1 - x^2}}$
+
+$f'(x) = 0 \Leftrightarrow \sqrt{1 - x^2} = x \Leftrightarrow 1 - x^2 = x^2$ (car $x > 0$) $\Leftrightarrow x^2 = \dfrac{1}{2} \Leftrightarrow x = \dfrac{\sqrt{2}}{2}$.
+
+Signe de $f'$ :
+- Pour $0 < x < \dfrac{\sqrt{2}}{2}$ : $\sqrt{1-x^2} > x$, donc $f'(x) > 0$
+- Pour $\dfrac{\sqrt{2}}{2} < x < 1$ : $\sqrt{1-x^2} < x$, donc $f'(x) < 0$
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($0$, $sqrt(2)/2$, $1$),
+  contents: (
+    ($+$, ("0", $-$)),
+    (
+      (bottom, $1$),
+      (top, $sqrt(2)$),
+      (bottom, $1$),
+    ),
+  ),
+)
+```
+
+**3.** $f$ atteint son maximum en $x = \dfrac{\sqrt{2}}{2}$, avec $f\left(\dfrac{\sqrt{2}}{2}\right) = \dfrac{\sqrt{2}}{2} + \sqrt{1 - \dfrac{1}{2}} = \dfrac{\sqrt{2}}{2} + \dfrac{\sqrt{2}}{2} = \sqrt{2}$.
+
+Le perimetre maximal est $p_{\max} = 4\sqrt{2}$.
+
+**4.** Pour $x = \dfrac{\sqrt{2}}{2}$ : $y = \sqrt{1 - \dfrac{1}{2}} = \dfrac{\sqrt{2}}{2} = x$.
+
+Puisque $x = y$, le rectangle a ses demi-cotes egaux, c'est donc un **carre** de cote $2x = \sqrt{2}$.
+:::
+
+:::methode
+Pour un probleme d'optimisation geometrique :
+1. Poser la variable et exprimer la grandeur a optimiser
+2. Identifier les contraintes (ici : le rectangle est inscrit dans le cercle)
+3. Deriver et etudier le signe de la derivee
+4. Conclure en revenant au probleme geometrique
+:::

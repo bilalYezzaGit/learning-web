@@ -1,0 +1,68 @@
+---
+type: exercise
+title: "Vrai ou faux sur la derivee et les extrema"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [derivation, derivabilite, extrema, variations]
+---
+
+:::enonce
+Repondre par **Vrai** ou **Faux** en justifiant chaque reponse par une preuve ou un contre-exemple.
+
+1. La fonction $x \mapsto |x|$ est derivable sur $\mathbb{R}$.
+2. La fonction $x \mapsto \sqrt{2x^2 + 1}$ est derivable sur $\left]-\infty, \dfrac{1}{2}\right]$.
+3. Si $f'(a) = 0$ alors $f$ admet un minimum en $a$.
+4. Si $f' = g'$ sur un intervalle $I$ alors $f = g$ sur $I$.
+5. $f$ est derivable sur $]0, +\infty[$, $f' \geq 0$ sur $]a, b[$ et $f(b) = 0$ : alors $f \leq 0$ sur $[a, b]$.
+:::
+
+:::solution
+**1. FAUX.**
+
+$|x|$ est derivable sur $\mathbb{R}^*$ mais **pas en $0$**.
+
+En effet, le taux de variation en $0$ donne :
+- $\lim_{h \to 0^+} \dfrac{|h|}{h} = 1$ (derivee a droite)
+- $\lim_{h \to 0^-} \dfrac{|h|}{h} = -1$ (derivee a gauche)
+
+Les limites sont differentes, donc $|x|$ n'est pas derivable en $0$ (point anguleux).
+
+**2. VRAI.**
+
+Posons $u(x) = 2x^2 + 1$. On a $u(x) \geq 1 > 0$ pour tout $x \in \mathbb{R}$.
+
+Comme $u$ est un polynome (donc derivable sur $\mathbb{R}$) et $u(x) > 0$ pour tout $x$, la fonction $\sqrt{u}$ est derivable sur **tout** $\mathbb{R}$, et en particulier sur $\left]-\infty, \dfrac{1}{2}\right]$.
+
+**3. FAUX.**
+
+Contre-exemple : $f(x) = x^3$. On a $f'(0) = 3 \times 0^2 = 0$, mais $f$ n'admet **aucun extremum** en $0$.
+
+En effet, $f'(x) = 3x^2 \geq 0$ pour tout $x$ : $f'$ ne change pas de signe en $0$, donc $f$ est croissante sur $\mathbb{R}$ (pas d'extremum).
+
+$f'(a) = 0$ est une condition **necessaire** mais **pas suffisante** pour un extremum.
+
+**4. FAUX.**
+
+Si $f' = g'$ sur $I$, alors $(f - g)' = 0$ sur $I$, donc $f - g$ est **constante** sur $I$.
+
+On a $f = g + c$ pour une constante $c$, mais pas necessairement $f = g$.
+
+Contre-exemple : $f(x) = x^2 + 5$ et $g(x) = x^2$. On a $f' = g' = 2x$ sur $\mathbb{R}$, mais $f \neq g$.
+
+**5. FAUX.**
+
+$f' \geq 0$ sur $]a, b[$ signifie que $f$ est **croissante** sur $[a, b]$.
+
+Donc pour tout $x \in [a, b]$ : $f(x) \leq f(b) = 0$, ce qui donne bien $f(x) \leq 0$ sur $[a, b]$.
+
+Attention : c'est en fait **VRAI** ! $f$ croissante et $f(b) = 0$ implique $f(x) \leq f(b) = 0$ pour tout $x \in [a, b]$.
+
+**Correction : VRAI.** Si $f' \geq 0$ sur $]a, b[$, alors $f$ est croissante sur $[a, b]$, donc pour tout $x \in [a, b]$ : $f(x) \leq f(b) = 0$.
+:::
+
+:::erreurs
+- Confondre condition necessaire et suffisante pour l'extremum (question 3)
+- Oublier la constante d'integration quand $f' = g'$ (question 4)
+- Ne pas exploiter correctement la croissance avec la condition $f(b) = 0$ (question 5)
+:::

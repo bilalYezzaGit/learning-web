@@ -1,0 +1,99 @@
+---
+type: exercise
+title: "Derivabilite et variations avec valeur absolue"
+difficulty: 2
+timeMinutes: 20
+category: probleme
+tags: [derivation, valeur-absolue, derivabilite, variations]
+---
+
+:::enonce
+Soit $f$ la fonction definie par :
+
+$$f(x) = \frac{x^2 + 4|x| + 3}{|x| - 1}$$
+
+1. Preciser le domaine de definition de $f$.
+2. Etudier la derivabilite de $f$ en $0$.
+3. Montrer que $f$ est derivable sur $\mathbb{R} \setminus \{-1, 0, 1\}$ et preciser $f'(x)$.
+4. Dresser le tableau de variation complet de $f$.
+5. En quels points la tangente a la courbe de $f$ est-elle parallele a la droite $D : y = -x$ ?
+:::
+
+:::solution
+**1.** $f$ est definie lorsque $|x| - 1 \neq 0$, soit $|x| \neq 1$, donc $x \neq \pm 1$.
+
+$$D_f = \mathbb{R} \setminus \{-1, 1\}$$
+
+**2.** Remarquons que $f$ est **paire** : $f(-x) = \dfrac{x^2 + 4|x| + 3}{|x| - 1} = f(x)$.
+
+Pour $x > 0$ : $f(x) = \dfrac{x^2 + 4x + 3}{x - 1} = \dfrac{(x+1)(x+3)}{x-1}$.
+
+Pour $x < 0$ : $f(x) = \dfrac{x^2 - 4x + 3}{-x - 1} = \dfrac{(x-1)(x-3)}{-(x+1)} = \dfrac{(1-x)(3-x)}{x+1}$.
+
+Taux de variation en $0$ :
+
+$$\frac{f(h) - f(0)}{h} = \frac{\frac{h^2 + 4|h| + 3}{|h|-1} - (-3)}{h} = \frac{\frac{h^2 + 4|h| + 3 + 3|h| - 3}{|h|-1}}{h} = \frac{h^2 + 7|h|}{h(|h|-1)}$$
+
+Pour $h > 0$ : $\dfrac{h + 7}{h - 1} \to \dfrac{7}{-1} = -7$ quand $h \to 0^+$.
+
+Pour $h < 0$ : $\dfrac{h - 7}{-h - 1} = \dfrac{h-7}{-(h+1)} \to \dfrac{-7}{-1} = 7$ quand $h \to 0^-$.
+
+Les limites a gauche et a droite sont differentes, donc $f$ **n'est pas derivable en $0$** (point anguleux).
+
+**3.** Sur $]0, 1[ \cup ]1, +\infty[$ : $f(x) = \dfrac{x^2 + 4x + 3}{x - 1}$.
+
+$$f'(x) = \frac{(2x+4)(x-1) - (x^2+4x+3)}{(x-1)^2} = \frac{2x^2 + 2x - 4 - x^2 - 4x - 3}{(x-1)^2} = \frac{x^2 - 2x - 7}{(x-1)^2}$$
+
+Par parite de $f$, $f'$ est **impaire**, donc sur $]-\infty, -1[ \cup ]-1, 0[$ :
+
+$$f'(x) = -\frac{x^2 - 2(-x) - 7}{(-x-1)^2} = -\frac{x^2 + 2x - 7}{(x+1)^2}$$
+
+**4.** Sur $]0, +\infty[ \setminus \{1\}$ : $f'(x) = 0 \Leftrightarrow x^2 - 2x - 7 = 0 \Leftrightarrow x = 1 \pm 2\sqrt{2}$.
+
+Sur $]0, +\infty[$ : seul $x_0 = 1 + 2\sqrt{2} \approx 3{,}83$ est dans le domaine.
+
+$f(1+2\sqrt{2}) = \dfrac{(1+2\sqrt{2})^2 + 4(1+2\sqrt{2}) + 3}{(1+2\sqrt{2})-1} = \dfrac{9+4\sqrt{2}+4+8\sqrt{2}+3}{2\sqrt{2}} = \dfrac{16 + 12\sqrt{2}}{2\sqrt{2}}$
+
+$= \dfrac{8}{\sqrt{2}} + 6 = 4\sqrt{2} + 6$
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $-1-2sqrt(2)$, $-1$, $0$, $1$, $1+2sqrt(2)$, $+infinity$),
+  contents: (
+    ($+$, ("0", $-$), ("||", $-$), ("||", $-$), ("||", $-$), ("0", $+$)),
+    (
+      (bottom, $+infinity$),
+      (top, $-(4sqrt(2)+6)$),
+      (center, $||$),
+      (center, $-3$),
+      (center, $||$),
+      (bottom, $4sqrt(2)+6$),
+      (top, $+infinity$),
+    ),
+  ),
+)
+```
+
+Par parite, $f$ admet un **maximum local** en $x = -(1+2\sqrt{2})$ egal a $-(4\sqrt{2}+6)$ et un **minimum local** en $x = 1 + 2\sqrt{2}$ egal a $4\sqrt{2} + 6$.
+
+**5.** Tangente parallele a $D : y = -x$, pente $-1$. On resout $f'(x) = -1$ sur $]0, +\infty[$ :
+
+$$\frac{x^2 - 2x - 7}{(x-1)^2} = -1$$
+
+$$x^2 - 2x - 7 = -(x-1)^2 = -x^2 + 2x - 1$$
+
+$$2x^2 - 4x - 6 = 0 \quad \Leftrightarrow \quad x^2 - 2x - 3 = 0 \quad \Leftrightarrow \quad (x-3)(x+1) = 0$$
+
+Sur $]0, +\infty[ \setminus \{1\}$ : $x = 3$.
+
+Par parite de $f$ et imparite de $f'$ : $f'(-3) = -f'(3) = 1 \neq -1$, donc il n'y a pas de point symetrique.
+
+La tangente parallele a $D$ est au point d'abscisse $x = 3$.
+:::

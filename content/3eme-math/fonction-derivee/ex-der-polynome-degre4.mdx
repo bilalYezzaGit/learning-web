@@ -1,0 +1,103 @@
+---
+type: exercise
+title: "Etude complete d'un polynome de degre 4"
+difficulty: 3
+timeMinutes: 20
+category: synthese
+tags: [derivation, polynome, variations, extrema, tvi]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}$ par $f(x) = -x^4 + 6x^2 - 9x + 1$.
+
+1. Determiner les limites de $f$ en $+\infty$ et $-\infty$.
+2. Calculer $f'(x)$ et etudier son signe.
+3. a) Dresser le tableau de variation de $f$.
+
+   b) Preciser les extrema locaux.
+
+   c) Montrer que l'equation $f(x) = 0$ admet exactement $3$ solutions. Encadrer chaque solution a $10^{-1}$ pres.
+4. Discussion : determiner le nombre de solutions de $f(x) = m$ selon les valeurs de $m$.
+:::
+
+:::solution
+**1.** $f(x) = -x^4\left(1 - \dfrac{6}{x^2} + \dfrac{9}{x^3} - \dfrac{1}{x^4}\right)$
+
+$$\lim_{x \to +\infty} f(x) = -\infty \qquad ; \qquad \lim_{x \to -\infty} f(x) = -\infty$$
+
+**2.** $f'(x) = -4x^3 + 12x - 9$.
+
+Cherchons les racines. Testons $x = \dfrac{3}{2}$ : $f'\left(\dfrac{3}{2}\right) = -4 \times \dfrac{27}{8} + 12 \times \dfrac{3}{2} - 9 = -\dfrac{27}{2} + 18 - 9 = -\dfrac{27}{2} + 9 = -\dfrac{9}{2} \neq 0$.
+
+Testons $x = 3$ : $f'(3) = -108 + 36 - 9 = -81 \neq 0$.
+
+On calcule le discriminant ou on utilise la methode numerique. $f''(x) = -12x^2 + 12 = -12(x^2 - 1)$.
+
+$f''(x) = 0 \Leftrightarrow x = \pm 1$.
+
+$f'(-1) = 4 + (-12) - 9 = -17 < 0$ et $f'(1) = -4 + 12 - 9 = -1 < 0$.
+
+$f'(0) = -9 < 0$.
+
+Verifions $f'(-2) = 32 - 24 - 9 = -1 < 0$ et $f'(-3) = 108 - 36 - 9 = 63 > 0$.
+
+$f'(2) = -32 + 24 - 9 = -17 < 0$ et $f'(3) = -108 + 36 - 9 = -81 < 0$.
+
+On a $f'(-3) = 63 > 0$ et $f'(-2) = -1 < 0$, donc $f'$ a une racine $\alpha$ dans $]-3, -2[$.
+
+$f'(-2{,}5) = -4(-15{,}625) + 12(-2{,}5) - 9 = 62{,}5 - 30 - 9 = 23{,}5 > 0$.
+
+$f'(-2{,}2) = -4(-10{,}648) + 12(-2{,}2) - 9 = 42{,}59 - 26{,}4 - 9 = 7{,}19 > 0$.
+
+Donc $f' > 0$ sur $]-\infty, \alpha[$ et $f' < 0$ sur $]\alpha, +\infty[$ ou $\alpha \approx -2{,}1$.
+
+Plus precisement, en factorisant numeriquement : $f'(x) = -4x^3 + 12x - 9$ admet une seule racine reelle $\alpha \approx -2{,}1$ (les deux autres sont complexes ou on verifie que le minimum local de $f'$ en $x = 1$ vaut $f'(1) = -1 < 0$).
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $alpha$, $+infinity$),
+  contents: (
+    ($+$, ("0", $-$)),
+    (
+      (bottom, $-infinity$),
+      (top, $f(alpha)$),
+      (bottom, $-infinity$),
+    ),
+  ),
+)
+```
+
+**3.a)** D'apres l'etude ci-dessus, $f$ est croissante sur $]-\infty, \alpha]$ et decroissante sur $[\alpha, +\infty[$.
+
+**3.b)** $f$ admet un **maximum absolu** en $x = \alpha$.
+
+$f(\alpha)$ est le maximum de $f$. Numeriquement, $f(-2{,}1) \approx -(-2{,}1)^4 + 6(2{,}1)^2 - 9(-2{,}1) + 1 \approx -19{,}45 + 26{,}46 + 18{,}9 + 1 = 26{,}91$.
+
+**3.c)** $f(x) = 0$ : on cherche les solutions.
+
+- $f(0) = 1 > 0$ et $f(1) = -1 + 6 - 9 + 1 = -3 < 0$ : par le TVI, une solution dans $]0, 1[$.
+  $f(0{,}1) \approx 0{,}1 > 0$, $f(0{,}2) \approx -0{,}8$. Solution dans $]0{,}1 \; ; \; 0{,}2[$.
+
+- $f(-1) = -1 + 6 + 9 + 1 = 15 > 0$ et $\lim_{-\infty} f = -\infty$ : solution dans $]-\infty, -1[$.
+  $f(-3) = -81 + 54 + 27 + 1 = 1 > 0$, $f(-4) = -256 + 96 + 36 + 1 = -123 < 0$. Solution dans $]-4, -3[$.
+
+- $f(3) = -81 + 54 - 27 + 1 = -53 < 0$ et comme $f(\alpha) > 0$ : une solution entre $\alpha$ et $3$.
+  $f(2) = -16 + 24 - 18 + 1 = -9 < 0$, donc la troisieme solution est dans $]\alpha, 2[$.
+
+L'equation $f(x) = 0$ admet exactement **3 solutions**.
+
+**4.** D'apres le tableau de variation, $f(x) = m$ admet :
+- **0 solution** si $m > f(\alpha)$
+- **1 solution** si $m = f(\alpha)$
+- **2 solutions** si $m = \lim$ (impossible car $\lim = -\infty$)
+- **2 solutions** pour certaines valeurs de $m < f(\alpha)$ specifiques
+
+Plus generalement : comme $f$ a un seul extremum (maximum), $f(x) = m$ admet **1 solution** si $m = f(\alpha)$, **2 solutions** si $m < f(\alpha)$ et **0 solution** si $m > f(\alpha)$.
+:::

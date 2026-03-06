@@ -1,0 +1,76 @@
+---
+type: exercise
+title: "Revenu maximal d'une compagnie de bus"
+difficulty: 3
+timeMinutes: 15
+category: probleme
+tags: [derivation, optimisation, economie, variations]
+---
+
+:::enonce
+Une compagnie de transport loue des bus de $60$ places a des groupes d'au moins $15$ personnes. Le tarif est de $90$ dinars par personne pour un groupe de $15$. Si le groupe comporte $n$ personnes supplementaires ($n \geq 0$), le tarif est reduit de $n$ dinars par personne pour tout le groupe.
+
+On note $R(n) = (15 + n)(90 - n)$ le revenu total.
+
+1. Verifier l'expression de $R(n)$.
+2. On pose $f(x) = (15 + x)(90 - x)$ pour $x \in [0, 45]$. Etudier les variations de $f$.
+3. Trouver le reel $x_0$ ou $f$ atteint son maximum.
+4. Encadrer $x_0$ entre deux entiers consecutifs $m$ et $m + 1$. Comparer $f(m)$ et $f(m+1)$.
+5. Conclure : quel effectif maximise le revenu de la compagnie ?
+:::
+
+:::solution
+**1.** Pour un groupe de $15 + n$ personnes, le tarif par personne est $90 - n$ dinars (reduction de $n$ dinars). Le revenu total est :
+
+$$R(n) = \text{nombre de personnes} \times \text{tarif} = (15 + n)(90 - n)$$
+
+Contrainte : $15 + n \leq 60$ (capacite du bus) et $90 - n > 0$, donc $0 \leq n \leq 45$.
+
+**2.** $f(x) = (15 + x)(90 - x) = -x^2 + 75x + 1350$.
+
+$f'(x) = -2x + 75$
+
+$f'(x) = 0 \Leftrightarrow x = \dfrac{75}{2} = 37{,}5$
+
+$f'(x) > 0$ pour $x < 37{,}5$ et $f'(x) < 0$ pour $x > 37{,}5$.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($0$, $37.5$, $45$),
+  contents: (
+    ($+$, ("0", $-$)),
+    (
+      (bottom, $1350$),
+      (top, $2756.25$),
+      (bottom, $2475$),
+    ),
+  ),
+)
+```
+
+**3.** $f$ atteint son **maximum** en $x_0 = 37{,}5$.
+
+$f(37{,}5) = (15 + 37{,}5)(90 - 37{,}5) = 52{,}5 \times 52{,}5 = 2756{,}25$.
+
+**4.** $37 < x_0 = 37{,}5 < 38$, donc $m = 37$.
+
+$$f(37) = (15 + 37)(90 - 37) = 52 \times 53 = 2756$$
+
+$$f(38) = (15 + 38)(90 - 38) = 53 \times 52 = 2756$$
+
+$f(37) = f(38) = 2756$.
+
+**5.** Le revenu maximal en entiers est atteint pour $n = 37$ ou $n = 38$, soit un groupe de $52$ ou $53$ personnes. Dans les deux cas, le revenu est de $2756$ dinars.
+:::
+
+:::erreurs
+- Oublier que $n$ doit etre un entier : le maximum reel $x_0 = 37{,}5$ n'est pas une valeur admissible
+- Ne pas comparer $f(m)$ et $f(m+1)$ et choisir arbitrairement l'un des deux
+:::

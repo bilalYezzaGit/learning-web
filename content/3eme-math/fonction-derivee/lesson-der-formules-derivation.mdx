@@ -1,0 +1,98 @@
+---
+type: lesson
+title: "Fonction derivee et formules de derivation"
+difficulty: 1
+timeMinutes: 10
+tags: [derivation, formules, operations]
+---
+
+### Fonction derivee
+
+:::definition[Fonction derivee]
+Soit $f$ une fonction derivable sur un intervalle $I$. La **fonction derivee** de $f$, notee $f'$, est la fonction qui a tout $x \in I$ associe le nombre derive $f'(x)$.
+:::
+
+:::remark
+Toute fonction polynome est derivable sur $\mathbb{R}$. Toute fonction rationnelle est derivable sur son ensemble de definition.
+:::
+
+### Derivees des fonctions usuelles
+
+| Fonction $f(x)$ | Derivee $f'(x)$ | Domaine |
+|:---:|:---:|:---:|
+| $c$ (constante) | $0$ | $\mathbb{R}$ |
+| $x$ | $1$ | $\mathbb{R}$ |
+| $x^n$ ($n \in \mathbb{N}^*$) | $n x^{n-1}$ | $\mathbb{R}$ |
+| $\dfrac{1}{x}$ | $-\dfrac{1}{x^2}$ | $\mathbb{R}^*$ |
+| $\dfrac{1}{x^n}$ ($n \in \mathbb{N}^*$) | $-\dfrac{n}{x^{n+1}}$ | $\mathbb{R}^*$ |
+| $\sqrt{x}$ | $\dfrac{1}{2\sqrt{x}}$ | $]0, +\infty[$ |
+
+### Operations sur les derivees
+
+:::property[Combinaison lineaire]
+Si $f$ et $g$ sont derivables sur $I$ et $\alpha, \beta \in \mathbb{R}$ :
+
+$$(\alpha f + \beta g)' = \alpha f' + \beta g'$$
+:::
+
+:::property[Produit]
+Si $f$ et $g$ sont derivables sur $I$ :
+
+$$(f \cdot g)' = f' \cdot g + f \cdot g'$$
+:::
+
+:::property[Quotient]
+Si $f$ et $g$ sont derivables sur $I$ et $g$ ne s'annule pas sur $I$ :
+
+$$\left(\frac{f}{g}\right)' = \frac{f' \cdot g - f \cdot g'}{g^2}$$
+:::
+
+:::attention
+Ne pas confondre avec la formule du produit ! Au quotient, c'est **moins** : $f'g - fg'$.
+:::
+
+:::property[Puissance]
+Si $f$ est derivable sur $I$ et $k \in \mathbb{N}^*$ :
+
+$$(f^k)' = k \cdot f' \cdot f^{k-1}$$
+:::
+
+:::property[Inverse et inverse de puissance]
+Si $f$ est derivable sur $I$ et ne s'annule pas :
+
+$$\left(\frac{1}{f}\right)' = -\frac{f'}{f^2} \qquad ; \qquad \left(\frac{1}{f^k}\right)' = -\frac{k \cdot f'}{f^{k+1}}$$
+:::
+
+### Derivee de $\sqrt{f}$
+
+:::property[Derivee de $\sqrt{f}$]
+Si $f$ est derivable et **strictement positive** sur $I$ :
+
+$$\left(\sqrt{f}\right)' = \frac{f'}{2\sqrt{f}}$$
+:::
+
+:::attention
+La condition $f > 0$ (strictement) est essentielle. Si $f(a) = 0$, alors $\sqrt{f}$ n'est pas derivable en $a$.
+:::
+
+### Derivee de $f(ax+b)$
+
+:::property[Composition affine]
+Si $f$ est derivable et $g(x) = f(ax + b)$ :
+
+$$g'(x) = a \cdot f'(ax + b)$$
+:::
+
+:::example[Application]
+$f(x) = (5x - 2)^4$. On pose $u(x) = 5x - 2$ et $h(t) = t^4$, donc $f(x) = h(u(x))$.
+
+$$f'(x) = 5 \times 4(5x-2)^3 = 20(5x-2)^3$$
+:::
+
+### Derivees successives
+
+:::definition[Derivees successives]
+Si $f'$ est elle-meme derivable, on note $f'' = (f')'$ la **derivee seconde**. Plus generalement, $f^{(n)}$ designe la derivee $n$-ieme de $f$.
+:::
+
+$$f' \quad ; \quad f'' = (f')' \quad ; \quad f''' = (f'')' \quad ; \quad f^{(4)} = (f''')' \quad ; \quad \ldots$$

@@ -1,0 +1,19 @@
+kind: serie
+title: "Problemes de synthese et d'optimisation"
+description: "Problemes complets de niveau synthese : optimisation geometrique et pratique, inegalites par la derivee, etudes parametriques."
+difficulty: 3
+estimatedMinutes: 160
+tags: [derivation, optimisation, inegalite, synthese]
+trimestre: 1
+modules: [fonction-derivee]
+
+steps:
+  - ex-der-rectangle-perimetre-max
+  - ex-der-optimisation-bus
+  - ex-der-inegalite-racine
+  - ex-der-polynome-degre4
+  - ex-der-triangle-aire-maximale
+  - ex-der-distance-minimale-parabole
+  - ex-der-casserole-metal-minimal
+  - ex-der-famille-fonctions-extrema
+  - ex-der-extremum-quadratique-lieu

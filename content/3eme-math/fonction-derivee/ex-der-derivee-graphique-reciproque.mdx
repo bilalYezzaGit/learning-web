@@ -1,0 +1,118 @@
+---
+type: exercise
+title: "Lecture graphique et lien f - f'"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [derivation, lecture-graphique, tangente, variations]
+---
+
+:::enonce
+On considere une fonction $f$ definie et derivable sur $[-1{,}5 \; ; \; 4{,}5]$ dont la courbe $\mathcal{C}_f$ est donnee ci-dessous. La tangente a $\mathcal{C}_f$ au point $A(1, 2)$ a pour coefficient directeur $-1$ et la tangente au point $B\left(\dfrac{3}{2}, \dfrac{3}{2}\right)$ est horizontale.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-2, 0), (5.5, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -1.5), (0, 4.5), stroke: 0.8pt, mark: (end: ">", fill: black))
+  content((5.3, -0.3), $x$)
+  content((-0.3, 4.3), $y$)
+  content((-0.3, -0.3), $O$)
+
+  // Graduations
+  for i in (-1, 1, 2, 3, 4, 5) {
+    line((i, -0.1), (i, 0.1), stroke: 0.5pt)
+    content((i, -0.4), text(size: 8pt, str(i)))
+  }
+  for j in (-1, 1, 2, 3, 4) {
+    line((-0.1, j), (0.1, j), stroke: 0.5pt)
+    content((-0.4, j), text(size: 8pt, str(j)))
+  }
+
+  // Courbe (schematique)
+  bezier((-1.5, -1), (1, 2), (-0.5, 3), stroke: 2pt + blue)
+  bezier((1, 2), (1.5, 1.5), (1.3, 1.6), stroke: 2pt + blue)
+  bezier((1.5, 1.5), (4.5, 4), (3, 0.5), stroke: 2pt + blue)
+
+  // Points
+  circle((1, 2), radius: 0.06, fill: red, stroke: red)
+  content((1.2, 2.3), text(size: 9pt, fill: red, $A$))
+  circle((1.5, 1.5), radius: 0.06, fill: red, stroke: red)
+  content((1.8, 1.3), text(size: 9pt, fill: red, $B$))
+
+  // Tangente en A (pente -1)
+  line((0, 3), (2.5, 0.5), stroke: (dash: "dashed", paint: gray))
+
+  // Tangente en B (horizontale)
+  line((0.5, 1.5), (3, 1.5), stroke: (dash: "dashed", paint: gray))
+})
+```
+
+1. Lire graphiquement $f(1)$, $f'(1)$ et $f'\left(\dfrac{3}{2}\right)$.
+2. Donner l'equation de la tangente a $\mathcal{C}_f$ au point d'abscisse $1$.
+3. Parmi les trois courbes proposees ci-dessous, identifier la representation de $f'$.
+   - Courbe (a) : parabole avec $f'(x) = 0$ en $x = \dfrac{3}{2}$ et $f'(x) > 0$ pour $x > \dfrac{3}{2}$
+   - Courbe (b) : droite decroissante passant par $\left(\dfrac{3}{2}, 0\right)$
+   - Courbe (c) : parabole avec $f'(x) = 0$ en $x = \dfrac{3}{2}$ et $f'(x) < 0$ pour $x > \dfrac{3}{2}$
+4. Dresser le tableau de variation de $f$ sur $[-1{,}5 \; ; \; 4{,}5]$. En deduire le signe de $f'$ sur $]-1{,}5 \; ; \; 4{,}5[$.
+5. Si $f'$ est la derivee d'une fonction $g$, dresser le tableau de variation de $g$.
+:::
+
+:::solution
+**1.** Lecture graphique :
+- $f(1) = 2$ (ordonnee du point $A$)
+- $f'(1) = -1$ (coefficient directeur de la tangente en $A$)
+- $f'\left(\dfrac{3}{2}\right) = 0$ (tangente horizontale en $B$)
+
+**2.** La tangente en $A(1, 2)$ a pour equation :
+
+$$y = f'(1)(x - 1) + f(1) = -1(x - 1) + 2 = -x + 3$$
+
+**3.** D'apres le graphique :
+- $f$ est croissante sur $[-1{,}5 \; ; \; 1]$ donc $f'(x) \geq 0$ sur cet intervalle
+- $f$ est decroissante sur $[1 \; ; \; \dfrac{3}{2}]$ donc $f'(x) \leq 0$
+- $f$ est croissante sur $[\dfrac{3}{2} \; ; \; 4{,}5]$ donc $f'(x) \geq 0$
+- $f'(1) = -1$ et $f'\left(\dfrac{3}{2}\right) = 0$
+
+La courbe (a) correspond : elle s'annule en $\dfrac{3}{2}$, est negative entre $1$ et $\dfrac{3}{2}$, et positive apres $\dfrac{3}{2}$. La courbe (b) ne convient pas ($f'$ ne serait pas negative avant $\dfrac{3}{2}$ sur tout l'intervalle). La courbe (c) ne convient pas ($f' < 0$ pour $x > \dfrac{3}{2}$ contredit la croissance de $f$).
+
+La reponse est la **courbe (a)**.
+
+**4.** Tableau de variation :
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-1.5$, $3/2$, $4.5$),
+  contents: (
+    ($-$, ("0", $+$)),
+    (
+      (top, $f(-1.5)$),
+      (bottom, $3/2$),
+      (top, $f(4.5)$),
+    ),
+  ),
+)
+```
+
+D'apres la courbe, $f$ semble decroissante sur $[-1{,}5 \; ; \; \dfrac{3}{2}]$ puis croissante sur $[\dfrac{3}{2} \; ; \; 4{,}5]$, avec un **minimum en $B$**.
+
+Signe de $f'$ : $f'(x) \leq 0$ sur $]-1{,}5 \; ; \; \dfrac{3}{2}[$ et $f'(x) \geq 0$ sur $]\dfrac{3}{2} \; ; \; 4{,}5[$.
+
+**5.** Si $f' = g'$, alors les variations de $g$ se deduisent du signe de $g' = f'$ :
+
+- $f'(x) \leq 0$ sur $]-1{,}5 \; ; \; \dfrac{3}{2}[$ donc $g$ est **decroissante** sur $[-1{,}5 \; ; \; \dfrac{3}{2}]$
+- $f'(x) \geq 0$ sur $]\dfrac{3}{2} \; ; \; 4{,}5[$ donc $g$ est **croissante** sur $[\dfrac{3}{2} \; ; \; 4{,}5]$
+
+$g$ admet un **minimum** en $x = \dfrac{3}{2}$.
+:::
