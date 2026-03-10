@@ -68,10 +68,10 @@ praxeologies:
 molecules:
 
   # ==========================================================================
-  # COURS (resume compact)
+  # LIVRET COURS (resume compact)
   # ==========================================================================
   - slug: "fonction-derivee"
-    kind: cours
+    kind: livret
     title: "Fonction derivee"
     description: >-
       Resume compact des outils de derivation : formules, lien
@@ -172,10 +172,10 @@ molecules:
             timeMinutes: 2
 
   # ==========================================================================
-  # SERIE 1 : Problemes d'etude de variations
+  # LIVRET SERIE 1 : Problemes d'etude de variations
   # ==========================================================================
   - slug: "fonction-derivee-variations"
-    kind: serie
+    kind: livret
     title: "Problemes d'etude de variations"
     description: >-
       Problemes complets combinant derivation, variations, extrema,
@@ -297,10 +297,10 @@ molecules:
         timeMinutes: 15
 
   # ==========================================================================
-  # SERIE 2 : Problemes de synthese et optimisation
+  # LIVRET SERIE 2 : Problemes de synthese et optimisation
   # ==========================================================================
   - slug: "fonction-derivee-optimisation"
-    kind: serie
+    kind: livret
     title: "Problemes de synthese et d'optimisation"
     description: >-
       Problemes complets de niveau synthese : optimisation geometrique

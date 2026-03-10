@@ -85,8 +85,7 @@ Pour chaque atome `todo` (ordre : lecons d'abord, puis exercices, puis QCM, par 
 
 Apres tous les atomes generes :
 
-- **Cours** → `_molecules/{slug}.yaml` avec sections/steps, quiz blocks (2-5 QCM par groupe)
-- **Series** → `_molecules/{slug}.yaml` avec steps plats
+- **Livrets** → `_molecules/{slug}.yaml` avec `kind: livret`, sections/steps, quiz blocks (2-5 QCM par groupe)
 
 Verifier que tous les atom IDs references dans les molecules existent en tant que fichiers `.mdx`.
 

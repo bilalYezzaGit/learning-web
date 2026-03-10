@@ -44,11 +44,10 @@ Genere un planning de livret a partir d'une KB module. Le planning declare tous 
 
 4. **Genere le planning** `content/{programme}/{module}/_planning.yaml` :
    - Declarer chaque praxeologie dans la section `praxeologies:`
-   - Concevoir les molecules (1 cours + 1-3 series)
-   - Pour le cours : organiser en sections thematiques
+   - Concevoir les livrets (1-4 livrets par module)
+   - Pour chaque livret : organiser en sections thematiques
    - Pour chaque section : declarer les atomes (lecons, exercices, QCM)
    - Pour chaque atome : slug, type, title, praxeologies, contenu (2-3 phrases), difficulte, timeMinutes
-   - Pour les series : liste plate d'atomes
 
 5. **Verifie la couverture** :
    - Chaque praxeologie de la KB est couverte par au moins 1 atome
@@ -105,7 +104,7 @@ Glob: content/{programme}/{module}/_planning.yaml
 
 1. **Determine le type** a creer :
    - Atome : `lesson`, `exercise`, `qcm`
-   - Molecule : `cours`, `serie`
+   - Molecule : `livret`
 
 2. **Charge le template** : Read [references/templates.md](references/templates.md) pour le template correspondant
 
@@ -166,11 +165,10 @@ Glob: content/{programme}/{module}/_planning.yaml
 
 ### Checklist molecule
 
-- [ ] Tous les champs obligatoires presents
+- [ ] Tous les champs obligatoires presents (`kind: livret`, `title`, `description`, `trimester`, `order`)
 - [ ] Tous les IDs d'atomes references existent dans le module correspondant
 - [ ] Groupes `quiz` : 2 a 5 QCM
-- [ ] Cours : `trimester`, `order` presents
-- [ ] Serie : `difficulty`, `tags` presents, minimum 2 steps
+- [ ] Au moins 1 section avec label + steps
 
 4. **Rapporte** les problemes trouves avec fichier:ligne et suggestion de fix
 
@@ -186,7 +184,7 @@ Utilise Glob et Grep pour repondre aux questions d'inventaire :
 | Atomes d'un topic | `Glob: content/**/*-{topic}-*.mdx` |
 | Atomes d'un type | `Glob: content/**/{type}-*.mdx` |
 | Atomes avec un tag | `Grep: pattern "- {tag}" dans content/` glob `*.mdx` |
-| Molecules cours/series | `Glob: content/**/_molecules/*.yaml` |
+| Molecules livrets | `Glob: content/**/_molecules/*.yaml` |
 | Programmes | `Glob: content/*/_programme.yaml` |
 | Atomes orphelins | Glob tous les atomes, Grep tous les IDs dans `_molecules/`, diff |
 | References a un atome | `Grep: pattern "{atom-id}" dans content/**/_molecules/` |

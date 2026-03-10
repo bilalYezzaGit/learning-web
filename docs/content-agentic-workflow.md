@@ -167,7 +167,7 @@ Le planning est bon, passe le status a validated
 
 #### Lacunes identifiees
 
-- Workflow nouveau, jamais execute en conditions reelles
+- ~~Workflow nouveau, jamais execute en conditions reelles~~ — resolu (2 plannings executes avec succes)
 - Pas de validation automatique du planning (couverture praxeologies, slugs conformes)
 
 ---
@@ -181,14 +181,16 @@ flowchart TD
     TYPST["references/typst-snippets.md"] -.-> GenAtomes
     CONV["CONTENT-CONVENTIONS.md"] -.-> GenAtomes
     GenAtomes --> Atomes[("Atomes MDX\ncontent/{prog}/{mod}/*.mdx")]
-    Atomes --> GenMol["3b — Assembler les molecules\ncours: sections > steps\nseries: liste plate"]
+    Atomes --> GenMol["3b — Assembler les livrets\nkind: livret, sections > steps"]
     PlanV -.-> GenMol
-    GenMol --> Molecules[("Molecules YAML\n_molecules/*.yaml")]
+    GenMol --> Molecules[("Livrets YAML\n_molecules/*.yaml")]
     Molecules --> Status["3c — status -> generated"]
 ```
 
+Chaque molecule generee utilise `kind: livret` avec des sections (pas de distinction cours/serie).
+
 Entree : `_planning.yaml` avec `status: validated`
-Sortie : atomes MDX + molecules YAML dans `content/{programme}/{module}/`
+Sortie : atomes MDX + molecules YAML (`kind: livret`) dans `content/{programme}/{module}/`
 
 #### Declencheurs
 
@@ -278,13 +280,13 @@ formules, calculs, solutions
 | Metrique | Valeur |
 |----------|--------|
 | Programmes | 3 declares (3eme-math, 1ere-tc, 2nde-math), 1 avec contenu |
-| Modules avec contenu | 3 (continuite, derivation, fonctions) |
-| Atomes MDX | 185 (continuite: 95, fonctions: 64, derivation: 26) |
-| Molecules YAML | 14 (continuite: 7, fonctions: 4, derivation: 3) |
-| KB modules | 1/23 (generalites-fonctions) |
+| Modules avec contenu | 5 (continuite, derivation, fonctions, fonction-derivee, fonction-derivee-usuelle) |
+| Atomes MDX | 222 |
+| Livrets YAML | 20 (kind: livret unifie, plus de distinction cours/serie) |
+| KB modules | 2 (generalites-fonctions, fonction-derivee) |
 | Fiches sources | 8 (tous les PDFs 3eme-math indexes) |
 | References Typst | 7 modules transcrits (21 fichiers .typ) |
-| Plannings | 0 (workflow defini, pas encore execute) |
+| Plannings | 2 (fonction-derivee, fonction-derivee-usuelle) |
 
 ---
 
@@ -293,7 +295,7 @@ formules, calculs, solutions
 | # | Lacune | Workflows impactes | Priorite |
 |---|--------|--------------------|----------|
 | ~~L1~~ | ~~Pas de skill dedie pour l'indexation de PDF (WF0a)~~ | ~~WF0~~ | resolue |
-| L2 | Planning jamais teste en conditions reelles | WF2 | **haute** |
+| ~~L2~~ | ~~Planning jamais teste en conditions reelles~~ | ~~WF2~~ | resolue (2 plannings executes) |
 | ~~L3~~ | ~~`/content creer` ne lit pas `_planning.yaml` comme source~~ | ~~WF3~~ | resolue |
 | L4 | Pas d'orchestration multi-atomes (reprise, progression) — partiellement resolu (progression par Glob) | WF3 | moyenne |
 | L5 | Paliers validation maths + pedagogie inexistants | WF4 | moyenne |

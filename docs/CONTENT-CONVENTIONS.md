@@ -251,9 +251,9 @@ content/
 │   ├── _programme.yaml                 # metadata du programme
 │   ├── continuite/                     # module
 │   │   ├── _molecules/
-│   │   │   ├── continuite.yaml         # cours (kind: cours)
-│   │   │   ├── continuite-fondamentaux.yaml  # serie (kind: serie)
-│   │   │   └── tvi-maitrise.yaml       # serie (kind: serie)
+│   │   │   ├── continuite.yaml         # livret cours (kind: livret)
+│   │   │   ├── continuite-fondamentaux.yaml  # livret serie (kind: livret)
+│   │   │   └── tvi-maitrise.yaml       # livret serie (kind: livret)
 │   │   ├── lesson-cont-definition.mdx
 │   │   ├── ex-cont-1.mdx
 │   │   └── qcm-cont-1.mdx
@@ -267,21 +267,23 @@ content/
 │   └── ...
 ```
 
-Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les atomes (`.mdx` dans les modules), et les molecules (`.yaml` dans `_molecules/`).
+Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les atomes (`.mdx` dans les modules), et les molecules/livrets (`.yaml` dans `_molecules/`).
 
-### 3.1 Molecule Cours
+### 3.1 Molecule Livret
+
+Tous les livrets utilisent `kind: livret`. Il n'y a plus de distinction `cours`/`serie` — un livret est simplement un assemblage ordonne d'atomes organise en sections.
 
 Fichier : `content/{programme}/{module}/_molecules/{slug}.yaml`
 
 ```yaml
-kind: cours                             # obligatoire, discriminant
+kind: livret                            # obligatoire, toujours "livret"
 visible: true                           # optionnel, defaut: true
 title: "Continuite"                     # obligatoire
 description: "Description courte"       # obligatoire
 trimester: T1 | T2 | T3                # obligatoire
 order: 1                                # obligatoire, position dans le programme
-estimatedMinutes: 180                   # obligatoire, en minutes
-objectives:                             # obligatoire, >= 1
+estimatedMinutes: 180                   # optionnel, auto-calcule si absent
+objectives:                             # optionnel, defaut: []
   - "Objectif 1"
   - "Objectif 2"
 
@@ -296,7 +298,7 @@ sections:                               # obligatoire, >= 1 section
 ```
 
 **Regles** :
-- `kind: cours` est obligatoire (discriminant avec les series)
+- `kind: livret` est obligatoire
 - `visible: true` par defaut. Mettre `false` pour un brouillon non publie
 - Plus de champ `programme:` — le programme est deduit de la hierarchie de repertoires
 - Chaque section a un `label` et des `steps`
@@ -304,41 +306,10 @@ sections:                               # obligatoire, >= 1 section
 - Un groupe `quiz` contient entre 2 et 5 questions QCM
 - L'ordre des steps definit la sequence pedagogique
 - Tous les IDs d'atomes references doivent exister dans le module correspondant
+- `estimatedMinutes` est optionnel : si absent, le pipeline le calcule comme somme des `timeMinutes` des atomes
+- `objectives` est optionnel (defaut : liste vide)
 
-### 3.2 Molecule Serie
-
-Fichier : `content/{programme}/{module}/_molecules/{slug}.yaml`
-
-```yaml
-kind: serie                             # obligatoire, discriminant
-visible: true                           # optionnel, defaut: true
-title: "TVI : maitrise complete"       # obligatoire
-description: "Description courte"       # obligatoire
-difficulty: 1 | 2 | 3                  # obligatoire
-estimatedMinutes: 50                    # obligatoire
-tags: [continuite, tvi]                 # obligatoire, >= 1 tag
-
-steps:                                  # obligatoire, >= 2 steps
-  - lesson-cont-tvi
-  - ex-cont-tvi-direct
-  - quiz:
-      - qcm-cont-tvi-existence
-      - qcm-cont-tvi-application
-type: mono-module                       # optionnel, defaut: mono-module
-trimestre: 1                            # obligatoire (1, 2, ou 3)
-modules: [continuite]                   # optionnel, modules associes
-priority: 0                             # optionnel, defaut: 0
-```
-
-**Regles** :
-- `kind: serie` est obligatoire (discriminant avec les cours)
-- `visible: true` par defaut. Mettre `false` pour un brouillon non publie
-- Pas de sections (liste plate de steps)
-- Une serie est thematique : elle cible un sujet precis
-- Minimum 2 steps (sinon ce n'est pas une serie)
-- Les tags decrivent le sujet de la serie
-
-### 3.3 Programme
+### 3.2 Programme
 
 Fichier : `content/{id}/_programme.yaml`
 
@@ -354,20 +325,20 @@ visible: true                           # optionnel, defaut: true
 
 **Regles** :
 - L'ID du programme (nom du repertoire) correspond au slug de parcours
-- Plus de listes `cours:` et `series:` — le pipeline les decouvre automatiquement en scannant les `_molecules/` des sous-modules
-- Les cours sont tries par `order`, les series par `priority`
+- Plus de listes `cours:` et `series:` — le pipeline decouvre automatiquement les livrets en scannant les `_molecules/` des sous-modules
+- Les livrets sont tries par `order`
 - `visible: true` par defaut. Mettre `false` pour un programme non publie
 
-### 3.4 Flag `visible`
+### 3.3 Flag `visible`
 
-Le flag `visible` est present sur les programmes, cours, et series. Il permet un workflow draft/publish :
+Le flag `visible` est present sur les programmes et les livrets. Il permet un workflow draft/publish :
 
 | Valeur | Signification |
 |--------|--------------|
 | `true` (defaut) | Contenu publie, visible dans l'UI |
 | `false` | Brouillon, present dans le generated output mais filtre cote UI |
 
-Le flag est propage dans tout le generated output (`programmes.json`, `cours/{slug}.json`, `series/{slug}.json`, `catalogues/{id}.json`).
+Le flag est propage dans tout le generated output (`programmes.json`, `livrets/{slug}.json`, `catalogues/{id}.json`).
 
 ---
 

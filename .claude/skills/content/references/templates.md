@@ -282,21 +282,20 @@ On applique la regle $(x^n)' = nx^{n-1}$, donc $(x^3)' = 3x^{3-1} = 3x^2$.
 
 ---
 
-## Molecule — Cours
+## Molecule — Livret
 
 Fichier : `content/{programme}/{module}/_molecules/{slug}.yaml`
 
 ```yaml
-kind: cours
-title: Nom du cours
+kind: livret
+title: "Nom du livret"
 description: "Description courte du contenu couvert"
 trimester: T1
 order: 1
-estimatedMinutes: 120
-objectives:
+estimatedMinutes: 120           # optionnel, auto-calcule si absent
+objectives:                     # optionnel, defaut: []
   - "Premier objectif d'apprentissage"
   - "Deuxieme objectif d'apprentissage"
-  - "Troisieme objectif d'apprentissage"
 
 sections:
   - label: "Premiere section"
@@ -319,41 +318,9 @@ sections:
 ```
 
 **Regles a respecter** :
-- `kind: cours` obligatoire
+- `kind: livret` obligatoire
 - Au moins 1 section avec label + steps
 - Steps : IDs d'atomes ou objets `quiz:` (2-5 QCM)
 - Les IDs d'atomes doivent exister dans le module correspondant
-
----
-
-## Molecule — Serie
-
-Fichier : `content/{programme}/{module}/_molecules/{slug}.yaml`
-
-```yaml
-kind: serie
-title: "Nom de la serie"
-description: "Description du parcours de revision"
-difficulty: 2
-estimatedMinutes: 50
-tags: [topic-principal, sous-theme]
-trimestre: 1
-modules: [topic]
-
-steps:
-  - lesson-topic-rappel
-  - ex-topic-application
-  - ex-topic-approfondissement
-  - quiz:
-      - qcm-topic-question-1
-      - qcm-topic-question-2
-  - ex-topic-synthese
-```
-
-**Regles a respecter** :
-- `kind: serie` obligatoire
-- Pas de sections (liste plate de steps)
-- Minimum 2 steps
-- `difficulty` obligatoire (1-3, pas de 0)
-- `tags` obligatoire, au moins 1
-- Thematique ciblee : un sujet precis
+- `estimatedMinutes` optionnel (somme des timeMinutes des atomes si absent)
+- `objectives` optionnel (defaut : liste vide)

@@ -54,10 +54,10 @@ praxeologies:
 molecules:
 
   # ==========================================================================
-  # COURS (resume ultra-compact)
+  # LIVRET COURS (resume ultra-compact)
   # ==========================================================================
   - slug: "fonction-derivee-usuelle"
-    kind: cours
+    kind: livret
     title: "Fonction derivee — Resume"
     description: >-
       Resume compact des outils : formules de derivation, lien
@@ -83,10 +83,10 @@ molecules:
             timeMinutes: 10
 
   # ==========================================================================
-  # SERIE 1 : Problemes usuels d'etude de fonctions
+  # LIVRET SERIE 1 : Problemes usuels d'etude de fonctions
   # ==========================================================================
   - slug: "fonction-derivee-usuelle-etudes"
-    kind: serie
+    kind: livret
     title: "Etudes de fonctions usuelles"
     description: >-
       Problemes standards d'etude de fonctions : polynomes, rationnelles,
@@ -187,10 +187,10 @@ molecules:
         timeMinutes: 15
 
   # ==========================================================================
-  # SERIE 2 : Problemes avec parametres, tangentes et inegalites
+  # LIVRET SERIE 2 : Problemes avec parametres, tangentes et inegalites
   # ==========================================================================
   - slug: "fonction-derivee-usuelle-parametres"
-    kind: serie
+    kind: livret
     title: "Parametres, tangentes et inegalites"
     description: >-
       Problemes standards avec parametres (trouver m pour un extremum donne),
