@@ -1,47 +1,31 @@
 /** Raw atom read from MDX file (frontmatter + raw content) */
 export interface RawAtom {
   id: string
-  type: 'lesson' | 'exercise' | 'qcm' | 'resume'
+  type: 'lesson' | 'exercise' | 'qcm'
   title: string
   difficulty: number
   timeMinutes: number
   tags: string[]
   category?: string
-  correctOption?: number
+  source?: string
   rawContent: string
 }
 
-/** Raw cours molecule from YAML */
-export interface RawCours {
+/** Raw livret molecule from YAML */
+export interface RawLivret {
   slug: string
-  kind: 'cours'
+  kind: 'livret'
   visible: boolean
   title: string
   description: string
   programme: string
   trimester: string
   order: number
-  estimatedMinutes: number
+  difficulty?: number
+  estimatedMinutes?: number
+  tags: string[]
   objectives: string[]
   sections: { label: string; steps: RawStep[] }[]
-}
-
-/** Raw series molecule from YAML */
-export interface RawSerie {
-  slug: string
-  kind: 'serie'
-  visible: boolean
-  title: string
-  description: string
-  difficulty: number
-  estimatedMinutes: number
-  tags: string[]
-  steps: RawStep[]
-  type: string
-  trimestre: number
-  modules: string[]
-  priority: number
-  successThreshold: number
 }
 
 /** Raw programme from YAML */
@@ -55,8 +39,7 @@ export interface RawProgramme {
   icon: string
   visible: boolean
   description?: string
-  cours: string[]
-  series: string[]
+  livrets: string[]
 }
 
 /** A step: either a string atom ID or a quiz group */
@@ -76,22 +59,27 @@ export interface CompiledQcm {
 /** Resolved activity in a timeline */
 export interface ResolvedActivity {
   id: string
-  type: 'lesson' | 'exercise' | 'qcm' | 'resume'
+  type: 'lesson' | 'exercise' | 'qcm'
   title: string
   timeMinutes: number
+  difficulty: number
+  category?: string
+  tags: string[]
   sectionId?: string
   quizAtomIds?: string[]
 }
 
-/** Resolved cours JSON */
-export interface ResolvedCours {
+/** Resolved livret JSON */
+export interface ResolvedLivret {
   slug: string
   title: string
   description: string
   programme: string
   trimester: string
   order: number
+  difficulty?: number
   estimatedMinutes: number
+  tags: string[]
   objectives: string[]
   visible: boolean
   sections: {
@@ -100,24 +88,6 @@ export interface ResolvedCours {
     activities: ResolvedActivity[]
   }[]
   totalActivities: number
-}
-
-/** Resolved serie JSON */
-export interface ResolvedSerie {
-  slug: string
-  title: string
-  description: string
-  difficulty: number
-  estimatedMinutes: number
-  tags: string[]
-  type: string
-  trimestre: number
-  modules: string[]
-  priority: number
-  visible: boolean
-  activities: ResolvedActivity[]
-  totalActivities: number
-  successThreshold: number
 }
 
 /** Catalogue entry for a programme */
@@ -130,25 +100,15 @@ export interface Catalogue {
   color: string
   icon: string
   visible: boolean
-  modules: {
+  livrets: {
     slug: string
     title: string
     trimester: string
     order: number
+    difficulty?: number
     totalActivities: number
     estimatedMinutes: number
     activityIds: string[]
-    visible: boolean
-  }[]
-  series: {
-    slug: string
-    title: string
-    difficulty: number
-    type: string
-    trimestre: number
-    totalActivities: number
-    estimatedMinutes: number
-    modules: string[]
     visible: boolean
   }[]
 }

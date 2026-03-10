@@ -1,27 +1,26 @@
-kind: serie
+kind: livret
 visible: true
 title: "Diagnostic : Continuite"
 description: "Teste rapidement ton niveau sur la continuite en 10 questions."
+trimester: T1
+order: 12
 difficulty: 1
 estimatedMinutes: 10
 tags: [continuite, diagnostic]
+objectives: []
 
-steps:
-  - quiz:
-      - qcm-cont-1
-      - qcm-cont-3
-      - qcm-cont-vf-1
-      - qcm-cont-vf-3
-      - qcm-cont-para-vf-1
-  - quiz:
-      - qcm-cont-5
-      - qcm-cont-vf-5
-      - qcm-cont-para-rationnelle-domaine
-      - qcm-cont-para-tvi-nombre-solutions
-      - qcm-cont-para-partie-entiere-intervalle
-
-type: diagnostic
-trimestre: 1
-modules: [continuite]
-priority: -1
-successThreshold: 70
+sections:
+  - label: "Diagnostic : Continuite"
+    steps:
+      - quiz:
+          - qcm-cont-1
+          - qcm-cont-3
+          - qcm-cont-vf-1
+          - qcm-cont-vf-3
+          - qcm-cont-para-vf-1
+      - quiz:
+          - qcm-cont-5
+          - qcm-cont-vf-5
+          - qcm-cont-para-rationnelle-domaine
+          - qcm-cont-para-tvi-nombre-solutions
+          - qcm-cont-para-partie-entiere-intervalle

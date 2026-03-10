@@ -1,25 +1,26 @@
-kind: serie
+kind: livret
 visible: true
 title: "Parite et variations de fonctions"
 description: "Etude de la parite, du sens de variation et des extremums d'une fonction"
+trimester: T1
+order: 11
 difficulty: 2
 estimatedMinutes: 50
 tags: [fonctions, parite, variations, extremums]
+objectives: []
 
-steps:
-  - lesson-fn-parite
-  - ex-fn-parite-calcul
-  - lesson-fn-variations
-  - ex-fn-variations-tableau
-  - ex-fn-parite-variations
-  - quiz:
-      - qcm-fn-paire-def
-      - qcm-fn-impaire-def
-      - qcm-fn-piege-parite-domaine
-      - qcm-fn-croissance-def
-      - qcm-fn-extremum-global
-  - ex-fn-synthese-complete
-type: mono-module
-trimestre: 1
-modules: [fonctions]
-priority: 0
+sections:
+  - label: "Parite et variations de fonctions"
+    steps:
+      - lesson-fn-parite
+      - ex-fn-parite-calcul
+      - lesson-fn-variations
+      - ex-fn-variations-tableau
+      - ex-fn-parite-variations
+      - quiz:
+          - qcm-fn-paire-def
+          - qcm-fn-impaire-def
+          - qcm-fn-piege-parite-domaine
+          - qcm-fn-croissance-def
+          - qcm-fn-extremum-global
+      - ex-fn-synthese-complete

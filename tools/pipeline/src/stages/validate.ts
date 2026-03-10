@@ -1,4 +1,4 @@
-import type { RawAtom, RawCours, RawSerie, RawProgramme, RawStep, ValidationError } from '../types.js'
+import type { RawAtom, RawLivret, RawProgramme, RawStep, ValidationError } from '../types.js'
 
 function isQuizStep(step: RawStep): step is { quiz: string[] } {
   return typeof step === 'object' && 'quiz' in step
@@ -6,14 +6,12 @@ function isQuizStep(step: RawStep): step is { quiz: string[] } {
 
 export function validateContent(
   atoms: RawAtom[],
-  cours: RawCours[],
-  series: RawSerie[],
+  livrets: RawLivret[],
   programmes: RawProgramme[],
 ): ValidationError[] {
   const errors: ValidationError[] = []
   const atomIds = new Set(atoms.map(a => a.id))
-  const coursIds = new Set(cours.map(c => c.slug))
-  const serieIds = new Set(series.map(s => s.slug))
+  const livretIds = new Set(livrets.map(l => l.slug))
 
   // Check atom IDs are unique
   const seenAtomIds = new Set<string>()
@@ -24,57 +22,44 @@ export function validateContent(
     seenAtomIds.add(atom.id)
   }
 
-  // Check QCMs have correctOption
+  // Check QCMs have exactly one :::option{correct}
   for (const atom of atoms) {
-    if (atom.type === 'qcm' && atom.correctOption === undefined) {
-      errors.push({ source: `atom/${atom.id}`, message: 'QCM missing correctOption', severity: 'error' })
-    }
-  }
-
-  // Check cours references
-  for (const c of cours) {
-    for (const section of c.sections) {
-      for (const step of section.steps) {
-        checkStep(step, `cours/${c.slug} > ${section.label}`, atomIds, errors)
+    if (atom.type === 'qcm') {
+      const correctCount = (atom.rawContent.match(/^:::option\{correct\}/gm) ?? []).length
+      if (correctCount === 0) {
+        errors.push({ source: `atom/${atom.id}`, message: 'QCM missing :::option{correct}', severity: 'error' })
+      } else if (correctCount > 1) {
+        errors.push({ source: `atom/${atom.id}`, message: `QCM has ${correctCount} :::option{correct} (expected exactly 1)`, severity: 'error' })
       }
     }
   }
 
-  // Check series references
-  for (const s of series) {
-    for (const step of s.steps) {
-      checkStep(step, `series/${s.slug}`, atomIds, errors)
+  // Check livret references
+  for (const l of livrets) {
+    for (const section of l.sections) {
+      for (const step of section.steps) {
+        checkStep(step, `livret/${l.slug} > ${section.label}`, atomIds, errors)
+      }
     }
   }
 
   // Check programme references
   for (const p of programmes) {
-    for (const slug of p.cours) {
-      if (!coursIds.has(slug)) {
-        errors.push({ source: `programme/${p.id}`, message: `Cours "${slug}" not found`, severity: 'error' })
-      }
-    }
-    for (const slug of p.series) {
-      if (!serieIds.has(slug)) {
-        errors.push({ source: `programme/${p.id}`, message: `Serie "${slug}" not found`, severity: 'error' })
+    for (const slug of p.livrets) {
+      if (!livretIds.has(slug)) {
+        errors.push({ source: `programme/${p.id}`, message: `Livret "${slug}" not found`, severity: 'error' })
       }
     }
   }
 
   // Warn about orphan atoms
   const referencedIds = new Set<string>()
-  for (const c of cours) {
-    for (const section of c.sections) {
+  for (const l of livrets) {
+    for (const section of l.sections) {
       for (const step of section.steps) {
         if (isQuizStep(step)) step.quiz.forEach(id => referencedIds.add(id))
         else referencedIds.add(step)
       }
-    }
-  }
-  for (const s of series) {
-    for (const step of s.steps) {
-      if (isQuizStep(step)) step.quiz.forEach(id => referencedIds.add(id))
-      else referencedIds.add(step)
     }
   }
 

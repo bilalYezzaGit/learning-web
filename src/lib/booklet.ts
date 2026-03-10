@@ -1,16 +1,16 @@
 /**
  * Booklet utilities — derives booklet definitions from the content pipeline.
  *
- * A booklet is a "virtual" entity that maps 1:1 to a cours molecule.
- * The code is generated deterministically from the module + programme.
+ * A booklet is a "virtual" entity that maps 1:1 to a livret molecule.
+ * The code is generated deterministically from the livret slug + programme.
  */
 
 import { cache } from 'react'
 
 import {
   getAllProgrammes,
-  getCours,
-  getCoursActivities,
+  getLivret,
+  getLivretActivities,
 } from '@/lib/content-loader'
 import type { BookletDefinition } from '@/types/booklet'
 import { generateBookletCode } from '@/types/booklet'
@@ -25,25 +25,25 @@ export const getAllBooklets = cache((): BookletDefinition[] => {
   for (const programme of programmes) {
     if (!programme.visible) continue
 
-    for (const coursSlug of programme.cours) {
+    for (const livretSlug of programme.livrets) {
       try {
-        const cours = getCours(coursSlug)
-        const activities = getCoursActivities(coursSlug)
+        const livret = getLivret(livretSlug)
+        const activities = getLivretActivities(livretSlug)
 
         booklets.push({
-          code: generateBookletCode(coursSlug, programme.id),
-          moduleSlug: coursSlug,
+          code: generateBookletCode(livretSlug, programme.id),
+          livretSlug,
           programmeId: programme.id,
-          title: cours.title,
-          description: cours.description,
+          title: livret.title,
+          description: livret.description,
           version: 1,
           exerciseCount: activities.filter((a) => a.type === 'exercise').length,
           qcmCount: activities.filter((a) => a.type === 'qcm').length,
           lessonCount: activities.filter((a) => a.type === 'lesson').length,
-          estimatedMinutes: cours.estimatedMinutes,
+          estimatedMinutes: livret.estimatedMinutes,
         })
       } catch {
-        // Skip invalid cours
+        // Skip invalid livrets
       }
     }
   }
@@ -57,4 +57,3 @@ export const getAllBooklets = cache((): BookletDefinition[] => {
 export const getBookletByCode = cache((code: string): BookletDefinition | undefined => {
   return getAllBooklets().find((b) => b.code === code)
 })
-

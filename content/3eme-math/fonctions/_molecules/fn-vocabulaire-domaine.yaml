@@ -1,23 +1,24 @@
-kind: serie
+kind: livret
 visible: true
 title: "Vocabulaire des fonctions et domaine de definition"
 description: "Revision sur le domaine de definition, les images, les antecedents et la lecture graphique"
+trimester: T1
+order: 10
 difficulty: 1
 estimatedMinutes: 35
 tags: [fonctions, domaine-definition, image, antecedent]
+objectives: []
 
-steps:
-  - lesson-fn-domaine
-  - lesson-fn-image-antecedent
-  - ex-fn-domaine-determination
-  - ex-fn-lecture-graphique-complet
-  - quiz:
-      - qcm-fn-domaine-polynome
-      - qcm-fn-domaine-fraction
-      - qcm-fn-domaine-racine
-      - qcm-fn-image-def
-      - qcm-fn-antecedent-def
-type: mono-module
-trimestre: 1
-modules: [fonctions]
-priority: 0
+sections:
+  - label: "Vocabulaire des fonctions et domaine de definition"
+    steps:
+      - lesson-fn-domaine
+      - lesson-fn-image-antecedent
+      - ex-fn-domaine-determination
+      - ex-fn-lecture-graphique-complet
+      - quiz:
+          - qcm-fn-domaine-polynome
+          - qcm-fn-domaine-fraction
+          - qcm-fn-domaine-racine
+          - qcm-fn-image-def
+          - qcm-fn-antecedent-def

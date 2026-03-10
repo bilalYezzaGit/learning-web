@@ -1,47 +1,31 @@
-import type { RawProgramme, ResolvedCours, ResolvedSerie, Catalogue } from '../types.js'
+import type { RawProgramme, ResolvedLivret, Catalogue } from '../types.js'
 
 export function assembleCatalogues(
   programmes: RawProgramme[],
-  coursList: ResolvedCours[],
-  seriesList: ResolvedSerie[],
+  livretsList: ResolvedLivret[],
 ): Catalogue[] {
-  const coursMap = new Map(coursList.map(c => [c.slug, c]))
-  const seriesMap = new Map(seriesList.map(s => [s.slug, s]))
+  const livretsMap = new Map(livretsList.map(l => [l.slug, l]))
 
   return programmes.map(prog => {
-    const modules = prog.cours
-      .map(slug => coursMap.get(slug))
-      .filter((c): c is ResolvedCours => c !== undefined)
-      .map(c => {
-        const activityIds = c.sections.flatMap(s =>
+    const livrets = prog.livrets
+      .map(slug => livretsMap.get(slug))
+      .filter((l): l is ResolvedLivret => l !== undefined)
+      .map(l => {
+        const activityIds = l.sections.flatMap(s =>
           s.activities.map(a => a.id)
         )
         return {
-          slug: c.slug,
-          title: c.title,
-          trimester: c.trimester,
-          order: c.order,
-          totalActivities: c.totalActivities,
-          estimatedMinutes: c.estimatedMinutes,
+          slug: l.slug,
+          title: l.title,
+          trimester: l.trimester,
+          order: l.order,
+          difficulty: l.difficulty,
+          totalActivities: l.totalActivities,
+          estimatedMinutes: l.estimatedMinutes,
           activityIds,
-          visible: c.visible,
+          visible: l.visible,
         }
       })
-
-    const series = prog.series
-      .map(slug => seriesMap.get(slug))
-      .filter((s): s is ResolvedSerie => s !== undefined)
-      .map(s => ({
-        slug: s.slug,
-        title: s.title,
-        difficulty: s.difficulty,
-        type: s.type,
-        trimestre: s.trimestre,
-        totalActivities: s.totalActivities,
-        estimatedMinutes: s.estimatedMinutes,
-        modules: s.modules,
-        visible: s.visible,
-      }))
 
     return {
       id: prog.id,
@@ -52,8 +36,7 @@ export function assembleCatalogues(
       color: prog.color,
       icon: prog.icon,
       visible: prog.visible,
-      modules,
-      series,
+      livrets,
     }
   })
 }

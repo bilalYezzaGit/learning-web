@@ -7,7 +7,7 @@ import type { RawAtom } from '../types.js'
 
 const atomMetaSchema = z
   .object({
-    type: z.enum(['lesson', 'exercise', 'qcm', 'resume']),
+    type: z.enum(['lesson', 'exercise', 'qcm']),
     title: z.string().min(1),
     difficulty: z.number().int().min(0).max(3).default(1),
     timeMinutes: z.number().int().min(1).default(5),
@@ -15,7 +15,7 @@ const atomMetaSchema = z
     category: z
       .enum(['application', 'approfondissement', 'synthese', 'probleme', 'demonstration'])
       .optional(),
-    correctOption: z.number().int().min(0).optional(),
+    source: z.string().optional(),
   })
   .refine(
     (data) => data.type !== 'exercise' || data.category !== undefined,
@@ -39,6 +39,11 @@ export function readAllAtoms(): RawAtom[] {
         const id = file.replace('.mdx', '')
         const raw = fs.readFileSync(path.join(moduleDir, file), 'utf-8')
         const { data, content } = matter(raw)
+
+        // Strip legacy correctOption field (now derived from :::option{correct})
+        if ('correctOption' in data) {
+          delete (data as Record<string, unknown>).correctOption
+        }
 
         const result = atomMetaSchema.safeParse(data)
         if (!result.success) {

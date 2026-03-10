@@ -1,9 +1,9 @@
 /**
  * PDF generation stage
  *
- * For each visible programme → for each cours:
+ * For each visible programme → for each livret:
  * 1. Convert atom rawContent to Typst via mdx-to-typst
- * 2. Assemble livret with cover, sections, series
+ * 2. Assemble livret with cover, sections
  * 3. Compile to PDF via Typst WASM
  * 4. Write to public/pdfs/{slug}.pdf
  */
@@ -15,12 +15,11 @@ import type {
   RawAtom,
   RawProgramme,
   RawStep,
-  ResolvedCours,
-  ResolvedSerie,
+  ResolvedLivret,
 } from '../types.js'
 import { convertMdxToTypst, extractQcmOptions } from '../pdf/mdx-to-typst.js'
 import { generateLivretTypst } from '../pdf/livret-template.js'
-import type { LivretSection, LivretSerie } from '../pdf/livret-template.js'
+import type { LivretSection } from '../pdf/livret-template.js'
 import { compileTypstToPdf } from '../pdf/compile-pdf.js'
 import {
   generateExerciseQrTypst,
@@ -41,8 +40,7 @@ function generateBookletCode(moduleSlug: string, programmeId: string): string {
 
 interface GeneratePdfsInput {
   atoms: RawAtom[]
-  resolvedCours: ResolvedCours[]
-  resolvedSeries: ResolvedSerie[]
+  resolvedLivrets: ResolvedLivret[]
   programmes: RawProgramme[]
 }
 
@@ -109,7 +107,7 @@ function convertQcmGroup(
 }
 
 /**
- * Process all steps in a section/serie and produce Typst content.
+ * Process all steps in a section and produce Typst content.
  */
 async function processSteps(
   steps: RawStep[],
@@ -136,36 +134,10 @@ async function processSteps(
 }
 
 /**
- * Find the RawCours that matches a ResolvedCours slug.
- * We need the raw cours to access its sections.steps (which contain atom IDs).
- */
-function findRawCoursSections(
-  resolvedCours: ResolvedCours,
-): { rawSections: { label: string; steps: RawStep[] }[] } | undefined {
-  // We need to reconstruct the steps from ResolvedCours activities
-  // Each activity has an id and optionally quizAtomIds
-  const rawSections: { label: string; steps: RawStep[] }[] = []
-
-  for (const section of resolvedCours.sections) {
-    const steps: RawStep[] = []
-    for (const activity of section.activities) {
-      if (activity.type === 'qcm' && activity.quizAtomIds) {
-        steps.push({ quiz: activity.quizAtomIds })
-      } else {
-        steps.push(activity.id)
-      }
-    }
-    rawSections.push({ label: section.label, steps })
-  }
-
-  return { rawSections }
-}
-
-/**
  * Generate all PDFs for all visible programmes.
  */
 export async function generateAllPdfs(input: GeneratePdfsInput): Promise<number> {
-  const { atoms, resolvedCours, resolvedSeries, programmes } = input
+  const { atoms, resolvedLivrets, programmes } = input
   const atomMap = new Map(atoms.map(a => [a.id, a]))
 
   // Ensure output directory exists
@@ -176,53 +148,38 @@ export async function generateAllPdfs(input: GeneratePdfsInput): Promise<number>
   for (const programme of programmes) {
     if (!programme.visible) continue
 
-    // Find all visible cours for this programme
-    const progCours = resolvedCours.filter(
-      c => c.programme === programme.id && c.visible,
+    // Find all visible livrets for this programme
+    const progLivrets = resolvedLivrets.filter(
+      l => l.programme === programme.id && l.visible,
     )
 
-    for (const cours of progCours) {
-      const coursData = findRawCoursSections(cours)
-      if (!coursData) continue
+    for (const livret of progLivrets) {
+      // ── Reconstruct steps from resolved activities ──
+      const rawSections: { label: string; steps: RawStep[] }[] = []
+      for (const section of livret.sections) {
+        const steps: RawStep[] = []
+        for (const activity of section.activities) {
+          if (activity.type === 'qcm' && activity.quizAtomIds) {
+            steps.push({ quiz: activity.quizAtomIds })
+          } else {
+            steps.push(activity.id)
+          }
+        }
+        rawSections.push({ label: section.label, steps })
+      }
 
       // ── Compute booklet code ──
-      const bookletCode = generateBookletCode(cours.slug, programme.id)
+      const bookletCode = generateBookletCode(livret.slug, programme.id)
 
       // ── Build sections ──
       const exerciseCounter = { value: 1 }
       const qcmCounter = { value: 1 }
 
       const sections: LivretSection[] = []
-      for (const section of coursData.rawSections) {
+      for (const section of rawSections) {
         sections.push({
           label: section.label,
           content: await processSteps(section.steps, atomMap, exerciseCounter, qcmCounter, bookletCode),
-        })
-      }
-
-      // ── Find related series ──
-      const relatedSeries = resolvedSeries.filter(
-        s => s.visible && s.modules.includes(cours.slug),
-      )
-
-      // Build series content using the same approach
-      const seriesData: LivretSerie[] = []
-      for (const serie of relatedSeries) {
-        const steps: RawStep[] = serie.activities.map(a => {
-          if (a.type === 'qcm' && a.quizAtomIds) {
-            return { quiz: a.quizAtomIds }
-          }
-          return a.id
-        })
-
-        const serieExerciseCounter = { value: 1 }
-        const serieQcmCounter = { value: 1 }
-
-        seriesData.push({
-          title: serie.title,
-          description: serie.description,
-          difficulty: serie.difficulty,
-          content: await processSteps(steps, atomMap, serieExerciseCounter, serieQcmCounter, bookletCode),
         })
       }
 
@@ -231,15 +188,15 @@ export async function generateAllPdfs(input: GeneratePdfsInput): Promise<number>
 
       // ── Assemble livret ──
       const typstSource = generateLivretTypst({
-        title: cours.title,
+        title: livret.title,
         programme: programme.id,
         programmeLabel: programme.label,
-        trimester: cours.trimester,
-        objectives: cours.objectives,
-        estimatedMinutes: cours.estimatedMinutes,
-        totalActivities: cours.totalActivities,
+        trimester: livret.trimester,
+        objectives: livret.objectives,
+        estimatedMinutes: livret.estimatedMinutes,
+        totalActivities: livret.totalActivities,
         sections,
-        series: seriesData,
+        series: [],
         coverQr,
         bookletCode,
       })
@@ -247,12 +204,12 @@ export async function generateAllPdfs(input: GeneratePdfsInput): Promise<number>
       // ── Compile to PDF ──
       try {
         const pdf = await compileTypstToPdf(typstSource)
-        const outputPath = path.join(PDFS_DIR, `${cours.slug}.pdf`)
+        const outputPath = path.join(PDFS_DIR, `${livret.slug}.pdf`)
         fs.writeFileSync(outputPath, pdf)
         pdfCount++
-        console.log(`      ✓ ${cours.slug}.pdf`)
+        console.log(`      ✓ ${livret.slug}.pdf`)
       } catch (err) {
-        console.error(`      ✗ ${cours.slug}.pdf — ${err instanceof Error ? err.message : err}`)
+        console.error(`      ✗ ${livret.slug}.pdf — ${err instanceof Error ? err.message : err}`)
       }
     }
   }

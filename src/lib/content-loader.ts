@@ -20,23 +20,25 @@ import type {
 // Types for generated JSON structures
 // =============================================================================
 
-export interface GeneratedCoursSection {
+export interface GeneratedLivretSection {
   id: string
   label: string
   activities: ResolvedActivity[]
 }
 
-export interface GeneratedCours {
+export interface GeneratedLivret {
   slug: string
   title: string
   description: string
   programme: string
   trimester: string
   order: number
+  difficulty?: number
   estimatedMinutes: number
+  tags: string[]
   objectives: string[]
   visible: boolean
-  sections: GeneratedCoursSection[]
+  sections: GeneratedLivretSection[]
   totalActivities: number
 }
 
@@ -68,18 +70,18 @@ export const getAllProgrammes = cache((): Programme[] => {
 })
 
 // =============================================================================
-// Cours
+// Livrets
 // =============================================================================
 
-export const getCours = cache((slug: string): GeneratedCours => {
-  const filePath = path.join(GENERATED_DIR, 'cours', `${slug}.json`)
-  if (!fileExists(filePath)) throw new Error(`Cours "${slug}" not found`)
-  return readJson<GeneratedCours>(filePath)
+export const getLivret = cache((slug: string): GeneratedLivret => {
+  const filePath = path.join(GENERATED_DIR, 'livrets', `${slug}.json`)
+  if (!fileExists(filePath)) throw new Error(`Livret "${slug}" not found`)
+  return readJson<GeneratedLivret>(filePath)
 })
 
-export const getCoursActivities = cache((slug: string): ResolvedActivity[] => {
-  const cours = getCours(slug)
-  return cours.sections.flatMap(s => s.activities)
+export const getLivretActivities = cache((slug: string): ResolvedActivity[] => {
+  const livret = getLivret(slug)
+  return livret.sections.flatMap(s => s.activities)
 })
 
 // =============================================================================

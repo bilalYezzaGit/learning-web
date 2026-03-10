@@ -61,7 +61,7 @@ export async function GET(request: Request) {
 
   return NextResponse.json({
     code: booklet.code,
-    moduleSlug: booklet.moduleSlug,
+    livretSlug: booklet.livretSlug,
     programmeId: booklet.programmeId,
     title: booklet.title,
   })

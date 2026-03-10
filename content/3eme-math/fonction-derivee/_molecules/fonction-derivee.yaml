@@ -1,4 +1,5 @@
-kind: cours
+kind: livret
+visible: true
 title: "Fonction derivee"
 description: "Resume compact des outils de derivation : formules, lien derivee-variations, extrema, tableau de variation."
 trimester: T1

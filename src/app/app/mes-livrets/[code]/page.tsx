@@ -31,9 +31,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return { title: booklet.title }
 }
 
-function hasResume(moduleSlug: string): boolean {
+function hasResume(livretSlug: string): boolean {
   try {
-    getAtomHtml(`resume-${moduleSlug}`)
+    getAtomHtml(`resume-${livretSlug}`)
     return true
   } catch {
     return false
@@ -48,7 +48,7 @@ export default async function BookletHubPage({ params }: PageProps) {
     notFound()
   }
 
-  const resumeAvailable = hasResume(booklet.moduleSlug)
+  const resumeAvailable = hasResume(booklet.livretSlug)
 
   return (
     <div>

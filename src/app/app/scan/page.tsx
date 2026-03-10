@@ -49,13 +49,13 @@ export default function ScanPage() {
         return
       }
 
-      const booklet: { code: string; moduleSlug: string; programmeId: string } = await res.json()
+      const booklet: { code: string; livretSlug: string; programmeId: string } = await res.json()
 
       // 2. Pair to Firestore if authenticated
       if (userId) {
         await pairBooklet(userId, {
           code: booklet.code,
-          moduleSlug: booklet.moduleSlug,
+          livretSlug: booklet.livretSlug,
           programmeId: booklet.programmeId,
         })
       }

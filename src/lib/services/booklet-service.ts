@@ -22,14 +22,14 @@ import type { UserBooklet } from '@/types/booklet'
  */
 export async function pairBooklet(
   userId: string,
-  booklet: { code: string; moduleSlug: string; programmeId: string },
+  booklet: { code: string; livretSlug: string; programmeId: string },
 ): Promise<void> {
   const db = getDbInstance()
   const ref = doc(db, 'users', userId, 'booklets', booklet.code)
 
   await setDoc(ref, {
     code: booklet.code,
-    moduleSlug: booklet.moduleSlug,
+    livretSlug: booklet.livretSlug,
     programmeId: booklet.programmeId,
     pairedAt: serverTimestamp(),
     lastOpenedAt: serverTimestamp(),
@@ -48,7 +48,7 @@ export async function getUserBooklets(userId: string): Promise<UserBooklet[]> {
     const data = d.data()
     return {
       code: d.id,
-      moduleSlug: data.moduleSlug as string,
+      livretSlug: (data.livretSlug ?? data.moduleSlug) as string,
       programmeId: data.programmeId as string,
       pairedAt: toISOString(data.pairedAt),
       lastOpenedAt: toISOString(data.lastOpenedAt),

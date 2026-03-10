@@ -3,7 +3,7 @@ import path from 'path'
 import { parse as parseYaml } from 'yaml'
 import { z } from 'zod'
 import { CONTENT_DIR } from '../config.js'
-import type { RawCours, RawSerie, RawProgramme } from '../types.js'
+import type { RawLivret, RawProgramme } from '../types.js'
 
 // ── Schemas ──
 
@@ -17,32 +17,18 @@ const moleculeSectionSchema = z.object({
   steps: z.array(stepSchema).min(1),
 })
 
-const coursMoleculeSchema = z.object({
-  kind: z.literal('cours'),
+const livretMoleculeSchema = z.object({
+  kind: z.literal('livret'),
   visible: z.boolean().default(true),
   title: z.string().min(1),
   description: z.string().min(1),
   trimester: z.string().min(1),
   order: z.number().int().min(0),
-  estimatedMinutes: z.number().int().min(1),
-  objectives: z.array(z.string()).min(1),
-  sections: z.array(moleculeSectionSchema).min(1),
-})
-
-const seriesMoleculeSchema = z.object({
-  kind: z.literal('serie'),
-  visible: z.boolean().default(true),
-  title: z.string().min(1),
-  description: z.string().min(1),
-  difficulty: z.number().int().min(0).max(3),
-  estimatedMinutes: z.number().int().min(1),
+  difficulty: z.number().int().min(0).max(3).optional(),
+  estimatedMinutes: z.number().int().min(1).optional(),
   tags: z.array(z.string()).default([]),
-  steps: z.array(stepSchema).min(2),
-  type: z.enum(['mono-module', 'cross-module', 'devoir-controle', 'devoir-synthese', 'diagnostic']).default('mono-module'),
-  trimestre: z.union([z.literal(1), z.literal(2), z.literal(3)]),
-  modules: z.array(z.string()).default([]),
-  priority: z.number().int().default(0),
-  successThreshold: z.number().int().min(0).max(100).default(70),
+  objectives: z.array(z.string()).default([]),
+  sections: z.array(moleculeSectionSchema).min(1),
 })
 
 const programmeSchema = z.object({
@@ -59,19 +45,17 @@ const programmeSchema = z.object({
 // ── Discovery ──
 
 /**
- * Scan the content/ tree and return all programmes, cours, and series.
+ * Scan the content/ tree and return all programmes and livrets.
  * Programme dirs contain _programme.yaml. Modules are their subdirectories.
- * Molecules live in {module}/_molecules/*.yaml with a `kind` field.
- * Programme.cours and programme.series are auto-populated from discovered molecules.
+ * Molecules live in {module}/_molecules/*.yaml with kind: livret.
+ * Programme.livrets is auto-populated from discovered molecules.
  */
 export function readAllContent(): {
   programmes: RawProgramme[]
-  cours: RawCours[]
-  series: RawSerie[]
+  livrets: RawLivret[]
 } {
   const programmes: RawProgramme[] = []
-  const cours: RawCours[] = []
-  const series: RawSerie[] = []
+  const livrets: RawLivret[] = []
 
   const progDirs = fs.readdirSync(CONTENT_DIR, { withFileTypes: true })
     .filter(d => d.isDirectory())
@@ -89,8 +73,7 @@ export function readAllContent(): {
       throw new Error(`Invalid programme "${progDir.name}": ${issues}`)
     }
 
-    const progCours: string[] = []
-    const progSeries: string[] = []
+    const progLivrets: string[] = []
 
     // Scan module directories
     const moduleDirs = fs.readdirSync(progDir.path, { withFileTypes: true })
@@ -111,54 +94,38 @@ export function readAllContent(): {
         const raw = fs.readFileSync(path.join(moleculesDir, yamlFile), 'utf-8')
         const data = parseYaml(raw) as Record<string, unknown>
 
-        if (data.kind === 'cours') {
-          const result = coursMoleculeSchema.safeParse(data)
-          if (!result.success) {
-            const issues = result.error.issues.map(i => `${i.path.join('.')}: ${i.message}`).join(', ')
-            throw new Error(`Invalid cours molecule "${slug}": ${issues}`)
-          }
-          cours.push({
-            slug,
-            programme: progDir.name,
-            ...result.data,
-          })
-          progCours.push(slug)
-        } else if (data.kind === 'serie') {
-          const result = seriesMoleculeSchema.safeParse(data)
-          if (!result.success) {
-            const issues = result.error.issues.map(i => `${i.path.join('.')}: ${i.message}`).join(', ')
-            throw new Error(`Invalid serie molecule "${slug}": ${issues}`)
-          }
-          series.push({
-            slug,
-            ...result.data,
-          })
-          progSeries.push(slug)
-        } else {
-          throw new Error(`Unknown molecule kind in "${slug}": ${data.kind}`)
+        if (data.kind !== 'livret') {
+          throw new Error(`Unknown molecule kind in "${slug}": ${data.kind} (expected "livret")`)
         }
+
+        const result = livretMoleculeSchema.safeParse(data)
+        if (!result.success) {
+          const issues = result.error.issues.map(i => `${i.path.join('.')}: ${i.message}`).join(', ')
+          throw new Error(`Invalid livret molecule "${slug}": ${issues}`)
+        }
+
+        livrets.push({
+          slug,
+          programme: progDir.name,
+          ...result.data,
+        })
+        progLivrets.push(slug)
       }
     }
 
-    // Sort cours by order, series by priority
-    progCours.sort((a, b) => {
-      const ca = cours.find(c => c.slug === a)
-      const cb = cours.find(c => c.slug === b)
-      return (ca?.order ?? 0) - (cb?.order ?? 0)
-    })
-    progSeries.sort((a, b) => {
-      const sa = series.find(s => s.slug === a)
-      const sb = series.find(s => s.slug === b)
-      return (sa?.priority ?? 0) - (sb?.priority ?? 0)
+    // Sort livrets by order
+    progLivrets.sort((a, b) => {
+      const la = livrets.find(l => l.slug === a)
+      const lb = livrets.find(l => l.slug === b)
+      return (la?.order ?? 0) - (lb?.order ?? 0)
     })
 
     programmes.push({
       id: progDir.name,
       ...progResult.data,
-      cours: progCours,
-      series: progSeries,
+      livrets: progLivrets,
     })
   }
 
-  return { programmes, cours, series }
+  return { programmes, livrets }
 }

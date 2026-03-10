@@ -34,7 +34,7 @@ export default async function BookletQcmPage({ params }: PageProps) {
     notFound()
   }
 
-  const questions = selectRandomQuestions(booklet.moduleSlug, 10)
+  const questions = selectRandomQuestions(booklet.livretSlug, 10)
 
   return (
     <div>

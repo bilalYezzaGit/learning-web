@@ -33,7 +33,7 @@ export default async function BookletResumePage({ params }: PageProps) {
 
   let resumeHtml: string
   try {
-    resumeHtml = getAtomHtml(`resume-${booklet.moduleSlug}`)
+    resumeHtml = getAtomHtml(`resume-${booklet.livretSlug}`)
   } catch {
     notFound()
   }

@@ -7,14 +7,14 @@
  */
 
 /**
- * Booklet definition — derived from a cours molecule.
+ * Booklet definition — derived from a livret molecule.
  * Not stored in DB; computed from the content pipeline output.
  */
 export interface BookletDefinition {
   /** Short pairing code (e.g. "CONT-3M-001") */
   code: string
-  /** Cours molecule slug (e.g. "continuite") */
-  moduleSlug: string
+  /** Livret molecule slug (e.g. "continuite") */
+  livretSlug: string
   /** Programme ID (e.g. "3eme-math") */
   programmeId: string
   /** Display title */
@@ -39,14 +39,14 @@ export interface BookletDefinition {
 export interface UserBooklet {
   code: string
   pairedAt: string
-  moduleSlug: string
+  livretSlug: string
   programmeId: string
   lastOpenedAt: string
 }
 
 
 /**
- * Generate a booklet code from module + programme.
+ * Generate a booklet code from livret slug + programme.
  *
  * Uses full slug (with hyphens removed) to avoid collisions between
  * variants like "continuite" vs "continuite-manuel-complet".
@@ -57,8 +57,8 @@ export interface UserBooklet {
  *   derivation + 3eme-math           → DERIVATION-3E-001
  *   fonctions + 3eme-math            → FONCTIONS-3E-001
  */
-export function generateBookletCode(moduleSlug: string, programmeId: string): string {
-  const modulePrefix = moduleSlug.replace(/-/g, '').toUpperCase()
+export function generateBookletCode(livretSlug: string, programmeId: string): string {
+  const livretPrefix = livretSlug.replace(/-/g, '').toUpperCase()
   const programmePrefix = programmeId.replace(/-/g, '').slice(0, 2).toUpperCase()
-  return `${modulePrefix}-${programmePrefix}-001`
+  return `${livretPrefix}-${programmePrefix}-001`
 }

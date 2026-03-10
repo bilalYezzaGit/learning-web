@@ -20,10 +20,8 @@ export interface Programme {
   icon: string
   visible: boolean
   description?: string
-  /** Ordered list of cours molecule slugs */
-  cours: string[]
-  /** Ordered list of series molecule slugs */
-  series: string[]
+  /** Ordered list of livret molecule slugs */
+  livrets: string[]
 }
 
 // =============================================================================
@@ -33,9 +31,12 @@ export interface Programme {
 /** Flat activity entry in a resolved molecule (for navigation) */
 export interface ResolvedActivity {
   id: string
-  type: 'lesson' | 'exercise' | 'qcm' | 'resume'
+  type: 'lesson' | 'exercise' | 'qcm'
   title: string
   timeMinutes: number
+  difficulty: number
+  category?: string
+  tags: string[]
   sectionId?: string
   /** For quiz groups, the list of QCM atom IDs */
   quizAtomIds?: string[]

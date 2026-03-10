@@ -1,17 +1,21 @@
-kind: serie
+kind: livret
+visible: true
 title: "Problemes d'etude de variations"
 description: "Problemes complets combinant derivation, variations, extrema, derivabilite et tangentes. Chaque probleme est multi-etapes."
+trimester: T1
+order: 10
 difficulty: 2
 estimatedMinutes: 130
 tags: [derivation, variations, extrema, tangente]
-trimestre: 1
-modules: [fonction-derivee]
+objectives: []
 
-steps:
-  - ex-der-etude-rationnelle-parametree
-  - ex-der-derivabilite-morceaux-parametree
-  - ex-der-tangentes-cubique
-  - ex-der-fonction-valeur-absolue
-  - ex-der-derivee-graphique-reciproque
-  - ex-der-derivees-successives-recurrence
-  - ex-der-vrai-faux-justifie
+sections:
+  - label: "Problemes d'etude de variations"
+    steps:
+      - ex-der-etude-rationnelle-parametree
+      - ex-der-derivabilite-morceaux-parametree
+      - ex-der-tangentes-cubique
+      - ex-der-fonction-valeur-absolue
+      - ex-der-derivee-graphique-reciproque
+      - ex-der-derivees-successives-recurrence
+      - ex-der-vrai-faux-justifie

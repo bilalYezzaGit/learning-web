@@ -1,25 +1,26 @@
-kind: serie
+kind: livret
 visible: true
 title: "TVI : theoreme des valeurs intermediaires"
 description: "Approfondis le TVI avec des exercices progressifs : application directe, equations, et problemes."
+trimester: T1
+order: 11
 difficulty: 2
 estimatedMinutes: 50
 tags: [continuite, tvi, equations]
+objectives: []
 
-steps:
-  - lesson-cont-tvi
-  - ex-cont-3
-  - ex-cont-3b
-  - ex-cont-3c
-  - ex-cont-4
-  - ex-cont-6
-  - quiz:
-      - qcm-cont-3
-      - qcm-cont-4
-  - quiz:
-      - qcm-cont-5
-      - qcm-cont-6
-type: mono-module
-trimestre: 1
-modules: [continuite]
-priority: 0
+sections:
+  - label: "TVI : theoreme des valeurs intermediaires"
+    steps:
+      - lesson-cont-tvi
+      - ex-cont-3
+      - ex-cont-3b
+      - ex-cont-3c
+      - ex-cont-4
+      - ex-cont-6
+      - quiz:
+          - qcm-cont-3
+          - qcm-cont-4
+      - quiz:
+          - qcm-cont-5
+          - qcm-cont-6

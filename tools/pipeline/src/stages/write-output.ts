@@ -1,13 +1,12 @@
 import fs from 'fs'
 import path from 'path'
 import { GENERATED_DIR } from '../config.js'
-import type { RawProgramme, Catalogue, ResolvedCours, ResolvedSerie, CompiledQcm } from '../types.js'
+import type { RawProgramme, Catalogue, ResolvedLivret, CompiledQcm } from '../types.js'
 
 interface WriteInput {
   programmes: RawProgramme[]
   catalogues: Catalogue[]
-  resolvedCours: ResolvedCours[]
-  resolvedSeries: ResolvedSerie[]
+  resolvedLivrets: ResolvedLivret[]
   htmlFiles: Map<string, string>
   qcmFiles: Map<string, CompiledQcm>
   rawMdxFiles: Map<string, string>
@@ -30,13 +29,11 @@ export async function writeOutput(input: WriteInput): Promise<number> {
   }
 
   const atomsDir = path.join(GENERATED_DIR, 'atoms')
-  const coursDir = path.join(GENERATED_DIR, 'cours')
-  const seriesDir = path.join(GENERATED_DIR, 'series')
+  const livretsDir = path.join(GENERATED_DIR, 'livrets')
   const cataloguesDir = path.join(GENERATED_DIR, 'catalogues')
 
   ensureDir(atomsDir)
-  ensureDir(coursDir)
-  ensureDir(seriesDir)
+  ensureDir(livretsDir)
   ensureDir(cataloguesDir)
 
   // Programmes
@@ -52,7 +49,7 @@ export async function writeOutput(input: WriteInput): Promise<number> {
     description: p.description,
     order: p.order,
     visible: p.visible,
-    active: input.resolvedCours.some(c => c.programme === p.id && c.visible),
+    active: input.resolvedLivrets.some(l => l.programme === p.id && l.visible),
   }))
   writeJson(path.join(GENERATED_DIR, 'parcours.json'), parcoursList)
   count++
@@ -63,15 +60,9 @@ export async function writeOutput(input: WriteInput): Promise<number> {
     count++
   }
 
-  // Cours
-  for (const cours of input.resolvedCours) {
-    writeJson(path.join(coursDir, `${cours.slug}.json`), cours)
-    count++
-  }
-
-  // Series
-  for (const serie of input.resolvedSeries) {
-    writeJson(path.join(seriesDir, `${serie.slug}.json`), serie)
+  // Livrets
+  for (const livret of input.resolvedLivrets) {
+    writeJson(path.join(livretsDir, `${livret.slug}.json`), livret)
     count++
   }
 
@@ -103,8 +94,7 @@ export async function writeOutput(input: WriteInput): Promise<number> {
         qcm: input.qcmFiles.size,
         rawMdx: input.rawMdxFiles.size,
       },
-      cours: input.resolvedCours.length,
-      series: input.resolvedSeries.length,
+      livrets: input.resolvedLivrets.length,
       programmes: input.programmes.length,
       parcours: parcoursList.length,
       catalogues: input.catalogues.length,

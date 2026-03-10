@@ -1,6 +1,8 @@
 /**
  * QCM compiler — extracts :::question, :::option, :::explanation
  * directive blocks and compiles each part to HTML separately.
+ *
+ * correctIndex is derived from :::option{correct} position in the content.
  */
 
 import { compileMdxToHtml } from './compile-mdx.js'
@@ -13,12 +15,22 @@ export async function compileQcm(atom: RawAtom): Promise<CompiledQcm> {
   const questionMatch = raw.match(/^:::question\s*\n([\s\S]*?)\n:::\s*$/m)
   const questionText = (questionMatch?.[1] ?? '').trim()
 
-  // Extract all :::option or :::option{correct} blocks
+  // Extract all :::option or :::option{correct} blocks, tracking which is correct
   const optionTexts: string[] = []
-  const optionRegex = /^:::option(?:\{correct\})?\s*\n([\s\S]*?)\n:::\s*$/gm
+  let correctIndex = -1
+  const optionRegex = /^:::option(\{correct\})?\s*\n([\s\S]*?)\n:::\s*$/gm
   let match
+  let optionIdx = 0
   while ((match = optionRegex.exec(raw)) !== null) {
-    optionTexts.push((match[1] ?? '').trim())
+    if (match[1] === '{correct}') {
+      correctIndex = optionIdx
+    }
+    optionTexts.push((match[2] ?? '').trim())
+    optionIdx++
+  }
+
+  if (correctIndex === -1) {
+    throw new Error(`QCM "${atom.id}" has no :::option{correct} — exactly one option must be marked {correct}`)
   }
 
   // Extract :::explanation ... :::
@@ -40,7 +52,7 @@ export async function compileQcm(atom: RawAtom): Promise<CompiledQcm> {
     title: atom.title,
     enonce: enonce ?? '',
     options: compiledOptions,
-    correctIndex: atom.correctOption ?? 0,
+    correctIndex,
     explication,
     timeMinutes: atom.timeMinutes,
   }
