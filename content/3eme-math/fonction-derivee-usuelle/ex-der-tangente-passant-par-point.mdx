@@ -1,0 +1,47 @@
+---
+type: exercise
+title: "Tangentes issues d'un point exterieur"
+difficulty: 2
+timeMinutes: 15
+category: probleme
+tags: [derivation, tangente, equation, polynome]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}$ par $f(x) = x^2 - 2x + 3$.
+
+Soit $\mathcal{C}_f$ sa courbe representative et $A(0, 1)$.
+
+1. Verifier que $A$ n'appartient pas a $\mathcal{C}_f$.
+2. Montrer que la tangente a $\mathcal{C}_f$ au point d'abscisse $a$ a pour equation $y = (2a - 2)x - a^2 + 3$.
+3. Determiner les valeurs de $a$ pour que cette tangente passe par $A$.
+4. Ecrire les equations des tangentes a $\mathcal{C}_f$ issues de $A$.
+:::
+
+:::solution
+**1.** Si $A(0, 1) \in \mathcal{C}_f$, alors $f(0) = 1$. Or $f(0) = 0 - 0 + 3 = 3 \neq 1$.
+
+Donc $A \notin \mathcal{C}_f$.
+
+**2.** La tangente au point d'abscisse $a$ a pour equation :
+
+$$y = f'(a)(x - a) + f(a)$$
+
+$f'(x) = 2x - 2$, donc $f'(a) = 2a - 2$ et $f(a) = a^2 - 2a + 3$.
+
+$$y = (2a - 2)(x - a) + a^2 - 2a + 3 = (2a - 2)x - 2a^2 + 2a + a^2 - 2a + 3$$
+
+$$y = (2a - 2)x - a^2 + 3$$
+
+**3.** La tangente passe par $A(0, 1)$ si $1 = (2a - 2) \times 0 - a^2 + 3$ :
+
+$$1 = -a^2 + 3 \quad \Leftrightarrow \quad a^2 = 2 \quad \Leftrightarrow \quad a = \pm\sqrt{2}$$
+
+**4.** Pour $a = \sqrt{2}$ : pente $= 2\sqrt{2} - 2$ et la tangente est $y = (2\sqrt{2} - 2)x + 1$.
+
+Pour $a = -\sqrt{2}$ : pente $= -2\sqrt{2} - 2$ et la tangente est $y = (-2\sqrt{2} - 2)x + 1$.
+
+Les deux tangentes issues de $A$ sont :
+
+$$T_1 : y = (2\sqrt{2} - 2)x + 1 \quad \text{et} \quad T_2 : y = -(2\sqrt{2} + 2)x + 1$$
+:::

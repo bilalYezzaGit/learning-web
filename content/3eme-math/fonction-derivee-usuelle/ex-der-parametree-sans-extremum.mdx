@@ -1,0 +1,70 @@
+---
+type: exercise
+title: "Valeurs du parametre sans extremum"
+difficulty: 2
+timeMinutes: 15
+category: probleme
+tags: [derivation, parametres, monotonie, discriminant]
+---
+
+:::enonce
+Soit $f_m$ la fonction definie sur $\mathbb{R}$ par :
+
+$$f_m(x) = x^3 + mx^2 + (2m - 3)x + 1$$
+
+ou $m$ est un parametre reel.
+
+1. Calculer $f'_m(x)$.
+2. Montrer que $f'_m$ est un trinome du second degre en $x$. Calculer son discriminant $\Delta$.
+3. Pour quelles valeurs de $m$, $f_m$ est-elle monotone sur $\mathbb{R}$ (pas d'extremum) ?
+4. Pour $m = 3$ : dresser le tableau de variation de $f_3$.
+:::
+
+:::solution
+**1.** $f'_m(x) = 3x^2 + 2mx + (2m - 3)$.
+
+**2.** $f'_m$ est un trinome de la forme $ax^2 + bx + c$ avec $a = 3$, $b = 2m$, $c = 2m - 3$.
+
+$$\Delta = (2m)^2 - 4 \times 3 \times (2m - 3) = 4m^2 - 24m + 36 = 4(m^2 - 6m + 9) = 4(m - 3)^2$$
+
+**3.** $f_m$ est monotone sur $\mathbb{R}$ lorsque $f'_m$ garde un signe constant, c'est-a-dire lorsque $f'_m(x) \geq 0$ pour tout $x$ (car $a = 3 > 0$).
+
+Cela se produit lorsque $\Delta \leq 0$, soit $4(m-3)^2 \leq 0$.
+
+Puisque $(m-3)^2 \geq 0$, on a $\Delta = 0$ uniquement pour $m = 3$. Pour $m \neq 3$, $\Delta > 0$ et $f'_m$ a deux racines reelles, donc $f'_m$ change de signe.
+
+Toutefois, pour $m = 3$ : $f'_3(x) = 3x^2 + 6x + 3 = 3(x+1)^2 \geq 0$ pour tout $x$, et $f'_3(-1) = 0$ sans changement de signe.
+
+Donc $f_m$ est **monotone (croissante)** sur $\mathbb{R}$ **uniquement pour $m = 3$**.
+
+**4.** Pour $m = 3$ : $f_3(x) = x^3 + 3x^2 + 3x + 1 = (x+1)^3$.
+
+$f'_3(x) = 3(x+1)^2 \geq 0$ pour tout $x$, donc $f_3$ est **croissante sur $\mathbb{R}$**.
+
+$f'_3(-1) = 0$ mais $f'_3$ ne change pas de signe : **pas d'extremum**.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'_3(x)$], "s"),
+    ([variation de $f_3$], "v"),
+  ),
+  domain: ($-infinity$, $-1$, $+infinity$),
+  contents: (
+    ($+$, ("0", $+$)),
+    (
+      (bottom, $-infinity$),
+      (center, $0$),
+      (top, $+infinity$),
+    ),
+  ),
+)
+```
+:::
+
+:::methode
+Pour determiner si une fonction cubique est monotone : calculer $\Delta$ du trinome $f'$. Si $\Delta \leq 0$, alors $f'$ garde un signe constant (celui de $a$), donc $f$ est monotone.
+:::

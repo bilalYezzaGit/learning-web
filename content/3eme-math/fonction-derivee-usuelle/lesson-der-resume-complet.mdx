@@ -1,0 +1,75 @@
+---
+type: lesson
+title: "Resume : derivees, variations et extrema"
+difficulty: 1
+timeMinutes: 10
+tags: [derivation, formules, variations, extrema]
+---
+
+### Formules de derivation
+
+:::property[Derivees usuelles]
+| $f(x)$ | $f'(x)$ | Domaine |
+|---------|---------|---------|
+| $c$ (constante) | $0$ | $\mathbb{R}$ |
+| $x^n$ | $nx^{n-1}$ | $\mathbb{R}$ |
+| $\dfrac{1}{x}$ | $-\dfrac{1}{x^2}$ | $\mathbb{R}^*$ |
+| $\dfrac{1}{x^n}$ | $-\dfrac{n}{x^{n+1}}$ | $\mathbb{R}^*$ |
+| $\sqrt{x}$ | $\dfrac{1}{2\sqrt{x}}$ | $]0, +\infty[$ |
+:::
+
+### Operations
+
+:::property[Regles de derivation]
+Soient $u$ et $v$ deux fonctions derivables :
+
+- **Somme** : $(u + v)' = u' + v'$
+- **Produit par un scalaire** : $(\alpha u)' = \alpha u'$
+- **Produit** : $(u \times v)' = u'v + uv'$
+- **Inverse** : $\left(\dfrac{1}{v}\right)' = -\dfrac{v'}{v^2}$
+- **Quotient** : $\left(\dfrac{u}{v}\right)' = \dfrac{u'v - uv'}{v^2}$
+- **Puissance** : $(u^n)' = n \cdot u' \cdot u^{n-1}$
+- **Racine** : $(\sqrt{u})' = \dfrac{u'}{2\sqrt{u}}$ (si $u > 0$)
+- **Composition affine** : si $g(x) = f(ax+b)$, alors $g'(x) = a \cdot f'(ax+b)$
+:::
+
+### Derivee et sens de variation
+
+:::theorem[Lien derivee-variations]
+Soit $f$ derivable sur un intervalle $I$ :
+
+- $f' \geq 0$ sur $I$ $\Leftrightarrow$ $f$ **croissante** sur $I$
+- $f' \leq 0$ sur $I$ $\Leftrightarrow$ $f$ **decroissante** sur $I$
+- $f' = 0$ sur $I$ $\Leftrightarrow$ $f$ **constante** sur $I$
+:::
+
+:::remark
+Si $f$ est **paire**, alors $f'$ est **impaire** (et reciproquement).
+:::
+
+### Extrema
+
+:::definition[Extremum local]
+$f$ admet un **maximum local** en $a$ s'il existe un intervalle ouvert $J$ contenant $a$ tel que $f(x) \leq f(a)$ pour tout $x \in J \cap D_f$.
+:::
+
+:::theorem[Conditions d'extremum]
+- **Condition necessaire** : si $f$ admet un extremum en $a$, alors $f'(a) = 0$.
+- **Condition suffisante** : si $f'(a) = 0$ et $f'$ **change de signe** en $a$, alors $f$ admet un extremum local en $a$.
+:::
+
+:::attention
+$f'(a) = 0$ **ne suffit pas** pour un extremum. Contre-exemple : $f(x) = x^3$, $f'(0) = 0$ mais pas d'extremum en $0$.
+:::
+
+### Construction du tableau de variation
+
+:::example[Methode]
+Pour dresser le tableau de variation de $f$ :
+
+1. Calculer $f'(x)$
+2. Factoriser $f'(x)$ et trouver ses zeros
+3. Dresser le tableau de signes de $f'$
+4. En deduire les fleches de variation ($\nearrow$ si $f' > 0$, $\searrow$ si $f' < 0$)
+5. Calculer les valeurs de $f$ aux bornes et aux zeros de $f'$
+:::

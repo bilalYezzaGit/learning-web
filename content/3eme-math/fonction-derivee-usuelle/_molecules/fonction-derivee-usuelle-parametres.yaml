@@ -1,0 +1,17 @@
+kind: serie
+title: "Parametres, tangentes et inegalites"
+description: "Problemes standards avec parametres (trouver m pour un extremum donne), tangentes (paralleles a une droite, issues d'un point), et inegalites par la derivee."
+difficulty: 2
+estimatedMinutes: 105
+tags: [derivation, parametres, tangente, inegalite]
+trimestre: 1
+modules: [fonction-derivee-usuelle]
+
+steps:
+  - ex-der-parametree-extremum-donne
+  - ex-der-parametree-sans-extremum
+  - ex-der-tangente-parallele-droite
+  - ex-der-tangente-passant-par-point
+  - ex-der-inegalite-simple
+  - ex-der-nombre-solutions-parametre
+  - ex-der-etude-rationnelle-asymptote

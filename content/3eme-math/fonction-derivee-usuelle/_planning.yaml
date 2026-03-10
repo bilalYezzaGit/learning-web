@@ -1,0 +1,335 @@
+kind: planning
+module: "fonction-derivee-usuelle"
+programme: "3eme-math"
+kb_source: "meta_system/kb/06-fonction-derivee.md"
+status: generated
+
+# ============================================================================
+# Design intent
+# ============================================================================
+# Problemes USUELS et STANDARDS de derivation — style manuel scolaire tunisien.
+# PAS d'exercices d'application directe (pas de "calculer f'").
+# PAS de problemes geometriques (rectangle inscrit, triangle, distance a une courbe).
+# PAS de problemes complexes ou hors du cadre standard.
+# Chaque exercice est un PROBLEME COMPLET multi-etapes mais CLASSIQUE :
+#   etude de fonction rationnelle, polynomiale, avec racine,
+#   parametree, tableau de variation, tangentes, inegalites.
+# Resume de cours COURT (1 lecon compacte).
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Praxeologies couvertes
+# ----------------------------------------------------------------------------
+
+praxeologies:
+  - id: Prax1
+    nom: "Calculer la derivee d'une fonction simple"
+    difficulte: 1
+  - id: Prax2a
+    nom: "Calculer la derivee d'un produit ou quotient"
+    difficulte: 2
+  - id: Prax2b
+    nom: "Calculer la derivee avec sqrt(f)"
+    difficulte: 2
+  - id: Prax4
+    nom: "Etudier les variations a l'aide de la derivee"
+    difficulte: 2
+  - id: Prax5
+    nom: "Determiner les extrema a partir du tableau de variation"
+    difficulte: 2
+  - id: Prax6
+    nom: "Determiner les extrema avec parametres"
+    difficulte: 2
+  - id: Prax8
+    nom: "Prouver une inegalite a l'aide de la derivee"
+    difficulte: 2
+  - id: Prax10
+    nom: "Etudier les tangentes et leur position par rapport a la courbe"
+    difficulte: 2
+
+# ----------------------------------------------------------------------------
+# Molecules
+# ----------------------------------------------------------------------------
+
+molecules:
+
+  # ==========================================================================
+  # COURS (resume ultra-compact)
+  # ==========================================================================
+  - slug: "fonction-derivee-usuelle"
+    kind: cours
+    title: "Fonction derivee — Resume"
+    description: >-
+      Resume compact des outils : formules de derivation, lien
+      derivee-variations, extrema.
+    trimester: T1
+    order: 7
+
+    sections:
+
+      - label: "Rappels et formules"
+        atoms:
+          - slug: "lesson-der-resume-complet"
+            type: lesson
+            title: "Resume : derivees, variations et extrema"
+            praxeologies: [Prax1, Prax2a, Prax2b, Prax4, Prax5]
+            contenu: >-
+              Resume en une lecon : formules de derivation (tableau complet),
+              operations (somme, produit, quotient, sqrt(f), f(ax+b)),
+              theoreme variations-derivee (f'>=0 <=> f croissante),
+              extrema (CN : f'(a)=0, CS : changement de signe),
+              construction du tableau de variation.
+            difficulte: 1
+            timeMinutes: 10
+
+  # ==========================================================================
+  # SERIE 1 : Problemes usuels d'etude de fonctions
+  # ==========================================================================
+  - slug: "fonction-derivee-usuelle-etudes"
+    kind: serie
+    title: "Etudes de fonctions usuelles"
+    description: >-
+      Problemes standards d'etude de fonctions : polynomes, rationnelles,
+      avec racines. Chaque probleme suit le schema classique :
+      derivee, signe, tableau de variation, extrema, tangentes.
+    difficulte: 2
+    tags: ["derivee", "variations", "etude-fonction"]
+
+    atoms:
+      - slug: "ex-der-etude-polynome-degre3"
+        type: exercise
+        title: "Etude complete d'un polynome de degre 3"
+        praxeologies: [Prax1, Prax4, Prax5, Prax10]
+        category: probleme
+        contenu: >-
+          f(x) = x^3 - 3x^2 + 4.
+          1) Calculer f'(x) et factoriser.
+          2) Dresser le tableau de signes de f'.
+          3) Dresser le tableau de variation de f. Preciser les extrema.
+          4) Montrer que f(x) = 0 admet exactement deux solutions (TVI + tableau).
+          5) Determiner l'equation de la tangente au point d'abscisse 1.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-der-etude-rationnelle-simple"
+        type: exercise
+        title: "Etude d'une fonction rationnelle"
+        praxeologies: [Prax2a, Prax4, Prax5, Prax10]
+        category: probleme
+        contenu: >-
+          f(x) = (x^2 - 4x + 5)/(x - 2).
+          1) Determiner le domaine de definition.
+          2) Calculer f'(x) et simplifier.
+          3) Etudier le signe de f' et dresser le tableau de variation.
+          4) Preciser les extrema locaux et leurs valeurs.
+          5) Determiner la tangente au point d'abscisse 0.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-der-etude-racine-carree"
+        type: exercise
+        title: "Etude d'une fonction avec racine carree"
+        praxeologies: [Prax2b, Prax4, Prax5]
+        category: probleme
+        contenu: >-
+          f(x) = x.sqrt(4-x^2).
+          1) Determiner le domaine de definition de f.
+          2) Montrer que f est impaire. Que peut-on en deduire pour l'etude ?
+          3) Calculer f'(x) pour x dans ]0, 2[.
+          4) Etudier le signe de f' et dresser le tableau de variation sur [0, 2].
+          5) Completer le tableau de variation sur [-2, 2] par parite.
+          6) Preciser le maximum et le minimum de f.
+        difficulte: 2
+        timeMinutes: 20
+
+      - slug: "ex-der-etude-quotient-trinome"
+        type: exercise
+        title: "Etude de f(x) = (ax^2+bx+c)/(x+d)"
+        praxeologies: [Prax2a, Prax4, Prax5]
+        category: probleme
+        contenu: >-
+          f(x) = (x^2 + 2x + 3)/(x + 1).
+          1) Montrer que f(x) = x + 1 + 2/(x+1). Preciser Df.
+          2) Calculer f'(x) a partir de cette ecriture.
+          3) Etudier le signe de f' et dresser le tableau de variation.
+          4) Montrer que f admet un minimum local et un maximum local. Les preciser.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-der-etude-produit-facteurs"
+        type: exercise
+        title: "Etude d'un produit de facteurs affines"
+        praxeologies: [Prax1, Prax4, Prax5, Prax10]
+        category: probleme
+        contenu: >-
+          f(x) = (x-1)^2(x+2).
+          1) Developper f(x) et calculer f'(x).
+          2) Factoriser f'(x).
+          3) Dresser le tableau de variation de f. Preciser les extrema.
+          4) Determiner les points de la courbe ou la tangente est horizontale.
+          5) Combien de solutions a l'equation f(x) = k selon les valeurs de k ?
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-der-etude-inverse-trinome"
+        type: exercise
+        title: "Variations d'une fonction inverse de trinome"
+        praxeologies: [Prax2a, Prax4, Prax5]
+        category: probleme
+        contenu: >-
+          f(x) = 1/(x^2 - 2x + 2).
+          1) Montrer que f est definie sur R tout entier.
+          2) Calculer f'(x).
+          3) Etudier le signe de f' et dresser le tableau de variation.
+          4) Preciser le maximum de f et la valeur en laquelle il est atteint.
+          5) Montrer que f est paire par rapport a x=1 (i.e. f(1+t) = f(1-t)).
+        difficulte: 2
+        timeMinutes: 15
+
+  # ==========================================================================
+  # SERIE 2 : Problemes avec parametres, tangentes et inegalites
+  # ==========================================================================
+  - slug: "fonction-derivee-usuelle-parametres"
+    kind: serie
+    title: "Parametres, tangentes et inegalites"
+    description: >-
+      Problemes standards avec parametres (trouver m pour un extremum donne),
+      tangentes (paralleles a une droite, issues d'un point),
+      et inegalites par la derivee.
+    difficulte: 2
+    tags: ["derivee", "parametres", "tangente", "inegalite"]
+
+    atoms:
+      - slug: "ex-der-parametree-extremum-donne"
+        type: exercise
+        title: "Parametre pour un extremum en un point donne"
+        praxeologies: [Prax6, Prax4, Prax5]
+        category: probleme
+        contenu: >-
+          f_m(x) = x^3 - mx^2 + (m+2)x - 1, m reel.
+          1) Calculer f'_m(x).
+          2) Pour quelle valeur de m, f_m admet-elle un extremum en x=1 ?
+          3) Pour cette valeur de m, preciser la nature de l'extremum (max ou min).
+          4) Dresser le tableau de variation complet de f pour cette valeur de m.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-der-parametree-sans-extremum"
+        type: exercise
+        title: "Valeurs du parametre sans extremum"
+        praxeologies: [Prax6, Prax4]
+        category: probleme
+        contenu: >-
+          f_m(x) = x^3 + mx^2 + (2m-3)x + 1, m reel.
+          1) Calculer f'_m(x).
+          2) Montrer que f'_m est un trinome du second degre en x. Calculer Delta.
+          3) Pour quelles valeurs de m, f_m est-elle monotone sur R (pas d'extremum) ?
+          4) Pour m = 3 : dresser le tableau de variation de f_3.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-der-tangente-parallele-droite"
+        type: exercise
+        title: "Tangentes paralleles a une droite donnee"
+        praxeologies: [Prax2a, Prax4, Prax10]
+        category: probleme
+        contenu: >-
+          f(x) = x^3 - 6x^2 + 9x + 1.
+          1) Calculer f'(x) et factoriser.
+          2) Dresser le tableau de variation de f.
+          3) Determiner les points de la courbe C_f ou la tangente est
+          parallele a la droite D : y = -3x + 5.
+          4) Ecrire les equations de ces tangentes.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-der-tangente-passant-par-point"
+        type: exercise
+        title: "Tangentes issues d'un point exterieur"
+        praxeologies: [Prax4, Prax10]
+        category: probleme
+        contenu: >-
+          f(x) = x^2 - 2x + 3. Soit C_f sa courbe et A(0, 1).
+          1) Verifier que A n'appartient pas a C_f.
+          2) Montrer que la tangente a C_f au point d'abscisse a a pour
+          equation y = (2a-2)x - a^2 + 3.
+          3) Determiner les valeurs de a pour que cette tangente passe par A.
+          4) Ecrire les equations des tangentes a C_f issues de A.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-der-inegalite-simple"
+        type: exercise
+        title: "Inegalite classique par la derivee"
+        praxeologies: [Prax8, Prax4]
+        category: probleme
+        contenu: >-
+          1) Soit h(x) = x - sin(x) pour x >= 0. Non, restons sans trigo.
+          Soit h(x) = (1+x)^2 - (1+2x) pour x >= 0.
+          a) Calculer h'(x) et etudier son signe.
+          b) En deduire que pour tout x >= 0 : (1+x)^2 >= 1+2x.
+          2) Soit g(x) = x^3 - x pour x dans [0, 1].
+          a) Etudier les variations de g sur [0, 1].
+          b) En deduire que pour tout x dans [0, 1] : x^3 <= x.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-der-nombre-solutions-parametre"
+        type: exercise
+        title: "Nombre de solutions selon un parametre"
+        praxeologies: [Prax4, Prax5]
+        category: probleme
+        contenu: >-
+          f(x) = -x^3 + 3x + 1.
+          1) Calculer f'(x) et etudier son signe.
+          2) Dresser le tableau de variation complet de f.
+          3) Discuter selon la valeur de k le nombre de solutions
+          de l'equation f(x) = k.
+          4) Encadrer a 0.5 pres chaque solution de f(x) = 0.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-der-etude-rationnelle-asymptote"
+        type: exercise
+        title: "Fonction rationnelle avec asymptote"
+        praxeologies: [Prax2a, Prax4, Prax5]
+        category: probleme
+        contenu: >-
+          f(x) = (2x^2 + x - 1)/(x + 1).
+          1) Determiner le domaine de definition.
+          2) Effectuer la division euclidienne et montrer que f(x) = 2x - 1.
+          Oups, ca se simplifie. Prenons plutot :
+          f(x) = (2x^2 + 3x + 4)/(x + 1).
+          1) Determiner Df. Montrer que f(x) = 2x + 1 + 3/(x+1).
+          2) Calculer f'(x). Etudier le signe de f'.
+          3) Dresser le tableau de variation de f.
+          4) Preciser les extrema locaux.
+        difficulte: 2
+        timeMinutes: 15
+
+# ============================================================================
+# Resume du planning
+# ============================================================================
+#
+# Cours : 1 lecon = 1 atome
+# Serie 1 (etudes usuelles) : 6 problemes
+# Serie 2 (parametres/tangentes/inegalites) : 7 problemes
+# ---
+# Total : 14 atomes (1 lesson, 13 exercise)
+#
+# Repartition :
+#   lesson : 7% (1/14)
+#   exercise : 93% (13/14) — tous category probleme, difficulte 2
+#
+# Praxeologies couvertes : 8/8
+#   Prax1  -> lesson, ex-polynome-degre3, ex-produit-facteurs
+#   Prax2a -> lesson, ex-rationnelle-simple, ex-quotient-trinome,
+#             ex-inverse-trinome, ex-tangente-parallele, ex-rationnelle-asymptote
+#   Prax2b -> lesson, ex-racine-carree
+#   Prax4  -> tous les exercices
+#   Prax5  -> tous les exercices
+#   Prax6  -> ex-parametree-extremum, ex-parametree-sans-extremum
+#   Prax8  -> ex-inegalite-simple
+#   Prax10 -> ex-tangente-parallele, ex-tangente-passant-par-point
+#
+# ============================================================================

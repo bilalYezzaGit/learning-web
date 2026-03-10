@@ -1,0 +1,50 @@
+---
+type: exercise
+title: "Inegalites classiques par la derivee"
+difficulty: 2
+timeMinutes: 15
+category: probleme
+tags: [derivation, inegalite, variations]
+---
+
+:::enonce
+**Partie A.** Soit $h$ la fonction definie sur $[0, +\infty[$ par $h(x) = (1 + x)^2 - (1 + 2x)$.
+
+1. Calculer $h'(x)$ et etudier son signe sur $[0, +\infty[$.
+2. En deduire que pour tout $x \geq 0$ : $(1 + x)^2 \geq 1 + 2x$.
+
+**Partie B.** Soit $g$ la fonction definie sur $[0, 1]$ par $g(x) = x - x^3$.
+
+1. Calculer $g'(x)$ et etudier les variations de $g$ sur $[0, 1]$.
+2. En deduire que pour tout $x \in [0, 1]$ : $x^3 \leq x$.
+:::
+
+:::solution
+**Partie A.**
+
+**1.** $h(x) = (1+x)^2 - 1 - 2x = 1 + 2x + x^2 - 1 - 2x = x^2$.
+
+Donc $h'(x) = 2x \geq 0$ pour tout $x \geq 0$.
+
+**2.** $h$ est croissante sur $[0, +\infty[$ et $h(0) = 0$.
+
+Donc pour tout $x \geq 0$ : $h(x) \geq h(0) = 0$, c'est-a-dire :
+
+$$(1 + x)^2 \geq 1 + 2x$$
+
+**Partie B.**
+
+**1.** $g(x) = x - x^3$, donc $g'(x) = 1 - 3x^2$.
+
+$g'(x) = 0 \Leftrightarrow x = \dfrac{1}{\sqrt{3}}$.
+
+Sur $\left[0, \dfrac{1}{\sqrt{3}}\right]$ : $g'(x) \geq 0$, $g$ croissante.
+
+Sur $\left[\dfrac{1}{\sqrt{3}}, 1\right]$ : $g'(x) \leq 0$, $g$ decroissante.
+
+$g(0) = 0$ et $g(1) = 1 - 1 = 0$.
+
+**2.** Puisque $g(0) = 0$, $g(1) = 0$ et $g$ est positive sur $[0, 1]$ (elle monte puis redescend a $0$) :
+
+Pour tout $x \in [0, 1]$ : $g(x) = x - x^3 \geq 0$, donc $x^3 \leq x$.
+:::

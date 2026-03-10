@@ -1,0 +1,15 @@
+kind: cours
+title: "Fonction derivee — Resume"
+description: "Resume compact des outils : formules de derivation, lien derivee-variations, extrema."
+trimester: T1
+order: 7
+estimatedMinutes: 10
+objectives:
+  - "Connaitre les formules de derivation (somme, produit, quotient, racine, composition)"
+  - "Maitriser le lien derivee-variations et les conditions d'extremum"
+  - "Savoir construire un tableau de variation a partir de la derivee"
+
+sections:
+  - label: "Rappels et formules"
+    steps:
+      - lesson-der-resume-complet

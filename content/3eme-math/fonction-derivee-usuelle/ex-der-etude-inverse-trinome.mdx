@@ -1,0 +1,67 @@
+---
+type: exercise
+title: "Variations d'une fonction inverse de trinome"
+difficulty: 2
+timeMinutes: 15
+category: probleme
+tags: [derivation, quotient, variations, extrema, symetrie]
+---
+
+:::enonce
+Soit $f$ la fonction definie par :
+
+$$f(x) = \frac{1}{x^2 - 2x + 2}$$
+
+1. Montrer que $f$ est definie sur $\mathbb{R}$ tout entier.
+2. Calculer $f'(x)$.
+3. Etudier le signe de $f'$ et dresser le tableau de variation de $f$.
+4. Preciser le maximum de $f$ et la valeur en laquelle il est atteint.
+5. Montrer que $f(1 + t) = f(1 - t)$ pour tout $t \in \mathbb{R}$.
+:::
+
+:::solution
+**1.** $x^2 - 2x + 2 = (x - 1)^2 + 1 \geq 1 > 0$ pour tout $x \in \mathbb{R}$.
+
+Donc le denominateur ne s'annule jamais et $D_f = \mathbb{R}$.
+
+**2.** $f(x) = (x^2 - 2x + 2)^{-1}$, donc :
+
+$$f'(x) = -\frac{2x - 2}{(x^2 - 2x + 2)^2} = \frac{-2(x - 1)}{(x^2 - 2x + 2)^2}$$
+
+**3.** $(x^2 - 2x + 2)^2 > 0$ pour tout $x$, donc le signe de $f'$ est celui de $-2(x-1)$, soit l'oppose du signe de $x - 1$.
+
+$f'(x) = 0 \Leftrightarrow x = 1$.
+
+$f(1) = \dfrac{1}{1 - 2 + 2} = 1$.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $1$, $+infinity$),
+  contents: (
+    ($+$, ("0", $-$)),
+    (
+      (bottom, $0$),
+      (top, $1$),
+      (bottom, $0$),
+    ),
+  ),
+)
+```
+
+**4.** $f$ admet un **maximum absolu** en $x = 1$ egal a $f(1) = 1$.
+
+**5.** Pour tout $t \in \mathbb{R}$ :
+
+$f(1 + t) = \dfrac{1}{(1+t)^2 - 2(1+t) + 2} = \dfrac{1}{t^2 + 2t + 1 - 2 - 2t + 2} = \dfrac{1}{t^2 + 1}$.
+
+$f(1 - t) = \dfrac{1}{(1-t)^2 - 2(1-t) + 2} = \dfrac{1}{t^2 - 2t + 1 - 2 + 2t + 2} = \dfrac{1}{t^2 + 1}$.
+
+Donc $f(1+t) = f(1-t)$ : la courbe de $f$ admet la droite $x = 1$ comme **axe de symetrie**.
+:::

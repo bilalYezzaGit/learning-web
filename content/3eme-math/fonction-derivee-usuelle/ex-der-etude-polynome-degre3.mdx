@@ -1,0 +1,70 @@
+---
+type: exercise
+title: "Etude complete d'un polynome de degre 3"
+difficulty: 2
+timeMinutes: 15
+category: probleme
+tags: [derivation, variations, extrema, tangente, polynome]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}$ par $f(x) = x^3 - 3x^2 + 4$.
+
+1. Calculer $f'(x)$ et factoriser.
+2. Dresser le tableau de signes de $f'$.
+3. Dresser le tableau de variation de $f$. Preciser les extrema.
+4. Montrer que l'equation $f(x) = 0$ admet exactement deux solutions.
+5. Determiner l'equation de la tangente a la courbe de $f$ au point d'abscisse $1$.
+:::
+
+:::solution
+**1.** $f'(x) = 3x^2 - 6x = 3x(x - 2)$.
+
+**2.** $f'(x) = 0 \Leftrightarrow x = 0$ ou $x = 2$.
+
+| $x$ | $-\infty$ | | $0$ | | $2$ | | $+\infty$ |
+|-----|-----------|--|-----|--|-----|--|-----------|
+| $3x$ | $-$ | | $0$ | $+$ | $+$ | | $+$ |
+| $x-2$ | $-$ | | $-$ | $-$ | $0$ | | $+$ |
+| $f'(x)$ | $+$ | | $0$ | $-$ | $0$ | | $+$ |
+
+**3.** $f(0) = 4$ et $f(2) = 8 - 12 + 4 = 0$.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $0$, $2$, $+infinity$),
+  contents: (
+    ($+$, ("0", $-$), ("0", $+$)),
+    (
+      (bottom, $-infinity$),
+      (top, $4$),
+      (bottom, $0$),
+      (top, $+infinity$),
+    ),
+  ),
+)
+```
+
+$f$ admet un **maximum local** en $x = 0$ egal a $4$ et un **minimum local** en $x = 2$ egal a $0$.
+
+**4.** D'apres le tableau de variation :
+
+- Sur $]-\infty, 0]$ : $f$ est croissante de $-\infty$ a $4$. Par le TVI, $f(x) = 0$ admet exactement une solution $x_1 < 0$.
+- Sur $[0, 2]$ : $f$ decroit de $4$ a $0$, donc $f(x) > 0$ sur $]0, 2[$ et $f(2) = 0$. Donc $x_2 = 2$ est solution.
+- Sur $[2, +\infty[$ : $f$ est croissante de $0$ a $+\infty$, donc $f(x) > 0$ pour $x > 2$. Pas de solution.
+
+L'equation $f(x) = 0$ admet exactement **deux solutions** : $x_1 < 0$ et $x_2 = 2$.
+
+**5.** $f(1) = 1 - 3 + 4 = 2$ et $f'(1) = 3 - 6 = -3$.
+
+L'equation de la tangente au point d'abscisse $1$ est :
+
+$$y = f'(1)(x - 1) + f(1) = -3(x - 1) + 2 = -3x + 5$$
+:::

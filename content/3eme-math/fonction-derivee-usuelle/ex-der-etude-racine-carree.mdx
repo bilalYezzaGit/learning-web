@@ -1,0 +1,89 @@
+---
+type: exercise
+title: "Etude d'une fonction avec racine carree"
+difficulty: 2
+timeMinutes: 20
+category: probleme
+tags: [derivation, racine-carree, parite, variations, extrema]
+---
+
+:::enonce
+Soit $f$ la fonction definie par $f(x) = x\sqrt{4 - x^2}$.
+
+1. Determiner le domaine de definition de $f$.
+2. Montrer que $f$ est impaire. Que peut-on en deduire pour l'etude ?
+3. Calculer $f'(x)$ pour $x \in ]-2, 2[$ avec $x \neq 0$.
+4. Etudier le signe de $f'$ et dresser le tableau de variation sur $[0, 2]$.
+5. Completer le tableau de variation sur $[-2, 2]$ par imparite.
+6. Preciser le maximum et le minimum de $f$.
+:::
+
+:::solution
+**1.** $f$ est definie lorsque $4 - x^2 \geq 0$, soit $x^2 \leq 4$, donc $D_f = [-2, 2]$.
+
+**2.** Pour tout $x \in [-2, 2]$ : $-x \in [-2, 2]$ et $f(-x) = (-x)\sqrt{4 - (-x)^2} = -x\sqrt{4 - x^2} = -f(x)$.
+
+Donc $f$ est **impaire**. On peut se limiter a l'etude sur $[0, 2]$ puis completer par symetrie par rapport a $O$.
+
+**3.** On ecrit $f(x) = x \cdot (4 - x^2)^{1/2}$. Par la formule du produit :
+
+$$f'(x) = 1 \cdot \sqrt{4 - x^2} + x \cdot \frac{-2x}{2\sqrt{4 - x^2}}$$
+
+$$= \sqrt{4 - x^2} - \frac{x^2}{\sqrt{4 - x^2}} = \frac{4 - x^2 - x^2}{\sqrt{4 - x^2}} = \frac{4 - 2x^2}{\sqrt{4 - x^2}}$$
+
+**4.** Sur $]0, 2[$ : $\sqrt{4 - x^2} > 0$, donc le signe de $f'$ est celui de $4 - 2x^2$.
+
+$4 - 2x^2 = 0 \Leftrightarrow x^2 = 2 \Leftrightarrow x = \sqrt{2}$ (on est sur $[0, 2]$).
+
+$f(\sqrt{2}) = \sqrt{2} \cdot \sqrt{4 - 2} = \sqrt{2} \cdot \sqrt{2} = 2$.
+
+$f(0) = 0$ et $f(2) = 2\sqrt{0} = 0$.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($0$, $sqrt(2)$, $2$),
+  contents: (
+    ($+$, ("0", $-$)),
+    (
+      (bottom, $0$),
+      (top, $2$),
+      (bottom, $0$),
+    ),
+  ),
+)
+```
+
+**5.** Par imparite, sur $[-2, 0]$ les variations sont inversees :
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-2$, $-sqrt(2)$, $0$, $sqrt(2)$, $2$),
+  contents: (
+    ($+$, ("0", $-$), ($+$), ("0", $-$)),
+    (
+      (bottom, $0$),
+      (top, $-2$),
+      (bottom, $0$),
+      (top, $2$),
+      (bottom, $0$),
+    ),
+  ),
+)
+```
+
+**6.** $f$ admet un **maximum** egal a $2$ en $x = \sqrt{2}$ et un **minimum** egal a $-2$ en $x = -\sqrt{2}$.
+:::

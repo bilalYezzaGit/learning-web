@@ -1,0 +1,72 @@
+---
+type: exercise
+title: "Nombre de solutions selon un parametre"
+difficulty: 2
+timeMinutes: 15
+category: probleme
+tags: [derivation, variations, extrema, nombre-solutions]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}$ par $f(x) = -x^3 + 3x + 1$.
+
+1. Calculer $f'(x)$ et etudier son signe.
+2. Dresser le tableau de variation complet de $f$.
+3. Discuter selon la valeur de $k$ le nombre de solutions de l'equation $f(x) = k$.
+4. Encadrer a $0{,}5$ pres chaque solution de $f(x) = 0$.
+:::
+
+:::solution
+**1.** $f'(x) = -3x^2 + 3 = -3(x^2 - 1) = -3(x - 1)(x + 1)$.
+
+$f'(x) = 0 \Leftrightarrow x = -1$ ou $x = 1$.
+
+$f'(x) > 0$ sur $]-1, 1[$ et $f'(x) < 0$ sur $]-\infty, -1[ \cup ]1, +\infty[$.
+
+**2.** $f(-1) = -(-1) + 3(-1) + 1 = 1 - 3 + 1 = -1$.
+
+$f(1) = -1 + 3 + 1 = 3$.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $-1$, $1$, $+infinity$),
+  contents: (
+    ($-$, ("0", $+$), ("0", $-$)),
+    (
+      (top, $+infinity$),
+      (bottom, $-1$),
+      (top, $3$),
+      (bottom, $-infinity$),
+    ),
+  ),
+)
+```
+
+**3.** D'apres le tableau de variation, $f$ atteint un minimum local $-1$ en $x = -1$ et un maximum local $3$ en $x = 1$.
+
+| Valeur de $k$ | Nombre de solutions |
+|:---:|:---:|
+| $k < -1$ | **1 solution** |
+| $k = -1$ | **2 solutions** |
+| $-1 < k < 3$ | **3 solutions** |
+| $k = 3$ | **2 solutions** |
+| $k > 3$ | **1 solution** |
+
+**4.** On cherche les solutions de $f(x) = 0$, soit $-x^3 + 3x + 1 = 0$.
+
+Comme $0 \in ]-1, 3[$, l'equation admet 3 solutions.
+
+- $f(-1) = -1 < 0$ et $f(-0{,}5) = 0{,}125 + 1{,}5 + 1 = 0{,}625 > 0$ : une solution dans $[-1 ; -0{,}5]$.
+- $f(0) = 1 > 0$ et $f(-0{,}5) > 0$, $f(-1) < 0$ : deja trouvee ci-dessus.
+- $f(1{,}5) = -3{,}375 + 4{,}5 + 1 = 2{,}125 > 0$ et $f(2) = -8 + 6 + 1 = -1 < 0$ : une solution dans $[1{,}5 ; 2]$.
+- Cherchons la troisieme : $f(-2) = 8 - 6 + 1 = 3 > 0$ et $f(-1) = -1 < 0$ : une solution dans $[-2 ; -1]$. Plus precisement, $f(-1{,}5) = 3{,}375 - 4{,}5 + 1 = -0{,}125 < 0$ : dans $[-2 ; -1{,}5]$. Et $f(-2) = 3 > 0$ : dans $[-2 ; -1{,}5]$.
+
+Les trois solutions sont encadrees : $x_1 \in [-2 ; -1{,}5]$, $x_2 \in [-1 ; -0{,}5]$, $x_3 \in [1{,}5 ; 2]$.
+:::

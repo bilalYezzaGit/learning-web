@@ -1,0 +1,16 @@
+kind: serie
+title: "Etudes de fonctions usuelles"
+description: "Problemes standards d'etude de fonctions : polynomes, rationnelles, avec racines. Chaque probleme suit le schema classique : derivee, signe, tableau de variation, extrema, tangentes."
+difficulty: 2
+estimatedMinutes: 95
+tags: [derivation, variations, etude-fonction]
+trimestre: 1
+modules: [fonction-derivee-usuelle]
+
+steps:
+  - ex-der-etude-polynome-degre3
+  - ex-der-etude-rationnelle-simple
+  - ex-der-etude-racine-carree
+  - ex-der-etude-quotient-trinome
+  - ex-der-etude-produit-facteurs
+  - ex-der-etude-inverse-trinome

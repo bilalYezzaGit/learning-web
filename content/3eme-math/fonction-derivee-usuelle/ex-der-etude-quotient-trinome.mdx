@@ -1,0 +1,66 @@
+---
+type: exercise
+title: "Etude de f(x) = (x^2+2x+3)/(x+1)"
+difficulty: 2
+timeMinutes: 15
+category: probleme
+tags: [derivation, quotient, division-euclidienne, variations, extrema]
+---
+
+:::enonce
+Soit $f$ la fonction definie par :
+
+$$f(x) = \frac{x^2 + 2x + 3}{x + 1}$$
+
+1. Montrer que $f(x) = x + 1 + \dfrac{2}{x + 1}$. Preciser le domaine de definition.
+2. Calculer $f'(x)$ a partir de cette ecriture.
+3. Etudier le signe de $f'$ et dresser le tableau de variation de $f$.
+4. Montrer que $f$ admet un minimum local et un maximum local. Les preciser.
+:::
+
+:::solution
+**1.** On effectue la division euclidienne de $x^2 + 2x + 3$ par $x + 1$ :
+
+$x^2 + 2x + 3 = (x + 1)(x + 1) + 2 = (x + 1)^2 + 2$.
+
+Donc $f(x) = \dfrac{(x+1)^2 + 2}{x+1} = x + 1 + \dfrac{2}{x+1}$.
+
+$f$ est definie lorsque $x + 1 \neq 0$, donc $D_f = \mathbb{R} \setminus \{-1\}$.
+
+**2.** $f(x) = x + 1 + 2(x+1)^{-1}$, donc :
+
+$$f'(x) = 1 - \frac{2}{(x+1)^2} = \frac{(x+1)^2 - 2}{(x+1)^2}$$
+
+**3.** $(x+1)^2 > 0$ pour $x \neq -1$, donc le signe de $f'$ est celui de $(x+1)^2 - 2$.
+
+$(x+1)^2 - 2 = 0 \Leftrightarrow (x+1)^2 = 2 \Leftrightarrow x + 1 = \pm\sqrt{2} \Leftrightarrow x = -1 + \sqrt{2}$ ou $x = -1 - \sqrt{2}$.
+
+$f(-1 + \sqrt{2}) = (-1+\sqrt{2}) + 1 + \dfrac{2}{\sqrt{2}} = \sqrt{2} + \sqrt{2} = 2\sqrt{2}$.
+
+$f(-1 - \sqrt{2}) = (-1-\sqrt{2}) + 1 + \dfrac{2}{-\sqrt{2}} = -\sqrt{2} - \sqrt{2} = -2\sqrt{2}$.
+
+```typst
+#import "@preview/vartable:0.2.3": tabvar
+
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $-1-sqrt(2)$, $-1$, $-1+sqrt(2)$, $+infinity$),
+  contents: (
+    ($+$, ("0", $-$), ("||", $-$), ("0", $+$)),
+    (
+      (bottom, $-infinity$),
+      (top, $-2sqrt(2)$),
+      (center, $||$),
+      (bottom, $2sqrt(2)$),
+      (top, $+infinity$),
+    ),
+  ),
+)
+```
+
+**4.** $f$ admet un **maximum local** en $x = -1 - \sqrt{2}$ egal a $-2\sqrt{2}$ et un **minimum local** en $x = -1 + \sqrt{2}$ egal a $2\sqrt{2}$.
+:::
