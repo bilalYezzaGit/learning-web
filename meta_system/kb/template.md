@@ -1,6 +1,6 @@
 # KB Module — [Nom du module]
 
-id: module_xxx
+id: module_{slug}
 niveau: 3eme-math | 4eme-math
 version: 0.1
 

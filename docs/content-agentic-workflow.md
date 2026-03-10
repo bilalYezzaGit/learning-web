@@ -28,7 +28,7 @@ Document vivant qui cartographie le systeme de contenu pilote par LLM.
 | Conventions | `docs/CONTENT-CONVENTIONS.md` | Source de verite syntaxe + structure | WF3 [3a] — reference nommage ; WF4 [4a] — reference validation |
 | **--- Validation (WF4) ---** | | | |
 | Pipeline | `tools/pipeline/` | Compilation MDX -> HTML/JSON + PDFs | WF4 [4a] — `npm run generate` compilation + validation |
-| Validation refs | `scripts/validate-content.mjs` | Integrite molecules -> atomes | WF4 [4a] — verification references croisees |
+| Validation refs | `tools/pipeline/src/stages/validate.ts` | Integrite molecules -> atomes (integre au pipeline) | WF4 [4a] — verification references croisees |
 | **--- Transversal ---** | | | |
 | Skill /content | `.claude/skills/content/SKILL.md` | Routeur workflow contenu | WF1 — `/content kb` ; WF2 — `/content plan` ; WF3 — `/content creer` ; WF4 — `/content valider` |
 
@@ -226,7 +226,7 @@ Validation multi-paliers du contenu genere (ou existant) :
 
 ```mermaid
 flowchart TD
-    Atomes[("Atomes MDX\ncontent/**/*.mdx")] --> V4a["4a — Syntaxe\nnpm run generate\n+ validate-content.mjs"]
+    Atomes[("Atomes MDX\ncontent/**/*.mdx")] --> V4a["4a — Syntaxe\nnpm run generate"]
     CONV["CONTENT-CONVENTIONS.md"] -.-> V4a
     PIPE["tools/pipeline/"] -.-> V4a
     Plan[("_planning.yaml")] -.-> V4a
@@ -237,6 +237,17 @@ flowchart TD
     V4c --> Rapport[/"Rapport pass/fail\npar palier"/]
 ```
 
+Le palier 4a (`npm run generate`) execute 6 phases internes :
+
+```mermaid
+flowchart LR
+    R["1. read\natoms + molecules"] --> V["2. validate\nreferences croisees"]
+    V --> C["3. compile\nMDX → HTML/JSON"]
+    C --> Res["4. resolve\nlivrets complets"]
+    Res --> W["5. write\nsrc/generated/"]
+    W --> P["6. generate-pdfs\npublic/pdfs/"]
+```
+
 Entree : atomes MDX (generes ou existants)
 Sortie : rapport de validation par palier
 
@@ -245,7 +256,7 @@ Sortie : rapport de validation par palier
 | Etape | Declencheur | Ressources chargees |
 |-------|-------------|---------------------|
 | 4a — Pipeline | `npm run generate` | `tools/pipeline/` (read, validate, compile, resolve, write) |
-| 4a — References | `node scripts/validate-content.mjs` | Molecules + atomes |
+| 4a — References | integre dans `npm run generate` (validate.ts) | Molecules + atomes |
 | 4a — Conventions | `/content valider {module}` | `docs/CONTENT-CONVENTIONS.md` |
 | 4b — Maths | **inexistant** | — |
 | 4c — Pedagogie | **inexistant** | — |

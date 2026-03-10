@@ -2,7 +2,7 @@ import { compileMdxToHtml } from './compile-mdx.js'
 import { compileQcm } from './compile-qcm.js'
 import type { RawAtom, CompiledQcm } from '../types.js'
 
-const CONCURRENCY = 20
+const CONCURRENCY = parseInt(process.env.COMPILE_CONCURRENCY || '20', 10)
 
 export async function compileAllAtoms(atoms: RawAtom[]): Promise<{
   htmlFiles: Map<string, string>
@@ -12,6 +12,7 @@ export async function compileAllAtoms(atoms: RawAtom[]): Promise<{
   const htmlFiles = new Map<string, string>()
   const qcmFiles = new Map<string, CompiledQcm>()
   const rawMdxFiles = new Map<string, string>()
+  const compileErrors: string[] = []
 
   // Process in batches for controlled concurrency
   for (let i = 0; i < atoms.length; i += CONCURRENCY) {
@@ -33,7 +34,7 @@ export async function compileAllAtoms(atoms: RawAtom[]): Promise<{
           }
         } catch (err) {
           const msg = err instanceof Error ? err.message : String(err)
-          throw new Error(`Failed to compile atom "${atom.id}": ${msg}`)
+          compileErrors.push(`atom "${atom.id}": ${msg}`)
         }
       }),
     )
@@ -44,5 +45,14 @@ export async function compileAllAtoms(atoms: RawAtom[]): Promise<{
   }
 
   process.stdout.write('\n')
+
+  if (compileErrors.length > 0) {
+    console.error(`\n  ${compileErrors.length} compilation error(s):`)
+    for (const e of compileErrors) {
+      console.error(`    [ERROR] ${e}`)
+    }
+    throw new Error(`${compileErrors.length} atom(s) failed to compile`)
+  }
+
   return { htmlFiles, qcmFiles, rawMdxFiles }
 }

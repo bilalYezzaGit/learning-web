@@ -19,11 +19,12 @@ async function ensureInit(): Promise<void> {
   $typst.use(
     TypstSnippet.preloadFontAssets({ assets: ['text'] }),
     TypstSnippet.withAccessModel(accessModel),
-    TypstSnippet.fetchPackageBy(accessModel, (_spec, httpUrl) => {
+    TypstSnippet.fetchPackageBy(accessModel, (spec, httpUrl) => {
       try {
         const buf = execFileSync('curl', ['-sL', httpUrl], { maxBuffer: 50 * 1024 * 1024 })
         return new Uint8Array(buf)
-      } catch {
+      } catch (err) {
+        console.error(`[compile-typst] Failed to download package "${spec}": ${err instanceof Error ? err.message : err}`)
         return undefined
       }
     }),

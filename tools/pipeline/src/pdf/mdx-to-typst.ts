@@ -5,7 +5,7 @@
  * Student version: enonces + writing space, NO solutions/hints/methods.
  */
 
-type AtomType = 'lesson' | 'exercise' | 'qcm'
+import type { AtomType } from '../types.js'
 
 // ── Directive stripping (student version) ──
 

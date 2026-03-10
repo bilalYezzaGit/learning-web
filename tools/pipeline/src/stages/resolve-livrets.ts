@@ -10,6 +10,7 @@ function resolveSteps(steps: RawStep[], atomMap: Map<string, RawAtom>, sectionId
       const atoms = step.quiz.map(id => atomMap.get(id)).filter((a): a is RawAtom => a !== undefined)
       const totalTime = atoms.reduce((sum, a) => sum + a.timeMinutes, 0)
       const firstAtom = atoms[0]
+      const mergedPrax = [...new Set(atoms.flatMap(a => a.praxeologies))]
       activities.push({
         id: firstId,
         type: 'qcm',
@@ -17,6 +18,7 @@ function resolveSteps(steps: RawStep[], atomMap: Map<string, RawAtom>, sectionId
         timeMinutes: totalTime,
         difficulty: firstAtom?.difficulty ?? 1,
         tags: firstAtom?.tags ?? [],
+        praxeologies: mergedPrax,
         sectionId,
         quizAtomIds: step.quiz,
       })
@@ -31,6 +33,7 @@ function resolveSteps(steps: RawStep[], atomMap: Map<string, RawAtom>, sectionId
         difficulty: atom.difficulty,
         category: atom.category,
         tags: atom.tags,
+        praxeologies: atom.praxeologies,
         sectionId,
       })
     }

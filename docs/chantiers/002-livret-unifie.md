@@ -1,6 +1,6 @@
 # Chantier 002 — Livret unifié
 
-**Statut** : PLANIFICATION
+**Statut** : TERMINE (2026-03-10)
 **Objectif** : Fusionner `cours` et `serie` en un seul type de molécule (`livret`) + nettoyer le frontmatter des atomes.
 
 ## Contexte

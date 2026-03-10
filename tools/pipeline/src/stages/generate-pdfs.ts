@@ -196,7 +196,6 @@ export async function generateAllPdfs(input: GeneratePdfsInput): Promise<number>
         estimatedMinutes: livret.estimatedMinutes,
         totalActivities: livret.totalActivities,
         sections,
-        series: [],
         coverQr,
         bookletCode,
       })

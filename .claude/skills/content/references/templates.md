@@ -17,6 +17,7 @@ title: "Titre descriptif du sujet"
 difficulty: 0
 timeMinutes: 5
 tags: [topic-tag, concept-specifique]
+praxeologies: [Prax1, Prax2a]
 ---
 
 ### Titre de la premiere section
@@ -126,6 +127,7 @@ difficulty: 1
 timeMinutes: 10
 category: application
 tags: [topic-tag, technique-utilisee]
+praxeologies: [Prax1]
 ---
 
 :::enonce
@@ -209,6 +211,7 @@ title: "Sujet de la question"
 difficulty: 1
 timeMinutes: 1
 tags: [topic-tag, concept]
+praxeologies: [Prax1]
 ---
 
 :::question
@@ -253,6 +256,7 @@ title: "Derivee de x cube"
 difficulty: 1
 timeMinutes: 1
 tags: [derivation, formules]
+praxeologies: [Prax2a]
 ---
 
 :::question

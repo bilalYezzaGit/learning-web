@@ -1,11 +1,15 @@
+/** Atom type discriminant */
+export type AtomType = 'lesson' | 'exercise' | 'qcm'
+
 /** Raw atom read from MDX file (frontmatter + raw content) */
 export interface RawAtom {
   id: string
-  type: 'lesson' | 'exercise' | 'qcm'
+  type: AtomType
   title: string
   difficulty: number
   timeMinutes: number
   tags: string[]
+  praxeologies: string[]
   category?: string
   source?: string
   rawContent: string
@@ -59,12 +63,13 @@ export interface CompiledQcm {
 /** Resolved activity in a timeline */
 export interface ResolvedActivity {
   id: string
-  type: 'lesson' | 'exercise' | 'qcm'
+  type: AtomType
   title: string
   timeMinutes: number
   difficulty: number
   category?: string
   tags: string[]
+  praxeologies: string[]
   sectionId?: string
   quizAtomIds?: string[]
 }

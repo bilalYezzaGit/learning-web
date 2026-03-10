@@ -10,13 +10,6 @@ export interface LivretSection {
   content: string // Pre-converted Typst markup for all activities in this section
 }
 
-export interface LivretSerie {
-  title: string
-  description: string
-  difficulty: number
-  content: string // Pre-converted Typst markup
-}
-
 export interface LivretData {
   title: string
   programme: string
@@ -26,17 +19,10 @@ export interface LivretData {
   estimatedMinutes: number
   totalActivities: number
   sections: LivretSection[]
-  series: LivretSerie[]
   /** Typst markup for the cover QR code (booklet pairing) */
   coverQr?: string
   /** Booklet code displayed on cover (e.g. "CONT-3E-001") */
   bookletCode?: string
-}
-
-function difficultyStars(level: number): string {
-  const filled = '#sym.star.filled '.repeat(level)
-  const empty = '#sym.star '.repeat(3 - level)
-  return `[${filled}${empty}]`
 }
 
 export function generateLivretTypst(data: LivretData): string {
@@ -53,22 +39,6 @@ export function generateLivretTypst(data: LivretData): string {
 
 ${section.content}
 `).join('\n')
-
-  // ── Series content ──
-  const seriesTypst = data.series.length > 0
-    ? data.series.map((serie, i) => `
-#pagebreak()
-
-// ── Serie ${i + 1} ──
-= Serie : ${serie.title}
-
-#text(size: 9pt, fill: luma(100))[${serie.description}] #h(1fr) Difficulte : ${difficultyStars(serie.difficulty)}
-
-#v(0.5em)
-
-${serie.content}
-`).join('\n')
-    : ''
 
   // ── Full document ──
   return `// ═══════════════════════════════════════════
@@ -301,9 +271,5 @@ ${serie.content}
 
 ${sectionsTypst}
 
-// ═══════════════════════════════════════════
-// SERIES
-// ═══════════════════════════════════════════
-${seriesTypst}
 `
 }

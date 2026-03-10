@@ -37,6 +37,7 @@ export interface ResolvedActivity {
   difficulty: number
   category?: string
   tags: string[]
+  praxeologies: string[]
   sectionId?: string
   /** For quiz groups, the list of QCM atom IDs */
   quizAtomIds?: string[]

@@ -126,7 +126,10 @@ molecules:
 # 3. Les `praxeologies` referencent les IDs de la KB (Prax0, Prax1, etc.)
 # 4. Un atome peut couvrir plusieurs praxeologies (ex: exercice de synthese)
 # 5. Les QCM du cours seront groupes en blocs `quiz:` dans la molecule finale
-# 6. Respecter le vocabulaire controle des topics (voir SKILL.md Quick Reference)
-# 7. Viser un equilibre : ~60% exercices, ~25% lecons, ~15% QCM
+# 6. Le champ `atoms:` avec metadonnees completes (type, praxeologies, contenu)
+#    sert de SPEC pour la generation. La molecule YAML finale utilise `steps:`
+#    avec juste les IDs des atomes (pas de metadonnees).
+# 7. Respecter le vocabulaire controle des topics (voir SKILL.md Quick Reference)
+# 8. Viser un equilibre : ~60% exercices, ~25% lecons, ~15% QCM
 #
 # ============================================================================

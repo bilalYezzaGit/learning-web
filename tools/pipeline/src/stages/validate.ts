@@ -22,14 +22,35 @@ export function validateContent(
     seenAtomIds.add(atom.id)
   }
 
-  // Check QCMs have exactly one :::option{correct}
+  // Check QCM structure: :::question, :::option (2-5), :::option{correct} (exactly 1), :::explanation
   for (const atom of atoms) {
     if (atom.type === 'qcm') {
-      const correctCount = (atom.rawContent.match(/^:::option\{correct\}/gm) ?? []).length
+      const raw = atom.rawContent
+
+      // Check :::question presence
+      if (!raw.match(/^:::question\s*$/m)) {
+        errors.push({ source: `atom/${atom.id}`, message: 'QCM missing :::question block', severity: 'error' })
+      }
+
+      // Check option count (2-5)
+      const optionCount = (raw.match(/^:::option(\{correct\})?\s*$/gm) ?? []).length
+      if (optionCount < 2) {
+        errors.push({ source: `atom/${atom.id}`, message: `QCM has ${optionCount} option(s) (minimum 2)`, severity: 'error' })
+      } else if (optionCount > 5) {
+        errors.push({ source: `atom/${atom.id}`, message: `QCM has ${optionCount} options (maximum 5)`, severity: 'error' })
+      }
+
+      // Check exactly one :::option{correct}
+      const correctCount = (raw.match(/^:::option\{correct\}\s*$/gm) ?? []).length
       if (correctCount === 0) {
         errors.push({ source: `atom/${atom.id}`, message: 'QCM missing :::option{correct}', severity: 'error' })
       } else if (correctCount > 1) {
         errors.push({ source: `atom/${atom.id}`, message: `QCM has ${correctCount} :::option{correct} (expected exactly 1)`, severity: 'error' })
+      }
+
+      // Check :::explanation presence
+      if (!raw.match(/^:::explanation\s*$/m)) {
+        errors.push({ source: `atom/${atom.id}`, message: 'QCM missing :::explanation block', severity: 'warning' })
       }
     }
   }
@@ -67,7 +88,7 @@ export function validateContent(
   if (orphans.length > 0) {
     errors.push({
       source: 'orphan-check',
-      message: `${orphans.length} orphan atom(s): ${orphans.slice(0, 5).map(a => a.id).join(', ')}${orphans.length > 5 ? '...' : ''}`,
+      message: `${orphans.length} orphan atom(s): ${orphans.map(a => a.id).join(', ')}`,
       severity: 'warning',
     })
   }
@@ -79,12 +100,12 @@ function checkStep(step: RawStep, source: string, atomIds: Set<string>, errors: 
   if (typeof step === 'object' && 'quiz' in step) {
     for (const id of step.quiz) {
       if (!atomIds.has(id)) {
-        errors.push({ source, message: `QCM atom "${id}" not found`, severity: 'warning' })
+        errors.push({ source, message: `QCM atom "${id}" not found`, severity: 'error' })
       }
     }
   } else {
     if (!atomIds.has(step)) {
-      errors.push({ source, message: `Atom "${step}" not found`, severity: 'warning' })
+      errors.push({ source, message: `Atom "${step}" not found`, severity: 'error' })
     }
   }
 }

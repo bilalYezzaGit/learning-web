@@ -110,6 +110,16 @@ Liste de tags semantiques. Minimum 1, pas de maximum recommande mais rester rais
 - Vocabulaire controle (voir section 6)
 - Au moins le tag correspondant au `topic` de l'ID
 
+#### `praxeologies`
+
+Liste des IDs de praxeologies couvertes par cet atome. Optionnel, defaut `[]`.
+Les IDs referencent les praxeologies de la KB module (`meta_system/kb/*.md`, section 8).
+Renseigne automatiquement lors de la generation depuis un planning (WF3).
+
+```yaml
+praxeologies: [Prax1, Prax2a, Prax4]
+```
+
 #### `category` (exercices uniquement)
 
 Obligatoire pour `type: exercise`. Interdit pour les autres types.
@@ -560,10 +570,21 @@ Graphiques de fonctions et tableaux de variations sont rendus via des blocs de c
 ```typst
 #import "@preview/vartable:0.2.3": tabvar
 #tabvar(
-  init: (variable: $x$, label: [Variations de $f$]),
-  ($-oo$, (), $-1$, (), $2$, (), $+oo$),
-  ($f'(x)$, $+$, $0$, $-$, $0$, $+$),
-  ($f(x)$, $-oo$, arr(from: $-oo$, to: $3$), $3$, arr(from: $3$, to: $-1$), $-1$, arr(from: $-1$, to: $+oo$), $+oo$),
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $-1$, $2$, $+infinity$),
+  contents: (
+    ($+$, ("0", $-$), ("0", $+$)),
+    (
+      (bottom, $-infinity$),
+      (top, $3$),
+      (bottom, $-1$),
+      (top, $+infinity$),
+    ),
+  ),
 )
 ```
 ````

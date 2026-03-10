@@ -9,7 +9,7 @@
 
 import QRCode from 'qrcode'
 
-const BASE_URL = 'https://www.aylansolutions.com'
+const BASE_URL = process.env.QR_BASE_URL || 'https://www.aylansolutions.com'
 
 /**
  * Generate a QR code SVG string for a given full URL.

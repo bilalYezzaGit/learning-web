@@ -12,6 +12,7 @@ const atomMetaSchema = z
     difficulty: z.number().int().min(0).max(3).default(1),
     timeMinutes: z.number().int().min(1).default(5),
     tags: z.array(z.string()).default([]),
+    praxeologies: z.array(z.string()).default([]),
     category: z
       .enum(['application', 'approfondissement', 'synthese', 'probleme', 'demonstration'])
       .optional(),
