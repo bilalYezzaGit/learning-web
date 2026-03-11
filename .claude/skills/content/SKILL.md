@@ -141,13 +141,25 @@ Glob: content/{programme}/{module}/_planning.yaml
 
 ## Validation workflow
 
+### Etape 0 — Routage
+
+Deux modes selon l'argument :
+
+- **`/content valider {module}`** (nom de module) → validation LLM semantique complete.
+  Delegue a [actions/validate-module.md](actions/validate-module.md).
+  Analyse chaque atome du module selon 3 grilles (Structure, Maths, Pedagogie) et ecrit un rapport dans `meta_system/validation/{module}.md`.
+
+- **`/content valider {fichier}`** (chemin ou ID d'un fichier unique) → validation rapide avec checklist inline ci-dessous.
+
+### Validation rapide (fichier unique)
+
 1. **Charge les regles completes** : Read `docs/CONTENT-CONVENTIONS.md` (source de verite)
 
 2. **Lis le(s) fichier(s)** a valider
 
 3. **Execute la checklist complete** :
 
-### Checklist atome
+#### Checklist atome
 
 - [ ] ID suit `{type}-{topic}-{slug}` avec topic du vocabulaire controle
 - [ ] Frontmatter : tous les champs obligatoires presents
@@ -163,7 +175,7 @@ Glob: content/{programme}/{module}/_planning.yaml
 - [ ] Headings commencent a `###`
 - [ ] Pas de composants non autorises
 
-### Checklist molecule
+#### Checklist molecule
 
 - [ ] Tous les champs obligatoires presents (`kind: livret`, `title`, `description`, `trimester`, `order`)
 - [ ] Tous les IDs d'atomes references existent dans le module correspondant

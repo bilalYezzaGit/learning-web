@@ -48,10 +48,10 @@ flowchart TD
     Review -->|"ajuste"| Plan
     Review -->|"valide"| PlanV["_planning.yaml\n(validated)"]
     PlanV -->|"WF3 : generer\n/content creer"| Contenu["Atomes MDX\n+ Molecules YAML"]
-    Contenu --> V4a["4a Syntaxe\nnpm run generate"]
-    V4a --> V4b["4b Maths\nagent LLM"]
-    V4b --> V4c["4c Pedagogie\nagent LLM"]
-    V4c --> Rapport[/"Rapport pass/fail"/]
+    Contenu --> PlanG["_planning.yaml\n(generated)"]
+    PlanG --> V4a["4a Syntaxe\nnpm run generate"]
+    V4a --> V4bc["4b+4c Semantique\n/content valider {module}"]
+    V4bc --> Rapport[/"Rapport pass/fail\nmeta_system/validation/"/]
 ```
 
 ---
@@ -147,6 +147,8 @@ flowchart TD
 Entree : KB module complete (`meta_system/kb/{nn}-{slug}.md`)
 Sortie : `content/{programme}/{module}/_planning.yaml` avec `status: validated`
 
+**Cycle de vie du status** : `draft` → `validated` (review humain) → `generated` (apres WF3)
+
 #### Declencheurs
 
 | Etape | Declencheur | Ressources chargees |
@@ -230,11 +232,11 @@ flowchart TD
     CONV["CONTENT-CONVENTIONS.md"] -.-> V4a
     PIPE["tools/pipeline/"] -.-> V4a
     Plan[("_planning.yaml")] -.-> V4a
-    V4a --> V4b["4b — Mathematiques\nagent LLM\nformules, calculs, solutions"]
-    V4b --> V4c["4c — Pedagogie\nagent LLM\nalignement KB + planning"]
-    KB[("KB module")] -.-> V4c
-    Plan -.-> V4c
-    V4c --> Rapport[/"Rapport pass/fail\npar palier"/]
+    V4a --> V4bc["4b+4c — Semantique\n/content valider {module}\nstructure + maths + pedagogie"]
+    KB[("KB module")] -.-> V4bc
+    Plan -.-> V4bc
+    CONV -.-> V4bc
+    V4bc --> Rapport[/"Rapport pass/fail\nmeta_system/validation/{module}.md"/]
 ```
 
 Le palier 4a (`npm run generate`) execute 6 phases internes :
@@ -257,9 +259,8 @@ Sortie : rapport de validation par palier
 |-------|-------------|---------------------|
 | 4a — Pipeline | `npm run generate` | `tools/pipeline/` (read, validate, compile, resolve, write) |
 | 4a — References | integre dans `npm run generate` (validate.ts) | Molecules + atomes |
-| 4a — Conventions | `/content valider {module}` | `docs/CONTENT-CONVENTIONS.md` |
-| 4b — Maths | **inexistant** | — |
-| 4c — Pedagogie | **inexistant** | — |
+| 4a — Conventions | `/content valider {fichier}` | `docs/CONTENT-CONVENTIONS.md` |
+| 4b+4c — Semantique | `/content valider {module}` | `CONTENT-CONVENTIONS.md`, KB, planning, templates |
 
 #### Exemples de prompts
 
@@ -279,9 +280,9 @@ formules, calculs, solutions
 
 #### Lacunes identifiees
 
-- Palier 4b (maths) : aucun outil — necessite un agent LLM avec checklist dediee
-- Palier 4c (pedagogie) : aucun outil — necessite un agent LLM avec acces a la KB et au planning
-- Pas de rapport structure (les erreurs sont dans le stdout de npm run generate, pas dans un fichier exploitable)
+- ~~Palier 4b (maths) : aucun outil~~ — resolu (`/content valider {module}`, Grille B)
+- ~~Palier 4c (pedagogie) : aucun outil~~ — resolu (`/content valider {module}`, Grille C)
+- ~~Pas de rapport structure~~ — resolu (rapport dans `meta_system/validation/{module}.md`)
 - Pas de conformite planning -> atomes generes (verifier que tous les slugs du planning existent)
 
 ---
@@ -309,5 +310,5 @@ formules, calculs, solutions
 | ~~L2~~ | ~~Planning jamais teste en conditions reelles~~ | ~~WF2~~ | resolue (2 plannings executes) |
 | ~~L3~~ | ~~`/content creer` ne lit pas `_planning.yaml` comme source~~ | ~~WF3~~ | resolue |
 | L4 | Pas d'orchestration multi-atomes (reprise, progression) — partiellement resolu (progression par Glob) | WF3 | moyenne |
-| L5 | Paliers validation maths + pedagogie inexistants | WF4 | moyenne |
+| ~~L5~~ | ~~Paliers validation maths + pedagogie inexistants~~ | ~~WF4~~ | resolue (`/content valider {module}`) |
 | L6 | Pas de verification automatique planning -> atomes generes | WF4 | basse |
