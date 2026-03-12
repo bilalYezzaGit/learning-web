@@ -47,7 +47,7 @@ const programmeSchema = z.object({
 /**
  * Scan the content/ tree and return all programmes and livrets.
  * Programme dirs contain _programme.yaml. Modules are their subdirectories.
- * Molecules live in {module}/_molecules/*.yaml with kind: livret.
+ * Molecules live in {module}/_molecules/{slug}/molecule.yaml (or legacy {module}/_molecules/{slug}.yaml).
  * Programme.livrets is auto-populated from discovered molecules.
  */
 export function readAllContent(): {
@@ -85,13 +85,28 @@ export function readAllContent(): {
       const moleculesDir = path.join(moduleDir, '_molecules')
       if (!fs.existsSync(moleculesDir)) continue
 
-      const yamlFiles = fs.readdirSync(moleculesDir)
-        .filter(f => f.endsWith('.yaml'))
-        .sort()
+      const entries = fs.readdirSync(moleculesDir, { withFileTypes: true })
+        .filter(e => !e.name.startsWith('.'))
+        .sort((a, b) => a.name.localeCompare(b.name))
 
-      for (const yamlFile of yamlFiles) {
-        const slug = yamlFile.replace('.yaml', '')
-        const raw = fs.readFileSync(path.join(moleculesDir, yamlFile), 'utf-8')
+      for (const entry of entries) {
+        let slug: string
+        let raw: string
+
+        if (entry.isDirectory()) {
+          // New layout: _molecules/{slug}/molecule.yaml
+          const molFile = path.join(moleculesDir, entry.name, 'molecule.yaml')
+          if (!fs.existsSync(molFile)) continue
+          slug = entry.name
+          raw = fs.readFileSync(molFile, 'utf-8')
+        } else if (entry.isFile() && entry.name.endsWith('.yaml')) {
+          // Legacy layout: _molecules/{slug}.yaml
+          slug = entry.name.replace('.yaml', '')
+          raw = fs.readFileSync(path.join(moleculesDir, entry.name), 'utf-8')
+        } else {
+          continue
+        }
+
         const data = parseYaml(raw) as Record<string, unknown>
 
         if (data.kind !== 'livret') {

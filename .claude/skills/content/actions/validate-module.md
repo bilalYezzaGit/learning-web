@@ -22,8 +22,8 @@
 
 3. Contexte pedagogique (si disponible) :
    ```
-   Glob: meta_system/kb/*-{module}*.md
-   Read: content/{programme}/{module}/_planning.yaml (champ kb_source pour trouver la bonne KB)
+   Read: content/{programme}/{module}/_kb.md
+   Glob: content/{programme}/{module}/_molecules/*/_planning.yaml
    ```
    → Si KB/planning absents, Grille C sera notee **partielle**
 
@@ -37,7 +37,7 @@ Glob: content/**/{module}/*.mdx
 
 - Detecter le programme parent (ex: `3eme-math`)
 - Compter les atomes par type (lesson, exercise, qcm)
-- Verifier l'existence de molecules : `Glob: content/{programme}/{module}/_molecules/*.yaml`
+- Verifier l'existence de molecules : `Glob: content/{programme}/{module}/_molecules/*/molecule.yaml`
 
 ### Etape 2 — Charger les references
 
@@ -47,18 +47,15 @@ Glob: content/**/{module}/*.mdx
 2. ```
    Read: .claude/skills/content/references/templates.md
    ```
-3. KB module (si existante) — resolution :
-   - D'abord, lire le planning pour le champ `kb_source` :
+3. KB module (si existante) :
      ```
-     Read: content/{programme}/{module}/_planning.yaml
-     ```
-   - Si `kb_source` existe, l'utiliser directement
-   - Sinon, tenter :
-     ```
-     Glob: meta_system/kb/*-{module}*.md
+     Glob: content/{programme}/{module}/_kb.md
      ```
    - Si rien trouve, noter que la Grille C sera partielle
-4. Planning (si existant) : `content/{programme}/{module}/_planning.yaml`
+4. Plannings per-molecule (si existants) :
+     ```
+     Glob: content/{programme}/{module}/_molecules/*/_planning.yaml
+     ```
 
 ### Etape 3 — Analyser chaque atome (boucle principale)
 
@@ -117,7 +114,7 @@ Pour chaque fichier `.mdx` du module, mener une analyse en profondeur selon 3 gr
 
 ### Etape 4 — Assembler le rapport
 
-Ecrire `meta_system/validation/{module}.md` :
+Ecrire un rapport par molecule dans `content/{programme}/{module}/_molecules/{slug}/_validation.md` :
 
 ```markdown
 # Validation — {module}
@@ -174,13 +171,13 @@ Afficher dans le terminal :
 
 1. Resume : X PASS / Y WARN / Z FAIL
 2. Top 3 FAIL (si existants) avec localisation precise
-3. Chemin du rapport complet : `meta_system/validation/{module}.md`
+3. Chemin des rapports : `content/{programme}/{module}/_molecules/{slug}/_validation.md`
 
 ## Checklist
 
 - [ ] Tous les atomes du module lus et analyses
 - [ ] Calculs maths verifies etape par etape (pas survoles)
 - [ ] Verdicts FAIL avec localisation precise (fichier, ligne, calcul fautif)
-- [ ] Rapport ecrit dans `meta_system/validation/{module}.md`
+- [ ] Rapport ecrit par molecule dans `content/{programme}/{module}/_molecules/{slug}/_validation.md`
 - [ ] Synthese avec compteurs PASS/WARN/FAIL en tete du rapport
 - [ ] Si KB/planning absents, mentionne dans le rapport (Grille C partielle)

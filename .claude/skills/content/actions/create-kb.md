@@ -7,7 +7,7 @@
 - Respecter les conventions du referentiel `docs/referentiels/redaction-mathematiques-tunisie.md`
 - Section 8 (Praxeologies) est la plus critique : 1 praxeologie = 1 type de tache + 1 technique
 - Section 9 (Misconceptions) : inclure des questions diagnostiques au format QCM
-- Convention de nommage : `{nn}-{slug}.md` ou nn = numero a 2 chiffres (01, 02...) correspondant a l'ordre dans le programme
+- Convention de nommage : `_kb.md` dans le repertoire du module (`content/{prog}/{mod}/_kb.md`)
 
 ## Pre-requis
 
@@ -32,7 +32,7 @@ Lister les fichiers trouves. On attend jusqu'a 3 sources (manuel, parascolaire, 
 ### Etape 2 — Charger le template
 
 ```
-Read: meta_system/kb/template.md
+Read: .claude/skills/content/references/kb-template.md
 ```
 
 ### Etape 3 — Charger les referentiels
@@ -74,13 +74,11 @@ Croiser les 3 sources pour chaque section. Estimation de taille par section :
 
 ### Etape 6 — Ecrire le fichier
 
-Determiner le numero `{nn}` en regardant les KB existantes :
+Ecrire le fichier KB dans le module :
 
 ```
-Glob: meta_system/kb/*.md
+Write: content/{programme}/{module}/_kb.md
 ```
-
-Ecrire `meta_system/kb/{nn}-{slug}.md`.
 
 ## Checklist KB
 
@@ -91,4 +89,4 @@ Avant de presenter le resultat a l'utilisateur, verifier :
 - [ ] Chaque misconception a une question diagnostique QCM
 - [ ] Les notations suivent le referentiel tunisien
 - [ ] Les liens inter-modules sont corrects (prerequisites, ouvre vers)
-- [ ] Le numero `{nn}` est coherent avec l'ordre des modules existants
+- [ ] Le fichier est bien place dans `content/{prog}/{mod}/_kb.md`

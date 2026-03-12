@@ -36,7 +36,12 @@ content/
 ├── {programme}/            # Ex: 3eme-math/
 │   ├── _programme.yaml     # Metadata programme
 │   └── {module}/           # Ex: continuite/
-│       ├── _molecules/     # Livrets YAML
+│       ├── _kb.md          # Knowledge Base module
+│       ├── _molecules/     # Repertoire par molecule
+│       │   └── {slug}/     # Ex: continuite/
+│       │       ├── molecule.yaml    # Livret YAML
+│       │       ├── _planning.yaml   # Planning (optionnel)
+│       │       └── _validation.md   # Validation (optionnel)
 │       └── *.mdx           # Atomes (lesson, exercise, qcm)
 
 tools/pipeline/src/         # Pipeline de contenu
@@ -81,4 +86,4 @@ tools/pipeline/src/         # Pipeline de contenu
 1. **TypeScript strict** — Pas de `any`, pas de `@ts-ignore`
 2. **Server Components first** — Client uniquement si necessaire
 3. **Projet autonome** — Pas de dependances externes non autorisees
-4. **Contenu** — Atomes MDX (lesson/exercise/qcm) + molecules YAML (livrets). Chaque atome a `praxeologies` dans son frontmatter.
+4. **Contenu** — Atomes MDX (lesson/exercise/qcm) + molecules YAML (livrets). Le champ `praxeologies` dans le frontmatter est optionnel (defaut `[]`), renseigne lors de la generation depuis un planning.

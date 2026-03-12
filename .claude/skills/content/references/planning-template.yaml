@@ -1,0 +1,95 @@
+# ============================================================================
+# PLANNING PER-MOLECULE — Template
+# ============================================================================
+#
+# Un fichier par molecule. Declare les atomes a generer pour un livret.
+# Cree par le LLM a partir d'une KB module, puis valide par un humain
+# AVANT toute generation de contenu MDX.
+#
+# Emplacement : content/{programme}/{module}/_molecules/{slug}/_planning.yaml
+#
+# Workflow :
+#   1. LLM genere ce fichier a partir de la KB
+#   2. Humain review et ajuste (slugs, couverture, difficulte, contenu)
+#   3. Statut passe a "validated"
+#   4. LLM genere chaque atome selon ce manifeste
+#   5. Validation multi-paliers du contenu genere
+#
+# ============================================================================
+
+kind: planning
+module: "{slug-module}"                           # Ex: continuite
+programme: "{slug-programme}"                     # Ex: 3eme-math
+status: draft                                     # draft | validated | generated
+
+# ============================================================================
+# Design intent
+# ============================================================================
+# Decrire ici l'intention pedagogique du livret : quels types d'exercices,
+# quel niveau, quel style (application directe, problemes, synthese...).
+
+slug: "{slug-molecule}"                           # Ex: continuite-fondamentaux
+title: "{Titre du livret}"
+description: "{1-2 phrases}"
+trimester: T1                                     # T1, T2 ou T3
+order: 1                                          # Ordre dans le programme
+
+sections:
+  - label: "{Nom de la section thematique}"
+    atoms:
+
+      # --- Lecon ---
+      - slug: "lesson-{topic}-{slug}"
+        type: lesson
+        title: "{Titre de la lecon}"
+        praxeologies: [Prax0]                     # Praxeologies couvertes (IDs de la KB)
+        contenu: >-
+          {2-3 phrases decrivant le contenu : definitions, theoremes,
+          proprietes, exemples illustratifs. Assez precis pour qu'un
+          humain sache exactement ce qui sera genere.}
+        difficulte: 1
+        timeMinutes: 8                            # 3-10 pour une lecon
+
+      # --- Exercice ---
+      - slug: "ex-{topic}-{slug}"
+        type: exercise
+        title: "{Titre de l'exercice}"
+        praxeologies: [Prax0]
+        category: application                     # application | approfondissement | synthese | probleme
+        contenu: >-
+          {Description precise : combien de questions, quel type de
+          fonctions, quelle technique attendue, quel resultat.}
+        difficulte: 1
+        timeMinutes: 15                           # 5-20 pour un exercice
+
+      # --- QCM (grouper 2-5 par bloc quiz dans la molecule finale) ---
+      - slug: "qcm-{topic}-{slug}"
+        type: qcm
+        title: "{Titre du QCM}"
+        praxeologies: [Prax0]
+        contenu: "{Ce que le QCM teste en 1 phrase}"
+        difficulte: 1
+        timeMinutes: 2                            # 1-2 pour un QCM
+
+  - label: "{Section suivante}"
+    atoms:
+      - slug: "..."
+        # ...
+
+# ============================================================================
+# Notes pour le LLM generateur
+# ============================================================================
+#
+# 1. Chaque atome du planning doit avoir un slug UNIQUE dans le module
+# 2. Le champ `contenu` est la spec — le LLM s'y tient lors de la generation
+# 3. Les `praxeologies` referencent les IDs de la KB (Prax0, Prax1, etc.)
+# 4. Un atome peut couvrir plusieurs praxeologies (ex: exercice de synthese)
+# 5. Les QCM du cours seront groupes en blocs `quiz:` dans la molecule finale
+# 6. Le champ `atoms:` avec metadonnees completes (type, praxeologies, contenu)
+#    sert de SPEC pour la generation. La molecule YAML finale utilise `steps:`
+#    avec juste les IDs des atomes (pas de metadonnees).
+# 7. Respecter le vocabulaire controle des topics (voir SKILL.md Quick Reference)
+# 8. Viser un equilibre : ~60% exercices, ~25% lecons, ~15% QCM
+# 9. Les praxeologies vivent dans la KB module — pas dupliquees ici
+#
+# ============================================================================

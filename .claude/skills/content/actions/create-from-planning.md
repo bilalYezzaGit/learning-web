@@ -13,23 +13,23 @@
 
 3 verifications avant de lancer le pipeline :
 
-1. **Planning existe** :
+1. **Planning(s) existent** :
    ```
-   Glob: content/{programme}/{module}/_planning.yaml
+   Glob: content/{programme}/{module}/_molecules/*/_planning.yaml
    ```
 
-2. **Status valide** : lire le YAML et verifier le champ `status` :
+2. **Status valide** : pour chaque planning, lire le YAML et verifier le champ `status` :
    - `validated` → continuer
    - `draft` → **stop**, demander a l'utilisateur de valider d'abord
    - `generated` → avertir que le contenu a deja ete genere, demander confirmation avant de regenerer
 
-3. **KB source existe** : verifier que le fichier reference par `kb_source` dans le planning est present
+3. **KB source existe** : verifier que `content/{programme}/{module}/_kb.md` est present
 
 ## Pipeline
 
 ### Etape 1 — Charger le planning
 
-Read le YAML `content/{programme}/{module}/_planning.yaml`. Extraire la liste plate d'atomes uniques (dedupliques par slug). Un meme atome peut apparaitre dans le cours et dans une serie — ne le compter qu'une fois.
+Read les plannings YAML `content/{programme}/{module}/_molecules/*/_planning.yaml`. Pour chaque planning, extraire la liste d'atomes. Fusionner en une liste plate unique (dedupliques par slug). Un meme atome peut apparaitre dans le cours et dans une serie — ne le compter qu'une fois.
 
 ### Etape 2 — Detecter la progression
 
@@ -67,7 +67,7 @@ Montrer la liste filtree et confirmer avec l'utilisateur avant de generer.
 Read: .claude/skills/content/references/templates.md
 Read: .claude/skills/content/references/typst-snippets.md
 Read: docs/CONTENT-CONVENTIONS.md
-Read: {kb_source}
+Read: content/{programme}/{module}/_kb.md
 ```
 
 ### Etape 5 — Generer les atomes
@@ -85,7 +85,7 @@ Pour chaque atome `todo` (ordre : lecons d'abord, puis exercices, puis QCM, par 
 
 Apres tous les atomes generes :
 
-- **Livrets** → `_molecules/{slug}.yaml` avec `kind: livret`, sections/steps, quiz blocks (2-5 QCM par groupe)
+- **Livrets** → `_molecules/{slug}/molecule.yaml` avec `kind: livret`, sections/steps, quiz blocks (2-5 QCM par groupe)
 
 Verifier que tous les atom IDs references dans les molecules existent en tant que fichiers `.mdx`.
 

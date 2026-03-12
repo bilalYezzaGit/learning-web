@@ -288,7 +288,7 @@ On applique la regle $(x^n)' = nx^{n-1}$, donc $(x^3)' = 3x^{3-1} = 3x^2$.
 
 ## Molecule — Livret
 
-Fichier : `content/{programme}/{module}/_molecules/{slug}.yaml`
+Fichier : `content/{programme}/{module}/_molecules/{slug}/molecule.yaml`
 
 ```yaml
 kind: livret

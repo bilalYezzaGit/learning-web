@@ -29,22 +29,21 @@ Genere un planning de livret a partir d'une KB module. Le planning declare tous 
 
 ### Pre-requis
 
-- KB module existante dans `meta_system/kb/`
-- Si pas de KB : creer d'abord la KB (voir `meta_system/kb/template.md`)
+- KB module existante (`content/{prog}/{mod}/_kb.md`)
+- Si pas de KB : creer d'abord la KB (voir `.claude/skills/content/references/kb-template.md`)
 
 ### Etapes
 
-1. **Charge la KB module** : Read `meta_system/kb/{nn}-{slug}.md`
+1. **Charge la KB module** : Read `content/{programme}/{module}/_kb.md`
 
-2. **Charge le template planning** : Read `meta_system/planning/template.yaml`
+2. **Charge le template planning** : Read `.claude/skills/content/references/planning-template.yaml`
 
 3. **Analyse les praxeologies** de la KB (section 8) :
    - Lister toutes les praxeologies avec leur difficulte
    - Identifier les groupements thematiques naturels
 
-4. **Genere le planning** `content/{programme}/{module}/_planning.yaml` :
-   - Declarer chaque praxeologie dans la section `praxeologies:`
-   - Concevoir les livrets (1-4 livrets par module)
+4. **Genere un planning per-molecule** `content/{programme}/{module}/_molecules/{slug}/_planning.yaml` :
+   - Un fichier par molecule (pas de wrapper `molecules:` ni `praxeologies:`)
    - Pour chaque livret : organiser en sections thematiques
    - Pour chaque section : declarer les atomes (lecons, exercices, QCM)
    - Pour chaque atome : slug, type, title, praxeologies, contenu (2-3 phrases), difficulte, timeMinutes
@@ -54,7 +53,7 @@ Genere un planning de livret a partir d'une KB module. Le planning declare tous 
    - Equilibre des types : ~60% exercices, ~25% lecons, ~15% QCM
    - Progression de difficulte coherente dans chaque molecule
 
-6. **Ecrit le fichier** `_planning.yaml` avec `status: draft`
+6. **Ecrit le(s) fichier(s)** `_planning.yaml` avec `status: draft`
 
 7. **Presente le planning a l'humain** pour validation :
    - Resume : nombre de molecules, nombre d'atomes par type, praxeologies couvertes
@@ -92,12 +91,12 @@ Voir [actions/create-kb.md](actions/create-kb.md) pour le pipeline complet.
 Avant toute creation, verifier si un planning valide existe pour le module cible :
 
 ```
-Glob: content/{programme}/{module}/_planning.yaml
+Glob: content/{programme}/{module}/_molecules/*/_planning.yaml
 ```
 
-- **Si planning avec `status: validated`** : utiliser le pipeline planning.
+- **Si planning(s) avec `status: validated`** : utiliser le pipeline planning.
   Voir [actions/create-from-planning.md](actions/create-from-planning.md).
-- **Si planning avec `status: draft`** : informer que le planning doit etre valide d'abord.
+- **Si planning(s) avec `status: draft`** : informer que le planning doit etre valide d'abord.
 - **Si pas de planning** : continuer avec le workflow generique ci-dessous.
 
 ### Workflow generique (sans planning)
@@ -132,7 +131,7 @@ Glob: content/{programme}/{module}/_planning.yaml
 
 4. **Si renommage d'ID** : chercher les molecules qui referencent cet ID et les mettre a jour
    ```
-   Grep pattern: ancien-id dans content/**/_molecules/*.yaml
+   Grep pattern: ancien-id dans content/**/_molecules/*/molecule.yaml
    ```
 
 5. **Ecrit le fichier** modifie
@@ -147,7 +146,7 @@ Deux modes selon l'argument :
 
 - **`/content valider {module}`** (nom de module) → validation LLM semantique complete.
   Delegue a [actions/validate-module.md](actions/validate-module.md).
-  Analyse chaque atome du module selon 3 grilles (Structure, Maths, Pedagogie) et ecrit un rapport dans `meta_system/validation/{module}.md`.
+  Analyse chaque atome du module selon 3 grilles (Structure, Maths, Pedagogie) et ecrit un rapport par molecule dans `content/{prog}/{mod}/_molecules/{slug}/_validation.md`.
 
 - **`/content valider {fichier}`** (chemin ou ID d'un fichier unique) → validation rapide avec checklist inline ci-dessous.
 
@@ -196,10 +195,10 @@ Utilise Glob et Grep pour repondre aux questions d'inventaire :
 | Atomes d'un topic | `Glob: content/**/*-{topic}-*.mdx` |
 | Atomes d'un type | `Glob: content/**/{type}-*.mdx` |
 | Atomes avec un tag | `Grep: pattern "- {tag}" dans content/` glob `*.mdx` |
-| Molecules livrets | `Glob: content/**/_molecules/*.yaml` |
+| Molecules livrets | `Glob: content/**/_molecules/*/molecule.yaml` |
 | Programmes | `Glob: content/*/_programme.yaml` |
-| Atomes orphelins | Glob tous les atomes, Grep tous les IDs dans `_molecules/`, diff |
-| References a un atome | `Grep: pattern "{atom-id}" dans content/**/_molecules/` |
+| Atomes orphelins | Glob tous les atomes, Grep tous les IDs dans `_molecules/*/molecule.yaml`, diff |
+| References a un atome | `Grep: pattern "{atom-id}" dans content/**/_molecules/*/molecule.yaml` |
 
 ---
 
@@ -208,9 +207,12 @@ Utilise Glob et Grep pour repondre aux questions d'inventaire :
 ### Nommage des fichiers
 
 ```
-Atomes:    content/{programme}/{module}/{type}-{topic}-{slug}.mdx
-Molecules: content/{programme}/{module}/_molecules/{slug}.yaml
-Programme: content/{programme}/_programme.yaml
+Atomes:     content/{programme}/{module}/{type}-{topic}-{slug}.mdx
+Molecules:  content/{programme}/{module}/_molecules/{slug}/molecule.yaml
+Planning:   content/{programme}/{module}/_molecules/{slug}/_planning.yaml
+Validation: content/{programme}/{module}/_molecules/{slug}/_validation.md
+KB:         content/{programme}/{module}/_kb.md
+Programme:  content/{programme}/_programme.yaml
 ```
 
 ### Frontmatter par type
@@ -274,8 +276,8 @@ Categories exercice : `application`, `approfondissement`, `synthese`, `probleme`
 ### Sources pedagogiques
 
 Le registre de sources (`docs/content-intelligence/sources/`) contient des fiches
-detaillees de sites web educatifs pre-scannes. Les actions create-module et
-create-programme consultent automatiquement ces fiches avant la recherche web.
+detaillees de sites web educatifs pre-scannes. Utile pour enrichir les KB modules
+et croiser les references lors de la creation de contenu.
 
 Commandes liees : `/source scan`, `/source discover`, `/source status`
 

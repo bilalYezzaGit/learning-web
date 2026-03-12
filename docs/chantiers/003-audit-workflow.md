@@ -104,7 +104,7 @@ Deja nettoye lors du chantier 002 (migration livret unifie).
 
 ### ~~L6. KB template — id `module_xxx` pas assez explicite~~ FAIT
 
-Mis a jour vers `id: module_{slug}` dans `meta_system/kb/template.md`.
+Mis a jour vers `id: module_{slug}` dans `.claude/skills/content/references/kb-template.md`.
 
 ---
 

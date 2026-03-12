@@ -1,0 +1,111 @@
+kind: planning
+module: "fonction-derivee"
+programme: "3eme-math"
+status: generated
+
+# ============================================================================
+# Design intent
+# ============================================================================
+# Resume de cours COURT (3 lecons compactes) + QCM d'auto-evaluation.
+# PAS d'exercices d'application directe (pas de "calculer f'").
+# ============================================================================
+
+slug: "fonction-derivee"
+title: "Fonction derivee"
+description: >-
+  Resume compact des outils de derivation : formules, lien
+  derivee-variations, extrema, tableau de variation.
+trimester: T1
+order: 6
+
+sections:
+
+  # --- Section 1 : Formules de derivation ---
+  - label: "Formules de derivation"
+    atoms:
+      - slug: "lesson-der-formules-derivation"
+        type: lesson
+        title: "Fonction derivee et formules de derivation"
+        praxeologies: [Prax1, Prax2a, Prax2b, Prax2c]
+        contenu: >-
+          Definition de la fonction derivee f' sur un intervalle I.
+          Tableau des derivees usuelles (x^n, 1/x, 1/x^n, sqrt(x)).
+          Toutes les operations : somme, produit, quotient, puissance,
+          inverse, (sqrt(f))' = f'/(2.sqrt(f)), g(x)=f(ax+b) => g'(x)=a.f'(ax+b).
+          Derivees successives f'', f^(n). Exemples illustratifs courts.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: "qcm-der-formules-quotient"
+        type: qcm
+        title: "Derivee d'un quotient"
+        praxeologies: [Prax2a]
+        contenu: >-
+          QCM testant la formule (u/v)' avec un piege classique
+          (signe + au lieu de -). Fonction rationnelle simple.
+        difficulte: 1
+        timeMinutes: 2
+
+      - slug: "qcm-der-derivee-racine"
+        type: qcm
+        title: "Derivee d'une racine composee"
+        praxeologies: [Prax2b]
+        contenu: >-
+          QCM sur (sqrt(f))'. Piege : oubli du facteur f' ou
+          application quand f s'annule.
+        difficulte: 1
+        timeMinutes: 2
+
+  # --- Section 2 : Variations et extrema ---
+  - label: "Variations et extrema"
+    atoms:
+      - slug: "lesson-der-variations-extrema"
+        type: lesson
+        title: "Derivee, sens de variation et extrema"
+        praxeologies: [Prax4, Prax5]
+        contenu: >-
+          Theoremes (admis) : f'>=0 <=> f croissante, f'<=0 <=> f decroissante.
+          Lien derivee-parite : f paire => f' impaire.
+          Extremum local (definition, voisinage), extremum absolu.
+          Condition necessaire : f'(a)=0 (demonstree). Contre-exemple x^3.
+          Condition suffisante : changement de signe de f' (admise).
+          Exemples : f(x)=-x^3+3x (deux extrema), f(x)=x^3 (pas d'extremum).
+        difficulte: 1
+        timeMinutes: 8
+
+      - slug: "qcm-der-extremum-condition"
+        type: qcm
+        title: "Condition necessaire vs suffisante pour un extremum"
+        praxeologies: [Prax5]
+        contenu: >-
+          QCM sur le piege f'(a)=0 n'implique pas extremum.
+          Contre-exemple f(x)=x^3 en 0.
+        difficulte: 2
+        timeMinutes: 2
+
+  # --- Section 3 : Tableau de variation ---
+  - label: "Tableau de variation"
+    atoms:
+      - slug: "lesson-der-tableau-variation"
+        type: lesson
+        title: "Construction et lecture du tableau de variation"
+        praxeologies: [Prax4, Prax5, Prax9]
+        contenu: >-
+          Methode complete : calculer f', factoriser, tableau de signes,
+          fleches de variation, valeurs aux bornes et aux zeros de f'.
+          Lecture inverse : du tableau deduire les extrema, le nombre de
+          solutions de f(x)=k, les encadrements de f(x).
+          Exemple complet traite : f(x) = 2x^3 - 3x^2 - 12x + 1.
+        difficulte: 1
+        timeMinutes: 8
+
+      - slug: "qcm-der-lecture-graphique"
+        type: qcm
+        title: "Identifier la courbe de f' a partir de celle de f"
+        praxeologies: [Prax9]
+        contenu: >-
+          Courbe de f donnee (cubique avec max/min locaux).
+          3 courbes candidates pour f'. Identifier la bonne
+          en reliant extrema de f aux zeros de f'.
+        difficulte: 1
+        timeMinutes: 2

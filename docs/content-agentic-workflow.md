@@ -17,11 +17,11 @@ Document vivant qui cartographie le systeme de contenu pilote par LLM.
 | References Typst | `_raw/reference/{programme}/{module}/` | Transcriptions PDF -> Typst | WF0 [0b] — sortie ; WF1 — entree |
 | **--- Knowledge Base (WF1) ---** | | | |
 | Referentiels | `docs/referentiels/` | Conventions redaction maths tunisiennes | WF1 — reference KB ; WF3 [3a] — reference generation |
-| KB template | `meta_system/kb/template.md` | Modele pour creer une KB module | WF1 — template de creation |
-| KB modules | `meta_system/kb/{nn}-{slug}.md` | Savoir structure par module (1 existant) | WF1 — sortie ; WF2 [2a] — entree analyse praxeologies |
+| KB template | `.claude/skills/content/references/kb-template.md` | Modele pour creer une KB module | WF1 — template de creation |
+| KB modules | `content/{prog}/{mod}/_kb.md` | Savoir structure par module (2 existants) | WF1 — sortie ; WF2 [2a] — entree analyse praxeologies |
 | **--- Planning (WF2) ---** | | | |
-| Planning template | `meta_system/planning/template.yaml` | Schema du manifeste de livret | WF2 [2b] — template de creation |
-| Planning modules | `content/{prog}/{mod}/_planning.yaml` | Manifeste par module (avant generation) | WF2 — sortie ; WF3 [3a] — spec de generation ; WF4 [4a] — verification couverture |
+| Planning template | `.claude/skills/content/references/planning-template.yaml` | Schema du manifeste per-molecule | WF2 [2b] — template de creation |
+| Planning per-molecule | `content/{prog}/{mod}/_molecules/{slug}/_planning.yaml` | Manifeste par molecule (avant generation) | WF2 — sortie ; WF3 [3a] — spec de generation ; WF4 [4a] — verification couverture |
 | **--- Generation (WF3) ---** | | | |
 | Templates atomes | `.claude/skills/content/references/templates.md` | Templates copier-coller par type | WF3 [3a] — structure MDX de chaque atome |
 | Snippets Typst | `.claude/skills/content/references/typst-snippets.md` | Snippets vartable, cetz-plot, cetz | WF3 [3a] — graphiques et tableaux de variation |
@@ -42,8 +42,8 @@ Document vivant qui cartographie le systeme de contenu pilote par LLM.
 flowchart TD
     PDF["PDF brut"] -->|"WF0a : indexer"| Fiche[("Fiche source YAML\n_raw/sources/*.yaml")]
     Fiche -->|"WF0b : transcrire\n/transcription"| Typst[("References Typst\n_raw/reference/{prog}/{mod}/*.typ")]
-    Typst -->|"WF1 : creer KB\n/content kb"| KB[("KB module\nmeta_system/kb/*.md")]
-    KB -->|"WF2 : planifier\n/content plan"| Plan["_planning.yaml\n(draft)"]
+    Typst -->|"WF1 : creer KB\n/content kb"| KB[("KB module\ncontent/{prog}/{mod}/_kb.md")]
+    KB -->|"WF2 : planifier\n/content plan"| Plan["_molecules/{slug}/_planning.yaml\n(draft)"]
     Plan --> Review{"Review\nhumain"}
     Review -->|"ajuste"| Plan
     Review -->|"valide"| PlanV["_planning.yaml\n(validated)"]
@@ -51,7 +51,7 @@ flowchart TD
     Contenu --> PlanG["_planning.yaml\n(generated)"]
     PlanG --> V4a["4a Syntaxe\nnpm run generate"]
     V4a --> V4bc["4b+4c Semantique\n/content valider {module}"]
-    V4bc --> Rapport[/"Rapport pass/fail\nmeta_system/validation/"/]
+    V4bc --> Rapport[/"Rapport pass/fail\n_molecules/{slug}/_validation.md"/]
 ```
 
 ---
@@ -104,20 +104,20 @@ Prerequis : les transcriptions .typ du module doivent exister dans `_raw/referen
 ```mermaid
 flowchart TD
     TYPST[("References Typst\n_raw/reference/{prog}/{mod}/*.typ")] --> Analyse["Analyser les transcriptions\nmanuel + parascolaire + xyplus"]
-    TPL["meta_system/kb/template.md"] -.-> Synth
+    TPL[".claude/skills/content/references/kb-template.md"] -.-> Synth
     REF["docs/referentiels/"] -.-> Synth
     Analyse --> Synth["Synthetiser en KB\naxiomatique, praxeologies, misconceptions"]
-    Synth --> KB[("KB module\nmeta_system/kb/{nn}-{slug}.md")]
+    Synth --> KB[("KB module\ncontent/{prog}/{mod}/_kb.md")]
 ```
 
 Entree : fichiers .typ existants pour le module
-Sortie : `meta_system/kb/{nn}-{slug}.md`
+Sortie : `content/{programme}/{module}/_kb.md`
 
 #### Declencheurs
 
 | Etape | Declencheur | Ressources chargees |
 |-------|-------------|---------------------|
-| Creer la KB | `/content kb {module}` | `meta_system/kb/template.md`, `_raw/reference/{prog}/{mod}/*.typ`, `docs/referentiels/` |
+| Creer la KB | `/content kb {module}` | `.claude/skills/content/references/kb-template.md`, `_raw/reference/{prog}/{mod}/*.typ`, `docs/referentiels/` |
 
 #### Exemples de prompts
 
@@ -135,17 +135,17 @@ Sortie : `meta_system/kb/{nn}-{slug}.md`
 
 ```mermaid
 flowchart TD
-    KB[("KB module\nmeta_system/kb/*.md")] --> Analyse["2a — Analyser les praxeologies\nsection 8 de la KB"]
-    Analyse --> Gen["2b — Generer _planning.yaml\nmolecules, atomes, praxeologies"]
-    TPL["meta_system/planning/template.yaml"] -.-> Gen
-    Gen --> PlanD[("_planning.yaml\nstatus: draft")]
+    KB[("KB module\ncontent/{prog}/{mod}/_kb.md")] --> Analyse["2a — Analyser les praxeologies\nsection 8 de la KB"]
+    Analyse --> Gen["2b — Generer _molecules/{slug}/_planning.yaml\natomes par molecule"]
+    TPL[".claude/skills/content/references/planning-template.yaml"] -.-> Gen
+    Gen --> PlanD[("_planning.yaml per-molecule\nstatus: draft")]
     PlanD --> Review{"2c — Review humain\ncouverture, slugs, difficultes"}
     Review -->|"ajuste"| Gen
-    Review -->|"valide"| PlanV[("_planning.yaml\nstatus: validated")]
+    Review -->|"valide"| PlanV[("_planning.yaml per-molecule\nstatus: validated")]
 ```
 
-Entree : KB module complete (`meta_system/kb/{nn}-{slug}.md`)
-Sortie : `content/{programme}/{module}/_planning.yaml` avec `status: validated`
+Entree : KB module complete (`content/{programme}/{module}/_kb.md`)
+Sortie : `content/{programme}/{module}/_molecules/{slug}/_planning.yaml` avec `status: validated` (1 fichier par molecule)
 
 **Cycle de vie du status** : `draft` → `validated` (review humain) → `generated` (apres WF3)
 
@@ -153,7 +153,7 @@ Sortie : `content/{programme}/{module}/_planning.yaml` avec `status: validated`
 
 | Etape | Declencheur | Ressources chargees |
 |-------|-------------|---------------------|
-| Generer le planning | `/content plan {module}` | KB module, `meta_system/planning/template.yaml` |
+| Generer le planning | `/content plan {module}` | KB module (`_kb.md`), `.claude/skills/content/references/planning-template.yaml` |
 | Review humain | manuel (lecture du YAML) | — |
 | Valider le planning | prompt libre | `_planning.yaml` |
 
@@ -185,14 +185,14 @@ flowchart TD
     GenAtomes --> Atomes[("Atomes MDX\ncontent/{prog}/{mod}/*.mdx")]
     Atomes --> GenMol["3b — Assembler les livrets\nkind: livret, sections > steps"]
     PlanV -.-> GenMol
-    GenMol --> Molecules[("Livrets YAML\n_molecules/*.yaml")]
+    GenMol --> Molecules[("Livrets YAML\n_molecules/{slug}/molecule.yaml")]
     Molecules --> Status["3c — status -> generated"]
 ```
 
 Chaque molecule generee utilise `kind: livret` avec des sections (pas de distinction cours/serie).
 
 Entree : `_planning.yaml` avec `status: validated`
-Sortie : atomes MDX + molecules YAML (`kind: livret`) dans `content/{programme}/{module}/`
+Sortie : atomes MDX + molecules YAML (`_molecules/{slug}/molecule.yaml`) dans `content/{programme}/{module}/`
 
 #### Declencheurs
 
@@ -236,7 +236,7 @@ flowchart TD
     KB[("KB module")] -.-> V4bc
     Plan -.-> V4bc
     CONV -.-> V4bc
-    V4bc --> Rapport[/"Rapport pass/fail\nmeta_system/validation/{module}.md"/]
+    V4bc --> Rapport[/"Rapport pass/fail\n_molecules/{slug}/_validation.md"/]
 ```
 
 Le palier 4a (`npm run generate`) execute 6 phases internes :
@@ -282,7 +282,7 @@ formules, calculs, solutions
 
 - ~~Palier 4b (maths) : aucun outil~~ — resolu (`/content valider {module}`, Grille B)
 - ~~Palier 4c (pedagogie) : aucun outil~~ — resolu (`/content valider {module}`, Grille C)
-- ~~Pas de rapport structure~~ — resolu (rapport dans `meta_system/validation/{module}.md`)
+- ~~Pas de rapport structure~~ — resolu (rapport par molecule dans `content/{prog}/{mod}/_molecules/{slug}/_validation.md`)
 - Pas de conformite planning -> atomes generes (verifier que tous les slugs du planning existent)
 
 ---
@@ -295,10 +295,10 @@ formules, calculs, solutions
 | Modules avec contenu | 5 (continuite, derivation, fonctions, fonction-derivee, fonction-derivee-usuelle) |
 | Atomes MDX | 222 |
 | Livrets YAML | 20 (kind: livret unifie, plus de distinction cours/serie) |
-| KB modules | 2 (generalites-fonctions, fonction-derivee) |
+| KB modules | 2 (fonctions, fonction-derivee) |
 | Fiches sources | 8 (tous les PDFs 3eme-math indexes) |
 | References Typst | 7 modules transcrits (21 fichiers .typ) |
-| Plannings | 2 (fonction-derivee, fonction-derivee-usuelle) |
+| Plannings | 6 per-molecule (3 fonction-derivee + 3 fonction-derivee-usuelle) |
 
 ---
 

@@ -113,7 +113,7 @@ Liste de tags semantiques. Minimum 1, pas de maximum recommande mais rester rais
 #### `praxeologies`
 
 Liste des IDs de praxeologies couvertes par cet atome. Optionnel, defaut `[]`.
-Les IDs referencent les praxeologies de la KB module (`meta_system/kb/*.md`, section 8).
+Les IDs referencent les praxeologies de la KB module (`content/{prog}/{mod}/_kb.md`, section 8).
 Renseigne automatiquement lors de la generation depuis un planning (WF3).
 
 ```yaml
@@ -260,30 +260,40 @@ content/
 ├── 3eme-math/                          # programme (contient _programme.yaml)
 │   ├── _programme.yaml                 # metadata du programme
 │   ├── continuite/                     # module
+│   │   ├── _kb.md                      # Knowledge Base module
 │   │   ├── _molecules/
-│   │   │   ├── continuite.yaml         # livret cours (kind: livret)
-│   │   │   ├── continuite-fondamentaux.yaml  # livret serie (kind: livret)
-│   │   │   └── tvi-maitrise.yaml       # livret serie (kind: livret)
+│   │   │   ├── continuite/
+│   │   │   │   ├── molecule.yaml       # livret (kind: livret)
+│   │   │   │   ├── _planning.yaml      # planning specifique (optionnel)
+│   │   │   │   └── _validation.md      # validation specifique (optionnel)
+│   │   │   ├── continuite-fondamentaux/
+│   │   │   │   └── molecule.yaml
+│   │   │   └── tvi-maitrise/
+│   │   │       └── molecule.yaml
 │   │   ├── lesson-cont-definition.mdx
-│   │   ├── ex-cont-1.mdx
-│   │   └── qcm-cont-1.mdx
+│   │   ├── ex-cont-tvi-direct.mdx
+│   │   └── qcm-cont-polynomes.mdx
 │   ├── derivation/
 │   │   ├── _molecules/
+│   │   │   └── derivation/
+│   │   │       └── molecule.yaml
 │   │   └── *.mdx
 │   └── fonctions/
 │       ├── _molecules/
+│       │   └── fonctions/
+│       │       └── molecule.yaml
 │       └── *.mdx
 ├── 2nde-math/                          # futur programme
 │   └── ...
 ```
 
-Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les atomes (`.mdx` dans les modules), et les molecules/livrets (`.yaml` dans `_molecules/`).
+Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les atomes (`.mdx` dans les modules), et les molecules/livrets (`_molecules/{slug}/molecule.yaml`). Les fichiers `_planning.yaml` et `_validation.md` dans les sous-repertoires molecule sont invisibles au pipeline.
 
 ### 3.1 Molecule Livret
 
 Tous les livrets utilisent `kind: livret`. Il n'y a plus de distinction `cours`/`serie` — un livret est simplement un assemblage ordonne d'atomes organise en sections.
 
-Fichier : `content/{programme}/{module}/_molecules/{slug}.yaml`
+Fichier : `content/{programme}/{module}/_molecules/{slug}/molecule.yaml`
 
 ```yaml
 kind: livret                            # obligatoire, toujours "livret"
@@ -335,7 +345,7 @@ visible: true                           # optionnel, defaut: true
 
 **Regles** :
 - L'ID du programme (nom du repertoire) correspond au slug de parcours
-- Plus de listes `cours:` et `series:` — le pipeline decouvre automatiquement les livrets en scannant les `_molecules/` des sous-modules
+- Plus de listes `cours:` et `series:` — le pipeline decouvre automatiquement les livrets en scannant les `_molecules/{slug}/molecule.yaml` des sous-modules
 - Les livrets sont tries par `order`
 - `visible: true` par defaut. Mettre `false` pour un programme non publie
 
