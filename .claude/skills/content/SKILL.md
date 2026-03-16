@@ -1,7 +1,7 @@
 ---
 name: content
 description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/{programme}/{module}/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon, module, planifier, planning, plan, kb, knowledge base, base de connaissances.
-argument-hint: "[action] [details]"
+argument-hint: "[action] [details] : [custom_detail]"
 ---
 
 # Content Management
@@ -32,7 +32,32 @@ Genere un planning de livret a partir d'une KB module. Le planning declare tous 
 - KB module existante (`content/{prog}/{mod}/_kb.md`)
 - Si pas de KB : creer d'abord la KB (voir `.claude/skills/content/references/kb-template.md`)
 
+### Syntaxe
+
+```
+/content plan {module}
+/content plan {module} : {specs libres}
+```
+
+Le texte apres `:` est un argument libre de customisation. Il peut contenir des contraintes sur :
+- le nombre de molecules
+- les praxeologies a couvrir ou exclure
+- les types d'atomes a inclure/exclure
+- les niveaux de difficulte
+- la structure des sections
+- toute autre intention pedagogique
+
+Exemples :
+- `/content plan nombre-derive : 2 molecules, focus bases dans la 1ere, approfondissement dans la 2eme`
+- `/content plan continuite : une seule molecule, seulement les Prax1-4, difficulte max 2`
+- `/content plan fonctions : 3 molecules progressives, pas de QCM dans la premiere`
+
 ### Etapes
+
+0. **Parse les specs de customisation** (si presentes apres `:` dans `$ARGUMENTS`) :
+   - Extraire les contraintes (nombre de molecules, praxeologies, difficultes, types, structure)
+   - Ces contraintes sont appliquees a l'etape 4 (generation) et 5 (verification)
+   - Si aucune spec : generer un planning par defaut (couverture complete, equilibre standard)
 
 1. **Charge la KB module** : Read `content/{programme}/{module}/_kb.md`
 

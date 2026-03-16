@@ -1,0 +1,96 @@
+---
+type: lesson
+title: "Rappel — Dérivabilité à droite, à gauche et non-dérivabilité"
+difficulty: 0
+timeMinutes: 5
+tags: [derivation, derivabilite-laterale, point-anguleux, tangente-verticale]
+praxeologies: [Prax7, Prax8]
+---
+
+### Dérivées latérales
+
+:::definition[Dérivée à droite et dérivée à gauche]
+
+Soit $f$ définie sur un intervalle contenant $a$.
+
+- La **dérivée à droite** de $f$ en $a$ est :
+
+$$f'_d(a) = \lim_{h \to 0^+} \frac{f(a + h) - f(a)}{h}$$
+
+- La **dérivée à gauche** de $f$ en $a$ est :
+
+$$f'_g(a) = \lim_{h \to 0^-} \frac{f(a + h) - f(a)}{h}$$
+
+:::
+
+:::attention[Sens des limites latérales]
+
+$h \to 0^+$ signifie $h > 0$, donc $a + h > a$ : on approche $a$ **par la droite**.
+
+$h \to 0^-$ signifie $h < 0$, donc $a + h < a$ : on approche $a$ **par la gauche**.
+
+Ne pas confondre le signe de $h$ avec le côté d'approche : $h > 0$ correspond bien à la dérivée **à droite**.
+
+:::
+
+### Condition de dérivabilité
+
+:::theorem[Condition nécessaire et suffisante]
+
+$f$ est **dérivable en $a$** si et seulement si $f'_d(a)$ et $f'_g(a)$ existent, sont **finies** et sont **égales** :
+
+$$f \text{ dérivable en } a \iff f'_d(a) = f'_g(a) \in \mathbb{R}$$
+
+Dans ce cas, $f'(a) = f'_d(a) = f'_g(a)$.
+
+:::
+
+### Point anguleux
+
+:::property[Point anguleux]
+
+Si $f'_d(a)$ et $f'_g(a)$ sont **finies mais différentes**, la courbe $\mathcal{C}_f$ présente un **point anguleux** en $A(a, f(a))$.
+
+La courbe admet deux **demi-tangentes** distinctes en $A$ :
+
+- Demi-tangente à droite : $y = f'_d(a)(x - a) + f(a)$
+- Demi-tangente à gauche : $y = f'_g(a)(x - a) + f(a)$
+
+:::
+
+### Demi-tangente verticale
+
+:::property[Demi-tangente verticale]
+
+Si $f'_d(a) = \pm\infty$ ou $f'_g(a) = \pm\infty$, la courbe $\mathcal{C}_f$ admet une **demi-tangente verticale** du côté correspondant.
+
+L'équation d'une demi-tangente verticale est $x = a$.
+
+:::
+
+### Démarche pour une fonction par morceaux
+
+:::remark
+
+Pour étudier la dérivabilité d'une fonction définie par morceaux en un point de raccordement $a$ :
+
+1. **Vérifier la continuité en $a$** : calculer $\lim_{x \to a^-} f(x)$, $\lim_{x \to a^+} f(x)$ et $f(a)$. Si $f$ n'est pas continue en $a$, elle **n'est pas dérivable** en $a$ (on s'arrête là).
+
+2. **Calculer $f'_g(a)$ et $f'_d(a)$** : utiliser l'expression de $f$ sur chaque morceau pour calculer les limites latérales du taux de variation.
+
+3. **Comparer** : si $f'_g(a) = f'_d(a) \in \mathbb{R}$, alors $f$ est dérivable en $a$. Sinon, $f$ n'est pas dérivable en $a$.
+
+La **continuité est un prérequis** : ne jamais sauter l'étape 1.
+
+:::
+
+### Dérivabilité sur un intervalle
+
+:::definition[Dérivabilité sur un intervalle]
+
+- $f$ est **dérivable sur un intervalle ouvert** $]a, b[$ si $f$ est dérivable en tout point de $]a, b[$.
+- $f$ est **dérivable sur** $[a, b]$ si $f$ est dérivable sur $]a, b[$, dérivable **à droite** en $a$ et **à gauche** en $b$.
+
+Les points de non-dérivabilité (points anguleux, tangentes verticales, points de discontinuité) **découpent** le domaine en intervalles sur lesquels $f$ est dérivable.
+
+:::

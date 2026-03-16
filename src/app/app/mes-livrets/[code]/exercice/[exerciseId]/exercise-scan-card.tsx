@@ -3,21 +3,25 @@
 /**
  * ExerciseScanCard — photo capture + AI correction for exercises.
  *
- * States: idle → capturing → analyzing → result
- * Uses native file input for cross-browser camera access.
+ * Shows a login CTA when user is not authenticated.
+ * States (when authenticated): idle → capturing → analyzing → result
  */
 
 import * as React from 'react'
+import Link from 'next/link'
 import {
   Camera,
   CheckCircle2,
   XCircle,
   Loader2,
+  LogIn,
   RotateCcw,
   Send,
   AlertCircle,
+  Sparkles,
 } from 'lucide-react'
 
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { useAuth } from '@/lib/context'
@@ -38,7 +42,7 @@ interface ExerciseScanCardProps {
 }
 
 export function ExerciseScanCard({ exerciseId, exerciseContent }: ExerciseScanCardProps) {
-  const { user } = useAuth()
+  const { user, isAuthenticated, isLoading } = useAuth()
   const [state, setState] = React.useState<ScanState>('idle')
   const [imageData, setImageData] = React.useState<string | null>(null)
   const [result, setResult] = React.useState<AnalysisResult | null>(null)
@@ -111,6 +115,39 @@ export function ExerciseScanCard({ exerciseId, exerciseContent }: ExerciseScanCa
     setError(null)
   }
 
+  // Don't render anything while auth is loading
+  if (isLoading) return null
+
+  // Unauthenticated — show login gate
+  if (!isAuthenticated) {
+    return (
+      <Card className="border-dashed">
+        <CardContent className="py-5">
+          <div className="flex flex-col items-center gap-3 py-4 text-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+              <Sparkles className="h-6 w-6 text-primary" aria-hidden="true" />
+            </div>
+            <div>
+              <div className="mb-2 flex items-center justify-center gap-2">
+                <p className="font-medium">Correction IA</p>
+                <Badge variant="secondary" className="text-[10px]">Compte requis</Badge>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Connecte-toi pour prendre en photo ton travail et recevoir une correction personnalisee.
+              </p>
+            </div>
+            <Button asChild variant="outline" className="mt-1">
+              <Link href="/login">
+                <LogIn className="mr-2 h-4 w-4" aria-hidden="true" />
+                Se connecter
+              </Link>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    )
+  }
+
   return (
     <Card>
       <CardContent className="py-5">
@@ -128,16 +165,18 @@ export function ExerciseScanCard({ exerciseId, exerciseContent }: ExerciseScanCa
         {/* Idle state */}
         {state === 'idle' && (
           <div className="flex flex-col items-center gap-4 py-6 text-center">
-            <Camera className="h-10 w-10 text-muted-foreground/30" aria-hidden="true" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+              <Sparkles className="h-6 w-6 text-primary" aria-hidden="true" />
+            </div>
             <div>
               <p className="font-medium">Correction IA</p>
               <p className="mt-1 text-sm text-muted-foreground">
-                Prenez en photo votre travail pour obtenir une correction
+                Prends en photo ton travail pour obtenir une correction personnalisee
               </p>
             </div>
             <Button onClick={() => fileInputRef.current?.click()}>
               <Camera className="mr-2 h-4 w-4" aria-hidden="true" />
-              Prendre en photo mon travail
+              Prendre en photo
             </Button>
           </div>
         )}

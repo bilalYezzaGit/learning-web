@@ -1,8 +1,8 @@
 /**
- * Progress Page — dashboard with real Firestore data.
+ * Progress Page — dashboard with activity progress.
  *
  * Shows:
- * - Summary stats (booklets, completed activities, QCM score)
+ * - Summary stats (completed activities, QCM score)
  * - Module-by-module progress bars
  * - Empty states for unauthenticated or no-data users
  */
@@ -10,19 +10,21 @@
 'use client'
 
 import Link from 'next/link'
-import { BarChart3, BookOpen, CheckCircle, Loader2, ScanLine, Target } from 'lucide-react'
+import * as React from 'react'
+import { BarChart3, BookOpen, CheckCircle, Loader2, Target } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/lib/context'
-import { useBookletProgress } from '@/app/app/_components/use-booklet-progress'
+import { useProgress, type ProgressMap } from '@/lib/hooks/use-progress'
 
 export default function ProgresPage() {
   const { userId, isAuthenticated, isLoading: authLoading } = useAuth()
-  const { stats, isLoading: progressLoading } = useBookletProgress(userId)
+  const { progress, isLoading: progressLoading } = useProgress(userId ?? undefined)
 
   const isLoading = authLoading || progressLoading
+  const stats = React.useMemo(() => computeStats(progress), [progress])
 
   return (
     <div className="px-4 py-5">
@@ -56,13 +58,13 @@ export default function ProgresPage() {
         /* No progress yet */
         <Card>
           <CardContent className="py-12 text-center text-muted-foreground">
-            <ScanLine className="mx-auto mb-4 h-12 w-12 opacity-30" aria-hidden="true" />
+            <BookOpen className="mx-auto mb-4 h-12 w-12 opacity-30" aria-hidden="true" />
             <p className="text-lg font-medium">Pas encore de progres</p>
             <p className="mt-1 text-sm">
-              Associe un livret et commence a travailler !
+              Explore les livrets et commence a travailler !
             </p>
             <Button asChild className="mt-4">
-              <Link href="/app/scan">Associer un livret</Link>
+              <Link href="/app/mes-livrets">Voir les livrets</Link>
             </Button>
           </CardContent>
         </Card>
@@ -70,12 +72,7 @@ export default function ProgresPage() {
         /* Real data */
         <div className="space-y-4">
           {/* Summary stats */}
-          <div className="grid grid-cols-3 gap-3">
-            <StatCard
-              icon={<BookOpen className="h-5 w-5 text-primary" />}
-              value={String(stats.totalBooklets)}
-              label="Livrets"
-            />
+          <div className="grid grid-cols-2 gap-3">
             <StatCard
               icon={<CheckCircle className="h-5 w-5 text-success" />}
               value={String(stats.completedActivities)}
@@ -110,6 +107,43 @@ export default function ProgresPage() {
       )}
     </div>
   )
+}
+
+function computeStats(progress: ProgressMap) {
+  let qcmScoreSum = 0
+  let qcmCount = 0
+  let completedActivities = 0
+
+  const moduleMap = new Map<string, { done: number; total: number }>()
+
+  for (const [activityId, p] of progress) {
+    completedActivities++
+    if (p.activityType === 'qcm' && p.score !== undefined) {
+      qcmScoreSum += p.score
+      qcmCount++
+    }
+
+    const parts = activityId.split('-')
+    const moduleKey = (parts.length >= 2 ? parts[1] : undefined) ?? 'other'
+    const m = moduleMap.get(moduleKey) ?? { done: 0, total: 0 }
+    m.done++
+    m.total++
+    moduleMap.set(moduleKey, m)
+  }
+
+  const modules = Array.from(moduleMap.entries()).map(([key, value]) => ({
+    moduleSlug: key,
+    label: key.charAt(0).toUpperCase() + key.slice(1),
+    done: value.done,
+    total: value.total,
+    percentage: value.total > 0 ? Math.round((value.done / value.total) * 100) : 0,
+  }))
+
+  return {
+    completedActivities,
+    avgQcmScore: qcmCount > 0 ? Math.round(qcmScoreSum / qcmCount) : null,
+    modules,
+  }
 }
 
 function StatCard({ icon, value, label }: { icon: React.ReactNode; value: string; label: string }) {

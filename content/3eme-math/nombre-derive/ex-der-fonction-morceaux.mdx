@@ -1,0 +1,102 @@
+---
+type: exercise
+title: "Dérivabilité d'une fonction définie par morceaux"
+difficulty: 2
+timeMinutes: 20
+category: approfondissement
+tags: [derivation, morceaux, derivabilite-laterale, point-anguleux]
+praxeologies: [Prax7, Prax8]
+---
+
+:::enonce
+Soit $g$ la fonction définie par :
+
+$$g(x) = \begin{cases} (x - 1)\sqrt{x + 3} & \text{si } x \geq 0 \\ -(x - 1)\sqrt{x + 3} & \text{si } x < 0 \end{cases}$$
+
+1. Déterminer le domaine de définition de $g$.
+2. Étudier la dérivabilité de $g$ en $-3$, en $0$ et en $1$.
+3. Interpréter graphiquement les résultats.
+:::
+
+:::solution
+**1. Domaine de définition de $g$**
+
+Pour que $g(x)$ existe, il faut que $\sqrt{x + 3}$ existe, donc $x + 3 \geq 0$, soit $x \geq -3$.
+
+- Pour $x \geq 0$ : on a besoin de $x + 3 \geq 0$, ce qui est toujours vérifié.
+- Pour $x < 0$ : on a besoin de $x + 3 \geq 0$, soit $x \geq -3$.
+
+Donc $D_g = [-3, +\infty[$.
+
+**2. Étude de la dérivabilité**
+
+**En $x = -3$ (bord gauche du domaine)**
+
+On a $g(-3) = -(-3 - 1)\sqrt{0} = 0$.
+
+On étudie la dérivée à droite (seule possible car $-3$ est le bord gauche) :
+
+$$\frac{g(-3 + h) - g(-3)}{h} = \frac{g(-3 + h)}{h}$$
+
+Pour $h > 0$ petit ($h < 3$), on a $-3 + h < 0$, donc on utilise la deuxième expression :
+
+$$g(-3 + h) = -(-3 + h - 1)\sqrt{-3 + h + 3} = -(h - 4)\sqrt{h} = (4 - h)\sqrt{h}$$
+
+Le taux d'accroissement vaut :
+
+$$\frac{(4 - h)\sqrt{h}}{h} = \frac{(4 - h)}{\sqrt{h}}$$
+
+$$\lim_{h \to 0^+} \frac{4 - h}{\sqrt{h}} = +\infty$$
+
+La limite est infinie : **$g$ n'est pas dérivable en $-3$**. La courbe admet une **demi-tangente verticale** à droite en $x = -3$.
+
+**En $x = 0$ (jonction des deux morceaux)**
+
+Vérifions d'abord la **continuité** en $0$.
+
+- $g(0)$ : on utilise la première expression ($x \geq 0$) :
+
+$$g(0) = (0 - 1)\sqrt{0 + 3} = -\sqrt{3}$$
+
+- Limite à gauche : pour $x < 0$, $g(x) = -(x - 1)\sqrt{x + 3}$ :
+
+$$\lim_{x \to 0^-} g(x) = -(0 - 1)\sqrt{0 + 3} = \sqrt{3}$$
+
+On a $g(0) = -\sqrt{3} \neq \sqrt{3} = \lim_{x \to 0^-} g(x)$.
+
+**$g$ n'est pas continue en $0$**, donc **$g$ n'est pas dérivable en $0$**.
+
+**En $x = 1$**
+
+Le point $x = 1$ est intérieur au morceau $[0, +\infty[$. On utilise donc l'expression $g(x) = (x - 1)\sqrt{x + 3}$.
+
+On a $g(1) = (1 - 1)\sqrt{1 + 3} = 0$.
+
+$$\frac{g(1 + h) - g(1)}{h} = \frac{(1 + h - 1)\sqrt{1 + h + 3}}{h} = \frac{h\sqrt{4 + h}}{h} = \sqrt{4 + h}$$
+
+$$\lim_{h \to 0} \sqrt{4 + h} = \sqrt{4} = 2$$
+
+**$g$ est dérivable en $1$** et $g'(1) = 2$.
+
+**3. Interprétation graphique**
+
+- **En $x = -3$** : la courbe admet une **demi-tangente verticale** à droite (pente infinie vers le haut). La courbe "part verticalement" depuis le point $(-3, 0)$.
+- **En $x = 0$** : la courbe présente une **discontinuité** (saut de $\sqrt{3}$ à $-\sqrt{3}$). Il n'y a pas de tangente en ce point.
+- **En $x = 1$** : la courbe admet une **tangente** de pente $2$, d'équation $y = 2(x - 1)$.
+:::
+
+:::methode
+Pour étudier la dérivabilité d'une fonction définie par morceaux :
+
+1. **Identifier le type de point** : bord du domaine, jonction entre morceaux, ou point intérieur à un morceau.
+2. **Toujours vérifier la continuité** en premier aux points de jonction : si $f$ n'est pas continue en $a$, alors $f$ n'est pas dérivable en $a$.
+3. **Calculer le taux d'accroissement** et étudier sa limite :
+   - Limite finie $\ell$ : $f$ est dérivable et $f'(a) = \ell$.
+   - Limite infinie : tangente verticale (non dérivable).
+   - Limites latérales différentes : point anguleux (non dérivable).
+:::
+
+:::erreurs
+- **Oublier de vérifier la continuité** : c'est l'erreur la plus fréquente. Avant de calculer des dérivées latérales en un point de jonction, il faut d'abord s'assurer que la fonction est continue en ce point. Si elle ne l'est pas, la dérivabilité est immédiatement exclue.
+- **Confondre "limite infinie" et "pas de limite"** : quand le taux d'accroissement tend vers $\pm\infty$, la fonction n'est pas dérivable mais la courbe admet une tangente verticale (interprétation géométrique précise).
+:::

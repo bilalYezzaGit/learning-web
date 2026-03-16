@@ -200,8 +200,8 @@ export default function LandingPage() {
               Pas d&apos;inscription obligatoire.
             </p>
             <Button size="lg" variant="secondary" className="relative gap-2 px-6 text-base" asChild>
-              <Link href="/app/scan">
-                Scanne mon livret
+              <Link href="/app/mes-livrets">
+                Explorer les livrets
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>

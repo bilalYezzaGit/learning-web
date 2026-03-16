@@ -19,6 +19,7 @@ export type ScanResult =
   | { type: 'booklet'; code: string }
   | { type: 'exercise'; bookletCode: string; exerciseId: string }
 
+
 interface QrScannerProps {
   onScan: (result: ScanResult) => void
 }

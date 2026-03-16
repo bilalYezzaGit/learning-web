@@ -12,7 +12,6 @@ const KNOWN_PREFIXES = [
   '/reset-password',
   '/terms',
   '/privacy',
-  '/viewer',
   '/app',       // paper-first app
   '/_next',
   '/api',

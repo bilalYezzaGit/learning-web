@@ -1,0 +1,139 @@
+---
+type: exercise
+title: "Lecture graphique — nombre derive et limites"
+difficulty: 2
+timeMinutes: 15
+category: application
+tags: [derivation, lecture-graphique, limite, nombre-derive]
+praxeologies: [Prax13, Prax9]
+---
+
+:::enonce
+La courbe ci-dessous represente une fonction $f$ dans un repere orthonorme $(O, \vec{i}, \vec{j})$.
+
+```typst
+#import "@preview/cetz:0.3.2": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Grille legere
+  for i in range(-5, 8) {
+    line((i, -4), (i, 5), stroke: 0.2pt + luma(220))
+  }
+  for j in range(-4, 6) {
+    line((-5, j), (7, j), stroke: 0.2pt + luma(220))
+  }
+
+  // Axes
+  line((-5, 0), (7, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -4), (0, 5), stroke: 0.8pt, mark: (end: ">", fill: black))
+  content((6.8, -0.4), $x$)
+  content((-0.4, 4.8), $y$)
+  content((-0.3, -0.3), $O$)
+
+  // Graduations x
+  for i in (-4, -3, -2, -1, 1, 2, 3, 4, 5, 6) {
+    line((i, -0.1), (i, 0.1), stroke: 0.5pt)
+    content((i, -0.45), text(size: 7pt, str(i)))
+  }
+  // Graduations y
+  for j in (-3, -2, -1, 1, 2, 3, 4) {
+    line((-0.1, j), (0.1, j), stroke: 0.5pt)
+    content((-0.45, j), text(size: 7pt, str(j)))
+  }
+
+  // Asymptotes verticales x = 1 et x = -1 (pointilles)
+  line((1, -4), (1, 5), stroke: (dash: "dashed", paint: gray))
+  line((-1, -4), (-1, 5), stroke: (dash: "dashed", paint: gray))
+
+  // Branche 1 (x < -1) : vient de y ~ 0 pour x -> -inf, passe par (-2, 0) avec pente ~ -1, va vers -inf quand x -> -1-
+  catmull((-4.5, -0.15), (-3.5, -0.3), (-2, 0), (-1.5, -1), (-1.2, -3.5),
+    stroke: 2pt + blue)
+
+  // Branche 2 (-1 < x < 1) : vient de +inf quand x -> -1+, minimum vers (0, 2), va vers +inf quand x -> 1-
+  catmull((-0.8, 4.5), (-0.5, 3), (0, 2), (0.5, 3), (0.8, 4.5),
+    stroke: 2pt + blue)
+
+  // Branche 3 (x > 1) : vient de -inf quand x -> 1+, passe par (2, -1) avec pente ~ 1, passe par (3, 0) avec pente ~ 1, approche 0 par-dessous quand x -> +inf
+  catmull((1.2, -3.5), (1.5, -2), (2, -1), (3, 0), (4.5, 0.15), (6, 0.05),
+    stroke: 2pt + blue)
+
+  // Tangente en (2, -1) de pente 1 (pointilles)
+  line((1, -2), (3.5, 0.5), stroke: (dash: "dotted", paint: orange))
+
+  // Tangente en (-2, 0) de pente -1 (pointilles)
+  line((-3, 1), (-1.2, -0.8), stroke: (dash: "dotted", paint: orange))
+
+  // Tangente en (3, 0) de pente 1 (pointilles)
+  line((2, -1), (4, 1), stroke: (dash: "dotted", paint: orange))
+
+  // Points remarquables
+  circle((-2, 0), radius: 0.08, fill: red, stroke: red)
+  content((-2.5, 0.35), text(size: 8pt, fill: red, $(-2 ; 0)$))
+
+  circle((3, 0), radius: 0.08, fill: red, stroke: red)
+  content((3.5, 0.35), text(size: 8pt, fill: red, $(3 ; 0)$))
+
+  circle((2, -1), radius: 0.08, fill: red, stroke: red)
+  content((2.5, -1.4), text(size: 8pt, fill: red, $(2 ; -1)$))
+
+  // Label courbe
+  content((4.5, -0.6), text(size: 9pt, fill: blue, $cal(C)_f$))
+})
+```
+
+1) Determiner le domaine de definition de $f$.
+2) Calculer $f'(2)$.
+3) Calculer les limites suivantes en reconnaissant un taux de variation :
+
+$$\lim_{x \to -2} \dfrac{f(x)}{x + 2} \quad \text{et} \quad \lim_{x \to 3} \dfrac{f(x)}{x - 3}$$
+
+4) Calculer $\lim_{x \to +\infty} f(x)$, $\lim_{x \to -\infty} f(x)$, $\lim_{x \to 1^+} f(x)$, $\lim_{x \to 1^-} f(x)$, $\lim_{x \to -1^+} f(x)$ et $\lim_{x \to -1^-} f(x)$.
+:::
+
+:::solution
+**1.** Les droites $x = -1$ et $x = 1$ sont des asymptotes verticales. La fonction $f$ n'est pas definie en ces points.
+
+$$D_f = \mathbb{R} \setminus \{-1, 1\}$$
+
+**2.** La tangente a $\mathcal{C}_f$ au point $(2, -1)$ a un coefficient directeur que l'on lit graphiquement. D'apres la figure, cette tangente a une pente egale a $1$.
+
+$$f'(2) = 1$$
+
+**3.** On remarque que $f(-2) = 0$ et $f(3) = 0$.
+
+Pour la premiere limite :
+
+$$\lim_{x \to -2} \dfrac{f(x)}{x + 2} = \lim_{x \to -2} \dfrac{f(x) - f(-2)}{x - (-2)} = f'(-2)$$
+
+C'est le taux de variation de $f$ en $-2$, donc cette limite vaut $f'(-2)$. D'apres la tangente au point $(-2, 0)$, la pente est $-1$.
+
+$$\lim_{x \to -2} \dfrac{f(x)}{x + 2} = f'(-2) = -1$$
+
+Pour la seconde limite :
+
+$$\lim_{x \to 3} \dfrac{f(x)}{x - 3} = \lim_{x \to 3} \dfrac{f(x) - f(3)}{x - 3} = f'(3)$$
+
+D'apres la tangente au point $(3, 0)$, la pente est $1$.
+
+$$\lim_{x \to 3} \dfrac{f(x)}{x - 3} = f'(3) = 1$$
+
+**4.** D'apres la courbe :
+
+- $\lim_{x \to +\infty} f(x) = 0$ (la courbe s'approche de l'axe des abscisses)
+- $\lim_{x \to -\infty} f(x) = 0$ (la courbe s'approche de l'axe des abscisses)
+- $\lim_{x \to 1^+} f(x) = -\infty$ (branche droite descendante)
+- $\lim_{x \to 1^-} f(x) = +\infty$ (branche centrale montante)
+- $\lim_{x \to -1^+} f(x) = +\infty$ (branche centrale montante)
+- $\lim_{x \to -1^-} f(x) = -\infty$ (branche gauche descendante)
+:::
+
+:::methode
+Pour reconnaitre un nombre derive dans une limite :
+
+1. Si $f(a) = 0$, alors $\lim_{x \to a} \dfrac{f(x)}{x - a} = \lim_{x \to a} \dfrac{f(x) - f(a)}{x - a} = f'(a)$
+2. On lit ensuite $f'(a)$ graphiquement comme la pente de la tangente en $(a, f(a))$.
+
+Cette technique permet de calculer des limites de formes indeterminees $\dfrac{0}{0}$ en les interpretant comme des nombres derives.
+:::

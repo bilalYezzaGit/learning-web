@@ -106,8 +106,8 @@ export function OnboardingOverlay() {
             </Button>
           ) : (
             <Button asChild className="w-full">
-              <Link href="/app/scan" onClick={handleDismiss}>
-                Scanne ton livret
+              <Link href="/app/mes-livrets" onClick={handleDismiss}>
+                Explorer les livrets
                 <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>

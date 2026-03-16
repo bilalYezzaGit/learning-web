@@ -1,0 +1,88 @@
+---
+type: lesson
+title: "Rappel — Nombre dérivé et équation de la tangente"
+difficulty: 0
+timeMinutes: 8
+tags: [derivation, nombre-derive, tangente, formules]
+praxeologies: [Prax1, Prax3]
+---
+
+### Définition du nombre dérivé
+
+:::definition[Nombre dérivé]
+
+Soit $f$ une fonction définie sur un intervalle ouvert $I$ et $a \in I$.
+
+On dit que $f$ est **dérivable en $a$** si la limite suivante existe et est **finie**. Ce nombre est appelé **nombre dérivé de $f$ en $a$**, noté $f'(a)$.
+
+**Première écriture** (avec $h$) :
+
+$$f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}$$
+
+**Deuxième écriture** (avec $x$) :
+
+$$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}$$
+
+:::
+
+### Interprétation géométrique
+
+:::property[Pente de la tangente]
+
+Si $f$ est dérivable en $a$, alors $f'(a)$ est le **coefficient directeur de la tangente** à la courbe $\mathcal{C}_f$ au point $A(a, f(a))$.
+
+- Si $f'(a) > 0$ : la tangente est croissante
+- Si $f'(a) < 0$ : la tangente est décroissante
+- Si $f'(a) = 0$ : la tangente est horizontale
+
+:::
+
+### Équation de la tangente
+
+:::theorem[Équation de la tangente]
+
+Soit $f$ dérivable en $a$. La tangente à $\mathcal{C}_f$ au point $A(a, f(a))$ a pour équation :
+
+$$y = f'(a)(x - a) + f(a)$$
+
+:::
+
+:::example[Tangente à f(x) = x² en a = 1]
+
+Soit $f(x) = x^2$. On a $f(1) = 1$ et $f'(1) = 2 \times 1 = 2$.
+
+L'équation de la tangente en $x = 1$ est :
+
+$$y = 2(x - 1) + 1 = 2x - 1$$
+
+:::
+
+### Nombres dérivés des fonctions usuelles
+
+| Fonction $f(x)$ | $f'(a)$ | Conditions |
+|---|---|---|
+| $c$ (constante) | $0$ | $a \in \mathbb{R}$ |
+| $mx + p$ | $m$ | $a \in \mathbb{R}$ |
+| $(x - \alpha)^2 + \beta$ | $2(a - \alpha)$ | $a \in \mathbb{R}$ |
+| $x^n$ | $n \cdot a^{n-1}$ | $a \in \mathbb{R}$, $n \in \mathbb{N}^*$ |
+| $\dfrac{1}{\alpha x + \beta}$ | $\dfrac{-\alpha}{(\alpha a + \beta)^2}$ | $\alpha a + \beta \neq 0$ |
+| $\sqrt{x + \alpha}$ | $\dfrac{1}{2\sqrt{a + \alpha}}$ | $a + \alpha > 0$ |
+
+### Formules des opérations
+
+Soit $f$ et $g$ dérivables en $a$ :
+
+| Opération | Nombre dérivé en $a$ | Conditions |
+|---|---|---|
+| $f + g$ | $f'(a) + g'(a)$ | |
+| $\alpha f + \beta g$ | $\alpha f'(a) + \beta g'(a)$ | $\alpha, \beta \in \mathbb{R}$ |
+| $f \times g$ | $f'(a) \cdot g(a) + f(a) \cdot g'(a)$ | |
+| $\dfrac{1}{f}$ | $\dfrac{-f'(a)}{[f(a)]^2}$ | $f(a) \neq 0$ |
+| $\dfrac{f}{g}$ | $\dfrac{f'(a) \cdot g(a) - f(a) \cdot g'(a)}{[g(a)]^2}$ | $g(a) \neq 0$ |
+| $\sqrt{f}$ | $\dfrac{f'(a)}{2\sqrt{f(a)}}$ | $f(a) > 0$ |
+
+:::attention[Produit de dérivées]
+
+La dérivée d'un produit n'est **pas** le produit des dérivées. On a $(f \times g)'(a) = f'(a) \cdot g(a) + f(a) \cdot g'(a)$ et non $f'(a) \cdot g'(a)$.
+
+:::

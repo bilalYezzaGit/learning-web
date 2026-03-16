@@ -1,0 +1,44 @@
+---
+type: qcm
+title: "Continuite et derivabilite"
+difficulty: 1
+timeMinutes: 2
+tags: [derivation, continuite, implication]
+praxeologies: [Prax6a, Prax6b]
+---
+
+:::question
+Parmi les affirmations suivantes, lesquelles sont **vraies** ?
+
+(I) Si $f$ est continue en $a$, alors $f$ est derivable en $a$.
+
+(II) Si $f$ est derivable en $a$, alors $f$ est continue en $a$.
+
+(III) Si $f$ n'est pas continue en $a$, alors $f$ n'est pas derivable en $a$.
+:::
+
+:::option
+(I) seulement
+:::
+
+:::option
+(II) seulement
+:::
+
+:::option{correct}
+(II) et (III)
+:::
+
+:::option
+(I), (II) et (III)
+:::
+
+:::explanation
+- **(I) est fausse** : la fonction $f(x) = |x|$ est continue en $0$ mais n'est pas derivable en $0$ (point anguleux avec $f'_g(0) = -1$ et $f'_d(0) = 1$).
+
+- **(II) est vraie** : c'est le theoreme fondamental : **derivable en $a$ implique continu en $a$**.
+
+- **(III) est vraie** : c'est la **contraposee** de (II). Si $f$ n'est pas continue en $a$, alors $f$ ne peut pas etre derivable en $a$.
+
+L'erreur courante est de croire que la reciproque de (II) est vraie, c'est-a-dire que continuite implique derivabilite. Continuite est une condition **necessaire** mais **pas suffisante** pour la derivabilite.
+:::

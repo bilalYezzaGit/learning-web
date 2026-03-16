@@ -1,24 +1,24 @@
 /**
- * Booklet Hub Page — action cards for a paired booklet.
- *
- * Each card navigates to a dedicated sub-page (resume, QCM, scan).
+ * Booklet Hub Page — quick actions + table of contents for a booklet.
  */
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import {
+  BookOpen,
   ChevronRight,
+  FileText,
   Lightbulb,
-  ScanLine,
   Zap,
 } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { getBookletByCode } from '@/lib/booklet'
-import { getAtomHtml } from '@/lib/content-loader'
+import { getAtomHtml, getLivret } from '@/lib/content-loader'
 import { BookletBackHeader } from '@/app/app/_components/booklet-back-header'
+import type { ResolvedActivity } from '@/types/content'
 
 interface PageProps {
   params: Promise<{ code: string }>
@@ -40,6 +40,18 @@ function hasResume(livretSlug: string): boolean {
   }
 }
 
+const ACTIVITY_ICON: Record<string, { icon: typeof BookOpen; className: string }> = {
+  lesson: { icon: BookOpen, className: 'text-amber-600' },
+  exercise: { icon: FileText, className: 'text-blue-600' },
+  qcm: { icon: Zap, className: 'text-violet-600' },
+}
+
+const ACTIVITY_LABEL: Record<string, string> = {
+  lesson: 'Cours',
+  exercise: 'Exercice',
+  qcm: 'QCM',
+}
+
 export default async function BookletHubPage({ params }: PageProps) {
   const { code } = await params
   const booklet = getBookletByCode(code)
@@ -49,6 +61,14 @@ export default async function BookletHubPage({ params }: PageProps) {
   }
 
   const resumeAvailable = hasResume(booklet.livretSlug)
+
+  let sections: { id: string; label: string; activities: ResolvedActivity[] }[] = []
+  try {
+    const livret = getLivret(booklet.livretSlug)
+    sections = livret.sections
+  } catch {
+    // Livret data unavailable — show hub without TOC
+  }
 
   return (
     <div>
@@ -73,8 +93,8 @@ export default async function BookletHubPage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Action cards */}
-        <div className="grid gap-3">
+        {/* Quick actions */}
+        <div className="mb-6 grid gap-3 sm:grid-cols-2">
           {resumeAvailable && (
             <ActionCard
               icon={<Lightbulb className="h-5 w-5 text-amber-600" />}
@@ -91,14 +111,34 @@ export default async function BookletHubPage({ params }: PageProps) {
             description={`${booklet.qcmCount} questions disponibles`}
             href={`/app/mes-livrets/${booklet.code}/qcm`}
           />
-          <ActionCard
-            icon={<ScanLine className="h-5 w-5 text-violet-600" />}
-            bgClass="bg-violet-50"
-            title="Scanner mon travail"
-            description="Photo → correction IA"
-            href={`/app/mes-livrets/${booklet.code}/scan`}
-          />
         </div>
+
+        {/* Table of contents */}
+        {sections.length > 0 && (
+          <div>
+            <h2 className="mb-3 font-serif text-lg font-semibold">Sommaire</h2>
+            <div className="space-y-4">
+              {sections.map((section) => (
+                <Card key={section.id}>
+                  <CardContent className="py-4">
+                    <h3 className="mb-3 text-sm font-medium text-muted-foreground">
+                      {section.label}
+                    </h3>
+                    <div className="space-y-1">
+                      {section.activities.map((activity) => (
+                        <ActivityRow
+                          key={activity.id}
+                          activity={activity}
+                          bookletCode={booklet.code}
+                        />
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
@@ -133,6 +173,36 @@ function ActionCard({
           </div>
         </CardContent>
       </Card>
+    </Link>
+  )
+}
+
+function ActivityRow({
+  activity,
+  bookletCode,
+}: {
+  activity: ResolvedActivity
+  bookletCode: string
+}) {
+  const fallback = { icon: FileText, className: 'text-blue-600' }
+  const config = ACTIVITY_ICON[activity.type] ?? fallback
+  const Icon = config.icon
+  const label = ACTIVITY_LABEL[activity.type] ?? activity.type
+
+  const href = `/app/mes-livrets/${bookletCode}/exercice/${activity.id}`
+
+  return (
+    <Link
+      href={href}
+      className="flex items-center gap-3 rounded-md px-2 py-2 transition-colors hover:bg-muted/50"
+    >
+      <Icon className={`h-4 w-4 shrink-0 ${config.className}`} aria-hidden="true" />
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-sm">{activity.title}</p>
+      </div>
+      <Badge variant="secondary" className="shrink-0 text-[10px]">
+        {label}
+      </Badge>
     </Link>
   )
 }

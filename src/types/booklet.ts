@@ -1,17 +1,16 @@
 /**
  * Booklet types — data model for the paper-first experience.
  *
- * A Booklet represents a physical printed booklet that a user pairs
- * with the app via QR code. The app then provides summaries, corrections,
- * and QCM sessions tied to that booklet's content.
+ * A Booklet represents a physical printed booklet. The app provides
+ * summaries, corrections, and QCM sessions tied to that booklet's content.
  */
 
 /**
  * Booklet definition — derived from a livret molecule.
- * Not stored in DB; computed from the content pipeline output.
+ * Computed from the content pipeline output.
  */
 export interface BookletDefinition {
-  /** Short pairing code (e.g. "CONT-3M-001") */
+  /** Booklet code (e.g. "CONT-3M-001") */
   code: string
   /** Livret molecule slug (e.g. "continuite") */
   livretSlug: string
@@ -32,18 +31,6 @@ export interface BookletDefinition {
   /** Total estimated time in minutes */
   estimatedMinutes: number
 }
-
-/**
- * User's paired booklet — stored in Firestore (users/{uid}/booklets/{code}).
- */
-export interface UserBooklet {
-  code: string
-  pairedAt: string
-  livretSlug: string
-  programmeId: string
-  lastOpenedAt: string
-}
-
 
 /**
  * Generate a booklet code from livret slug + programme.

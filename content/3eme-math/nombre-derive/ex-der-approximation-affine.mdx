@@ -1,0 +1,65 @@
+---
+type: exercise
+title: "Approximation affine et estimations numériques"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [derivation, approximation-affine, estimation]
+praxeologies: [Prax5a, Prax5b]
+---
+
+:::enonce
+1. Soit $f(x) = \dfrac{1}{1 + x}$. Donner l'approximation affine de $f$ au voisinage de $0$.
+2. En déduire une valeur approchée de :
+
+   a. $\dfrac{1}{1{,}02}$
+
+   b. $\dfrac{1}{0{,}98}$
+:::
+
+:::solution
+**1. Approximation affine de $f(x) = \dfrac{1}{1 + x}$ au voisinage de $0$**
+
+On applique la formule $f(h) \approx f(0) + h \cdot f'(0)$ pour $h$ voisin de $0$.
+
+Calculons $f(0)$ :
+
+$$f(0) = \frac{1}{1 + 0} = 1$$
+
+Calculons $f'(x)$ :
+
+$$f'(x) = \frac{-1}{(1 + x)^2}$$
+
+$$f'(0) = \frac{-1}{1} = -1$$
+
+Donc pour $h$ voisin de $0$ :
+
+$$\frac{1}{1 + h} \approx 1 + h \times (-1) = 1 - h$$
+
+$$\boxed{\frac{1}{1 + h} \approx 1 - h}$$
+
+**2. Estimations numériques**
+
+**a.** $\dfrac{1}{1{,}02} = \dfrac{1}{1 + 0{,}02}$ : on pose $h = 0{,}02$.
+
+$$\frac{1}{1{,}02} \approx 1 - 0{,}02 = 0{,}98$$
+
+**b.** $\dfrac{1}{0{,}98} = \dfrac{1}{1 + (-0{,}02)}$ : on pose $h = -0{,}02$.
+
+$$\frac{1}{0{,}98} \approx 1 - (-0{,}02) = 1{,}02$$
+
+:::
+
+:::methode
+Pour utiliser l'approximation affine :
+
+1. **Identifier** la fonction $f$ et le point $a$ tels que le nombre à estimer s'écrive $f(a + h)$ avec $h$ petit
+2. **Calculer** $f(a)$ et $f'(a)$
+3. **Appliquer** $f(a + h) \approx f(a) + h \cdot f'(a)$
+4. **Remplacer** $h$ par la valeur numérique pour obtenir l'estimation
+:::
+
+:::erreurs
+- Oublier le signe de $f'(a)$ : ici $f'(0) = -1$, d'où le signe $-$ dans $1 - h$
+- Pour $\dfrac{1}{0{,}98}$ : ne pas voir que $0{,}98 = 1 + (-0{,}02)$, c'est-à-dire $h = -0{,}02$ (et non $h = 0{,}02$)
+:::

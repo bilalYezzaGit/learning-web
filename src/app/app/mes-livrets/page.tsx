@@ -1,17 +1,13 @@
 /**
- * Mes Livrets — list of user's paired booklets.
- *
- * PR1: shows available booklets from the content pipeline.
- * PR2: will show only user's paired booklets from Firestore.
+ * Mes Livrets — list of all available booklets.
  */
 
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { BookOpen, Plus, QrCode } from 'lucide-react'
+import { BookOpen } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { getAllBooklets } from '@/lib/booklet'
 
 export const metadata: Metadata = {
@@ -31,14 +27,6 @@ export default function MesLivretsPage() {
         </p>
       </div>
 
-      {/* Pair CTA */}
-      <Button asChild className="mb-5 w-full" size="lg">
-        <Link href="/app/scan">
-          <QrCode className="mr-2 h-4 w-4" aria-hidden="true" />
-          Associer un nouveau livret
-        </Link>
-      </Button>
-
       {/* Booklet list */}
       {booklets.length === 0 ? (
         <Card>
@@ -46,7 +34,7 @@ export default function MesLivretsPage() {
             <BookOpen className="mx-auto mb-4 h-12 w-12 opacity-50" aria-hidden="true" />
             <p className="text-lg font-medium">Aucun livret disponible</p>
             <p className="mt-1 text-sm">
-              Scannez le QR code de votre livret pour commencer
+              Les livrets seront bientot disponibles.
             </p>
           </CardContent>
         </Card>
@@ -77,7 +65,6 @@ export default function MesLivretsPage() {
                         </Badge>
                       </div>
                     </div>
-                    <Plus className="mt-2 h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
                   </div>
                 </CardContent>
               </Card>

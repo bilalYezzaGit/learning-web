@@ -1,0 +1,38 @@
+---
+type: qcm
+title: "Definition du nombre derive"
+difficulty: 1
+timeMinutes: 2
+tags: [derivation, definition, nombre-derive]
+praxeologies: [Prax1]
+---
+
+:::question
+Soit $f$ une fonction definie sur un intervalle ouvert $I$ et $a \in I$. Quelle expression definit le nombre derive $f'(a)$ ?
+:::
+
+:::option
+$\displaystyle\lim_{h \to 0} \dfrac{f(a) - f(a + h)}{h}$
+:::
+
+:::option{correct}
+$\displaystyle\lim_{h \to 0} \dfrac{f(a + h) - f(a)}{h}$
+:::
+
+:::option
+$\displaystyle\lim_{h \to 0^+} \dfrac{f(a + h) - f(a)}{h}$
+:::
+
+:::option
+$\displaystyle\lim_{h \to 0} [f(a + h) - f(a)]$
+:::
+
+:::explanation
+Le nombre derive $f'(a)$ est defini comme la **limite du taux de variation** :
+
+$$f'(a) = \lim_{h \to 0} \dfrac{f(a + h) - f(a)}{h}$$
+
+- La premiere option inverse $f(a)$ et $f(a+h)$ au numerateur : c'est une erreur de signe qui donne $-f'(a)$.
+- La troisieme option est la limite quand $h \to 0^+$ seulement : c'est la definition de la **derivee a droite** $f'_d(a)$, pas du nombre derive.
+- La quatrieme option oublie la division par $h$ : c'est $\lim_{h \to 0} [f(a+h) - f(a)] = 0$ si $f$ est continue en $a$, ce qui ne donne pas le nombre derive.
+:::
