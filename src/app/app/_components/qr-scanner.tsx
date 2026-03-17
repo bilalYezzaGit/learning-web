@@ -138,7 +138,7 @@ export function QrScanner({ onScan }: QrScannerProps) {
  * Parse a QR value into a scan result.
  * Supports:
  * - Exercise URL: /app/ex?b=CODE&e=EXERCISE_ID
- * - Pairing URL: /app/scan?code=CODE
+ * - Booklet URL: /app/scan?code=CODE (cover QR)
  * - Direct code: "CONT-3M-001"
  */
 function parseScanResult(value: string): ScanResult | null {
@@ -155,7 +155,7 @@ function parseScanResult(value: string): ScanResult | null {
       }
     }
 
-    // Pairing QR: /app/scan?code=...
+    // Booklet cover QR: /app/scan?code=...
     const code = url.searchParams.get('code')
     if (code) {
       return { type: 'booklet', code: code.toUpperCase().trim() }

@@ -20,7 +20,7 @@ const STEPS = [
     icon: BookOpen,
     title: 'Bienvenue sur Aylan',
     description:
-      'Aylan augmente ton livret de maths avec la correction IA, des QCM interactifs et un suivi de ta progression.',
+      'Aylan augmente ton livret de maths avec la correction IA et des QCM interactifs.',
   },
   {
     icon: QrCode,

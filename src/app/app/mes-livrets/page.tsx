@@ -1,14 +1,13 @@
 /**
- * Mes Livrets — list of all available booklets.
+ * Mes Livrets — list of all available booklets with favorites.
  */
 
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { BookOpen } from 'lucide-react'
 
 import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { getAllBooklets } from '@/lib/booklet'
+import { BookletList } from '@/app/app/mes-livrets/_components/booklet-list'
 
 export const metadata: Metadata = {
   title: 'Mes livrets',
@@ -39,38 +38,7 @@ export default function MesLivretsPage() {
           </CardContent>
         </Card>
       ) : (
-        <div className="grid gap-3">
-          {booklets.map((booklet) => (
-            <Link key={booklet.code} href={`/app/mes-livrets/${booklet.code}`}>
-              <Card className="transition-colors hover:bg-muted/50">
-                <CardContent className="py-4">
-                  <div className="flex items-start gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                      <BookOpen className="h-5 w-5 text-primary" aria-hidden="true" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="font-medium">{booklet.title}</p>
-                      <p className="mt-0.5 line-clamp-1 text-sm text-muted-foreground">
-                        {booklet.description}
-                      </p>
-                      <div className="mt-2 flex flex-wrap gap-1.5">
-                        <Badge variant="secondary" className="text-xs">
-                          {booklet.exerciseCount} exercices
-                        </Badge>
-                        <Badge variant="secondary" className="text-xs">
-                          {booklet.qcmCount} QCM
-                        </Badge>
-                        <Badge variant="outline" className="text-xs">
-                          {booklet.code}
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
+        <BookletList booklets={booklets} />
       )}
     </div>
   )

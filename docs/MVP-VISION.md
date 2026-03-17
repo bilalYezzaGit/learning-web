@@ -192,36 +192,17 @@ Pas de tracking de progression en V1.
 
 ## 5. Backlog d'alignement MVP
 
-### Phase 1 — Supprimer le progress (nettoyage code)
+### Phase 1 — Supprimer le progress (FAIT)
 
-| # | Tache | Fichiers a supprimer/modifier |
-|---|-------|-------------------------------|
-| 1 | Supprimer `useProgress` hook | `src/lib/hooks/use-progress.ts` |
-| 2 | Supprimer `useModuleProgress` hook | `src/lib/hooks/use-module-progress.ts` |
-| 3 | Supprimer `local-progress.ts` | `src/lib/services/local-progress.ts` + export dans `index.ts` |
-| 4 | Supprimer types progress | `src/types/progress.ts` |
-| 5 | Supprimer constante `SUCCESS_THRESHOLD` | `src/lib/constants.ts` |
-| 6 | Nettoyer QCM player (retirer tracking score) | `qcm-session-player.tsx` |
-| 7 | Simplifier profile sheet (tab Stats → supprime) | `profile-sheet.tsx` |
-| 8 | Nettoyer Firestore rules (`activityProgress`) | `firestore.rules` |
+Tous les fichiers progress supprimes : hooks, services, types, constants, page, Firestore rules, profile sheet simplifie.
 
-### Phase 2 — Refonte navigation (UX)
+### Phase 2 — Refonte navigation (FAIT)
 
-| # | Tache | Fichiers concernes |
-|---|-------|--------------------|
-| 9 | Supprimer bottom nav | `bottom-nav.tsx` + `layout.tsx` |
-| 10 | Supprimer page `/app/progres` | `progres/page.tsx` |
-| 11 | Supprimer page `/app/scan` | `scan/page.tsx` |
-| 12 | Creer FAB scan flottant (camera directe) | Nouveau composant + `layout.tsx` |
-| 13 | Ajouter favoris localStorage a la liste des livrets | `mes-livrets/page.tsx` |
-| 14 | Ajuster `app-main.tsx` (plus de padding nav) | `app-main.tsx` |
+Bottom nav supprimee, pages `/app/scan` et `/app/progres` supprimees, FAB scan flottant cree, favoris localStorage ajoutes, `app-main.tsx` simplifie.
 
-### Phase 3 — Polish landing
+### Phase 3 — Polish landing (FAIT)
 
-| # | Tache | Fichiers concernes |
-|---|-------|--------------------|
-| 15 | Retirer feature card "progression" | `(landing)/page.tsx` |
-| 16 | Ajuster a 2 features (consulter + corriger) | `(landing)/page.tsx` |
+Feature card "progression" supprimee. Landing ajustee a 2 features (consulter + corriger) en grille 2 colonnes.
 
 ### Reporte (V2)
 

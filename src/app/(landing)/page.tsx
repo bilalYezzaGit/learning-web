@@ -2,7 +2,6 @@ import Link from 'next/link'
 import {
   BookOpen,
   Brain,
-  BarChart3,
   ArrowRight,
   GraduationCap,
   QrCode,
@@ -35,19 +34,13 @@ const FEATURES = [
     icon: QrCode,
     title: 'Scanne ton livret',
     description:
-      'Un QR code sur chaque exercice. Scanne-le pour accéder au contenu augmenté : correction IA, QCM et explications.',
+      'Un QR code sur chaque exercice. Scanne-le pour acceder au contenu augmente : corrections, QCM et explications.',
   },
   {
     icon: Brain,
     title: 'Correction IA',
     description:
-      'Prends en photo ton travail et reçois un feedback personnalisé. L\'IA analyse ta démarche et te guide.',
-  },
-  {
-    icon: BarChart3,
-    title: 'Suis ta progression',
-    description:
-      'Chaque exercice terminé, chaque QCM réussi s\'ajoute à ton tableau de bord. Visualise tes progrès.',
+      'Prends en photo ton travail et recois un feedback personnalise. L\'IA analyse ta demarche et te guide.',
   },
 ]
 
@@ -146,7 +139,7 @@ export default function LandingPage() {
             les QCM interactifs et le suivi de progression.
           </p>
         </div>
-        <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-3">
+        <div className="mx-auto grid max-w-3xl gap-6 md:grid-cols-2">
           {FEATURES.map((feature) => (
             <Card
               key={feature.title}
