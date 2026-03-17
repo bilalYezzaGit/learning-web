@@ -13,6 +13,4 @@ export {
 
 export { logError } from './error-logger'
 
-export { getLocalProgress, setLocalActivityComplete } from './local-progress'
-
 export { analyzeScan, ScanError, type ScanResult } from './scan-service'

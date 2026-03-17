@@ -10,13 +10,13 @@
 ## 1. Vision globale
 
 L'application Aylan est une **extension numerique de livrets mathematiques imprimes**.
-Les livrets PDF sont le produit principal. L'app sert a :
+Les livrets PDF sont le produit principal. L'app fait 2 choses :
 
-1. **Consulter les corrections** — Scanner un QR d'exercice/QCM → voir enonce + solution
-2. **Correction IA** — Scanner une copie manuscrite → feedback personnalise (auth requise)
-3. **Suivre sa progression** — Dashboard de suivi (auth requise, V2)
+1. **Consulter le contenu** — Scanner un QR ou naviguer → voir enonce, solution, QCM, cours
+2. **Correction IA** — Prendre en photo son travail → feedback personnalise (auth requise)
 
-Le contenu est **ouvert et statique** en V1. Pas de pairing, pas de compte obligatoire pour consulter.
+Le contenu est **ouvert et statique**. Pas de compte obligatoire pour consulter.
+Pas de tracking de progression en V1.
 
 ---
 
@@ -26,66 +26,82 @@ Le contenu est **ouvert et statique** en V1. Pas de pairing, pas de compte oblig
 |----------|-------------|
 | **Paper-first** | Le livret imprime est le support principal, l'app l'augmente |
 | **Contenu ouvert** | Tout le contenu statique est accessible sans compte |
-| **Auth minimale** | Seuls le scan IA et la progression necessitent un login |
-| **Zero friction** | Scanner un QR → voir le contenu en 1 seconde, pas de pairing |
+| **Auth minimale** | Seule la correction IA necessite un login |
+| **Zero friction** | Scanner un QR → voir le contenu en 1 seconde |
 | **Mobile-first** | UX optimisee pour smartphone (scan QR sur le terrain) |
+| **Pas de code superflu** | Si une feature est coupee, son code est supprime |
 
 ---
 
 ## 3. Fonctionnalites — Vision vs. Etat
 
-### 3.1 Consultation du contenu (OUVERT)
+### 3.1 Navigation & UX globale
 
-#### 3.1.1 Liste des livrets
+#### 3.1.1 Page principale — Liste des livrets
 
 | | Vision | App actuelle | Aligne ? |
 |-|--------|-------------|----------|
-| **Acces** | Ouvert, tous les livrets visibles | Ouvert, affiche tous les livrets via `getAllBooklets()` | OUI |
-| **Navigation** | Grille de livrets avec metadata | Grille avec titre, description, badges (exos, QCM, code) | OUI |
-| **CTA principal** | Pas de CTA de pairing | CTA pairing supprime | OUI |
+| **Contenu** | Liste de tous les livrets, c'est LA page principale | Grille avec titre, description, badges | OUI |
+| **Favoris** | Etoile sur chaque livret, stocke en localStorage, affiches en premier | Non implemente | NON |
+| **Navigation** | Pas de bottom nav — la liste EST la navigation | Bottom nav 3 onglets (Livrets, Scan, Progres) | NON |
 
-**Statut : ALIGNE** (pairing supprime le 2026-03-17)
+**Taches d'alignement :**
+- [ ] Supprimer la bottom nav (`bottom-nav.tsx`)
+- [ ] Supprimer la page `/app/progres` et sa route
+- [ ] Supprimer la page `/app/scan` (le scan se fait via FAB)
+- [ ] Ajouter un systeme de favoris localStorage sur la liste des livrets
+- [ ] Ajuster `app-main.tsx` (plus de padding bottom pour la nav)
 
-#### 3.1.2 Hub du livret
+#### 3.1.2 FAB Scan
+
+| | Vision | App actuelle | Aligne ? |
+|-|--------|-------------|----------|
+| **Position** | Floating action button en bas a droite, toujours visible | Onglet central dans la bottom nav | NON |
+| **Comportement** | Clic → active la camera immediatement (pas de page intermediaire) | Navigue vers `/app/scan` (page avec choix camera/manuel) | NON |
+
+**Taches d'alignement :**
+- [ ] Creer un composant FAB scan flottant (bottom-right, z-40)
+- [ ] Au clic → ouvre un sheet/modal avec QrScanner (camera directe)
+- [ ] Sur scan reussi → redirect vers le contenu (exercice ou hub livret)
+- [ ] Integrer dans le layout app (visible sur toutes les pages app)
+
+#### 3.1.3 Hub du livret
 
 | | Vision | App actuelle | Aligne ? |
 |-|--------|-------------|----------|
 | **Acces** | Direct via URL ou QR | Direct via `/app/mes-livrets/[code]` | OUI |
-| **Actions rapides** | Resume + QCM | 2 cards (Resume, QCM rapide) — card Scanner supprimee | OUI |
-| **Sommaire** | Table des matieres avec tous les atomes cliquables | Sections + activites (lecons, exercices, QCM) avec liens | OUI |
+| **Actions rapides** | Resume + QCM | 2 cards (Resume, QCM rapide) | OUI |
+| **Sommaire** | Table des matieres avec tous les atomes cliquables | Sections + activites avec liens | OUI |
 
-**Statut : ALIGNE** (sommaire ajoute le 2026-03-17)
+**Statut : ALIGNE**
 
-#### 3.1.3 Page exercice (via QR)
+#### 3.1.4 Page exercice
 
 | | Vision | App actuelle | Aligne ? |
 |-|--------|-------------|----------|
-| **Acces** | QR → `/app/ex?b=...&e=...` → page exercice | Redirect fonctionne | OUI |
 | **Enonce** | Affiche clairement | HTML compile avec KaTeX | OUI |
-| **Solution** | Bouton "Voir la solution" visible | Bloc depliable `<details>` compile par pipeline | OUI |
-| **Scan IA** | Gate auth : badge "Compte requis" + CTA login | Card avec gate visuel si non connecte | OUI |
-| **Scope** | Scan IA uniquement pour exercices | `isExercise` check, pas de scan card pour lecons/QCM | OUI |
+| **Solution** | Bouton "Voir la solution" | Bloc depliable `<details>` | OUI |
+| **Scan IA** | Gate auth : badge "Compte requis" + CTA login | Card avec gate visuel | OUI |
+| **Scope** | Scan IA uniquement pour exercices | `isExercise` check | OUI |
 
-**Statut : ALIGNE** (gate auth + separation exercice/lecon ajoutees le 2026-03-17)
+**Statut : ALIGNE**
 
-#### 3.1.4 Page QCM
-
-| | Vision | App actuelle | Aligne ? |
-|-|--------|-------------|----------|
-| **Mode consultation** | Scanner QR ou clic sommaire → voir question + reponse + explication | Page exercice detecte `qcm-*`, charge les JSON compiles, affiche avec reponse correcte (vert) + explication | OUI |
-| **Mode session** | Quiz chronometre interactif | QcmSessionPlayer (10 min, 10 questions, scoring) via "QCM rapide" | OUI |
-| **Quiz groups** | Affiche toutes les questions du groupe | Detecte `quizAtomIds` dans le livret, charge le groupe complet | OUI |
-
-**Statut : ALIGNE** (consultation mode ajoute le 2026-03-17)
-
-#### 3.1.5 Page resume
+#### 3.1.5 Page QCM
 
 | | Vision | App actuelle | Aligne ? |
 |-|--------|-------------|----------|
-| **Contenu** | Resume du cours, theoremes, definitions | HTML compile avec KaTeX, blocs structures | OUI |
-| **Acces** | Depuis le hub du livret | Card "Resume du cours" si resume existe | OUI |
+| **Mode consultation** | Question + reponse correcte + explication | Detecte `qcm-*`, affiche avec reponse verte | OUI |
+| **Mode session** | Quiz chronometre interactif | QcmSessionPlayer via "QCM rapide" | OUI |
 
-**Statut : ALIGNE** — Rien a faire.
+**Statut : ALIGNE**
+
+#### 3.1.6 Page resume
+
+| | Vision | App actuelle | Aligne ? |
+|-|--------|-------------|----------|
+| **Contenu** | Resume du cours, theoremes, definitions | HTML compile avec KaTeX | OUI |
+
+**Statut : ALIGNE**
 
 ---
 
@@ -93,86 +109,69 @@ Le contenu est **ouvert et statique** en V1. Pas de pairing, pas de compte oblig
 
 | | Vision | App actuelle | Aligne ? |
 |-|--------|-------------|----------|
-| **Declencheur** | Scanner sa copie depuis la page exercice | `ExerciseScanCard` avec capture photo | OUI |
+| **Declencheur** | Depuis la page exercice | `ExerciseScanCard` avec capture photo | OUI |
 | **Auth** | Login requis | `/api/scan` verifie Bearer token | OUI |
 | **Modele** | Claude Vision | Claude Sonnet 4.5 avec tool_use | OUI |
-| **Rate limit** | Protection contre abus | 10 req/min par IP (in-memory) | OUI |
-| **Feedback** | Correct/incorrect, confiance, suggestions | isCorrect, confidence, feedback, suggestions[] | OUI |
-| **UX non-connecte** | Message clair + CTA login | Card avec badge "Compte requis" + bouton login | OUI |
+| **UX non-connecte** | Badge "Compte requis" + CTA login | Card avec gate visuel | OUI |
 
-**Statut : ALIGNE** (gate auth ajoute le 2026-03-17)
+**Statut : ALIGNE**
 
 ---
 
-### 3.3 Progression (AUTH REQUISE — V2)
-
-| | Vision | App actuelle | Aligne ? |
-|-|--------|-------------|----------|
-| **Stockage** | Firestore par utilisateur | `users/{uid}/activityProgress/{activityId}` | OUI |
-| **Dashboard** | Stats + progression par module | Page `/app/progres` avec stats et barres | OUI |
-| **Sans compte** | localStorage (pas de migration) | `local-progress.ts` ecrit en localStorage | OUI |
-| **Priorite V1** | Secondaire — message "Creez un compte" | Page affiche CTA login si non connecte | OUI |
-
-**Statut : ALIGNE** pour V1 (fonctionnel mais secondaire).
-
----
-
-### 3.4 Pairing de livrets
+### 3.3 Progression — SUPPRIMEE en V1
 
 | | Vision V1 | App actuelle | Aligne ? |
 |-|-----------|-------------|----------|
-| **Concept** | SUPPRIME — contenu ouvert | Code supprime entierement | OUI |
+| **Concept** | SUPPRIME — pas de tracking en V1 | `useProgress`, `local-progress.ts`, page `/app/progres`, stats dans profile sheet | NON |
 
-**Statut : ALIGNE** (supprime le 2026-03-17)
-- `booklet-service.ts` supprime
-- `UserBooklet` type supprime
-- `/api/booklet/validate` route supprimee
-- `use-booklet-progress.ts` hook supprime
-- `/app/scan` transforme en simple scanner → redirect contenu
-- Firestore rules nettoyees (collection `booklets` retiree)
-
----
-
-### 3.5 Simulations interactives (V2)
-
-| | Vision | App actuelle | Aligne ? |
-|-|--------|-------------|----------|
-| **Concept** | QR sur theoreme → simulation/graphique interactif dans l'app | Non existant | REPORTE V2 |
-
-**Scope V2 :**
-- Nouveau type d'atome `interactive` ou `simulation`
-- Composants React interactifs (canvas, sliders, animations)
-- Nouveau type de QR "theoreme" dans le pipeline PDF
-- Route dediee `/app/interactive/[id]`
+**Taches d'alignement :**
+- [ ] Supprimer `useProgress` hook
+- [ ] Supprimer `useModuleProgress` hook
+- [ ] Supprimer `local-progress.ts` service
+- [ ] Supprimer types progress (`ActivityProgress`, `ProgressStatus`, `ProgressContext`)
+- [ ] Supprimer la constante `SUCCESS_THRESHOLD`
+- [ ] Supprimer les appels `completeQCM` / `completeExercise` dans le QCM player
+- [ ] Simplifier le profile sheet (supprimer tab Stats)
+- [ ] Nettoyer Firestore rules (collection `activityProgress`)
 
 ---
 
-### 3.6 Authentification
+### 3.4 Authentification
 
 | | Vision | App actuelle | Aligne ? |
 |-|--------|-------------|----------|
 | **Login/Signup** | Fonctionnel | Firebase Auth (email/password) | OUI |
 | **Reset password** | Fonctionnel | Firebase sendPasswordResetEmail | OUI |
-| **Pages auth** | Design shadcn | Cards avec pattern login-01 | OUI |
-| **Guard middleware** | Routes publiques vs protegees | Whitelist de routes, redirect vers `/` | PARTIEL |
+| **Utilite unique en V1** | Correction IA | `/api/scan` avec Bearer token | OUI |
+| **Profile sheet** | Juste infos compte (email) | 2 tabs (Stats + Profil) | NON |
 
 **Taches d'alignement :**
-- [ ] Nettoyer le middleware : supprimer `/viewer` de la whitelist (n'existe pas)
-- [ ] Ajouter un guard cote client pour les features auth (scan IA, progres) — pas de redirect middleware, juste des CTA login dans l'UI
+- [ ] Simplifier profile sheet (supprimer tab Stats, garder uniquement Profil)
 
 ---
 
-### 3.7 Landing page
+### 3.5 Landing page
 
 | | Vision | App actuelle | Aligne ? |
 |-|--------|-------------|----------|
 | **Message** | "Augmente ton livret de maths avec l'IA" | Meme message | OUI |
-| **Features mises en avant** | Scan QR, correction IA, consultation | Scan livret, Correction IA, Progression | PARTIEL |
-| **CTA principal** | Explorer les livrets (ouvert) | "Scanne ton livret" → `/app/mes-livrets` | PARTIEL |
+| **Features** | Consulter + Corriger (2 piliers, pas 3) | 3 cards dont "Suis ta progression" | NON |
+| **CTA** | Explorer les livrets | "Explorer les livrets" (mis a jour) | OUI |
 
 **Taches d'alignement :**
-- [ ] Ajuster les CTA pour refleter le contenu ouvert (pas besoin de scanner pour explorer)
-- [ ] Revoir les 3 feature cards pour coller a la vision V1 (consulter, corriger, s'entrainer)
+- [ ] Retirer la feature card "Suis ta progression"
+- [ ] Ajuster a 2 features : consultation + correction IA
+
+---
+
+### 3.6 Features supprimees
+
+| Feature | Statut | Date |
+|---------|--------|------|
+| Pairing de livrets | Code supprime | 2026-03-17 |
+| Progression / tracking | A supprimer | - |
+| Simulations interactives | Reporte V2 | 2026-03-17 |
+| Parcours personnalises | Reporte V2 | 2026-03-17 |
 
 ---
 
@@ -181,46 +180,56 @@ Le contenu est **ouvert et statique** en V1. Pas de pairing, pas de compte oblig
 | Aspect | Etat | Notes |
 |--------|------|-------|
 | Pipeline 6 etapes | Fonctionnel | read → validate → compile → resolve → write → generate-pdfs |
-| Atomes MDX | 237 atomes (lesson, exercise, qcm) | 6 modules dans 3eme-math |
-| Molecules YAML | 21 livrets unifies | Format `kind: livret` |
+| Atomes MDX | 237 atomes | 6 modules dans 3eme-math |
+| Molecules YAML | 21 livrets | Format `kind: livret` |
 | Generation PDF | 17+ PDFs avec QR codes | Couverture + QR exercices |
 | QR exercices | Fonctionnel | `/app/ex?b=...&e=...` |
-| QR couverture | Fonctionnel | `/app/scan?code=...` |
-| KB modules | 3 modules documentes | fonction-derivee, nombre-derive, fonctions |
-| Plannings | 6 plannings actifs | Per-molecule WF2 |
+| KB modules | 3 modules | fonction-derivee, nombre-derive, fonctions |
 
-**Statut : SOLIDE** — Le pipeline est le point fort du projet. Pas de changement necessaire pour V1.
+**Statut : SOLIDE** — Pas de changement necessaire.
 
 ---
 
 ## 5. Backlog d'alignement MVP
 
-### Priorite haute (bloquant pour V1)
+### Phase 1 — Supprimer le progress (nettoyage code)
 
-| # | Tache | Fichiers concernes | Statut |
-|---|-------|--------------------|--------|
-| 1 | ~~Supprimer le flux de pairing~~ | ~~service, types, API, hook, UI~~ | FAIT |
-| 2 | ~~Transformer `/app/scan` en scanner → redirect~~ | ~~`scan/page.tsx`~~ | FAIT |
-| 3 | ~~Gate visuel scan IA pour non-connectes~~ | ~~`exercise-scan-card.tsx`~~ | FAIT |
-| 4 | ~~Ajouter sommaire dans le hub livret~~ | ~~`[code]/page.tsx`~~ | FAIT |
+| # | Tache | Fichiers a supprimer/modifier |
+|---|-------|-------------------------------|
+| 1 | Supprimer `useProgress` hook | `src/lib/hooks/use-progress.ts` |
+| 2 | Supprimer `useModuleProgress` hook | `src/lib/hooks/use-module-progress.ts` |
+| 3 | Supprimer `local-progress.ts` | `src/lib/services/local-progress.ts` + export dans `index.ts` |
+| 4 | Supprimer types progress | `src/types/progress.ts` |
+| 5 | Supprimer constante `SUCCESS_THRESHOLD` | `src/lib/constants.ts` |
+| 6 | Nettoyer QCM player (retirer tracking score) | `qcm-session-player.tsx` |
+| 7 | Simplifier profile sheet (tab Stats → supprime) | `profile-sheet.tsx` |
+| 8 | Nettoyer Firestore rules (`activityProgress`) | `firestore.rules` |
 
-### Priorite moyenne (amelioration UX)
+### Phase 2 — Refonte navigation (UX)
 
-| # | Tache | Fichiers concernes | Statut |
-|---|-------|--------------------|--------|
-| 5 | ~~Separer scan IA (exercices only) + nettoyer page~~ | ~~`[exerciseId]/page.tsx`~~ | FAIT |
-| 6 | ~~Mode consultation QCM (voir reponse)~~ | ~~`[exerciseId]/page.tsx`~~ | FAIT |
-| 7 | ~~Ajuster landing page CTA~~ | ~~`(landing)/page.tsx`~~ | FAIT |
-| 8 | ~~Nettoyer middleware~~ | ~~`middleware.ts`~~ | FAIT |
+| # | Tache | Fichiers concernes |
+|---|-------|--------------------|
+| 9 | Supprimer bottom nav | `bottom-nav.tsx` + `layout.tsx` |
+| 10 | Supprimer page `/app/progres` | `progres/page.tsx` |
+| 11 | Supprimer page `/app/scan` | `scan/page.tsx` |
+| 12 | Creer FAB scan flottant (camera directe) | Nouveau composant + `layout.tsx` |
+| 13 | Ajouter favoris localStorage a la liste des livrets | `mes-livrets/page.tsx` |
+| 14 | Ajuster `app-main.tsx` (plus de padding nav) | `app-main.tsx` |
 
-### Priorite basse (V2 / reporte)
+### Phase 3 — Polish landing
 
-| # | Tache | Notes |
-|---|-------|-------|
-| 9 | Simulations interactives | Nouveau type d'atome + composants |
-| 10 | Re-introduire le pairing quand progression activee | Code existe, juste re-exposer |
-| 11 | Migration localStorage → Firestore au login | Utile quand progression est un vrai feature |
-| 12 | Parcours personnalises | 2nde-math, 1ere-tc a activer |
+| # | Tache | Fichiers concernes |
+|---|-------|--------------------|
+| 15 | Retirer feature card "progression" | `(landing)/page.tsx` |
+| 16 | Ajuster a 2 features (consulter + corriger) | `(landing)/page.tsx` |
+
+### Reporte (V2)
+
+| # | Tache |
+|---|-------|
+| 17 | Simulations interactives |
+| 18 | Parcours personnalises (2nde-math, 1ere-tc) |
+| 19 | Tracking progression (si valide plus tard) |
 
 ---
 
@@ -229,23 +238,22 @@ Le contenu est **ouvert et statique** en V1. Pas de pairing, pas de compte oblig
 ```
 ROUTES PUBLIQUES (sans compte)
   /                          Landing page
-  /app/mes-livrets           Tous les livrets disponibles
-  /app/mes-livrets/[code]    Hub livret (resume, exercices, QCM)
+  /app/mes-livrets           Liste des livrets (page principale, favoris)
+  /app/mes-livrets/[code]    Hub livret (resume, sommaire, QCM)
   /app/mes-livrets/[code]/resume       Resume du cours
-  /app/mes-livrets/[code]/exercice/[id]  Enonce + solution
+  /app/mes-livrets/[code]/exercice/[id]  Exercice/Lecon/QCM consultation
   /app/mes-livrets/[code]/qcm          Session QCM interactive
   /app/ex?b=...&e=...        Redirect QR exercice
-  /app/scan                  Scanner QR → redirect vers contenu
   /login, /signup, /reset-password
   /terms, /privacy
 
 ROUTES AUTH (avec compte)
   POST /api/scan             Correction IA (Bearer token)
-  /app/progres               Dashboard progression
 
-FEATURES GATING (cote client, pas middleware)
-  ExerciseScanCard           → CTA login si non connecte
-  Page progres               → CTA login si non connecte
+UX GLOBALE
+  FAB scan flottant          Visible sur toutes les pages /app/*
+  Pas de bottom nav          La liste des livrets EST la navigation
+  Favoris                    localStorage, affiches en premier dans la liste
 ```
 
 ---
@@ -256,9 +264,13 @@ FEATURES GATING (cote client, pas middleware)
 |------|----------|----------|
 | 2026-03-17 | Supprimer le pairing en V1 | Contenu ouvert, zero friction |
 | 2026-03-17 | Reporter les simulations interactives a V2 | Necessite nouveau type d'atome + composants |
-| 2026-03-17 | Auth uniquement sur scan IA et progression | Simplification V1 |
-| 2026-03-17 | Ajouter mode consultation QCM | QR doit pouvoir pointer vers une reponse |
 | 2026-03-17 | Pairing supprime entierement (code + UI + Firestore rules) | YAGNI — pas de code speculatif |
-| 2026-03-17 | Scan page simplifie (QR → redirect, pas de pairing) | Zero friction |
-| 2026-03-17 | Landing CTA mis a jour ("Explorer les livrets") | Coherence avec contenu ouvert |
-| 2026-03-17 | Middleware nettoye (route `/viewer` supprimee) | Hygiene |
+| 2026-03-17 | Scan page simplifie (QR → redirect) | Zero friction |
+| 2026-03-17 | Gate auth sur scan IA | Badge "Compte requis" + CTA login |
+| 2026-03-17 | Sommaire dans le hub livret | Table des matieres interactive |
+| 2026-03-17 | Mode consultation QCM | Voir reponse + explication |
+| 2026-03-17 | **Supprimer le progress en V1** | Focus sur les 2 piliers : contenu statique + correction IA |
+| 2026-03-17 | **Supprimer la bottom nav** | 1 seule page utile, pas besoin de 3 onglets |
+| 2026-03-17 | **FAB scan flottant** | Camera directe, pas de page intermediaire |
+| 2026-03-17 | **Favoris localStorage** | Personnalisation sans auth |
+| 2026-03-17 | **Landing a 2 features** | Consulter + corriger (plus de progression) |

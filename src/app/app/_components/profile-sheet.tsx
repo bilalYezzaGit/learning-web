@@ -3,24 +3,18 @@
 /**
  * Profile Sheet
  *
- * Side panel (right) showing user profile with tabs: Stats, Profil.
+ * Side panel (right) showing user profile info.
  * Opened from the NavUser dropdown.
  */
 
-import * as React from 'react'
 import Link from 'next/link'
 import {
-  BookOpen,
-  CheckCircle,
-  GraduationCap,
   LogOut,
-  Trophy,
   User,
 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   Sheet,
@@ -31,7 +25,6 @@ import {
 } from '@/components/ui/sheet'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useAuth } from '@/lib/context'
-import { useProgress } from '@/lib/hooks/use-progress'
 
 // =============================================================================
 // ProfileSheet
@@ -43,7 +36,7 @@ interface ProfileSheetProps {
 }
 
 export function ProfileSheet({ open, onOpenChange }: ProfileSheetProps) {
-  const { user, userId, isAuthenticated, signOut } = useAuth()
+  const { user, isAuthenticated, signOut } = useAuth()
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -53,7 +46,6 @@ export function ProfileSheet({ open, onOpenChange }: ProfileSheetProps) {
         ) : (
           <AuthenticatedContent
             user={user}
-            userId={userId}
             onSignOut={signOut}
           />
         )}
@@ -71,7 +63,7 @@ function GuestContent() {
     <>
       <SheetHeader className="border-b px-6 py-4">
         <SheetTitle>Profil</SheetTitle>
-        <SheetDescription>Connectez-vous pour accéder à votre profil</SheetDescription>
+        <SheetDescription>Connectez-vous pour utiliser la correction IA</SheetDescription>
       </SheetHeader>
       <div className="flex flex-1 flex-col items-center justify-center p-6">
         <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-muted">
@@ -79,7 +71,7 @@ function GuestContent() {
         </div>
         <h2 className="text-xl font-semibold">Visiteur</h2>
         <p className="mt-2 text-center text-muted-foreground">
-          Connectez-vous pour sauvegarder votre progression
+          Connectez-vous pour utiliser la correction IA
         </p>
         <Button className="mt-6" size="lg" asChild>
           <Link href="/login">Se connecter</Link>
@@ -95,13 +87,11 @@ function GuestContent() {
 
 interface AuthenticatedContentProps {
   user: ReturnType<typeof useAuth>['user']
-  userId: string | null
   onSignOut: () => Promise<void>
 }
 
 function AuthenticatedContent({
   user,
-  userId,
   onSignOut,
 }: AuthenticatedContentProps) {
   const displayName = user?.displayName || user?.email || 'Utilisateur'
@@ -133,182 +123,22 @@ function AuthenticatedContent({
         </div>
       </SheetHeader>
 
-      {/* Tabs */}
-      <Tabs defaultValue="stats" className="flex flex-1 flex-col overflow-hidden">
-        <div className="px-6 pt-4">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="stats">
-              <Trophy className="mr-1.5 h-3.5 w-3.5" />
-              Stats
-            </TabsTrigger>
-            <TabsTrigger value="profil">
-              <User className="mr-1.5 h-3.5 w-3.5" />
-              Profil
-            </TabsTrigger>
-          </TabsList>
+      {/* Account info */}
+      <ScrollArea className="flex-1">
+        <div className="px-6 py-4">
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm">Informations du compte</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">Email</span>
+                <span className="text-sm font-medium">{userEmail || 'Non renseigne'}</span>
+              </div>
+            </CardContent>
+          </Card>
         </div>
-
-        <ScrollArea className="flex-1">
-          <div className="px-6 py-4">
-            <TabsContent value="stats" className="mt-0">
-              {userId && <StatsTab userId={userId} />}
-            </TabsContent>
-
-            <TabsContent value="profil" className="mt-0">
-              <ProfilTab email={user?.email} />
-            </TabsContent>
-          </div>
-        </ScrollArea>
-      </Tabs>
+      </ScrollArea>
     </>
-  )
-}
-
-// =============================================================================
-// Stats Tab
-// =============================================================================
-
-function StatsTab({ userId }: { userId: string }) {
-  const { progress } = useProgress(userId)
-
-  const stats = React.useMemo(() => {
-    let completed = 0
-    let success = 0
-    let qcmDone = 0
-    let qcmSuccess = 0
-    let exercisesDone = 0
-    let totalPercentage = 0
-    let qcmWithScore = 0
-
-    progress.forEach((p) => {
-      completed++
-      if (p.status === 'success') success++
-
-      if (p.activityType === 'qcm') {
-        qcmDone++
-        if (p.status === 'success') qcmSuccess++
-        if (p.score !== undefined) {
-          totalPercentage += p.score
-          qcmWithScore++
-        }
-      } else if (p.activityType === 'exercise') {
-        exercisesDone++
-      }
-    })
-
-    const avgScore = qcmWithScore > 0 ? Math.min(Math.round(totalPercentage / qcmWithScore), 100) : 0
-    const successRate = completed > 0 ? Math.round((success / completed) * 100) : 0
-
-    return { completed, success, qcmDone, qcmSuccess, exercisesDone, avgScore, successRate }
-  }, [progress])
-
-  return (
-    <div className="space-y-4">
-      {/* Stats Grid */}
-      <div className="grid grid-cols-2 gap-3">
-        <Card>
-          <CardContent className="py-3">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-success/10">
-                <CheckCircle className="h-4 w-4 text-success" />
-              </div>
-              <div>
-                <p className="tabular-nums text-xl font-bold">{stats.completed}</p>
-                <p className="text-xs text-muted-foreground">Activités</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="py-3">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-info/10">
-                <GraduationCap className="h-4 w-4 text-info" />
-              </div>
-              <div>
-                <p className="tabular-nums text-xl font-bold">{stats.avgScore}%</p>
-                <p className="text-xs text-muted-foreground">Score QCM</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="py-3">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-warning/10">
-                <BookOpen className="h-4 w-4 text-warning" />
-              </div>
-              <div>
-                <p className="tabular-nums text-xl font-bold">{stats.exercisesDone}</p>
-                <p className="text-xs text-muted-foreground">Exercices</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="py-3">
-            <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
-                <Trophy className="h-4 w-4 text-primary" />
-              </div>
-              <div>
-                <p className="tabular-nums text-xl font-bold">{stats.successRate}%</p>
-                <p className="text-xs text-muted-foreground">Réussite</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* QCM Details */}
-      <Card>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-sm">Détails QCM</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-0">
-          <div className="flex items-center justify-between border-b py-2.5">
-            <span className="text-sm text-muted-foreground">QCM complétés</span>
-            <span className="text-sm font-medium">{stats.qcmDone}</span>
-          </div>
-          <div className="flex items-center justify-between border-b py-2.5">
-            <span className="text-sm text-muted-foreground">QCM réussis</span>
-            <span className="text-sm font-medium text-success">{stats.qcmSuccess}</span>
-          </div>
-          <div className="flex items-center justify-between py-2.5">
-            <span className="text-sm text-muted-foreground">À revoir</span>
-            <span className="text-sm font-medium text-warning">{stats.qcmDone - stats.qcmSuccess}</span>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  )
-}
-
-// =============================================================================
-// Profil Tab
-// =============================================================================
-
-function ProfilTab({
-  email,
-}: {
-  email?: string | null
-}) {
-  return (
-    <div className="space-y-4">
-      <Card>
-        <CardHeader className="pb-2">
-          <CardTitle className="text-sm">Informations du compte</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">Email</span>
-            <span className="text-sm font-medium">{email || 'Non renseigné'}</span>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
   )
 }
