@@ -175,7 +175,43 @@ Pas de tracking de progression en V1.
 
 ---
 
-## 4. Pipeline & contenu
+## 4. Architecture technique
+
+### Stack V1
+
+| Couche | Technologie | Role |
+|--------|-------------|------|
+| Frontend | Next.js (App Router) + Tailwind + shadcn | Rendu statique + client |
+| Auth | Firebase Auth (client SDK) | Login/signup/reset |
+| API | Next.js API Routes | Correction IA (POST /api/scan) |
+| Token verification | Firebase Admin SDK | `verifyIdToken()` dans /api/scan |
+| IA | Anthropic API (Claude Vision) | Analyse des copies manuscrites |
+| Contenu | Pipeline custom (MDX → HTML/JSON/PDF) | Generation des livrets |
+| Math | KaTeX | Rendu des formules |
+
+### Services supprimes
+
+| Service | Raison |
+|---------|--------|
+| Firestore | Plus aucune donnee a stocker cote serveur en V1 |
+| Firebase Cloud Functions | Non utilise |
+| `firebase/firestore` (client SDK) | Import supprime, reduit le bundle |
+
+### Variables d'environnement (Vercel)
+
+```
+ANTHROPIC_API_KEY          → Cle API Anthropic (sk-ant-...)
+FIREBASE_PROJECT_ID        → learning-os-platform
+FIREBASE_CLIENT_EMAIL      → firebase-adminsdk-...@...iam.gserviceaccount.com
+FIREBASE_PRIVATE_KEY       → -----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n
+```
+
+> Firebase Auth client config est hardcodee dans `src/lib/firebase/config.ts` (valeurs publiques, pas des secrets).
+> Les `NEXT_PUBLIC_FIREBASE_*` dans `.env.local` ne sont PAS utilises et peuvent etre retires.
+
+---
+
+## 5. Pipeline & contenu
 
 | Aspect | Etat | Notes |
 |--------|------|-------|
@@ -190,7 +226,7 @@ Pas de tracking de progression en V1.
 
 ---
 
-## 5. Backlog d'alignement MVP
+## 6. Backlog d'alignement MVP
 
 ### Phase 1 — Supprimer le progress (FAIT)
 
@@ -214,7 +250,7 @@ Feature card "progression" supprimee. Landing ajustee a 2 features (consulter + 
 
 ---
 
-## 6. Architecture cible V1
+## 7. Architecture cible V1
 
 ```
 ROUTES PUBLIQUES (sans compte)
@@ -255,3 +291,5 @@ UX GLOBALE
 | 2026-03-17 | **FAB scan flottant** | Camera directe, pas de page intermediaire |
 | 2026-03-17 | **Favoris localStorage** | Personnalisation sans auth |
 | 2026-03-17 | **Landing a 2 features** | Consulter + corriger (plus de progression) |
+| 2026-03-17 | **Firestore supprime** | Plus aucune donnee serveur en V1, Firebase Auth suffit |
+| 2026-03-17 | **Parcours supprime** | Code mort, jamais importe dans l'app |

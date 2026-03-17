@@ -1,18 +1,12 @@
 /**
- * Firebase Client
+ * Firebase Client — Auth only
  *
- * Initializes Firebase app and exports service instances.
+ * Initializes Firebase app and exports Auth instance.
  * Uses lazy initialization to avoid issues with SSR.
- *
- * Usage:
- * ```ts
- * import { getAuthInstance, getDbInstance } from '@/lib/firebase/client'
- * ```
  */
 
 import { initializeApp, getApps, type FirebaseApp } from 'firebase/app'
 import { getAuth, type Auth } from 'firebase/auth'
-import { getFirestore, type Firestore } from 'firebase/firestore'
 import { getAnalytics, isSupported, type Analytics } from 'firebase/analytics'
 
 import { getFirebaseConfig } from './config'
@@ -28,7 +22,6 @@ function getApp(): FirebaseApp {
 
 // Lazy-initialized instances
 let _auth: Auth | null = null
-let _db: Firestore | null = null
 let _analytics: Analytics | null = null
 
 /**
@@ -39,16 +32,6 @@ export function getAuthInstance(): Auth {
     _auth = getAuth(getApp())
   }
   return _auth
-}
-
-/**
- * Firestore Database instance
- */
-export function getDbInstance(): Firestore {
-  if (!_db) {
-    _db = getFirestore(getApp())
-  }
-  return _db
 }
 
 /**
@@ -64,4 +47,3 @@ export async function getAnalyticsInstance(): Promise<Analytics | null> {
   _analytics = getAnalytics(getApp())
   return _analytics
 }
-
