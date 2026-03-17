@@ -13,7 +13,6 @@ import type {
   ResolvedActivity,
   Programme,
   CompiledQCMQuestion,
-  CompiledQuiz,
 } from '@/types/content'
 
 // =============================================================================
@@ -119,15 +118,3 @@ export const getCompiledQcm = cache((id: string): CompiledQCMQuestion => {
   return readJson<CompiledQCMQuestion>(filePath)
 })
 
-/**
- * Assemble a quiz from pre-compiled QCM questions.
- */
-export function getCompiledQuiz(atomIds: string[]): CompiledQuiz {
-  const questions = atomIds.map(id => getCompiledQcm(id))
-  const firstId = atomIds[0] ?? 'quiz'
-  return {
-    id: firstId,
-    title: `QCM (${atomIds.length} questions)`,
-    questions,
-  }
-}

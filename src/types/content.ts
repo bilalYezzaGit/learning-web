@@ -54,9 +54,3 @@ export interface CompiledQCMQuestion {
   timeMinutes: number
 }
 
-/** Compiled quiz group for QCMPlayer */
-export interface CompiledQuiz {
-  id: string
-  title: string
-  questions: CompiledQCMQuestion[]
-}

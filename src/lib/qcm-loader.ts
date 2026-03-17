@@ -43,7 +43,7 @@ function findModuleDir(moduleSlug: string): string | undefined {
 /**
  * Get all compiled QCM questions for a module.
  */
-export const getModuleQcmQuestions = cache((moduleSlug: string): QcmQuestion[] => {
+const getModuleQcmQuestions = cache((moduleSlug: string): QcmQuestion[] => {
   const dir = findModuleDir(moduleSlug)
   if (!dir) return []
 

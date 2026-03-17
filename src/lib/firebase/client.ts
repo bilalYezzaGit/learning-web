@@ -7,7 +7,6 @@
 
 import { initializeApp, getApps, type FirebaseApp } from 'firebase/app'
 import { getAuth, type Auth } from 'firebase/auth'
-import { getAnalytics, isSupported, type Analytics } from 'firebase/analytics'
 
 import { getFirebaseConfig } from './config'
 
@@ -20,9 +19,7 @@ function getApp(): FirebaseApp {
   return initializeApp(getFirebaseConfig())
 }
 
-// Lazy-initialized instances
 let _auth: Auth | null = null
-let _analytics: Analytics | null = null
 
 /**
  * Firebase Authentication instance
@@ -32,18 +29,4 @@ export function getAuthInstance(): Auth {
     _auth = getAuth(getApp())
   }
   return _auth
-}
-
-/**
- * Firebase Analytics instance (browser only)
- * Returns null if analytics is not supported (SSR, privacy blockers)
- */
-export async function getAnalyticsInstance(): Promise<Analytics | null> {
-  if (_analytics) return _analytics
-
-  const supported = await isSupported()
-  if (!supported) return null
-
-  _analytics = getAnalytics(getApp())
-  return _analytics
 }

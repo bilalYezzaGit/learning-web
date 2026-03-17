@@ -12,5 +12,3 @@ export {
 } from './auth-service'
 
 export { logError } from './error-logger'
-
-export { analyzeScan, ScanError, type ScanResult } from './scan-service'
