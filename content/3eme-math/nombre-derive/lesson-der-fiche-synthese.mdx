@@ -1,23 +1,23 @@
 ---
 type: lesson
-title: "Fiche de synthese — Derivation"
+title: "Fiche de synthèse — Dérivation"
 difficulty: 0
 timeMinutes: 5
-tags: [derivation, synthese, formules, revision]
+tags: [dérivation, synthèse, formules, révision]
 praxeologies: [Prax1, Prax2, Prax3, Prax5a, Prax7]
 ---
 
-### Definition du nombre derive
+### Définition du nombre dérivé
 
-:::property[Deux ecritures equivalentes]
-$f$ est derivable en $a$ si la limite suivante existe et est finie :
+:::property[Deux écritures équivalentes]
+$f$ est dérivable en $a$ si la limite suivante existe et est finie :
 
 $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a} = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h}$$
 :::
 
-### Derivees des fonctions usuelles
+### Dérivées des fonctions usuelles
 
-:::property[Table des derivees usuelles]
+:::property[Table des dérivées usuelles]
 ```typst
 #table(
   columns: (auto, auto, auto),
@@ -37,8 +37,8 @@ $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a} = \lim_{h \to 0} \frac{f(a + 
 
 ### Formules d'operations
 
-:::property[Operations sur les derivees]
-Soient $f$ et $g$ derivables en $a$, $\alpha, \beta \in \mathbb{R}$, $k \in \mathbb{N}^*$ :
+:::property[Operations sur les dérivées]
+Soient $f$ et $g$ dérivables en $a$, $\alpha, \beta \in \mathbb{R}$, $k \in \mathbb{N}^*$ :
 
 ```typst
 #table(
@@ -59,8 +59,8 @@ Soient $f$ et $g$ derivables en $a$, $\alpha, \beta \in \mathbb{R}$, $k \in \mat
 
 ### Tangente et approximation affine
 
-:::property[Equation de la tangente]
-La tangente a $C_f$ au point d'abscisse $a$ a pour equation :
+:::property[Équation de la tangente]
+La tangente à $C_f$ au point d'abscisse $a$ a pour équation :
 
 $$y = f'(a)(x - a) + f(a)$$
 :::
@@ -71,20 +71,20 @@ Pour $h$ voisin de $0$ :
 $$f(a + h) \approx f(a) + h \cdot f'(a)$$
 :::
 
-### Derivabilite laterale
+### Dérivabilité latérale
 
-:::property[Condition de derivabilite laterale]
-$f$ est derivable en $a$ si et seulement si les derivees laterales existent et sont egales :
+:::property[Condition de dérivabilité latérale]
+$f$ est dérivable en $a$ si et seulement si les dérivées latérales existent et sont égales :
 
 $$f'_d(a) = \lim_{h \to 0^+} \frac{f(a + h) - f(a)}{h} = \lim_{h \to 0^-} \frac{f(a + h) - f(a)}{h} = f'_g(a)$$
 
 Si $f'_d(a) \neq f'_g(a)$, le point est un **point anguleux** avec deux demi-tangentes.
 :::
 
-### Derivabilite et continuite
+### Dérivabilité et continuité
 
 :::property[Implication fondamentale]
-$$f \text{ derivable en } a \implies f \text{ continue en } a$$
+$$f \text{ dérivable en } a \implies f \text{ continue en } a$$
 
-La reciproque est fausse : $f(x) = |x|$ est continue en $0$ mais pas derivable en $0$.
+La réciproque est fausse : $f(x) = |x|$ est continue en $0$ mais pas dérivable en $0$.
 :::

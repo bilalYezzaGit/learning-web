@@ -67,7 +67,7 @@ ${section.content}
   },
 )
 
-#set text(font: "New Computer Modern", size: 10.5pt, lang: "fr")
+#set text(font: "New Computer Modern", size: 10.5pt, lang: "fr", hyphenate: true)
 #set par(justify: true)
 #set heading(numbering: none)
 
@@ -170,7 +170,6 @@ ${section.content}
           text(weight: "bold")[Exercice #number — #title]
           parbreak()
           body
-          v(5em)
         },
         align(top, qr)
       )
@@ -178,8 +177,11 @@ ${section.content}
       text(weight: "bold")[Exercice #number — #title]
       parbreak()
       body
-      v(5em)
     }
+    v(0.5em)
+    line(length: 100%, stroke: 0.3pt + luma(220))
+    v(0.2em)
+    text(size: 7.5pt, style: "italic", fill: luma(140))[Solution détaillée sur l'application — scannez le QR code]
   }
 )
 
@@ -199,15 +201,18 @@ ${section.content}
     v(0.3em)
     for (i, opt) in options.enumerate() {
       box(
-        width: 0.8em,
-        height: 0.8em,
-        stroke: 0.8pt + luma(100),
+        width: 1em,
+        height: 1em,
+        stroke: 1pt + luma(100),
         radius: 50%,
       )
       h(0.5em)
       opt
       parbreak()
+      v(0.2em)
     }
+    v(0.3em)
+    text(size: 7.5pt, style: "italic", fill: luma(140))[Vérifiez vos réponses sur l'application]
   }
 )
 
@@ -222,7 +227,7 @@ ${section.content}
 
     #v(1em)
 
-    #text(size: 28pt, weight: "bold")[${data.title}]
+    #text(size: 24pt, weight: "bold")[${data.title}]
 
     #v(1.5em)
 
@@ -236,10 +241,12 @@ ${section.content}
 
     #v(2em)
 
-    #block(width: 70%, inset: 16pt, stroke: 0.5pt + luma(200), radius: 6pt)[
-      #text(weight: "bold")[Objectifs du module]
-
-      ${data.objectives.map(o => `+ ${o}`).join('\n      ')}
+    #block(width: 75%, inset: 16pt, stroke: 0.5pt + luma(200), radius: 6pt)[
+      #align(center)[#text(weight: "bold")[Objectifs du module]]
+      #v(0.5em)
+      #align(left)[
+        ${data.objectives.map((o, i) => `${i + 1}. ${o}`).join('\\\\\n        ')}
+      ]
     ]
   ]
   #v(1fr)

@@ -1,21 +1,21 @@
 ---
 type: exercise
-title: "Tangente parallele a une droite donnee"
+title: "Tangente parallèle à une droite donnée"
 difficulty: 2
 timeMinutes: 10
 category: application
-tags: [derivation, tangente, parallele, examen]
+tags: [dérivation, tangente, parallèle, examen]
 praxeologies: [Prax4a]
 ---
 
 :::enonce
-Soit $f$ la fonction definie par $f(x) = x^3 - 3x$ et soit $D$ la droite d'equation $y = 9x - 2$.
+Soit $f$ la fonction définie par $f(x) = x^3 - 3x$ et soit $D$ la droite d'équation $y = 9x - 2$.
 
-**1)** Calculer $f'(a)$ pour tout reel $a$.
+**1)** Calculer $f'(a)$ pour tout réel $a$.
 
-**2)** Determiner les valeurs de $a$ pour lesquelles la tangente a $C_f$ au point d'abscisse $a$ est parallele a $D$.
+**2)** Déterminer les valeurs de $a$ pour lesquelles la tangente à $C_f$ au point d'abscisse $a$ est parallèle a $D$.
 
-**3)** Ecrire l'equation de chacune de ces tangentes.
+**3)** Écrire l'équation de chacune de ces tangentes.
 :::
 
 :::solution
@@ -25,11 +25,11 @@ $$\frac{f(x) - f(a)}{x - a} = \frac{(x^3 - 3x) - (a^3 - 3a)}{x - a} = \frac{x^3 
 
 $$= \frac{(x - a)(x^2 + ax + a^2) - 3(x - a)}{x - a} = x^2 + ax + a^2 - 3$$
 
-En passant a la limite quand $x \to a$ :
+En passant à la limite quand $x \to a$ :
 
 $$f'(a) = a^2 + a^2 + a^2 - 3 = 3a^2 - 3$$
 
-**2)** La droite $D$ a pour coefficient directeur $9$. La tangente est parallele a $D$ si et seulement si $f'(a) = 9$ :
+**2)** La droite $D$ a pour coefficient directeur $9$. La tangente est parallèle a $D$ si et seulement si $f'(a) = 9$ :
 
 $$3a^2 - 3 = 9$$
 
@@ -45,7 +45,7 @@ $$\boxed{a = 2 \quad \text{ou} \quad a = -2}$$
 
 - $f'(2) = 9$
 
-- Equation : $y = 9(x - 2) + 2 = 9x - 18 + 2$
+- Équation : $y = 9(x - 2) + 2 = 9x - 18 + 2$
 
 $$\boxed{T_1 : y = 9x - 16}$$
 
@@ -55,15 +55,15 @@ $$\boxed{T_1 : y = 9x - 16}$$
 
 - $f'(-2) = 9$
 
-- Equation : $y = 9(x - (-2)) + (-2) = 9(x + 2) - 2 = 9x + 18 - 2$
+- Équation : $y = 9(x - (-2)) + (-2) = 9(x + 2) - 2 = 9x + 18 - 2$
 
 $$\boxed{T_2 : y = 9x + 16}$$
 :::
 
 :::methode
-Pour trouver les tangentes paralleles a une droite $D$ de pente $m$ :
+Pour trouver les tangentes parallèles à une droite $D$ de pente $m$ :
 
 1. Calculer $f'(a)$ pour tout $a$
-2. Resoudre $f'(a) = m$ (meme pente que $D$)
-3. Pour chaque solution, ecrire l'equation de la tangente
+2. Résoudre $f'(a) = m$ (même pente que $D$)
+3. Pour chaque solution, écrire l'équation de la tangente
 :::

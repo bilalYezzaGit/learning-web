@@ -1,55 +1,55 @@
 ---
 type: lesson
-title: "Definition du nombre derive"
+title: "Définition du nombre dérivé"
 difficulty: 0
 timeMinutes: 8
-tags: [derivation, definition, taux-variation]
+tags: [dérivation, définition, taux-variation]
 praxeologies: [Prax1]
 ---
 
 ### Motivation : la vitesse instantanee
 
-Un mobile se deplace le long d'un axe. Sa position a l'instant $t$ est donnee par une fonction $f(t)$.
+Un mobile se déplace le long d'un axe. Sa position a l'instant $t$ est donnée par une fonction $f(t)$.
 
 Entre les instants $t = a$ et $t = a + h$, la **vitesse moyenne** du mobile est :
 
 $$v_m = \frac{f(a + h) - f(a)}{h}$$
 
-Ce rapport mesure la variation de la position par unite de temps. Lorsque $h$ devient tres petit, ce rapport tend vers la **vitesse instantanee** a l'instant $a$.
+Ce rapport mesure la variation de la position par unite de temps. Lorsque $h$ devient très petit, ce rapport tend vers la **vitesse instantanee** a l'instant $a$.
 
-Cette idee de passage a la limite est au coeur de la notion de **nombre derive**.
+Cette idee de passage à la limite est au coeur de la notion de **nombre dérivé**.
 
 ### Taux de variation
 
 :::definition[Taux de variation]
-Soit $f$ une fonction definie sur un intervalle $I$ et $a \in I$. Pour tout $x \in I$ avec $x \neq a$, le **taux de variation** de $f$ entre $a$ et $x$ est le rapport :
+Soit $f$ une fonction définie sur un intervalle $I$ et $a \in I$. Pour tout $x \in I$ avec $x \neq a$, le **taux de variation** de $f$ entre $a$ et $x$ est le rapport :
 
 $$\tau(x) = \frac{f(x) - f(a)}{x - a}$$
 :::
 
-En posant $x = a + h$ (avec $h \neq 0$), on obtient l'ecriture equivalente :
+En posant $x = a + h$ (avec $h \neq 0$), on obtient l'écriture équivalente :
 
 $$\tau(h) = \frac{f(a + h) - f(a)}{h}$$
 
-### Nombre derive
+### Nombre dérivé
 
-:::definition[Nombre derive]
-Soit $f$ une fonction definie sur un intervalle $I$ et $a \in I$. On dit que $f$ est **derivable en $a$** si la limite suivante existe et est finie :
+:::definition[Nombre dérivé]
+Soit $f$ une fonction définie sur un intervalle $I$ et $a \in I$. On dit que $f$ est **dérivable en $a$** si la limite suivante existe et est finie :
 
 $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}$$
 
-Cette limite est appelee le **nombre derive** de $f$ en $a$, note $f'(a)$.
+Cette limite est appelée le **nombre dérivé** de $f$ en $a$, noté $f'(a)$.
 :::
 
 :::remark
-L'ecriture equivalente avec $h = x - a$ (donc $h \to 0$) est :
+L'écriture équivalente avec $h = x - a$ (donc $h \to 0$) est :
 
 $$f'(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h}$$
 
-Les deux ecritures sont strictement equivalentes et s'utilisent selon le contexte.
+Les deux écritures sont strictement équivalentes et s'utilisent selon le contexte.
 :::
 
-**Interpretation geometrique** : le taux de variation $\dfrac{f(x) - f(a)}{x - a}$ est le coefficient directeur de la secante passant par $(a, f(a))$ et $(x, f(x))$. Lorsque $x \to a$, la secante tend vers la tangente et le taux de variation tend vers $f'(a)$.
+**Interprétation géométrique** : le taux de variation $\dfrac{f(x) - f(a)}{x - a}$ est le coefficient directeur de la sécante passant par $(a, f(a))$ et $(x, f(x))$. Lorsque $x \to a$, la sécante tend vers la tangente et le taux de variation tend vers $f'(a)$.
 
 ```typst {frame}
 #import "@preview/cetz:0.3.4": canvas, draw
@@ -76,28 +76,28 @@ Les deux ecritures sont strictement equivalentes et s'utilisent selon le context
 
 ### Exemples de calcul
 
-:::example[Nombre derive de $f(x) = x^2$ en $a = 1$]
+:::example[Nombre dérivé de $f(x) = x^2$ en $a = 1$]
 On calcule le taux de variation :
 
 $$\frac{f(x) - f(1)}{x - 1} = \frac{x^2 - 1}{x - 1} = \frac{(x - 1)(x + 1)}{x - 1} = x + 1$$
 
-En passant a la limite :
+En passant à la limite :
 
 $$f'(1) = \lim_{x \to 1} (x + 1) = 2$$
 
 Donc $f'(1) = 2$.
 :::
 
-:::example[Nombre derive de $f(x) = 3x + 2$ en un point quelconque $a$]
+:::example[Nombre dérivé de $f(x) = 3x + 2$ en un point quelconque $a$]
 On calcule le taux de variation :
 
 $$\frac{f(x) - f(a)}{x - a} = \frac{(3x + 2) - (3a + 2)}{x - a} = \frac{3x - 3a}{x - a} = \frac{3(x - a)}{x - a} = 3$$
 
-En passant a la limite :
+En passant à la limite :
 
 $$f'(a) = \lim_{x \to a} 3 = 3$$
 
-Donc $f'(a) = 3$ pour tout $a \in \mathbb{R}$. Le nombre derive d'une fonction affine est constant, egal au coefficient directeur.
+Donc $f'(a) = 3$ pour tout $a \in \mathbb{R}$. Le nombre dérivé d'une fonction affine est constant, egal au coefficient directeur.
 :::
 
 :::remark

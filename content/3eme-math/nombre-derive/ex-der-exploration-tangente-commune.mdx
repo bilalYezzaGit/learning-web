@@ -4,24 +4,24 @@ title: "Tangente commune a deux paraboles"
 difficulty: 2
 timeMinutes: 12
 category: approfondissement
-tags: [derivation, tangente-commune, paraboles]
+tags: [dérivation, tangente-commune, paraboles]
 praxeologies: [Prax11, Prax3]
 ---
 
 :::enonce
 Soit $C_1$ la courbe de $f(x) = x^2 + 2x - 1$ et $C_2$ la courbe de $g(x) = -x^2 - 6x - 9$.
 
-**1)** Determiner le(s) point(s) d'intersection de $C_1$ et $C_2$.
+**1)** Déterminer le(s) point(s) d'intersection de $C_1$ et $C_2$.
 
-**2)** Montrer que $C_1$ et $C_2$ admettent une tangente commune au point d'intersection. Ecrire l'equation de cette tangente $T$.
+**2)** Montrer que $C_1$ et $C_2$ admettent une tangente commune au point d'intersection. Écrire l'équation de cette tangente $T$.
 
-**3)** Etudier la position de $C_1$ et $C_2$ par rapport a $T$.
+**3)** Étudier la position de $C_1$ et $C_2$ par rapport à $T$.
 :::
 
 :::solution
 **1)** Points d'intersection.
 
-On resout $f(x) = g(x)$ :
+On résout $f(x) = g(x)$ :
 
 $$x^2 + 2x - 1 = -x^2 - 6x - 9$$
 
@@ -31,9 +31,9 @@ $$x^2 + 4x + 4 = 0$$
 
 $$(x + 2)^2 = 0$$
 
-D'ou $x = -2$ est l'unique solution.
+D'où $x = -2$ est l'unique solution.
 
-On calcule l'ordonnee : $f(-2) = 4 - 4 - 1 = -1$.
+On calcule l'ordonnée : $f(-2) = 4 - 4 - 1 = -1$.
 
 Les deux courbes ont un **unique point d'intersection** $A(-2, -1)$.
 
@@ -47,41 +47,41 @@ Pour $g(x) = -x^2 - 6x - 9$ : $g'(x) = -2x - 6$, donc $g'(-2) = 4 - 6 = -2$.
 
 On a $f(-2) = g(-2) = -1$ et $f'(-2) = g'(-2) = -2$.
 
-Les deux courbes passent par le meme point avec la **meme pente**, donc elles admettent une **tangente commune** en $A$.
+Les deux courbes passent par le même point avec la **même pente**, donc elles admettent une **tangente commune** en $A$.
 
-L'equation de cette tangente est :
+L'équation de cette tangente est :
 
 $$T : y = f'(-2)(x - (-2)) + f(-2) = -2(x + 2) - 1 = -2x - 4 - 1$$
 
 $$\boxed{T : y = -2x - 5}$$
 
-**3)** Position par rapport a $T$.
+**3)** Position par rapport à $T$.
 
-**$C_1$ par rapport a $T$** :
+**$C_1$ par rapport à $T$** :
 
 $$f(x) - (-2x - 5) = x^2 + 2x - 1 + 2x + 5 = x^2 + 4x + 4 = (x + 2)^2$$
 
-Or $(x + 2)^2 \geq 0$ pour tout $x$, avec egalite uniquement en $x = -2$.
+Or $(x + 2)^2 \geq 0$ pour tout $x$, avec égalité uniquement en $x = -2$.
 
-D'ou $C_1$ est **au-dessus** de $T$ (ou sur $T$ en $A$).
+D'où $C_1$ est **au-dessus** de $T$ (ou sur $T$ en $A$).
 
-**$C_2$ par rapport a $T$** :
+**$C_2$ par rapport à $T$** :
 
 $$g(x) - (-2x - 5) = -x^2 - 6x - 9 + 2x + 5 = -x^2 - 4x - 4 = -(x + 2)^2$$
 
-Or $-(x + 2)^2 \leq 0$ pour tout $x$, avec egalite uniquement en $x = -2$.
+Or $-(x + 2)^2 \leq 0$ pour tout $x$, avec égalité uniquement en $x = -2$.
 
-D'ou $C_2$ est **au-dessous** de $T$ (ou sur $T$ en $A$).
+D'où $C_2$ est **au-dessous** de $T$ (ou sur $T$ en $A$).
 
-La tangente commune $T$ **separe** les deux courbes : $C_1$ est au-dessus et $C_2$ est au-dessous, avec un contact en $A(-2, -1)$.
+La tangente commune $T$ **sépare** les deux courbes : $C_1$ est au-dessus et $C_2$ est au-dessous, avec un contact en $A(-2, -1)$.
 :::
 
 :::methode
 Pour montrer que deux courbes $C_1$ et $C_2$ admettent une tangente commune en un point :
 
 1. Trouver les points d'intersection : $f(a) = g(a)$
-2. Verifier l'egalite des pentes : $f'(a) = g'(a)$
+2. Vérifier l'égalité des pentes : $f'(a) = g'(a)$
 3. Si les deux conditions sont remplies, les tangentes coincident
 
-Pour la position relative, etudier le signe de $f(x) - T(x)$ et $g(x) - T(x)$.
+Pour la position relative, étudier le signe de $f(x) - T(x)$ et $g(x) - T(x)$.
 :::

@@ -1,33 +1,33 @@
 ---
 type: exercise
-title: "Fonction par morceaux avec parametre et derivabilite"
+title: "Fonction par morceaux avec paramètre et dérivabilité"
 difficulty: 2
 timeMinutes: 12
 category: approfondissement
-tags: [derivation, morceaux, parametre, examen]
+tags: [dérivation, morceaux, paramètre, examen]
 praxeologies: [Prax8, Prax10]
 ---
 
 :::enonce
-Soit $m$ un parametre reel et $f$ la fonction definie sur $\mathbb{R}$ par :
+Soit $m$ un paramètre réel et $f$ la fonction définie sur $\mathbb{R}$ par :
 
 $$f(x) = \begin{cases} 3x^2 - 5x + m & \text{si } x \leq 2 \\ \sqrt{x^2 + 2x - 8} + mx & \text{si } x > 2 \end{cases}$$
 
-1. Determiner la valeur de $m$ pour que $f$ soit continue en $2$.
-2. Pour cette valeur de $m$, etudier la derivabilite de $f$ en $2$.
-3. Ecrire les equations des demi-tangentes a la courbe $\mathcal{C}_f$ au point d'abscisse $2$.
+1. Déterminer la valeur de $m$ pour que $f$ soit continue en $2$.
+2. Pour cette valeur de $m$, étudier la dérivabilité de $f$ en $2$.
+3. Écrire les équations des demi-tangentes à la courbe $\mathcal{C}_f$ au point d'abscisse $2$.
 :::
 
 :::solution
-**1. Continuite en $2$**
+**1. Continuité en $2$**
 
-**A gauche** :
+**À gauche** :
 
 $$\lim_{x \to 2^-} f(x) = 3(4) - 5(2) + m = 12 - 10 + m = 2 + m$$
 
 $$f(2) = 2 + m$$
 
-**A droite** : on a $2^2 + 2(2) - 8 = 0$, donc :
+**À droite** : on a $2^2 + 2(2) - 8 = 0$, donc :
 
 $$\lim_{x \to 2^+} f(x) = \sqrt{0} + 2m = 2m$$
 
@@ -39,15 +39,15 @@ $$m = 2$$
 
 ---
 
-**2. Derivabilite en $2$ avec $m = 2$**
+**2. Dérivabilité en $2$ avec $m = 2$**
 
-Avec $m = 2$, $f$ s'ecrit :
+Avec $m = 2$, $f$ s'écrit :
 
 $$f(x) = \begin{cases} 3x^2 - 5x + 2 & \text{si } x \leq 2 \\ \sqrt{x^2 + 2x - 8} + 2x & \text{si } x > 2 \end{cases}$$
 
 et $f(2) = 2 + 2 = 4$.
 
-**Derivee a gauche** : pour $x < 2$, $f(x) = 3x^2 - 5x + 2$, donc :
+**Dérivée à gauche** : pour $x < 2$, $f(x) = 3x^2 - 5x + 2$, donc :
 
 $$f'_g(2) = \lim_{x \to 2^-} \frac{f(x) - f(2)}{x - 2} = \lim_{x \to 2^-} \frac{3x^2 - 5x + 2 - 4}{x - 2} = \lim_{x \to 2^-} \frac{3x^2 - 5x - 2}{x - 2}$$
 
@@ -55,7 +55,7 @@ On factorise : $3x^2 - 5x - 2 = (x - 2)(3x + 1)$, donc :
 
 $$f'_g(2) = \lim_{x \to 2^-} (3x + 1) = 7$$
 
-**Derivee a droite** : pour $x > 2$, $f(x) = \sqrt{x^2 + 2x - 8} + 2x$, donc :
+**Dérivée à droite** : pour $x > 2$, $f(x) = \sqrt{x^2 + 2x - 8} + 2x$, donc :
 
 $$f'_d(2) = \lim_{x \to 2^+} \frac{f(x) - f(2)}{x - 2} = \lim_{x \to 2^+} \frac{\sqrt{x^2 + 2x - 8} + 2x - 4}{x - 2} = \lim_{x \to 2^+} \left(\frac{\sqrt{x^2 + 2x - 8}}{x - 2} + 2\right)$$
 
@@ -67,28 +67,28 @@ Quand $x \to 2^+$ : $\sqrt{x + 4} \to \sqrt{6}$ et $\sqrt{x - 2} \to 0^+$, donc 
 
 Ainsi $f'_d(2) = +\infty$.
 
-Comme $f'_d(2) = +\infty$, la fonction $f$ **n'est pas derivable en $2$**.
+Comme $f'_d(2) = +\infty$, la fonction $f$ **n'est pas dérivable en $2$**.
 
 ---
 
-**3. Equations des demi-tangentes**
+**3. Équations des demi-tangentes**
 
-**Demi-tangente a gauche** (pente $f'_g(2) = 7$) :
+**Demi-tangente à gauche** (pente $f'_g(2) = 7$) :
 
 $$y = 7(x - 2) + 4 = 7x - 10$$
 
-**Demi-tangente a droite** ($f'_d(2) = +\infty$) : c'est une demi-droite verticale d'equation :
+**Demi-tangente à droite** ($f'_d(2) = +\infty$) : c'est une demi-droite verticale d'équation :
 
 $$x = 2$$
 
-dirigee vers le haut.
+dirigée vers le haut.
 :::
 
 :::methode
-Pour une fonction par morceaux avec un parametre :
+Pour une fonction par morceaux avec un paramètre :
 
-1. Ecrire les limites a gauche et a droite du point de raccordement
-2. Egaliser pour trouver $m$ (continuite)
-3. Avec la valeur de $m$, calculer les derivees laterales par le taux de variation
+1. Écrire les limites à gauche et à droite du point de raccordement
+2. Égaliser pour trouver $m$ (continuité)
+3. Avec la valeur de $m$, calculer les dérivées latérales par le taux de variation
 4. Sous une racine, factoriser l'expression pour identifier le comportement du taux
 :::

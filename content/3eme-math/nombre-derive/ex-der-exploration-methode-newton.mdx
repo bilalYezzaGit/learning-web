@@ -1,25 +1,25 @@
 ---
 type: exercise
-title: "Methode de Newton pour approcher une racine"
+title: "Méthode de Newton pour approcher une racine"
 difficulty: 2
 timeMinutes: 15
 category: probleme
-tags: [derivation, newton, approximation, racine]
+tags: [dérivation, newton, approximation, racine]
 praxeologies: [Prax3, Prax5a]
 ---
 
 :::enonce
 Soit $f(x) = x^3 + x - 3$.
 
-**1)** Montrer que l'equation $f(x) = 0$ admet une unique solution $\alpha$ dans $[1, 2]$.
+**1)** Montrer que l'équation $f(x) = 0$ admet une unique solution $\alpha$ dans $[1, 2]$.
 
-**2)** Calculer $f'(a)$ pour tout $a$ dans l'ensemble de definition de $f$.
+**2)** Calculer $f'(a)$ pour tout $a$ dans l'ensemble de définition de $f$.
 
-**3)** Ecrire l'equation de la tangente $T_0$ a la courbe de $f$ au point d'abscisse $x_0 = 1$.
+**3)** Écrire l'équation de la tangente $T_0$ à la courbe de $f$ au point d'abscisse $x_0 = 1$.
 
-**4)** Determiner l'abscisse $x_1$ du point d'intersection de $T_0$ avec l'axe des abscisses.
+**4)** Déterminer l'abscisse $x_1$ du point d'intersection de $T_0$ avec l'axe des abscisses.
 
-**5)** Ecrire l'equation de la tangente $T_1$ au point d'abscisse $x_1$, puis determiner $x_2$.
+**5)** Écrire l'équation de la tangente $T_1$ au point d'abscisse $x_1$, puis déterminer $x_2$.
 
 **6)** Comparer les valeurs $x_0$, $x_1$, $x_2$ avec la valeur exacte $\alpha \approx 1{,}2134$. Commenter la convergence.
 
@@ -54,9 +54,9 @@ Soit $f(x) = x^3 + x - 3$.
 :::
 
 :::solution
-**1)** Existence et unicite de $\alpha$.
+**1)** Existence et unicité de $\alpha$.
 
-$f$ est une fonction polynome, donc continue sur $\mathbb{R}$.
+$f$ est une fonction polynôme, donc continue sur $\mathbb{R}$.
 
 Calculons :
 
@@ -64,19 +64,19 @@ $$f(1) = 1 + 1 - 3 = -1 < 0$$
 
 $$f(2) = 8 + 2 - 3 = 7 > 0$$
 
-Comme $f$ est continue sur $[1, 2]$ et $f(1) \times f(2) < 0$, par le **theoreme des valeurs intermediaires**, il existe au moins un reel $\alpha \in [1, 2]$ tel que $f(\alpha) = 0$.
+Comme $f$ est continue sur $[1, 2]$ et $f(1) \times f(2) < 0$, par le **théorème des valeurs intermédiaires**, il existe au moins un réel $\alpha \in [1, 2]$ tel que $f(\alpha) = 0$.
 
-Montrons l'unicite. On a $f'(x) = 3x^2 + 1$. Pour tout $x \in \mathbb{R}$, $3x^2 \geq 0$ donc $f'(x) = 3x^2 + 1 \geq 1 > 0$.
+Montrons l'unicité. On a $f'(x) = 3x^2 + 1$. Pour tout $x \in \mathbb{R}$, $3x^2 \geq 0$ donc $f'(x) = 3x^2 + 1 \geq 1 > 0$.
 
-La fonction $f$ est **strictement croissante** sur $\mathbb{R}$, donc l'equation $f(x) = 0$ admet **une unique solution** $\alpha$ dans $[1, 2]$.
+La fonction $f$ est **strictement croissante** sur $\mathbb{R}$, donc l'équation $f(x) = 0$ admet **une unique solution** $\alpha$ dans $[1, 2]$.
 
-**2)** On a $f'(a) = 3a^2 + 1$ pour tout reel $a$.
+**2)** On a $f'(a) = 3a^2 + 1$ pour tout réel $a$.
 
 **3)** Tangente $T_0$ au point d'abscisse $x_0 = 1$.
 
 $$f(1) = -1 \qquad f'(1) = 3 + 1 = 4$$
 
-L'equation de $T_0$ est :
+L'équation de $T_0$ est :
 
 $$y = f'(1)(x - 1) + f(1) = 4(x - 1) - 1 = 4x - 5$$
 
@@ -84,7 +84,7 @@ $$y = f'(1)(x - 1) + f(1) = 4(x - 1) - 1 = 4x - 5$$
 
 $$4x - 5 = 0 \implies x = \frac{5}{4}$$
 
-D'ou $x_1 = \dfrac{5}{4} = 1{,}25$.
+D'où $x_1 = \dfrac{5}{4} = 1{,}25$.
 
 **5)** Tangente $T_1$ au point d'abscisse $x_1 = \dfrac{5}{4}$.
 
@@ -96,7 +96,7 @@ Calculons $f'(x_1)$ :
 
 $$f'\!\left(\frac{5}{4}\right) = 3 \times \frac{25}{16} + 1 = \frac{75}{16} + \frac{16}{16} = \frac{91}{16}$$
 
-L'equation de $T_1$ est :
+L'équation de $T_1$ est :
 
 $$y = \frac{91}{16}\!\left(x - \frac{5}{4}\right) + \frac{13}{64}$$
 
@@ -108,7 +108,7 @@ $$x - \frac{5}{4} = -\frac{13}{64} \times \frac{16}{91} = -\frac{13}{4 \times 91
 
 $$x_2 = \frac{5}{4} - \frac{1}{28} = \frac{35}{28} - \frac{1}{28} = \frac{34}{28} = \frac{17}{14}$$
 
-D'ou $x_2 = \dfrac{17}{14} \approx 1{,}2143$.
+D'où $x_2 = \dfrac{17}{14} \approx 1{,}2143$.
 
 **6)** Comparaison avec $\alpha \approx 1{,}2134$.
 
@@ -125,19 +125,19 @@ D'ou $x_2 = \dfrac{17}{14} \approx 1{,}2143$.
 )
 ```
 
-La convergence est **tres rapide** : l'erreur est divisee par environ $40$ a chaque etape.
+La convergence est **très rapide** : l'erreur est divisee par environ $40$ a chaque etape.
 
-**Principe intuitif** : a chaque iteration, on remplace la courbe par sa tangente. La tangente est une bonne approximation locale de la courbe, donc le zero de la tangente est proche du zero de la courbe. Plus on est proche de $\alpha$, meilleure est l'approximation, et plus la convergence s'accelere.
+**Principe intuitif** : a chaque iteration, on remplace la courbe par sa tangente. La tangente est une bonne approximation locale de la courbe, donc le zero de la tangente est proche du zero de la courbe. Plus on est proche de $\alpha$, meilleure est l'approximation, et plus la convergence s'accélère.
 :::
 
 :::methode
-**Methode de Newton** pour approcher une racine de $f(x) = 0$ :
+**Méthode de Newton** pour approcher une racine de $f(x) = 0$ :
 
 1. Choisir une valeur initiale $x_0$ proche de la racine
-2. Ecrire la tangente a la courbe au point d'abscisse $x_n$
+2. Écrire la tangente à la courbe au point d'abscisse $x_n$
 3. L'intersection de cette tangente avec l'axe Ox donne $x_{n+1}$ :
 
 $$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$$
 
-4. Repeter jusqu'a la precision souhaitee
+4. Répéter jusqu'à la précision souhaitée
 :::

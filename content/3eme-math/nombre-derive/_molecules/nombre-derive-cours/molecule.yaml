@@ -1,17 +1,17 @@
 kind: livret
-title: "Nombre derive — Cours et applications directes"
-description: "Decouvrir le nombre derive : definition, tangente, formules, derivabilite laterale et applications."
+title: "Nombre dérivé — Cours et applications directes"
+description: "Découvrir le nombre dérivé : définition, tangente, formules, dérivabilité latérale et applications."
 trimester: T1
 order: 1
 objectives:
-  - "Calculer le nombre derive par la definition et par les formules"
-  - "Ecrire l'equation de la tangente a une courbe"
+  - "Calculer le nombre dérivé par la définition et par les formules"
+  - "Écrire l'équation de la tangente à une courbe"
   - "Utiliser l'approximation affine pour des estimations"
-  - "Etudier la derivabilite laterale et les fonctions par morceaux"
-  - "Calculer des limites par reconnaissance d'un nombre derive"
+  - "Étudier la dérivabilité latérale et les fonctions par morceaux"
+  - "Calculer des limites par reconnaissance d'un nombre dérivé"
 
 sections:
-  - label: "Definition du nombre derive"
+  - label: "Définition du nombre dérivé"
     steps:
       - lesson-der-definition-taux
       - ex-der-calcul-definition-polynome
@@ -29,7 +29,7 @@ sections:
           - qcm-der-equation-tangente
           - qcm-der-approximation-affine
 
-  - label: "Formules de derivation"
+  - label: "Formules de dérivation"
     steps:
       - lesson-der-formules-usuelles-operations
       - ex-der-formules-polynome-rationnelle
@@ -38,7 +38,7 @@ sections:
           - qcm-der-formule-produit
           - qcm-der-condition-racine
 
-  - label: "Derivabilite laterale"
+  - label: "Dérivabilité latérale"
     steps:
       - lesson-der-laterale-morceaux
       - ex-der-valeur-absolue
@@ -47,7 +47,7 @@ sections:
           - qcm-der-continuite-vs-derivabilite
           - qcm-der-laterale-definition
 
-  - label: "Applications du nombre derive"
+  - label: "Applications du nombre dérivé"
     steps:
       - lesson-der-applications
       - ex-der-limite-nombre-derive

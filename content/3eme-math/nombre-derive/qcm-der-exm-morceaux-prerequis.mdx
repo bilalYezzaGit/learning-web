@@ -1,18 +1,18 @@
 ---
 type: qcm
-title: "Prerequis de continuite pour la derivabilite par morceaux"
+title: "Prérequis de continuité pour la dérivabilité par morceaux"
 difficulty: 1
 timeMinutes: 1
-tags: [derivation, morceaux, continuite, prerequis, examen]
+tags: [dérivation, morceaux, continuité, prerequis, examen]
 praxeologies: [Prax6a, Prax8]
 ---
 
 :::question
-Soit $f$ definie sur $\mathbb{R}$ par :
+Soit $f$ définie sur $\mathbb{R}$ par :
 
 $$f(x) = \begin{cases} x^2 & \text{si } x \leq 1 \\ x + 1 & \text{si } x > 1 \end{cases}$$
 
-$f$ est-elle derivable en $1$ ?
+$f$ est-elle dérivable en $1$ ?
 :::
 
 :::option
@@ -28,16 +28,16 @@ Non, car $f$ n'est pas continue en $1$ puisque $f(1) = 1$ et $\lim_{x \to 1^+} f
 :::
 
 :::option
-Oui, car les deux limites laterales existent
+Oui, car les deux limites latérales existent
 :::
 
 :::explanation
-Avant d'etudier la derivabilite, il faut **toujours verifier la continuite**. Ici :
+Avant d'étudier la dérivabilité, il faut **toujours vérifier la continuité**. Ici :
 
 - $f(1) = 1^2 = 1$
 - $\lim_{x \to 1^+} f(x) = 1 + 1 = 2 \neq f(1)$
 
-Donc $f$ n'est **pas continue en $1$**, et par consequent elle n'est **pas derivable en $1$** (car derivable $\Rightarrow$ continu).
+Donc $f$ n'est **pas continue en $1$**, et par conséquent elle n'est **pas dérivable en $1$** (car dérivable $\Rightarrow$ continu).
 
-Il est inutile de calculer les derivees laterales si la continuite n'est pas verifiee.
+Il est inutile de calculer les dérivées latérales si la continuité n'est pas vérifiée.
 :::

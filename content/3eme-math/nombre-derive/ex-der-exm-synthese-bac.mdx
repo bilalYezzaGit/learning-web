@@ -1,29 +1,29 @@
 ---
 type: exercise
-title: "Probleme de synthese : fonction par morceaux, tangentes et derivees"
+title: "Problème de synthèse : fonction par morceaux, tangentes et dérivées"
 difficulty: 2
 timeMinutes: 20
 category: synthese
-tags: [derivation, synthese, bac, morceaux, tangente, examen]
+tags: [dérivation, synthèse, bac, morceaux, tangente, examen]
 praxeologies: [Prax2, Prax3, Prax4a, Prax7, Prax8]
 ---
 
 :::enonce
-Soit $f$ la fonction definie sur $\mathbb{R}$ par :
+Soit $f$ la fonction définie sur $\mathbb{R}$ par :
 
 $$f(x) = \begin{cases} x^3 - 2x + 1 & \text{si } x < 2 \\ \sqrt{x^2 - 4} + x + 3 & \text{si } x \geq 2 \end{cases}$$
 
 1. Montrer que $f$ est continue en $2$.
-2. Etudier la derivabilite de $f$ en $2$. En deduire les equations des demi-tangentes au point d'abscisse $2$.
+2. Étudier la dérivabilité de $f$ en $2$. En déduire les équations des demi-tangentes au point d'abscisse $2$.
 3. Pour $a > 2$, calculer $f'(a)$.
-4. Determiner l'equation de la tangente $T$ a la courbe $\mathcal{C}_f$ au point d'abscisse $3$.
-5. Determiner la valeur de $a > 2$ pour laquelle la tangente a $\mathcal{C}_f$ est parallele a la droite $y = 3x + 1$.
+4. Déterminer l'équation de la tangente $T$ à la courbe $\mathcal{C}_f$ au point d'abscisse $3$.
+5. Déterminer la valeur de $a > 2$ pour laquelle la tangente à $\mathcal{C}_f$ est parallèle à la droite $y = 3x + 1$.
 :::
 
 :::solution
-**1. Continuite en $2$**
+**1. Continuité en $2$**
 
-**A gauche** :
+**À gauche** :
 
 $$\lim_{x \to 2^-} f(x) = \lim_{x \to 2^-} (x^3 - 2x + 1) = 8 - 4 + 1 = 5$$
 
@@ -31,7 +31,7 @@ $$\lim_{x \to 2^-} f(x) = \lim_{x \to 2^-} (x^3 - 2x + 1) = 8 - 4 + 1 = 5$$
 
 $$f(2) = \sqrt{4 - 4} + 2 + 3 = 0 + 5 = 5$$
 
-**A droite** :
+**À droite** :
 
 $$\lim_{x \to 2^+} f(x) = \lim_{x \to 2^+} \left(\sqrt{x^2 - 4} + x + 3\right) = \sqrt{0} + 2 + 3 = 5$$
 
@@ -39,9 +39,9 @@ On a $\lim_{x \to 2^-} f(x) = \lim_{x \to 2^+} f(x) = f(2) = 5$, donc $f$ est **
 
 ---
 
-**2. Derivabilite en $2$**
+**2. Dérivabilité en $2$**
 
-**Derivee a gauche** : pour $x < 2$, $f(x) = x^3 - 2x + 1$, donc :
+**Dérivée à gauche** : pour $x < 2$, $f(x) = x^3 - 2x + 1$, donc :
 
 $$f'_g(2) = \lim_{x \to 2^-} \frac{f(x) - f(2)}{x - 2} = \lim_{x \to 2^-} \frac{x^3 - 2x + 1 - 5}{x - 2} = \lim_{x \to 2^-} \frac{x^3 - 2x - 4}{x - 2}$$
 
@@ -49,7 +49,7 @@ On factorise : $x^3 - 2x - 4 = (x - 2)(x^2 + 2x + 2)$, donc :
 
 $$f'_g(2) = \lim_{x \to 2^-} (x^2 + 2x + 2) = 4 + 4 + 2 = 10$$
 
-**Derivee a droite** : pour $x > 2$, $f(x) = \sqrt{x^2 - 4} + x + 3$, donc :
+**Dérivée à droite** : pour $x > 2$, $f(x) = \sqrt{x^2 - 4} + x + 3$, donc :
 
 $$f'_d(2) = \lim_{x \to 2^+} \frac{f(x) - f(2)}{x - 2} = \lim_{x \to 2^+} \frac{\sqrt{x^2 - 4} + x + 3 - 5}{x - 2} = \lim_{x \to 2^+} \left(\frac{\sqrt{x^2 - 4}}{x - 2} + 1\right)$$
 
@@ -61,19 +61,19 @@ Quand $x \to 2^+$ : $\sqrt{x + 2} \to 2$ et $\sqrt{x - 2} \to 0^+$, donc $\dfrac
 
 Ainsi $f'_d(2) = +\infty$.
 
-Comme $f'_d(2) = +\infty$, la fonction $f$ **n'est pas derivable en $2$**.
+Comme $f'_d(2) = +\infty$, la fonction $f$ **n'est pas dérivable en $2$**.
 
-**Equations des demi-tangentes :**
+**Équations des demi-tangentes :**
 
-**Demi-tangente a gauche** (pente $f'_g(2) = 10$) :
+**Demi-tangente à gauche** (pente $f'_g(2) = 10$) :
 
 $$y = 10(x - 2) + 5 = 10x - 15$$
 
-**Demi-tangente a droite** ($f'_d(2) = +\infty$) : c'est une demi-droite verticale d'equation :
+**Demi-tangente à droite** ($f'_d(2) = +\infty$) : c'est une demi-droite verticale d'équation :
 
 $$x = 2$$
 
-dirigee vers le haut.
+dirigée vers le haut.
 
 ---
 
@@ -81,7 +81,7 @@ dirigee vers le haut.
 
 Pour $x > 2$, $f(x) = \sqrt{x^2 - 4} + x + 3$.
 
-On derive en utilisant $(\sqrt{u})' = \dfrac{u'}{2\sqrt{u}}$ avec $u(x) = x^2 - 4$ et $u'(x) = 2x$ :
+On dérivé en utilisant $(\sqrt{u})' = \dfrac{u'}{2\sqrt{u}}$ avec $u(x) = x^2 - 4$ et $u'(x) = 2x$ :
 
 $$f'(x) = \frac{2x}{2\sqrt{x^2 - 4}} + 1 = \frac{x}{\sqrt{x^2 - 4}} + 1$$
 
@@ -99,7 +99,7 @@ $$f(3) = \sqrt{9 - 4} + 3 + 3 = \sqrt{5} + 6$$
 
 $$f'(3) = \frac{3}{\sqrt{9 - 4}} + 1 = \frac{3}{\sqrt{5}} + 1 = \frac{3\sqrt{5}}{5} + 1 = \frac{3\sqrt{5} + 5}{5}$$
 
-L'equation de la tangente $T$ au point d'abscisse $3$ est :
+L'équation de la tangente $T$ au point d'abscisse $3$ est :
 
 $$T : y = f'(3)(x - 3) + f(3)$$
 
@@ -107,15 +107,15 @@ $$T : y = \frac{3\sqrt{5} + 5}{5}(x - 3) + \sqrt{5} + 6$$
 
 ---
 
-**5. Tangente parallele a $y = 3x + 1$**
+**5. Tangente parallèle a $y = 3x + 1$**
 
-La tangente est parallele a la droite $y = 3x + 1$ lorsque $f'(a) = 3$ :
+La tangente est parallèle à la droite $y = 3x + 1$ lorsque $f'(a) = 3$ :
 
 $$\frac{a}{\sqrt{a^2 - 4}} + 1 = 3$$
 
 $$\frac{a}{\sqrt{a^2 - 4}} = 2$$
 
-On eleve au carre (valide car $a > 2 > 0$, donc les deux membres sont positifs) :
+On élève au carré (valide car $a > 2 > 0$, donc les deux membres sont positifs) :
 
 $$\frac{a^2}{a^2 - 4} = 4$$
 
@@ -131,17 +131,17 @@ $$a = \frac{4}{\sqrt{3}} = \frac{4\sqrt{3}}{3}$$
 
 (On retient la valeur positive car $a > 2$.)
 
-**Verification** : $a = \dfrac{4\sqrt{3}}{3} \approx 2{,}31 > 2$ ✓
+**Vérification** : $a = \dfrac{4\sqrt{3}}{3} \approx 2{,}31 > 2$ ✓
 
-La tangente a $\mathcal{C}_f$ est parallele a la droite $y = 3x + 1$ au point d'abscisse $a = \dfrac{4\sqrt{3}}{3}$.
+La tangente à $\mathcal{C}_f$ est parallèle à la droite $y = 3x + 1$ au point d'abscisse $a = \dfrac{4\sqrt{3}}{3}$.
 :::
 
 :::methode
-Pour un probleme de synthese sur une fonction par morceaux :
+Pour un problème de synthèse sur une fonction par morceaux :
 
-1. **Continuite** : comparer $\lim_{x \to a^-} f(x)$, $\lim_{x \to a^+} f(x)$ et $f(a)$
-2. **Derivabilite** : calculer les taux de variation lateraux ; factoriser sous la racine si necessaire
-3. **Derivee sur un intervalle** : utiliser les formules de derivation standard
-4. **Equation de tangente** : $y = f'(a)(x - a) + f(a)$
-5. **Tangente parallele** : resoudre $f'(a) = m$ ou $m$ est la pente donnee
+1. **Continuité** : comparer $\lim_{x \to a^-} f(x)$, $\lim_{x \to a^+} f(x)$ et $f(a)$
+2. **Dérivabilité** : calculer les taux de variation lateraux ; factoriser sous la racine si nécessaire
+3. **Dérivée sur un intervalle** : utiliser les formules de dérivation standard
+4. **Équation de tangente** : $y = f'(a)(x - a) + f(a)$
+5. **Tangente parallèle** : résoudre $f'(a) = m$ ou $m$ est la pente donnée
 :::

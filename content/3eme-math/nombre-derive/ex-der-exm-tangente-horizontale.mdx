@@ -1,33 +1,33 @@
 ---
 type: exercise
-title: "Tangentes horizontales a une courbe"
+title: "Tangentes horizontales à une courbe"
 difficulty: 2
 timeMinutes: 10
 category: application
-tags: [derivation, tangente, horizontale, examen]
+tags: [dérivation, tangente, horizontale, examen]
 praxeologies: [Prax4a]
 ---
 
 :::enonce
-Soit $f$ la fonction definie sur $\mathbb{R} \setminus \{1\}$ par $f(x) = x + 5 + \dfrac{4}{x - 1}$.
+Soit $f$ la fonction définie sur $\mathbb{R} \setminus \{1\}$ par $f(x) = x + 5 + \dfrac{4}{x - 1}$.
 
 **1)** Calculer $f'(a)$ pour tout $a \neq 1$.
 
-**2)** Determiner les valeurs de $a$ pour lesquelles la tangente a $C_f$ est horizontale.
+**2)** Déterminer les valeurs de $a$ pour lesquelles la tangente à $C_f$ est horizontale.
 
-**3)** Ecrire l'equation de chacune de ces tangentes.
+**3)** Écrire l'équation de chacune de ces tangentes.
 :::
 
 :::solution
-**1)** On ecrit $f(x) = x + 5 + 4 \cdot \dfrac{1}{x - 1}$.
+**1)** On écrit $f(x) = x + 5 + 4 \cdot \dfrac{1}{x - 1}$.
 
-En utilisant les formules de derivation :
+En utilisant les formules de dérivation :
 
-- La derivee de $x + 5$ en $a$ est $1$
+- La dérivée de $x + 5$ en $a$ est $1$
 
-- La derivee de $\dfrac{1}{x - 1}$ en $a$ est $\dfrac{-1}{(a - 1)^2}$ (formule de $\dfrac{1}{\alpha x + \beta}$ avec $\alpha = 1$, $\beta = -1$)
+- La dérivée de $\dfrac{1}{x - 1}$ en $a$ est $\dfrac{-1}{(a - 1)^2}$ (formule de $\dfrac{1}{\alpha x + \beta}$ avec $\alpha = 1$, $\beta = -1$)
 
-Par linearite :
+Par linéarité :
 
 $$f'(a) = 1 + 4 \times \frac{-1}{(a - 1)^2} = 1 - \frac{4}{(a - 1)^2}$$
 
@@ -49,7 +49,7 @@ $$\boxed{a = 3 \quad \text{ou} \quad a = -1}$$
 
 $$f(3) = 3 + 5 + \frac{4}{3 - 1} = 8 + 2 = 10$$
 
-La tangente est horizontale, donc son equation est :
+La tangente est horizontale, donc son équation est :
 
 $$\boxed{T_1 : y = 10}$$
 
@@ -57,7 +57,7 @@ $$\boxed{T_1 : y = 10}$$
 
 $$f(-1) = -1 + 5 + \frac{4}{-1 - 1} = 4 + \frac{4}{-2} = 4 - 2 = 2$$
 
-La tangente est horizontale, donc son equation est :
+La tangente est horizontale, donc son équation est :
 
 $$\boxed{T_2 : y = 2}$$
 :::
@@ -66,6 +66,6 @@ $$\boxed{T_2 : y = 2}$$
 Pour trouver les tangentes horizontales a $C_f$ :
 
 1. Calculer $f'(a)$ pour tout $a$ du domaine
-2. Resoudre $f'(a) = 0$ (pente nulle)
-3. L'equation de chaque tangente horizontale est $y = f(a)$
+2. Résoudre $f'(a) = 0$ (pente nulle)
+3. L'équation de chaque tangente horizontale est $y = f(a)$
 :::

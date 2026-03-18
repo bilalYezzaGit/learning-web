@@ -1,29 +1,29 @@
 kind: livret
-title: "Nombre derive — Exploration et approfondissement"
-description: "Problemes ouverts, demonstrations, applications reelles et combinaisons inhabituelles du nombre derive."
+title: "Nombre dérivé — Exploration et approfondissement"
+description: "Problèmes ouverts, démonstrations, applications réelles et combinaisons inhabituelles du nombre dérivé."
 trimester: T1
 order: 3
 objectives:
-  - "Demontrer les formules de derivation"
-  - "Explorer les fonctions continues non derivables"
-  - "Appliquer le nombre derive a la cinematique et l'economie"
-  - "Maitriser la methode de Newton"
-  - "Resoudre des problemes de tangente commune et perpendiculaire"
+  - "Démontrer les formules de dérivation"
+  - "Explorer les fonctions continues non dérivables"
+  - "Appliquer le nombre dérivé à la cinématique et l'économie"
+  - "Maîtriser la méthode de Newton"
+  - "Résoudre des problèmes de tangente commune et perpendiculaire"
 
 sections:
-  - label: "Demonstrations et preuves"
+  - label: "Démonstrations et preuves"
     steps:
       - lesson-der-exploration-preuve
       - ex-der-exploration-preuve-formules
       - ex-der-exploration-continu-non-derivable
 
-  - label: "Applications au monde reel"
+  - label: "Applications au monde réel"
     steps:
       - ex-der-exploration-vitesse-instantanee
       - ex-der-exploration-methode-newton
       - ex-der-exploration-economie
 
-  - label: "Geometrie et tangentes avancees"
+  - label: "Géométrie et tangentes avancées"
     steps:
       - ex-der-exploration-tangente-commune
       - ex-der-exploration-tangentes-perpendiculaires

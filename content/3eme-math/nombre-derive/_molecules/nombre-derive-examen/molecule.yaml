@@ -1,17 +1,17 @@
 kind: livret
-title: "Nombre derive — Exercices types examen"
-description: "Fiche de synthese + exercices types classes par frequence pour preparer le controle et le BAC."
+title: "Nombre dérivé — Exercices types examen"
+description: "Fiche de synthèse + exercices types classés par fréquence pour préparer le contrôle et le BAC."
 trimester: T1
 order: 2
 objectives:
-  - "Maitriser les exercices types du nombre derive"
-  - "Resoudre des problemes de tangente parallele et perpendiculaire"
-  - "Etudier la derivabilite de fonctions par morceaux avec parametre"
-  - "Calculer des limites par reconnaissance d'un nombre derive"
-  - "Resoudre un exercice de synthese type BAC"
+  - "Maîtriser les exercices types du nombre dérivé"
+  - "Résoudre des problèmes de tangente parallèle et perpendiculaire"
+  - "Étudier la dérivabilité de fonctions par morceaux avec paramètre"
+  - "Calculer des limites par reconnaissance d'un nombre dérivé"
+  - "Résoudre un exercice de synthèse type BAC"
 
 sections:
-  - label: "Fiche de synthese"
+  - label: "Fiche de synthèse"
     steps:
       - lesson-der-fiche-synthese
 
@@ -25,7 +25,7 @@ sections:
           - qcm-der-exm-tangente-pente
           - qcm-der-exm-parallele
 
-  - label: "Derivabilite laterale et fonctions par morceaux"
+  - label: "Dérivabilité latérale et fonctions par morceaux"
     steps:
       - ex-der-exm-laterale-absolue
       - ex-der-exm-morceaux-complet
@@ -33,14 +33,14 @@ sections:
       - quiz:
           - qcm-der-exm-morceaux-prerequis
 
-  - label: "Formules et estimations numeriques"
+  - label: "Formules et estimations numériques"
     steps:
       - ex-der-exm-formules-variees
       - ex-der-exm-estimation-numerique
       - quiz:
           - qcm-der-exm-signe-derivee
 
-  - label: "Problemes de synthese"
+  - label: "Problèmes de synthèse"
     steps:
       - ex-der-exm-limites-derivee
       - ex-der-exm-coefficients

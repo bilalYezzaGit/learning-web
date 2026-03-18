@@ -1,35 +1,35 @@
 ---
 type: exercise
-title: "Cout marginal en economie"
+title: "Cout marginal en économie"
 difficulty: 2
 timeMinutes: 12
 category: probleme
-tags: [derivation, economie, cout-marginal, modelisation]
+tags: [dérivation, économie, cout-marginal, modélisation]
 praxeologies: [Prax1, Prax5a]
 ---
 
 :::enonce
-Le cout total de production de $x$ unites d'un bien est modelise par :
+Le cout total de production de $x$ unites d'un bien est modélisé par :
 
 $$C(x) = 0{,}01x^3 - 0{,}6x^2 + 15x + 100 \quad \text{(en dinars, } x \geq 0\text{)}$$
 
-**1)** Calculer $C'(a)$ en utilisant les formules de derivation.
+**1)** Calculer $C'(a)$ en utilisant les formules de dérivation.
 
-**2)** Calculer $C'(10)$ et interpreter le resultat.
+**2)** Calculer $C'(10)$ et interpréter le résultat.
 
-**3)** Calculer $C(11) - C(10)$ (cout reel de la 11e unite). Comparer avec $C'(10)$.
+**3)** Calculer $C(11) - C(10)$ (cout réel de la 11e unite). Comparer avec $C'(10)$.
 
-**4)** Determiner le nombre d'unites $a$ pour lequel le cout marginal $C'(a)$ est minimal.
+**4)** Déterminer le nombre d'unites $a$ pour lequel le cout marginal $C'(a)$ est minimal.
 :::
 
 :::solution
-**1)** La fonction $C$ est un polynome. En appliquant les formules de derivation (somme et $x^n$) :
+**1)** La fonction $C$ est un polynôme. En appliquant les formules de dérivation (somme et $x^n$) :
 
 $$(0{,}01x^3)' \text{ en } a = 0{,}03a^2 \qquad (-0{,}6x^2)' \text{ en } a = -1{,}2a$$
 
 $$(15x)' \text{ en } a = 15 \qquad (100)' \text{ en } a = 0$$
 
-D'ou :
+D'où :
 
 $$C'(a) = 0{,}03a^2 - 1{,}2a + 15$$
 
@@ -37,9 +37,9 @@ $$C'(a) = 0{,}03a^2 - 1{,}2a + 15$$
 
 $$C'(10) = 0{,}03 \times 100 - 1{,}2 \times 10 + 15 = 3 - 12 + 15 = 6$$
 
-**Interpretation** : $C'(10) = 6$ dinars signifie que, lorsque la production est de $10$ unites, produire **une unite supplementaire** coute **approximativement 6 dinars**. C'est le **cout marginal** au niveau de production $x = 10$.
+**Interprétation** : $C'(10) = 6$ dinars signifie que, lorsque la production est de $10$ unites, produire **une unite supplémentaire** coute **approximativement 6 dinars**. C'est le **cout marginal** au niveau de production $x = 10$.
 
-**3)** Calculons le cout reel de la 11e unite :
+**3)** Calculons le cout réel de la 11e unite :
 
 $$C(11) = 0{,}01 \times 1331 - 0{,}6 \times 121 + 15 \times 11 + 100$$
 
@@ -49,17 +49,17 @@ $$C(10) = 0{,}01 \times 1000 - 0{,}6 \times 100 + 15 \times 10 + 100$$
 
 $$= 10 - 60 + 150 + 100 = 200$$
 
-D'ou :
+D'où :
 
 $$C(11) - C(10) = 205{,}71 - 200 = 5{,}71 \;\text{dinars}$$
 
-Le cout reel de la 11e unite est $5{,}71$ dinars, proche de la valeur approchee $C'(10) = 6$ dinars.
+Le cout réel de la 11e unite est $5{,}71$ dinars, proche de la valeur approchée $C'(10) = 6$ dinars.
 
-La difference est $6 - 5{,}71 = 0{,}29$ dinar, soit une erreur d'environ $5\%$. L'approximation affine $C(a + 1) \approx C(a) + C'(a)$ est donc bonne pour estimer le cout d'une unite supplementaire.
+La difference est $6 - 5{,}71 = 0{,}29$ dinar, soit une erreur d'environ $5\%$. L'approximation affine $C(a + 1) \approx C(a) + C'(a)$ est donc bonne pour estimer le cout d'une unite supplémentaire.
 
 **4)** Le cout marginal est $C'(a) = 0{,}03a^2 - 1{,}2a + 15$.
 
-C'est un trinome du second degre en $a$ avec un coefficient dominant $0{,}03 > 0$, donc $C'(a)$ admet un **minimum** au sommet de la parabole.
+C'est un trinome du second degré en $a$ avec un coefficient dominant $0{,}03 > 0$, donc $C'(a)$ admet un **minimum** au sommet de la parabole.
 
 L'abscisse du sommet est :
 
@@ -69,13 +69,13 @@ Le cout marginal minimal est :
 
 $$C'(20) = 0{,}03 \times 400 - 1{,}2 \times 20 + 15 = 12 - 24 + 15 = 3 \;\text{dinars}$$
 
-Le cout marginal est minimal pour une production de **20 unites**, ou il vaut **3 dinars** par unite supplementaire.
+Le cout marginal est minimal pour une production de **20 unites**, où il vaut **3 dinars** par unite supplémentaire.
 :::
 
 :::methode
-En economie, le **cout marginal** $C'(a)$ represente le cout approximatif de production d'une unite supplementaire a partir de $a$ unites. C'est une application directe de l'approximation affine :
+En économie, le **cout marginal** $C'(a)$ représente le cout approximatif de production d'une unite supplémentaire à partir de $a$ unites. C'est une application directe de l'approximation affine :
 
 $$C(a + 1) \approx C(a) + C'(a)$$
 
-Le cout reel de la $(a+1)$-ieme unite est $C(a+1) - C(a)$, qui est proche de $C'(a)$.
+Le cout réel de la $(a+1)$-ieme unite est $C(a+1) - C(a)$, qui est proche de $C'(a)$.
 :::

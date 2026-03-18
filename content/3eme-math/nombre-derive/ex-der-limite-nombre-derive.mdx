@@ -1,15 +1,15 @@
 ---
 type: exercise
-title: "Calcul de limites par reconnaissance d'un nombre derive"
+title: "Calcul de limites par reconnaissance d'un nombre dérivé"
 difficulty: 2
 timeMinutes: 10
 category: application
-tags: [derivation, limites, reconnaissance]
+tags: [dérivation, limites, reconnaissance]
 praxeologies: [Prax9]
 ---
 
 :::enonce
-Calculer chacune des limites suivantes en reconnaissant un nombre derive :
+Calculer chacune des limites suivantes en reconnaissant un nombre dérivé :
 
 **a)** $\displaystyle\lim_{x \to -4} \frac{x^2 - 16}{x + 4}$
 
@@ -27,7 +27,7 @@ $$\frac{x^2 - 16}{x + 4} = \frac{g(x) - g(-4)}{x - (-4)}$$
 
 C'est le taux de variation de $g$ en $a = -4$.
 
-On calcule $g'(x) = 2x$, d'ou $g'(-4) = 2 \times (-4) = -8$.
+On calcule $g'(x) = 2x$, d'où $g'(-4) = 2 \times (-4) = -8$.
 
 $$\lim_{x \to -4} \frac{x^2 - 16}{x + 4} = g'(-4) = -8$$
 
@@ -37,7 +37,7 @@ $$\frac{\sqrt{x} - 1}{x - 1} = \frac{g(x) - g(1)}{x - 1}$$
 
 C'est le taux de variation de $g$ en $a = 1$.
 
-On calcule $g'(x) = \frac{1}{2\sqrt{x}}$, d'ou $g'(1) = \frac{1}{2}$.
+On calcule $g'(x) = \frac{1}{2\sqrt{x}}$, d'où $g'(1) = \frac{1}{2}$.
 
 $$\lim_{x \to 1} \frac{\sqrt{x} - 1}{x - 1} = g'(1) = \frac{1}{2}$$
 
@@ -47,11 +47,11 @@ $$\frac{(1 + x)^5 - 1}{x} = \frac{g(x) - g(0)}{x - 0}$$
 
 C'est le taux de variation de $g$ en $a = 0$.
 
-On developpe : $g(x) = (1 + x)^5$, donc par la formule $(u^n)' = n \cdot u^{n-1} \cdot u'$ avec $u(x) = 1 + x$ et $u'(x) = 1$ :
+On développe : $g(x) = (1 + x)^5$, donc par la formule $(u^n)' = n \cdot u^{n-1} \cdot u'$ avec $u(x) = 1 + x$ et $u'(x) = 1$ :
 
 $$g'(x) = 5(1 + x)^4$$
 
-D'ou $g'(0) = 5 \times 1^4 = 5$.
+D'où $g'(0) = 5 \times 1^4 = 5$.
 
 $$\lim_{x \to 0} \frac{(1 + x)^5 - 1}{x} = g'(0) = 5$$
 
@@ -61,16 +61,16 @@ $$\frac{\frac{1}{x + 5} - 1}{x + 4} = \frac{g(x) - g(-4)}{x - (-4)}$$
 
 C'est le taux de variation de $g$ en $a = -4$.
 
-On calcule $g'(x) = \frac{-1}{(x + 5)^2}$, d'ou $g'(-4) = \frac{-1}{(-4 + 5)^2} = \frac{-1}{1} = -1$.
+On calcule $g'(x) = \frac{-1}{(x + 5)^2}$, d'où $g'(-4) = \frac{-1}{(-4 + 5)^2} = \frac{-1}{1} = -1$.
 
 $$\lim_{x \to -4} \frac{\frac{1}{x + 5} - 1}{x + 4} = g'(-4) = -1$$
 :::
 
 :::methode
-Pour calculer une limite par reconnaissance d'un nombre derive :
+Pour calculer une limite par reconnaissance d'un nombre dérivé :
 
 1. Identifier une fonction $g$ et un point $a$ tels que l'expression est de la forme $\frac{g(x) - g(a)}{x - a}$
-2. Verifier que $g(a)$ correspond bien au numerateur
-3. Calculer $g'(a)$ avec les formules de derivation
+2. Vérifier que $g(a)$ correspond bien au numérateur
+3. Calculer $g'(a)$ avec les formules de dérivation
 4. Conclure que la limite vaut $g'(a)$
 :::

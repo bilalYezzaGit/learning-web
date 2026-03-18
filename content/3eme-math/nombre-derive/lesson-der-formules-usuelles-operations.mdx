@@ -1,16 +1,16 @@
 ---
 type: lesson
-title: "Formules de derivation usuelles et operations"
+title: "Formules de dérivation usuelles et operations"
 difficulty: 1
 timeMinutes: 10
-tags: [derivation, formules, operations]
+tags: [dérivation, formules, operations]
 praxeologies: [Prax2]
 ---
 
 ### Nombres derives des fonctions usuelles
 
 :::theorem[Nombres derives des fonctions usuelles (T4)]
-Soit $a$ un reel du domaine de derivabilite de $f$. On a :
+Soit $a$ un réel du domaine de dérivabilité de $f$. On a :
 
 ```typst
 #table(
@@ -30,13 +30,13 @@ Soit $a$ un reel du domaine de derivabilite de $f$. On a :
 ```
 :::
 
-:::example[Nombre derive de $f(x) = x^4$ en $a = 2$]
+:::example[Nombre dérivé de $f(x) = x^4$ en $a = 2$]
 On applique la formule $(x^n)' = na^{n-1}$ avec $n = 4$ :
 
 $$f'(2) = 4 \times 2^3 = 32$$
 :::
 
-:::example[Nombre derive de $f(x) = \dfrac{1}{3x + 1}$ en $a = 1$]
+:::example[Nombre dérivé de $f(x) = \dfrac{1}{3x + 1}$ en $a = 1$]
 On applique la formule de $\dfrac{1}{\alpha x + \beta}$ avec $\alpha = 3$ et $\beta = 1$ :
 
 $$f'(1) = \frac{-3}{(3 \times 1 + 1)^2} = \frac{-3}{16}$$
@@ -44,16 +44,16 @@ $$f'(1) = \frac{-3}{(3 \times 1 + 1)^2} = \frac{-3}{16}$$
 
 ### Operations sur les nombres derives
 
-:::theorem[Derivation de la somme et de la combinaison lineaire (T5)]
-Si $f$ et $g$ sont derivables en $a$, et $\alpha, \beta \in \mathbb{R}$, alors :
+:::theorem[Dérivation de la somme et de la combinaison lineaire (T5)]
+Si $f$ et $g$ sont dérivables en $a$, et $\alpha, \beta \in \mathbb{R}$, alors :
 
 $$(\alpha f + \beta g)'(a) = \alpha f'(a) + \beta g'(a)$$
 
 En particulier, $(f + g)'(a) = f'(a) + g'(a)$.
 :::
 
-:::theorem[Derivation du produit (T5)]
-Si $f$ et $g$ sont derivables en $a$, alors $f \cdot g$ est derivable en $a$ et :
+:::theorem[Dérivation du produit (T5)]
+Si $f$ et $g$ sont dérivables en $a$, alors $f \cdot g$ est dérivable en $a$ et :
 
 $$\boxed{(f \cdot g)'(a) = f'(a) \cdot g(a) + f(a) \cdot g'(a)}$$
 :::
@@ -64,8 +64,8 @@ On pose $u(x) = x^2$ et $v(x) = x + 3$. On a $u'(1) = 2$, $v'(1) = 1$, $u(1) = 1
 $$(u \cdot v)'(1) = u'(1) \cdot v(1) + u(1) \cdot v'(1) = 2 \times 4 + 1 \times 1 = 9$$
 :::
 
-:::theorem[Derivation du quotient (T5)]
-Si $f$ et $g$ sont derivables en $a$ et $g(a) \neq 0$, alors $\dfrac{f}{g}$ est derivable en $a$ et :
+:::theorem[Dérivation du quotient (T5)]
+Si $f$ et $g$ sont dérivables en $a$ et $g(a) \neq 0$, alors $\dfrac{f}{g}$ est dérivable en $a$ et :
 
 $$\boxed{\left(\frac{f}{g}\right)'(a) = \frac{f'(a) \cdot g(a) - f(a) \cdot g'(a)}{[g(a)]^2}}$$
 :::
@@ -76,8 +76,8 @@ On pose $u(x) = 2x + 1$ et $v(x) = x - 1$. On a $u'(2) = 2$, $v'(2) = 1$, $u(2) 
 $$f'(2) = \frac{2 \times 1 - 5 \times 1}{1^2} = \frac{-3}{1} = -3$$
 :::
 
-:::theorem[Derivation de la puissance $f^k$ (T5)]
-Si $f$ est derivable en $a$ et $k \in \mathbb{N}^*$, alors $f^k$ est derivable en $a$ et :
+:::theorem[Dérivation de la puissance $f^k$ (T5)]
+Si $f$ est dérivable en $a$ et $k \in \mathbb{N}^*$, alors $f^k$ est dérivable en $a$ et :
 
 $$\boxed{(f^k)'(a) = k \cdot [f(a)]^{k-1} \cdot f'(a)}$$
 :::
@@ -88,8 +88,8 @@ On pose $u(x) = 2x + 1$. On a $u(0) = 1$ et $u'(0) = 2$.
 $$(u^3)'(0) = 3 \times [u(0)]^2 \times u'(0) = 3 \times 1 \times 2 = 6$$
 :::
 
-:::theorem[Derivation de $\sqrt{f}$ (T6)]
-Si $f$ est derivable en $a$ et $f(a) > 0$, alors $\sqrt{f}$ est derivable en $a$ et :
+:::theorem[Dérivation de $\sqrt{f}$ (T6)]
+Si $f$ est dérivable en $a$ et $f(a) > 0$, alors $\sqrt{f}$ est dérivable en $a$ et :
 
 $$\boxed{(\sqrt{f})'(a) = \frac{f'(a)}{2\sqrt{f(a)}}}$$
 :::
@@ -97,7 +97,7 @@ $$\boxed{(\sqrt{f})'(a) = \frac{f'(a)}{2\sqrt{f(a)}}}$$
 :::attention[Condition $f(a) > 0$ obligatoire]
 La formule $(\sqrt{f})'(a) = \dfrac{f'(a)}{2\sqrt{f(a)}}$ n'est applicable que si $f(a) > 0$ **strictement**.
 
-Si $f(a) = 0$, le denominateur s'annule et la formule ne s'applique pas. Il faut alors revenir a la definition du nombre derive (limite du taux de variation) pour etudier la derivabilite.
+Si $f(a) = 0$, le dénominateur s'annule et la formule ne s'applique pas. Il faut alors revenir à la définition du nombre dérivé (limite du taux de variation) pour étudier la dérivabilité.
 :::
 
 :::example[Racine : $f(x) = \sqrt{3x + 1}$ en $a = 1$]

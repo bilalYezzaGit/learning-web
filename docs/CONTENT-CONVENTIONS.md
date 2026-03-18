@@ -828,7 +828,23 @@ Les tags sont semantiques et libres, mais doivent rester dans le vocabulaire exi
 
 ---
 
-## 8. Markdown
+## 8. Langue et accents
+
+Tout le contenu DOIT etre redige en **francais correct avec tous les accents** :
+- `é`, `è`, `ê`, `ë` — derivee → **dérivée**, theoreme → **théorème**, premiere → **première**
+- `à`, `â` — a (preposition) → **à**, parametre → **paramètre**
+- `ù`, `û` — ou → **où** (pronom relatif)
+- `ô` — controle → **contrôle**
+- `ç` — ca → **ça**, lecon → **leçon**
+- `î`, `ï` — connaitre → **connaître**
+
+**Pas d'exception.** Les fichiers MDX, les titres, les descriptions de molecules, les plannings — tout doit avoir les accents corrects. Un livret sans accents n'est pas publiable.
+
+**Verification** : le workflow WF4 (validation) doit signaler tout texte francais sans accents comme FAIL (Grille A).
+
+---
+
+## 9. Markdown
 
 ### Headings
 
@@ -855,7 +871,7 @@ Les tags sont semantiques et libres, mais doivent rester dans le vocabulaire exi
 
 ---
 
-## 9. Checklist de validation
+## 10. Checklist de validation
 
 Un atome est valide si :
 
@@ -876,7 +892,7 @@ Un atome est valide si :
 
 ---
 
-## 10. Patterns d'examen (`_patterns.yaml`)
+## 11. Patterns d'examen (`_patterns.yaml`)
 
 Fichier par module : `content/{programme}/{module}/_patterns.yaml`. Contient les variantes d'exercices d'examen classifiees par praxeologie.
 

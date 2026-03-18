@@ -1,43 +1,43 @@
 ---
 type: lesson
-title: "Applications du nombre derive"
+title: "Applications du nombre dérivé"
 difficulty: 1
 timeMinutes: 6
-tags: [derivation, limites, lecture-graphique]
+tags: [dérivation, limites, lecture-graphique]
 praxeologies: [Prax9, Prax13]
 ---
 
-### Calculer une limite par reconnaissance d'un nombre derive
+### Calculer une limite par reconnaissance d'un nombre dérivé
 
-Certaines limites ont la forme d'un taux de variation. On peut les calculer en reconnaissant un nombre derive.
+Certaines limites ont la forme d'un taux de variation. On peut les calculer en reconnaissant un nombre dérivé.
 
 :::definition[Principe de reconnaissance]
-Si l'on peut ecrire une limite sous la forme :
+Si l'on peut écrire une limite sous la forme :
 
 $$\lim_{x \to a} \frac{g(x) - g(a)}{x - a}$$
 
-alors cette limite vaut $g'(a)$, a condition que $g$ soit derivable en $a$.
+alors cette limite vaut $g'(a)$, à condition que $g$ soit dérivable en $a$.
 :::
 
-**Methode** : identifier la fonction $g$ et le point $a$, puis calculer $g'(a)$ avec les formules de derivation.
+**Méthode** : identifier la fonction $g$ et le point $a$, puis calculer $g'(a)$ avec les formules de dérivation.
 
 :::example[Limite d'un quotient polynomial]
 Calculer :
 
 $$\lim_{x \to 1} \frac{x^3 - 1}{x - 1}$$
 
-On reconnait le taux de variation de $g(x) = x^3$ entre $1$ et $x$.
+On reconnaît le taux de variation de $g(x) = x^3$ entre $1$ et $x$.
 
 En effet : $\frac{x^3 - 1}{x - 1} = \frac{g(x) - g(1)}{x - 1}$ avec $g(1) = 1$.
 
 On a $g'(x) = 3x^2$, donc $g'(1) = 3$.
 
-D'ou :
+D'où :
 
 $$\lim_{x \to 1} \frac{x^3 - 1}{x - 1} = g'(1) = 3$$
 :::
 
-:::example[Limite avec une racine carree]
+:::example[Limite avec une racine carrée]
 Calculer :
 
 $$\lim_{x \to 0} \frac{\sqrt{1 + x} - 1}{x}$$
@@ -46,7 +46,7 @@ On pose $g(x) = \sqrt{1 + x}$. On a $g(0) = 1$, donc :
 
 $$\frac{\sqrt{1 + x} - 1}{x} = \frac{g(x) - g(0)}{x - 0}$$
 
-On calcule $g'(x) = \frac{1}{2\sqrt{1 + x}}$, d'ou $g'(0) = \frac{1}{2}$.
+On calcule $g'(x) = \frac{1}{2\sqrt{1 + x}}$, d'où $g'(0) = \frac{1}{2}$.
 
 Par suite :
 
@@ -54,18 +54,18 @@ $$\lim_{x \to 0} \frac{\sqrt{1 + x} - 1}{x} = g'(0) = \frac{1}{2}$$
 :::
 
 :::remark
-L'astuce consiste souvent a reecrire la limite pour faire apparaitre la forme $\frac{g(x) - g(a)}{x - a}$. Parfois, un changement de variable est necessaire.
+L'astuce consiste souvent à réécrire la limite pour faire apparaître la forme $\frac{g(x) - g(a)}{x - a}$. Parfois, un changement de variable est nécessaire.
 :::
 
-### Lecture graphique du nombre derive
+### Lecture graphique du nombre dérivé
 
-A partir du graphe d'une fonction $f$, on peut lire directement $f(a)$ et $f'(a)$.
+À partir du graphe d'une fonction $f$, on peut lire directement $f(a)$ et $f'(a)$.
 
 :::definition[Lecture graphique]
-Soit $\mathcal{C}_f$ la courbe representative de $f$ dans un repere $(O, \vec{i}, \vec{j})$.
+Soit $\mathcal{C}_f$ la courbe représentative de $f$ dans un repère $(O, \vec{i}, \vec{j})$.
 
-- **$f(a)$** se lit comme l'ordonnee du point de $\mathcal{C}_f$ d'abscisse $a$.
-- **$f'(a)$** se lit comme le **coefficient directeur** (la pente) de la tangente a $\mathcal{C}_f$ au point d'abscisse $a$.
+- **$f(a)$** se lit comme l'ordonnée du point de $\mathcal{C}_f$ d'abscisse $a$.
+- **$f'(a)$** se lit comme le **coefficient directeur** (la pente) de la tangente à $\mathcal{C}_f$ au point d'abscisse $a$.
 :::
 
 ```typst {frame}
@@ -112,16 +112,16 @@ Soit $\mathcal{C}_f$ la courbe representative de $f$ dans un repere $(O, \vec{i}
 ```
 
 :::example[Lecture sur un graphe]
-Si la tangente a la courbe au point $A(2, 3)$ passe aussi par le point $B(4, 7)$, alors :
+Si la tangente à la courbe au point $A(2, 3)$ passe aussi par le point $B(4, 7)$, alors :
 
-- $f(2) = 3$ (ordonnee du point de tangence)
+- $f(2) = 3$ (ordonnée du point de tangence)
 - $f'(2) = \frac{7 - 3}{4 - 2} = \frac{4}{2} = 2$ (pente de la tangente)
 
-L'equation de la tangente en $a = 2$ est :
+L'équation de la tangente en $a = 2$ est :
 
 $$y = f'(2)(x - 2) + f(2) = 2(x - 2) + 3 = 2x - 1$$
 :::
 
 :::attention
-Si la tangente est **horizontale** en un point $a$, cela signifie que $f'(a) = 0$, et **non** que $f$ n'est pas derivable en $a$. Une tangente horizontale est bien une tangente.
+Si la tangente est **horizontale** en un point $a$, cela signifie que $f'(a) = 0$, et **non** que $f$ n'est pas dérivable en $a$. Une tangente horizontale est bien une tangente.
 :::
