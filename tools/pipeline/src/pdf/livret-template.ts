@@ -269,60 +269,104 @@ ${section.content}
 // ═══════════════════════════════════════════
 
 #page(header: none, footer: none)[
-  #v(1fr)
+
+  // ── Bandeau programme ──
+  #place(top + left, dx: -20mm, dy: -25mm,
+    block(width: 210mm, height: 18mm, fill: rgb("#1e40af"))[
+      #align(center + horizon)[
+        #text(size: 11pt, fill: white, weight: "bold", tracking: 1pt)[
+          ${data.programmeLabel.toUpperCase()}
+        ]
+      ]
+    ]
+  )
+
+  #v(2em)
+
+  // ── Mini-graphe décoratif (tangente à une parabole) ──
   #align(center)[
-    #text(size: 14pt, fill: luma(120))[${data.programmeLabel}]
+    #box(inset: 8pt, radius: 50%, fill: rgb("#eff6ff"), stroke: 1pt + rgb("#bfdbfe"))[
+      #image.decode(
+        bytes("<svg width='48' height='48' viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'><path d='M8 40 Q24 -8 40 40' fill='none' stroke='#1e40af' stroke-width='2.5'/><line x1='6' y1='32' x2='42' y2='8' stroke='#dc2626' stroke-width='1.5' stroke-dasharray='4,3'/><circle cx='24' cy='16' r='3' fill='#1e40af'/></svg>"),
+        width: 36pt,
+      )
+    ]
+  ]
 
-    #v(1em)
+  #v(1em)
 
-    #text(size: 24pt, weight: "bold")[${data.title}]
+  // ── Titre ──
+  #align(center)[
+    #block(width: 85%, inset: (x: 16pt, y: 12pt), radius: 8pt,
+      stroke: 1.5pt + rgb("#1e40af"),
+      fill: rgb("#eff6ff"),
+    )[
+      #align(center)[
+        #text(size: 22pt, weight: "bold", fill: rgb("#1e3a5f"))[${data.title}]
+      ]
+    ]
+  ]
 
-    #v(1.5em)
+  #v(1.2em)
 
-    #line(length: 40%, stroke: 1pt + luma(200))
-
-    #v(1.5em)
-
-    #text(size: 11pt, fill: luma(80))[
+  // ── Métadonnées ──
+  #align(center)[
+    #text(size: 10pt, fill: luma(80))[
       ${data.totalActivities} activités  |  ${timeStr}  |  ${data.trimester}
     ]
+  ]
 
-    #v(2em)
+  #v(1.5em)
 
-    #block(width: 75%, inset: 16pt, stroke: 0.5pt + luma(200), radius: 6pt)[
-      #align(center)[#text(weight: "bold")[Objectifs du module]]
-      #v(0.5em)
+  // ── Objectifs ──
+  #align(center)[
+    #block(width: 78%, inset: 14pt, stroke: 0.5pt + luma(200), radius: 6pt, fill: rgb("#f8fafc"))[
+      #align(center)[#text(weight: "bold", size: 10pt)[Objectifs du module]]
+      #v(0.4em)
       #align(left)[
         ${data.objectives.map((o, i) => `${i + 1}. ${o}`).join('\\\\\n        ')}
       ]
     ]
   ]
-  #v(1.5em)
 
-  #block(width: 75%, inset: 12pt, stroke: 0.5pt + luma(200), radius: 6pt)[
-    #grid(
-      columns: (1fr, 1fr),
-      column-gutter: 12pt,
-      row-gutter: 10pt,
-      [Nom : #box(width: 1fr, repeat[.])],
-      [Prénom : #box(width: 1fr, repeat[.])],
-      [Classe : #box(width: 1fr, repeat[.])],
-      [Année : 20#box(width: 2em, repeat[.]) / 20#box(width: 2em, repeat[.])],
-    )
+  #v(1.2em)
+
+  // ── Nom / Prénom / Classe ──
+  #align(center)[
+    #block(width: 78%, inset: 12pt, stroke: 0.5pt + luma(200), radius: 6pt)[
+      #grid(
+        columns: (1fr, 1fr),
+        column-gutter: 12pt,
+        row-gutter: 10pt,
+        [Nom : #box(width: 1fr, repeat[.])],
+        [Prénom : #box(width: 1fr, repeat[.])],
+        [Classe : #box(width: 1fr, repeat[.])],
+        [Année : 20#box(width: 2em, repeat[.]) / 20#box(width: 2em, repeat[.])],
+      )
+    ]
   ]
 
   #v(1fr)
+
+  // ── QR code ──
   #align(center)[
     ${data.coverQr && data.bookletCode ? `
-    #text(size: 9pt, fill: luma(100))[Code livret : #text(weight: "bold")[${data.bookletCode}]]
+    #text(size: 8.5pt, fill: luma(100))[Code livret : #text(weight: "bold")[${data.bookletCode}]]
     #v(0.5em)
     #${data.coverQr}
-    #v(0.5em)
-    #text(size: 8pt, fill: luma(150))[Scannez pour associer ce livret]
+    #v(0.4em)
+    #text(size: 7.5pt, fill: luma(150))[Scannez pour accéder au livret sur l'application]
     ` : `
     #text(size: 9pt, fill: luma(150))[Livret élève — Version énoncés]
     `}
   ]
+
+  #v(1em)
+
+  // ── Barre de pied de couverture ──
+  #place(bottom + left, dx: -20mm, dy: 25mm,
+    block(width: 210mm, height: 6mm, fill: rgb("#1e40af"))[]
+  )
 ]
 
 // ═══════════════════════════════════════════

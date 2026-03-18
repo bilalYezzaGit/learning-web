@@ -16,6 +16,27 @@ Soit $C_1$ la courbe de $f(x) = x^2 + 2x - 1$ et $C_2$ la courbe de $g(x) = -x^2
 **2)** Montrer que $C_1$ et $C_2$ admettent une tangente commune au point d'intersection. Écrire l'équation de cette tangente $T$.
 
 **3)** Étudier la position de $C_1$ et $C_2$ par rapport à $T$.
+
+```typst {frame}
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-grid: "major", y-grid: "major",
+    x-label: $x$, y-label: $y$,
+    x-tick-step: 1, y-tick-step: 1,
+    x-min: -5, x-max: 1, y-min: -4, y-max: 3,
+    {
+      plot.add(domain: (-4.5, 0.5), x => calc.pow(x, 2) + 2*x - 1,
+        style: (stroke: 2pt + blue), label: $C_1$)
+      plot.add(domain: (-4.5, 0.5), x => -1*calc.pow(x, 2) - 6*x - 9,
+        style: (stroke: 2pt + red), label: $C_2$)
+    },
+  )
+})
+```
 :::
 
 :::solution

@@ -16,6 +16,27 @@ Soit $\mathcal{P}$ la courbe de $f(x) = x^2$ et $\mathcal{P}'$ la courbe de $g(x
 **2)** Montrer que les tangentes à $\mathcal{P}$ et $\mathcal{P}'$ en chacun de ces points sont perpendiculaires.
 
 **3)** Écrire les équations des tangentes au point d'intersection d'abscisse positive.
+
+```typst {frame}
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-grid: "major", y-grid: "major",
+    x-label: $x$, y-label: $y$,
+    x-tick-step: 1, y-tick-step: 1,
+    x-min: -2.5, x-max: 2.5, y-min: -1, y-max: 4,
+    {
+      plot.add(domain: (-2, 2), x => calc.pow(x, 2),
+        style: (stroke: 2pt + blue), label: $cal(P)$)
+      plot.add(domain: (-2, 2), x => -1*calc.pow(x, 2)/3 + 1,
+        style: (stroke: 2pt + red), label: $cal(P')$)
+    },
+  )
+})
+```
 :::
 
 :::solution
