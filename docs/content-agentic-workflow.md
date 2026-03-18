@@ -289,16 +289,23 @@ formules, calculs, solutions
 
 ## Partie 3 : Etat actuel
 
+> Mis a jour le 2026-03-18 apres nettoyage des modules ad-hoc.
+
 | Metrique | Valeur |
 |----------|--------|
 | Programmes | 3 declares (3eme-math, 1ere-tc, 2nde-math), 1 avec contenu |
-| Modules avec contenu | 5 (continuite, derivation, fonctions, fonction-derivee, fonction-derivee-usuelle) |
-| Atomes MDX | 222 |
-| Livrets YAML | 20 (kind: livret unifie, plus de distinction cours/serie) |
-| KB modules | 2 (fonctions, fonction-derivee) |
+| Modules avec contenu | 2 (fonction-derivee, nombre-derive) — modules workflow uniquement |
+| Atomes MDX | 38 |
+| Livrets YAML | 4 (kind: livret unifie) |
+| KB modules | 2 (fonction-derivee, nombre-derive) |
+| Patterns (_patterns.yaml) | 0 (nouveau concept GenTech v2) |
 | Fiches sources | 8 (tous les PDFs 3eme-math indexes) |
 | References Typst | 7 modules transcrits (21 fichiers .typ) |
-| Plannings | 6 per-molecule (3 fonction-derivee + 3 fonction-derivee-usuelle) |
+| Plannings | 4 per-molecule (3 fonction-derivee + 1 nombre-derive) |
+
+> **GenTech v2** : voir `docs/CONTENT-SYSTEM-VISION.md` pour la vision complete
+> (3 livrets/module, `_patterns.yaml` iteratif, workflow WF0→WF1→WF1+→WF2→WF3→WF4).
+> Plan d'execution : `docs/PLAN-GENTECH-V2.md`
 
 ---
 
@@ -312,3 +319,5 @@ formules, calculs, solutions
 | L4 | Pas d'orchestration multi-atomes (reprise, progression) — partiellement resolu (progression par Glob) | WF3 | moyenne |
 | ~~L5~~ | ~~Paliers validation maths + pedagogie inexistants~~ | ~~WF4~~ | resolue (`/content valider {module}`) |
 | L6 | Pas de verification automatique planning -> atomes generes | WF4 | basse |
+| L7 | Pas de skill WF1+ (enrichissement patterns) | WF1+ | haute — Phase 2 du plan |
+| L8 | Pas de `_patterns.yaml` existant | WF1+ | haute — Phase 3 du plan |
