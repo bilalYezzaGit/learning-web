@@ -19,6 +19,7 @@ Determine l'action a partir de `$ARGUMENTS` ou du contexte utilisateur :
 | **Valider** | [Validation](#validation-workflow) | valider, verifier, checker, audit |
 | **Planifier** | [Planning](#planning-workflow) | planifier, planning, plan livret |
 | **KB** | [Knowledge Base](#kb-workflow) | kb, knowledge base, creer KB, base de connaissances |
+| **Patterns** | [Patterns](#patterns-workflow) | patterns, enrichir, feeder, exercices types, examen, variantes |
 | **Lister** | [Listing](#listing-workflow) | lister, inventaire, combien, quels atomes |
 
 ---
@@ -106,6 +107,55 @@ Prerequis : transcriptions .typ dans `_raw/reference/{programme}/{module}/`.
 Si absentes : utiliser `/transcription {module}` d'abord.
 
 Voir [actions/create-kb.md](actions/create-kb.md) pour le pipeline complet.
+
+---
+
+## Patterns workflow
+
+Enrichit le fichier `_patterns.yaml` d'un module a partir de series d'exercices (WF1+).
+
+### Pre-requis
+
+- KB module existante (`content/{prog}/{mod}/_kb.md`)
+- Si pas de KB : creer d'abord la KB (`/content kb {module}`)
+
+### Syntaxe
+
+```
+/content patterns {module}
+```
+
+L'utilisateur fournit des exercices en contexte (transcriptions Typst, texte, images, PDFs).
+
+### Etapes
+
+1. **Charge la KB module** : lire `content/{programme}/{module}/_kb.md`, extraire les praxeologies (section 8)
+
+2. **Charge `_patterns.yaml` existant** (ou creer la structure vide si premier appel)
+
+3. **Charge le template patterns** : Read `.claude/skills/content/references/patterns-template.yaml`
+
+4. **Analyse chaque exercice fourni** :
+   - Identifier la/les praxeologie(s) mobilisees (reference KB)
+   - Extraire : type de tache, technique, variables qui changent
+   - Comparer avec les patterns existants dans `_patterns.yaml`
+
+5. **Classifier** :
+   - Si **variante connue** → incrementer `frequency`, ajouter source, optionnellement ajouter un exemple
+   - Si **nouvelle variante** → creer un nouveau pattern avec ID `PraxN.vM`
+   - Si **praxeologie inconnue** (pas dans la KB) → **signaler a l'humain**, ne pas modifier la KB
+
+6. **Ecrire** `_patterns.yaml` mis a jour, incrementer `version`
+
+7. **Afficher un resume** : N exercices analyses, M nouveaux patterns, K variantes enrichies, J non classifies
+
+### Regles
+
+- 1 fichier `_patterns.yaml` par module (pas par molecule)
+- Ne jamais modifier la KB automatiquement
+- Les `examples` sont des exercices reels (pas inventes), avec source
+- `frequency` est incremente a chaque observation dans une nouvelle source
+- IDs de patterns : `{Praxeologie}.v{numero}` (ex: `Prax3.v1`)
 
 ---
 
@@ -237,6 +287,7 @@ Molecules:  content/{programme}/{module}/_molecules/{slug}/molecule.yaml
 Planning:   content/{programme}/{module}/_molecules/{slug}/_planning.yaml
 Validation: content/{programme}/{module}/_molecules/{slug}/_validation.md
 KB:         content/{programme}/{module}/_kb.md
+Patterns:   content/{programme}/{module}/_patterns.yaml
 Programme:  content/{programme}/_programme.yaml
 ```
 

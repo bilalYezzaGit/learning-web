@@ -18,7 +18,10 @@ Document vivant qui cartographie le systeme de contenu pilote par LLM.
 | **--- Knowledge Base (WF1) ---** | | | |
 | Referentiels | `docs/referentiels/` | Conventions redaction maths tunisiennes | WF1 — reference KB ; WF3 [3a] — reference generation |
 | KB template | `.claude/skills/content/references/kb-template.md` | Modele pour creer une KB module | WF1 — template de creation |
-| KB modules | `content/{prog}/{mod}/_kb.md` | Savoir structure par module (2 existants) | WF1 — sortie ; WF2 [2a] — entree analyse praxeologies |
+| KB modules | `content/{prog}/{mod}/_kb.md` | Savoir structure par module (2 existants) | WF1 — sortie ; WF1+ — reference praxeologies ; WF2 [2a] — entree analyse |
+| **--- Patterns (WF1+) ---** | | | |
+| Patterns template | `.claude/skills/content/references/patterns-template.yaml` | Schema du fichier patterns | WF1+ — template |
+| Patterns module | `content/{prog}/{mod}/_patterns.yaml` | Variantes d'examen par praxeologie (0 existants) | WF1+ — sortie ; WF2 — entree Livret 2 |
 | **--- Planning (WF2) ---** | | | |
 | Planning template | `.claude/skills/content/references/planning-template.yaml` | Schema du manifeste per-molecule | WF2 [2b] — template de creation |
 | Planning per-molecule | `content/{prog}/{mod}/_molecules/{slug}/_planning.yaml` | Manifeste par molecule (avant generation) | WF2 — sortie ; WF3 [3a] — spec de generation ; WF4 [4a] — verification couverture |
@@ -42,8 +45,12 @@ Document vivant qui cartographie le systeme de contenu pilote par LLM.
 flowchart TD
     PDF["PDF brut"] -->|"WF0a : indexer"| Fiche[("Fiche source YAML\n_raw/sources/*.yaml")]
     Fiche -->|"WF0b : transcrire\n/transcription"| Typst[("References Typst\n_raw/reference/{prog}/{mod}/*.typ")]
-    Typst -->|"WF1 : creer KB\n/content kb"| KB[("KB module\ncontent/{prog}/{mod}/_kb.md")]
-    KB -->|"WF2 : planifier\n/content plan"| Plan["_molecules/{slug}/_planning.yaml\n(draft)"]
+    Typst -->|"WF1 : creer KB\n/content kb"| KB[("KB module\n_kb.md")]
+    KB -->|"WF1+ : enrichir patterns\n/content patterns"| Patterns[("_patterns.yaml\n(version N)")]
+    Series["Nouvelles series\nBAC, devoirs, parascolaires"] -->|"WF1+"| Patterns
+    Patterns -.->|"iteratif\n(N fois)"| Patterns
+    KB -->|"WF2 : planifier\n/content plan"| Plan["_planning.yaml x3\n(draft)"]
+    Patterns -.->|"Livret 2\n(patterns)"| Plan
     Plan --> Review{"Review\nhumain"}
     Review -->|"ajuste"| Plan
     Review -->|"valide"| PlanV["_planning.yaml\n(validated)"]
@@ -51,7 +58,8 @@ flowchart TD
     Contenu --> PlanG["_planning.yaml\n(generated)"]
     PlanG --> V4a["4a Syntaxe\nnpm run generate"]
     V4a --> V4bc["4b+4c Semantique\n/content valider {module}"]
-    V4bc --> Rapport[/"Rapport pass/fail\n_molecules/{slug}/_validation.md"/]
+    V4bc --> Rapport[/"Rapport pass/fail\n_validation.md"/]
+    V4bc -->|"Si FAIL"| Plan
 ```
 
 ---
@@ -127,6 +135,48 @@ Sortie : `content/{programme}/{module}/_kb.md`
 
 ```
 /content kb fonction-derivee
+```
+
+---
+
+### WF1+ -- Enrichir les patterns d'examen (iteratif)
+
+Workflow iteratif qui accumule des patterns d'exercices a partir de series, BAC, parascolaires. Peut etre appele N fois par module. Chaque appel enrichit `_patterns.yaml`.
+
+Prerequis : KB module existante (`content/{prog}/{mod}/_kb.md`).
+
+```mermaid
+flowchart TD
+    KB[("KB module\n_kb.md")] --> Load["Charger praxeologies\nsection 8 de la KB"]
+    PAT[("_patterns.yaml\n(existant ou vide)")] --> Load
+    Source["Exercices\n(Typst, MDX, texte, image)"] --> Analyse["Analyser chaque exercice"]
+    Load --> Analyse
+    Analyse --> Class{"Variante\nconnue ?"}
+    Class -->|"oui"| Incr["Incrementer frequency\najouter source + exemple"]
+    Class -->|"non, meme prax"| New["Creer nouveau pattern\nPraxN.vM"]
+    Class -->|"prax inconnue"| Alert["Signaler a l'humain"]
+    Incr --> Write["Ecrire _patterns.yaml\nincrementer version"]
+    New --> Write
+```
+
+Entree : exercices (Typst, MDX, texte, image) + KB module
+Sortie : `content/{programme}/{module}/_patterns.yaml` (cree ou enrichi)
+
+#### Declencheurs
+
+| Etape | Declencheur | Ressources chargees |
+|-------|-------------|---------------------|
+| Enrichir les patterns | `/content patterns {module}` | KB module, `_patterns.yaml` existant, exercices fournis par l'utilisateur |
+
+#### Exemples de prompts
+
+```
+/content patterns nombre-derive
+(puis fournir des exercices en contexte : Typst, texte, images...)
+```
+
+```
+Voici un sujet de BAC 2024, enrichis les patterns du module nombre-derive
 ```
 
 ---

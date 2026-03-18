@@ -1,6 +1,6 @@
 # Convention de contenu
 
-Version 3 — 2026-02-27
+Version 4 — 2026-03-18
 
 Ce document definit les regles strictes d'ecriture du contenu pedagogique. Tout contenu qui ne respecte pas ces regles doit etre corrige. La convention prime sur l'existant.
 
@@ -118,6 +118,16 @@ Renseigne automatiquement lors de la generation depuis un planning (WF3).
 
 ```yaml
 praxeologies: [Prax1, Prax2a, Prax4]
+```
+
+#### `pattern`
+
+ID du pattern d'examen instancie par cet atome. Optionnel.
+Reference un pattern dans `content/{prog}/{mod}/_patterns.yaml`.
+Utilise principalement pour les exercices du Livret 2 (Examen), generes a partir de patterns reels.
+
+```yaml
+pattern: Prax3.v1
 ```
 
 #### `category` (exercices uniquement)
@@ -259,35 +269,39 @@ Les molecules sont des fichiers YAML dans `content/{programme}/{module}/_molecul
 content/
 ├── 3eme-math/                          # programme (contient _programme.yaml)
 │   ├── _programme.yaml                 # metadata du programme
-│   ├── continuite/                     # module
-│   │   ├── _kb.md                      # Knowledge Base module
+│   ├── nombre-derive/                  # module
+│   │   ├── _kb.md                      # Knowledge Base (WF1, stable)
+│   │   ├── _patterns.yaml             # Patterns d'examen (WF1+, vivant)
 │   │   ├── _molecules/
-│   │   │   ├── continuite/
+│   │   │   ├── nombre-derive-cours/
 │   │   │   │   ├── molecule.yaml       # livret (kind: livret)
 │   │   │   │   ├── _planning.yaml      # planning specifique (optionnel)
 │   │   │   │   └── _validation.md      # validation specifique (optionnel)
-│   │   │   ├── continuite-fondamentaux/
+│   │   │   ├── nombre-derive-examen/
 │   │   │   │   └── molecule.yaml
-│   │   │   └── tvi-maitrise/
+│   │   │   └── nombre-derive-exploration/
 │   │   │       └── molecule.yaml
-│   │   ├── lesson-cont-definition.mdx
-│   │   ├── ex-cont-tvi-direct.mdx
-│   │   └── qcm-cont-polynomes.mdx
-│   ├── derivation/
-│   │   ├── _molecules/
-│   │   │   └── derivation/
-│   │   │       └── molecule.yaml
-│   │   └── *.mdx
-│   └── fonctions/
+│   │   ├── lesson-der-definition.mdx
+│   │   ├── ex-der-tvi-direct.mdx
+│   │   └── qcm-der-tangente.mdx
+│   └── fonction-derivee/
+│       ├── _kb.md
+│       ├── _patterns.yaml
 │       ├── _molecules/
-│       │   └── fonctions/
-│       │       └── molecule.yaml
+│       │   └── .../molecule.yaml
 │       └── *.mdx
 ├── 2nde-math/                          # futur programme
 │   └── ...
 ```
 
-Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les atomes (`.mdx` dans les modules), et les molecules/livrets (`_molecules/{slug}/molecule.yaml`). Les fichiers `_planning.yaml` et `_validation.md` dans les sous-repertoires molecule sont invisibles au pipeline.
+Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les atomes (`.mdx` dans les modules), et les molecules/livrets (`_molecules/{slug}/molecule.yaml`). Les fichiers prefixes `_` dans les modules et sous-repertoires molecule sont **invisibles au pipeline** :
+
+| Fichier invisible | Role | Cree par |
+|-------------------|------|----------|
+| `_kb.md` | Base de connaissances du module | WF1 |
+| `_patterns.yaml` | Patterns d'examen (par module, enrichi iterativement) | WF1+ |
+| `_planning.yaml` | Spec de generation (par molecule) | WF2 |
+| `_validation.md` | Rapport de validation (par molecule) | WF4 |
 
 ### 3.1 Molecule Livret
 
@@ -859,3 +873,54 @@ Un atome est valide si :
 - [ ] Les headings commencent a `###`
 - [ ] Pas de directives non autorisees
 - [ ] Toute nouvelle directive est documentee dans la section 5
+
+---
+
+## 10. Patterns d'examen (`_patterns.yaml`)
+
+Fichier par module : `content/{programme}/{module}/_patterns.yaml`. Contient les variantes d'exercices d'examen classifiees par praxeologie.
+
+Ce fichier est **vivant** — enrichi iterativement a chaque nouvelle source d'exercices (WF1+). Il est invisible au pipeline.
+
+### Format
+
+```yaml
+module: "{slug-module}"
+programme: "{slug-programme}"
+version: 1                              # incremente a chaque enrichissement
+
+patterns:
+  - id: Prax3.v1                        # convention : {Praxeologie}.v{numero}
+    praxeology: Prax3                   # reference vers la KB (section 8)
+    name: "Nom court de la variante"
+    description: >-
+      Ce que l'eleve doit faire dans cette variante.
+    method:
+      - "Etape 1 de la methode"
+      - "Etape 2"
+    variables:
+      function: ["x³-3x+1", "eˣ-2x"]
+      interval: ["[0,1]", "[1,2]"]
+    difficulty: 1
+    frequency: 3                        # nombre d'occurrences dans les sources
+    sources:
+      - "Manuel T1 p.35 ex.1"
+      - "BAC 2024 ex.3a"
+    examples:
+      - title: "BAC 2024 — Exercice 3a"
+        enonce: >-
+          Texte de l'enonce reel.
+        sketch: >-
+          Grandes lignes de la solution.
+```
+
+### Regles
+
+- **1 fichier par module** (pas par molecule)
+- IDs de patterns : `{Praxeologie}.v{numero}` (ex: `Prax3.v1`, `Prax3.v2`)
+- Chaque pattern reference une praxeologie de la KB via `praxeology:`
+- `frequency` = nombre d'occurrences observees dans les sources ingeres
+- `examples` = exercices reels (pas inventes), avec source
+- `variables` = ce qui change d'un exercice a l'autre pour ce pattern
+- `version` incremente a chaque enrichissement (WF1+)
+- Seuil : au-dela de ~10 variantes par praxeologie, regrouper ou elaguer

@@ -25,8 +25,12 @@ status: draft                                     # draft | validated | generate
 # ============================================================================
 # Design intent
 # ============================================================================
-# Decrire ici l'intention pedagogique du livret : quels types d'exercices,
-# quel niveau, quel style (application directe, problemes, synthese...).
+
+design_intent: >-
+  Decrire ici l'intention pedagogique du livret : quels types d'exercices,
+  quel niveau, quel style (application directe, problemes, synthese...).
+  Pour un livret Examen : exercices types par frequence decroissante.
+  Pour un livret Exploration : problemes atypiques, modelisations.
 
 slug: "{slug-molecule}"                           # Ex: continuite-fondamentaux
 title: "{Titre du livret}"
@@ -55,10 +59,12 @@ sections:
         type: exercise
         title: "{Titre de l'exercice}"
         praxeologies: [Prax0]
+        pattern: Prax0.v1                         # Optionnel — reference _patterns.yaml (Livret Examen)
         category: application                     # application | approfondissement | synthese | probleme
         contenu: >-
           {Description precise : combien de questions, quel type de
-          fonctions, quelle technique attendue, quel resultat.}
+          fonctions, quelle technique attendue, quel resultat.
+          Si pattern: instancier avec de nouvelles valeurs.}
         difficulte: 1
         timeMinutes: 15                           # 5-20 pour un exercice
 
@@ -91,5 +97,9 @@ sections:
 # 7. Respecter le vocabulaire controle des topics (voir SKILL.md Quick Reference)
 # 8. Viser un equilibre : ~60% exercices, ~25% lecons, ~15% QCM
 # 9. Les praxeologies vivent dans la KB module — pas dupliquees ici
+# 10. Le champ `pattern` (optionnel) reference un pattern de _patterns.yaml
+#     Utilise surtout pour le Livret 2 (Examen) : le LLM instancie le pattern
+#     avec de nouvelles valeurs au lieu de creer un exercice de zero.
+# 11. Le champ `design_intent` decrit l'intention pedagogique du livret
 #
 # ============================================================================
