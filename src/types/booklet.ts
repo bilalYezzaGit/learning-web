@@ -16,6 +16,10 @@ export interface BookletDefinition {
   livretSlug: string
   /** Programme ID (e.g. "3eme-math") */
   programmeId: string
+  /** Programme display label (e.g. "3eme annee - Math") */
+  programmeLabel: string
+  /** Programme color hex (e.g. "#3B82F6") */
+  programmeColor: string
   /** Display title */
   title: string
   /** Description */

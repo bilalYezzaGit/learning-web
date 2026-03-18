@@ -77,8 +77,16 @@ export default async function BookletHubPage({ params }: PageProps) {
       <div className="px-4 py-5">
         {/* Header */}
         <div className="mb-6">
-          <Badge variant="outline" className="mb-2 text-xs">
-            {booklet.code}
+          <Badge
+            variant="outline"
+            className="mb-2 gap-1.5 text-xs"
+          >
+            <span
+              className="h-2 w-2 rounded-full"
+              style={{ backgroundColor: booklet.programmeColor }}
+              aria-hidden="true"
+            />
+            {booklet.programmeLabel}
           </Badge>
           <h1 className="font-serif text-2xl font-semibold">{booklet.title}</h1>
           <p className="mt-1 text-sm text-muted-foreground">

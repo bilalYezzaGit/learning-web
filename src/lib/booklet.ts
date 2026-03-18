@@ -34,6 +34,8 @@ export const getAllBooklets = cache((): BookletDefinition[] => {
           code: generateBookletCode(livretSlug, programme.id),
           livretSlug,
           programmeId: programme.id,
+          programmeLabel: programme.label,
+          programmeColor: programme.color,
           title: livret.title,
           description: livret.description,
           version: 1,
