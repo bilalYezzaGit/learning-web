@@ -1,0 +1,772 @@
+module: nombre-derive
+programme: 3eme-math
+version: 1
+
+patterns:
+
+  # =========================================================================
+  # Prax1 — Calculer f'(a) par la definition
+  # =========================================================================
+
+  - id: Prax1.v1
+    praxeology: Prax1
+    name: "Derivee par definition — polynome"
+    description: >-
+      Calculer f'(a) par la definition pour une fonction polynome.
+      Factoriser (x-a) ou developper f(a+h), simplifier, calculer la limite.
+    method:
+      - "Ecrire le taux de variation (f(x)-f(a))/(x-a) ou (f(a+h)-f(a))/h"
+      - "Factoriser le numerateur (identites remarquables, Horner)"
+      - "Simplifier par (x-a) ou h"
+      - "Calculer la limite → f'(a)"
+    variables:
+      function: ["x^3+2x^2-x+1", "2x^3-x+3", "x^2-3x+1"]
+      point: ["0", "1", "2", "a (general)"]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "Para ex.1a p.110"
+      - "Para ex.2 p.110"
+      - "Manuel activites cours"
+      - "Manuel ex.1 enonce (items 1-2)"
+      - "KB EC1"
+    examples:
+      - title: "Para ex.1a — Polynome en 0"
+        enonce: >-
+          Soit f(x) = x^3 + 2x^2 - x + 1. Montrer que f est derivable
+          en 0 et determiner f'(0).
+        sketch: >-
+          (f(x)-f(0))/x = (x^3+2x^2-x)/x = x^2+2x-1 → -1. Donc f'(0) = -1.
+      - title: "Para ex.2 — Cubique general"
+        enonce: >-
+          Soit f(x) = 2x^3 - x + 3. Montrer que f est derivable en tout
+          point a et calculer f'(a).
+        sketch: >-
+          Factoriser 2(x^3-a^3) = 2(x-a)(x^2+ax+a^2), simplifier,
+          limite = 6a^2 - 1.
+
+  - id: Prax1.v2
+    praxeology: Prax1
+    name: "Derivee par definition — racine carree (conjugue)"
+    description: >-
+      Calculer f'(a) par la definition pour sqrt(x+c).
+      Technique du conjugue pour lever l'indetermination.
+    method:
+      - "Ecrire le taux de variation (sqrt(x+c)-sqrt(a+c))/(x-a)"
+      - "Multiplier numerateur et denominateur par le conjugue"
+      - "Simplifier par (x-a)"
+      - "Calculer la limite → 1/(2*sqrt(a+c))"
+    variables:
+      function: ["sqrt(x+3)", "sqrt(x)", "sqrt(x+4)"]
+      point: ["-2", "4", "0"]
+    difficulty: 1
+    frequency: 4
+    sources:
+      - "Para ex.1b p.110"
+      - "Manuel ex.5 p.95"
+      - "KB EC2"
+      - "Manuel ex.3 enonce (item 3)"
+    examples:
+      - title: "Para ex.1b — sqrt(x+3) en -2"
+        enonce: >-
+          Soit f(x) = sqrt(x+3). Montrer que f est derivable en -2
+          et determiner f'(-2).
+        sketch: >-
+          Conjugue : (sqrt(x+3)-1)/(x+2) * (sqrt(x+3)+1)/(sqrt(x+3)+1)
+          = 1/(sqrt(x+3)+1) → 1/2.
+
+  - id: Prax1.v3
+    praxeology: Prax1
+    name: "Derivee par definition — fonction mixte"
+    description: >-
+      Calculer f'(a) par la definition pour une fonction combinant
+      polynome et racine (ex: x - sqrt(2x+1)).
+    method:
+      - "Separer le taux de variation en partie polynomiale + partie radicale"
+      - "Appliquer le conjugue sur la partie racine"
+      - "Simplifier et calculer la limite"
+    variables:
+      function: ["x - sqrt(2x+1)", "x^2 + sqrt(x)"]
+      point: ["4", "1"]
+    difficulty: 1
+    frequency: 1
+    sources:
+      - "Para ex.1e p.110"
+    examples:
+      - title: "Para ex.1e — Mixte en 4"
+        enonce: >-
+          Soit f(x) = x - sqrt(2x+1). Montrer que f est derivable en 4
+          et determiner f'(4).
+        sketch: >-
+          Taux = (x-4-(sqrt(2x+1)-3))/(x-4). Conjugue sur la racine,
+          simplifier, limite = 2/3.
+
+  # =========================================================================
+  # Prax1b — Non-derivabilite par la definition
+  # =========================================================================
+
+  - id: Prax1b.v1
+    praxeology: Prax1b
+    name: "Non-derivabilite — tangente verticale (sqrt au bord)"
+    description: >-
+      Montrer que f n'est pas derivable en a car le taux de variation
+      tend vers l'infini (tangente verticale ou demi-tangente verticale).
+    method:
+      - "Ecrire le taux de variation"
+      - "Montrer que la limite est +inf ou -inf"
+      - "Conclure : f non derivable, demi-tangente verticale"
+    variables:
+      function: ["sqrt(x-1)", "sqrt(x)", "sqrt(x^2-2x)"]
+      point: ["1", "0", "2"]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "Para ex.1c p.110"
+      - "Manuel V/F 3 p.93"
+      - "XY ex.1.3b p.63"
+      - "Para ex.5 (a x=-1)"
+      - "KB EC7"
+    examples:
+      - title: "Para ex.1c — sqrt(x-1) en 1"
+        enonce: >-
+          Soit f(x) = sqrt(x-1). Montrer que f n'est pas derivable en 1.
+        sketch: >-
+          Taux = sqrt(x-1)/(x-1) = 1/sqrt(x-1) → +inf. Limite infinie,
+          donc f non derivable en 1. Demi-tangente verticale.
+
+  - id: Prax1b.v2
+    praxeology: Prax1b
+    name: "Non-derivabilite — point anguleux (valeur absolue)"
+    description: >-
+      Montrer que |g(x)| n'est pas derivable en a ou g(a)=0 car les
+      derivees laterales sont differentes (point anguleux).
+    method:
+      - "Reecrire |g(x)| par morceaux selon le signe de g(x)"
+      - "Calculer f'_d(a) et f'_g(a)"
+      - "Constater f'_d(a) != f'_g(a) → point anguleux"
+    variables:
+      function: ["|x|", "|x+1|", "|x^2-4|", "|1-x^2|"]
+      point: ["0", "-1", "2 et -2", "-1"]
+    difficulty: 1
+    frequency: 6
+    sources:
+      - "Manuel V/F 2 p.93"
+      - "Manuel ex.17 corrige (|x^2-4|)"
+      - "Para ex.1d p.110"
+      - "Para ex.12 p.112"
+      - "XY ex.1.4 p.63"
+      - "KB EC6"
+    examples:
+      - title: "Para ex.12 — |1-x^2| en -1"
+        enonce: >-
+          Soit f(x) = |1-x^2|. Montrer qu'au point x0=-1, la courbe
+          admet deux demi-tangentes. Les representer.
+        sketch: >-
+          f'_d(-1) = 2, f'_g(-1) = -2. Point anguleux.
+          Demi-tangentes : y = 2(x+1) et y = -2(x+1).
+
+  # =========================================================================
+  # Prax2 — Calculer f'(a) avec les formules
+  # =========================================================================
+
+  - id: Prax2.v1
+    praxeology: Prax2
+    name: "Derivee par formules — polynome"
+    description: >-
+      Calculer f'(a) pour un polynome en appliquant les formules de
+      derivation (somme, produit par scalaire, x^n).
+    method:
+      - "Appliquer (x^n)' = nx^(n-1) terme par terme"
+      - "Substituer x = a"
+    variables:
+      function: ["x^4-3x^2+5", "x^3-x^2+2x+1", "x^2+x-5"]
+      point: ["1", "0", "general a"]
+    difficulty: 1
+    frequency: 7
+    sources:
+      - "Manuel ex.1 corrige item 1"
+      - "Manuel QCM 3"
+      - "XY ex.1.1 p.63"
+      - "XY ex.3.1 p.63"
+      - "XY ex.6.1 p.64"
+      - "Para ex.16.1 p.112"
+      - "Para ex.9.1-9.2 p.111"
+
+  - id: Prax2.v2
+    praxeology: Prax2
+    name: "Derivee par formules — rationnelle"
+    description: >-
+      Calculer f'(a) pour une fonction rationnelle (quotient de polynomes
+      ou 1/(ax+b)) en appliquant la formule du quotient.
+    method:
+      - "Appliquer (u/v)' = (u'v - uv')/v^2 ou (1/v)' = -v'/v^2"
+      - "Substituer x = a"
+    variables:
+      function: ["4/(2x+3)", "(x-1)/(x+1)", "(3x+5)/(-2x+3)", "x+5+4/(x-1)"]
+      point: ["-1", "-2", "1/3", "a general"]
+    difficulty: 1
+    frequency: 6
+    sources:
+      - "Manuel ex.1 corrige items 2-4"
+      - "XY ex.1.2 p.63"
+      - "XY ex.4.1 p.63"
+      - "XY ex.8.1a p.65"
+      - "Para ex.22.4 p.114"
+      - "Para ex.19.3a p.113"
+
+  - id: Prax2.v3
+    praxeology: Prax2
+    name: "Derivee par formules — racine composee"
+    description: >-
+      Calculer f'(a) pour sqrt(u(x)) en appliquant (sqrt(u))' = u'/(2*sqrt(u)).
+    method:
+      - "Identifier u(x) et calculer u'(x)"
+      - "Appliquer (sqrt(u))' = u'/(2*sqrt(u))"
+      - "Verifier u(a) > 0 (condition d'application)"
+      - "Substituer x = a"
+    variables:
+      function: ["sqrt(4x+5)", "sqrt(1-x^2)", "sqrt(x^2-2x)", "sqrt(x^2-4)+x"]
+      point: ["0", "1/2", "3", "general a"]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "Manuel ex.1 corrige items 6,8"
+      - "XY ex.1.3a p.63"
+      - "Para ex.7.2 p.111"
+      - "XY ex.5.4a p.64"
+      - "XY ex.8.4b p.65"
+
+  - id: Prax2.v4
+    praxeology: Prax2
+    name: "Derivee par formules — produit avec racine"
+    description: >-
+      Calculer f'(a) pour un produit impliquant sqrt (ex: x*sqrt(x),
+      2x*sqrt(x)) en utilisant la regle du produit.
+    method:
+      - "Appliquer (uv)' = u'v + uv'"
+      - "Calculer les derivees de chaque facteur"
+      - "Substituer x = a"
+    variables:
+      function: ["x*sqrt(x)", "2x*sqrt(x)"]
+      point: ["1", "4"]
+    difficulty: 1
+    frequency: 2
+    sources:
+      - "Manuel ex.1 corrige item 7"
+      - "XY ex.7.4b p.65 (produit x^2*f(x))"
+
+  # =========================================================================
+  # Prax3 — Equation de la tangente
+  # =========================================================================
+
+  - id: Prax3.v1
+    praxeology: Prax3
+    name: "Tangente standard — calculer f(a), f'(a), ecrire l'equation"
+    description: >-
+      Determiner l'equation de la tangente a C_f au point d'abscisse a.
+      Exercice direct en 3 etapes.
+    method:
+      - "Calculer f(a)"
+      - "Calculer f'(a) (par definition ou formule)"
+      - "Ecrire y = f'(a)(x-a) + f(a)"
+    variables:
+      function: ["2x^3-4x+3", "(x-1)/(x+1)", "x^3", "sqrt(x+4)", "(3x+1)/(x-1)"]
+      point: ["1", "-2", "-1", "0", "3"]
+    difficulty: 1
+    frequency: 11
+    sources:
+      - "Manuel QCM 2 p.93"
+      - "Manuel ex.4 p.95"
+      - "Manuel ex.5 p.95"
+      - "Manuel ex.6 corrige"
+      - "Para ex.3.1-3.2 p.110"
+      - "Para ex.19.2a p.113"
+      - "Para ex.20.4 p.114"
+      - "Para ex.22.5a p.115"
+      - "XY ex.1.1-1.3a p.63"
+      - "XY ex.8.4c p.65"
+      - "KB EC4"
+    examples:
+      - title: "Para ex.3.1 — Cubique en 1"
+        enonce: >-
+          Soit f(x) = 2x^3 - 4x + 3. Determiner l'equation de la tangente
+          a la courbe au point d'abscisse 1.
+        sketch: >-
+          f(1) = 1, f'(1) = 2 (par definition). T : y = 2x - 1.
+
+  - id: Prax3.v2
+    praxeology: Prax3
+    name: "Tangente depuis donnees graphiques — f(a) et f'(a) donnes"
+    description: >-
+      Ecrire l'equation de la tangente quand f(a) et f'(a) sont
+      donnes directement (lecture graphique ou hypothese).
+    method:
+      - "Lire ou noter f(a) et f'(a)"
+      - "Appliquer y = f'(a)(x-a) + f(a)"
+    variables:
+      point: ["2", "-1", "1", "3"]
+      slope: ["1/2", "-1", "0", "5"]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "Manuel QCM 1 p.93"
+      - "Para ex.7.1 p.111"
+      - "Para ex.9.3-9.4 p.112"
+      - "Para ex.17.2-17.3 p.113"
+
+  # =========================================================================
+  # Prax4a — Tangente parallele a une droite
+  # =========================================================================
+
+  - id: Prax4a.v1
+    praxeology: Prax4a
+    name: "Tangente horizontale — resoudre f'(a) = 0"
+    description: >-
+      Trouver les points ou la tangente est parallele a l'axe Ox
+      (tangente horizontale), i.e. resoudre f'(a) = 0.
+    method:
+      - "Calculer f'(a) en fonction de a"
+      - "Resoudre f'(a) = 0"
+      - "Calculer f(a) pour chaque solution"
+    variables:
+      function: ["5/(2x^2+3)", "x+5+4/(x-1)", "x^2+x-6"]
+      nb_solutions: ["1", "2", "0"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Manuel ex.10 corrige"
+      - "XY ex.5.3 p.64"
+      - "XY ex.8.1b p.65"
+      - "Para ex.20.4 (tangente horizontale en 1 et -1)"
+
+  - id: Prax4a.v2
+    praxeology: Prax4a
+    name: "Tangente parallele a une droite oblique — resoudre f'(a) = m"
+    description: >-
+      Trouver les points ou la tangente est parallele a D: y = mx + p,
+      i.e. resoudre f'(a) = m.
+    method:
+      - "Identifier le coefficient directeur m de D"
+      - "Calculer f'(a) en fonction de a"
+      - "Resoudre f'(a) = m"
+      - "Verifier l'existence de solutions"
+    variables:
+      function: ["x^3", "x^3-x", "(2x+3)^2", "sqrt(x^2-4)+x"]
+      target_slope: ["3", "1", "-1", "sqrt(6)+1"]
+    difficulty: 2
+    frequency: 7
+    sources:
+      - "Manuel QCM 5 p.93"
+      - "Manuel ex.11 p.96"
+      - "Para ex.19.3b p.113"
+      - "Para ex.20.5 p.114"
+      - "Para ex.22.5b p.115"
+      - "XY ex.5.4b p.64"
+      - "XY ex.3.2a p.63"
+
+  - id: Prax4a.v3
+    praxeology: Prax4a
+    name: "Tangentes paralleles entre deux courbes — f'(a) = g'(a)"
+    description: >-
+      Montrer que les tangentes a deux courbes au meme abscisse (ou
+      a des abscisses liees) sont paralleles.
+    method:
+      - "Calculer f'(a) et g'(a)"
+      - "Montrer f'(a) = g'(a) (ou resoudre)"
+      - "Conclure : tangentes paralleles"
+    variables:
+      functions: ["x^3+3x^2-2 et x^3+3x^2+1", "x+1/(x+1) aux points a et -2-a"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Manuel ex.9 corrige"
+      - "Manuel ex.12 corrige"
+      - "Para ex.16.2 p.112"
+      - "XY ex.4.3 p.64"
+
+  # =========================================================================
+  # Prax4b — Tangente perpendiculaire a une droite
+  # =========================================================================
+
+  - id: Prax4b.v1
+    praxeology: Prax4b
+    name: "Tangente perpendiculaire a une droite — f'(a)*m = -1"
+    description: >-
+      Trouver les points ou la tangente est perpendiculaire a une droite
+      D de coefficient directeur m, i.e. resoudre f'(a) * m = -1.
+    method:
+      - "Extraire le coefficient directeur m de D (si ax+by+c=0, m = -a/b)"
+      - "Resoudre f'(a) = -1/m"
+      - "Calculer f(a) et ecrire l'equation de la tangente"
+    variables:
+      function: ["2x^2+x+1", "x+5+4/(x-1)"]
+      target_line: ["x-7y+7=0", "4x+3y-3=0"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Para ex.19.2b p.113"
+      - "XY ex.6.3 p.64"
+      - "XY ex.8.1c p.65"
+      - "Manuel ex.21 corrige (tangente perp a OA)"
+
+  # =========================================================================
+  # Prax5a — Approximation affine directe
+  # =========================================================================
+
+  - id: Prax5a.v1
+    praxeology: Prax5a
+    name: "Approximations affines classiques — formules standard"
+    description: >-
+      Etablir les approximations (1+h)^n ~ 1+nh, sqrt(1+h) ~ 1+h/2,
+      1/(1+h) ~ 1-h pour h voisin de 0.
+    method:
+      - "Identifier f(x) et a tels que l'expression = f(a+h)"
+      - "Calculer f(a) et f'(a)"
+      - "Ecrire f(a+h) ~ f(a) + h*f'(a)"
+    variables:
+      function: ["x^n", "sqrt(x)", "1/x", "x^2", "x^3"]
+      base_point: ["1"]
+    difficulty: 1
+    frequency: 8
+    sources:
+      - "XY ex.2 p.63 (5 sous-questions)"
+      - "Para ex.13.1 p.112"
+      - "Para ex.14.1, 14.3a p.112"
+      - "Para ex.15.1 p.112"
+      - "Para ex.9.7 p.112"
+      - "Manuel ex.15 corrige"
+      - "KB EC5"
+      - "KB Prax5a exemples"
+
+  # =========================================================================
+  # Prax5b — Estimation numerique par approximation affine
+  # =========================================================================
+
+  - id: Prax5b.v1
+    praxeology: Prax5b
+    name: "Estimation numerique — appliquer l'approximation a une valeur"
+    description: >-
+      Calculer une valeur approchee d'un nombre (sqrt(1.001), (3.01)^2,
+      1/1.002...) en identifiant f, a et h puis en appliquant l'approximation.
+    method:
+      - "Ecrire le nombre sous la forme f(a+h) avec a simple et h petit"
+      - "Appliquer f(a+h) ~ f(a) + h*f'(a)"
+      - "Calculer la valeur approchee"
+    variables:
+      number_to_estimate: ["sqrt(1.001)", "(3.01)^2", "1/1.002", "sqrt(25.0002)"]
+      decomposition: ["sqrt(1+0.001)", "(3+0.01)^2", "1/(1+0.002)", "sqrt(25+0.0002)"]
+    difficulty: 1
+    frequency: 6
+    sources:
+      - "Para ex.13.2 p.112"
+      - "Para ex.14.2, 14.3b p.112"
+      - "Para ex.15.2 p.112"
+      - "Manuel ex.14-15 p.97"
+      - "XY ex.7.4a p.65"
+      - "KB Prax5b exemples"
+
+  # =========================================================================
+  # Prax7 — Derivabilite a droite et a gauche
+  # =========================================================================
+
+  - id: Prax7.v1
+    praxeology: Prax7
+    name: "Derivees laterales d'une valeur absolue — point anguleux"
+    description: >-
+      Etudier la derivabilite de |g(x)| en a ou g(a)=0. Calculer
+      f'_d(a) et f'_g(a), conclure sur le point anguleux.
+    method:
+      - "Reecrire |g(x)| par morceaux"
+      - "Calculer f'_d(a) = g'(a) et f'_g(a) = -g'(a)"
+      - "Si g'(a) != 0 : f'_d != f'_g → point anguleux"
+      - "Ecrire les equations des deux demi-tangentes"
+    variables:
+      function: ["|x|", "|x+1|", "|x^2-4|", "|1-x^2|", "x^2+2|x|"]
+      point: ["0", "-1", "2", "-1", "0"]
+    difficulty: 2
+    frequency: 8
+    sources:
+      - "Manuel V/F 2 p.93"
+      - "Manuel ex.17 corrige"
+      - "Para ex.1d p.110"
+      - "Para ex.4b p.110"
+      - "Para ex.8 p.111"
+      - "Para ex.12 p.112"
+      - "Para ex.20.1-20.3 p.113"
+      - "XY ex.1.4 p.63"
+
+  - id: Prax7.v2
+    praxeology: Prax7
+    name: "Derivees laterales d'une fonction par morceaux — raccordement"
+    description: >-
+      Etudier la derivabilite d'une fonction par morceaux en un point de
+      raccordement. Verifier continuite d'abord, puis comparer f'_d et f'_g.
+    method:
+      - "Verifier la continuite en a (prerequis obligatoire)"
+      - "Calculer f'_g(a) sur le morceau gauche"
+      - "Calculer f'_d(a) sur le morceau droit"
+      - "Si f'_d = f'_g : derivable. Sinon : point anguleux ou non derivable"
+    variables:
+      branches: ["polynome/polynome", "polynome/racine", "racine/polynome", "3 morceaux"]
+      point: ["0", "1", "2", "-1"]
+    difficulty: 2
+    frequency: 10
+    sources:
+      - "Manuel ex.2 p.95"
+      - "Manuel ex.16 corrige"
+      - "Manuel ex.18 corrige"
+      - "Para ex.4a p.110"
+      - "Para ex.19.1 p.113"
+      - "Para ex.21.2 p.114"
+      - "Para ex.22.3 p.114"
+      - "XY ex.5.2 p.64"
+      - "XY ex.8.3b p.65"
+      - "XY ex.8.4a p.65"
+    examples:
+      - title: "XY ex.5 — Piecewise avec demi-tangente verticale"
+        enonce: >-
+          f(x) = {x^2+x-6 si x<=2, sqrt(x^2-4)+x-2 si x>2}.
+          Etudier la derivabilite de f en 2.
+        sketch: >-
+          f continue en 2 (les deux limites = 0). f'_g(2) = 5.
+          f'_d(2) = lim +inf (taux tend vers l'infini). Non derivable.
+          Demi-tangente gauche de pente 5, demi-tangente verticale a droite.
+
+  - id: Prax7.v3
+    praxeology: Prax7
+    name: "Demi-tangente verticale — limite infinie du taux de variation"
+    description: >-
+      Montrer qu'une fonction admet une demi-tangente verticale en a
+      (le taux de variation tend vers +inf ou -inf d'un cote).
+    method:
+      - "Calculer la limite laterale du taux de variation"
+      - "Constater que la limite est +inf ou -inf"
+      - "Conclure : demi-tangente verticale (equation x = a)"
+    variables:
+      function: ["sqrt(x-1)", "sqrt(2x-6)", "(3/5)*sqrt(25-x^2)"]
+      point: ["1", "3", "5 et -5"]
+    difficulty: 2
+    frequency: 5
+    sources:
+      - "Manuel ex.18 corrige"
+      - "Para ex.5 p.110"
+      - "Para ex.6 p.110"
+      - "Para ex.24.2 p.115"
+      - "XY ex.1.3b p.63"
+
+  # =========================================================================
+  # Prax8 — Derivabilite d'une fonction par morceaux (avec parametre)
+  # =========================================================================
+
+  - id: Prax8.v1
+    praxeology: Prax8
+    name: "Piecewise avec parametre — trouver m pour continuite/derivabilite"
+    description: >-
+      Determiner un parametre m pour qu'une fonction par morceaux soit
+      continue (et eventuellement derivable) en un point de raccordement.
+    method:
+      - "Ecrire la condition de continuite : lim gauche = lim droite = f(a)"
+      - "Resoudre en m"
+      - "Verifier la derivabilite avec la valeur trouvee"
+    variables:
+      parameter: ["m", "a et b", "n"]
+      nb_branches: ["2", "3"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Para ex.21.1 p.114"
+      - "Para ex.22.1 p.114"
+      - "Para ex.23.4 p.115"
+      - "XY ex.8.3c p.65"
+
+  # =========================================================================
+  # Prax9 — Calcul de limite par nombre derive
+  # =========================================================================
+
+  - id: Prax9.v1
+    praxeology: Prax9
+    name: "Reconnaître un taux de variation — forme standard"
+    description: >-
+      Calculer lim (g(x)-g(a))/(x-a) en reconnaissant g'(a).
+      Forme standard ou a mettre en forme standard.
+    method:
+      - "Identifier g et a tels que l'expression = taux de variation de g en a"
+      - "Verifier que g est derivable en a"
+      - "Conclure : la limite vaut g'(a)"
+    variables:
+      expression: ["(x^3-1)/(x-1)", "(sqrt(x)-1)/(x-1)", "(x^2-16)/(x+4)", "((x+1)^2006-1)/x"]
+      function_g: ["x^3", "sqrt(x)", "x^2", "(x+1)^2006"]
+      point_a: ["1", "1", "-4", "0"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Manuel ex.3 p.95 (enonce + corrige)"
+      - "Para ex.23.3 p.115"
+      - "KB EC8"
+      - "KB Prax9 exemples"
+    examples:
+      - title: "Manuel ex.3 corrige — Quatre limites"
+        enonce: >-
+          Calculer les limites suivantes en utilisant la notion de nombre derive :
+          a) lim_{x→-4} (x^2-16)/(x+4)
+          b) lim_{x→-4} (1/(x+5)-1)/(x+4)
+          c) lim_{x→1} (sqrt(x)-1)/(x-1)
+          d) lim_{x→0} ((x+1)^{2006}-1)/x
+        sketch: >-
+          a) g(x)=x^2, g'(-4)=-8.  b) g(x)=1/(x+5), g'(-4)=-1.
+          c) g(x)=sqrt(x), g'(1)=1/2.  d) g(x)=(x+1)^{2006}, g'(0)=2006.
+
+  # =========================================================================
+  # Prax10 — Determiner des coefficients (probleme inverse)
+  # =========================================================================
+
+  - id: Prax10.v1
+    praxeology: Prax10
+    name: "Polynome avec conditions point + tangente"
+    description: >-
+      Determiner a, b, c d'un polynome f(x)=ax^2+bx+c sachant que la
+      courbe passe par des points donnes et a une tangente de pente donnee.
+    method:
+      - "Traduire chaque condition en equation : f(x_i)=y_i, f'(x_j)=m_j"
+      - "Resoudre le systeme lineaire"
+    variables:
+      degree: ["2", "3"]
+      nb_conditions: ["3", "4"]
+      conditions: ["passage par A et B + pente tangente en A", "passage par A + tangente parallele a D"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Manuel ex.7 corrige"
+      - "Para ex.10 p.112"
+      - "XY ex.6.2 p.64"
+      - "KB EC canonique Prax10"
+    examples:
+      - title: "Para ex.10 — Quadratique avec 3 conditions"
+        enonce: >-
+          Soit f(x) = ax^2+bx+c. La courbe passe par A(1,4) et B(-1,6),
+          et la tangente en A a pour coefficient directeur 3. Determiner a, b, c.
+        sketch: >-
+          Systeme : a+b+c=4, a-b+c=6, 2a+b=3. Solution : a=2, b=-1, c=3.
+
+  - id: Prax10.v2
+    praxeology: Prax10
+    name: "Parametre d'une fonction rationnelle — condition tangente"
+    description: >-
+      Determiner un parametre m dans f_m(x) pour que la tangente en un
+      point donne ait un coefficient directeur fixe.
+    method:
+      - "Calculer f'(x0) en fonction de m"
+      - "Poser f'(x0) = valeur cible"
+      - "Resoudre en m"
+    variables:
+      function: ["(mx+1)/((2-m)x+3)", "ax+b/(x+1)"]
+      target_slope: ["-2", "3/4"]
+    difficulty: 2
+    frequency: 2
+    sources:
+      - "Para ex.11 p.112"
+      - "XY ex.4.2 p.64"
+
+  - id: Prax10.v3
+    praxeology: Prax10
+    name: "Tangente passant par un point exterieur"
+    description: >-
+      Trouver les points de la courbe dont la tangente passe par un
+      point exterieur donne B.
+    method:
+      - "Ecrire l'equation de la tangente en x0 : y = f'(x0)(x-x0)+f(x0)"
+      - "Imposer que B(x_B, y_B) est sur la tangente"
+      - "Resoudre l'equation en x0"
+    variables:
+      external_point: ["(0,-1)", "(0,0)", "(1,0)"]
+    difficulty: 2
+    frequency: 1
+    sources:
+      - "Para ex.21.3 p.114"
+
+  # =========================================================================
+  # Prax11 — Tangente commune a deux courbes
+  # =========================================================================
+
+  - id: Prax11.v1
+    praxeology: Prax11
+    name: "Tangente commune — meme point + meme pente"
+    description: >-
+      Montrer que deux courbes admettent une tangente commune en un point
+      d'intersection. Condition : f(a)=g(a) ET f'(a)=g'(a).
+    method:
+      - "Trouver les points d'intersection : resoudre f(x)=g(x)"
+      - "Pour chaque point commun, verifier f'(a) = g'(a)"
+      - "Ecrire l'equation de la tangente commune"
+      - "Optionnel : montrer que les courbes sont de part et d'autre de la tangente"
+    variables:
+      functions: ["x^2+2x-1 et -x^2-6x-9", "deux paraboles"]
+    difficulty: 2
+    frequency: 1
+    sources:
+      - "Manuel ex.13 corrige"
+
+  # =========================================================================
+  # Prax12 — Tangentes perpendiculaires entre deux courbes
+  # =========================================================================
+
+  - id: Prax12.v1
+    praxeology: Prax12
+    name: "Tangentes perpendiculaires aux points d'intersection"
+    description: >-
+      Montrer que les tangentes a deux courbes en leurs points d'intersection
+      sont perpendiculaires : f'(a) * g'(a) = -1.
+    method:
+      - "Trouver les points d'intersection"
+      - "Calculer f'(a) et g'(a) en chaque point"
+      - "Verifier f'(a) * g'(a) = -1"
+    variables:
+      functions: ["y=x^2 et y=-x^2/3+1", "deux paraboles inversees"]
+    difficulty: 2
+    frequency: 1
+    sources:
+      - "Manuel ex.8 corrige"
+
+  # =========================================================================
+  # Prax13 — Lecture graphique du nombre derive
+  # =========================================================================
+
+  - id: Prax13.v1
+    praxeology: Prax13
+    name: "Lecture graphique — lire f(a) et f'(a) depuis la courbe"
+    description: >-
+      A partir d'un graphe, determiner f(a) (ordonnee du point) et f'(a)
+      (pente de la tangente) puis ecrire l'equation de la tangente.
+    method:
+      - "Lire f(a) sur la courbe (ordonnee du point d'abscisse a)"
+      - "Tracer (ou identifier) la tangente en a"
+      - "Mesurer la pente : prendre deux points sur la tangente, calculer Dy/Dx"
+      - "Ecrire l'equation y = f'(a)(x-a) + f(a)"
+    variables:
+      points_to_read: ["1 point", "plusieurs points", "points avec tangente horizontale"]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "Manuel QCM 1, QCM 4 p.93"
+      - "Manuel ex.20 p.98"
+      - "Para ex.17 p.113"
+      - "XY ex.7 p.64"
+
+  - id: Prax13.v2
+    praxeology: Prax13
+    name: "Lecture graphique complete — limites, derivees, approximation"
+    description: >-
+      Exercice de synthese graphique : lire limites aux bornes, derivees
+      en plusieurs points, demi-tangentes, puis calculer une approximation
+      affine ou la derivee d'un produit a partir des valeurs lues.
+    method:
+      - "Lire les limites (asymptotes horizontales, verticales, obliques)"
+      - "Lire f'(a) en plusieurs points (tangentes horizontales, obliques)"
+      - "Identifier les points de non-derivabilite (demi-tangentes)"
+      - "Appliquer l'approximation affine ou les formules d'operations"
+    variables:
+      questions: ["limites + derivees + approximation", "limites + derivees + produit"]
+    difficulty: 2
+    frequency: 1
+    sources:
+      - "XY ex.7 p.64-65"
