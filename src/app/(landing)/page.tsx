@@ -1,11 +1,14 @@
 import Link from 'next/link'
 import {
+  ArrowRight,
   BookOpen,
   Brain,
-  ArrowRight,
+  FileText,
   GraduationCap,
   QrCode,
+  ScanLine,
   Sparkles,
+  Zap,
 } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
@@ -34,7 +37,7 @@ const FEATURES = [
     icon: QrCode,
     title: 'Scanne ton livret',
     description:
-      'Un QR code sur chaque exercice. Scanne-le pour acceder au contenu augmente : corrections, QCM et explications.',
+      'Chaque exercice a un QR code. Scanne-le pour acceder a la correction, aux QCM et aux explications.',
   },
   {
     icon: Brain,
@@ -42,12 +45,39 @@ const FEATURES = [
     description:
       'Prends en photo ton travail et recois un feedback personnalise. L\'IA analyse ta demarche et te guide.',
   },
+  {
+    icon: Zap,
+    title: 'QCM interactifs',
+    description:
+      'Teste tes connaissances avec des QCM chronomètres. Chaque question a une explication detaillee.',
+  },
+  {
+    icon: FileText,
+    title: 'Cours et resumes',
+    description:
+      'Retrouve l\'essentiel de chaque chapitre en un coup d\'oeil. Definitions, theoremes et exemples cles.',
+  },
 ]
 
-const STATS = [
-  { value: '3', label: 'modules', icon: BookOpen },
-  { value: '90+', label: 'activités', icon: Brain },
-  { value: 'IA', label: 'correction', icon: Sparkles },
+const HOW_IT_WORKS = [
+  {
+    step: '1',
+    icon: BookOpen,
+    title: 'Ouvre ton livret',
+    description: 'Travaille l\'exercice sur papier comme d\'habitude.',
+  },
+  {
+    step: '2',
+    icon: ScanLine,
+    title: 'Scanne le QR code',
+    description: 'Utilise l\'app pour scanner le QR a cote de l\'exercice.',
+  },
+  {
+    step: '3',
+    icon: Sparkles,
+    title: 'Obtiens ton feedback',
+    description: 'Correction IA, explications et QCM pour verifier ta comprehension.',
+  },
 ]
 
 export default function LandingPage() {
@@ -68,7 +98,7 @@ export default function LandingPage() {
           {MATH_FORMULAS.map((formula) => (
             <span
               key={formula.text}
-              className={`absolute font-serif text-foreground/[0.06] ${formula.className}`}
+              className={`absolute font-serif text-foreground/[0.08] ${formula.className}`}
             >
               {formula.text}
             </span>
@@ -82,24 +112,24 @@ export default function LandingPage() {
             className="mb-8 border-primary/20 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary"
           >
             <GraduationCap className="mr-1.5 h-3.5 w-3.5" aria-hidden="true" />
-            Parcours 1ère TC disponible
+            6 livrets disponibles — 3eme Math
           </Badge>
 
           <h1 className="mx-auto max-w-3xl text-balance font-serif text-4xl font-bold leading-[1.15] tracking-tight md:text-5xl lg:text-6xl">
-            Augmente ton livret de maths{' '}
-            <span className="text-primary">avec l&apos;IA</span>
+            Ton livret de maths,{' '}
+            <span className="text-primary">augmente par l&apos;IA</span>
           </h1>
 
           <p className="mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Scanne le QR code de ton livret, obtiens une correction IA
-            personnalisée et suis ta progression.
+            Travaille sur ton livret papier, scanne le QR code
+            et obtiens une correction IA personnalisee.
             Gratuit et sans pub.
           </p>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">
             <Button size="lg" className="gap-2 px-6 text-base" asChild>
               <Link href="/app/mes-livrets">
-                Scanne ton livret
+                Voir les livrets
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </Button>
@@ -110,21 +140,37 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── Stats strip ─── */}
+      {/* ─── How it works ─── */}
       <section className="border-y bg-card">
-        <div className="mx-auto grid max-w-3xl grid-cols-3 divide-x px-4 py-10 text-center">
-          {STATS.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center gap-2">
-              <stat.icon
-                className="h-5 w-5 text-primary/60"
-                aria-hidden="true"
-              />
-              <p className="font-serif text-3xl font-bold tabular-nums text-primary md:text-4xl">
-                {stat.value}
-              </p>
-              <p className="text-sm font-medium text-muted-foreground">{stat.label}</p>
-            </div>
-          ))}
+        <div className="mx-auto w-full max-w-5xl px-4 py-16 md:px-6">
+          <h2 className="mb-10 text-center font-serif text-2xl font-semibold md:text-3xl">
+            Comment ca marche ?
+          </h2>
+          <div className="mx-auto grid max-w-3xl gap-8 md:grid-cols-3">
+            {HOW_IT_WORKS.map((item, i) => (
+              <div key={item.step} className="flex flex-col items-center text-center">
+                <div className="relative mb-4">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
+                    <item.icon className="h-8 w-8 text-primary" aria-hidden="true" />
+                  </div>
+                  <span className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+                    {item.step}
+                  </span>
+                </div>
+                <h3 className="font-serif text-lg font-semibold">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {item.description}
+                </p>
+                {/* Connector arrow (hidden on last item and mobile) */}
+                {i < HOW_IT_WORKS.length - 1 && (
+                  <ArrowRight
+                    className="mt-4 hidden h-5 w-5 text-muted-foreground/30 md:absolute md:right-0 md:top-1/2 md:mt-0 md:block md:-translate-y-1/2 md:translate-x-1/2"
+                    aria-hidden="true"
+                  />
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -132,14 +178,14 @@ export default function LandingPage() {
       <section className="mx-auto w-full max-w-5xl px-4 py-24 md:px-6">
         <div className="mb-14 text-center">
           <h2 className="text-balance font-serif text-3xl font-semibold md:text-4xl">
-            Le livret papier, version augmentée
+            Le livret papier, version augmentee
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-lg text-muted-foreground">
             Ton livret reste au centre. L&apos;app ajoute la correction IA,
-            les QCM interactifs et le suivi de progression.
+            les QCM interactifs et les resumes de cours.
           </p>
         </div>
-        <div className="mx-auto grid max-w-3xl gap-6 md:grid-cols-2">
+        <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2">
           {FEATURES.map((feature) => (
             <Card
               key={feature.title}
@@ -159,6 +205,36 @@ export default function LandingPage() {
               </CardContent>
             </Card>
           ))}
+        </div>
+      </section>
+
+      {/* ─── For who ─── */}
+      <section className="border-y bg-muted/30">
+        <div className="mx-auto w-full max-w-5xl px-4 py-16 md:px-6">
+          <h2 className="mb-10 text-center font-serif text-2xl font-semibold md:text-3xl">
+            Concu pour le lycee tunisien
+          </h2>
+          <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-3">
+            {[
+              { label: '3eme Math', detail: 'Nombre derive, Fonction derivee', color: '#3B82F6' },
+              { label: '2nde Math', detail: 'Bientot disponible', color: '#8B5CF6' },
+              { label: '1ere TC', detail: 'Bientot disponible', color: '#F59E0B' },
+            ].map((level) => (
+              <Card key={level.label} className="text-center">
+                <CardContent className="py-6">
+                  <span
+                    className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-white"
+                    style={{ backgroundColor: level.color }}
+                    aria-hidden="true"
+                  >
+                    {level.label.charAt(0)}
+                  </span>
+                  <p className="font-semibold">{level.label}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{level.detail}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -186,7 +262,7 @@ export default function LandingPage() {
             </div>
 
             <h2 className="relative text-balance font-serif text-2xl font-semibold md:text-3xl">
-              Prêt à augmenter ton livret ?
+              Pret a augmenter ton livret ?
             </h2>
             <p className="relative max-w-md text-balance text-primary-foreground/80">
               Scanne le QR code de ton livret pour commencer.
@@ -203,9 +279,9 @@ export default function LandingPage() {
                 href="/signup"
                 className="underline underline-offset-4 transition-colors hover:text-primary-foreground/80"
               >
-                Crée un compte
+                Cree un compte
               </Link>{' '}
-              pour sauvegarder ta progression
+              pour utiliser la correction IA
             </p>
           </CardContent>
         </Card>
@@ -221,7 +297,8 @@ export default function LandingPage() {
                 Aylan
               </span>
               <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
-                Augmente ton livret de maths avec la correction IA, les QCM interactifs et le suivi de progression.
+                Augmente ton livret de maths avec la correction IA
+                et les QCM interactifs. Concu pour le lycee tunisien.
               </p>
             </div>
 
@@ -233,7 +310,7 @@ export default function LandingPage() {
                   Mes livrets
                 </Link>
                 <Link href="/signup" className="transition-colors hover:text-foreground">
-                  Créer un compte
+                  Creer un compte
                 </Link>
               </div>
             </div>
@@ -246,15 +323,15 @@ export default function LandingPage() {
                   Conditions d&apos;utilisation
                 </Link>
                 <Link href="/privacy" className="transition-colors hover:text-foreground">
-                  Politique de confidentialité
+                  Politique de confidentialite
                 </Link>
               </div>
             </div>
           </div>
 
           <div className="mt-10 flex flex-col items-center gap-2 border-t pt-6 text-xs text-muted-foreground sm:flex-row sm:justify-between">
-            <span>&copy; {new Date().getFullYear()} Aylan. Tous droits réservés.</span>
-            <span>Conçu pour les élèves du lycée tunisien</span>
+            <span>&copy; {new Date().getFullYear()} Aylan. Tous droits reserves.</span>
+            <span>Concu pour les eleves du lycee tunisien</span>
           </div>
         </div>
       </footer>
