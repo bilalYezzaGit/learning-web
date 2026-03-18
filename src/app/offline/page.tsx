@@ -7,7 +7,7 @@
  * Registered as the PWA offline fallback via next-pwa configuration.
  */
 
-import { WifiOff } from 'lucide-react'
+import { BookOpen, WifiOff } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -22,11 +22,17 @@ export default function OfflinePage() {
           </div>
           <h1 className="font-serif text-2xl font-semibold">Hors connexion</h1>
           <p className="mt-2 text-muted-foreground">
-            Vous n&apos;êtes pas connecté à Internet. Vérifiez votre connexion et réessayez.
+            Pas de connexion Internet pour le moment.
           </p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Les pages déjà visitées restent disponibles hors ligne.
-          </p>
+
+          <div className="mx-auto mt-6 flex items-start gap-3 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-left">
+            <BookOpen className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+            <p className="text-sm text-muted-foreground">
+              Ton livret papier marche toujours, meme sans Internet.
+              Continue tes exercices et scanne-les quand tu seras reconnecte.
+            </p>
+          </div>
+
           <Button
             className="mt-6"
             onClick={() => {
@@ -35,7 +41,7 @@ export default function OfflinePage() {
               }
             }}
           >
-            Réessayer
+            Reessayer
           </Button>
         </CardContent>
       </Card>

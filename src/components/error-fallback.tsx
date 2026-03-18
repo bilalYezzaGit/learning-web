@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import { AlertTriangle } from 'lucide-react'
+
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { logError } from '@/lib/services/error-logger'
@@ -41,10 +43,10 @@ export function ErrorFallback({
     <div className={`flex flex-col items-center justify-center p-6 ${fullScreen ? 'bg-muted min-h-svh' : 'min-h-[60vh]'}`}>
       <Card className="mx-auto w-full max-w-md text-center">
         <CardContent className="space-y-6 py-12">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-destructive/10">
+            <AlertTriangle className="h-8 w-8 text-destructive" aria-hidden="true" />
+          </div>
           <div className="space-y-2">
-            <p className={`font-serif font-bold text-destructive ${fullScreen ? 'text-6xl' : 'text-5xl'}`}>
-              Oups
-            </p>
             <h1 className="text-xl font-semibold">{heading}</h1>
             <p className="text-sm text-muted-foreground">{message}</p>
           </div>
