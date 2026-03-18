@@ -24,6 +24,33 @@ $$g(x) = \begin{cases} x^2 \sin\!\left(\dfrac{1}{x}\right) & \text{si } x \neq 0
 **a)** Montrer que $g$ est derivable en $0$ et calculer $g'(0)$.
 
 **3)** Comparer les deux situations : pourquoi $x^2$ « regularise » l'oscillation alors que $x$ ne le fait pas ?
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 5),
+    x-label: $x$, y-label: $y$,
+    x-tick-step: 0.5, y-tick-step: 0.5,
+    x-min: -1, x-max: 1, y-min: -1, y-max: 1,
+    {
+      // x*sin(1/x) — oscillates wildly near 0
+      plot.add(domain: (0.05, 1), x => x * calc.sin(1/x),
+        style: (stroke: 1.5pt + blue), label: $x sin(1\/x)$, samples: 500)
+      plot.add(domain: (-1, -0.05), x => x * calc.sin(1/x),
+        style: (stroke: 1.5pt + blue), samples: 500)
+      // Envelope |x|
+      plot.add(domain: (-1, 1), x => calc.abs(x),
+        style: (stroke: (dash: "dashed", paint: gray)))
+      plot.add(domain: (-1, 1), x => -calc.abs(x),
+        style: (stroke: (dash: "dashed", paint: gray)))
+    },
+  )
+})
+```
+
 :::
 
 :::solution

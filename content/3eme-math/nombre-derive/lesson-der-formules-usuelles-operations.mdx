@@ -12,14 +12,22 @@ praxeologies: [Prax2]
 :::theorem[Nombres derives des fonctions usuelles (T4)]
 Soit $a$ un reel du domaine de derivabilite de $f$. On a :
 
-| Fonction $f(x)$ | Nombre derive $f'(a)$ | Condition |
-|---|---|---|
-| $c$ (constante) | $0$ | |
-| $\alpha x + \beta$ | $\alpha$ | |
-| $x^n$ ($n \in \mathbb{N}^*$) | $na^{n-1}$ | |
-| $\dfrac{1}{\alpha x + \beta}$ | $\dfrac{-\alpha}{(\alpha a + \beta)^2}$ | $\alpha a + \beta \neq 0$ |
-| $\sqrt{x + \alpha}$ | $\dfrac{1}{2\sqrt{a + \alpha}}$ | $a + \alpha > 0$ |
-| $\dfrac{\alpha x + \beta}{\lambda x + \gamma}$ | $\dfrac{\alpha \gamma - \beta \lambda}{(\lambda a + \gamma)^2}$ | $\lambda a + \gamma \neq 0$ |
+```typst
+#table(
+  columns: (auto, auto, auto),
+  inset: 8pt,
+  align: (left, center, center),
+  table.header(
+    [*Fonction $f$*], [*Domaine*], [*$f'(a)$*],
+  ),
+  [$c$ (constante)], [$RR$], [$0$],
+  [$a x + b$], [$RR$], [$a$],
+  [$x^n$ ($n in NN^*$)], [$RR$], [$n a^(n-1)$],
+  [$display(1/(alpha x + beta))$], [$alpha x + beta != 0$], [$display((-alpha)/(alpha a + beta)^2)$],
+  [$sqrt(x + alpha)$], [$x + alpha > 0$], [$display(1/(2 sqrt(a + alpha)))$],
+  [$display((alpha x + beta)/(lambda x + gamma))$], [$lambda x + gamma != 0$], [$display((alpha gamma - beta lambda)/(lambda a + gamma)^2)$],
+)
+```
 :::
 
 :::example[Nombre derive de $f(x) = x^4$ en $a = 2$]

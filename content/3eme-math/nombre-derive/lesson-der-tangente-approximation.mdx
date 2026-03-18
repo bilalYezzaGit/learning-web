@@ -25,6 +25,28 @@ Soit $f$ une fonction derivable en $a$. L'equation de la tangente a la courbe $C
 $$y = f'(a)(x - a) + f(a)$$
 :::
 
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$, y-label: $y$,
+    x-tick-step: 1, y-tick-step: 1,
+    x-min: -1, x-max: 3, y-min: -1.5, y-max: 5,
+    {
+      // Parabole f(x) = x^2
+      plot.add(domain: (-0.8, 2.5), x => calc.pow(x, 2),
+        style: (stroke: 2pt + blue), label: $C_f : y = x^2$)
+      // Tangente en a=1 : y = 2x - 1
+      plot.add(domain: (-0.5, 2.8), x => 2*x - 1,
+        style: (stroke: 1.5pt + red), label: $T : y = 2x - 1$)
+    },
+  )
+})
+```
+
 :::example[Tangente a $y = x^2$ en $a = 1$]
 On a $f(x) = x^2$, donc $f(1) = 1$ et $f'(1) = 2$ (calcule precedemment).
 

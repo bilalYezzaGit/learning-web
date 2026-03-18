@@ -22,6 +22,34 @@ Soit $f(x) = x^3 + x - 3$.
 **5)** Ecrire l'equation de la tangente $T_1$ au point d'abscisse $x_1$, puis determiner $x_2$.
 
 **6)** Comparer les valeurs $x_0$, $x_1$, $x_2$ avec la valeur exacte $\alpha \approx 1{,}2134$. Commenter la convergence.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $x$, y-label: $y$,
+    x-tick-step: 0.5, y-tick-step: 2,
+    x-min: 0.5, x-max: 2.5, y-min: -2, y-max: 8,
+    {
+      // f(x) = x^3 + x - 3
+      plot.add(domain: (0.5, 2.2), x => calc.pow(x, 3) + x - 3,
+        style: (stroke: 2pt + blue), label: $f(x) = x^3 + x - 3$)
+      // Tangent at x0=1: y = 4x - 5
+      plot.add(domain: (0.8, 1.8), x => 4*x - 5,
+        style: (stroke: 1.5pt + red))
+      // Tangent at x1=1.25: y ≈ 5.6875(x-1.25) + 0.203
+      plot.add(domain: (1.0, 1.5), x => 5.6875*(x - 1.25) + 0.203125,
+        style: (stroke: 1.5pt + orange))
+      // x-axis
+      plot.add-hline(0, style: (stroke: 0.5pt + black))
+    },
+  )
+})
+```
+
 :::
 
 :::solution
@@ -83,11 +111,18 @@ D'ou $x_2 = \dfrac{17}{14} \approx 1{,}2143$.
 
 **6)** Comparaison avec $\alpha \approx 1{,}2134$.
 
-| Iteration | Valeur | Erreur approximative |
-|-----------|--------|---------------------|
-| $x_0$ | $1$ | $0{,}213$ |
-| $x_1$ | $1{,}25$ | $0{,}037$ |
-| $x_2$ | $1{,}2143$ | $0{,}0009$ |
+```typst
+#table(
+  columns: (auto, auto, auto),
+  align: (center, center, center),
+  table.header(
+    [*Iteration*], [*Valeur*], [*Erreur approximative*],
+  ),
+  [$x_0$], [$1$], [$0","213$],
+  [$x_1$], [$1","25$], [$0","037$],
+  [$x_2$], [$1","2143$], [$0","0009$],
+)
+```
 
 La convergence est **tres rapide** : l'erreur est divisee par environ $40$ a chaque etape.
 

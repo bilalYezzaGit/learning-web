@@ -11,6 +11,61 @@ praxeologies: [Prax13]
 :::enonce
 La courbe ci-dessous represente une fonction $f$ definie et derivable sur $[-2 ; 4]$ dans un repere $(O, \vec{i}, \vec{j})$.
 
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+
+#canvas({
+  import draw: *
+
+  // Axes
+  line((-2.8, 0), (4.8, 0), stroke: 0.8pt, mark: (end: ">", fill: black))
+  line((0, -1), (0, 2.5), stroke: 0.8pt, mark: (end: ">", fill: black))
+  content((4.6, -0.3), $x$)
+  content((-0.3, 2.3), $y$)
+  content((-0.3, -0.3), $O$)
+
+  // Graduations x
+  for x in (-2, -1, 1, 2, 3, 4) {
+    line((x, -0.1), (x, 0.1), stroke: 0.5pt)
+    content((x, -0.35), text(size: 8pt, str(x)))
+  }
+  // Graduations y
+  for y in (-1, 1, 2) {
+    line((-0.1, y), (0.1, y), stroke: 0.5pt)
+    content((-0.35, y), text(size: 8pt, str(y)))
+  }
+
+  // Courbe passant par A(-1,1), B(1,0), C(3,1)
+  // Descend de (-2, 2) vers B(1,0) en passant par A(-1,1), puis remonte vers C(3,1), puis redescend
+  bezier((-2, 2), (-1, 1), (-1.6, 1.8), stroke: 2pt + blue)
+  bezier((-1, 1), (1, 0), (0, 0.2), stroke: 2pt + blue)
+  bezier((1, 0), (3, 1), (2, 0), stroke: 2pt + blue)
+  bezier((3, 1), (4.2, 0.5), (3.8, 1), stroke: 2pt + blue)
+
+  // Tangente en A(-1,1) : pente -1, y = -(x+1)+1 = -x
+  line((-2.2, 2.2), (0.5, -0.5), stroke: (dash: "dashed", paint: red, thickness: 1.5pt))
+
+  // Tangente en B(1,0) : horizontale
+  line((-0.5, 0), (2.5, 0), stroke: (dash: "dashed", paint: red, thickness: 1.5pt))
+
+  // Tangente en C(3,1) : horizontale
+  line((1.5, 1), (4.5, 1), stroke: (dash: "dashed", paint: red, thickness: 1.5pt))
+
+  // Points
+  circle((-1, 1), radius: 0.08, fill: red, stroke: red)
+  content((-1.4, 1.4), text(fill: red, $A$))
+
+  circle((1, 0), radius: 0.08, fill: red, stroke: red)
+  content((1.3, -0.35), text(fill: red, $B$))
+
+  circle((3, 1), radius: 0.08, fill: red, stroke: red)
+  content((3.3, 1.35), text(fill: red, $C$))
+
+  // Label courbe
+  content((-2.2, 2.3), text(fill: blue, $C_f$))
+})
+```
+
 On donne les informations suivantes :
 
 - La courbe passe par le point $A(-1, 1)$ et la tangente en $A$ a pour coefficient directeur $-1$.

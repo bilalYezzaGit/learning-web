@@ -20,6 +20,29 @@ $$d(t) = t^3 - 6t^2 + 9t \quad \text{(en metres)}$$
 **3)** Ecrire l'approximation affine de $d(2 + h)$ pour $h$ voisin de $0$. En deduire une estimation de $d(2{,}01)$.
 
 **4)** Interpreter le signe de $v(t)$ en termes de mouvement du mobile.
+
+```typst
+#import "@preview/cetz:0.3.4": canvas, draw
+#import "@preview/cetz-plot:0.1.1": plot
+
+#canvas({
+  plot.plot(
+    size: (8, 6),
+    x-label: $t$, y-label: $d(t)$,
+    x-tick-step: 1, y-tick-step: 2,
+    x-min: -0.5, x-max: 5, y-min: -2, y-max: 10,
+    {
+      // Position d(t) = t^3 - 6t^2 + 9t
+      plot.add(domain: (0, 4.5), t => calc.pow(t, 3) - 6*calc.pow(t, 2) + 9*t,
+        style: (stroke: 2pt + blue), label: $d(t)$)
+      // Tangent at t=2: y = -3(t-2) + 2 = -3t + 8
+      plot.add(domain: (0.5, 3.5), t => -3*t + 8,
+        style: (stroke: 1.5pt + red), label: $v(2) = -3$)
+    },
+  )
+})
+```
+
 :::
 
 :::solution

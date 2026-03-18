@@ -18,13 +18,21 @@ $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a} = \lim_{h \to 0} \frac{f(a + 
 ### Derivees des fonctions usuelles
 
 :::property[Table des derivees usuelles]
-| Fonction $f(x)$ | Nombre derive $f'(a)$ | Condition |
-|---|---|---|
-| $c$ (constante) | $0$ | |
-| $\alpha x + \beta$ | $\alpha$ | |
-| $x^n$ ($n \in \mathbb{N}^*$) | $na^{n-1}$ | |
-| $\dfrac{1}{\alpha x + \beta}$ | $\dfrac{-\alpha}{(\alpha a + \beta)^2}$ | $\alpha a + \beta \neq 0$ |
-| $\sqrt{x + \alpha}$ | $\dfrac{1}{2\sqrt{a + \alpha}}$ | $a + \alpha > 0$ |
+```typst
+#table(
+  columns: (auto, auto, auto),
+  inset: 8pt,
+  align: (left, center, center),
+  table.header(
+    [*Fonction $f$*], [*Domaine*], [*$f'(a)$*],
+  ),
+  [$c$ (constante)], [$RR$], [$0$],
+  [$a x + b$], [$RR$], [$a$],
+  [$x^n$ ($n in NN^*$)], [$RR$], [$n a^(n-1)$],
+  [$display(1/(alpha x + beta))$], [$alpha x + beta != 0$], [$display((-alpha)/(alpha a + beta)^2)$],
+  [$sqrt(x + alpha)$], [$x + alpha > 0$], [$display(1/(2 sqrt(a + alpha)))$],
+)
+```
 :::
 
 ### Formules d'operations
@@ -32,13 +40,21 @@ $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a} = \lim_{h \to 0} \frac{f(a + 
 :::property[Operations sur les derivees]
 Soient $f$ et $g$ derivables en $a$, $\alpha, \beta \in \mathbb{R}$, $k \in \mathbb{N}^*$ :
 
-| Operation | Formule |
-|---|---|
-| Combinaison lineaire | $(\alpha f + \beta g)'(a) = \alpha f'(a) + \beta g'(a)$ |
-| Produit | $(f \cdot g)'(a) = f'(a) \cdot g(a) + f(a) \cdot g'(a)$ |
-| Quotient ($g(a) \neq 0$) | $\left(\dfrac{f}{g}\right)'(a) = \dfrac{f'(a) \cdot g(a) - f(a) \cdot g'(a)}{[g(a)]^2}$ |
-| Puissance $f^k$ | $(f^k)'(a) = k \cdot [f(a)]^{k-1} \cdot f'(a)$ |
-| Racine ($f(a) > 0$) | $(\sqrt{f})'(a) = \dfrac{f'(a)}{2\sqrt{f(a)}}$ |
+```typst
+#table(
+  columns: (auto, auto),
+  inset: 8pt,
+  align: (left, left),
+  table.header(
+    [*Operation*], [*Formule*],
+  ),
+  [Combinaison lineaire], [$( alpha f + beta g)'(a) = alpha f'(a) + beta g'(a)$],
+  [Produit], [$(f dot g)'(a) = f'(a) dot g(a) + f(a) dot g'(a)$],
+  [Quotient ($g(a) != 0$)], [$display((f/g)'(a) = (f'(a) dot g(a) - f(a) dot g'(a))/([g(a)]^2))$],
+  [Puissance $f^k$], [$(f^k)'(a) = k dot [f(a)]^(k-1) dot f'(a)$],
+  [Racine ($f(a) > 0$)], [$display((sqrt(f))'(a) = (f'(a))/(2 sqrt(f(a))))$],
+)
+```
 :::
 
 ### Tangente et approximation affine
