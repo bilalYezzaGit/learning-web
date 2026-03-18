@@ -22,9 +22,10 @@ export type ScanResult =
 
 interface QrScannerProps {
   onScan: (result: ScanResult) => void
+  autoStart?: boolean
 }
 
-export function QrScanner({ onScan }: QrScannerProps) {
+export function QrScanner({ onScan, autoStart = false }: QrScannerProps) {
   const videoRef = React.useRef<HTMLVideoElement>(null)
   const scannerRef = React.useRef<QrScannerLib | null>(null)
   const [error, setError] = React.useState<string | null>(null)
@@ -78,6 +79,13 @@ export function QrScanner({ onScan }: QrScannerProps) {
       }
     }
   }, [onScan])
+
+  // Auto-start camera when requested
+  React.useEffect(() => {
+    if (autoStart && !isActive && !error) {
+      startCamera()
+    }
+  }, [autoStart]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Cleanup on unmount
   React.useEffect(() => {

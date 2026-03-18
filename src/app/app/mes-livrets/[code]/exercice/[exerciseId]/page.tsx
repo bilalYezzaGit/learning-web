@@ -163,13 +163,13 @@ function QcmQuestionCard({
                 key={i}
                 className={`flex items-start gap-3 rounded-lg border px-3 py-2.5 ${
                   isCorrect
-                    ? 'border-emerald-300 bg-emerald-50'
+                    ? 'border-success/40 bg-success/10'
                     : 'border-border bg-background'
                 }`}
               >
                 <span className="mt-0.5 shrink-0">
                   {isCorrect ? (
-                    <CheckCircle2 className="h-4 w-4 text-emerald-600" aria-hidden="true" />
+                    <CheckCircle2 className="h-4 w-4 text-success-foreground" aria-hidden="true" />
                   ) : (
                     <XCircle className="h-4 w-4 text-muted-foreground/30" aria-hidden="true" />
                   )}
@@ -185,8 +185,8 @@ function QcmQuestionCard({
 
         {/* Explanation */}
         {question.explication && (
-          <div className="rounded-lg border-l-[3px] border-l-amber-500 bg-gradient-to-r from-amber-50/60 to-amber-50/10 px-4 py-3">
-            <p className="mb-1 text-xs font-semibold text-amber-700">Explication</p>
+          <div className="rounded-lg border-l-[3px] border-l-warning bg-gradient-to-r from-warning/15 to-warning/5 px-4 py-3">
+            <p className="mb-1 text-xs font-semibold text-warning-foreground">Explication</p>
             <div
               className="prose prose-stone max-w-none text-sm"
               dangerouslySetInnerHTML={{ __html: question.explication }}

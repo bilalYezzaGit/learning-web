@@ -93,12 +93,15 @@ export default function BookletScanPage() {
               <form onSubmit={handleManualSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="exercise-id" className="mb-1.5 block text-sm font-medium">
-                    Identifiant de l&apos;exercice
+                    Code de l&apos;exercice
                   </label>
+                  <p className="mb-2 text-xs text-muted-foreground">
+                    Le code se trouve sous le QR code dans ton livret
+                  </p>
                   <Input
                     id="exercise-id"
                     type="text"
-                    placeholder="ex: ex-continuite-1"
+                    placeholder="ex-continuite-1"
                     value={exerciseId}
                     onChange={(e) => {
                       setExerciseId(e.target.value)

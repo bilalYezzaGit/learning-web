@@ -269,10 +269,10 @@ export function QcmSessionPlayer({
 
       {/* Explanation */}
       {state === 'validated' && currentQuestion.explanationHtml && (
-        <div aria-live="polite" className="mt-4 rounded-lg border border-blue-200 bg-blue-50 p-3">
-          <p className="text-xs font-medium text-blue-600">Explication</p>
+        <div aria-live="polite" className="mt-4 rounded-lg border border-info/30 bg-info/10 p-3">
+          <p className="text-xs font-medium text-info-foreground">Explication</p>
           <div
-            className="prose prose-stone mt-1 max-w-none text-sm text-blue-900 [&_p]:m-0"
+            className="prose prose-stone mt-1 max-w-none text-sm text-foreground [&_p]:m-0"
             dangerouslySetInnerHTML={{ __html: currentQuestion.explanationHtml }}
           />
         </div>

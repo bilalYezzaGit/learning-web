@@ -20,7 +20,7 @@ export function AuthFormCard({ className, rightPanelSubtitle, children }: AuthFo
           <div className="bg-primary relative hidden md:block">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-primary-foreground text-center p-8">
-                <h2 className="text-3xl font-bold mb-4">Learning</h2>
+                <h2 className="font-serif text-3xl font-bold mb-4">Aylan</h2>
                 <p className="text-lg opacity-90">{rightPanelSubtitle}</p>
               </div>
             </div>

@@ -60,7 +60,7 @@ export function ScanFab() {
             </SheetDescription>
           </SheetHeader>
           <div className="pb-6">
-            {open && <QrScanner onScan={handleScan} />}
+            {open && <QrScanner onScan={handleScan} autoStart />}
           </div>
         </SheetContent>
       </Sheet>

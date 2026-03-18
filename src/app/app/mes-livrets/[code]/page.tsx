@@ -41,9 +41,9 @@ function hasResume(livretSlug: string): boolean {
 }
 
 const ACTIVITY_ICON: Record<string, { icon: typeof BookOpen; className: string }> = {
-  lesson: { icon: BookOpen, className: 'text-amber-600' },
-  exercise: { icon: FileText, className: 'text-blue-600' },
-  qcm: { icon: Zap, className: 'text-violet-600' },
+  lesson: { icon: BookOpen, className: 'text-warning-foreground' },
+  exercise: { icon: FileText, className: 'text-info-foreground' },
+  qcm: { icon: Zap, className: 'text-primary' },
 }
 
 const ACTIVITY_LABEL: Record<string, string> = {
@@ -97,16 +97,16 @@ export default async function BookletHubPage({ params }: PageProps) {
         <div className="mb-6 grid gap-3 sm:grid-cols-2">
           {resumeAvailable && (
             <ActionCard
-              icon={<Lightbulb className="h-5 w-5 text-amber-600" />}
-              bgClass="bg-amber-50"
+              icon={<Lightbulb className="h-5 w-5 text-warning-foreground" />}
+              bgClass="bg-warning/10"
               title="Resume du cours"
               description="L'essentiel en 2 minutes"
               href={`/app/mes-livrets/${booklet.code}/resume`}
             />
           )}
           <ActionCard
-            icon={<Zap className="h-5 w-5 text-blue-600" />}
-            bgClass="bg-blue-50"
+            icon={<Zap className="h-5 w-5 text-info-foreground" />}
+            bgClass="bg-info/10"
             title="QCM rapide"
             description={`${booklet.qcmCount} questions disponibles`}
             href={`/app/mes-livrets/${booklet.code}/qcm`}
