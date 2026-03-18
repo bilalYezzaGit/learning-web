@@ -43,12 +43,13 @@
 
 | # | Tache | Fichier(s) | Statut |
 |---|-------|-----------|--------|
-| 4.1 | Reduire les espaces blancs excessifs apres exercices/QCM | `livret-template.ts` (spacing, pagebreak logic) | TODO |
-| 4.2 | Sommaire : ne pas gaspiller une page entiere si < 10 lignes | `livret-template.ts` (sommaire layout) | TODO |
-| 4.3 | Numerotation coherente exercices + QCM (integrer les QCM dans la sequence) | `generate-pdfs.ts` (numerotation) | TODO |
-| 4.4 | Footer : remplacer "learning.app" par le vrai domaine | `livret-template.ts` | TODO |
-| 4.5 | Titre exercice : eviter la compression par le QR code quand titre long | `livret-template.ts` (exercise-frame grid) | TODO |
-| 4.6 | Rendu LaTeX dans les titres d'exercice (ex: |x^2-1| mal affiche) | `generate-pdfs.ts` (title escaping) | TODO |
+| 4.1 | Reduire les espaces blancs excessifs apres exercices/QCM | `livret-template.ts` — remplacé par lignes de rédaction (Lot 2) | FAIT |
+| 4.2 | Sommaire : ne pas gaspiller une page entiere si < 10 lignes | `livret-template.ts` — `#pagebreak(weak: true)` | FAIT |
+| 4.3 | Numerotation coherente exercices + QCM | Gardé tel quel — style tunisien OK (exos numérotés, QCM séparés) | N/A |
+| 4.4 | Footer : remplacer "learning.app" par le vrai domaine | `livret-template.ts` → aylansolutions.com | FAIT |
+| 4.5 | Titre exercice : eviter la compression par le QR code quand titre long | `livret-template.ts` — métadonnées sur ligne séparée | FAIT |
+| 4.6 | Rendu LaTeX dans les titres d'exercice (ex: \|x^2-1\| mal affiche) | `generate-pdfs.ts` — escapeTypstTitle() convertit $...$ → #mi("...") | FAIT |
+| 4.7 | Accent manquant "activites" sur la couverture | `livret-template.ts` → "activités" | FAIT |
 
 ---
 

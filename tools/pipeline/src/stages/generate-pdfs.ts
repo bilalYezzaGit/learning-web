@@ -47,6 +47,18 @@ interface GeneratePdfsInput {
 /**
  * Convert a single atom's raw content to Typst, wrapped in the appropriate frame.
  */
+/**
+ * Escape a title string for safe use in Typst content blocks.
+ * Converts inline LaTeX $...$ to Typst #mi("...") for math in titles.
+ */
+function escapeTypstTitle(title: string): string {
+  // Convert inline LaTeX $...$ to Typst math
+  return title.replace(/\$([^$]+)\$/g, (_m, latex: string) => {
+    const escaped = latex.replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+    return `#mi("${escaped}")`
+  })
+}
+
 async function convertAtomToTypst(
   atom: RawAtom,
   exerciseNumber: { value: number },
@@ -59,13 +71,14 @@ async function convertAtomToTypst(
   if (atom.type === 'exercise') {
     const content = convertMdxToTypst(atom.rawContent, 'exercise')
     const num = exerciseNumber.value++
+    const safeTitle = escapeTypstTitle(atom.title)
     const linesArg = atom.lines != null ? `, lines: ${atom.lines}` : `, time: ${atom.timeMinutes}`
     const metaArgs = `, difficulty: ${atom.difficulty}, minutes: ${atom.timeMinutes}`
     if (bookletCode) {
       const qrTypst = await generateExerciseQrTypst(bookletCode, atom.id)
-      return `#exercise-frame(${num}, [${atom.title}], [\n${content}\n], qr: ${qrTypst}${linesArg}${metaArgs})`
+      return `#exercise-frame(${num}, [${safeTitle}], [\n${content}\n], qr: ${qrTypst}${linesArg}${metaArgs})`
     }
-    return `#exercise-frame(${num}, [${atom.title}], [\n${content}\n]${linesArg}${metaArgs})`
+    return `#exercise-frame(${num}, [${safeTitle}], [\n${content}\n]${linesArg}${metaArgs})`
   }
 
   // QCM atoms are handled at the group level, not individually

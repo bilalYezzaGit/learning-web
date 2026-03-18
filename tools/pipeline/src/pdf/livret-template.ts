@@ -65,7 +65,7 @@ ${section.content}
     set text(size: 8pt, fill: luma(150))
     line(length: 100%, stroke: 0.3pt + luma(200))
     v(2pt)
-    [learning.app #h(1fr) #counter(page).display() #h(1fr) ${data.trimester}]
+    [aylansolutions.com #h(1fr) #counter(page).display() #h(1fr) ${data.trimester}]
   },
 )
 
@@ -188,32 +188,30 @@ ${section.content}
     above: 1.2em,
     below: 1.2em,
     {
-      // Header with title + metadata
+      // Header with title on first line, metadata on second line
+      let meta-line = {
+        if difficulty != none or minutes != none {
+          v(0.2em)
+          if difficulty != none { difficulty-stars(difficulty); h(0.8em) }
+          if minutes != none { text(size: 8pt, fill: luma(120))[Durée : ~#minutes min] }
+        }
+      }
+
       if qr != none {
         grid(
           columns: (1fr, auto),
           column-gutter: 8pt,
           {
             text(weight: "bold")[Exercice #number — #title]
-            if difficulty != none or minutes != none {
-              h(1fr)
-              if difficulty != none { difficulty-stars(difficulty); h(0.5em) }
-              if minutes != none { text(size: 8pt, fill: luma(120))[~#minutes min] }
-            }
+            meta-line
             parbreak()
             body
           },
           align(top, qr)
         )
       } else {
-        {
-          text(weight: "bold")[Exercice #number — #title]
-          if difficulty != none or minutes != none {
-            h(1fr)
-            if difficulty != none { difficulty-stars(difficulty); h(0.5em) }
-            if minutes != none { text(size: 8pt, fill: luma(120))[~#minutes min] }
-          }
-        }
+        text(weight: "bold")[Exercice #number — #title]
+        meta-line
         parbreak()
         body
       }
@@ -286,7 +284,7 @@ ${section.content}
     #v(1.5em)
 
     #text(size: 11pt, fill: luma(80))[
-      ${data.totalActivities} activites  |  ${timeStr}  |  ${data.trimester}
+      ${data.totalActivities} activités  |  ${timeStr}  |  ${data.trimester}
     ]
 
     #v(2em)
@@ -344,9 +342,10 @@ ${data.examMode ? `
   - Les exercices sont indépendants et peuvent être traités dans n'importe quel ordre.
   - Scanner le QR code de chaque exercice pour accéder à la solution détaillée.
 ]
-` : ''}
-
 #pagebreak()
+` : `
+#pagebreak(weak: true)
+`}
 
 // ═══════════════════════════════════════════
 // COURS
