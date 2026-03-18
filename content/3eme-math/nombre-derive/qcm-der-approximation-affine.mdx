@@ -1,0 +1,40 @@
+---
+type: qcm
+title: "Approximation affine de $(1+h)^3$"
+difficulty: 1
+timeMinutes: 1
+tags: [derivation, approximation-affine]
+praxeologies: [Prax5a]
+---
+
+:::question
+L'approximation affine de $(1 + h)^3$ au voisinage de $h = 0$ est :
+:::
+
+:::option
+$3 + 3h$
+:::
+
+:::option{correct}
+$1 + 3h$
+:::
+
+:::option
+$3h$
+:::
+
+:::option
+$1 + h^3$
+:::
+
+:::explanation
+On pose $f(x) = x^3$. On cherche l'approximation affine de $f(1 + h)$ au voisinage de $h = 0$, c'est-a-dire de $f$ au voisinage de $a = 1$.
+
+On a $f(1) = 1$ et $f'(1) = 3 \times 1^2 = 3$.
+
+Par l'approximation affine :
+
+$$f(1 + h) \approx f(1) + h \cdot f'(1) = 1 + 3h$$
+
+L'erreur $3 + 3h$ provient de la confusion $f'(1) + f'(1) \cdot h$. L'erreur $3h$ oublie le terme constant $f(1) = 1$. L'erreur $1 + h^3$ oublie de deriver et garde $h^3$.
+:::

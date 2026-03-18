@@ -1,0 +1,66 @@
+---
+type: exercise
+title: "Derivabilite de fonctions avec valeur absolue"
+difficulty: 1
+timeMinutes: 8
+tags: [derivation, laterale, valeur-absolue, point-anguleux]
+category: application
+praxeologies: [Prax7, Prax1b]
+---
+
+:::enonce
+**a)** Soit $f(x) = |x + 1|$.
+
+Etudier la derivabilite de $f$ en $a = -1$. En cas de non-derivabilite, preciser la nature du point et ecrire les equations des demi-tangentes.
+
+**b)** Soit $f(x) = |x^2 - 4|$.
+
+Etudier la derivabilite de $f$ en $a = 2$. En cas de non-derivabilite, preciser la nature du point et ecrire les equations des demi-tangentes.
+:::
+
+:::solution
+**a)** On reecrit $f$ sans valeur absolue :
+
+$$f(x) = \begin{cases} x + 1 & \text{si } x \geq -1 \\ -(x + 1) & \text{si } x < -1 \end{cases}$$
+
+**Continuite** : $f(-1) = 0$, $\lim_{x \to -1^+} f(x) = 0$, $\lim_{x \to -1^-} f(x) = 0$. Donc $f$ est continue en $-1$.
+
+**Derivee a droite** : pour $h > 0$, $f(-1 + h) = (-1 + h) + 1 = h$, donc :
+
+$$f'_d(-1) = \lim_{h \to 0^+} \frac{h - 0}{h} = 1$$
+
+**Derivee a gauche** : pour $h < 0$, $-1 + h < -1$, donc $f(-1 + h) = -((-1 + h) + 1) = -h$, d'ou :
+
+$$f'_g(-1) = \lim_{h \to 0^-} \frac{-h - 0}{h} = -1$$
+
+**Conclusion** : $f'_d(-1) = 1 \neq -1 = f'_g(-1)$. Donc $f$ n'est pas derivable en $-1$. Le point $A(-1, 0)$ est un **point anguleux**.
+
+**Demi-tangentes** :
+
+- A droite : $y = 1 \cdot (x - (-1)) + 0 = x + 1$
+- A gauche : $y = (-1)(x - (-1)) + 0 = -x - 1$
+
+---
+
+**b)** On etudie le signe de $x^2 - 4 = (x - 2)(x + 2)$. Au voisinage de $a = 2$ :
+
+- Si $x \geq 2$ : $x^2 - 4 \geq 0$ donc $f(x) = x^2 - 4$
+- Si $x < 2$ (et $x > -2$) : $x^2 - 4 < 0$ donc $f(x) = -(x^2 - 4) = -x^2 + 4$
+
+**Continuite** : $f(2) = |4 - 4| = 0$, $\lim_{x \to 2^+} (x^2 - 4) = 0$, $\lim_{x \to 2^-} (-x^2 + 4) = 0$. Donc $f$ est continue en $2$.
+
+**Derivee a droite** : pour $h > 0$, $f(2 + h) = (2 + h)^2 - 4 = 4 + 4h + h^2 - 4 = 4h + h^2$, donc :
+
+$$f'_d(2) = \lim_{h \to 0^+} \frac{4h + h^2}{h} = \lim_{h \to 0^+} (4 + h) = 4$$
+
+**Derivee a gauche** : pour $h < 0$ (petit), $2 + h < 2$, donc $f(2 + h) = -(2 + h)^2 + 4 = -4 - 4h - h^2 + 4 = -4h - h^2$, d'ou :
+
+$$f'_g(2) = \lim_{h \to 0^-} \frac{-4h - h^2}{h} = \lim_{h \to 0^-} (-4 - h) = -4$$
+
+**Conclusion** : $f'_d(2) = 4 \neq -4 = f'_g(2)$. Donc $f$ n'est pas derivable en $2$. Le point $B(2, 0)$ est un **point anguleux**.
+
+**Demi-tangentes** :
+
+- A droite : $y = 4(x - 2) + 0 = 4x - 8$
+- A gauche : $y = -4(x - 2) + 0 = -4x + 8$
+:::

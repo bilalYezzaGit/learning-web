@@ -1,0 +1,72 @@
+---
+type: lesson
+title: "Tangente et approximation affine"
+difficulty: 0
+timeMinutes: 10
+tags: [derivation, tangente, approximation-affine, continuite]
+praxeologies: [Prax3, Prax5a]
+---
+
+### Interpretation geometrique du nombre derive
+
+Le taux de variation $\dfrac{f(x) - f(a)}{x - a}$ represente le coefficient directeur de la droite passant par les points $A(a, f(a))$ et $M(x, f(x))$ de la courbe $C_f$.
+
+Cette droite est appelee **secante** a la courbe.
+
+Lorsque $x$ tend vers $a$, le point $M$ se rapproche de $A$ et la secante tend vers une position limite : la **tangente** a $C_f$ au point $A$.
+
+Le nombre derive $f'(a)$ est donc le **coefficient directeur de la tangente** a $C_f$ au point d'abscisse $a$.
+
+### Equation de la tangente
+
+:::theorem[Equation de la tangente]
+Soit $f$ une fonction derivable en $a$. L'equation de la tangente a la courbe $C_f$ au point d'abscisse $a$ est :
+
+$$y = f'(a)(x - a) + f(a)$$
+:::
+
+:::example[Tangente a $y = x^2$ en $a = 1$]
+On a $f(x) = x^2$, donc $f(1) = 1$ et $f'(1) = 2$ (calcule precedemment).
+
+L'equation de la tangente en $a = 1$ est :
+
+$$y = 2(x - 1) + 1 = 2x - 1$$
+:::
+
+:::remark
+Si $f'(a) = 0$, la tangente est horizontale : $y = f(a)$.
+
+Si $f$ n'est pas derivable en $a$, la tangente n'existe pas en ce point (ou est verticale dans certains cas).
+:::
+
+### Approximation affine
+
+:::property[Approximation affine]
+Si $f$ est derivable en $a$, alors pour $h$ voisin de $0$ :
+
+$$f(a + h) \approx f(a) + h \cdot f'(a)$$
+
+Autrement dit, au voisinage de $a$, la fonction $f$ est approchee par sa tangente.
+:::
+
+:::example[Approximations classiques au voisinage de $0$]
+En appliquant l'approximation affine avec $a = 0$ :
+
+- $\sqrt{1 + h} \approx 1 + \dfrac{h}{2}$ car $f(x) = \sqrt{1 + x}$, $f(0) = 1$, $f'(0) = \dfrac{1}{2}$
+
+- $(1 + h)^n \approx 1 + nh$ car $f(x) = (1 + x)^n$, $f(0) = 1$, $f'(0) = n$
+
+- $\dfrac{1}{1 + h} \approx 1 - h$ car $f(x) = \dfrac{1}{1 + x}$, $f(0) = 1$, $f'(0) = -1$
+:::
+
+### Derivabilite et continuite
+
+:::theorem[Derivabilite implique continuite]
+Si $f$ est derivable en $a$, alors $f$ est continue en $a$.
+:::
+
+:::attention
+La reciproque est fausse ! Une fonction peut etre continue en un point sans y etre derivable.
+
+Exemple classique : $f(x) = |x|$ est continue en $0$ mais pas derivable en $0$ (la courbe presente un « point anguleux »).
+:::

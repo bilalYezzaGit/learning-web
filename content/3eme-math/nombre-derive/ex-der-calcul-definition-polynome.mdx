@@ -1,0 +1,70 @@
+---
+type: exercise
+title: "Calcul du nombre derive par la definition — Polynomes"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [derivation, definition, polynomes]
+praxeologies: [Prax1]
+---
+
+:::enonce
+En utilisant la definition du nombre derive, calculer $f'(a)$ dans chacun des cas suivants :
+
+**a)** $f(x) = x^2 - 3x + 1$ en $a = 2$
+
+**b)** $f(x) = x^3 + 2x$ en $a = 1$
+
+**c)** $f(x) = 2x^3 - x + 3$ en un point quelconque $a \in \mathbb{R}$
+:::
+
+:::solution
+**a)** On calcule le taux de variation de $f(x) = x^2 - 3x + 1$ en $a = 2$ :
+
+$$\frac{f(x) - f(2)}{x - 2} = \frac{(x^2 - 3x + 1) - (4 - 6 + 1)}{x - 2} = \frac{x^2 - 3x + 1 - (-1)}{x - 2} = \frac{x^2 - 3x + 2}{x - 2}$$
+
+On factorise le numerateur : $x^2 - 3x + 2 = (x - 1)(x - 2)$
+
+$$\frac{f(x) - f(2)}{x - 2} = \frac{(x - 1)(x - 2)}{x - 2} = x - 1$$
+
+Donc :
+
+$$f'(2) = \lim_{x \to 2} (x - 1) = 1$$
+
+**b)** On calcule le taux de variation de $f(x) = x^3 + 2x$ en $a = 1$ :
+
+$$\frac{f(x) - f(1)}{x - 1} = \frac{(x^3 + 2x) - (1 + 2)}{x - 1} = \frac{x^3 + 2x - 3}{x - 1}$$
+
+On verifie que $x = 1$ est racine du numerateur : $1 + 2 - 3 = 0$. On factorise :
+
+$$x^3 + 2x - 3 = (x - 1)(x^2 + x + 3)$$
+
+Donc :
+
+$$\frac{f(x) - f(1)}{x - 1} = \frac{(x - 1)(x^2 + x + 3)}{x - 1} = x^2 + x + 3$$
+
+$$f'(1) = \lim_{x \to 1} (x^2 + x + 3) = 1 + 1 + 3 = 5$$
+
+**c)** On utilise l'ecriture avec $h$ pour $f(x) = 2x^3 - x + 3$ :
+
+$$\frac{f(a + h) - f(a)}{h} = \frac{[2(a + h)^3 - (a + h) + 3] - [2a^3 - a + 3]}{h}$$
+
+On developpe $(a + h)^3 = a^3 + 3a^2h + 3ah^2 + h^3$ :
+
+$$= \frac{2a^3 + 6a^2h + 6ah^2 + 2h^3 - a - h + 3 - 2a^3 + a - 3}{h}$$
+
+$$= \frac{6a^2h + 6ah^2 + 2h^3 - h}{h} = \frac{h(6a^2 + 6ah + 2h^2 - 1)}{h} = 6a^2 + 6ah + 2h^2 - 1$$
+
+En passant a la limite quand $h \to 0$ :
+
+$$f'(a) = \lim_{h \to 0} (6a^2 + 6ah + 2h^2 - 1) = 6a^2 - 1$$
+:::
+
+:::methode
+Pour calculer le nombre derive par la definition :
+
+1. Ecrire le taux de variation $\frac{f(x) - f(a)}{x - a}$ ou $\frac{f(a+h) - f(a)}{h}$
+2. Simplifier l'expression en factorisant $(x - a)$ ou $h$ au numerateur
+3. Simplifier la fraction
+4. Calculer la limite quand $x \to a$ ou $h \to 0$
+:::

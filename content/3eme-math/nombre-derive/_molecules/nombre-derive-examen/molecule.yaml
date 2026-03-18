@@ -1,0 +1,47 @@
+kind: livret
+title: "Nombre derive — Exercices types examen"
+description: "Fiche de synthese + exercices types classes par frequence pour preparer le controle et le BAC."
+trimester: T1
+order: 2
+objectives:
+  - "Maitriser les exercices types du nombre derive"
+  - "Resoudre des problemes de tangente parallele et perpendiculaire"
+  - "Etudier la derivabilite de fonctions par morceaux avec parametre"
+  - "Calculer des limites par reconnaissance d'un nombre derive"
+  - "Resoudre un exercice de synthese type BAC"
+
+sections:
+  - label: "Fiche de synthese"
+    steps:
+      - lesson-der-fiche-synthese
+
+  - label: "Tangente et applications"
+    steps:
+      - ex-der-exm-tangente-polynome
+      - ex-der-exm-tangente-parallele
+      - ex-der-exm-tangente-perpendiculaire
+      - ex-der-exm-tangente-horizontale
+      - quiz:
+          - qcm-der-exm-tangente-pente
+          - qcm-der-exm-parallele
+
+  - label: "Derivabilite laterale et fonctions par morceaux"
+    steps:
+      - ex-der-exm-laterale-absolue
+      - ex-der-exm-morceaux-complet
+      - ex-der-exm-morceaux-parametre
+      - quiz:
+          - qcm-der-exm-morceaux-prerequis
+
+  - label: "Formules et estimations numeriques"
+    steps:
+      - ex-der-exm-formules-variees
+      - ex-der-exm-estimation-numerique
+      - quiz:
+          - qcm-der-exm-signe-derivee
+
+  - label: "Problemes de synthese"
+    steps:
+      - ex-der-exm-limites-derivee
+      - ex-der-exm-coefficients
+      - ex-der-exm-synthese-bac

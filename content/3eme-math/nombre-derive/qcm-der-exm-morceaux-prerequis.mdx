@@ -1,0 +1,43 @@
+---
+type: qcm
+title: "Prerequis de continuite pour la derivabilite par morceaux"
+difficulty: 1
+timeMinutes: 1
+tags: [derivation, morceaux, continuite, prerequis, examen]
+praxeologies: [Prax6a, Prax8]
+---
+
+:::question
+Soit $f$ definie sur $\mathbb{R}$ par :
+
+$$f(x) = \begin{cases} x^2 & \text{si } x \leq 1 \\ x + 1 & \text{si } x > 1 \end{cases}$$
+
+$f$ est-elle derivable en $1$ ?
+:::
+
+:::option
+Oui, car $f'_g(1) = 2$ et $f'_d(1) = 1$ existent tous les deux
+:::
+
+:::option
+Non, car $f'_g(1) = 2 \neq 1 = f'_d(1)$
+:::
+
+:::option{correct}
+Non, car $f$ n'est pas continue en $1$ puisque $f(1) = 1$ et $\lim_{x \to 1^+} f(x) = 2$
+:::
+
+:::option
+Oui, car les deux limites laterales existent
+:::
+
+:::explanation
+Avant d'etudier la derivabilite, il faut **toujours verifier la continuite**. Ici :
+
+- $f(1) = 1^2 = 1$
+- $\lim_{x \to 1^+} f(x) = 1 + 1 = 2 \neq f(1)$
+
+Donc $f$ n'est **pas continue en $1$**, et par consequent elle n'est **pas derivable en $1$** (car derivable $\Rightarrow$ continu).
+
+Il est inutile de calculer les derivees laterales si la continuite n'est pas verifiee.
+:::

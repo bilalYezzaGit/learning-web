@@ -1,0 +1,57 @@
+---
+type: exercise
+title: "Derivation avec racine carree et produit"
+difficulty: 1
+timeMinutes: 10
+tags: [derivation, formules, racine, produit]
+category: application
+praxeologies: [Prax2]
+---
+
+:::enonce
+Calculer le nombre derive de $f$ en $a$ dans chacun des cas suivants :
+
+**a)** $f(x) = \sqrt{4x + 5}$ en $a = 0$
+
+**b)** $f(x) = 2x\sqrt{x}$ en $a = 1$
+
+**c)** $f(x) = \sqrt{-x^2 + 5x - 4}$ en $a = 3$
+:::
+
+:::solution
+**a)** On pose $u(x) = 4x + 5$, de sorte que $f(x) = \sqrt{u(x)}$.
+
+On verifie la condition : $u(0) = 5 > 0$. La formule s'applique.
+
+On a $u'(0) = 4$.
+
+$$f'(0) = \frac{u'(0)}{2\sqrt{u(0)}} = \frac{4}{2\sqrt{5}} = \frac{2}{\sqrt{5}}$$
+
+D'ou $f'(0) = \dfrac{2}{\sqrt{5}} = \dfrac{2\sqrt{5}}{5}$.
+
+---
+
+**b)** Pour $x > 0$, on a $\sqrt{x} = x^{1/2}$, donc $f(x) = 2x\sqrt{x}$.
+
+On pose $u(x) = 2x$ et $v(x) = \sqrt{x}$.
+
+On a $u(1) = 2$, $u'(1) = 2$, $v(1) = 1$ et $v'(1) = \dfrac{1}{2\sqrt{1}} = \dfrac{1}{2}$.
+
+On applique la formule du produit $(u \cdot v)'(a) = u'(a) \cdot v(a) + u(a) \cdot v'(a)$ :
+
+$$f'(1) = u'(1) \cdot v(1) + u(1) \cdot v'(1) = 2 \times 1 + 2 \times \frac{1}{2} = 2 + 1 = 3$$
+
+D'ou $f'(1) = 3$.
+
+---
+
+**c)** On pose $u(x) = -x^2 + 5x - 4$, de sorte que $f(x) = \sqrt{u(x)}$.
+
+**Verification de la condition** : $u(3) = -9 + 15 - 4 = 2 > 0$. La formule s'applique.
+
+On calcule $u'(a) = -2a + 5$, d'ou $u'(3) = -6 + 5 = -1$.
+
+$$f'(3) = \frac{u'(3)}{2\sqrt{u(3)}} = \frac{-1}{2\sqrt{2}}$$
+
+D'ou $f'(3) = \dfrac{-1}{2\sqrt{2}} = \dfrac{-\sqrt{2}}{4}$.
+:::

@@ -1,0 +1,42 @@
+---
+type: qcm
+title: "Calcul de nombre derive par la definition"
+difficulty: 1
+timeMinutes: 1
+tags: [derivation, definition, calcul]
+praxeologies: [Prax1]
+---
+
+:::question
+Soit $f(x) = x^3 - x$. La valeur de $f'(2)$ est :
+:::
+
+:::option
+$10$
+:::
+
+:::option
+$12$
+:::
+
+:::option{correct}
+$11$
+:::
+
+:::option
+$6$
+:::
+
+:::explanation
+On calcule le taux de variation :
+
+$$\frac{f(x) - f(2)}{x - 2} = \frac{(x^3 - x) - (8 - 2)}{x - 2} = \frac{x^3 - x - 6}{x - 2}$$
+
+On verifie que $x = 2$ est racine : $8 - 2 - 6 = 0$. On factorise :
+
+$$x^3 - x - 6 = (x - 2)(x^2 + 2x + 3)$$
+
+Donc $f'(2) = 2^2 + 2 \times 2 + 3 = 4 + 4 + 3 = 11$.
+
+Les distracteurs : $10$ (erreur de calcul), $12$ (confusion avec $3 \times 2^2 = 12$ sans le $-1$), $6$ (confusion avec $f(2)$).
+:::

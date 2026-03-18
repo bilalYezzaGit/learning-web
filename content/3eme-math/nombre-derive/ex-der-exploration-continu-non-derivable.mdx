@@ -1,0 +1,89 @@
+---
+type: exercise
+title: "Fonctions continues non derivables : oscillation et regularisation"
+difficulty: 3
+timeMinutes: 15
+category: probleme
+tags: [derivation, continuite, non-derivable, oscillation]
+praxeologies: [Prax6b, Prax7]
+---
+
+:::enonce
+**1)** Soit $f$ la fonction definie par :
+
+$$f(x) = \begin{cases} x \sin\!\left(\dfrac{1}{x}\right) & \text{si } x \neq 0 \\ 0 & \text{si } x = 0 \end{cases}$$
+
+**a)** Montrer que $f$ est continue en $0$.
+
+**b)** Montrer que $f$ n'est pas derivable en $0$.
+
+**2)** Soit $g$ la fonction definie par :
+
+$$g(x) = \begin{cases} x^2 \sin\!\left(\dfrac{1}{x}\right) & \text{si } x \neq 0 \\ 0 & \text{si } x = 0 \end{cases}$$
+
+**a)** Montrer que $g$ est derivable en $0$ et calculer $g'(0)$.
+
+**3)** Comparer les deux situations : pourquoi $x^2$ « regularise » l'oscillation alors que $x$ ne le fait pas ?
+:::
+
+:::solution
+**1a) Continuite de $f$ en $0$.**
+
+Pour tout $x \neq 0$, on a $-1 \leq \sin\!\left(\dfrac{1}{x}\right) \leq 1$, donc :
+
+$$-|x| \leq x \sin\!\left(\frac{1}{x}\right) \leq |x|$$
+
+c'est-a-dire $|f(x)| \leq |x|$.
+
+Or $\lim_{x \to 0} |x| = 0$, donc par le theoreme des gendarmes :
+
+$$\lim_{x \to 0} f(x) = 0 = f(0)$$
+
+D'ou $f$ est **continue en $0$**.
+
+**1b) Non-derivabilite de $f$ en $0$.**
+
+Le taux de variation de $f$ en $0$ est :
+
+$$\frac{f(h) - f(0)}{h} = \frac{h \sin\!\left(\dfrac{1}{h}\right)}{h} = \sin\!\left(\frac{1}{h}\right)$$
+
+Or $\sin\!\left(\dfrac{1}{h}\right)$ **n'admet pas de limite** quand $h \to 0$ : elle oscille indefiniment entre $-1$ et $1$.
+
+En effet, pour $h_n = \dfrac{1}{2n\pi}$, on a $\sin(2n\pi) = 0$, et pour $h'_n = \dfrac{1}{2n\pi + \frac{\pi}{2}}$, on a $\sin\!\left(2n\pi + \dfrac{\pi}{2}\right) = 1$.
+
+La limite du taux de variation n'existe pas, donc $f$ **n'est pas derivable en $0$**.
+
+**2a) Derivabilite de $g$ en $0$.**
+
+Le taux de variation de $g$ en $0$ est :
+
+$$\frac{g(h) - g(0)}{h} = \frac{h^2 \sin\!\left(\dfrac{1}{h}\right)}{h} = h \sin\!\left(\frac{1}{h}\right)$$
+
+Pour tout $h \neq 0$ :
+
+$$\left|h \sin\!\left(\frac{1}{h}\right)\right| \leq |h|$$
+
+Or $\lim_{h \to 0} |h| = 0$, donc par le theoreme des gendarmes :
+
+$$\lim_{h \to 0} h \sin\!\left(\frac{1}{h}\right) = 0$$
+
+D'ou $g$ est **derivable en $0$** et $g'(0) = 0$.
+
+**3) Comparaison.**
+
+Dans les deux cas, le facteur $\sin\!\left(\dfrac{1}{x}\right)$ oscille indefiniment entre $-1$ et $1$ au voisinage de $0$.
+
+- Pour $f(x) = x \sin\!\left(\dfrac{1}{x}\right)$ : le taux de variation est $\sin\!\left(\dfrac{1}{h}\right)$. Le facteur $x$ suffit a « ecraser » l'oscillation pour assurer la continuite ($|f(x)| \leq |x| \to 0$), mais apres division par $h$ dans le taux de variation, il ne reste rien pour compenser l'oscillation.
+
+- Pour $g(x) = x^2 \sin\!\left(\dfrac{1}{x}\right)$ : le taux de variation est $h \sin\!\left(\dfrac{1}{h}\right)$. Le facteur $x^2$ est assez « fort » pour qu'apres division par $h$, il reste un facteur $h$ qui ecrase l'oscillation et force la limite a $0$.
+
+En resume : $x^2$ fournit un « amortissement supplementaire » que $x$ ne donne pas. Pour la continuite, un facteur $x$ suffit ; pour la derivabilite, il faut un facteur $x^2$ (ou plus).
+:::
+
+:::methode
+Pour etudier la derivabilite en $0$ d'une fonction de la forme $x^k \sin(1/x)$ :
+
+1. Ecrire le taux de variation : $\dfrac{h^k \sin(1/h)}{h} = h^{k-1} \sin(1/h)$
+2. Si $k - 1 \geq 1$ (soit $k \geq 2$) : le facteur $h^{k-1}$ ecrase l'oscillation, la limite vaut $0$, la fonction est derivable
+3. Si $k - 1 = 0$ (soit $k = 1$) : il reste $\sin(1/h)$ qui n'a pas de limite, la fonction n'est pas derivable
+:::

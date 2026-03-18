@@ -1,0 +1,69 @@
+---
+type: exercise
+title: "Derivation de polynomes et de fonctions rationnelles"
+difficulty: 1
+timeMinutes: 10
+tags: [derivation, formules, polynomes, rationnelle]
+category: application
+praxeologies: [Prax2]
+---
+
+:::enonce
+Calculer le nombre derive de $f$ en $a$ dans chacun des cas suivants :
+
+**a)** $f(x) = x^4 - 3x^2 + 5$ en $a = 1$
+
+**b)** $f(x) = \dfrac{4}{2x + 3}$ en $a = -1$
+
+**c)** $f(x) = \dfrac{3x + 5}{-2x + 3}$ en $a = 1$
+
+**d)** $f(x) = (2x + 3)^3$ en $a = \dfrac{1}{2}$
+:::
+
+:::solution
+**a)** On ecrit $f(x) = x^4 - 3x^2 + 5$, somme de fonctions usuelles.
+
+On a $(x^n)'(a) = na^{n-1}$ et la derivee d'une constante est nulle. Par linearite :
+
+$$f'(a) = 4a^3 - 6a$$
+
+D'ou :
+
+$$f'(1) = 4 \times 1^3 - 6 \times 1 = 4 - 6 = -2$$
+
+---
+
+**b)** On a $f(x) = \dfrac{4}{2x + 3} = 4 \times \dfrac{1}{2x + 3}$.
+
+On applique la formule $\left(\dfrac{1}{\alpha x + \beta}\right)'(a) = \dfrac{-\alpha}{(\alpha a + \beta)^2}$ avec $\alpha = 2$ et $\beta = 3$ :
+
+$$\left(\frac{1}{2x + 3}\right)'(-1) = \frac{-2}{(2 \times (-1) + 3)^2} = \frac{-2}{1^2} = -2$$
+
+Par suite :
+
+$$f'(-1) = 4 \times (-2) = -8$$
+
+---
+
+**c)** On a $f(x) = \dfrac{3x + 5}{-2x + 3}$. C'est un quotient de deux fonctions affines.
+
+On applique la formule $\left(\dfrac{\alpha x + \beta}{\lambda x + \gamma}\right)'(a) = \dfrac{\alpha \gamma - \beta \lambda}{(\lambda a + \gamma)^2}$ avec $\alpha = 3$, $\beta = 5$, $\lambda = -2$ et $\gamma = 3$ :
+
+$$f'(a) = \frac{3 \times 3 - 5 \times (-2)}{(-2a + 3)^2} = \frac{9 + 10}{(-2a + 3)^2} = \frac{19}{(-2a + 3)^2}$$
+
+D'ou :
+
+$$f'(1) = \frac{19}{(-2 \times 1 + 3)^2} = \frac{19}{1^2} = 19$$
+
+---
+
+**d)** On a $f(x) = (2x + 3)^3$. On pose $u(x) = 2x + 3$ et $f = u^3$.
+
+On applique la formule $(u^k)'(a) = k \cdot [u(a)]^{k-1} \cdot u'(a)$ avec $k = 3$.
+
+On a $u\!\left(\dfrac{1}{2}\right) = 2 \times \dfrac{1}{2} + 3 = 4$ et $u'(a) = 2$ pour tout $a$.
+
+D'ou :
+
+$$f'\!\left(\frac{1}{2}\right) = 3 \times 4^2 \times 2 = 3 \times 16 \times 2 = 96$$
+:::

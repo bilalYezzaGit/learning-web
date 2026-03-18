@@ -1,0 +1,40 @@
+---
+type: qcm
+title: "Lien entre continuite et derivabilite"
+difficulty: 1
+timeMinutes: 1
+tags: [derivation, continuite, implication, piege]
+praxeologies: [Prax6a, Prax6b]
+---
+
+:::question
+Parmi les affirmations suivantes :
+
+- **(I)** Si $f$ est continue en $a$, alors $f$ est derivable en $a$
+- **(II)** Si $f$ est derivable en $a$, alors $f$ est continue en $a$
+- **(III)** Si $f$ n'est pas continue en $a$, alors $f$ n'est pas derivable en $a$
+
+Lesquelles sont vraies ?
+:::
+
+:::option
+Aucune
+:::
+
+:::option
+Seulement (II)
+:::
+
+:::option{correct}
+(II) et (III)
+:::
+
+:::option
+Les trois
+:::
+
+:::explanation
+- **(II)** est vraie : c'est le theoreme T3 (derivable $\Rightarrow$ continu).
+- **(III)** est vraie : c'est la **contraposee** de T3. Si $f$ n'est pas continue en $a$, elle ne peut pas etre derivable en $a$.
+- **(I)** est **fausse** : la reciproque de T3 n'est pas vraie. Contre-exemple : $f(x) = |x|$ est continue en $0$ mais n'est pas derivable en $0$ (point anguleux avec $f'_d(0) = 1 \neq -1 = f'_g(0)$).
+:::

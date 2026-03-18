@@ -1,0 +1,88 @@
+---
+type: lesson
+title: "Derivabilite laterale et fonctions par morceaux"
+difficulty: 1
+timeMinutes: 8
+tags: [derivation, laterale, morceaux, point-anguleux]
+praxeologies: [Prax7, Prax8]
+---
+
+### Derivees laterales
+
+:::definition[Nombre derive a droite et a gauche (D2)]
+Soit $f$ une fonction definie sur un intervalle $I$ et $a \in I$.
+
+Le **nombre derive a droite** de $f$ en $a$ est :
+
+$$f'_d(a) = \lim_{h \to 0^+} \frac{f(a + h) - f(a)}{h}$$
+
+Le **nombre derive a gauche** de $f$ en $a$ est :
+
+$$f'_g(a) = \lim_{h \to 0^-} \frac{f(a + h) - f(a)}{h}$$
+
+lorsque ces limites existent et sont finies.
+:::
+
+:::remark
+On peut aussi ecrire les derivees laterales avec la variable $x$ :
+
+$$f'_d(a) = \lim_{\substack{x \to a \\ x > a}} \frac{f(x) - f(a)}{x - a} \qquad ; \qquad f'_g(a) = \lim_{\substack{x \to a \\ x < a}} \frac{f(x) - f(a)}{x - a}$$
+:::
+
+### Condition de derivabilite
+
+:::theorem[Derivabilite et derivees laterales (T7)]
+$f$ est derivable en $a$ si et seulement si $f$ est derivable a droite et a gauche en $a$ et :
+
+$$f'_d(a) = f'_g(a)$$
+
+Dans ce cas, $f'(a) = f'_d(a) = f'_g(a)$.
+:::
+
+### Point anguleux
+
+:::definition[Point anguleux (N5.4)]
+Si $f$ est continue en $a$, que $f'_d(a)$ et $f'_g(a)$ existent mais sont **differentes**, on dit que le point $M(a, f(a))$ est un **point anguleux** de la courbe $\mathcal{C}_f$.
+
+En ce point, la courbe admet deux **demi-tangentes** :
+
+- **Demi-tangente a droite** : $y = f'_d(a)(x - a) + f(a)$
+- **Demi-tangente a gauche** : $y = f'_g(a)(x - a) + f(a)$
+:::
+
+:::example[Point anguleux : $f(x) = |x|$ en $a = 0$]
+On a $f(x) = x$ si $x \geq 0$ et $f(x) = -x$ si $x < 0$.
+
+$$f'_d(0) = \lim_{h \to 0^+} \frac{|h| - 0}{h} = \lim_{h \to 0^+} \frac{h}{h} = 1$$
+
+$$f'_g(0) = \lim_{h \to 0^-} \frac{|h| - 0}{h} = \lim_{h \to 0^-} \frac{-h}{h} = -1$$
+
+Comme $f'_d(0) = 1 \neq -1 = f'_g(0)$, la fonction $|x|$ n'est pas derivable en $0$. Le point $O(0, 0)$ est un point anguleux.
+:::
+
+### Demi-tangente verticale
+
+:::definition[Demi-tangente verticale (N6)]
+Si $\lim_{h \to 0^+} \dfrac{f(a + h) - f(a)}{h} = +\infty$ (ou $-\infty$), on dit que la courbe admet une **demi-tangente verticale a droite** en $a$.
+
+De meme pour la demi-tangente verticale a gauche (limite quand $h \to 0^-$).
+:::
+
+:::example[Demi-tangente verticale : $f(x) = \sqrt{x}$ en $a = 0$]
+$$f'_d(0) = \lim_{h \to 0^+} \frac{\sqrt{h} - 0}{h} = \lim_{h \to 0^+} \frac{1}{\sqrt{h}} = +\infty$$
+
+La limite est infinie : $f$ n'est pas derivable a droite en $0$. La courbe admet une demi-tangente verticale (la droite $x = 0$) en ce point.
+:::
+
+### Procedure pour les fonctions par morceaux
+
+:::attention[Verifier la continuite d'abord]
+Pour etudier la derivabilite d'une fonction definie par morceaux en un point de raccordement $a$, il faut **toujours** suivre cet ordre :
+
+1. **Continuite** : verifier que $\lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = f(a)$
+2. Si $f$ n'est pas continue en $a$ : elle n'est pas derivable en $a$ (par T3)
+3. Si $f$ est continue en $a$ : calculer $f'_g(a)$ et $f'_d(a)$ separement sur chaque morceau
+4. Conclure : $f'_g(a) = f'_d(a)$ implique derivable, sinon point anguleux ou demi-tangente verticale
+
+**Ne jamais passer a l'etape 3 sans avoir valide l'etape 1.**
+:::

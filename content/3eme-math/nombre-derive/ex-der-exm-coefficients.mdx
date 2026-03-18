@@ -1,0 +1,82 @@
+---
+type: exercise
+title: "Determination de coefficients par conditions sur la tangente"
+difficulty: 2
+timeMinutes: 10
+category: approfondissement
+tags: [derivation, coefficients, systeme, examen]
+praxeologies: [Prax10]
+---
+
+:::enonce
+Soit $f(x) = ax^2 + bx + c$ une fonction polynome du second degre. On note $\mathcal{C}_f$ sa courbe representative.
+
+On donne les conditions suivantes :
+
+- $\mathcal{C}_f$ passe par le point $A(0, 1)$
+- $\mathcal{C}_f$ passe par le point $B(2, 5)$
+- La tangente a $\mathcal{C}_f$ au point $B$ a pour coefficient directeur $3$
+
+1. Determiner la valeur de $c$.
+2. Ecrire un systeme de deux equations en $a$ et $b$.
+3. Resoudre ce systeme et donner l'expression de $f(x)$.
+4. Determiner l'equation de la tangente a $\mathcal{C}_f$ au point $A$.
+:::
+
+:::solution
+**1. Determination de $c$**
+
+$\mathcal{C}_f$ passe par $A(0, 1)$, donc $f(0) = 1$ :
+
+$$f(0) = a \times 0^2 + b \times 0 + c = c = 1$$
+
+Donc $c = 1$.
+
+---
+
+**2. Systeme en $a$ et $b$**
+
+$\mathcal{C}_f$ passe par $B(2, 5)$, donc $f(2) = 5$ :
+
+$$f(2) = 4a + 2b + 1 = 5$$
+
+$$4a + 2b = 4 \quad \text{...(I)}$$
+
+La tangente en $B$ a pour pente $3$, donc $f'(2) = 3$.
+
+On calcule $f'(x) = 2ax + b$, d'ou :
+
+$$f'(2) = 4a + b = 3 \quad \text{...(II)}$$
+
+---
+
+**3. Resolution du systeme**
+
+$$\begin{cases} 4a + 2b = 4 & \text{(I)} \\ 4a + b = 3 & \text{(II)} \end{cases}$$
+
+Par soustraction $\text{(I)} - \text{(II)}$ :
+
+$$b = 1$$
+
+En remplacant dans $\text{(II)}$ :
+
+$$4a + 1 = 3 \implies 4a = 2 \implies a = \frac{1}{2}$$
+
+Donc :
+
+$$f(x) = \frac{1}{2}x^2 + x + 1$$
+
+**Verification** : $f(0) = 1$ ✓, $f(2) = 2 + 2 + 1 = 5$ ✓, $f'(2) = 2 + 1 = 3$ ✓.
+
+---
+
+**4. Tangente au point $A$**
+
+On a $A(0, 1)$, donc $f(0) = 1$ et :
+
+$$f'(0) = 2 \times \frac{1}{2} \times 0 + 1 = 1$$
+
+L'equation de la tangente en $A$ est :
+
+$$T_A : y = f'(0)(x - 0) + f(0) = 1 \times x + 1 = x + 1$$
+:::

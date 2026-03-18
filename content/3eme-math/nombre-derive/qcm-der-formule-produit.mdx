@@ -1,0 +1,40 @@
+---
+type: qcm
+title: "Derivee d'un produit : piege classique"
+difficulty: 1
+timeMinutes: 1
+tags: [derivation, formules, produit, piege]
+praxeologies: [Prax2]
+---
+
+:::question
+Soit $f(x) = x^2$ et $g(x) = x + 1$. Que vaut $(f \cdot g)'(1)$ ?
+:::
+
+:::option
+$f'(1) \cdot g'(1) = 2 \times 1 = 2$
+:::
+
+:::option{correct}
+$f'(1) \cdot g(1) + f(1) \cdot g'(1) = 2 \times 2 + 1 \times 1 = 5$
+:::
+
+:::option
+$f(1) \cdot g'(1) = 1 \times 1 = 1$
+:::
+
+:::option
+$f'(1) \cdot g(1) = 2 \times 2 = 4$
+:::
+
+:::explanation
+La derivee d'un produit n'est **pas** le produit des derivees. La formule correcte est :
+
+$$(f \cdot g)'(a) = f'(a) \cdot g(a) + f(a) \cdot g'(a)$$
+
+Ici : $f'(1) = 2$, $g(1) = 2$, $f(1) = 1$, $g'(1) = 1$.
+
+D'ou $(f \cdot g)'(1) = 2 \times 2 + 1 \times 1 = 5$.
+
+L'erreur $f'(1) \cdot g'(1) = 2$ provient d'une generalisation abusive de la regle de la somme $(f + g)' = f' + g'$ au produit.
+:::

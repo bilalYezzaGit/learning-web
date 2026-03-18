@@ -1,0 +1,105 @@
+---
+type: exercise
+title: "Vitesse instantanee et approximation affine"
+difficulty: 2
+timeMinutes: 15
+category: probleme
+tags: [derivation, vitesse, cinematique, modelisation]
+praxeologies: [Prax1, Prax3]
+---
+
+:::enonce
+Un mobile se deplace sur un axe. Sa position a l'instant $t$ (en secondes, $t \geq 0$) est donnee par :
+
+$$d(t) = t^3 - 6t^2 + 9t \quad \text{(en metres)}$$
+
+**1)** Calculer la vitesse instantanee $v(t_0) = d'(t_0)$ par la definition du nombre derive.
+
+**2)** Determiner les instants ou la vitesse est nulle.
+
+**3)** Ecrire l'approximation affine de $d(2 + h)$ pour $h$ voisin de $0$. En deduire une estimation de $d(2{,}01)$.
+
+**4)** Interpreter le signe de $v(t)$ en termes de mouvement du mobile.
+:::
+
+:::solution
+**1)** Calculons $d'(t_0)$ par la definition.
+
+Le taux de variation de $d$ en $t_0$ est :
+
+$$\frac{d(t_0 + h) - d(t_0)}{h}$$
+
+Calculons $d(t_0 + h)$ :
+
+$$d(t_0 + h) = (t_0 + h)^3 - 6(t_0 + h)^2 + 9(t_0 + h)$$
+
+$$= t_0^3 + 3t_0^2 h + 3t_0 h^2 + h^3 - 6t_0^2 - 12t_0 h - 6h^2 + 9t_0 + 9h$$
+
+D'ou :
+
+$$d(t_0 + h) - d(t_0) = 3t_0^2 h + 3t_0 h^2 + h^3 - 12t_0 h - 6h^2 + 9h$$
+
+$$= h(3t_0^2 + 3t_0 h + h^2 - 12t_0 - 6h + 9)$$
+
+Le taux de variation est :
+
+$$\frac{d(t_0 + h) - d(t_0)}{h} = 3t_0^2 + 3t_0 h + h^2 - 12t_0 - 6h + 9$$
+
+En passant a la limite quand $h \to 0$ :
+
+$$d'(t_0) = 3t_0^2 - 12t_0 + 9$$
+
+D'ou la vitesse instantanee est :
+
+$$v(t_0) = 3t_0^2 - 12t_0 + 9$$
+
+**2)** On resout $v(t) = 0$ :
+
+$$3t^2 - 12t + 9 = 0$$
+
+$$t^2 - 4t + 3 = 0$$
+
+$$\Delta = 16 - 12 = 4$$
+
+$$t = \frac{4 \pm 2}{2}$$
+
+D'ou $t = 1$ ou $t = 3$.
+
+La vitesse s'annule aux instants $t = 1\,\text{s}$ et $t = 3\,\text{s}$.
+
+**3)** L'approximation affine de $d$ au voisinage de $t_0 = 2$ est :
+
+$$d(2 + h) \approx d(2) + h \cdot d'(2)$$
+
+Calculons :
+
+$$d(2) = 8 - 24 + 18 = 2$$
+
+$$d'(2) = 12 - 24 + 9 = -3$$
+
+D'ou :
+
+$$d(2 + h) \approx 2 - 3h$$
+
+Pour $t = 2{,}01$, on a $h = 0{,}01$ :
+
+$$d(2{,}01) \approx 2 - 3 \times 0{,}01 = 2 - 0{,}03 = 1{,}97 \;\text{m}$$
+
+**4)** Interpretation du signe de $v(t) = 3(t - 1)(t - 3)$ :
+
+- Pour $t \in [0, 1[$ : $v(t) > 0$, le mobile avance dans le sens positif.
+
+- Pour $t \in \,]1, 3[$ : $v(t) < 0$, le mobile recule (sens negatif).
+
+- Pour $t \in \,]3, +\infty[$ : $v(t) > 0$, le mobile avance a nouveau.
+
+- A $t = 1$ et $t = 3$ : $v = 0$, le mobile s'arrete momentanement avant de changer de sens.
+:::
+
+:::methode
+Pour un probleme de cinematique avec la derivee :
+
+1. La **vitesse instantanee** est le nombre derive de la position : $v(t_0) = d'(t_0)$
+2. $v(t_0) > 0$ : mouvement dans le sens positif ; $v(t_0) < 0$ : sens negatif ; $v(t_0) = 0$ : arret momentane
+3. L'approximation affine $d(t_0 + h) \approx d(t_0) + h \cdot v(t_0)$ estime la position pour un petit deplacement de temps
+:::

@@ -1,0 +1,44 @@
+---
+type: qcm
+title: "Tangente horizontale a un polynome du second degre"
+difficulty: 1
+timeMinutes: 1
+tags: [derivation, tangente, horizontale, examen]
+praxeologies: [Prax4a]
+---
+
+:::question
+Soit $f(x) = x^2 - 4x + 3$. En quel point la tangente a $C_f$ est-elle horizontale ?
+:::
+
+:::option
+$x = 0$
+:::
+
+:::option{correct}
+$x = 2$
+:::
+
+:::option
+$x = 4$
+:::
+
+:::option
+$x = 1$
+:::
+
+:::explanation
+La tangente est horizontale lorsque $f'(a) = 0$.
+
+On calcule $f'(a)$ : pour $f(x) = x^2 - 4x + 3$, le taux de variation en $a$ donne :
+
+$$\frac{f(x) - f(a)}{x - a} = \frac{(x^2 - 4x + 3) - (a^2 - 4a + 3)}{x - a} = \frac{(x^2 - a^2) - 4(x - a)}{x - a} = (x + a) - 4$$
+
+Donc $f'(a) = 2a - 4$.
+
+On resout $f'(a) = 0$ : $2a - 4 = 0$, soit $a = 2$.
+
+- $x = 0$ : confusion avec l'ordonnee a l'origine
+- $x = 4$ : erreur en prenant le double de la solution
+- $x = 1$ : confusion avec une racine de $f$ ($f(1) = 0$)
+:::

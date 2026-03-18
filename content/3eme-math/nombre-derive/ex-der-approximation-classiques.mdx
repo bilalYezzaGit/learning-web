@@ -1,0 +1,63 @@
+---
+type: exercise
+title: "Approximations affines classiques"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [derivation, approximation-affine, estimation]
+praxeologies: [Prax5a, Prax5b]
+---
+
+:::enonce
+**a)** Montrer que pour $h$ voisin de $0$ : $\sqrt{1 + h} \approx 1 + \dfrac{h}{2}$
+
+**b)** En deduire des valeurs approchees de $\sqrt{1,001}$ et $\sqrt{0,998}$.
+
+**c)** Montrer que pour $h$ voisin de $0$ : $\dfrac{1}{1 + h} \approx 1 - h$. En deduire une valeur approchee de $\dfrac{1}{1,002}$.
+:::
+
+:::solution
+**a)** Soit $f(x) = \sqrt{1 + x}$. On a $f(0) = 1$.
+
+Calculons $f'(0)$ par la definition :
+
+$$\frac{f(h) - f(0)}{h} = \frac{\sqrt{1 + h} - 1}{h} = \frac{(\sqrt{1 + h} - 1)(\sqrt{1 + h} + 1)}{h(\sqrt{1 + h} + 1)} = \frac{h}{h(\sqrt{1 + h} + 1)} = \frac{1}{\sqrt{1 + h} + 1}$$
+
+$$f'(0) = \lim_{h \to 0} \frac{1}{\sqrt{1 + h} + 1} = \frac{1}{2}$$
+
+Par l'approximation affine $f(0 + h) \approx f(0) + h \cdot f'(0)$ :
+
+$$\sqrt{1 + h} \approx 1 + \frac{h}{2}$$
+
+**b)** Pour $\sqrt{1,001}$ : on pose $h = 0,001$ :
+
+$$\sqrt{1,001} \approx 1 + \frac{0,001}{2} = 1,0005$$
+
+Pour $\sqrt{0,998}$ : on pose $h = -0,002$ :
+
+$$\sqrt{0,998} \approx 1 + \frac{-0,002}{2} = 1 - 0,001 = 0,999$$
+
+**c)** Soit $g(x) = \dfrac{1}{1 + x}$. On a $g(0) = 1$.
+
+Calculons $g'(0)$ par la definition :
+
+$$\frac{g(h) - g(0)}{h} = \frac{\dfrac{1}{1 + h} - 1}{h} = \frac{\dfrac{1 - (1 + h)}{1 + h}}{h} = \frac{-h}{h(1 + h)} = \frac{-1}{1 + h}$$
+
+$$g'(0) = \lim_{h \to 0} \frac{-1}{1 + h} = -1$$
+
+Par l'approximation affine :
+
+$$\frac{1}{1 + h} \approx 1 + h \times (-1) = 1 - h$$
+
+Pour $\dfrac{1}{1,002}$ : on pose $h = 0,002$ :
+
+$$\frac{1}{1,002} \approx 1 - 0,002 = 0,998$$
+:::
+
+:::methode
+Pour obtenir une approximation affine de $f$ au voisinage de $a$ :
+
+1. Calculer $f(a)$ et $f'(a)$
+2. Ecrire $f(a + h) \approx f(a) + h \cdot f'(a)$
+3. Pour l'application numerique, identifier la valeur de $h$ telle que $a + h$ soit le nombre cherche
+:::

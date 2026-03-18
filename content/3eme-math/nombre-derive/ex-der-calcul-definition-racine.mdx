@@ -1,0 +1,52 @@
+---
+type: exercise
+title: "Calcul du nombre derive par la definition — Racine et inverse"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [derivation, definition, racine, inverse]
+praxeologies: [Prax1]
+---
+
+:::enonce
+En utilisant la definition du nombre derive, calculer $f'(a)$ dans chacun des cas suivants :
+
+**a)** $f(x) = \sqrt{x + 3}$ en $a = -2$
+
+**b)** $f(x) = \dfrac{1}{x + 1}$ en $a = 0$
+:::
+
+:::solution
+**a)** On calcule le taux de variation de $f(x) = \sqrt{x + 3}$ en $a = -2$ :
+
+$$\frac{f(x) - f(-2)}{x - (-2)} = \frac{\sqrt{x + 3} - \sqrt{-2 + 3}}{x + 2} = \frac{\sqrt{x + 3} - 1}{x + 2}$$
+
+On multiplie par l'expression conjuguee :
+
+$$= \frac{(\sqrt{x + 3} - 1)(\sqrt{x + 3} + 1)}{(x + 2)(\sqrt{x + 3} + 1)} = \frac{(x + 3) - 1}{(x + 2)(\sqrt{x + 3} + 1)} = \frac{x + 2}{(x + 2)(\sqrt{x + 3} + 1)}$$
+
+On simplifie par $(x + 2)$ :
+
+$$= \frac{1}{\sqrt{x + 3} + 1}$$
+
+En passant a la limite :
+
+$$f'(-2) = \lim_{x \to -2} \frac{1}{\sqrt{x + 3} + 1} = \frac{1}{\sqrt{1} + 1} = \frac{1}{2}$$
+
+**b)** On calcule le taux de variation de $f(x) = \dfrac{1}{x + 1}$ en $a = 0$ :
+
+$$\frac{f(x) - f(0)}{x - 0} = \frac{\dfrac{1}{x + 1} - 1}{x}$$
+
+On reduit au meme denominateur :
+
+$$= \frac{\dfrac{1 - (x + 1)}{x + 1}}{x} = \frac{\dfrac{-x}{x + 1}}{x} = \frac{-x}{x(x + 1)} = \frac{-1}{x + 1}$$
+
+En passant a la limite :
+
+$$f'(0) = \lim_{x \to 0} \frac{-1}{x + 1} = \frac{-1}{1} = -1$$
+:::
+
+:::methode
+- Pour les **racines carrees** : multiplier numerateur et denominateur par l'expression conjuguee $(\sqrt{A} + \sqrt{B})$ pour eliminer la racine.
+- Pour les **fractions** : reduire au meme denominateur pour obtenir une seule fraction, puis simplifier le facteur $(x - a)$.
+:::

@@ -1,0 +1,80 @@
+---
+type: exercise
+title: "Tangentes a une parabole depuis un point exterieur"
+difficulty: 3
+timeMinutes: 12
+category: approfondissement
+tags: [derivation, tangente, point-exterieur, parabole]
+praxeologies: [Prax10, Prax3]
+---
+
+:::enonce
+Soit $\mathcal{C}$ la courbe de $f(x) = x^2$ et soit $B(1, -3)$.
+
+**1)** Verifier que $B$ n'appartient pas a $\mathcal{C}$.
+
+**2)** Ecrire l'equation de la tangente a $\mathcal{C}$ au point d'abscisse $t$.
+
+**3)** Determiner les valeurs de $t$ pour lesquelles cette tangente passe par $B$.
+
+**4)** En deduire les equations des deux tangentes a $\mathcal{C}$ passant par $B$.
+:::
+
+:::solution
+**1)** Si $B(1, -3)$ appartenait a $\mathcal{C}$, on aurait $f(1) = -3$. Or $f(1) = 1^2 = 1 \neq -3$.
+
+Donc $B$ **n'appartient pas** a $\mathcal{C}$.
+
+**2)** Soit $M(t, t^2)$ un point de $\mathcal{C}$. On a $f(t) = t^2$ et $f'(t) = 2t$.
+
+L'equation de la tangente a $\mathcal{C}$ au point d'abscisse $t$ est :
+
+$$T_t : y = f'(t)(x - t) + f(t) = 2t(x - t) + t^2$$
+
+$$T_t : y = 2tx - 2t^2 + t^2$$
+
+$$\boxed{T_t : y = 2tx - t^2}$$
+
+**3)** La tangente $T_t$ passe par $B(1, -3)$ si et seulement si les coordonnees de $B$ verifient l'equation de $T_t$ :
+
+$$-3 = 2t \times 1 - t^2$$
+
+$$-3 = 2t - t^2$$
+
+$$t^2 - 2t - 3 = 0$$
+
+On calcule le discriminant : $\Delta = 4 + 12 = 16$.
+
+$$t = \frac{2 \pm 4}{2}$$
+
+D'ou $t = 3$ ou $t = -1$.
+
+**4)** Les deux tangentes sont :
+
+**Pour $t = 3$** : $T_3 : y = 2 \times 3 \times x - 3^2 = 6x - 9$.
+
+$$\boxed{T_3 : y = 6x - 9}$$
+
+**Verification** : $T_3$ passe par $B$ : $6 \times 1 - 9 = -3$. Correct.
+
+Le point de tangence est $M_1(3, 9)$.
+
+**Pour $t = -1$** : $T_{-1} : y = 2 \times (-1) \times x - (-1)^2 = -2x - 1$.
+
+$$\boxed{T_{-1} : y = -2x - 1}$$
+
+**Verification** : $T_{-1}$ passe par $B$ : $-2 \times 1 - 1 = -3$. Correct.
+
+Le point de tangence est $M_2(-1, 1)$.
+
+Depuis le point exterieur $B(1, -3)$, on peut tracer exactement **deux tangentes** a la parabole $\mathcal{C}$ : $y = 6x - 9$ (tangente en $M_1(3, 9)$) et $y = -2x - 1$ (tangente en $M_2(-1, 1)$).
+:::
+
+:::methode
+Pour trouver les tangentes a une courbe passant par un point exterieur $B(x_B, y_B)$ :
+
+1. Ecrire la tangente generique au point d'abscisse $t$ : $y = f'(t)(x - t) + f(t)$
+2. Imposer que $B$ appartient a cette tangente : substituer $(x_B, y_B)$ dans l'equation
+3. Resoudre l'equation en $t$ obtenue
+4. Chaque solution donne une tangente
+:::

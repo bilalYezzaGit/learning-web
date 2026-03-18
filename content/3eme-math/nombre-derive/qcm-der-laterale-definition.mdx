@@ -1,0 +1,38 @@
+---
+type: qcm
+title: "Definition du nombre derive a droite"
+difficulty: 1
+timeMinutes: 1
+tags: [derivation, laterale, definition, piege]
+praxeologies: [Prax7]
+---
+
+:::question
+Le nombre derive a droite $f'_d(a)$ est defini comme :
+:::
+
+:::option
+$\displaystyle\lim_{h \to 0^-} \frac{f(a + h) - f(a)}{h}$
+:::
+
+:::option{correct}
+$\displaystyle\lim_{h \to 0^+} \frac{f(a + h) - f(a)}{h}$
+:::
+
+:::option
+$\displaystyle\lim_{x \to a^-} \frac{f(x) - f(a)}{x - a}$
+:::
+
+:::option
+$\displaystyle\lim_{h \to 0} \frac{f(a + h) - f(a)}{h}$
+:::
+
+:::explanation
+Le nombre derive **a droite** utilise la limite quand $h \to 0^+$ (c'est-a-dire $h > 0$).
+
+En effet, si $h > 0$, alors $a + h > a$ : on approche le point $a$ **par la droite**, d'ou le nom.
+
+- L'option (a) avec $h \to 0^-$ correspond a $f'_g(a)$ (derivee a gauche), pas a droite.
+- L'option (c) avec $x \to a^-$ correspond aussi a la derivee a gauche (on approche par la gauche).
+- L'option (d) avec $h \to 0$ (sans signe) correspond a $f'(a)$, le nombre derive tout court, pas le nombre derive lateral.
+:::

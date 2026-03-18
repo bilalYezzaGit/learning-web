@@ -1,0 +1,68 @@
+---
+type: exercise
+title: "Derivabilite d'une fonction par morceaux en un point de raccordement"
+difficulty: 1
+timeMinutes: 10
+tags: [derivation, morceaux, raccordement, laterale]
+category: application
+praxeologies: [Prax8, Prax7]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}$ par :
+
+$$f(x) = \begin{cases} x^2 + 1 & \text{si } x \geq 0 \\ -2x + 1 & \text{si } x < 0 \end{cases}$$
+
+1. Verifier que $f$ est continue en $0$.
+2. Calculer $f'_d(0)$ et $f'_g(0)$.
+3. $f$ est-elle derivable en $0$ ? Justifier.
+4. Ecrire les equations des demi-tangentes a la courbe $\mathcal{C}_f$ au point d'abscisse $0$.
+:::
+
+:::solution
+**1. Continuite en $0$**
+
+$$f(0) = 0^2 + 1 = 1$$
+
+$$\lim_{x \to 0^+} f(x) = \lim_{x \to 0^+} (x^2 + 1) = 1$$
+
+$$\lim_{x \to 0^-} f(x) = \lim_{x \to 0^-} (-2x + 1) = 1$$
+
+On a $\lim_{x \to 0^-} f(x) = \lim_{x \to 0^+} f(x) = f(0) = 1$, donc $f$ est **continue en $0$**.
+
+---
+
+**2. Calcul des derivees laterales**
+
+**Derivee a droite** : pour $h > 0$, $f(h) = h^2 + 1$, donc :
+
+$$f'_d(0) = \lim_{h \to 0^+} \frac{f(h) - f(0)}{h} = \lim_{h \to 0^+} \frac{(h^2 + 1) - 1}{h} = \lim_{h \to 0^+} \frac{h^2}{h} = \lim_{h \to 0^+} h = 0$$
+
+**Derivee a gauche** : pour $h < 0$, $f(h) = -2h + 1$, donc :
+
+$$f'_g(0) = \lim_{h \to 0^-} \frac{f(h) - f(0)}{h} = \lim_{h \to 0^-} \frac{(-2h + 1) - 1}{h} = \lim_{h \to 0^-} \frac{-2h}{h} = -2$$
+
+---
+
+**3. Derivabilite en $0$**
+
+On a $f'_d(0) = 0$ et $f'_g(0) = -2$.
+
+Comme $f'_d(0) \neq f'_g(0)$, la fonction $f$ **n'est pas derivable en $0$**.
+
+Le point $M(0, 1)$ est un **point anguleux** de la courbe $\mathcal{C}_f$.
+
+---
+
+**4. Equations des demi-tangentes**
+
+**Demi-tangente a droite** (pente $f'_d(0) = 0$) :
+
+$$y = 0 \cdot (x - 0) + 1 = 1$$
+
+C'est une droite horizontale.
+
+**Demi-tangente a gauche** (pente $f'_g(0) = -2$) :
+
+$$y = -2(x - 0) + 1 = -2x + 1$$
+:::

@@ -1,0 +1,57 @@
+kind: livret
+title: "Nombre derive — Cours et applications directes"
+description: "Decouvrir le nombre derive : definition, tangente, formules, derivabilite laterale et applications."
+trimester: T1
+order: 1
+objectives:
+  - "Calculer le nombre derive par la definition et par les formules"
+  - "Ecrire l'equation de la tangente a une courbe"
+  - "Utiliser l'approximation affine pour des estimations"
+  - "Etudier la derivabilite laterale et les fonctions par morceaux"
+  - "Calculer des limites par reconnaissance d'un nombre derive"
+
+sections:
+  - label: "Definition du nombre derive"
+    steps:
+      - lesson-der-definition-taux
+      - ex-der-calcul-definition-polynome
+      - ex-der-calcul-definition-racine
+      - quiz:
+          - qcm-der-definition-taux-variation
+          - qcm-der-calcul-definition
+
+  - label: "Tangente et approximation affine"
+    steps:
+      - lesson-der-tangente-approximation
+      - ex-der-tangente-directe
+      - ex-der-approximation-classiques
+      - quiz:
+          - qcm-der-equation-tangente
+          - qcm-der-approximation-affine
+
+  - label: "Formules de derivation"
+    steps:
+      - lesson-der-formules-usuelles-operations
+      - ex-der-formules-polynome-rationnelle
+      - ex-der-formules-racine-produit
+      - quiz:
+          - qcm-der-formule-produit
+          - qcm-der-condition-racine
+
+  - label: "Derivabilite laterale"
+    steps:
+      - lesson-der-laterale-morceaux
+      - ex-der-valeur-absolue
+      - ex-der-morceaux-raccordement
+      - quiz:
+          - qcm-der-continuite-vs-derivabilite
+          - qcm-der-laterale-definition
+
+  - label: "Applications du nombre derive"
+    steps:
+      - lesson-der-applications
+      - ex-der-limite-nombre-derive
+      - ex-der-lecture-graphique
+      - quiz:
+          - qcm-der-reconnaitre-limite
+          - qcm-der-lecture-graphique-pente

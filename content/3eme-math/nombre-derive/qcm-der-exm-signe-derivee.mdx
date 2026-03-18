@@ -1,0 +1,38 @@
+---
+type: qcm
+title: "Signe de la derivee d'une fonction rationnelle"
+difficulty: 1
+timeMinutes: 1
+tags: [derivation, formules, signe, piege, examen]
+praxeologies: [Prax2]
+---
+
+:::question
+Soit $f(x) = \dfrac{1}{x + 1}$ definie sur $]-1 \,;\, +\infty[$. Que vaut $f'(a)$ pour $a > -1$ ?
+:::
+
+:::option
+$\dfrac{1}{(a + 1)^2}$
+:::
+
+:::option{correct}
+$\dfrac{-1}{(a + 1)^2}$
+:::
+
+:::option
+$\dfrac{-1}{a + 1}$
+:::
+
+:::option
+$\dfrac{1}{a + 1}$
+:::
+
+:::explanation
+On applique la formule $\left(\dfrac{1}{u}\right)' = \dfrac{-u'}{u^2}$ avec $u(x) = x + 1$ et $u'(x) = 1$ :
+
+$$f'(x) = \frac{-1}{(x + 1)^2}$$
+
+Le **signe moins** est essentiel : la derivee de $\dfrac{1}{u}$ est toujours **negative** (quand $u' > 0$). Oublier ce signe est une erreur tres frequente.
+
+De plus, le denominateur est au **carre**, pas a la puissance $1$.
+:::

@@ -1,0 +1,36 @@
+---
+type: qcm
+title: "Identification du taux de variation"
+difficulty: 0
+timeMinutes: 1
+tags: [derivation, definition, taux-variation]
+praxeologies: [Prax1]
+---
+
+:::question
+Soit $f$ une fonction definie sur un intervalle $I$ et $a \in I$. Quelle expression represente le nombre derive $f'(a)$ ?
+:::
+
+:::option
+$\dfrac{f(a + h) - f(a)}{a}$
+:::
+
+:::option{correct}
+$\displaystyle\lim_{h \to 0} \dfrac{f(a + h) - f(a)}{h}$
+:::
+
+:::option
+$\dfrac{f(a) - f(h)}{a - h}$
+:::
+
+:::option
+$\displaystyle\lim_{x \to 0} \dfrac{f(x) - f(a)}{x - a}$
+:::
+
+:::explanation
+Le nombre derive $f'(a)$ est defini comme la limite du taux de variation quand $h$ tend vers $0$ :
+
+$$f'(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h}$$
+
+Les autres propositions contiennent des erreurs : division par $a$ au lieu de $h$, mauvais arguments dans $f$, ou limite quand $x \to 0$ au lieu de $x \to a$.
+:::

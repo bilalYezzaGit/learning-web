@@ -1,0 +1,83 @@
+---
+type: exercise
+title: "Derivabilite de f(x) = |x^2 - 1|"
+difficulty: 2
+timeMinutes: 12
+category: application
+tags: [derivation, laterale, valeur-absolue, demi-tangentes, examen]
+praxeologies: [Prax7, Prax1b]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}$ par $f(x) = |x^2 - 1|$.
+
+**1)** Reecrire $f(x)$ sans valeur absolue (expression par morceaux).
+
+**2)** Etudier la derivabilite de $f$ en $a = 1$.
+
+**3)** Etudier la derivabilite de $f$ en $a = -1$.
+
+**4)** Pour chaque point de non-derivabilite, ecrire les equations des demi-tangentes.
+:::
+
+:::solution
+**1)** On etudie le signe de $x^2 - 1 = (x - 1)(x + 1)$ :
+
+- $x^2 - 1 \geq 0$ lorsque $x \leq -1$ ou $x \geq 1$
+- $x^2 - 1 < 0$ lorsque $-1 < x < 1$
+
+Donc :
+
+$$f(x) = \begin{cases} x^2 - 1 & \text{si } x \leq -1 \text{ ou } x \geq 1 \\ 1 - x^2 & \text{si } -1 < x < 1 \end{cases}$$
+
+**2)** Etude de la derivabilite en $a = 1$ :
+
+**Continuite** : $f(1) = |1 - 1| = 0$, $\lim_{x \to 1^+} (x^2 - 1) = 0$, $\lim_{x \to 1^-} (1 - x^2) = 0$. Donc $f$ est continue en $1$.
+
+**Derivee a droite** : pour $h > 0$, $1 + h > 1$, donc $f(1 + h) = (1 + h)^2 - 1 = 1 + 2h + h^2 - 1 = 2h + h^2$ :
+
+$$f'_d(1) = \lim_{h \to 0^+} \frac{2h + h^2 - 0}{h} = \lim_{h \to 0^+} (2 + h) = 2$$
+
+**Derivee a gauche** : pour $h < 0$ (petit), $1 + h < 1$, donc $f(1 + h) = 1 - (1 + h)^2 = 1 - 1 - 2h - h^2 = -2h - h^2$ :
+
+$$f'_g(1) = \lim_{h \to 0^-} \frac{-2h - h^2 - 0}{h} = \lim_{h \to 0^-} (-2 - h) = -2$$
+
+**Conclusion** : $f'_d(1) = 2 \neq -2 = f'_g(1)$. Donc $f$ n'est pas derivable en $1$. Le point $A(1, 0)$ est un **point anguleux**.
+
+**3)** Etude de la derivabilite en $a = -1$ :
+
+**Continuite** : $f(-1) = |1 - 1| = 0$, $\lim_{x \to -1^-} (x^2 - 1) = 0$, $\lim_{x \to -1^+} (1 - x^2) = 0$. Donc $f$ est continue en $-1$.
+
+**Derivee a droite** : pour $h > 0$ (petit), $-1 + h > -1$, donc $f(-1 + h) = 1 - (-1 + h)^2 = 1 - (1 - 2h + h^2) = 2h - h^2$ :
+
+$$f'_d(-1) = \lim_{h \to 0^+} \frac{2h - h^2 - 0}{h} = \lim_{h \to 0^+} (2 - h) = 2$$
+
+**Derivee a gauche** : pour $h < 0$, $-1 + h < -1$, donc $f(-1 + h) = (-1 + h)^2 - 1 = 1 - 2h + h^2 - 1 = -2h + h^2$ :
+
+$$f'_g(-1) = \lim_{h \to 0^-} \frac{-2h + h^2 - 0}{h} = \lim_{h \to 0^-} (-2 + h) = -2$$
+
+**Conclusion** : $f'_d(-1) = 2 \neq -2 = f'_g(-1)$. Donc $f$ n'est pas derivable en $-1$. Le point $B(-1, 0)$ est un **point anguleux**.
+
+**4)** Equations des demi-tangentes :
+
+**Au point $A(1, 0)$** :
+
+- Demi-tangente a droite : $y = f'_d(1)(x - 1) + f(1) = 2(x - 1)$, soit $y = 2x - 2$
+
+- Demi-tangente a gauche : $y = f'_g(1)(x - 1) + f(1) = -2(x - 1)$, soit $y = -2x + 2$
+
+**Au point $B(-1, 0)$** :
+
+- Demi-tangente a droite : $y = f'_d(-1)(x - (-1)) + f(-1) = 2(x + 1)$, soit $y = 2x + 2$
+
+- Demi-tangente a gauche : $y = f'_g(-1)(x - (-1)) + f(-1) = -2(x + 1)$, soit $y = -2x - 2$
+:::
+
+:::methode
+Pour etudier la derivabilite d'une fonction avec valeur absolue :
+
+1. Reecrire $f$ sans valeur absolue (expression par morceaux)
+2. Verifier la continuite au point critique
+3. Calculer $f'_d(a)$ et $f'_g(a)$ separement
+4. Conclure : si $f'_d(a) \neq f'_g(a)$, point anguleux avec demi-tangentes
+:::

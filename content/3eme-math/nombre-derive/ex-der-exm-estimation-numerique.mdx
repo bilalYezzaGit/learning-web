@@ -1,0 +1,65 @@
+---
+type: exercise
+title: "Estimations numeriques par approximation affine"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [derivation, approximation-affine, estimation, examen]
+praxeologies: [Prax5a, Prax5b]
+---
+
+:::enonce
+**1.** Montrer que pour $h$ voisin de $0$ :
+
+$$(1 + h)^4 \approx 1 + 4h$$
+
+**2.** En deduire une valeur approchee de $(1{,}002)^4$.
+
+**3.** Soit $f(x) = \sqrt{2x + 5}$. Donner une valeur approchee de $f(10{,}001)$.
+:::
+
+:::solution
+**1.** Soit $g(x) = (1 + x)^4$. On a $g(0) = 1$.
+
+Calculons $g'(x)$ : avec la formule $(u^n)' = n \cdot u^{n-1} \cdot u'$ ou $u(x) = 1 + x$ :
+
+$$g'(x) = 4(1 + x)^3$$
+
+$$g'(0) = 4 \times 1^3 = 4$$
+
+Par l'approximation affine $g(0 + h) \approx g(0) + h \cdot g'(0)$ :
+
+$$(1 + h)^4 \approx 1 + 4h$$
+
+---
+
+**2.** On ecrit $(1{,}002)^4 = (1 + 0{,}002)^4$, soit $h = 0{,}002$ :
+
+$$(1{,}002)^4 \approx 1 + 4 \times 0{,}002 = 1 + 0{,}008 = 1{,}008$$
+
+---
+
+**3.** On a $f(x) = \sqrt{2x + 5}$ et on cherche $f(10{,}001)$.
+
+On utilise l'approximation affine au voisinage de $a = 10$ :
+
+$$f(10) = \sqrt{2 \times 10 + 5} = \sqrt{25} = 5$$
+
+Calculons $f'(x)$ : avec $(\sqrt{u})' = \dfrac{u'}{2\sqrt{u}}$ :
+
+$$f'(x) = \frac{2}{2\sqrt{2x + 5}} = \frac{1}{\sqrt{2x + 5}}$$
+
+$$f'(10) = \frac{1}{\sqrt{25}} = \frac{1}{5}$$
+
+On pose $h = 10{,}001 - 10 = 0{,}001$ :
+
+$$f(10{,}001) \approx f(10) + h \cdot f'(10) = 5 + 0{,}001 \times \frac{1}{5} = 5 + 0{,}0002 = 5{,}0002$$
+:::
+
+:::methode
+Pour estimer $f(a + h)$ quand $h$ est petit :
+
+1. Choisir un point $a$ ou $f(a)$ est facile a calculer (entier, carre parfait...)
+2. Calculer $f'(a)$
+3. Appliquer $f(a + h) \approx f(a) + h \cdot f'(a)$
+:::

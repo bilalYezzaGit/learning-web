@@ -1,0 +1,72 @@
+---
+type: lesson
+title: "Derivabilite et continuite : preuve et contre-exemples"
+difficulty: 2
+timeMinutes: 8
+tags: [derivation, demonstration, continuite, contre-exemple]
+praxeologies: [Prax6a, Prax6b]
+---
+
+### Le theoreme T3 : derivable implique continu
+
+:::theorem[Theoreme T3]
+Si $f$ est derivable en $a$, alors $f$ est continue en $a$.
+:::
+
+**Demonstration complete.**
+
+Pour montrer que $f$ est continue en $a$, il faut montrer que $\lim_{x \to a} f(x) = f(a)$, c'est-a-dire que $\lim_{x \to a} \bigl[f(x) - f(a)\bigr] = 0$.
+
+Pour $x \neq a$, on ecrit :
+
+$$f(x) - f(a) = \frac{f(x) - f(a)}{x - a} \times (x - a)$$
+
+Comme $f$ est derivable en $a$, on a :
+
+$$\lim_{x \to a} \frac{f(x) - f(a)}{x - a} = f'(a)$$
+
+De plus :
+
+$$\lim_{x \to a} (x - a) = 0$$
+
+Par produit des limites :
+
+$$\lim_{x \to a} \bigl[f(x) - f(a)\bigr] = f'(a) \times 0 = 0$$
+
+D'ou $\lim_{x \to a} f(x) = f(a)$, ce qui signifie que $f$ est continue en $a$.
+
+### La reciproque est fausse
+
+:::attention[Continu n'implique pas derivable]
+La reciproque de T3 est **fausse** : une fonction peut etre continue en un point sans y etre derivable. Il existe deux types de situations.
+:::
+
+:::example[Contre-exemple 1 : la valeur absolue (point anguleux)]
+Soit $f(x) = |x|$. Cette fonction est continue en $0$ car $\lim_{x \to 0} |x| = 0 = f(0)$.
+
+Etudions la derivabilite en $0$ :
+
+- **A droite** : pour $h > 0$, $\dfrac{f(0 + h) - f(0)}{h} = \dfrac{|h|}{h} = \dfrac{h}{h} = 1$, donc $f'_d(0) = 1$.
+
+- **A gauche** : pour $h < 0$, $\dfrac{f(0 + h) - f(0)}{h} = \dfrac{|h|}{h} = \dfrac{-h}{h} = -1$, donc $f'_g(0) = -1$.
+
+Comme $f'_d(0) = 1 \neq -1 = f'_g(0)$, la fonction $f$ n'est **pas derivable** en $0$.
+
+La courbe presente un **point anguleux** en $0$ : deux demi-tangentes de pentes differentes.
+:::
+
+:::example[Contre-exemple 2 : la racine cubique (tangente verticale)]
+Soit $g(x) = x^{1/3} = \sqrt[3]{x}$. Cette fonction est continue en $0$ car $\lim_{x \to 0} x^{1/3} = 0 = g(0)$.
+
+Etudions le taux de variation en $0$ :
+
+$$\frac{g(h) - g(0)}{h} = \frac{h^{1/3}}{h} = \frac{1}{h^{2/3}}$$
+
+Or $\lim_{h \to 0} \dfrac{1}{h^{2/3}} = +\infty$, donc $g$ n'est **pas derivable** en $0$.
+
+La courbe admet une **tangente verticale** au point $O(0, 0)$.
+:::
+
+:::remark[Curiosite : la fonction de Weierstrass]
+Il existe des fonctions **continues partout** mais **derivables nulle part**. La plus celebre est la fonction de Weierstrass (1872), definie comme une serie de fonctions trigonometriques. Elle montre que la continuite et la derivabilite sont des proprietes fondamentalement differentes : la derivabilite est beaucoup plus exigeante.
+:::

@@ -1,0 +1,95 @@
+---
+type: exercise
+title: "Tangentes perpendiculaires en un point commun"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [derivation, tangentes-perpendiculaires, paraboles]
+praxeologies: [Prax12, Prax3]
+---
+
+:::enonce
+Soit $\mathcal{P}$ la courbe de $f(x) = x^2$ et $\mathcal{P}'$ la courbe de $g(x) = -\dfrac{x^2}{3} + 1$.
+
+**1)** Determiner les points d'intersection de $\mathcal{P}$ et $\mathcal{P}'$.
+
+**2)** Montrer que les tangentes a $\mathcal{P}$ et $\mathcal{P}'$ en chacun de ces points sont perpendiculaires.
+
+**3)** Ecrire les equations des tangentes au point d'intersection d'abscisse positive.
+:::
+
+:::solution
+**1)** Points d'intersection.
+
+On resout $f(x) = g(x)$ :
+
+$$x^2 = -\frac{x^2}{3} + 1$$
+
+$$x^2 + \frac{x^2}{3} = 1$$
+
+$$\frac{4x^2}{3} = 1$$
+
+$$x^2 = \frac{3}{4}$$
+
+$$x = \pm \frac{\sqrt{3}}{2}$$
+
+Pour $x = \dfrac{\sqrt{3}}{2}$ : $f\!\left(\dfrac{\sqrt{3}}{2}\right) = \dfrac{3}{4}$.
+
+Pour $x = -\dfrac{\sqrt{3}}{2}$ : $f\!\left(-\dfrac{\sqrt{3}}{2}\right) = \dfrac{3}{4}$.
+
+Les deux points d'intersection sont $A\!\left(\dfrac{\sqrt{3}}{2},\, \dfrac{3}{4}\right)$ et $B\!\left(-\dfrac{\sqrt{3}}{2},\, \dfrac{3}{4}\right)$.
+
+**2)** Perpendicularite des tangentes.
+
+Calculons les nombres derives :
+
+$$f'(x) = 2x \qquad g'(x) = -\frac{2x}{3}$$
+
+**Au point $A$ ($x = \dfrac{\sqrt{3}}{2}$)** :
+
+$$f'\!\left(\frac{\sqrt{3}}{2}\right) = 2 \times \frac{\sqrt{3}}{2} = \sqrt{3}$$
+
+$$g'\!\left(\frac{\sqrt{3}}{2}\right) = -\frac{2}{3} \times \frac{\sqrt{3}}{2} = -\frac{\sqrt{3}}{3}$$
+
+Produit des pentes :
+
+$$f'\!\left(\frac{\sqrt{3}}{2}\right) \times g'\!\left(\frac{\sqrt{3}}{2}\right) = \sqrt{3} \times \left(-\frac{\sqrt{3}}{3}\right) = -\frac{3}{3} = -1$$
+
+Comme le produit des pentes vaut $-1$, les tangentes sont **perpendiculaires** en $A$.
+
+**Au point $B$ ($x = -\dfrac{\sqrt{3}}{2}$)** :
+
+$$f'\!\left(-\frac{\sqrt{3}}{2}\right) = -\sqrt{3} \qquad g'\!\left(-\frac{\sqrt{3}}{2}\right) = \frac{\sqrt{3}}{3}$$
+
+$$f'\!\left(-\frac{\sqrt{3}}{2}\right) \times g'\!\left(-\frac{\sqrt{3}}{2}\right) = (-\sqrt{3}) \times \frac{\sqrt{3}}{3} = -\frac{3}{3} = -1$$
+
+Les tangentes sont egalement **perpendiculaires** en $B$.
+
+**3)** Equations des tangentes au point $A\!\left(\dfrac{\sqrt{3}}{2},\, \dfrac{3}{4}\right)$.
+
+**Tangente a $\mathcal{P}$** :
+
+$$T_1 : y = f'\!\left(\frac{\sqrt{3}}{2}\right)\!\left(x - \frac{\sqrt{3}}{2}\right) + f\!\left(\frac{\sqrt{3}}{2}\right)$$
+
+$$T_1 : y = \sqrt{3}\!\left(x - \frac{\sqrt{3}}{2}\right) + \frac{3}{4} = \sqrt{3}\, x - \frac{3}{2} + \frac{3}{4}$$
+
+$$\boxed{T_1 : y = \sqrt{3}\, x - \frac{3}{4}}$$
+
+**Tangente a $\mathcal{P}'$** :
+
+$$T_2 : y = g'\!\left(\frac{\sqrt{3}}{2}\right)\!\left(x - \frac{\sqrt{3}}{2}\right) + g\!\left(\frac{\sqrt{3}}{2}\right)$$
+
+$$T_2 : y = -\frac{\sqrt{3}}{3}\!\left(x - \frac{\sqrt{3}}{2}\right) + \frac{3}{4} = -\frac{\sqrt{3}}{3}\, x + \frac{1}{2} + \frac{3}{4}$$
+
+$$\boxed{T_2 : y = -\frac{\sqrt{3}}{3}\, x + \frac{5}{4}}$$
+
+**Verification** : $\sqrt{3} \times \left(-\dfrac{\sqrt{3}}{3}\right) = -1$. Les tangentes $T_1$ et $T_2$ sont bien perpendiculaires.
+:::
+
+:::methode
+Pour montrer que les tangentes a deux courbes en un point commun sont perpendiculaires :
+
+1. Determiner les points d'intersection : $f(a) = g(a)$
+2. Calculer les pentes des tangentes : $f'(a)$ et $g'(a)$
+3. Verifier que le produit des pentes vaut $-1$ : $f'(a) \times g'(a) = -1$
+:::

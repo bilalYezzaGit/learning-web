@@ -1,0 +1,112 @@
+---
+type: exercise
+title: "Demonstration des formules de derivation"
+difficulty: 3
+timeMinutes: 15
+category: probleme
+tags: [derivation, demonstration, formules, produit]
+praxeologies: [Prax1, Prax2]
+---
+
+:::enonce
+**1)** Demontrer que si $f$ et $g$ sont derivables en $a$, alors $f + g$ est derivable en $a$ et :
+
+$$(f + g)'(a) = f'(a) + g'(a)$$
+
+**2)** Demontrer que si $f$ et $g$ sont derivables en $a$, alors $fg$ est derivable en $a$ et :
+
+$$(fg)'(a) = f'(a) \, g(a) + f(a) \, g'(a)$$
+
+*Indication : ajouter et retrancher $f(a) \, g(x)$ au numerateur.*
+
+**3)** En deduire que $(f^2)'(a) = 2 \, f(a) \, f'(a)$.
+
+**4)** Generaliser par recurrence : pour tout entier $n \geq 1$, si $f$ est derivable en $a$, alors :
+
+$$(f^n)'(a) = n \, f^{n-1}(a) \, f'(a)$$
+:::
+
+:::solution
+**1) Derivee de la somme.**
+
+On ecrit le taux de variation de $f + g$ en $a$ :
+
+$$\frac{(f + g)(x) - (f + g)(a)}{x - a} = \frac{f(x) + g(x) - f(a) - g(a)}{x - a}$$
+
+$$= \frac{f(x) - f(a)}{x - a} + \frac{g(x) - g(a)}{x - a}$$
+
+En passant a la limite quand $x \to a$, comme $f$ et $g$ sont derivables en $a$ :
+
+$$\lim_{x \to a} \frac{(f + g)(x) - (f + g)(a)}{x - a} = f'(a) + g'(a)$$
+
+D'ou $f + g$ est derivable en $a$ et $(f + g)'(a) = f'(a) + g'(a)$.
+
+**2) Derivee du produit.**
+
+On ecrit le taux de variation de $fg$ en $a$ :
+
+$$\frac{f(x) \, g(x) - f(a) \, g(a)}{x - a}$$
+
+On ajoute et retranche $f(a) \, g(x)$ au numerateur :
+
+$$= \frac{f(x) \, g(x) - f(a) \, g(x) + f(a) \, g(x) - f(a) \, g(a)}{x - a}$$
+
+$$= \frac{\bigl[f(x) - f(a)\bigr] \, g(x)}{x - a} + \frac{f(a) \bigl[g(x) - g(a)\bigr]}{x - a}$$
+
+$$= \frac{f(x) - f(a)}{x - a} \times g(x) + f(a) \times \frac{g(x) - g(a)}{x - a}$$
+
+En passant a la limite quand $x \to a$ :
+
+- $\lim_{x \to a} \dfrac{f(x) - f(a)}{x - a} = f'(a)$
+
+- $\lim_{x \to a} g(x) = g(a)$ (car $g$ derivable en $a$ donc continue en $a$ par T3)
+
+- $\lim_{x \to a} \dfrac{g(x) - g(a)}{x - a} = g'(a)$
+
+Par suite :
+
+$$\lim_{x \to a} \frac{f(x) \, g(x) - f(a) \, g(a)}{x - a} = f'(a) \, g(a) + f(a) \, g'(a)$$
+
+D'ou $fg$ est derivable en $a$ et $(fg)'(a) = f'(a) \, g(a) + f(a) \, g'(a)$.
+
+**3) Derivee de $f^2$.**
+
+On applique la formule du produit avec $g = f$ :
+
+$$(f^2)'(a) = (f \times f)'(a) = f'(a) \, f(a) + f(a) \, f'(a) = 2 \, f(a) \, f'(a)$$
+
+**4) Demonstration par recurrence.**
+
+**Initialisation.** Pour $n = 1$ : $(f^1)'(a) = f'(a) = 1 \times f^{0}(a) \times f'(a)$. Vrai.
+
+**Heredite.** Supposons que pour un entier $n \geq 1$ :
+
+$$(f^n)'(a) = n \, f^{n-1}(a) \, f'(a)$$
+
+On a $f^{n+1} = f^n \times f$. Par la formule du produit :
+
+$$(f^{n+1})'(a) = (f^n)'(a) \, f(a) + f^n(a) \, f'(a)$$
+
+En utilisant l'hypothese de recurrence :
+
+$$= n \, f^{n-1}(a) \, f'(a) \, f(a) + f^n(a) \, f'(a)$$
+
+$$= n \, f^n(a) \, f'(a) + f^n(a) \, f'(a)$$
+
+$$= (n + 1) \, f^n(a) \, f'(a)$$
+
+D'ou la propriete est vraie au rang $n + 1$.
+
+**Conclusion.** Par recurrence, pour tout entier $n \geq 1$ :
+
+$$(f^n)'(a) = n \, f^{n-1}(a) \, f'(a)$$
+:::
+
+:::methode
+Pour demontrer une formule de derivation :
+
+1. Ecrire le taux de variation par la definition
+2. Transformer algebriquement le numerateur pour faire apparaitre des taux de variation connus
+3. Passer a la limite en utilisant les limites connues et les theoremes sur les operations de limites
+4. Pour le produit, le **truc cle** est d'ajouter et retrancher un terme intermediaire au numerateur
+:::
