@@ -63,7 +63,7 @@ function GuestContent() {
     <>
       <SheetHeader className="border-b px-6 py-4">
         <SheetTitle>Profil</SheetTitle>
-        <SheetDescription>Connectez-vous pour utiliser la correction IA</SheetDescription>
+        <SheetDescription>Connecte-toi pour utiliser la correction IA</SheetDescription>
       </SheetHeader>
       <div className="flex flex-1 flex-col items-center justify-center p-6">
         <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-muted">
@@ -71,7 +71,7 @@ function GuestContent() {
         </div>
         <h2 className="text-xl font-semibold">Visiteur</h2>
         <p className="mt-2 text-center text-muted-foreground">
-          Connectez-vous pour utiliser la correction IA
+          Connecte-toi pour utiliser la correction IA
         </p>
         <Button className="mt-6" size="lg" asChild>
           <Link href="/login">Se connecter</Link>
@@ -117,7 +117,7 @@ function AuthenticatedContent({
             <SheetTitle className="truncate">{displayName}</SheetTitle>
             <SheetDescription className="truncate">{userEmail}</SheetDescription>
           </div>
-          <Button variant="outline" size="sm" onClick={() => onSignOut()} aria-label="Se deconnecter">
+          <Button variant="outline" size="sm" onClick={() => onSignOut()} aria-label="Se déconnecter">
             <LogOut className="h-4 w-4" />
           </Button>
         </div>
@@ -133,7 +133,7 @@ function AuthenticatedContent({
             <CardContent className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Email</span>
-                <span className="text-sm font-medium">{userEmail || 'Non renseigne'}</span>
+                <span className="text-sm font-medium">{userEmail || 'Non renseigné'}</span>
               </div>
             </CardContent>
           </Card>

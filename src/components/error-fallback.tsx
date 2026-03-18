@@ -51,7 +51,7 @@ export function ErrorFallback({
             <p className="text-sm text-muted-foreground">{message}</p>
           </div>
           <div className="flex flex-col gap-2 sm:flex-row sm:justify-center">
-            <Button onClick={reset}>Reessayer</Button>
+            <Button onClick={reset}>Réessayer</Button>
             <Button variant="outline" asChild>
               <Link href={backHref}>{backLabel}</Link>
             </Button>

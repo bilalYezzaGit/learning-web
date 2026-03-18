@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Eye, EyeOff } from 'lucide-react'
+import { AlertCircle, Eye, EyeOff } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -36,7 +36,7 @@ export function SignupForm({
     }
 
     if (password.length < 8) {
-      setError('Le mot de passe doit contenir au moins 8 caracteres')
+      setError('Le mot de passe doit contenir au moins 8 caractères')
       return
     }
 
@@ -53,18 +53,19 @@ export function SignupForm({
   }
 
   return (
-    <AuthFormCard className={className} rightPanelSubtitle="Commencez votre apprentissage" {...props}>
+    <AuthFormCard className={className} rightPanelSubtitle="Commence ton apprentissage" {...props}>
       <form className="p-6 md:p-8" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col items-center gap-2 text-center">
-            <h1 className="text-2xl font-bold">Creer un compte</h1>
+            <h1 className="text-2xl font-bold">Créer un compte</h1>
             <p className="text-muted-foreground text-sm text-balance">
-              Entrez vos informations pour creer votre compte
+              Entre ton email et choisis un mot de passe
             </p>
           </div>
 
           {error && (
-            <div role="alert" className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+            <div role="alert" className="flex items-start gap-2 rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
               {error}
             </div>
           )}
@@ -123,15 +124,15 @@ export function SignupForm({
             </div>
           </div>
           <p className="text-xs text-muted-foreground -mt-4">
-            Minimum 8 caracteres
+            Minimum 8 caractères
           </p>
 
           <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? 'Creation\u2026' : 'S\'inscrire'}
+            {isLoading ? 'Création\u2026' : 'S\'inscrire'}
           </Button>
 
           <p className="text-center text-sm text-muted-foreground">
-            Deja un compte ?{' '}
+            Déjà un compte ?{' '}
             <Link href="/login" className="underline underline-offset-2 hover:text-primary">
               Se connecter
             </Link>

@@ -37,25 +37,25 @@ const FEATURES = [
     icon: QrCode,
     title: 'Scanne ton livret',
     description:
-      'Chaque exercice a un QR code. Scanne-le pour acceder a la correction, aux QCM et aux explications.',
+      'Chaque exercice a un QR code. Scanne-le pour accéder à la correction, aux QCM et aux explications.',
   },
   {
     icon: Brain,
     title: 'Correction IA',
     description:
-      'Prends en photo ton travail et recois un feedback personnalise. L\'IA analyse ta demarche et te guide.',
+      'Prends en photo ton travail et reçois un feedback personnalisé. L\'IA analyse ta démarche et te guide.',
   },
   {
     icon: Zap,
     title: 'QCM interactifs',
     description:
-      'Teste tes connaissances avec des QCM chronomètres. Chaque question a une explication detaillee.',
+      'Teste tes connaissances avec des QCM chronométrés. Chaque question a une explication détaillée.',
   },
   {
     icon: FileText,
-    title: 'Cours et resumes',
+    title: 'Cours et résumés',
     description:
-      'Retrouve l\'essentiel de chaque chapitre en un coup d\'oeil. Definitions, theoremes et exemples cles.',
+      'Retrouve l\'essentiel de chaque chapitre en un coup d\'oeil. Définitions, théorèmes et exemples clés.',
   },
 ]
 
@@ -70,13 +70,13 @@ const HOW_IT_WORKS = [
     step: '2',
     icon: ScanLine,
     title: 'Scanne le QR code',
-    description: 'Utilise l\'app pour scanner le QR a cote de l\'exercice.',
+    description: 'Utilise l\'app pour scanner le QR à côté de l\'exercice.',
   },
   {
     step: '3',
     icon: Sparkles,
     title: 'Obtiens ton feedback',
-    description: 'Correction IA, explications et QCM pour verifier ta comprehension.',
+    description: 'Correction IA, explications et QCM pour vérifier ta compréhension.',
   },
 ]
 
@@ -117,12 +117,12 @@ export default function LandingPage() {
 
           <h1 className="mx-auto max-w-3xl text-balance font-serif text-4xl font-bold leading-[1.15] tracking-tight md:text-5xl lg:text-6xl">
             Ton livret de maths,{' '}
-            <span className="text-primary">augmente par l&apos;IA</span>
+            <span className="text-primary">augmenté par l&apos;IA</span>
           </h1>
 
           <p className="mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground md:text-xl">
             Travaille sur ton livret papier, scanne le QR code
-            et obtiens une correction IA personnalisee.
+            et obtiens une correction IA personnalisée.
             Gratuit et sans pub.
           </p>
 
@@ -178,11 +178,11 @@ export default function LandingPage() {
       <section className="mx-auto w-full max-w-5xl px-4 py-24 md:px-6">
         <div className="mb-14 text-center">
           <h2 className="text-balance font-serif text-3xl font-semibold md:text-4xl">
-            Le livret papier, version augmentee
+            Le livret papier, version augmentée
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-lg text-muted-foreground">
             Ton livret reste au centre. L&apos;app ajoute la correction IA,
-            les QCM interactifs et les resumes de cours.
+            les QCM interactifs et les résumés de cours.
           </p>
         </div>
         <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2">
@@ -212,13 +212,13 @@ export default function LandingPage() {
       <section className="border-y bg-muted/30">
         <div className="mx-auto w-full max-w-5xl px-4 py-16 md:px-6">
           <h2 className="mb-10 text-center font-serif text-2xl font-semibold md:text-3xl">
-            Concu pour le lycee tunisien
+            Conçu pour le lycée tunisien
           </h2>
           <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-3">
             {[
-              { label: '3eme Math', detail: 'Nombre derive, Fonction derivee', color: '#3B82F6' },
-              { label: '2nde Math', detail: 'Bientot disponible', color: '#8B5CF6' },
-              { label: '1ere TC', detail: 'Bientot disponible', color: '#F59E0B' },
+              { label: '3ème Math', detail: 'Nombre dérivé, Fonction dérivée', color: 'var(--chart-4)' },
+              { label: '2nde Math', detail: 'Bientôt disponible', color: 'var(--chart-1)' },
+              { label: '1ère TC', detail: 'Bientôt disponible', color: 'var(--chart-3)' },
             ].map((level) => (
               <Card key={level.label} className="text-center">
                 <CardContent className="py-6">
@@ -262,7 +262,7 @@ export default function LandingPage() {
             </div>
 
             <h2 className="relative text-balance font-serif text-2xl font-semibold md:text-3xl">
-              Pret a augmenter ton livret ?
+              Prêt à augmenter ton livret ?
             </h2>
             <p className="relative max-w-md text-balance text-primary-foreground/80">
               Scanne le QR code de ton livret pour commencer.
@@ -279,7 +279,7 @@ export default function LandingPage() {
                 href="/signup"
                 className="underline underline-offset-4 transition-colors hover:text-primary-foreground/80"
               >
-                Cree un compte
+                Crée un compte
               </Link>{' '}
               pour utiliser la correction IA
             </p>
@@ -298,7 +298,7 @@ export default function LandingPage() {
               </span>
               <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
                 Augmente ton livret de maths avec la correction IA
-                et les QCM interactifs. Concu pour le lycee tunisien.
+                et les QCM interactifs. Conçu pour le lycée tunisien.
               </p>
             </div>
 
@@ -310,7 +310,7 @@ export default function LandingPage() {
                   Mes livrets
                 </Link>
                 <Link href="/signup" className="transition-colors hover:text-foreground">
-                  Creer un compte
+                  Créer un compte
                 </Link>
               </div>
             </div>
@@ -331,7 +331,7 @@ export default function LandingPage() {
 
           <div className="mt-10 flex flex-col items-center gap-2 border-t pt-6 text-xs text-muted-foreground sm:flex-row sm:justify-between">
             <span>&copy; {new Date().getFullYear()} Aylan. Tous droits reserves.</span>
-            <span>Concu pour les eleves du lycee tunisien</span>
+            <span>Conçu pour les élèves du lycée tunisien</span>
           </div>
         </div>
       </footer>

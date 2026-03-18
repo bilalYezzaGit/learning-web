@@ -130,10 +130,10 @@ export function ExerciseScanCard({ exerciseId, exerciseContent }: ExerciseScanCa
             <div>
               <div className="mb-2 flex items-center justify-center gap-2">
                 <p className="font-medium">Correction IA</p>
-                <Badge variant="secondary" className="text-[10px]">Compte requis</Badge>
+                <Badge variant="secondary" className="text-xs">Compte requis</Badge>
               </div>
               <p className="text-sm text-muted-foreground">
-                Connecte-toi pour prendre en photo ton travail et recevoir une correction personnalisee.
+                Connecte-toi pour prendre en photo ton travail et recevoir une correction personnalisée.
               </p>
             </div>
             <Button asChild variant="outline" className="mt-1">
@@ -171,7 +171,7 @@ export function ExerciseScanCard({ exerciseId, exerciseContent }: ExerciseScanCa
             <div>
               <p className="font-medium">Correction IA</p>
               <p className="mt-1 text-sm text-muted-foreground">
-                Prends en photo ton travail pour obtenir une correction personnalisee
+                Prends en photo ton travail pour obtenir une correction personnalisée
               </p>
             </div>
             <Button onClick={() => fileInputRef.current?.click()}>
@@ -226,9 +226,9 @@ export function ExerciseScanCard({ exerciseId, exerciseContent }: ExerciseScanCa
           <div className="space-y-4">
             <div className="flex items-start gap-3">
               {result.isCorrect ? (
-                <CheckCircle2 className="mt-0.5 h-6 w-6 shrink-0 text-emerald-600" aria-hidden="true" />
+                <CheckCircle2 className="mt-0.5 h-6 w-6 shrink-0 text-success-foreground" aria-hidden="true" />
               ) : (
-                <XCircle className="mt-0.5 h-6 w-6 shrink-0 text-red-600" aria-hidden="true" />
+                <XCircle className="mt-0.5 h-6 w-6 shrink-0 text-destructive" aria-hidden="true" />
               )}
               <div>
                 <p className="font-medium">

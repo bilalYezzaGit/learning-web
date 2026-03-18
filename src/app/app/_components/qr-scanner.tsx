@@ -71,11 +71,11 @@ export function QrScanner({ onScan, autoStart = false }: QrScannerProps) {
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err)
       if (message.includes('NotAllowedError') || message.includes('Permission') || message.includes('denied')) {
-        setError('Acces camera refuse. Autorisez la camera dans les parametres du navigateur.')
+        setError('Accès caméra refusé. Autorise la caméra dans les paramètres du navigateur.')
       } else if (message.includes('not found') || message.includes('Requested device not found')) {
-        setError('Aucune camera detectee. Verifiez que votre appareil a une camera.')
+        setError('Aucune caméra détectée. Vérifie que ton appareil a une caméra.')
       } else {
-        setError(`Impossible d'acceder a la camera: ${message}`)
+        setError(`Impossible d'accéder à la caméra : ${message}`)
       }
     }
   }, [onScan])
@@ -120,7 +120,7 @@ export function QrScanner({ onScan, autoStart = false }: QrScannerProps) {
           <CameraOff className="h-12 w-12 text-muted-foreground/30" aria-hidden="true" />
           <p className="text-sm text-destructive" role="alert">{error}</p>
           <Button variant="outline" onClick={() => { setError(null); startCamera() }}>
-            Reessayer
+            Réessayer
           </Button>
         </div>
       )}

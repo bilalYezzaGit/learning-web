@@ -208,7 +208,7 @@ function ActivityRow({
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm">{activity.title}</p>
       </div>
-      <Badge variant="secondary" className="shrink-0 text-[10px]">
+      <Badge variant="secondary" className="shrink-0 text-xs">
         {label}
       </Badge>
     </Link>

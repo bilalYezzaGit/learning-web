@@ -41,7 +41,7 @@ export default function OfflinePage() {
               }
             }}
           >
-            Reessayer
+            Réessayer
           </Button>
         </CardContent>
       </Card>

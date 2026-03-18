@@ -173,7 +173,7 @@ export function QcmSessionPlayer({
         restartHref={restartHref}
         exitHref={exitHref}
         exitLabel={exitLabel}
-        title={score / questions.length >= 0.7 ? 'Bravo !' : 'Continue tes efforts !'}
+        title={score / questions.length >= 0.7 ? 'Bravo !' : 'Presque ! Révise et réessaie'}
       />
     )
   }
@@ -276,6 +276,13 @@ export function QcmSessionPlayer({
             dangerouslySetInnerHTML={{ __html: currentQuestion.explanationHtml }}
           />
         </div>
+      )}
+
+      {/* Keyboard hint (desktop only, first question only) */}
+      {currentIndex === 0 && state === 'playing' && (
+        <p className="mt-3 hidden text-center text-xs text-muted-foreground/60 md:block">
+          Raccourcis clavier : 1-{currentQuestion.optionHtmls.length} pour choisir, Entrée pour valider
+        </p>
       )}
 
       {/* Footer */}

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Eye, EyeOff } from 'lucide-react'
+import { AlertCircle, Eye, EyeOff } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -41,18 +41,19 @@ export function LoginForm({
   }
 
   return (
-    <AuthFormCard className={className} rightPanelSubtitle="Apprenez a votre rythme" {...props}>
+    <AuthFormCard className={className} rightPanelSubtitle="Apprends à ton rythme" {...props}>
       <form className="p-6 md:p-8" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-6">
           <div className="flex flex-col items-center gap-2 text-center">
             <h1 className="text-2xl font-bold">Bienvenue</h1>
             <p className="text-muted-foreground text-balance">
-              Connectez-vous pour sauvegarder votre progression
+              Connecte-toi pour utiliser la correction IA
             </p>
           </div>
 
           {error && (
-            <div role="alert" className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+            <div role="alert" className="flex items-start gap-2 rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+              <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
               {error}
             </div>
           )}
@@ -78,7 +79,7 @@ export function LoginForm({
                 href="/reset-password"
                 className="text-xs underline-offset-2 hover:underline text-muted-foreground hover:text-primary"
               >
-                Mot de passe oublie ?
+                Mot de passe oublié ?
               </Link>
             </div>
             <div className="relative">

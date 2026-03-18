@@ -55,7 +55,7 @@ export function ScanFab() {
           <SheetHeader className="pb-2">
             <SheetTitle>Scanner un QR code</SheetTitle>
             <SheetDescription>
-              Placez le QR code de votre livret devant la camera
+              Place le QR code de ton livret devant la caméra
             </SheetDescription>
           </SheetHeader>
           <div className="pb-6">
