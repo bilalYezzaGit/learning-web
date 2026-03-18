@@ -82,6 +82,7 @@ ${section.content}
   fill: rgb("#eef2ff"),
   above: 1em,
   below: 1em,
+  breakable: false,
   {
     if title != none and title != [] and title != "" {
       text(weight: "bold", fill: rgb("#4338ca"))[#title]
@@ -98,6 +99,7 @@ ${section.content}
   fill: rgb("#fef2f2"),
   above: 1em,
   below: 1em,
+  breakable: false,
   {
     if title != none and title != [] and title != "" {
       text(weight: "bold", fill: rgb("#b91c1c"))[#title]
@@ -114,6 +116,7 @@ ${section.content}
   fill: rgb("#ecfeff"),
   above: 1em,
   below: 1em,
+  breakable: false,
   {
     if title != none and title != [] and title != "" {
       text(weight: "bold", fill: rgb("#0e7490"))[#title]
@@ -130,6 +133,7 @@ ${section.content}
   fill: rgb("#f0fdf4"),
   above: 1em,
   below: 1em,
+  breakable: false,
   {
     if title != none and title != [] and title != "" {
       text(weight: "bold", fill: rgb("#15803d"))[#title]
@@ -146,6 +150,7 @@ ${section.content}
   fill: rgb("#fefce8"),
   above: 1em,
   below: 1em,
+  breakable: false,
   {
     if title != none and title != [] and title != "" {
       text(weight: "bold", fill: rgb("#a16207"))[#title]
@@ -187,6 +192,7 @@ ${section.content}
     radius: 4pt,
     above: 1.2em,
     below: 1.2em,
+    breakable: n-lines > 12,
     {
       // Header with title on first line, metadata on second line
       let meta-line = {
@@ -235,6 +241,7 @@ ${section.content}
   radius: 4pt,
   above: 1em,
   below: 1em,
+  breakable: false,
   {
     {
       text(weight: "bold")[Question #number]
