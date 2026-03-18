@@ -114,6 +114,8 @@ Voir [actions/create-kb.md](actions/create-kb.md) pour le pipeline complet.
 
 Enrichit le fichier `_patterns.yaml` d'un module a partir de series d'exercices (WF1+).
 
+Voir [actions/enrich-patterns.md](actions/enrich-patterns.md) pour le pipeline complet.
+
 ### Pre-requis
 
 - KB module existante (`content/{prog}/{mod}/_kb.md`)
