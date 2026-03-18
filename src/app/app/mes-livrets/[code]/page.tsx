@@ -10,7 +10,6 @@ import {
   ChevronRight,
   FileText,
   Lightbulb,
-  ScanLine,
   Zap,
 } from 'lucide-react'
 
@@ -119,13 +118,6 @@ export default async function BookletHubPage({ params }: PageProps) {
             title="QCM rapide"
             description={`${booklet.qcmCount} questions disponibles`}
             href={`/app/mes-livrets/${booklet.code}/qcm`}
-          />
-          <ActionCard
-            icon={<ScanLine className="h-5 w-5 text-primary" />}
-            bgClass="bg-primary/10"
-            title="Scanner un exercice"
-            description="Scanne le QR de ton livret"
-            href={`/app/mes-livrets/${booklet.code}/scan`}
           />
         </div>
 
