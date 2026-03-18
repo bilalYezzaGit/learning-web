@@ -1,0 +1,174 @@
+kind: planning
+module: nombre-derive
+programme: 3eme-math
+status: validated
+
+design_intent: >-
+  Livret 3 — Exploration. Problemes atypiques, demonstrations, applications
+  reelles et combinaisons inhabituelles de notions. L'eleve qui a compris le
+  cours et maitrise les exercices types peut approfondir sa comprehension.
+  Difficulte 2-3. Pas de pattern — exercices originaux.
+
+slug: nombre-derive-exploration
+title: "Nombre derive — Exploration et approfondissement"
+description: "Problemes ouverts, demonstrations, applications reelles et combinaisons inhabituelles du nombre derive."
+trimester: T1
+order: 3
+
+sections:
+
+  # =========================================================================
+  # Section 1 — Demonstrations et preuves
+  # =========================================================================
+  - label: "Demonstrations et preuves"
+    atoms:
+      - slug: lesson-der-exploration-preuve
+        type: lesson
+        title: "L'art de la demonstration en derivabilite"
+        praxeologies: [Prax6a, Prax6b]
+        contenu: >-
+          Rappel du lien derivabilite → continuite (T3) avec sa preuve
+          complete. Pourquoi la reciproque est fausse : construire des
+          contre-exemples (|x| en 0, x^(1/3) en 0, fonction de Weierstrass
+          — mentionnee comme curiosite). Distinction entre "existe mais infini"
+          (tangente verticale) et "n'existe pas" (limites laterales differentes).
+        difficulte: 2
+        timeMinutes: 8
+
+      - slug: ex-der-exploration-preuve-formules
+        type: exercise
+        title: "Demontrer les formules de derivation"
+        praxeologies: [Prax1, Prax2]
+        category: probleme
+        contenu: >-
+          (1) Demontrer que (f+g)'(a) = f'(a) + g'(a) par la definition.
+          (2) Demontrer que (f*g)'(a) = f'(a)g(a) + f(a)g'(a) par la definition
+          (astuce : ajouter et retrancher f(a)g(x) au numerateur).
+          (3) En deduire (f^2)'(a) = 2f(a)f'(a). Generaliser a (f^n)'(a).
+        difficulte: 3
+        timeMinutes: 15
+
+      - slug: ex-der-exploration-continu-non-derivable
+        type: exercise
+        title: "Construire des fonctions continues non derivables"
+        praxeologies: [Prax6b, Prax7]
+        category: probleme
+        contenu: >-
+          (1) Montrer que f(x) = x*sin(1/x) (prolongee par 0 en 0) est
+          continue en 0 mais non derivable en 0. Indication : le taux de
+          variation vaut sin(1/h) qui n'a pas de limite.
+          (2) Montrer que g(x) = x^2*sin(1/x) (prolongee par 0 en 0) est
+          derivable en 0. Trouver g'(0).
+          (3) Comparer : pourquoi le x^2 "regularise" mais pas le x ?
+        difficulte: 3
+        timeMinutes: 15
+
+  # =========================================================================
+  # Section 2 — Applications reelles
+  # =========================================================================
+  - label: "Applications au monde reel"
+    atoms:
+      - slug: ex-der-exploration-vitesse-instantanee
+        type: exercise
+        title: "Vitesse instantanee et acceleration"
+        praxeologies: [Prax1, Prax3]
+        category: probleme
+        contenu: >-
+          Un mobile se deplace sur un axe. Sa position est d(t) = t^3 - 6t^2 + 9t
+          (en metres, t en secondes). (1) Calculer la vitesse instantanee v(t0)
+          par la definition du nombre derive. (2) A quel instant la vitesse
+          est-elle nulle ? (3) Ecrire l'approximation affine de d(2+h).
+          Estimer d(2.01). (4) Interpreter : quand le mobile avance-t-il ?
+          recule-t-il ?
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-der-exploration-methode-newton
+        type: exercise
+        title: "Methode de Newton — approcher une racine"
+        praxeologies: [Prax3, Prax5a]
+        category: probleme
+        contenu: >-
+          f(x) = x^3 + x - 3. (1) Montrer que f(x) = 0 admet une unique
+          solution alpha dans [1, 2] (TVI + monotonie). (2) Calculer f'(a).
+          (3) Ecrire l'equation de la tangente T au point d'abscisse x0 = 1.
+          (4) T coupe l'axe Ox en x1. Calculer x1. (5) Repeter le processus :
+          tangente en x1 → intersection x2. (6) Comparer x1, x2 avec alpha
+          (calculatrice). Pourquoi la methode converge-t-elle ?
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-der-exploration-economie
+        type: exercise
+        title: "Cout marginal — interpretation economique"
+        praxeologies: [Prax1, Prax5a]
+        category: probleme
+        contenu: >-
+          Le cout total de production de x unites est C(x) = 0.01x^3 - 0.6x^2 + 15x + 100
+          (en dinars). (1) Calculer C'(a) par les formules. (2) Calculer C'(10).
+          Interpreter : "produire une unite supplementaire a partir de 10 coute environ
+          C'(10) dinars". (3) Comparer C'(10) avec C(11)-C(10). Commenter.
+          (4) Pour combien d'unites le cout marginal est-il minimal ?
+        difficulte: 2
+        timeMinutes: 12
+
+  # =========================================================================
+  # Section 3 — Problemes geometriques avances
+  # =========================================================================
+  - label: "Geometrie et tangentes avancees"
+    atoms:
+      - slug: ex-der-exploration-tangente-commune
+        type: exercise
+        title: "Tangente commune a deux paraboles"
+        praxeologies: [Prax11, Prax3]
+        category: approfondissement
+        contenu: >-
+          C1 : y = x^2 + 2x - 1, C2 : y = -x^2 - 6x - 9. (1) Montrer que C1
+          et C2 se coupent en un unique point A. Determiner A. (2) Montrer
+          que les tangentes a C1 et C2 en A sont confondues (tangente commune).
+          (3) Montrer que C1 est au-dessus de la tangente et C2 en-dessous.
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: ex-der-exploration-tangentes-perpendiculaires
+        type: exercise
+        title: "Tangentes perpendiculaires aux points d'intersection"
+        praxeologies: [Prax12, Prax3]
+        category: approfondissement
+        contenu: >-
+          P : y = x^2, P' : y = -x^2/3 + 4/3. (1) Determiner les points
+          d'intersection A et B. (2) Calculer les pentes des tangentes a P
+          et P' en chaque point. (3) Montrer que les tangentes sont
+          perpendiculaires en A et en B (produit des pentes = -1).
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: ex-der-exploration-tangente-exterieure
+        type: exercise
+        title: "Tangente passant par un point exterieur"
+        praxeologies: [Prax10, Prax3]
+        category: approfondissement
+        contenu: >-
+          C : y = x^2. Le point B(1, -3) n'est pas sur C. (1) Ecrire
+          l'equation de la tangente a C au point d'abscisse t.
+          (2) Determiner les valeurs de t pour lesquelles cette tangente
+          passe par B. (3) Combien y a-t-il de tangentes a C passant par B ?
+          Ecrire leurs equations.
+        difficulte: 3
+        timeMinutes: 12
+
+      - slug: qcm-der-exploration-tangente-commune
+        type: qcm
+        title: "Condition de tangente commune"
+        praxeologies: [Prax11]
+        contenu: "Deux courbes ont une tangente commune en A si : a) f(a)=g(a), b) f'(a)=g'(a), c) f(a)=g(a) ET f'(a)=g'(a), d) f(a)=g(a) OU f'(a)=g'(a)."
+        difficulte: 2
+        timeMinutes: 1
+
+      - slug: qcm-der-exploration-tangentes-perp
+        type: qcm
+        title: "Tangentes perpendiculaires"
+        praxeologies: [Prax12]
+        contenu: "Les tangentes a C1 et C2 en un point commun sont perpendiculaires si : a) f'(a)+g'(a)=0, b) f'(a)*g'(a)=0, c) f'(a)*g'(a)=-1, d) f'(a)=1/g'(a)."
+        difficulte: 2
+        timeMinutes: 1

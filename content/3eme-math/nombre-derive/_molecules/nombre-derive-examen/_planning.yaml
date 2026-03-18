@@ -1,0 +1,253 @@
+kind: planning
+module: nombre-derive
+programme: 3eme-math
+status: validated
+
+design_intent: >-
+  Livret 2 — Examen. Preparation au controle et au BAC. Commence par une
+  fiche de synthese complete, puis enchaine les exercices types par frequence
+  decroissante (patterns les plus frequents d'abord). Termine par un exercice
+  de synthese type BAC combinant plusieurs praxeologies. Difficulte 1-2.
+  Chaque exercice instancie un pattern de _patterns.yaml avec de nouvelles valeurs.
+
+slug: nombre-derive-examen
+title: "Nombre derive — Exercices types examen"
+description: "Fiche de synthese + exercices types classes par frequence pour preparer le controle et le BAC."
+trimester: T1
+order: 2
+
+sections:
+
+  # =========================================================================
+  # Section 1 — Fiche de synthese
+  # =========================================================================
+  - label: "Fiche de synthese"
+    atoms:
+      - slug: lesson-der-fiche-synthese
+        type: lesson
+        title: "Fiche de synthese — Nombre derive"
+        praxeologies: [Prax1, Prax2, Prax3, Prax5a, Prax7]
+        contenu: >-
+          Resume compact de tout le module : definition du nombre derive
+          (deux ecritures), table des derivees usuelles (constante, x^n,
+          1/(ax+b), sqrt(x+a)), formules d'operations (somme, produit,
+          quotient, puissance, racine composee), equation de la tangente,
+          approximation affine, derivabilite laterale (theoreme d'equivalence),
+          derivable => continu. Format fiche : pas d'exemples, juste les
+          formules et theoremes essentiels.
+        difficulte: 0
+        timeMinutes: 5
+
+  # =========================================================================
+  # Section 2 — Tangente et applications (freq haute)
+  # =========================================================================
+  - label: "Tangente et applications"
+    atoms:
+      - slug: ex-der-exm-tangente-polynome
+        type: exercise
+        title: "Equation de tangente — polynome et rationnelle"
+        praxeologies: [Prax3]
+        pattern: Prax3.v1
+        category: application
+        contenu: >-
+          f(x) = x^3 - 2x^2 + x - 3. (1) Calculer f'(a) pour tout a.
+          (2) Equation de la tangente en a=2. (3) f(x) = (2x+1)/(x-3).
+          Equation de la tangente en a=1.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-der-exm-tangente-parallele
+        type: exercise
+        title: "Tangente parallele a une droite"
+        praxeologies: [Prax4a]
+        pattern: Prax4a.v2
+        category: application
+        contenu: >-
+          f(x) = x^3 - 3x. (1) Calculer f'(a). (2) Determiner les points
+          de la courbe ou la tangente est parallele a D: y = 9x - 2.
+          (3) Ecrire les equations de ces tangentes.
+        difficulte: 2
+        timeMinutes: 10
+
+      - slug: ex-der-exm-tangente-perpendiculaire
+        type: exercise
+        title: "Tangente perpendiculaire a une droite"
+        praxeologies: [Prax4b]
+        pattern: Prax4b.v1
+        category: application
+        contenu: >-
+          f(x) = 2x^2 + x + 1. La droite D a pour equation x - 7y + 7 = 0.
+          (1) Determiner le coefficient directeur de D. (2) Trouver le point
+          de C ou la tangente est perpendiculaire a D. (3) Ecrire l'equation
+          de cette tangente.
+        difficulte: 2
+        timeMinutes: 10
+
+      - slug: ex-der-exm-tangente-horizontale
+        type: exercise
+        title: "Points a tangente horizontale"
+        praxeologies: [Prax4a]
+        pattern: Prax4a.v1
+        category: application
+        contenu: >-
+          f(x) = x + 5 + 4/(x-1), definie sur R\{1}. (1) Calculer f'(a).
+          (2) Determiner les points ou la tangente est horizontale
+          (resoudre f'(a) = 0). (3) Ecrire les equations de ces tangentes.
+        difficulte: 2
+        timeMinutes: 10
+
+      - slug: qcm-der-exm-tangente-pente
+        type: qcm
+        title: "Pente de tangente"
+        praxeologies: [Prax3]
+        contenu: "f(x)=x^3-x. La pente de la tangente en x=0 est : a) 0, b) -1, c) 1, d) 3."
+        difficulte: 1
+        timeMinutes: 1
+
+      - slug: qcm-der-exm-parallele
+        type: qcm
+        title: "Tangente parallele a Ox"
+        praxeologies: [Prax4a]
+        contenu: "f(x)=x^2-4x+3. La tangente est horizontale en : a) x=0, b) x=2, c) x=4, d) x=1."
+        difficulte: 1
+        timeMinutes: 1
+
+  # =========================================================================
+  # Section 3 — Derivabilite laterale et morceaux (freq haute)
+  # =========================================================================
+  - label: "Derivabilite laterale et fonctions par morceaux"
+    atoms:
+      - slug: ex-der-exm-laterale-absolue
+        type: exercise
+        title: "Derivabilite de |g(x)| — demi-tangentes"
+        praxeologies: [Prax7, Prax1b]
+        pattern: Prax1b.v2
+        category: application
+        contenu: >-
+          f(x) = |x^2 - 1|. (1) Reecrire f par morceaux.
+          (2) Etudier la derivabilite en a=1 et a=-1.
+          (3) Ecrire les equations des demi-tangentes en chaque point.
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: ex-der-exm-morceaux-complet
+        type: exercise
+        title: "Piecewise — continuite puis derivabilite"
+        praxeologies: [Prax8, Prax7]
+        pattern: Prax7.v2
+        category: approfondissement
+        contenu: >-
+          f(x) = {x^2 + x - 6 si x <= 2, sqrt(x^2-4) + x - 2 si x > 2}.
+          (1) Montrer que f est continue en 2. (2) Etudier la derivabilite
+          a gauche et a droite en 2. (3) Interpreter geometriquement.
+          Attendre demi-tangente de pente 5 a gauche et verticale a droite.
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: ex-der-exm-morceaux-parametre
+        type: exercise
+        title: "Piecewise avec parametre — trouver m"
+        praxeologies: [Prax8, Prax10]
+        pattern: Prax8.v1
+        category: approfondissement
+        contenu: >-
+          f(x) = {3x^2-5x+m si x<=2, sqrt(x^2+2x-8)+mx si x>2}.
+          (1) Determiner m pour que f soit continue en 2. (2) Avec la
+          valeur trouvee, etudier la derivabilite en 2. (3) Equations
+          des demi-tangentes.
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: qcm-der-exm-morceaux-prerequis
+        type: qcm
+        title: "Prerequis a la derivabilite"
+        praxeologies: [Prax6a, Prax8]
+        contenu: "f(x)={x^2 si x<=1, x+1 si x>1}. f est-elle derivable en 1 ? Piege : f n'est meme pas continue."
+        difficulte: 1
+        timeMinutes: 1
+
+  # =========================================================================
+  # Section 4 — Calculs et estimations (freq moyenne)
+  # =========================================================================
+  - label: "Formules et estimations numeriques"
+    atoms:
+      - slug: ex-der-exm-formules-variees
+        type: exercise
+        title: "Calculer f'(a) — batterie de fonctions"
+        praxeologies: [Prax2]
+        pattern: Prax2.v1
+        category: application
+        contenu: >-
+          Calculer f'(a) pour : (a) f(x)=x^4-2x^3+5 en a=-1,
+          (b) f(x)=3/(2x+1) en a=1, (c) f(x)=sqrt(3x+1) en a=5,
+          (d) f(x)=x^2*sqrt(x+1) en a=0. Application directe des formules.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-der-exm-estimation-numerique
+        type: exercise
+        title: "Estimations numeriques par approximation affine"
+        praxeologies: [Prax5a, Prax5b]
+        pattern: Prax5b.v1
+        category: application
+        contenu: >-
+          (1) Donner l'approximation affine de (1+h)^4 pour h voisin de 0.
+          (2) En deduire une valeur approchee de (1.002)^4.
+          (3) f(x) = sqrt(2x+5). Donner une valeur approchee de f(10.001).
+          Comparer avec la valeur exacte.
+        difficulte: 1
+        timeMinutes: 8
+
+      - slug: qcm-der-exm-signe-derivee
+        type: qcm
+        title: "Erreur de signe"
+        praxeologies: [Prax2]
+        contenu: "Piege E3 : f(x)=1/(x+1). f'(a) = ? Tester l'oubli du signe moins."
+        difficulte: 1
+        timeMinutes: 1
+
+  # =========================================================================
+  # Section 5 — Problemes de synthese type BAC
+  # =========================================================================
+  - label: "Problemes de synthese"
+    atoms:
+      - slug: ex-der-exm-limites-derivee
+        type: exercise
+        title: "Calculer des limites par nombre derive"
+        praxeologies: [Prax9]
+        pattern: Prax9.v1
+        category: approfondissement
+        contenu: >-
+          Calculer en utilisant la notion de nombre derive :
+          (a) lim(x->2)(x^4-16)/(x-2), (b) lim(x->0)(sqrt(4+x)-2)/x,
+          (c) lim(x->0)((1+x)^10-1)/x. Identifier g et a a chaque fois.
+        difficulte: 2
+        timeMinutes: 10
+
+      - slug: ex-der-exm-coefficients
+        type: exercise
+        title: "Determiner des coefficients"
+        praxeologies: [Prax10]
+        pattern: Prax10.v1
+        category: approfondissement
+        contenu: >-
+          f(x) = ax^2 + bx + c. La courbe passe par A(0,1) et B(2,5),
+          et la tangente en B a pour coefficient directeur 3. Determiner a, b, c.
+          Ecrire l'equation de la tangente en A.
+        difficulte: 2
+        timeMinutes: 10
+
+      - slug: ex-der-exm-synthese-bac
+        type: exercise
+        title: "Exercice de synthese type BAC"
+        praxeologies: [Prax2, Prax3, Prax4a, Prax7, Prax8]
+        category: synthese
+        contenu: >-
+          f definie par morceaux : f(x) = {x^3-2x+1 si x<2, sqrt(x^2-4)+x+m si x>=2}.
+          (1) Determiner m pour que f soit continue en 2 (Prax10).
+          (2) Etudier la derivabilite en 2, equations des demi-tangentes (Prax7/8).
+          (3) Calculer f'(a) pour a>2 (Prax2).
+          (4) Tangente au point d'abscisse 3 (Prax3).
+          (5) Existe-t-il un point a>2 ou la tangente est parallele a y=3x+1 ? (Prax4a).
+        difficulte: 2
+        timeMinutes: 20

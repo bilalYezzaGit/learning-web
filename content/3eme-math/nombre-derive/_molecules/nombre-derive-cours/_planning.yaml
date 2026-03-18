@@ -1,0 +1,303 @@
+kind: planning
+module: nombre-derive
+programme: 3eme-math
+status: validated
+
+design_intent: >-
+  Livret 1 — Cours. L'eleve decouvre le chapitre notion par notion.
+  Chaque concept est suivi d'un exercice d'application directe (difficulte 0-1)
+  et d'un bloc QCM de consolidation. Structure : theoreme → exemple → exercice → QCM.
+  Couvre l'integralite de la carte des notions N1-N8.
+
+slug: nombre-derive-cours
+title: "Nombre derive — Cours et applications directes"
+description: "Decouvrir le nombre derive : definition, tangente, formules, derivabilite laterale et applications."
+trimester: T1
+order: 1
+
+sections:
+
+  # =========================================================================
+  # Section 1 — Definition et calcul par la definition
+  # =========================================================================
+  - label: "Definition du nombre derive"
+    atoms:
+      - slug: lesson-der-definition-taux
+        type: lesson
+        title: "Definition du nombre derive"
+        praxeologies: [Prax1]
+        contenu: >-
+          Introduire le nombre derive par la vitesse instantanee (interpretation
+          cinematique) puis formaliser : les deux ecritures de la definition
+          (lim x->a et lim h->0). Exemples : f(x)=x^2 en a=1, f(x)=3x+2 en a.
+          Notation f'(a).
+        difficulte: 0
+        timeMinutes: 8
+
+      - slug: ex-der-calcul-definition-polynome
+        type: exercise
+        title: "Calculer f'(a) par la definition — polynomes"
+        praxeologies: [Prax1]
+        category: application
+        contenu: >-
+          3 sous-questions : (a) f(x)=x^2-3x+1 en a=2, (b) f(x)=x^3+2x en a=1,
+          (c) f(x)=2x^3-x+3 en a general. Technique : factoriser, simplifier, limite.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-der-calcul-definition-racine
+        type: exercise
+        title: "Calculer f'(a) par la definition — racines"
+        praxeologies: [Prax1]
+        category: application
+        contenu: >-
+          2 sous-questions : (a) f(x)=sqrt(x+3) en a=-2 (conjugue),
+          (b) f(x)=1/(x+1) en a=0 (mise au meme denominateur). Technique
+          de rationalisation et de reduction au meme denominateur.
+        difficulte: 1
+        timeMinutes: 8
+
+      - slug: qcm-der-definition-taux-variation
+        type: qcm
+        title: "Le taux de variation"
+        praxeologies: [Prax1]
+        contenu: "Tester si l'eleve identifie correctement le taux de variation et sa limite."
+        difficulte: 0
+        timeMinutes: 1
+
+      - slug: qcm-der-calcul-definition
+        type: qcm
+        title: "Calcul de f'(a) par la definition"
+        praxeologies: [Prax1]
+        contenu: "Choisir la bonne valeur de f'(2) pour f(x)=x^3-x parmi 4 propositions."
+        difficulte: 1
+        timeMinutes: 1
+
+  # =========================================================================
+  # Section 2 — Tangente et approximation affine
+  # =========================================================================
+  - label: "Tangente et approximation affine"
+    atoms:
+      - slug: lesson-der-tangente-approximation
+        type: lesson
+        title: "Equation de la tangente et approximation affine"
+        praxeologies: [Prax3, Prax5a]
+        contenu: >-
+          Interpretation geometrique : la tangente comme droite limite des secantes.
+          Equation y = f'(a)(x-a) + f(a) (T1). Exemple : tangente a y=x^2 en a=1.
+          Approximation affine f(a+h) ≈ f(a) + h*f'(a) (T2). Exemples classiques :
+          sqrt(1+h) ≈ 1+h/2, (1+h)^n ≈ 1+nh. Lien derivabilite → continuite (T3).
+        difficulte: 0
+        timeMinutes: 10
+
+      - slug: ex-der-tangente-directe
+        type: exercise
+        title: "Equations de tangentes"
+        praxeologies: [Prax3]
+        category: application
+        contenu: >-
+          3 sous-questions : (a) f(x)=2x^3-4x+3 en a=1,
+          (b) f(x)=(x-1)/(x+1) en a=-2, (c) f(x)=sqrt(x+4) en a=0.
+          Pour chaque : calculer f(a), f'(a), ecrire y = f'(a)(x-a)+f(a).
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-der-approximation-classiques
+        type: exercise
+        title: "Approximations affines et estimations"
+        praxeologies: [Prax5a, Prax5b]
+        category: application
+        contenu: >-
+          (a) Montrer que sqrt(1+h) ≈ 1+h/2 pour h voisin de 0.
+          (b) En deduire une valeur approchee de sqrt(1.001) et sqrt(0.998).
+          (c) Montrer que 1/(1+h) ≈ 1-h. En deduire 1/1.002.
+        difficulte: 1
+        timeMinutes: 8
+
+      - slug: qcm-der-equation-tangente
+        type: qcm
+        title: "Equation de la tangente"
+        praxeologies: [Prax3]
+        contenu: "f(2)=3, f'(2)=-1. Quelle est l'equation de la tangente en a=2 ?"
+        difficulte: 1
+        timeMinutes: 1
+
+      - slug: qcm-der-approximation-affine
+        type: qcm
+        title: "Approximation affine"
+        praxeologies: [Prax5a]
+        contenu: "L'approximation affine de (1+h)^3 pres de 0 est : a) 3+3h, b) 1+3h, c) 3h, d) 1+h^3."
+        difficulte: 1
+        timeMinutes: 1
+
+  # =========================================================================
+  # Section 3 — Formules de derivation
+  # =========================================================================
+  - label: "Formules de derivation"
+    atoms:
+      - slug: lesson-der-formules-usuelles-operations
+        type: lesson
+        title: "Nombres derives des fonctions usuelles et operations"
+        praxeologies: [Prax2]
+        contenu: >-
+          Table des nombres derives : constante, affine, x^n, 1/(ax+b),
+          sqrt(x+a), (ax+b)/(cx+d) (T4). Operations : somme, produit (u'v+uv'),
+          quotient (u'v-uv')/v^2, puissance f^k, racine sqrt(f) avec condition
+          f(a)>0 (T5, T6). Exemples calcules pour chaque regle.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-der-formules-polynome-rationnelle
+        type: exercise
+        title: "Calculer f'(a) — polynomes et rationnelles"
+        praxeologies: [Prax2]
+        category: application
+        contenu: >-
+          4 sous-questions : (a) f(x)=x^4-3x^2+5 en a=1, (b) f(x)=4/(2x+3) en a=-1,
+          (c) f(x)=(3x+5)/(-2x+3) en a=1, (d) f(x)=(2x+3)^3 en a=1/2.
+          Application directe des formules.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-der-formules-racine-produit
+        type: exercise
+        title: "Calculer f'(a) — racines et produits"
+        praxeologies: [Prax2]
+        category: application
+        contenu: >-
+          3 sous-questions : (a) f(x)=sqrt(4x+5) en a=0,
+          (b) f(x)=2x*sqrt(x) en a=1, (c) f(x)=sqrt(-x^2+5x-4) en a=3.
+          Utiliser (sqrt(u))' et (uv)'. Verifier les conditions.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: qcm-der-formule-produit
+        type: qcm
+        title: "Derivee d'un produit"
+        praxeologies: [Prax2]
+        contenu: "Piege E7 : f(x)=x^2, g(x)=x+1. (f.g)'(1) = ? Tester l'erreur f'*g' vs f'g+fg'."
+        difficulte: 1
+        timeMinutes: 1
+
+      - slug: qcm-der-condition-racine
+        type: qcm
+        title: "Condition pour (sqrt(f))'(a)"
+        praxeologies: [Prax2]
+        contenu: "Piege E5 : f(x)=sqrt(x^2-4). Peut-on calculer f'(2) avec la formule ? Tester la condition f(a)>0."
+        difficulte: 1
+        timeMinutes: 1
+
+  # =========================================================================
+  # Section 4 — Derivabilite laterale et fonctions par morceaux
+  # =========================================================================
+  - label: "Derivabilite laterale"
+    atoms:
+      - slug: lesson-der-laterale-morceaux
+        type: lesson
+        title: "Derivees laterales et fonctions par morceaux"
+        praxeologies: [Prax7, Prax8]
+        contenu: >-
+          Definitions de f'_d(a) et f'_g(a) (D2). Theoreme : derivable <=>
+          f'_d = f'_g (T7). Point anguleux vs demi-tangente verticale (N5.4, N6).
+          Procedure pour les fonctions par morceaux : continuite d'abord, puis
+          derivees laterales. Exemples : |x| en 0 (anguleux), sqrt(x) en 0 (verticale).
+        difficulte: 1
+        timeMinutes: 8
+
+      - slug: ex-der-valeur-absolue
+        type: exercise
+        title: "Derivabilite de |g(x)|"
+        praxeologies: [Prax7, Prax1b]
+        category: application
+        contenu: >-
+          2 sous-questions : (a) f(x)=|x+1| en a=-1 : reecrire par morceaux,
+          calculer f'_d et f'_g, conclure (point anguleux).
+          (b) f(x)=|x^2-4| en a=2 : meme demarche, demi-tangentes.
+        difficulte: 1
+        timeMinutes: 8
+
+      - slug: ex-der-morceaux-raccordement
+        type: exercise
+        title: "Fonction par morceaux — derivabilite au raccordement"
+        praxeologies: [Prax8, Prax7]
+        category: application
+        contenu: >-
+          f(x) = {x^2+1 si x>=0, -2x+1 si x<0}. (1) Verifier la continuite en 0.
+          (2) Calculer f'_d(0) et f'_g(0). (3) Conclure sur la derivabilite.
+          (4) Ecrire les equations des demi-tangentes.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: qcm-der-continuite-vs-derivabilite
+        type: qcm
+        title: "Continuite et derivabilite"
+        praxeologies: [Prax6a, Prax6b]
+        contenu: "Piege E1 : Parmi (I) continue=>derivable, (II) derivable=>continue, (III) non continue=>non derivable, lesquelles sont vraies ?"
+        difficulte: 1
+        timeMinutes: 1
+
+      - slug: qcm-der-laterale-definition
+        type: qcm
+        title: "Derivee a droite et a gauche"
+        praxeologies: [Prax7]
+        contenu: "Piege E6 : f'_d(a) est definie comme lim h->0+ ou h->0- ? Tester la confusion gauche/droite."
+        difficulte: 1
+        timeMinutes: 1
+
+  # =========================================================================
+  # Section 5 — Applications
+  # =========================================================================
+  - label: "Applications du nombre derive"
+    atoms:
+      - slug: lesson-der-applications
+        type: lesson
+        title: "Calcul de limites et lecture graphique"
+        praxeologies: [Prax9, Prax13]
+        contenu: >-
+          Calcul de limites par reconnaissance d'un nombre derive : transformer
+          lim (g(x)-g(a))/(x-a) en g'(a). Exemples : lim(x->1)(x^3-1)/(x-1),
+          lim(x->0)(sqrt(1+x)-1)/x. Lecture graphique : lire f(a) et f'(a)
+          sur un graphe, ecrire l'equation de la tangente.
+        difficulte: 1
+        timeMinutes: 6
+
+      - slug: ex-der-limite-nombre-derive
+        type: exercise
+        title: "Calculer une limite par nombre derive"
+        praxeologies: [Prax9]
+        category: application
+        contenu: >-
+          4 limites : (a) lim(x->-4)(x^2-16)/(x+4), (b) lim(x->1)(sqrt(x)-1)/(x-1),
+          (c) lim(x->0)((1+x)^5-1)/x, (d) lim(x->-4)(1/(x+5)-1)/(x+4).
+          Identifier g et a, conclure g'(a).
+        difficulte: 2
+        timeMinutes: 10
+
+      - slug: ex-der-lecture-graphique
+        type: exercise
+        title: "Lecture graphique du nombre derive"
+        praxeologies: [Prax13]
+        category: application
+        contenu: >-
+          Graphe donne avec courbe et tangentes tracees en 3 points.
+          (1) Lire f(-1), f'(-1), f(1), f'(1), f(3), f'(3).
+          (2) Ecrire l'equation de la tangente en a=-1.
+          (3) Identifier les points ou f'(a)=0.
+        difficulte: 1
+        timeMinutes: 8
+
+      - slug: qcm-der-reconnaitre-limite
+        type: qcm
+        title: "Reconnaitre un nombre derive dans une limite"
+        praxeologies: [Prax9]
+        contenu: "lim(x->1)(x^5-1)/(x-1) = ? Tester si l'eleve identifie g(x)=x^5, g'(1)=5."
+        difficulte: 1
+        timeMinutes: 1
+
+      - slug: qcm-der-lecture-graphique-pente
+        type: qcm
+        title: "Lecture graphique de f'(a)"
+        praxeologies: [Prax13]
+        contenu: "D'apres le graphe, f'(2) = 0. Que signifie geometriquement f'(a)=0 ? Piege E4."
+        difficulte: 1
+        timeMinutes: 1
