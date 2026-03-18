@@ -23,6 +23,8 @@ export interface LivretData {
   coverQr?: string
   /** Booklet code displayed on cover (e.g. "CONT-3E-001") */
   bookletCode?: string
+  /** If true, add exam instructions after TOC (duration, calculator policy, etc.) */
+  examMode?: boolean
 }
 
 export function generateLivretTypst(data: LivretData): string {
@@ -153,9 +155,19 @@ ${section.content}
   }
 )
 
+// ── Difficulty stars helper ──
+#let difficulty-stars(level) = {
+  let filled = "★"
+  let empty = "☆"
+  let stars = ""
+  for i in range(3) {
+    if i < level { stars += filled } else { stars += empty }
+  }
+  text(size: 8pt, fill: luma(120))[#stars]
+}
+
 // ── Exercise frame ──
-// Args: number, title, body, qr (optional), lines (optional: explicit line count), time (optional: auto-compute lines from minutes)
-#let exercise-frame(number, title, body, qr: none, lines: none, time: none) = {
+#let exercise-frame(number, title, body, qr: none, lines: none, time: none, difficulty: none, minutes: none) = {
   // Compute number of writing lines
   let n-lines = 0
   if lines != none {
@@ -176,19 +188,32 @@ ${section.content}
     above: 1.2em,
     below: 1.2em,
     {
+      // Header with title + metadata
       if qr != none {
         grid(
           columns: (1fr, auto),
           column-gutter: 8pt,
           {
             text(weight: "bold")[Exercice #number — #title]
+            if difficulty != none or minutes != none {
+              h(1fr)
+              if difficulty != none { difficulty-stars(difficulty); h(0.5em) }
+              if minutes != none { text(size: 8pt, fill: luma(120))[~#minutes min] }
+            }
             parbreak()
             body
           },
           align(top, qr)
         )
       } else {
-        text(weight: "bold")[Exercice #number — #title]
+        {
+          text(weight: "bold")[Exercice #number — #title]
+          if difficulty != none or minutes != none {
+            h(1fr)
+            if difficulty != none { difficulty-stars(difficulty); h(0.5em) }
+            if minutes != none { text(size: 8pt, fill: luma(120))[~#minutes min] }
+          }
+        }
         parbreak()
         body
       }
@@ -205,7 +230,7 @@ ${section.content}
 }
 
 // ── QCM frame ──
-#let qcm-question(number, question, options) = block(
+#let qcm-question(number, question, options, difficulty: none) = block(
   width: 100%,
   inset: 12pt,
   stroke: 0.5pt + luma(200),
@@ -213,7 +238,13 @@ ${section.content}
   above: 1em,
   below: 1em,
   {
-    text(weight: "bold")[Question #number]
+    {
+      text(weight: "bold")[Question #number]
+      if difficulty != none {
+        h(1fr)
+        difficulty-stars(difficulty)
+      }
+    }
     parbreak()
     question
     parbreak()
@@ -301,6 +332,20 @@ ${section.content}
 // ═══════════════════════════════════════════
 
 #outline(title: [Sommaire], indent: 1.5em, depth: 2)
+
+${data.examMode ? `
+#v(1fr)
+#block(width: 100%, inset: 14pt, stroke: 1pt + luma(180), radius: 6pt, fill: rgb("#fffbeb"))[
+  #text(weight: "bold", size: 11pt)[Consignes]
+  #v(0.3em)
+  - *Durée indicative* : ${timeStr}
+  - Toute réponse doit être *justifiée*.
+  - La qualité de la rédaction est prise en compte.
+  - Les exercices sont indépendants et peuvent être traités dans n'importe quel ordre.
+  - Scanner le QR code de chaque exercice pour accéder à la solution détaillée.
+]
+` : ''}
+
 #pagebreak()
 
 // ═══════════════════════════════════════════

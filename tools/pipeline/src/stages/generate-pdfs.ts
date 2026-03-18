@@ -60,11 +60,12 @@ async function convertAtomToTypst(
     const content = convertMdxToTypst(atom.rawContent, 'exercise')
     const num = exerciseNumber.value++
     const linesArg = atom.lines != null ? `, lines: ${atom.lines}` : `, time: ${atom.timeMinutes}`
+    const metaArgs = `, difficulty: ${atom.difficulty}, minutes: ${atom.timeMinutes}`
     if (bookletCode) {
       const qrTypst = await generateExerciseQrTypst(bookletCode, atom.id)
-      return `#exercise-frame(${num}, [${atom.title}], [\n${content}\n], qr: ${qrTypst}${linesArg})`
+      return `#exercise-frame(${num}, [${atom.title}], [\n${content}\n], qr: ${qrTypst}${linesArg}${metaArgs})`
     }
-    return `#exercise-frame(${num}, [${atom.title}], [\n${content}\n]${linesArg})`
+    return `#exercise-frame(${num}, [${atom.title}], [\n${content}\n]${linesArg}${metaArgs})`
   }
 
   // QCM atoms are handled at the group level, not individually
@@ -96,7 +97,7 @@ function convertQcmGroup(
     })
 
     questions.push(
-      `#qcm-question(${questionNum}, [\n${questionTypst}\n], (${optionsTypst.join(', ')}))`,
+      `#qcm-question(${questionNum}, [\n${questionTypst}\n], (${optionsTypst.join(', ')}), difficulty: ${atom.difficulty})`,
     )
     questionNum++
   }
@@ -199,6 +200,7 @@ export async function generateAllPdfs(input: GeneratePdfsInput): Promise<number>
         sections,
         coverQr,
         bookletCode,
+        examMode: livret.slug.includes('examen'),
       })
 
       // ── Compile to PDF ──
