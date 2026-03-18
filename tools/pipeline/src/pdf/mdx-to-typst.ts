@@ -54,7 +54,9 @@ function extractTypstBlocks(source: string): { source: string; blocks: TypstBloc
 function restoreTypstBlocks(source: string, blocks: TypstBlock[]): string {
   let result = source
   for (const block of blocks) {
-    result = result.replace(block.placeholder, block.code)
+    // Center Typst figures in PDF output
+    const centered = `#align(center)[\n${block.code}\n]`
+    result = result.replace(block.placeholder, centered)
   }
   return result
 }
