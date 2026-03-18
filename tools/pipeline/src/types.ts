@@ -12,6 +12,7 @@ export interface RawAtom {
   praxeologies: string[]
   category?: string
   source?: string
+  lines?: number
   rawContent: string
 }
 

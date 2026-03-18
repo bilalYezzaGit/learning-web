@@ -52,6 +52,18 @@
 
 ---
 
+## Lot futur — Directive :::workspace (espace de réponse custom)
+
+| # | Tache | Fichier(s) | Statut |
+|---|-------|-----------|--------|
+| F.1 | Créer la directive `:::workspace` pour espace de réponse custom (repère, grille, courbe pré-tracée) | `compile-mdx.ts` + `mdx-to-typst.ts` + CONTENT-CONVENTIONS.md | TODO |
+| F.2 | Comportement PDF : afficher le Typst du workspace dans l'espace de réponse | `livret-template.ts` | TODO |
+| F.3 | Comportement HTML : afficher le workspace dans l'exercice (avant la photo pour correction IA) | `compile-mdx.ts` | TODO |
+
+> Le champ `lines` couvre 90% des cas. La directive `:::workspace` sera ajoutée quand un exercice réel en aura besoin (ex: "tracer la tangente sur ce repère").
+
+---
+
 ## Lot 5 — Contenu complementaire
 
 | # | Tache | Fichier(s) | Statut |

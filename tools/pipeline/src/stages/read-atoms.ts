@@ -17,6 +17,7 @@ const atomMetaSchema = z
       .enum(['application', 'approfondissement', 'synthese', 'probleme', 'demonstration'])
       .optional(),
     source: z.string().optional(),
+    lines: z.number().int().min(1).optional(),
   })
   .refine(
     (data) => data.type !== 'exercise' || data.category !== undefined,

@@ -130,6 +130,16 @@ Utilise principalement pour les exercices du Livret 2 (Examen), generes a partir
 pattern: Prax3.v1
 ```
 
+#### `lines` (exercices uniquement, optionnel)
+
+Nombre de lignes de rédaction dans le PDF imprimé. Optionnel — si absent, calculé automatiquement depuis `timeMinutes` (5-8 min → 8 lignes, 10-12 min → 12 lignes, 15-20 min → 16 lignes).
+
+```yaml
+lines: 20    # override le calcul automatique
+```
+
+Utiliser quand l'exercice nécessite plus (ou moins) de lignes que ce que le temps suggère.
+
 #### `category` (exercices uniquement)
 
 Obligatoire pour `type: exercise`. Interdit pour les autres types.

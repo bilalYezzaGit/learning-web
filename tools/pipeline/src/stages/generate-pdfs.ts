@@ -59,11 +59,12 @@ async function convertAtomToTypst(
   if (atom.type === 'exercise') {
     const content = convertMdxToTypst(atom.rawContent, 'exercise')
     const num = exerciseNumber.value++
+    const linesArg = atom.lines != null ? `, lines: ${atom.lines}` : `, time: ${atom.timeMinutes}`
     if (bookletCode) {
       const qrTypst = await generateExerciseQrTypst(bookletCode, atom.id)
-      return `#exercise-frame(${num}, [${atom.title}], [\n${content}\n], qr: ${qrTypst})`
+      return `#exercise-frame(${num}, [${atom.title}], [\n${content}\n], qr: ${qrTypst}${linesArg})`
     }
-    return `#exercise-frame(${num}, [${atom.title}], [\n${content}\n])`
+    return `#exercise-frame(${num}, [${atom.title}], [\n${content}\n]${linesArg})`
   }
 
   // QCM atoms are handled at the group level, not individually

@@ -154,36 +154,55 @@ ${section.content}
 )
 
 // ── Exercise frame ──
-#let exercise-frame(number, title, body, qr: none) = block(
-  width: 100%,
-  inset: 12pt,
-  stroke: 0.5pt + luma(200),
-  radius: 4pt,
-  above: 1.2em,
-  below: 1.2em,
-  {
-    if qr != none {
-      grid(
-        columns: (1fr, auto),
-        column-gutter: 8pt,
-        {
-          text(weight: "bold")[Exercice #number — #title]
-          parbreak()
-          body
-        },
-        align(top, qr)
-      )
-    } else {
-      text(weight: "bold")[Exercice #number — #title]
-      parbreak()
-      body
-    }
-    v(0.5em)
-    line(length: 100%, stroke: 0.3pt + luma(220))
-    v(0.2em)
-    text(size: 7.5pt, style: "italic", fill: luma(140))[Solution détaillée sur l'application — scannez le QR code]
+// Args: number, title, body, qr (optional), lines (optional: explicit line count), time (optional: auto-compute lines from minutes)
+#let exercise-frame(number, title, body, qr: none, lines: none, time: none) = {
+  // Compute number of writing lines
+  let n-lines = 0
+  if lines != none {
+    n-lines = lines
+  } else if time != none {
+    if time <= 8 { n-lines = 8 }
+    else if time <= 12 { n-lines = 12 }
+    else { n-lines = 16 }
+  } else {
+    n-lines = 10
   }
-)
+
+  block(
+    width: 100%,
+    inset: 12pt,
+    stroke: 0.5pt + luma(200),
+    radius: 4pt,
+    above: 1.2em,
+    below: 1.2em,
+    {
+      if qr != none {
+        grid(
+          columns: (1fr, auto),
+          column-gutter: 8pt,
+          {
+            text(weight: "bold")[Exercice #number — #title]
+            parbreak()
+            body
+          },
+          align(top, qr)
+        )
+      } else {
+        text(weight: "bold")[Exercice #number — #title]
+        parbreak()
+        body
+      }
+      v(0.8em)
+      // Writing lines for student
+      for i in range(n-lines) {
+        v(0.6em)
+        line(length: 100%, stroke: 0.3pt + luma(220))
+      }
+      v(0.5em)
+      text(size: 7.5pt, style: "italic", fill: luma(140))[Solution détaillée sur l'application — scannez le QR code]
+    }
+  )
+}
 
 // ── QCM frame ──
 #let qcm-question(number, question, options) = block(
@@ -249,6 +268,20 @@ ${section.content}
       ]
     ]
   ]
+  #v(1.5em)
+
+  #block(width: 75%, inset: 12pt, stroke: 0.5pt + luma(200), radius: 6pt)[
+    #grid(
+      columns: (1fr, 1fr),
+      column-gutter: 12pt,
+      row-gutter: 10pt,
+      [Nom : #box(width: 1fr, repeat[.])],
+      [Prénom : #box(width: 1fr, repeat[.])],
+      [Classe : #box(width: 1fr, repeat[.])],
+      [Année : 20#box(width: 2em, repeat[.]) / 20#box(width: 2em, repeat[.])],
+    )
+  ]
+
   #v(1fr)
   #align(center)[
     ${data.coverQr && data.bookletCode ? `
@@ -258,7 +291,7 @@ ${section.content}
     #v(0.5em)
     #text(size: 8pt, fill: luma(150))[Scannez pour associer ce livret]
     ` : `
-    #text(size: 9pt, fill: luma(150))[Livret eleve — Version enonces]
+    #text(size: 9pt, fill: luma(150))[Livret élève — Version énoncés]
     `}
   ]
 ]
@@ -277,6 +310,21 @@ ${section.content}
 = ${data.title}
 
 ${sectionsTypst}
+
+// ═══════════════════════════════════════════
+// NOTES PAGE
+// ═══════════════════════════════════════════
+
+#pagebreak()
+
+== Notes
+
+#v(1em)
+
+#for i in range(30) {
+  v(0.7em)
+  line(length: 100%, stroke: 0.3pt + luma(200))
+}
 
 `
 }
