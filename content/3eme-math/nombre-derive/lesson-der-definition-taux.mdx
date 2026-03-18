@@ -51,13 +51,14 @@ Les deux ecritures sont strictement equivalentes et s'utilisent selon le context
 
 **Interpretation geometrique** : le taux de variation $\dfrac{f(x) - f(a)}{x - a}$ est le coefficient directeur de la secante passant par $(a, f(a))$ et $(x, f(x))$. Lorsque $x \to a$, la secante tend vers la tangente et le taux de variation tend vers $f'(a)$.
 
-```typst
+```typst {frame}
 #import "@preview/cetz:0.3.4": canvas, draw
 #import "@preview/cetz-plot:0.1.1": plot
 
 #canvas({
   plot.plot(
     size: (8, 6),
+    x-grid: "major", y-grid: "major",
     x-label: $x$, y-label: $y$,
     x-tick-step: 1, y-tick-step: 1,
     x-min: -0.5, x-max: 3, y-min: -0.5, y-max: 5,

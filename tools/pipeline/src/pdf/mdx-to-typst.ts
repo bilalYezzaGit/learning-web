@@ -42,7 +42,7 @@ interface TypstBlock {
 function extractTypstBlocks(source: string): { source: string; blocks: TypstBlock[] } {
   const blocks: TypstBlock[] = []
   let i = 0
-  const result = source.replace(/```typst\n([\s\S]*?)```/g, (_match, code: string) => {
+  const result = source.replace(/```typst(?:\s*\{[^}]*\})?\n([\s\S]*?)```/g, (_match, code: string) => {
     const placeholder = `${TYPST_PLACEHOLDER_PREFIX}${i}%%`
     blocks.push({ placeholder, code: code.trim() })
     i++

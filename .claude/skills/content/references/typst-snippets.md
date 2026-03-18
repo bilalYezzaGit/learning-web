@@ -136,15 +136,21 @@ Import obligatoire :
 #import "@preview/cetz-plot:0.1.1": plot
 ```
 
+**Options de bloc** : utiliser ` ```typst {frame} ` pour encadrer le graphe, ` ```typst {frame left} ` pour encadrer + aligner a gauche.
+
+**Grille academique** : toujours ajouter `x-grid: "major", y-grid: "major",` dans `plot.plot()` pour un rendu style papier millimetre.
+
 ### 2.1 Courbe simple
 
-```typst
+````mdx
+```typst {frame}
 #import "@preview/cetz:0.3.4": canvas, draw
 #import "@preview/cetz-plot:0.1.1": plot
 
 #canvas({
   plot.plot(
     size: (8, 6),
+    x-grid: "major", y-grid: "major",
     x-label: $x$,
     y-label: $y$,
     x-tick-step: 1,
@@ -158,6 +164,7 @@ Import obligatoire :
   )
 })
 ```
+````
 
 ### 2.2 Deux courbes superposees
 

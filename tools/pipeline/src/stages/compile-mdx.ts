@@ -241,8 +241,12 @@ function remarkDirectiveHandlers() {
 }
 
 // ── Typst code blocks → inline SVG ──
+// Supports options via meta-string: ```typst {frame} or ```typst {frame left}
+// Options:
+//   frame  → adds a border around the SVG
+//   left   → aligns left instead of center (default: center)
 
-const TYPST_BLOCK_RE = /```typst\n([\s\S]*?)```/g
+const TYPST_BLOCK_RE = /```typst(?:\s*\{([^}]*)\})?\n([\s\S]*?)```/g
 
 async function compileTypstBlocks(source: string): Promise<{ source: string; svgs: Map<string, string> }> {
   const matches = [...source.matchAll(TYPST_BLOCK_RE)]
@@ -252,10 +256,18 @@ async function compileTypstBlocks(source: string): Promise<{ source: string; svg
   let result = source
   let i = 0
   for (const match of matches) {
-    const code = match[1]!.trim()
+    const options = (match[1] ?? '').split(/\s+/).filter(Boolean)
+    const code = match[2]!.trim()
     const svg = await compileTypstToSvg(code)
     const placeholder = `<!--TYPST_SVG_${i}-->`
-    const wrapped = `<div class="not-prose my-6 flex justify-center">${svg}</div>`
+
+    const isFramed = options.includes('frame')
+    const isLeft = options.includes('left')
+
+    const alignClass = isLeft ? 'flex justify-start' : 'flex justify-center'
+    const frameClass = isFramed ? ' rounded-lg border border-border/50 bg-muted/30 p-4' : ''
+    const wrapped = `<div class="not-prose my-6 ${alignClass}${frameClass}">${svg}</div>`
+
     svgs.set(placeholder, wrapped)
     result = result.replace(match[0], placeholder)
     i++

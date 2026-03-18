@@ -23,13 +23,14 @@ Soit $f(x) = x^3 + x - 3$.
 
 **6)** Comparer les valeurs $x_0$, $x_1$, $x_2$ avec la valeur exacte $\alpha \approx 1{,}2134$. Commenter la convergence.
 
-```typst
+```typst {frame}
 #import "@preview/cetz:0.3.4": canvas, draw
 #import "@preview/cetz-plot:0.1.1": plot
 
 #canvas({
   plot.plot(
     size: (8, 6),
+    x-grid: "major", y-grid: "major",
     x-label: $x$, y-label: $y$,
     x-tick-step: 0.5, y-tick-step: 2,
     x-min: 0.5, x-max: 2.5, y-min: -2, y-max: 8,

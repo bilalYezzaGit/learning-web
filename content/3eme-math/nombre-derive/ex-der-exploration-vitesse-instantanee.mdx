@@ -21,13 +21,14 @@ $$d(t) = t^3 - 6t^2 + 9t \quad \text{(en metres)}$$
 
 **4)** Interpreter le signe de $v(t)$ en termes de mouvement du mobile.
 
-```typst
+```typst {frame}
 #import "@preview/cetz:0.3.4": canvas, draw
 #import "@preview/cetz-plot:0.1.1": plot
 
 #canvas({
   plot.plot(
     size: (8, 6),
+    x-grid: "major", y-grid: "major",
     x-label: $t$, y-label: $d(t)$,
     x-tick-step: 1, y-tick-step: 2,
     x-min: -0.5, x-max: 5, y-min: -2, y-max: 10,
