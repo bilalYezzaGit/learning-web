@@ -24,6 +24,7 @@ import { compileTypstToPdf } from '../pdf/compile-pdf.js'
 import {
   generateExerciseQrTypst,
   generateBookletQrTypst,
+  generateQcmGroupQrTypst,
 } from '../pdf/qr-generator.js'
 
 const PDFS_DIR = path.join(PROJECT_ROOT, 'public', 'pdfs')
@@ -88,11 +89,12 @@ async function convertAtomToTypst(
 /**
  * Convert a QCM group (multiple qcm atoms) to Typst with empty circles.
  */
-function convertQcmGroup(
+async function convertQcmGroup(
   atomIds: string[],
   atomMap: Map<string, RawAtom>,
   qcmGroupNumber: { value: number },
-): string {
+  bookletCode?: string,
+): Promise<string> {
   const questions: string[] = []
   let questionNum = 1
 
@@ -118,7 +120,10 @@ function convertQcmGroup(
   if (questions.length === 0) return ''
 
   const groupNum = qcmGroupNumber.value++
-  return `\n=== QCM ${groupNum}\n\n${questions.join('\n\n')}`
+  const qrBlock = bookletCode && atomIds[0]
+    ? `#align(right)[${await generateQcmGroupQrTypst(bookletCode, atomIds[0])}]`
+    : ''
+  return `\n=== QCM ${groupNum}\n${qrBlock}\n\n${questions.join('\n\n')}`
 }
 
 /**
@@ -135,7 +140,7 @@ async function processSteps(
 
   for (const step of steps) {
     if (typeof step === 'object' && 'quiz' in step) {
-      const typst = convertQcmGroup(step.quiz, atomMap, qcmCounter)
+      const typst = await convertQcmGroup(step.quiz, atomMap, qcmCounter, bookletCode)
       if (typst) parts.push(typst)
     } else {
       const atom = atomMap.get(step)

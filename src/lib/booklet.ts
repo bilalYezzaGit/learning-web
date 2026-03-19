@@ -12,6 +12,7 @@ import {
   getLivret,
   getLivretActivities,
 } from '@/lib/content-loader'
+import { countLivretQcmQuestions } from '@/lib/qcm-loader'
 import type { BookletDefinition } from '@/types/booklet'
 import { generateBookletCode } from '@/types/booklet'
 
@@ -40,7 +41,7 @@ export const getAllBooklets = cache((): BookletDefinition[] => {
           description: livret.description,
           version: 1,
           exerciseCount: activities.filter((a) => a.type === 'exercise').length,
-          qcmCount: activities.filter((a) => a.type === 'qcm').length,
+          qcmCount: countLivretQcmQuestions(livretSlug),
           lessonCount: activities.filter((a) => a.type === 'lesson').length,
           estimatedMinutes: livret.estimatedMinutes,
         })

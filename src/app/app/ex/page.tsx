@@ -1,9 +1,12 @@
 /**
  * Exercise QR Redirect — lightweight route for QR code scanning.
  *
- * QR codes encode: /app/ex?b=CONTINUITE3E001&e=ex-continuite-1
+ * QR codes encode:
+ *   /app/ex?b=CONTINUITE3E001&e=ex-continuite-1          → exercise page
+ *   /app/ex?b=CONTINUITE3E001&e=qcm-der-xxx&mode=quiz    → QCM player (group session)
+ *
  * This page reconstitutes the booklet code and redirects to the
- * full exercise page at /app/mes-livrets/[code]/exercice/[exerciseId].
+ * appropriate page based on the mode parameter.
  */
 
 import { redirect, notFound } from 'next/navigation'
@@ -11,7 +14,7 @@ import { redirect, notFound } from 'next/navigation'
 import { getAllBooklets } from '@/lib/booklet'
 
 interface PageProps {
-  searchParams: Promise<{ b?: string; e?: string }>
+  searchParams: Promise<{ b?: string; e?: string; mode?: string }>
 }
 
 /**
@@ -25,7 +28,7 @@ function findBookletByCompactCode(compact: string) {
 }
 
 export default async function ExerciseRedirectPage({ searchParams }: PageProps) {
-  const { b, e } = await searchParams
+  const { b, e, mode } = await searchParams
 
   if (!b || !e) {
     notFound()
@@ -34,6 +37,11 @@ export default async function ExerciseRedirectPage({ searchParams }: PageProps) 
   const booklet = findBookletByCompactCode(b)
   if (!booklet) {
     notFound()
+  }
+
+  // QCM group mode — redirect to QCM player with the specific group
+  if (mode === 'quiz') {
+    redirect(`/app/mes-livrets/${booklet.code}/qcm?group=${e}`)
   }
 
   redirect(`/app/mes-livrets/${booklet.code}/exercice/${e}`)
