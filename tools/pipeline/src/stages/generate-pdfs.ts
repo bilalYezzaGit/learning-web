@@ -121,7 +121,7 @@ async function convertQcmGroup(
 
   const groupNum = qcmGroupNumber.value++
   const qrBlock = bookletCode && atomIds[0]
-    ? `#align(right)[${await generateQcmGroupQrTypst(bookletCode, atomIds[0])}]`
+    ? `#align(right)[#${await generateQcmGroupQrTypst(bookletCode, atomIds[0])}]`
     : ''
   return `\n=== QCM ${groupNum}\n${qrBlock}\n\n${questions.join('\n\n')}`
 }
