@@ -1,0 +1,62 @@
+---
+type: lesson
+title: "Choisir la bonne formule"
+difficulty: 0
+timeMinutes: 6
+tags: [denombrement, tableau-recapitulatif, tirage, modelisation]
+praxeologies: [Prax2]
+---
+
+### Les trois questions à se poser
+
+Face à un problème de dénombrement, pose-toi systématiquement ces **trois questions** :
+
+1. **L'ordre intervient-il ?** (Est-ce que $(a, b)$ est différent de $(b, a)$ ?)
+2. **Y a-t-il remise ?** (Un même élément peut-il être choisi plusieurs fois ?)
+3. **Combien d'éléments choisit-on ?** ($p$ parmi $n$)
+
+### Tableau récapitulatif
+
+:::property[Tableau des tirages]
+```typst
+#table(
+  columns: 5,
+  align: center,
+  stroke: 0.5pt,
+  [*Type de tirage*], [*Ordre ?*], [*Remise ?*], [*Formule*], [*Exemple*],
+  [*Simultané* (ou " choix d'un groupe ")], [Non], [Non], [$C_n^p$], [Tirer 3 boules d'un coup],
+  [*Successif sans remise*], [Oui], [Non], [$A_n^p$], [Tirer 3 boules l'une après l'autre, sans les remettre],
+  [*Successif avec remise*], [Oui], [Oui], [$n^p$], [Lancer un dé 3 fois],
+)
+```
+:::
+
+### Application : même urne, trois situations
+
+:::example[Une urne de 10 boules distinctes, on en choisit 3]
+**Situation 1** — On tire **3 boules simultanément**.
+
+L'ordre ne compte pas, pas de remise : $C_{10}^3 = 120$ tirages.
+
+**Situation 2** — On tire **successivement 3 boules sans remise**.
+
+L'ordre compte, pas de remise : $A_{10}^3 = 10 \times 9 \times 8 = 720$ tirages.
+
+**Situation 3** — On tire **une boule, on note sa couleur, on la remet**, et on recommence 3 fois.
+
+L'ordre compte, avec remise : $10^3 = 1\,000$ tirages.
+:::
+
+:::remark
+On a bien $A_{10}^3 = C_{10}^3 \times 3! = 120 \times 6 = 720$.
+
+Cela confirme que chaque combinaison correspond à $p! = 3! = 6$ arrangements (les différents ordres des mêmes 3 éléments).
+:::
+
+:::attention
+Le mot " choisir " seul ne suffit pas toujours : regarde le contexte !
+
+- " Choisir un comité de 3 personnes " : pas d'ordre, c'est $C_n^3$.
+- " Choisir un président, un vice-président et un secrétaire " : les rôles créent un ordre, c'est $A_n^3$.
+- " Former un code de 3 chiffres " : l'ordre compte et la répétition est possible, c'est $n^3$.
+:::

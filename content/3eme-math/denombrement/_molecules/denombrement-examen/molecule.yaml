@@ -1,0 +1,87 @@
+kind: livret
+title: "Dénombrement — Examen"
+description: "S'entraîner sur tous les exercices types du BAC et des contrôles : tirages, cartes, codes, anagrammes, placements, coloriages, dénombrement sous contraintes multiples."
+trimester: T2
+order: 18
+objectives:
+  - "Identifier le modèle de tirage approprié et appliquer la bonne formule"
+  - "Maîtriser la méthode du complémentaire pour les problèmes « au moins »"
+  - "Dénombrer sous contraintes multiples en décomposant en cas disjoints"
+  - "Résoudre des exercices types BAC de dénombrement"
+
+sections:
+  - label: "Fiche de synthèse"
+    steps:
+      - lesson-denom-synthese-formules
+
+  - label: "Tirages dans une urne"
+    steps:
+      - ex-denom-urne-trois-modes
+      - ex-denom-urne-complementaire
+      - ex-denom-urne-somme-paire
+      - ex-denom-urne-boules-numerotees
+      - quiz:
+          - qcm-denom-urne-modele
+          - qcm-denom-complementaire
+
+  - label: "Jeux de cartes"
+    steps:
+      - ex-denom-cartes-mains-8
+      - ex-denom-cartes-contraintes-croisees
+      - ex-denom-cartes-mains-5-figures
+      - ex-denom-cartes-grille-jeu
+
+  - label: "Codes, nombres et chiffres"
+    steps:
+      - ex-denom-nombres-quatre-chiffres
+      - ex-denom-nombres-six-chiffres-jetons
+      - ex-denom-codes-login
+      - ex-denom-code-antivol
+      - ex-denom-factorielles-derniers-chiffres
+      - quiz:
+          - qcm-denom-premier-chiffre
+
+  - label: "Anagrammes et permutations"
+    steps:
+      - ex-denom-anagrammes-contraintes
+      - ex-denom-anagrammes-repetitions
+      - ex-denom-placement-alterne
+      - ex-denom-placement-pieces
+      - quiz:
+          - qcm-denom-anagrammes-rep
+
+  - label: "Diagrammes et inclusion-exclusion"
+    steps:
+      - ex-denom-venn-trois-langues
+      - ex-denom-venn-defauts
+
+  - label: "Coloriages et configurations"
+    steps:
+      - ex-denom-coloriage-grille
+      - ex-denom-jetons-damier
+      - ex-denom-grille-mots-croises
+
+  - label: "Rendez-vous et rencontres"
+    steps:
+      - ex-denom-cafes-rencontre
+      - ex-denom-billets-train
+
+  - label: "Circuits et excursions"
+    steps:
+      - ex-denom-circuits-touristiques
+      - ex-denom-sondage-qcm
+
+  - label: "Mots et lettres"
+    steps:
+      - ex-denom-mots-18-lettres
+      - ex-denom-mots-os
+
+  - label: "Problèmes de synthèse type BAC"
+    steps:
+      - ex-denom-synthese-qcm-bac
+      - ex-denom-synthese-vrai-faux
+      - ex-denom-synthese-grenouille
+      - ex-denom-synthese-des-galilee
+      - ex-denom-synthese-des-discernables
+      - ex-denom-synthese-carres-quadrillage
+      - ex-denom-synthese-equations

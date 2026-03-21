@@ -1,0 +1,78 @@
+kind: livret
+title: "Dénombrement — Exploration"
+description: "Approfondir le dénombrement à travers des applications réelles, des identités profondes, des paradoxes et des problèmes créatifs : ADN, cryptographie, Braille, chemins, double comptage, poker."
+trimester: T2
+order: 18
+objectives:
+  - "Maîtriser les identités du binôme de Newton par spécialisation, dérivation et intégration"
+  - "Dénombrer des chemins sur un réseau et modéliser avec des récurrences"
+  - "Utiliser le double comptage pour démontrer des identités combinatoires"
+  - "Appliquer le dénombrement à des situations réelles (ADN, cryptographie, poker, loterie)"
+  - "Découvrir les dérangements, le paradoxe des anniversaires et le triangle de Sierpinski"
+
+sections:
+  - label: "Identités du binôme de Newton"
+    steps:
+      - lesson-denom-identites-binome
+      - ex-denom-somme-alternee
+      - ex-denom-derivation-binome
+      - ex-denom-integration-binome
+      - quiz:
+          - qcm-denom-identite-2n
+
+  - label: "Chemins sur réseau"
+    steps:
+      - ex-denom-chemins-grille-base
+      - ex-denom-chemins-obstacle
+      - ex-denom-chemins-robot
+
+  - label: "Double comptage et identités profondes"
+    steps:
+      - lesson-denom-double-comptage
+      - ex-denom-vandermonde
+      - ex-denom-poignees-de-main
+      - quiz:
+          - qcm-denom-vandermonde
+
+  - label: "Équations combinatoires et démonstrations"
+    steps:
+      - ex-denom-equations-combinatoires
+      - ex-denom-pascal-arithmetique
+      - ex-denom-cnp-entier
+      - ex-denom-formule-cnp-recurrence
+
+  - label: "Applications réelles — biologie"
+    steps:
+      - lesson-denom-applications-reelles
+      - ex-denom-adn-codons
+      - ex-denom-mots-de-passe-securite
+
+  - label: "Applications réelles — codes et jeux"
+    steps:
+      - ex-denom-braille
+      - ex-denom-plaques-immatriculation
+      - ex-denom-poker-mains
+      - ex-denom-serrure-combinaison
+      - ex-denom-sudoku-mini
+
+  - label: "Applications réelles — probabilités et paradoxes"
+    steps:
+      - ex-denom-anniversaires
+      - ex-denom-probleme-tiroir
+      - ex-denom-loterie
+
+  - label: "Chemins, arbres et récurrences"
+    steps:
+      - ex-denom-escalier-fibonacci
+      - ex-denom-arbre-tournoi
+      - ex-denom-pavage-dominos
+
+  - label: "Problèmes de modélisation avancée"
+    steps:
+      - ex-denom-qcm-candidat
+      - ex-denom-derangements
+      - ex-denom-sierpinski
+      - ex-denom-cryptographie-substitution
+      - quiz:
+          - qcm-denom-derangements
+          - qcm-denom-sierpinski

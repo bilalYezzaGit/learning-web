@@ -1,0 +1,34 @@
+---
+type: exercise
+title: "Mots avec lettres A, B, C"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [denombrement, mots, permutations, repetitions]
+praxeologies: [Prax4b]
+---
+
+:::enonce
+On dispose de $4$ lettres A, $5$ lettres B et $9$ lettres C (soit $18$ lettres au total, chaque lettre étant indiscernable des autres de même type).
+
+Combien de " mots " de $18$ lettres peut-on écrire en utilisant toutes ces lettres ?
+:::
+
+:::solution
+C'est le nombre de permutations de $18$ lettres avec répétitions : A apparaît $4$ fois, B apparaît $5$ fois, C apparaît $9$ fois.
+
+$$\frac{18!}{4! \times 5! \times 9!}$$
+
+**Calcul** :
+
+$$\frac{18!}{4! \times 5! \times 9!} = \frac{18!}{24 \times 120 \times 362\,880}$$
+
+On peut aussi interpréter ce résultat comme un produit de combinaisons successives :
+- Choisir $4$ positions pour les A parmi $18$ : $C_{18}^4$
+- Choisir $5$ positions pour les B parmi les $14$ restantes : $C_{14}^5$
+- Les $9$ positions restantes sont pour les C : $C_9^9 = 1$
+
+$$C_{18}^4 \times C_{14}^5 = \frac{18!}{4! \times 14!} \times \frac{14!}{5! \times 9!} = \frac{18!}{4! \times 5! \times 9!}$$
+
+On retrouve bien la même formule.
+:::

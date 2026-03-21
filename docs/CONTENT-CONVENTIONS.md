@@ -327,9 +327,10 @@ description: "Description courte"       # obligatoire
 trimester: T1 | T2 | T3                # obligatoire
 order: 1                                # obligatoire, position dans le programme
 estimatedMinutes: 180                   # optionnel, auto-calcule si absent
-objectives:                             # optionnel, defaut: []
+objectives:                             # obligatoire, >= 3 objectifs
   - "Objectif 1"
   - "Objectif 2"
+  - "Objectif 3"
 
 sections:                               # obligatoire, >= 1 section
   - label: "Continuite en un point"     # obligatoire
@@ -351,7 +352,7 @@ sections:                               # obligatoire, >= 1 section
 - L'ordre des steps definit la sequence pedagogique
 - Tous les IDs d'atomes references doivent exister dans le module correspondant
 - `estimatedMinutes` est optionnel : si absent, le pipeline le calcule comme somme des `timeMinutes` des atomes
-- `objectives` est optionnel (defaut : liste vide)
+- `objectives` est **obligatoire**, minimum 3 objectifs d'apprentissage clairs et mesurables
 
 ### 3.2 Programme
 
@@ -577,7 +578,9 @@ On applique la regle $(x^n)' = nx^{n-1}$, donc $(x^3)' = 3x^2$.
 
 #### Blocs Typst
 
-Graphiques de fonctions et tableaux de variations sont rendus via des blocs de code Typst (` ```typst `). Le pipeline compile le Typst en SVG statique.
+Graphiques de fonctions, tableaux de variations et **tableaux de donnees** sont rendus via des blocs de code Typst (` ```typst `). Le pipeline compile le Typst en SVG statique.
+
+**IMPORTANT** : ne jamais utiliser les tableaux Markdown (`| ... | ... |`) dans le contenu MDX. Ils ne sont pas rendus dans les PDFs. Toujours utiliser un bloc ` ```typst ` avec `#table()` a la place.
 
 | Propriete | Valeur |
 |-----------|--------|
@@ -619,6 +622,20 @@ Graphiques de fonctions et tableaux de variations sont rendus via des blocs de c
       (top, $+infinity$),
     ),
   ),
+)
+```
+````
+
+**Tableau de donnees** (`#table`) :
+````mdx
+```typst
+#table(
+  columns: 4,
+  align: center,
+  stroke: 0.5pt,
+  [*En-tete 1*], [*En-tete 2*], [*En-tete 3*], [*En-tete 4*],
+  [valeur], [valeur], [valeur], [valeur],
+  [valeur], [valeur], [valeur], [valeur],
 )
 ```
 ````
@@ -823,6 +840,7 @@ Le topic dans l'ID de l'atome est un slug court. Chaque topic correspond a un co
 | `fa` | Fonctions affines |
 | `sys` | Systemes |
 | `stat` | Statistiques |
+| `denom` | Dénombrement |
 
 Pour ajouter un nouveau topic : l'ajouter a ce tableau et creer le cours correspondant.
 

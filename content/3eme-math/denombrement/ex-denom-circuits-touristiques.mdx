@@ -1,0 +1,46 @@
+---
+type: exercise
+title: "Circuits touristiques — 6 villes"
+difficulty: 1
+timeMinutes: 12
+category: application
+tags: [denombrement, circuits, permutations, arrangements, equation]
+praxeologies: [Prax4a, Prax3]
+---
+
+:::enonce
+Une agence de voyages propose des circuits touristiques parmi $6$ villes : Athènes, Berlin, Copenhague, Dublin, Edimbourg et Florence.
+
+1. Combien de circuits passant par les $6$ villes peut-on organiser ?
+2. Combien de ces circuits **commencent** par Athènes ?
+3. Combien d'excursions de $2$ villes (avec ordre de visite) peut-on proposer ?
+4. L'agence souhaite proposer exactement $56$ excursions de $2$ villes. Combien de villes faut-il pour cela ?
+:::
+
+:::solution
+**1.** Un circuit passant par les $6$ villes est une permutation des $6$ villes :
+
+$$6! = 720$$
+
+**2.** Athènes est en première position (fixée). Les $5$ villes restantes se permutent :
+
+$$5! = 120$$
+
+**3.** Une excursion de $2$ villes avec ordre = un arrangement de $2$ parmi $6$ :
+
+$$A_6^2 = 6 \times 5 = 30$$
+
+**4.** On cherche $n$ tel que $A_n^2 = 56$, c'est-à-dire :
+
+$$n(n-1) = 56$$
+
+$$n^2 - n - 56 = 0$$
+
+$$\Delta = 1 + 224 = 225 = 15^2$$
+
+$$n = \frac{1 + 15}{2} = 8 \quad \text{(on rejette } n = \frac{1-15}{2} = -7 < 0\text{)}$$
+
+Il faut **$8$ villes** pour proposer $56$ excursions.
+
+**Vérification** : $A_8^2 = 8 \times 7 = 56$.
+:::

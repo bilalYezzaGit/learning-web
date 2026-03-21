@@ -1,0 +1,35 @@
+---
+type: exercise
+title: "Calcul d'arrangements"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [denombrement, arrangements, tirage-successif]
+praxeologies: [Prax3]
+---
+
+:::enonce
+1. Calculer $A_{10}^3$ et $A_7^4$.
+2. Une agence de voyage propose des excursions de 2 villes parmi 6 (l'ordre de visite compte). Combien d'excursions différentes peut-on proposer ?
+3. On tire successivement et sans remise 4 boules d'une urne contenant 15 boules distinctes. Combien de tirages différents peut-on obtenir ?
+:::
+
+:::solution
+**1.** Calcul de $A_{10}^3$ et $A_7^4$ :
+
+$$A_{10}^3 = 10 \times 9 \times 8 = 720$$
+
+$$A_7^4 = 7 \times 6 \times 5 \times 4 = 840$$
+
+**2.** On choisit 2 villes parmi 6 et l'ordre compte (visiter Paris puis Lyon est différent de Lyon puis Paris). C'est un arrangement de 2 parmi 6 :
+
+$$A_6^2 = 6 \times 5 = 30$$
+
+Il y a **30 excursions** différentes.
+
+**3.** On tire successivement et sans remise 4 boules parmi 15. L'ordre compte (tirage successif) et pas de répétition (sans remise). C'est un arrangement de 4 parmi 15 :
+
+$$A_{15}^4 = 15 \times 14 \times 13 \times 12 = 32\,760$$
+
+Il y a **32 760 tirages** différents.
+:::

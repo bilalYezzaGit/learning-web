@@ -1,0 +1,64 @@
+---
+type: exercise
+title: "Mains de 8 cartes — jeu de 32"
+difficulty: 2
+timeMinutes: 15
+category: application
+tags: [denombrement, cartes, combinaisons, complementaire]
+praxeologies: [Prax5a, Prax6, Prax8]
+---
+
+:::enonce
+On considère un jeu de $32$ cartes ($4$ couleurs : pique, coeur, carreau, trèfle ; $8$ valeurs par couleur : $7, 8, 9, 10$, valet, dame, roi, as). On tire une main de $8$ cartes.
+
+Déterminer le nombre de mains contenant :
+
+1. Exactement un roi.
+2. Exactement deux as.
+3. Au moins un as.
+4. Au moins un as **et** au moins un valet.
+:::
+
+:::solution
+Le nombre total de mains : $C_{32}^8 = 10\,518\,300$.
+
+**1.** Exactement un roi. On choisit $1$ roi parmi $4$ et $7$ cartes parmi les $28$ non-rois :
+
+$$C_4^1 \times C_{28}^7 = 4 \times 1\,184\,040 = 4\,736\,160$$
+
+**2.** Exactement deux as. On choisit $2$ as parmi $4$ et $6$ cartes parmi les $28$ non-as :
+
+$$C_4^2 \times C_{28}^6 = 6 \times 376\,740 = 2\,260\,440$$
+
+**3.** Au moins un as. Par la **méthode du complémentaire** :
+
+$$C_{32}^8 - C_{28}^8 = 10\,518\,300 - 3\,108\,105 = 7\,410\,195$$
+
+**4.** Au moins un as **et** au moins un valet. On utilise l'**inclusion-exclusion**.
+
+Soit $A$ = " au moins un as " et $V$ = " au moins un valet ".
+
+$$\text{card}(A \cap V) = \text{card}(A) + \text{card}(V) - \text{card}(A \cup V)$$
+
+Or $\text{card}(A \cup V) = \text{total} - \text{card}(\overline{A \cup V})$.
+
+$\overline{A \cup V}$ = " ni as, ni valet " = mains de $8$ cartes parmi les $24$ cartes qui ne sont ni as ni valet.
+
+$$\text{card}(\overline{A \cup V}) = C_{24}^8 = 735\,471$$
+
+Donc $\text{card}(A \cup V) = 10\,518\,300 - 735\,471 = 9\,782\,829$.
+
+On a aussi :
+- $\text{card}(A) = 7\,410\,195$ (question 3)
+- $\text{card}(V) = 7\,410\,195$ (par symétrie, même calcul que pour les as)
+
+$$\text{card}(A \cap V) = 7\,410\,195 + 7\,410\,195 - 9\,782\,829 = 5\,037\,561$$
+:::
+
+:::methode
+Pour " $A$ **et** $B$ " avec l'inclusion-exclusion :
+
+$$\text{card}(A \cap B) = \text{card}(A) + \text{card}(B) - \text{card}(A \cup B)$$
+
+Calculer $\text{card}(A \cup B)$ via le complémentaire : $\text{card}(A \cup B) = \text{total} - \text{card}(\overline{A} \cap \overline{B})$.
+:::

@@ -1,0 +1,72 @@
+---
+type: exercise
+title: "Nombres formés avec 6 jetons"
+difficulty: 2
+timeMinutes: 15
+category: application
+tags: [denombrement, nombres, permutations, arrangements, divisibilite]
+praxeologies: [Prax3, Prax4a, Prax8]
+---
+
+:::enonce
+On dispose de six jetons portant les chiffres $0, 1, 2, 3, 4, 5$.
+
+1. Combien d'entiers de $4$ chiffres distincts peut-on former avec ces jetons ?
+2. Combien d'entiers de $6$ chiffres peut-on former (en utilisant tous les jetons) ?
+3. Parmi les entiers de $6$ chiffres, combien sont **pairs** ?
+4. Parmi les entiers de $6$ chiffres, combien ont le chiffre des unités égal à $5$ ?
+5. Combien d'entiers de $3$ chiffres distincts **divisibles par $9$** peut-on former avec ces jetons ?
+:::
+
+:::solution
+**1.** Entiers de $4$ chiffres distincts parmi $\{0, 1, 2, 3, 4, 5\}$. Le premier chiffre $\neq 0$ ($5$ choix), puis $5$, $4$ et $3$ choix :
+
+$$5 \times 5 \times 4 \times 3 = 300$$
+
+**2.** Entiers de $6$ chiffres utilisant tous les jetons = permutations de $\{0, 1, 2, 3, 4, 5\}$ avec premier chiffre $\neq 0$.
+
+$$\text{Total des permutations} = 6! = 720$$
+
+Permutations commençant par $0$ : $5! = 120$.
+
+$$720 - 120 = 600$$
+
+**3.** Entiers de $6$ chiffres pairs. Le dernier chiffre doit être pair : $\{0, 2, 4\}$.
+
+**Cas 1 : dernier chiffre $= 0$.** Premier chiffre $\neq 0$ est automatique. Les $4$ chiffres restants se permutent librement.
+
+$$5 \times 4! = 5! = 120$$
+
+**Cas 2 : dernier chiffre $= 2$.** Premier chiffre $\in \{1, 3, 4, 5\}$ ($4$ choix, car $\neq 0$ et $\neq 2$). Les $4$ restants se permutent.
+
+$$4 \times 4! = 96$$
+
+**Cas 3 : dernier chiffre $= 4$.** Par symétrie avec le cas 2 :
+
+$$4 \times 4! = 96$$
+
+$$\text{Total} = 120 + 96 + 96 = 312$$
+
+**4.** Chiffre des unités $= 5$. Premier chiffre $\in \{1, 2, 3, 4\}$ ($4$ choix, car $\neq 0$ et $\neq 5$). Les $4$ restants se permutent.
+
+$$4 \times 4! = 96$$
+
+**5.** Entier de $3$ chiffres distincts divisible par $9$. Un nombre est divisible par $9$ si la somme de ses chiffres est divisible par $9$.
+
+On cherche les triplets de chiffres distincts dans $\{0, 1, 2, 3, 4, 5\}$ dont la somme est divisible par $9$.
+
+La somme maximale de $3$ chiffres est $3 + 4 + 5 = 12$, donc la somme doit valoir exactement $9$.
+
+Les triplets dont la somme vaut $9$ :
+- $\{0, 4, 5\}$ : somme $= 9$
+- $\{1, 3, 5\}$ : somme $= 9$
+- $\{2, 3, 4\}$ : somme $= 9$
+
+Pour chaque triplet, on compte les entiers de $3$ chiffres (premier $\neq 0$) :
+
+- $\{0, 4, 5\}$ : premier chiffre $\in \{4, 5\}$ → $2 \times 2! = 4$
+- $\{1, 3, 5\}$ : premier chiffre $\in \{1, 3, 5\}$ → $3 \times 2! = 6$
+- $\{2, 3, 4\}$ : premier chiffre $\in \{2, 3, 4\}$ → $3 \times 2! = 6$
+
+$$\text{Total} = 4 + 6 + 6 = 16$$
+:::

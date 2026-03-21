@@ -1,0 +1,45 @@
+---
+type: exercise
+title: "Code antivol d'un autoradio"
+difficulty: 2
+timeMinutes: 15
+category: application
+tags: [denombrement, codes, permutations, combinaisons]
+praxeologies: [Prax2, Prax4a, Prax4b]
+---
+
+:::enonce
+Un autoradio est protégé par un code de $4$ chiffres (de $0$ à $9$).
+
+1. Combien y a-t-il de codes possibles ?
+2. Combien y a-t-il de codes de $4$ chiffres **distincts** ?
+3. Le propriétaire sait que les $4$ chiffres de son code sont $1, 9, 9, 5$ (mais il a oublié l'ordre). Combien d'essais au maximum doit-il effectuer (en plus du code correct) ?
+4. Un autre propriétaire sait que ses $4$ chiffres sont $1, 2, 6, 7$ (tous distincts). Combien d'essais au maximum ?
+5. Un autre modèle d'antivol demande d'appuyer **simultanément** sur $4$ touches parmi $10$. Combien de codes possibles ?
+:::
+
+:::solution
+**1.** Chaque chiffre parmi $\{0, 1, \ldots, 9\}$, avec répétition et ordre :
+
+$$10^4 = 10\,000$$
+
+**2.** $4$ chiffres distincts ordonnés = arrangement de $4$ parmi $10$ :
+
+$$A_{10}^4 = 10 \times 9 \times 8 \times 7 = 5040$$
+
+**3.** Les chiffres sont $1, 9, 9, 5$ : le chiffre $9$ apparaît $2$ fois. Le nombre d'arrangements distincts est :
+
+$$\frac{4!}{2!} = \frac{24}{2} = 12$$
+
+Le propriétaire connaît la composition mais pas l'ordre. Il doit essayer au maximum $12 - 1 = 11$ codes incorrects avant de trouver le bon (dans le pire des cas).
+
+**4.** Les chiffres sont $1, 2, 6, 7$ (tous distincts). Le nombre d'arrangements :
+
+$$4! = 24$$
+
+Il doit essayer au maximum $24 - 1 = 23$ codes.
+
+**5.** Appui simultané sur $4$ touches parmi $10$ : pas d'ordre, pas de répétition → combinaisons :
+
+$$C_{10}^4 = \frac{10 \times 9 \times 8 \times 7}{24} = 210$$
+:::

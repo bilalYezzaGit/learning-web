@@ -1,0 +1,288 @@
+kind: planning
+module: denombrement
+programme: 3eme-math
+status: generated
+
+design_intent: >-
+  Livret Cours — initiation au denombrement. Structure progressive :
+  chaque notion est introduite par une lecon suivie d'exercices d'application
+  directe et de QCM de consolidation. L'eleve decouvre les outils un par un
+  (cardinal, arrangements, permutations, combinaisons, binome) avant de les
+  combiner. Difficulte 0-1, style pedagogique avec definitions et exemples.
+
+slug: denombrement-cours
+title: "Denombrement — Cours"
+description: "Decouvrir les outils fondamentaux du denombrement : cardinal, arrangements, permutations, combinaisons et binome de Newton, avec exercices d'application directe."
+trimester: T2
+order: 18
+
+sections:
+  - label: "Cardinal d'un ensemble fini"
+    atoms:
+      - slug: lesson-denom-cardinal
+        type: lesson
+        title: "Cardinal d'un ensemble fini"
+        praxeologies: [Prax1]
+        contenu: >-
+          Definition du cardinal. Formule de l'union : card(E ∪ F) = card(E) + card(F) - card(E ∩ F).
+          Cardinal du complementaire. Diagrammes de Venn pour visualiser. Exemples : diviseurs,
+          ensembles d'entiers pairs/impairs.
+        difficulte: 0
+        timeMinutes: 8
+
+      - slug: ex-denom-cardinal-venn
+        type: exercise
+        title: "Cardinal et diagramme de Venn"
+        praxeologies: [Prax1]
+        category: application
+        contenu: >-
+          Un ensemble d'appareils avec deux defauts A et B. Donnees : card(A), card(B), card(A ∩ B).
+          Calculer card(A ∪ B) et le nombre d'appareils sans defaut. Utiliser un diagramme de Venn.
+        difficulte: 1
+        timeMinutes: 8
+
+      - slug: ex-denom-cardinal-trois-ensembles
+        type: exercise
+        title: "Cardinal de l'union de trois ensembles"
+        praxeologies: [Prax1]
+        category: application
+        contenu: >-
+          Eleves etudiant 3 langues (anglais, espagnol, allemand) avec donnees partielles.
+          Appliquer la formule d'inclusion-exclusion a 3 ensembles pour trouver le nombre total.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: qcm-denom-cardinal-union
+        type: qcm
+        title: "Cardinal d'une union"
+        praxeologies: [Prax1]
+        contenu: "Tester la formule card(E ∪ F) avec des valeurs numeriques. Distracteurs : oubli de soustraire l'intersection, addition simple."
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Produit cartesien et principe multiplicatif"
+    atoms:
+      - slug: lesson-denom-produit-cartesien
+        type: lesson
+        title: "Produit cartesien et principe multiplicatif"
+        praxeologies: [Prax2]
+        contenu: >-
+          Definition du p-uplet et du produit cartesien E × F. Formule card(E × F) = card(E) × card(F).
+          Principe multiplicatif : si un choix se decompose en etapes independantes, le total est le produit.
+          Arbre de choix comme outil de visualisation. Exemples : pieces de monnaie, menus, codes.
+        difficulte: 0
+        timeMinutes: 7
+
+      - slug: ex-denom-principe-multiplicatif
+        type: exercise
+        title: "Application du principe multiplicatif"
+        praxeologies: [Prax2]
+        category: application
+        contenu: >-
+          Formation de codes : un Login de 6 chiffres suivi d'une lettre, avec contraintes
+          (premier chiffre ≠ 0, lettre ≠ O). Calculer le nombre maximum de clients.
+          Puis un mot de passe de 4 lettres avec repetition. Comparer les deux cardinaux.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: qcm-denom-produit-cartesien
+        type: qcm
+        title: "Produit cartesien"
+        praxeologies: [Prax2]
+        contenu: "Calculer card(E × F × G) avec des ensembles simples. Distracteurs : addition au lieu de produit, oubli d'un facteur."
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Arrangements"
+    atoms:
+      - slug: lesson-denom-arrangements
+        type: lesson
+        title: "Arrangements sans repetition"
+        praxeologies: [Prax3]
+        contenu: >-
+          Definition d'un arrangement de p parmi n (p-uplet d'elements distincts).
+          Formule A_n^p = n(n-1)...(n-p+1) = n!/(n-p)!. Demonstration par le principe
+          multiplicatif (n choix pour le 1er, n-1 pour le 2e, etc.). Exemples : circuits
+          touristiques, bureaux. Distinction avec les combinaisons (l'ordre compte ici).
+        difficulte: 0
+        timeMinutes: 8
+
+      - slug: ex-denom-arrangements-direct
+        type: exercise
+        title: "Calcul d'arrangements"
+        praxeologies: [Prax3]
+        category: application
+        contenu: >-
+          1) Calculer A_10^3, A_7^4. 2) Une agence propose des excursions de 2 villes
+          parmi 6 (l'ordre compte). Combien d'excursions ? 3) Tirages successifs sans remise
+          de 4 boules parmi 15.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-denom-tirages-successifs-sans-remise
+        type: exercise
+        title: "Tirages successifs sans remise"
+        praxeologies: [Prax2, Prax3]
+        category: application
+        contenu: >-
+          Une urne contient 12 boules (5 noires, 3 blanches, 4 rouges). On tire successivement
+          sans remise 5 boules. Calculer : a) nombre total de tirages, b) tirages avec la 1ere
+          boule rouge, c) tirages avec exactement 1 boule rouge.
+        difficulte: 1
+        timeMinutes: 12
+
+      - slug: qcm-denom-arrangements
+        type: qcm
+        title: "Arrangements vs combinaisons"
+        praxeologies: [Prax3, Prax5a]
+        contenu: "Un tirage successif sans remise de 3 parmi 8. Quelle formule ? Distracteurs : C_8^3 (pas d'ordre), 8^3 (avec remise), 3! × 8."
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Permutations et anagrammes"
+    atoms:
+      - slug: lesson-denom-permutations
+        type: lesson
+        title: "Permutations et factorielle"
+        praxeologies: [Prax4a, Prax4b]
+        contenu: >-
+          Definition des permutations (arrangement de n parmi n). Factorielle : n! = n × (n-1) × ... × 1,
+          convention 0! = 1. Application aux anagrammes (mots de lettres distinctes : n! anagrammes).
+          Cas des lettres repetees : n!/(p1! × p2! × ... × pk!). Exemples : QCM (3! = 6),
+          ANANAS (6!/(3!×2!) = 60), ESSENTIEL (9!/(3!×2!) = 30240).
+        difficulte: 0
+        timeMinutes: 8
+
+      - slug: ex-denom-anagrammes-simples
+        type: exercise
+        title: "Anagrammes de mots a lettres distinctes"
+        praxeologies: [Prax4a]
+        category: application
+        contenu: >-
+          1) Combien d'anagrammes du mot BLANCHE ? 2) Combien se terminent par E ?
+          3) Dans combien de mots les voyelles sont-elles consecutives ?
+          4) Placement de 3 filles et 3 garcons en alternance sur 6 chaises.
+        difficulte: 1
+        timeMinutes: 12
+
+      - slug: ex-denom-anagrammes-repetitions
+        type: exercise
+        title: "Anagrammes avec lettres repetees"
+        praxeologies: [Prax4b]
+        category: application
+        contenu: >-
+          Calculer le nombre d'anagrammes de : a) ANANAS, b) ESSENTIEL, c) MATHEMATIQUES.
+          Pour chaque mot, identifier les lettres qui se repetent et appliquer la formule
+          n!/(p1! × p2! × ... × pk!).
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: qcm-denom-anagrammes
+        type: qcm
+        title: "Nombre d'anagrammes"
+        praxeologies: [Prax4b]
+        contenu: "Nombre d'anagrammes de ANANAS. Distracteurs : 6! (oubli de diviser), 6!/3! (oubli du 2! des N), 3!×2! (confusion)."
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Combinaisons"
+    atoms:
+      - slug: lesson-denom-combinaisons
+        type: lesson
+        title: "Combinaisons et leurs proprietes"
+        praxeologies: [Prax5a, Prax5b]
+        contenu: >-
+          Definition : combinaison = sous-ensemble de p elements (sans ordre). Formule
+          C_n^p = n!/(p!(n-p)!) = A_n^p/p!. Proprietes : C_n^0 = C_n^n = 1, C_n^1 = n,
+          symetrie C_n^p = C_n^(n-p), relation de Pascal C_n^p = C_{n-1}^{p-1} + C_{n-1}^p.
+          Triangle de Pascal : construction et lecture. Exemples : tirage simultane de boules,
+          diagonales d'un polygone.
+        difficulte: 0
+        timeMinutes: 10
+
+      - slug: ex-denom-combinaisons-direct
+        type: exercise
+        title: "Calcul de combinaisons"
+        praxeologies: [Prax5a]
+        category: application
+        contenu: >-
+          1) Calculer C_10^3, C_8^5. 2) Combien de droites definies par 5 points
+          (non alignes) ? 3) Combien de triangles formes par n points d'un cercle ?
+          4) Construire le triangle de Pascal jusqu'a n = 7.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-denom-tirage-simultane-boules
+        type: exercise
+        title: "Tirage simultane de boules"
+        praxeologies: [Prax5a, Prax2]
+        category: application
+        contenu: >-
+          Une urne contient 12 boules (5 noires, 3 blanches, 4 rouges). Tirage simultane
+          de 5 boules. a) Nombre total de tirages. b) Tirages avec 2 noires et 3 blanches.
+          c) Tirages avec 2 rouges, 1 noire et 2 blanches.
+        difficulte: 1
+        timeMinutes: 12
+
+      - slug: qcm-denom-combinaisons-proprietes
+        type: qcm
+        title: "Proprietes des combinaisons"
+        praxeologies: [Prax5b]
+        contenu: "Verifier une identite : C_8^3 = C_7^2 + C_7^3. Distracteurs : C_7^2 × C_7^3, C_8^3 = C_8^5 (confusion symetrie), valeur numerique fausse."
+        difficulte: 1
+        timeMinutes: 2
+
+      - slug: qcm-denom-tirage-simultane
+        type: qcm
+        title: "Choix du modele de tirage"
+        praxeologies: [Prax2]
+        contenu: "On tire simultanement 3 boules parmi 10. Quelle formule ? Distracteurs : A_10^3 (ordre), 10^3 (remise), 3!×10 (faux)."
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Binome de Newton"
+    atoms:
+      - slug: lesson-denom-binome
+        type: lesson
+        title: "Formule du binome de Newton"
+        praxeologies: [Prax7a]
+        contenu: >-
+          Formule : (a+b)^n = Σ C_n^k a^(n-k) b^k. Demonstration par recurrence.
+          Cas particuliers : (1+1)^n = 2^n (nombre de parties d'un ensemble),
+          (1-1)^n = 0 (somme alternee). Exemples de developpement pour n = 3, 4, 5.
+        difficulte: 1
+        timeMinutes: 8
+
+      - slug: ex-denom-binome-developpement
+        type: exercise
+        title: "Developpement avec le binome"
+        praxeologies: [Prax7a]
+        category: application
+        contenu: >-
+          1) Developper (1+x)^5 et (2-x)^4. 2) Trouver le coefficient de x^3
+          dans (1+x)^7. 3) Calculer le nombre de parties d'un ensemble a 6 elements.
+          4) Montrer que C_n^0 + C_n^1 + ... + C_n^n = 2^n.
+        difficulte: 1
+        timeMinutes: 12
+
+      - slug: qcm-denom-binome
+        type: qcm
+        title: "Coefficient dans le binome"
+        praxeologies: [Prax7a]
+        contenu: "Coefficient de x^3 dans (1+x)^5. Distracteurs : 5^3 (confusion n^p), 3! (confusion permutations), C_5^2 (mauvais indice)."
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Tableau recapitulatif des tirages"
+    atoms:
+      - slug: lesson-denom-tableau-recapitulatif
+        type: lesson
+        title: "Choisir la bonne formule"
+        praxeologies: [Prax2]
+        contenu: >-
+          Tableau recapitulatif : tirage simultane → C_n^p, successif sans remise → A_n^p,
+          successif avec remise → n^p. Les 3 questions a se poser : l'ordre intervient-il ?
+          Y a-t-il remise ? Combien d'elements ? Application sur 3 situations contrastees
+          avec la meme urne pour montrer la difference.
+        difficulte: 0
+        timeMinutes: 6

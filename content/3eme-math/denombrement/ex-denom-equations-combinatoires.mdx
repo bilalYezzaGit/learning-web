@@ -1,0 +1,93 @@
+---
+type: exercise
+title: "Équations en $n$ avec $A_n^p$ et $C_n^p$"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [denombrement, equations-combinatoires, arrangements, combinaisons]
+praxeologies: [Prax9]
+---
+
+:::enonce
+Résoudre les équations suivantes (dans $\mathbb{N}$, en vérifiant les conditions de validité).
+
+a) $A_7^n = 21 \times A_6^{n-2}$
+
+b) $C_n^2 + C_{n-3}^2 = 17$
+
+c) $A_n^3 = 72 \times A_{n-2}^1$
+:::
+
+:::solution
+**a)** On a $A_7^n = \dfrac{7!}{(7-n)!}$ et $A_6^{n-2} = \dfrac{6!}{(6-(n-2))!} = \dfrac{6!}{(8-n)!}$.
+
+L'équation devient :
+
+$$\frac{7!}{(7-n)!} = 21 \times \frac{6!}{(8-n)!}$$
+
+Or $7! = 7 \times 6!$, donc :
+
+$$\frac{7 \times 6!}{(7-n)!} = \frac{21 \times 6!}{(8-n)!}$$
+
+On simplifie par $6!$ :
+
+$$\frac{7}{(7-n)!} = \frac{21}{(8-n)!}$$
+
+Or $(8-n)! = (8-n)(7-n)!$, donc :
+
+$$7 = \frac{21}{8-n}$$
+
+$$8 - n = 3 \implies n = 5$$
+
+**Vérification** : $0 \leq n \leq 7$ et $n - 2 \leq 6$, soit $n \leq 8$. Pour $n = 5$ : $A_7^5 = 7 \times 6 \times 5 \times 4 \times 3 = 2520$ et $21 \times A_6^3 = 21 \times 120 = 2520$. Correct.
+
+**b)** On écrit :
+
+$$C_n^2 = \frac{n(n-1)}{2} \quad \text{et} \quad C_{n-3}^2 = \frac{(n-3)(n-4)}{2}$$
+
+L'équation devient :
+
+$$\frac{n(n-1)}{2} + \frac{(n-3)(n-4)}{2} = 17$$
+
+$$n(n-1) + (n-3)(n-4) = 34$$
+
+$$n^2 - n + n^2 - 7n + 12 = 34$$
+
+$$2n^2 - 8n + 12 = 34$$
+
+$$2n^2 - 8n - 22 = 0$$
+
+$$n^2 - 4n - 11 = 0$$
+
+Le discriminant est $\Delta = 16 + 44 = 60$, et $\sqrt{60} \notin \mathbb{N}$.
+
+Donc il **n'y a pas de solution** dans $\mathbb{N}$.
+
+**c)** $A_n^3 = n(n-1)(n-2)$ et $A_{n-2}^1 = n - 2$.
+
+L'équation devient :
+
+$$n(n-1)(n-2) = 72(n-2)$$
+
+Pour $n \neq 2$ (car $A_{n-2}^1$ nécessite $n - 2 \geq 1$, donc $n \geq 3$), on simplifie par $(n-2)$ :
+
+$$n(n-1) = 72$$
+
+$$n^2 - n - 72 = 0$$
+
+$\Delta = 1 + 288 = 289 = 17^2$
+
+$$n = \frac{1 + 17}{2} = 9 \quad \text{ou} \quad n = \frac{1 - 17}{2} = -8 \text{ (impossible)}$$
+
+Donc $n = 9$.
+
+**Vérification** : $A_9^3 = 9 \times 8 \times 7 = 504$ et $72 \times A_7^1 = 72 \times 7 = 504$. Correct.
+:::
+
+:::methode
+Pour résoudre une équation combinatoire :
+1. Remplacer $A_n^p$ et $C_n^p$ par leurs expressions en factorielles
+2. Simplifier (souvent en divisant par des factorielles communes)
+3. Obtenir une équation polynomiale en $n$
+4. Résoudre et vérifier que $n \in \mathbb{N}$ avec $p \leq n$
+:::

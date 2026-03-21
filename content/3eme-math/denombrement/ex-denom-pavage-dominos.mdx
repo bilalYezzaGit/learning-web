@@ -1,0 +1,86 @@
+---
+type: exercise
+title: "Pavage d'un rectangle par des dominos"
+difficulty: 3
+timeMinutes: 18
+category: probleme
+tags: [denombrement, fibonacci, recurrence, pavage]
+praxeologies: [Prax8, Prax10]
+---
+
+:::enonce
+On veut paver (recouvrir entièrement, sans chevauchement) un rectangle de dimensions $2 \times n$ avec des dominos de taille $2 \times 1$. Chaque domino peut être placé **horizontalement** ou **verticalement**.
+
+On note $f(n)$ le nombre de pavages possibles.
+
+a) Calculer $f(1)$.
+
+b) Calculer $f(2)$.
+
+c) Calculer $f(3)$.
+
+d) Montrer que $f(n) = f(n-1) + f(n-2)$ pour $n \geq 3$.
+
+e) Quelle suite célèbre reconnaît-on ?
+
+f) Calculer $f(8)$.
+:::
+
+:::solution
+**a)** Pour $n = 1$ : rectangle $2 \times 1$. Un seul domino vertical le remplit.
+
+$$f(1) = 1$$
+
+**b)** Pour $n = 2$ : rectangle $2 \times 2$.
+- 2 dominos verticaux côte à côte
+- 2 dominos horizontaux empilés
+
+$$f(2) = 2$$
+
+**c)** Pour $n = 3$ : rectangle $2 \times 3$.
+
+Les pavages possibles sont :
+1. Trois dominos verticaux
+2. Un domino vertical à gauche + deux horizontaux à droite
+3. Deux dominos horizontaux à gauche + un vertical à droite
+
+$$f(3) = 3$$
+
+**d)** Pour $n \geq 3$, considérons la colonne la plus à **droite** du rectangle $2 \times n$.
+
+**Cas 1** : cette colonne est couverte par un **domino vertical** ($2 \times 1$). Il reste un rectangle $2 \times (n-1)$ à paver, soit $f(n-1)$ façons.
+
+**Cas 2** : cette colonne est couverte par **deux dominos horizontaux** (chacun $1 \times 2$, qui occupent les colonnes $n-1$ et $n$). Il reste un rectangle $2 \times (n-2)$ à paver, soit $f(n-2)$ façons.
+
+Ces deux cas sont **disjoints** (un domino vertical ne peut pas coexister avec deux horizontaux dans la dernière colonne) et **exhaustifs** (la case en haut à droite est couverte soit par un domino vertical, soit par un domino horizontal).
+
+Donc :
+
+$$\boxed{f(n) = f(n-1) + f(n-2)}$$
+
+**e)** Avec $f(1) = 1$ et $f(2) = 2$, la suite vérifie la récurrence de **Fibonacci** :
+
+$$1, 2, 3, 5, 8, 13, 21, 34, 55, \ldots$$
+
+Comme pour les escaliers, le dénombrement des pavages de dominos est gouverné par la suite de Fibonacci.
+
+**f)** Calculons terme à terme :
+
+```typst
+#table(
+  columns: 9,
+  align: center,
+  stroke: 0.5pt,
+  [*$n$*], [1], [2], [3], [4], [5], [6], [7], [8],
+  [*$f(n)$*], [1], [2], [3], [5], [8], [13], [21], [34],
+)
+```
+
+$$\boxed{f(8) = 34}$$
+:::
+
+:::remark
+Le lien entre pavages de dominos et Fibonacci est l'une des plus belles surprises de la combinatoire. Le même argument (un choix binaire qui réduit le problème) produit la même récurrence dans des contextes très différents : escaliers, pavages, chemins...
+
+Pour un rectangle $3 \times n$, la récurrence devient plus complexe et ne donne plus Fibonacci. C'est un problème ouvert pour les grandes dimensions.
+:::

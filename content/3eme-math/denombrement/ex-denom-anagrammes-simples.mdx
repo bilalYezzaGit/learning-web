@@ -1,0 +1,51 @@
+---
+type: exercise
+title: "Anagrammes de mots à lettres distinctes"
+difficulty: 1
+timeMinutes: 12
+category: application
+tags: [denombrement, permutations, anagrammes]
+praxeologies: [Prax4a]
+---
+
+:::enonce
+1. Combien d'anagrammes peut-on former avec le mot **BLANCHE** ?
+2. Combien de ces anagrammes se terminent par la lettre E ?
+3. Dans combien de ces anagrammes les trois voyelles (A, E) et (oui, BLANCHE a A et E comme voyelles) sont-elles consécutives ?
+4. On dispose de 3 filles et 3 garçons. De combien de façons peut-on les placer sur 6 chaises en ligne si les places doivent alterner (fille, garçon, fille, garçon, ...) ?
+:::
+
+:::solution
+**1.** Le mot BLANCHE a 7 lettres **toutes distinctes** (B, L, A, N, C, H, E).
+
+Le nombre d'anagrammes est $7! = 5\,040$.
+
+**2.** On fixe la lettre E en dernière position. Il reste 6 lettres à placer dans les 6 premières positions.
+
+Le nombre d'anagrammes terminant par E est $6! = 720$.
+
+**3.** Les voyelles de BLANCHE sont A et E (2 voyelles). On veut qu'elles soient consécutives.
+
+On regroupe les 2 voyelles en un **bloc** [AE]. Ce bloc se comporte comme un seul élément. On a alors 6 " éléments " à permuter : le bloc [AE] et les 5 consonnes B, L, N, C, H.
+
+- Permutations des 6 éléments : $6! = 720$
+- Permutations internes du bloc (A et E peuvent s'échanger) : $2! = 2$
+
+Nombre total : $6! \times 2! = 720 \times 2 = 1\,440$.
+
+**4.** On alterne fille-garçon-fille-garçon-fille-garçon.
+
+- Les **positions impaires** (1, 3, 5) sont occupées par les 3 filles : $3! = 6$ façons de les placer
+- Les **positions paires** (2, 4, 6) sont occupées par les 3 garçons : $3! = 6$ façons de les placer
+
+Par le principe multiplicatif : $3! \times 3! = 6 \times 6 = 36$ placements.
+
+:::remark
+Si on autorise aussi l'alternance garçon-fille-garçon-fille-garçon-fille, le total serait $2 \times 36 = 72$.
+:::
+:::
+
+:::erreurs
+- Oublier les permutations internes du bloc de voyelles en question 3
+- Confondre 6! et 7! en question 2 (il ne reste que 6 lettres à permuter)
+:::

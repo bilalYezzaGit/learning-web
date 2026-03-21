@@ -1,0 +1,36 @@
+---
+type: qcm
+title: "Somme des C_n^k"
+difficulty: 2
+timeMinutes: 2
+tags: [denombrement, binome-newton, identites-combinatoires]
+praxeologies: [Prax7b]
+---
+
+:::question
+Combien vaut $C_5^0 + C_5^1 + C_5^2 + C_5^3 + C_5^4 + C_5^5$ ?
+:::
+
+:::option
+$5! = 120$
+:::
+
+:::option
+$5^2 = 25$
+:::
+
+:::option
+$2^5 - 1 = 31$
+:::
+
+:::option{correct}
+$2^5 = 32$
+:::
+
+:::explanation
+D'après la formule du binôme de Newton avec $a = b = 1$ :
+
+$$(1 + 1)^5 = \sum_{k=0}^{5} C_5^k = 2^5 = 32$$
+
+Le piège classique est de retrancher $1$ (en oubliant le terme $C_5^0 = 1$), ce qui donnerait $31$. Mais la somme commence bien à $k = 0$, donc $C_5^0 = 1$ est inclus.
+:::

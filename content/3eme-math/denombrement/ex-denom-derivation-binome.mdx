@@ -1,0 +1,73 @@
+---
+type: exercise
+title: "Dérivation du binôme — somme pondérée"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [denombrement, binome-newton, derivation, identites-combinatoires]
+praxeologies: [Prax7b]
+---
+
+:::enonce
+On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = (1 + x)^n$, où $n \in \mathbb{N}^*$.
+
+1. Calculer $f'(x)$ de deux façons : directement, et en dérivant le développement du binôme terme à terme.
+
+2. En déduire que $\displaystyle\sum_{k=1}^{n} k \, C_n^k = n \cdot 2^{n-1}$.
+
+3. Montrer que $(1 + x)^n \geq 1 + nx$ pour tout $x \geq 0$ et tout $n \in \mathbb{N}^*$.
+
+4. En dérivant $f'(x)$ une seconde fois, calculer $\displaystyle\sum_{k=2}^{n} k(k-1) \, C_n^k$.
+:::
+
+:::solution
+**1.** D'une part, directement :
+
+$$f'(x) = n(1 + x)^{n-1}$$
+
+D'autre part, $f(x) = \displaystyle\sum_{k=0}^{n} C_n^k \, x^k$, donc :
+
+$$f'(x) = \sum_{k=1}^{n} k \, C_n^k \, x^{k-1}$$
+
+On obtient l'identité : $\displaystyle\sum_{k=1}^{n} k \, C_n^k \, x^{k-1} = n(1 + x)^{n-1}$.
+
+**2.** On pose $x = 1$ dans l'identité précédente :
+
+$$\sum_{k=1}^{n} k \, C_n^k \cdot 1^{k-1} = n(1 + 1)^{n-1} = n \cdot 2^{n-1}$$
+
+Donc $\displaystyle\sum_{k=1}^{n} k \, C_n^k = n \cdot 2^{n-1}$.
+
+**Vérification pour $n = 5$** : $1 \times 5 + 2 \times 10 + 3 \times 10 + 4 \times 5 + 5 \times 1 = 5 + 20 + 30 + 20 + 5 = 80 = 5 \times 2^4$. Correct.
+
+**3.** Pour $x \geq 0$ et $n \geq 1$ :
+
+$$(1 + x)^n = \sum_{k=0}^{n} C_n^k \, x^k = 1 + nx + \sum_{k=2}^{n} C_n^k \, x^k$$
+
+Or pour $x \geq 0$, chaque terme $C_n^k \, x^k \geq 0$, donc :
+
+$$(1 + x)^n \geq 1 + nx$$
+
+C'est l'**inégalité de Bernoulli**, démontrée ici par le binôme de Newton.
+
+**4.** On dérive $f'(x) = n(1 + x)^{n-1}$ :
+
+$$f''(x) = n(n-1)(1 + x)^{n-2}$$
+
+D'autre part, en dérivant $f'(x) = \displaystyle\sum_{k=1}^{n} k \, C_n^k \, x^{k-1}$ :
+
+$$f''(x) = \sum_{k=2}^{n} k(k-1) \, C_n^k \, x^{k-2}$$
+
+En posant $x = 1$ :
+
+$$\sum_{k=2}^{n} k(k-1) \, C_n^k = n(n-1) \cdot 2^{n-2}$$
+
+On peut alors déduire $\displaystyle\sum_{k=1}^{n} k^2 \, C_n^k$ :
+
+$$\sum_{k=1}^{n} k^2 \, C_n^k = \sum_{k=2}^{n} k(k-1) \, C_n^k + \sum_{k=1}^{n} k \, C_n^k = n(n-1) \cdot 2^{n-2} + n \cdot 2^{n-1}$$
+
+$$= n \cdot 2^{n-2} \big( (n-1) + 2 \big) = n(n+1) \cdot 2^{n-2}$$
+:::
+
+:::methode
+La technique générale : écrire $(1+x)^n$ sous forme de somme (binôme), puis manipuler la fonction (dériver, intégrer, évaluer en un point) pour obtenir des identités sur les $C_n^k$.
+:::

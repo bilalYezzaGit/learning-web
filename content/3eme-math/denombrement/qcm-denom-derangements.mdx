@@ -1,0 +1,38 @@
+---
+type: qcm
+title: "Nombre de dérangements de 4 éléments"
+difficulty: 2
+timeMinutes: 2
+tags: [denombrement, derangements, permutations]
+praxeologies: [Prax4a]
+---
+
+:::question
+Combien y a-t-il de **dérangements** de $\{1, 2, 3, 4\}$ (permutations où aucun élément n'est à sa place) ?
+:::
+
+:::option
+$4! = 24$
+:::
+
+:::option
+$4! - 1 = 23$
+:::
+
+:::option
+$4! - 4 = 20$
+:::
+
+:::option{correct}
+$9$
+:::
+
+:::explanation
+Un dérangement est une permutation **sans point fixe**. Pour 4 éléments, il y en a exactement $D_4 = 9$.
+
+- $4! = 24$ est le nombre **total** de permutations, sans exclure celles qui ont des points fixes.
+- $4! - 1 = 23$ retire seulement la permutation identité (4 points fixes), mais il y a d'autres permutations avec des points fixes.
+- $4! - 4 = 20$ retire 4 permutations, mais il n'y a pas de logique combinatoire derrière ce choix.
+
+La formule exacte est $D_4 = 4! (1 - 1 + \frac{1}{2} - \frac{1}{6} + \frac{1}{24}) = 24 \times \frac{3}{8} = 9$.
+:::

@@ -79,13 +79,18 @@ Exemples :
    - Equilibre des types : ~60% exercices, ~25% lecons, ~15% QCM
    - Progression de difficulte coherente dans chaque molecule
 
-6. **Ecrit le(s) fichier(s)** `_planning.yaml` avec `status: draft`
+6. **Redige les objectifs** pour chaque molecule :
+   - Minimum 3 objectifs d'apprentissage clairs et mesurables
+   - Formuler en "Verbe d'action + objet" (ex: "Calculer le cardinal d'une union")
+   - Les objectifs sont inclus dans le champ `objectives:` du planning
 
-7. **Presente le planning a l'humain** pour validation :
+7. **Ecrit le(s) fichier(s)** `_planning.yaml` avec `status: draft`
+
+8. **Presente le planning a l'humain** pour validation :
    - Resume : nombre de molecules, nombre d'atomes par type, praxeologies couvertes
    - Demander validation ou ajustements
 
-8. **Apres validation humaine** : mettre `status: validated`
+9. **Apres validation humaine** : mettre `status: validated`
 
 ### Checklist planning
 
@@ -96,6 +101,8 @@ Exemples :
 - [ ] Difficultes coherentes avec la KB
 - [ ] Categories presentes pour tous les exercices
 - [ ] QCM regroupables en blocs de 2-5 par theme
+- [ ] Chaque molecule a >= 3 objectifs d'apprentissage clairs et mesurables
+- [ ] Les tableaux utilisent des blocs typst `#table()`, jamais du Markdown
 
 ---
 

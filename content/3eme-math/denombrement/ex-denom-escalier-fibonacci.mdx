@@ -1,0 +1,83 @@
+---
+type: exercise
+title: "Escaliers et suite de Fibonacci"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [denombrement, fibonacci, recurrence, chemins]
+praxeologies: [Prax10, Prax8]
+---
+
+:::enonce
+On monte un escalier de $n$ marches. À chaque pas, on peut monter de **1 marche** ou de **2 marches**. On note $u_n$ le nombre de façons de monter $n$ marches.
+
+a) Calculer $u_1, u_2, u_3, \ldots, u_8$.
+
+b) Montrer que $u_n = u_{n-1} + u_{n-2}$ pour $n \geq 3$.
+
+c) Reconnaître une suite célèbre.
+
+d) Si on autorise aussi les sauts de **3 marches**, on note $v_n$ le nombre de façons. Quelle récurrence vérifie $v_n$ ?
+
+e) Calculer $v_{10}$.
+:::
+
+:::solution
+**a)** Calculons les premières valeurs :
+
+- $u_1 = 1$ : une seule façon (1 pas de 1)
+- $u_2 = 2$ : soit (1+1), soit (2)
+- $u_3 = 3$ : (1+1+1), (1+2), (2+1)
+- $u_4 = 5$ : (1+1+1+1), (1+1+2), (1+2+1), (2+1+1), (2+2)
+- $u_5 = 8$
+- $u_6 = 13$
+- $u_7 = 21$
+- $u_8 = 34$
+
+**b)** Pour monter $n$ marches ($n \geq 3$), on distingue deux cas selon le **premier pas** :
+
+- Si le 1er pas est de **1 marche** : il reste $n - 1$ marches à monter, soit $u_{n-1}$ façons.
+- Si le 1er pas est de **2 marches** : il reste $n - 2$ marches à monter, soit $u_{n-2}$ façons.
+
+Ces deux cas sont **disjoints** et **exhaustifs**, donc :
+
+$$u_n = u_{n-1} + u_{n-2}$$
+
+**c)** Avec $u_1 = 1$ et $u_2 = 2$, la suite $(u_n)$ vérifie la récurrence de **Fibonacci** :
+
+$$1, 2, 3, 5, 8, 13, 21, 34, 55, \ldots$$
+
+Plus précisément, si on note $(F_n)$ la suite de Fibonacci standard ($F_1 = 1, F_2 = 1, F_3 = 2, \ldots$), alors $u_n = F_{n+1}$.
+
+**d)** Avec des sauts de 1, 2 ou 3 marches, on raisonne de même sur le premier pas :
+
+- 1er pas de 1 marche : $v_{n-1}$ façons
+- 1er pas de 2 marches : $v_{n-2}$ façons
+- 1er pas de 3 marches : $v_{n-3}$ façons
+
+$$\boxed{v_n = v_{n-1} + v_{n-2} + v_{n-3}} \quad \text{pour } n \geq 4$$
+
+avec $v_1 = 1$, $v_2 = 2$, $v_3 = 4$.
+
+Vérifions $v_3$ : (1+1+1), (1+2), (2+1), (3). C'est bien 4.
+
+**e)** Calculons terme à terme :
+
+```typst
+#table(
+  columns: 11,
+  align: center,
+  stroke: 0.5pt,
+  [*$n$*], [1], [2], [3], [4], [5], [6], [7], [8], [9], [10],
+  [*$v_n$*], [1], [2], [4], [7], [13], [24], [44], [81], [149], [274],
+)
+```
+
+Vérification : $v_4 = 4 + 2 + 1 = 7$, $v_5 = 7 + 4 + 2 = 13$, ..., $v_{10} = 149 + 81 + 44 = 274$.
+
+$$\boxed{v_{10} = 274}$$
+:::
+
+:::remark
+La suite de Fibonacci apparaît naturellement dans de nombreux problèmes de dénombrement. Dès qu'un choix se décompose en " faire un petit pas ou un grand pas ", la récurrence $u_n = u_{n-1} + u_{n-2}$ surgit. C'est l'un des liens les plus beaux entre la combinatoire et les suites.
+:::

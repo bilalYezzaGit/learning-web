@@ -1,0 +1,57 @@
+---
+type: exercise
+title: "Jetons numérotés sur un damier"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [denombrement, damier, arrangements, enumeration]
+praxeologies: [Prax3, Prax4a, Prax8]
+---
+
+:::enonce
+On considère un damier $3 \times 3$ ($9$ cases). On dispose $4$ jetons numérotés $1, 2, 3, 4$ sur ce damier (au plus un jeton par case).
+
+1. Combien y a-t-il de dispositions possibles ?
+2. Combien de dispositions forment un **carré** (les $4$ jetons occupent les $4$ sommets d'un carré) ?
+3. Combien de dispositions ont au moins $3$ jetons sur une **même ligne** ?
+:::
+
+:::solution
+**1.** On choisit $4$ cases parmi $9$ et on y place les $4$ jetons numérotés. L'ordre compte (les jetons sont distinguables).
+
+$$A_9^4 = 9 \times 8 \times 7 \times 6 = 3024$$
+
+**2.** Les $4$ jetons forment un carré. On doit d'abord dénombrer les carrés possibles dans le damier $3 \times 3$ (grille $4 \times 4$ de points).
+
+Les positions des cases sont repérées par $(i, j)$ avec $i, j \in \{1, 2, 3\}$.
+
+**Carrés alignés avec la grille** :
+- Carrés $1 \times 1$ : coin en $(i, j)$ avec $i \in \{1, 2\}$ et $j \in \{1, 2\}$ → $4$ carrés.
+- Carrés $2 \times 2$ : coin en $(1, 1)$ → $1$ seul carré (coins aux $4$ sommets du damier : $(1,1), (1,3), (3,1), (3,3)$).
+
+**Carrés inclinés** :
+- Carré de côté $\sqrt{2}$ : centres aux $(1,2), (2,1), (2,3), (3,2)$ → $1$ carré (le carré incliné à $45°$).
+
+Mais attention : les sommets du carré doivent coïncider avec des **cases** du damier (pas des intersections). Ici les cases sont les $9$ positions.
+
+Carrés dont les sommets sont $4$ cases du damier :
+- **$2 \times 2$** (côté $1$) : $4$ carrés (coins $(1,1)(1,2)(2,1)(2,2)$, etc.)
+- **$3 \times 3$** (côté $2$) : $1$ carré (les $4$ coins du damier)
+- **Incliné $\sqrt{2}$** (côté $\sqrt{2}$, rotation $45°$) : sommets $(1,2), (2,1), (2,3), (3,2)$ → $1$ carré.
+
+Total : $4 + 1 + 1 = 6$ carrés.
+
+Pour chaque carré, les $4$ jetons numérotés se permutent sur les $4$ sommets : $4! = 24$.
+
+$$6 \times 24 = 144$$
+
+**3.** Au moins $3$ jetons sur une même ligne. Le damier a $3$ lignes de $3$ cases.
+
+**Cas 1 : exactement $3$ jetons sur une même ligne.** On choisit la ligne ($3$ choix). Les $3$ jetons occupant cette ligne sont choisis parmi $4$ ($C_4^3 = 4$ choix) et se placent sur les $3$ cases ($3! = 6$ arrangements). Le $4$-ème jeton se place sur l'une des $6$ cases restantes.
+
+$$3 \times C_4^3 \times 3! \times 6 = 3 \times 4 \times 6 \times 6 = 432$$
+
+**Cas 2 : $4$ jetons sur une même ligne.** Impossible car chaque ligne n'a que $3$ cases.
+
+$$\text{Total} = 432$$
+:::

@@ -1,0 +1,36 @@
+---
+type: qcm
+title: "Propriétés des combinaisons"
+difficulty: 1
+timeMinutes: 2
+tags: [denombrement, combinaisons, pascal, symetrie]
+praxeologies: [Prax5b]
+---
+
+:::question
+Laquelle des égalités suivantes est **vraie** ?
+:::
+
+:::option
+$C_8^3 = C_7^2 \times C_7^3$
+:::
+
+:::option{correct}
+$C_8^3 = C_7^2 + C_7^3$
+:::
+
+:::option
+$C_8^3 = C_8^6$
+:::
+
+:::option
+$C_8^3 = 84$
+:::
+
+:::explanation
+D'après la **relation de Pascal** : $C_8^3 = C_7^2 + C_7^3$.
+
+Vérifions : $C_7^2 + C_7^3 = 21 + 35 = 56 = C_8^3$. Correct.
+
+La première option multiplie au lieu d'additionner ($21 \times 35 = 735 \neq 56$). La troisième confond symétrie : $C_8^3 = C_8^5$ (pas $C_8^6$). La quatrième donne une valeur fausse ($C_8^3 = 56$, pas $84$).
+:::

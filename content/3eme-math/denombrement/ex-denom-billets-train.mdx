@@ -1,0 +1,36 @@
+---
+type: exercise
+title: "Billets de train — stations"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [denombrement, billets, arrangements, combinaisons]
+praxeologies: [Prax5a, Prax3]
+---
+
+:::enonce
+Une ligne de train comporte $25$ stations. Pour chaque trajet, il existe des billets de $1$ère classe et de $2$ème classe. Un billet indique la station de départ et la station d'arrivée (un billet aller n'est pas le même qu'un billet retour).
+
+1. Combien de **types** de billets différents faut-il imprimer ?
+2. On ajoute $3$ nouvelles stations à la ligne (qui en compte maintenant $28$). Combien de **nouveaux types** de billets faut-il imprimer ?
+:::
+
+:::solution
+**1.** Un billet est défini par :
+- Un couple (départ, arrivée) avec départ $\neq$ arrivée : c'est un arrangement de $2$ parmi $25$.
+- Un choix de classe : $2$ possibilités.
+
+$$2 \times A_{25}^2 = 2 \times 25 \times 24 = 1200$$
+
+**2.** Avec $28$ stations, le nombre total de types de billets est :
+
+$$2 \times A_{28}^2 = 2 \times 28 \times 27 = 1512$$
+
+Le nombre de **nouveaux** types de billets :
+
+$$1512 - 1200 = 312$$
+:::
+
+:::remark
+Un billet aller (de $A$ vers $B$) est différent d'un billet retour (de $B$ vers $A$). C'est pourquoi on utilise des **arrangements** (l'ordre compte) et non des combinaisons.
+:::

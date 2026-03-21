@@ -1,0 +1,49 @@
+---
+type: exercise
+title: "QCM type BAC — 5 questions"
+difficulty: 1
+timeMinutes: 10
+category: synthese
+tags: [denombrement, synthese, bac, combinaisons, arrangements, permutations]
+praxeologies: [Prax5a, Prax4a, Prax3]
+---
+
+:::enonce
+Répondre à chaque question en justifiant.
+
+**1.** Combien d'anagrammes du mot **QCM** peut-on former ?
+
+**2.** On forme des triplets d'éléments de l'ensemble $\{a, b, c, d\}$, avec répétition autorisée. Combien de triplets peut-on former ?
+
+**3.** Parmi $4$ personnes, on désigne un bureau composé d'un président, un secrétaire et un trésorier. Combien de bureaux possibles ?
+
+**4.** On considère $5$ points du plan, dont aucun triplet n'est aligné. Combien de droites passent par exactement $2$ de ces points ?
+
+**5.** Avec les mêmes $5$ points, combien de triangles peut-on former ?
+:::
+
+:::solution
+**1.** Le mot QCM a $3$ lettres **distinctes**. Le nombre d'anagrammes est :
+
+$$3! = 6$$
+
+**2.** Un triplet avec répétition à partir de $4$ éléments. Chaque position a $4$ choix :
+
+$$4^3 = 64$$
+
+**3.** On choisit $3$ personnes parmi $4$ **avec** un rôle attribué (l'ordre compte). C'est un arrangement :
+
+$$A_4^3 = 4 \times 3 \times 2 = 24$$
+
+*Autre méthode* : président ($4$ choix) × secrétaire ($3$ choix) × trésorier ($2$ choix) $= 24$.
+
+**Remarque** : $C_4^3 = 4$ serait le nombre de **groupes** de $3$ personnes sans rôle. Ici les rôles sont distincts, donc on utilise les arrangements.
+
+**4.** Une droite est définie par $2$ points. On choisit $2$ points parmi $5$ (l'ordre ne compte pas) :
+
+$$C_5^2 = \frac{5 \times 4}{2} = 10$$
+
+**5.** Un triangle est défini par $3$ points non alignés. On choisit $3$ points parmi $5$ :
+
+$$C_5^3 = \frac{5 \times 4 \times 3}{6} = 10$$
+:::

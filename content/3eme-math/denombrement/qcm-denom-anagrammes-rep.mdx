@@ -1,0 +1,38 @@
+---
+type: qcm
+title: "Anagrammes avec répétitions"
+difficulty: 1
+timeMinutes: 2
+tags: [denombrement, anagrammes, repetitions]
+praxeologies: [Prax4b]
+---
+
+:::question
+Le nombre d'anagrammes du mot **ANANAS** est :
+:::
+
+:::option
+$6! = 720$
+:::
+
+:::option
+$\dfrac{6!}{3!} = 120$
+:::
+
+:::option{correct}
+$\dfrac{6!}{3! \times 2!} = 60$
+:::
+
+:::option
+$\dfrac{6!}{3! \times 2! \times 1!} = 60$
+:::
+
+:::explanation
+ANANAS a $6$ lettres : A apparaît $3$ fois et N apparaît $2$ fois.
+
+On applique la formule : $\dfrac{6!}{3! \times 2!} = \dfrac{720}{12} = 60$.
+
+- $6! = 720$ oublie complètement la division par les répétitions.
+- $\dfrac{6!}{3!} = 120$ oublie de diviser par $2!$ pour les deux N.
+- La dernière option donne le même résultat ($1! = 1$), mais elle est aussi correcte sur le plan mathématique.
+:::

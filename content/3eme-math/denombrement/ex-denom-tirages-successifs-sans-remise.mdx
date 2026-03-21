@@ -1,0 +1,59 @@
+---
+type: exercise
+title: "Tirages successifs sans remise"
+difficulty: 1
+timeMinutes: 12
+category: application
+tags: [denombrement, arrangements, tirage-successif, principe-multiplicatif]
+praxeologies: [Prax2, Prax3]
+---
+
+:::enonce
+Une urne contient 12 boules : 5 noires, 3 blanches et 4 rouges. On tire successivement et sans remise 5 boules.
+
+Calculer :
+
+a) Le nombre total de tirages possibles.
+
+b) Le nombre de tirages dont la première boule tirée est rouge.
+
+c) Le nombre de tirages contenant exactement 1 boule rouge.
+:::
+
+:::solution
+**a)** On tire successivement sans remise 5 boules parmi 12 boules **distinctes** (chaque boule est identifiable). C'est un arrangement :
+
+$$A_{12}^5 = 12 \times 11 \times 10 \times 9 \times 8 = 95\,040$$
+
+**b)** On impose que la 1re boule soit rouge :
+- **1re position** : 4 choix (une boule rouge parmi 4)
+- **2e position** : 11 choix (il reste 11 boules)
+- **3e position** : 10 choix
+- **4e position** : 9 choix
+- **5e position** : 8 choix
+
+Par le principe multiplicatif :
+
+$$4 \times 11 \times 10 \times 9 \times 8 = 4 \times 7\,920 = 31\,680$$
+
+**c)** On veut exactement 1 boule rouge parmi les 5 tirées.
+
+**Étape 1 :** Choisir la **position** de la boule rouge parmi les 5 positions : $C_5^1 = 5$ choix.
+
+**Étape 2 :** Choisir **quelle** boule rouge occupe cette position : $4$ choix.
+
+**Étape 3 :** Les 4 positions restantes sont occupées par des boules non rouges (5 noires + 3 blanches = 8 boules). On tire successivement sans remise 4 boules parmi 8 :
+
+$$A_8^4 = 8 \times 7 \times 6 \times 5 = 1\,680$$
+
+Par le principe multiplicatif :
+
+$$5 \times 4 \times 1\,680 = 33\,600$$
+:::
+
+:::methode
+Pour un tirage successif sans remise avec contraintes :
+1. Identifier le type de tirage (successif sans remise = arrangements)
+2. Pour les contraintes, décomposer en étapes indépendantes
+3. Appliquer le principe multiplicatif
+:::

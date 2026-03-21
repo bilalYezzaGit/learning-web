@@ -1,0 +1,60 @@
+---
+type: lesson
+title: "Le double comptage — une technique puissante"
+difficulty: 2
+timeMinutes: 8
+tags: [denombrement, double-comptage, identites-combinatoires, vandermonde]
+praxeologies: [Prax11]
+---
+
+### Le principe
+
+:::definition[Double comptage]
+Le **double comptage** consiste à dénombrer un même ensemble fini de **deux manières différentes**. L'égalité des deux résultats fournit une identité combinatoire.
+:::
+
+C'est une technique de preuve élégante : au lieu de manipuler des formules algébriques, on construit un **argument combinatoire** — on raconte une histoire de comptage.
+
+### Exemple fondateur : $\sum (C_n^k)^2 = C_{2n}^n$
+
+:::theorem[Identité de Vandermonde (cas symétrique)]
+$$\sum_{k=0}^{n} (C_n^k)^2 = C_{2n}^n$$
+:::
+
+**Démonstration par double comptage.**
+
+Considère une urne contenant $2n$ boules : **$n$ noires** (numérotées de $1$ à $n$) et **$n$ blanches** (numérotées de $1$ à $n$).
+
+On tire **$n$ boules** au hasard.
+
+- **Comptage 1** (global) : on choisit $n$ boules parmi $2n$, soit $C_{2n}^n$ tirages possibles.
+
+- **Comptage 2** (par décomposition) : si on tire exactement $k$ boules noires, on tire $n - k$ boules blanches. Le nombre de façons est :
+
+$$C_n^k \times C_n^{n-k} = C_n^k \times C_n^k = (C_n^k)^2$$
+
+En sommant sur toutes les valeurs possibles de $k$ ($0 \leq k \leq n$) :
+
+$$\sum_{k=0}^{n} (C_n^k)^2 = C_{2n}^n$$
+
+:::example[Vérification pour $n = 3$]
+$(C_3^0)^2 + (C_3^1)^2 + (C_3^2)^2 + (C_3^3)^2 = 1 + 9 + 9 + 1 = 20 = C_6^3$. Correct !
+:::
+
+### Autre exemple : les poignées de main
+
+Imagine une salle de $n$ personnes. Chaque personne serre la main à exactement $k$ autres personnes. Comptons le nombre total de **poignées de main** $P$ :
+
+- **Comptage 1** (par personne) : chaque personne participe à $k$ poignées. Total des participations : $nk$. Mais chaque poignée implique **2 personnes**, donc $P = nk/2$.
+
+- **Comptage 2** (cas $k = n-1$) : si tout le monde se serre la main ($k = n-1$), on choisit simplement les 2 personnes d'une poignée parmi $n$, soit $P = C_n^2$.
+
+On retrouve : $n(n-1)/2 = C_n^2$.
+
+:::remark
+Le double comptage est l'une des techniques les plus puissantes de la combinatoire. Elle repose sur une idée simple : **un même objet, deux points de vue**. C'est souvent plus élégant qu'une preuve algébrique.
+:::
+
+:::attention
+Pour qu'un double comptage soit valide, il faut vérifier que les deux comptages portent sur **exactement le même ensemble**. La décomposition doit être **exhaustive** (couvrir tous les cas) et **disjointe** (pas de double comptage accidentel !).
+:::

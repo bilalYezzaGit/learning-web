@@ -1,0 +1,83 @@
+---
+type: exercise
+title: "Urne — comparer les trois modes de tirage"
+difficulty: 1
+timeMinutes: 15
+category: application
+tags: [denombrement, urne, tirage, combinaisons, arrangements]
+praxeologies: [Prax2, Prax3, Prax5a]
+---
+
+:::enonce
+Une urne contient $10$ jetons numérotés de $0$ à $9$ : $5$ rouges ($0, 1, 2, 3, 4$), $3$ blancs ($5, 6, 7$) et $2$ jaunes ($8, 9$).
+
+On tire $3$ jetons de cette urne. Pour chacun des trois modes de tirage ci-dessous, déterminer :
+
+**Mode 1 — Tirage simultané :**
+
+1. Le nombre total de tirages.
+2. Le nombre de tirages où les $3$ jetons sont rouges.
+3. Le nombre de tirages où les $3$ jetons sont de la même couleur.
+4. Le nombre de tirages où les $3$ numéros sont pairs.
+
+**Mode 2 — Tirage successif sans remise :**
+
+5. Le nombre total de tirages.
+6. Le nombre de tirages où les $3$ jetons sont rouges.
+
+**Mode 3 — Tirage successif avec remise :**
+
+7. Le nombre total de tirages.
+8. Le nombre de tirages où les $3$ jetons sont rouges.
+:::
+
+:::solution
+**Mode 1 — Tirage simultané** (sans ordre, sans remise → combinaisons) :
+
+**1.** Le nombre total de tirages de $3$ jetons parmi $10$ :
+
+$$C_{10}^3 = \frac{10!}{3! \times 7!} = \frac{10 \times 9 \times 8}{3 \times 2 \times 1} = 120$$
+
+**2.** Les $3$ jetons sont rouges. On choisit $3$ jetons parmi les $5$ rouges :
+
+$$C_5^3 = \frac{5!}{3! \times 2!} = 10$$
+
+**3.** Les $3$ jetons sont de la même couleur. On distingue trois cas disjoints :
+- $3$ rouges : $C_5^3 = 10$
+- $3$ blancs : $C_3^3 = 1$
+- $3$ jaunes : impossible car il n'y a que $2$ jaunes ($C_2^3 = 0$)
+
+$$\text{Total} = 10 + 1 + 0 = 11$$
+
+**4.** Les $3$ numéros sont pairs. Les numéros pairs sont $\{0, 2, 4, 6, 8\}$, soit $5$ jetons.
+
+$$C_5^3 = 10$$
+
+**Mode 2 — Tirage successif sans remise** (ordre compte, sans remise → arrangements) :
+
+**5.** Le nombre total de tirages :
+
+$$A_{10}^3 = 10 \times 9 \times 8 = 720$$
+
+**6.** Les $3$ jetons sont rouges. On choisit $3$ jetons ordonnés parmi $5$ :
+
+$$A_5^3 = 5 \times 4 \times 3 = 60$$
+
+**Mode 3 — Tirage successif avec remise** (ordre compte, avec remise → $n^p$) :
+
+**7.** Le nombre total de tirages :
+
+$$10^3 = 1000$$
+
+**8.** Les $3$ jetons sont rouges. À chaque tirage, $5$ choix parmi les rouges :
+
+$$5^3 = 125$$
+:::
+
+:::methode
+Pour chaque situation de tirage, se poser deux questions :
+1. **L'ordre intervient-il ?** (simultané = non, successif = oui)
+2. **Y a-t-il remise ?** (avec remise = oui, sans remise = non)
+
+Puis appliquer la formule du tableau récapitulatif.
+:::

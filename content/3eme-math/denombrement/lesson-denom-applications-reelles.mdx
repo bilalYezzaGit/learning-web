@@ -1,0 +1,67 @@
+---
+type: lesson
+title: "Le dénombrement dans le monde réel"
+difficulty: 2
+timeMinutes: 7
+tags: [denombrement, applications, modelisation]
+praxeologies: [Prax2, Prax5a]
+---
+
+### Le dénombrement est partout
+
+Les formules $A_n^p$, $C_n^p$ et $n^p$ ne sont pas des abstractions : elles modélisent des situations concrètes que tu rencontres au quotidien. Voici quelques exemples qui montrent la **puissance du dénombrement**.
+
+### ADN et code génétique
+
+L'ADN utilise **4 bases azotées** : A (adénine), T (thymine), C (cytosine), G (guanine). Un **codon** est un triplet de 3 bases.
+
+- Nombre de codons possibles : $4^3 = 64$ (tirage avec remise de 3 parmi 4)
+- Mais la nature n'utilise que **20 acides aminés** : le code génétique est **redondant**
+
+:::remark
+C'est un tirage **avec remise et avec ordre** : le codon ATG est différent de GTA. On utilise donc le modèle $n^p$.
+:::
+
+### Plaques d'immatriculation
+
+Format tunisien simplifié : **3 chiffres + 2 lettres + 2 chiffres**.
+
+- Modèle : choix successifs indépendants avec remise
+- Nombre : $10^3 \times 26^2 \times 10^2 = 67\,600\,000$ plaques
+
+### Serrures à combinaison
+
+Serrure à 3 molettes de 0 à 39 : c'est un arrangement avec remise (l'ordre compte, la répétition est possible).
+
+- Nombre : $40^3 = 64\,000$ combinaisons si la répétition est autorisée
+- Nombre : $A_{40}^3 = 40 \times 39 \times 38 = 59\,280$ si les trois nombres sont distincts
+
+### Code Braille
+
+Grille de $2 \times 3 = 6$ points, chacun pouvant être en relief ou non.
+
+- Total de configurations : $2^6 = 64$ (chaque point est un choix binaire)
+- Caractères utiles : $2^6 - 1 = 63$ (on exclut la grille vide)
+
+:::property[Quel modèle choisir ?]
+```typst
+#table(
+  columns: 4,
+  align: center,
+  stroke: 0.5pt,
+  [*Situation*], [*Ordre ?*], [*Répétition ?*], [*Formule*],
+  [Codes, mots de passe], [Oui], [Oui], [$n^p$],
+  [Classement, podium], [Oui], [Non], [$A_n^p$],
+  [Comité, équipe, main de cartes], [Non], [Non], [$C_n^p$],
+  [Anagrammes], [Oui], [Non], [$n!$ ou $frac(n!, p_1! dots.c)$],
+)
+```
+:::
+
+### Cryptographie
+
+Un chiffrement par **substitution** remplace chaque lettre par une autre (bijection de l'alphabet). Le nombre de clés possibles est $26! \approx 4 \times 10^{26}$ — un nombre astronomique.
+
+:::attention
+Ne confonds pas le modèle ! " Choisir un comité de 5 personnes " (combinaisons) est très différent de " classer 5 personnes sur un podium " (arrangements). La question clé est toujours : **l'ordre compte-t-il ?**
+:::

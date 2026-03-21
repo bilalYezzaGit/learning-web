@@ -1,0 +1,82 @@
+---
+type: lesson
+title: "Permutations et factorielle"
+difficulty: 0
+timeMinutes: 8
+tags: [denombrement, permutations, factorielle, anagrammes]
+praxeologies: [Prax4a, Prax4b]
+---
+
+### Factorielle
+
+:::definition[Factorielle]
+Pour tout entier naturel $n \geq 1$, on définit :
+
+$$n! = n \times (n-1) \times (n-2) \times \cdots \times 2 \times 1$$
+
+Par convention : $0! = 1$.
+:::
+
+:::example[Premières valeurs]
+- $1! = 1$
+- $2! = 2$
+- $3! = 6$
+- $4! = 24$
+- $5! = 120$
+- $6! = 720$
+- $7! = 5\,040$
+:::
+
+### Permutations
+
+:::definition[Permutation]
+Une **permutation** de $n$ éléments est un arrangement de $n$ éléments parmi $n$. C'est un réarrangement de **tous** les éléments.
+:::
+
+:::theorem[Nombre de permutations]
+Le nombre de permutations de $n$ éléments est :
+
+$$A_n^n = n!$$
+:::
+
+C'est un cas particulier de la formule des arrangements : $A_n^n = \frac{n!}{(n-n)!} = \frac{n!}{0!} = n!$.
+
+### Anagrammes de mots à lettres distinctes
+
+:::property
+Le nombre d'**anagrammes** d'un mot de $n$ lettres **toutes distinctes** est $n!$.
+:::
+
+:::example
+Le mot **BLANCHE** a 7 lettres toutes distinctes. Le nombre d'anagrammes est $7! = 5\,040$.
+:::
+
+### Anagrammes avec lettres répétées
+
+:::theorem[Anagrammes avec répétitions]
+Le nombre d'anagrammes d'un mot de $n$ lettres, dans lequel la lettre $l_1$ apparaît $p_1$ fois, la lettre $l_2$ apparaît $p_2$ fois, ..., la lettre $l_k$ apparaît $p_k$ fois (avec $p_1 + p_2 + \cdots + p_k = n$), est :
+
+$$\frac{n!}{p_1! \times p_2! \times \cdots \times p_k!}$$
+:::
+
+:::remark
+On divise par $p_1! \times p_2! \times \cdots \times p_k!$ car les permutations entre lettres identiques ne changent pas le mot.
+:::
+
+### Exemples d'anagrammes avec répétitions
+
+:::example[ANANAS]
+Le mot ANANAS a 6 lettres : A apparaît **3 fois**, N apparaît **2 fois**, S apparaît **1 fois**.
+
+$$\text{Nombre d'anagrammes} = \frac{6!}{3! \times 2! \times 1!} = \frac{720}{6 \times 2 \times 1} = \frac{720}{12} = 60$$
+:::
+
+:::example[ESSENTIEL]
+Le mot ESSENTIEL a 9 lettres : E apparaît **3 fois**, S apparaît **2 fois**, les lettres N, T, I, L apparaissent chacune **1 fois**.
+
+$$\text{Nombre d'anagrammes} = \frac{9!}{3! \times 2!} = \frac{362\,880}{6 \times 2} = \frac{362\,880}{12} = 30\,240$$
+:::
+
+:::attention
+Avant d'appliquer la formule, identifie toujours **toutes les lettres** et **leur fréquence** dans le mot. Une erreur de comptage des répétitions donne un résultat faux.
+:::

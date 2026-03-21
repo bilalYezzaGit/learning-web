@@ -1,0 +1,58 @@
+---
+type: exercise
+title: "Anagrammes avec contraintes de position"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [denombrement, anagrammes, permutations, contraintes]
+praxeologies: [Prax4a, Prax8]
+---
+
+:::enonce
+On considère le mot **BLANCHE** ($7$ lettres toutes distinctes).
+
+1. Combien d'anagrammes peut-on former ?
+2. Combien d'anagrammes se terminent par la lettre E ?
+3. Combien d'anagrammes contiennent le bloc **HE** (H suivi immédiatement de E) ?
+4. Combien d'anagrammes ne commencent **pas** par B ?
+5. Combien d'anagrammes ont les voyelles A et E séparées par exactement $2$ consonnes ?
+:::
+
+:::solution
+Le mot BLANCHE a $7$ lettres distinctes : B, L, A, N, C, H, E. Les voyelles sont A et E, les consonnes sont B, L, N, C, H.
+
+**1.** Nombre total d'anagrammes :
+
+$$7! = 5040$$
+
+**2.** La dernière lettre est E (fixée). Les $6$ lettres restantes se permutent librement :
+
+$$6! = 720$$
+
+**3.** On traite le bloc **HE** comme une seule entité. On a alors $6$ " objets " à permuter (HE, B, L, A, N, C) :
+
+$$6! = 720$$
+
+**4.** Les anagrammes ne commençant pas par B. On utilise le complémentaire.
+
+Anagrammes commençant par B : $6! = 720$.
+
+$$7! - 6! = 5040 - 720 = 4320$$
+
+*Autre méthode* : le premier emplacement a $6$ choix (tout sauf B), puis les $6$ restants se permutent : $6 \times 6! = 4320$.
+
+**5.** Les voyelles A et E doivent être séparées par exactement $2$ consonnes. Cela signifie un motif de la forme :
+
+$$\text{A} \_ \_ \text{E} \quad \text{ou} \quad \text{E} \_ \_ \text{A}$$
+
+où les deux cases $\_$ sont occupées par des consonnes.
+
+On cherche les positions du bloc de $4$ lettres consécutives contenant les voyelles aux extrémités. Si A est en position $i$ et E en position $i+3$ (ou l'inverse), les positions de départ possibles sont $i = 1, 2, 3, 4$ (le bloc de $4$ occupe les positions $i, i+1, i+2, i+3$ parmi $7$).
+
+- **$4$ positions** pour le début du bloc.
+- **$2$** choix pour l'ordre des voyelles (A...E ou E...A).
+- **$A_5^2 = 20$** choix pour les $2$ consonnes à l'intérieur du bloc (parmi $5$ consonnes, ordonnées).
+- **$3!= 6$** permutations des $3$ consonnes restantes dans les $3$ places libres.
+
+$$4 \times 2 \times 20 \times 6 = 960$$
+:::

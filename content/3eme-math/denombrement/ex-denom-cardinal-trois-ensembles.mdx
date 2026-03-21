@@ -1,0 +1,56 @@
+---
+type: exercise
+title: "Cardinal de l'union de trois ensembles"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [denombrement, cardinal, inclusion-exclusion, union]
+praxeologies: [Prax1]
+---
+
+:::enonce
+Dans un lycée, on interroge des élèves sur les langues qu'ils étudient :
+- 40 élèves étudient l'anglais ($A$)
+- 30 élèves étudient l'espagnol ($S$)
+- 20 élèves étudient l'allemand ($L$)
+- 15 élèves étudient l'anglais et l'espagnol
+- 10 élèves étudient l'anglais et l'allemand
+- 8 élèves étudient l'espagnol et l'allemand
+- 5 élèves étudient les trois langues
+
+1. Combien d'élèves étudient au moins une de ces trois langues ?
+2. Sachant qu'il y a 80 élèves au total, combien n'étudient aucune de ces langues ?
+3. Combien d'élèves étudient exactement une seule langue ?
+:::
+
+:::solution
+**1.** On applique la formule d'inclusion-exclusion pour trois ensembles :
+
+$$\text{card}(A \cup S \cup L) = \text{card}(A) + \text{card}(S) + \text{card}(L)$$
+$$- \text{card}(A \cap S) - \text{card}(A \cap L) - \text{card}(S \cap L) + \text{card}(A \cap S \cap L)$$
+
+$$\text{card}(A \cup S \cup L) = 40 + 30 + 20 - 15 - 10 - 8 + 5 = 62$$
+
+**62 élèves** étudient au moins une langue.
+
+**2.** Le nombre d'élèves n'étudiant aucune de ces langues :
+
+$$80 - 62 = 18 \text{ élèves}$$
+
+**3.** Pour trouver le nombre d'élèves étudiant **exactement une seule langue**, on calcule les effectifs de chaque zone du diagramme de Venn :
+
+- Anglais seulement : $40 - 15 - 10 + 5 = 20$
+- Espagnol seulement : $30 - 15 - 8 + 5 = 12$
+- Allemand seulement : $20 - 10 - 8 + 5 = 7$
+
+Nombre d'élèves étudiant exactement une seule langue : $20 + 12 + 7 = 39$.
+
+**Vérification :** exactement une langue ($39$) + exactement deux langues ($10 + 5 + 3 = 18$) + les trois langues ($5$) = $39 + 18 + 5 = 62$. Correct.
+:::
+
+:::methode
+Pour l'inclusion-exclusion à 3 ensembles :
+1. Additionner les trois cardinaux
+2. Soustraire les trois intersections deux à deux
+3. Ajouter l'intersection des trois
+:::

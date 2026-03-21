@@ -331,7 +331,7 @@ ${section.content}
       #align(center)[#text(weight: "bold", size: 10pt)[Objectifs du module]]
       #v(0.4em)
       #align(left)[
-        ${data.objectives.map((o, i) => `${i + 1}. ${o}`).join('\\\\\n        ')}
+        ${data.objectives.map(o => `+ ${o}`).join('\n        ')}
       ]
     ]
   ]

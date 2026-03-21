@@ -1,0 +1,538 @@
+kind: planning
+module: denombrement
+programme: 3eme-math
+status: generated
+
+design_intent: >-
+  Livret Examen — preparation intensive au controle et au BAC. Exercices types
+  classes par theme, du plus frequent au plus rare. Chaque exercice couvre un
+  pattern classique tunisien. Commence par une fiche de synthese, puis enchaine
+  tous les types d'exercices qu'un eleve peut rencontrer en examen.
+  Couverture maximale des situations : urnes, cartes, codes, nombres, anagrammes,
+  placement, coloriages, equations combinatoires. Difficulte 1-2.
+
+slug: denombrement-examen
+title: "Denombrement — Examen"
+description: "S'entrainer sur tous les exercices types du BAC et des controles : tirages, cartes, codes, anagrammes, placements, coloriages, denombrement sous contraintes multiples."
+trimester: T2
+order: 18
+
+sections:
+  - label: "Fiche de synthese"
+    atoms:
+      - slug: lesson-denom-synthese-formules
+        type: lesson
+        title: "Fiche de synthese — Toutes les formules"
+        praxeologies: [Prax2, Prax3, Prax4a, Prax5a, Prax7a]
+        contenu: >-
+          Recapitulatif de toutes les formules du chapitre en une page :
+          cardinal de l'union, A_n^p, n!, C_n^p, n^p, binome de Newton.
+          Tableau recapitulatif des tirages. Proprietes des C_n^p (symetrie, Pascal).
+          Formule des anagrammes avec repetitions. Pas de demonstrations, juste les enonces.
+        difficulte: 1
+        timeMinutes: 5
+
+  - label: "Tirages dans une urne"
+    atoms:
+      - slug: ex-denom-urne-trois-modes
+        type: exercise
+        title: "Urne — comparer les trois modes de tirage"
+        praxeologies: [Prax2, Prax3, Prax5a]
+        category: application
+        contenu: >-
+          Urne de 10 jetons (5 rouges, 3 blancs, 2 jaunes) numerotes de 0 a 9.
+          Tirage de 3 jetons dans 3 modes : simultane, successif sans remise,
+          successif avec remise. Pour chaque mode : nombre total, tirages
+          avec contrainte de couleur (tous rouges, tous meme couleur),
+          tirages avec contrainte de parite (tous pairs, tous impairs).
+        difficulte: 1
+        timeMinutes: 15
+
+      - slug: ex-denom-urne-complementaire
+        type: exercise
+        title: "Urne — methode du complementaire"
+        praxeologies: [Prax5a, Prax6]
+        category: application
+        contenu: >-
+          Urne de 15 boules (6 rouges, 4 vertes, 5 blanches). Tirage simultane de 4 boules.
+          a) Tirages avec au moins une boule verte (complementaire : aucune verte).
+          b) Tirages avec au moins une boule de chaque couleur.
+          c) Tirages avec 4 boules de meme couleur.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-urne-somme-paire
+        type: exercise
+        title: "Urne — somme des numeros paire"
+        praxeologies: [Prax5a, Prax8]
+        category: approfondissement
+        contenu: >-
+          Urne de 10 jetons numerotes 0 a 9. Tirage simultane de 3 jetons.
+          a) Nombre total de tirages. b) Tirages avec au moins un numero pair
+          (complementaire). c) Tirages dont la somme des numeros est paire
+          (decomposer : 3 pairs, ou 2 impairs + 1 pair). Appliquer C_5^3 + C_5^2 × C_5^1.
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: ex-denom-urne-boules-numerotees
+        type: exercise
+        title: "Boules bicolores numerotees"
+        praxeologies: [Prax2, Prax5a, Prax8]
+        category: approfondissement
+        contenu: >-
+          Urne avec 5 boules rouges (num 0,0,1,2,2), 3 blanches (num 0,1,2),
+          2 jaunes (num 0,4). Tirage simultane de 3 boules. a) Tirages de 3 boules
+          de meme couleur. b) Tirages d'une seule boule jaune. c) Tirages ou la somme
+          des numeros = 5. d) Tirages ou le produit des numeros est nul. e) Tirages
+          d'une seule boule rouge portant le numero 0.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: qcm-denom-urne-modele
+        type: qcm
+        title: "Identifier le modele de tirage"
+        praxeologies: [Prax2]
+        contenu: "Tirage simultane de 4 boules parmi 12 : quelle formule ? Distracteurs : A_12^4 (avec ordre), 12^4 (avec remise)."
+        difficulte: 1
+        timeMinutes: 2
+
+      - slug: qcm-denom-complementaire
+        type: qcm
+        title: "Methode du complementaire"
+        praxeologies: [Prax6]
+        contenu: "Nombre de mains de 5 cartes (jeu de 32) contenant au moins un as. Distracteurs : C_4^1 × C_28^4 (exactement 1), somme de C_4^k sans facteur."
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Jeux de cartes"
+    atoms:
+      - slug: ex-denom-cartes-mains-8
+        type: exercise
+        title: "Mains de 8 cartes — jeu de 32"
+        praxeologies: [Prax5a, Prax6, Prax8]
+        category: application
+        contenu: >-
+          Jeu de 32 cartes, main de 8 cartes. Denombrer les mains contenant :
+          a) exactement un roi, b) exactement deux as, c) au moins un as
+          (complementaire), d) au moins un as et au moins un valet (inclusion-exclusion).
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-cartes-contraintes-croisees
+        type: exercise
+        title: "Mains avec contraintes croisees"
+        praxeologies: [Prax5a, Prax8]
+        category: approfondissement
+        contenu: >-
+          Jeu de 32 cartes, main de 5 cartes. Denombrer les mains contenant
+          exactement 1 roi et exactement 3 coeurs. Attention : le roi de coeur
+          peut etre dans la main. Decomposer en 2 cas disjoints :
+          cas 1 (roi non-coeur + 3 coeurs non-roi + 1 autre), cas 2 (roi de coeur
+          + 2 autres coeurs + 2 non-coeur non-roi).
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-cartes-mains-5-figures
+        type: exercise
+        title: "Mains de 5 cartes — figures et couleurs"
+        praxeologies: [Prax5a, Prax6]
+        category: application
+        contenu: >-
+          Jeu de 32 cartes, main de 5 cartes. a) Nombre total de mains.
+          b) Mains ne contenant que des figures (12 figures au total). c) Mains
+          sans aucun roi. d) Mains avec au moins un roi (complementaire de c).
+        difficulte: 1
+        timeMinutes: 12
+
+      - slug: ex-denom-cartes-grille-jeu
+        type: exercise
+        title: "Jeu de grille — cocher des cartes"
+        praxeologies: [Prax2, Prax5a, Prax8]
+        category: approfondissement
+        contenu: >-
+          Un jeu consiste a cocher un pique, un coeur, un carreau et un trefle
+          sur une grille 4×8 (32 cartes). a) Nombre total de grilles. b) Grilles
+          ou les 4 cartes cochees sont tirees. c) Exactement 3 tirees. d) La carte
+          de carreau n'a pas ete tiree. e) Aucune carte cochee n'a ete tiree.
+          f) Au moins une carte cochee a ete tiree.
+        difficulte: 2
+        timeMinutes: 15
+
+  - label: "Codes, nombres et chiffres"
+    atoms:
+      - slug: ex-denom-nombres-quatre-chiffres
+        type: exercise
+        title: "Nombres de quatre chiffres distincts"
+        praxeologies: [Prax3, Prax8]
+        category: application
+        contenu: >-
+          Chiffres de 0 a 9 : a) nombres de 4 chiffres, b) de 4 chiffres distincts
+          (premier ≠ 0), c) de 4 chiffres pairs, d) de 4 chiffres pairs distincts
+          (distinguer dernier chiffre = 0 vs ∈ {2,4,6,8}). e) de 4 chiffres distincts
+          contenant au moins l'un des chiffres 0, 1, 2 (complementaire).
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-nombres-six-chiffres-jetons
+        type: exercise
+        title: "Nombres formes avec 6 jetons"
+        praxeologies: [Prax3, Prax4a, Prax8]
+        category: application
+        contenu: >-
+          Six jetons portant 0, 1, 2, 3, 4, 5. a) Entiers de 4 chiffres formables.
+          b) Entiers de 6 chiffres (tous les jetons). c) Entiers de 6 chiffres pairs
+          (dernier chiffre ∈ {0,2,4}, distinguer cas 0). d) Entiers de 6 chiffres
+          dont le chiffre des unites est 5. e) Entiers de 3 chiffres divisibles par 9
+          (somme des chiffres divisible par 9).
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-codes-login
+        type: exercise
+        title: "Login et mot de passe"
+        praxeologies: [Prax2, Prax3]
+        category: application
+        contenu: >-
+          Login : 6 chiffres + 1 lettre (premier chiffre ≠ 0, lettre ≠ O).
+          a) Nombre max de clients. Mot de passe : 4 lettres (26), repetition possible.
+          b) Tous les clients ont-ils un mot de passe unique ? c) Client a oublie
+          son code de 4 lettres distinctes : combien d'essais ? d) Il sait qu'il y a
+          2 voyelles : combien d'essais ?
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: ex-denom-code-antivol
+        type: exercise
+        title: "Code antivol d'un autoradio"
+        praxeologies: [Prax2, Prax4a, Prax4b]
+        category: application
+        contenu: >-
+          Code de 4 chiffres (0-9). a) Nombre de codes possibles (10^4).
+          b) Codes de 4 chiffres distincts (A_10^4). c) Le proprietaire sait que
+          les 4 chiffres sont 1, 9, 9, 5 (ordre oublie) : combien d'essais max ?
+          (4!/2! - 1 = 11). d) Meme question avec 1, 2, 6, 7 (4! - 1 = 23).
+          e) Autre antivol : appui simultane sur 4 touches parmi 10 (C_10^4 = 210).
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-factorielles-derniers-chiffres
+        type: exercise
+        title: "Derniers chiffres de sommes de factorielles"
+        praxeologies: [Prax4a, Prax8]
+        category: approfondissement
+        contenu: >-
+          1) Calculer n! pour n de 2 a 5. 2) A partir de quel n a-t-on n! > n^2 ?
+          3) A partir de quel n n! est-il multiple de 10 ? de 100 ? de 1000 ?
+          4) Trouver les 3 derniers chiffres de N = 1! + 2! + ... + 2006!.
+          Astuce : pour n ≥ 15, n! est multiple de 1000, donc seuls les premiers
+          termes comptent. Resultat : 313.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: qcm-denom-premier-chiffre
+        type: qcm
+        title: "Premier chiffre d'un nombre"
+        praxeologies: [Prax8]
+        contenu: "Nombres de 4 chiffres distincts (0-9). Distracteurs : A_10^4 = 5040 (oubli premier ≠ 0). Reponse : 9 × A_9^3 = 4536."
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Anagrammes et permutations"
+    atoms:
+      - slug: ex-denom-anagrammes-contraintes
+        type: exercise
+        title: "Anagrammes avec contraintes de position"
+        praxeologies: [Prax4a, Prax8]
+        category: approfondissement
+        contenu: >-
+          Mot BLANCHE (7 lettres distinctes). a) Nombre total (7!). b) Se terminent
+          par E (6!). c) E suit H (traiter HE comme un bloc : 6!). d) Ne commencent
+          pas par B (6 × 6!). e) Voyelles separees par exactement 2 consonnes
+          (enumerer les positions possibles, puis permuter).
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-anagrammes-repetitions
+        type: exercise
+        title: "Anagrammes de mots avec repetitions"
+        praxeologies: [Prax4b]
+        category: application
+        contenu: >-
+          Calculer les anagrammes de : a) ANANAS (3A, 2N, 1S → 6!/(3!2!) = 60),
+          b) ESSENTIEL (3E, 2S → 9!/(3!2!) = 30240),
+          c) MATHEMATIQUES (2M, 2A, 2T, 2E → 12!/(2!)^4),
+          d) ANTICONSTITUTIONNELLEMENT (25 lettres, identifier toutes les repetitions).
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-denom-placement-alterne
+        type: exercise
+        title: "Placement alterne garcons-filles"
+        praxeologies: [Prax4a, Prax2]
+        category: application
+        contenu: >-
+          3 filles et 3 garcons sur une rangee de 6 chaises, en alternance.
+          a) Combien de configurations GFGFGF ? (3! × 3!). b) Combien de
+          configurations FGFGFG ? (3! × 3!). c) Total en alternance (2 × (3!)^2 = 72).
+        difficulte: 1
+        timeMinutes: 8
+
+      - slug: ex-denom-placement-pieces
+        type: exercise
+        title: "Repartition de personnes dans des pieces"
+        praxeologies: [Prax5a, Prax8]
+        category: application
+        contenu: >-
+          3 personnes dans 3 pieces : a) de 2, 4 et 6 chaises (C_12^2 × C_10^4 × C_6^6),
+          b) de 4 chaises chacune (C_12^4 × C_8^4 × C_4^4). Utiliser les combinaisons
+          successives pour les repartitions.
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: qcm-denom-anagrammes-rep
+        type: qcm
+        title: "Anagrammes avec repetitions"
+        praxeologies: [Prax4b]
+        contenu: "Anagrammes de ANANAS. Distracteurs : 6! = 720 (oubli division), 6!/3! = 120 (oubli 2! des N). Reponse : 6!/(3!×2!) = 60."
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Diagrammes et inclusion-exclusion"
+    atoms:
+      - slug: ex-denom-venn-trois-langues
+        type: exercise
+        title: "Diagramme de Venn — trois langues"
+        praxeologies: [Prax1, Prax8]
+        category: application
+        contenu: >-
+          Classe : 16 etudient l'anglais, 13 l'espagnol, 13 l'allemand, 4 anglais+espagnol,
+          6 espagnol+allemand, 5 anglais+allemand, 3 les trois. Tous etudient
+          au moins une langue. Combien d'eleves ? (Inclusion-exclusion a 3 ensembles.)
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-denom-venn-defauts
+        type: exercise
+        title: "Appareils avec defauts — Venn"
+        praxeologies: [Prax1]
+        category: application
+        contenu: >-
+          100 appareils, defauts A et B. 6 ont A sans B, 8 ont B sans A, 4 ont A et B.
+          Combien sans defaut ? Representer avec un diagramme de Venn, calculer
+          card(A ∪ B), puis le complementaire.
+        difficulte: 1
+        timeMinutes: 8
+
+  - label: "Coloriages et configurations"
+    atoms:
+      - slug: ex-denom-coloriage-grille
+        type: exercise
+        title: "Coloriage d'une grille"
+        praxeologies: [Prax2, Prax6]
+        category: application
+        contenu: >-
+          Grille de 5 cases, 3 couleurs (noir, gris, blanc). a) Coloriages possibles (3^5).
+          b) Une seule couleur utilisee (3). c) Le blanc n'est pas utilise (2^5).
+          d) Le blanc est utilise au moins une fois (3^5 - 2^5). e) Cases extremes
+          de meme couleur (3 × 3^3).
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-denom-jetons-damier
+        type: exercise
+        title: "Jetons numerotes sur un damier"
+        praxeologies: [Prax3, Prax4a, Prax8]
+        category: approfondissement
+        contenu: >-
+          Damier 3×3, on dispose 4 jetons numerotes 1-4 (au plus 1 par case).
+          a) Nombre total de dispositions (A_9^4 = 3024). b) Dispositions formant
+          un carre (enumerer les 6 positions de carre × 4!). c) 3 jetons sur
+          une meme ligne (3 lignes × 6 positions × 4!).
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-grille-mots-croises
+        type: exercise
+        title: "Grille de mots croises"
+        praxeologies: [Prax5a]
+        category: application
+        contenu: >-
+          Grille de 10 lignes × 12 colonnes (120 cases). On noircit 23 cases.
+          Combien de grilles possibles ? (C_120^23). Application directe des
+          combinaisons a une situation concrete.
+        difficulte: 1
+        timeMinutes: 5
+
+  - label: "Rendez-vous et rencontres"
+    atoms:
+      - slug: ex-denom-cafes-rencontre
+        type: exercise
+        title: "Trois personnes dans cinq cafes"
+        praxeologies: [Prax2, Prax3, Prax6]
+        category: application
+        contenu: >-
+          3 personnes se donnent rendez-vous, 5 cafes au village. a) Cas possibles
+          (5^3 = 125). b) Aucune ne se rencontre (A_5^3 = 60). c) Les 3 se
+          rencontrent (5). d) Exactement 2 se rencontrent (125 - 60 - 5 = 60).
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-denom-billets-train
+        type: exercise
+        title: "Billets de train — stations"
+        praxeologies: [Prax5a, Prax3]
+        category: application
+        contenu: >-
+          Ligne de 25 stations, billets 1ere et 2eme classe. a) Nombre de types
+          de billets pour 25 stations (2 × C_25^2 = 600, car aller ≠ retour, ou
+          2 × A_25^2 si billets directionnels). b) On ajoute 3 stations : combien
+          de nouveaux types ? (2 × C_28^2 - 600 = 156).
+        difficulte: 1
+        timeMinutes: 10
+
+  - label: "Circuits et excursions"
+    atoms:
+      - slug: ex-denom-circuits-touristiques
+        type: exercise
+        title: "Circuits touristiques — 6 villes"
+        praxeologies: [Prax4a, Prax3]
+        category: application
+        contenu: >-
+          Agence avec 6 villes. a) Circuits ordonnés (6! = 720). b) Circuits
+          commencant par Athenes (5! = 120). c) Excursions de 2 villes avec ordre
+          (A_6^2 = 30). d) Pour avoir 56 excursions, combien de villes ? Resoudre
+          n(n-1) = 56 → n = 8.
+        difficulte: 1
+        timeMinutes: 12
+
+      - slug: ex-denom-sondage-qcm
+        type: exercise
+        title: "Sondage — reponses multiples"
+        praxeologies: [Prax2, Prax3]
+        category: approfondissement
+        contenu: >-
+          Journal : 10 questions, 5 affirmations par question. Le lecteur peut
+          ne rien cocher, cocher 1 affirmation, ou en cocher 2 en indiquant sa
+          preference. Par question : 1 + 5 + A_5^2 = 26 manieres. Pour 10
+          questions : 26^10.
+        difficulte: 2
+        timeMinutes: 12
+
+  - label: "Mots et lettres"
+    atoms:
+      - slug: ex-denom-mots-18-lettres
+        type: exercise
+        title: "Mots avec lettres A, B, C"
+        praxeologies: [Prax4b]
+        category: application
+        contenu: >-
+          On dispose de 4 A, 5 B et 9 C. Combien de mots de 18 lettres peut-on
+          ecrire ? (18!/(4! × 5! × 9!)). Application directe de la formule
+          des permutations avec repetitions.
+        difficulte: 1
+        timeMinutes: 8
+
+      - slug: ex-denom-mots-os
+        type: exercise
+        title: "Mots binaires O et S"
+        praxeologies: [Prax5a, Prax6, Prax7a]
+        category: approfondissement
+        contenu: >-
+          Mots de 8 lettres avec O et S. a) Total : 2^8. b) Ne contenant aucun S : 1.
+          c) Contenant exactement 1 S : C_8^1. d) Contenant au moins 3 S :
+          2^8 - (1 + C_8^1 + C_8^2). Lien avec le binome (1+1)^8.
+        difficulte: 2
+        timeMinutes: 12
+
+  - label: "Problemes de synthese type BAC"
+    atoms:
+      - slug: ex-denom-synthese-qcm-bac
+        type: exercise
+        title: "QCM type BAC — 5 questions"
+        praxeologies: [Prax5a, Prax4a, Prax3]
+        category: synthese
+        contenu: >-
+          5 questions classiques : 1) anagrammes de QCM (3! = 6), 2) triplets
+          parmi 4 avec repetition (4^3 = 64), 3) bureau de 3 parmi 4 (C_4^3 = 4),
+          4) droites par 5 points (C_5^2 = 10), 5) triangles par 5 points (C_5^3 = 10).
+          Format examen avec 3 choix.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-denom-synthese-vrai-faux
+        type: exercise
+        title: "Vrai ou Faux — justifier"
+        praxeologies: [Prax4b, Prax6, Prax5a, Prax8]
+        category: synthese
+        contenu: >-
+          5 affirmations a justifier : 1) ANANAS a 6! anagrammes (FAUX, 6!/(3!2!)=60).
+          2) ANANAS a 6!/(2!3!)=60 anagrammes (VRAI). 3) Lancer 4 des, plus de la moitie
+          des issues contiennent au moins 1 (VRAI, 6^4 - 5^4 = 671 > 648). 4) Mots
+          de 8 lettres O/S avec ≥3 S : 2^8 - (1+C_8^2+C_8^4) (VRAI/FAUX a verifier).
+          5) Mains de 5 cartes avec 2 as et 3 coeurs : C_4^2 × C_8^3 (FAUX, cas roi coeur).
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-synthese-grenouille
+        type: exercise
+        title: "La grenouille sur l'escalier"
+        praxeologies: [Prax5a, Prax8]
+        category: probleme
+        contenu: >-
+          Grenouille sur un escalier de 13 marches, sauts de 1 ou 2 marches.
+          a) Lister les couples (N,P) avec 2N+P=13. b) Pour chaque couple,
+          calculer C_{N+P}^N. c) Sommer (377 facons). d) Reconnaitre la suite
+          de Fibonacci u_n = u_{n-1} + u_{n-2}.
+        difficulte: 2
+        timeMinutes: 18
+
+      - slug: ex-denom-synthese-des-galilee
+        type: exercise
+        title: "Trois des — somme 9 vs 10 (Galilee)"
+        praxeologies: [Prax2, Prax8]
+        category: approfondissement
+        contenu: >-
+          Pourquoi la somme 10 est plus frequente que 9 en lancant 3 des ?
+          Pour chaque somme, lister les decompositions et compter les triplets
+          ordonnes (distinguer chiffres distincts, 2 egaux, 3 egaux).
+          Resultat : 27 triplets pour S=10, 25 pour S=9.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-synthese-des-discernables
+        type: exercise
+        title: "Lancer de 3 des — discernables vs indiscernables"
+        praxeologies: [Prax2, Prax5a]
+        category: application
+        contenu: >-
+          Lancer simultane de 3 des (faces 1-6). a) Des discernables : nombre d'issues
+          (6^3 = 216). b) Des indiscernables : nombre d'issues (C_6^3 + ...,
+          decomposer en 3 distincts, 2 egaux, 3 egaux). Comprendre la difference
+          entre les deux modeles.
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: ex-denom-synthese-carres-quadrillage
+        type: exercise
+        title: "Carres dans un quadrillage 3×3"
+        praxeologies: [Prax5a, Prax8]
+        category: approfondissement
+        contenu: >-
+          Carre ABCD de cote 3 decoupe en 9 petits carres. Determiner le nombre
+          de carres que l'on peut former avec les sommets du quadrillage.
+          Enumerer par taille : 1×1, 2×2, 3×3, plus les carres inclines.
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: ex-denom-synthese-equations
+        type: exercise
+        title: "Equations combinatoires"
+        praxeologies: [Prax9]
+        category: approfondissement
+        contenu: >-
+          Resoudre : a) A_7^n = 21 × A_6^{n-2} (reponse n=5).
+          b) C_n^2 + C_{n-3}^2 = 17 (montrer pas de solution dans N).
+          c) A_n^3 = 72 × A_{n-2}^1 (reponse n=9). Pour chaque equation :
+          remplacer par factorielles, simplifier, resoudre, verifier conditions.
+        difficulte: 2
+        timeMinutes: 15

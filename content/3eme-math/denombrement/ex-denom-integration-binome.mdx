@@ -1,0 +1,53 @@
+---
+type: exercise
+title: "Intégration du binôme"
+difficulty: 3
+timeMinutes: 15
+category: probleme
+tags: [denombrement, binome-newton, integration, identites-combinatoires]
+praxeologies: [Prax7b]
+---
+
+:::enonce
+On considère l'identité du binôme de Newton : $(1 + x)^n = \displaystyle\sum_{k=0}^{n} C_n^k \, x^k$.
+
+1. Intégrer les deux membres de cette identité entre $0$ et $1$.
+
+2. En déduire que :
+
+$$\frac{2^{n+1} - 1}{n + 1} = \sum_{k=0}^{n} \frac{C_n^k}{k + 1}$$
+
+3. Vérifier numériquement cette identité pour $n = 4$.
+:::
+
+:::solution
+**1.** On intègre les deux membres entre $0$ et $1$.
+
+**Membre de gauche** :
+
+$$\int_0^1 (1 + x)^n \, dx = [ \frac{(1 + x)^{n+1}}{n + 1} ]_0^1 = \frac{2^{n+1}}{n+1} - \frac{1}{n+1} = \frac{2^{n+1} - 1}{n + 1}$$
+
+**Membre de droite** :
+
+$$\int_0^1 \sum_{k=0}^{n} C_n^k \, x^k \, dx = \sum_{k=0}^{n} C_n^k \int_0^1 x^k \, dx = \sum_{k=0}^{n} C_n^k [ \frac{x^{k+1}}{k+1} ]_0^1 = \sum_{k=0}^{n} \frac{C_n^k}{k+1}$$
+
+**2.** En égalant les deux résultats :
+
+$$\frac{2^{n+1} - 1}{n + 1} = \sum_{k=0}^{n} \frac{C_n^k}{k + 1}$$
+
+**3.** Pour $n = 4$ :
+
+**Membre de gauche** : $\dfrac{2^5 - 1}{5} = \dfrac{31}{5} = 6,2$.
+
+**Membre de droite** :
+
+$$\frac{C_4^0}{1} + \frac{C_4^1}{2} + \frac{C_4^2}{3} + \frac{C_4^3}{4} + \frac{C_4^4}{5}$$
+
+$$= \frac{1}{1} + \frac{4}{2} + \frac{6}{3} + \frac{4}{4} + \frac{1}{5} = 1 + 2 + 2 + 1 + 0,2 = 6,2$$
+
+Les deux membres sont bien égaux.
+:::
+
+:::remark
+L'intégration formelle du binôme est un outil puissant : elle permet d'obtenir des identités sur des sommes de $C_n^k / (k+1)$ qui seraient très difficiles à démontrer autrement. C'est la même idée que la dérivation, mais " dans l'autre sens ".
+:::

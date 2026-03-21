@@ -1,0 +1,57 @@
+---
+type: exercise
+title: "Grilles de réponses à un QCM"
+difficulty: 2
+timeMinutes: 15
+category: synthese
+tags: [denombrement, applications, binome-newton, complementaire]
+praxeologies: [Prax2, Prax7b]
+---
+
+:::enonce
+Un QCM comporte **10 questions**, chacune avec **4 réponses** proposées (une seule correcte). Un candidat répond au hasard à toutes les questions.
+
+a) Combien de grilles de réponses différentes peut-on remplir au total ?
+
+b) Combien de grilles ont **exactement 8 bonnes réponses** ?
+
+c) De façon générale, combien de grilles ont **exactement $p$ bonnes réponses** ($0 \leq p \leq 10$) ?
+
+d) En sommant sur toutes les valeurs de $p$, vérifier que l'on retrouve le total de la question a). Quel théorème reconnaît-on ?
+:::
+
+:::solution
+**a)** Chaque question a 4 réponses possibles. Les 10 questions sont indépendantes. C'est un tirage successif avec remise (de 10 choix parmi 4 options) :
+
+$$\text{Total} = 4^{10} = 1\,048\,576$$
+
+**b)** Pour avoir exactement 8 bonnes réponses :
+- On choisit les 8 questions réussies parmi 10 : $C_{10}^8$ façons
+- Pour chaque question réussie, il y a 1 seule bonne réponse
+- Pour chaque question ratée (2 questions), il y a 3 mauvaises réponses : $3^2$ façons
+
+$$\text{Exactement 8 bonnes} = C_{10}^8 \times 1^8 \times 3^2 = 45 \times 9 = 405$$
+
+**c)** Par le même raisonnement, pour exactement $p$ bonnes réponses :
+- Choix des $p$ questions réussies : $C_{10}^p$
+- Bonnes réponses aux $p$ questions : $1^p = 1$
+- Mauvaises réponses aux $10 - p$ autres : $3^{10-p}$
+
+$$\text{Exactement } p \text{ bonnes} = C_{10}^p \times 3^{10-p}$$
+
+**d)** Sommons sur $p$ de 0 à 10 :
+
+$$\sum_{p=0}^{10} C_{10}^p \times 3^{10-p} = \sum_{p=0}^{10} C_{10}^p \times 1^p \times 3^{10-p}$$
+
+On reconnaît la **formule du binôme de Newton** avec $a = 1$ et $b = 3$ :
+
+$$(1 + 3)^{10} = \sum_{p=0}^{10} C_{10}^p \times 1^p \times 3^{10-p} = 4^{10} = 1\,048\,576$$
+
+On retrouve bien le résultat de la question a).
+
+Cet exercice illustre le fait que le binôme de Newton n'est pas qu'une formule algébrique : c'est un **principe de dénombrement** qui décompose un ensemble en sous-ensembles indexés par le nombre de " succès ".
+:::
+
+:::methode
+Quand on a $n$ objets et que chacun peut être dans un état " succès " (1 choix) ou " échec " ($k$ choix), le nombre total de configurations avec exactement $p$ succès est $C_n^p \times k^{n-p}$. La somme sur $p$ donne $(1+k)^n$ par le binôme.
+:::

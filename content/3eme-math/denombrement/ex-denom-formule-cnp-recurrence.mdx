@@ -1,0 +1,65 @@
+---
+type: exercise
+title: "Formule $C_n^p = \\frac{n}{p} C_{n-1}^{p-1}$"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [denombrement, combinaisons, identites-combinatoires]
+praxeologies: [Prax5b, Prax9]
+---
+
+:::enonce
+1. Vérifier la formule $C_n^p = \dfrac{n}{p} \times C_{n-1}^{p-1}$ pour $(n,p) = (5,2)$, $(6,3)$ et $(10,4)$.
+
+2. Démontrer cette formule algébriquement.
+
+3. En déduire la valeur de la somme $S = \displaystyle\sum_{k=0}^{n} \dfrac{C_n^k}{k + 1}$.
+
+4. Quel est le lien avec l'intégration du binôme ?
+:::
+
+:::solution
+**1.** Vérifications :
+
+- $(n,p) = (5,2)$ : $C_5^2 = 10$ et $\dfrac{5}{2} \times C_4^1 = \dfrac{5}{2} \times 4 = 10$. Correct.
+
+- $(n,p) = (6,3)$ : $C_6^3 = 20$ et $\dfrac{6}{3} \times C_5^2 = 2 \times 10 = 20$. Correct.
+
+- $(n,p) = (10,4)$ : $C_{10}^4 = 210$ et $\dfrac{10}{4} \times C_9^3 = \dfrac{10}{4} \times 84 = 210$. Correct.
+
+**2.** Pour $1 \leq p \leq n$ :
+
+$$\frac{n}{p} \times C_{n-1}^{p-1} = \frac{n}{p} \times \frac{(n-1)!}{(p-1)!(n-p)!}$$
+
+$$= \frac{n \times (n-1)!}{p \times (p-1)! \times (n-p)!} = \frac{n!}{p! \times (n-p)!} = C_n^p$$
+
+**3.** On utilise une reformulation astucieuse. Pour $k \geq 0$ :
+
+$$\frac{C_n^k}{k+1} = \frac{n!}{k!(n-k)!(k+1)} = \frac{n!}{(k+1)!(n-k)!}$$
+
+On multiplie haut et bas par $(n+1)$ :
+
+$$\frac{C_n^k}{k+1} = \frac{1}{n+1} \times \frac{(n+1)!}{(k+1)!(n-k)!} = \frac{1}{n+1} \times C_{n+1}^{k+1}$$
+
+Donc :
+
+$$S = \sum_{k=0}^{n} \frac{C_n^k}{k+1} = \frac{1}{n+1} \sum_{k=0}^{n} C_{n+1}^{k+1}$$
+
+En posant $j = k + 1$ :
+
+$$S = \frac{1}{n+1} \sum_{j=1}^{n+1} C_{n+1}^{j} = \frac{1}{n+1} ( \sum_{j=0}^{n+1} C_{n+1}^{j} - C_{n+1}^0 ) = \frac{1}{n+1} ( 2^{n+1} - 1 )$$
+
+$$\boxed{S = \frac{2^{n+1} - 1}{n + 1}}$$
+
+**Vérification pour $n = 3$** : $\dfrac{C_3^0}{1} + \dfrac{C_3^1}{2} + \dfrac{C_3^2}{3} + \dfrac{C_3^3}{4} = 1 + \dfrac{3}{2} + 1 + \dfrac{1}{4} = \dfrac{15}{4}$. Et $\dfrac{2^4 - 1}{4} = \dfrac{15}{4}$. Correct.
+
+**4.** C'est exactement le résultat obtenu par intégration du binôme entre $0$ et $1$ :
+
+$$\int_0^1 (1+x)^n \, dx = \sum_{k=0}^{n} C_n^k \int_0^1 x^k \, dx = \sum_{k=0}^{n} \frac{C_n^k}{k+1} = \frac{2^{n+1} - 1}{n+1}$$
+
+Ainsi, deux méthodes différentes (la transformation $\dfrac{C_n^k}{k+1} = \dfrac{C_{n+1}^{k+1}}{n+1}$ et l'intégration) mènent au même résultat. L'algèbre et l'analyse se rejoignent.
+:::
+
+:::methode
+La relation $\dfrac{C_n^k}{k+1} = \dfrac{C_{n+1}^{k+1}}{n+1}$ est un outil puissant pour simplifier les sommes de coefficients binomiaux pondérés par $\dfrac{1}{k+1}$. Elle découle directement de la formule $C_n^p = \dfrac{n}{p} C_{n-1}^{p-1}$.
+:::

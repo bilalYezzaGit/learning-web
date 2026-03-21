@@ -1,0 +1,59 @@
+kind: livret
+title: "Dénombrement — Cours"
+description: "Découvrir les outils fondamentaux du dénombrement : cardinal, arrangements, permutations, combinaisons et binôme de Newton, avec exercices d'application directe."
+trimester: T2
+order: 18
+objectives:
+  - "Calculer le cardinal d'une union, d'une intersection et d'un complémentaire"
+  - "Appliquer le principe multiplicatif et le produit cartésien"
+  - "Distinguer et calculer arrangements, permutations et combinaisons"
+  - "Utiliser le triangle de Pascal et la relation de récurrence"
+  - "Développer avec la formule du binôme de Newton"
+  - "Choisir la bonne formule selon le modèle de tirage"
+
+sections:
+  - label: "Cardinal d'un ensemble fini"
+    steps:
+      - lesson-denom-cardinal
+      - ex-denom-cardinal-venn
+      - ex-denom-cardinal-trois-ensembles
+      - qcm-denom-cardinal-union
+
+  - label: "Produit cartésien et principe multiplicatif"
+    steps:
+      - lesson-denom-produit-cartesien
+      - ex-denom-principe-multiplicatif
+      - qcm-denom-produit-cartesien
+
+  - label: "Arrangements"
+    steps:
+      - lesson-denom-arrangements
+      - ex-denom-arrangements-direct
+      - ex-denom-tirages-successifs-sans-remise
+      - qcm-denom-arrangements
+
+  - label: "Permutations et anagrammes"
+    steps:
+      - lesson-denom-permutations
+      - ex-denom-anagrammes-simples
+      - ex-denom-anagrammes-repetitions
+      - qcm-denom-anagrammes
+
+  - label: "Combinaisons"
+    steps:
+      - lesson-denom-combinaisons
+      - ex-denom-combinaisons-direct
+      - ex-denom-tirage-simultane-boules
+      - quiz:
+          - qcm-denom-combinaisons-proprietes
+          - qcm-denom-tirage-simultane
+
+  - label: "Binôme de Newton"
+    steps:
+      - lesson-denom-binome
+      - ex-denom-binome-developpement
+      - qcm-denom-binome
+
+  - label: "Tableau récapitulatif des tirages"
+    steps:
+      - lesson-denom-tableau-recapitulatif

@@ -1,0 +1,33 @@
+---
+type: exercise
+title: "Placement alterné garçons-filles"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [denombrement, placement, permutations, alternance]
+praxeologies: [Prax4a, Prax2]
+---
+
+:::enonce
+$3$ filles et $3$ garçons doivent s'asseoir sur une rangée de $6$ chaises en **alternance** (un garçon n'est jamais à côté d'un autre garçon, une fille n'est jamais à côté d'une autre fille).
+
+1. Combien de configurations commencent par un **garçon** (GFGFGF) ?
+2. Combien de configurations commencent par une **fille** (FGFGFG) ?
+3. Combien de configurations **alternées** en tout ?
+:::
+
+:::solution
+**1.** Configuration GFGFGF.
+- Les garçons occupent les positions $1, 3, 5$ : ils se permutent entre eux de $3! = 6$ façons.
+- Les filles occupent les positions $2, 4, 6$ : elles se permutent entre elles de $3! = 6$ façons.
+
+$$3! \times 3! = 6 \times 6 = 36$$
+
+**2.** Configuration FGFGFG. Par un raisonnement symétrique :
+
+$$3! \times 3! = 36$$
+
+**3.** Les deux cas sont **disjoints** (une configuration commence soit par G soit par F). Donc :
+
+$$36 + 36 = 2 \times (3!)^2 = 72$$
+:::

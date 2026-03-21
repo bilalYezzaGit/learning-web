@@ -1,0 +1,62 @@
+---
+type: exercise
+title: "Chemins avec point interdit"
+difficulty: 2
+timeMinutes: 15
+category: synthese
+tags: [denombrement, chemins, complementaire, combinaisons]
+praxeologies: [Prax10, Prax6]
+---
+
+:::enonce
+On considère une grille de taille $5 \times 4$ (5 pas vers la droite, 4 pas vers le haut). On se déplace du coin $A(0,0)$ au coin $Z(5,4)$.
+
+a) Calculer le nombre total de chemins de $A$ à $Z$.
+
+b) Soit $P(2,2)$ un point fixe de la grille. Combien de chemins passent par $P$ ?
+
+c) Soit $Q(3,2)$ un point **interdit**. Combien de chemins **ne passent pas** par $Q$ ?
+
+d) Combien de chemins passent par $P$ mais **ne passent pas** par $Q$ ?
+:::
+
+:::solution
+**a)** Chaque chemin utilise $5$ pas droite et $4$ pas haut, soit un mot de $9$ lettres.
+
+$$\text{Total} = C_9^4 = \frac{9!}{4! \times 5!} = 126$$
+
+**b)** Un chemin passant par $P(2,2)$ se décompose en :
+- $A(0,0) \to P(2,2)$ : $2d + 2h$ $\Rightarrow C_4^2 = 6$
+- $P(2,2) \to Z(5,4)$ : $3d + 2h$ $\Rightarrow C_5^2 = 10$
+
+$$\text{Passant par } P = 6 \times 10 = 60$$
+
+**c)** On utilise la **méthode du complémentaire** : le nombre de chemins ne passant pas par $Q$ est le total moins ceux qui passent par $Q$.
+
+Chemins passant par $Q(3,2)$ :
+- $A(0,0) \to Q(3,2)$ : $3d + 2h$ $\Rightarrow C_5^2 = 10$
+- $Q(3,2) \to Z(5,4)$ : $2d + 2h$ $\Rightarrow C_4^2 = 6$
+
+$$\text{Passant par } Q = 10 \times 6 = 60$$
+
+$$\text{Ne passant pas par } Q = 126 - 60 = 66$$
+
+**d)** On cherche les chemins passant par $P$ et ne passant pas par $Q$.
+
+D'abord, comptons les chemins passant par $P$ **et** par $Q$. Comme $P(2,2)$ et $Q(3,2)$ sont tels que $2 \leq 3$ et $2 \leq 2$, un chemin peut passer par $P$ puis par $Q$ :
+- $A \to P$ : $C_4^2 = 6$
+- $P(2,2) \to Q(3,2)$ : $1d + 0h$ $\Rightarrow C_1^0 = 1$
+- $Q(3,2) \to Z$ : $C_4^2 = 6$
+
+$$\text{Passant par } P \text{ et } Q = 6 \times 1 \times 6 = 36$$
+
+Donc :
+
+$$\text{Passant par } P \text{ mais pas } Q = 60 - 36 = 24$$
+:::
+
+:::methode
+Pour les chemins avec point interdit, toujours utiliser le **complémentaire** :
+- Chemins évitant $Q$ = Total $-$ Chemins passant par $Q$
+- Chemins passant par $P$ et évitant $Q$ = Passant par $P$ $-$ Passant par $P$ et $Q$
+:::

@@ -1,0 +1,96 @@
+---
+type: lesson
+title: "Combinaisons et leurs propriétés"
+difficulty: 0
+timeMinutes: 10
+tags: [denombrement, combinaisons, triangle-pascal, symetrie]
+praxeologies: [Prax5a, Prax5b]
+---
+
+### Définition
+
+:::definition[Combinaison]
+Soient $n$ et $p$ deux entiers naturels tels que $0 \leq p \leq n$.
+
+Une **combinaison de $p$ éléments parmi $n$** est un **sous-ensemble** de $p$ éléments choisis parmi $n$. L'**ordre ne compte pas**.
+
+Le nombre de combinaisons de $p$ parmi $n$ est noté $C_n^p$.
+:::
+
+:::remark
+La différence fondamentale avec les arrangements : dans une combinaison, les ensembles $\{a, b, c\}$ et $\{c, a, b\}$ sont **le même** choix. Dans un arrangement, $(a, b, c)$ et $(c, a, b)$ sont **différents**.
+:::
+
+### Formule
+
+:::theorem[Formule des combinaisons]
+Pour $0 \leq p \leq n$ :
+
+$$C_n^p = \frac{A_n^p}{p!} = \frac{n!}{p!(n-p)!}$$
+:::
+
+**Justification :** Chaque combinaison de $p$ éléments peut être ordonnée de $p!$ façons différentes pour donner un arrangement. Donc $A_n^p = C_n^p \times p!$, d'où $C_n^p = \frac{A_n^p}{p!}$.
+
+:::example[Calculs directs]
+- $C_5^2 = \frac{5!}{2! \times 3!} = \frac{120}{2 \times 6} = 10$
+- $C_{10}^3 = \frac{10!}{3! \times 7!} = \frac{10 \times 9 \times 8}{3 \times 2 \times 1} = \frac{720}{6} = 120$
+- $C_8^5 = \frac{8!}{5! \times 3!} = \frac{8 \times 7 \times 6}{3 \times 2 \times 1} = 56$
+:::
+
+### Propriétés
+
+:::property[Valeurs particulières]
+Pour tout entier naturel $n$ :
+
+- $C_n^0 = C_n^n = 1$
+- $C_n^1 = C_n^{n-1} = n$
+:::
+
+:::property[Symétrie]
+Pour tout $0 \leq p \leq n$ :
+
+$$C_n^p = C_n^{n-p}$$
+:::
+
+Choisir $p$ éléments à garder revient à choisir $n - p$ éléments à écarter.
+
+:::theorem[Relation de Pascal]
+Pour tout $1 \leq p \leq n - 1$ :
+
+$$C_n^p = C_{n-1}^{p-1} + C_{n-1}^p$$
+:::
+
+**Justification :** On fixe un élément $x$. Les combinaisons de $p$ parmi $n$ se répartissent en :
+- celles qui **contiennent** $x$ : il reste à choisir $p - 1$ éléments parmi les $n - 1$ restants, soit $C_{n-1}^{p-1}$
+- celles qui **ne contiennent pas** $x$ : il faut choisir $p$ éléments parmi les $n - 1$ restants, soit $C_{n-1}^p$
+
+### Triangle de Pascal
+
+Le **triangle de Pascal** se construit ligne par ligne en utilisant la relation de Pascal. Chaque nombre est la somme des deux nombres situés au-dessus de lui.
+
+```typst
+#table(
+  columns: 9,
+  align: center,
+  stroke: 0.5pt,
+  [$n backslash p$], [0], [1], [2], [3], [4], [5], [6], [7],
+  [*0*], [1], [], [], [], [], [], [], [],
+  [*1*], [1], [1], [], [], [], [], [], [],
+  [*2*], [1], [2], [1], [], [], [], [], [],
+  [*3*], [1], [3], [3], [1], [], [], [], [],
+  [*4*], [1], [4], [6], [4], [1], [], [], [],
+  [*5*], [1], [5], [10], [10], [5], [1], [], [],
+  [*6*], [1], [6], [15], [20], [15], [6], [1], [],
+  [*7*], [1], [7], [21], [35], [35], [21], [7], [1],
+)
+```
+
+:::example[Applications géométriques]
+- Le nombre de **droites** définies par 5 points (non alignés trois à trois) est $C_5^2 = 10$.
+- Le nombre de **triangles** formés par 8 points d'un cercle est $C_8^3 = 56$.
+- Le nombre de **diagonales** d'un polygone à $n$ côtés est $C_n^2 - n = \frac{n(n-1)}{2} - n = \frac{n(n-3)}{2}$.
+:::
+
+:::attention
+Si le problème parle de " choisir ", " tirer simultanément ", " former un groupe " ou " sélectionner " sans notion d'ordre, c'est une **combinaison**. Si l'ordre intervient (classement, placement, code), c'est un **arrangement**.
+:::

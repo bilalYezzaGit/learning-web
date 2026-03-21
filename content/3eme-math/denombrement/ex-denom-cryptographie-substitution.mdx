@@ -1,0 +1,59 @@
+---
+type: exercise
+title: "Cryptographie — chiffrement par substitution"
+difficulty: 2
+timeMinutes: 15
+category: synthese
+tags: [denombrement, applications, cryptographie, permutations]
+praxeologies: [Prax4a, Prax2]
+---
+
+:::enonce
+Le **chiffrement par substitution** remplace chaque lettre de l'alphabet par une autre lettre (bijection de l'alphabet sur lui-même). Par exemple : A $\to$ K, B $\to$ Z, C $\to$ F, etc.
+
+a) Combien de clés de chiffrement par substitution sont possibles avec un alphabet de 26 lettres ? Calculer l'ordre de grandeur.
+
+b) Si un ordinateur teste $10^9$ clés par seconde, combien de temps faudrait-il pour tester toutes les clés ?
+
+c) Le **chiffrement de César** est un cas particulier : chaque lettre est décalée d'un nombre fixe de positions (A $\to$ D, B $\to$ E, etc.). Combien de clés de César possibles ?
+
+d) Pourquoi le chiffrement par substitution est-il vulnérable à l'analyse de fréquence mais pas au brute-force ?
+:::
+
+:::solution
+**a)** Une clé de substitution est une **bijection** de l'alphabet $\{A, B, \ldots, Z\}$ sur lui-même, c'est-à-dire une **permutation** des 26 lettres.
+
+$$\text{Nombre de clés} = 26!$$
+
+Calculons l'ordre de grandeur :
+
+$$26! = 403\,291\,461\,126\,605\,635\,584\,000\,000 \approx 4,03 \times 10^{26}$$
+
+C'est un nombre astronomique : plus de **400 millions de milliards de milliards** de clés.
+
+**b)** À $10^9$ clés/seconde :
+
+$$t = \frac{26!}{10^9} = \frac{4,03 \times 10^{26}}{10^9} = 4,03 \times 10^{17} \text{ secondes}$$
+
+Convertissons en années ($1 \text{ an} \approx 3,15 \times 10^7$ secondes) :
+
+$$t = \frac{4,03 \times 10^{17}}{3,15 \times 10^7} \approx 1,28 \times 10^{10} \text{ années}$$
+
+C'est environ **12,8 milliards d'années** — comparable à l'âge de l'univers ($13,8$ milliards d'années) !
+
+Le brute-force est totalement irréalisable.
+
+**c)** Le chiffrement de César décale chaque lettre de $d$ positions ($1 \leq d \leq 25$). La clé est entièrement déterminée par le décalage $d$.
+
+$$\text{Nombre de clés de César} = 25$$
+
+(On exclut $d = 0$ qui ne chiffre rien, et $d = 26$ qui est identique à $d = 0$.)
+
+**d)** Le paradoxe de la substitution :
+
+- **Résistance au brute-force** : avec $4 \times 10^{26}$ clés, il est impossible de toutes les tester. Le nombre de clés est bien trop grand.
+
+- **Vulnérabilité à l'analyse de fréquence** : dans un texte français, la lettre E apparaît environ 17 % du temps, A environ 8 %, etc. Ces fréquences sont **conservées** par la substitution (si E est remplacé par K, alors K apparaîtra 17 % du temps dans le texte chiffré). Un cryptanalyste peut donc identifier les lettres les plus fréquentes et reconstituer la clé sans tester les $26!$ possibilités.
+
+Le nombre gigantesque de clés ne protège pas contre une attaque intelligente. C'est une leçon fondamentale de la cryptographie : la **taille de l'espace des clés** n'est pas le seul critère de sécurité.
+:::

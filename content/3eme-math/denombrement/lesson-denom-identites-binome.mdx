@@ -1,0 +1,83 @@
+---
+type: lesson
+title: "Exploiter le binôme — identités combinatoires"
+difficulty: 2
+timeMinutes: 8
+tags: [denombrement, binome-newton, identites-combinatoires]
+praxeologies: [Prax7b]
+---
+
+### L'idée clé : spécialiser le binôme
+
+La formule du binôme de Newton est un outil bien plus puissant qu'un simple développement. En choisissant astucieusement les valeurs de $a$ et $b$, on obtient des **identités remarquables** sur les coefficients binomiaux.
+
+:::property[Rappel — Binôme de Newton]
+Pour tout $n \in \mathbb{N}$ et tous réels $a, b$ :
+
+$$(a + b)^n = \sum_{k=0}^{n} C_n^k \, a^{n-k} \, b^k$$
+:::
+
+### Somme des $C_n^k$ : la puissance de 2
+
+:::theorem[Somme des coefficients binomiaux]
+$$\sum_{k=0}^{n} C_n^k = 2^n$$
+:::
+
+**Démonstration.** On pose $a = 1$ et $b = 1$ dans le binôme :
+
+$$(1 + 1)^n = \sum_{k=0}^{n} C_n^k \cdot 1^{n-k} \cdot 1^k = \sum_{k=0}^{n} C_n^k$$
+
+D'où $\sum_{k=0}^{n} C_n^k = 2^n$.
+
+:::remark
+Cette identité a une interprétation combinatoire élégante : $2^n$ est le nombre de parties d'un ensemble à $n$ éléments. On retrouve ce nombre en sommant le nombre de parties de cardinal $0$, $1$, $2$, ..., $n$.
+:::
+
+### Somme alternée : le zéro magique
+
+:::theorem[Somme alternée]
+$$\sum_{k=0}^{n} (-1)^k \, C_n^k = 0$$
+:::
+
+**Démonstration.** On pose $a = 1$ et $b = -1$ :
+
+$$(1 + (-1))^n = \sum_{k=0}^{n} C_n^k \cdot 1^{n-k} \cdot (-1)^k = \sum_{k=0}^{n} (-1)^k \, C_n^k$$
+
+Comme $(1 - 1)^n = 0^n = 0$ (pour $n \geq 1$), on obtient le résultat.
+
+### Séparer les termes pairs et impairs
+
+Pour $n$ pair, en combinant les deux identités précédentes :
+
+- Somme : $\displaystyle\sum_{k=0}^{n} C_n^k = 2^n$
+- Alternée : $\displaystyle\sum_{k=0}^{n} (-1)^k C_n^k = 0$
+
+En ajoutant ces deux égalités, les termes de $k$ impair s'annulent :
+
+$$2 \sum_{\substack{k=0 \\ k \text{ pair}}}^{n} C_n^k = 2^n$$
+
+:::property[Termes pairs et impairs]
+$$\sum_{\substack{k \text{ pair}}} C_n^k = \sum_{\substack{k \text{ impair}}} C_n^k = 2^{n-1}$$
+:::
+
+### Dériver le binôme : sommes pondérées
+
+On considère la fonction $f(x) = (1 + x)^n = \sum_{k=0}^{n} C_n^k \, x^k$.
+
+En dérivant :
+
+$$f'(x) = n(1 + x)^{n-1} = \sum_{k=1}^{n} k \, C_n^k \, x^{k-1}$$
+
+:::property[Somme pondérée par $k$]
+En posant $x = 1$ dans la dérivée :
+
+$$\sum_{k=1}^{n} k \, C_n^k = n \cdot 2^{n-1}$$
+:::
+
+:::example[Vérification pour $n = 4$]
+$\sum_{k=1}^{4} k \, C_4^k = 1 \times 4 + 2 \times 6 + 3 \times 4 + 4 \times 1 = 4 + 12 + 12 + 4 = 32 = 4 \times 2^3$
+:::
+
+:::attention
+Ces techniques (spécialiser, dériver, intégrer le binôme) sont des outils puissants. Retiens la méthode : on part de $(a+b)^n$ comme " fonction génératrice " des $C_n^k$, puis on la manipule pour extraire l'identité voulue.
+:::

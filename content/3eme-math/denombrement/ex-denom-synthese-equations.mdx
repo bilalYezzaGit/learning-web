@@ -1,0 +1,97 @@
+---
+type: exercise
+title: "Équations combinatoires"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [denombrement, equations, arrangements, combinaisons]
+praxeologies: [Prax9]
+---
+
+:::enonce
+Résoudre les équations suivantes dans $\mathbb{N}$.
+
+1. $A_7^n = 21 \times A_6^{n-2}$
+2. $C_n^2 + C_{n-3}^2 = 17$
+3. $A_n^3 = 72 \times A_{n-2}^1$
+:::
+
+:::solution
+**1.** $A_7^n = 21 \times A_6^{n-2}$
+
+On remplace par les expressions en factorielles :
+
+$$\frac{7!}{(7-n)!} = 21 \times \frac{6!}{(6-(n-2))!} = 21 \times \frac{6!}{(8-n)!}$$
+
+$$\frac{7!}{(7-n)!} = 21 \times \frac{6!}{(8-n)!}$$
+
+$$\frac{7 \times 6!}{(7-n)!} = 21 \times \frac{6!}{(8-n)!}$$
+
+On simplifie par $6!$ :
+
+$$\frac{7}{(7-n)!} = \frac{21}{(8-n)!}$$
+
+Or $(8-n)! = (8-n)(7-n)!$, donc :
+
+$$\frac{7}{(7-n)!} = \frac{21}{(8-n)(7-n)!}$$
+
+On simplifie par $(7-n)!$ (avec $n \leq 7$) :
+
+$$7 = \frac{21}{8-n}$$
+
+$$8 - n = 3 \implies n = 5$$
+
+**Vérification** : $A_7^5 = 7 \times 6 \times 5 \times 4 \times 3 = 2520$ et $21 \times A_6^3 = 21 \times 120 = 2520$. $\checkmark$
+
+**Conditions** : $0 \leq n \leq 7$ et $n - 2 \leq 6$, soit $n \leq 8$. Avec $n = 5$ : $0 \leq 5 \leq 7$ et $3 \leq 6$. $\checkmark$
+
+**2.** $C_n^2 + C_{n-3}^2 = 17$
+
+On développe :
+
+$$\frac{n(n-1)}{2} + \frac{(n-3)(n-4)}{2} = 17$$
+
+$$n(n-1) + (n-3)(n-4) = 34$$
+
+$$n^2 - n + n^2 - 7n + 12 = 34$$
+
+$$2n^2 - 8n + 12 = 34$$
+
+$$2n^2 - 8n - 22 = 0$$
+
+$$n^2 - 4n - 11 = 0$$
+
+$$\Delta = 16 + 44 = 60$$
+
+$\sqrt{60} = 2\sqrt{15} \notin \mathbb{N}$, donc l'équation n'a **pas de solution** dans $\mathbb{N}$.
+
+**3.** $A_n^3 = 72 \times A_{n-2}^1$
+
+On développe :
+
+$$n(n-1)(n-2) = 72(n-2)$$
+
+Si $n = 2$ : $0 = 0$, c'est une solution. Mais $A_2^3$ n'est pas défini (il faut $n \geq 3$), donc $n = 2$ est rejeté.
+
+Pour $n \geq 3$, on simplifie par $(n-2) \neq 0$ :
+
+$$n(n-1) = 72$$
+
+$$n^2 - n - 72 = 0$$
+
+$$\Delta = 1 + 288 = 289 = 17^2$$
+
+$$n = \frac{1 + 17}{2} = 9 \quad \text{(on rejette } n = \frac{1-17}{2} = -8\text{)}$$
+
+**Vérification** : $A_9^3 = 9 \times 8 \times 7 = 504$ et $72 \times A_7^1 = 72 \times 7 = 504$. $\checkmark$
+
+**Conditions** : $n \geq 3$ et $n - 2 \geq 1$. Avec $n = 9$ : $9 \geq 3$ et $7 \geq 1$. $\checkmark$
+:::
+
+:::methode
+Pour résoudre une équation combinatoire :
+1. Remplacer $A_n^p$ et $C_n^p$ par leurs expressions en factorielles.
+2. Simplifier en utilisant les propriétés des factorielles.
+3. Obtenir une équation polynomiale en $n$ (ou $p$).
+4. Résoudre et **vérifier les conditions de validité** ($p \leq n$, $n \in \mathbb{N}$).
+:::

@@ -1,0 +1,50 @@
+---
+type: exercise
+title: "Jeu de grille — cocher des cartes"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [denombrement, cartes, grille, combinaisons, complementaire]
+praxeologies: [Prax2, Prax5a, Prax8]
+---
+
+:::enonce
+Un jeu consiste à cocher sur une grille $4 \times 8$ (représentant les $32$ cartes d'un jeu classique) exactement $4$ cartes : un pique, un coeur, un carreau et un trèfle. On tire ensuite $4$ cartes du jeu.
+
+1. Combien de grilles différentes peut-on remplir ?
+2. Combien de grilles ont leurs $4$ cartes cochées parmi les $4$ cartes tirées ?
+3. Combien de grilles ont **exactement $3$** de leurs cartes cochées parmi les tirées ?
+4. Combien de grilles ont la carte de carreau cochée **non tirée** ?
+5. Combien de grilles n'ont **aucune** carte cochée parmi les tirées ?
+6. Combien de grilles ont **au moins une** carte cochée parmi les tirées ?
+:::
+
+:::solution
+**1.** Pour chaque couleur, on choisit $1$ carte parmi $8$. Par le principe multiplicatif :
+
+$$8 \times 8 \times 8 \times 8 = 8^4 = 4096$$
+
+**2.** Les $4$ cartes tirées sont fixées ($1$ de chaque couleur, puisqu'on tire $4$ cartes). La grille doit cocher exactement ces $4$ cartes : il n'y a qu'**une seule** grille possible.
+
+$$1$$
+
+**3.** Exactement $3$ cartes cochées sont tirées. Une des $4$ couleurs a sa carte cochée non tirée.
+
+- Choix de la couleur " ratée " : $4$ choix.
+- Pour cette couleur, la carte cochée doit être différente de la carte tirée : $7$ choix (sur $8$ cartes de cette couleur).
+- Pour les $3$ autres couleurs, la carte cochée est obligatoirement la carte tirée : $1$ choix chacune.
+
+$$4 \times 7 \times 1^3 = 28$$
+
+**4.** La carte de carreau cochée n'est pas tirée. La carte de carreau cochée est différente de la carte de carreau tirée : $7$ choix. Pour les $3$ autres couleurs, on choisit librement : $8$ choix chacune.
+
+$$7 \times 8^3 = 7 \times 512 = 3584$$
+
+**5.** Aucune carte cochée n'est tirée. Pour chaque couleur, la carte cochée est différente de la tirée : $7$ choix par couleur.
+
+$$7^4 = 2401$$
+
+**6.** Au moins une carte cochée est tirée. Par le **complémentaire** :
+
+$$8^4 - 7^4 = 4096 - 2401 = 1695$$
+:::

@@ -1,0 +1,77 @@
+---
+type: lesson
+title: "Cardinal d'un ensemble fini"
+difficulty: 0
+timeMinutes: 8
+tags: [denombrement, cardinal, union, intersection]
+praxeologies: [Prax1]
+---
+
+### Cardinal d'un ensemble fini
+
+:::definition[Cardinal d'un ensemble]
+Soit $E$ un ensemble fini. Le **cardinal** de $E$, noté $\text{card}(E)$, est le nombre d'éléments de $E$.
+
+Par convention, $\text{card}(\emptyset) = 0$.
+:::
+
+:::example
+- $E = \{1, 2, 3, 4, 5\}$ : $\text{card}(E) = 5$
+- $F = \{x \in \mathbb{N} \mid x \leq 9 \text{ et } x \text{ est pair}\} = \{0, 2, 4, 6, 8\}$ : $\text{card}(F) = 5$
+:::
+
+### Cardinal de l'union de deux ensembles
+
+:::theorem[Formule de l'union]
+Soient $E$ et $F$ deux ensembles finis. On a :
+
+$$\text{card}(E \cup F) = \text{card}(E) + \text{card}(F) - \text{card}(E \cap F)$$
+:::
+
+:::remark
+Si $E$ et $F$ sont **disjoints** (c'est-à-dire $E \cap F = \emptyset$), alors :
+
+$$\text{card}(E \cup F) = \text{card}(E) + \text{card}(F)$$
+
+C'est le **principe additif**.
+:::
+
+### Cardinal du complémentaire
+
+:::property[Cardinal du complémentaire]
+Soit $A$ une partie d'un ensemble fini $E$. Le complémentaire de $A$ dans $E$, noté $\overline{A}$, vérifie :
+
+$$\text{card}(\overline{A}) = \text{card}(E) - \text{card}(A)$$
+:::
+
+### Visualisation avec les diagrammes de Venn
+
+Un **diagramme de Venn** permet de représenter les ensembles et leurs intersections de manière visuelle. On place les éléments dans des zones correspondant à leur appartenance.
+
+:::example[Diviseurs de 12 et de 18]
+Soit $A = \{1, 2, 3, 4, 6, 12\}$ l'ensemble des diviseurs de 12 et $B = \{1, 2, 3, 6, 9, 18\}$ l'ensemble des diviseurs de 18.
+
+- $A \cap B = \{1, 2, 3, 6\}$, donc $\text{card}(A \cap B) = 4$
+- $\text{card}(A \cup B) = 6 + 6 - 4 = 8$
+
+On peut vérifier : $A \cup B = \{1, 2, 3, 4, 6, 9, 12, 18\}$, qui contient bien 8 éléments.
+:::
+
+### Formule de l'union de trois ensembles
+
+:::property[Inclusion-exclusion pour trois ensembles]
+Soient $A$, $B$ et $C$ trois ensembles finis. On a :
+
+$$\text{card}(A \cup B \cup C) = \text{card}(A) + \text{card}(B) + \text{card}(C)$$
+$$- \text{card}(A \cap B) - \text{card}(A \cap C) - \text{card}(B \cap C) + \text{card}(A \cap B \cap C)$$
+:::
+
+:::example[Ensembles d'entiers]
+Soit $E = \{1, 2, 3, \ldots, 20\}$. On pose $A$ l'ensemble des multiples de 2, $B$ l'ensemble des multiples de 3, $C$ l'ensemble des multiples de 5.
+
+- $\text{card}(A) = 10$, $\text{card}(B) = 6$, $\text{card}(C) = 4$
+- $\text{card}(A \cap B) = 3$ (multiples de 6), $\text{card}(A \cap C) = 2$ (multiples de 10), $\text{card}(B \cap C) = 1$ (multiples de 15)
+- $\text{card}(A \cap B \cap C) = 1$ (multiples de 30... mais 30 > 20, donc $\text{card}(A \cap B \cap C) = 0$)
+
+Donc $\text{card}(A \cup B \cup C) = 10 + 6 + 4 - 3 - 2 - 1 + 0 = 14$.
+:::

@@ -1,0 +1,44 @@
+---
+type: exercise
+title: "Cardinal et diagramme de Venn"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [denombrement, cardinal, venn, union]
+praxeologies: [Prax1]
+---
+
+:::enonce
+Une usine produit 200 appareils. Un contrôle de qualité révèle que :
+- 35 appareils présentent le défaut $A$
+- 25 appareils présentent le défaut $B$
+- 10 appareils présentent les deux défauts $A$ et $B$
+
+1. Calculer $\text{card}(A \cup B)$, le nombre d'appareils présentant au moins un défaut.
+2. En déduire le nombre d'appareils sans aucun défaut.
+3. Représenter la situation à l'aide d'un diagramme de Venn en indiquant le nombre d'appareils dans chaque zone.
+:::
+
+:::solution
+**1.** On applique la formule de l'union :
+
+$$\text{card}(A \cup B) = \text{card}(A) + \text{card}(B) - \text{card}(A \cap B)$$
+
+$$\text{card}(A \cup B) = 35 + 25 - 10 = 50$$
+
+Il y a **50 appareils** présentant au moins un défaut.
+
+**2.** Le nombre d'appareils sans aucun défaut est le cardinal du complémentaire de $A \cup B$ :
+
+$$\text{card}(\overline{A \cup B}) = \text{card}(E) - \text{card}(A \cup B) = 200 - 50 = 150$$
+
+Il y a **150 appareils** sans aucun défaut.
+
+**3.** Diagramme de Venn :
+- Zone $A$ seulement : $35 - 10 = 25$ appareils
+- Zone $B$ seulement : $25 - 10 = 15$ appareils
+- Zone $A \cap B$ : $10$ appareils
+- Zone extérieure : $150$ appareils
+
+**Vérification :** $25 + 10 + 15 + 150 = 200$. Correct.
+:::

@@ -1,0 +1,62 @@
+---
+type: exercise
+title: "Le paradoxe des anniversaires"
+difficulty: 2
+timeMinutes: 15
+category: synthese
+tags: [denombrement, applications, paradoxe, complementaire, arrangements]
+praxeologies: [Prax2, Prax6]
+---
+
+:::enonce
+Dans une salle se trouvent $n$ personnes. On suppose que les anniversaires sont répartis uniformément sur les 365 jours de l'année (on ignore les années bissextiles).
+
+a) Calculer le nombre total de configurations d'anniversaires pour $n$ personnes.
+
+b) Calculer le nombre de configurations où **tous les anniversaires sont différents**.
+
+c) En déduire la probabilité $P(n)$ qu'**au moins deux personnes** partagent le même anniversaire.
+
+d) Calculer $P(23)$ et $P(50)$ (on pourra utiliser les approximations données). Commenter.
+:::
+
+:::solution
+**a)** Chaque personne a son anniversaire parmi 365 jours, indépendamment des autres. C'est un tirage successif **avec remise** :
+
+$$\text{Total} = 365^n$$
+
+**b)** Si tous les anniversaires sont différents, on choisit $n$ jours distincts parmi 365 **et** on les attribue aux $n$ personnes dans l'ordre. C'est un arrangement sans répétition :
+
+$$A_{365}^n = 365 \times 364 \times 363 \times \cdots \times (365 - n + 1)$$
+
+**c)** Par le **complémentaire** :
+
+$$P(n) = 1 - \frac{A_{365}^n}{365^n} = 1 - \frac{365 \times 364 \times \cdots \times (365 - n + 1)}{365^n}$$
+
+$$P(n) = 1 - \prod_{k=0}^{n-1} \frac{365 - k}{365} = 1 - \prod_{k=0}^{n-1} (1 - \frac{k}{365})$$
+
+**d)** Pour $n = 23$ :
+
+$$P(23) = 1 - \frac{365!}{342! \times 365^{23}}$$
+
+Le calcul donne :
+
+$$P(23) \approx 1 - 0,4927 = 0,5073 \approx 50,7\%$$
+
+Avec seulement **23 personnes**, il y a **plus d'une chance sur deux** que deux partagent le même anniversaire !
+
+Pour $n = 50$ :
+
+$$P(50) \approx 1 - 0,0296 = 0,9704 \approx 97\%$$
+
+Avec 50 personnes, la probabilité est de **97 %** — quasi certaine.
+
+**Pourquoi est-ce surprenant ?** Notre intuition nous dit : " 23 personnes sur 365 jours, c'est peu, donc la probabilité devrait être faible. " Mais on ne compare pas 23 à 365 : on compare le nombre de **paires** possibles à 365. Avec 23 personnes, il y a $C_{23}^2 = 253$ paires, ce qui est comparable à 365. C'est pour cela que la probabilité est déjà élevée.
+
+C'est le **paradoxe des anniversaires** : il n'est pas réellement paradoxal, mais il est profondément contre-intuitif. Le dénombrement montre que notre intuition est mauvaise dès que les nombres sont grands.
+:::
+
+:::erreurs
+- Confondre " au moins 2 partagent un anniversaire " (complémentaire de " tous différents ") avec " quelqu'un partage MON anniversaire " (probabilité beaucoup plus faible : $\approx n/365$)
+- Oublier d'utiliser le complémentaire et tenter de lister les cas favorables
+:::

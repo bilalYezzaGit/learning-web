@@ -1,0 +1,85 @@
+---
+type: lesson
+title: "Formule du binôme de Newton"
+difficulty: 1
+timeMinutes: 8
+tags: [denombrement, binome-newton, combinaisons, developpement]
+praxeologies: [Prax7a]
+---
+
+### La formule
+
+:::theorem[Binôme de Newton]
+Pour tous réels $a$ et $b$ et tout entier naturel $n$ :
+
+$$(a + b)^n = \sum_{k=0}^{n} C_n^k \, a^{n-k} \, b^k$$
+
+Soit, en écriture développée :
+
+$$(a+b)^n = C_n^0 \, a^n + C_n^1 \, a^{n-1}b + C_n^2 \, a^{n-2}b^2 + \cdots + C_n^n \, b^n$$
+:::
+
+:::remark
+Le terme général de rang $k$ (pour $k = 0, 1, \ldots, n$) est :
+
+$$T_k = C_n^k \, a^{n-k} \, b^k$$
+
+Le développement contient $n + 1$ termes.
+:::
+
+### Démonstration (idée par récurrence)
+
+On démontre par récurrence sur $n$ :
+
+- **Initialisation** : pour $n = 0$, $(a+b)^0 = 1 = C_0^0 \, a^0 \, b^0$. Vrai.
+- **Hérédité** : on suppose la formule vraie au rang $n$. Alors :
+
+$$(a+b)^{n+1} = (a+b) \times (a+b)^n = (a+b) \times \sum_{k=0}^{n} C_n^k \, a^{n-k} \, b^k$$
+
+En développant et en regroupant les termes de même degré en $b$, on utilise la **relation de Pascal** $C_n^{k-1} + C_n^k = C_{n+1}^k$ pour obtenir la formule au rang $n + 1$.
+
+### Cas particuliers importants
+
+:::property[Identités remarquables]
+En posant $a = 1$ et $b = 1$ dans la formule du binôme :
+
+$$2^n = (1+1)^n = \sum_{k=0}^{n} C_n^k = C_n^0 + C_n^1 + C_n^2 + \cdots + C_n^n$$
+
+C'est le **nombre de parties** d'un ensemble à $n$ éléments.
+:::
+
+:::property[Somme alternée]
+En posant $a = 1$ et $b = -1$ :
+
+$$0 = (1-1)^n = \sum_{k=0}^{n} (-1)^k \, C_n^k = C_n^0 - C_n^1 + C_n^2 - C_n^3 + \cdots$$
+:::
+
+### Exemples de développement
+
+:::example[Développement de $(1+x)^3$]
+$(1+x)^3 = C_3^0 + C_3^1 \, x + C_3^2 \, x^2 + C_3^3 \, x^3 = 1 + 3x + 3x^2 + x^3$
+:::
+
+:::example[Développement de $(1+x)^4$]
+$(1+x)^4 = 1 + 4x + 6x^2 + 4x^3 + x^4$
+:::
+
+:::example[Développement de $(2-x)^4$]
+On pose $a = 2$ et $b = -x$ :
+
+$(2-x)^4 = \sum_{k=0}^{4} C_4^k \, 2^{4-k} \, (-x)^k$
+
+$= C_4^0 \cdot 16 - C_4^1 \cdot 8x + C_4^2 \cdot 4x^2 - C_4^3 \cdot 2x^3 + C_4^4 \cdot x^4$
+
+$= 16 - 32x + 24x^2 - 8x^3 + x^4$
+:::
+
+:::example[Développement de $(1+x)^5$]
+$(1+x)^5 = 1 + 5x + 10x^2 + 10x^3 + 5x^4 + x^5$
+:::
+
+:::attention
+Pour trouver le coefficient de $x^k$ dans $(a+b)^n$, il suffit d'identifier le terme $T_k = C_n^k \, a^{n-k} \, b^k$ et de lire le coefficient.
+
+Par exemple, le coefficient de $x^3$ dans $(1+x)^7$ est $C_7^3 = 35$.
+:::

@@ -1,0 +1,55 @@
+---
+type: exercise
+title: "Poignées de main dans un groupe"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [denombrement, double-comptage, combinaisons]
+praxeologies: [Prax5a, Prax11]
+---
+
+:::enonce
+Dans une salle, $n$ personnes sont réunies. Chaque personne serre la main à exactement $k$ autres personnes.
+
+1. Montrer que le produit $nk$ est pair.
+
+2. Pour $n = 10$ et $k = 3$, calculer le nombre total de poignées de main.
+
+3. Montrer que le nombre total de poignées de main est $\dfrac{nk}{2}$.
+
+4. Si tout le monde se serre la main ($k = n - 1$), retrouver le résultat $C_n^2$.
+:::
+
+:::solution
+**1.** Chaque poignée de main implique **2 personnes**. Le nombre total de " participations à une poignée " est $nk$ (chaque personne participe à $k$ poignées). Or chaque poignée est comptée **2 fois** (une fois pour chaque participant).
+
+Donc le nombre de poignées $P$ vérifie $nk = 2P$, ce qui signifie que $nk$ est pair.
+
+**2.** Pour $n = 10$ et $k = 3$ :
+
+$$P = \frac{nk}{2} = \frac{10 \times 3}{2} = 15$$
+
+Il y a **15 poignées de main**.
+
+**3.** Par le raisonnement de double comptage :
+
+- **Comptage par personne** : en parcourant les $n$ personnes, on totalise $nk$ participations. Chaque poignée étant comptée 2 fois :
+
+$$P = \frac{nk}{2}$$
+
+Ceci est cohérent car on a montré que $nk$ est pair.
+
+**4.** Si $k = n - 1$ (chaque personne serre la main à toutes les autres) :
+
+$$P = \frac{n(n-1)}{2}$$
+
+D'autre part, une poignée de main est déterminée par le choix de 2 personnes parmi $n$ (sans ordre), soit :
+
+$$P = C_n^2 = \frac{n!}{2!(n-2)!} = \frac{n(n-1)}{2}$$
+
+Les deux résultats coïncident. Le double comptage donne directement la formule de $C_n^2$.
+:::
+
+:::methode
+Le double comptage " par personne puis diviser par 2 " est un classique. Il s'applique chaque fois qu'on compte des **paires** : poignées de main, matchs dans un tournoi, diagonales d'un polygone, arêtes d'un graphe...
+:::

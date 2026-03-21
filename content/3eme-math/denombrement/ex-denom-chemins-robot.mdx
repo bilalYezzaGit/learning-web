@@ -1,0 +1,120 @@
+---
+type: exercise
+title: "Le robot sur la grille — mouvements contraints"
+difficulty: 3
+timeMinutes: 18
+category: synthese
+tags: [denombrement, chemins, recurrence, combinaisons]
+praxeologies: [Prax10, Prax8]
+---
+
+:::enonce
+Un robot se déplace sur une grille de taille $6 \times 4$ (du coin $(0,0)$ au coin $(6,4)$). Il peut effectuer trois types de mouvements :
+- **D** : un pas vers la droite (de $(i,j)$ à $(i+1,j)$)
+- **H** : un pas vers le haut (de $(i,j)$ à $(i,j+1)$)
+- **DH** : un pas en diagonale (de $(i,j)$ à $(i+1,j+1)$)
+
+a) Si le robot ne peut utiliser que D et H, combien de chemins existent ?
+
+b) Si D, H et DH sont tous autorisés, on note $f(i,j)$ le nombre de chemins de $(0,0)$ à $(i,j)$. Établir une relation de récurrence sur $f$.
+
+c) Calculer $f(6,4)$ en remplissant la grille case par case.
+:::
+
+:::solution
+**a)** Avec uniquement D et H, chaque chemin utilise $6$ pas droite et $4$ pas haut. C'est un mot de $10$ lettres :
+
+$$C_{10}^4 = \frac{10!}{4! \times 6!} = 210$$
+
+**b)** Pour atteindre la case $(i,j)$ avec $i \geq 1$ et $j \geq 1$, le robot peut venir de :
+- $(i-1, j)$ par un pas D
+- $(i, j-1)$ par un pas H
+- $(i-1, j-1)$ par un pas DH
+
+Donc la relation de récurrence est :
+
+$$f(i,j) = f(i-1, j) + f(i, j-1) + f(i-1, j-1)$$
+
+avec les conditions initiales :
+- $f(0,0) = 1$ (le robot est déjà à l'arrivée)
+- $f(i,0) = 1$ pour tout $i$ (un seul chemin : tout droit)
+- $f(0,j) = 1$ pour tout $j$ (un seul chemin : tout haut)
+
+**c)** On remplit la grille ligne par ligne (les lignes sont indexées par $j$, les colonnes par $i$) :
+
+**$j = 0$** : $f(i,0) = 1$ pour $i = 0, 1, \ldots, 6$
+
+```typst
+#table(
+  columns: 8,
+  align: center,
+  stroke: 0.5pt,
+  [*$i$*], [0], [1], [2], [3], [4], [5], [6],
+  [*$j=0$*], [1], [1], [1], [1], [1], [1], [1],
+)
+```
+
+**$j = 1$** :
+- $f(1,1) = f(0,1) + f(1,0) + f(0,0) = 1 + 1 + 1 = 3$
+- $f(2,1) = f(1,1) + f(2,0) + f(1,0) = 3 + 1 + 1 = 5$
+- $f(3,1) = 5 + 1 + 1 = 7$, $f(4,1) = 9$, $f(5,1) = 11$, $f(6,1) = 13$
+
+```typst
+#table(
+  columns: 8,
+  align: center,
+  stroke: 0.5pt,
+  [*$j=1$*], [1], [3], [5], [7], [9], [11], [13],
+)
+```
+
+**$j = 2$** :
+- $f(1,2) = 1 + 3 + 1 = 5$
+- $f(2,2) = 5 + 5 + 3 = 13$
+- $f(3,2) = 13 + 7 + 5 = 25$
+- $f(4,2) = 25 + 9 + 7 = 41$
+- $f(5,2) = 41 + 11 + 9 = 61$
+- $f(6,2) = 61 + 13 + 11 = 85$
+
+```typst
+#table(
+  columns: 8,
+  align: center,
+  stroke: 0.5pt,
+  [*$j=2$*], [1], [5], [13], [25], [41], [61], [85],
+)
+```
+
+**$j = 3$** :
+- $f(1,3) = 1 + 5 + 1 = 7$
+- $f(2,3) = 7 + 13 + 5 = 25$
+- $f(3,3) = 25 + 25 + 13 = 63$
+- $f(4,3) = 63 + 41 + 25 = 129$
+- $f(5,3) = 129 + 61 + 41 = 231$
+- $f(6,3) = 231 + 85 + 61 = 377$
+
+```typst
+#table(
+  columns: 8,
+  align: center,
+  stroke: 0.5pt,
+  [*$j=3$*], [1], [7], [25], [63], [129], [231], [377],
+)
+```
+
+**$j = 4$** :
+- $f(1,4) = 1 + 7 + 1 = 9$
+- $f(2,4) = 9 + 25 + 7 = 41$
+- $f(3,4) = 41 + 63 + 25 = 129$
+- $f(4,4) = 129 + 129 + 63 = 321$
+- $f(5,4) = 321 + 231 + 129 = 681$
+- $f(6,4) = 681 + 377 + 231 = 1289$
+
+$$\boxed{f(6,4) = 1289}$$
+
+À comparer avec les $210$ chemins sans diagonale : les mouvements diagonaux multiplient les possibilités par plus de $6$.
+:::
+
+:::methode
+Quand les mouvements autorisés ne se réduisent pas à un simple mot binaire, on utilise une **récurrence sur la grille** : on exprime $f(i,j)$ en fonction des cases voisines accessibles, puis on remplit la grille case par case.
+:::

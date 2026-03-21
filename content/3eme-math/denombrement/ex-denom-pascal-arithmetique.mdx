@@ -1,0 +1,87 @@
+---
+type: exercise
+title: "Progression arithmétique dans le triangle de Pascal"
+difficulty: 3
+timeMinutes: 20
+category: probleme
+tags: [denombrement, pascal, progression-arithmetique, combinaisons]
+praxeologies: [Prax5b, Prax9]
+---
+
+:::enonce
+Existe-t-il un entier $n$ tel que **quatre coefficients binomiaux consécutifs** sur la ligne $n$ du triangle de Pascal soient en **progression arithmétique** ?
+
+Autrement dit, peut-on trouver $n$ et $p$ tels que $C_n^p$, $C_n^{p+1}$, $C_n^{p+2}$, $C_n^{p+3}$ forment une suite arithmétique ?
+:::
+
+:::solution
+Posons $a = C_n^p$, $b = C_n^{p+1}$, $c = C_n^{p+2}$, $d = C_n^{p+3}$.
+
+Pour que $(a, b, c, d)$ soit une progression arithmétique, il faut :
+
+$$b - a = c - b = d - c$$
+
+soit les deux conditions :
+
+$$2b = a + c \quad \text{et} \quad 2c = b + d$$
+
+**Utilisons les rapports de coefficients consécutifs.** On sait que :
+
+$$\frac{C_n^{k+1}}{C_n^k} = \frac{n - k}{k + 1}$$
+
+Posons $r_1 = \dfrac{b}{a} = \dfrac{n-p}{p+1}$, $r_2 = \dfrac{c}{b} = \dfrac{n-p-1}{p+2}$, $r_3 = \dfrac{d}{c} = \dfrac{n-p-2}{p+3}$.
+
+**Condition 1** : $2b = a + c$, soit $2 = \dfrac{a}{b} + \dfrac{c}{b} = \dfrac{1}{r_1} + r_2$.
+
+$$2 = \frac{p+1}{n-p} + \frac{n-p-1}{p+2}$$
+
+En mettant au même dénominateur $(n-p)(p+2)$ :
+
+$$(p+1)(p+2) + (n-p-1)(n-p) = 2(n-p)(p+2)$$
+
+Développons le membre de gauche :
+
+$$p^2 + 3p + 2 + n^2 - 2np - n + p^2 + p = 2p^2 + 4p + 2 + n^2 - 2np - n$$
+
+Et le membre de droite :
+
+$$2(np + 2n - p^2 - 2p) = 2np + 4n - 2p^2 - 4p$$
+
+L'égalité donne :
+
+$$2p^2 + 4p + 2 + n^2 - 2np - n = 2np + 4n - 2p^2 - 4p$$
+
+$$4p^2 + 8p + 2 + n^2 - 4np - 5n = 0 \quad \text{...(E1)}$$
+
+**Condition 2** : $2c = b + d$, ce qui donne une équation similaire avec $p$ remplacé par $p+1$ :
+
+$$4(p+1)^2 + 8(p+1) + 2 + n^2 - 4n(p+1) - 5n = 0$$
+
+$$4p^2 + 16p + 14 + n^2 - 4np - 4n - 5n = 0$$
+
+$$4p^2 + 16p + 14 + n^2 - 4np - 9n = 0 \quad \text{...(E2)}$$
+
+**(E2) $-$ (E1)** :
+
+$$8p + 12 - 4n = 0$$
+
+$$n = 2p + 3$$
+
+On substitue dans (E1) :
+
+$$4p^2 + 8p + 2 + (2p+3)^2 - 4(2p+3)p - 5(2p+3) = 0$$
+
+$$4p^2 + 8p + 2 + 4p^2 + 12p + 9 - 8p^2 - 12p - 10p - 15 = 0$$
+
+$$-2p - 4 = 0$$
+
+$$p = -2$$
+
+Comme $p$ doit être un entier naturel ($p \geq 0$), il **n'existe pas** de solution.
+
+**Conclusion** : il n'existe aucune ligne du triangle de Pascal contenant 4 coefficients consécutifs en progression arithmétique.
+:::
+
+:::remark
+Ce résultat montre que la croissance puis décroissance des coefficients binomiaux sur une ligne du triangle de Pascal est " trop rapide " pour permettre une progression arithmétique de longueur 4. En revanche, des progressions de longueur 3 existent (par exemple, $C_7^1 = 7$, $C_7^2 = 21$, $C_7^3 = 35$).
+:::

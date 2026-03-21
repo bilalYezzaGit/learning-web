@@ -1,0 +1,53 @@
+---
+type: exercise
+title: "Application du principe multiplicatif"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [denombrement, principe-multiplicatif, codes]
+praxeologies: [Prax2]
+---
+
+:::enonce
+Une banque attribue à chaque client un identifiant composé de :
+- un **Login** de 6 chiffres (de 0 à 9), avec la contrainte que le premier chiffre est **non nul**
+- suivi d'une **lettre** de l'alphabet (26 lettres), avec la contrainte que la lettre n'est **pas O** (pour éviter la confusion avec 0)
+
+1. Combien de clients au maximum la banque peut-elle gérer ?
+2. Un mot de passe est composé de 4 lettres (parmi 26) où la répétition est autorisée. Combien de mots de passe différents peut-on former ?
+3. Comparer le nombre d'identifiants et le nombre de mots de passe.
+:::
+
+:::solution
+**1.** On décompose l'identifiant en étapes :
+- **1er chiffre** : $\{1, 2, \ldots, 9\}$ soit **9 choix** (non nul)
+- **2e au 6e chiffre** : chacun a **10 choix** (de 0 à 9), soit $10^5$ possibilités
+- **Lettre** : $26 - 1 = 25$ choix (on retire la lettre O)
+
+Par le principe multiplicatif :
+
+$$9 \times 10^5 \times 25 = 9 \times 100\,000 \times 25 = 22\,500\,000$$
+
+La banque peut gérer au maximum **22 500 000 clients**.
+
+**2.** Le mot de passe est composé de 4 lettres avec répétition autorisée.
+
+Chaque position a 26 choix indépendants :
+
+$$26^4 = 456\,976$$
+
+Il y a **456 976 mots de passe** différents.
+
+**3.** Comparaison :
+- Nombre d'identifiants : $22\,500\,000$
+- Nombre de mots de passe : $456\,976$
+
+Le nombre d'identifiants est environ **49 fois** plus grand que le nombre de mots de passe ($\frac{22\,500\,000}{456\,976} \approx 49,2$). L'identifiant est donc beaucoup plus sécurisé.
+:::
+
+:::methode
+Pour utiliser le principe multiplicatif :
+1. Décomposer le choix en étapes successives indépendantes
+2. Compter le nombre de possibilités à chaque étape (attention aux contraintes)
+3. Multiplier tous les nombres de possibilités
+:::

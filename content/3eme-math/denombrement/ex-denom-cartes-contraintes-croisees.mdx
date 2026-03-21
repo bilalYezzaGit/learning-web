@@ -1,0 +1,48 @@
+---
+type: exercise
+title: "Mains avec contraintes croisées"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [denombrement, cartes, contraintes-croisees, cas-disjoints]
+praxeologies: [Prax5a, Prax8]
+---
+
+:::enonce
+Dans un jeu de $32$ cartes, on tire une main de $5$ cartes.
+
+Déterminer le nombre de mains contenant **exactement $1$ roi** et **exactement $3$ coeurs**.
+
+*Attention : le roi de coeur peut faire partie de la main.*
+:::
+
+:::solution
+Il y a $4$ rois (un par couleur) et $8$ coeurs. Le roi de coeur est à l'intersection des deux catégories.
+
+On décompose en **deux cas disjoints** selon que le roi choisi est le roi de coeur ou non.
+
+**Cas 1 : le roi n'est pas le roi de coeur.**
+
+- Choix du roi (non-coeur) : $3$ choix (roi de pique, carreau, trèfle).
+- On a besoin de $3$ coeurs parmi les $8$ coeurs (le roi de coeur n'est pas interdit ici, mais il est roi, et on veut exactement $1$ roi). Donc on choisit $3$ coeurs parmi les $7$ coeurs non-roi : $C_7^3 = 35$.
+- La $5$-ème carte n'est ni un roi, ni un coeur : $32 - 4 - 8 + 1 = 21$ cartes (ni roi, ni coeur, le $+1$ corrige le roi de coeur compté deux fois). Donc $C_{21}^1 = 21$.
+
+$$\text{Cas 1} = 3 \times 35 \times 21 = 2205$$
+
+**Cas 2 : le roi est le roi de coeur.**
+
+- Le roi de coeur est choisi : $1$ choix. Il compte aussi comme un coeur, donc on a déjà $1$ coeur.
+- On a besoin de $2$ coeurs supplémentaires parmi les $7$ coeurs non-roi : $C_7^2 = 21$.
+- Les $2$ cartes restantes ne doivent être ni roi, ni coeur : $21$ cartes disponibles, on en choisit $2$ : $C_{21}^2 = 210$.
+
+$$\text{Cas 2} = 1 \times 21 \times 210 = 4410$$
+
+**Résultat :**
+
+$$\text{Total} = 2205 + 4410 = 6615$$
+:::
+
+:::erreurs
+- Ne pas distinguer les deux cas : si on calcule directement $C_4^1 \times C_8^3 \times C_{20}^1$, on mélange les situations et on risque un double comptage (le roi de coeur est compté comme roi ET comme coeur).
+- Oublier de retirer le roi de coeur des coeurs disponibles dans le cas 1.
+:::

@@ -1,0 +1,40 @@
+---
+type: qcm
+title: "Identité de Vandermonde numérique"
+difficulty: 2
+timeMinutes: 2
+tags: [denombrement, vandermonde, identites-combinatoires]
+praxeologies: [Prax11]
+---
+
+:::question
+Combien vaut $(C_5^0)^2 + (C_5^1)^2 + (C_5^2)^2 + (C_5^3)^2 + (C_5^4)^2 + (C_5^5)^2$ ?
+:::
+
+:::option
+$2^5 = 32$
+:::
+
+:::option
+$(2^5)^2 = 1024$
+:::
+
+:::option
+$5! = 120$
+:::
+
+:::option{correct}
+$C_{10}^5 = 252$
+:::
+
+:::explanation
+D'après l'identité de Vandermonde (cas symétrique) :
+
+$$\sum_{k=0}^{n} (C_n^k)^2 = C_{2n}^n$$
+
+Pour $n = 5$ : $\sum_{k=0}^{5} (C_5^k)^2 = C_{10}^5 = 252$.
+
+Vérification : $1 + 25 + 100 + 100 + 25 + 1 = 252$.
+
+Le piège $2^5 = 32$ correspondrait à la somme des $C_5^k$ (sans les carrés), et $(2^5)^2 = 1024$ serait le carré de cette somme, pas la somme des carrés.
+:::

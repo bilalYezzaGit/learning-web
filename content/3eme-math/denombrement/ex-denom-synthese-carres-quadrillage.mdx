@@ -1,0 +1,68 @@
+---
+type: exercise
+title: "Carrés dans un quadrillage 3×3"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [denombrement, geometrie, carres, enumeration]
+praxeologies: [Prax5a, Prax8]
+---
+
+:::enonce
+On considère un carré ABCD de côté $3$, découpé en $9$ petits carrés unitaires. Les sommets du quadrillage forment une grille de $4 \times 4 = 16$ points.
+
+Déterminer le nombre de carrés que l'on peut former avec les sommets du quadrillage.
+:::
+
+:::solution
+On dénombre tous les carrés dont les $4$ sommets sont des points du quadrillage $4 \times 4$.
+
+**Carrés alignés avec la grille** (côtés horizontaux et verticaux) :
+
+- Carrés de côté $1$ : coin supérieur gauche en $(i, j)$ avec $0 \leq i \leq 2$ et $0 \leq j \leq 2$ → $3 \times 3 = 9$ carrés.
+- Carrés de côté $2$ : coin en $(i, j)$ avec $0 \leq i \leq 1$ et $0 \leq j \leq 1$ → $2 \times 2 = 4$ carrés.
+- Carrés de côté $3$ : coin en $(0, 0)$ → $1 \times 1 = 1$ carré.
+
+Sous-total alignés : $9 + 4 + 1 = 14$.
+
+**Carrés inclinés** (côtés en diagonale) :
+
+Un carré incliné est défini par un vecteur $(a, b)$ avec $a > 0$ et $b > 0$. Le côté du carré a pour longueur $\sqrt{a^2 + b^2}$.
+
+- **Vecteur $(1, 1)$** : côté $\sqrt{2}$. Le carré a pour sommets $P$, $P + (1,1)$, $P + (1,1) + (-1,1)$, $P + (-1,1)$, c'est-à-dire $P + (0, 2)$. Il faut que les $4$ sommets restent dans la grille. Les positions possibles du coin : $2 \times 2 = 4$ carrés.
+
+- **Vecteur $(1, 2)$** : côté $\sqrt{5}$. Il faut vérifier que les $4$ sommets restent dans $[0, 3] \times [0, 3]$. Les positions possibles : $2$ carrés.
+
+- **Vecteur $(2, 1)$** : côté $\sqrt{5}$. Par symétrie : $2$ carrés.
+
+Sous-total inclinés : $4 + 2 + 2 = 8$.
+
+$$\textbf{Total} = 14 + 8 = 20$$
+
+**Récapitulatif** :
+
+```typst
+#table(
+  columns: 2,
+  align: center,
+  stroke: 0.5pt,
+  [*Type*], [*Nombre*],
+  [Côté $1$ (aligné)], [$9$],
+  [Côté $2$ (aligné)], [$4$],
+  [Côté $3$ (aligné)], [$1$],
+  [Côté $sqrt(2)$ (incliné $45°$)], [$4$],
+  [Côté $sqrt(5)$ (incliné)], [$2 + 2 = 4$],
+  [*Total*], [*$22$*],
+)
+```
+
+Revérifions les carrés inclinés $\sqrt{5}$.
+
+Pour le vecteur $(1, 2)$ : sommets $(x, y)$, $(x+1, y+2)$, $(x+1-2, y+2+1) = (x-1, y+3)$, $(x-2, y+1)$. On a besoin de $x \geq 2$, $x+1 \leq 3$, $y \geq 0$, $y+3 \leq 3$ → $x \in \{2\}$, $y = 0$ → $1$ carré.
+
+Pour le vecteur $(2, 1)$ : sommets $(x, y)$, $(x+2, y+1)$, $(x+2-1, y+1+2) = (x+1, y+3)$, $(x-1, y+2)$. On a besoin de $x \geq 1$, $x+2 \leq 3$, $y \geq 0$, $y+3 \leq 3$ → $x = 1$, $y = 0$ → $1$ carré.
+
+Sous-total inclinés $\sqrt{5}$ : $1 + 1 = 2$.
+
+$$\textbf{Total corrigé} = 14 + 4 + 2 = 20$$
+:::

@@ -1,0 +1,35 @@
+---
+type: exercise
+title: "Sondage — réponses multiples"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [denombrement, sondage, principe-multiplicatif, arrangements]
+praxeologies: [Prax2, Prax3]
+---
+
+:::enonce
+Un journal publie un sondage de $10$ questions. Pour chaque question, $5$ affirmations sont proposées. Le lecteur peut :
+- Ne rien cocher,
+- Cocher une seule affirmation,
+- Cocher deux affirmations en indiquant sa préférence (celle qu'il préfère en premier).
+
+1. Combien de manières de répondre à **une** question ?
+2. Combien de manières de répondre à l'**ensemble** du sondage ($10$ questions) ?
+:::
+
+:::solution
+**1.** Pour une question, on distingue trois cas :
+
+- **Ne rien cocher** : $1$ manière.
+- **Cocher une seule affirmation** parmi $5$ : $5$ manières.
+- **Cocher deux affirmations avec préférence** (l'ordre compte) : c'est un arrangement de $2$ parmi $5$ : $A_5^2 = 5 \times 4 = 20$ manières.
+
+$$\text{Total par question} = 1 + 5 + 20 = 26$$
+
+**2.** Les réponses aux $10$ questions sont indépendantes. Par le principe multiplicatif :
+
+$$26^{10}$$
+
+Ce nombre vaut environ $1,41 \times 10^{14}$.
+:::

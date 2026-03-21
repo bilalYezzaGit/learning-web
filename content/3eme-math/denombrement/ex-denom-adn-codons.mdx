@@ -1,0 +1,54 @@
+---
+type: exercise
+title: "ADN — codons et protéines"
+difficulty: 2
+timeMinutes: 15
+category: synthese
+tags: [denombrement, applications, adn, biologie]
+praxeologies: [Prax2]
+---
+
+:::enonce
+L'ADN est constitué de 4 bases azotées : **A** (adénine), **T** (thymine), **C** (cytosine) et **G** (guanine). Un **codon** est un triplet ordonné de 3 bases (par exemple : ATG, CCA, GGG).
+
+a) Combien y a-t-il de codons possibles ?
+
+b) Combien de codons utilisent **3 bases distinctes** parmi les 4 ? Et combien utilisent **les 4 bases distinctes** ?
+
+c) Combien de codons sont des **palindromes** (la 1ère base est identique à la 3ème) ?
+
+d) Un gène est une séquence de 300 codons. Combien de gènes différents peut-on former ?
+
+e) En réalité, le code génétique ne produit que 20 acides aminés (+ 3 codons " stop "). Pourquoi y a-t-il une telle redondance ?
+:::
+
+:::solution
+**a)** Chaque position du codon peut être occupée par l'une des 4 bases. Les positions sont ordonnées et les bases peuvent se répéter. C'est un tirage **successif avec remise** :
+
+$$\text{Nombre de codons} = 4^3 = 64$$
+
+**b)** Codons avec **3 bases distinctes** parmi 4 :
+- On choisit les 3 bases à utiliser parmi 4 : $C_4^3 = 4$ choix
+- On ordonne ces 3 bases dans les 3 positions : $3! = 6$ arrangements
+
+$$\text{Total} = C_4^3 \times 3! = 4 \times 6 = 24$$
+
+Autre méthode directe : $A_4^3 = 4 \times 3 \times 2 = 24$.
+
+Codons avec **4 bases distinctes** : c'est **impossible**. Un codon n'a que 3 positions, on ne peut pas y placer 4 bases distinctes. Le nombre est $0$.
+
+**c)** Un codon palindrome vérifie : la 1ère base = la 3ème base.
+- 1ère base : 4 choix
+- 2ème base : 4 choix (indépendant)
+- 3ème base : imposée (= 1ère base), donc 1 choix
+
+$$\text{Codons palindromes} = 4 \times 4 \times 1 = 16$$
+
+**d)** Un gène est une séquence ordonnée de 300 codons (avec répétition possible de codons identiques). Chaque position peut contenir l'un des 64 codons :
+
+$$\text{Nombre de gènes} = 64^{300} = (4^3)^{300} = 4^{900}$$
+
+C'est un nombre astronomique : $4^{900} \approx 10^{541}$, bien supérieur au nombre d'atomes dans l'univers observable ($\approx 10^{80}$).
+
+**e)** Avec 64 codons et seulement 20 acides aminés + 3 signaux stop = 23 " fonctions ", il y a en moyenne $64/23 \approx 2,8$ codons par fonction. Cette **redondance** (ou **dégénérescence**) du code génétique offre une protection : une mutation d'une base dans un codon ne change pas toujours l'acide aminé produit. C'est un mécanisme de **tolérance aux erreurs** que la nature a " sélectionné " au cours de l'évolution.
+:::

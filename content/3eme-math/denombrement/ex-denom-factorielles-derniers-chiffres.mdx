@@ -1,0 +1,74 @@
+---
+type: exercise
+title: "Derniers chiffres de sommes de factorielles"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [denombrement, factorielles, divisibilite, astuce]
+praxeologies: [Prax4a, Prax8]
+---
+
+:::enonce
+1. Calculer $n!$ pour $n = 2, 3, 4, 5$.
+2. À partir de quel entier $n$ a-t-on $n! > n^2$ ?
+3. À partir de quel entier $n$ le nombre $n!$ est-il :
+   - a) multiple de $10$ ?
+   - b) multiple de $100$ ?
+   - c) multiple de $1000$ ?
+4. Déterminer les trois derniers chiffres du nombre $N = 1! + 2! + 3! + \cdots + 2006!$.
+:::
+
+:::solution
+**1.** Calcul direct :
+- $2! = 2$
+- $3! = 6$
+- $4! = 24$
+- $5! = 120$
+
+**2.** Comparons $n!$ et $n^2$ :
+
+```typst
+#table(
+  columns: 4,
+  align: center,
+  stroke: 0.5pt,
+  [*$n$*], [*$n!$*], [*$n^2$*], [*$n! > n^2$ ?*],
+  [$2$], [$2$], [$4$], [Non],
+  [$3$], [$6$], [$9$], [Non],
+  [$4$], [$24$], [$16$], [*Oui*],
+)
+```
+
+À partir de $n = 4$, on a $n! > n^2$.
+
+**3.** Un nombre est multiple de $10 = 2 \times 5$ s'il contient les facteurs $2$ et $5$.
+
+**a)** $n!$ est multiple de $10$ dès que $n \geq 5$ (car $5! = 120$ contient les facteurs $2$ et $5$).
+
+**b)** $n!$ est multiple de $100 = 4 \times 25$ dès que $n \geq 10$ (car $10!$ contient au moins deux facteurs $5$ : ceux de $5$ et $10$).
+
+**c)** $n!$ est multiple de $1000 = 8 \times 125$ dès que $n \geq 15$ (car $15!$ contient au moins trois facteurs $5$ : ceux de $5$, $10$ et $15$).
+
+**4.** Puisque pour $n \geq 15$, $n!$ est multiple de $1000$, les trois derniers chiffres de $n!$ sont $000$.
+
+Donc les trois derniers chiffres de $N$ ne dépendent que des termes $1! + 2! + \cdots + 14!$.
+
+Calculons cette somme modulo $1000$ :
+
+$$1 + 2 + 6 + 24 + 120 + 720 + 5040 + 40320 + 362880 + 3628800$$
+
+Pas à pas modulo $1000$ :
+- $1! + 2! + 3! + 4! = 1 + 2 + 6 + 24 = 33$
+- $+ 5! = 33 + 120 = 153$
+- $+ 6! = 153 + 720 = 873$
+- $+ 7! = 873 + 040 = 913$ (car $5040 \equiv 040 \pmod{1000}$)
+- $+ 8! = 913 + 320 = 233$ (car $40320 \equiv 320 \pmod{1000}$, et $913 + 320 = 1233 \equiv 233$)
+- $+ 9! = 233 + 880 = 113$ (car $362880 \equiv 880 \pmod{1000}$, et $233 + 880 = 1113 \equiv 113$)
+- $+ 10! = 113 + 800 = 913$ (car $3628800 \equiv 800 \pmod{1000}$)
+- $+ 11! = 913 + 800 = 713$ (car $39916800 \equiv 800 \pmod{1000}$)
+- $+ 12! = 713 + 600 = 313$ (car $479001600 \equiv 600 \pmod{1000}$)
+- $+ 13! = 313 + 800 = 113$ (car $6227020800 \equiv 800 \pmod{1000}$)
+- $+ 14! = 113 + 200 = 313$ (car $87178291200 \equiv 200 \pmod{1000}$)
+
+Les trois derniers chiffres de $N$ sont $\boxed{313}$.
+:::

@@ -1,0 +1,75 @@
+---
+type: exercise
+title: "Mains de poker — 5 cartes parmi 52"
+difficulty: 2
+timeMinutes: 18
+category: synthese
+tags: [denombrement, applications, poker, combinaisons]
+praxeologies: [Prax5a, Prax8]
+---
+
+:::enonce
+Un jeu standard contient **52 cartes** : 4 couleurs (pique, coeur, carreau, trèfle) et 13 valeurs (2, 3, ..., 10, Valet, Dame, Roi, As). Une main de poker est un tirage simultané de **5 cartes**.
+
+a) Calculer le nombre total de mains possibles $C_{52}^5$.
+
+b) Calculer le nombre de **carrés** (4 cartes de même valeur + 1 carte quelconque).
+
+c) Calculer le nombre de **fulls** (3 cartes d'une valeur + 2 cartes d'une autre valeur).
+
+d) Calculer le nombre de **couleurs** (5 cartes de la même couleur, sans contrainte de suite).
+
+e) Classer ces combinaisons de la plus rare à la plus fréquente.
+:::
+
+:::solution
+**a)** On choisit 5 cartes parmi 52 sans ordre :
+
+$$C_{52}^5 = \frac{52!}{5! \times 47!} = \frac{52 \times 51 \times 50 \times 49 \times 48}{120} = 2\,598\,960$$
+
+**b) Carrés** : 4 cartes de même valeur + 1 carte restante.
+
+- Choix de la valeur du carré : 13 possibilités
+- Les 4 cartes de cette valeur sont imposées (les 4 couleurs)
+- Choix de la 5ème carte parmi les 48 restantes : 48 possibilités
+
+$$\text{Carrés} = 13 \times 48 = 624$$
+
+**c) Fulls** : un brelan (3 cartes d'une valeur) + une paire (2 cartes d'une autre valeur).
+
+- Choix de la valeur du brelan : 13 possibilités
+- Choix des 3 couleurs pour le brelan parmi 4 : $C_4^3 = 4$
+- Choix de la valeur de la paire parmi les 12 valeurs restantes : 12 possibilités
+- Choix des 2 couleurs pour la paire parmi 4 : $C_4^2 = 6$
+
+$$\text{Fulls} = 13 \times C_4^3 \times 12 \times C_4^2 = 13 \times 4 \times 12 \times 6 = 3\,744$$
+
+**d) Couleurs** : 5 cartes de la même couleur.
+
+- Choix de la couleur : 4 possibilités
+- Choix des 5 cartes parmi les 13 de cette couleur : $C_{13}^5 = 1287$
+
+$$\text{Couleurs} = 4 \times C_{13}^5 = 4 \times 1287 = 5\,148$$
+
+*Remarque : ce nombre inclut les quintes flush (suites de même couleur). Si on les exclut (il y en a $4 \times 10 = 40$), on obtient $5\,148 - 40 = 5\,108$ couleurs " simples ".*
+
+**e) Classement** (du plus rare au plus fréquent) :
+
+```typst
+#table(
+  columns: 3,
+  align: center,
+  stroke: 0.5pt,
+  [*Combinaison*], [*Nombre*], [*Probabilité*],
+  [Carré], [624], [0,024 %],
+  [Full], [3 744], [0,144 %],
+  [Couleur], [5 148], [0,198 %],
+)
+```
+
+Le carré est environ **6 fois plus rare** que le full, et **8 fois plus rare** que la couleur. C'est pour cette raison que le carré bat le full, qui bat la couleur au poker.
+:::
+
+:::remark
+Les règles du poker classent les mains exactement par rareté : plus une main est rare, plus elle est forte. Le dénombrement fournit une justification mathématique rigoureuse de cette hiérarchie.
+:::

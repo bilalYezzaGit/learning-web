@@ -1,0 +1,49 @@
+---
+type: exercise
+title: "Somme alternée et termes pairs/impairs"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [denombrement, binome-newton, identites-combinatoires, somme-alternee]
+praxeologies: [Prax7b]
+---
+
+:::enonce
+1. Montrer que $\displaystyle\sum_{k=0}^{n} (-1)^k \, C_n^k = 0$ pour tout $n \geq 1$.
+
+2. Pour $n$ pair, en déduire que la somme des $C_n^k$ pour $k$ pair vaut $2^{n-1}$, et de même pour $k$ impair.
+
+3. **Application** : soit $E$ un ensemble à $n$ éléments. Montrer que le nombre de sous-ensembles de $E$ de cardinal pair est égal à $2^{n-1}$.
+:::
+
+:::solution
+**1.** On applique la formule du binôme de Newton avec $a = 1$ et $b = -1$ :
+
+$$(1 + (-1))^n = \sum_{k=0}^{n} C_n^k \cdot 1^{n-k} \cdot (-1)^k = \sum_{k=0}^{n} (-1)^k \, C_n^k$$
+
+Or $(1 - 1)^n = 0^n = 0$ pour $n \geq 1$.
+
+Donc $\displaystyle\sum_{k=0}^{n} (-1)^k \, C_n^k = 0$.
+
+**2.** On note $S_+ = \displaystyle\sum_{\substack{k=0 \\ k \text{ pair}}}^{n} C_n^k$ et $S_- = \displaystyle\sum_{\substack{k=1 \\ k \text{ impair}}}^{n} C_n^k$.
+
+On dispose de deux identités :
+- $S_+ + S_- = \displaystyle\sum_{k=0}^{n} C_n^k = 2^n$ (somme totale)
+- $S_+ - S_- = \displaystyle\sum_{k=0}^{n} (-1)^k C_n^k = 0$ (somme alternée, car $(-1)^k = 1$ si $k$ pair, $-1$ si $k$ impair)
+
+En ajoutant : $2S_+ = 2^n$, donc $S_+ = 2^{n-1}$.
+
+En soustrayant : $2S_- = 2^n$, donc $S_- = 2^{n-1}$.
+
+**3.** Le nombre de sous-ensembles de $E$ de cardinal $k$ est $C_n^k$.
+
+Le nombre de sous-ensembles de cardinal **pair** est :
+
+$$S_+ = C_n^0 + C_n^2 + C_n^4 + \cdots = \sum_{\substack{k \text{ pair}}} C_n^k = 2^{n-1}$$
+
+Ainsi, parmi les $2^n$ parties de $E$, exactement la moitié ($2^{n-1}$) ont un cardinal pair, et l'autre moitié un cardinal impair.
+:::
+
+:::remark
+Ce résultat est valable pour tout $n \geq 1$, pas seulement pour $n$ pair. La question 2 se démontre de la même façon quel que soit $n$.
+:::

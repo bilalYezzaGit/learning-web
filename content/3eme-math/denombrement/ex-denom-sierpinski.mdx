@@ -1,0 +1,80 @@
+---
+type: exercise
+title: "Triangle de Pascal et triangle de Sierpinski"
+difficulty: 3
+timeMinutes: 18
+category: probleme
+tags: [denombrement, pascal, sierpinski, parite, fractales]
+praxeologies: [Prax5b, Prax7b]
+---
+
+:::enonce
+Dans le triangle de Pascal, on colorie chaque nombre :
+- en **noir** s'il est **pair**
+- en **blanc** s'il est **impair**
+
+a) Écrire les 8 premières lignes du triangle de Pascal (lignes $n = 0$ à $n = 7$) et colorier selon la parité.
+
+b) Calculer $C_8^k$ pour $k = 0, 1, \ldots, 8$. Combien de ces coefficients sont impairs ?
+
+c) Montrer que $C_8^3 = 56$ est pair. Plus généralement, montrer que $C_{2^m}^k$ est pair pour tout $1 \leq k \leq 2^m - 1$.
+
+d) Quel motif géométrique reconnaît-on dans le coloriage ? Quel est le lien avec les fractales ?
+:::
+
+:::solution
+**a)** Les 8 premières lignes (I = impair, P = pair) :
+
+$n = 0$ : **1** $\to$ I
+
+$n = 1$ : **1  1** $\to$ I I
+
+$n = 2$ : **1  2  1** $\to$ I P I
+
+$n = 3$ : **1  3  3  1** $\to$ I I I I
+
+$n = 4$ : **1  4  6  4  1** $\to$ I P P P I
+
+$n = 5$ : **1  5  10  10  5  1** $\to$ I I P P I I
+
+$n = 6$ : **1  6  15  20  15  6  1** $\to$ I P I P I P I
+
+$n = 7$ : **1  7  21  35  35  21  7  1** $\to$ I I I I I I I I
+
+On observe un motif en " triangle plein / triangle vide " qui se reproduit à différentes échelles.
+
+**b)** Ligne $n = 8$ :
+
+$$C_8^0 = 1, \; C_8^1 = 8, \; C_8^2 = 28, \; C_8^3 = 56, \; C_8^4 = 70$$
+
+$$C_8^5 = 56, \; C_8^6 = 28, \; C_8^7 = 8, \; C_8^8 = 1$$
+
+Parités : I, P, P, P, P, P, P, P, I.
+
+Seuls **2 coefficients** sont impairs : $C_8^0 = 1$ et $C_8^8 = 1$.
+
+**c)** Montrons que $C_{2^m}^k$ est pair pour $1 \leq k \leq 2^m - 1$.
+
+On utilise la formule :
+
+$$C_{2^m}^k = \frac{2^m}{k} \times C_{2^m - 1}^{k-1}$$
+
+Le numérateur contient le facteur $2^m$. Pour que $C_{2^m}^k$ soit impair, il faudrait que $k$ absorbe toutes les puissances de 2 du numérateur. Or pour $1 \leq k \leq 2^m - 1$, on peut montrer que la puissance de 2 dans $2^m \times (2^m - 1)!$ dépasse strictement celle dans $k! \times (2^m - k)!$, ce qui rend le quotient pair.
+
+**Preuve par le binôme** : $(1 + 1)^{2^m} = \sum_{k=0}^{2^m} C_{2^m}^k = 2^{2^m}$. Et $(1 + 1)^{2^m} \equiv (1 + 1)^{2^m} \pmod{2}$. En travaillant modulo 2, $(1 + x)^2 \equiv 1 + x^2 \pmod{2}$. Par récurrence, $(1 + x)^{2^m} \equiv 1 + x^{2^m} \pmod{2}$.
+
+Donc les seuls coefficients non nuls modulo 2 sont ceux de $x^0$ et $x^{2^m}$, c'est-à-dire $C_{2^m}^0$ et $C_{2^m}^{2^m}$. Tous les autres sont pairs.
+
+**d)** Le motif observé est le **triangle de Sierpinski**. C'est une **fractale** : un motif géométrique qui se reproduit à l'identique à toutes les échelles.
+
+Dans le triangle de Pascal colorié par parité :
+- Les lignes $n = 0$ à $n = 2^m - 1$ forment un triangle plein (beaucoup d'impairs)
+- La ligne $n = 2^m$ est presque vide (seuls les bords sont impairs)
+- Le motif se reproduit : trois copies du triangle de taille $2^{m-1}$ forment le triangle de taille $2^m$
+
+C'est l'une des connexions les plus surprenantes entre l'arithmétique (parité des coefficients binomiaux), la combinatoire (triangle de Pascal) et la géométrie fractale (Sierpinski).
+:::
+
+:::remark
+Le théorème de Lucas (1878) donne un critère complet : $C_n^k$ est impair si et seulement si chaque chiffre de $k$ en écriture binaire est inférieur ou égal au chiffre correspondant de $n$. C'est ce critère qui explique le motif fractal.
+:::

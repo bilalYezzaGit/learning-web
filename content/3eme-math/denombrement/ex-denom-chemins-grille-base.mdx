@@ -1,0 +1,59 @@
+---
+type: exercise
+title: "Chemins de A à Z — réseau rectangulaire"
+difficulty: 2
+timeMinutes: 18
+category: approfondissement
+tags: [denombrement, chemins, combinaisons, reseau]
+praxeologies: [Prax10]
+---
+
+:::enonce
+On considère un réseau rectangulaire. Un chemin va du coin inférieur gauche $A$ au coin supérieur droit $Z$ en se déplaçant uniquement **vers la droite** ($d$) ou **vers le haut** ($h$).
+
+Le réseau a **10 colonnes** et **5 lignes** (il faut donc 10 pas vers la droite et 5 pas vers le haut).
+
+1. Montrer que le nombre de chemins de $A$ à $Z$ est $C_{15}^5 = 3003$.
+
+2. Soit $E$ un point du réseau situé à 6 pas droite et 3 pas haut de $A$. Calculer le nombre de chemins de $A$ à $Z$ passant par $E$.
+
+3. Soit $M$ un point situé à 8 pas droite et 4 pas haut de $A$. Calculer le nombre de chemins passant par $E$ **puis** par $M$.
+
+4. Expliquer pourquoi, de façon générale, le nombre de chemins du coin $(0,0)$ au coin $(m,n)$ est $C_{m+n}^{m}$.
+:::
+
+:::solution
+**1.** Chaque chemin de $A$ à $Z$ est un mot de $15$ lettres composé de $10$ lettres " $d$ " et $5$ lettres " $h$ ". Il suffit de choisir les $5$ positions des lettres " $h$ " parmi les $15$ positions disponibles.
+
+Le nombre de chemins est donc :
+
+$$C_{15}^5 = \frac{15!}{5! \times 10!} = 3003$$
+
+**2.** Un chemin de $A$ à $Z$ passant par $E$ se décompose en :
+- Un chemin de $A$ à $E$ : $6$ pas droite + $3$ pas haut $\Rightarrow C_9^3 = 84$
+- Un chemin de $E$ à $Z$ : $4$ pas droite + $2$ pas haut $\Rightarrow C_6^2 = 15$
+
+Par le principe multiplicatif :
+
+$$\text{Nombre de chemins passant par } E = C_9^3 \times C_6^2 = 84 \times 15 = 1260$$
+
+**3.** Un chemin passant par $E$ puis par $M$ se décompose en trois tronçons :
+- $A \to E$ : $6d + 3h$ $\Rightarrow C_9^3 = 84$
+- $E \to M$ : $(8-6)d + (4-3)h = 2d + 1h$ $\Rightarrow C_3^1 = 3$
+- $M \to Z$ : $(10-8)d + (5-4)h = 2d + 1h$ $\Rightarrow C_3^1 = 3$
+
+Total : $84 \times 3 \times 3 = 756$.
+
+**4.** Un chemin de $(0,0)$ à $(m,n)$ utilise exactement $m$ pas droite et $n$ pas haut, soit un mot de $m + n$ lettres. Il y a une **bijection** entre les chemins et les mots binaires de longueur $m + n$ contenant exactement $m$ lettres " $d$ ".
+
+Le nombre de tels mots est le nombre de façons de placer les $m$ lettres " $d$ " parmi $m + n$ positions, c'est-à-dire $C_{m+n}^{m}$.
+
+On a aussi $C_{m+n}^{m} = C_{m+n}^{n}$ par symétrie, ce qui est cohérent : on peut aussi choisir les positions des " $h$ ".
+:::
+
+:::methode
+Pour tout problème de chemins sur réseau (déplacements droite/haut uniquement) :
+1. Identifier le nombre de pas droite ($m$) et haut ($n$)
+2. Le nombre total de chemins est $C_{m+n}^m$
+3. Si passage obligé par un point $P$, décomposer en tronçons et multiplier
+:::

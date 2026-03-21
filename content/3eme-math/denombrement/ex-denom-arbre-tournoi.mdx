@@ -1,0 +1,80 @@
+---
+type: exercise
+title: "Tournoi — arbre d'élimination"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [denombrement, applications, arbre, tournoi]
+praxeologies: [Prax2, Prax4a]
+---
+
+:::enonce
+Deux équipes $A$ et $B$ s'affrontent dans un tournoi. L'équipe qui gagne **2 matchs consécutifs** ou **3 matchs au total** (la première condition atteinte) remporte le tournoi.
+
+a) Dessiner l'arbre des résultats possibles du tournoi.
+
+b) Quel est le nombre **maximum** de matchs dans ce tournoi ?
+
+c) Quel est le nombre **minimum** de matchs ?
+
+d) Dénombrer toutes les suites de résultats possibles du tournoi.
+
+e) Si chaque match est à 50/50, calculer la probabilité que $A$ gagne le tournoi.
+:::
+
+:::solution
+**a)** On construit l'arbre en notant le vainqueur de chaque match. Le tournoi s'arrête dès que l'une des conditions est remplie (2 victoires consécutives ou 3 victoires totales).
+
+**Branche A** (A gagne le 1er match) :
+- **AA** $\to$ 2 consécutifs pour A. **A gagne.** (2 matchs)
+- AB $\to$ continue.
+  - **ABB** $\to$ 2 consécutifs pour B. **B gagne.** (3 matchs)
+  - ABA $\to$ continue. (A: 2, B: 1, pas de 2 consécutifs)
+    - **ABAA** $\to$ 2 consécutifs pour A. **A gagne.** (4 matchs)
+    - ABAB $\to$ continue. (A: 2, B: 2, pas de 2 consécutifs, pas de 3 total)
+      - **ABABA** $\to$ A a 3 victoires. **A gagne.** (5 matchs)
+      - **ABABB** $\to$ 2 consécutifs pour B. **B gagne.** (5 matchs)
+
+**Branche B** (B gagne le 1er match) — par symétrie :
+- **BB** $\to$ **B gagne.** (2 matchs)
+- BA $\to$ continue.
+  - **BAA** $\to$ **A gagne.** (3 matchs)
+  - BAB $\to$ continue. (B: 2, A: 1)
+    - **BABB** $\to$ **B gagne.** (4 matchs)
+    - BABA $\to$ continue. (B: 2, A: 2)
+      - **BABAA** $\to$ **A gagne.** (5 matchs)
+      - **BABAB** $\to$ B a 3 victoires. **B gagne.** (5 matchs)
+
+**b)** Le nombre maximum de matchs est **5**, atteint par les séquences ABABA, ABABB, BABAA, BABAB.
+
+**c)** Le nombre minimum est **2**, atteint par les séquences AA et BB.
+
+**d)** L'arbre donne **10 suites** au total :
+
+```typst
+#table(
+  columns: 3,
+  align: center,
+  stroke: 0.5pt,
+  [*Longueur*], [*A gagne*], [*B gagne*],
+  [2], [AA], [BB],
+  [3], [BAA], [ABB],
+  [4], [ABAA], [BABB],
+  [5], [ABABA, BABAA], [ABABB, BABAB],
+)
+```
+
+Total : **5 victoires de A** et **5 victoires de B**, soit **10 suites**.
+
+**e)** Chaque suite de longueur $\ell$ a une probabilité $(1/2)^\ell$ :
+
+$$P(A) = \frac{1}{4} + \frac{1}{8} + \frac{1}{16} + \frac{1}{32} + \frac{1}{32}$$
+
+$$= \frac{8 + 4 + 2 + 1 + 1}{32} = \frac{16}{32} = \frac{1}{2}$$
+
+Par symétrie, $P(B) = \dfrac{1}{2}$.
+
+$$\boxed{P(A \text{ gagne}) = \frac{1}{2}}$$
+
+Ce résultat est naturel : les règles du tournoi sont symétriques (elles ne favorisent ni A ni B), donc si chaque match est équilibré, le tournoi l'est aussi.
+:::

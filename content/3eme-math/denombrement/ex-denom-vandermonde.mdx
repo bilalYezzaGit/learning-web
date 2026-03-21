@@ -1,0 +1,76 @@
+---
+type: exercise
+title: "Identité de Vandermonde"
+difficulty: 3
+timeMinutes: 18
+category: probleme
+tags: [denombrement, vandermonde, double-comptage, identites-combinatoires]
+praxeologies: [Prax11]
+---
+
+:::enonce
+Une urne contient $n$ boules noires numérotées de $1$ à $n$ et $n$ boules blanches numérotées de $1$ à $n$. On tire simultanément $n$ boules.
+
+a) Déterminer le nombre total de tirages possibles.
+
+b) Soit $p$ un entier tel que $0 \leq p \leq n$. Calculer le nombre de tirages contenant exactement $p$ boules noires.
+
+c) En déduire que $\displaystyle\sum_{k=0}^{n} (C_n^k)^2 = C_{2n}^n$.
+
+d) Vérifier numériquement cette identité pour $n = 10$.
+
+e) **Généralisation** (identité de Vandermonde complète) : soit $m, n, p$ des entiers naturels avec $p \leq m + n$. En considérant une urne de $m$ boules noires et $n$ boules blanches, montrer que :
+
+$$\sum_{k=0}^{p} C_m^k \times C_n^{p-k} = C_{m+n}^{p}$$
+:::
+
+:::solution
+**a)** On tire $n$ boules parmi $2n$ boules au total, sans tenir compte de l'ordre :
+
+$$\text{Nombre total} = C_{2n}^n$$
+
+**b)** Pour obtenir exactement $p$ boules noires parmi les $n$ tirées :
+- On choisit $p$ boules noires parmi $n$ : $C_n^p$ possibilités
+- On choisit $n - p$ boules blanches parmi $n$ : $C_n^{n-p}$ possibilités
+
+Par le principe multiplicatif :
+
+$$\text{Nombre de tirages avec } p \text{ noires} = C_n^p \times C_n^{n-p}$$
+
+Or $C_n^{n-p} = C_n^p$ (symétrie), donc ce nombre est $(C_n^p)^2$.
+
+**c)** Les événements " exactement $k$ boules noires " pour $k = 0, 1, \ldots, n$ forment une partition de l'ensemble des tirages. On somme :
+
+$$\sum_{k=0}^{n} (C_n^k)^2 = C_{2n}^n$$
+
+**d)** Pour $n = 10$ :
+
+$C_{20}^{10} = \dfrac{20!}{10! \times 10!} = 184\,756$
+
+Vérifions : $(C_{10}^0)^2 + (C_{10}^1)^2 + \cdots + (C_{10}^{10})^2$
+
+$= 1 + 100 + 2025 + 14400 + 44100 + 63504 + 44100 + 14400 + 2025 + 100 + 1$
+
+$= 184\,756$
+
+L'identité est vérifiée.
+
+**e)** On considère une urne de $m$ boules noires et $n$ boules blanches. On tire $p$ boules.
+
+- **Comptage global** : $C_{m+n}^p$ tirages possibles.
+
+- **Comptage par décomposition** : si on tire exactement $k$ noires, on tire $p - k$ blanches.
+  - Choix des noires : $C_m^k$ (avec $0 \leq k \leq \min(p, m)$)
+  - Choix des blanches : $C_n^{p-k}$ (avec $p - k \leq n$)
+  - Nombre pour $k$ noires fixé : $C_m^k \times C_n^{p-k}$
+
+En sommant sur $k$ :
+
+$$\sum_{k=0}^{p} C_m^k \times C_n^{p-k} = C_{m+n}^p$$
+
+C'est l'**identité de Vandermonde** (ou convolution de Vandermonde). Le cas $m = n$ et $p = n$ redonne l'identité de la question c).
+:::
+
+:::remark
+L'identité de Vandermonde est l'une des identités les plus importantes de la combinatoire. Elle se retrouve partout : en probabilités, en algèbre, et même en informatique théorique.
+:::

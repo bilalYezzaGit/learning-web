@@ -1,0 +1,41 @@
+---
+type: exercise
+title: "Coloriage d'une grille"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [denombrement, coloriage, complementaire, principe-multiplicatif]
+praxeologies: [Prax2, Prax6]
+---
+
+:::enonce
+On dispose de $3$ couleurs : noir, gris et blanc, pour colorier une grille de $5$ cases alignées.
+
+1. Combien de coloriages possibles ?
+2. Combien de coloriages utilisent **une seule** couleur ?
+3. Combien de coloriages **n'utilisent pas** le blanc ?
+4. Combien de coloriages utilisent le blanc **au moins une fois** ?
+5. Combien de coloriages ont les deux **cases extrêmes** (première et dernière) de la **même couleur** ?
+:::
+
+:::solution
+**1.** Chaque case a $3$ choix de couleur, indépendamment des autres. Par le principe multiplicatif :
+
+$$3^5 = 243$$
+
+**2.** Si on utilise une seule couleur, les $5$ cases sont de la même couleur. Il y a $3$ couleurs possibles :
+
+$$3$$
+
+**3.** Sans le blanc, chaque case a $2$ choix (noir ou gris) :
+
+$$2^5 = 32$$
+
+**4.** Le blanc est utilisé au moins une fois. Par le **complémentaire** (le complémentaire est " aucune case blanche ", calculé en 3) :
+
+$$3^5 - 2^5 = 243 - 32 = 211$$
+
+**5.** Les deux cases extrêmes sont de la même couleur. On choisit la couleur commune aux extrêmes ($3$ choix), puis les $3$ cases du milieu sont libres ($3$ choix chacune) :
+
+$$3 \times 3^3 = 3 \times 27 = 81$$
+:::

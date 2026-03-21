@@ -1,0 +1,66 @@
+---
+type: exercise
+title: "Nombres de quatre chiffres distincts"
+difficulty: 2
+timeMinutes: 15
+category: application
+tags: [denombrement, nombres, chiffres, arrangements, complementaire]
+praxeologies: [Prax3, Prax8]
+---
+
+:::enonce
+On utilise les chiffres de $0$ à $9$.
+
+1. Combien peut-on former de nombres de $4$ chiffres ?
+2. Combien peut-on former de nombres de $4$ chiffres **distincts** ?
+3. Combien peut-on former de nombres **pairs** de $4$ chiffres ?
+4. Combien peut-on former de nombres **pairs** de $4$ chiffres **distincts** ?
+5. Combien peut-on former de nombres de $4$ chiffres **distincts** contenant **au moins l'un** des chiffres $0$, $1$ ou $2$ ?
+:::
+
+:::solution
+**1.** Le premier chiffre $\neq 0$ ($9$ choix), les trois autres : $10$ choix chacun.
+
+$$9 \times 10^3 = 9000$$
+
+**2.** Le premier chiffre $\neq 0$ ($9$ choix). Les chiffres sont distincts : le deuxième a $9$ choix (tous sauf le premier), le troisième $8$, le quatrième $7$.
+
+$$9 \times 9 \times 8 \times 7 = 4536$$
+
+**3.** Un nombre pair a son dernier chiffre $\in \{0, 2, 4, 6, 8\}$ ($5$ choix). Le premier chiffre $\neq 0$ ($9$ choix). Les deux chiffres du milieu : $10$ choix chacun.
+
+$$9 \times 10 \times 10 \times 5 = 4500$$
+
+**4.** Nombre pair de $4$ chiffres distincts. On distingue **deux cas** selon le dernier chiffre.
+
+**Cas 1 : le dernier chiffre est $0$.**
+- Dernier chiffre : $0$ (fixé).
+- Premier chiffre : $9$ choix ($1$ à $9$).
+- Deuxième chiffre : $8$ choix (tout sauf le premier et $0$).
+- Troisième chiffre : $7$ choix.
+
+$$\text{Cas 1} = 9 \times 8 \times 7 = 504$$
+
+**Cas 2 : le dernier chiffre est pair $\neq 0$**, c'est-à-dire $\in \{2, 4, 6, 8\}$ ($4$ choix).
+- Dernier chiffre : $4$ choix.
+- Premier chiffre : $8$ choix ($1$ à $9$, sauf le dernier chiffre).
+- Deuxième chiffre : $8$ choix (tout sauf le premier et le dernier).
+- Troisième chiffre : $7$ choix.
+
+$$\text{Cas 2} = 4 \times 8 \times 8 \times 7 = 1792$$
+
+$$\text{Total} = 504 + 1792 = 2296$$
+
+**5.** Nombres de $4$ chiffres distincts contenant au moins l'un des chiffres $0$, $1$ ou $2$. Par le **complémentaire** : total $-$ nombres de $4$ chiffres distincts **sans** $0$, $1$ et $2$.
+
+Sans $0$, $1$, $2$ : on utilise les chiffres $\{3, 4, 5, 6, 7, 8, 9\}$ (7 chiffres). Le premier chiffre $\neq 0$ est automatiquement vérifié.
+
+$$\text{Sans } 0, 1, 2 = 7 \times 6 \times 5 \times 4 = 840$$
+
+$$\text{Au moins un parmi } \{0, 1, 2\} = 4536 - 840 = 3696$$
+:::
+
+:::erreurs
+- **Erreur classique** à la question 2 : calculer $A_{10}^4 = 5040$ en oubliant que le premier chiffre $\neq 0$.
+- **Erreur classique** à la question 4 : ne pas distinguer le cas " dernier chiffre $= 0$ " du cas " dernier chiffre pair $\neq 0$ ". Le cas $0$ est spécial car il ne contraint pas le premier chiffre.
+:::

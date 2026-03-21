@@ -1,0 +1,57 @@
+---
+type: exercise
+title: "$C_n^p$ est toujours un entier — démonstration"
+difficulty: 3
+timeMinutes: 18
+category: probleme
+tags: [denombrement, combinaisons, recurrence, pascal]
+praxeologies: [Prax5b]
+---
+
+:::enonce
+Le coefficient binomial $C_n^p = \dfrac{n!}{p!(n-p)!}$ est défini comme un quotient de factorielles. On veut montrer que c'est **toujours un entier naturel**.
+
+1. Calculer $C_4^p$ pour $p = 0, 1, 2, 3, 4$ et vérifier que ce sont des entiers.
+
+2. Montrer que pour tout $n \geq 2$, le produit $n(n-1)$ est pair. En déduire que $C_n^2 \in \mathbb{N}$.
+
+3. Montrer par récurrence sur $n$ que $C_n^p \in \mathbb{N}$ pour tout $0 \leq p \leq n$, en utilisant la relation de Pascal.
+:::
+
+:::solution
+**1.**
+
+$$C_4^0 = 1, \quad C_4^1 = 4, \quad C_4^2 = 6, \quad C_4^3 = 4, \quad C_4^4 = 1$$
+
+Ce sont bien tous des entiers naturels.
+
+**2.** Parmi deux entiers consécutifs $n$ et $n - 1$, l'un est pair et l'autre impair. Donc leur produit $n(n-1)$ est toujours **pair**.
+
+On en déduit que $C_n^2 = \dfrac{n(n-1)}{2} \in \mathbb{N}$, car on divise un nombre pair par $2$.
+
+**3.** On montre par récurrence sur $n$ la propriété :
+
+$$\mathcal{P}(n) : \text{" Pour tout } 0 \leq p \leq n, \, C_n^p \in \mathbb{N} \text{ "}$$
+
+**Initialisation** ($n = 0$) : $C_0^0 = 1 \in \mathbb{N}$. $\mathcal{P}(0)$ est vraie.
+
+**Hérédité** : supposons $\mathcal{P}(n)$ vraie pour un certain $n \geq 0$. Montrons $\mathcal{P}(n+1)$.
+
+Pour $p = 0$ : $C_{n+1}^0 = 1 \in \mathbb{N}$.
+
+Pour $p = n + 1$ : $C_{n+1}^{n+1} = 1 \in \mathbb{N}$.
+
+Pour $1 \leq p \leq n$ : on utilise la **relation de Pascal** :
+
+$$C_{n+1}^p = C_n^{p-1} + C_n^p$$
+
+Par hypothèse de récurrence ($\mathcal{P}(n)$), $C_n^{p-1} \in \mathbb{N}$ et $C_n^p \in \mathbb{N}$.
+
+Donc $C_{n+1}^p \in \mathbb{N}$ (somme de deux entiers naturels).
+
+**Conclusion** : par le principe de récurrence, pour tout $n \in \mathbb{N}$ et tout $0 \leq p \leq n$, $C_n^p$ est un entier naturel.
+:::
+
+:::remark
+Ce résultat est remarquable : le quotient $\dfrac{n!}{p!(n-p)!}$ est toujours entier, bien que la division par $p!(n-p)!$ ne soit pas a priori " exacte ". La preuve par récurrence via la relation de Pascal est la plus élégante : elle ne fait aucun calcul de divisibilité, elle utilise simplement le fait que la somme de deux entiers est un entier.
+:::

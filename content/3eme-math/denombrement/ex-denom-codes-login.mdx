@@ -1,0 +1,58 @@
+---
+type: exercise
+title: "Login et mot de passe"
+difficulty: 2
+timeMinutes: 12
+category: application
+tags: [denombrement, codes, arrangements, principe-multiplicatif]
+praxeologies: [Prax2, Prax3]
+---
+
+:::enonce
+Une banque attribue à chaque client un login composé de $6$ chiffres suivis d'une lettre. Le premier chiffre est différent de $0$ et la lettre est différente de O.
+
+1. Quel est le nombre maximal de clients que la banque peut gérer ?
+
+Chaque client choisit un mot de passe de $4$ lettres (parmi les $26$ lettres de l'alphabet), la répétition étant autorisée.
+
+2. Tous les clients peuvent-ils avoir un mot de passe distinct ?
+
+Un client a oublié son mot de passe, mais il sait que ses $4$ lettres sont **distinctes**.
+
+3. Combien d'essais au maximum doit-il effectuer ?
+
+Il se souvient de plus que son mot de passe contient exactement $2$ voyelles (parmi $a, e, i, o, u, y$, soit $6$ voyelles).
+
+4. Combien d'essais au maximum doit-il effectuer ?
+:::
+
+:::solution
+**1.** Le login est composé de $6$ chiffres + $1$ lettre.
+- Premier chiffre $\neq 0$ : $9$ choix.
+- Chiffres $2$ à $6$ : $10$ choix chacun.
+- Lettre $\neq$ O : $25$ choix.
+
+$$9 \times 10^5 \times 25 = 22\,500\,000$$
+
+**2.** Nombre de mots de passe de $4$ lettres avec répétition :
+
+$$26^4 = 456\,976$$
+
+Comme $456\,976 < 22\,500\,000$, **non**, tous les clients ne peuvent pas avoir un mot de passe distinct.
+
+**3.** Mot de passe de $4$ lettres **distinctes**. C'est un arrangement de $4$ parmi $26$ :
+
+$$A_{26}^4 = 26 \times 25 \times 24 \times 23 = 358\,800$$
+
+Il doit effectuer au maximum **$358\,800$ essais**.
+
+**4.** Le mot de passe contient exactement $2$ voyelles et $2$ consonnes, toutes distinctes. Il y a $6$ voyelles et $20$ consonnes.
+
+- Choix des positions des $2$ voyelles parmi $4$ : $C_4^2 = 6$.
+- Choix des $2$ voyelles distinctes : $A_6^2 = 30$.
+- Choix des $2$ consonnes distinctes : $A_{20}^2 = 380$.
+
+$$6 \times 30 \times 380 = 68\,400$$
+
+Il doit effectuer au maximum **$68\,400$ essais**.
+:::

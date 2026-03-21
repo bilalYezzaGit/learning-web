@@ -1,0 +1,58 @@
+---
+type: exercise
+title: "Tirage simultané de boules"
+difficulty: 1
+timeMinutes: 12
+category: application
+tags: [denombrement, combinaisons, tirage-simultane, principe-multiplicatif]
+praxeologies: [Prax5a, Prax2]
+---
+
+:::enonce
+Une urne contient 12 boules : 5 noires, 3 blanches et 4 rouges. On tire **simultanément** 5 boules.
+
+Calculer :
+
+a) Le nombre total de tirages possibles.
+
+b) Le nombre de tirages contenant exactement 2 noires et 3 blanches.
+
+c) Le nombre de tirages contenant exactement 2 rouges, 1 noire et 2 blanches.
+:::
+
+:::solution
+**a)** On tire simultanément 5 boules parmi 12. L'ordre ne compte pas, c'est une combinaison :
+
+$$C_{12}^5 = \frac{12!}{5! \times 7!} = \frac{12 \times 11 \times 10 \times 9 \times 8}{5 \times 4 \times 3 \times 2 \times 1} = \frac{95\,040}{120} = 792$$
+
+**b)** On veut exactement 2 noires parmi 5 **et** 3 blanches parmi 3.
+
+- Choisir 2 noires parmi 5 : $C_5^2 = 10$
+- Choisir 3 blanches parmi 3 : $C_3^3 = 1$
+
+Par le principe multiplicatif (les choix sont indépendants) :
+
+$$C_5^2 \times C_3^3 = 10 \times 1 = 10$$
+
+**Vérification :** $2 + 3 = 5$ boules tirées. Correct.
+
+**c)** On veut exactement 2 rouges, 1 noire et 2 blanches.
+
+- Choisir 2 rouges parmi 4 : $C_4^2 = 6$
+- Choisir 1 noire parmi 5 : $C_5^1 = 5$
+- Choisir 2 blanches parmi 3 : $C_3^2 = 3$
+
+Par le principe multiplicatif :
+
+$$C_4^2 \times C_5^1 \times C_3^2 = 6 \times 5 \times 3 = 90$$
+
+**Vérification :** $2 + 1 + 2 = 5$ boules tirées. Correct.
+:::
+
+:::methode
+Pour un tirage simultané avec contraintes sur les couleurs :
+1. Identifier le type de tirage (simultané = combinaisons)
+2. Pour chaque couleur, calculer le nombre de façons de choisir le nombre voulu
+3. Multiplier (principe multiplicatif, car les choix par couleur sont indépendants)
+4. Vérifier que la somme des boules choisies égale le nombre total tiré
+:::

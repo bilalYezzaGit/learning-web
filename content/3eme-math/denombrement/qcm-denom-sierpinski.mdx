@@ -1,0 +1,38 @@
+---
+type: qcm
+title: "$C_n^k$ pair ou impair"
+difficulty: 2
+timeMinutes: 2
+tags: [denombrement, pascal, parite]
+praxeologies: [Prax5b]
+---
+
+:::question
+Le coefficient binomial $C_8^3$ est-il pair ou impair ?
+:::
+
+:::option
+Impair, car $8$ et $3$ sont des nombres simples
+:::
+
+:::option
+Impair, car $C_8^3 = 55$
+:::
+
+:::option{correct}
+Pair, car $C_8^3 = 56$
+:::
+
+:::option
+On ne peut pas savoir sans calculer toute la ligne 8
+:::
+
+:::explanation
+Calculons : $C_8^3 = \dfrac{8 \times 7 \times 6}{3 \times 2 \times 1} = \dfrac{336}{6} = 56$.
+
+$56$ est **pair** ($56 = 2 \times 28$).
+
+En fait, $8 = 2^3$, et le théorème de Lucas montre que $C_{2^m}^k$ est pair pour tout $1 \leq k \leq 2^m - 1$. Donc tous les coefficients intérieurs de la ligne 8 sont pairs, sauf $C_8^0 = C_8^8 = 1$.
+
+L'intuition " $8$ et $3$ sont simples donc le résultat est impair " est un piège : la parité de $C_n^k$ n'a rien d'évident et requiert un calcul ou un théorème.
+:::

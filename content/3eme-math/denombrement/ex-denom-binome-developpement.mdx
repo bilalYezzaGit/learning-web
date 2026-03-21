@@ -1,0 +1,56 @@
+---
+type: exercise
+title: "Développement avec le binôme"
+difficulty: 1
+timeMinutes: 12
+category: application
+tags: [denombrement, binome-newton, developpement, combinaisons]
+praxeologies: [Prax7a]
+---
+
+:::enonce
+1. Développer $(1+x)^5$ et $(2-x)^4$ en utilisant la formule du binôme de Newton.
+2. Trouver le coefficient de $x^3$ dans le développement de $(1+x)^7$.
+3. Calculer le nombre de parties d'un ensemble à 6 éléments.
+4. Montrer que $C_n^0 + C_n^1 + C_n^2 + \cdots + C_n^n = 2^n$.
+:::
+
+:::solution
+**1.** Développement de $(1+x)^5$ :
+
+$$(1+x)^5 = \sum_{k=0}^{5} C_5^k \, x^k = C_5^0 + C_5^1 x + C_5^2 x^2 + C_5^3 x^3 + C_5^4 x^4 + C_5^5 x^5$$
+
+$$(1+x)^5 = 1 + 5x + 10x^2 + 10x^3 + 5x^4 + x^5$$
+
+Développement de $(2-x)^4$ : on pose $a = 2$ et $b = -x$ :
+
+$$(2-x)^4 = \sum_{k=0}^{4} C_4^k \, 2^{4-k} \, (-x)^k = \sum_{k=0}^{4} C_4^k \, 2^{4-k} \, (-1)^k \, x^k$$
+
+- $k=0$ : $C_4^0 \cdot 2^4 = 16$
+- $k=1$ : $C_4^1 \cdot 2^3 \cdot (-1) = 4 \cdot 8 \cdot (-1) = -32$
+- $k=2$ : $C_4^2 \cdot 2^2 \cdot 1 = 6 \cdot 4 = 24$
+- $k=3$ : $C_4^3 \cdot 2^1 \cdot (-1) = 4 \cdot 2 \cdot (-1) = -8$
+- $k=4$ : $C_4^4 \cdot 2^0 \cdot 1 = 1$
+
+$$(2-x)^4 = 16 - 32x + 24x^2 - 8x^3 + x^4$$
+
+**2.** Le coefficient de $x^3$ dans $(1+x)^7$ est le terme pour $k = 3$ :
+
+$$C_7^3 = \frac{7!}{3! \times 4!} = \frac{7 \times 6 \times 5}{3 \times 2 \times 1} = \frac{210}{6} = 35$$
+
+Le coefficient de $x^3$ est **35**.
+
+**3.** Le nombre de parties d'un ensemble à 6 éléments est $2^6 = 64$.
+
+En effet, pour chaque élément, on a deux choix : le prendre ou ne pas le prendre dans la partie. Par le principe multiplicatif, le nombre total de parties est $2^6$.
+
+On peut aussi le vérifier avec le binôme : $C_6^0 + C_6^1 + C_6^2 + C_6^3 + C_6^4 + C_6^5 + C_6^6 = 1 + 6 + 15 + 20 + 15 + 6 + 1 = 64 = 2^6$.
+
+**4.** On applique le binôme de Newton avec $a = 1$ et $b = 1$ :
+
+$$(1+1)^n = \sum_{k=0}^{n} C_n^k \cdot 1^{n-k} \cdot 1^k = \sum_{k=0}^{n} C_n^k$$
+
+Donc :
+
+$$C_n^0 + C_n^1 + C_n^2 + \cdots + C_n^n = 2^n$$
+:::

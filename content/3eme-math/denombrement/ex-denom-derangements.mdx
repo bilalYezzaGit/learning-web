@@ -1,0 +1,87 @@
+---
+type: exercise
+title: "Le problème des enveloppes (dérangements)"
+difficulty: 3
+timeMinutes: 20
+category: probleme
+tags: [denombrement, derangements, recurrence, permutations]
+praxeologies: [Prax4a, Prax8]
+---
+
+:::enonce
+On dispose de $n$ lettres et $n$ enveloppes, numérotées de $1$ à $n$. On met chaque lettre dans une enveloppe (une par enveloppe). Un **dérangement** est une permutation où **aucune lettre** ne se trouve dans son enveloppe d'origine.
+
+On note $D_n$ le nombre de dérangements de $\{1, 2, \ldots, n\}$.
+
+a) Calculer $D_2$.
+
+b) Calculer $D_3$.
+
+c) Calculer $D_4$.
+
+d) Montrer que $D_n = (n-1)(D_{n-1} + D_{n-2})$ pour $n \geq 3$.
+
+e) Montrer que $D_n = n! \displaystyle\sum_{k=0}^{n} \dfrac{(-1)^k}{k!}$. Calculer $D_n/n!$ pour $n = 10$ et commenter.
+:::
+
+:::solution
+**a)** Pour $n = 2$, les permutations de $\{1, 2\}$ sont : $(1, 2)$ et $(2, 1)$.
+
+Seule $(2, 1)$ est un dérangement (aucun élément à sa place).
+
+$$D_2 = 1$$
+
+**b)** Pour $n = 3$, les 6 permutations de $\{1, 2, 3\}$ sont :
+
+$(1,2,3)$ — 3 points fixes. $(1,3,2)$ — 1 fixe. $(2,1,3)$ — 1 fixe. $(2,3,1)$ — 0 fixe. $(3,1,2)$ — 0 fixe. $(3,2,1)$ — 1 fixe.
+
+Les dérangements sont $(2, 3, 1)$ et $(3, 1, 2)$.
+
+$$D_3 = 2$$
+
+**c)** Pour $n = 4$, énumérons les permutations sans point fixe. Les dérangements de $\{1, 2, 3, 4\}$ sont :
+
+$(2, 1, 4, 3)$, $(2, 3, 4, 1)$, $(2, 4, 1, 3)$, $(3, 1, 4, 2)$, $(3, 4, 1, 2)$, $(3, 4, 2, 1)$, $(4, 1, 2, 3)$, $(4, 3, 1, 2)$, $(4, 3, 2, 1)$
+
+$$D_4 = 9$$
+
+**Vérification** : $(n-1)(D_{n-1} + D_{n-2}) = 3 \times (D_3 + D_2) = 3 \times (2 + 1) = 9$. Correct.
+
+**d)** Considérons la lettre $n$. Elle est placée dans une enveloppe $i \neq n$ (sinon elle serait à sa place). Il y a $n - 1$ choix pour $i$.
+
+**Cas 1** : la lettre $i$ est placée dans l'enveloppe $n$. Alors les lettres $i$ et $n$ ont " échangé " leurs enveloppes. Il reste $n - 2$ lettres ($\neq i, n$) à placer dans $n - 2$ enveloppes ($\neq i, n$), sans point fixe : $D_{n-2}$ façons.
+
+**Cas 2** : la lettre $i$ n'est **pas** dans l'enveloppe $n$. Alors la lettre $i$ doit éviter les enveloppes $i$ (sa propre enveloppe) **et** $n$ n'est pas disponible pour elle (car la lettre $n$ y est déjà... non, l'enveloppe $n$ est occupée par une autre lettre... en fait, redéfinissons). On peut reformuler : les $n - 1$ lettres $\{1, \ldots, n\} \setminus \{n\}$ doivent être placées dans les enveloppes $\{1, \ldots, n\} \setminus \{i\}$ de sorte qu'aucune ne soit à sa place d'origine. L'enveloppe $n$ joue le rôle de " l'enveloppe interdite pour $i$ ". C'est un dérangement de $n - 1$ éléments : $D_{n-1}$ façons.
+
+En combinant :
+
+$$D_n = (n-1)(D_{n-1} + D_{n-2})$$
+
+**e)** La formule explicite s'obtient par le principe d'inclusion-exclusion. Soit $A_i$ l'ensemble des permutations qui fixent $i$. On cherche $D_n = n! - |\bigcup A_i|$.
+
+Par inclusion-exclusion :
+
+$$|\bigcup_{i=1}^n A_i| = \sum |A_i| - \sum |A_i \cap A_j| + \cdots + (-1)^{n+1} |A_1 \cap \cdots \cap A_n|$$
+
+$|A_{i_1} \cap \cdots \cap A_{i_k}|$ = nombre de permutations fixant les $k$ éléments $i_1, \ldots, i_k$ = $(n-k)!$. Il y a $C_n^k$ tels ensembles.
+
+$$|\bigcup A_i| = \sum_{k=1}^n (-1)^{k+1} C_n^k (n-k)! = \sum_{k=1}^n (-1)^{k+1} \frac{n!}{k!}$$
+
+Donc :
+
+$$D_n = n! - \sum_{k=1}^n (-1)^{k+1} \frac{n!}{k!} = n! \sum_{k=0}^n \frac{(-1)^k}{k!}$$
+
+Pour $n = 10$ :
+
+$$\frac{D_{10}}{10!} = \sum_{k=0}^{10} \frac{(-1)^k}{k!} = 1 - 1 + \frac{1}{2} - \frac{1}{6} + \frac{1}{24} - \frac{1}{120} + \frac{1}{720} - \frac{1}{5040} + \frac{1}{40320} - \frac{1}{362880} + \frac{1}{3628800}$$
+
+$$\approx 0,367\,879\,464$$
+
+Or $e^{-1} \approx 0,367\,879\,441$.
+
+La proportion de dérangements est très proche de $\dfrac{1}{e} \approx 36,8\%$. Autrement dit, si on distribue les lettres au hasard, il y a environ **37 % de chances** qu'aucune lettre ne soit dans la bonne enveloppe — et cette proportion est quasiment indépendante de $n$ !
+:::
+
+:::remark
+Le fait que $D_n / n! \to 1/e$ est l'un des résultats les plus élégants de la combinatoire. Il relie le dénombrement discret (permutations) à la constante $e$ de l'analyse. La convergence est extrêmement rapide : dès $n = 5$, l'approximation est excellente.
+:::

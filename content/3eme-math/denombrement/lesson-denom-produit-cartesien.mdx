@@ -1,0 +1,71 @@
+---
+type: lesson
+title: "Produit cartésien et principe multiplicatif"
+difficulty: 0
+timeMinutes: 7
+tags: [denombrement, produit-cartesien, principe-multiplicatif, p-uplet]
+praxeologies: [Prax2]
+---
+
+### P-uplet et produit cartésien
+
+:::definition[P-uplet]
+Un **p-uplet** (ou liste ordonnée de longueur $p$) d'éléments est une suite $(x_1, x_2, \ldots, x_p)$ où l'**ordre compte**.
+
+Deux p-uplets $(x_1, \ldots, x_p)$ et $(y_1, \ldots, y_p)$ sont égaux si et seulement si $x_i = y_i$ pour tout $i$.
+:::
+
+:::definition[Produit cartésien]
+Soient $E$ et $F$ deux ensembles. Le **produit cartésien** de $E$ et $F$ est :
+
+$$E \times F = \{(x, y) \mid x \in E \text{ et } y \in F\}$$
+:::
+
+:::theorem[Cardinal du produit cartésien]
+Soient $E$ et $F$ deux ensembles finis. On a :
+
+$$\text{card}(E \times F) = \text{card}(E) \times \text{card}(F)$$
+
+Plus généralement, pour $E_1, E_2, \ldots, E_p$ ensembles finis :
+
+$$\text{card}(E_1 \times E_2 \times \cdots \times E_p) = \text{card}(E_1) \times \text{card}(E_2) \times \cdots \times \text{card}(E_p)$$
+:::
+
+### Principe multiplicatif
+
+:::property[Principe multiplicatif]
+Si un choix se décompose en **étapes successives indépendantes**, avec $n_1$ possibilités pour la première étape, $n_2$ pour la deuxième, ..., $n_p$ pour la p-ième, alors le nombre total de choix est :
+
+$$n_1 \times n_2 \times \cdots \times n_p$$
+:::
+
+### Arbre de choix
+
+Un **arbre de choix** permet de visualiser toutes les possibilités lorsqu'on effectue des choix successifs. Chaque branche représente un choix, et chaque chemin de la racine à une feuille donne un résultat possible.
+
+:::example[Pièces de monnaie]
+On lance deux pièces de monnaie. Chaque pièce donne Pile (P) ou Face (F).
+
+- 1er lancer : 2 choix (P ou F)
+- 2e lancer : 2 choix (P ou F)
+
+Nombre total de résultats : $2 \times 2 = 4$.
+
+Les résultats possibles sont : (P, P), (P, F), (F, P), (F, F).
+:::
+
+:::example[Menus d'un restaurant]
+Un restaurant propose 3 entrées, 4 plats et 2 desserts. Combien de menus complets peut-on composer ?
+
+Par le principe multiplicatif : $3 \times 4 \times 2 = 24$ menus possibles.
+:::
+
+:::example[Codes à chiffres]
+Combien de codes à 4 chiffres (de 0 à 9) peut-on former si la répétition est autorisée ?
+
+Chaque position a 10 choix indépendants : $10 \times 10 \times 10 \times 10 = 10^4 = 10\,000$ codes.
+:::
+
+:::attention
+Le principe multiplicatif s'applique uniquement si les choix aux différentes étapes sont **indépendants**. Si le nombre de possibilités à une étape dépend du choix fait à l'étape précédente, il faut adapter le raisonnement (ce qui mène aux arrangements).
+:::

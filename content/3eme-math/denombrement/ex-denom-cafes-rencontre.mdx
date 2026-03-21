@@ -1,0 +1,36 @@
+---
+type: exercise
+title: "Trois personnes dans cinq cafés"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [denombrement, rencontre, arrangements, complementaire]
+praxeologies: [Prax2, Prax3, Prax6]
+---
+
+:::enonce
+Trois personnes $A$, $B$ et $C$ se donnent rendez-vous dans un village qui comporte $5$ cafés. Chacune choisit un café au hasard.
+
+1. Combien de choix possibles en tout ?
+2. Combien de choix font qu'**aucune** des trois personnes ne se rencontre ?
+3. Combien de choix font que les **trois** se rencontrent (dans le même café) ?
+4. Combien de choix font qu'**exactement deux** personnes se rencontrent ?
+:::
+
+:::solution
+**1.** Chaque personne choisit un café parmi $5$, indépendamment. C'est un tirage successif avec remise :
+
+$$5^3 = 125$$
+
+**2.** Aucune ne se rencontre : les trois personnes choisissent des cafés **tous différents**. C'est un arrangement de $3$ parmi $5$ :
+
+$$A_5^3 = 5 \times 4 \times 3 = 60$$
+
+**3.** Les trois se rencontrent : elles choisissent le **même** café. Il y a $5$ cafés possibles :
+
+$$5$$
+
+**4.** Les événements " aucune rencontre ", " exactement 2 se rencontrent " et " les 3 se rencontrent " forment une **partition** de l'ensemble des cas possibles.
+
+$$\text{Exactement 2} = \text{Total} - \text{Aucune} - \text{Les 3} = 125 - 60 - 5 = 60$$
+:::

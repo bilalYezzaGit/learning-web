@@ -1,0 +1,97 @@
+---
+type: lesson
+title: "Fiche de synthèse — Toutes les formules"
+difficulty: 1
+timeMinutes: 5
+tags: [denombrement, formules, synthese]
+praxeologies: [Prax2, Prax3, Prax4a, Prax5a, Prax7a]
+---
+
+### Cardinal d'une union
+
+:::property[Cardinal de la réunion]
+Pour deux ensembles finis $E$ et $F$ :
+
+$$\text{card}(E \cup F) = \text{card}(E) + \text{card}(F) - \text{card}(E \cap F)$$
+
+Si $E$ et $F$ sont disjoints : $\text{card}(E \cup F) = \text{card}(E) + \text{card}(F)$.
+:::
+
+### Arrangements sans répétition
+
+:::definition[Arrangement]
+Un **arrangement** de $p$ éléments parmi $n$ est un $p$-uplet d'éléments **deux à deux distincts**.
+
+$$A_n^p = n(n-1)(n-2)\cdots(n-p+1) = \frac{n!}{(n-p)!}$$
+:::
+
+### Arrangements avec répétition
+
+:::property[Tirages successifs avec remise]
+Le nombre de $p$-uplets d'éléments d'un ensemble de $n$ éléments (avec répétition possible) est :
+
+$$n^p$$
+:::
+
+### Permutations et factorielle
+
+:::definition[Permutation]
+Une **permutation** de $n$ éléments est un arrangement de $n$ parmi $n$.
+
+$$n! = n \times (n-1) \times \cdots \times 2 \times 1 \qquad \text{avec } 0! = 1$$
+:::
+
+:::property[Anagrammes avec répétitions]
+Le nombre d'anagrammes d'un mot de $n$ lettres où la lettre $i$ apparaît $p_i$ fois est :
+
+$$\frac{n!}{p_1! \times p_2! \times \cdots \times p_k!}$$
+:::
+
+### Combinaisons
+
+:::definition[Combinaison]
+Une **combinaison** de $p$ éléments parmi $n$ est un sous-ensemble de $p$ éléments (sans ordre).
+
+$$C_n^p = \frac{A_n^p}{p!} = \frac{n!}{p!(n-p)!}$$
+:::
+
+:::property[Propriétés des combinaisons]
+- $C_n^0 = C_n^n = 1$
+- $C_n^1 = C_n^{n-1} = n$
+- **Symétrie** : $C_n^p = C_n^{n-p}$
+- **Relation de Pascal** : $C_n^p = C_{n-1}^{p-1} + C_{n-1}^p$
+:::
+
+### Binôme de Newton
+
+:::theorem[Formule du binôme de Newton]
+Pour tout $a, b$ et tout entier $n \geq 1$ :
+
+$$(a+b)^n = \sum_{k=0}^{n} C_n^k \, a^{n-k} \, b^k$$
+
+**Cas particuliers** : $(1+1)^n = 2^n$ et $(1-1)^n = 0$.
+:::
+
+### Tableau récapitulatif des tirages
+
+```typst
+#table(
+  columns: 4,
+  align: center,
+  stroke: 0.5pt,
+  [*Modèle de tirage*], [*Ordre ?*], [*Répétition ?*], [*Formule*],
+  [Simultané ($p$ parmi $n$)], [Non], [Non], [$C_n^p$],
+  [Successif sans remise], [Oui], [Non], [$A_n^p$],
+  [Successif avec remise], [Oui], [Oui], [$n^p$],
+)
+```
+
+:::attention
+Pour les **nombres** de $k$ chiffres : le premier chiffre ne peut **jamais** être $0$. Toujours traiter ce cas séparément.
+:::
+
+:::remark
+Pour dénombrer " **au moins un** ", utiliser la méthode du complémentaire :
+
+$$|\text{au moins un}| = |\text{total}| - |\text{aucun}|$$
+:::

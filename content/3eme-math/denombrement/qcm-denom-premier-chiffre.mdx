@@ -1,0 +1,38 @@
+---
+type: qcm
+title: "Premier chiffre d'un nombre"
+difficulty: 1
+timeMinutes: 2
+tags: [denombrement, nombres, premier-chiffre]
+praxeologies: [Prax8]
+---
+
+:::question
+Le nombre de nombres de $4$ chiffres **distincts** formés avec les chiffres de $0$ à $9$ est :
+:::
+
+:::option
+$A_{10}^4 = 5040$
+:::
+
+:::option{correct}
+$9 \times A_9^3 = 4536$
+:::
+
+:::option
+$9 \times 10^3 = 9000$
+:::
+
+:::option
+$10^4 = 10\,000$
+:::
+
+:::explanation
+Le premier chiffre ne peut pas être $0$ ($9$ choix), puis on choisit les $3$ chiffres restants **distincts** parmi les $9$ disponibles : $A_9^3 = 9 \times 8 \times 7 = 504$.
+
+Total : $9 \times 504 = 4536$.
+
+- $A_{10}^4 = 5040$ oublie la contrainte premier chiffre $\neq 0$.
+- $9 \times 10^3$ oublie la contrainte " chiffres distincts ".
+- $10^4$ oublie les deux contraintes.
+:::

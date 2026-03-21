@@ -1,0 +1,56 @@
+---
+type: exercise
+title: "Plaques d'immatriculation"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [denombrement, applications, principe-multiplicatif]
+praxeologies: [Prax2]
+---
+
+:::enonce
+Une plaque d'immatriculation a le format : **3 chiffres — 2 lettres — 2 chiffres** (exemple : 123-AB-45). Les chiffres vont de 0 à 9 et les lettres de A à Z (26 lettres). La répétition est autorisée.
+
+a) Calculer le nombre total de plaques possibles.
+
+b) Combien de plaques sont des **palindromes** (se lisent de la même façon dans les deux sens) ?
+
+c) Combien de plaques contiennent **au moins un 7** parmi les chiffres ?
+
+d) Si on passe à **4 lettres** au lieu de 2, combien de fois plus de plaques obtient-on ?
+:::
+
+:::solution
+**a)** Par le principe multiplicatif, chaque position est un choix indépendant :
+- 3 positions de chiffres : $10^3$ choix
+- 2 positions de lettres : $26^2$ choix
+- 2 positions de chiffres : $10^2$ choix
+
+$$N = 10^3 \times 26^2 \times 10^2 = 10^5 \times 676 = 67\,600\,000$$
+
+**b)** Une plaque palindrome se lit identiquement à l'endroit et à l'envers. Le format est $c_1 c_2 c_3 \text{-} l_1 l_2 \text{-} c_4 c_5$.
+
+Lu à l'envers : $c_5 c_4 \text{-} l_2 l_1 \text{-} c_3 c_2 c_1$.
+
+Pour que ce soit un palindrome : $c_1 = c_5$, $c_2 = c_4$, $l_1 = l_2$, et $c_3$ est libre.
+
+Choix libres : $c_1$ (10), $c_2$ (10), $c_3$ (10), $l_1$ (26). Les autres sont imposés.
+
+$$\text{Palindromes} = 10 \times 10 \times 10 \times 26 = 26\,000$$
+
+**c)** Par le **complémentaire** : nombre de plaques avec au moins un 7 = total $-$ plaques sans aucun 7.
+
+Plaques sans aucun 7 : chaque chiffre a 9 choix (0 à 9 sauf 7), les lettres restent à 26.
+
+$$\text{Sans 7} = 9^3 \times 26^2 \times 9^2 = 9^5 \times 676 = 59\,049 \times 676 = 39\,917\,124$$
+
+$$\text{Avec au moins un 7} = 67\,600\,000 - 39\,917\,124 = 27\,682\,876$$
+
+**d)** Avec 4 lettres : $N' = 10^3 \times 26^4 \times 10^2 = 10^5 \times 456\,976 = 45\,697\,600\,000$.
+
+Le rapport est :
+
+$$\frac{N'}{N} = \frac{26^4}{26^2} = 26^2 = 676$$
+
+On obtient **676 fois** plus de plaques. Ajouter 2 lettres multiplie les possibilités par $676$ !
+:::

@@ -1,0 +1,51 @@
+---
+type: exercise
+title: "Urne — somme des numéros paire"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [denombrement, urne, complementaire, parite]
+praxeologies: [Prax5a, Prax8]
+---
+
+:::enonce
+Une urne contient $10$ jetons numérotés de $0$ à $9$. On tire simultanément $3$ jetons.
+
+1. Déterminer le nombre total de tirages.
+2. Déterminer le nombre de tirages contenant **au moins un numéro pair** (méthode du complémentaire).
+3. Déterminer le nombre de tirages dont la **somme des numéros est paire**.
+:::
+
+:::solution
+Les numéros pairs sont $\{0, 2, 4, 6, 8\}$ (5 jetons) et les numéros impairs sont $\{1, 3, 5, 7, 9\}$ (5 jetons).
+
+**1.** Nombre total de tirages de $3$ jetons parmi $10$ :
+
+$$C_{10}^3 = \frac{10 \times 9 \times 8}{6} = 120$$
+
+**2.** Par la méthode du complémentaire. Le complémentaire de " au moins un pair " est " aucun pair ", c'est-à-dire $3$ jetons impairs.
+
+$$C_5^3 = \frac{5 \times 4 \times 3}{6} = 10$$
+
+Donc :
+
+$$\text{Au moins un pair} = 120 - 10 = 110$$
+
+**3.** La somme de $3$ entiers est paire si et seulement si le nombre de termes impairs est **pair** (0 ou 2).
+
+On distingue deux cas disjoints :
+
+- **Cas 1 : $3$ pairs et $0$ impair** → $C_5^3 \times C_5^0 = 10 \times 1 = 10$
+
+- **Cas 2 : $1$ pair et $2$ impairs** → $C_5^1 \times C_5^2 = 5 \times 10 = 50$
+
+$$\text{Total} = 10 + 50 = 60$$
+
+**Vérification** : le nombre de tirages dont la somme est impaire est $C_5^2 \times C_5^1 + C_5^0 \times C_5^3 = 50 + 10 = 60$. On a bien $60 + 60 = 120$.
+:::
+
+:::methode
+Pour la parité d'une somme, décomposer selon le nombre de termes impairs :
+- Somme **paire** : nombre de termes impairs pair (0, 2, 4, ...)
+- Somme **impaire** : nombre de termes impairs impair (1, 3, 5, ...)
+:::

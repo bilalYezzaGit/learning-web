@@ -1,0 +1,57 @@
+---
+type: exercise
+title: "Urne — méthode du complémentaire"
+difficulty: 2
+timeMinutes: 15
+category: application
+tags: [denombrement, urne, complementaire, combinaisons]
+praxeologies: [Prax5a, Prax6]
+---
+
+:::enonce
+Une urne contient $15$ boules : $6$ rouges, $4$ vertes et $5$ blanches. On tire simultanément $4$ boules.
+
+1. Déterminer le nombre de tirages contenant **au moins une boule verte**.
+2. Déterminer le nombre de tirages contenant **au moins une boule de chaque couleur**.
+3. Déterminer le nombre de tirages contenant $4$ boules **de la même couleur**.
+:::
+
+:::solution
+Le nombre total de tirages de $4$ boules parmi $15$ :
+
+$$C_{15}^4 = \frac{15!}{4! \times 11!} = \frac{15 \times 14 \times 13 \times 12}{4 \times 3 \times 2 \times 1} = 1365$$
+
+**1.** On utilise la **méthode du complémentaire**. Le complémentaire de " au moins une verte " est " aucune verte ".
+
+Aucune verte : on choisit $4$ boules parmi les $15 - 4 = 11$ boules non vertes :
+
+$$C_{11}^4 = \frac{11 \times 10 \times 9 \times 8}{24} = 330$$
+
+Donc le nombre de tirages avec au moins une boule verte :
+
+$$C_{15}^4 - C_{11}^4 = 1365 - 330 = 1035$$
+
+**2.** Au moins une boule de **chaque** couleur ($1$ rouge, $1$ verte et $1$ blanche au minimum). Comme on tire $4$ boules et qu'il y a $3$ couleurs, exactement une couleur aura $2$ boules.
+
+On distingue trois cas disjoints :
+- **$2$ rouges, $1$ verte, $1$ blanche** : $C_6^2 \times C_4^1 \times C_5^1 = 15 \times 4 \times 5 = 300$
+- **$1$ rouge, $2$ vertes, $1$ blanche** : $C_6^1 \times C_4^2 \times C_5^1 = 6 \times 6 \times 5 = 180$
+- **$1$ rouge, $1$ verte, $2$ blanches** : $C_6^1 \times C_4^1 \times C_5^2 = 6 \times 4 \times 10 = 240$
+
+$$\text{Total} = 300 + 180 + 240 = 720$$
+
+**3.** $4$ boules de la même couleur. On distingue trois cas :
+- $4$ rouges : $C_6^4 = 15$
+- $4$ vertes : $C_4^4 = 1$
+- $4$ blanches : $C_5^4 = 5$
+
+$$\text{Total} = 15 + 1 + 5 = 21$$
+:::
+
+:::methode
+Pour " au moins un ", toujours penser au complémentaire :
+
+$$|\text{au moins un}| = |\text{total}| - |\text{aucun}|$$
+
+Pour " au moins un de chaque catégorie ", il est souvent plus simple de décomposer en cas disjoints selon la répartition exacte.
+:::

@@ -1,0 +1,59 @@
+---
+type: exercise
+title: "Vrai ou Faux — justifier"
+difficulty: 2
+timeMinutes: 15
+category: synthese
+tags: [denombrement, vrai-faux, anagrammes, complementaire, cartes]
+praxeologies: [Prax4b, Prax6, Prax5a, Prax8]
+---
+
+:::enonce
+Pour chaque affirmation, indiquer si elle est **vraie** ou **fausse** et justifier.
+
+**1.** Le mot ANANAS admet $6! = 720$ anagrammes.
+
+**2.** Le mot ANANAS admet $\dfrac{6!}{2! \times 3!} = 60$ anagrammes.
+
+**3.** En lançant $4$ dés, plus de la moitié des issues contiennent au moins un $1$.
+
+**4.** Le nombre de mots de $8$ lettres (avec O et S) contenant au moins $3$ lettres S est $2^8 - (1 + C_8^1 + C_8^2)$.
+
+**5.** Le nombre de mains de $5$ cartes (jeu de $32$) contenant exactement $2$ as et $3$ coeurs est $C_4^2 \times C_8^3$.
+:::
+
+:::solution
+**1. FAUX.** Le mot ANANAS a des lettres répétées (A $\times 3$, N $\times 2$). Le nombre d'anagrammes est :
+
+$$\frac{6!}{3! \times 2!} = \frac{720}{12} = 60 \neq 720$$
+
+**2. VRAI.** C'est exactement la bonne formule : $\dfrac{6!}{3! \times 2!} = 60$.
+
+**3. VRAI.** On lance $4$ dés. Total des issues : $6^4 = 1296$.
+
+Issues **sans aucun** $1$ : chaque dé $\in \{2, 3, 4, 5, 6\}$, soit $5^4 = 625$.
+
+Issues avec **au moins un** $1$ : $1296 - 625 = 671$.
+
+La moitié de $1296$ est $648$. Comme $671 > 648$, plus de la moitié des issues contiennent au moins un $1$.
+
+**4. VRAI.** Le total est $2^8 = 256$. Les mots avec $0$ S : $C_8^0 = 1$. Avec $1$ S : $C_8^1 = 8$. Avec $2$ S : $C_8^2 = 28$.
+
+$$\text{Au moins 3 S} = 2^8 - (C_8^0 + C_8^1 + C_8^2) = 256 - (1 + 8 + 28) = 219$$
+
+La formule est correcte.
+
+**5. FAUX.** Le calcul $C_4^2 \times C_8^3$ suppose qu'on choisit $2$ as et $3$ coeurs parmi les $8$ coeurs. Mais il y a un **problème** : un as peut être un as de coeur. Cette carte serait comptée comme as **et** comme coeur, ce qui crée un double comptage.
+
+Il faut distinguer les cas selon que l'as de coeur fait partie de la main ou non.
+
+**Cas 1 : l'as de coeur n'est pas dans la main.** On choisit $2$ as parmi les $3$ as non-coeur ($C_3^2 = 3$) et $3$ coeurs parmi les $7$ coeurs non-as ($C_7^3 = 35$).
+
+$$3 \times 35 = 105$$
+
+**Cas 2 : l'as de coeur est dans la main.** Il compte comme as et comme coeur. On choisit $1$ autre as parmi les $3$ restants ($C_3^1 = 3$) et $2$ autres coeurs parmi les $7$ coeurs non-as ($C_7^2 = 21$).
+
+$$3 \times 21 = 63$$
+
+$$\text{Total} = 105 + 63 = 168 \neq C_4^2 \times C_8^3 = 6 \times 56 = 336$$
+:::

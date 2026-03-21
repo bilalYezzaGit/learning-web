@@ -1,0 +1,36 @@
+---
+type: qcm
+title: "Nombre d'anagrammes"
+difficulty: 1
+timeMinutes: 2
+tags: [denombrement, anagrammes, permutations, repetitions]
+praxeologies: [Prax4b]
+---
+
+:::question
+Le nombre d'anagrammes du mot **ANANAS** est :
+:::
+
+:::option
+$6! = 720$
+:::
+
+:::option
+$\frac{6!}{3!} = 120$
+:::
+
+:::option{correct}
+$\frac{6!}{3! \times 2!} = 60$
+:::
+
+:::option
+$3! \times 2! = 12$
+:::
+
+:::explanation
+Le mot ANANAS a 6 lettres : A apparaît **3 fois**, N apparaît **2 fois**, S apparaît **1 fois**.
+
+La formule est $\frac{6!}{3! \times 2! \times 1!} = \frac{720}{12} = 60$.
+
+L'erreur $720$ oublie de diviser par les répétitions. L'erreur $120$ oublie de diviser par $2!$ (les N). L'erreur $12$ confond le dénominateur avec le résultat.
+:::

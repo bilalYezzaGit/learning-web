@@ -1,0 +1,36 @@
+---
+type: qcm
+title: "Choix du modèle de tirage"
+difficulty: 1
+timeMinutes: 2
+tags: [denombrement, combinaisons, tirage-simultane, modelisation]
+praxeologies: [Prax2]
+---
+
+:::question
+On tire **simultanément** 3 boules d'une urne contenant 10 boules distinctes. Le nombre de tirages possibles est :
+:::
+
+:::option
+$A_{10}^3 = 720$
+:::
+
+:::option
+$10^3 = 1\,000$
+:::
+
+:::option
+$3! \times 10 = 60$
+:::
+
+:::option{correct}
+$C_{10}^3 = 120$
+:::
+
+:::explanation
+Un tirage **simultané** signifie que l'ordre ne compte pas et qu'il n'y a pas de remise. On utilise donc les combinaisons :
+
+$C_{10}^3 = \frac{10!}{3! \times 7!} = \frac{10 \times 9 \times 8}{6} = 120$.
+
+$A_{10}^3 = 720$ correspond à un tirage **successif sans remise** (l'ordre compte). $10^3 = 1\,000$ correspond à un tirage **avec remise**.
+:::

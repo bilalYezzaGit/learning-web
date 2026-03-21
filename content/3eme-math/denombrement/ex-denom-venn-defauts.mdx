@@ -1,0 +1,39 @@
+---
+type: exercise
+title: "Appareils avec défauts — Venn"
+difficulty: 1
+timeMinutes: 8
+category: application
+tags: [denombrement, venn, cardinal, complementaire]
+praxeologies: [Prax1]
+---
+
+:::enonce
+On contrôle un lot de $100$ appareils. Chaque appareil peut présenter un défaut de type $A$ et/ou de type $B$.
+
+On constate que :
+- $6$ appareils ont le défaut $A$ **sans** le défaut $B$
+- $8$ appareils ont le défaut $B$ **sans** le défaut $A$
+- $4$ appareils ont les défauts $A$ **et** $B$
+
+Combien d'appareils sont **sans défaut** ?
+:::
+
+:::solution
+On commence par calculer le cardinal de $A \cup B$ (appareils avec au moins un défaut).
+
+D'après le diagramme de Venn :
+- $A$ seul (sans $B$) : $6$
+- $B$ seul (sans $A$) : $8$
+- $A$ et $B$ : $4$
+
+$$\text{card}(A \cup B) = 6 + 8 + 4 = 18$$
+
+Le nombre d'appareils sans défaut est le complémentaire :
+
+$$100 - \text{card}(A \cup B) = 100 - 18 = 82$$
+
+**Vérification** : $\text{card}(A) = 6 + 4 = 10$ et $\text{card}(B) = 8 + 4 = 12$.
+
+$$\text{card}(A \cup B) = 10 + 12 - 4 = 18 \quad \checkmark$$
+:::

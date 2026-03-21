@@ -1,0 +1,489 @@
+kind: planning
+module: denombrement
+programme: 3eme-math
+status: generated
+
+design_intent: >-
+  Livret Exploration — le denombrement est un chapitre riche en applications
+  reelles et en problemes fun. Ce livret va au-dela de l'examen : identites
+  combinatoires profondes, chemins sur reseau, double comptage, modelisation
+  de situations reelles (ADN, cryptographie, Braille, plaques, poker, serrures),
+  problemes historiques et paradoxes. Pour les eleves curieux qui veulent
+  comprendre la puissance du denombrement. Difficulte 2-3.
+
+slug: denombrement-exploration
+title: "Denombrement — Exploration"
+description: "Approfondir le denombrement a travers des applications reelles, des identites profondes, des paradoxes et des problemes creatifs : ADN, cryptographie, Braille, chemins, double comptage, poker."
+trimester: T2
+order: 18
+
+sections:
+  - label: "Identites du binome de Newton"
+    atoms:
+      - slug: lesson-denom-identites-binome
+        type: lesson
+        title: "Exploiter le binome — identites combinatoires"
+        praxeologies: [Prax7b]
+        contenu: >-
+          Methode : specialiser (a+b)^n avec des valeurs choisies de a et b pour
+          obtenir des identites sur les C_n^k. Exemples : somme = 2^n (a=b=1),
+          somme alternee = 0 (a=1, b=-1). Deriver le binome pour obtenir n×2^{n-1}.
+          Separer termes pairs/impairs pour n pair.
+        difficulte: 2
+        timeMinutes: 8
+
+      - slug: ex-denom-somme-alternee
+        type: exercise
+        title: "Somme alternee et termes pairs/impairs"
+        praxeologies: [Prax7b]
+        category: approfondissement
+        contenu: >-
+          1) Montrer Σ(-1)^k C_n^k = 0. 2) Pour n pair, deduire que la somme
+          des C_n^k pour k pair = 2^{n-1}, idem pour k impair. 3) Application :
+          nombre de sous-ensembles de cardinal pair d'un ensemble a n elements.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-derivation-binome
+        type: exercise
+        title: "Derivation du binome — somme ponderee"
+        praxeologies: [Prax7b]
+        category: approfondissement
+        contenu: >-
+          f(x) = (1+x)^n. 1) Calculer f'(x) de deux facons. 2) Deduire
+          n×2^{n-1} = Σ k×C_n^k. 3) Deduire (1+x)^n ≥ 1+nx pour x ≥ 0.
+          4) Calculer Σ k^2 × C_n^k en derivant deux fois.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-integration-binome
+        type: exercise
+        title: "Integration du binome"
+        praxeologies: [Prax7b]
+        category: probleme
+        contenu: >-
+          1) Integrer (1+x)^n = Σ C_n^k x^k de 0 a 1. 2) Obtenir
+          (2^{n+1} - 1)/(n+1) = Σ C_n^k/(k+1). 3) Cas n=4 : verifier
+          numeriquement. Montrer la puissance de l'integration formelle.
+        difficulte: 3
+        timeMinutes: 15
+
+      - slug: qcm-denom-identite-2n
+        type: qcm
+        title: "Somme des C_n^k"
+        praxeologies: [Prax7b]
+        contenu: "C_5^0 + C_5^1 + ... + C_5^5. Distracteurs : 5!=120, 5^2=25, 2^5-1=31. Reponse : 2^5 = 32."
+        difficulte: 2
+        timeMinutes: 2
+
+  - label: "Chemins sur reseau"
+    atoms:
+      - slug: ex-denom-chemins-grille-base
+        type: exercise
+        title: "Chemins de A a Z — reseau rectangulaire"
+        praxeologies: [Prax10]
+        category: approfondissement
+        contenu: >-
+          Reseau, deplacements droite (d) ou haut (h). 1) Mots de 15 lettres
+          avec 10 d et 5 h → C_15^5 = 3003. 2) Chemins passant par E
+          (decomposer A→E × E→Z). 3) Chemins passant par E puis M.
+          4) Pourquoi C_{m+n}^m ? (bijection chemin ↔ mot binaire).
+        difficulte: 2
+        timeMinutes: 18
+
+      - slug: ex-denom-chemins-obstacle
+        type: exercise
+        title: "Chemins avec point interdit"
+        praxeologies: [Prax10, Prax6]
+        category: synthese
+        contenu: >-
+          Grille 5×4. a) Total de chemins. b) Chemins passant par P fixe.
+          c) Chemins NE passant PAS par Q interdit (complementaire :
+          total - passant par Q). d) Chemins passant par P mais pas par Q.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-chemins-robot
+        type: exercise
+        title: "Le robot sur la grille — mouvements contraints"
+        praxeologies: [Prax10, Prax8]
+        category: synthese
+        contenu: >-
+          Un robot se deplace sur une grille 6×4. Il peut aller droite (D),
+          haut (H), ou en diagonale (DH). a) Si seulement D et H : combien
+          de chemins ? b) Si D, H et DH sont autorises : modeliser et compter
+          (recurrence sur les cases). c) Chemins de longueur minimale.
+        difficulte: 3
+        timeMinutes: 18
+
+  - label: "Double comptage et identites profondes"
+    atoms:
+      - slug: lesson-denom-double-comptage
+        type: lesson
+        title: "Le double comptage — une technique puissante"
+        praxeologies: [Prax11]
+        contenu: >-
+          Principe : compter le meme ensemble de deux manieres differentes.
+          Exemple fondateur : Σ(C_n^k)^2 = C_{2n}^n via tirage bicolore.
+          Autre exemple : compter les poignees de main dans un groupe.
+          Methode : choisir un ensemble, partitionner, compter chaque partie.
+        difficulte: 2
+        timeMinutes: 8
+
+      - slug: ex-denom-vandermonde
+        type: exercise
+        title: "Identite de Vandermonde"
+        praxeologies: [Prax11]
+        category: probleme
+        contenu: >-
+          Urne avec n boules noires et n blanches (1 a n). On tire n boules.
+          a) Total : C_{2n}^n. b) Tirages avec p noires : C_n^p × C_n^{n-p} = (C_n^p)^2.
+          c) Sommer : Σ(C_n^k)^2 = C_{2n}^n. d) Application n=10 : verifier
+          numeriquement. e) Generaliser : Σ C_m^k × C_n^{p-k} = C_{m+n}^p.
+        difficulte: 3
+        timeMinutes: 18
+
+      - slug: ex-denom-poignees-de-main
+        type: exercise
+        title: "Poignees de main dans un groupe"
+        praxeologies: [Prax5a, Prax11]
+        category: approfondissement
+        contenu: >-
+          n personnes dans une salle, chacune serre la main a exactement k autres.
+          1) Montrer que nk est pair. 2) Pour n=10, k=3 : combien de poignees ? (15).
+          3) Generaliser : le nombre de poignees de main est nk/2. 4) Lien avec C_n^2
+          quand tout le monde se serre la main (k=n-1).
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: qcm-denom-vandermonde
+        type: qcm
+        title: "Identite de Vandermonde numerique"
+        praxeologies: [Prax11]
+        contenu: "(C_5^0)^2 + (C_5^1)^2 + ... + (C_5^5)^2. Distracteurs : 2^5=32, (2^5)^2=1024, 5!=120. Reponse : C_10^5 = 252."
+        difficulte: 2
+        timeMinutes: 2
+
+  - label: "Equations combinatoires et demonstrations"
+    atoms:
+      - slug: ex-denom-equations-combinatoires
+        type: exercise
+        title: "Equations en n avec A_n^p et C_n^p"
+        praxeologies: [Prax9]
+        category: approfondissement
+        contenu: >-
+          a) A_7^n = 21×A_6^{n-2} (n=5). b) C_n^2 + C_{n-3}^2 = 17 (pas de solution).
+          c) A_n^3 = 72×A_{n-2}^1 (n=9). Methode : remplacer par factorielles,
+          simplifier, resoudre, verifier conditions n ∈ N, p ≤ n.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-pascal-arithmetique
+        type: exercise
+        title: "Progression arithmetique dans le triangle de Pascal"
+        praxeologies: [Prax5b, Prax9]
+        category: probleme
+        contenu: >-
+          Existe-t-il n tel que 4 coefficients consecutifs sur la ligne n soient
+          en progression arithmetique ? Poser a, a+b, a+2b, a+3b = C_n^p, ..., C_n^{p+3}.
+          Remonter dans le triangle de Pascal, obtenir des equations, montrer
+          l'impossibilite. Probleme de raisonnement pur.
+        difficulte: 3
+        timeMinutes: 20
+
+      - slug: ex-denom-cnp-entier
+        type: exercise
+        title: "C_n^p est toujours un entier — demonstration"
+        praxeologies: [Prax5b]
+        category: probleme
+        contenu: >-
+          1) Calculer C_4^p pour p=0..4. 2) Montrer que n(n-1) est pair.
+          3) Deduire que C_n^2 ∈ N. 4) Montrer par recurrence (relation de Pascal)
+          que C_n^p ∈ N pour tout n,p. C'est surprenant : un quotient de factorielles
+          est toujours entier !
+        difficulte: 3
+        timeMinutes: 18
+
+      - slug: ex-denom-formule-cnp-recurrence
+        type: exercise
+        title: "C_n^p = n/p × C_{n-1}^{p-1}"
+        praxeologies: [Prax5b, Prax9]
+        category: approfondissement
+        contenu: >-
+          1) Verifier la formule C_n^p = n/p × C_{n-1}^{p-1} pour quelques valeurs.
+          2) La demontrer algebriquement. 3) En deduire la somme
+          S = Σ 1/k × C_n^k pour k=1 a n. 4) Lien avec l'integration du binome.
+        difficulte: 2
+        timeMinutes: 15
+
+  - label: "Applications reelles — biologie"
+    atoms:
+      - slug: lesson-denom-applications-reelles
+        type: lesson
+        title: "Le denombrement dans le monde reel"
+        praxeologies: [Prax2, Prax5a]
+        contenu: >-
+          Montrer que le denombrement n'est pas abstrait : il est partout.
+          Exemples rapides : ADN (4 bases, codons = 4^3 = 64), plaques
+          d'immatriculation, serrures a combinaison, code Braille, cryptographie.
+          Pour chaque exemple : quel modele (arrangement, combinaison, n^p) ?
+        difficulte: 2
+        timeMinutes: 7
+
+      - slug: ex-denom-adn-codons
+        type: exercise
+        title: "ADN — codons et proteines"
+        praxeologies: [Prax2]
+        category: synthese
+        contenu: >-
+          L'ADN utilise 4 bases (A, T, C, G). Un codon = triplet de 3 bases.
+          a) Nombre de codons possibles (4^3 = 64). b) Codons avec les 4 bases
+          distinctes : impossible (3 positions, 4 bases). c) Codons palindromes
+          (1ere = 3eme lettre) : 4 × 4 = 16. d) Si un gene a 300 codons, combien
+          de genes possibles ? (64^300). e) Pourquoi la nature n'utilise que 20
+          acides amines (redundance du code genetique).
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-mots-de-passe-securite
+        type: exercise
+        title: "Securite des mots de passe"
+        praxeologies: [Prax2, Prax6]
+        category: synthese
+        contenu: >-
+          Mot de passe de 8 caracteres (26 lettres + 10 chiffres + 10 symboles = 46).
+          a) Total si tous caracteres autorises (46^8). b) Si seulement lettres
+          minuscules (26^8). c) Si au moins 1 chiffre et 1 symbole (complementaire).
+          d) Si un ordinateur teste 10^9 mots/s, combien de temps pour tester
+          tous les mots de b) vs a) ? Montrer l'importance de la complexite.
+        difficulte: 2
+        timeMinutes: 15
+
+  - label: "Applications reelles — codes et jeux"
+    atoms:
+      - slug: ex-denom-braille
+        type: exercise
+        title: "Caracteres Braille"
+        praxeologies: [Prax5a, Prax6]
+        category: synthese
+        contenu: >-
+          Grille 2×3 (6 trous), on perce au moins 1 trou. a) Total (2^6 - 1 = 63).
+          b) Caracteres a 3 points (C_6^3 = 20). c) A 4 points (C_6^4 = 15).
+          d) A au plus 2 points (C_6^1 + C_6^2 = 21). e) Verifier que
+          Σ C_6^k pour k=1..6 = 63.
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: ex-denom-plaques-immatriculation
+        type: exercise
+        title: "Plaques d'immatriculation"
+        praxeologies: [Prax2]
+        category: application
+        contenu: >-
+          Format : 3 chiffres + 2 lettres + 2 chiffres (ex: 123-AB-45).
+          a) Nombre total de plaques (10^3 × 26^2 × 10^2). b) Plaques
+          palindromes (1er chiffre = dernier, 2e = avant-dernier, etc.).
+          c) Plaques avec au moins un 7 (complementaire). d) Si on passe a
+          4 lettres, combien de fois plus de plaques ?
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-denom-poker-mains
+        type: exercise
+        title: "Mains de poker — 5 cartes parmi 52"
+        praxeologies: [Prax5a, Prax8]
+        category: synthese
+        contenu: >-
+          Jeu de 52 cartes (4 couleurs × 13 valeurs). a) Nombre total de mains
+          de 5 cartes (C_52^5). b) Nombre de "carres" (4 cartes de meme valeur
+          + 1 autre) : 13 × 48. c) Nombre de "fulls" (3 + 2 de valeurs
+          differentes) : 13 × C_4^3 × 12 × C_4^2. d) Nombre de "couleurs"
+          (5 cartes de meme couleur) : 4 × C_13^5. Classer du plus rare au plus
+          frequent.
+        difficulte: 2
+        timeMinutes: 18
+
+      - slug: ex-denom-serrure-combinaison
+        type: exercise
+        title: "Serrure a combinaison"
+        praxeologies: [Prax2, Prax3]
+        category: application
+        contenu: >-
+          Serrure a 3 molettes de 0 a 39. a) Nombre de combinaisons si les 3
+          nombres sont distincts (A_40^3). b) Si le 1er et le 3eme tournent
+          dans le meme sens (contrainte). c) Combien de temps pour tester
+          toutes les combinaisons a 5 secondes chacune ?
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: ex-denom-sudoku-mini
+        type: exercise
+        title: "Mini-Sudoku 4×4"
+        praxeologies: [Prax4a, Prax8]
+        category: synthese
+        contenu: >-
+          Grille 4×4 a remplir avec 1,2,3,4 (chaque chiffre une fois par ligne
+          et par colonne). a) Nombre de facons de remplir la 1ere ligne (4!).
+          b) 2eme ligne sachant la 1ere (derangements de 4 elements ou denombrement
+          direct). c) Estimer le nombre total de grilles valides. Lien avec
+          les carres latins.
+        difficulte: 3
+        timeMinutes: 18
+
+  - label: "Applications reelles — probabilites et paradoxes"
+    atoms:
+      - slug: ex-denom-anniversaires
+        type: exercise
+        title: "Le paradoxe des anniversaires"
+        praxeologies: [Prax2, Prax6]
+        category: synthese
+        contenu: >-
+          n personnes dans une salle (365 jours possibles). a) Nombre de
+          configurations ou tous les anniversaires sont differents (A_365^n / 365^n).
+          b) Probabilite qu'au moins 2 partagent leur anniversaire (complementaire).
+          c) Calculer pour n=23 : la proba depasse 50% ! d) Pour n=50 : 97%.
+          Pourquoi est-ce surprenant ? (Notre intuition est mauvaise en combinatoire.)
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-probleme-tiroir
+        type: exercise
+        title: "Le principe des tiroirs (Pigeonhole)"
+        praxeologies: [Prax1, Prax8]
+        category: approfondissement
+        contenu: >-
+          Principe : si n+1 objets sont repartis dans n tiroirs, au moins un
+          tiroir contient 2 objets. Applications : a) Dans un groupe de 13
+          personnes, au moins 2 sont nees le meme mois. b) Parmi 5 entiers
+          quelconques, 2 ont la meme parite. c) Dans 27 mots de 3 lettres
+          (alphabet de 3 lettres), au moins 2 sont identiques (3^3 = 27 = n).
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: ex-denom-loterie
+        type: exercise
+        title: "Loterie — les chances de gagner"
+        praxeologies: [Prax5a, Prax6]
+        category: synthese
+        contenu: >-
+          Loterie : choisir 6 numeros parmi 49. a) Nombre de grilles (C_49^6 = 13983816).
+          b) Grilles avec exactement 3 bons numeros (C_6^3 × C_43^3). c) Grilles
+          avec au moins 1 bon (complementaire : C_43^6). d) Si on joue 1 grille/semaine,
+          combien d'annees pour esperer gagner le gros lot ? e) Comparer avec
+          la proba d'etre frappe par la foudre.
+        difficulte: 2
+        timeMinutes: 15
+
+  - label: "Chemins, arbres et recurrences"
+    atoms:
+      - slug: ex-denom-escalier-fibonacci
+        type: exercise
+        title: "Escaliers et suite de Fibonacci"
+        praxeologies: [Prax10, Prax8]
+        category: approfondissement
+        contenu: >-
+          Monter un escalier de n marches (sauts de 1 ou 2). a) Calculer u_1 a u_8.
+          b) Montrer u_n = u_{n-1} + u_{n-2} (recurrence). c) Reconnaitre Fibonacci.
+          d) Si on autorise aussi les sauts de 3 : quelle recurrence ?
+          (u_n = u_{n-1} + u_{n-2} + u_{n-3}). e) Calculer pour n=10.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-arbre-tournoi
+        type: exercise
+        title: "Tournoi — arbre d'elimination"
+        praxeologies: [Prax2, Prax4a]
+        category: approfondissement
+        contenu: >-
+          Equipe A vs B : la premiere a gagner 2 matchs de suite ou 3 au total
+          gagne le tournoi. a) Dessiner l'arbre des possibles. b) Nombre max
+          de matchs (5). c) Nombre min de matchs (2). d) Denombrer toutes les
+          suites de resultats possibles. e) Si chaque match est 50/50, proba
+          que A gagne (denombrement + fractions).
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-pavage-dominos
+        type: exercise
+        title: "Pavage d'un rectangle par des dominos"
+        praxeologies: [Prax8, Prax10]
+        category: probleme
+        contenu: >-
+          Rectangle 2×n pave par des dominos 2×1 (horizontal ou vertical).
+          a) Pour n=1 : 1 facon. b) n=2 : 2 facons. c) n=3 : 3 facons.
+          d) Montrer que le nombre de pavages f(n) verifie f(n) = f(n-1) + f(n-2).
+          e) Reconnaitre encore Fibonacci ! f) Calculer f(8).
+        difficulte: 3
+        timeMinutes: 18
+
+  - label: "Problemes de modelisation avancee"
+    atoms:
+      - slug: ex-denom-qcm-candidat
+        type: exercise
+        title: "Grilles de reponses a un QCM"
+        praxeologies: [Prax2, Prax7b]
+        category: synthese
+        contenu: >-
+          QCM 10 questions, 4 reponses/question. a) Total (4^10). b) Exactement
+          8 bonnes (C_10^8 × 3^2). c) Exactement p bonnes (C_10^p × 3^{10-p}).
+          d) Deduire Σ C_10^p × 3^{10-p} = 4^10 (binome de Newton).
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: ex-denom-derangements
+        type: exercise
+        title: "Le probleme des enveloppes (derangements)"
+        praxeologies: [Prax4a, Prax8]
+        category: probleme
+        contenu: >-
+          n lettres, n enveloppes. Combien de facons de mettre chaque lettre
+          dans une mauvaise enveloppe ? a) Pour n=2 : 1. b) n=3 : 2. c) n=4 : 9.
+          d) Trouver la recurrence D_n = (n-1)(D_{n-1} + D_{n-2}).
+          e) Formule : D_n = n! × Σ(-1)^k/k! pour k=0..n. Lien avec e^{-1} ≈ 0.368.
+        difficulte: 3
+        timeMinutes: 20
+
+      - slug: ex-denom-sierpinski
+        type: exercise
+        title: "Triangle de Pascal et triangle de Sierpinski"
+        praxeologies: [Prax5b, Prax7b]
+        category: probleme
+        contenu: >-
+          Dans le triangle de Pascal, colorier les nombres pairs en noir et
+          les impairs en blanc. a) Observer le motif pour les 8 premieres lignes.
+          b) Montrer que C_n^k est impair ssi chaque chiffre de k en base 2
+          est ≤ au chiffre correspondant de n (theoreme de Kummer/Lucas).
+          c) Reconnaitre le triangle de Sierpinski. d) Lien avec les fractales.
+        difficulte: 3
+        timeMinutes: 18
+
+      - slug: ex-denom-cryptographie-substitution
+        type: exercise
+        title: "Cryptographie — chiffrement par substitution"
+        praxeologies: [Prax4a, Prax2]
+        category: synthese
+        contenu: >-
+          Chiffrement par substitution : chaque lettre est remplacee par une autre.
+          a) Nombre de cles possibles avec 26 lettres (26!). Calculer l'ordre de
+          grandeur (≈ 4 × 10^26). b) Si on teste 10^9 cles/seconde, combien
+          d'annees ? c) Chiffrement de Cesar (decalage fixe) : combien de cles ? (25).
+          d) Pourquoi le chiffrement par substitution est-il vulnerable a l'analyse
+          de frequence mais pas au brute-force ?
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: qcm-denom-derangements
+        type: qcm
+        title: "Nombre de derangements de 4 elements"
+        praxeologies: [Prax4a]
+        contenu: "Derangements de {1,2,3,4} (aucun element a sa place). Distracteurs : 4!=24, 4!-1=23, 4!-4=20. Reponse : 9."
+        difficulte: 2
+        timeMinutes: 2
+
+      - slug: qcm-denom-sierpinski
+        type: qcm
+        title: "C_n^k pair ou impair"
+        praxeologies: [Prax5b]
+        contenu: "C_8^3 est-il pair ou impair ? Calculer : 8!/(3!5!) = 56 → pair. Distracteurs : impair (car 8 et 3 sont 'simples')."
+        difficulte: 2
+        timeMinutes: 2

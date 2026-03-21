@@ -1,0 +1,53 @@
+---
+type: exercise
+title: "Serrure à combinaison"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [denombrement, applications, arrangements]
+praxeologies: [Prax2, Prax3]
+---
+
+:::enonce
+Une serrure à combinaison possède **3 molettes**, chacune numérotée de 0 à 39.
+
+a) Combien de combinaisons sont possibles si les 3 nombres choisis sont **distincts** ?
+
+b) La serrure impose une contrainte : le 1er et le 3ème nombre doivent être de **même parité** (tous les deux pairs ou tous les deux impairs). Combien de combinaisons (à nombres distincts) respectent cette contrainte ?
+
+c) Si on teste chaque combinaison en **5 secondes**, combien de temps faudrait-il pour tester toutes les combinaisons du cas a) ?
+:::
+
+:::solution
+**a)** L'ordre des 3 nombres compte (la séquence 5-12-27 est différente de 27-5-12), et les nombres sont distincts. C'est un **arrangement sans répétition** :
+
+$$A_{40}^3 = 40 \times 39 \times 38 = 59\,280$$
+
+**b)** Parmi les nombres de 0 à 39, il y a **20 nombres pairs** (0, 2, 4, ..., 38) et **20 nombres impairs** (1, 3, 5, ..., 39).
+
+**Cas 1 : les 3 nombres de même parité sont pairs.**
+Le 1er nombre est pair : 20 choix. Le 3ème est pair et différent du 1er : 19 choix. Le 2ème est distinct des deux autres parmi les 38 restants : 38 choix.
+
+Nombre : $20 \times 38 \times 19 = 14\,440$.
+
+**Cas 2 : les 3 nombres de même parité sont impairs.**
+Par symétrie : $20 \times 38 \times 19 = 14\,440$.
+
+Attention, relisons l'énoncé : la contrainte est que le 1er et le 3ème soient de même parité. Le 2ème nombre n'a pas de contrainte de parité.
+
+**Cas 1 : 1er et 3ème pairs.** 1er nombre pair : 20 choix. 3ème nombre pair, distinct du 1er : 19 choix. 2ème nombre distinct des deux autres : 38 choix.
+
+$$20 \times 38 \times 19 = 14\,440$$
+
+**Cas 2 : 1er et 3ème impairs.** Par symétrie : $20 \times 38 \times 19 = 14\,440$.
+
+$$\text{Total} = 14\,440 + 14\,440 = 28\,880$$
+
+**c)** À 5 secondes par combinaison :
+
+$$t = 59\,280 \times 5 = 296\,400 \text{ secondes}$$
+
+$$= \frac{296\,400}{3600} \approx 82,3 \text{ heures} \approx 3,4 \text{ jours}$$
+
+Il faudrait plus de **3 jours** de tests ininterrompus pour essayer toutes les combinaisons.
+:::

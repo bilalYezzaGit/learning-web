@@ -1,0 +1,69 @@
+---
+type: exercise
+title: "Loterie — les chances de gagner"
+difficulty: 2
+timeMinutes: 15
+category: synthese
+tags: [denombrement, applications, loterie, combinaisons, complementaire]
+praxeologies: [Prax5a, Prax6]
+---
+
+:::enonce
+Dans une loterie, on doit choisir **6 numéros** parmi les entiers de **1 à 49**. L'ordre ne compte pas. Lors du tirage, 6 numéros gagnants sont tirés au hasard.
+
+a) Calculer le nombre total de grilles possibles.
+
+b) Calculer le nombre de grilles ayant **exactement 3 bons numéros**.
+
+c) Calculer le nombre de grilles ayant **au moins 1 bon numéro**.
+
+d) Si on joue **1 grille par semaine**, combien d'années faudrait-il en moyenne pour espérer avoir les 6 bons numéros ?
+
+e) La probabilité d'être frappé par la foudre dans une vie est d'environ $1/15\,000$. Comparer avec la probabilité de gagner le gros lot.
+:::
+
+:::solution
+**a)** On choisit 6 numéros parmi 49 sans ordre :
+
+$$C_{49}^6 = \frac{49!}{6! \times 43!} = \frac{49 \times 48 \times 47 \times 46 \times 45 \times 44}{720} = 13\,983\,816$$
+
+Il y a environ **14 millions** de grilles possibles.
+
+**b)** Pour avoir exactement 3 bons numéros :
+- On choisit 3 numéros parmi les 6 gagnants : $C_6^3 = 20$
+- On choisit 3 numéros parmi les 43 perdants : $C_{43}^3 = 12\,341$
+
+$$\text{Exactement 3 bons} = C_6^3 \times C_{43}^3 = 20 \times 12\,341 = 246\,820$$
+
+**c)** Par le **complémentaire** : au moins 1 bon = total $-$ aucun bon.
+
+Grilles avec aucun bon numéro : on choisit les 6 numéros parmi les 43 perdants.
+
+$$C_{43}^6 = \frac{43!}{6! \times 37!} = 6\,096\,454$$
+
+$$\text{Au moins 1 bon} = 13\,983\,816 - 6\,096\,454 = 7\,887\,362$$
+
+La probabilité d'avoir au moins 1 bon numéro est $\dfrac{7\,887\,362}{13\,983\,816} \approx 56,4\%$. C'est plus d'une chance sur deux, mais cela ne rapporte rien en pratique.
+
+**d)** Pour espérer les 6 bons numéros, il faut en moyenne jouer $13\,983\,816$ fois (une fois par combinaison possible).
+
+À raison d'une grille par semaine :
+
+$$\frac{13\,983\,816}{52} \approx 268\,920 \text{ années}$$
+
+Il faudrait environ **269 000 ans** — bien plus que la durée de l'espèce humaine.
+
+**e)** La probabilité de gagner le gros lot est :
+
+$$p_{\text{loto}} = \frac{1}{13\,983\,816} \approx 7,2 \times 10^{-8}$$
+
+La probabilité d'être frappé par la foudre dans une vie :
+
+$$p_{\text{foudre}} = \frac{1}{15\,000} \approx 6,7 \times 10^{-5}$$
+
+Le rapport est :
+
+$$\frac{p_{\text{foudre}}}{p_{\text{loto}}} = \frac{13\,983\,816}{15\,000} \approx 932$$
+
+Tu as environ **930 fois plus de chances** d'être frappé par la foudre que de gagner le gros lot de la loterie.
+:::

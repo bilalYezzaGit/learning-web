@@ -1,0 +1,51 @@
+---
+type: exercise
+title: "Le principe des tiroirs (Pigeonhole)"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [denombrement, principe-tiroirs, raisonnement]
+praxeologies: [Prax1, Prax8]
+---
+
+:::enonce
+**Principe des tiroirs** (ou *Pigeonhole Principle*) : si $n + 1$ objets sont répartis dans $n$ tiroirs, alors **au moins un tiroir contient au moins 2 objets**.
+
+a) Dans un groupe de **13 personnes**, montrer qu'au moins 2 personnes sont nées le **même mois**.
+
+b) Parmi **5 entiers** quelconques, montrer que 2 d'entre eux ont la **même parité** (tous les deux pairs ou tous les deux impairs).
+
+c) On forme **27 mots** de 3 lettres en utilisant un alphabet de 3 lettres $\{a, b, c\}$. Montrer qu'au moins 2 de ces mots sont **identiques**.
+:::
+
+:::solution
+**a)** Il y a 12 mois dans l'année. On répartit 13 personnes dans 12 " tiroirs " (un par mois de naissance).
+
+Comme $13 > 12$, par le principe des tiroirs, **au moins un mois contient au moins 2 personnes**. Donc au moins 2 personnes sont nées le même mois.
+
+**b)** Il y a exactement **2 classes de parité** : pair et impair. Ce sont nos 2 " tiroirs ".
+
+On répartit 5 entiers dans ces 2 tiroirs selon leur parité. Comme $5 > 2$, par le principe des tiroirs, au moins un tiroir contient au moins 2 entiers.
+
+Plus précisément, au moins $\lceil 5/2 \rceil = 3$ entiers ont la même parité (version renforcée du principe).
+
+Donc parmi 5 entiers, au moins 2 ont la même parité.
+
+**c)** Le nombre total de mots de 3 lettres formés avec l'alphabet $\{a, b, c\}$ est :
+
+$$3^3 = 27$$
+
+Les " tiroirs " sont les 27 mots possibles, et on place les 27 mots choisis dedans.
+
+Ici, $27 = 27$ : le nombre d'objets est **égal** au nombre de tiroirs, pas strictement supérieur. Le principe des tiroirs standard ne s'applique pas directement.
+
+**Mais** l'énoncé dit qu'on **forme** 27 mots (c'est-à-dire qu'on en écrit 27, potentiellement avec des répétitions). Si tous les 27 mots étaient distincts, ils seraient exactement les $3^3 = 27$ mots possibles. Mais si on en ajoute un 28ème, par le principe des tiroirs, il serait forcément identique à l'un des 27 précédents.
+
+Avec exactement 27 mots, il est **possible** que les 27 soient distincts (ils seraient alors tous les mots possibles), mais ce n'est pas garanti. En revanche, dès qu'on en forme **28 ou plus**, au moins 2 sont identiques, avec certitude.
+
+**Rectification** : le principe des tiroirs garantit qu'avec $27 + 1 = 28$ mots, au moins 2 sont identiques. Avec exactement 27, on ne peut que dire qu'ils sont **au plus** tous distincts, et dans ce cas ils épuisent toutes les possibilités.
+:::
+
+:::remark
+Le principe des tiroirs est d'une simplicité désarmante, mais ses conséquences sont profondes. Il est utilisé en théorie des nombres, en informatique (collisions de hachage), et en combinatoire avancée. Sa force vient du fait qu'il donne un résultat **sans avoir besoin de trouver l'exemple concret** : il prouve l'existence sans construire.
+:::

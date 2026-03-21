@@ -1,0 +1,76 @@
+---
+type: lesson
+title: "Arrangements sans répétition"
+difficulty: 0
+timeMinutes: 8
+tags: [denombrement, arrangements, factorielle]
+praxeologies: [Prax3]
+---
+
+### Définition
+
+:::definition[Arrangement]
+Soient $n$ et $p$ deux entiers naturels tels que $0 \leq p \leq n$.
+
+Un **arrangement de $p$ éléments parmi $n$** est un p-uplet $(x_1, x_2, \ldots, x_p)$ d'éléments **deux à deux distincts** d'un ensemble de $n$ éléments.
+
+Le nombre d'arrangements de $p$ parmi $n$ est noté $A_n^p$.
+:::
+
+:::remark
+Dans un arrangement, **l'ordre compte** et il n'y a **pas de répétition**. Choisir $(a, b, c)$ est différent de choisir $(b, a, c)$.
+:::
+
+### Formule
+
+:::theorem[Formule des arrangements]
+Pour $0 \leq p \leq n$ :
+
+$$A_n^p = n(n-1)(n-2)\cdots(n-p+1) = \frac{n!}{(n-p)!}$$
+
+C'est un produit de $p$ facteurs consécutifs décroissants, partant de $n$.
+:::
+
+**Démonstration par le principe multiplicatif :**
+
+Pour construire un p-uplet d'éléments distincts parmi $n$ :
+- **1re position** : $n$ choix possibles
+- **2e position** : $n - 1$ choix (un élément déjà utilisé)
+- **3e position** : $n - 2$ choix
+- ...
+- **p-ième position** : $n - p + 1$ choix
+
+Par le principe multiplicatif : $A_n^p = n \times (n-1) \times (n-2) \times \cdots \times (n-p+1)$.
+
+En multipliant et divisant par $(n-p)!$ :
+
+$$A_n^p = \frac{n!}{(n-p)!}$$
+
+### Exemples de calcul
+
+:::example[Calculs directs]
+- $A_5^2 = 5 \times 4 = 20$
+- $A_8^3 = 8 \times 7 \times 6 = 336$
+- $A_6^1 = 6$
+- $A_n^0 = 1$ (un seul 0-uplet : le tuple vide)
+:::
+
+:::example[Circuits touristiques]
+Une agence propose des circuits de 3 villes parmi 7 villes. L'ordre de visite compte (on ne visite pas la même ville deux fois).
+
+Le nombre de circuits possibles est $A_7^3 = 7 \times 6 \times 5 = 210$.
+:::
+
+:::example[Élection d'un bureau]
+On veut élire un président, un vice-président et un trésorier parmi 10 candidats (postes distincts).
+
+Le nombre de bureaux possibles est $A_{10}^3 = 10 \times 9 \times 8 = 720$.
+:::
+
+### Arrangement ou combinaison ?
+
+:::attention
+Les arrangements comptent les choix où **l'ordre importe**. Si l'on demande de " choisir un groupe " ou de " tirer simultanément " (sans distinction d'ordre), il faut utiliser les **combinaisons** $C_n^p$, que l'on verra plus loin.
+
+Retiens : **tirage successif sans remise = arrangement**, **tirage simultané = combinaison**.
+:::

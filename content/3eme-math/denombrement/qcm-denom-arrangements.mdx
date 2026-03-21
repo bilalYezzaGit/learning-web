@@ -1,0 +1,36 @@
+---
+type: qcm
+title: "Arrangements vs combinaisons"
+difficulty: 1
+timeMinutes: 2
+tags: [denombrement, arrangements, combinaisons, tirage]
+praxeologies: [Prax3, Prax5a]
+---
+
+:::question
+On tire **successivement et sans remise** 3 boules d'une urne contenant 8 boules distinctes. Quelle formule donne le nombre de tirages possibles ?
+:::
+
+:::option
+$C_8^3 = 56$
+:::
+
+:::option
+$8^3 = 512$
+:::
+
+:::option{correct}
+$A_8^3 = 336$
+:::
+
+:::option
+$3! \times 8 = 48$
+:::
+
+:::explanation
+Le tirage est **successif** (l'ordre compte) et **sans remise** (pas de répétition) : c'est un arrangement.
+
+$A_8^3 = 8 \times 7 \times 6 = 336$.
+
+$C_8^3 = 56$ correspondrait à un tirage **simultané** (sans ordre). $8^3 = 512$ correspondrait à un tirage **avec remise**. $3! \times 8 = 48$ n'a pas de signification combinatoire ici.
+:::

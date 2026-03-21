@@ -1,0 +1,46 @@
+---
+type: exercise
+title: "Lancer de 3 dés — discernables vs indiscernables"
+difficulty: 2
+timeMinutes: 12
+category: application
+tags: [denombrement, des, discernables, indiscernables, combinaisons]
+praxeologies: [Prax2, Prax5a]
+---
+
+:::enonce
+On lance simultanément $3$ dés dont les faces sont numérotées de $1$ à $6$.
+
+1. Si les dés sont **discernables** (par exemple de couleurs différentes), combien y a-t-il d'issues possibles ?
+2. Si les dés sont **indiscernables** (identiques), combien y a-t-il d'issues possibles ?
+:::
+
+:::solution
+**1. Dés discernables.** Chaque dé donne une valeur parmi $\{1, 2, 3, 4, 5, 6\}$, indépendamment des autres. C'est un tirage successif avec remise :
+
+$$6^3 = 216$$
+
+**2. Dés indiscernables.** Seul le **multi-ensemble** des résultats compte (pas quel dé donne quel résultat). On décompose en trois cas selon la structure du triplet.
+
+**Cas 1 : $3$ valeurs distinctes.** On choisit $3$ valeurs parmi $6$ :
+
+$$C_6^3 = 20$$
+
+**Cas 2 : exactement $2$ valeurs égales (et une différente).** On choisit la valeur qui apparaît $2$ fois ($6$ choix) puis la valeur qui apparaît $1$ fois ($5$ choix) :
+
+$$6 \times 5 = 30$$
+
+**Cas 3 : $3$ valeurs égales.** On choisit la valeur commune ($6$ choix) :
+
+$$6$$
+
+$$\text{Total} = 20 + 30 + 6 = 56$$
+
+**Vérification** : on peut aussi utiliser la formule des combinaisons avec répétition $C_{n+p-1}^p$ avec $n = 6$ valeurs et $p = 3$ dés :
+
+$$C_{6+3-1}^3 = C_8^3 = 56 \quad \checkmark$$
+:::
+
+:::remark
+La distinction entre dés discernables et indiscernables est fondamentale. Avec des dés discernables, $(1, 2, 3)$, $(2, 1, 3)$ et $(3, 2, 1)$ sont des issues **différentes**. Avec des dés indiscernables, elles comptent pour une **seule** issue : $\{1, 2, 3\}$.
+:::

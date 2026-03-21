@@ -1,0 +1,68 @@
+---
+type: exercise
+title: "Trois dés — somme 9 vs 10 (Galilée)"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [denombrement, des, somme, galilee, enumeration]
+praxeologies: [Prax2, Prax8]
+---
+
+:::enonce
+On lance $3$ dés **discernables** (faces de $1$ à $6$).
+
+Pourquoi la somme $10$ est-elle plus fréquente que la somme $9$ ?
+
+Pour chaque somme ($9$ et $10$), lister toutes les décompositions possibles et compter le nombre de triplets ordonnés correspondants.
+:::
+
+:::solution
+Pour chaque décomposition, on distingue trois types :
+- **$3$ chiffres distincts** : $3! = 6$ triplets ordonnés.
+- **$2$ chiffres égaux** et un différent : $\dfrac{3!}{2!} = 3$ triplets ordonnés.
+- **$3$ chiffres égaux** : $1$ seul triplet ordonné.
+
+**Somme $= 9$ :**
+
+```typst
+#table(
+  columns: 3,
+  align: center,
+  stroke: 0.5pt,
+  [*Décomposition*], [*Type*], [*Triplets ordonnés*],
+  [$\{1, 2, 6\}$], [$3$ distincts], [$6$],
+  [$\{1, 3, 5\}$], [$3$ distincts], [$6$],
+  [$\{1, 4, 4\}$], [$2$ égaux], [$3$],
+  [$\{2, 3, 4\}$], [$3$ distincts], [$6$],
+  [$\{2, 2, 5\}$], [$2$ égaux], [$3$],
+  [$\{3, 3, 3\}$], [$3$ égaux], [$1$],
+)
+```
+
+$$\text{Total pour } S = 9 : 6 + 6 + 3 + 6 + 3 + 1 = 25$$
+
+**Somme $= 10$ :**
+
+```typst
+#table(
+  columns: 3,
+  align: center,
+  stroke: 0.5pt,
+  [*Décomposition*], [*Type*], [*Triplets ordonnés*],
+  [$\{1, 3, 6\}$], [$3$ distincts], [$6$],
+  [$\{1, 4, 5\}$], [$3$ distincts], [$6$],
+  [$\{2, 2, 6\}$], [$2$ égaux], [$3$],
+  [$\{2, 3, 5\}$], [$3$ distincts], [$6$],
+  [$\{2, 4, 4\}$], [$2$ égaux], [$3$],
+  [$\{3, 3, 4\}$], [$2$ égaux], [$3$],
+)
+```
+
+$$\text{Total pour } S = 10 : 6 + 6 + 3 + 6 + 3 + 3 = 27$$
+
+**Conclusion** : la somme $10$ a $27$ triplets ordonnés contre $25$ pour la somme $9$. La différence vient du fait que $S = 9$ possède la décomposition $(3, 3, 3)$ qui ne donne qu'un seul triplet, alors que $S = 10$ a plus de décompositions avec $2$ égaux (chacune donnant $3$ triplets).
+:::
+
+:::remark
+Cette question a été posée au physicien Galilée par le Grand Duc de Toscane au XVIIe siècle. Les joueurs de l'époque avaient remarqué empiriquement que la somme $10$ apparaissait plus souvent que $9$, sans savoir l'expliquer.
+:::

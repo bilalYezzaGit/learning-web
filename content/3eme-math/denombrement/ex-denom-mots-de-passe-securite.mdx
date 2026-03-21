@@ -1,0 +1,77 @@
+---
+type: exercise
+title: "Sécurité des mots de passe"
+difficulty: 2
+timeMinutes: 15
+category: synthese
+tags: [denombrement, applications, cryptographie, complementaire]
+praxeologies: [Prax2, Prax6]
+---
+
+:::enonce
+Un mot de passe est composé de **8 caractères** choisis parmi :
+- 26 lettres minuscules
+- 10 chiffres (0 à 9)
+- 10 symboles spéciaux (!, @, etc.)
+
+soit un alphabet de $46$ caractères au total. Les caractères peuvent se répéter.
+
+a) Calculer le nombre total de mots de passe possibles.
+
+b) Calculer le nombre de mots de passe composés **uniquement de lettres minuscules**.
+
+c) Calculer le nombre de mots de passe contenant **au moins un chiffre et au moins un symbole**.
+
+d) Un ordinateur teste $10^9$ mots de passe par seconde. Combien de temps faudrait-il pour tester tous les mots de passe du cas b) ? Et du cas a) ? Conclure sur l'importance de la complexité.
+:::
+
+:::solution
+**a)** Chaque position parmi les 8 peut être remplie par l'un des 46 caractères (avec remise) :
+
+$$N_{\text{total}} = 46^8 = 20\,047\,612\,231\,936 \approx 2{,}0 \times 10^{13}$$
+
+**b)** Avec seulement des lettres minuscules (26 caractères) :
+
+$$N_{\text{lettres}} = 26^8 = 208\,827\,064\,576 \approx 2{,}1 \times 10^{11}$$
+
+**c)** On utilise la **méthode du complémentaire**. Notons :
+- $A$ = " le mot de passe contient au moins un chiffre "
+- $B$ = " le mot de passe contient au moins un symbole "
+
+On cherche $\text{card}(A \cap B)$.
+
+Par la formule d'inclusion-exclusion : $\text{card}(\overline{A \cap B}) = \text{card}(\overline{A} \cup \overline{B})$
+
+$$\text{card}(\overline{A} \cup \overline{B}) = \text{card}(\overline{A}) + \text{card}(\overline{B}) - \text{card}(\overline{A} \cap \overline{B})$$
+
+- $\overline{A}$ = " aucun chiffre " : alphabet de $26 + 10 = 36$ caractères $\Rightarrow 36^8$
+- $\overline{B}$ = " aucun symbole " : alphabet de $26 + 10 = 36$ caractères $\Rightarrow 36^8$
+- $\overline{A} \cap \overline{B}$ = " aucun chiffre et aucun symbole " = lettres uniquement $\Rightarrow 26^8$
+
+$$\text{card}(A \cap B) = 46^8 - 2 \times 36^8 + 26^8$$
+
+$$= 20\,047\,612\,231\,936 - 5\,642\,219\,814\,912 + 208\,827\,064\,576 \approx 1{,}5 \times 10^{13}$$
+
+**d)** À $10^9$ tests/seconde :
+
+**Cas b) (lettres uniquement)** :
+
+$$t_b = \frac{26^8}{10^9} \approx 210 \text{ secondes}$$
+
+soit environ **3 minutes et demie**.
+
+**Cas a) (alphabet complet)** :
+
+$$t_a = \frac{46^8}{10^9} \approx 20\,048 \text{ secondes}$$
+
+soit environ **5 heures et demie**.
+
+**Conclusion** : en passant de 26 à 46 caractères, le temps de recherche est multiplié par environ $(46/26)^8 \approx 96$. Utiliser un alphabet plus riche augmente **exponentiellement** la sécurité du mot de passe.
+
+Et encore, 8 caractères restent faibles. Avec 12 caractères et 46 symboles, il faudrait environ **2 200 ans** de recherche !
+:::
+
+:::erreurs
+- Oublier d'utiliser le complémentaire pour " au moins un chiffre ET au moins un symbole " et tenter un comptage direct (très compliqué)
+- Confondre " au moins un parmi " (complémentaire de " aucun ") et " exactement un "
+:::

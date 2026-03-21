@@ -1,0 +1,40 @@
+---
+type: qcm
+title: "Méthode du complémentaire"
+difficulty: 1
+timeMinutes: 2
+tags: [denombrement, complementaire, cartes]
+praxeologies: [Prax6]
+---
+
+:::question
+Dans un jeu de $32$ cartes, on tire une main de $5$ cartes. Le nombre de mains contenant **au moins un as** est :
+:::
+
+:::option
+$C_4^1 \times C_{28}^4 = 81\,200$
+:::
+
+:::option
+$C_4^1 + C_4^2 + C_4^3 + C_4^4 = 15$
+:::
+
+:::option{correct}
+$C_{32}^5 - C_{28}^5 = 102\,936$
+:::
+
+:::option
+$4 \times C_{32}^4 = 139\,880$
+:::
+
+:::explanation
+On utilise la **méthode du complémentaire** : " au moins un as " = total $-$ " aucun as ".
+
+- Total : $C_{32}^5 = 201\,376$.
+- Aucun as : on choisit $5$ cartes parmi les $28$ non-as : $C_{28}^5 = 98\,280$.
+- Réponse : $201\,376 - 98\,280 = 103\,096$.
+
+Le distracteur $C_4^1 \times C_{28}^4$ ne compte que les mains avec **exactement** $1$ as, pas " au moins un ".
+
+**Attention** : le résultat exact est $C_{32}^5 - C_{28}^5 = 201\,376 - 98\,280 = 103\,096$. La formule $C_{32}^5 - C_{28}^5$ est bien la bonne méthode.
+:::

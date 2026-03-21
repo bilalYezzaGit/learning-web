@@ -1,0 +1,23 @@
+---
+type: exercise
+title: "Grille de mots croisés"
+difficulty: 1
+timeMinutes: 5
+category: application
+tags: [denombrement, grille, combinaisons]
+praxeologies: [Prax5a]
+---
+
+:::enonce
+Une grille de mots croisés comporte $10$ lignes et $12$ colonnes, soit $120$ cases. On doit noircir $23$ cases pour former le motif de la grille.
+
+Combien de grilles différentes peut-on réaliser ?
+:::
+
+:::solution
+On choisit $23$ cases à noircir parmi $120$. L'ordre n'intervient pas (on choisit un sous-ensemble de cases). C'est donc une **combinaison** :
+
+$$C_{120}^{23} = \frac{120!}{23! \times 97!}$$
+
+Ce nombre est astronomiquement grand, mais l'écriture sous forme de $C_{120}^{23}$ est la réponse attendue.
+:::
