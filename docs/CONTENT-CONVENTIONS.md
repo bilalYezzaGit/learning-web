@@ -4,7 +4,7 @@ Version 5 — 2026-03-22
 
 Ce document definit les regles strictes d'ecriture du contenu pedagogique. Tout contenu qui ne respecte pas ces regles doit etre corrige. La convention prime sur l'existant.
 
-> **Architecture `_meta/`** : le modele academique (savoir, praxeologies, misconceptions, lexique, patterns) vit dans `_meta/modules/{module}/`, separe de la production de contenu dans `content/`. Le repertoire `_meta/` n'est pas touche par le pipeline de contenu.
+> **Architecture `_meta/`** : le modele academique (savoir, praxeologies, misconceptions, lexique, patterns) vit dans `_meta/{programme}/{module}/`, separe de la production de contenu dans `content/`. Le repertoire `_meta/` n'est pas touche par le pipeline de contenu.
 
 ---
 
@@ -115,7 +115,7 @@ Liste de tags semantiques. Minimum 1, pas de maximum recommande mais rester rais
 #### `praxeologies`
 
 Liste des IDs de praxeologies couvertes par cet atome. Optionnel, defaut `[]`.
-Les IDs referencent les praxeologies du modele academique (`_meta/modules/{mod}/praxeologies.yaml`).
+Les IDs referencent les praxeologies du modele academique (`_meta/{prog}/{mod}/praxeologies.yaml`).
 Renseigne automatiquement lors de la generation depuis un planning (WF3).
 
 ```yaml
@@ -125,7 +125,7 @@ praxeologies: [Prax1, Prax2a, Prax4]
 #### `pattern`
 
 ID du pattern d'examen instancie par cet atome. Optionnel.
-Reference un pattern dans `_meta/modules/{mod}/patterns.yaml`.
+Reference un pattern dans `_meta/{prog}/{mod}/patterns.yaml`.
 Utilise principalement pour les exercices du Livret 2 (Examen), generes a partir de patterns reels.
 
 ```yaml
@@ -303,26 +303,27 @@ content/
 
 _meta/                                   # modele academique (hors pipeline)
 ├── _interface.yaml                      # schema d'interface _meta ↔ content
-├── global/                              # donnees transversales
-│   ├── lexique.yaml
-│   ├── complexite.yaml
-│   └── prerequis-graph.yaml
-├── examens/                             # specifications d'examens
-│   └── bac-3eme-t3.yaml
-└── modules/                             # 1 repertoire par module
-    ├── nombre-derive/
+├── lexique.yaml                         # conventions globales (append-only)
+├── complexite.yaml                      # echelle 0-3
+├── booklet-profiles.yaml                # profils cours/examen/exploration
+└── 3eme-math/                           # 1 repertoire par programme
+    ├── prerequis-graph.yaml             # graphe de dependances entre modules
+    ├── nombre-derive/                   # 1 repertoire par module
     │   ├── savoir.yaml                    # savoirs theoriques (ex _kb.md)
     │   ├── praxeologies.yaml              # taches-types et techniques
     │   ├── misconceptions.yaml            # erreurs frequentes
     │   ├── lexique.yaml                   # vocabulaire du module
     │   ├── redaction.yaml                 # conventions de redaction du module
-    │   └── patterns.yaml               # patterns d'examen (ex _patterns.yaml)
-    └── fonction-derivee/
-        ├── savoir.yaml
-        ├── praxeologies.yaml
-        ├── misconceptions.yaml
-        ├── lexique.yaml
-        └── redaction.yaml
+    │   └── patterns.yaml                  # patterns d'examen (ex _patterns.yaml)
+    ├── fonction-derivee/
+    │   ├── savoir.yaml
+    │   ├── praxeologies.yaml
+    │   ├── misconceptions.yaml
+    │   ├── lexique.yaml
+    │   └── redaction.yaml
+    └── examens/                           # specifications d'examens
+        └── synthese-3eme-t3/
+            └── spec.yaml
 ```
 
 Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les atomes (`.mdx` dans les modules), et les molecules/livrets (`_molecules/{slug}/molecule.yaml`). Les fichiers prefixes `_` dans les sous-repertoires molecule sont **invisibles au pipeline** :
@@ -332,7 +333,7 @@ Le pipeline decouvre automatiquement les programmes (repertoires contenant `_pro
 | `_planning.yaml` | Spec de generation (par molecule) | WF2 |
 | `_validation.md` | Rapport de validation (par molecule) | WF4 |
 
-Le modele academique (anciennement `_kb.md` et `_patterns.yaml` dans les modules) vit desormais dans `_meta/modules/{module}/` :
+Le modele academique (anciennement `_kb.md` et `_patterns.yaml` dans les modules) vit desormais dans `_meta/{programme}/{module}/` :
 
 | Fichier `_meta/` | Role | Cree par |
 |-------------------|------|----------|
@@ -952,7 +953,7 @@ Un atome est valide si :
 
 ## 11. Patterns d'examen (`patterns.yaml`)
 
-Fichier par module : `_meta/modules/{module}/patterns.yaml`. Contient les variantes d'exercices d'examen classifiees par praxeologie.
+Fichier par module : `_meta/{programme}/{module}/patterns.yaml`. Contient les variantes d'exercices d'examen classifiees par praxeologie.
 
 Ce fichier est **vivant** — enrichi iterativement a chaque nouvelle source d'exercices (WF1+). Il vit dans `_meta/`, separe du pipeline de contenu.
 
@@ -965,7 +966,7 @@ version: 1                              # incremente a chaque enrichissement
 
 patterns:
   - id: Prax3.v1                        # convention : {Praxeologie}.v{numero}
-    praxeology: Prax3                   # reference vers _meta/modules/{mod}/praxeologies.yaml
+    praxeology: Prax3                   # reference vers _meta/{prog}/{mod}/praxeologies.yaml
     name: "Nom court de la variante"
     description: >-
       Ce que l'eleve doit faire dans cette variante.
@@ -990,9 +991,9 @@ patterns:
 
 ### Regles
 
-- **1 fichier par module** dans `_meta/modules/{module}/patterns.yaml` (pas par molecule)
+- **1 fichier par module** dans `_meta/{programme}/{module}/patterns.yaml` (pas par molecule)
 - IDs de patterns : `{Praxeologie}.v{numero}` (ex: `Prax3.v1`, `Prax3.v2`)
-- Chaque pattern reference une praxeologie de `_meta/modules/{module}/praxeologies.yaml` via `praxeology:`
+- Chaque pattern reference une praxeologie de `_meta/{programme}/{module}/praxeologies.yaml` via `praxeology:`
 - `frequency` = nombre d'occurrences observees dans les sources ingeres
 - `examples` = exercices reels (pas inventes), avec source
 - `variables` = ce qui change d'un exercice a l'autre pour ce pattern

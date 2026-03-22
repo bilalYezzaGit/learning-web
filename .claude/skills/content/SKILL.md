@@ -30,7 +30,7 @@ Genere un planning de livret a partir d'une KB module. Le planning declare tous 
 
 ### Pre-requis
 
-- Meta module existante (`_meta/modules/{module}/` avec savoir.yaml, praxeologies.yaml)
+- Meta module existante (`_meta/{programme}/{module}/` avec savoir.yaml, praxeologies.yaml)
 - Si pas de meta : creer d'abord la KB (`/content kb {module}`)
 
 ### Syntaxe
@@ -40,7 +40,7 @@ Genere un planning de livret a partir d'une KB module. Le planning declare tous 
 /content plan {module} : {profil}, {specs libres}
 ```
 
-Le premier mot apres `:` est matche contre les profils de `_meta/global/booklet-profiles.yaml` :
+Le premier mot apres `:` est matche contre les profils de `_meta/booklet-profiles.yaml` :
 - **`cours`** — difficulte 0-1, application directe, ~16 atomes, guidance elevee
 - **`examen`** — difficulte 1-2, combinaison de techniques, ~17 atomes, exercices types
 - **`exploration`** — difficulte 2-3, problemes de synthese, ~10 atomes, guidance faible
@@ -59,17 +59,17 @@ Exemples :
 ### Etapes
 
 0. **Charger le profil de livret** :
-   - Read `_meta/global/booklet-profiles.yaml`
+   - Read `_meta/booklet-profiles.yaml`
    - Matcher le premier mot apres `:` (cours, examen, exploration)
    - Extraire : difficulty range, structure (exercise_count, lesson_count, qcm_count), exercise_categories (required/forbidden), contexts (allowed/forbidden), progression, guidance_level, expected_order
    - Si specs libres supplementaires : elles overrident les valeurs du profil
    - Ecrire le champ `profile:` dans le planning genere
 
-1. **Charge la meta module** : Read `_meta/modules/{module}/savoir.yaml` + `_meta/modules/{module}/praxeologies.yaml`
+1. **Charge la meta module** : Read `_meta/{programme}/{module}/savoir.yaml` + `_meta/{programme}/{module}/praxeologies.yaml`
 
 2. **Charge le template planning** : Read `.claude/skills/content/references/planning-template.yaml`
 
-3. **Analyse les praxeologies** de `_meta/modules/{module}/praxeologies.yaml` :
+3. **Analyse les praxeologies** de `_meta/{programme}/{module}/praxeologies.yaml` :
    - Lister toutes les praxeologies avec leur difficulte
    - Identifier les groupements thematiques naturels
 
@@ -143,7 +143,7 @@ Voir [actions/enrich-patterns.md](actions/enrich-patterns.md) pour le pipeline c
 
 ### Pre-requis
 
-- Meta module existante (`_meta/modules/{module}/` avec savoir.yaml, praxeologies.yaml)
+- Meta module existante (`_meta/{programme}/{module}/` avec savoir.yaml, praxeologies.yaml)
 - Si pas de meta : creer d'abord la KB (`/content kb {module}`)
 
 ### Syntaxe
@@ -156,29 +156,29 @@ L'utilisateur fournit des exercices en contexte (transcriptions Typst, texte, im
 
 ### Etapes
 
-1. **Charge la meta module** : lire `_meta/modules/{module}/savoir.yaml` + `_meta/modules/{module}/praxeologies.yaml`
+1. **Charge la meta module** : lire `_meta/{programme}/{module}/savoir.yaml` + `_meta/{programme}/{module}/praxeologies.yaml`
 
-2. **Charge `_meta/modules/{module}/patterns.yaml` existant** (ou creer la structure vide si premier appel)
+2. **Charge `_meta/{programme}/{module}/patterns.yaml` existant** (ou creer la structure vide si premier appel)
 
 3. **Charge le template patterns** : Read `.claude/skills/content/references/patterns-template.yaml`
 
 4. **Analyse chaque exercice fourni** :
    - Identifier la/les praxeologie(s) mobilisees (reference KB)
    - Extraire : type de tache, technique, variables qui changent
-   - Comparer avec les patterns existants dans `_meta/modules/{module}/patterns.yaml`
+   - Comparer avec les patterns existants dans `_meta/{programme}/{module}/patterns.yaml`
 
 5. **Classifier** :
    - Si **variante connue** → incrementer `frequency`, ajouter source, optionnellement ajouter un exemple
    - Si **nouvelle variante** → creer un nouveau pattern avec ID `PraxN.vM`
    - Si **praxeologie inconnue** (pas dans la KB) → **signaler a l'humain**, ne pas modifier la KB
 
-6. **Ecrire** `_meta/modules/{module}/patterns.yaml` mis a jour, incrementer `version`
+6. **Ecrire** `_meta/{programme}/{module}/patterns.yaml` mis a jour, incrementer `version`
 
 7. **Afficher un resume** : N exercices analyses, M nouveaux patterns, K variantes enrichies, J non classifies
 
 ### Regles
 
-- 1 fichier `_meta/modules/{module}/patterns.yaml` par module (pas par molecule)
+- 1 fichier `_meta/{programme}/{module}/patterns.yaml` par module (pas par molecule)
 - Ne jamais modifier la KB automatiquement
 - Les `examples` sont des exercices reels (pas inventes), avec source
 - `frequency` est incremente a chaque observation dans une nouvelle source
@@ -313,7 +313,7 @@ Atomes:     content/{programme}/{module}/{type}-{topic}-{slug}.mdx
 Molecules:  content/{programme}/{module}/_molecules/{slug}/molecule.yaml
 Planning:   content/{programme}/{module}/_molecules/{slug}/_planning.yaml
 Validation: content/{programme}/{module}/_molecules/{slug}/_validation.md
-Meta:       _meta/modules/{module}/  (savoir.yaml, praxeologies.yaml, patterns.yaml, redaction.yaml, etc.)
+Meta:       _meta/{programme}/{module}/  (savoir.yaml, praxeologies.yaml, patterns.yaml, redaction.yaml, etc.)
 Programme:  content/{programme}/_programme.yaml
 ```
 
@@ -385,15 +385,16 @@ Commandes liees : `/source scan`, `/source discover`, `/source status`
 
 ### Meta (modele academique)
 - Interface : `_meta/_interface.yaml`
-- Savoir module : `_meta/modules/{module}/savoir.yaml`
-- Praxeologies : `_meta/modules/{module}/praxeologies.yaml`
-- Patterns : `_meta/modules/{module}/patterns.yaml`
-- Misconceptions : `_meta/modules/{module}/misconceptions.yaml`
-- Lexique module : `_meta/modules/{module}/lexique.yaml`
-- Redaction : `_meta/modules/{module}/redaction.yaml`
-- Specs examen : `_meta/examens/{slug}.yaml`
-- Profils livrets : `_meta/global/booklet-profiles.yaml` (cours, examen, exploration)
-- Globaux : `_meta/global/` (lexique.yaml, complexite.yaml, prerequis-graph.yaml)
+- Savoir module : `_meta/{programme}/{module}/savoir.yaml`
+- Praxeologies : `_meta/{programme}/{module}/praxeologies.yaml`
+- Patterns : `_meta/{programme}/{module}/patterns.yaml`
+- Misconceptions : `_meta/{programme}/{module}/misconceptions.yaml`
+- Lexique module : `_meta/{programme}/{module}/lexique.yaml`
+- Redaction : `_meta/{programme}/{module}/redaction.yaml`
+- Specs examen : `_meta/{programme}/examens/{slug}/spec.yaml`
+- Profils livrets : `_meta/booklet-profiles.yaml` (cours, examen, exploration)
+- Globaux : `_meta/` (lexique.yaml, complexite.yaml)
+- Prerequis : `_meta/{programme}/prerequis-graph.yaml`
 
 
 ### Difficulty scale

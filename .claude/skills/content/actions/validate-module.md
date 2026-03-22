@@ -22,11 +22,11 @@
 
 3. Contexte pedagogique (si disponible) :
    ```
-   Read: _meta/modules/{module}/savoir.yaml
-   Read: _meta/modules/{module}/praxeologies.yaml
-   Read: _meta/modules/{module}/misconceptions.yaml
-   Read: _meta/modules/{module}/lexique.yaml
-   Read: _meta/modules/{module}/redaction.yaml
+   Read: _meta/{programme}/{module}/savoir.yaml
+   Read: _meta/{programme}/{module}/praxeologies.yaml
+   Read: _meta/{programme}/{module}/misconceptions.yaml
+   Read: _meta/{programme}/{module}/lexique.yaml
+   Read: _meta/{programme}/{module}/redaction.yaml
    Glob: content/{programme}/{module}/_molecules/*/_planning.yaml
    ```
    → Si fichiers KB/planning absents, Grille C sera notee **partielle**
@@ -53,11 +53,11 @@ Glob: content/**/{module}/*.mdx
    ```
 3. KB module (si existante) :
      ```
-     Read: _meta/modules/{module}/savoir.yaml
-     Read: _meta/modules/{module}/praxeologies.yaml
-     Read: _meta/modules/{module}/misconceptions.yaml
-     Read: _meta/modules/{module}/lexique.yaml
-     Read: _meta/modules/{module}/redaction.yaml
+     Read: _meta/{programme}/{module}/savoir.yaml
+     Read: _meta/{programme}/{module}/praxeologies.yaml
+     Read: _meta/{programme}/{module}/misconceptions.yaml
+     Read: _meta/{programme}/{module}/lexique.yaml
+     Read: _meta/{programme}/{module}/redaction.yaml
      ```
    - Si les fichiers n'existent pas, noter que la Grille C sera partielle
 4. Plannings per-molecule (si existants) :

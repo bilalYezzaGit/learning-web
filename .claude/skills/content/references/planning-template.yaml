@@ -22,13 +22,13 @@ module: "{slug-module}"                           # Ex: continuite
 programme: "{slug-programme}"                     # Ex: 3eme-math
 status: draft                                     # draft | validated | generated
 
-# Profil de livret (charge depuis _meta/global/booklet-profiles.yaml)
+# Profil de livret (charge depuis _meta/booklet-profiles.yaml)
 # Valeurs : cours | examen | exploration
 profile: "{cours|examen|exploration}"
 
 # References vers _meta/ (resolu via _meta/_interface.yaml)
 meta_refs:
-  module: "{slug-module}"          # → _meta/modules/{slug-module}/
+  module: "{slug-module}"          # → _meta/{slug-programme}/{slug-module}/
   # patterns: [Prax1.v1, ...]     # optionnel, pour livrets examen
   # examen: "synthese-3eme-t3"    # optionnel, pour livrets de preparation
 

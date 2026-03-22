@@ -41,20 +41,21 @@ content/       Systeme de production de livrets
 | Ressource | Chemin | Role | Format |
 |-----------|--------|------|--------|
 | Interface | `_meta/_interface.yaml` | Contrat IDs, schemas, conventions d'identifiants | YAML v2 |
-| **Par module** | `_meta/modules/{mod}/` | 6 fichiers par module | |
+| **Globaux (racine)** | `_meta/` | Fichiers transversaux a tous les programmes | |
+| Complexite | `→ complexite.yaml` | Echelle 0-3 avec criteres, correspondance types d'atomes | YAML |
+| Lexique global | `→ lexique.yaml` | Vocabulaire partage, verbes d'action, conventions de demonstration | YAML |
+| Profils livrets | `→ booklet-profiles.yaml` | Calibration des 3 types de livrets (cours, examen, exploration) : nb atomes, difficulte, categories, contextes, progression | YAML |
+| **Par programme** | `_meta/{prog}/` | Fichiers specifiques a un programme | |
+| Prerequis | `→ prerequis-graph.yaml` | Graphe de dependances entre modules (ordre, trimestres) | YAML |
+| **Par module** | `_meta/{prog}/{mod}/` | 6 fichiers par module | |
 | Savoir | `→ savoir.yaml` | Objectif, epistemic_level (admis/demontre/exclu), theoremes, concepts, KC | YAML structure |
 | Praxeologies | `→ praxeologies.yaml` | TAD de Chevallard : tache, technique, technologie, theorie + didactic_variables, difficulty_profiles, exam_frequency | YAML structure |
 | Patterns | `→ patterns.yaml` | Variantes d'exercices observees dans les examens (frequency, sources, examples) | YAML structure |
 | Misconceptions | `→ misconceptions.yaml` | Erreurs frequentes avec category, diagnostic QCM (reveals), remediation (praxeology_to_practice) | YAML structure |
 | Lexique | `→ lexique.yaml` | Notations, formules de redaction, regles de rigueur, longueurs type | YAML structure |
 | Redaction | `→ redaction.yaml` | Modeles de redaction par praxeologie avec templates, variantes, criteres de notation ponderes | YAML structure |
-| **Globaux** | `_meta/global/` | Cross-module | |
-| Complexite | `→ complexite.yaml` | Echelle 0-3 avec criteres, correspondance types d'atomes | YAML |
-| Lexique global | `→ lexique.yaml` | Vocabulaire partage, verbes d'action, conventions de demonstration | YAML |
-| Prerequis | `→ prerequis-graph.yaml` | Graphe de dependances entre modules (ordre, trimestres) | YAML |
-| Profils livrets | `→ booklet-profiles.yaml` | Calibration des 3 types de livrets (cours, examen, exploration) : nb atomes, difficulte, categories, contextes, progression | YAML |
-| **Examens** | `_meta/examens/` | Specs par examen | |
-| Spec examen | `→ {slug}.yaml` | Structure, duree, distribution par module, patterns transversaux | YAML |
+| **Examens** | `_meta/{prog}/examens/` | Specs par examen | |
+| Spec examen | `→ {slug}/spec.yaml` | Structure, duree, distribution par module, patterns transversaux | YAML |
 
 ### Couche 3 — `content/` (production de livrets)
 
@@ -92,7 +93,7 @@ content/       Systeme de production de livrets
 flowchart TD
     PDF["PDF brut"] -->|"WF0a : indexer"| Fiche[("Fiche source YAML\n_raw/sources/*.yaml")]
     Fiche -->|"WF0b : transcrire\n/transcription"| Typst[("References Typst\n_raw/reference/{prog}/{mod}/*.typ")]
-    Typst -->|"WF1 : creer KB\n/content kb"| Meta[("_meta/modules/{mod}/\n6 fichiers YAML")]
+    Typst -->|"WF1 : creer KB\n/content kb"| Meta[("_meta/{prog}/{mod}/\n6 fichiers YAML")]
     Meta -->|"WF1+ : enrichir patterns\n/content patterns"| Patterns[("patterns.yaml\n(version N)")]
     Series["Nouvelles series\nBAC, devoirs, parascolaires"] -->|"WF1+"| Patterns
     Patterns -.->|"iteratif\n(N fois)"| Patterns
@@ -158,12 +159,12 @@ flowchart TD
     TPL["kb-template.md"] -.-> Synth
     REF["docs/referentiels/"] -.-> Synth
     Analyse --> Synth["Synthetiser en KB\n6 fichiers YAML structures"]
-    Synth --> Meta[("_meta/modules/{mod}/\nsavoir.yaml\npraxeologies.yaml\nmisconceptions.yaml\nlexique.yaml\nredaction.yaml")]
+    Synth --> Meta[("_meta/{prog}/{mod}/\nsavoir.yaml\npraxeologies.yaml\nmisconceptions.yaml\nlexique.yaml\nredaction.yaml")]
     Meta --> Interface["Mettre a jour\n_interface.yaml"]
 ```
 
 **Entree** : fichiers `.typ` pour le module (jusqu'a 3 sources)
-**Sortie** : `_meta/modules/{module}/` — 5 fichiers YAML :
+**Sortie** : `_meta/{programme}/{module}/` — 5 fichiers YAML :
 
 | Fichier | Contenu | Sections KB |
 |---------|---------|-------------|
@@ -183,12 +184,12 @@ flowchart TD
 
 Accumule des patterns d'exercices a partir de series, BAC, parascolaires. Peut etre appele N fois par module.
 
-**Prerequis** : KB module existante dans `_meta/modules/{mod}/`.
+**Prerequis** : KB module existante dans `_meta/{prog}/{mod}/`.
 
 ```mermaid
 flowchart TD
-    KB[("_meta/modules/{mod}/\npraxeologies.yaml")] --> Load["Charger praxeologies"]
-    PAT[("_meta/modules/{mod}/\npatterns.yaml\n(existant ou vide)")] --> Load
+    KB[("_meta/{prog}/{mod}/\npraxeologies.yaml")] --> Load["Charger praxeologies"]
+    PAT[("_meta/{prog}/{mod}/\npatterns.yaml\n(existant ou vide)")] --> Load
     Source["Exercices\n(Typst, MDX, texte, image)"] --> Analyse["Analyser chaque exercice"]
     Load --> Analyse
     Analyse --> Class{"Variante\nconnue ?"}
@@ -200,11 +201,11 @@ flowchart TD
 ```
 
 **Entree** : exercices (Typst, MDX, texte, image) + KB module
-**Sortie** : `_meta/modules/{module}/patterns.yaml` (cree ou enrichi)
+**Sortie** : `_meta/{programme}/{module}/patterns.yaml` (cree ou enrichi)
 
 | Declencheur | Ressources chargees |
 |-------------|---------------------|
-| `/content patterns {module}` | KB module (_meta/), patterns.yaml existant, exercices fournis |
+| `/content patterns {module}` | KB module (_meta/{prog}/{mod}/), patterns.yaml existant, exercices fournis |
 
 **Regles** : 1 fichier par module, ne jamais modifier la KB, examples reels uniquement, IDs `PraxN.vM`.
 
@@ -214,15 +215,15 @@ flowchart TD
 
 Declare tous les atomes et la structure d'un livret AVANT generation.
 
-**Prerequis** : KB module dans `_meta/modules/{mod}/`.
+**Prerequis** : KB module dans `_meta/{prog}/{mod}/`.
 
 ```mermaid
 flowchart TD
-    KB[("_meta/modules/{mod}/\nsavoir.yaml + praxeologies.yaml")] --> Analyse["2a — Analyser les praxeologies"]
+    KB[("_meta/{prog}/{mod}/\nsavoir.yaml + praxeologies.yaml")] --> Analyse["2a — Analyser les praxeologies"]
     PROF[("booklet-profiles.yaml\ncours | examen | exploration")] --> Gen
     Analyse --> Gen["2b — Generer _planning.yaml\ncalibre par le profil"]
     TPL["planning-template.yaml"] -.-> Gen
-    EXAM[("_meta/examens/{slug}.yaml\n(optionnel)")] -.-> Gen
+    EXAM[("_meta/{prog}/examens/{slug}/spec.yaml\n(optionnel)")] -.-> Gen
     Gen --> PlanD[("_planning.yaml per-molecule\nstatus: draft")]
     PlanD --> Review{"2c — Review humain\ncouverture, slugs, difficultes"}
     Review -->|"ajuste"| Gen
@@ -236,12 +237,12 @@ Le planning contient un champ `profile` et un champ `meta_refs` :
 ```yaml
 profile: cours                   # charge depuis booklet-profiles.yaml
 meta_refs:
-  module: continuite           # → _meta/modules/continuite/
+  module: continuite           # → _meta/{prog}/continuite/
   # patterns: [Prax1.v1, ...]  # optionnel, pour livrets examen
   # examen: synthese-3eme-t3   # optionnel, pour livrets cross-module
 ```
 
-**Profils de livrets** (`_meta/global/booklet-profiles.yaml`) :
+**Profils de livrets** (`_meta/booklet-profiles.yaml`) :
 
 | Profil | Difficulte | Atomes | Lecons | Exercices | QCM | Guidance |
 |--------|-----------|--------|--------|-----------|-----|----------|
@@ -275,7 +276,7 @@ flowchart TD
     TPL["templates.md"] -.-> GenAtomes
     TYPST["typst-snippets.md"] -.-> GenAtomes
     CONV["CONTENT-CONVENTIONS.md"] -.-> GenAtomes
-    META[("_meta/modules/{mod}/\nsavoir + praxeologies")] -.-> GenAtomes
+    META[("_meta/{prog}/{mod}/\nsavoir + praxeologies")] -.-> GenAtomes
     GenAtomes --> Atomes[("Atomes MDX\ncontent/{prog}/{mod}/*.mdx")]
     Atomes --> GenMol["3b — Assembler les livrets\nkind: livret, sections > steps"]
     PlanV -.-> GenMol
@@ -311,7 +312,7 @@ flowchart TD
     CONV["CONTENT-CONVENTIONS.md"] -.-> V4a
     PIPE["tools/pipeline/"] -.-> V4a
     V4a --> V4bc["4b+4c — Semantique\n/content valider {module}\nstructure + maths + pedagogie"]
-    KB[("_meta/modules/{mod}/")] -.-> V4bc
+    KB[("_meta/{prog}/{mod}/")] -.-> V4bc
     V4bc --> Rapport[/"Rapport pass/fail\n_validation.md"/]
 ```
 
@@ -448,7 +449,7 @@ Definit les schemas, les modules declares, les specs d'examen, et les convention
 |----------|----------|-----------------|
 | `/transcription index <pdf>` | WF0a | Indexer un PDF, creer la fiche source |
 | `/transcription {module}` | WF0b | Transcrire un module en Typst |
-| `/content kb {module}` | WF1 | Creer les 5 fichiers YAML dans `_meta/modules/` |
+| `/content kb {module}` | WF1 | Creer les 5 fichiers YAML dans `_meta/{prog}/{mod}/` |
 | `/content patterns {module}` | WF1+ | Enrichir patterns.yaml avec des exercices |
 | `/content plan {module} : {profil}` | WF2 | Generer un planning calibre par profil (cours, examen, exploration) |
 | `/content plan {module} : {profil}, {specs}` | WF2 | idem avec overrides libres |
@@ -472,7 +473,7 @@ Definit les schemas, les modules declares, les specs d'examen, et les convention
 | KB modules (_meta/) | 4 (6 fichiers YAML chacun) |
 | Patterns | 1 (nombre-derive, 30+ patterns documentes) |
 | Specs examen | 1 (synthese-3eme-t3) |
-| Fichiers _meta/ globaux | 4 (complexite, lexique, prerequis-graph, booklet-profiles) |
+| Fichiers _meta/ globaux | 3 (complexite, lexique, booklet-profiles) + prerequis-graph par programme |
 | Fiches sources (_raw/) | 8 (tous les PDFs 3eme-math indexes) |
 | References Typst | 8 modules transcrits (24 fichiers .typ) |
 | Plannings | 12 per-molecule (3 par module) |

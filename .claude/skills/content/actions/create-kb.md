@@ -7,7 +7,7 @@
 - Respecter les conventions du referentiel `docs/referentiels/redaction-mathematiques-tunisie.md`
 - Section 8 (Praxeologies) est la plus critique : 1 praxeologie = 1 type de tache + 1 technique
 - Section 9 (Misconceptions) : inclure des questions diagnostiques au format QCM
-- Output : fichiers splites dans `_meta/modules/{module}/` (savoir.yaml, praxeologies.yaml, misconceptions.yaml, lexique.yaml, redaction.yaml)
+- Output : fichiers splites dans `_meta/{programme}/{module}/` (savoir.yaml, praxeologies.yaml, misconceptions.yaml, lexique.yaml, redaction.yaml)
 
 ## Pre-requis
 
@@ -74,14 +74,14 @@ Croiser les 3 sources pour chaque section. Estimation de taille par section :
 
 ### Etape 6 — Ecrire les fichiers splites
 
-Ecrire la KB en 5 fichiers dans `_meta/modules/{module}/` :
+Ecrire la KB en 5 fichiers dans `_meta/{programme}/{module}/` :
 
 ```
-Write: _meta/modules/{module}/savoir.yaml        # Sections 0-7 (objectif, scope, transposition, prereqs, carte, theoremes, KC, exemples)
-Write: _meta/modules/{module}/praxeologies.yaml   # Section 8 (praxeologies)
-Write: _meta/modules/{module}/misconceptions.yaml # Section 9 (misconceptions + QCM diagnostiques)
-Write: _meta/modules/{module}/lexique.yaml        # Section 10 (regles redactionnelles, notations)
-Write: _meta/modules/{module}/redaction.yaml    # Modeles de redaction et criteres de notation
+Write: _meta/{programme}/{module}/savoir.yaml        # Sections 0-7 (objectif, scope, transposition, prereqs, carte, theoremes, KC, exemples)
+Write: _meta/{programme}/{module}/praxeologies.yaml   # Section 8 (praxeologies)
+Write: _meta/{programme}/{module}/misconceptions.yaml # Section 9 (misconceptions + QCM diagnostiques)
+Write: _meta/{programme}/{module}/lexique.yaml        # Section 10 (regles redactionnelles, notations)
+Write: _meta/{programme}/{module}/redaction.yaml    # Modeles de redaction et criteres de notation
 ```
 
 ### Etape 7 — Mettre a jour l'interface
@@ -105,5 +105,5 @@ Avant de presenter le resultat a l'utilisateur, verifier :
 - [ ] Chaque misconception a une question diagnostique QCM
 - [ ] Les notations suivent le referentiel tunisien
 - [ ] Les liens inter-modules sont corrects (prerequisites, ouvre vers)
-- [ ] Les 5 fichiers sont bien places dans `_meta/modules/{module}/`
+- [ ] Les 5 fichiers sont bien places dans `_meta/{programme}/{module}/`
 - [ ] `_meta/_interface.yaml` est mis a jour avec l'entree du module

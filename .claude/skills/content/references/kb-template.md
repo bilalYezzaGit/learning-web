@@ -1,7 +1,7 @@
 # KB Module — [Nom du module]
 
 > **Structure _meta/** : La KB est desormais eclatee en 5 fichiers dans
-> `_meta/modules/{module}/` :
+> `_meta/{programme}/{module}/` :
 >
 > | Fichier | Sections |
 > |---------|----------|

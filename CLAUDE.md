@@ -33,11 +33,14 @@ src/
 └── types/            # Interfaces (content, booklet, progress)
 
 _meta/
-├── _interface.yaml       # Contrat IDs modules/patterns/examens
-├── global/               # Lexique, complexite, prerequis-graph
-├── examens/              # Specs par type d'examen
-└── modules/
-    └── {module}/         # savoir.yaml, praxeologies.yaml, patterns.yaml, misconceptions.yaml, lexique.yaml, redaction.yaml
+├── _interface.yaml       # Contrat IDs, schemas, composition
+├── lexique.yaml          # Conventions globales (append-only)
+├── complexite.yaml       # Echelle 0-3
+├── booklet-profiles.yaml # Profils cours/examen/exploration
+└── {programme}/          # Ex: 3eme-math/
+    ├── prerequis-graph.yaml
+    ├── {module}/         # savoir.yaml, praxeologies.yaml, patterns.yaml, misconceptions.yaml, lexique.yaml, redaction.yaml
+    └── examens/{slug}/   # spec.yaml
 
 content/
 ├── {programme}/            # Ex: 3eme-math/

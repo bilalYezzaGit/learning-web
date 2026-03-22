@@ -23,7 +23,7 @@
    - `draft` → **stop**, demander a l'utilisateur de valider d'abord
    - `generated` → avertir que le contenu a deja ete genere, demander confirmation avant de regenerer
 
-3. **KB source existe** : verifier que `_meta/modules/{module}/savoir.yaml` et `_meta/modules/{module}/praxeologies.yaml` existent (consulter `_meta/_interface.yaml` pour resoudre les references module)
+3. **KB source existe** : verifier que `_meta/{programme}/{module}/savoir.yaml` et `_meta/{programme}/{module}/praxeologies.yaml` existent (consulter `_meta/_interface.yaml` pour resoudre les references module)
 
 ## Pipeline
 
@@ -67,8 +67,8 @@ Montrer la liste filtree et confirmer avec l'utilisateur avant de generer.
 Read: .claude/skills/content/references/templates.md
 Read: .claude/skills/content/references/typst-snippets.md
 Read: docs/CONTENT-CONVENTIONS.md
-Read: _meta/modules/{module}/savoir.yaml
-Read: _meta/modules/{module}/praxeologies.yaml
+Read: _meta/{programme}/{module}/savoir.yaml
+Read: _meta/{programme}/{module}/praxeologies.yaml
 ```
 
 ### Etape 5 — Generer les atomes
