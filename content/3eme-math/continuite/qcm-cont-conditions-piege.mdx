@@ -1,0 +1,36 @@
+---
+type: qcm
+title: "Conditions de continuite — pieges classiques"
+difficulty: 1
+timeMinutes: 2
+tags: [continuite, racine-carree, domaine, conditions]
+praxeologies: [Prax2, Prax9]
+---
+
+:::question
+Soit $f(x) = \sqrt{x^2 - 9}$. Le domaine de definition de $f$ est $]-\infty{,}\ {-3}] \cup [3{,}\ +\infty[$. En quel(s) point(s) de son domaine $f$ n'est-elle **pas** continue ?
+:::
+
+:::option
+En $a = 0$ (car $f(0)$ n'existe pas)
+:::
+
+:::option
+En $a = 3$ et $a = -3$
+:::
+
+:::option{correct}
+$f$ est continue en tout point de son domaine
+:::
+
+:::option
+En tout point $a > 3$
+:::
+
+:::explanation
+La fonction $x \mapsto x^2 - 9$ est polynome, donc continue sur $\mathbb{R}$. Sur le domaine de $f$, on a $x^2 - 9 \geq 0$, donc $f(x) = \sqrt{x^2 - 9}$ est bien definie.
+
+Le theoreme de continuite de $\sqrt{\ }$ exige $f(a) > 0$ pour la continuite **en un point interieur**, mais en $a = 3$ et $a = -3$, on a $f(a) = 0$ et $f$ reste continue (c'est un point du bord du domaine).
+
+En fait, $f$ est continue en tout point de son domaine $]-\infty{,}\ {-3}] \cup [3{,}\ +\infty[$. Le piege est de croire que $f(a) = 0$ empeche la continuite : la condition $f(a) > 0$ est suffisante mais pas necessaire.
+:::

@@ -1,0 +1,46 @@
+---
+type: lesson
+title: "Continuite a droite, a gauche, et fonctions par morceaux"
+difficulty: 0
+timeMinutes: 8
+tags: [continuite, laterale, morceaux]
+praxeologies: [Prax3]
+---
+
+### Continuite laterale
+
+:::definition[Continuite a droite]
+$f$ est **continue a droite en $a$** si pour tout $\beta > 0$, il existe $\alpha > 0$ tel que :
+
+$$0 \leq x - a < \alpha \implies |f(x) - f(a)| < \beta$$
+:::
+
+:::definition[Continuite a gauche]
+$f$ est **continue a gauche en $a$** si pour tout $\beta > 0$, il existe $\alpha > 0$ tel que :
+
+$$0 \leq a - x < \alpha \implies |f(x) - f(a)| < \beta$$
+:::
+
+### Lien avec la continuite
+
+:::theorem[Equivalence]
+$f$ est continue en $a$ si et seulement si $f$ est **continue a droite** et **continue a gauche** en $a$.
+:::
+
+### Methode pour les fonctions par morceaux
+
+Pour etudier la continuite d'une fonction definie par morceaux au point de raccordement $x_0$ :
+
+1. **Sur chaque morceau ouvert** : identifier le type (polynome, rationnelle...) et conclure par les theoremes
+2. **Au point de raccordement** : calculer $\lim_{x \to x_0^-} f(x)$, $\lim_{x \to x_0^+} f(x)$ et $f(x_0)$
+3. **Conclure** : si les trois sont egaux, $f$ est continue en $x_0$
+
+:::example[Fonction par morceaux continue]
+$$f(x) = \begin{cases} 2x + 1 & \text{si } x > 1 \\ 3 & \text{si } x = 1 \\ 3x - 1 & \text{si } x < 1 \end{cases}$$
+
+- $\lim_{x \to 1^+} f(x) = 2(1) + 1 = 3$
+- $\lim_{x \to 1^-} f(x) = 3(1) - 1 = 2$
+- $f(1) = 3$
+
+Comme $\lim_{x \to 1^-} f(x) = 2 \neq 3 = f(1)$, la fonction $f$ **n'est pas continue en $1$**.
+:::

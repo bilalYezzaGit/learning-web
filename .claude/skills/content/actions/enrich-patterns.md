@@ -6,8 +6,8 @@
 
 ## Pre-requis
 
-1. **KB module obligatoire** : verifier que `content/{programme}/{module}/_kb.md` existe.
-   Si absente → arreter et informer : "Cree d'abord la KB avec `/content kb {module}`."
+1. **KB module obligatoire** : verifier que `_meta/modules/{module}/praxeologies.md` existe.
+   Si absent → arreter et informer : "Cree d'abord la KB avec `/content kb {module}`."
 
 2. **Identifier le programme** : parcourir `content/*/` pour trouver le module demande.
 
@@ -16,8 +16,8 @@
 ### 1. Charger le contexte
 
 ```
-Read: content/{programme}/{module}/_kb.md
-      → Extraire la section 8 (Praxeologies) : liste des Prax avec T, tau, theta, difficulte
+Read: _meta/modules/{module}/praxeologies.md
+      → Liste des Prax avec T, tau, theta, difficulte
 ```
 
 ```
@@ -26,7 +26,7 @@ Read: .claude/skills/content/references/patterns-template.yaml
 ```
 
 ```
-Read: content/{programme}/{module}/_patterns.yaml  (si existe)
+Read: _meta/modules/{module}/patterns.yaml  (si existe)
       → Patterns existants a enrichir
       → Si n'existe pas : on creera le fichier a l'etape 5
 ```
@@ -117,11 +117,11 @@ Demander validation avant d'ecrire.
 
 ### 5. Ecrire le fichier
 
-Si `_patterns.yaml` existe → mettre a jour (ajouter les nouveaux patterns, incrementer les frequencies).
+Si `_meta/modules/{module}/patterns.yaml` existe → mettre a jour (ajouter les nouveaux patterns, incrementer les frequencies).
 Si n'existe pas → creer depuis le template.
 
 ```
-Write: content/{programme}/{module}/_patterns.yaml
+Write: _meta/modules/{module}/patterns.yaml
 ```
 
 **Toujours** incrementer `version` de 1.

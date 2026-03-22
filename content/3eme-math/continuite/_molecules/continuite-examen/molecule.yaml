@@ -1,0 +1,54 @@
+kind: livret
+title: "Continuite — Examen"
+description: "S'entrainer aux exercices types des devoirs et examens : morceaux, TVI + unicite, image d'intervalle, comptage de solutions."
+trimester: T1
+order: 2
+visible: true
+
+objectives:
+  - "Etudier la continuite d'une fonction par morceaux en tout point de raccordement"
+  - "Appliquer le TVI et prouver l'unicite d'une solution par monotonie"
+  - "Determiner l'image d'un intervalle par une fonction continue"
+  - "Determiner le nombre exact de solutions d'une equation"
+  - "Encadrer une solution par dichotomie a la precision demandee"
+
+sections:
+  - label: "Justifications de continuite — combinaisons"
+    steps:
+      - lesson-cont-methode-justification
+      - ex-cont-justif-combinee
+      - quiz:
+          - qcm-cont-conditions-piege
+
+  - label: "Fonctions par morceaux"
+    steps:
+      - ex-cont-morceaux-2pieces
+      - ex-cont-morceaux-3pieces
+      - quiz:
+          - qcm-cont-morceaux-diagnostic
+
+  - label: "TVI — existence et unicite"
+    steps:
+      - lesson-cont-methode-tvi-unicite
+      - ex-cont-tvi-unicite-polynome
+      - ex-cont-tvi-equation-mixte
+      - quiz:
+          - qcm-cont-tvi-hypotheses
+
+  - label: "Image d'un intervalle"
+    steps:
+      - ex-cont-image-monotone
+      - ex-cont-image-non-monotone
+
+  - label: "Nombre de solutions et dichotomie"
+    steps:
+      - ex-cont-comptage-solutions
+      - ex-cont-dichotomie-precision
+      - quiz:
+          - qcm-cont-nombre-solutions
+
+  - label: "Continuite par la definition"
+    steps:
+      - ex-cont-definition-alpha-beta
+      - quiz:
+          - qcm-cont-definition-choix-alpha

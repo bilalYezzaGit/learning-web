@@ -1,0 +1,39 @@
+---
+type: exercise
+title: "Justifier la continuité par le type de fonction"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [continuité, fonctions-usuelles, justification]
+praxeologies: [Prax1]
+---
+
+:::enonce
+Justifier la continuité des fonctions suivantes au point indiqué.
+
+**1.** $f(x) = 3x^4 - 2x + 7$ en $a = 1$
+
+**2.** $f(x) = \dfrac{x - 1}{x^2 + 3}$ en $a = 0$
+
+**3.** $f(x) = \sqrt{2x + 5}$ en $a = 2$
+
+**4.** $f(x) = |x - 3|$ en $a = 0$
+:::
+
+:::solution
+**1.** $f$ est une **fonction polynôme**, donc $f$ est continue sur $\mathbb{R}$.
+
+D'où $f$ est continue en $a = 1$.
+
+**2.** $f$ est une **fonction rationnelle**. On vérifie que le dénominateur est non nul en $a = 0$ : $0^2 + 3 = 3 \neq 0$.
+
+D'où $f$ est continue en $a = 0$.
+
+**3.** On a $2 \times 2 + 5 = 9 > 0$. La fonction $x \mapsto \sqrt{2x + 5}$ est définie et continue en tout réel $a$ tel que $2a + 5 > 0$.
+
+Comme $2 \times 2 + 5 = 9 > 0$, $f$ est continue en $a = 2$.
+
+**4.** $f(x) = |x - 3|$. La fonction $x \mapsto x - 3$ est affine, donc continue sur $\mathbb{R}$. La valeur absolue d'une fonction continue est continue.
+
+D'où $|x - 3|$ est continue en $a = 0$.
+:::

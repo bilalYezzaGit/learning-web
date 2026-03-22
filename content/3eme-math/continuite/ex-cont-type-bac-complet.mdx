@@ -1,0 +1,168 @@
+---
+type: exercise
+title: "Exercice type devoir de synthese — etude complete"
+difficulty: 3
+timeMinutes: 20
+category: probleme
+tags: [continuite, variation, tvi, zeros, image-intervalle, dichotomie, type-bac]
+praxeologies: [Prax3, Prax5, Prax6, Prax7, Prax8]
+---
+
+:::enonce
+Soit $f(x) = x^3 - 3x^2 + 4$.
+
+**Partie A — Etude des variations**
+
+**a)** Calculer $f'(x)$ et dresser le tableau de variation de $f$ sur $\mathbb{R}$.
+
+**b)** Montrer que $f$ admet un maximum local et un minimum local. Preciser leurs valeurs.
+
+**Partie B — Zeros et equations**
+
+**c)** Verifier que $f(-1) = 0$ et factoriser $f(x)$.
+
+**d)** En deduire le nombre exact de solutions de l'equation $f(x) = 0$ dans $\mathbb{R}$.
+
+**Partie C — Images et dichotomie**
+
+**e)** Determiner $f(]{-}\infty{,}\ 0])$, $f([0{,}\ 2])$ et $f([2{,}\ +\infty[)$.
+
+**f)** Montrer que l'equation $f(x) = 1$ admet exactement $3$ solutions. Encadrer a $0{,}1$ pres la solution de $f(x) = 1$ dans l'intervalle $]{-}2{,}\ -1[$.
+:::
+
+:::solution
+**Partie A — Etude des variations**
+
+**a)** On calcule :
+
+$$f'(x) = 3x^2 - 6x = 3x(x - 2)$$
+
+Signe de $f'(x)$ :
+- $f'(x) > 0$ pour $x \in {]{-}\infty{,}\ 0[} \cup {]2{,}\ +\infty[}$
+- $f'(x) < 0$ pour $x \in {]0{,}\ 2[}$
+
+Limites : $\displaystyle\lim_{x \to -\infty} f(x) = -\infty$ et $\displaystyle\lim_{x \to +\infty} f(x) = +\infty$.
+
+Valeurs aux extremums :
+- $f(0) = 0 - 0 + 4 = 4$
+- $f(2) = 8 - 12 + 4 = 0$
+
+Tableau de variation :
+
+| $x$ | $-\infty$ | | $0$ | | $2$ | | $+\infty$ |
+|-----|-----------|---|------|---|------|---|-----------|
+| $f'(x)$ | | $+$ | $0$ | $-$ | $0$ | $+$ | |
+| $f(x)$ | $-\infty$ | $\nearrow$ | $4$ | $\searrow$ | $0$ | $\nearrow$ | $+\infty$ |
+
+**b)** D'apres le tableau de variation :
+- $f$ admet un **maximum local** $f(0) = 4$ en $x = 0$
+- $f$ admet un **minimum local** $f(2) = 0$ en $x = 2$
+
+---
+
+**Partie B — Zeros et equations**
+
+**c)** Calculons :
+
+$$f(-1) = (-1)^3 - 3 \times (-1)^2 + 4 = -1 - 3 + 4 = 0$$
+
+Donc $x = -1$ est un zero de $f$, ce qui signifie que $(x + 1)$ divise $f(x)$.
+
+On effectue la division euclidienne ou on factorise :
+
+$$f(x) = x^3 - 3x^2 + 4 = (x + 1)(x^2 - 4x + 4) = (x + 1)(x - 2)^2$$
+
+**Verification** : $(x + 1)(x^2 - 4x + 4) = x^3 - 4x^2 + 4x + x^2 - 4x + 4 = x^3 - 3x^2 + 4$ --- correct.
+
+**d)** L'equation $f(x) = 0$ equivaut a :
+
+$$(x + 1)(x - 2)^2 = 0 \iff x = -1 \quad \text{ou} \quad x = 2$$
+
+L'equation $f(x) = 0$ admet **exactement $2$ solutions distinctes** : $x = -1$ et $x = 2$.
+
+**Remarque** : $x = 2$ est une racine double (le minimum local touche l'axe des abscisses sans le traverser), tandis que $x = -1$ est une racine simple (la courbe traverse l'axe).
+
+---
+
+**Partie C — Images et dichotomie**
+
+**e)** D'apres le tableau de variation :
+
+- **$f(]{-}\infty{,}\ 0])$** : $f$ est strictement croissante de $-\infty$ a $4$, donc $f(]{-}\infty{,}\ 0]) = {]{-}\infty{,}\ 4]}$.
+
+- **$f([0{,}\ 2])$** : $f$ est strictement decroissante de $4$ a $0$, donc $f([0{,}\ 2]) = [0{,}\ 4]$.
+
+- **$f([2{,}\ +\infty[)$** : $f$ est strictement croissante de $0$ a $+\infty$, donc $f([2{,}\ +\infty[) = [0{,}\ +\infty[$.
+
+**f)** Montrons que $f(x) = 1$ admet exactement $3$ solutions.
+
+**Sur $]{-}\infty{,}\ 0]$** : $f$ est strictement croissante et continue, avec $\displaystyle\lim_{x \to -\infty} f(x) = -\infty$ et $f(0) = 4$.
+
+Comme $1 \in {]{-}\infty{,}\ 4[}$, par le TVI il existe une **unique** solution $\alpha_1 \in {]{-}\infty{,}\ 0[}$.
+
+**Sur $[0{,}\ 2]$** : $f$ est strictement decroissante et continue de $f(0) = 4$ a $f(2) = 0$.
+
+Comme $1 \in {]0{,}\ 4[}$, par le TVI il existe une **unique** solution $\alpha_2 \in {]0{,}\ 2[}$.
+
+**Sur $[2{,}\ +\infty[$** : $f$ est strictement croissante et continue de $f(2) = 0$ a $+\infty$.
+
+Comme $1 \in {]0{,}\ +\infty[}$, par le TVI il existe une **unique** solution $\alpha_3 \in {]2{,}\ +\infty[}$.
+
+L'equation $f(x) = 1$ admet **exactement $3$ solutions**.
+
+---
+
+**Encadrement de $\alpha_1$ par dichotomie** :
+
+On cherche $\alpha_1$ dans $]{-}\infty{,}\ 0[$. Localisons d'abord :
+
+- $f(-2) = -8 - 12 + 4 = -16 < 1$
+- $f(-1) = 0 < 1$
+- $f(0) = 4 > 1$
+
+Donc $\alpha_1 \in {]{-}1{,}\ 0[}$. On affine par dichotomie sur $[-1{,}\ 0]$ avec $g(x) = f(x) - 1 = x^3 - 3x^2 + 3$.
+
+- $g(-1) = -1 - 3 + 3 = -1 < 0$ et $g(0) = 3 > 0$
+
+**Etape 1** : milieu $x_0 = -0{,}5$.
+
+$g(-0{,}5) = (-0{,}5)^3 - 3 \times (-0{,}5)^2 + 3 = -0{,}125 - 0{,}75 + 3 = 2{,}125 > 0$
+
+Donc $\alpha_1 \in {]{-}1{,}\ -0{,}5[}$.
+
+**Etape 2** : milieu $x_1 = -0{,}75$.
+
+$g(-0{,}75) = (-0{,}75)^3 - 3 \times (-0{,}75)^2 + 3 = -0{,}421875 - 1{,}6875 + 3 = 0{,}890625 > 0$
+
+Donc $\alpha_1 \in {]{-}1{,}\ -0{,}75[}$.
+
+**Etape 3** : milieu $x_2 = -0{,}875$.
+
+$g(-0{,}875) = (-0{,}875)^3 - 3 \times (-0{,}875)^2 + 3 = -0{,}669921875 - 2{,}296875 + 3 = 0{,}033203125 > 0$
+
+Donc $\alpha_1 \in {]{-}1{,}\ -0{,}875[}$.
+
+**Etape 4** : milieu $x_3 = -0{,}9375$.
+
+$g(-0{,}9375) = (-0{,}9375)^3 - 3 \times (-0{,}9375)^2 + 3$
+
+$= -0{,}8245\ldots - 2{,}6367\ldots + 3 = -0{,}4613\ldots < 0$
+
+Donc $\alpha_1 \in {]{-}0{,}9375{,}\ -0{,}875[}$.
+
+Les deux bornes sont dans $]{-}1{,}0{,}\ -0{,}9[$ :
+
+$$-1{,}0 < -0{,}9375 < \alpha_1 < -0{,}875 < -0{,}8$$
+
+Donc $\alpha_1 \in {]{-}1{,}0{,}\ -0{,}9[}$, soit :
+
+$$\boxed{-1{,}0 < \alpha_1 < -0{,}9}$$
+
+L'encadrement a $0{,}1$ pres est : $\alpha_1 \approx -0{,}9$ a $0{,}1$ pres.
+:::
+
+:::erreurs
+- **Oublier la racine double** : $x = 2$ est un zero de multiplicite $2$ (la courbe touche l'axe sans le traverser). Il faut bien distinguer « $2$ solutions distinctes » de « $3$ racines comptees avec multiplicite ».
+- **Pour $f(x) = 1$, ne considerer qu'un seul intervalle** : il faut analyser chaque intervalle de monotonie separement (ici trois intervalles, trois solutions).
+- **Mauvaise initialisation de la dichotomie** : l'intervalle de depart doit contenir la racine. Ici $g(-1) < 0$ et $g(0) > 0$, donc on part de $[-1{,}\ 0]$.
+:::

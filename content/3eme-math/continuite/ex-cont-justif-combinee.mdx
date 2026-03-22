@@ -1,0 +1,77 @@
+---
+type: exercise
+title: "Justifier la continuite — fonctions combinees"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [continuite, operations, quotient, racine-carree, valeur-absolue]
+praxeologies: [Prax2, Prax9]
+---
+
+:::enonce
+Justifier que chacune des fonctions suivantes est continue au point $a$ indique.
+
+**(a)** $f(x) = \dfrac{x^3 - 2x + 1}{x^2 + x + 1}$ en $a = -1$
+
+**(b)** $f(x) = \sqrt{x^2 - 2x + 5}$ en $a = 1$
+
+**(c)** $f(x) = \dfrac{|x^2 - 4|}{x + 3}$ en $a = 2$
+
+**(d)** $f(x) = x\sqrt{1 + \dfrac{1}{x^2}}$ en $a = 2$
+
+**(e)** $f(x) = \sqrt{x + \sqrt{x + 1}}$ en $a = 3$
+
+**(f)** $f(x) = \dfrac{\sqrt{x + 1} - 1}{x^2 - x}$ en $a = -2$
+:::
+
+:::solution
+**(a)** Le numerateur $x \mapsto x^3 - 2x + 1$ est polynome, donc continu en $-1$.
+
+Le denominateur $x \mapsto x^2 + x + 1$ est polynome, continu en $-1$, et $(-1)^2 + (-1) + 1 = 1 \neq 0$.
+
+Donc $f$ est continue en $a = -1$ comme quotient de fonctions continues avec denominateur non nul.
+
+**(b)** La fonction $x \mapsto x^2 - 2x + 5$ est polynome, donc continue en $1$.
+
+On verifie : $1^2 - 2(1) + 5 = 4 > 0$.
+
+On peut aussi ecrire $x^2 - 2x + 5 = (x - 1)^2 + 4 \geq 4 > 0$ pour tout $x \in \mathbb{R}$.
+
+Donc $f(x) = \sqrt{x^2 - 2x + 5}$ est continue en $a = 1$ comme racine carree d'une fonction continue et strictement positive en ce point.
+
+**(c)** La fonction $x \mapsto x^2 - 4$ est polynome, donc continue en $2$.
+
+D'ou $x \mapsto |x^2 - 4|$ est continue en $2$ comme valeur absolue d'une fonction continue.
+
+Le denominateur $x \mapsto x + 3$ est affine, continu en $2$, et $2 + 3 = 5 \neq 0$.
+
+Donc $f$ est continue en $a = 2$ comme quotient de fonctions continues avec denominateur non nul.
+
+**(d)** On a $a = 2 \neq 0$, donc $x \mapsto x^2$ est polynome, continu en $2$, et $2^2 = 4 > 0$.
+
+D'ou $x \mapsto \dfrac{1}{x^2}$ est continue en $2$ comme inverse d'une fonction continue non nulle.
+
+La fonction $x \mapsto 1 + \dfrac{1}{x^2}$ est continue en $2$, et $1 + \dfrac{1}{4} = \dfrac{5}{4} > 0$.
+
+D'ou $x \mapsto \sqrt{1 + \dfrac{1}{x^2}}$ est continue en $2$.
+
+Enfin, $f(x) = x \cdot \sqrt{1 + \dfrac{1}{x^2}}$ est continue en $a = 2$ comme produit de fonctions continues.
+
+**(e)** La fonction $x \mapsto x + 1$ est affine, continue en $3$, et $3 + 1 = 4 > 0$.
+
+D'ou $x \mapsto \sqrt{x + 1}$ est continue en $3$, et $\sqrt{4} = 2$.
+
+La fonction $x \mapsto x + \sqrt{x + 1}$ est continue en $3$ comme somme de fonctions continues, et $3 + 2 = 5 > 0$.
+
+Donc $f(x) = \sqrt{x + \sqrt{x + 1}}$ est continue en $a = 3$ comme racine carree d'une fonction continue et strictement positive en ce point.
+
+**(f)** Le numerateur : $x \mapsto x + 1$ est affine, continue en $-2$, et $-2 + 1 = -1 < 0$. **Attention** : on ne peut pas prendre la racine carree d'un nombre negatif.
+
+Verifions : $f(-2) = \dfrac{\sqrt{-2 + 1} - 1}{(-2)^2 - (-2)} = \dfrac{\sqrt{-1} - 1}{6}$. La quantite $\sqrt{-1}$ n'est pas definie dans $\mathbb{R}$.
+
+Donc $f$ **n'est pas definie** en $a = -2$. On ne peut pas parler de continuite en un point ou la fonction n'existe pas.
+:::
+
+:::erreurs
+Dans la question **(f)**, le piege est de calculer mecaniquement sans verifier le domaine de definition. Avant toute justification de continuite, il faut s'assurer que $f(a)$ **existe**.
+:::

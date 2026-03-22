@@ -1,0 +1,38 @@
+kind: livret
+title: "Continuite — Exploration"
+description: "Approfondir la continuite avec des problemes de synthese, des demonstrations, et des exercices type BAC combinant plusieurs techniques."
+trimester: T1
+order: 3
+visible: true
+
+objectives:
+  - "Resoudre des problemes combinant continuite par morceaux, TVI et image d'intervalle"
+  - "Demontrer la continuite par la definition alpha-beta pour des fonctions non triviales"
+  - "Determiner le nombre exact de solutions d'equations polynomiales et irrationnelles"
+  - "Mener une etude complete de type BAC (continuite + variations + TVI + dichotomie)"
+
+sections:
+  - label: "Demonstrations et definition formelle"
+    steps:
+      - ex-cont-demo-alpha-beta-quadratique
+      - ex-cont-demo-alpha-beta-sqrt
+      - quiz:
+          - qcm-cont-demo-majoration
+
+  - label: "Problemes de continuite par morceaux avances"
+    steps:
+      - ex-cont-morceaux-parametre-complet
+      - ex-cont-morceaux-valeur-absolue
+
+  - label: "Problemes de synthese — TVI et images"
+    steps:
+      - ex-cont-synthese-cubique
+      - ex-cont-synthese-irrationnelle
+      - quiz:
+          - qcm-cont-synthese-image
+
+  - label: "Exercice type BAC"
+    steps:
+      - ex-cont-type-bac-complet
+      - quiz:
+          - qcm-cont-type-bac-rapide

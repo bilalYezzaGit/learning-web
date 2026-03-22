@@ -1,0 +1,44 @@
+---
+type: qcm
+title: "QCM de synthese — continuite"
+difficulty: 2
+timeMinutes: 2
+tags: [continuite, tvi, monotonie, nombre-solutions]
+praxeologies: [Prax4, Prax5]
+---
+
+:::question
+Soit $f$ une fonction **continue** et **strictement croissante** sur $[0{,}\ 5]$, avec $f(0) = -2$ et $f(5) = 4$.
+
+Combien de solutions l'equation $f(x) = 1$ admet-elle dans $[0{,}\ 5]$ ?
+:::
+
+:::option
+Aucune solution
+:::
+
+:::option
+Au moins une solution (on ne peut pas preciser)
+:::
+
+:::option{correct}
+Exactement une solution
+:::
+
+:::option
+Exactement deux solutions
+:::
+
+:::explanation
+On applique le theoreme des valeurs intermediaires (TVI) :
+
+$f$ est continue sur $[0{,}\ 5]$, et $1 \in [-2{,}\ 4]$ (car $f(0) = -2 \leq 1 \leq 4 = f(5)$).
+
+Par le TVI, il existe **au moins un** $c \in [0{,}\ 5]$ tel que $f(c) = 1$.
+
+De plus, $f$ est **strictement croissante** sur $[0{,}\ 5]$, ce qui garantit l'**unicite** : si $f(c_1) = f(c_2) = 1$ avec $c_1 < c_2$, alors $f(c_1) < f(c_2)$ (contradiction).
+
+Donc l'equation $f(x) = 1$ admet **exactement une solution** dans $[0{,}\ 5]$.
+
+**Piege** : « Au moins une solution » est vrai mais incomplet. La monotonie stricte permet de conclure a l'unicite.
+:::

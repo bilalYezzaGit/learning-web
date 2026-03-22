@@ -15,13 +15,22 @@ Document vivant qui cartographie le systeme de contenu pilote par LLM.
 | Skill /source | `.claude/skills/source/SKILL.md` | Gestion sources pedagogiques web | pre-WF0 — veille et scan de sources |
 | Sources web | `docs/content-intelligence/sources/registry.md` | Registre de sources pedagogiques | pre-WF0 — reference lors de la recherche |
 | References Typst | `_raw/reference/{programme}/{module}/` | Transcriptions PDF -> Typst | WF0 [0b] — sortie ; WF1 — entree |
+| **--- Modele academique (_meta/) ---** | | | |
+| Interface | `_meta/_interface.yaml` | Contrat IDs modules/patterns/examens | WF1 — enregistrement ; WF2 — resolution refs ; WF3 — resolution refs |
+| Savoir module | `_meta/modules/{mod}/savoir.md` | Objectif, scope, theoremes, knowledge components | WF1 — sortie ; WF2 [2a] — entree analyse |
+| Praxeologies | `_meta/modules/{mod}/praxeologies.md` | Types de taches, techniques, technologies | WF1 — sortie ; WF2 [2a] — entree analyse ; WF3 [3a] — reference |
+| Patterns module | `_meta/modules/{mod}/patterns.yaml` | Variantes d'examen par praxeologie | WF1+ — sortie ; WF2 — entree Livret 2 |
+| Misconceptions | `_meta/modules/{mod}/misconceptions.md` | Erreurs frequentes, diagnostics, remediations | WF1 — sortie ; WF3 [3a] — reference QCM |
+| Lexique module | `_meta/modules/{mod}/lexique.md` | Regles de redaction specifiques au module | WF1 — sortie ; WF3 [3a] — reference redaction |
+| Specs examen | `_meta/examens/{slug}.yaml` | Structure, duree, distribution par module | WF2 — plans cross-module/examen |
+| Globaux | `_meta/global/` | Lexique partage, echelle complexite, graphe prerequis | WF2 — reference transversale ; WF3 — reference |
 | **--- Knowledge Base (WF1) ---** | | | |
 | Referentiels | `docs/referentiels/` | Conventions redaction maths tunisiennes | WF1 — reference KB ; WF3 [3a] — reference generation |
 | KB template | `.claude/skills/content/references/kb-template.md` | Modele pour creer une KB module | WF1 — template de creation |
-| KB modules | `content/{prog}/{mod}/_kb.md` | Savoir structure par module (2 existants) | WF1 — sortie ; WF1+ — reference praxeologies ; WF2 [2a] — entree analyse |
+| KB modules | `_meta/modules/{mod}/` (savoir.md, praxeologies.md, misconceptions.md, lexique.md) | Savoir structure par module (migre depuis _kb.md) | WF1 — sortie ; WF1+ — reference praxeologies ; WF2 [2a] — entree analyse |
 | **--- Patterns (WF1+) ---** | | | |
 | Patterns template | `.claude/skills/content/references/patterns-template.yaml` | Schema du fichier patterns | WF1+ — template |
-| Patterns module | `content/{prog}/{mod}/_patterns.yaml` | Variantes d'examen par praxeologie (0 existants) | WF1+ — sortie ; WF2 — entree Livret 2 |
+| Patterns module | `_meta/modules/{mod}/patterns.yaml` | Variantes d'examen par praxeologie | WF1+ — sortie ; WF2 — entree Livret 2 |
 | **--- Planning (WF2) ---** | | | |
 | Planning template | `.claude/skills/content/references/planning-template.yaml` | Schema du manifeste per-molecule | WF2 [2b] — template de creation |
 | Planning per-molecule | `content/{prog}/{mod}/_molecules/{slug}/_planning.yaml` | Manifeste par molecule (avant generation) | WF2 — sortie ; WF3 [3a] — spec de generation ; WF4 [4a] — verification couverture |
@@ -45,8 +54,8 @@ Document vivant qui cartographie le systeme de contenu pilote par LLM.
 flowchart TD
     PDF["PDF brut"] -->|"WF0a : indexer"| Fiche[("Fiche source YAML\n_raw/sources/*.yaml")]
     Fiche -->|"WF0b : transcrire\n/transcription"| Typst[("References Typst\n_raw/reference/{prog}/{mod}/*.typ")]
-    Typst -->|"WF1 : creer KB\n/content kb"| KB[("KB module\n_kb.md")]
-    KB -->|"WF1+ : enrichir patterns\n/content patterns"| Patterns[("_patterns.yaml\n(version N)")]
+    Typst -->|"WF1 : creer KB\n/content kb"| KB[("_meta/modules/{mod}/\nsavoir + praxeologies\nmisconceptions + lexique")]
+    KB -->|"WF1+ : enrichir patterns\n/content patterns"| Patterns[("_meta/modules/{mod}/\npatterns.yaml\n(version N)")]
     Series["Nouvelles series\nBAC, devoirs, parascolaires"] -->|"WF1+"| Patterns
     Patterns -.->|"iteratif\n(N fois)"| Patterns
     KB -->|"WF2 : planifier\n/content plan"| Plan["_planning.yaml x3\n(draft)"]
@@ -115,11 +124,11 @@ flowchart TD
     TPL[".claude/skills/content/references/kb-template.md"] -.-> Synth
     REF["docs/referentiels/"] -.-> Synth
     Analyse --> Synth["Synthetiser en KB\naxiomatique, praxeologies, misconceptions"]
-    Synth --> KB[("KB module\ncontent/{prog}/{mod}/_kb.md")]
+    Synth --> Meta[("_meta/modules/{mod}/\nsavoir.md\npraxeologies.md\nmisconceptions.md\nlexique.md")]
 ```
 
 Entree : fichiers .typ existants pour le module
-Sortie : `content/{programme}/{module}/_kb.md`
+Sortie : `_meta/modules/{module}/` (4 fichiers : savoir.md, praxeologies.md, misconceptions.md, lexique.md)
 
 #### Declencheurs
 
@@ -141,32 +150,32 @@ Sortie : `content/{programme}/{module}/_kb.md`
 
 ### WF1+ -- Enrichir les patterns d'examen (iteratif)
 
-Workflow iteratif qui accumule des patterns d'exercices a partir de series, BAC, parascolaires. Peut etre appele N fois par module. Chaque appel enrichit `_patterns.yaml`.
+Workflow iteratif qui accumule des patterns d'exercices a partir de series, BAC, parascolaires. Peut etre appele N fois par module. Chaque appel enrichit `patterns.yaml`.
 
-Prerequis : KB module existante (`content/{prog}/{mod}/_kb.md`).
+Prerequis : KB module existante (`_meta/modules/{mod}/savoir.md` + `praxeologies.md`).
 
 ```mermaid
 flowchart TD
-    KB[("KB module\n_kb.md")] --> Load["Charger praxeologies\nsection 8 de la KB"]
-    PAT[("_patterns.yaml\n(existant ou vide)")] --> Load
+    KB[("_meta/modules/{mod}/\npraxeologies.md")] --> Load["Charger praxeologies"]
+    PAT[("_meta/modules/{mod}/\npatterns.yaml\n(existant ou vide)")] --> Load
     Source["Exercices\n(Typst, MDX, texte, image)"] --> Analyse["Analyser chaque exercice"]
     Load --> Analyse
     Analyse --> Class{"Variante\nconnue ?"}
     Class -->|"oui"| Incr["Incrementer frequency\najouter source + exemple"]
     Class -->|"non, meme prax"| New["Creer nouveau pattern\nPraxN.vM"]
     Class -->|"prax inconnue"| Alert["Signaler a l'humain"]
-    Incr --> Write["Ecrire _patterns.yaml\nincrementer version"]
+    Incr --> Write["Ecrire patterns.yaml\nincrementer version"]
     New --> Write
 ```
 
-Entree : exercices (Typst, MDX, texte, image) + KB module
-Sortie : `content/{programme}/{module}/_patterns.yaml` (cree ou enrichi)
+Entree : exercices (Typst, MDX, texte, image) + KB module (_meta/)
+Sortie : `_meta/modules/{module}/patterns.yaml` (cree ou enrichi)
 
 #### Declencheurs
 
 | Etape | Declencheur | Ressources chargees |
 |-------|-------------|---------------------|
-| Enrichir les patterns | `/content patterns {module}` | KB module, `_patterns.yaml` existant, exercices fournis par l'utilisateur |
+| Enrichir les patterns | `/content patterns {module}` | KB module (_meta/), `patterns.yaml` existant, exercices fournis par l'utilisateur |
 
 #### Exemples de prompts
 
@@ -185,7 +194,7 @@ Voici un sujet de BAC 2024, enrichis les patterns du module nombre-derive
 
 ```mermaid
 flowchart TD
-    KB[("KB module\ncontent/{prog}/{mod}/_kb.md")] --> Analyse["2a — Analyser les praxeologies\nsection 8 de la KB"]
+    KB[("_meta/modules/{mod}/\nsavoir.md + praxeologies.md")] --> Analyse["2a — Analyser les praxeologies"]
     Analyse --> Gen["2b — Generer _molecules/{slug}/_planning.yaml\natomes par molecule"]
     TPL[".claude/skills/content/references/planning-template.yaml"] -.-> Gen
     Gen --> PlanD[("_planning.yaml per-molecule\nstatus: draft")]
@@ -194,8 +203,10 @@ flowchart TD
     Review -->|"valide"| PlanV[("_planning.yaml per-molecule\nstatus: validated")]
 ```
 
-Entree : KB module complete (`content/{programme}/{module}/_kb.md`)
+Entree : KB module complete (`_meta/modules/{module}/savoir.md` + `praxeologies.md`)
 Sortie : `content/{programme}/{module}/_molecules/{slug}/_planning.yaml` avec `status: validated` (1 fichier par molecule)
+
+> **_meta/ examens** : les plans peuvent aussi referencer les specs d'examen depuis `_meta/examens/{slug}.yaml` pour construire des livrets cross-module ou alignes sur un examen specifique (ex: bac-3eme-t3).
 
 **Cycle de vie du status** : `draft` → `validated` (review humain) → `generated` (apres WF3)
 
@@ -203,7 +214,7 @@ Sortie : `content/{programme}/{module}/_molecules/{slug}/_planning.yaml` avec `s
 
 | Etape | Declencheur | Ressources chargees |
 |-------|-------------|---------------------|
-| Generer le planning | `/content plan {module}` | KB module (`_kb.md`), `.claude/skills/content/references/planning-template.yaml` |
+| Generer le planning | `/content plan {module}` | KB module (`_meta/modules/{mod}/`), `.claude/skills/content/references/planning-template.yaml`, optionnel : `_meta/examens/*.yaml` |
 | Review humain | manuel (lecture du YAML) | — |
 | Valider le planning | prompt libre | `_planning.yaml` |
 
@@ -339,7 +350,7 @@ formules, calculs, solutions
 
 ## Partie 3 : Etat actuel
 
-> Mis a jour le 2026-03-18 apres nettoyage des modules ad-hoc.
+> Mis a jour le 2026-03-22 apres migration vers l'architecture _meta/ 3-couches.
 
 | Metrique | Valeur |
 |----------|--------|
@@ -347,15 +358,17 @@ formules, calculs, solutions
 | Modules avec contenu | 2 (fonction-derivee, nombre-derive) — modules workflow uniquement |
 | Atomes MDX | 38 |
 | Livrets YAML | 4 (kind: livret unifie) |
-| KB modules | 2 (fonction-derivee, nombre-derive) |
-| Patterns (_patterns.yaml) | 0 (nouveau concept GenTech v2) |
+| KB modules | 3 (migres vers `_meta/modules/`) |
+| Patterns (patterns.yaml) | 1 (nombre-derive, migre vers `_meta/`) |
+| Specs examen | 1 (bac-3eme-t3) |
+| Fichiers _meta/ globaux | 3 (lexique, complexite, prerequis-graph) |
 | Fiches sources | 8 (tous les PDFs 3eme-math indexes) |
 | References Typst | 7 modules transcrits (21 fichiers .typ) |
 | Plannings | 4 per-molecule (3 fonction-derivee + 1 nombre-derive) |
 
-> **GenTech v2** : voir `docs/CONTENT-SYSTEM-VISION.md` pour la vision complete
-> (3 livrets/module, `_patterns.yaml` iteratif, workflow WF0→WF1→WF1+→WF2→WF3→WF4).
-> Plan d'execution : `docs/PLAN-GENTECH-V2.md`
+> **GenTech v2 + _meta/** : l'architecture 3-couches (`_meta/` modele academique, `content/` atomes+molecules, `_raw/` sources)
+> separe le savoir structure du contenu livrable. Voir `docs/CONTENT-SYSTEM-VISION.md` pour la vision complete
+> (3 livrets/module, `patterns.yaml` iteratif, workflow WF0->WF1->WF1+->WF2->WF3->WF4).
 
 ---
 
@@ -369,5 +382,5 @@ formules, calculs, solutions
 | L4 | Pas d'orchestration multi-atomes (reprise, progression) — partiellement resolu (progression par Glob) | WF3 | moyenne |
 | ~~L5~~ | ~~Paliers validation maths + pedagogie inexistants~~ | ~~WF4~~ | resolue (`/content valider {module}`) |
 | L6 | Pas de verification automatique planning -> atomes generes | WF4 | basse |
-| L7 | Pas de skill WF1+ (enrichissement patterns) | WF1+ | haute — Phase 2 du plan |
-| L8 | Pas de `_patterns.yaml` existant | WF1+ | haute — Phase 3 du plan |
+| L7 | ~~Pas de skill WF1+ (enrichissement patterns)~~ — partiellement resolu (patterns template existe, skill `/content patterns` operationnel) | WF1+ | moyenne — template + skill en place |
+| L8 | ~~Pas de `_patterns.yaml` existant~~ — partiellement resolu (1 fichier `_meta/modules/nombre-derive/patterns.yaml`, architecture _meta/ en place) | WF1+ | moyenne — structure _meta/ deployee |

@@ -1,0 +1,33 @@
+---
+type: lesson
+title: "Methode — TVI + unicite par monotonie"
+difficulty: 1
+timeMinutes: 5
+tags: [continuite, tvi, unicite, monotonie, methode]
+praxeologies: [Prax4, Prax5]
+---
+
+### Schema en deux etapes
+
+Pour montrer qu'une equation $f(x) = 0$ admet une **unique** solution dans un intervalle $[a{,}\ b]$, il faut toujours proceder en **deux etapes separees**.
+
+### Etape 1 — Existence (TVI)
+
+1. Verifier que $f$ est **continue** sur $[a{,}\ b]$
+2. Calculer $f(a)$ et $f(b)$
+3. Constater que $f(a) \times f(b) < 0$ (signes opposes)
+4. Conclure : par le TVI, il existe **au moins un** $c \in ]a{,}\ b[$ tel que $f(c) = 0$
+
+### Etape 2 — Unicite (monotonie stricte)
+
+1. Calculer $f'(x)$ sur $[a{,}\ b]$
+2. Montrer que $f'(x) > 0$ (ou $f'(x) < 0$) pour tout $x \in [a{,}\ b]$
+3. Conclure : $f$ est strictement monotone, donc la solution est **unique**
+
+:::attention[Toujours separer les deux etapes]
+Ne jamais ecrire directement « $f(x) = 0$ admet une unique solution » sans avoir montre les deux etapes. Le TVI donne l'existence, la monotonie donne l'unicite. Ce sont deux arguments **distincts**.
+:::
+
+:::remark
+Pour l'equation $f(x) = k$ (avec $k \neq 0$), on pose $g(x) = f(x) - k$ et on applique le meme schema a $g(x) = 0$. Ou bien, on applique directement le TVI a $f$ avec la valeur $k$ comprise entre $f(a)$ et $f(b)$.
+:::

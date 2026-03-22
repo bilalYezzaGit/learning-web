@@ -1,0 +1,98 @@
+---
+type: exercise
+title: "Demonstration alpha-beta — fonction quadratique"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [continuite, definition, epsilon-delta, quadratique, majoration]
+praxeologies: [Prax10]
+---
+
+:::enonce
+Soit $f(x) = x^2 + x$.
+
+**a)** Montrer par la definition ($\alpha$-$\beta$) que $f$ est continue en $a = 1$.
+
+**b)** Generaliser : montrer que $f$ est continue en tout reel $a$.
+:::
+
+:::methode
+Pour montrer la continuite par la definition, on doit prouver :
+
+> Pour tout $\beta > 0$, il existe $\alpha > 0$ tel que $|x - a| < \alpha \implies |f(x) - f(a)| < \beta$.
+
+La strategie est toujours :
+1. Calculer $|f(x) - f(a)|$ et factoriser par $|x - a|$.
+2. Se restreindre a un voisinage de $a$ (par exemple $|x - a| < 1$) pour majorer le facteur restant par une constante $M$.
+3. Choisir $\alpha = \min\!\left(1{,}\ \dfrac{\beta}{M}\right)$.
+:::
+
+:::solution
+**a)** Il faut montrer : pour tout $\beta > 0$, il existe $\alpha > 0$ tel que $|x - 1| < \alpha \implies |f(x) - f(1)| < \beta$.
+
+On calcule $f(1) = 1^2 + 1 = 2$, puis :
+
+$$|f(x) - f(1)| = |x^2 + x - 2| = |(x - 1)(x + 2)| = |x - 1| \cdot |x + 2|$$
+
+On doit majorer $|x + 2|$. Supposons $|x - 1| < 1$, ce qui donne $0 < x < 2$, donc :
+
+$$2 < x + 2 < 4 \implies |x + 2| < 4$$
+
+Ainsi, sous la condition $|x - 1| < 1$ :
+
+$$|f(x) - f(1)| = |x - 1| \cdot |x + 2| < 4|x - 1|$$
+
+On veut $4|x - 1| < \beta$, soit $|x - 1| < \dfrac{\beta}{4}$.
+
+On choisit $\alpha = \min\!\left(1{,}\ \dfrac{\beta}{4}\right)$.
+
+**Verification** : si $|x - 1| < \alpha$, alors :
+- $|x - 1| < 1$, donc $|x + 2| < 4$
+- $|x - 1| < \dfrac{\beta}{4}$
+
+D'ou :
+
+$$|f(x) - f(1)| = |x - 1| \cdot |x + 2| < \frac{\beta}{4} \times 4 = \beta$$
+
+Donc $f$ est **continue en $a = 1$** par la definition.
+
+---
+
+**b)** Soit $a \in \mathbb{R}$. On calcule $f(a) = a^2 + a$, puis :
+
+$$|f(x) - f(a)| = |x^2 + x - a^2 - a| = |(x^2 - a^2) + (x - a)|$$
+
+$$= |(x - a)(x + a) + (x - a)| = |x - a| \cdot |x + a + 1|$$
+
+On doit majorer $|x + a + 1|$. Supposons $|x - a| < 1$, ce qui donne $a - 1 < x < a + 1$, donc :
+
+$$a - 1 + a + 1 < x + a + 1 < a + 1 + a + 1$$
+
+$$2a < x + a + 1 < 2a + 2$$
+
+D'ou $|x + a + 1| \leq |2a + 1| + 1$ (par l'inegalite triangulaire appliquee a $x + a + 1 = (x - a) + (2a + 1)$).
+
+Posons $M = |2a + 1| + 1 > 0$. Sous la condition $|x - a| < 1$ :
+
+$$|f(x) - f(a)| = |x - a| \cdot |x + a + 1| < M \cdot |x - a|$$
+
+On veut $M \cdot |x - a| < \beta$, soit $|x - a| < \dfrac{\beta}{M}$.
+
+On choisit $\alpha = \min\!\left(1{,}\ \dfrac{\beta}{M}\right) = \min\!\left(1{,}\ \dfrac{\beta}{|2a + 1| + 1}\right)$.
+
+**Verification** : si $|x - a| < \alpha$, alors :
+- $|x - a| < 1$, donc $|x + a + 1| < M$
+- $|x - a| < \dfrac{\beta}{M}$
+
+D'ou :
+
+$$|f(x) - f(a)| < M \times \frac{\beta}{M} = \beta$$
+
+Donc $f$ est **continue en tout reel $a$** par la definition.
+:::
+
+:::erreurs
+- **Oublier la restriction** : ne pas imposer $|x - a| < 1$ avant de majorer. Sans cette restriction, le facteur $|x + a + 1|$ n'est pas borne et la preuve est incorrecte.
+- **Ecrire $\alpha = \beta/M$ sans le min** : il faut $\alpha = \min(1{,}\ \beta/M)$ pour garantir que la restriction $|x - a| < 1$ est respectee.
+- **Confondre la generalisation** : en **b)**, la constante $M$ depend de $a$. C'est normal car $\alpha$ a le droit de dependre de $a$ (la continuite est une propriete locale).
+:::

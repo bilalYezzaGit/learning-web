@@ -1,0 +1,53 @@
+---
+type: qcm
+title: "Choix de la majoration dans une demonstration"
+difficulty: 2
+timeMinutes: 2
+tags: [continuite, definition, majoration, restriction]
+praxeologies: [Prax10]
+---
+
+:::question
+Pour montrer que $f(x) = x^3$ est continue en $a = 1$ par la definition ($\alpha$-$\beta$), on ecrit :
+
+$$|x^3 - 1| = |x - 1| \cdot |x^2 + x + 1|$$
+
+On impose la restriction $|x - 1| < 1$, ce qui donne $0 < x < 2$.
+
+Quelle est la bonne majoration de $|x^2 + x + 1|$ sous cette restriction ?
+:::
+
+:::option
+$|x^2 + x + 1| < 3$
+:::
+
+:::option{correct}
+$|x^2 + x + 1| < 7$
+:::
+
+:::option
+$|x^2 + x + 1| < 4$
+:::
+
+:::option
+$|x^2 + x + 1| < 1$
+:::
+
+:::explanation
+Si $|x - 1| < 1$, alors $0 < x < 2$.
+
+On majore chaque terme de $x^2 + x + 1$ pour $x \in {]0{,}\ 2[}$ :
+
+- $x^2 < 4$
+- $x < 2$
+- le terme constant vaut $1$
+
+Donc $x^2 + x + 1 < 4 + 2 + 1 = 7$.
+
+**Analyse des distracteurs** :
+- $3$ correspond a la valeur en $a = 1$ ($1 + 1 + 1 = 3$), mais ce n'est pas un majorant sur tout l'intervalle $]0{,}\ 2[$.
+- $4$ est trop petit (par exemple, $x = 1{,}9$ donne $x^2 + x + 1 = 3{,}61 + 1{,}9 + 1 = 6{,}51 > 4$).
+- $1$ n'est evidemment pas un majorant.
+
+Avec cette majoration, on choisit $\alpha = \min\!\left(1{,}\ \dfrac{\beta}{7}\right)$.
+:::

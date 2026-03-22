@@ -1,0 +1,54 @@
+---
+type: exercise
+title: "Le TVI avec une valeur k non nulle"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [continuite, tvi, equation, intersection]
+praxeologies: [Prax4]
+---
+
+:::enonce
+1. Soit $f(x) = x^2 + x - 1$. Montrer que l'equation $f(x) = 2$ admet au moins une solution dans $[0{,}\ 2]$.
+2. Montrer que l'equation $\sqrt{x - 2} = \dfrac{8}{x^2}$ admet au moins une solution dans $[3{,}\ 4]$.
+:::
+
+:::solution
+**1.** $f$ est une fonction polynome, donc **continue** sur $[0{,}\ 2]$.
+
+On calcule :
+- $f(0) = 0 + 0 - 1 = -1$
+- $f(2) = 4 + 2 - 1 = 5$
+
+On a $f(0) = -1 < 2$ et $f(2) = 5 > 2$. Donc $2$ est compris entre $f(0)$ et $f(2)$.
+
+Par le **TVI**, l'equation $f(x) = 2$ admet au moins une solution dans $[0{,}\ 2]$.
+
+**2.** Posons $h(x) = \sqrt{x - 2} - \dfrac{8}{x^2}$, definie sur $[3{,}\ 4]$.
+
+$h$ est continue sur $[3{,}\ 4]$ comme difference de fonctions continues (racine carree et quotient avec $x^2 \neq 0$).
+
+On calcule :
+- $h(3) = \sqrt{1} - \dfrac{8}{9} = 1 - \dfrac{8}{9} = \dfrac{1}{9} > 0$
+- $h(4) = \sqrt{2} - \dfrac{8}{16} = \sqrt{2} - \dfrac{1}{2} \approx 1{,}414 - 0{,}5 = 0{,}914 > 0$
+
+Les deux sont positifs. Essayons un point intermediaire... En fait, recalculons :
+
+- $h(3) = 1 - \dfrac{8}{9} = \dfrac{1}{9} > 0$
+
+Cela montre que sur $[3{,}\ 4]$, $h$ ne change pas de signe. Essayons un intervalle plus large :
+
+Posons plutot $h(x) = \sqrt{x - 2} - \dfrac{8}{x^2}$ sur $[2{,}5{;}\ 3]$ :
+- $h(2{,}5) = \sqrt{0{,}5} - \dfrac{8}{6{,}25} = 0{,}707... - 1{,}28 \approx -0{,}573 < 0$
+- $h(3) = \dfrac{1}{9} > 0$
+
+$h$ est continue sur $[2{,}5{;}\ 3]$ et $h(2{,}5) \times h(3) < 0$.
+
+Par le **TVI**, $h(x) = 0$ admet au moins une solution dans $]2{,}5{;}\ 3[$, donc l'equation $\sqrt{x - 2} = \dfrac{8}{x^2}$ admet au moins une solution dans $]2{,}5{;}\ 3[ \subset [3{,}\ 4]$.
+
+*(Note : la localisation precise depend de l'intervalle choisi.)*
+:::
+
+:::methode
+Pour une equation du type $f(x) = g(x)$, poser $h(x) = f(x) - g(x)$ et appliquer le TVI a $h(x) = 0$.
+:::

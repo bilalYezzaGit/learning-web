@@ -1,0 +1,53 @@
+---
+type: lesson
+title: "Définition et interprétation graphique de la continuité"
+difficulty: 0
+timeMinutes: 10
+tags: [continuité, définition, fonctions-usuelles]
+praxeologies: [Prax1]
+---
+
+### Qu'est-ce que la continuité ?
+
+Intuitivement, une fonction est **continue** lorsque sa courbe peut être tracée **sans lever le crayon**.
+
+:::definition[Continuité en un point]
+Soit $f$ une fonction définie sur un intervalle ouvert $I$ et $a$ un réel de $I$.
+
+On dit que $f$ est **continue en $a$** si pour tout nombre $\beta > 0$, il existe un nombre $\alpha > 0$ tel que :
+
+$$\text{si } x \in I \text{ et } |x - a| < \alpha, \text{ alors } |f(x) - f(a)| < \beta$$
+:::
+
+:::remark
+Le programme tunisien utilise $\alpha$ et $\beta$ (et non $\varepsilon$ et $\delta$) dans la définition de la continuité.
+:::
+
+### Discontinuité
+
+Une fonction **non continue** en $a$ est dite **discontinue en $a$**. Graphiquement, on observe un **saut** ou une **rupture** dans la courbe.
+
+:::example[Contre-exemple fondamental]
+La **partie entière** $f(x) = E(x)$ est discontinue en tout entier $n$.
+
+En effet, $\lim_{x \to n^-} E(x) = n - 1$ et $\lim_{x \to n^+} E(x) = n$. Les limites latérales sont différentes : il y a un saut.
+:::
+
+### Fonctions usuelles continues
+
+:::theorem[Continuité des fonctions usuelles]
+Les fonctions suivantes sont continues sur leur domaine de définition :
+
+- Toute fonction **constante** est continue en tout réel $a$
+- Toute fonction **linéaire** $x \mapsto ax$ est continue en tout réel $a$
+- Toute fonction **affine** $x \mapsto ax + b$ est continue en tout réel $a$
+- La fonction $x \mapsto x^2$ est continue en tout réel $a$
+- Toute **fonction polynôme** est continue sur $\mathbb{R}$
+- La fonction $x \mapsto \dfrac{1}{x}$ est continue en tout réel non nul $a$
+- Toute **fonction rationnelle** est continue en tout réel où elle est définie
+- La fonction $x \mapsto \sqrt{x}$ est continue en tout réel strictement positif $a$
+:::
+
+:::attention[Domaine de définition]
+Ces fonctions sont continues **sur leur domaine de définition**. Par exemple, $\dfrac{1}{x}$ n'est pas définie en $0$, donc on ne peut pas parler de continuité en $0$.
+:::

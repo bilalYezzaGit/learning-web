@@ -1,0 +1,44 @@
+---
+type: qcm
+title: "Fonction par morceaux — erreur classique"
+difficulty: 1
+timeMinutes: 2
+tags: [continuite, morceaux, valeur-absolue]
+praxeologies: [Prax3]
+---
+
+:::question
+Soit $f$ definie sur $\mathbb{R}$ par :
+
+$$f(x) = \begin{cases} x + 1 & \text{si } x \geq 0 \\ -x + 1 & \text{si } x < 0 \end{cases}$$
+
+$f$ est-elle continue en $0$ ?
+:::
+
+:::option{correct}
+Oui, car $\lim_{x \to 0^-} f(x) = \lim_{x \to 0^+} f(x) = f(0) = 1$
+:::
+
+:::option
+Non, car la formule change en $0$
+:::
+
+:::option
+Non, car $f$ n'est pas derivable en $0$
+:::
+
+:::option
+On ne peut pas conclure sans etudier la derivee
+:::
+
+:::explanation
+Calculons :
+
+- $f(0) = 0 + 1 = 1$
+- $\lim_{x \to 0^+} f(x) = \lim_{x \to 0^+} (x + 1) = 1$
+- $\lim_{x \to 0^-} f(x) = \lim_{x \to 0^-} (-x + 1) = 1$
+
+Les trois valeurs sont egales, donc $f$ est **continue en $0$**.
+
+Le piege est de croire qu'un changement de formule entraine une discontinuite. Ici, $f(x) = |x| + 1$ est continue partout. La continuite depend des **valeurs** de la fonction, pas de son ecriture.
+:::

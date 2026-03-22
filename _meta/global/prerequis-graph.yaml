@@ -1,0 +1,45 @@
+# Graphe de prerequis entre modules
+# Format : chaque module liste ses dependances directes
+# Permet de sequencer les livrets cross-module
+
+programme: 3eme-math
+
+modules:
+  generalites-fonctions:
+    order: 1
+    trimester: T1
+    depends_on: []
+
+  continuite:
+    order: 2
+    trimester: T1
+    depends_on: [generalites-fonctions]
+
+  nombre-derive:
+    order: 3
+    trimester: T1
+    depends_on: [generalites-fonctions, continuite]
+
+  fonction-derivee:
+    order: 4
+    trimester: T2
+    depends_on: [nombre-derive]
+
+  suites-reelles:
+    order: 5
+    trimester: T2
+    depends_on: [generalites-fonctions]
+
+  denombrement:
+    order: 6
+    trimester: T2
+    depends_on: [suites-reelles]
+
+  probabilites:
+    order: 7
+    trimester: T3
+    depends_on: [denombrement]
+
+# Note : seuls les modules avec contenu dans _meta/ sont detailles.
+# Les autres sont listes pour le graphe de dependances.
+# Ce fichier sera enrichi a mesure que de nouveaux modules sont crees.

@@ -1,0 +1,59 @@
+---
+type: exercise
+title: "Image d'un intervalle — fonction monotone"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [continuite, image-intervalle, monotonie]
+praxeologies: [Prax6]
+---
+
+:::enonce
+Determiner l'image de l'intervalle indique par chacune des fonctions suivantes.
+
+**a)** $f(x) = 2x + 3$ sur $[1{,}\ 5]$
+
+**b)** $f(x) = -x^2 + 4$ sur $[0{,}\ 3]$
+
+**c)** $f(x) = \sqrt{x}$ sur $[1{,}\ 9]$
+:::
+
+:::solution
+**a)** $f(x) = 2x + 3$ est une fonction affine avec un coefficient directeur $2 > 0$, donc $f$ est **strictement croissante** sur $[1{,}\ 5]$.
+
+$f$ est continue sur $[1{,}\ 5]$ (fonction affine).
+
+On calcule :
+- $f(1) = 2 \times 1 + 3 = 5$
+- $f(5) = 2 \times 5 + 3 = 13$
+
+Comme $f$ est continue et strictement croissante sur $[1{,}\ 5]$ :
+
+$$f([1{,}\ 5]) = [f(1){,}\ f(5)] = [5{,}\ 13]$$
+
+**b)** $f(x) = -x^2 + 4$. On calcule $f'(x) = -2x$.
+
+Pour tout $x \in [0{,}\ 3]$ : $f'(x) = -2x \leq 0$, donc $f$ est **decroissante** sur $[0{,}\ 3]$.
+
+$f$ est continue sur $[0{,}\ 3]$ (fonction polynome).
+
+On calcule :
+- $f(0) = -0 + 4 = 4$
+- $f(3) = -9 + 4 = -5$
+
+Comme $f$ est continue et decroissante sur $[0{,}\ 3]$ :
+
+$$f([0{,}\ 3]) = [f(3){,}\ f(0)] = [-5{,}\ 4]$$
+
+**c)** $f(x) = \sqrt{x}$ est strictement croissante sur $[1{,}\ 9]$ (fonction racine carree).
+
+$f$ est continue sur $[1{,}\ 9]$.
+
+On calcule :
+- $f(1) = \sqrt{1} = 1$
+- $f(9) = \sqrt{9} = 3$
+
+Comme $f$ est continue et strictement croissante sur $[1{,}\ 9]$ :
+
+$$f([1{,}\ 9]) = [f(1){,}\ f(9)] = [1{,}\ 3]$$
+:::

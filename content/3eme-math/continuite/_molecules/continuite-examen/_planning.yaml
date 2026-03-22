@@ -1,0 +1,263 @@
+kind: planning
+module: continuite
+programme: 3eme-math
+status: validated
+
+meta_refs:
+  module: continuite
+
+design_intent: >-
+  Livret Examen — Preparation aux devoirs de synthese et examens.
+  Difficulte 1-2. Exercices types par frequence decroissante.
+  Combinaison de techniques, fonctions par morceaux, TVI + unicite,
+  image d'intervalle, comptage de solutions, dichotomie.
+  Peu de lecons (rappels methodologiques), beaucoup d'exercices.
+
+slug: continuite-examen
+title: "Continuite — Examen"
+description: "S'entrainer aux exercices types des devoirs et examens : morceaux, TVI + unicite, image d'intervalle, comptage de solutions."
+trimester: T1
+order: 2
+
+objectives:
+  - "Etudier la continuite d'une fonction par morceaux en tout point de raccordement"
+  - "Appliquer le TVI et prouver l'unicite d'une solution par monotonie"
+  - "Determiner l'image d'un intervalle par une fonction continue"
+  - "Determiner le nombre exact de solutions d'une equation"
+  - "Encadrer une solution par dichotomie a la precision demandee"
+
+sections:
+  - label: "Justifications de continuite — combinaisons"
+    atoms:
+      - slug: "lesson-cont-methode-justification"
+        type: lesson
+        title: "Methode — Justifier la continuite en un point"
+        praxeologies: [Prax1, Prax2, Prax9]
+        contenu: >-
+          Rappel methodologique : les 3 approches pour justifier la continuite.
+          (1) Par le type : polynome, rationnelle, sqrt → citer T1.
+          (2) Par les operations : decomposer en somme/produit/quotient/sqrt → citer T2-T5.
+          (3) Par morceaux : continuite laterale + raccordement → T6.
+          Conditions a ne pas oublier : g(a) != 0 pour le quotient, f(a) > 0 pour sqrt(f).
+        difficulte: 1
+        timeMinutes: 5
+
+      - slug: "ex-cont-justif-combinee"
+        type: exercise
+        title: "Justifier la continuite — fonctions combinees"
+        praxeologies: [Prax2, Prax9]
+        category: approfondissement
+        contenu: >-
+          6 fonctions a traiter, difficulte croissante :
+          (a) f(x) = (x^3 - 2x + 1)/(x^2 + x + 1) en a = -1.
+          (b) f(x) = sqrt(x^2 - 2x + 5) en a = 1.
+          (c) f(x) = |x^2 - 4|/(x + 3) en a = 2.
+          (d) f(x) = x.sqrt(1 + 1/x^2) en a = 2.
+          (e) f(x) = sqrt(x + sqrt(x + 1)) en a = 3.
+          (f) f(x) = (sqrt(x+1) - 1)/(x^2 - x) en a = -2.
+          Pour chaque cas : decomposer, verifier les conditions, conclure.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "qcm-cont-conditions-piege"
+        type: qcm
+        title: "Conditions de continuite — pieges classiques"
+        praxeologies: [Prax2, Prax9]
+        contenu: >-
+          f(x) = sqrt(x^2 - 9). En quel(s) point(s) de son domaine f n'est-elle
+          PAS continue ? Piege : f est continue sur son domaine ouvert ]-inf,-3[ U ]3,+inf[
+          mais la condition f(a) > 0 n'est pas verifiee en a = 3 et a = -3.
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Fonctions par morceaux"
+    atoms:
+      - slug: "ex-cont-morceaux-2pieces"
+        type: exercise
+        title: "Continuite d'une fonction a deux morceaux"
+        praxeologies: [Prax3]
+        category: application
+        contenu: >-
+          f(x) = {x^2 - 3x + 2 si x <= 2, sqrt(x - 2) si x > 2}.
+          (a) Montrer que f est continue sur ]-inf, 2[ et sur ]2, +inf[.
+          (b) Etudier la continuite de f en 2 (calculer les limites laterales et f(2)).
+          (c) f est-elle continue sur R ? Justifier.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: "ex-cont-morceaux-3pieces"
+        type: exercise
+        title: "Continuite d'une fonction a trois morceaux"
+        praxeologies: [Prax3]
+        category: approfondissement
+        contenu: >-
+          f(x) = {(x^2 - 1)/(x - 1) si x < 1, a si x = 1, sqrt(x) + b si x > 1}.
+          (a) Simplifier f(x) pour x < 1 (factoriser x^2 - 1).
+          (b) Determiner a et b pour que f soit continue en 1.
+          (c) f est-elle alors continue sur R ?
+          Deux points de raccordement implicites : 1 (explicit) et le comportement a l'infini.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "qcm-cont-morceaux-diagnostic"
+        type: qcm
+        title: "Fonction par morceaux — erreur classique"
+        praxeologies: [Prax3]
+        contenu: >-
+          f(x) = {x + 1 si x >= 0, -x + 1 si x < 0}. f est-elle continue en 0 ?
+          Piege : lim gauche = 1, lim droite = 1, f(0) = 1 → f est continue
+          (l'eleve qui dit non parce que la formule change se trompe).
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "TVI — existence et unicite"
+    atoms:
+      - slug: "lesson-cont-methode-tvi-unicite"
+        type: lesson
+        title: "Methode — TVI + unicite par monotonie"
+        praxeologies: [Prax4, Prax5]
+        contenu: >-
+          Rappel du schema standard en 2 etapes :
+          Etape 1 (existence) : f continue sur [a,b], f(a).f(b) < 0, donc par le TVI
+          il existe au moins un c dans ]a,b[ tel que f(c) = 0.
+          Etape 2 (unicite) : f est strictement monotone sur [a,b] (par etude de f'),
+          donc la solution est unique.
+          Attention : TOUJOURS les deux etapes separement. Ne jamais dire "unique" sans monotonie.
+        difficulte: 1
+        timeMinutes: 5
+
+      - slug: "ex-cont-tvi-unicite-polynome"
+        type: exercise
+        title: "TVI + unicite — polynome de degre 3"
+        praxeologies: [Prax4, Prax5]
+        category: approfondissement
+        contenu: >-
+          f(x) = x^3 + 3x - 1.
+          (a) Montrer que f est strictement croissante sur R (calculer f'(x) = 3x^2 + 3 > 0).
+          (b) Montrer que f(x) = 0 admet une unique solution alpha dans ]0, 1[.
+          (c) Encadrer alpha a 10^-1 pres par dichotomie.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-cont-tvi-equation-mixte"
+        type: exercise
+        title: "Existence d'une solution — equation mixte"
+        praxeologies: [Prax4, Prax5]
+        category: approfondissement
+        contenu: >-
+          Montrer que l'equation sqrt(x + 1) = 3 - x admet une unique solution
+          dans [0, 3]. Poser h(x) = sqrt(x+1) - 3 + x. Montrer que h est continue
+          sur [0, 3]. Calculer h(0) et h(3). Montrer que h est strictement croissante
+          (calculer h'(x) = 1/(2.sqrt(x+1)) + 1 > 0). Conclure existence + unicite.
+        difficulte: 2
+        timeMinutes: 12
+
+      - slug: "qcm-cont-tvi-hypotheses"
+        type: qcm
+        title: "TVI — verifier les hypotheses"
+        praxeologies: [Prax4]
+        contenu: >-
+          f(x) = 1/(x-1). f(0) = -1 < 0, f(2) = 1 > 0. Peut-on conclure que
+          f(x) = 0 admet une solution dans [0, 2] ? Non, car f n'est pas continue
+          sur [0, 2] (discontinuite en 1). Tester l'hypothese de continuite.
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Image d'un intervalle"
+    atoms:
+      - slug: "ex-cont-image-monotone"
+        type: exercise
+        title: "Image d'un intervalle — fonction monotone"
+        praxeologies: [Prax6]
+        category: application
+        contenu: >-
+          (a) f(x) = 2x + 3 sur [1, 5]. Determiner f([1, 5]).
+          (b) f(x) = -x^2 + 4 sur [0, 3]. f est decroissante sur [0, 3] (car f'(x) = -2x <= 0).
+          Donc f([0, 3]) = [f(3), f(0)] = [-5, 4].
+          (c) f(x) = sqrt(x) sur [1, 9]. f croissante, f([1, 9]) = [1, 3].
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: "ex-cont-image-non-monotone"
+        type: exercise
+        title: "Image d'un intervalle — fonction non monotone"
+        praxeologies: [Prax6]
+        category: approfondissement
+        contenu: >-
+          f(x) = x^2 - 2x sur [-1, 3].
+          (a) Calculer f'(x) = 2x - 2. En deduire que f est decroissante sur [-1, 1]
+          et croissante sur [1, 3].
+          (b) Dresser le tableau de variation de f sur [-1, 3]. Minimum f(1) = -1.
+          (c) Determiner f([-1, 3]). Calculer f(-1) = 3, f(3) = 3, min = -1.
+          Donc f([-1, 3]) = [-1, 3].
+        difficulte: 2
+        timeMinutes: 12
+
+  - label: "Nombre de solutions et dichotomie"
+    atoms:
+      - slug: "ex-cont-comptage-solutions"
+        type: exercise
+        title: "Nombre exact de solutions d'une equation"
+        praxeologies: [Prax8]
+        category: approfondissement
+        contenu: >-
+          f(x) = x^3 - 3x + 1.
+          (a) Calculer f'(x) = 3x^2 - 3 = 3(x-1)(x+1). Dresser le tableau de variation.
+          (b) Calculer f(-1) = 3 > 0, f(1) = -1 < 0.
+          (c) En deduire que f(x) = 0 admet exactement 3 solutions dans R.
+          Localiser chaque solution dans un intervalle de longueur 1.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-cont-dichotomie-precision"
+        type: exercise
+        title: "Dichotomie a 10^-2"
+        praxeologies: [Prax7]
+        category: application
+        contenu: >-
+          f(x) = x^3 - 3x + 1. On sait que f admet une solution alpha dans [1, 2].
+          (a) Verifier que f(1) < 0 et f(2) > 0.
+          (b) Par dichotomie, encadrer alpha a 10^-1 pres (3-4 etapes).
+          (c) Poursuivre pour obtenir un encadrement a 10^-2 pres.
+          Presenter les resultats dans un tableau organise.
+        difficulte: 1
+        timeMinutes: 12
+
+      - slug: "qcm-cont-nombre-solutions"
+        type: qcm
+        title: "Combien de solutions ?"
+        praxeologies: [Prax8]
+        contenu: >-
+          f(x) = x^4 - 2x^2 + 1 = (x^2 - 1)^2. Combien de solutions pour f(x) = 0 ?
+          Options : 0, 1, 2, 4. Reponse : 2 (x = 1 et x = -1, chacune racine double).
+          Tester la distinction entre nombre de racines et multiplicite.
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Continuite par la definition"
+    atoms:
+      - slug: "ex-cont-definition-alpha-beta"
+        type: exercise
+        title: "Montrer la continuite par la definition"
+        praxeologies: [Prax10]
+        category: approfondissement
+        contenu: >-
+          (a) f(x) = 3x - 2 en a = 1. Calculer |f(x) - f(1)| = |3x - 3| = 3|x - 1|.
+          Choisir alpha = beta/3. Conclure.
+          (b) f(x) = x^2 en a = 2. Calculer |f(x) - 4| = |x-2|.|x+2|.
+          Si |x - 2| < 1, alors |x+2| < 5, donc |f(x) - 4| < 5|x-2|.
+          Choisir alpha = min(1, beta/5). Conclure.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "qcm-cont-definition-choix-alpha"
+        type: qcm
+        title: "Choix de alpha dans la definition"
+        praxeologies: [Prax10]
+        contenu: >-
+          f(x) = 5x + 1. Pour montrer la continuite en a = 0,
+          quel alpha choisir en fonction de beta ?
+          Options : alpha = beta, alpha = beta/5, alpha = 5.beta, alpha = beta^2.
+          Reponse : alpha = beta/5 (car |f(x) - f(0)| = 5|x| < beta ssi |x| < beta/5).
+        difficulte: 1
+        timeMinutes: 2

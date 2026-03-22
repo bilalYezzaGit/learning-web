@@ -1,0 +1,239 @@
+kind: planning
+module: continuite
+programme: 3eme-math
+status: validated
+
+meta_refs:
+  module: continuite
+
+design_intent: >-
+  Livret Cours — Introduction a la continuite. Difficulte 0-1.
+  Focus sur les definitions, les fonctions usuelles continues, les operations,
+  et la premiere application du TVI. Exercices d'application directe uniquement.
+  Pas de problemes de synthese ni de demonstrations par la definition alpha-beta.
+
+slug: continuite-cours
+title: "Continuite — Cours"
+description: "Decouvrir la continuite en un point et sur un intervalle, maitriser les justifications standard, et appliquer le TVI."
+trimester: T1
+order: 1
+
+objectives:
+  - "Justifier la continuite d'une fonction en un point par identification du type"
+  - "Justifier la continuite par les operations (somme, produit, quotient, racine)"
+  - "Etudier la continuite d'une fonction par morceaux en un point de raccordement"
+  - "Appliquer le TVI pour prouver l'existence d'une solution"
+  - "Approximer une solution par la methode de dichotomie"
+
+sections:
+  - label: "Continuite en un point et fonctions usuelles"
+    atoms:
+      - slug: "lesson-cont-definition-continuite"
+        type: lesson
+        title: "Definition et interpretation graphique de la continuite"
+        praxeologies: [Prax1]
+        contenu: >-
+          Definition de la continuite en un point (formulation alpha-beta, convention tunisienne).
+          Interpretation graphique : la courbe peut etre tracee sans lever le crayon.
+          Contre-exemple : la partie entiere E(x) est discontinue en tout entier.
+          Tableau des fonctions usuelles continues (constante, affine, polynome, rationnelle, sqrt).
+        difficulte: 0
+        timeMinutes: 10
+
+      - slug: "ex-cont-justifier-type-simple"
+        type: exercise
+        title: "Justifier la continuite par le type de fonction"
+        praxeologies: [Prax1]
+        category: application
+        contenu: >-
+          4 cas a traiter : (a) f(x) = 3x^4 - 2x + 7 en a = 1 (polynome),
+          (b) f(x) = (x-1)/(x^2+3) en a = 0 (rationnelle, denominateur non nul),
+          (c) f(x) = sqrt(2x+5) en a = 2 (racine, expression > 0),
+          (d) f(x) = |x-3| en a = 0 (valeur absolue d'un polynome).
+          Pour chaque cas : identifier le type, citer le theoreme, verifier les conditions, conclure.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: "qcm-cont-fonctions-usuelles"
+        type: qcm
+        title: "Fonctions usuelles continues"
+        praxeologies: [Prax1]
+        contenu: >-
+          Parmi les affirmations suivantes, laquelle est FAUSSE ?
+          Tester la connaissance du tableau des fonctions usuelles continues
+          (piege : sqrt(x) est continue sur R+* mais pas en tout reel).
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Operations sur les fonctions continues"
+    atoms:
+      - slug: "lesson-cont-operations"
+        type: lesson
+        title: "Operations algebriques et continuite"
+        praxeologies: [Prax2, Prax9]
+        contenu: >-
+          Theoremes : si f et g continues en a, alors f+g, f.g, k.f sont continues en a.
+          Quotient : f/g continue en a si g(a) != 0.
+          Valeur absolue : |f| continue en a si f continue en a.
+          Racine carree : sqrt(f) continue en a si f continue en a ET f(a) > 0 (strictement).
+          Exemple type : f(x) = sqrt(x-2)/(x^2+2x+5), justifier la continuite en 2.
+        difficulte: 0
+        timeMinutes: 8
+
+      - slug: "ex-cont-operations-combinee"
+        type: exercise
+        title: "Justifier la continuite par decomposition"
+        praxeologies: [Prax2]
+        category: application
+        contenu: >-
+          3 fonctions a traiter : (a) f(x) = (2x^2+1)/(x-3) en a = 1,
+          (b) f(x) = sqrt(x^2+4) - 3x en a = 0,
+          (c) f(x) = x.sqrt(x+1)/(x^2+2) en a = 3.
+          Pour chaque cas : decomposer en operations, citer les theoremes, verifier les conditions.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: "ex-cont-sqrt-conditions"
+        type: exercise
+        title: "Continuite de sqrt(f) — verifier les conditions"
+        praxeologies: [Prax9]
+        category: application
+        contenu: >-
+          (a) f(x) = sqrt(x^2+1) : justifier que f est continue en tout reel
+          (x^2+1 > 0 pour tout x).
+          (b) f(x) = sqrt(4-x^2) : pour quelles valeurs de a f est-elle continue ?
+          Identifier le domaine [-2,2], verifier f(a) > 0 pour a dans ]-2,2[.
+          (c) f(x) = sqrt(x^2-4) : f est-elle continue en 2 ? (piege : f(2) = 0, condition stricte non verifiee).
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: "qcm-cont-conditions-operations"
+        type: qcm
+        title: "Conditions de continuite des operations"
+        praxeologies: [Prax2, Prax9]
+        contenu: >-
+          f continue en a et g continue en a. Laquelle des fonctions suivantes
+          N'EST PAS necessairement continue en a ? Tester la condition g(a) != 0
+          pour le quotient ou f(a) > 0 pour sqrt(f).
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Continuite laterale et fonctions par morceaux"
+    atoms:
+      - slug: "lesson-cont-laterale-morceaux"
+        type: lesson
+        title: "Continuite a droite, a gauche, et fonctions par morceaux"
+        praxeologies: [Prax3]
+        contenu: >-
+          Definitions de la continuite a droite et a gauche en un point.
+          Theoreme : f continue en a <=> f continue a droite et a gauche en a.
+          Methode pour les fonctions par morceaux : (1) continuite sur chaque morceau ouvert,
+          (2) au point de raccordement calculer lim a gauche, lim a droite, et f(x0),
+          (3) conclure. Exemple : f(x) = {2x+1 si x>1, 3 si x=1, 3x-1 si x<1} en 1.
+        difficulte: 0
+        timeMinutes: 8
+
+      - slug: "ex-cont-morceaux-simple"
+        type: exercise
+        title: "Etude de continuite d'une fonction par morceaux"
+        praxeologies: [Prax3]
+        category: application
+        contenu: >-
+          f(x) = {x^2+1 si x <= 1, 3x-1 si x > 1}.
+          (a) Justifier que f est continue sur ]-inf, 1[ et sur ]1, +inf[.
+          (b) Calculer lim_{x->1^-} f(x), lim_{x->1^+} f(x) et f(1).
+          (c) f est-elle continue en 1 ? Conclure sur la continuite de f sur R.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: "qcm-cont-partie-entiere"
+        type: qcm
+        title: "Continuite de la partie entiere"
+        praxeologies: [Prax3]
+        contenu: >-
+          f(x) = E(x) la partie entiere. Ou f est-elle continue ?
+          Options : sur R, sur ]0,1[, en tout entier n, nulle part.
+          Tester la comprehension de la discontinuite aux entiers et la continuite entre les entiers.
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Theoreme des valeurs intermediaires"
+    atoms:
+      - slug: "lesson-cont-tvi"
+        type: lesson
+        title: "Theoreme des valeurs intermediaires et localisation de zeros"
+        praxeologies: [Prax4]
+        contenu: >-
+          Enonce du TVI : si f continue sur [a,b] et k entre f(a) et f(b),
+          alors f(x) = k admet au moins une solution dans [a,b].
+          Cas particulier : si f(a).f(b) < 0, il existe c dans ]a,b[ tel que f(c) = 0.
+          Attention : le TVI donne l'existence mais PAS l'unicite.
+          Schema standard de redaction en 4 etapes.
+        difficulte: 0
+        timeMinutes: 8
+
+      - slug: "ex-cont-tvi-existence"
+        type: exercise
+        title: "Existence d'une solution par le TVI"
+        praxeologies: [Prax4]
+        category: application
+        contenu: >-
+          (a) f(x) = x^3 + 2x - 5. Montrer que f(x) = 0 admet au moins une solution
+          dans [1, 2]. Calculer f(1) = -2 < 0 et f(2) = 7 > 0.
+          (b) f(x) = 2x^3 - 3x^2 - 1. Montrer que f(x) = 0 admet au moins une solution
+          dans [1, 2]. Calculer f(1) = -2 < 0 et f(2) = 3 > 0.
+          Pour chaque cas : justifier la continuite, calculer, appliquer le TVI, conclure.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: "ex-cont-tvi-equation-k"
+        type: exercise
+        title: "Le TVI avec une valeur k non nulle"
+        praxeologies: [Prax4]
+        category: application
+        contenu: >-
+          f(x) = x^2 + x - 1. Montrer que l'equation f(x) = 2 admet au moins une
+          solution dans [0, 2]. Calculer f(0) = -1 < 2 et f(2) = 5 > 2,
+          donc 2 est entre f(0) et f(2). Appliquer le TVI.
+          Variante : montrer que sqrt(x-2) = 8/x^2 admet une solution dans [3, 4]
+          en posant h(x) = sqrt(x-2) - 8/x^2.
+        difficulte: 1
+        timeMinutes: 10
+
+      - slug: "qcm-cont-tvi-pieges"
+        type: qcm
+        title: "TVI — existence vs unicite"
+        praxeologies: [Prax4]
+        contenu: >-
+          f continue sur [-2, 2], f(-2) = -3, f(2) = 5. Que peut-on conclure sur f(x) = 0 ?
+          Piege : l'eleve qui repond "exactement une solution" au lieu de "au moins une solution".
+          Tester la distinction existence/unicite.
+        difficulte: 1
+        timeMinutes: 2
+
+  - label: "Approximation par dichotomie"
+    atoms:
+      - slug: "lesson-cont-dichotomie"
+        type: lesson
+        title: "Methode de dichotomie"
+        praxeologies: [Prax7]
+        contenu: >-
+          Principe : diviser l'intervalle par 2 a chaque etape.
+          Algorithme : (1) calculer m = (a+b)/2, (2) si f(a).f(m) < 0 la solution est dans [a,m],
+          sinon dans [m,b], (3) repeter. Precision apres n etapes : (b-a)/2^n.
+          Exemple complet : encadrer alpha a 10^-1 pour f(x) = x^3 - x - 1.
+        difficulte: 0
+        timeMinutes: 5
+
+      - slug: "ex-cont-dichotomie-pratique"
+        type: exercise
+        title: "Encadrer une solution par dichotomie"
+        praxeologies: [Prax7]
+        category: application
+        contenu: >-
+          f(x) = x^3 + 2x - 5. On a montre que f(x) = 0 admet une solution alpha dans [1, 2].
+          (a) Calculer f(1,5). En deduire un encadrement de alpha a 0,5 pres.
+          (b) Affiner par dichotomie pour obtenir un encadrement a 10^-1.
+          Presenter les calculs sous forme de tableau : [a, b], m, f(m), signe, nouvel intervalle.
+        difficulte: 1
+        timeMinutes: 12

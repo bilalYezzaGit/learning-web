@@ -1,0 +1,44 @@
+---
+type: lesson
+title: "Theoreme des valeurs intermediaires et localisation de zeros"
+difficulty: 0
+timeMinutes: 8
+tags: [continuite, tvi, zeros, existence]
+praxeologies: [Prax4]
+---
+
+### Le theoreme
+
+:::theorem[Theoreme des valeurs intermediaires (TVI)]
+Soit $f$ une fonction **continue** sur $[a{,}\ b]$. Pour tout reel $k$ compris entre $f(a)$ et $f(b)$, l'equation $f(x) = k$ admet **au moins une solution** dans $[a{,}\ b]$.
+:::
+
+### Cas particulier : localisation d'un zero
+
+:::property[Corollaire — Existence d'un zero]
+Si $f$ est continue sur $[a{,}\ b]$ et $f(a) \times f(b) < 0$ (signes opposes), alors il existe au moins un $c \in ]a{,}\ b[$ tel que $f(c) = 0$.
+:::
+
+### Schema de redaction
+
+Pour montrer que $f(x) = 0$ admet une solution dans $[a{,}\ b]$ :
+
+1. Justifier que $f$ est **continue** sur $[a{,}\ b]$
+2. Calculer $f(a)$ et $f(b)$
+3. Constater que $f(a) \times f(b) < 0$
+4. Conclure par le TVI
+
+:::attention[Existence, pas unicite]
+Le TVI garantit l'**existence** d'au moins une solution, mais **pas l'unicite**. Pour l'unicite, il faut montrer en plus que $f$ est strictement monotone.
+:::
+
+:::example[Application]
+Montrer que $f(x) = x^3 + 2x - 5$ admet au moins une solution dans $[1{,}\ 2]$.
+
+- $f$ est polynomiale, donc continue sur $[1{,}\ 2]$
+- $f(1) = 1 + 2 - 5 = -2 < 0$
+- $f(2) = 8 + 4 - 5 = 7 > 0$
+- $f(1) \times f(2) < 0$
+
+Par le TVI, $f(x) = 0$ admet au moins une solution dans $]1{,}\ 2[$.
+:::

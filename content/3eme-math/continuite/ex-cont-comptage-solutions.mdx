@@ -1,0 +1,66 @@
+---
+type: exercise
+title: "Nombre exact de solutions d'une equation"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [continuite, tvi, comptage, variation, polynome]
+praxeologies: [Prax8]
+---
+
+:::enonce
+Soit $f(x) = x^3 - 3x + 1$.
+
+**a)** Calculer $f'(x)$ et dresser le tableau de variation de $f$ sur $\mathbb{R}$.
+
+**b)** Calculer $f(-1)$ et $f(1)$.
+
+**c)** En deduire que l'equation $f(x) = 0$ admet exactement $3$ solutions dans $\mathbb{R}$. Localiser chaque solution dans un intervalle de longueur $1$.
+:::
+
+:::solution
+**a)** On calcule $f'(x) = 3x^2 - 3 = 3(x^2 - 1) = 3(x - 1)(x + 1)$.
+
+- $f'(x) > 0$ pour $x \in {]{-}\infty{,}\ -1[} \cup {]1{,}\ +\infty[}$
+- $f'(x) < 0$ pour $x \in {]{-}1{,}\ 1[}$
+
+Donc $f$ est **croissante** sur $]{-}\infty{,}\ -1]$, **decroissante** sur $[-1{,}\ 1]$, et **croissante** sur $[1{,}\ +\infty[$.
+
+De plus : $\lim_{x \to -\infty} f(x) = -\infty$ et $\lim_{x \to +\infty} f(x) = +\infty$.
+
+**b)** On calcule :
+- $f(-1) = (-1)^3 - 3 \times (-1) + 1 = -1 + 3 + 1 = 3 > 0$
+- $f(1) = 1 - 3 + 1 = -1 < 0$
+
+Tableau de variation :
+
+| $x$ | $-\infty$ | | $-1$ | | $1$ | | $+\infty$ |
+|-----|-----------|---|------|---|-----|---|-----------|
+| $f'(x)$ | | $+$ | $0$ | $-$ | $0$ | $+$ | |
+| $f(x)$ | $-\infty$ | $\nearrow$ | $3$ | $\searrow$ | $-1$ | $\nearrow$ | $+\infty$ |
+
+**c)** $f$ est continue sur $\mathbb{R}$ (fonction polynome). On etudie chaque intervalle de monotonie.
+
+**Sur $]{-}\infty{,}\ -1]$** : $f$ est strictement croissante, continue, avec $\lim_{x \to -\infty} f(x) = -\infty$ et $f(-1) = 3 > 0$.
+
+Comme $0 \in {]{-}\infty{,}\ 3[}$, par le TVI il existe une **unique** solution $\alpha_1 \in {]{-}\infty{,}\ -1[}$.
+
+On precise : $f(-2) = -8 + 6 + 1 = -1 < 0$ et $f(-1) = 3 > 0$, donc $\alpha_1 \in {]{-}2{,}\ -1[}$.
+
+**Sur $[-1{,}\ 1]$** : $f$ est strictement decroissante, continue, avec $f(-1) = 3 > 0$ et $f(1) = -1 < 0$.
+
+Par le TVI, il existe une **unique** solution $\alpha_2 \in {]{-}1{,}\ 1[}$.
+
+On precise : $f(0) = 1 > 0$ et $f(1) = -1 < 0$, donc $\alpha_2 \in {]0{,}\ 1[}$.
+
+**Sur $[1{,}\ +\infty[$** : $f$ est strictement croissante, continue, avec $f(1) = -1 < 0$ et $\lim_{x \to +\infty} f(x) = +\infty$.
+
+Par le TVI, il existe une **unique** solution $\alpha_3 \in {]1{,}\ +\infty[}$.
+
+On precise : $f(1) = -1 < 0$ et $f(2) = 8 - 6 + 1 = 3 > 0$, donc $\alpha_3 \in {]1{,}\ 2[}$.
+
+**Conclusion** : l'equation $f(x) = 0$ admet **exactement $3$ solutions** :
+- $\alpha_1 \in {]{-}2{,}\ -1[}$
+- $\alpha_2 \in {]0{,}\ 1[}$
+- $\alpha_3 \in {]1{,}\ 2[}$
+:::

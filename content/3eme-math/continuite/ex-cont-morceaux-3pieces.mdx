@@ -1,0 +1,49 @@
+---
+type: exercise
+title: "Continuite d'une fonction a trois morceaux"
+difficulty: 2
+timeMinutes: 15
+category: approfondissement
+tags: [continuite, morceaux, parametres, raccordement]
+praxeologies: [Prax3]
+---
+
+:::enonce
+Soit $f$ la fonction definie sur $\mathbb{R}$ par :
+
+$$f(x) = \begin{cases} \dfrac{x^2 - 1}{x - 1} & \text{si } x < 1 \\ a & \text{si } x = 1 \\ \sqrt{x} + b & \text{si } x > 1 \end{cases}$$
+
+ou $a$ et $b$ sont deux reels.
+
+1. Simplifier $f(x)$ pour $x < 1$.
+2. Determiner les valeurs de $a$ et $b$ pour que $f$ soit continue en $1$.
+3. Pour ces valeurs de $a$ et $b$, $f$ est-elle continue sur $\mathbb{R}$ ?
+:::
+
+:::solution
+**1.** Pour $x < 1$, on a $x \neq 1$, donc on peut factoriser :
+
+$$f(x) = \frac{x^2 - 1}{x - 1} = \frac{(x - 1)(x + 1)}{x - 1} = x + 1$$
+
+**2.** Pour que $f$ soit continue en $1$, il faut :
+
+$$\lim_{x \to 1^-} f(x) = \lim_{x \to 1^+} f(x) = f(1)$$
+
+Calculons chaque quantite :
+
+- $\lim_{x \to 1^-} f(x) = \lim_{x \to 1^-} (x + 1) = 2$
+- $f(1) = a$
+- $\lim_{x \to 1^+} f(x) = \lim_{x \to 1^+} (\sqrt{x} + b) = \sqrt{1} + b = 1 + b$
+
+La continuite en $1$ impose :
+
+$$a = 2 \quad \text{et} \quad 1 + b = 2 \implies b = 1$$
+
+**3.** Avec $a = 2$ et $b = 1$, on a :
+
+- Sur $]-\infty{,}\ 1[$ : $f(x) = x + 1$ est affine, donc **continue**.
+- En $1$ : $f$ est continue (par construction de $a$ et $b$).
+- Sur $]1{,}\ +\infty[$ : $f(x) = \sqrt{x} + 1$. La fonction $\sqrt{x}$ est continue sur $]1{,}\ +\infty[$ (car $x > 0$) et $1$ est constante. Donc $f$ est **continue** sur $]1{,}\ +\infty[$.
+
+Par suite, $f$ est **continue sur $\mathbb{R}$**.
+:::

@@ -1,0 +1,36 @@
+---
+type: qcm
+title: "Choix de alpha dans la definition"
+difficulty: 1
+timeMinutes: 2
+tags: [continuite, definition, epsilon-delta]
+praxeologies: [Prax10]
+---
+
+:::question
+Soit $f(x) = 5x + 1$. Pour montrer la continuite de $f$ en $a = 0$ par la definition, quel $\alpha$ choisir en fonction de $\beta$ ?
+:::
+
+:::option
+$\alpha = \beta$
+:::
+
+:::option{correct}
+$\alpha = \dfrac{\beta}{5}$
+:::
+
+:::option
+$\alpha = 5\beta$
+:::
+
+:::option
+$\alpha = \beta^2$
+:::
+
+:::explanation
+On calcule $|f(x) - f(0)| = |(5x + 1) - 1| = |5x| = 5|x|$.
+
+On veut $5|x| < \beta$, soit $|x| < \dfrac{\beta}{5}$.
+
+Il suffit de choisir $\alpha = \dfrac{\beta}{5}$ : si $|x - 0| < \alpha$, alors $|f(x) - f(0)| = 5|x| < 5 \times \dfrac{\beta}{5} = \beta$.
+:::

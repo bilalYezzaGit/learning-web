@@ -1,0 +1,60 @@
+---
+type: lesson
+title: "Opérations algébriques et continuité"
+difficulty: 0
+timeMinutes: 8
+tags: [continuité, opérations, racine-carrée, valeur-absolue]
+praxeologies: [Prax2, Prax9]
+---
+
+### Opérations qui préservent la continuité
+
+:::theorem[Opérations sur les fonctions continues]
+Soient $f$ et $g$ deux fonctions continues en $a$ et $k$ un réel.
+
+Alors les fonctions suivantes sont continues en $a$ :
+- $f + g$ (somme)
+- $f \times g$ (produit)
+- $k \cdot f$ (produit par un scalaire)
+:::
+
+### Quotient et inverse
+
+:::theorem[Quotient de fonctions continues]
+- Si $f$ est continue en $a$ et $f(a) \neq 0$, alors $\dfrac{1}{f}$ est continue en $a$.
+- Si $f$ et $g$ sont continues en $a$ et $g(a) \neq 0$, alors $\dfrac{f}{g}$ est continue en $a$.
+:::
+
+:::attention[Condition sur le dénominateur]
+Toujours vérifier que $g(a) \neq 0$ avant de conclure que le quotient est continu.
+:::
+
+### Valeur absolue et racine carrée
+
+:::property[Valeur absolue]
+Si $f$ est continue en $a$, alors $|f|$ est continue en $a$.
+:::
+
+:::property[Racine carrée]
+Si $f$ est continue en $a$ et $f(a) > 0$ (**strictement**), alors $\sqrt{f}$ est continue en $a$.
+:::
+
+:::attention[Condition stricte pour la racine]
+La condition est $f(a) > 0$ (strictement positif). Si $f(a) = 0$, on ne peut pas appliquer directement ce théorème.
+:::
+
+### Méthode de justification
+
+:::example[Exemple type]
+$f(x) = \dfrac{\sqrt{x - 2}}{x^2 + 2x + 5}$. Justifier que $f$ est continue en $2$.
+
+- Le numérateur : $x \mapsto x - 2$ est affine, donc continue. En $2$ : $2 - 2 = 0$.
+
+On a $\sqrt{x - 2}$ est définie pour $x \geq 2$, et en $a = 2$ : $\sqrt{0} = 0$. Ici $f(2) = 0$ et on ne peut pas appliquer le théorème de la racine (car $x - 2 = 0$ en $a = 2$). Il faut vérifier directement.
+
+Cependant, $\sqrt{x - 2}$ est **continue à droite en $2$** (car $\lim_{x \to 2^+} \sqrt{x - 2} = 0 = \sqrt{0}$).
+
+Le dénominateur : $x^2 + 2x + 5 = 13 \neq 0$ en $a = 2$.
+
+Par suite, $f$ est continue à droite en $2$.
+:::

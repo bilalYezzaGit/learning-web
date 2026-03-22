@@ -7,7 +7,7 @@
 - Respecter les conventions du referentiel `docs/referentiels/redaction-mathematiques-tunisie.md`
 - Section 8 (Praxeologies) est la plus critique : 1 praxeologie = 1 type de tache + 1 technique
 - Section 9 (Misconceptions) : inclure des questions diagnostiques au format QCM
-- Convention de nommage : `_kb.md` dans le repertoire du module (`content/{prog}/{mod}/_kb.md`)
+- Output : fichiers splites dans `_meta/modules/{module}/` (savoir.md, praxeologies.md, misconceptions.md, lexique.md)
 
 ## Pre-requis
 
@@ -72,21 +72,37 @@ Croiser les 3 sources pour chaque section. Estimation de taille par section :
 - Chaque erreur a une question diagnostique QCM avec distracteurs cibles
 - Chaque distracteur revele une misconception specifique
 
-### Etape 6 — Ecrire le fichier
+### Etape 6 — Ecrire les fichiers splites
 
-Ecrire le fichier KB dans le module :
+Ecrire la KB en 4 fichiers dans `_meta/modules/{module}/` :
 
 ```
-Write: content/{programme}/{module}/_kb.md
+Write: _meta/modules/{module}/savoir.md        # Sections 0-7 (objectif, scope, transposition, prereqs, carte, theoremes, KC, exemples)
+Write: _meta/modules/{module}/praxeologies.md   # Section 8 (praxeologies)
+Write: _meta/modules/{module}/misconceptions.md # Section 9 (misconceptions + QCM diagnostiques)
+Write: _meta/modules/{module}/lexique.md        # Section 10 (regles redactionnelles, notations)
+```
+
+### Etape 7 — Mettre a jour l'interface
+
+Ajouter/mettre a jour l'entree du module dans `_meta/_interface.yaml` :
+
+```yaml
+modules:
+  {module}:
+    programme: {programme}
+    kb_status: complete     # ou partial
+    files: [savoir, praxeologies, misconceptions, lexique]
 ```
 
 ## Checklist KB
 
 Avant de presenter le resultat a l'utilisateur, verifier :
 
-- [ ] Les 10 sections sont presentes et remplies
+- [ ] Les 10 sections sont presentes et remplies (reparties sur les 4 fichiers)
 - [ ] Chaque praxeologie a T, tau, theta, variables didactiques, difficulte
 - [ ] Chaque misconception a une question diagnostique QCM
 - [ ] Les notations suivent le referentiel tunisien
 - [ ] Les liens inter-modules sont corrects (prerequisites, ouvre vers)
-- [ ] Le fichier est bien place dans `content/{prog}/{mod}/_kb.md`
+- [ ] Les 4 fichiers sont bien places dans `_meta/modules/{module}/`
+- [ ] `_meta/_interface.yaml` est mis a jour avec l'entree du module

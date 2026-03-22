@@ -1,0 +1,36 @@
+---
+type: qcm
+title: "Continuite de la partie entiere"
+difficulty: 1
+timeMinutes: 2
+tags: [continuite, partie-entiere, discontinuite]
+praxeologies: [Prax3]
+---
+
+:::question
+Soit $f(x) = E(x)$ la fonction partie entiere. Ou $f$ est-elle continue ?
+:::
+
+:::option
+Sur $\mathbb{R}$
+:::
+
+:::option{correct}
+Sur chaque intervalle $]n{,}\ n + 1[$ ou $n \in \mathbb{Z}$
+:::
+
+:::option
+En tout entier $n$
+:::
+
+:::option
+Nulle part
+:::
+
+:::explanation
+La partie entiere $E(x)$ est constante (donc continue) sur chaque intervalle $]n{,}\ n+1[$ entre deux entiers consecutifs.
+
+En revanche, en tout entier $n$ : $\lim_{x \to n^-} E(x) = n - 1 \neq n = E(n)$, donc $E$ est **discontinue** en $n$.
+
+$E$ n'est pas continue nulle part, car elle est bien continue entre les entiers.
+:::

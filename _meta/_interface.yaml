@@ -1,0 +1,42 @@
+# Interface META ↔ CONTENT
+# Contrat stable : les plans de production referencent les IDs definis ici.
+# Toute modification des IDs doit etre propagee aux plans existants.
+
+version: 1
+
+modules:
+  nombre-derive:
+    programme: 3eme-math
+    savoir: modules/nombre-derive/savoir.md
+    praxeologies: modules/nombre-derive/praxeologies.md
+    patterns: modules/nombre-derive/patterns.yaml
+    misconceptions: modules/nombre-derive/misconceptions.md
+    lexique: modules/nombre-derive/lexique.md
+  fonction-derivee:
+    programme: 3eme-math
+    savoir: modules/fonction-derivee/savoir.md
+    praxeologies: modules/fonction-derivee/praxeologies.md
+    misconceptions: modules/fonction-derivee/misconceptions.md
+    lexique: modules/fonction-derivee/lexique.md
+  denombrement:
+    programme: 3eme-math
+    savoir: modules/denombrement/savoir.md
+    praxeologies: modules/denombrement/praxeologies.md
+    misconceptions: modules/denombrement/misconceptions.md
+    lexique: modules/denombrement/lexique.md
+  continuite:
+    programme: 3eme-math
+    savoir: modules/continuite/savoir.md
+    praxeologies: modules/continuite/praxeologies.md
+    misconceptions: modules/continuite/misconceptions.md
+    lexique: modules/continuite/lexique.md
+
+examens:
+  synthese-3eme-t3:
+    spec: examens/synthese-3eme-t3.yaml
+
+identifiers:
+  praxeologies: "Prax{N}[a-z]?"
+  patterns: "Prax{N}[a-z]?.v{M}"
+  theorems: "{PREFIX}{N} (module-local)"
+  modules: "kebab-case slug"

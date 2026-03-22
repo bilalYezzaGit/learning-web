@@ -1,0 +1,92 @@
+---
+type: exercise
+title: "Etude complete — polynome de degre 3"
+difficulty: 2
+timeMinutes: 20
+category: probleme
+tags: [continuite, variation, tvi, zeros, polynome, image-intervalle]
+praxeologies: [Prax5, Prax6, Prax8]
+---
+
+:::enonce
+Soit $f(x) = 2x^3 - 9x^2 + 12x - 4$.
+
+**a)** Calculer $f'(x)$ et dresser le tableau de variation de $f$ sur $\mathbb{R}$.
+
+**b)** Calculer $f(1)$ et $f(2)$. En deduire qu'un des extremums de $f$ est un zero.
+
+**c)** Montrer que l'equation $f(x) = 0$ admet exactement $2$ solutions dans $\mathbb{R}$. Localiser la deuxieme solution dans un intervalle de longueur $1$.
+
+**d)** Determiner $f(]{-}\infty{,}\ 1])$, $f([1{,}\ 2])$ et $f([2{,}\ +\infty[)$.
+:::
+
+:::solution
+**a)** On calcule :
+
+$$f'(x) = 6x^2 - 18x + 12 = 6(x^2 - 3x + 2) = 6(x - 1)(x - 2)$$
+
+Signe de $f'(x)$ :
+- $f'(x) > 0$ pour $x \in {]{-}\infty{,}\ 1[} \cup {]2{,}\ +\infty[}$
+- $f'(x) < 0$ pour $x \in {]1{,}\ 2[}$
+
+De plus : $\displaystyle\lim_{x \to -\infty} f(x) = -\infty$ et $\displaystyle\lim_{x \to +\infty} f(x) = +\infty$.
+
+Tableau de variation :
+
+| $x$ | $-\infty$ | | $1$ | | $2$ | | $+\infty$ |
+|-----|-----------|---|------|---|------|---|-----------|
+| $f'(x)$ | | $+$ | $0$ | $-$ | $0$ | $+$ | |
+| $f(x)$ | $-\infty$ | $\nearrow$ | $1$ | $\searrow$ | $0$ | $\nearrow$ | $+\infty$ |
+
+---
+
+**b)** On calcule :
+
+$$f(1) = 2 - 9 + 12 - 4 = 1$$
+
+$$f(2) = 2 \times 8 - 9 \times 4 + 12 \times 2 - 4 = 16 - 36 + 24 - 4 = 0$$
+
+Donc $f(2) = 0$ : le minimum local $x = 2$ est un **zero** de $f$.
+
+---
+
+**c)** $f$ est continue sur $\mathbb{R}$ (fonction polynome). On etudie chaque intervalle de monotonie.
+
+**Sur $]{-}\infty{,}\ 1]$** : $f$ est strictement croissante, avec $\displaystyle\lim_{x \to -\infty} f(x) = -\infty$ et $f(1) = 1$.
+
+L'image de cet intervalle est $]{-}\infty{,}\ 1]$.
+
+Comme $0 \in {]{-}\infty{,}\ 1[}$, par le TVI applique a $f$ strictement croissante et continue, il existe une **unique** solution $\alpha_1 \in {]{-}\infty{,}\ 1[}$.
+
+Localisation : $f(0) = -4 < 0$ et $f(1) = 1 > 0$, donc $\alpha_1 \in {]0{,}\ 1[}$.
+
+**Sur $[1{,}\ 2]$** : $f$ est strictement decroissante de $f(1) = 1$ a $f(2) = 0$.
+
+L'image de cet intervalle est $[0{,}\ 1]$.
+
+L'equation $f(x) = 0$ admet $x = 2$ comme unique solution sur $[1{,}\ 2]$ (le minimum atteint).
+
+**Sur $[2{,}\ +\infty[$** : $f$ est strictement croissante de $f(2) = 0$ a $+\infty$.
+
+L'image de cet intervalle est $[0{,}\ +\infty[$.
+
+Pour $x > 2$ : $f(x) > f(2) = 0$ (croissance stricte), donc $f(x) = 0$ n'a **pas d'autre solution** sur $]2{,}\ +\infty[$.
+
+**Conclusion** : l'equation $f(x) = 0$ admet **exactement $2$ solutions** :
+- $\alpha_1 \in {]0{,}\ 1[}$
+- $\alpha_2 = 2$
+
+---
+
+**d)** D'apres le tableau de variation :
+
+- $f(]{-}\infty{,}\ 1]) = {]{-}\infty{,}\ 1]}$ (croissante de $-\infty$ a $1$)
+- $f([1{,}\ 2]) = [0{,}\ 1]$ (decroissante de $1$ a $0$)
+- $f([2{,}\ +\infty[) = [0{,}\ +\infty[$ (croissante de $0$ a $+\infty$)
+:::
+
+:::erreurs
+- **Oublier que $f(2) = 0$ est atteint** : le minimum est exactement $0$, donc $x = 2$ est bien un zero de $f$.
+- **Compter $3$ solutions** : sur $[2{,}\ +\infty[$, $f$ est croissante a partir de $0$, donc $f(x) > 0$ pour $x > 2$. Il n'y a pas de troisieme solution.
+- **Ecrire $f([1{,}\ 2]) = {]0{,}\ 1]}$** : attention, le minimum $0$ est atteint en $x = 2$, donc c'est bien $[0{,}\ 1]$ avec crochet ferme.
+:::

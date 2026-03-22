@@ -1,0 +1,44 @@
+---
+type: exercise
+title: "Continuité de sqrt(f) — vérifier les conditions"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [continuité, racine-carrée, conditions]
+praxeologies: [Prax9]
+---
+
+:::enonce
+**1.** Justifier que $f(x) = \sqrt{x^2 + 1}$ est continue en tout réel $a$.
+
+**2.** Pour quelles valeurs de $a$ la fonction $f(x) = \sqrt{4 - x^2}$ est-elle continue ?
+
+**3.** La fonction $f(x) = \sqrt{x^2 - 4}$ est-elle continue en $a = 2$ ?
+:::
+
+:::solution
+**1.** La fonction $x \mapsto x^2 + 1$ est polynôme, donc continue sur $\mathbb{R}$.
+
+De plus, pour tout réel $x$ : $x^2 + 1 \geq 1 > 0$.
+
+D'où $\sqrt{x^2 + 1}$ est continue en tout réel $a$ (la condition $f(a) > 0$ est vérifiée).
+
+**2.** La fonction $x \mapsto 4 - x^2$ est polynôme, donc continue sur $\mathbb{R}$.
+
+Le domaine de définition de $\sqrt{4 - x^2}$ est $[-2{,}\ 2]$ (car $4 - x^2 \geq 0 \Leftrightarrow x^2 \leq 4$).
+
+Pour $a \in {]{-2}{,}\ 2[}$ : $4 - a^2 > 0$, donc $\sqrt{4 - x^2}$ est continue en $a$.
+
+En $a = -2$ et $a = 2$ : $4 - a^2 = 0$. La condition $f(a) > 0$ (strictement) n'est pas vérifiée. Il faudrait une étude spécifique (continuité latérale).
+
+**3.** En $a = 2$ : $x^2 - 4 = 4 - 4 = 0$.
+
+La condition du théorème exige $f(a) > 0$ (**strictement**). Ici $f(2) = \sqrt{0} = 0$, la condition n'est pas remplie.
+
+On ne peut pas conclure directement par le théorème. Une étude plus fine (par la définition) serait nécessaire pour déterminer si $\sqrt{x^2 - 4}$ est continue à droite en $2$.
+:::
+
+:::erreurs
+- Appliquer le théorème $\sqrt{f}$ continue sans vérifier que $f(a) > 0$ **strictement**
+- Confondre $f(a) \geq 0$ (définie) avec $f(a) > 0$ (condition pour le théorème)
+:::

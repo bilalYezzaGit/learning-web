@@ -30,8 +30,8 @@ Genere un planning de livret a partir d'une KB module. Le planning declare tous 
 
 ### Pre-requis
 
-- KB module existante (`content/{prog}/{mod}/_kb.md`)
-- Si pas de KB : creer d'abord la KB (voir `.claude/skills/content/references/kb-template.md`)
+- Meta module existante (`_meta/modules/{module}/` avec savoir.md, praxeologies.md)
+- Si pas de meta : creer d'abord la KB (`/content kb {module}`)
 
 ### Syntaxe
 
@@ -60,11 +60,11 @@ Exemples :
    - Ces contraintes sont appliquees a l'etape 4 (generation) et 5 (verification)
    - Si aucune spec : generer un planning par defaut (couverture complete, equilibre standard)
 
-1. **Charge la KB module** : Read `content/{programme}/{module}/_kb.md`
+1. **Charge la meta module** : Read `_meta/modules/{module}/savoir.md` + `_meta/modules/{module}/praxeologies.md`
 
 2. **Charge le template planning** : Read `.claude/skills/content/references/planning-template.yaml`
 
-3. **Analyse les praxeologies** de la KB (section 8) :
+3. **Analyse les praxeologies** de `_meta/modules/{module}/praxeologies.md` :
    - Lister toutes les praxeologies avec leur difficulte
    - Identifier les groupements thematiques naturels
 
@@ -85,6 +85,7 @@ Exemples :
    - Les objectifs sont inclus dans le champ `objectives:` du planning
 
 7. **Ecrit le(s) fichier(s)** `_planning.yaml` avec `status: draft`
+   - Les plannings referencent `_meta/` via le champ `meta_refs` (interface definie dans `_meta/_interface.yaml`)
 
 8. **Presente le planning a l'humain** pour validation :
    - Resume : nombre de molecules, nombre d'atomes par type, praxeologies couvertes
@@ -119,14 +120,14 @@ Voir [actions/create-kb.md](actions/create-kb.md) pour le pipeline complet.
 
 ## Patterns workflow
 
-Enrichit le fichier `_patterns.yaml` d'un module a partir de series d'exercices (WF1+).
+Enrichit le fichier `patterns.yaml` d'un module a partir de series d'exercices (WF1+).
 
 Voir [actions/enrich-patterns.md](actions/enrich-patterns.md) pour le pipeline complet.
 
 ### Pre-requis
 
-- KB module existante (`content/{prog}/{mod}/_kb.md`)
-- Si pas de KB : creer d'abord la KB (`/content kb {module}`)
+- Meta module existante (`_meta/modules/{module}/` avec savoir.md, praxeologies.md)
+- Si pas de meta : creer d'abord la KB (`/content kb {module}`)
 
 ### Syntaxe
 
@@ -138,29 +139,29 @@ L'utilisateur fournit des exercices en contexte (transcriptions Typst, texte, im
 
 ### Etapes
 
-1. **Charge la KB module** : lire `content/{programme}/{module}/_kb.md`, extraire les praxeologies (section 8)
+1. **Charge la meta module** : lire `_meta/modules/{module}/savoir.md` + `_meta/modules/{module}/praxeologies.md`
 
-2. **Charge `_patterns.yaml` existant** (ou creer la structure vide si premier appel)
+2. **Charge `_meta/modules/{module}/patterns.yaml` existant** (ou creer la structure vide si premier appel)
 
 3. **Charge le template patterns** : Read `.claude/skills/content/references/patterns-template.yaml`
 
 4. **Analyse chaque exercice fourni** :
    - Identifier la/les praxeologie(s) mobilisees (reference KB)
    - Extraire : type de tache, technique, variables qui changent
-   - Comparer avec les patterns existants dans `_patterns.yaml`
+   - Comparer avec les patterns existants dans `_meta/modules/{module}/patterns.yaml`
 
 5. **Classifier** :
    - Si **variante connue** → incrementer `frequency`, ajouter source, optionnellement ajouter un exemple
    - Si **nouvelle variante** → creer un nouveau pattern avec ID `PraxN.vM`
    - Si **praxeologie inconnue** (pas dans la KB) → **signaler a l'humain**, ne pas modifier la KB
 
-6. **Ecrire** `_patterns.yaml` mis a jour, incrementer `version`
+6. **Ecrire** `_meta/modules/{module}/patterns.yaml` mis a jour, incrementer `version`
 
 7. **Afficher un resume** : N exercices analyses, M nouveaux patterns, K variantes enrichies, J non classifies
 
 ### Regles
 
-- 1 fichier `_patterns.yaml` par module (pas par molecule)
+- 1 fichier `_meta/modules/{module}/patterns.yaml` par module (pas par molecule)
 - Ne jamais modifier la KB automatiquement
 - Les `examples` sont des exercices reels (pas inventes), avec source
 - `frequency` est incremente a chaque observation dans une nouvelle source
@@ -295,8 +296,7 @@ Atomes:     content/{programme}/{module}/{type}-{topic}-{slug}.mdx
 Molecules:  content/{programme}/{module}/_molecules/{slug}/molecule.yaml
 Planning:   content/{programme}/{module}/_molecules/{slug}/_planning.yaml
 Validation: content/{programme}/{module}/_molecules/{slug}/_validation.md
-KB:         content/{programme}/{module}/_kb.md
-Patterns:   content/{programme}/{module}/_patterns.yaml
+Meta:       _meta/modules/{module}/  (savoir.md, praxeologies.md, patterns.yaml, etc.)
 Programme:  content/{programme}/_programme.yaml
 ```
 
@@ -365,6 +365,16 @@ detaillees de sites web educatifs pre-scannes. Utile pour enrichir les KB module
 et croiser les references lors de la creation de contenu.
 
 Commandes liees : `/source scan`, `/source discover`, `/source status`
+
+### Meta (modele academique)
+- Interface : `_meta/_interface.yaml`
+- Savoir module : `_meta/modules/{module}/savoir.md`
+- Praxeologies : `_meta/modules/{module}/praxeologies.md`
+- Patterns : `_meta/modules/{module}/patterns.yaml`
+- Misconceptions : `_meta/modules/{module}/misconceptions.md`
+- Lexique module : `_meta/modules/{module}/lexique.md`
+- Specs examen : `_meta/examens/{slug}.yaml`
+- Globaux : `_meta/global/` (lexique.md, complexite.md, prerequis-graph.yaml)
 
 ### Difficulty scale
 

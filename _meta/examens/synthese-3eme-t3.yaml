@@ -1,0 +1,108 @@
+# Specification d'examen — Devoir de synthese 3eme Math Trimestre 3
+# Source : programme officiel tunisien + sujets observes
+
+id: synthese-3eme-t3
+type: devoir-synthese
+niveau: 3eme-math
+trimester: T3
+description: >-
+  Devoir de synthese du trimestre 3 pour les 3eme annee section Mathematiques.
+  Couvre l'ensemble du programme annuel avec une ponderation par trimestre.
+  Note : le Baccalaureat est l'examen de fin de 4eme annee, pas de 3eme.
+
+# --- Structure de l'examen ---
+structure:
+  duree_minutes: 180
+  nombre_exercices: 5
+  bareme_total: 20
+  format: "5 exercices independants, chacun note sur 3 a 5 points"
+
+# --- Distribution par module ---
+# Ponderation typique observee dans les sujets BAC
+distribution:
+  - module: continuite
+    poids: 10-15%
+    points_typiques: 2-3
+    presence: "souvent integre dans un exercice d'etude de fonction"
+    patterns_frequents: [TVI, continuite par morceaux, image d'un intervalle]
+
+  - module: nombre-derive
+    poids: 10-15%
+    points_typiques: 2-3
+    presence: "exercice dedie ou integre dans etude de fonction"
+    patterns_frequents: [Prax1, Prax3, Prax7, Prax9]
+
+  - module: fonction-derivee
+    poids: 25-30%
+    points_typiques: 5-6
+    presence: "exercice majeur d'etude de fonction (le plus gros du sujet)"
+    patterns_frequents: [Prax4, Prax5, Prax7a, Prax8]
+
+  - module: suites-reelles
+    poids: 20-25%
+    points_typiques: 4-5
+    presence: "exercice dedie (suites + recurrence)"
+    patterns_frequents: [suite geometrique, recurrence, convergence]
+
+  - module: denombrement
+    poids: 10-15%
+    points_typiques: 2-3
+    presence: "exercice dedie ou combine avec probabilites"
+    patterns_frequents: [Prax2, Prax5a, Prax6, Prax7a]
+
+  - module: probabilites
+    poids: 10-15%
+    points_typiques: 2-3
+    presence: "exercice dedie, souvent combine avec denombrement"
+    patterns_frequents: [probabilites classiques, conditionnelles, arbre]
+
+# --- Profil de difficulte ---
+difficulte:
+  global: "Majorite niveau 2, avec des questions de niveau 1 et quelques de niveau 3"
+  distribution:
+    niveau_1: 30%
+    niveau_2: 50%
+    niveau_3: 20%
+  progression: "Chaque exercice est progressif : questions faciles en debut, difficiles a la fin"
+
+# --- Contraintes temporelles ---
+temps:
+  duree_totale: 180
+  temps_moyen_par_exercice: 30-40
+  marge_relecture: 10-15
+  note: "Les 5 exercices sont independants, l'eleve peut les traiter dans n'importe quel ordre"
+
+# --- Patterns transversaux ---
+patterns_transversaux:
+  - name: "Etude complete de fonction"
+    description: >-
+      Exercice en 5+ parties : domaine, derivee, tableau de variation,
+      tangente, courbe, position par rapport a une droite, limites.
+      Combine nombre-derive, fonction-derivee et potentiellement continuite.
+    modules: [nombre-derive, fonction-derivee, continuite]
+    points_typiques: 5-6
+    frequence: "present dans 100% des sujets"
+
+  - name: "Suite definie par recurrence"
+    description: >-
+      Suite u_{n+1} = f(u_n) : recurrence, monotonie, convergence.
+      Combine suites et etude de la fonction auxiliaire f.
+    modules: [suites-reelles, fonction-derivee]
+    points_typiques: 4-5
+    frequence: "present dans ~80% des sujets"
+
+  - name: "Denombrement + probabilites"
+    description: >-
+      Exercice combinant un probleme de denombrement (urne, cartes)
+      avec un calcul de probabilites.
+    modules: [denombrement, probabilites]
+    points_typiques: 4-5
+    frequence: "present dans ~70% des sujets"
+
+# --- Notes pour la generation de livrets ---
+notes_generation:
+  - "Un livret de preparation BAC T3 doit couvrir les 6 modules principaux"
+  - "L'exercice d'etude de fonction est le plus important (25-30% du bareme)"
+  - "Les exercices doivent etre progressifs dans chaque partie (questions de difficulte croissante)"
+  - "Inclure au moins un probleme transversal (combine 2+ modules)"
+  - "Le temps total des exercices doit etre calibre pour ~170 minutes de travail effectif"

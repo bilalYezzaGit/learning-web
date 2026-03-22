@@ -1,8 +1,10 @@
 # Convention de contenu
 
-Version 4 — 2026-03-18
+Version 5 — 2026-03-22
 
 Ce document definit les regles strictes d'ecriture du contenu pedagogique. Tout contenu qui ne respecte pas ces regles doit etre corrige. La convention prime sur l'existant.
+
+> **Architecture `_meta/`** : le modele academique (savoir, praxeologies, misconceptions, lexique, patterns) vit dans `_meta/modules/{module}/`, separe de la production de contenu dans `content/`. Le repertoire `_meta/` n'est pas touche par le pipeline de contenu.
 
 ---
 
@@ -113,7 +115,7 @@ Liste de tags semantiques. Minimum 1, pas de maximum recommande mais rester rais
 #### `praxeologies`
 
 Liste des IDs de praxeologies couvertes par cet atome. Optionnel, defaut `[]`.
-Les IDs referencent les praxeologies de la KB module (`content/{prog}/{mod}/_kb.md`, section 8).
+Les IDs referencent les praxeologies du modele academique (`_meta/modules/{mod}/praxeologies.md`).
 Renseigne automatiquement lors de la generation depuis un planning (WF3).
 
 ```yaml
@@ -123,7 +125,7 @@ praxeologies: [Prax1, Prax2a, Prax4]
 #### `pattern`
 
 ID du pattern d'examen instancie par cet atome. Optionnel.
-Reference un pattern dans `content/{prog}/{mod}/_patterns.yaml`.
+Reference un pattern dans `_meta/modules/{mod}/patterns.yaml`.
 Utilise principalement pour les exercices du Livret 2 (Examen), generes a partir de patterns reels.
 
 ```yaml
@@ -280,8 +282,6 @@ content/
 ├── 3eme-math/                          # programme (contient _programme.yaml)
 │   ├── _programme.yaml                 # metadata du programme
 │   ├── nombre-derive/                  # module
-│   │   ├── _kb.md                      # Knowledge Base (WF1, stable)
-│   │   ├── _patterns.yaml             # Patterns d'examen (WF1+, vivant)
 │   │   ├── _molecules/
 │   │   │   ├── nombre-derive-cours/
 │   │   │   │   ├── molecule.yaml       # livret (kind: livret)
@@ -295,23 +295,50 @@ content/
 │   │   ├── ex-der-tvi-direct.mdx
 │   │   └── qcm-der-tangente.mdx
 │   └── fonction-derivee/
-│       ├── _kb.md
-│       ├── _patterns.yaml
 │       ├── _molecules/
 │       │   └── .../molecule.yaml
 │       └── *.mdx
 ├── 2nde-math/                          # futur programme
 │   └── ...
+
+_meta/                                   # modele academique (hors pipeline)
+├── _interface.yaml                      # schema d'interface _meta ↔ content
+├── global/                              # donnees transversales
+│   ├── lexique.md
+│   ├── complexite.md
+│   └── prerequis-graph.yaml
+├── examens/                             # specifications d'examens
+│   └── bac-3eme-t3.yaml
+└── modules/                             # 1 repertoire par module
+    ├── nombre-derive/
+    │   ├── savoir.md                    # savoirs theoriques (ex _kb.md)
+    │   ├── praxeologies.md              # taches-types et techniques
+    │   ├── misconceptions.md            # erreurs frequentes
+    │   ├── lexique.md                   # vocabulaire du module
+    │   └── patterns.yaml               # patterns d'examen (ex _patterns.yaml)
+    └── fonction-derivee/
+        ├── savoir.md
+        ├── praxeologies.md
+        ├── misconceptions.md
+        └── lexique.md
 ```
 
-Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les atomes (`.mdx` dans les modules), et les molecules/livrets (`_molecules/{slug}/molecule.yaml`). Les fichiers prefixes `_` dans les modules et sous-repertoires molecule sont **invisibles au pipeline** :
+Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les atomes (`.mdx` dans les modules), et les molecules/livrets (`_molecules/{slug}/molecule.yaml`). Les fichiers prefixes `_` dans les sous-repertoires molecule sont **invisibles au pipeline** :
 
 | Fichier invisible | Role | Cree par |
 |-------------------|------|----------|
-| `_kb.md` | Base de connaissances du module | WF1 |
-| `_patterns.yaml` | Patterns d'examen (par module, enrichi iterativement) | WF1+ |
 | `_planning.yaml` | Spec de generation (par molecule) | WF2 |
 | `_validation.md` | Rapport de validation (par molecule) | WF4 |
+
+Le modele academique (anciennement `_kb.md` et `_patterns.yaml` dans les modules) vit desormais dans `_meta/modules/{module}/` :
+
+| Fichier `_meta/` | Role | Cree par |
+|-------------------|------|----------|
+| `savoir.md` | Savoirs theoriques du module | WF1 |
+| `praxeologies.md` | Taches-types et techniques | WF1 |
+| `misconceptions.md` | Erreurs frequentes des eleves | WF1 |
+| `lexique.md` | Vocabulaire specifique du module | WF1 |
+| `patterns.yaml` | Patterns d'examen (enrichi iterativement) | WF1+ |
 
 ### 3.1 Molecule Livret
 
@@ -920,11 +947,11 @@ Un atome est valide si :
 
 ---
 
-## 11. Patterns d'examen (`_patterns.yaml`)
+## 11. Patterns d'examen (`patterns.yaml`)
 
-Fichier par module : `content/{programme}/{module}/_patterns.yaml`. Contient les variantes d'exercices d'examen classifiees par praxeologie.
+Fichier par module : `_meta/modules/{module}/patterns.yaml`. Contient les variantes d'exercices d'examen classifiees par praxeologie.
 
-Ce fichier est **vivant** — enrichi iterativement a chaque nouvelle source d'exercices (WF1+). Il est invisible au pipeline.
+Ce fichier est **vivant** — enrichi iterativement a chaque nouvelle source d'exercices (WF1+). Il vit dans `_meta/`, separe du pipeline de contenu.
 
 ### Format
 
@@ -935,7 +962,7 @@ version: 1                              # incremente a chaque enrichissement
 
 patterns:
   - id: Prax3.v1                        # convention : {Praxeologie}.v{numero}
-    praxeology: Prax3                   # reference vers la KB (section 8)
+    praxeology: Prax3                   # reference vers _meta/modules/{mod}/praxeologies.md
     name: "Nom court de la variante"
     description: >-
       Ce que l'eleve doit faire dans cette variante.
@@ -960,9 +987,9 @@ patterns:
 
 ### Regles
 
-- **1 fichier par module** (pas par molecule)
+- **1 fichier par module** dans `_meta/modules/{module}/patterns.yaml` (pas par molecule)
 - IDs de patterns : `{Praxeologie}.v{numero}` (ex: `Prax3.v1`, `Prax3.v2`)
-- Chaque pattern reference une praxeologie de la KB via `praxeology:`
+- Chaque pattern reference une praxeologie de `_meta/modules/{module}/praxeologies.md` via `praxeology:`
 - `frequency` = nombre d'occurrences observees dans les sources ingeres
 - `examples` = exercices reels (pas inventes), avec source
 - `variables` = ce qui change d'un exercice a l'autre pour ce pattern

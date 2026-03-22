@@ -32,11 +32,17 @@ src/
 │   └── utils/        # Helpers divers
 └── types/            # Interfaces (content, booklet, progress)
 
+_meta/
+├── _interface.yaml       # Contrat IDs modules/patterns/examens
+├── global/               # Lexique, complexite, prerequis-graph
+├── examens/              # Specs par type d'examen
+└── modules/
+    └── {module}/         # savoir.md, praxeologies.md, patterns.yaml, misconceptions.md, lexique.md
+
 content/
 ├── {programme}/            # Ex: 3eme-math/
 │   ├── _programme.yaml     # Metadata programme
 │   └── {module}/           # Ex: continuite/
-│       ├── _kb.md          # Knowledge Base module
 │       ├── _molecules/     # Repertoire par molecule
 │       │   └── {slug}/     # Ex: continuite/
 │       │       ├── molecule.yaml    # Livret YAML
@@ -69,6 +75,7 @@ tools/pipeline/src/         # Pipeline de contenu
 - Rules detaillees → `.claude/rules/index.md` + `docs/specs/rules/` (14 domaines)
 - Contenu pedagogique → `docs/CONTENT-CONVENTIONS.md`
 - Systeme de contenu → `docs/content-agentic-workflow.md`
+- Modele academique → `_meta/` (savoir, praxeologies, patterns, misconceptions, lexique)
 
 ## Skills
 

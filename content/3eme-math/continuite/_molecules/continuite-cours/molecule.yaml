@@ -1,0 +1,49 @@
+kind: livret
+title: "Continuite — Cours"
+description: "Decouvrir la continuite en un point et sur un intervalle, maitriser les justifications standard, et appliquer le TVI."
+trimester: T1
+order: 1
+visible: true
+
+objectives:
+  - "Justifier la continuite d'une fonction en un point par identification du type"
+  - "Justifier la continuite par les operations (somme, produit, quotient, racine)"
+  - "Etudier la continuite d'une fonction par morceaux en un point de raccordement"
+  - "Appliquer le TVI pour prouver l'existence d'une solution"
+  - "Approximer une solution par la methode de dichotomie"
+
+sections:
+  - label: "Continuite en un point et fonctions usuelles"
+    steps:
+      - lesson-cont-definition-continuite
+      - ex-cont-justifier-type-simple
+      - quiz:
+          - qcm-cont-fonctions-usuelles
+
+  - label: "Operations sur les fonctions continues"
+    steps:
+      - lesson-cont-operations
+      - ex-cont-operations-combinee
+      - ex-cont-sqrt-conditions
+      - quiz:
+          - qcm-cont-conditions-operations
+
+  - label: "Continuite laterale et fonctions par morceaux"
+    steps:
+      - lesson-cont-laterale-morceaux
+      - ex-cont-morceaux-simple
+      - quiz:
+          - qcm-cont-partie-entiere
+
+  - label: "Theoreme des valeurs intermediaires"
+    steps:
+      - lesson-cont-tvi
+      - ex-cont-tvi-existence
+      - ex-cont-tvi-equation-k
+      - quiz:
+          - qcm-cont-tvi-pieges
+
+  - label: "Approximation par dichotomie"
+    steps:
+      - lesson-cont-dichotomie
+      - ex-cont-dichotomie-pratique

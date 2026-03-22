@@ -1,0 +1,40 @@
+---
+type: lesson
+title: "Methode — Justifier la continuite en un point"
+difficulty: 1
+timeMinutes: 5
+tags: [continuite, methode, justification, operations]
+praxeologies: [Prax1, Prax2, Prax9]
+---
+
+### Trois approches pour justifier la continuite
+
+Pour montrer qu'une fonction $f$ est continue en un point $a$, on dispose de trois approches. Le choix depend de la forme de $f$.
+
+### Approche 1 : Par le type
+
+Si $f$ est une fonction usuelle (polynome, rationnelle, racine carree), on cite directement le theoreme correspondant.
+
+:::remark
+Les fonctions polynomes sont continues sur $\mathbb{R}$. Les fonctions rationnelles sont continues en tout point ou le denominateur ne s'annule pas. La fonction $x \mapsto \sqrt{x}$ est continue en tout reel strictement positif.
+:::
+
+### Approche 2 : Par les operations
+
+On decompose $f$ en somme, produit, quotient ou composee de fonctions continues, puis on cite les theoremes d'operations.
+
+:::attention[Conditions a verifier]
+- **Quotient** $\dfrac{f}{g}$ : il faut que $g(a) \neq 0$
+- **Racine** $\sqrt{f}$ : il faut que $f(a) > 0$ (strictement !)
+- **Valeur absolue** $|f|$ : toujours continue si $f$ l'est (pas de condition)
+:::
+
+### Approche 3 : Par morceaux
+
+Si $f$ est definie par morceaux, on etudie la continuite sur chaque morceau ouvert (par type), puis on verifie le raccordement aux points de jonction :
+
+$$\lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = f(a)$$
+
+:::remark
+En pratique, un exercice d'examen combine souvent les approches 2 et 3. Par exemple, chaque morceau est une combinaison de fonctions continues (approche 2), et il faut verifier le raccordement (approche 3).
+:::

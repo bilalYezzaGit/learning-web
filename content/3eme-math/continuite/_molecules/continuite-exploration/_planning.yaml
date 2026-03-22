@@ -1,0 +1,177 @@
+kind: planning
+module: continuite
+programme: 3eme-math
+status: validated
+
+meta_refs:
+  module: continuite
+
+design_intent: >-
+  Livret Exploration — Approfondissement et problemes de synthese.
+  Difficulte 2-3. Problemes ouverts, demonstrations, modelisations.
+  Combine plusieurs praxeologies dans un meme exercice.
+  Exercices de type BAC complets (etude de fonction + TVI + image + dichotomie).
+
+slug: continuite-exploration
+title: "Continuite — Exploration"
+description: "Approfondir la continuite avec des problemes de synthese, des demonstrations, et des exercices type BAC combinant plusieurs techniques."
+trimester: T1
+order: 3
+
+objectives:
+  - "Resoudre des problemes combinant continuite par morceaux, TVI et image d'intervalle"
+  - "Demontrer la continuite par la definition alpha-beta pour des fonctions non triviales"
+  - "Determiner le nombre exact de solutions d'equations polynomiales et irrationnelles"
+  - "Mener une etude complete de type BAC (continuite + variations + TVI + dichotomie)"
+
+sections:
+  - label: "Demonstrations et definition formelle"
+    atoms:
+      - slug: "ex-cont-demo-alpha-beta-quadratique"
+        type: exercise
+        title: "Demonstration alpha-beta — fonction quadratique"
+        praxeologies: [Prax10]
+        category: approfondissement
+        contenu: >-
+          f(x) = x^2 + x.
+          (a) Montrer par la definition que f est continue en a = 1.
+          Calculer |f(x) - f(1)| = |x^2 + x - 2| = |x-1|.|x+2|.
+          Si |x-1| < 1, alors |x+2| < 4, donc |f(x)-f(1)| < 4|x-1|.
+          Choisir alpha = min(1, beta/4).
+          (b) Generaliser : montrer que f est continue en tout reel a.
+          Calculer |f(x)-f(a)| = |x-a|.|x+a+1|. Restreindre |x-a| < 1
+          puis majorer |x+a+1| <= |2a+1| + 1.
+        difficulte: 2
+        timeMinutes: 15
+
+      - slug: "ex-cont-demo-alpha-beta-sqrt"
+        type: exercise
+        title: "Demonstration alpha-beta — racine carree"
+        praxeologies: [Prax10]
+        category: synthese
+        contenu: >-
+          Montrer par la definition que f(x) = sqrt(x) est continue en a > 0.
+          Technique du conjugue : |sqrt(x) - sqrt(a)| = |x - a|/(sqrt(x) + sqrt(a)).
+          Comme sqrt(x) + sqrt(a) >= sqrt(a) > 0, on a |sqrt(x) - sqrt(a)| <= |x-a|/sqrt(a).
+          Choisir alpha = beta.sqrt(a). Conclure.
+          Discussion : pourquoi cette methode ne marche pas en a = 0 ?
+        difficulte: 3
+        timeMinutes: 15
+
+      - slug: "qcm-cont-demo-majoration"
+        type: qcm
+        title: "Choix de la majoration dans une demonstration"
+        praxeologies: [Prax10]
+        contenu: >-
+          Pour montrer que f(x) = x^3 est continue en a = 1, on ecrit
+          |x^3 - 1| = |x-1|.|x^2+x+1|. Si |x-1| < 1, quelle majoration
+          de |x^2+x+1| est correcte ? Tester le sens de la restriction.
+        difficulte: 2
+        timeMinutes: 2
+
+  - label: "Problemes de continuite par morceaux avances"
+    atoms:
+      - slug: "ex-cont-morceaux-parametre-complet"
+        type: exercise
+        title: "Fonction par morceaux avec deux parametres"
+        praxeologies: [Prax3]
+        category: synthese
+        contenu: >-
+          f(x) = {ax^2 + bx + 1 si x <= 0, sqrt(x + 1) si 0 < x < 3, (x+6)/(x-1) si x >= 3}.
+          (a) Determiner a et b pour que f soit continue sur R.
+          En x = 0 : continuite => f(0) = 1 et lim droite = 1 (automatique).
+          En x = 3 : lim gauche = 2, f(3) = 9/2. Pour continuite : lim droite de sqrt(x+1) en 3 = 2 != 9/2.
+          Discuter : f ne peut pas etre continue en 3 avec ces formules. L'eleve doit le detecter.
+          (b) Si on remplace le 3eme morceau par cx + d pour x >= 3, trouver c et d pour continuite.
+        difficulte: 3
+        timeMinutes: 20
+
+      - slug: "ex-cont-morceaux-valeur-absolue"
+        type: exercise
+        title: "Continuite de f(x) = |g(x)| par morceaux"
+        praxeologies: [Prax3, Prax9]
+        category: approfondissement
+        contenu: >-
+          f(x) = |x^2 - 4x + 3|.
+          (a) Factoriser x^2 - 4x + 3 = (x-1)(x-3). Etudier le signe.
+          (b) Reecrire f par morceaux (3 morceaux).
+          (c) Etudier la continuite de f en 1 et en 3.
+          (d) Representer graphiquement f sur [-1, 5].
+        difficulte: 2
+        timeMinutes: 15
+
+  - label: "Problemes de synthese — TVI et images"
+    atoms:
+      - slug: "ex-cont-synthese-cubique"
+        type: exercise
+        title: "Etude complete — polynome de degre 3"
+        praxeologies: [Prax5, Prax6, Prax8]
+        category: probleme
+        contenu: >-
+          f(x) = 2x^3 - 9x^2 + 12x - 4.
+          (a) Calculer f'(x) = 6x^2 - 18x + 12 = 6(x-1)(x-2). Dresser le tableau de variation.
+          (b) Calculer f(1) = 1 et f(2) = 0. En deduire que alpha = 2 est un zero de f.
+          (c) Montrer que f(x) = 0 admet exactement 2 solutions dans R (alpha = 2 et une autre dans ]0, 1[).
+          (d) Determiner f(]-inf, 1]) et f([1, 2]) et f([2, +inf[).
+        difficulte: 2
+        timeMinutes: 20
+
+      - slug: "ex-cont-synthese-irrationnelle"
+        type: exercise
+        title: "Etude complete — fonction irrationnelle"
+        praxeologies: [Prax2, Prax5, Prax6]
+        category: probleme
+        contenu: >-
+          f(x) = sqrt(x + 2) - x.
+          (a) Determiner l'ensemble de definition de f.
+          (b) Justifier que f est continue sur [-2, +inf[.
+          (c) Calculer f'(x) = 1/(2.sqrt(x+2)) - 1. Etudier le signe de f'.
+          En deduire que f est croissante sur [-2, -7/4] et decroissante sur [-7/4, +inf[.
+          (d) Montrer que f(x) = 0 admet exactement 2 solutions. Les localiser.
+          (e) Determiner f([-2, +inf[).
+        difficulte: 3
+        timeMinutes: 20
+
+      - slug: "qcm-cont-synthese-image"
+        type: qcm
+        title: "Image d'un intervalle — lecture du tableau de variation"
+        praxeologies: [Prax6]
+        contenu: >-
+          On donne le tableau de variation d'une fonction f continue sur [0, 4] :
+          f croissante sur [0, 2] de f(0) = -1 a f(2) = 3,
+          f decroissante sur [2, 4] de f(2) = 3 a f(4) = 0.
+          Determiner f([0, 4]). Options testant les erreurs classiques.
+        difficulte: 2
+        timeMinutes: 2
+
+  - label: "Exercice type BAC"
+    atoms:
+      - slug: "ex-cont-type-bac-complet"
+        type: exercise
+        title: "Exercice type devoir de synthese — etude complete"
+        praxeologies: [Prax3, Prax5, Prax6, Prax7, Prax8]
+        category: probleme
+        contenu: >-
+          f(x) = {x^2 - 2x + 2 si x <= 1, (x+1)/(x-1) si x > 1} (en excluant x = 1 du 2e morceau, f(1) = 1).
+          Partie A :
+          (a) Etudier la continuite de f sur R. Verifier en x = 1.
+          (b) Etudier les variations de f sur ]-inf, 1] et sur ]1, +inf[.
+          (c) Dresser le tableau de variation complet.
+          Partie B :
+          (d) Montrer que f(x) = 3 admet exactement 2 solutions.
+          (e) Determiner f(]1, +inf[) et f(]-inf, 1]).
+          (f) Encadrer la solution de f(x) = 3 dans ]1, +inf[ a 10^-1 pres.
+        difficulte: 3
+        timeMinutes: 20
+
+      - slug: "qcm-cont-type-bac-rapide"
+        type: qcm
+        title: "QCM de synthese — continuite"
+        praxeologies: [Prax4, Prax5]
+        contenu: >-
+          f continue et strictement croissante sur [0, 5], f(0) = -2, f(5) = 4.
+          Combien de solutions pour f(x) = 1 dans [0, 5] ?
+          Options : 0, au moins 1, exactement 1, exactement 2.
+          Reponse : exactement 1 (TVI + monotonie stricte).
+        difficulte: 2
+        timeMinutes: 2

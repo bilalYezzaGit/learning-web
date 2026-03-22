@@ -22,10 +22,13 @@
 
 3. Contexte pedagogique (si disponible) :
    ```
-   Read: content/{programme}/{module}/_kb.md
+   Read: _meta/modules/{module}/savoir.md
+   Read: _meta/modules/{module}/praxeologies.md
+   Read: _meta/modules/{module}/misconceptions.md
+   Read: _meta/modules/{module}/lexique.md
    Glob: content/{programme}/{module}/_molecules/*/_planning.yaml
    ```
-   → Si KB/planning absents, Grille C sera notee **partielle**
+   → Si fichiers KB/planning absents, Grille C sera notee **partielle**
 
 ## Pipeline
 
@@ -49,9 +52,12 @@ Glob: content/**/{module}/*.mdx
    ```
 3. KB module (si existante) :
      ```
-     Glob: content/{programme}/{module}/_kb.md
+     Read: _meta/modules/{module}/savoir.md
+     Read: _meta/modules/{module}/praxeologies.md
+     Read: _meta/modules/{module}/misconceptions.md
+     Read: _meta/modules/{module}/lexique.md
      ```
-   - Si rien trouve, noter que la Grille C sera partielle
+   - Si les fichiers n'existent pas, noter que la Grille C sera partielle
 4. Plannings per-molecule (si existants) :
      ```
      Glob: content/{programme}/{module}/_molecules/*/_planning.yaml

@@ -1,0 +1,49 @@
+---
+type: exercise
+title: "Image d'un intervalle — fonction non monotone"
+difficulty: 2
+timeMinutes: 12
+category: approfondissement
+tags: [continuite, image-intervalle, variation, extremum]
+praxeologies: [Prax6]
+---
+
+:::enonce
+Soit $f(x) = x^2 - 2x$ definie sur $[-1{,}\ 3]$.
+
+**a)** Calculer $f'(x)$ et en deduire le sens de variation de $f$ sur $[-1{,}\ 3]$.
+
+**b)** Dresser le tableau de variation de $f$ sur $[-1{,}\ 3]$.
+
+**c)** Determiner $f([-1{,}\ 3])$.
+:::
+
+:::solution
+**a)** On calcule $f'(x) = 2x - 2$.
+
+- Pour $x \in [-1{,}\ 1]$ : $f'(x) = 2x - 2 \leq 0$, donc $f$ est **decroissante** sur $[-1{,}\ 1]$.
+- Pour $x \in [1{,}\ 3]$ : $f'(x) = 2x - 2 \geq 0$, donc $f$ est **croissante** sur $[1{,}\ 3]$.
+
+**b)** On calcule les valeurs aux bornes et a l'extremum :
+
+- $f(-1) = (-1)^2 - 2 \times (-1) = 1 + 2 = 3$
+- $f(1) = 1 - 2 = -1$ (minimum)
+- $f(3) = 9 - 6 = 3$
+
+Tableau de variation :
+
+| $x$ | $-1$ | | $1$ | | $3$ |
+|-----|------|---|-----|---|-----|
+| $f'(x)$ | | $-$ | $0$ | $+$ | |
+| $f(x)$ | $3$ | $\searrow$ | $-1$ | $\nearrow$ | $3$ |
+
+**c)** $f$ est continue sur $[-1{,}\ 3]$ (fonction polynome).
+
+D'apres le tableau de variation :
+- Le **minimum** de $f$ sur $[-1{,}\ 3]$ est $f(1) = -1$
+- Le **maximum** de $f$ sur $[-1{,}\ 3]$ est $\max(f(-1){,}\ f(3)) = \max(3{,}\ 3) = 3$
+
+D'ou :
+
+$$f([-1{,}\ 3]) = [-1{,}\ 3]$$
+:::

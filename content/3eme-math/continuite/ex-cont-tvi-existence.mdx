@@ -1,0 +1,36 @@
+---
+type: exercise
+title: "Existence d'une solution par le TVI"
+difficulty: 1
+timeMinutes: 10
+category: application
+tags: [continuite, tvi, existence, polynome]
+praxeologies: [Prax4]
+---
+
+:::enonce
+1. Soit $f(x) = x^3 + 2x - 5$. Montrer que l'equation $f(x) = 0$ admet au moins une solution dans $[1{,}\ 2]$.
+2. Soit $f(x) = 2x^3 - 3x^2 - 1$. Montrer que l'equation $f(x) = 0$ admet au moins une solution dans $[1{,}\ 2]$.
+:::
+
+:::solution
+**1.** $f$ est une fonction polynome, donc **continue** sur $[1{,}\ 2]$.
+
+On calcule :
+- $f(1) = 1 + 2 - 5 = -2 < 0$
+- $f(2) = 8 + 4 - 5 = 7 > 0$
+
+On a $f(1) \times f(2) = (-2) \times 7 < 0$.
+
+Par le **theoreme des valeurs intermediaires**, l'equation $f(x) = 0$ admet au moins une solution dans $]1{,}\ 2[$.
+
+**2.** $f$ est une fonction polynome, donc **continue** sur $[1{,}\ 2]$.
+
+On calcule :
+- $f(1) = 2 - 3 - 1 = -2 < 0$
+- $f(2) = 16 - 12 - 1 = 3 > 0$
+
+On a $f(1) \times f(2) = (-2) \times 3 < 0$.
+
+Par le **TVI**, l'equation $f(x) = 0$ admet au moins une solution dans $]1{,}\ 2[$.
+:::
