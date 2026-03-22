@@ -1,0 +1,80 @@
+# Echelle de complexite — Reference globale
+# Echelle commune a tous les modules pour mesurer la difficulte
+
+# ---------------------------------------------------------------------------
+# Niveaux de difficulte (0 a 3)
+# ---------------------------------------------------------------------------
+levels:
+  - level: 0
+    name: "Decouverte guidee"
+    description: "Activite introductive, l'eleve est accompagne pas a pas"
+    autonomy: "Tres faible — les etapes sont indiquees"
+    techniques: 1
+    technique_type: elementaire
+    duration_minutes: { min: 2, max: 5 }
+    example: "Calculer f(2) pour f(x) = x^2 + 1"
+
+  - level: 1
+    name: "Application directe"
+    description: "Application d'une seule formule ou technique, sans adaptation"
+    autonomy: "L'eleve doit identifier la formule mais le schema est standard"
+    techniques: 1
+    technique_type: standard
+    duration_minutes: { min: 3, max: 10 }
+    example: "Calculer f'(a) par la definition pour f(x) = x^2"
+
+  - level: 2
+    name: "Combinaison de techniques"
+    description: "Necessite de combiner 2+ techniques ou d'adapter a un contexte nouveau"
+    autonomy: "L'eleve doit choisir les outils et planifier les etapes"
+    techniques: "2-3"
+    technique_type: enchainee
+    duration_minutes: { min: 8, max: 20 }
+    example: "Etudier la derivabilite d'une fonction par morceaux en un point de raccordement"
+
+  - level: 3
+    name: "Probleme de synthese / approfondissement"
+    description: "Probleme ouvert, modelisation, ou demonstration non triviale"
+    autonomy: "Elevee — l'eleve doit structurer sa demarche"
+    techniques: "3+"
+    technique_type: strategique
+    duration_minutes: { min: 15, max: 30 }
+    example: "Probleme d'optimisation geometrique (modeliser + deriver + conclure)"
+
+# ---------------------------------------------------------------------------
+# Criteres transversaux
+# ---------------------------------------------------------------------------
+criteria:
+  - name: "Nombre de techniques"
+    by_level: { "0-1": "1", "2": "2-3", "3": "3+" }
+  - name: "Transfert de contexte"
+    by_level: { "0-1": "Non", "2": "Partiel", "3": "Oui" }
+  - name: "Modelisation requise"
+    by_level: { "0-1": "Non", "2": "Non", "3": "Oui" }
+  - name: "Justification"
+    by_level: { "0-1": "Calcul", "2": "Argument", "3": "Demonstration" }
+  - name: "Parametres"
+    by_level: { "0-1": "Numeriques fixes", "2": "Mixtes", "3": "Generaux / parametriques" }
+
+# ---------------------------------------------------------------------------
+# Correspondance avec les types d'atomes
+# ---------------------------------------------------------------------------
+atom_type_mapping:
+  - atom_type: lesson
+    difficulty_range: [0, 1]
+    note: "Les exemples dans les lecons sont de niveau 0-1"
+  - atom_type: exercise
+    categories:
+      - category: application
+        difficulty: 1
+      - category: approfondissement
+        difficulty: 2
+      - category: synthese
+        difficulty_range: [2, 3]
+      - category: probleme
+        difficulty: 3
+      - category: demonstration
+        difficulty_range: [2, 3]
+  - atom_type: qcm
+    difficulty_range: [0, 2]
+    note: "Typiquement niveau 1"

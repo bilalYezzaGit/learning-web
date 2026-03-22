@@ -1,0 +1,101 @@
+# Lexique et regles redactionnelles — Denombrement
+
+module: denombrement
+programme: 3eme-math
+
+# ---------------------------------------------------------------------------
+# Notations specifiques au module
+# ---------------------------------------------------------------------------
+notations:
+  - symbol: "A_n^p"
+    meaning: "Nombre d'arrangements de p parmi n (jamais P(n,p) ni P_r)"
+  - symbol: "C_n^p"
+    meaning: "Nombre de combinaisons de p parmi n (notation binomiale acceptee mais secondaire)"
+  - symbol: "n!"
+    meaning: "Factorielle de n (convention 0! = 1)"
+  - symbol: "card(E)"
+    meaning: "Cardinal de l'ensemble E (pas |E| ni #E)"
+  - symbol: "E x F"
+    meaning: "Produit cartesien de E et F"
+  - symbol: "complementaire de A, C_E A"
+    meaning: "Complementaire de A dans E"
+  - symbol: "n^p"
+    meaning: "Nombre d'applications de {1,...,p} dans un ensemble de cardinal n (tirages avec remise)"
+
+# ---------------------------------------------------------------------------
+# Formules de redaction consacrees
+# ---------------------------------------------------------------------------
+redaction_formulas:
+  identification_modele:
+    description: "Quand on identifie le modele de tirage"
+    template: "Il s'agit d'un tirage {type_tirage}, donc on utilise {formule}"
+    examples:
+      - "Il s'agit d'un tirage simultane de 3 boules parmi 10, donc on utilise C_{10}^3"
+      - "Il s'agit d'un tirage successif sans remise de 4 elements parmi 8, donc on utilise A_8^4"
+      - "Il s'agit d'un tirage successif avec remise, donc on utilise n^p"
+
+  principe_multiplicatif:
+    description: "Quand on applique le principe multiplicatif"
+    template: "On utilise le principe multiplicatif : {detail_etapes} d'ou le nombre total est {produit}"
+
+  complementaire:
+    description: "Quand on utilise la methode du complementaire"
+    template: "Par la methode du complementaire, le nombre de ... est : total - nombre de ... = ..."
+
+  binome:
+    description: "Quand on applique le binome de Newton"
+    template: "D'apres la formule du binome de Newton appliquee avec a = ..., b = ..., n = ..."
+
+  combinaison_directe:
+    description: "Quand on applique directement la formule des combinaisons"
+    template: "Le nombre de facons de choisir p elements parmi n est C_n^p = {calcul}"
+
+  arrangement:
+    description: "Quand on applique la formule des arrangements"
+    template: "Le nombre de p-uplets d'elements distincts de E est A_n^p = {calcul}"
+
+  anagrammes_repetitions:
+    description: "Quand on calcule des anagrammes avec repetitions"
+    template: >-
+      Le mot comporte {n} lettres dont {detail_repetitions}.
+      Le nombre d'anagrammes est n! / (p1! x p2! x ... x pk!) = {calcul}.
+
+  inclusion_exclusion:
+    description: "Quand on applique l'inclusion-exclusion"
+    template: "card(E union F) = card(E) + card(F) - card(E inter F) = {calcul}"
+
+# ---------------------------------------------------------------------------
+# Niveau de rigueur attendu
+# ---------------------------------------------------------------------------
+rigor_rules:
+  - context: "Choix de formule"
+    rule: "TOUJOURS justifier le choix du modele ('tirage simultane donc combinaisons' ou 'ordre et sans remise donc arrangements')"
+  - context: "Conditions de validite"
+    rule: "TOUJOURS preciser que 0 <= p <= n pour A_n^p et C_n^p"
+  - context: "Denombrement sous contraintes"
+    rule: "TOUJOURS expliciter la decomposition en cas et verifier que les cas sont disjoints"
+  - context: "Premier chiffre d'un nombre"
+    rule: "TOUJOURS traiter le premier chiffre separement (ne peut pas etre 0)"
+  - context: "Methode du complementaire"
+    rule: "TOUJOURS identifier clairement ce qu'on soustrait et pourquoi"
+  - context: "Anagrammes avec repetitions"
+    rule: "TOUJOURS dresser le tableau lettre/frequence avant d'appliquer la formule"
+
+# ---------------------------------------------------------------------------
+# Longueur type des redactions
+# ---------------------------------------------------------------------------
+typical_lengths:
+  - type: "Application directe (A_n^p, C_n^p, n!)"
+    lines: { min: 3, typical: 4, max: 5 }
+  - type: "Anagrammes avec repetitions"
+    lines: { min: 3, typical: 5, max: 6 }
+  - type: "Probleme avec contraintes (decomposition en cas)"
+    lines: { min: 8, typical: 12, max: 15 }
+  - type: "Methode du complementaire"
+    lines: { min: 5, typical: 7, max: 10 }
+  - type: "Developpement binome de Newton"
+    lines: { min: 4, typical: 6, max: 8 }
+  - type: "Demonstration identite combinatoire"
+    lines: { min: 10, typical: 15, max: 20 }
+  - type: "Equation combinatoire"
+    lines: { min: 5, typical: 8, max: 10 }

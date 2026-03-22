@@ -4,89 +4,107 @@ title: "Etude complete — polynome de degre 3"
 difficulty: 2
 timeMinutes: 20
 category: probleme
-tags: [continuite, variation, tvi, zeros, polynome, image-intervalle]
+tags: [continuite, variations, tvi, zeros, image-intervalle, polynome]
 praxeologies: [Prax5, Prax6, Prax8]
 ---
 
 :::enonce
-Soit $f(x) = 2x^3 - 9x^2 + 12x - 4$.
+Soit $f$ la fonction definie sur $\mathbb{R}$ par $f(x) = 2x^3 - 9x^2 + 12x - 4$.
 
-**a)** Calculer $f'(x)$ et dresser le tableau de variation de $f$ sur $\mathbb{R}$.
-
-**b)** Calculer $f(1)$ et $f(2)$. En deduire qu'un des extremums de $f$ est un zero.
-
-**c)** Montrer que l'equation $f(x) = 0$ admet exactement $2$ solutions dans $\mathbb{R}$. Localiser la deuxieme solution dans un intervalle de longueur $1$.
-
-**d)** Determiner $f(]{-}\infty{,}\ 1])$, $f([1{,}\ 2])$ et $f([2{,}\ +\infty[)$.
+1. Calculer $f'(x)$ et etudier son signe. Dresser le tableau de variation de $f$.
+2. Calculer $f(1)$ et $f(2)$. En deduire que $\alpha = 2$ est un zero de $f$.
+3. Montrer que l'equation $f(x) = 0$ admet **exactement deux solutions** dans $\mathbb{R}$.
+4. Determiner $f(]{-\infty}, 1])$, $f([1, 2])$ et $f([2, +\infty[)$.
 :::
 
 :::solution
-**a)** On calcule :
+**1. Derivee et variations :**
 
 $$f'(x) = 6x^2 - 18x + 12 = 6(x^2 - 3x + 2) = 6(x - 1)(x - 2)$$
 
-Signe de $f'(x)$ :
-- $f'(x) > 0$ pour $x \in {]{-}\infty{,}\ 1[} \cup {]2{,}\ +\infty[}$
-- $f'(x) < 0$ pour $x \in {]1{,}\ 2[}$
+**Signe de $f'(x)$ :** $f'(x) = 0 \Leftrightarrow x = 1$ ou $x = 2$.
 
-De plus : $\displaystyle\lim_{x \to -\infty} f(x) = -\infty$ et $\displaystyle\lim_{x \to +\infty} f(x) = +\infty$.
+Le coefficient dominant de $f'$ est $6 > 0$, donc $f'(x) > 0$ a l'exterieur des racines.
 
-Tableau de variation :
+**Valeurs remarquables :**
 
-| $x$ | $-\infty$ | | $1$ | | $2$ | | $+\infty$ |
-|-----|-----------|---|------|---|------|---|-----------|
-| $f'(x)$ | | $+$ | $0$ | $-$ | $0$ | $+$ | |
-| $f(x)$ | $-\infty$ | $\nearrow$ | $1$ | $\searrow$ | $0$ | $\nearrow$ | $+\infty$ |
+$$f(1) = 2 - 9 + 12 - 4 = 1 \quad ; \quad f(2) = 16 - 36 + 24 - 4 = 0$$
 
----
+**Limites aux bornes :**
 
-**b)** On calcule :
+$$\lim_{x \to -\infty} f(x) = -\infty \quad ; \quad \lim_{x \to +\infty} f(x) = +\infty$$
 
-$$f(1) = 2 - 9 + 12 - 4 = 1$$
+**Tableau de variation :**
 
-$$f(2) = 2 \times 8 - 9 \times 4 + 12 \times 2 - 4 = 16 - 36 + 24 - 4 = 0$$
+```typst
+#import "@preview/vartable:0.2.3": tabvar
 
-Donc $f(2) = 0$ : le minimum local $x = 2$ est un **zero** de $f$.
-
----
-
-**c)** $f$ est continue sur $\mathbb{R}$ (fonction polynome). On etudie chaque intervalle de monotonie.
-
-**Sur $]{-}\infty{,}\ 1]$** : $f$ est strictement croissante, avec $\displaystyle\lim_{x \to -\infty} f(x) = -\infty$ et $f(1) = 1$.
-
-L'image de cet intervalle est $]{-}\infty{,}\ 1]$.
-
-Comme $0 \in {]{-}\infty{,}\ 1[}$, par le TVI applique a $f$ strictement croissante et continue, il existe une **unique** solution $\alpha_1 \in {]{-}\infty{,}\ 1[}$.
-
-Localisation : $f(0) = -4 < 0$ et $f(1) = 1 > 0$, donc $\alpha_1 \in {]0{,}\ 1[}$.
-
-**Sur $[1{,}\ 2]$** : $f$ est strictement decroissante de $f(1) = 1$ a $f(2) = 0$.
-
-L'image de cet intervalle est $[0{,}\ 1]$.
-
-L'equation $f(x) = 0$ admet $x = 2$ comme unique solution sur $[1{,}\ 2]$ (le minimum atteint).
-
-**Sur $[2{,}\ +\infty[$** : $f$ est strictement croissante de $f(2) = 0$ a $+\infty$.
-
-L'image de cet intervalle est $[0{,}\ +\infty[$.
-
-Pour $x > 2$ : $f(x) > f(2) = 0$ (croissance stricte), donc $f(x) = 0$ n'a **pas d'autre solution** sur $]2{,}\ +\infty[$.
-
-**Conclusion** : l'equation $f(x) = 0$ admet **exactement $2$ solutions** :
-- $\alpha_1 \in {]0{,}\ 1[}$
-- $\alpha_2 = 2$
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $1$, $2$, $+infinity$),
+  contents: (
+    ($+$, ("0", $-$), ("0", $+$)),
+    (
+      (bottom, $-infinity$),
+      (top, $1$),
+      (bottom, $0$),
+      (top, $+infinity$),
+    ),
+  ),
+)
+```
 
 ---
 
-**d)** D'apres le tableau de variation :
+**2.** On a $f(1) = 1$ et $f(2) = 0$. Donc $\alpha = 2$ est bien un zero de $f$ : $f(2) = 0$.
 
-- $f(]{-}\infty{,}\ 1]) = {]{-}\infty{,}\ 1]}$ (croissante de $-\infty$ a $1$)
-- $f([1{,}\ 2]) = [0{,}\ 1]$ (decroissante de $1$ a $0$)
-- $f([2{,}\ +\infty[) = [0{,}\ +\infty[$ (croissante de $0$ a $+\infty$)
+---
+
+**3. Nombre exact de solutions de $f(x) = 0$ :**
+
+D'apres le tableau de variation, on etudie l'equation $f(x) = 0$ sur chaque intervalle de monotonie.
+
+**Sur $]{-\infty}, 1]$ :** $f$ est strictement croissante, continue, avec $f(x) \to -\infty$ quand $x \to -\infty$ et $f(1) = 1 > 0$.
+
+Par le TVI, il existe $c \in {]{-\infty}, 1[}$ tel que $f(c) = 0$. Par stricte monotonie, cette solution est **unique**.
+
+Localisation : $f(0) = -4 < 0$ et $f(1) = 1 > 0$, donc $c \in {]0, 1[}$.
+
+**Sur $[1, 2]$ :** $f$ est strictement decroissante de $f(1) = 1$ a $f(2) = 0$.
+
+$f(x) = 0$ admet $x = 2$ comme unique solution (atteinte au bord).
+
+**Sur $[2, +\infty[$ :** $f$ est strictement croissante de $f(2) = 0$ a $+\infty$.
+
+$f(x) = 0$ admet $x = 2$ comme unique solution (atteinte au bord).
+
+En rassemblant : $f(x) = 0$ admet **exactement deux solutions** : $c \in {]0, 1[}$ et $\alpha = 2$.
+
+---
+
+**4. Images d'intervalles :**
+
+**$f(]{-\infty}, 1])$ :** $f$ est strictement croissante sur $]{-\infty}, 1]$, de $-\infty$ a $f(1) = 1$.
+
+$$f(]{-\infty}, 1]) = {]{-\infty}, 1]}$$
+
+**$f([1, 2])$ :** $f$ est strictement decroissante sur $[1, 2]$, de $f(1) = 1$ a $f(2) = 0$.
+
+$$f([1, 2]) = [0, 1]$$
+
+**$f([2, +\infty[)$ :** $f$ est strictement croissante sur $[2, +\infty[$, de $f(2) = 0$ a $+\infty$.
+
+$$f([2, +\infty[) = [0, +\infty[$$
 :::
 
-:::erreurs
-- **Oublier que $f(2) = 0$ est atteint** : le minimum est exactement $0$, donc $x = 2$ est bien un zero de $f$.
-- **Compter $3$ solutions** : sur $[2{,}\ +\infty[$, $f$ est croissante a partir de $0$, donc $f(x) > 0$ pour $x > 2$. Il n'y a pas de troisieme solution.
-- **Ecrire $f([1{,}\ 2]) = {]0{,}\ 1]}$** : attention, le minimum $0$ est atteint en $x = 2$, donc c'est bien $[0{,}\ 1]$ avec crochet ferme.
+:::methode
+Pour une etude complete d'un polynome de degre 3 :
+1. Deriver, factoriser $f'$, dresser le tableau de variation
+2. Calculer les valeurs aux extrema locaux
+3. Sur chaque intervalle de monotonie, appliquer TVI + injectivite pour compter les zeros
+4. Pour les images, lire directement les valeurs extremes dans le tableau de variation
 :::

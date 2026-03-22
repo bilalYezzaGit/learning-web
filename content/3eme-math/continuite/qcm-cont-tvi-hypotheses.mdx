@@ -3,34 +3,36 @@ type: qcm
 title: "TVI — verifier les hypotheses"
 difficulty: 1
 timeMinutes: 2
-tags: [continuite, tvi, hypotheses, discontinuite]
+tags: [continuite, tvi, hypotheses]
 praxeologies: [Prax4]
 ---
 
 :::question
-Soit $f(x) = \dfrac{1}{x - 1}$. On a $f(0) = -1 < 0$ et $f(2) = 1 > 0$. Peut-on conclure que l'equation $f(x) = 0$ admet une solution dans $[0{,}\ 2]$ ?
+Soit $f(x) = \dfrac{1}{x - 1}$. On constate que $f(0) = -1 < 0$ et $f(2) = 1 > 0$. Peut-on conclure que l'equation $f(x) = 0$ admet une solution dans $[0, 2]$ ?
 :::
 
 :::option
-Oui, par le TVI car $f(0) \times f(2) < 0$
+Oui, par le TVI car $f(0) < 0$ et $f(2) > 0$
 :::
 
 :::option
-Oui, car $0$ est compris entre $f(0)$ et $f(2)$
+Oui, car $f$ change de signe sur $[0, 2]$
 :::
 
 :::option{correct}
-Non, car $f$ n'est pas continue sur $[0{,}\ 2]$
+Non, car $f$ n'est pas continue sur $[0, 2]$
 :::
 
 :::option
-Non, car $f$ ne s'annule jamais
+Non, car $f(0) \cdot f(2) > 0$
 :::
 
 :::explanation
-La fonction $f(x) = \dfrac{1}{x - 1}$ n'est **pas definie** en $x = 1$, qui appartient a $[0{,}\ 2]$. Donc $f$ n'est pas continue sur $[0{,}\ 2]$.
+Le TVI necessite que $f$ soit **continue sur l'intervalle** $[a, b]$. Or ici, $f(x) = \dfrac{1}{x - 1}$ n'est pas definie en $x = 1$, donc $f$ n'est pas continue sur $[0, 2]$.
 
-Le TVI exige que $f$ soit **continue sur tout l'intervalle** $[a{,}\ b]$. Sans cette hypothese, on ne peut rien conclure.
+L'hypothese de continuite n'est pas satisfaite : on ne peut pas appliquer le TVI.
 
-D'ailleurs, $f(x) = \dfrac{1}{x - 1}$ ne s'annule effectivement jamais, ce qui montre que le changement de signe ne suffit pas sans la continuite.
+D'ailleurs, $f(x) = \dfrac{1}{x - 1}$ ne s'annule jamais (le numerateur vaut toujours $1 \neq 0$), donc l'equation $f(x) = 0$ n'a aucune solution.
+
+C'est un contre-exemple classique : le changement de signe n'implique pas l'existence d'un zero si la fonction n'est pas continue.
 :::

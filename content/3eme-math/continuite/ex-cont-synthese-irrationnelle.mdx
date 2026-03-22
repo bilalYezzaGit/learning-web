@@ -4,120 +4,141 @@ title: "Etude complete — fonction irrationnelle"
 difficulty: 3
 timeMinutes: 20
 category: probleme
-tags: [continuite, variation, tvi, racine, irrationnelle, image-intervalle]
+tags: [continuite, variations, tvi, irrationnelle, image-intervalle, zeros]
 praxeologies: [Prax2, Prax5, Prax6]
 ---
 
 :::enonce
-Soit $f(x) = \sqrt{x + 2} - x$.
+Soit $f$ la fonction definie par $f(x) = \sqrt{x + 2} - x$.
 
-**a)** Determiner l'ensemble de definition $D_f$ de $f$.
-
-**b)** Justifier que $f$ est continue sur $D_f$.
-
-**c)** Calculer $f'(x)$ et etudier son signe. En deduire le tableau de variation de $f$.
-
-**d)** Montrer que l'equation $f(x) = 0$ admet exactement une solution dans $D_f$. La determiner.
-
-**e)** Determiner $f([-2{,}\ +\infty[)$.
-:::
-
-:::methode
-Pour une fonction irrationnelle $f(x) = \sqrt{u(x)} - v(x)$, la strategie d'etude est :
-1. Domaine : $u(x) \geq 0$.
-2. Continuite : composee/somme de fonctions continues.
-3. Derivee : $f'(x) = \dfrac{u'(x)}{2\sqrt{u(x)}} - v'(x)$, puis signe par mise au meme denominateur.
-4. Pour les zeros : resoudre $\sqrt{u(x)} = v(x)$ impose $v(x) \geq 0$, puis elever au carre.
+1. Determiner l'ensemble de definition $D_f$ de $f$.
+2. Justifier que $f$ est continue sur $D_f$.
+3. Calculer $f'(x)$ et etudier le signe de $f'$. En deduire le tableau de variation de $f$.
+4. Montrer que l'equation $f(x) = 0$ admet **exactement deux solutions** dans $D_f$. Les localiser.
+5. Determiner $f([-2, +\infty[)$.
 :::
 
 :::solution
-**a)** La fonction $f$ est definie si et seulement si $x + 2 \geq 0$, soit $x \geq -2$.
+**1. Ensemble de definition :**
 
-$$D_f = [-2{,}\ +\infty[$$
+$f(x) = \sqrt{x + 2} - x$ est definie si et seulement si $x + 2 \geq 0$, c'est-a-dire $x \geq -2$.
 
----
-
-**b)** Sur $]{-}2{,}\ +\infty[$ :
-- $x \mapsto x + 2$ est continue (fonction affine)
-- $t \mapsto \sqrt{t}$ est continue sur $]0{,}\ +\infty[$
-- par composition, $x \mapsto \sqrt{x + 2}$ est continue sur $]{-}2{,}\ +\infty[$
-- $x \mapsto x$ est continue
-- par difference, $f(x) = \sqrt{x + 2} - x$ est **continue** sur $]{-}2{,}\ +\infty[$
-
-En $x = -2$ : $f(-2) = \sqrt{0} - (-2) = 2$ et $\displaystyle\lim_{x \to -2^+} f(x) = 0 + 2 = 2$, donc $f$ est continue a droite en $-2$.
-
-Ainsi $f$ est **continue sur $[-2{,}\ +\infty[$**.
+$$D_f = [-2, +\infty[$$
 
 ---
 
-**c)** Pour $x > -2$ :
+**2. Continuite :**
+
+- $x \mapsto \sqrt{x + 2}$ est continue sur $[-2, +\infty[$ : c'est la composee de $x \mapsto x + 2$ (polynome, continue) et $t \mapsto \sqrt{t}$ (continue sur $\mathbb{R}^+$). Par le theoreme T5 (ou T1), elle est continue sur son domaine.
+- $x \mapsto x$ est continue sur $\mathbb{R}$ (polynome).
+- Par difference de fonctions continues (theoreme T2), $f$ est continue sur $[-2, +\infty[$.
+
+---
+
+**3. Derivee et variations :**
+
+Pour $x > -2$ :
 
 $$f'(x) = \frac{1}{2\sqrt{x + 2}} - 1$$
 
-On etudie le signe de $f'(x)$ :
+**Signe de $f'(x)$ :**
 
-$$f'(x) = 0 \iff \frac{1}{2\sqrt{x + 2}} = 1 \iff 2\sqrt{x + 2} = 1 \iff \sqrt{x + 2} = \frac{1}{2}$$
+$$f'(x) = 0 \Leftrightarrow \frac{1}{2\sqrt{x + 2}} = 1 \Leftrightarrow \sqrt{x + 2} = \frac{1}{2} \Leftrightarrow x + 2 = \frac{1}{4} \Leftrightarrow x = -\frac{7}{4}$$
 
-$$\iff x + 2 = \frac{1}{4} \iff x = -\frac{7}{4}$$
+- Si $x < -\dfrac{7}{4}$ : $\sqrt{x + 2} < \dfrac{1}{2}$, donc $\dfrac{1}{2\sqrt{x+2}} > 1$, donc $f'(x) > 0$.
+- Si $x > -\dfrac{7}{4}$ : $\sqrt{x + 2} > \dfrac{1}{2}$, donc $\dfrac{1}{2\sqrt{x+2}} < 1$, donc $f'(x) < 0$.
 
-Signe de $f'(x)$ :
-- Pour $x \in {]{-}2{,}\ -\frac{7}{4}[}$ : $\sqrt{x+2} < \dfrac{1}{2}$, donc $\dfrac{1}{2\sqrt{x+2}} > 1$, d'ou $f'(x) > 0$.
-- Pour $x \in {]{-}\frac{7}{4}{,}\ +\infty[}$ : $\sqrt{x+2} > \dfrac{1}{2}$, donc $\dfrac{1}{2\sqrt{x+2}} < 1$, d'ou $f'(x) < 0$.
+**Valeurs remarquables :**
 
-Valeurs aux bornes et a l'extremum :
-- $f(-2) = \sqrt{0} + 2 = 2$
-- $f\!\left(-\dfrac{7}{4}\right) = \sqrt{-\dfrac{7}{4} + 2} - \left(-\dfrac{7}{4}\right) = \sqrt{\dfrac{1}{4}} + \dfrac{7}{4} = \dfrac{1}{2} + \dfrac{7}{4} = \dfrac{9}{4}$
-- $\displaystyle\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} (\sqrt{x+2} - x) = -\infty$ (car $x$ domine $\sqrt{x+2}$)
+$$f(-2) = \sqrt{0} - (-2) = 2$$
 
-Tableau de variation :
+$$f\!\left(-\frac{7}{4}\right) = \sqrt{-\frac{7}{4} + 2} - \left(-\frac{7}{4}\right) = \sqrt{\frac{1}{4}} + \frac{7}{4} = \frac{1}{2} + \frac{7}{4} = \frac{9}{4}$$
 
-| $x$ | $-2$ | | $-\dfrac{7}{4}$ | | $+\infty$ |
-|-----|------|---|-----------------|---|-----------|
-| $f'(x)$ | | $+$ | $0$ | $-$ | |
-| $f(x)$ | $2$ | $\nearrow$ | $\dfrac{9}{4}$ | $\searrow$ | $-\infty$ |
+**Limite en $+\infty$ :**
 
----
+$$\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} (\sqrt{x+2} - x) = -\infty$$
 
-**d)** On cherche les solutions de $f(x) = 0$, c'est-a-dire $\sqrt{x + 2} = x$.
+car $x$ croit beaucoup plus vite que $\sqrt{x+2}$.
 
-**Condition necessaire** : $x \geq 0$ (car $\sqrt{x+2} \geq 0$).
+Plus rigoureusement : $f(x) = \sqrt{x+2} - x = x\!\left(\dfrac{\sqrt{x+2}}{x} - 1\right)$. Or $\dfrac{\sqrt{x+2}}{x} = \dfrac{1}{\sqrt{x+2}} \cdot \dfrac{x+2}{x} \to 0$ quand $x \to +\infty$, donc $f(x) \to -\infty$.
 
-Sous cette condition, on eleve au carre :
+**Tableau de variation :**
 
-$$x + 2 = x^2 \iff x^2 - x - 2 = 0 \iff (x - 2)(x + 1) = 0$$
+```typst
+#import "@preview/vartable:0.2.3": tabvar
 
-Les solutions de l'equation algebrique sont $x = 2$ et $x = -1$.
-
-**Verification** (car l'elevation au carre peut introduire des solutions parasites) :
-- $x = 2$ : $f(2) = \sqrt{4} - 2 = 2 - 2 = 0$ **--- solution valide.**
-- $x = -1$ : ne verifie pas $x \geq 0$, donc **rejetee**.
-
-On peut aussi verifier directement : $f(-1) = \sqrt{1} - (-1) = 1 + 1 = 2 \neq 0$.
-
-**Par le tableau de variation** : $f$ est decroissante sur $\left[-\dfrac{7}{4}{,}\ +\infty\right[$ de $\dfrac{9}{4}$ a $-\infty$. Comme $0 \in \left]{-}\infty{,}\ \dfrac{9}{4}\right[$, le TVI applique a $f$ strictement decroissante garantit l'existence et l'unicite d'un zero, qui est $x = 2$.
-
-Sur $\left[-2{,}\ -\dfrac{7}{4}\right]$, $f$ est croissante de $2$ a $\dfrac{9}{4}$, donc $f(x) \geq 2 > 0$ : aucun zero.
-
-L'equation $f(x) = 0$ admet **exactement une solution : $x = 2$**.
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-2$, $-7/4$, $+infinity$),
+  contents: (
+    ($+$, ("0", $-$)),
+    (
+      (bottom, $2$),
+      (top, $9/4$),
+      (bottom, $-infinity$),
+    ),
+  ),
+)
+```
 
 ---
 
-**e)** D'apres le tableau de variation :
+**4. Solutions de $f(x) = 0$ :**
 
-- $f$ est continue sur $[-2{,}\ +\infty[$
-- $f$ croit de $2$ a $\dfrac{9}{4}$ sur $\left[-2{,}\ -\dfrac{7}{4}\right]$, puis decroit de $\dfrac{9}{4}$ a $-\infty$ sur $\left[-\dfrac{7}{4}{,}\ +\infty\right[$
+$f(x) = 0 \Leftrightarrow \sqrt{x + 2} = x$.
 
-Le maximum de $f$ est $\dfrac{9}{4}$, atteint en $x = -\dfrac{7}{4}$.
+**Condition necessaire :** $x \geq 0$ (car $\sqrt{x+2} \geq 0$).
 
-La fonction $f$ prend toutes les valeurs de $]{-}\infty{,}\ \dfrac{9}{4}]$ sur $\left[-\dfrac{7}{4}{,}\ +\infty\right[$ (decroissante de $\dfrac{9}{4}$ a $-\infty$).
+D'apres le tableau de variation :
 
-Donc :
+**Sur $[-2, -\frac{7}{4}]$ :** $f$ est croissante de $f(-2) = 2$ a $f(-\frac{7}{4}) = \frac{9}{4}$. Comme $f > 0$ sur cet intervalle, **aucune solution**.
 
-$$f([-2{,}\ +\infty[) = \left]{-}\infty{,}\ \frac{9}{4}\right]$$
+**Sur $[-\frac{7}{4}, +\infty[$ :** $f$ est strictement decroissante de $f(-\frac{7}{4}) = \frac{9}{4}$ a $-\infty$.
+
+Comme $f(-\frac{7}{4}) = \frac{9}{4} > 0$ et $\lim_{+\infty} f = -\infty$, par le TVI, il existe au moins un $c$ tel que $f(c) = 0$.
+
+Par stricte monotonie (decroissance stricte), cette solution est **unique** sur $[-\frac{7}{4}, +\infty[$.
+
+Mais resolvons directement : $\sqrt{x+2} = x \Rightarrow x + 2 = x^2$ (en elevant au carre, avec $x \geq 0$).
+
+$$x^2 - x - 2 = 0 \quad ; \quad \Delta = 1 + 8 = 9 \quad ; \quad x = \frac{1 \pm 3}{2}$$
+
+$$x_1 = -1 \quad ; \quad x_2 = 2$$
+
+**Verification :** $x_1 = -1$ donne $\sqrt{1} = 1 \neq -1$, donc $x_1 = -1$ est **etrangere** (introduction par l'elevation au carre).
+
+$x_2 = 2$ donne $\sqrt{4} = 2$. Correct.
+
+Conclusion : l'equation $f(x) = 0$ admet une **unique solution** $x = 2$.
+
+**Remarque :** l'analyse par le tableau de variation confirme ce resultat. L'equation $f(x) = 0$ n'admet qu'une seule solution car $f$ ne s'annule que sur l'intervalle de decroissance, et par monotonie stricte, la solution est unique.
+
+---
+
+**5. Image de $[-2, +\infty[$ :**
+
+D'apres le tableau de variation :
+- $f$ croit de $f(-2) = 2$ a $f(-\frac{7}{4}) = \frac{9}{4}$
+- $f$ decroit de $\frac{9}{4}$ a $-\infty$
+
+L'image est donc :
+
+$$f([-2, +\infty[) = \left]{-\infty}, \frac{9}{4}\right]$$
+:::
+
+:::methode
+Pour une etude complete de fonction irrationnelle :
+1. Le domaine est impose par la condition sous la racine
+2. La continuite se justifie par les operations (somme, composee de fonctions continues)
+3. La derivee contient un terme en $\frac{1}{2\sqrt{\cdot}}$ : resoudre $f' = 0$ en isolant la racine
+4. Attention aux solutions etrangeres introduites par l'elevation au carre
 :::
 
 :::erreurs
-- **Oublier de verifier $x \geq 0$ avant d'elever au carre** : l'equation $\sqrt{x+2} = x$ impose $x \geq 0$. Sans cette verification, on garde la fausse solution $x = -1$.
-- **Ecrire $f(-1) = 0$** : attention, $f(-1) = \sqrt{1} - (-1) = 1 + 1 = 2$, pas $0$.
-- **Se tromper dans le calcul de $f\!\left(-\frac{7}{4}\right)$** : le maximum est $\dfrac{9}{4}$, pas $\dfrac{7}{4}$ ou $2$.
+- Oublier la condition $x \geq 0$ dans $\sqrt{x+2} = x$ : la racine carree est positive, donc $x$ doit l'etre aussi.
+- Garder $x = -1$ comme solution : l'elevation au carre introduit des solutions parasites. Toujours verifier dans l'equation initiale.
 :::

@@ -1,0 +1,300 @@
+# Modeles de redaction — Fonction derivee
+# Templates structures par praxeologie pour generation LLM et correction
+# Chaque modele decrit EXACTEMENT comment un bon eleve doit rediger
+
+module: fonction-derivee
+programme: 3eme-math
+
+redaction_models:
+  # -------------------------------------------------------------------------
+  - praxeology: Prax1
+    name: "Calcul de derivee simple (polynome, combinaison lineaire)"
+
+    template: |
+      $f$ est une fonction {type_fonction}, donc derivable sur ${domaine}$.
+
+      $f'(x) = {calcul_derivee}$
+
+      {simplification}
+
+    variants:
+      type_fonction:
+        polynome: "polynome"
+        rationnelle: "rationnelle definie sur ${domaine}$"
+      simplification:
+        directe: ""
+        factorisation: "Soit $f'(x) = {forme_factorisee}$."
+
+    expected_lines: { min: 2, typical: 3, max: 4 }
+
+    grading_criteria:
+      - criterion: "Identification du type et domaine de derivabilite"
+        weight: 0.2
+        required: true
+      - criterion: "Application correcte des formules de derivation"
+        weight: 0.4
+        required: true
+      - criterion: "Simplification ou factorisation du resultat"
+        weight: 0.2
+        required: false
+      - criterion: "Resultat final correct"
+        weight: 0.2
+        required: true
+
+  # -------------------------------------------------------------------------
+  - praxeology: Prax2a
+    name: "Derivee d'un produit ou quotient"
+
+    template: |
+      Posons $u(x) = {u}$ et $v(x) = {v}$.
+
+      $u'(x) = {u_prime}$ et $v'(x) = {v_prime}$.
+
+      {formule_appliquee}
+
+      {simplification}
+
+    variants:
+      formule_appliquee:
+        produit: >-
+          $f'(x) = u'(x) \cdot v(x) + u(x) \cdot v'(x) = {developpement}$
+        quotient: >-
+          $f'(x) = \dfrac{u'(x) \cdot v(x) - u(x) \cdot v'(x)}{[v(x)]^2} = {developpement}$
+        inverse: >-
+          $f'(x) = \dfrac{-u'(x)}{[u(x)]^2} = {developpement}$
+      simplification:
+        sans: ""
+        factorisation: "Apres factorisation : $f'(x) = {forme_factorisee}$."
+
+    expected_lines: { min: 4, typical: 5, max: 7 }
+
+    grading_criteria:
+      - criterion: "Identification correcte de u et v"
+        weight: 0.2
+        required: true
+      - criterion: "Calcul correct de u' et v'"
+        weight: 0.2
+        required: true
+      - criterion: "Application de la bonne formule (produit ou quotient)"
+        weight: 0.3
+        required: true
+        must_include: ["u'.v - u.v'"]
+      - criterion: "Simplification ou factorisation du resultat"
+        weight: 0.3
+        required: true
+
+  # -------------------------------------------------------------------------
+  - praxeology: Prax4
+    name: "Etude des variations a l'aide de la derivee"
+
+    template: |
+      $f$ est {type_fonction} donc derivable sur ${domaine}$.
+
+      $f'(x) = {derivee}$
+
+      {factorisation}
+
+      **Signe de $f'(x)$ :**
+      {etude_signe}
+
+      **Tableau de variation :**
+      {tableau_variation}
+
+      {conclusion_variations}
+
+    variants:
+      factorisation:
+        trinome: >-
+          $f'(x) = {coeff}({facteur_1})({facteur_2})$
+        lineaire: >-
+          $f'(x) = {coeff}(x - {zero})$
+        toujours_signe: >-
+          Pour tout $x \in {domaine}$, $f'(x) {signe} 0$.
+      conclusion_variations:
+        monotone: >-
+          Donc $f$ est strictement {croissante/decroissante} sur ${domaine}$.
+        deux_intervalles: >-
+          Donc $f$ est strictement croissante sur $]{-\infty}, {x0}]$ et
+          strictement decroissante sur $[{x0}, {+\infty}[$ (ou inversement).
+
+    expected_lines: { min: 8, typical: 10, max: 14 }
+
+    grading_criteria:
+      - criterion: "Justification de la derivabilite"
+        weight: 0.1
+        required: true
+      - criterion: "Calcul correct de f'"
+        weight: 0.25
+        required: true
+      - criterion: "Factorisation de f' pour l'etude de signe"
+        weight: 0.2
+        required: true
+      - criterion: "Tableau de signes de f' correct"
+        weight: 0.2
+        required: true
+      - criterion: "Tableau de variation complet (bornes + extrema)"
+        weight: 0.25
+        required: true
+        must_include: ["croissante", "decroissante"]
+
+  # -------------------------------------------------------------------------
+  - praxeology: Prax5
+    name: "Determination des extrema"
+
+    template: |
+      D'apres le tableau de variation :
+
+      {analyse_zeros_f_prime}
+
+      {verification_changement_signe}
+
+      {conclusion_extrema}
+
+    variants:
+      analyse_zeros_f_prime:
+        un_zero: >-
+          $f'(x) = 0 \Leftrightarrow x = {x0}$.
+        plusieurs_zeros: >-
+          $f'(x) = 0 \Leftrightarrow x = {x1}$ ou $x = {x2}$.
+      verification_changement_signe:
+        plus_a_moins: >-
+          $f'$ passe du signe $+$ au signe $-$ en $x = {x0}$.
+        moins_a_plus: >-
+          $f'$ passe du signe $-$ au signe $+$ en $x = {x0}$.
+        sans_changement: >-
+          $f'$ ne change pas de signe en $x = {x0}$ ($f' \geq 0$ partout).
+          Donc $f$ n'admet pas d'extremum en ${x0}$.
+      conclusion_extrema:
+        maximum_local: >-
+          Donc $f$ admet un **maximum local** en $x = {x0}$ egal a $f({x0}) = {valeur}$.
+        minimum_local: >-
+          Donc $f$ admet un **minimum local** en $x = {x0}$ egal a $f({x0}) = {valeur}$.
+        global: >-
+          De plus, d'apres le tableau de variation, pour tout $x \in {domaine}$,
+          $f(x) \geq f({x0}) = {valeur}$.
+          Donc $f$ admet un **minimum absolu** en $x = {x0}$.
+
+    expected_lines: { min: 4, typical: 6, max: 8 }
+
+    grading_criteria:
+      - criterion: "Localisation des zeros de f'"
+        weight: 0.2
+        required: true
+      - criterion: "Verification du changement de signe"
+        weight: 0.3
+        required: true
+        must_include: ["change de signe"]
+      - criterion: "Identification correcte du type d'extremum (max/min, local/global)"
+        weight: 0.25
+        required: true
+      - criterion: "Valeur de l'extremum calculee"
+        weight: 0.25
+        required: true
+
+  # -------------------------------------------------------------------------
+  - praxeology: Prax7a
+    name: "Probleme d'optimisation geometrique"
+
+    template: |
+      **Modelisation :**
+      Soit $x$ {definition_variable}. Les contraintes imposent $x \in {domaine}$.
+
+      {expression_grandeur}
+
+      **Etude de $f$ :**
+      $f'(x) = {derivee}$
+
+      {etude_signe_f_prime}
+
+      **Tableau de variation :**
+      {tableau_variation}
+
+      **Conclusion :**
+      {conclusion}
+
+    variants:
+      expression_grandeur:
+        aire: >-
+          L'aire s'ecrit : $A(x) = {formule}$.
+        perimetre: >-
+          Le perimetre s'ecrit : $P(x) = {formule}$.
+        volume: >-
+          Le volume s'ecrit : $V(x) = {formule}$.
+      conclusion:
+        avec_valeur: >-
+          D'apres le tableau de variation, $f$ admet un {maximum/minimum}
+          en $x = {x0}$, egal a $f({x0}) = {valeur}$.
+          Donc {interpretation_geometrique}.
+        avec_dimensions: >-
+          Le {maximum/minimum} est atteint pour $x = {x0}$, soit
+          {description_dimensions}. La valeur optimale est ${valeur}$.
+
+    expected_lines: { min: 12, typical: 16, max: 20 }
+
+    grading_criteria:
+      - criterion: "Mise en equation correcte (variable, contraintes, domaine)"
+        weight: 0.25
+        required: true
+      - criterion: "Expression de la grandeur a optimiser en fonction de x"
+        weight: 0.2
+        required: true
+      - criterion: "Etude de variations complete (f', signe, tableau)"
+        weight: 0.3
+        required: true
+      - criterion: "Conclusion en revenant au probleme geometrique"
+        weight: 0.25
+        required: true
+        must_include: ["maximum", "minimum"]
+
+  # -------------------------------------------------------------------------
+  - praxeology: Prax8
+    name: "Demonstration d'inegalite par la derivee"
+
+    template: |
+      Posons $h(x) = {f_moins_g}$ pour tout $x \in {domaine}$.
+
+      $h'(x) = {derivee_h}$
+
+      {etude_signe_h_prime}
+
+      Donc $h$ est {monotonie} sur ${domaine}$.
+
+      {evaluation_borne}
+
+      Donc pour tout $x \in {domaine}$, $h(x) {signe_conclusion} 0$,
+      c'est-a-dire ${inegalite_finale}$.
+
+    variants:
+      etude_signe_h_prime:
+        direct: >-
+          Pour tout $x \in {domaine}$, $h'(x) {signe} 0$.
+        avec_tableau: >-
+          $h'(x) = 0 \Leftrightarrow x = {x0}$.
+          $h'$ est {signe_avant} sur $]{borne_gauche}, {x0}[$ et
+          {signe_apres} sur $]{x0}, {borne_droite}[$.
+      evaluation_borne:
+        au_bord: >-
+          Or $h({borne}) = {valeur} \geq 0$.
+        au_minimum: >-
+          D'apres le tableau de variation, $h$ admet un minimum en $x = {x0}$
+          egal a $h({x0}) = {valeur} \geq 0$.
+
+    expected_lines: { min: 6, typical: 9, max: 14 }
+
+    grading_criteria:
+      - criterion: "Definition correcte de h = f - g"
+        weight: 0.15
+        required: true
+      - criterion: "Calcul correct de h'"
+        weight: 0.2
+        required: true
+      - criterion: "Etude du signe de h' et variations de h"
+        weight: 0.25
+        required: true
+      - criterion: "Evaluation au point critique (borne ou minimum)"
+        weight: 0.2
+        required: true
+      - criterion: "Conclusion avec l'inegalite demandee"
+        weight: 0.2
+        required: true
+        must_include: ["pour tout", ">="]

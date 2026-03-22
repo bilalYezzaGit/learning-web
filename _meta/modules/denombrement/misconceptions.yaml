@@ -1,0 +1,247 @@
+# Misconceptions — Denombrement
+# Erreurs frequentes des eleves, avec diagnostic et remediation structuree
+
+module: denombrement
+programme: 3eme-math
+
+misconceptions:
+  # -------------------------------------------------------------------------
+  - id: E1
+    name: "Confusion entre arrangement et combinaison"
+    category: confusion
+    frequency: tres_frequente
+
+    description: >-
+      L'eleve utilise A_n^p quand il faut C_n^p (ou inversement), car il
+      ne distingue pas si l'ordre intervient.
+
+    source_cognitive: >-
+      Difficulte a determiner si la situation est ordonnee ou non, surtout
+      quand le contexte n'est pas explicite ("choisir" vs "ranger").
+
+    detection_patterns:
+      - "A_n^p au lieu de C_n^p"
+      - "C_n^p au lieu de A_n^p"
+      - "utilise arrangements pour un tirage simultane"
+      - "oublie l'ordre dans un tirage successif"
+
+    diagnostic:
+      question: >-
+        On tire simultanement 3 boules parmi 10 boules distinctes.
+        Combien de tirages possibles ?
+      options:
+        - label: "10^3 = 1000"
+          reveals: "confusion avec tirages avec remise (n^p)"
+        - label: "A_{10}^3 = 720"
+          reveals: "confusion arrangement/combinaison (l'ordre n'intervient pas dans un tirage simultane)"
+        - label: "C_{10}^3 = 120"
+          correct: true
+        - label: "3! x 10 = 60"
+          reveals: "erreur de formule"
+
+    remediation:
+      explanation: >-
+        Utiliser systematiquement le tableau recapitulatif des tirages ;
+        poser les 3 questions : l'ordre intervient-il ? y a-t-il remise ?
+        combien d'elements choisis ?
+      counter_example: "Tirage simultane de 3 boules = choix sans ordre = C_{10}^3 = 120, pas A_{10}^3 = 720"
+      praxeology_to_practice: Prax2
+
+  # -------------------------------------------------------------------------
+  - id: E2
+    name: "Oubli du cas complementaire pour 'au moins'"
+    category: erreur-technique
+    frequency: frequente
+
+    description: >-
+      L'eleve tente de lister tous les cas favorables au lieu de passer
+      par le complementaire.
+
+    source_cognitive: >-
+      Reflexe de comptage direct ; le complementaire est contre-intuitif
+      ("compter ce qu'on ne veut pas").
+
+    detection_patterns:
+      - "liste tous les cas pour 'au moins'"
+      - "somme de cas sans passer par le complementaire"
+      - "au moins un confondu avec exactement un"
+
+    diagnostic:
+      question: >-
+        Dans un jeu de 32 cartes, on tire 5 cartes. Le nombre de mains
+        contenant au moins un as est :
+      options:
+        - label: "C_4^1 x C_{28}^4"
+          reveals: "'au moins un' confondu avec 'exactement un'"
+        - label: "C_{32}^5 - C_{28}^5"
+          correct: true
+        - label: "C_4^1 + C_4^2 + C_4^3 + C_4^4"
+          reveals: "oubli de multiplier par les cartes restantes"
+        - label: "4 x C_{32}^4"
+          reveals: "erreur de modelisation"
+
+    remediation:
+      explanation: >-
+        Enseigner le reflexe "au moins = total - aucun" ; montrer que
+        la methode directe necessite une disjonction en "exactement 1,
+        exactement 2, ..." qui est plus lourde.
+      counter_example: "Mains avec au moins un as : C_{32}^5 - C_{28}^5 = 201376 - 98280 = 103096"
+      praxeology_to_practice: Prax6
+
+  # -------------------------------------------------------------------------
+  - id: E3
+    name: "Erreur dans les anagrammes avec repetitions"
+    category: oubli
+    frequency: frequente
+
+    description: >-
+      L'eleve calcule n! sans diviser par les factorielles des lettres
+      repetees, ou se trompe dans le decompte des repetitions.
+
+    source_cognitive: >-
+      Confusion entre le cas "toutes lettres distinctes" (n!) et le cas
+      avec repetitions (n! / (p1! ... pk!)).
+
+    detection_patterns:
+      - "n! sans division"
+      - "oublie une lettre repetee"
+      - "divise par un seul groupe au lieu de tous"
+
+    diagnostic:
+      question: >-
+        Le nombre d'anagrammes du mot ANANAS est :
+      options:
+        - label: "6! = 720"
+          reveals: "oubli de la division par les repetitions"
+        - label: "6! / 3! = 120"
+          reveals: "oubli de diviser aussi par le 2! des N"
+        - label: "6! / (3! x 2!) = 60"
+          correct: true
+        - label: "6! / (3! x 2! x 1!) = 60"
+          correct: true
+
+    remediation:
+      explanation: >-
+        Identifier d'abord TOUTES les lettres et leurs frequences avant
+        d'appliquer la formule. Dresser un tableau lettre/frequence.
+      counter_example: "ANANAS : A apparait 3 fois, N apparait 2 fois, S apparait 1 fois. Resultat : 6!/(3!x2!) = 60"
+      praxeology_to_practice: Prax4b
+
+  # -------------------------------------------------------------------------
+  - id: E4
+    name: "Erreur sur le premier chiffre d'un nombre"
+    category: oubli
+    frequency: frequente
+
+    description: >-
+      L'eleve oublie que le premier chiffre d'un nombre a k chiffres
+      ne peut pas etre 0.
+
+    source_cognitive: >-
+      Le 0 est un chiffre comme les autres dans l'ensemble {0,...,9},
+      mais pas en position de tete.
+
+    detection_patterns:
+      - "A_{10}^4 sans soustraire le cas premier chiffre = 0"
+      - "10 choix pour le premier chiffre"
+      - "oublie la contrainte premier chiffre != 0"
+
+    diagnostic:
+      question: >-
+        Combien peut-on former de nombres de 4 chiffres distincts avec
+        les chiffres 0 a 9 ?
+      options:
+        - label: "A_{10}^4 = 5040"
+          reveals: "oubli de la contrainte premier chiffre != 0"
+        - label: "9 x A_9^3 = 4536"
+          correct: true
+        - label: "9 x 10^3 = 9000"
+          reveals: "oubli de la contrainte 'distincts'"
+        - label: "10^4 = 10000"
+          reveals: "oubli des deux contraintes"
+
+    remediation:
+      explanation: >-
+        Toujours traiter le premier chiffre separement (9 choix),
+        puis completer avec les chiffres restants.
+      counter_example: "Nombres de 4 chiffres distincts : premier chiffre dans {1,...,9} (9 choix), puis 3 chiffres parmi les 9 restants = 9 x A_9^3 = 4536"
+      praxeology_to_practice: Prax8
+
+  # -------------------------------------------------------------------------
+  - id: E5
+    name: "Confusion entre C_n^p et le binome de Newton"
+    category: confusion
+    frequency: occasionnelle
+
+    description: >-
+      L'eleve ne fait pas le lien entre les coefficients binomiaux et la
+      formule du binome, ou applique mal les exposants.
+
+    source_cognitive: >-
+      Le passage de l'algebre (developpement) a la combinatoire (comptage)
+      n'est pas naturel.
+
+    detection_patterns:
+      - "confond l'exposant de x et le rang k"
+      - "utilise n^p au lieu de C_n^p"
+      - "erreur d'identification de a, b, k dans le binome"
+
+    diagnostic:
+      question: >-
+        Le coefficient de x^3 dans le developpement de (1+x)^5 est :
+      options:
+        - label: "C_5^3 = 10"
+          correct: true
+        - label: "C_5^2 = 10"
+          reveals: "resultat correct par symetrie, mais raisonnement potentiellement errone (confond l'exposant de x et celui de 1)"
+        - label: "5^3 = 125"
+          reveals: "confusion avec n^p"
+        - label: "3! = 6"
+          reveals: "confusion avec permutations"
+
+    remediation:
+      explanation: >-
+        Ecrire explicitement chaque terme C_n^k a^{n-k} b^k et identifier
+        le bon k. Le terme en x^k a pour coefficient C_n^k.
+      counter_example: "(1+x)^5 : le terme en x^3 est C_5^3 x 1^2 x x^3 = 10x^3"
+      praxeology_to_practice: Prax7a
+
+  # -------------------------------------------------------------------------
+  - id: E6
+    name: "Nombres pairs avec chiffres distincts : oubli de distinguer les cas"
+    category: erreur-technique
+    frequency: frequente
+
+    description: >-
+      L'eleve ne distingue pas le cas ou le dernier chiffre est 0 des
+      autres cas pairs, ce qui mene a un double comptage ou un sous-comptage.
+
+    source_cognitive: >-
+      Le cas 0 en derniere position est special car il ne contraint pas
+      le premier chiffre, contrairement aux autres chiffres pairs.
+
+    detection_patterns:
+      - "5 x A_9^3 sans distinguer le cas 0"
+      - "traite dernier chiffre pair sans separer 0"
+      - "premier chiffre a 9 choix dans tous les cas"
+
+    diagnostic:
+      question: >-
+        Le nombre de nombres pairs de 4 chiffres distincts (chiffres de 0 a 9) est :
+      options:
+        - label: "5 x A_9^3 = 2520"
+          reveals: "pas de distinction de cas (traite dernier chiffre dans {0,2,4,6,8} sans separer)"
+        - label: "504 + 1792 = 2296"
+          correct: true
+        - label: "4 x 9 x 8 x 7 = 2016"
+          reveals: "oubli du cas dernier chiffre = 0"
+        - label: "9 x 8 x 7 x 5 = 2520"
+          reveals: "traitement comme si le dernier chiffre etait independant du premier"
+
+    remediation:
+      explanation: >-
+        Toujours separer en deux cas : dernier chiffre = 0 (premier chiffre
+        a 9 choix) et dernier chiffre dans {2,4,6,8} (premier chiffre a 8 choix,
+        car != 0 et != dernier).
+      counter_example: "Cas 1 : dernier = 0, premier dans {1..9} = 9x8x7 = 504. Cas 2 : dernier dans {2,4,6,8} = 4 choix, premier dans {1..9}\\{dernier} = 8 choix, puis 8x7 = 4x8x8x7 = 1792. Total = 2296."
+      praxeology_to_practice: Prax8

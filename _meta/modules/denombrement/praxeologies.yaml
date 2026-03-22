@@ -1,0 +1,546 @@
+# Praxeologies — Denombrement
+# Cadre theorique : TAD de Chevallard (Tache, Technique, Technologie, Theorie)
+# Enrichi avec variables didactiques et profils de difficulte
+
+module: denombrement
+programme: 3eme-math
+
+praxeologies:
+  # -------------------------------------------------------------------------
+  - id: Prax1
+    name: "Calculer le cardinal d'une union/intersection"
+    concepts: [N1]
+    difficulty: 1
+    exam_frequency: medium
+
+    task_type: >-
+      Determiner le nombre d'elements dans une union ou une intersection
+      de 2 ou 3 ensembles finis, a partir de donnees partielles.
+    technique: |
+      1. Identifier les ensembles et les donnees fournies (card(E), card(F), card(E inter F))
+      2. Appliquer la formule card(E union F) = card(E) + card(F) - card(E inter F)
+      3. Si 3 ensembles, appliquer l'inclusion-exclusion generalisee
+      4. Eventuellement utiliser un diagramme de Venn ou un tableau de Carrol
+      5. Conclure avec la valeur numerique
+    technology: "Principe d'inclusion-exclusion pour les ensembles finis (T1)"
+    theory: "Theorie des ensembles finis — cardinal et operations"
+
+    didactic_variables:
+      - name: nombre_ensembles
+        values: [2, 3]
+        effect: "+1 si 3 ensembles"
+      - name: donnees
+        values: [directes, a_deduire]
+        effect: "+0.5 si a deduire"
+      - name: presence_complementaire
+        values: [oui, non]
+        effect: "+0.5 si oui"
+
+    difficulty_profiles:
+      0: { nombre_ensembles: 2, donnees: directes }
+      1: { nombre_ensembles: 2, donnees: a_deduire }
+      2: { nombre_ensembles: 3, donnees: a_deduire, presence_complementaire: oui }
+
+    common_errors: [E1]
+    canonical_examples:
+      - "Appareils avec defauts A et B (Manuel ex.1)"
+      - "Club de joueurs bridge/tarot (Parascolaire)"
+      - "Eleves etudiant 3 langues (Parascolaire ex.6)"
+
+  # -------------------------------------------------------------------------
+  - id: Prax2
+    name: "Identifier le modele de tirage et appliquer le principe multiplicatif"
+    concepts: [N2, N8]
+    difficulty: 1
+    exam_frequency: very_high
+
+    task_type: >-
+      Face a une situation concrete, identifier s'il s'agit d'un tirage
+      simultane, successif avec ou sans remise, puis calculer le nombre de cas.
+    technique: |
+      1. Analyser la situation en 3 criteres :
+         a. L'ordre intervient-il ?
+         b. Y a-t-il remise (repetition possible) ?
+         c. Combien d'elements sont choisis ?
+      2. Consulter le tableau recapitulatif des tirages
+      3. Appliquer la formule correspondante (C_n^p, A_n^p ou n^p)
+      4. Calculer la valeur numerique
+    technology: "Principe multiplicatif — si un choix se decompose en etapes independantes, le nombre total est le produit du nombre de choix a chaque etape"
+    theory: "Combinatoire — classification des modeles de tirage"
+
+    didactic_variables:
+      - name: contexte
+        values: [urne, des, codes, cartes]
+        effect: "cartes → +0.5 (contexte plus riche)"
+      - name: nombre_etapes
+        values: [2, 3, "4+"]
+        effect: "+0.5 par etape supplementaire"
+      - name: indices_trompeurs
+        values: [oui, non]
+        effect: "+1 si oui (l'eleve doit decider du modele)"
+
+    difficulty_profiles:
+      1: { contexte: urne, nombre_etapes: 2, indices_trompeurs: non }
+      2: { contexte: codes, nombre_etapes: 3, indices_trompeurs: oui }
+
+    common_errors: [E1]
+    canonical_examples:
+      - "Tirage de boules (simultane vs successif)"
+      - "Lancer de des"
+      - "Formation de codes a 4 chiffres"
+
+  # -------------------------------------------------------------------------
+  - id: Prax3
+    name: "Calculer un nombre d'arrangements"
+    concepts: [N3]
+    difficulty: 1
+    exam_frequency: medium
+
+    task_type: >-
+      Calculer le nombre de p-uplets d'elements distincts d'un ensemble
+      de n elements.
+    technique: |
+      1. Identifier n (taille de l'ensemble) et p (nombre d'elements choisis)
+      2. Verifier que 0 <= p <= n
+      3. Appliquer la formule A_n^p = n(n-1)...(n-p+1) = n! / (n-p)!
+      4. Calculer la valeur numerique
+    technology: "Chaque position du p-uplet reduit d'un le nombre de choix restants (sans remise + ordre)"
+    theory: "Combinatoire — injections entre ensembles finis"
+
+    didactic_variables:
+      - name: valeurs_n_p
+        values: [petites, moyennes, grandes]
+        effect: "+0.5 si grandes (calcul plus long)"
+      - name: contexte
+        values: [excursions, bureaux, placements_ordonnes, tirages]
+        effect: "contexte n'affecte pas la difficulte technique"
+
+    difficulty_profiles:
+      0: { valeurs_n_p: petites, contexte: tirages }
+      1: { valeurs_n_p: moyennes, contexte: excursions }
+
+    common_errors: [E1]
+    canonical_examples:
+      - "Circuits touristiques de p villes parmi n (Parascolaire ex.12)"
+      - "Tirages successifs sans remise de boules"
+
+  # -------------------------------------------------------------------------
+  - id: Prax4a
+    name: "Calculer un nombre de permutations (anagrammes, mots distincts)"
+    concepts: [N4]
+    difficulty: 1
+    exam_frequency: medium
+
+    task_type: >-
+      Calculer le nombre d'anagrammes d'un mot dont toutes les lettres sont
+      distinctes, ou le nombre de facons d'ordonner n objets.
+    technique: |
+      1. Identifier n (nombre de lettres/objets)
+      2. Verifier que toutes les lettres sont distinctes
+      3. Le nombre est n!
+      4. Si contrainte (commence par X, finit par Y) : fixer les positions contraintes, permuter le reste
+    technology: "Une permutation est un arrangement de n parmi n ; chaque position a un choix decroissant"
+    theory: "Combinatoire — bijections d'un ensemble fini sur lui-meme"
+
+    didactic_variables:
+      - name: taille_mot
+        values: [4, 5, 6, 7]
+        effect: "+0 (calcul de factorielle)"
+      - name: presence_contraintes
+        values: [oui, non]
+        effect: "+1 si oui (fixer des positions)"
+
+    difficulty_profiles:
+      0: { taille_mot: 4, presence_contraintes: non }
+      1: { taille_mot: 7, presence_contraintes: oui }
+
+    common_errors: []
+    canonical_examples:
+      - "Anagrammes de BLANCHE (Manuel ex.13)"
+      - "Placement de personnes sur des chaises (Manuel ex.14-15)"
+
+  # -------------------------------------------------------------------------
+  - id: Prax4b
+    name: "Calculer un nombre d'anagrammes avec lettres repetees"
+    concepts: [N4]
+    difficulty: 2
+    exam_frequency: high
+
+    task_type: >-
+      Calculer le nombre d'anagrammes d'un mot contenant des lettres
+      qui se repetent.
+    technique: |
+      1. Identifier toutes les lettres du mot et leurs frequences (p1, p2, ..., pk)
+      2. Verifier que p1 + p2 + ... + pk = n (nombre total de lettres)
+      3. Appliquer la formule n! / (p1! x p2! x ... x pk!)
+      4. Calculer la valeur numerique
+    technology: "On divise par le nombre de permutations internes de chaque groupe de lettres identiques, car ces permutations ne changent pas le mot"
+    theory: "Combinatoire — permutations avec repetitions (multinomiales)"
+
+    didactic_variables:
+      - name: nombre_lettres
+        values: [5, 6, 7, "8+"]
+        effect: "+0.5 par tranche"
+      - name: nombre_groupes_repetitions
+        values: [1, 2, 3]
+        effect: "+0.5 par groupe"
+      - name: taille_groupes
+        values: [2, 3, "4+"]
+        effect: "+0.5 si groupes grands"
+
+    difficulty_profiles:
+      1: { nombre_lettres: 6, nombre_groupes_repetitions: 1 }
+      2: { nombre_lettres: 6, nombre_groupes_repetitions: 2 }
+      3: { nombre_lettres: "8+", nombre_groupes_repetitions: 3 }
+
+    common_errors: [E3]
+    canonical_examples:
+      - "ANANAS (6!/(3!x2!) = 60)"
+      - "ESSENTIEL (9!/(3!x2!) = 30240)"
+      - "MATHEMATIQUES (12!/(2!)^4)"
+      - "ANTICONSTITUTIONNELLEMENT"
+
+  # -------------------------------------------------------------------------
+  - id: Prax5a
+    name: "Calculer un nombre de combinaisons (application directe)"
+    concepts: [N5]
+    difficulty: 1
+    exam_frequency: very_high
+
+    task_type: >-
+      Calculer le nombre de facons de choisir p elements parmi n sans
+      tenir compte de l'ordre.
+    technique: |
+      1. Identifier n et p
+      2. Verifier que 0 <= p <= n
+      3. Appliquer C_n^p = n! / (p!(n-p)!) ou lire dans le triangle de Pascal
+      4. Simplifier et calculer la valeur numerique
+    technology: "Une combinaison est un sous-ensemble ; l'absence d'ordre impose de diviser les arrangements par p!"
+    theory: "Combinatoire — sous-ensembles d'un ensemble fini"
+
+    didactic_variables:
+      - name: valeurs_n_p
+        values: [petites, moyennes, grandes]
+        effect: "+0.5 si grandes (simplification necessaire)"
+      - name: lecture_triangle
+        values: [oui, non]
+        effect: "triangle → raccourci de calcul"
+
+    difficulty_profiles:
+      0: { valeurs_n_p: petites, lecture_triangle: oui }
+      1: { valeurs_n_p: moyennes, lecture_triangle: non }
+
+    common_errors: [E1]
+    canonical_examples:
+      - "Tirage simultane de boules"
+      - "Nombre de droites/triangles formes par n points"
+      - "Mains de cartes"
+
+  # -------------------------------------------------------------------------
+  - id: Prax5b
+    name: "Utiliser les proprietes des combinaisons"
+    concepts: [N5]
+    difficulty: 2
+    exam_frequency: medium
+
+    task_type: >-
+      Simplifier une expression contenant des C_n^p en utilisant symetrie,
+      relation de Pascal, ou le triangle.
+    technique: |
+      1. Identifier la propriete applicable :
+         a. Symetrie : C_n^p = C_n^{n-p} pour simplifier
+         b. Pascal : C_n^p = C_{n-1}^{p-1} + C_{n-1}^p pour decomposer
+         c. Triangle : construire les lignes necessaires
+      2. Appliquer la propriete
+      3. Simplifier l'expression resultante
+    technology: "La symetrie vient de la formule (p et n-p jouent des roles symetriques) ; la relation de Pascal vient de la partition des combinaisons selon qu'un element fixe est choisi ou non"
+    theory: "Combinatoire — proprietes algebriques des coefficients binomiaux"
+
+    didactic_variables:
+      - name: type_propriete
+        values: [symetrie, pascal, triangle, identite]
+        effect: "identite → +1"
+      - name: complexite_expression
+        values: [simple, composee]
+        effect: "+0.5 si composee"
+
+    difficulty_profiles:
+      1: { type_propriete: symetrie, complexite_expression: simple }
+      2: { type_propriete: pascal, complexite_expression: composee }
+      3: { type_propriete: identite, complexite_expression: composee }
+
+    common_errors: []
+    canonical_examples:
+      - "Verifier C_n^p = (n/p) C_{n-1}^{p-1} (Manuel ex.19)"
+      - "Construire le triangle de Pascal (Manuel)"
+
+  # -------------------------------------------------------------------------
+  - id: Prax6
+    name: "Denombrer avec la methode du complementaire"
+    concepts: [N1, N5, N6]
+    difficulty: 2
+    exam_frequency: high
+
+    task_type: >-
+      Calculer le nombre de configurations verifiant "au moins un..."
+      ou une condition complexe, en passant par le complementaire.
+    technique: |
+      1. Calculer le nombre total de configurations (sans contrainte)
+      2. Calculer le nombre de configurations ne verifiant PAS la condition
+         (souvent plus simple : "aucun")
+      3. Soustraire : |au moins un| = |total| - |aucun|
+    technology: "Principe du complementaire — card(A) = card(E) - card(complementaire de A)"
+    theory: "Theorie des ensembles — complementaire et cardinal"
+
+    didactic_variables:
+      - name: type_condition
+        values: ["au_moins_un", "au_moins_deux", "pas_tous_meme"]
+        effect: "+0.5 par niveau"
+      - name: contexte
+        values: [cartes, boules, codes]
+        effect: "cartes → +0.5 (contexte plus riche)"
+
+    difficulty_profiles:
+      1: { type_condition: au_moins_un, contexte: boules }
+      2: { type_condition: au_moins_deux, contexte: cartes }
+      3: { type_condition: pas_tous_meme, contexte: cartes }
+
+    common_errors: [E2]
+    canonical_examples:
+      - "Mains de cartes avec au moins un as (Manuel ex.6c, Parascolaire ex.5)"
+      - "Mots avec au moins 3 fois la lettre S (Manuel V/F)"
+      - "Tirages avec au moins une boule verte (XY Plus ex.1)"
+
+  # -------------------------------------------------------------------------
+  - id: Prax7a
+    name: "Developper une puissance avec le binome de Newton"
+    concepts: [N7]
+    difficulty: 1
+    exam_frequency: high
+
+    task_type: >-
+      Developper (a+b)^n ou trouver un coefficient specifique dans
+      le developpement.
+    technique: |
+      1. Identifier a, b et n dans l'expression
+      2. Appliquer la formule (a+b)^n = somme_{k=0}^{n} C_n^k a^{n-k} b^k
+      3. Pour un coefficient specifique : identifier le rang k correspondant
+      4. Calculer le terme C_n^k a^{n-k} b^k
+    technology: "Le binome de Newton se demontre par recurrence en utilisant la relation de Pascal"
+    theory: "Algebre — identites polynomiales et coefficients binomiaux"
+
+    didactic_variables:
+      - name: valeur_n
+        values: [3, 4, 5, 6, "7+"]
+        effect: "+0.5 si n >= 5 (plus de termes)"
+      - name: nature_a_b
+        values: [entiers, fractions, expressions_algebriques]
+        effect: "+0.5 si expressions algebriques"
+      - name: type_question
+        values: [developpement_complet, coefficient_specifique]
+        effect: "coefficient → legrement plus facile"
+
+    difficulty_profiles:
+      0: { valeur_n: 3, nature_a_b: entiers, type_question: developpement_complet }
+      1: { valeur_n: 5, nature_a_b: entiers, type_question: coefficient_specifique }
+      2: { valeur_n: "7+", nature_a_b: expressions_algebriques, type_question: coefficient_specifique }
+
+    common_errors: [E5]
+    canonical_examples:
+      - "Developper (1+x)^5"
+      - "Trouver le coefficient de x^3 dans (2+x)^7"
+
+  # -------------------------------------------------------------------------
+  - id: Prax7b
+    name: "Exploiter les identites du binome (sommes de C_n^k)"
+    concepts: [N7]
+    difficulty: 2
+    exam_frequency: medium
+
+    task_type: >-
+      Calculer des sommes de combinaisons (somme C_n^k, somme (-1)^k C_n^k,
+      somme k C_n^k, sommes pairs/impairs) en specialisant le binome.
+    technique: |
+      1. Ecrire la formule du binome (a+b)^n = somme C_n^k a^{n-k} b^k
+      2. Choisir les valeurs de a et b adaptees :
+         a. a=1, b=1 donne somme C_n^k = 2^n
+         b. a=1, b=-1 donne somme (-1)^k C_n^k = 0
+         c. Deriver par rapport a b puis specialiser pour somme k C_n^k
+      3. Simplifier pour obtenir l'identite cherchee
+    technology: "Le binome fournit une fonction generatrice des C_n^k ; specialiser les variables donne des identites combinatoires"
+    theory: "Algebre — fonctions generatrices elementaires"
+
+    didactic_variables:
+      - name: type_somme
+        values: [simple, alternee, ponderee_par_k, termes_pairs_impairs]
+        effect: "+0.5 par niveau de complexite"
+      - name: besoin_derivation
+        values: [oui, non]
+        effect: "+1 si oui"
+
+    difficulty_profiles:
+      1: { type_somme: simple, besoin_derivation: non }
+      2: { type_somme: alternee, besoin_derivation: non }
+      3: { type_somme: ponderee_par_k, besoin_derivation: oui }
+
+    common_errors: [E5]
+    canonical_examples:
+      - "Montrer somme C_n^k = 2^n"
+      - "Montrer somme (-1)^k C_n^k = 0 (Parascolaire ex.24)"
+      - "Calculer n x 2^{n-1} = somme k C_n^k (Parascolaire ex.23)"
+      - "Montrer (1+x)^n >= 1+nx pour x >= 0"
+
+  # -------------------------------------------------------------------------
+  - id: Prax8
+    name: "Denombrer sous contraintes multiples (synthese)"
+    concepts: [N2, N3, N5, N6, N8]
+    difficulty: 2
+    exam_frequency: very_high
+
+    task_type: >-
+      Resoudre un probleme combinatoire concret necessitant de combiner
+      plusieurs formules et/ou de decomposer en cas.
+    technique: |
+      1. Analyser le probleme : identifier les objets, les contraintes, le type de tirage
+      2. Decomposer en sous-cas disjoints si necessaire
+      3. Dans chaque sous-cas, appliquer le principe multiplicatif
+      4. Sommer les sous-cas (principe additif) ou soustraire (complementaire)
+      5. Verifier que les cas sont bien disjoints et exhaustifs
+    technology: "Combinaison du principe additif, multiplicatif et du complementaire"
+    theory: "Combinatoire — decomposition en cas et principes fondamentaux"
+
+    didactic_variables:
+      - name: nombre_contraintes
+        values: [1, 2, "3+"]
+        effect: "+0.5 par contrainte"
+      - name: melange_types
+        values: [oui, non]
+        effect: "+1 si melange ordre/sans ordre"
+      - name: distinction_cas
+        values: [oui, non]
+        effect: "+1 si oui (ex: dernier chiffre = 0 vs pair != 0)"
+
+    difficulty_profiles:
+      1: { nombre_contraintes: 1, melange_types: non }
+      2: { nombre_contraintes: 2, melange_types: non, distinction_cas: oui }
+      3: { nombre_contraintes: "3+", melange_types: oui, distinction_cas: oui }
+
+    common_errors: [E4, E6]
+    canonical_examples:
+      - "Nombres de 4 chiffres pairs avec chiffres distincts (Manuel ex.5)"
+      - "Mains de cartes avec exactement 1 roi et 3 coeurs (Parascolaire ex.5)"
+      - "Disposition de jetons sur un damier (Parascolaire ex.16)"
+      - "Codes antivol (Parascolaire ex.17)"
+
+  # -------------------------------------------------------------------------
+  - id: Prax9
+    name: "Resoudre une equation combinatoire"
+    concepts: [N3, N5]
+    difficulty: 2
+    exam_frequency: medium
+
+    task_type: >-
+      Trouver la valeur de n (ou p) dans une equation faisant intervenir
+      A_n^p ou C_n^p.
+    technique: |
+      1. Remplacer A_n^p ou C_n^p par leur expression en factorielles
+      2. Simplifier les fractions de factorielles
+      3. Obtenir une equation polynomiale (souvent degre 2)
+      4. Resoudre l'equation
+      5. Verifier les conditions de validite (p <= n, n dans N)
+    technology: "Les formules de A_n^p et C_n^p se ramenent a des produits de facteurs consecutifs, donc a des polynomes en n"
+    theory: "Combinatoire — equations en nombres entiers"
+
+    didactic_variables:
+      - name: degre_equation
+        values: [1, 2]
+        effect: "+0.5 si degre 2"
+      - name: verification_conditions
+        values: [simple, multiple]
+        effect: "+0.5 si multiple (plusieurs solutions a tester)"
+
+    difficulty_profiles:
+      1: { degre_equation: 1, verification_conditions: simple }
+      2: { degre_equation: 2, verification_conditions: multiple }
+
+    common_errors: []
+    canonical_examples:
+      - "A_7^n = 21 A_6^{n-2} (Parascolaire ex.20a)"
+      - "C_n^2 + C_{n-3}^2 = 17 (Parascolaire ex.20b)"
+      - "Agence proposant 56 excursions (Parascolaire ex.12b)"
+
+  # -------------------------------------------------------------------------
+  - id: Prax10
+    name: "Denombrer des chemins sur un reseau"
+    concepts: [N5, N4]
+    difficulty: 2
+    exam_frequency: medium
+
+    task_type: >-
+      Compter le nombre de chemins reliant deux points d'un quadrillage
+      en se deplacant uniquement vers la droite ou vers le haut.
+    technique: |
+      1. Identifier les dimensions : m pas a droite et n pas en haut
+      2. Un chemin = un mot de m+n lettres avec m lettres 'd' et n lettres 'h'
+      3. Le nombre de chemins est C_{m+n}^m = (m+n)! / (m! x n!)
+      4. Si passage oblige par un point intermediaire : decomposer le chemin
+         en deux parties et multiplier
+    technology: "Bijection entre les chemins et les anagrammes d'un mot binaire ; le nombre est une combinaison"
+    theory: "Combinatoire — bijections et chemins de Delannoy/lattice paths"
+
+    didactic_variables:
+      - name: dimensions_grille
+        values: [petite, moyenne, grande]
+        effect: "+0 (le calcul reste une combinaison)"
+      - name: passage_oblige
+        values: [oui, non]
+        effect: "+1 si oui (decomposition du chemin)"
+      - name: zones_interdites
+        values: [oui, non]
+        effect: "+1 si oui (complementaire)"
+
+    difficulty_profiles:
+      1: { dimensions_grille: petite, passage_oblige: non }
+      2: { dimensions_grille: moyenne, passage_oblige: oui }
+      3: { dimensions_grille: moyenne, passage_oblige: oui, zones_interdites: oui }
+
+    common_errors: []
+    canonical_examples:
+      - "Reseau de A a Z avec 10 pas droite et 5 pas haut (Manuel — Mobiliser, Situation 2)"
+      - "Chemins passant par E puis M"
+
+  # -------------------------------------------------------------------------
+  - id: Prax11
+    name: "Identite de Vandermonde et sommes de carres de combinaisons"
+    concepts: [N5, N7]
+    difficulty: 3
+    exam_frequency: low
+
+    task_type: >-
+      Demontrer ou exploiter l'identite somme_{k=0}^{n} (C_n^k)^2 = C_{2n}^n
+      par un argument combinatoire.
+    technique: |
+      1. Modeliser : considerer un ensemble de 2n elements (n noirs + n blancs)
+      2. Compter le nombre de facons de choisir n elements parmi 2n : C_{2n}^n
+      3. Decomposer selon le nombre k de noirs choisis :
+         choisir k noirs parmi n (C_n^k) ET n-k blancs parmi n (C_n^{n-k} = C_n^k par symetrie)
+      4. Le nombre est somme C_n^k x C_n^{n-k} = somme (C_n^k)^2
+      5. Conclure par double comptage
+    technology: "Argument de double comptage — compter le meme ensemble de deux manieres differentes"
+    theory: "Combinatoire — identites de Vandermonde et double comptage"
+
+    didactic_variables:
+      - name: formulation
+        values: [algebrique, combinatoire]
+        effect: "combinatoire → plus naturel"
+      - name: generalisation
+        values: [standard, etendue]
+        effect: "+1 si etendue (autres identites)"
+
+    difficulty_profiles:
+      2: { formulation: combinatoire, generalisation: standard }
+      3: { formulation: algebrique, generalisation: etendue }
+
+    common_errors: []
+    canonical_examples:
+      - "Urne de 2n boules, n noires et n blanches (Parascolaire ex.26)"

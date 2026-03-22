@@ -3,22 +3,24 @@ type: qcm
 title: "Choix de la majoration dans une demonstration"
 difficulty: 2
 timeMinutes: 2
-tags: [continuite, definition, majoration, restriction]
+tags: [continuite, definition, alpha-beta, majoration, demonstration]
 praxeologies: [Prax10]
 ---
 
 :::question
-Pour montrer que $f(x) = x^3$ est continue en $a = 1$ par la definition ($\alpha$-$\beta$), on ecrit :
+On veut montrer que $f(x) = x^3$ est continue en $a = 1$ par la definition ($\alpha$-$\beta$).
 
-$$|x^3 - 1| = |x - 1| \cdot |x^2 + x + 1|$$
+On ecrit : $|x^3 - 1| = |x - 1| \cdot |x^2 + x + 1|$.
 
-On impose la restriction $|x - 1| < 1$, ce qui donne $0 < x < 2$.
-
-Quelle est la bonne majoration de $|x^2 + x + 1|$ sous cette restriction ?
+En se restreignant a $|x - 1| < 1$ (c'est-a-dire $x \in {]0, 2[}$), quelle est la **meilleure majoration** de $|x^2 + x + 1|$ ?
 :::
 
 :::option
 $|x^2 + x + 1| < 3$
+:::
+
+:::option
+$|x^2 + x + 1| < 5$
 :::
 
 :::option{correct}
@@ -26,28 +28,23 @@ $|x^2 + x + 1| < 7$
 :::
 
 :::option
-$|x^2 + x + 1| < 4$
-:::
-
-:::option
-$|x^2 + x + 1| < 1$
+$|x^2 + x + 1| < 10$
 :::
 
 :::explanation
-Si $|x - 1| < 1$, alors $0 < x < 2$.
+Sous la restriction $|x - 1| < 1$, on a $x \in {]0, 2[}$, donc $0 < x < 2$.
 
-On majore chaque terme de $x^2 + x + 1$ pour $x \in {]0{,}\ 2[}$ :
+Le trinome $g(x) = x^2 + x + 1$ est croissant sur $]0, 2[$ (car $g'(x) = 2x + 1 > 0$).
 
-- $x^2 < 4$
-- $x < 2$
-- le terme constant vaut $1$
+La valeur maximale est atteinte quand $x$ s'approche de $2$ :
 
-Donc $x^2 + x + 1 < 4 + 2 + 1 = 7$.
+$$g(2) = 4 + 2 + 1 = 7$$
 
-**Analyse des distracteurs** :
-- $3$ correspond a la valeur en $a = 1$ ($1 + 1 + 1 = 3$), mais ce n'est pas un majorant sur tout l'intervalle $]0{,}\ 2[$.
-- $4$ est trop petit (par exemple, $x = 1{,}9$ donne $x^2 + x + 1 = 3{,}61 + 1{,}9 + 1 = 6{,}51 > 4$).
-- $1$ n'est evidemment pas un majorant.
+Donc $|x^2 + x + 1| < 7$ est la majoration correcte.
 
-Avec cette majoration, on choisit $\alpha = \min\!\left(1{,}\ \dfrac{\beta}{7}\right)$.
+- $< 3$ est faux : $g(1) = 3$ deja, et $g$ depasse $3$ sur $]1, 2[$.
+- $< 5$ est insuffisant : $g(1{,}5) = 2{,}25 + 1{,}5 + 1 = 4{,}75$ et $g(1{,}8) = 6{,}04$.
+- $< 10$ est vrai mais pas optimal : on choisit toujours la majoration la plus fine possible.
+
+Avec cette majoration, on choisit $\alpha = \min\!\left(1,\; \dfrac{\beta}{7}\right)$ pour conclure.
 :::

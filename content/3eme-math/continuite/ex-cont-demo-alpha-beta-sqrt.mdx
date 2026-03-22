@@ -4,64 +4,61 @@ title: "Demonstration alpha-beta — racine carree"
 difficulty: 3
 timeMinutes: 15
 category: synthese
-tags: [continuite, definition, epsilon-delta, racine, conjugue]
+tags: [continuite, definition, alpha-beta, racine-carree, conjugue, demonstration]
 praxeologies: [Prax10]
 ---
 
 :::enonce
-Soit $f(x) = \sqrt{x}$ definie sur $[0{,}\ +\infty[$.
+Soit $f$ la fonction definie sur $\mathbb{R}^+$ par $f(x) = \sqrt{x}$.
 
-**a)** Montrer par la definition ($\alpha$-$\beta$) que $f$ est continue en tout $a > 0$.
+1. Soit $a > 0$. Montrer, en utilisant la definition de la continuite ($\alpha$-$\beta$), que $f$ est continue en $a$.
 
-**b)** Expliquer pourquoi cette methode ne fonctionne pas directement en $a = 0$.
-:::
+   *Indication :* utiliser la quantite conjuguee pour transformer $|\sqrt{x} - \sqrt{a}|$.
 
-:::methode
-Lorsque la fonction contient une racine carree, la technique du **conjugue** est essentielle :
-
-$$\sqrt{x} - \sqrt{a} = \frac{(\sqrt{x} - \sqrt{a})(\sqrt{x} + \sqrt{a})}{\sqrt{x} + \sqrt{a}} = \frac{x - a}{\sqrt{x} + \sqrt{a}}$$
-
-Cela fait apparaitre $|x - a|$ au numerateur, ce qui est exactement ce qu'on controle avec $\alpha$.
+2. Expliquer pourquoi la methode utilisee a la question 1 ne fonctionne pas directement en $a = 0$.
 :::
 
 :::solution
-**a)** Soit $a > 0$. On doit montrer : pour tout $\beta > 0$, il existe $\alpha > 0$ tel que $|x - a| < \alpha \implies |\sqrt{x} - \sqrt{a}| < \beta$.
+**1.** On veut montrer : pour tout $\beta > 0$, il existe $\alpha > 0$ tel que pour tout $x \geq 0$, $|x - a| < \alpha \Rightarrow |\sqrt{x} - \sqrt{a}| < \beta$.
 
-On utilise la technique du conjugue. Pour $x \geq 0$ :
+**Transformation par la quantite conjuguee :**
 
-$$|\sqrt{x} - \sqrt{a}| = \left|\frac{(\sqrt{x} - \sqrt{a})(\sqrt{x} + \sqrt{a})}{\sqrt{x} + \sqrt{a}}\right| = \frac{|x - a|}{\sqrt{x} + \sqrt{a}}$$
+$$|\sqrt{x} - \sqrt{a}| = \frac{|(\sqrt{x} - \sqrt{a})(\sqrt{x} + \sqrt{a})|}{\sqrt{x} + \sqrt{a}} = \frac{|x - a|}{\sqrt{x} + \sqrt{a}}$$
 
-Or $\sqrt{x} \geq 0$, donc $\sqrt{x} + \sqrt{a} \geq \sqrt{a}$, d'ou :
+**Majoration :** puisque $x \geq 0$ et $a > 0$, on a $\sqrt{x} + \sqrt{a} \geq \sqrt{a} > 0$. Donc :
 
 $$|\sqrt{x} - \sqrt{a}| = \frac{|x - a|}{\sqrt{x} + \sqrt{a}} \leq \frac{|x - a|}{\sqrt{a}}$$
 
-On veut $\dfrac{|x - a|}{\sqrt{a}} < \beta$, soit $|x - a| < \beta \sqrt{a}$.
+**Choix de $\alpha$ :** soit $\beta > 0$. On pose :
 
-On choisit $\alpha = \beta \sqrt{a}$.
+$$\alpha = \beta \cdot \sqrt{a}$$
 
-**Verification** : si $|x - a| < \alpha = \beta\sqrt{a}$, alors :
+Alors, si $|x - a| < \alpha$ :
 
-$$|\sqrt{x} - \sqrt{a}| \leq \frac{|x - a|}{\sqrt{a}} < \frac{\beta\sqrt{a}}{\sqrt{a}} = \beta$$
+$$|\sqrt{x} - \sqrt{a}| \leq \frac{|x - a|}{\sqrt{a}} < \frac{\beta \cdot \sqrt{a}}{\sqrt{a}} = \beta$$
 
-Donc $f$ est **continue en $a$** pour tout $a > 0$.
-
-**Remarque** : on n'a meme pas eu besoin de la restriction $|x - a| < 1$ ici, car la majoration $\sqrt{x} + \sqrt{a} \geq \sqrt{a}$ est valable pour tout $x \geq 0$. Toutefois, il faut s'assurer que $x \geq 0$ (domaine de $f$). Si $a > 0$ et $|x - a| < \alpha \leq a$ (ce qu'on peut toujours imposer en prenant $\alpha = \min(a{,}\ \beta\sqrt{a})$), alors $x > 0$ et on est dans le domaine.
+Conclusion : $f$ est continue en tout $a > 0$.
 
 ---
 
-**b)** En $a = 0$, la methode du conjugue donne :
+**2.** En $a = 0$, la methode echoue car :
 
-$$|\sqrt{x} - \sqrt{0}| = \sqrt{x} = \frac{|x - 0|}{\sqrt{x} + \sqrt{0}} = \frac{|x|}{\sqrt{x}} = \frac{x}{\sqrt{x}} = \sqrt{x}$$
+La majoration repose sur le minorant $\sqrt{x} + \sqrt{a} \geq \sqrt{a}$. En $a = 0$, on obtient $\sqrt{x} + 0 = \sqrt{x}$, et on ne peut pas minorer $\sqrt{x}$ par une constante strictement positive lorsque $x \to 0$.
 
-Le probleme est que la minoration $\sqrt{x} + \sqrt{a} \geq \sqrt{a}$ devient $\sqrt{x} + 0 \geq 0$, ce qui ne permet pas de diviser par une constante strictement positive.
+Concretement, on aurait $|\sqrt{x} - 0| = \sqrt{x} = \dfrac{|x - 0|}{\sqrt{x}}$, et le denominateur $\sqrt{x}$ tend vers $0$ quand $x \to 0$, donc le rapport $\dfrac{|x|}{\sqrt{x}}$ ne donne pas une majoration de la forme $K|x|$.
 
-En fait, $f$ **est** continue en $0$, mais il faut une autre approche : on veut $\sqrt{x} < \beta$, soit $x < \beta^2$. Il suffit de choisir $\alpha = \beta^2$.
+Pour prouver la continuite en $0$, on utilise directement : si $|x| < \alpha$ avec $\alpha = \beta^2$, alors $\sqrt{x} = \sqrt{|x|} < \sqrt{\beta^2} = \beta$. La demonstration est donc possible, mais par une **autre technique** (pas par conjugue).
+:::
 
-La methode de la partie **a)** ne s'applique pas en $a = 0$ car elle repose sur la minoration $\sqrt{x} + \sqrt{a} \geq \sqrt{a} > 0$, qui necessite $a > 0$.
+:::methode
+Pour les fonctions irrationnelles, la **technique du conjugue** est la cle :
+1. Multiplier et diviser par $\sqrt{x} + \sqrt{a}$
+2. Simplifier en $\dfrac{|x - a|}{\sqrt{x} + \sqrt{a}}$
+3. Minorer le denominateur par $\sqrt{a}$ (valable uniquement si $a > 0$)
+4. En deduire $\alpha = \beta \sqrt{a}$
 :::
 
 :::erreurs
-- **Oublier le conjugue** : essayer de travailler directement avec $|\sqrt{x} - \sqrt{a}|$ sans multiplier/diviser par le conjugue rend la preuve impossible.
-- **Oublier la condition $x \geq 0$** : la racine carree n'est definie que pour $x \geq 0$, il faut s'assurer que le choix de $\alpha$ garantit $x \geq 0$.
-- **Conclure que $\sqrt{x}$ n'est pas continue en $0$** : elle l'est, mais par une methode differente ($\alpha = \beta^2$).
+- Tenter de majorer $|\sqrt{x} - \sqrt{a}|$ directement sans passer par le conjugue : on ne fait pas apparaitre $|x - a|$.
+- Appliquer la meme methode en $a = 0$ : le denominateur $\sqrt{a} = 0$ rend la majoration impossible. Il faut un argument different.
 :::

@@ -3,35 +3,54 @@ type: lesson
 title: "Methode de dichotomie"
 difficulty: 0
 timeMinutes: 5
-tags: [continuite, dichotomie, approximation]
+tags: [continuite, dichotomie, approximation, tvi]
 praxeologies: [Prax7]
 ---
 
 ### Principe
 
-La **dichotomie** permet d'encadrer une solution $\alpha$ de $f(x) = 0$ avec une precision choisie.
+La **methode de dichotomie** permet d'encadrer une solution de $f(x) = 0$ avec une precision arbitraire, en divisant l'intervalle par deux a chaque etape.
+
+Elle repose sur le TVI : si $f$ est continue sur $[a, b]$ et $f(a) \times f(b) < 0$, on sait qu'il existe un zero $\alpha$ dans $]a, b[$.
 
 ### Algorithme
 
-1. Partir d'un intervalle $[a{,}\ b]$ ou $f(a) \times f(b) < 0$
-2. Calculer le milieu $m = \dfrac{a + b}{2}$
-3. Calculer $f(m)$ :
-   - Si $f(a) \times f(m) < 0$ : la solution est dans $[a{,}\ m]$
-   - Sinon : la solution est dans $[m{,}\ b]$
-4. Repeter avec le nouvel intervalle
+:::definition[Methode de dichotomie]
+Soit $f$ continue sur $[a, b]$ avec $f(a) \times f(b) < 0$.
 
-:::remark
-A chaque etape, la longueur de l'intervalle est divisee par $2$. Apres $n$ etapes, la precision est $\dfrac{b - a}{2^n}$.
+A chaque etape :
+
+1. Calculer le **milieu** $m = \dfrac{a + b}{2}$
+2. Calculer $f(m)$
+3. Si $f(a) \times f(m) < 0$, la solution est dans $[a, m]$ : on pose $b \leftarrow m$
+4. Sinon, la solution est dans $[m, b]$ : on pose $a \leftarrow m$
+5. Repeter jusqu'a la precision souhaitee
 :::
 
-:::example[Illustration]
-$f(x) = x^3 - x - 1$ admet un zero $\alpha$ dans $[1{,}\ 2]$ (car $f(1) = -1 < 0$ et $f(2) = 5 > 0$).
+:::property[Precision]
+Apres $n$ etapes de dichotomie, la solution $\alpha$ est encadree dans un intervalle de longueur :
 
-| Etape | $[a{,}\ b]$ | $m$ | $f(m)$ | Signe | Nouvel intervalle |
-|-------|-------------|-----|--------|-------|-------------------|
-| 1 | $[1{;}\ 2]$ | $1{,}5$ | $0{,}875$ | $+$ | $[1{;}\ 1{,}5]$ |
-| 2 | $[1{;}\ 1{,}5]$ | $1{,}25$ | $-0{,}297$ | $-$ | $[1{,}25{;}\ 1{,}5]$ |
-| 3 | $[1{,}25{;}\ 1{,}5]$ | $1{,}375$ | $0{,}225$ | $+$ | $[1{,}25{;}\ 1{,}375]$ |
+$$\frac{b - a}{2^n}$$
 
-D'ou $\alpha \in [1{,}25{;}\ 1{,}375]$, soit $\alpha \approx 1{,}3$ a $10^{-1}$ pres.
+Pour obtenir une precision de $10^{-p}$, il faut $n$ etapes telles que $\dfrac{b - a}{2^n} \leqslant 10^{-p}$.
+:::
+
+### Exemple complet
+
+:::example[Encadrement a $10^{-1}$ pres]
+Soit $f(x) = x^3 - x - 1$. On sait que $f(1) = -1 < 0$ et $f(2) = 5 > 0$, donc $\alpha \in {]1, 2[}$.
+
+| Etape | $[a, b]$ | $m$ | $f(m)$ | Signe | Nouvel intervalle |
+|---|---|---|---|---|---|
+| 1 | $[1 ;\, 2]$ | $1{,}5$ | $f(1{,}5) = 0{,}875$ | $+$ | $[1 ;\, 1{,}5]$ |
+| 2 | $[1 ;\, 1{,}5]$ | $1{,}25$ | $f(1{,}25) \approx -0{,}297$ | $-$ | $[1{,}25 ;\, 1{,}5]$ |
+| 3 | $[1{,}25 ;\, 1{,}5]$ | $1{,}375$ | $f(1{,}375) \approx 0{,}225$ | $+$ | $[1{,}25 ;\, 1{,}375]$ |
+
+A l'etape 3, la longueur de l'intervalle est $1{,}375 - 1{,}25 = 0{,}125 < 0{,}1 + 0{,}125$.
+
+Pour un encadrement a $10^{-1}$ pres : $\alpha \in [1{,}2 ;\, 1{,}4]$ (on arrondit les bornes). En fait, apres l'etape 3 : $1{,}25 \leqslant \alpha \leqslant 1{,}375$, donc $\alpha \approx 1{,}3$ a $10^{-1}$ pres.
+:::
+
+:::remark
+La dichotomie est une methode **sure mais lente**. Chaque etape ne gagne qu'un facteur $2$ en precision. Pour atteindre $10^{-2}$ en partant d'un intervalle de longueur $1$, il faut au moins $7$ etapes ($2^7 = 128 > 100$).
 :::

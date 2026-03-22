@@ -1,19 +1,20 @@
 # KB Module — [Nom du module]
 
-> **Structure _meta/** : La KB est desormais eclatee en 4 fichiers dans
+> **Structure _meta/** : La KB est desormais eclatee en 5 fichiers dans
 > `_meta/modules/{module}/` :
 >
 > | Fichier | Sections |
 > |---------|----------|
-> | `savoir.md` | 0-7 (objectif, scope, transposition, prerequis, carte notions, theoremes, knowledge components, exemples canoniques) |
-> | `praxeologies.md` | 8 (patterns d'exercices) |
-> | `misconceptions.md` | 9 (erreurs frequentes & questions diagnostiques) |
-> | `lexique.md` | 10 (regles redactionnelles, notations, rigueur) |
+> | `savoir.yaml` | 0-7 (objectif, scope, transposition, prerequis, carte notions, theoremes, knowledge components, exemples canoniques) |
+> | `praxeologies.yaml` | 8 (patterns d'exercices) |
+> | `misconceptions.yaml` | 9 (erreurs frequentes & questions diagnostiques) |
+> | `lexique.yaml` | 10 (regles redactionnelles, notations, rigueur) |
+> | `redaction.yaml` | modeles de redaction et criteres de notation |
 >
 > Chaque fichier commence par un header avec les metadonnees `Module:` et
 > `Programme:` (ex: `Module: continuite`, `Programme: 3eme-math`).
 >
-> Apres avoir cree les 4 fichiers, mettre a jour `_meta/_interface.yaml`
+> Apres avoir cree les 5 fichiers, mettre a jour `_meta/_interface.yaml`
 > pour enregistrer le nouveau module dans le registre.
 
 id: module_{slug}

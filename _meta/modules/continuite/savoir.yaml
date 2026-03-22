@@ -1,0 +1,478 @@
+# Savoir — Continuite
+# Format structure pour lecture humaine (profs) et machine (LLM, pipeline)
+
+module: continuite
+programme: 3eme-math
+version: 2.0
+
+# ---------------------------------------------------------------------------
+# 0) OBJECTIF (1 phrase)
+# ---------------------------------------------------------------------------
+objective: >-
+  Maitriser la notion de continuite d'une fonction en un point et sur un
+  intervalle, exploiter les operations sur les fonctions continues, et
+  appliquer le theoreme des valeurs intermediaires pour prouver l'existence
+  et l'unicite de solutions d'equations.
+
+# ---------------------------------------------------------------------------
+# 1) NIVEAU EPISTEMIQUE
+# Definit ce qui est admis, demontre ou exclu pour CE programme.
+# C'est la piece maitresse qui distingue un cours de prepa d'un cours lycee.
+# ---------------------------------------------------------------------------
+epistemic_level:
+  theory_base: "analyse-reelle-elementaire"
+  # Pas de topologie, pas d'espaces metriques, pas d'epsilon-delta standard
+
+  admitted:
+    - id: T1
+      statement: >-
+        Toute fonction constante, lineaire, affine, x^2 est continue en tout
+        reel. Toute fonction polynome est continue sur R. Toute fonction
+        rationnelle est continue sur son ensemble de definition. sqrt(x) est
+        continue sur R+*.
+      justification: "Admis — demonstration par epsilon-delta hors programme"
+
+    - id: T7
+      statement: >-
+        L'image d'un intervalle par une fonction continue est un intervalle.
+      justification: "Admis — demonstration par connexite hors programme"
+
+    - id: T8
+      statement: >-
+        (TVI) Soit f continue sur [a,b]. Pour tout k entre f(a) et f(b),
+        l'equation f(x) = k admet au moins une solution dans [a,b].
+      justification: "Admis — demonstration par borne superieure hors programme"
+
+  demonstrated:
+    - id: T2
+      statement: "Si f et g sont continues en a et k un reel, alors f+g, f.g, k.f sont continues en a"
+      proof_type: demonstration-complete
+
+    - id: T3
+      statement: "Si f est continue en a et f(a) != 0, alors 1/f est continue en a"
+      proof_type: demonstration-complete
+
+    - id: T4
+      statement: "Si f est continue en a, alors |f| est continue en a"
+      proof_type: demonstration-complete
+
+    - id: T5
+      statement: "Si f est continue en a et f(a) > 0, alors sqrt(f) est continue en a"
+      proof_type: demonstration-complete
+
+    - id: T6
+      statement: "f est continue en a <=> f est continue a droite et a gauche en a"
+      proof_type: demonstration-complete
+
+    - id: T9
+      statement: "Si de plus f est strictement monotone sur [a,b], la solution est unique"
+      proof_type: demonstration-complete
+
+  excluded:
+    - "Continuite uniforme"
+    - "Theoreme de Heine (continuite uniforme sur un compact)"
+    - "Theoreme de Bolzano-Weierstrass"
+    - "Definition epsilon-delta standard (le programme tunisien utilise alpha-beta)"
+    - "Fonctions trigonometriques"
+    - "Theoreme des bornes atteintes (mentionne mais pas approfondi)"
+    - "Continuite et derivabilite (module nombre-derive)"
+
+  starting_point:
+    - "Notion de limite (module generalites-fonctions)"
+    - "Operations sur les limites"
+    - "Fonctions usuelles (polynome, rationnelle, racine carree)"
+    - "Inegalites, valeur absolue, intervalles"
+
+# ---------------------------------------------------------------------------
+# 2) TRANSPOSITION DIDACTIQUE
+# ---------------------------------------------------------------------------
+transposition:
+  savoir_savant:
+    - "Definition topologique de la continuite (epsilon-delta, Weierstrass)"
+    - "Theoreme des valeurs intermediaires (Bolzano, 1817)"
+    - "Theoreme de l'image continue d'un connexe"
+    - "Proprietes des fonctions continues sur les compacts"
+
+  savoir_a_enseigner:
+    - "La definition utilise alpha et beta (convention tunisienne, pas epsilon-delta)"
+    - "Le TVI est le theoreme central : existence d'au moins une solution"
+    - "L'unicite est obtenue en ajoutant la monotonie stricte (theoreme separe)"
+    - "L'image d'un intervalle par une fonction continue est admise"
+    - "La dichotomie est presentee comme methode pratique d'approximation"
+
+  adaptations_didactiques:
+    - "Introduction graphique : 'la courbe peut etre tracee sans lever le crayon'"
+    - "La definition alpha-beta est motivee par des rectangles de tolerance"
+    - "La partie entiere E(x) sert de contre-exemple fondamental"
+    - "Le TVI est illustre par des applications concretes avant l'enonce formel"
+    - "La dichotomie est illustree par le calcul effectif (tableaux de valeurs)"
+
+# ---------------------------------------------------------------------------
+# 3) PREREQUISITES & LIENS INTER-MODULES
+# ---------------------------------------------------------------------------
+prerequisites:
+  required:
+    - module: generalites-fonctions
+      description: "Ensemble de definition, image, domaine, representation graphique"
+    - prior_knowledge: "Inegalites, valeur absolue, intervalles, polynomes, fonctions rationnelles, racine carree"
+
+  opens_toward:
+    - module: nombre-derive
+      link: "Le theoreme 'derivable => continu' utilise la continuite"
+    - module: fonction-derivee
+      link: "Etude de variations qui utilise la continuite sur un intervalle"
+
+# ---------------------------------------------------------------------------
+# 4) CARTE CONCEPTUELLE (dependances intra-module)
+# ---------------------------------------------------------------------------
+concepts:
+  - id: N1
+    name: "Continuite en un point"
+    bloom_level: comprendre
+    depends_on: []
+    sub_concepts:
+      - id: N1.1
+        name: "Definition alpha-beta (convention tunisienne)"
+      - id: N1.2
+        name: "Interpretation graphique (trace sans lever le crayon)"
+      - id: N1.3
+        name: "Discontinuite en un point (saut, point isole)"
+
+  - id: N2
+    name: "Continuite des fonctions usuelles"
+    bloom_level: memoriser
+    depends_on: [N1]
+    sub_concepts:
+      - id: N2.1
+        name: "Constante, identite, lineaire, affine"
+      - id: N2.2
+        name: "x^2, polynomes"
+      - id: N2.3
+        name: "1/x, fonctions rationnelles"
+      - id: N2.4
+        name: "sqrt(x), sqrt(f(x))"
+
+  - id: N3
+    name: "Operations sur les fonctions continues"
+    bloom_level: appliquer
+    depends_on: [N1, N2]
+    sub_concepts:
+      - id: N3.1
+        name: "Somme, produit, combinaison lineaire"
+      - id: N3.2
+        name: "Inverse 1/f (condition f(a) != 0)"
+      - id: N3.3
+        name: "Quotient f/g (condition g(a) != 0)"
+      - id: N3.4
+        name: "Valeur absolue |f|"
+      - id: N3.5
+        name: "Racine carree sqrt(f) (condition f(a) > 0)"
+
+  - id: N4
+    name: "Continuite laterale"
+    bloom_level: comprendre
+    depends_on: [N1]
+    sub_concepts:
+      - id: N4.1
+        name: "Continuite a droite en a"
+      - id: N4.2
+        name: "Continuite a gauche en a"
+      - id: N4.3
+        name: "Theoreme : f continue en a <=> f continue a droite et a gauche en a"
+
+  - id: N5
+    name: "Continuite sur un intervalle"
+    bloom_level: comprendre
+    depends_on: [N1, N4]
+    sub_concepts:
+      - id: N5.1
+        name: "Definitions (intervalle ouvert, ferme, semi-ouvert)"
+      - id: N5.2
+        name: "Consequence : continuite sur tout sous-intervalle"
+
+  - id: N6
+    name: "Image d'un intervalle"
+    bloom_level: appliquer
+    depends_on: [N5]
+    sub_concepts:
+      - id: N6.1
+        name: "Theoreme : l'image d'un intervalle par une fonction continue est un intervalle"
+      - id: N6.2
+        name: "Determination de f(I) par le tableau de variation"
+
+  - id: N7
+    name: "Theoreme des valeurs intermediaires (TVI)"
+    bloom_level: appliquer
+    depends_on: [N5, N6]
+    sub_concepts:
+      - id: N7.1
+        name: "Enonce general (existence d'au moins une solution)"
+      - id: N7.2
+        name: "Cas particulier : localisation d'un zero (f(a).f(b) < 0)"
+      - id: N7.3
+        name: "Unicite par monotonie stricte"
+
+  - id: N8
+    name: "Applications"
+    bloom_level: analyser
+    depends_on: [N7]
+    sub_concepts:
+      - id: N8.1
+        name: "Approximation par dichotomie"
+      - id: N8.2
+        name: "Nombre de solutions d'une equation"
+      - id: N8.3
+        name: "Intersection de courbes (f(x) = g(x) via h(x) = f(x) - g(x))"
+
+# ---------------------------------------------------------------------------
+# 5) THEOREMES & PROPRIETES CLES
+# ---------------------------------------------------------------------------
+theorems:
+  - id: D1
+    type: definition
+    name: "Continuite en un point (alpha-beta)"
+    statement: >-
+      Soit f definie sur un intervalle ouvert I et a un reel de I.
+      f est continue en a si : pour tout beta > 0, il existe alpha > 0
+      tel que si x dans I et |x-a| < alpha, alors |f(x)-f(a)| < beta.
+    status: definition
+    concepts: [N1]
+    used_in: [Prax1, Prax10]
+
+  - id: D2
+    type: definition
+    name: "Continuite a droite"
+    statement: >-
+      f est continue a droite en a si pour tout beta > 0, il existe alpha > 0
+      tel que 0 <= x-a < alpha implique |f(x)-f(a)| < beta.
+    status: definition
+    concepts: [N4]
+    used_in: [Prax3]
+
+  - id: D3
+    type: definition
+    name: "Continuite a gauche"
+    statement: >-
+      f est continue a gauche en a si pour tout beta > 0, il existe alpha > 0
+      tel que 0 <= a-x < alpha implique |f(x)-f(a)| < beta.
+    status: definition
+    concepts: [N4]
+    used_in: [Prax3]
+
+  - id: T1
+    type: theorem
+    name: "Continuite des fonctions usuelles"
+    statement: >-
+      Toute fonction constante, lineaire, affine, x^2 est continue en tout reel.
+      Toute fonction polynome est continue sur R.
+      Toute fonction rationnelle est continue sur son ensemble de definition.
+      sqrt(x) est continue sur R+*.
+    status: admis
+    concepts: [N2]
+    used_in: [Prax1, Prax2]
+
+  - id: T2
+    type: theorem
+    name: "Operations — somme, produit"
+    statement: "Si f et g sont continues en a et k un reel, alors f+g, f.g, k.f sont continues en a"
+    status: demontre
+    concepts: [N3]
+    used_in: [Prax2]
+
+  - id: T3
+    type: theorem
+    name: "Operations — inverse, quotient"
+    statement: "Si f est continue en a et f(a) != 0, alors 1/f est continue en a. Si g(a) != 0, alors f/g est continue en a"
+    status: demontre
+    concepts: [N3]
+    used_in: [Prax2]
+
+  - id: T4
+    type: theorem
+    name: "Operations — valeur absolue"
+    statement: "Si f est continue en a, alors |f| est continue en a"
+    status: demontre
+    concepts: [N3]
+    used_in: [Prax2]
+
+  - id: T5
+    type: theorem
+    name: "Operations — racine carree"
+    statement: "Si f est continue en a et f(a) > 0, alors sqrt(f) est continue en a"
+    status: demontre
+    concepts: [N3]
+    used_in: [Prax2, Prax9]
+
+  - id: T6
+    type: theorem
+    name: "Continuite laterale"
+    statement: "f est continue en a <=> f est continue a droite et a gauche en a"
+    status: demontre
+    concepts: [N4]
+    used_in: [Prax3]
+
+  - id: T7
+    type: theorem
+    name: "Image d'un intervalle"
+    statement: "L'image d'un intervalle par une fonction continue est un intervalle"
+    status: admis
+    concepts: [N6]
+    used_in: [Prax6]
+
+  - id: T8
+    type: theorem
+    name: "Theoreme des valeurs intermediaires (TVI)"
+    statement: >-
+      Soit f continue sur [a,b]. Pour tout k entre f(a) et f(b),
+      l'equation f(x) = k admet au moins une solution dans [a,b].
+    status: admis
+    concepts: [N7]
+    used_in: [Prax4, Prax5, Prax8]
+
+  - id: "T8'"
+    type: corollary
+    name: "TVI — cas particulier zero"
+    statement: "Si f(a).f(b) < 0, il existe c dans ]a,b[ tel que f(c) = 0"
+    status: corollaire
+    concepts: [N7]
+    used_in: [Prax4]
+
+  - id: T9
+    type: theorem
+    name: "Unicite par monotonie"
+    statement: "Si de plus f est strictement monotone sur [a,b], la solution est unique"
+    status: demontre
+    concepts: [N7]
+    used_in: [Prax5]
+
+# ---------------------------------------------------------------------------
+# 6) KNOWLEDGE COMPONENTS
+# ---------------------------------------------------------------------------
+facts:
+  - id: F1
+    content: "Definition de la continuite en a (formulation alpha-beta)"
+  - id: F2
+    content: "Table des fonctions usuelles continues (constante, affine, polynome, rationnelle, sqrt)"
+  - id: F3
+    content: "Les operations preservent la continuite (somme, produit, quotient sous conditions)"
+  - id: F4
+    content: "f continue en a <=> f continue a droite et a gauche en a"
+  - id: F5
+    content: "L'image d'un intervalle par une fonction continue est un intervalle"
+  - id: F6
+    content: "TVI : existence d'au moins une solution si f(a).f(b) < 0"
+  - id: F7
+    content: "Unicite si f est strictement monotone sur l'intervalle"
+  - id: F8
+    content: "La partie entiere E(x) est discontinue en tout entier (contre-exemple fondamental)"
+
+skills:
+  - id: S1
+    description: "Justifier la continuite en un point par identification du type de fonction"
+    concepts: [N2]
+    difficulty: 1
+    praxeology: Prax1
+
+  - id: S2
+    description: "Justifier la continuite par les operations (somme, produit, quotient, sqrt)"
+    concepts: [N3]
+    difficulty: 1
+    praxeology: Prax2
+
+  - id: S3
+    description: "Etudier la continuite d'une fonction par morceaux"
+    concepts: [N4]
+    difficulty: 2
+    praxeology: Prax3
+
+  - id: S4
+    description: "Appliquer le TVI pour prouver l'existence d'une solution"
+    concepts: [N7]
+    difficulty: 1
+    praxeology: Prax4
+
+  - id: S5
+    description: "Prouver l'unicite d'une solution (TVI + monotonie)"
+    concepts: [N7]
+    difficulty: 2
+    praxeology: Prax5
+
+  - id: S6
+    description: "Determiner l'image d'un intervalle par une fonction continue"
+    concepts: [N6]
+    difficulty: 2
+    praxeology: Prax6
+
+  - id: S7
+    description: "Approximer une solution par dichotomie"
+    concepts: [N8]
+    difficulty: 1
+    praxeology: Prax7
+
+  - id: S8
+    description: "Determiner le nombre de solutions via tableau de variation + TVI"
+    concepts: [N8]
+    difficulty: 2
+    praxeology: Prax8
+
+principles:
+  - id: P1
+    content: "La continuite est une propriete locale (en un point) qui se globalise (sur un intervalle)"
+  - id: P2
+    content: "Le TVI garantit l'EXISTENCE mais pas l'UNICITE — la monotonie est necessaire pour l'unicite"
+  - id: P3
+    content: "L'image d'un intervalle est un intervalle — propriete fondamentale qui sous-tend le TVI"
+  - id: P4
+    content: "La discontinuite se manifeste graphiquement par un saut ou une rupture dans la courbe"
+
+# ---------------------------------------------------------------------------
+# 7) EXEMPLES CANONIQUES
+# ---------------------------------------------------------------------------
+canonical_examples:
+  - id: EC1
+    description: "f(x) = 2x - 1, montrer la continuite en a = 2 par la definition alpha-beta"
+    illustrates: "Definition avec une fonction affine (alpha = beta/2)"
+    concepts: [N1]
+    difficulty: 1
+
+  - id: EC2
+    description: "f(x) = sqrt(x-2)/(x^2+2x+5), justifier la continuite en 2"
+    illustrates: "Composition d'operations (sqrt + polynome + quotient)"
+    concepts: [N3]
+    difficulty: 1
+
+  - id: EC3
+    description: "f(x) = E(x) (partie entiere), etudier la continuite"
+    illustrates: "Discontinuite en tout entier (contre-exemple fondamental)"
+    concepts: [N1]
+    difficulty: 1
+
+  - id: EC4
+    description: "f par morceaux {2x+1 si x>1, 3 si x=1, 3x-1 si x<1}, continuite en 1"
+    illustrates: "Continuite laterale"
+    concepts: [N4]
+    difficulty: 2
+
+  - id: EC5
+    description: "f(x) = x^3 + 3x/2 + 1, montrer que f(x) = 0 admet une solution dans [-2, 1]"
+    illustrates: "Application du TVI (f(-2) < 0, f(1) > 0)"
+    concepts: [N7]
+    difficulty: 1
+
+  - id: EC6
+    description: "f(x) = x^4 - 4x^2 - x + 1, montrer exactement 4 solutions"
+    illustrates: "Comptage de solutions par TVI + tableau de variation"
+    concepts: [N8]
+    difficulty: 2
+
+  - id: EC7
+    description: "sqrt(x-2) = 8/x^2, existence d'une solution sur [3, +inf["
+    illustrates: "Intersection de courbes (h(x) = f(x) - g(x))"
+    concepts: [N8]
+    difficulty: 2
+
+  - id: EC8
+    description: "Approximation d'un zero a 10^-2 par dichotomie"
+    illustrates: "Methode pratique (tableau de valeurs successifs)"
+    concepts: [N8]
+    difficulty: 1

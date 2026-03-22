@@ -1,60 +1,61 @@
 ---
 type: lesson
-title: "Opérations algébriques et continuité"
+title: "Operations algebriques et continuite"
 difficulty: 0
 timeMinutes: 8
-tags: [continuité, opérations, racine-carrée, valeur-absolue]
+tags: [continuite, operations, racine-carree, quotient]
 praxeologies: [Prax2, Prax9]
 ---
 
-### Opérations qui préservent la continuité
+### Principe general
 
-:::theorem[Opérations sur les fonctions continues]
-Soient $f$ et $g$ deux fonctions continues en $a$ et $k$ un réel.
+Lorsque deux fonctions $f$ et $g$ sont continues en un point $a$, on peut construire de nouvelles fonctions continues a partir d'elles grace aux **operations algebriques**.
 
-Alors les fonctions suivantes sont continues en $a$ :
-- $f + g$ (somme)
-- $f \times g$ (produit)
-- $k \cdot f$ (produit par un scalaire)
+### Somme, produit, combinaison lineaire
+
+:::theorem[Operations de base]
+Si $f$ et $g$ sont continues en $a$ et $k \in \mathbb{R}$, alors :
+
+- $f + g$ est continue en $a$
+- $f \times g$ est continue en $a$
+- $k \cdot f$ est continue en $a$
 :::
 
-### Quotient et inverse
+### Inverse et quotient
 
-:::theorem[Quotient de fonctions continues]
-- Si $f$ est continue en $a$ et $f(a) \neq 0$, alors $\dfrac{1}{f}$ est continue en $a$.
-- Si $f$ et $g$ sont continues en $a$ et $g(a) \neq 0$, alors $\dfrac{f}{g}$ est continue en $a$.
+:::theorem[Inverse et quotient]
+Si $f$ est continue en $a$ et $f(a) \neq 0$, alors $\dfrac{1}{f}$ est continue en $a$.
+
+Si $f$ et $g$ sont continues en $a$ et $g(a) \neq 0$, alors $\dfrac{f}{g}$ est continue en $a$.
 :::
 
-:::attention[Condition sur le dénominateur]
-Toujours vérifier que $g(a) \neq 0$ avant de conclure que le quotient est continu.
+:::attention[Condition indispensable]
+Le quotient $\dfrac{f}{g}$ n'est continu en $a$ que si $g(a) \neq 0$. Il faut **toujours verifier** que le denominateur ne s'annule pas au point considere.
 :::
 
-### Valeur absolue et racine carrée
+### Valeur absolue
 
-:::property[Valeur absolue]
+:::theorem[Valeur absolue]
 Si $f$ est continue en $a$, alors $|f|$ est continue en $a$.
 :::
 
-:::property[Racine carrée]
+### Racine carree
+
+:::theorem[Racine carree]
 Si $f$ est continue en $a$ et $f(a) > 0$ (**strictement**), alors $\sqrt{f}$ est continue en $a$.
 :::
 
 :::attention[Condition stricte pour la racine]
-La condition est $f(a) > 0$ (strictement positif). Si $f(a) = 0$, on ne peut pas appliquer directement ce théorème.
+La condition est $f(a) > 0$ et non $f(a) \geqslant 0$. Si $f(a) = 0$, le theoreme **ne s'applique pas** directement. La continuite de $\sqrt{f}$ en un point ou $f$ s'annule necessite une etude specifique.
 :::
 
-### Méthode de justification
+### Exemple type
 
-:::example[Exemple type]
-$f(x) = \dfrac{\sqrt{x - 2}}{x^2 + 2x + 5}$. Justifier que $f$ est continue en $2$.
+:::example[Continuite de $\sqrt{x - 2}\, /\, (x^2 + 2x + 5)$ en $a = 3$]
+Posons $h(x) = \dfrac{\sqrt{x - 2}}{x^2 + 2x + 5}$.
 
-- Le numérateur : $x \mapsto x - 2$ est affine, donc continue. En $2$ : $2 - 2 = 0$.
-
-On a $\sqrt{x - 2}$ est définie pour $x \geq 2$, et en $a = 2$ : $\sqrt{0} = 0$. Ici $f(2) = 0$ et on ne peut pas appliquer le théorème de la racine (car $x - 2 = 0$ en $a = 2$). Il faut vérifier directement.
-
-Cependant, $\sqrt{x - 2}$ est **continue à droite en $2$** (car $\lim_{x \to 2^+} \sqrt{x - 2} = 0 = \sqrt{0}$).
-
-Le dénominateur : $x^2 + 2x + 5 = 13 \neq 0$ en $a = 2$.
-
-Par suite, $f$ est continue à droite en $2$.
+1. $x \mapsto x - 2$ est un polynome, donc continu en $3$. De plus, $3 - 2 = 1 > 0$.
+2. Par le theoreme sur la racine carree, $\sqrt{x - 2}$ est continue en $3$.
+3. $x \mapsto x^2 + 2x + 5$ est un polynome, donc continu en $3$. De plus, $9 + 6 + 5 = 20 \neq 0$.
+4. Par le theoreme sur le quotient, $h$ est **continue en $3$**.
 :::

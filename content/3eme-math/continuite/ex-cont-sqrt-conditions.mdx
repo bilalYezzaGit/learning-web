@@ -1,44 +1,52 @@
 ---
 type: exercise
-title: "Continuité de sqrt(f) — vérifier les conditions"
+title: "Continuite de sqrt(f) — verifier les conditions"
 difficulty: 1
 timeMinutes: 10
 category: application
-tags: [continuité, racine-carrée, conditions]
+tags: [continuite, racine-carree, conditions]
 praxeologies: [Prax9]
 ---
 
 :::enonce
-**1.** Justifier que $f(x) = \sqrt{x^2 + 1}$ est continue en tout réel $a$.
+**a)** Soit $f(x) = \sqrt{x^2 + 1}$. Justifier que $f$ est continue en tout reel $a \in \mathbb{R}$.
 
-**2.** Pour quelles valeurs de $a$ la fonction $f(x) = \sqrt{4 - x^2}$ est-elle continue ?
+**b)** Soit $f(x) = \sqrt{4 - x^2}$. Pour quelles valeurs de $a$ peut-on affirmer (par le theoreme sur la racine carree) que $f$ est continue en $a$ ?
 
-**3.** La fonction $f(x) = \sqrt{x^2 - 4}$ est-elle continue en $a = 2$ ?
+**c)** Soit $f(x) = \sqrt{x^2 - 4}$. La fonction $f$ est-elle continue en $a = 2$ par le theoreme sur la racine carree ?
 :::
 
 :::solution
-**1.** La fonction $x \mapsto x^2 + 1$ est polynôme, donc continue sur $\mathbb{R}$.
+**a)** Posons $g(x) = x^2 + 1$.
 
-De plus, pour tout réel $x$ : $x^2 + 1 \geq 1 > 0$.
+- $g$ est un polynome, donc continu en tout reel $a$.
+- Pour tout $a \in \mathbb{R}$, on a $g(a) = a^2 + 1 \geqslant 1 > 0$.
 
-D'où $\sqrt{x^2 + 1}$ est continue en tout réel $a$ (la condition $f(a) > 0$ est vérifiée).
+Les deux conditions du theoreme sont remplies : $g$ continue en $a$ et $g(a) > 0$.
 
-**2.** La fonction $x \mapsto 4 - x^2$ est polynôme, donc continue sur $\mathbb{R}$.
+Donc $f(x) = \sqrt{x^2 + 1}$ est **continue en tout reel**.
 
-Le domaine de définition de $\sqrt{4 - x^2}$ est $[-2{,}\ 2]$ (car $4 - x^2 \geq 0 \Leftrightarrow x^2 \leq 4$).
+**b)** Posons $g(x) = 4 - x^2$. La fonction $f$ est definie pour $g(x) \geqslant 0$, c'est-a-dire $x \in [-2, 2]$.
 
-Pour $a \in {]{-2}{,}\ 2[}$ : $4 - a^2 > 0$, donc $\sqrt{4 - x^2}$ est continue en $a$.
+- $g$ est un polynome, donc continu en tout reel $a$.
+- La condition $g(a) > 0$ impose $4 - a^2 > 0$, soit $a^2 < 4$, c'est-a-dire $a \in {]{-2}, 2[}$.
 
-En $a = -2$ et $a = 2$ : $4 - a^2 = 0$. La condition $f(a) > 0$ (strictement) n'est pas vérifiée. Il faudrait une étude spécifique (continuité latérale).
+Par le theoreme sur la racine carree, $f$ est **continue en tout $a \in {]{-2}, 2[}$**.
 
-**3.** En $a = 2$ : $x^2 - 4 = 4 - 4 = 0$.
+:::remark
+Aux points $a = -2$ et $a = 2$, on a $g(a) = 0$. Le theoreme ne s'applique pas directement, mais la continuite peut etre etablie par une etude specifique (hors cadre de cet exercice).
+:::
 
-La condition du théorème exige $f(a) > 0$ (**strictement**). Ici $f(2) = \sqrt{0} = 0$, la condition n'est pas remplie.
+**c)** Posons $g(x) = x^2 - 4$.
 
-On ne peut pas conclure directement par le théorème. Une étude plus fine (par la définition) serait nécessaire pour déterminer si $\sqrt{x^2 - 4}$ est continue à droite en $2$.
+En $a = 2$ : $g(2) = 4 - 4 = 0$.
+
+La condition du theoreme exige $g(a) > 0$ (**strictement**), or $g(2) = 0$.
+
+Le theoreme sur la racine carree **ne s'applique pas** en $a = 2$. On ne peut pas conclure par cette methode.
 :::
 
 :::erreurs
-- Appliquer le théorème $\sqrt{f}$ continue sans vérifier que $f(a) > 0$ **strictement**
-- Confondre $f(a) \geq 0$ (définie) avec $f(a) > 0$ (condition pour le théorème)
+- **Confondre $\geqslant$ et $>$** : le theoreme sur $\sqrt{f}$ exige $f(a) > 0$ strictement. Si $f(a) = 0$, il ne s'applique pas.
+- **Oublier de verifier la positivite** : ecrire « $g$ est continue donc $\sqrt{g}$ est continue » sans verifier que $g(a) > 0$.
 :::

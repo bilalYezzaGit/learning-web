@@ -4,86 +4,138 @@ title: "Continuite de f(x) = |g(x)| par morceaux"
 difficulty: 2
 timeMinutes: 15
 category: approfondissement
-tags: [continuite, morceaux, valeur-absolue, signe, graphe]
+tags: [continuite, morceaux, valeur-absolue, signe, representation]
 praxeologies: [Prax3, Prax9]
 ---
 
 :::enonce
-Soit $f(x) = |x^2 - 4x + 3|$.
+Soit $f$ la fonction definie sur $\mathbb{R}$ par $f(x) = |x^2 - 4x + 3|$.
 
-**a)** Factoriser $x^2 - 4x + 3$ et etudier son signe sur $\mathbb{R}$.
-
-**b)** Reecrire $f$ comme une fonction definie par morceaux (sans valeur absolue).
-
-**c)** Etudier la continuite de $f$ en $x = 1$ et en $x = 3$.
-
-**d)** Representer graphiquement $f$ sur $[-1{,}\ 5]$.
+1. Factoriser $x^2 - 4x + 3$ et etudier son signe sur $\mathbb{R}$.
+2. Reecrire $f$ comme une fonction definie par morceaux (sans valeur absolue).
+3. Etudier la continuite de $f$ en $x = 1$ et en $x = 3$.
+4. Representer graphiquement $f$ sur $[-1, 5]$.
 :::
 
 :::solution
-**a)** On resout $x^2 - 4x + 3 = 0$.
+**1. Factorisation et signe :**
 
-$\Delta = 16 - 12 = 4$, donc $x_1 = \dfrac{4 - 2}{2} = 1$ et $x_2 = \dfrac{4 + 2}{2} = 3$.
+On cherche les racines de $g(x) = x^2 - 4x + 3$.
 
-Factorisation :
+$$\Delta = 16 - 12 = 4 \quad ; \quad x_1 = \frac{4 - 2}{2} = 1 \quad ; \quad x_2 = \frac{4 + 2}{2} = 3$$
 
-$$x^2 - 4x + 3 = (x - 1)(x - 3)$$
+Donc $g(x) = (x - 1)(x - 3)$.
 
-Tableau de signe :
+**Tableau de signe :** le coefficient dominant est positif ($a = 1 > 0$), donc $g(x) > 0$ a l'exterieur des racines :
 
 | $x$ | $-\infty$ | | $1$ | | $3$ | | $+\infty$ |
-|-----|-----------|---|-----|---|-----|---|-----------|
-| $x - 1$ | | $-$ | $0$ | $+$ | | $+$ | |
-| $x - 3$ | | $-$ | | $-$ | $0$ | $+$ | |
-| $(x-1)(x-3)$ | | $+$ | $0$ | $-$ | $0$ | $+$ | |
-
-Donc $x^2 - 4x + 3 \geq 0$ sur $]{-}\infty{,}\ 1] \cup [3{,}\ +\infty[$ et $x^2 - 4x + 3 \leq 0$ sur $[1{,}\ 3]$.
+|---|---|---|---|---|---|---|---|
+| $g(x)$ | $+$ | $+$ | $0$ | $-$ | $0$ | $+$ | $+$ |
 
 ---
 
-**b)** Par definition de la valeur absolue :
+**2. Ecriture par morceaux :**
 
-$$f(x) = \begin{cases} x^2 - 4x + 3 & \text{si } x \leq 1 \\ -(x^2 - 4x + 3) = -x^2 + 4x - 3 & \text{si } 1 \leq x \leq 3 \\ x^2 - 4x + 3 & \text{si } x \geq 3 \end{cases}$$
-
----
-
-**c)** **Continuite en $x = 1$** :
-
-- $f(1) = |1 - 4 + 3| = |0| = 0$
-- $\displaystyle\lim_{x \to 1^-} f(x) = \lim_{x \to 1^-} (x^2 - 4x + 3) = 1 - 4 + 3 = 0$
-- $\displaystyle\lim_{x \to 1^+} f(x) = \lim_{x \to 1^+} (-x^2 + 4x - 3) = -1 + 4 - 3 = 0$
-
-On a $\displaystyle\lim_{x \to 1^-} f(x) = \lim_{x \to 1^+} f(x) = f(1) = 0$, donc $f$ est **continue en $x = 1$**.
-
-**Continuite en $x = 3$** :
-
-- $f(3) = |9 - 12 + 3| = |0| = 0$
-- $\displaystyle\lim_{x \to 3^-} f(x) = \lim_{x \to 3^-} (-x^2 + 4x - 3) = -9 + 12 - 3 = 0$
-- $\displaystyle\lim_{x \to 3^+} f(x) = \lim_{x \to 3^+} (x^2 - 4x + 3) = 9 - 12 + 3 = 0$
-
-On a $\displaystyle\lim_{x \to 3^-} f(x) = \lim_{x \to 3^+} f(x) = f(3) = 0$, donc $f$ est **continue en $x = 3$**.
-
-**Conclusion** : $f$ est **continue sur $\mathbb{R}$**. C'est un resultat general : si $g$ est continue, alors $|g|$ est continue.
+$$f(x) = |g(x)| = \begin{cases} x^2 - 4x + 3 & \text{si } x \leq 1 \\ -(x^2 - 4x + 3) = -x^2 + 4x - 3 & \text{si } 1 \leq x \leq 3 \\ x^2 - 4x + 3 & \text{si } x \geq 3 \end{cases}$$
 
 ---
 
-**d)** Pour representer $f$ sur $[-1{,}\ 5]$, on trace d'abord la parabole $g(x) = x^2 - 4x + 3 = (x - 2)^2 - 1$.
+**3. Continuite en $x = 1$ :**
 
-C'est une parabole de sommet $(2{,}\ -1)$, passant par $(1{,}\ 0)$ et $(3{,}\ 0)$.
+- **Limite a gauche :** $\displaystyle\lim_{x \to 1^-} (x^2 - 4x + 3) = 1 - 4 + 3 = 0$
 
-La courbe de $f = |g|$ s'obtient en **repliant la partie negative** de la parabole au-dessus de l'axe des abscisses :
+- **Valeur en $1$ :** $f(1) = |1 - 4 + 3| = |0| = 0$
 
-- Sur $[-1{,}\ 1]$ et $[3{,}\ 5]$ : $f(x) = g(x)$ (la courbe reste inchangee).
-- Sur $[1{,}\ 3]$ : $f(x) = -g(x)$, c'est le symetrique de la parabole par rapport a l'axe des abscisses.
+- **Limite a droite :** $\displaystyle\lim_{x \to 1^+} (-x^2 + 4x - 3) = -1 + 4 - 3 = 0$
 
-Valeurs remarquables :
-- $f(-1) = |1 + 4 + 3| = 8$
-- $f(0) = |0 - 0 + 3| = 3$
-- $f(1) = 0$
-- $f(2) = |4 - 8 + 3| = |-1| = 1$ (maximum local du morceau central)
-- $f(3) = 0$
-- $f(4) = |16 - 16 + 3| = 3$
-- $f(5) = |25 - 20 + 3| = 8$
+Les trois quantites sont egales a $0$. **$f$ est continue en $1$.**
 
-La courbe est symetrique par rapport a la droite $x = 2$ et touche l'axe des abscisses en $x = 1$ et $x = 3$.
+**Continuite en $x = 3$ :**
+
+- **Limite a gauche :** $\displaystyle\lim_{x \to 3^-} (-x^2 + 4x - 3) = -9 + 12 - 3 = 0$
+
+- **Valeur en $3$ :** $f(3) = |9 - 12 + 3| = |0| = 0$
+
+- **Limite a droite :** $\displaystyle\lim_{x \to 3^+} (x^2 - 4x + 3) = 9 - 12 + 3 = 0$
+
+Les trois quantites sont egales a $0$. **$f$ est continue en $3$.**
+
+Conclusion : $f$ est continue sur $\mathbb{R}$ tout entier. Ce resultat est d'ailleurs previsible : $g$ est continue sur $\mathbb{R}$ (polynome), donc $|g|$ est continue sur $\mathbb{R}$ (theoreme T4).
+
+---
+
+**4. Representation graphique :**
+
+La courbe de $f$ s'obtient a partir de celle de $g(x) = (x-1)(x-3)$ :
+- Sur $]{-\infty}, 1] \cup [3, +\infty[$ : la courbe est identique a celle de $g$ (partie positive).
+- Sur $[1, 3]$ : la courbe est le **symetrique par rapport a l'axe des abscisses** de celle de $g$ (on « releve » la partie negative).
+
+```typst
+#import "@preview/cetz:0.3.4"
+
+#cetz.canvas({
+  import cetz.draw: *
+
+  // Axes
+  line((-1.5, 0), (5.5, 0), stroke: gray + 0.5pt, mark: (end: ">"))
+  line((0, -0.5), (0, 3.5), stroke: gray + 0.5pt, mark: (end: ">"))
+  content((5.5, -0.3), $x$)
+  content((-0.3, 3.5), $y$)
+
+  // Graduation
+  for x in (-1, 1, 2, 3, 4, 5) {
+    line((x, -0.1), (x, 0.1), stroke: gray + 0.3pt)
+    content((x, -0.35), text(size: 8pt, str(x)))
+  }
+  for y in (1, 2, 3) {
+    line((-0.1, y), (0.1, y), stroke: gray + 0.3pt)
+    content((-0.35, y), text(size: 8pt, str(y)))
+  }
+
+  // Courbe f(x) = |x^2 - 4x + 3|
+  // Morceau 1 : x in [-1, 1], f(x) = x^2 - 4x + 3
+  let pts1 = ()
+  for i in range(21) {
+    let x = -1 + i * 0.1
+    let y = x * x - 4 * x + 3
+    pts1.push((x, y))
+  }
+  line(..pts1, stroke: blue + 1.5pt)
+
+  // Morceau 2 : x in [1, 3], f(x) = -(x^2 - 4x + 3) = -x^2 + 4x - 3
+  let pts2 = ()
+  for i in range(21) {
+    let x = 1 + i * 0.1
+    let y = -x * x + 4 * x - 3
+    pts2.push((x, y))
+  }
+  line(..pts2, stroke: blue + 1.5pt)
+
+  // Morceau 3 : x in [3, 5], f(x) = x^2 - 4x + 3
+  let pts3 = ()
+  for i in range(21) {
+    let x = 3 + i * 0.1
+    let y = x * x - 4 * x + 3
+    pts3.push((x, y))
+  }
+  line(..pts3, stroke: blue + 1.5pt)
+
+  // Points remarquables
+  circle((1, 0), radius: 0.06, fill: blue, stroke: blue)
+  circle((3, 0), radius: 0.06, fill: blue, stroke: blue)
+  circle((2, 1), radius: 0.06, fill: blue, stroke: blue)
+
+  // Sommet du « dôme »
+  content((2, 1.3), text(size: 8pt, blue, $(2, 1)$))
+})
+```
+
+Le point $(2, 1)$ est le sommet de l'arc releve, correspondant a $f(2) = |4 - 8 + 3| = |-1| = 1$.
+:::
+
+:::methode
+Pour etudier $f(x) = |g(x)|$ :
+1. Trouver les zeros de $g$ et etudier son signe
+2. Reecrire par morceaux : $f(x) = g(x)$ ou $g \geq 0$, $f(x) = -g(x)$ ou $g < 0$
+3. Graphiquement : garder la partie positive, « relever » la partie negative par symetrie
 :::

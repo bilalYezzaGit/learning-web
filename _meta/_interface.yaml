@@ -1,42 +1,167 @@
-# Interface META ↔ CONTENT
+# Interface META <-> CONTENT
 # Contrat stable : les plans de production referencent les IDs definis ici.
 # Toute modification des IDs doit etre propagee aux plans existants.
+#
+# VERSION 2.0 — Migration vers fichiers YAML structures
+# Les anciens .md sont remplaces par des .yaml avec structure riche
+# (epistemic_level, didactic_variables, redaction models, etc.)
 
-version: 1
+version: 2
 
+# ---------------------------------------------------------------------------
+# Schema des fichiers meta par module
+# ---------------------------------------------------------------------------
+schema:
+  module_files:
+    savoir: "savoir.yaml"          # Savoir structure (ex savoir.md)
+    praxeologies: "praxeologies.yaml"  # Praxeologies TAD (ex praxeologies.md)
+    patterns: "patterns.yaml"      # Patterns d'exercices (inchange)
+    misconceptions: "misconceptions.yaml"  # Erreurs frequentes (ex misconceptions.md)
+    lexique: "lexique.yaml"        # Lexique et regles (ex lexique.md)
+    redaction: "redaction.yaml"    # NOUVEAU : modeles de redaction
+
+  global_files:
+    complexite: "global/complexite.yaml"
+    lexique: "global/lexique.yaml"
+    prerequis_graph: "global/prerequis-graph.yaml"
+
+  exam_files:
+    pattern: "examens/{id}.yaml"
+
+# ---------------------------------------------------------------------------
+# Modules declares
+# ---------------------------------------------------------------------------
 modules:
   nombre-derive:
     programme: 3eme-math
-    savoir: modules/nombre-derive/savoir.md
-    praxeologies: modules/nombre-derive/praxeologies.md
+    savoir: modules/nombre-derive/savoir.yaml
+    praxeologies: modules/nombre-derive/praxeologies.yaml
     patterns: modules/nombre-derive/patterns.yaml
-    misconceptions: modules/nombre-derive/misconceptions.md
-    lexique: modules/nombre-derive/lexique.md
+    misconceptions: modules/nombre-derive/misconceptions.yaml
+    lexique: modules/nombre-derive/lexique.yaml
+    redaction: modules/nombre-derive/redaction.yaml
+
   fonction-derivee:
     programme: 3eme-math
-    savoir: modules/fonction-derivee/savoir.md
-    praxeologies: modules/fonction-derivee/praxeologies.md
-    misconceptions: modules/fonction-derivee/misconceptions.md
-    lexique: modules/fonction-derivee/lexique.md
+    savoir: modules/fonction-derivee/savoir.yaml
+    praxeologies: modules/fonction-derivee/praxeologies.yaml
+    misconceptions: modules/fonction-derivee/misconceptions.yaml
+    lexique: modules/fonction-derivee/lexique.yaml
+    redaction: modules/fonction-derivee/redaction.yaml
+
   denombrement:
     programme: 3eme-math
-    savoir: modules/denombrement/savoir.md
-    praxeologies: modules/denombrement/praxeologies.md
-    misconceptions: modules/denombrement/misconceptions.md
-    lexique: modules/denombrement/lexique.md
+    savoir: modules/denombrement/savoir.yaml
+    praxeologies: modules/denombrement/praxeologies.yaml
+    misconceptions: modules/denombrement/misconceptions.yaml
+    lexique: modules/denombrement/lexique.yaml
+    redaction: modules/denombrement/redaction.yaml
+
   continuite:
     programme: 3eme-math
-    savoir: modules/continuite/savoir.md
-    praxeologies: modules/continuite/praxeologies.md
-    misconceptions: modules/continuite/misconceptions.md
-    lexique: modules/continuite/lexique.md
+    savoir: modules/continuite/savoir.yaml
+    praxeologies: modules/continuite/praxeologies.yaml
+    misconceptions: modules/continuite/misconceptions.yaml
+    lexique: modules/continuite/lexique.yaml
+    redaction: modules/continuite/redaction.yaml
 
+# ---------------------------------------------------------------------------
+# Examens declares
+# ---------------------------------------------------------------------------
 examens:
   synthese-3eme-t3:
     spec: examens/synthese-3eme-t3.yaml
 
+# ---------------------------------------------------------------------------
+# Conventions d'identifiants
+# ---------------------------------------------------------------------------
 identifiers:
   praxeologies: "Prax{N}[a-z]?"
   patterns: "Prax{N}[a-z]?.v{M}"
-  theorems: "{PREFIX}{N} (module-local)"
+  theorems: "{PREFIX}{N} (module-local, ex: T1, D2, P3)"
+  concepts: "N{N}[.{N}]? (module-local, ex: N1, N3.2)"
+  misconceptions: "E{N} (module-local)"
+  skills: "S{N} (module-local)"
+  facts: "F{N} (module-local)"
+  canonical_examples: "EC{N} (module-local)"
   modules: "kebab-case slug"
+
+# ---------------------------------------------------------------------------
+# Structure d'un fichier savoir.yaml
+# ---------------------------------------------------------------------------
+savoir_schema:
+  required_sections:
+    - objective           # 1 phrase
+    - epistemic_level     # admitted, demonstrated, excluded, starting_point
+    - transposition       # savoir_savant, savoir_a_enseigner, adaptations
+    - prerequisites       # required, opens_toward
+    - concepts            # id, name, bloom_level, depends_on, sub_concepts
+    - theorems            # id, type, name, statement, status, concepts, used_in
+    - facts               # id, content
+    - skills              # id, description, concepts, difficulty, praxeology
+    - principles          # id, content
+    - canonical_examples  # id, description, illustrates, concepts, difficulty
+
+  bloom_levels:
+    - memoriser
+    - comprendre
+    - appliquer
+    - analyser
+    - evaluer
+    - creer
+
+  theorem_statuses:
+    - definition
+    - admis
+    - demontre
+    - corollaire
+    - propriete
+
+# ---------------------------------------------------------------------------
+# Structure d'un fichier praxeologies.yaml
+# ---------------------------------------------------------------------------
+praxeologies_schema:
+  required_fields:
+    - id                  # Prax{N}[a-z]?
+    - name                # Nom descriptif
+    - concepts            # Liste de concepts mobilises
+    - difficulty          # 0-3
+    - exam_frequency      # low, medium, high, very_high
+    - task_type           # Description de la tache (T)
+    - technique           # Methode pas a pas (tau)
+    - technology          # Justification theorique (theta)
+    - theory              # Cadre theorique (Theta)
+    - didactic_variables  # Variables qui modulent la difficulte
+    - difficulty_profiles # Combinaisons variables -> niveau
+    - common_errors       # Liens vers misconceptions
+    - canonical_examples  # Exemples types
+
+# ---------------------------------------------------------------------------
+# Structure d'un fichier redaction.yaml
+# ---------------------------------------------------------------------------
+redaction_schema:
+  required_fields:
+    - praxeology          # ID de la praxeologie associee
+    - name                # Nom du modele
+    - template            # Template avec placeholders
+    - expected_lines      # Longueur attendue {min, typical, max}
+    - grading_criteria    # Criteres de correction avec poids
+  optional_fields:
+    - extends             # ID d'un autre modele qu'il etend
+    - variants            # Variantes du template
+    - additional_lines    # Lignes supplementaires si extends
+
+# ---------------------------------------------------------------------------
+# Structure d'un fichier misconceptions.yaml
+# ---------------------------------------------------------------------------
+misconceptions_schema:
+  required_fields:
+    - id                  # E{N}
+    - name                # Nom court
+    - category            # confusion, sur-generalisation, oubli, erreur-technique
+    - frequency           # occasionnelle, frequente, tres_frequente
+    - description         # Description de l'erreur
+    - source_cognitive    # Origine cognitive
+    - detection_patterns  # Phrases types revelant l'erreur
+    - diagnostic          # Question + options avec correct/reveals
+    - remediation         # explanation, counter_example, praxeology_to_practice

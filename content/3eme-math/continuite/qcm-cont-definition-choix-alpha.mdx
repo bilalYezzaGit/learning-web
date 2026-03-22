@@ -3,7 +3,7 @@ type: qcm
 title: "Choix de alpha dans la definition"
 difficulty: 1
 timeMinutes: 2
-tags: [continuite, definition, epsilon-delta]
+tags: [continuite, definition, alpha-beta]
 praxeologies: [Prax10]
 ---
 
@@ -28,9 +28,15 @@ $\alpha = \beta^2$
 :::
 
 :::explanation
-On calcule $|f(x) - f(0)| = |(5x + 1) - 1| = |5x| = 5|x|$.
+On calcule $|f(x) - f(0)|$ :
 
-On veut $5|x| < \beta$, soit $|x| < \dfrac{\beta}{5}$.
+$$|f(x) - f(0)| = |(5x + 1) - 1| = |5x| = 5|x| = 5|x - 0|$$
 
-Il suffit de choisir $\alpha = \dfrac{\beta}{5}$ : si $|x - 0| < \alpha$, alors $|f(x) - f(0)| = 5|x| < 5 \times \dfrac{\beta}{5} = \beta$.
+On veut $|f(x) - f(0)| < \beta$, c'est-a-dire $5|x| < \beta$, soit $|x| < \dfrac{\beta}{5}$.
+
+Donc le bon choix est $\alpha = \dfrac{\beta}{5}$.
+
+- $\alpha = \beta$ ne suffit pas : $5|x| < 5\beta \neq \beta$ en general.
+- $\alpha = 5\beta$ est trop grand : on obtiendrait $5|x| < 25\beta$.
+- $\alpha = \beta^2$ n'a pas la bonne forme : la relation est lineaire, pas quadratique.
 :::

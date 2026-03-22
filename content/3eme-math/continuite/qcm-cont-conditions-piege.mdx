@@ -3,34 +3,38 @@ type: qcm
 title: "Conditions de continuite — pieges classiques"
 difficulty: 1
 timeMinutes: 2
-tags: [continuite, racine-carree, domaine, conditions]
+tags: [continuite, conditions, racine-carree]
 praxeologies: [Prax2, Prax9]
 ---
 
 :::question
-Soit $f(x) = \sqrt{x^2 - 9}$. Le domaine de definition de $f$ est $]-\infty{,}\ {-3}] \cup [3{,}\ +\infty[$. En quel(s) point(s) de son domaine $f$ n'est-elle **pas** continue ?
+Soit $f(x) = \sqrt{x^2 - 9}$. Le domaine de definition de $f$ est $D_f = ]{-}\infty, -3] \cup [3, +\infty[$. Parmi les affirmations suivantes, laquelle est correcte ?
 :::
 
 :::option
-En $a = 0$ (car $f(0)$ n'existe pas)
-:::
-
-:::option
-En $a = 3$ et $a = -3$
+$f$ est continue en tout point de $D_f$
 :::
 
 :::option{correct}
-$f$ est continue en tout point de son domaine
+$f$ est continue sur $]{-}\infty, -3[$ et sur $]3, +\infty[$, mais le theoreme T5 ne s'applique pas en $x = 3$ ni en $x = -3$
 :::
 
 :::option
-En tout point $a > 3$
+$f$ n'est continue en aucun point de $D_f$
+:::
+
+:::option
+$f$ est continue sur $D_f$ sauf en $x = 0$
 :::
 
 :::explanation
-La fonction $x \mapsto x^2 - 9$ est polynome, donc continue sur $\mathbb{R}$. Sur le domaine de $f$, on a $x^2 - 9 \geq 0$, donc $f(x) = \sqrt{x^2 - 9}$ est bien definie.
+Posons $g(x) = x^2 - 9$. C'est un polynome, continu sur $\mathbb{R}$.
 
-Le theoreme de continuite de $\sqrt{\ }$ exige $f(a) > 0$ pour la continuite **en un point interieur**, mais en $a = 3$ et $a = -3$, on a $f(a) = 0$ et $f$ reste continue (c'est un point du bord du domaine).
+Le theoreme T5 dit : si $g$ est continue en $a$ et $g(a) > 0$ (**strictement**), alors $\sqrt{g}$ est continue en $a$.
 
-En fait, $f$ est continue en tout point de son domaine $]-\infty{,}\ {-3}] \cup [3{,}\ +\infty[$. Le piege est de croire que $f(a) = 0$ empeche la continuite : la condition $f(a) > 0$ est suffisante mais pas necessaire.
+- Pour $a \in ]{-}\infty, -3[$ ou $a \in ]3, +\infty[$ : $g(a) > 0$, donc T5 s'applique et $f$ est continue en $a$.
+- Pour $a = 3$ : $g(3) = 0$, la condition $g(a) > 0$ n'est pas verifiee. T5 ne permet pas de conclure directement.
+- Pour $a = -3$ : $g(-3) = 0$, meme situation.
+
+Le piege est de croire que « continue sur son domaine » est automatique. Ici, $f$ est bien continue en $3$ et $-3$ (on peut le prouver par la definition), mais le theoreme T5 seul ne suffit pas.
 :::

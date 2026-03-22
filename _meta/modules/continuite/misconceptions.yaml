@@ -1,0 +1,230 @@
+# Misconceptions — Continuite
+# Erreurs frequentes des eleves, avec diagnostic et remediation structuree
+
+module: continuite
+programme: 3eme-math
+
+misconceptions:
+  # -------------------------------------------------------------------------
+  - id: E1
+    name: "Confondre continuite et 'definie en a'"
+    category: confusion
+    frequency: frequente
+
+    description: >-
+      L'eleve pense que si f est definie en a, alors f est continue en a.
+
+    source_cognitive: >-
+      La continuite exige plus que l'existence de f(a) — il faut aussi que
+      le comportement de f(x) au voisinage de a soit coherent avec f(a).
+
+    detection_patterns:
+      - "f est definie en a donc continue"
+      - "f(a) existe donc f est continue"
+
+    diagnostic:
+      question: >-
+        Soit f(x) = {1 si x >= 0, -1 si x < 0}. f est definie en 0 (f(0) = 1).
+        f est-elle continue en 0 ?
+      options:
+        - label: "Oui, car f(0) = 1 existe"
+          reveals: "confusion definie/continue"
+        - label: "Oui, car f est definie sur R"
+          reveals: "confusion globale/locale"
+        - label: "Non, car lim_{x->0^-} f(x) = -1 != f(0) = 1"
+          correct: true
+        - label: "Non, car f n'est pas derivable en 0"
+          reveals: "confusion continuite/derivabilite"
+
+    remediation:
+      explanation: >-
+        Insister sur les 3 conditions : f(a) existe, lim a gauche = lim a droite = f(a).
+      counter_example: "f(x) = signe(x) : definie en 0, mais discontinue (saut de -1 a 1)"
+      praxeology_to_practice: Prax3
+
+  # -------------------------------------------------------------------------
+  - id: E2
+    name: "Croire que le TVI donne l'unicite"
+    category: sur-generalisation
+    frequency: tres_frequente
+
+    description: >-
+      L'eleve applique le TVI et conclut "il existe UNE solution" au lieu de
+      "il existe AU MOINS UNE solution".
+
+    source_cognitive: >-
+      L'eleve ne distingue pas existence et unicite. Le TVI ne garantit que l'existence.
+
+    detection_patterns:
+      - "admet une unique solution"
+      - "la solution est"
+      - "il existe une solution"
+
+    diagnostic:
+      question: >-
+        f continue sur [-2, 2], f(-2) = -3, f(2) = 5.
+        Que peut-on dire de f(x) = 0 ?
+      options:
+        - label: "L'equation admet exactement une solution dans [-2, 2]"
+          reveals: "confusion existence/unicite"
+        - label: "L'equation admet au moins une solution dans ]-2, 2["
+          correct: true
+        - label: "L'equation admet une solution en x = 0"
+          reveals: "confusion sur la localisation"
+        - label: "On ne peut rien dire car on ne connait pas la formule de f"
+          reveals: "non-comprehension du TVI"
+
+    remediation:
+      explanation: >-
+        Le TVI prouve l'existence, la monotonie prouve l'unicite.
+      counter_example: "f(x) = x^3 - 4x sur [-3, 3] a TROIS zeros."
+      praxeology_to_practice: Prax5
+
+  # -------------------------------------------------------------------------
+  - id: E3
+    name: "Oublier de verifier les conditions pour sqrt(f)"
+    category: oubli
+    frequency: frequente
+
+    description: >-
+      L'eleve dit "sqrt(f) est continue en a car f est continue en a"
+      sans verifier que f(a) > 0 (strictement).
+
+    source_cognitive: >-
+      Application mecanique du theoreme T5 sans verifier la condition f(a) > 0.
+
+    detection_patterns:
+      - "f est continue donc sqrt(f) est continue"
+      - "sqrt(f) continue car f continue"
+
+    diagnostic:
+      question: >-
+        f(x) = sqrt(x^2 - 4). f est-elle continue en x = 2 ?
+      options:
+        - label: "Oui, car x^2 - 4 est continue et sqrt est continue"
+          reveals: "oubli de la condition > 0"
+        - label: "Oui, car f(2) = 0 existe"
+          reveals: "confusion definie/continue"
+        - label: "Non, car x^2 - 4 = 0 en x = 2, la condition f(a) > 0 n'est pas verifiee"
+          correct: true
+
+    remediation:
+      explanation: >-
+        Le theoreme T5 exige f(a) > 0 (STRICTEMENT). Si f(a) = 0,
+        il faut revenir a la definition ou etudier separement.
+      counter_example: "sqrt(x) est continue sur ]0,+inf[ par T5, mais en 0 il faut une etude specifique"
+      praxeology_to_practice: Prax9
+
+  # -------------------------------------------------------------------------
+  - id: E4
+    name: "Appliquer le TVI sans verifier la continuite"
+    category: oubli
+    frequency: occasionnelle
+
+    description: >-
+      L'eleve applique le TVI a une fonction non continue sur l'intervalle,
+      ou ignore une discontinuite.
+
+    source_cognitive: >-
+      L'hypothese de continuite du TVI est vue comme une formalite.
+
+    detection_patterns:
+      - "f(a) < 0 et f(b) > 0 donc"
+      - "Par le TVI"
+
+    diagnostic:
+      question: >-
+        f(x) = 1/x. f(-1) = -1 < 0 et f(1) = 1 > 0.
+        Peut-on conclure que f(x) = 0 admet une solution dans [-1, 1] ?
+      options:
+        - label: "Oui, par le TVI car f(-1) < 0 et f(1) > 0"
+          reveals: "oubli de verifier la continuite"
+        - label: "Non, car f n'est pas continue sur [-1, 1] (f non definie en 0)"
+          correct: true
+        - label: "Oui, car 1/x passe par toutes les valeurs"
+          reveals: "intuition fausse"
+
+    remediation:
+      explanation: >-
+        Toujours verifier TROIS choses avant le TVI :
+        (1) f continue sur [a,b], (2) f(a) et f(b) calcules,
+        (3) k entre f(a) et f(b).
+      counter_example: "1/x ne vaut jamais 0, malgre le changement de signe"
+      praxeology_to_practice: Prax4
+
+  # -------------------------------------------------------------------------
+  - id: E5
+    name: "Confondre continuite en un point et continuite sur un intervalle"
+    category: confusion
+    frequency: frequente
+
+    description: >-
+      L'eleve dit "f est continue" sans preciser ou
+      (en un point ou sur un intervalle).
+
+    source_cognitive: >-
+      Manque de rigueur dans l'enonce. La continuite en un point est locale,
+      la continuite sur un intervalle est globale.
+
+    detection_patterns:
+      - "f est continue"
+      - "la fonction est continue"
+
+    diagnostic:
+      question: >-
+        f(x) = E(x) (partie entiere). Laquelle de ces affirmations est correcte ?
+      options:
+        - label: "f est continue sur R"
+          reveals: "confusion globale"
+        - label: "f est continue sur ]0, 1["
+          correct: true
+        - label: "f est continue en 1"
+          reveals: "la partie entiere est discontinue en tout entier"
+        - label: "f n'est continue nulle part"
+          reveals: "trop radical"
+
+    remediation:
+      explanation: >-
+        E(x) est continue sur chaque intervalle ]n, n+1[ mais discontinue
+        en tout entier n. Toujours preciser OU la fonction est continue.
+      counter_example: "E(x) sur ]0,1[ vs en x=1"
+      praxeology_to_practice: Prax3
+
+  # -------------------------------------------------------------------------
+  - id: E6
+    name: "Erreur sur les bornes de l'image d'un intervalle"
+    category: erreur-technique
+    frequency: frequente
+
+    description: >-
+      L'eleve ecrit f([a,b]) = [f(a), f(b)] sans verifier la monotonie,
+      ou confond les bornes ouvertes/fermees.
+
+    source_cognitive: >-
+      L'eleve suppose que f est croissante par defaut, ou ignore le cas
+      ou f change de monotonie.
+
+    detection_patterns:
+      - "f([a,b]) = [f(a), f(b)]"
+      - "l'image est [f(a), f(b)]"
+
+    diagnostic:
+      question: >-
+        f(x) = x^2 sur [-1, 2]. Quelle est l'image f([-1, 2]) ?
+      options:
+        - label: "[f(-1), f(2)] = [1, 4]"
+          reveals: "suppose f croissante sans verifier"
+        - label: "[f(2), f(-1)] = [4, 1]"
+          reveals: "intervalle inverse"
+        - label: "[0, 4]"
+          correct: true
+        - label: "[-1, 4]"
+          reveals: "confond x et f(x)"
+
+    remediation:
+      explanation: >-
+        Toujours dresser le tableau de variation de f sur I AVANT de
+        determiner l'image. Le minimum et le maximum de f sur I donnent
+        les bornes de f(I).
+      counter_example: "x^2 sur [-1,2] : min en 0 (pas aux bornes)"
+      praxeology_to_practice: Prax6

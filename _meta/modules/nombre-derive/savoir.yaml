@@ -1,0 +1,503 @@
+# Savoir — Nombre derive
+# Format structure pour lecture humaine (profs) et machine (LLM, pipeline)
+
+module: nombre-derive
+programme: 3eme-math
+version: 2.0
+
+# ---------------------------------------------------------------------------
+# 0) OBJECTIF (1 phrase)
+# ---------------------------------------------------------------------------
+objective: >-
+  Introduire le nombre derive comme limite du taux de variation, maitriser
+  son calcul pour les fonctions usuelles et les operations, et l'exploiter
+  pour determiner l'equation de la tangente et l'approximation affine.
+
+# ---------------------------------------------------------------------------
+# 1) NIVEAU EPISTEMIQUE
+# Definit ce qui est admis, demontre ou exclu pour CE programme.
+# ---------------------------------------------------------------------------
+epistemic_level:
+  theory_base: "analyse-reelle-elementaire"
+  # Pas de derivation au sens des distributions, pas de differentielles
+
+  admitted:
+    - id: T5
+      statement: >-
+        f+g, f.g, alpha.f+beta.g, f^k, 1/f, f/g sont derivables en a
+        si f et g le sont (et conditions : g(a) != 0 pour 1/g et f/g).
+      justification: "Admis — demonstration par limites de produits et quotients hors programme"
+
+    - id: T6
+      statement: >-
+        Si f est derivable en a et f(a) > 0, alors sqrt(f) est derivable
+        en a et (sqrt(f))'(a) = f'(a) / (2.sqrt(f(a))).
+      justification: "Admis — demonstration par composition hors programme"
+
+  demonstrated:
+    - id: T1
+      statement: >-
+        Si f est derivable en a, alors la courbe de f admet en M(a,f(a))
+        une tangente d'equation y = f'(a)(x-a) + f(a).
+      proof_type: demonstration-complete
+
+    - id: T2
+      statement: >-
+        Si f est derivable en a, alors f(a+h) = f(a) + h.f'(a) + h.epsilon(h)
+        ou lim_{h->0} epsilon(h) = 0 (approximation affine).
+      proof_type: demonstration-complete
+
+    - id: T3
+      statement: "Si f est derivable en a, alors f est continue en a"
+      proof_type: demonstration-complete
+
+    - id: T4
+      statement: >-
+        Nombres derives des fonctions usuelles (constante, affine,
+        (x-alpha)^2+beta, x^n, 1/(alpha.x+beta), sqrt(x+alpha),
+        (alpha.x+beta)/(lambda.x+gamma)) — etablis par le calcul direct
+        de la limite du taux de variation.
+      proof_type: demonstration-complete
+
+    - id: T7
+      statement: >-
+        f est derivable en a si et seulement si f est derivable a droite
+        et a gauche en a et f'_d(a) = f'_g(a).
+      proof_type: demonstration-complete
+
+  excluded:
+    - "Fonction derivee (derivee sur tout un intervalle, etude de signe de f') — module fonction-derivee"
+    - "Etude de variations, extrema, tableaux de variation — module fonction-derivee"
+    - "Derivees successives (f'', f''') — module fonction-derivee"
+    - "Derivee de la composee f(ax+b) — module fonction-derivee"
+    - "Fonctions trigonometriques — hors programme 3eme"
+    - "Theoreme des accroissements finis — hors programme"
+
+  starting_point:
+    - "Notion de limite (module generalites-fonctions)"
+    - "Operations sur les limites"
+    - "Continuite en un point (module continuite)"
+    - "Coefficient directeur d'une droite, equation de droite"
+    - "Formes indeterminees"
+
+# ---------------------------------------------------------------------------
+# 2) TRANSPOSITION DIDACTIQUE
+# ---------------------------------------------------------------------------
+transposition:
+  savoir_savant:
+    - "Differentiation au sens de Leibniz-Newton : nombre derive comme taux de variation infinitesimal"
+    - "Definition rigoureuse (Weierstrass) : limite du taux de variation"
+    - "Lien derivabilite-continuite : derivabilite => continuite (implication stricte)"
+    - "Existence de fonctions continues non derivables (fonction de Weierstrass)"
+
+  savoir_a_enseigner:
+    - "Le nombre derive est introduit par deux motivations paralleles : la vitesse instantanee (physique) et la pente de la tangente (geometrie)"
+    - "Les deux ecritures de la definition sont traitees simultanement : lim_{x->a} (f(x)-f(a))/(x-a) et lim_{h->0} (f(a+h)-f(a))/h"
+    - "Le theoreme 'derivable => continu' est demontre (via l'approximation affine)"
+    - "La reciproque 'continu => derivable' est refutee par des contre-exemples (|x|, sqrt(x) en 0)"
+    - "Les nombres derives des fonctions usuelles sont etablis par le calcul direct de la limite du taux de variation"
+    - "L'approximation affine est presentee comme application pratique (estimation numerique)"
+
+  adaptations_didactiques:
+    - "Approche progressive : activites -> definition -> proprietes -> exercices"
+    - "La vitesse instantanee sert de motivation concrete avant la formalisation"
+    - "Les fonctions usuelles sont derivees une par une par calcul direct (pas de formules admises)"
+    - "L'approximation affine est illustree par des estimations numeriques comparees a la calculatrice"
+    - "La non-derivabilite est illustree graphiquement (point anguleux, tangente verticale)"
+    - "La methode de Newton est presentee comme application avancee de la tangente"
+
+# ---------------------------------------------------------------------------
+# 3) PREREQUISITES & LIENS INTER-MODULES
+# ---------------------------------------------------------------------------
+prerequisites:
+  required:
+    - module: generalites-fonctions
+      description: "Ensemble de definition, courbe representative, repere"
+    - module: continuite
+      description: "Continuite en un point, TVI (utilise pour la methode de Newton)"
+    - prior_knowledge: "Limites de fonctions (lim_{x->a}), operations sur les limites, coefficient directeur d'une droite, equation de droite, formes indeterminees"
+
+  opens_toward:
+    - module: fonction-derivee
+      link: "Derivee comme fonction, formules de derivation, etude de variations"
+    - module: fonction-derivee-usuelle
+      link: "Derivees des fonctions usuelles sur des intervalles"
+
+# ---------------------------------------------------------------------------
+# 4) CARTE CONCEPTUELLE (dependances intra-module)
+# ---------------------------------------------------------------------------
+concepts:
+  - id: N1
+    name: "Nombre derive en un point"
+    bloom_level: comprendre
+    depends_on: []
+    sub_concepts:
+      - id: N1.1
+        name: "Definition (deux ecritures equivalentes : lim_{x->a} et lim_{h->0})"
+      - id: N1.2
+        name: "Interpretation cinematique (vitesse instantanee)"
+      - id: N1.3
+        name: "Interpretation geometrique (tangente, pente, vecteur directeur)"
+      - id: N1.4
+        name: "Equation de la tangente : y = f'(a)(x-a) + f(a)"
+
+  - id: N2
+    name: "Approximation affine"
+    bloom_level: appliquer
+    depends_on: [N1]
+    sub_concepts:
+      - id: N2.1
+        name: "Definition et formule : f(a+h) ≈ f(a) + h.f'(a)"
+      - id: N2.2
+        name: "Theoreme 'derivable => continu' (consequence)"
+      - id: N2.3
+        name: "Applications numeriques (estimations)"
+
+  - id: N3
+    name: "Nombres derives des fonctions usuelles"
+    bloom_level: memoriser
+    depends_on: [N1]
+    sub_concepts:
+      - id: N3.1
+        name: "Constante, affine, (x-alpha)^2+beta"
+      - id: N3.2
+        name: "x^n (entier naturel)"
+      - id: N3.3
+        name: "1/(alpha.x+beta)"
+      - id: N3.4
+        name: "sqrt(x+alpha)"
+      - id: N3.5
+        name: "(alpha.x+beta)/(lambda.x+gamma) — quotient de deux affines"
+
+  - id: N4
+    name: "Operations algebriques sur les nombres derives"
+    bloom_level: appliquer
+    depends_on: [N1, N3]
+    sub_concepts:
+      - id: N4.1
+        name: "Somme, combinaison lineaire"
+      - id: N4.2
+        name: "Produit"
+      - id: N4.3
+        name: "Puissance f^k"
+      - id: N4.4
+        name: "Inverse 1/f, quotient f/g"
+      - id: N4.5
+        name: "Racine sqrt(f)"
+      - id: N4.6
+        name: "Polynome (formule explicite)"
+
+  - id: N5
+    name: "Derivabilite a droite et a gauche"
+    bloom_level: analyser
+    depends_on: [N1]
+    sub_concepts:
+      - id: N5.1
+        name: "Definitions de f'_d(a) et f'_g(a)"
+      - id: N5.2
+        name: "Theoreme d'equivalence : derivable <=> f'_d = f'_g"
+      - id: N5.3
+        name: "Demi-tangentes non verticales"
+      - id: N5.4
+        name: "Point anguleux"
+
+  - id: N6
+    name: "Tangente verticale et demi-tangente verticale"
+    bloom_level: comprendre
+    depends_on: [N1, N5]
+    sub_concepts:
+      - id: N6.1
+        name: "Limite infinie du taux de variation"
+      - id: N6.2
+        name: "Demi-tangente verticale (a droite ou a gauche)"
+
+  - id: N7
+    name: "Derivabilite sur un intervalle"
+    bloom_level: comprendre
+    depends_on: [N5]
+    sub_concepts:
+      - id: N7.1
+        name: "Definitions (intervalle ouvert, ferme, semi-ouvert)"
+      - id: N7.2
+        name: "Exemples de verification"
+
+  - id: N8
+    name: "Applications"
+    bloom_level: analyser
+    depends_on: [N1, N3, N4, N5]
+    sub_concepts:
+      - id: N8.1
+        name: "Calcul de limites par reconnaissance d'un nombre derive"
+      - id: N8.2
+        name: "Methode de Newton (approximation d'une racine)"
+      - id: N8.3
+        name: "Tangente commune a deux courbes"
+      - id: N8.4
+        name: "Tangentes paralleles / perpendiculaires a une droite donnee"
+
+# ---------------------------------------------------------------------------
+# 5) THEOREMES & PROPRIETES CLES
+# ---------------------------------------------------------------------------
+theorems:
+  - id: D1
+    type: definition
+    name: "Nombre derive (ecriture x->a)"
+    statement: >-
+      Soit f definie sur un intervalle ouvert I et a un reel de I.
+      f est derivable en a s'il existe un reel l tel que
+      lim_{x->a} (f(x)-f(a))/(x-a) = l. Le reel l est note f'(a).
+    status: definition
+    concepts: [N1]
+    used_in: [Prax1, Prax2, Prax3]
+
+  - id: "D1'"
+    type: definition
+    name: "Nombre derive (ecriture h->0)"
+    statement: >-
+      Ecriture equivalente : f'(a) = lim_{h->0} (f(a+h)-f(a))/h.
+    status: definition
+    concepts: [N1]
+    used_in: [Prax1]
+
+  - id: D2
+    type: definition
+    name: "Derivees laterales"
+    statement: >-
+      f'_g(a) = lim_{h->0^-} (f(a+h)-f(a))/h ;
+      f'_d(a) = lim_{h->0^+} (f(a+h)-f(a))/h.
+    status: definition
+    concepts: [N5]
+    used_in: [Prax7, Prax8]
+
+  - id: T1
+    type: theorem
+    name: "Equation de la tangente"
+    statement: >-
+      Si f est derivable en a, alors la courbe de f admet en M(a,f(a))
+      une tangente d'equation y = f'(a)(x-a) + f(a).
+    status: demontre
+    concepts: [N1]
+    used_in: [Prax3, Prax4a, Prax4b]
+
+  - id: T2
+    type: theorem
+    name: "Approximation affine"
+    statement: >-
+      Si f est derivable en a, alors f(a+h) = f(a) + h.f'(a) + h.epsilon(h)
+      ou lim_{h->0} epsilon(h) = 0. En particulier f(a+h) ≈ f(a) + h.f'(a)
+      pour h voisin de 0.
+    status: demontre
+    concepts: [N2]
+    used_in: [Prax5a, Prax5b]
+
+  - id: T3
+    type: theorem
+    name: "Derivable implique continu"
+    statement: "Si f est derivable en a, alors f est continue en a"
+    status: demontre
+    concepts: [N2]
+    used_in: [Prax6a]
+
+  - id: "T3'"
+    type: propriete
+    name: "Reciproque fausse"
+    statement: >-
+      La reciproque de T3 est fausse : f continue en a n'implique pas
+      f derivable en a.
+    status: propriete
+    concepts: [N2]
+    used_in: [Prax6b]
+
+  - id: T4
+    type: theorem
+    name: "Nombres derives des fonctions usuelles"
+    statement: >-
+      Table : constante -> 0, affine ax+b -> a, (x-alpha)^2+beta -> 2(x-alpha),
+      x^n -> n.x^(n-1), 1/(alpha.x+beta) -> -alpha/(alpha.x+beta)^2,
+      sqrt(x+alpha) -> 1/(2.sqrt(x+alpha)),
+      (alpha.x+beta)/(lambda.x+gamma) -> (alpha.gamma-beta.lambda)/(lambda.x+gamma)^2.
+    status: demontre
+    concepts: [N3]
+    used_in: [Prax2]
+
+  - id: T5
+    type: theorem
+    name: "Operations sur les nombres derives"
+    statement: >-
+      (f+g)'(a) = f'(a)+g'(a), (alpha.f+beta.g)'(a) = alpha.f'(a)+beta.g'(a),
+      (f.g)'(a) = f'(a).g(a)+f(a).g'(a), (f^k)'(a) = k.f^(k-1)(a).f'(a),
+      (1/f)'(a) = -f'(a)/f(a)^2 (si f(a)!=0),
+      (f/g)'(a) = (f'(a).g(a)-f(a).g'(a))/g(a)^2 (si g(a)!=0).
+    status: admis
+    concepts: [N4]
+    used_in: [Prax2, Prax4a, Prax4b]
+
+  - id: T6
+    type: theorem
+    name: "Derivee de sqrt(f)"
+    statement: >-
+      Si f est derivable en a et f(a) > 0, alors
+      (sqrt(f))'(a) = f'(a) / (2.sqrt(f(a))).
+    status: admis
+    concepts: [N4]
+    used_in: [Prax2]
+
+  - id: T7
+    type: theorem
+    name: "Equivalence derivabilite laterale"
+    statement: >-
+      f est derivable en a si et seulement si f est derivable a droite
+      et a gauche en a et f'_d(a) = f'_g(a).
+    status: demontre
+    concepts: [N5]
+    used_in: [Prax7, Prax8]
+
+# ---------------------------------------------------------------------------
+# 6) KNOWLEDGE COMPONENTS
+# ---------------------------------------------------------------------------
+facts:
+  - id: F1
+    content: "f'(a) = lim_{x->a} (f(x)-f(a))/(x-a) = lim_{h->0} (f(a+h)-f(a))/h"
+  - id: F2
+    content: "Equation de la tangente : y = f'(a)(x-a) + f(a)"
+  - id: F3
+    content: "Approximation affine : f(a+h) ≈ f(a) + h.f'(a)"
+  - id: F4
+    content: "Table des nombres derives des fonctions usuelles (constante, affine, carre, x^n, inverse, racine, quotient de deux affines)"
+  - id: F5
+    content: "(f+g)'(a) = f'(a) + g'(a)"
+  - id: F6
+    content: "(f.g)'(a) = f'(a).g(a) + f(a).g'(a)"
+  - id: F7
+    content: "(f/g)'(a) = (f'(a).g(a) - f(a).g'(a)) / (g(a))^2"
+  - id: F8
+    content: "(f^k)'(a) = k.f^(k-1)(a).f'(a)"
+  - id: F9
+    content: "(sqrt(f))'(a) = f'(a) / (2.sqrt(f(a)))"
+  - id: F10
+    content: "Derivable en a => continu en a (reciproque fausse)"
+  - id: F11
+    content: "Derivable en a <=> f'_d(a) = f'_g(a)"
+
+skills:
+  - id: S1
+    description: "Calculer f'(a) par la definition (limite du taux de variation)"
+    concepts: [N1]
+    difficulty: 1
+    praxeology: Prax1
+
+  - id: S2
+    description: "Calculer f'(a) en utilisant les formules usuelles et les operations"
+    concepts: [N3, N4]
+    difficulty: 1
+    praxeology: Prax2
+
+  - id: S3
+    description: "Ecrire l'equation de la tangente a une courbe en un point"
+    concepts: [N1]
+    difficulty: 1
+    praxeology: Prax3
+
+  - id: S4
+    description: "Determiner un point ou la tangente est parallele/perpendiculaire a une droite donnee"
+    concepts: [N1, N4]
+    difficulty: 2
+    praxeology: Prax4a
+
+  - id: S5
+    description: "Calculer une approximation affine"
+    concepts: [N2]
+    difficulty: 1
+    praxeology: Prax5a
+
+  - id: S6
+    description: "Etudier la derivabilite a droite et a gauche en un point"
+    concepts: [N5]
+    difficulty: 2
+    praxeology: Prax7
+
+  - id: S7
+    description: "Ecrire les equations des demi-tangentes"
+    concepts: [N5]
+    difficulty: 2
+    praxeology: Prax7
+
+  - id: S8
+    description: "Etudier la derivabilite d'une fonction definie par morceaux"
+    concepts: [N5, N7]
+    difficulty: 2
+    praxeology: Prax8
+
+  - id: S9
+    description: "Calculer une limite par reconnaissance d'un nombre derive"
+    concepts: [N8]
+    difficulty: 2
+    praxeology: Prax9
+
+  - id: S10
+    description: "Determiner des coefficients a, b, c pour qu'une courbe passe par un point avec une tangente donnee"
+    concepts: [N1, N3]
+    difficulty: 2
+    praxeology: Prax10
+
+principles:
+  - id: P1
+    content: "Le nombre derive mesure la pente de la tangente — le taux de variation 'se fige' a la limite"
+  - id: P2
+    content: "La derivabilite est plus forte que la continuite — un point anguleux est continu mais non derivable"
+  - id: P3
+    content: "L'approximation affine consiste a remplacer localement la courbe par sa tangente"
+  - id: P4
+    content: "La non-derivabilite se manifeste geometriquement par un point anguleux ou une tangente verticale"
+
+# ---------------------------------------------------------------------------
+# 7) EXEMPLES CANONIQUES
+# ---------------------------------------------------------------------------
+canonical_examples:
+  - id: EC1
+    description: "f(x) = x^2, calculer f'(1) par la definition"
+    illustrates: "Definition avec un polynome simple"
+    concepts: [N1]
+    difficulty: 1
+
+  - id: EC2
+    description: "f(x) = sqrt(x), calculer f'(a) par la definition (conjugue)"
+    illustrates: "Technique de rationalisation pour la racine carree"
+    concepts: [N1]
+    difficulty: 1
+
+  - id: EC3
+    description: "f(x) = 1/(x+1), calculer f'(a) par la definition"
+    illustrates: "Technique de mise au meme denominateur"
+    concepts: [N1]
+    difficulty: 1
+
+  - id: EC4
+    description: "Tangente a y = x^2 au point d'abscisse 1"
+    illustrates: "Equation de la tangente (application directe)"
+    concepts: [N1]
+    difficulty: 1
+
+  - id: EC5
+    description: "Approximation affine de sqrt(1+h) ≈ 1 + h/2"
+    illustrates: "Estimation numerique par approximation affine"
+    concepts: [N2]
+    difficulty: 1
+
+  - id: EC6
+    description: "f(x) = |x|, etude de la derivabilite en 0"
+    illustrates: "Point anguleux (f'_d(0) = 1, f'_g(0) = -1)"
+    concepts: [N5]
+    difficulty: 1
+
+  - id: EC7
+    description: "f(x) = sqrt(x), etude en 0"
+    illustrates: "Demi-tangente verticale (limite infinie du taux de variation)"
+    concepts: [N6]
+    difficulty: 1
+
+  - id: EC8
+    description: "lim_{x->1} (x^3-1)/(x-1) reconnu comme f'(1) avec f(x) = x^3"
+    illustrates: "Calcul de limite par reconnaissance d'un nombre derive"
+    concepts: [N8]
+    difficulty: 2

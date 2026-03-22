@@ -6,7 +6,7 @@
 
 ## Pre-requis
 
-1. **KB module obligatoire** : verifier que `_meta/modules/{module}/praxeologies.md` existe.
+1. **KB module obligatoire** : verifier que `_meta/modules/{module}/praxeologies.yaml` existe.
    Si absent → arreter et informer : "Cree d'abord la KB avec `/content kb {module}`."
 
 2. **Identifier le programme** : parcourir `content/*/` pour trouver le module demande.
@@ -16,7 +16,7 @@
 ### 1. Charger le contexte
 
 ```
-Read: _meta/modules/{module}/praxeologies.md
+Read: _meta/modules/{module}/praxeologies.yaml
       → Liste des Prax avec T, tau, theta, difficulte
 ```
 

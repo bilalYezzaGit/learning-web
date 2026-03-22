@@ -13,37 +13,49 @@ Soit $f$ la fonction definie sur $\mathbb{R}$ par :
 
 $$f(x) = \begin{cases} \dfrac{x^2 - 1}{x - 1} & \text{si } x < 1 \\ a & \text{si } x = 1 \\ \sqrt{x} + b & \text{si } x > 1 \end{cases}$$
 
-ou $a$ et $b$ sont deux reels.
+ou $a$ et $b$ sont des constantes reelles.
 
-1. Simplifier $f(x)$ pour $x < 1$.
-2. Determiner les valeurs de $a$ et $b$ pour que $f$ soit continue en $1$.
-3. Pour ces valeurs de $a$ et $b$, $f$ est-elle continue sur $\mathbb{R}$ ?
+**a)** Simplifier $f(x)$ pour $x < 1$.
+
+**b)** Determiner les valeurs de $a$ et $b$ pour que $f$ soit continue en $1$.
+
+**c)** Pour ces valeurs de $a$ et $b$, $f$ est-elle continue sur $\mathbb{R}$ ?
 :::
 
 :::solution
-**1.** Pour $x < 1$, on a $x \neq 1$, donc on peut factoriser :
+**a)** Pour $x < 1$, on a $x \neq 1$, donc on peut factoriser :
 
 $$f(x) = \frac{x^2 - 1}{x - 1} = \frac{(x - 1)(x + 1)}{x - 1} = x + 1$$
 
-**2.** Pour que $f$ soit continue en $1$, il faut :
+Ainsi, pour $x < 1$ : $f(x) = x + 1$.
+
+**b)** Pour que $f$ soit continue en $1$, il faut :
 
 $$\lim_{x \to 1^-} f(x) = \lim_{x \to 1^+} f(x) = f(1)$$
 
-Calculons chaque quantite :
+**Limite a gauche** :
 
-- $\lim_{x \to 1^-} f(x) = \lim_{x \to 1^-} (x + 1) = 2$
-- $f(1) = a$
-- $\lim_{x \to 1^+} f(x) = \lim_{x \to 1^+} (\sqrt{x} + b) = \sqrt{1} + b = 1 + b$
+$$\lim_{x \to 1^-} f(x) = \lim_{x \to 1^-} (x + 1) = 1 + 1 = 2$$
 
-La continuite en $1$ impose :
+**Valeur en $1$** : $f(1) = a$.
 
-$$a = 2 \quad \text{et} \quad 1 + b = 2 \implies b = 1$$
+**Limite a droite** :
 
-**3.** Avec $a = 2$ et $b = 1$, on a :
+$$\lim_{x \to 1^+} f(x) = \lim_{x \to 1^+} (\sqrt{x} + b) = \sqrt{1} + b = 1 + b$$
 
-- Sur $]-\infty{,}\ 1[$ : $f(x) = x + 1$ est affine, donc **continue**.
-- En $1$ : $f$ est continue (par construction de $a$ et $b$).
-- Sur $]1{,}\ +\infty[$ : $f(x) = \sqrt{x} + 1$. La fonction $\sqrt{x}$ est continue sur $]1{,}\ +\infty[$ (car $x > 0$) et $1$ est constante. Donc $f$ est **continue** sur $]1{,}\ +\infty[$.
+La continuite en $1$ exige :
 
-Par suite, $f$ est **continue sur $\mathbb{R}$**.
+$$2 = a = 1 + b$$
+
+Donc : $a = 2$ et $b = 1$.
+
+**c)** Avec $a = 2$ et $b = 1$, on a :
+
+$$f(x) = \begin{cases} x + 1 & \text{si } x < 1 \\ 2 & \text{si } x = 1 \\ \sqrt{x} + 1 & \text{si } x > 1 \end{cases}$$
+
+- Sur $]{-}\infty, 1[$ : $f(x) = x + 1$ est un polynome, continu sur $\mathbb{R}$ (T1).
+- Sur $]1, +\infty[$ : $\sqrt{x}$ est continue sur $]0, +\infty[$ (T1) et la constante $1$ est continue. Donc $f(x) = \sqrt{x} + 1$ est continue sur $]1, +\infty[$ (T2).
+- En $1$ : on a montre que $f$ est continue en $1$.
+
+Donc $f$ est continue sur $\mathbb{R}$.
 :::

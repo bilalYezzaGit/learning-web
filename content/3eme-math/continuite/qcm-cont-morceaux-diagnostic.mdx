@@ -3,7 +3,7 @@ type: qcm
 title: "Fonction par morceaux — erreur classique"
 difficulty: 1
 timeMinutes: 2
-tags: [continuite, morceaux, valeur-absolue]
+tags: [continuite, morceaux, diagnostic]
 praxeologies: [Prax3]
 ---
 
@@ -20,7 +20,7 @@ Oui, car $\lim_{x \to 0^-} f(x) = \lim_{x \to 0^+} f(x) = f(0) = 1$
 :::
 
 :::option
-Non, car la formule change en $0$
+Non, car la formule change en $x = 0$
 :::
 
 :::option
@@ -34,11 +34,13 @@ On ne peut pas conclure sans etudier la derivee
 :::explanation
 Calculons :
 
-- $f(0) = 0 + 1 = 1$
+- $f(0) = 0 + 1 = 1$ (on utilise la formule $x + 1$ car $0 \geq 0$)
 - $\lim_{x \to 0^+} f(x) = \lim_{x \to 0^+} (x + 1) = 1$
 - $\lim_{x \to 0^-} f(x) = \lim_{x \to 0^-} (-x + 1) = 1$
 
-Les trois valeurs sont egales, donc $f$ est **continue en $0$**.
+Les trois valeurs sont egales, donc $f$ est continue en $0$ (T6).
 
-Le piege est de croire qu'un changement de formule entraine une discontinuite. Ici, $f(x) = |x| + 1$ est continue partout. La continuite depend des **valeurs** de la fonction, pas de son ecriture.
+**Piege classique** : le fait que la formule change en un point ne signifie pas que $f$ est discontinue. Ce qui compte, c'est l'egalite des limites laterales et de la valeur. Ici, $f(x) = |x| + 1$, qui est bien continue.
+
+La derivabilite est une notion differente de la continuite : $f$ peut etre continue sans etre derivable.
 :::

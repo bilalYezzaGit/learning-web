@@ -4,54 +4,61 @@ title: "Dichotomie a 10^-2"
 difficulty: 1
 timeMinutes: 12
 category: application
-tags: [continuite, dichotomie, approximation, tvi]
+tags: [continuite, dichotomie, encadrement]
 praxeologies: [Prax7]
 ---
 
 :::enonce
-Soit $f(x) = x^3 - 3x + 1$. On sait que $f$ admet une solution $\alpha$ dans $[1{,}\ 2]$.
+Soit $f(x) = x^3 - 3x + 1$. On admet que $f$ admet une solution $\alpha$ dans $[1, 2]$.
 
 **a)** Verifier que $f(1) < 0$ et $f(2) > 0$.
 
 **b)** Par dichotomie, encadrer $\alpha$ a $10^{-1}$ pres.
 
-**c)** Poursuivre pour obtenir un encadrement de $\alpha$ a $10^{-2}$ pres.
+**c)** Poursuivre pour obtenir un encadrement de $\alpha$ a $10^{-2}$ pres. Presenter les resultats dans un tableau.
 :::
 
 :::solution
 **a)** On calcule :
-- $f(1) = 1 - 3 + 1 = -1 < 0$
-- $f(2) = 8 - 6 + 1 = 3 > 0$
 
-On a bien $f(1) < 0$ et $f(2) > 0$, donc $f(1) \times f(2) < 0$.
+$$f(1) = 1 - 3 + 1 = -1 < 0$$
 
-$f$ etant continue sur $[1{,}\ 2]$, la solution $\alpha$ est bien dans $]1{,}\ 2[$.
+$$f(2) = 8 - 6 + 1 = 3 > 0$$
 
-**b)** On applique la methode de dichotomie :
+On a bien $f(1) < 0$ et $f(2) > 0$.
 
-| Etape | $[a{,}\ b]$ | $m$ | $f(m)$ | Signe | Nouvel intervalle |
-|-------|-------------|-----|--------|-------|-------------------|
-| 1 | $[1{;}\ 2]$ | $1{,}5$ | $(1{,}5)^3 - 3(1{,}5) + 1 = -0{,}125$ | $-$ | $[1{,}5{;}\ 2]$ |
-| 2 | $[1{,}5{;}\ 2]$ | $1{,}75$ | $(1{,}75)^3 - 3(1{,}75) + 1 \approx 1{,}109$ | $+$ | $[1{,}5{;}\ 1{,}75]$ |
-| 3 | $[1{,}5{;}\ 1{,}75]$ | $1{,}625$ | $(1{,}625)^3 - 3(1{,}625) + 1 \approx 0{,}416$ | $+$ | $[1{,}5{;}\ 1{,}625]$ |
+**b)** On applique la methode de dichotomie a partir de $[1, 2]$.
 
-La longueur est $1{,}625 - 1{,}5 = 0{,}125 > 0{,}1$. On continue :
+| Etape | $a$ | $b$ | $m = \frac{a+b}{2}$ | $f(m)$ | Signe | Nouvel intervalle |
+|-------|-----|-----|------|--------|-------|-------------------|
+| 1 | $1$ | $2$ | $1{,}5$ | $1{,}5^3 - 3 \times 1{,}5 + 1 = -0{,}125$ | $-$ | $[1{,}5\ ;\ 2]$ |
+| 2 | $1{,}5$ | $2$ | $1{,}75$ | $1{,}75^3 - 3 \times 1{,}75 + 1 \approx 1{,}109$ | $+$ | $[1{,}5\ ;\ 1{,}75]$ |
+| 3 | $1{,}5$ | $1{,}75$ | $1{,}625$ | $1{,}625^3 - 3 \times 1{,}625 + 1 \approx 0{,}416$ | $+$ | $[1{,}5\ ;\ 1{,}625]$ |
+| 4 | $1{,}5$ | $1{,}625$ | $1{,}5625$ | $1{,}5625^3 - 3 \times 1{,}5625 + 1 \approx 0{,}127$ | $+$ | $[1{,}5\ ;\ 1{,}5625]$ |
 
-| 4 | $[1{,}5{;}\ 1{,}625]$ | $1{,}5625$ | $(1{,}5625)^3 - 3(1{,}5625) + 1 \approx 0{,}127$ | $+$ | $[1{,}5{;}\ 1{,}5625]$ |
+Longueur de l'intervalle : $1{,}5625 - 1{,}5 = 0{,}0625 < 0{,}1$.
 
-La longueur est $1{,}5625 - 1{,}5 = 0{,}0625 < 0{,}1$.
+Donc $\alpha \in [1{,}5\ ;\ 1{,}6]$ a $10^{-1}$ pres.
 
-D'ou $\alpha \in [1{,}5{;}\ 1{,}6]$ (encadrement a $10^{-1}$ pres).
+**c)** On poursuit la dichotomie pour atteindre la precision $10^{-2}$.
 
-**c)** On poursuit la dichotomie a partir de $[1{,}5{;}\ 1{,}5625]$ :
+| Etape | $a$ | $b$ | $m$ | $f(m)$ | Signe | Nouvel intervalle |
+|-------|-----|-----|-----|--------|-------|-------------------|
+| 5 | $1{,}5$ | $1{,}5625$ | $1{,}53125$ | $\approx -0{,}003$ | $-$ | $[1{,}53125\ ;\ 1{,}5625]$ |
+| 6 | $1{,}53125$ | $1{,}5625$ | $1{,}546875$ | $\approx 0{,}061$ | $+$ | $[1{,}53125\ ;\ 1{,}546875]$ |
+| 7 | $1{,}53125$ | $1{,}546875$ | $1{,}539063$ | $\approx 0{,}029$ | $+$ | $[1{,}53125\ ;\ 1{,}539063]$ |
 
-| Etape | $[a{,}\ b]$ | $m$ | $f(m)$ | Signe | Nouvel intervalle |
-|-------|-------------|-----|--------|-------|-------------------|
-| 5 | $[1{,}5{;}\ 1{,}5625]$ | $1{,}53125$ | $\approx -0{,}003$ | $-$ | $[1{,}53125{;}\ 1{,}5625]$ |
-| 6 | $[1{,}53125{;}\ 1{,}5625]$ | $1{,}546875$ | $\approx 0{,}061$ | $+$ | $[1{,}53125{;}\ 1{,}546875]$ |
-| 7 | $[1{,}53125{;}\ 1{,}546875]$ | $1{,}539063$ | $\approx 0{,}028$ | $+$ | $[1{,}53125{;}\ 1{,}539063]$ |
+Longueur : $1{,}539063 - 1{,}53125 = 0{,}007813 < 0{,}01$.
 
-La longueur est $1{,}539063 - 1{,}53125 = 0{,}007813 < 0{,}01$.
+Donc $\alpha \in [1{,}53\ ;\ 1{,}54]$ a $10^{-2}$ pres.
+:::
 
-D'ou $\alpha \in [1{,}53{;}\ 1{,}54]$ (encadrement a $10^{-2}$ pres).
+:::methode
+Pour encadrer $\alpha$ a la precision $\varepsilon$ :
+
+1. Partir de $[a, b]$ avec $f(a) \cdot f(b) < 0$
+2. Calculer $m = \dfrac{a + b}{2}$, puis $f(m)$
+3. Si $f(a) \cdot f(m) < 0$, la solution est dans $[a, m]$ ; sinon dans $[m, b]$
+4. Repeter tant que $b - a > \varepsilon$
+5. Nombre d'etapes necessaires : $n$ tel que $\dfrac{b - a}{2^n} < \varepsilon$
 :::

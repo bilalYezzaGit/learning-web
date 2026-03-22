@@ -4,74 +4,81 @@ title: "Justifier la continuite — fonctions combinees"
 difficulty: 2
 timeMinutes: 15
 category: approfondissement
-tags: [continuite, operations, quotient, racine-carree, valeur-absolue]
+tags: [continuite, operations, justification]
 praxeologies: [Prax2, Prax9]
 ---
 
 :::enonce
-Justifier que chacune des fonctions suivantes est continue au point $a$ indique.
+Pour chacune des fonctions suivantes, justifier que $f$ est continue au point $a$ indique.
 
-**(a)** $f(x) = \dfrac{x^3 - 2x + 1}{x^2 + x + 1}$ en $a = -1$
+**a)** $f(x) = \dfrac{x^3 - 2x + 1}{x^2 + x + 1}$ en $a = -1$
 
-**(b)** $f(x) = \sqrt{x^2 - 2x + 5}$ en $a = 1$
+**b)** $f(x) = \sqrt{x^2 - 2x + 5}$ en $a = 1$
 
-**(c)** $f(x) = \dfrac{|x^2 - 4|}{x + 3}$ en $a = 2$
+**c)** $f(x) = \dfrac{|x^2 - 4|}{x + 3}$ en $a = 2$
 
-**(d)** $f(x) = x\sqrt{1 + \dfrac{1}{x^2}}$ en $a = 2$
+**d)** $f(x) = x\sqrt{1 + \dfrac{1}{x^2}}$ en $a = 2$
 
-**(e)** $f(x) = \sqrt{x + \sqrt{x + 1}}$ en $a = 3$
+**e)** $f(x) = \sqrt{x + \sqrt{x + 1}}$ en $a = 3$
 
-**(f)** $f(x) = \dfrac{\sqrt{x + 1} - 1}{x^2 - x}$ en $a = -2$
+**f)** $f(x) = \dfrac{\sqrt{x + 1} - 1}{x^2 - x}$ en $a = -2$
 :::
 
 :::solution
-**(a)** Le numerateur $x \mapsto x^3 - 2x + 1$ est polynome, donc continu en $-1$.
+**a)** Le numerateur $x^3 - 2x + 1$ est un polynome, donc continu sur $\mathbb{R}$ (T1).
 
-Le denominateur $x \mapsto x^2 + x + 1$ est polynome, continu en $-1$, et $(-1)^2 + (-1) + 1 = 1 \neq 0$.
+Le denominateur $x^2 + x + 1$ est un polynome, donc continu sur $\mathbb{R}$ (T1).
 
-Donc $f$ est continue en $a = -1$ comme quotient de fonctions continues avec denominateur non nul.
+On verifie : $(-1)^2 + (-1) + 1 = 1 \neq 0$.
 
-**(b)** La fonction $x \mapsto x^2 - 2x + 5$ est polynome, donc continue en $1$.
+Donc $f$ est le quotient de deux fonctions continues en $-1$ avec un denominateur non nul en $-1$. Par T3, $f$ est continue en $-1$.
 
-On verifie : $1^2 - 2(1) + 5 = 4 > 0$.
+**b)** Posons $g(x) = x^2 - 2x + 5$. C'est un polynome, donc continu sur $\mathbb{R}$ (T1).
 
-On peut aussi ecrire $x^2 - 2x + 5 = (x - 1)^2 + 4 \geq 4 > 0$ pour tout $x \in \mathbb{R}$.
+On calcule : $g(1) = 1 - 2 + 5 = 4 > 0$.
 
-Donc $f(x) = \sqrt{x^2 - 2x + 5}$ est continue en $a = 1$ comme racine carree d'une fonction continue et strictement positive en ce point.
+Par T5, $\sqrt{g}$ est continue en $1$. Donc $f$ est continue en $1$.
 
-**(c)** La fonction $x \mapsto x^2 - 4$ est polynome, donc continue en $2$.
+**c)** On decompose : $x^2 - 4$ est un polynome, continu en $2$ (T1). Donc $|x^2 - 4|$ est continue en $2$ (T4).
 
-D'ou $x \mapsto |x^2 - 4|$ est continue en $2$ comme valeur absolue d'une fonction continue.
+Le denominateur $x + 3$ est un polynome continu en $2$ (T1), et $2 + 3 = 5 \neq 0$.
 
-Le denominateur $x \mapsto x + 3$ est affine, continu en $2$, et $2 + 3 = 5 \neq 0$.
+Par T3, le quotient $f$ est continu en $2$.
 
-Donc $f$ est continue en $a = 2$ comme quotient de fonctions continues avec denominateur non nul.
+**d)** On decompose : $x$ est un polynome, continu en $2$ (T1).
 
-**(d)** On a $a = 2 \neq 0$, donc $x \mapsto x^2$ est polynome, continu en $2$, et $2^2 = 4 > 0$.
+$x^2$ est un polynome, continu en $2$, et $2^2 = 4 \neq 0$, donc $\dfrac{1}{x^2}$ est continue en $2$ (T3).
 
-D'ou $x \mapsto \dfrac{1}{x^2}$ est continue en $2$ comme inverse d'une fonction continue non nulle.
+$1 + \dfrac{1}{x^2}$ est la somme de la constante $1$ et de $\dfrac{1}{x^2}$, continue en $2$ (T2), et $1 + \dfrac{1}{4} = \dfrac{5}{4} > 0$.
 
-La fonction $x \mapsto 1 + \dfrac{1}{x^2}$ est continue en $2$, et $1 + \dfrac{1}{4} = \dfrac{5}{4} > 0$.
+Donc $\sqrt{1 + \dfrac{1}{x^2}}$ est continue en $2$ (T5).
 
-D'ou $x \mapsto \sqrt{1 + \dfrac{1}{x^2}}$ est continue en $2$.
+Finalement, $f$ est le produit de $x$ et de $\sqrt{1 + \dfrac{1}{x^2}}$, toutes deux continues en $2$. Par T2, $f$ est continue en $2$.
 
-Enfin, $f(x) = x \cdot \sqrt{1 + \dfrac{1}{x^2}}$ est continue en $a = 2$ comme produit de fonctions continues.
+**e)** $x + 1$ est un polynome, continu en $3$ (T1), et $3 + 1 = 4 > 0$.
 
-**(e)** La fonction $x \mapsto x + 1$ est affine, continue en $3$, et $3 + 1 = 4 > 0$.
+Donc $\sqrt{x + 1}$ est continue en $3$ (T5) et $\sqrt{3 + 1} = 2$.
 
-D'ou $x \mapsto \sqrt{x + 1}$ est continue en $3$, et $\sqrt{4} = 2$.
+$x + \sqrt{x + 1}$ est une somme de fonctions continues en $3$ (T2), et $3 + 2 = 5 > 0$.
 
-La fonction $x \mapsto x + \sqrt{x + 1}$ est continue en $3$ comme somme de fonctions continues, et $3 + 2 = 5 > 0$.
+Donc $\sqrt{x + \sqrt{x + 1}}$ est continue en $3$ (T5).
 
-Donc $f(x) = \sqrt{x + \sqrt{x + 1}}$ est continue en $a = 3$ comme racine carree d'une fonction continue et strictement positive en ce point.
+**f)** Le numerateur : $x + 1$ est un polynome continu en $-2$ (T1), et $-2 + 1 = -1 < 0$.
 
-**(f)** Le numerateur : $x \mapsto x + 1$ est affine, continue en $-2$, et $-2 + 1 = -1 < 0$. **Attention** : on ne peut pas prendre la racine carree d'un nombre negatif.
+**Attention** : $\sqrt{x + 1}$ n'est pas definie en $x = -2$ car $-2 + 1 = -1 < 0$.
 
-Verifions : $f(-2) = \dfrac{\sqrt{-2 + 1} - 1}{(-2)^2 - (-2)} = \dfrac{\sqrt{-1} - 1}{6}$. La quantite $\sqrt{-1}$ n'est pas definie dans $\mathbb{R}$.
+Donc $f$ n'est pas definie en $a = -2$, et la question de la continuite ne se pose pas. On conclut que $f$ n'est pas continue en $-2$ car elle n'y est pas definie.
 
-Donc $f$ **n'est pas definie** en $a = -2$. On ne peut pas parler de continuite en un point ou la fonction n'existe pas.
+:::remark
+Le cas **f)** est un piege : avant d'appliquer les theoremes, il faut toujours verifier que la fonction est **definie** au point $a$.
+:::
 :::
 
-:::erreurs
-Dans la question **(f)**, le piege est de calculer mecaniquement sans verifier le domaine de definition. Avant toute justification de continuite, il faut s'assurer que $f(a)$ **existe**.
+:::methode
+Pour justifier la continuite d'une fonction combinee en un point $a$ :
+
+1. Identifier les fonctions de base et les operations utilisees
+2. Pour chaque etape, citer le theoreme adapte (T1 a T5)
+3. Verifier les conditions : $g(a) \neq 0$ pour un quotient, $f(a) > 0$ pour une racine carree
+4. Conclure en enchainant les resultats
 :::

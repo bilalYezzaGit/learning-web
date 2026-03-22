@@ -3,42 +3,58 @@ type: lesson
 title: "Theoreme des valeurs intermediaires et localisation de zeros"
 difficulty: 0
 timeMinutes: 8
-tags: [continuite, tvi, zeros, existence]
+tags: [continuite, tvi, existence, zeros]
 praxeologies: [Prax4]
 ---
+
+### Idee intuitive
+
+Si une fonction continue prend la valeur $-2$ en un point et la valeur $5$ en un autre, alors elle passe **necessairement** par toutes les valeurs entre $-2$ et $5$ (en particulier par $0$).
+
+C'est la consequence directe du fait qu'une fonction continue ne « saute » pas de valeur.
 
 ### Le theoreme
 
 :::theorem[Theoreme des valeurs intermediaires (TVI)]
-Soit $f$ une fonction **continue** sur $[a{,}\ b]$. Pour tout reel $k$ compris entre $f(a)$ et $f(b)$, l'equation $f(x) = k$ admet **au moins une solution** dans $[a{,}\ b]$.
+Soit $f$ une fonction **continue** sur $[a, b]$.
+
+Pour tout reel $k$ compris entre $f(a)$ et $f(b)$, l'equation $f(x) = k$ admet **au moins une solution** $c \in [a, b]$.
 :::
 
 ### Cas particulier : localisation d'un zero
 
 :::property[Corollaire — Existence d'un zero]
-Si $f$ est continue sur $[a{,}\ b]$ et $f(a) \times f(b) < 0$ (signes opposes), alors il existe au moins un $c \in ]a{,}\ b[$ tel que $f(c) = 0$.
+Si $f$ est continue sur $[a, b]$ et si $f(a) \times f(b) < 0$ (signes contraires), alors il existe $c \in {]a, b[}$ tel que :
+
+$$f(c) = 0$$
+:::
+
+:::remark
+La condition $f(a) \times f(b) < 0$ signifie que $f(a)$ et $f(b)$ sont de signes opposes : l'un est positif, l'autre est negatif. La fonction continue doit donc passer par zero entre $a$ et $b$.
+:::
+
+### Existence vs unicite
+
+:::attention[Le TVI ne donne PAS l'unicite]
+Le TVI affirme qu'il existe **au moins une** solution. Il peut y en avoir plusieurs !
+
+Pour prouver qu'il y a **exactement une** solution, il faut un argument supplementaire (par exemple, montrer que $f$ est strictement monotone sur l'intervalle).
 :::
 
 ### Schema de redaction
 
-Pour montrer que $f(x) = 0$ admet une solution dans $[a{,}\ b]$ :
+Pour appliquer le TVI dans un exercice, suis ces **4 etapes** :
 
-1. Justifier que $f$ est **continue** sur $[a{,}\ b]$
-2. Calculer $f(a)$ et $f(b)$
-3. Constater que $f(a) \times f(b) < 0$
-4. Conclure par le TVI
-
-:::attention[Existence, pas unicite]
-Le TVI garantit l'**existence** d'au moins une solution, mais **pas l'unicite**. Pour l'unicite, il faut montrer en plus que $f$ est strictement monotone.
-:::
+1. **Continuite** : justifier que $f$ est continue sur $[a, b]$ (par le type ou par les operations)
+2. **Calcul** : calculer $f(a)$ et $f(b)$
+3. **Encadrement** : constater que $k$ est entre $f(a)$ et $f(b)$ (ou que $f(a) \times f(b) < 0$ pour $k = 0$)
+4. **Conclusion** : « Par le TVI, il existe $c \in [a, b]$ tel que $f(c) = k$ »
 
 :::example[Application]
-Montrer que $f(x) = x^3 + 2x - 5$ admet au moins une solution dans $[1{,}\ 2]$.
+Soit $f(x) = x^3 + 2x - 5$. Montrer que $f(x) = 0$ admet une solution dans $[1, 2]$.
 
-- $f$ est polynomiale, donc continue sur $[1{,}\ 2]$
-- $f(1) = 1 + 2 - 5 = -2 < 0$
-- $f(2) = 8 + 4 - 5 = 7 > 0$
-- $f(1) \times f(2) < 0$
-
-Par le TVI, $f(x) = 0$ admet au moins une solution dans $]1{,}\ 2[$.
+1. $f$ est un polynome, donc **continue sur $[1, 2]$**.
+2. $f(1) = 1 + 2 - 5 = -2$ et $f(2) = 8 + 4 - 5 = 7$.
+3. $f(1) \times f(2) = (-2) \times 7 = -14 < 0$.
+4. Par le TVI, il existe $c \in {]1, 2[}$ tel que $f(c) = 0$.
 :::

@@ -37,7 +37,7 @@ _meta/
 ├── global/               # Lexique, complexite, prerequis-graph
 ├── examens/              # Specs par type d'examen
 └── modules/
-    └── {module}/         # savoir.md, praxeologies.md, patterns.yaml, misconceptions.md, lexique.md
+    └── {module}/         # savoir.yaml, praxeologies.yaml, patterns.yaml, misconceptions.yaml, lexique.yaml, redaction.yaml
 
 content/
 ├── {programme}/            # Ex: 3eme-math/
@@ -75,7 +75,7 @@ tools/pipeline/src/         # Pipeline de contenu
 - Rules detaillees → `.claude/rules/index.md` + `docs/specs/rules/` (14 domaines)
 - Contenu pedagogique → `docs/CONTENT-CONVENTIONS.md`
 - Systeme de contenu → `docs/content-agentic-workflow.md`
-- Modele academique → `_meta/` (savoir, praxeologies, patterns, misconceptions, lexique)
+- Modele academique → `_meta/` (savoir, praxeologies, patterns, misconceptions, lexique, redaction)
 
 ## Skills
 

@@ -9,33 +9,87 @@ praxeologies: [Prax7]
 ---
 
 :::enonce
-Soit $f(x) = x^3 + 2x - 5$. On a montre que $f(x) = 0$ admet une solution $\alpha$ dans $[1{,}\ 2]$.
+Soit $f(x) = x^3 + 2x - 5$. On a montre que l'equation $f(x) = 0$ admet une solution $\alpha$ dans $[1, 2]$.
 
-1. Calculer $f(1{,}5)$. En deduire un encadrement de $\alpha$ a $0{,}5$ pres.
-2. Poursuivre la dichotomie pour obtenir un encadrement de $\alpha$ a $10^{-1}$ pres.
+**a)** Calculer $f(1{,}5)$. En deduire un encadrement de $\alpha$ a $0{,}5$ pres.
+
+**b)** Par la methode de dichotomie, affiner l'encadrement pour obtenir un encadrement de $\alpha$ a $10^{-1}$ pres. Presenter les calculs sous forme de tableau.
 :::
 
 :::solution
-**1.** On calcule $f(1{,}5) = (1{,}5)^3 + 2 \times 1{,}5 - 5 = 3{,}375 + 3 - 5 = 1{,}375 > 0$.
+**a)** On calcule :
 
-On a $f(1) = -2 < 0$ et $f(1{,}5) = 1{,}375 > 0$.
+$$f(1{,}5) = (1{,}5)^3 + 2 \times 1{,}5 - 5 = 3{,}375 + 3 - 5 = 1{,}375 > 0$$
 
-Donc $f(1) \times f(1{,}5) < 0$ : la solution $\alpha$ est dans $[1{;}\ 1{,}5]$.
+On avait $f(1) = -2 < 0$ et $f(1{,}5) = 1{,}375 > 0$.
 
-D'ou $\alpha \in [1{;}\ 1{,}5]$ (encadrement a $0{,}5$ pres).
+Donc $f(1) \times f(1{,}5) < 0$, ce qui signifie que $\alpha \in [1 ;\, 1{,}5]$.
 
-**2.** On poursuit la dichotomie :
+On a un encadrement a $0{,}5$ pres : $1 \leqslant \alpha \leqslant 1{,}5$.
 
-| Etape | $[a{,}\ b]$ | $m$ | $f(m)$ | Signe | Nouvel intervalle |
-|-------|-------------|-----|--------|-------|-------------------|
-| 1 | $[1{;}\ 1{,}5]$ | $1{,}25$ | $(1{,}25)^3 + 2{,}5 - 5 = -0{,}547$ | $-$ | $[1{,}25{;}\ 1{,}5]$ |
-| 2 | $[1{,}25{;}\ 1{,}5]$ | $1{,}375$ | $(1{,}375)^3 + 2{,}75 - 5 = 0{,}349$ | $+$ | $[1{,}25{;}\ 1{,}375]$ |
+**b)** On poursuit la dichotomie a partir de $[1 ;\, 1{,}5]$ :
 
-La longueur de l'intervalle est $1{,}375 - 1{,}25 = 0{,}125 < 0{,}2$, mais il nous faut une precision de $10^{-1} = 0{,}1$.
+| Etape | $[a, b]$ | $m$ | $f(m)$ | Signe | Nouvel intervalle |
+|---|---|---|---|---|---|
+| 0 | $[1 ;\, 2]$ | $1{,}5$ | $1{,}375$ | $+$ | $[1 ;\, 1{,}5]$ |
+| 1 | $[1 ;\, 1{,}5]$ | $1{,}25$ | $f(1{,}25)$ | ? | ? |
 
-| 3 | $[1{,}25{;}\ 1{,}375]$ | $1{,}3125$ | $(1{,}3125)^3 + 2{,}625 - 5 = -0{,}114$ | $-$ | $[1{,}3125{;}\ 1{,}375]$ |
+Calculons $f(1{,}25)$ :
+
+$$f(1{,}25) = (1{,}25)^3 + 2 \times 1{,}25 - 5 = 1{,}953125 + 2{,}5 - 5 = -0{,}546875$$
+
+Donc $f(1{,}25) < 0$.
+
+$f(1{,}25) \times f(1{,}5) = (-0{,}547) \times 1{,}375 < 0$, donc $\alpha \in [1{,}25 ;\, 1{,}5]$.
+
+| Etape | $[a, b]$ | $m$ | $f(m)$ | Signe | Nouvel intervalle |
+|---|---|---|---|---|---|
+| 1 | $[1 ;\, 1{,}5]$ | $1{,}25$ | $-0{,}547$ | $-$ | $[1{,}25 ;\, 1{,}5]$ |
+| 2 | $[1{,}25 ;\, 1{,}5]$ | $1{,}375$ | $f(1{,}375)$ | ? | ? |
+
+Calculons $f(1{,}375)$ :
+
+$$f(1{,}375) = (1{,}375)^3 + 2 \times 1{,}375 - 5 = 2{,}600 + 2{,}75 - 5 = 0{,}350$$
+
+Donc $f(1{,}375) > 0$.
+
+$f(1{,}25) \times f(1{,}375) < 0$, donc $\alpha \in [1{,}25 ;\, 1{,}375]$.
+
+La longueur de l'intervalle est $1{,}375 - 1{,}25 = 0{,}125 > 0{,}1$. On continue.
+
+| Etape | $[a, b]$ | $m$ | $f(m)$ | Signe | Nouvel intervalle |
+|---|---|---|---|---|---|
+| 2 | $[1{,}25 ;\, 1{,}5]$ | $1{,}375$ | $0{,}350$ | $+$ | $[1{,}25 ;\, 1{,}375]$ |
+| 3 | $[1{,}25 ;\, 1{,}375]$ | $1{,}3125$ | $f(1{,}3125)$ | ? | ? |
+
+Calculons $f(1{,}3125)$ :
+
+$$f(1{,}3125) = (1{,}3125)^3 + 2 \times 1{,}3125 - 5 = 2{,}260 + 2{,}625 - 5 = -0{,}115$$
+
+Donc $f(1{,}3125) < 0$.
+
+$f(1{,}3125) \times f(1{,}375) < 0$, donc $\alpha \in [1{,}3125 ;\, 1{,}375]$.
 
 La longueur est $1{,}375 - 1{,}3125 = 0{,}0625 < 0{,}1$.
 
-D'ou $\alpha \in [1{,}3{;}\ 1{,}4]$ (encadrement a $10^{-1}$ pres).
+**Tableau recapitulatif :**
+
+| Etape | $[a, b]$ | $m$ | $f(m)$ | Signe | Nouvel intervalle |
+|---|---|---|---|---|---|
+| 0 | $[1 ;\, 2]$ | $1{,}5$ | $1{,}375$ | $+$ | $[1 ;\, 1{,}5]$ |
+| 1 | $[1 ;\, 1{,}5]$ | $1{,}25$ | $-0{,}547$ | $-$ | $[1{,}25 ;\, 1{,}5]$ |
+| 2 | $[1{,}25 ;\, 1{,}5]$ | $1{,}375$ | $0{,}350$ | $+$ | $[1{,}25 ;\, 1{,}375]$ |
+| 3 | $[1{,}25 ;\, 1{,}375]$ | $1{,}3125$ | $-0{,}115$ | $-$ | $[1{,}3125 ;\, 1{,}375]$ |
+
+**Conclusion :** $\alpha \in [1{,}3125 ;\, 1{,}375]$, soit $\alpha \approx 1{,}3$ a $10^{-1}$ pres.
+:::
+
+:::methode
+Pour la dichotomie :
+
+1. Partir de l'intervalle $[a, b]$ ou $f(a) \times f(b) < 0$
+2. Calculer $m = \dfrac{a + b}{2}$ puis $f(m)$
+3. Comparer le signe de $f(m)$ avec ceux de $f(a)$ et $f(b)$ pour choisir le sous-intervalle
+4. Repeter jusqu'a ce que la longueur de l'intervalle soit inferieure a la precision demandee
+5. Presenter les resultats dans un **tableau** pour plus de clarte
 :::

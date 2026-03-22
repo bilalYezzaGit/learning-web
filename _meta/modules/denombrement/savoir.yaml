@@ -1,0 +1,515 @@
+# Savoir — Denombrement
+# Format structure pour lecture humaine (profs) et machine (LLM, pipeline)
+
+module: denombrement
+programme: 3eme-math
+version: 2.0
+
+# ---------------------------------------------------------------------------
+# 0) OBJECTIF (1 phrase)
+# ---------------------------------------------------------------------------
+objective: >-
+  Maitriser les outils fondamentaux du denombrement (arrangements, permutations,
+  combinaisons, binome de Newton) pour compter de facon systematique et
+  rigoureuse le nombre de configurations possibles dans des situations finies.
+
+# ---------------------------------------------------------------------------
+# 1) NIVEAU EPISTEMIQUE
+# ---------------------------------------------------------------------------
+epistemic_level:
+  theory_base: "combinatoire-elementaire"
+
+  admitted:
+    - id: T6
+      statement: >-
+        Le nombre d'applications de {1,...,p} dans E (card(E)=n) est n^p.
+      justification: "Admis — demonstration par recurrence hors programme a ce stade"
+
+  demonstrated:
+    - id: T1
+      statement: >-
+        card(E union F) = card(E) + card(F) - card(E inter F)
+      proof_type: demonstration-complete
+
+    - id: T2
+      statement: >-
+        card(E x F) = card(E) x card(F)
+      proof_type: demonstration-complete
+
+    - id: T3
+      statement: >-
+        A_n^p = n! / (n-p)!
+      proof_type: demonstration-complete
+
+    - id: T4
+      statement: >-
+        Le nombre de permutations de n elements est n!
+      proof_type: demonstration-complete
+
+    - id: T5
+      statement: >-
+        C_n^p = n! / (p!(n-p)!)
+      proof_type: demonstration-complete
+
+    - id: P1
+      statement: >-
+        C_n^p = C_n^{n-p} (symetrie)
+      proof_type: demonstration-complete
+
+    - id: P2
+      statement: >-
+        C_n^p = C_{n-1}^{p-1} + C_{n-1}^p (relation de Pascal)
+      proof_type: demonstration-complete
+
+    - id: T7
+      statement: >-
+        (a+b)^n = somme_{k=0}^{n} C_n^k a^{n-k} b^k (binome de Newton)
+      proof_type: demonstration-par-recurrence
+
+    - id: P3
+      statement: >-
+        somme_{k=0}^{n} C_n^k = 2^n (nombre de parties d'un ensemble)
+      proof_type: corollaire-de-T7
+
+    - id: P4
+      statement: >-
+        somme_{k=0}^{n} (-1)^k C_n^k = 0
+      proof_type: corollaire-de-T7
+
+  excluded:
+    - "Fonctions generatrices, series formelles"
+    - "Combinatoire avancee (nombres de Stirling, nombres de Catalan)"
+    - "Analyse combinatoire dans Z/nZ"
+    - "Probabilites (module probabilites)"
+    - "Denombrement dans des structures algebriques"
+    - "Principe d'inclusion-exclusion generalise (plus de 3 ensembles)"
+
+  starting_point:
+    - "Operations sur les ensembles (union, intersection, complementaire)"
+    - "Notion de fonction (injection, surjection, bijection)"
+    - "Calcul algebrique (puissances, factorisation, developpement)"
+    - "Recurrence (pour demonstration du binome de Newton)"
+
+# ---------------------------------------------------------------------------
+# 2) TRANSPOSITION DIDACTIQUE
+# ---------------------------------------------------------------------------
+transposition:
+  savoir_savant:
+    - "Theorie des ensembles finis et cardinal"
+    - "Fonctions entre ensembles finis (injections = arrangements, bijections = permutations, applications = arrangements avec repetition)"
+    - "Sous-ensembles de cardinal fixe (combinaisons)"
+    - "Algebre des polynomes (binome de Newton comme identite algebrique)"
+
+  savoir_a_enseigner:
+    - "Le programme introduit dans l'ordre : cardinal -> produit cartesien -> arrangements -> permutations -> combinaisons -> binome de Newton"
+    - "L'accent est mis sur l'identification du modele de tirage (simultane = combinaisons, successif sans remise = arrangements, successif avec remise = n^p)"
+    - "Les demonstrations des formules de A_n^p et C_n^p sont attendues"
+    - "La formule du binome est demontree par recurrence"
+
+  adaptations_didactiques:
+    - "Approche par les situations concretes (urnes, cartes, codes, anagrammes) avant formalisation"
+    - "Le tableau recapitulatif des tirages est un outil pedagogique central pour aider les eleves a choisir la bonne formule"
+    - "Les anagrammes servent d'introduction intuitive aux permutations"
+    - "Le triangle de Pascal est construit comme outil de calcul rapide des C_n^p"
+    - "Notation tunisienne : A_n^p (pas P(n,p)), C_n^p (pas binomial en priorite)"
+
+# ---------------------------------------------------------------------------
+# 3) PREREQUISITES & LIENS INTER-MODULES
+# ---------------------------------------------------------------------------
+prerequisites:
+  required:
+    - prior_knowledge: "Operations sur les ensembles (union, intersection, complementaire), notion de fonction (injection, surjection, bijection)"
+    - prior_knowledge: "Calcul algebrique (puissances, factorisation, developpement)"
+    - module: suites-reelles
+      description: "Notion de recurrence (pour demonstration du binome de Newton)"
+
+  opens_toward:
+    - module: probabilites
+      link: "Le denombrement fournit le calcul des cardinaux pour les probabilites classiques (cas favorables / cas possibles)"
+    - module: divisibilite
+      link: "Proprietes de divisibilite de n! et C_n^p"
+
+# ---------------------------------------------------------------------------
+# 4) CARTE CONCEPTUELLE (dependances intra-module)
+# ---------------------------------------------------------------------------
+concepts:
+  - id: N1
+    name: "Cardinal d'un ensemble fini"
+    bloom_level: comprendre
+    depends_on: []
+    sub_concepts:
+      - id: N1.1
+        name: "Notation card(E), ensemble vide"
+      - id: N1.2
+        name: "Cardinal de l'union (inclusion-exclusion)"
+      - id: N1.3
+        name: "Cardinal du complementaire"
+      - id: N1.4
+        name: "Principe additif (ensembles disjoints)"
+
+  - id: N2
+    name: "Produit cartesien et p-uplets"
+    bloom_level: comprendre
+    depends_on: [N1]
+    sub_concepts:
+      - id: N2.1
+        name: "Definition du p-uplet (liste ordonnee)"
+      - id: N2.2
+        name: "Cardinal du produit cartesien"
+      - id: N2.3
+        name: "Principe multiplicatif (choix successifs independants)"
+
+  - id: N3
+    name: "Arrangements sans repetition"
+    bloom_level: appliquer
+    depends_on: [N2]
+    sub_concepts:
+      - id: N3.1
+        name: "Definition (p-uplet d'elements deux a deux distincts)"
+      - id: N3.2
+        name: "Formule A_n^p = n!/(n-p)!"
+
+  - id: N4
+    name: "Permutations"
+    bloom_level: appliquer
+    depends_on: [N3]
+    sub_concepts:
+      - id: N4.1
+        name: "Definition (arrangement de n parmi n)"
+      - id: N4.2
+        name: "Factorielle : n! = n x (n-1) x ... x 1, convention 0! = 1"
+      - id: N4.3
+        name: "Anagrammes comme application des permutations"
+      - id: N4.4
+        name: "Anagrammes avec lettres repetees : n! / (p1! p2! ... pk!)"
+
+  - id: N5
+    name: "Combinaisons"
+    bloom_level: appliquer
+    depends_on: [N3]
+    sub_concepts:
+      - id: N5.1
+        name: "Definition (sous-ensemble de p elements, sans ordre)"
+      - id: N5.2
+        name: "Formule C_n^p = n! / (p!(n-p)!)"
+      - id: N5.3
+        name: "Proprietes : C_n^0 = C_n^n = 1, C_n^1 = C_n^{n-1} = n"
+      - id: N5.4
+        name: "Symetrie : C_n^p = C_n^{n-p}"
+      - id: N5.5
+        name: "Relation de Pascal : C_n^p = C_{n-1}^{p-1} + C_{n-1}^p"
+      - id: N5.6
+        name: "Triangle de Pascal (construction et lecture)"
+
+  - id: N6
+    name: "Nombre d'applications (n^p)"
+    bloom_level: appliquer
+    depends_on: [N2]
+    sub_concepts:
+      - id: N6.1
+        name: "Tirages successifs avec remise = applications"
+      - id: N6.2
+        name: "Formule n^p"
+
+  - id: N7
+    name: "Binome de Newton"
+    bloom_level: appliquer
+    depends_on: [N5]
+    sub_concepts:
+      - id: N7.1
+        name: "Formule (a+b)^n = somme C_n^k a^{n-k} b^k"
+      - id: N7.2
+        name: "Cas particuliers : (1+1)^n = 2^n, (1-1)^n = 0"
+      - id: N7.3
+        name: "Nombre de parties d'un ensemble : 2^n"
+
+  - id: N8
+    name: "Modelisation et choix de formule"
+    bloom_level: analyser
+    depends_on: [N3, N5, N6]
+    sub_concepts:
+      - id: N8.1
+        name: "Tableau recapitulatif des tirages"
+      - id: N8.2
+        name: "Identification du modele (ordre ? repetition ?)"
+
+# ---------------------------------------------------------------------------
+# 5) THEOREMES & PROPRIETES CLES
+# ---------------------------------------------------------------------------
+theorems:
+  - id: D1
+    type: definition
+    name: "Cardinal d'un ensemble fini"
+    statement: >-
+      Le cardinal de E, note card(E), est le nombre d'elements de E.
+    status: definition
+    concepts: [N1]
+    used_in: [Prax1, Prax2]
+
+  - id: T1
+    type: theorem
+    name: "Cardinal de l'union"
+    statement: >-
+      card(E union F) = card(E) + card(F) - card(E inter F)
+    status: demontre
+    concepts: [N1]
+    used_in: [Prax1]
+
+  - id: T2
+    type: theorem
+    name: "Cardinal du produit cartesien"
+    statement: >-
+      card(E x F) = card(E) x card(F)
+    status: demontre
+    concepts: [N2]
+    used_in: [Prax2, Prax3]
+
+  - id: D2
+    type: definition
+    name: "Arrangement sans repetition"
+    statement: >-
+      Un arrangement de p parmi n est un p-uplet d'elements
+      deux a deux distincts d'un ensemble de cardinal n.
+    status: definition
+    concepts: [N3]
+    used_in: [Prax3]
+
+  - id: T3
+    type: theorem
+    name: "Nombre d'arrangements"
+    statement: >-
+      A_n^p = n(n-1)...(n-p+1) = n! / (n-p)!
+    status: demontre
+    concepts: [N3]
+    used_in: [Prax3, Prax4a]
+
+  - id: D3
+    type: definition
+    name: "Permutation"
+    statement: >-
+      Une permutation de n elements est un arrangement de n parmi n.
+    status: definition
+    concepts: [N4]
+    used_in: [Prax4a]
+
+  - id: T4
+    type: theorem
+    name: "Nombre de permutations"
+    statement: >-
+      Le nombre de permutations de n elements est n!
+    status: demontre
+    concepts: [N4]
+    used_in: [Prax4a, Prax4b]
+
+  - id: D4
+    type: definition
+    name: "Combinaison"
+    statement: >-
+      Une combinaison de p parmi n est un sous-ensemble de cardinal p
+      d'un ensemble de cardinal n.
+    status: definition
+    concepts: [N5]
+    used_in: [Prax5a]
+
+  - id: T5
+    type: theorem
+    name: "Nombre de combinaisons"
+    statement: >-
+      C_n^p = A_n^p / p! = n! / (p!(n-p)!)
+    status: demontre
+    concepts: [N5]
+    used_in: [Prax5a, Prax5b]
+
+  - id: P1
+    type: property
+    name: "Symetrie des combinaisons"
+    statement: >-
+      C_n^p = C_n^{n-p}
+    status: demontre
+    concepts: [N5]
+    used_in: [Prax5b]
+
+  - id: P2
+    type: property
+    name: "Relation de Pascal"
+    statement: >-
+      C_n^p = C_{n-1}^{p-1} + C_{n-1}^p
+    status: demontre
+    concepts: [N5]
+    used_in: [Prax5b, Prax7a]
+
+  - id: T6
+    type: theorem
+    name: "Nombre d'applications"
+    statement: >-
+      Le nombre d'applications de {1,...,p} dans E (card(E)=n) est n^p.
+    status: admis
+    concepts: [N6]
+    used_in: [Prax6]
+
+  - id: T7
+    type: theorem
+    name: "Binome de Newton"
+    statement: >-
+      (a+b)^n = somme_{k=0}^{n} C_n^k a^{n-k} b^k
+    status: demontre
+    concepts: [N7]
+    used_in: [Prax7a, Prax7b]
+
+  - id: P3
+    type: corollary
+    name: "Somme des combinaisons"
+    statement: >-
+      somme_{k=0}^{n} C_n^k = 2^n (nombre de parties d'un ensemble)
+    status: corollaire
+    concepts: [N7]
+    used_in: [Prax7b]
+
+  - id: P4
+    type: corollary
+    name: "Somme alternee des combinaisons"
+    statement: >-
+      somme_{k=0}^{n} (-1)^k C_n^k = 0
+    status: corollaire
+    concepts: [N7]
+    used_in: [Prax7b]
+
+# ---------------------------------------------------------------------------
+# 6) KNOWLEDGE COMPONENTS
+# ---------------------------------------------------------------------------
+facts:
+  - id: F1
+    content: "0! = 1 et 1! = 1"
+  - id: F2
+    content: "C_n^0 = C_n^n = 1"
+  - id: F3
+    content: "C_n^1 = C_n^{n-1} = n"
+  - id: F4
+    content: "Les premieres lignes du triangle de Pascal (jusqu'a n=6 environ)"
+  - id: F5
+    content: "(1+1)^n = 2^n et (1-1)^n = 0"
+  - id: F6
+    content: "Tableau recapitulatif : simultane -> C_n^p, successif sans remise -> A_n^p, successif avec remise -> n^p"
+
+skills:
+  - id: S1
+    description: "Calculer le cardinal d'une union/intersection"
+    concepts: [N1]
+    difficulty: 1
+    praxeology: Prax1
+
+  - id: S2
+    description: "Appliquer le principe multiplicatif"
+    concepts: [N2]
+    difficulty: 1
+    praxeology: Prax2
+
+  - id: S3
+    description: "Calculer A_n^p"
+    concepts: [N3]
+    difficulty: 1
+    praxeology: Prax3
+
+  - id: S4
+    description: "Calculer n! et le nombre de permutations"
+    concepts: [N4]
+    difficulty: 1
+    praxeology: Prax4a
+
+  - id: S5
+    description: "Calculer C_n^p (formule directe ou triangle)"
+    concepts: [N5]
+    difficulty: 1
+    praxeology: Prax5a
+
+  - id: S6
+    description: "Identifier le modele de tirage approprie"
+    concepts: [N8]
+    difficulty: 2
+    praxeology: Prax2
+
+  - id: S7
+    description: "Developper (a+b)^n avec le binome"
+    concepts: [N7]
+    difficulty: 1
+    praxeology: Prax7a
+
+  - id: S8
+    description: "Calculer un nombre d'anagrammes (avec ou sans lettres repetees)"
+    concepts: [N4]
+    difficulty: 1
+    praxeology: Prax4b
+
+  - id: S9
+    description: "Denombrer avec la methode du complementaire"
+    concepts: [N1]
+    difficulty: 2
+    praxeology: Prax6
+
+  - id: S10
+    description: "Resoudre une equation en n ou p avec A_n^p ou C_n^p"
+    concepts: [N3, N5]
+    difficulty: 2
+    praxeology: Prax9
+
+principles:
+  - id: P1
+    content: "Un arrangement tient compte de l'ordre, une combinaison non — la relation C_n^p = A_n^p / p! traduit le fait qu'on divise par le nombre de rearrangements"
+  - id: P2
+    content: "Le complementaire est souvent plus simple a compter que l'evenement direct ('au moins un' = total - 'aucun')"
+  - id: P3
+    content: "Le triangle de Pascal encode la relation de recurrence et permet de lire les C_n^p directement"
+  - id: P4
+    content: "Le binome de Newton generalise le developpement (a+b)^2 et fournit des identites puissantes sur les C_n^p"
+
+# ---------------------------------------------------------------------------
+# 7) EXEMPLES CANONIQUES
+# ---------------------------------------------------------------------------
+canonical_examples:
+  - id: EC1
+    description: "Tirage de boules dans une urne (simultane, successif avec/sans remise)"
+    illustrates: "Choix de formule (N8) et modelisation"
+    concepts: [N8]
+    difficulty: 1
+
+  - id: EC2
+    description: "Anagrammes d'un mot (ANANAS, ESSENTIEL, MATHEMATIQUES)"
+    illustrates: "Permutations avec repetitions (N4.3, N4.4)"
+    concepts: [N4]
+    difficulty: 2
+
+  - id: EC3
+    description: "Mains de cartes dans un jeu de 32 cartes (au moins un as, exactement 2 rois)"
+    illustrates: "Combinaisons avec contraintes (N5, methode du complementaire)"
+    concepts: [N5]
+    difficulty: 2
+
+  - id: EC4
+    description: "Codes et mots de passe (nombres de 4 chiffres distincts, codes a lettres)"
+    illustrates: "Arrangements et principe multiplicatif (N2, N3)"
+    concepts: [N2, N3]
+    difficulty: 1
+
+  - id: EC5
+    description: "Chemins sur un reseau/grille (de A a Z, uniquement droite ou haut)"
+    illustrates: "Bijection avec les mots binaires et les combinaisons (N5)"
+    concepts: [N5]
+    difficulty: 2
+
+  - id: EC6
+    description: "Diagonales d'un polygone / triangles formes par n points"
+    illustrates: "Combinaisons geometriques (N5)"
+    concepts: [N5]
+    difficulty: 1
+
+  - id: EC7
+    description: "Somme obtenue en lancant 3 des (question historique de Galilee)"
+    illustrates: "Denombrement de p-uplets avec contraintes (N6, N2)"
+    concepts: [N6, N2]
+    difficulty: 2
+
+  - id: EC8
+    description: "Nombre de parties d'un ensemble, sommes alternees de C_n^k"
+    illustrates: "Binome de Newton (N7)"
+    concepts: [N7]
+    difficulty: 2

@@ -1,0 +1,295 @@
+# Misconceptions — Nombre derive
+# Erreurs frequentes des eleves, avec diagnostic et remediation structuree
+
+module: nombre-derive
+programme: 3eme-math
+
+misconceptions:
+  # -------------------------------------------------------------------------
+  - id: E1
+    name: "Confondre continuite et derivabilite"
+    category: sur-generalisation
+    frequency: tres_frequente
+
+    description: >-
+      L'eleve pense que si f est continue en a, alors f est derivable en a.
+      Il generalise abusivement le theoreme T3 (derivable => continu) en
+      croyant que l'implication est une equivalence.
+
+    source_cognitive: >-
+      Generalisation abusive du theoreme T3. Difficulte a distinguer
+      les deux concepts et a comprendre que l'implication n'est pas
+      reversible.
+
+    detection_patterns:
+      - "f est continue en a donc derivable"
+      - "continue implique derivable"
+      - "continuite et derivabilite c'est pareil"
+
+    diagnostic:
+      question: >-
+        Parmi les affirmations suivantes, lesquelles sont vraies ?
+        (I) Si f est continue en a alors f est derivable en a.
+        (II) Si f est derivable en a alors f est continue en a.
+        (III) Si f n'est pas continue en a alors f n'est pas derivable en a.
+      options:
+        - label: "Aucune n'est vraie"
+          reveals: "incomprehension totale du lien derivabilite-continuite"
+        - label: "Une seule est vraie"
+          reveals: "confusion sur la direction de l'implication"
+        - label: "Deux sont vraies (II et III)"
+          correct: true
+        - label: "Les trois sont vraies"
+          reveals: "croyance que continuite <=> derivabilite"
+
+    remediation:
+      explanation: >-
+        T3 dit : derivable => continu. La contraposee (III) est aussi vraie :
+        non continu => non derivable. Mais la reciproque (I) est FAUSSE.
+      counter_example: "f(x) = |x| en 0 : continue mais non derivable (point anguleux). f(x) = x^{1/3} en 0 : continue mais tangente verticale."
+      praxeology_to_practice: Prax6b
+
+  # -------------------------------------------------------------------------
+  - id: E2
+    name: "Oublier de verifier la continuite avant la derivabilite"
+    category: oubli
+    frequency: frequente
+
+    description: >-
+      L'eleve etudie directement la derivabilite d'une fonction par morceaux
+      sans verifier d'abord la continuite au point de raccordement.
+
+    source_cognitive: >-
+      La derivabilite est perçue comme independante de la continuite.
+      L'eleve ne sait pas que la continuite est un prerequis a la derivabilite.
+
+    detection_patterns:
+      - "f'_d et f'_g existent donc"
+      - "calculons les derivees laterales"
+      - "sans verifier la continuite"
+
+    diagnostic:
+      question: >-
+        Soit f(x) = {x^2 si x <= 1, x+1 si x > 1}. f est-elle derivable en 1 ?
+      options:
+        - label: "Oui car f'_g(1) = 2 et f'_d(1) = 1, et les deux existent"
+          reveals: "ne verifie pas la continuite"
+        - label: "Non car f'_g(1) ≠ f'_d(1)"
+          reveals: "bonne conclusion mais mauvaise raison (f n'est meme pas continue)"
+        - label: "Non car f n'est pas continue en 1 (f(1)=1 mais lim_{x->1+} f(x)=2)"
+          correct: true
+        - label: "Oui car les deux limites laterales existent"
+          reveals: "confusion entre existence et egalite"
+
+    remediation:
+      explanation: >-
+        Toujours suivre le schema : (1) verifier la continuite en a,
+        (2) si continue, calculer f'_d(a) et f'_g(a), (3) comparer.
+        Si f n'est pas continue, elle n'est PAS derivable (contraposee de T3).
+      counter_example: "f(x) = {x^2 si x<=1, x+1 si x>1} : f(1)=1 mais lim_{x->1+} f(x)=2, discontinue donc non derivable"
+      praxeology_to_practice: Prax8
+
+  # -------------------------------------------------------------------------
+  - id: E3
+    name: "Erreur de signe dans le taux de variation"
+    category: erreur-technique
+    frequency: frequente
+
+    description: >-
+      L'eleve ecrit (f(a)-f(a+h))/h au lieu de (f(a+h)-f(a))/h,
+      ou oublie le signe moins dans la derivee de 1/f.
+
+    source_cognitive: >-
+      Inversion mecanique dans la fraction. Manque de rigueur dans
+      l'ecriture de la definition.
+
+    detection_patterns:
+      - "(f(a)-f(a+h))/h"
+      - "f'(a) = 1/(a+1)^2"
+      - "oubli du signe moins"
+
+    diagnostic:
+      question: >-
+        Si f(x) = 1/(x+1), que vaut f'(a) ?
+      options:
+        - label: "1/(a+1)^2"
+          reveals: "oubli du signe moins"
+        - label: "-1/(a+1)^2"
+          correct: true
+        - label: "-1/(a+1)"
+          reveals: "oubli du carre au denominateur"
+        - label: "1/(a+1)"
+          reveals: "confusion avec la derivee de x"
+
+    remediation:
+      explanation: >-
+        Toujours ecrire le taux de variation dans l'ordre correct :
+        (f(a+h)-f(a))/h. Refaire le calcul par la definition pour
+        verifier le signe.
+      counter_example: "f(x) = 1/x : f'(a) = -1/a^2 (signe negatif car 1/x est decroissante)"
+      praxeology_to_practice: Prax1
+
+  # -------------------------------------------------------------------------
+  - id: E4
+    name: "Confondre f'(a) = 0 et 'non derivable'"
+    category: confusion
+    frequency: occasionnelle
+
+    description: >-
+      L'eleve pense que si la tangente est horizontale (f'(a) = 0),
+      la fonction n'est pas derivable en a. Il confond
+      "pas de pente" (pente nulle) et "pas de tangente".
+
+    source_cognitive: >-
+      Confusion entre pente nulle et absence de pente.
+      Le vocabulaire "pas de pente" est ambigu.
+
+    detection_patterns:
+      - "f'(a) = 0 donc non derivable"
+      - "tangente horizontale = pas de derivee"
+      - "pas de pente"
+
+    diagnostic:
+      question: >-
+        Si f'(a) = 0, que peut-on dire ?
+      options:
+        - label: "f n'est pas derivable en a"
+          reveals: "confusion f'(a)=0 et non-derivabilite"
+        - label: "La tangente en a est verticale"
+          reveals: "confusion horizontale/verticale"
+        - label: "La tangente en a est horizontale, parallele a l'axe des abscisses"
+          correct: true
+        - label: "f est constante au voisinage de a"
+          reveals: "confusion locale/globale"
+
+    remediation:
+      explanation: >-
+        f'(a) = 0 signifie que la tangente est HORIZONTALE, pas que
+        f n'est pas derivable. Au contraire, f IS derivable en a
+        et le nombre derive vaut 0.
+      counter_example: "f(x) = x^2 en a=0 : f'(0)=0, tangente horizontale y=0, f est bien derivable"
+      praxeology_to_practice: Prax3
+
+  # -------------------------------------------------------------------------
+  - id: E5
+    name: "Oublier la condition f(a) > 0 pour (sqrt(f))'(a)"
+    category: oubli
+    frequency: frequente
+
+    description: >-
+      L'eleve applique la formule (sqrt(f))'(a) = f'(a)/(2.sqrt(f(a)))
+      sans verifier que f(a) > 0 strictement.
+
+    source_cognitive: >-
+      Application mecanique de la formule T6 sans verifier les conditions
+      d'application (f(a) > 0 strictement pour eviter la division par zero).
+
+    detection_patterns:
+      - "sqrt(f) derivable car f derivable"
+      - "(sqrt(f))'(a) = f'(a)/(2.sqrt(f(a)))"
+      - "sans verifier f(a) > 0"
+
+    diagnostic:
+      question: >-
+        Soit f(x) = sqrt(x^2-4). Peut-on calculer f'(2) avec la formule
+        (sqrt(u))'(a) = u'(a)/(2.sqrt(u(a))) ?
+      options:
+        - label: "Oui, f'(2) = 4/(2.sqrt(0)) = +∞"
+          reveals: "division par zero ignoree"
+        - label: "Oui, f'(2) = 4/0 = impossible, mais f est quand meme derivable"
+          reveals: "confusion"
+        - label: "Non, car u(2) = 0, la condition u(a) > 0 n'est pas verifiee"
+          correct: true
+        - label: "Non, car f n'est pas definie en 2"
+          reveals: "confusion (f(2) = 0 est defini)"
+
+    remediation:
+      explanation: >-
+        La formule T6 exige f(a) > 0 STRICTEMENT. Si f(a) = 0, la formule
+        ne s'applique pas. Il faut revenir a la definition (taux de variation)
+        pour etudier la derivabilite.
+      counter_example: "sqrt(x) en 0 : la formule donne 1/(2.sqrt(0)) qui est indeterminee. En fait, f n'est pas derivable en 0 (demi-tangente verticale)."
+      praxeology_to_practice: Prax2
+
+  # -------------------------------------------------------------------------
+  - id: E6
+    name: "Confondre derivabilite a droite et a gauche"
+    category: confusion
+    frequency: frequente
+
+    description: >-
+      L'eleve se trompe dans le sens des limites laterales : il prend
+      h->0^+ pour la derivee a gauche et h->0^- pour la derivee a droite,
+      ou inversement.
+
+    source_cognitive: >-
+      Confusion entre le sens de la limite (h->0+ ou h->0-) et le cote
+      (droite/gauche). Le vocabulaire "a droite" et "a gauche" n'est pas
+      relie correctement au signe de h.
+
+    detection_patterns:
+      - "f'_d(a) = lim_{h->0^-}"
+      - "f'_g(a) = lim_{h->0^+}"
+      - "inversion droite/gauche"
+
+    diagnostic:
+      question: >-
+        f'_d(a) est defini comme :
+      options:
+        - label: "lim_{h->0^-} (f(a+h)-f(a))/h"
+          reveals: "inversion gauche/droite"
+        - label: "lim_{h->0^+} (f(a+h)-f(a))/h"
+          correct: true
+        - label: "lim_{x->a^-} (f(x)-f(a))/(x-a)"
+          reveals: "inversion gauche/droite (ecriture x->a)"
+        - label: "lim_{h->0} (f(a+h)-f(a))/h"
+          reveals: "confusion avec la derivabilite en a (limite bilaterale)"
+
+    remediation:
+      explanation: >-
+        Retenir : h->0+ signifie h > 0 donc x = a+h > a, on approche par
+        la DROITE. h->0- signifie h < 0 donc x = a+h < a, on approche par
+        la GAUCHE. Mnemonique : "positif = droite, negatif = gauche".
+      counter_example: "Pour f(x) = |x| en 0 : f'_d(0) = lim_{h->0+} |h|/h = 1 (par la droite), f'_g(0) = lim_{h->0-} |h|/h = -1 (par la gauche)."
+      praxeology_to_practice: Prax7
+
+  # -------------------------------------------------------------------------
+  - id: E7
+    name: "Erreur dans le produit de derivees"
+    category: erreur-technique
+    frequency: tres_frequente
+
+    description: >-
+      L'eleve ecrit (f.g)'(a) = f'(a).g'(a) au lieu de
+      f'(a).g(a) + f(a).g'(a). Il generalise a tort la linearite
+      de la derivee de la somme au produit.
+
+    source_cognitive: >-
+      Analogie avec (f+g)' = f' + g' generalisee a tort au produit.
+      La formule du produit est contre-intuitive par rapport a la somme.
+
+    detection_patterns:
+      - "(f.g)' = f'.g'"
+      - "produit des derivees"
+      - "(fg)'(a) = f'(a) × g'(a)"
+
+    diagnostic:
+      question: >-
+        Soit f(x) = x^2 et g(x) = x+1. Que vaut (f.g)'(1) ?
+      options:
+        - label: "f'(1).g'(1) = 2 × 1 = 2"
+          reveals: "derivee du produit = produit des derivees (FAUX)"
+        - label: "f'(1).g(1) + f(1).g'(1) = 2×2 + 1×1 = 5"
+          correct: true
+        - label: "f(1).g'(1) = 1 × 1 = 1"
+          reveals: "oubli du premier terme"
+        - label: "f'(1).g(1) = 2 × 2 = 4"
+          reveals: "oubli du second terme"
+
+    remediation:
+      explanation: >-
+        La formule du produit est (f.g)' = f'.g + f.g' (pas f'.g').
+        Moyen mnemotechnique : "u'v + uv'" — chaque facteur est derive
+        a tour de role, l'autre restant intact.
+      counter_example: "f(x) = x, g(x) = x : (fg)(x) = x^2, (fg)'(x) = 2x. Mais f'(x).g'(x) = 1×1 = 1 ≠ 2x."
+      praxeology_to_practice: Prax2
