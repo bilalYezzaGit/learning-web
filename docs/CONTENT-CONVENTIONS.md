@@ -115,7 +115,7 @@ Liste de tags semantiques. Minimum 1, pas de maximum recommande mais rester rais
 #### `praxeologies`
 
 Liste des IDs de praxeologies couvertes par cet atome. Optionnel, defaut `[]`.
-Les IDs referencent les praxeologies du modele academique (`_meta/modules/{mod}/praxeologies.md`).
+Les IDs referencent les praxeologies du modele academique (`_meta/modules/{mod}/praxeologies.yaml`).
 Renseigne automatiquement lors de la generation depuis un planning (WF3).
 
 ```yaml
@@ -304,23 +304,25 @@ content/
 _meta/                                   # modele academique (hors pipeline)
 ├── _interface.yaml                      # schema d'interface _meta ↔ content
 ├── global/                              # donnees transversales
-│   ├── lexique.md
-│   ├── complexite.md
+│   ├── lexique.yaml
+│   ├── complexite.yaml
 │   └── prerequis-graph.yaml
 ├── examens/                             # specifications d'examens
 │   └── bac-3eme-t3.yaml
 └── modules/                             # 1 repertoire par module
     ├── nombre-derive/
-    │   ├── savoir.md                    # savoirs theoriques (ex _kb.md)
-    │   ├── praxeologies.md              # taches-types et techniques
-    │   ├── misconceptions.md            # erreurs frequentes
-    │   ├── lexique.md                   # vocabulaire du module
+    │   ├── savoir.yaml                    # savoirs theoriques (ex _kb.md)
+    │   ├── praxeologies.yaml              # taches-types et techniques
+    │   ├── misconceptions.yaml            # erreurs frequentes
+    │   ├── lexique.yaml                   # vocabulaire du module
+    │   ├── redaction.yaml                 # conventions de redaction du module
     │   └── patterns.yaml               # patterns d'examen (ex _patterns.yaml)
     └── fonction-derivee/
-        ├── savoir.md
-        ├── praxeologies.md
-        ├── misconceptions.md
-        └── lexique.md
+        ├── savoir.yaml
+        ├── praxeologies.yaml
+        ├── misconceptions.yaml
+        ├── lexique.yaml
+        └── redaction.yaml
 ```
 
 Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les atomes (`.mdx` dans les modules), et les molecules/livrets (`_molecules/{slug}/molecule.yaml`). Les fichiers prefixes `_` dans les sous-repertoires molecule sont **invisibles au pipeline** :
@@ -334,10 +336,11 @@ Le modele academique (anciennement `_kb.md` et `_patterns.yaml` dans les modules
 
 | Fichier `_meta/` | Role | Cree par |
 |-------------------|------|----------|
-| `savoir.md` | Savoirs theoriques du module | WF1 |
-| `praxeologies.md` | Taches-types et techniques | WF1 |
-| `misconceptions.md` | Erreurs frequentes des eleves | WF1 |
-| `lexique.md` | Vocabulaire specifique du module | WF1 |
+| `savoir.yaml` | Savoirs theoriques du module | WF1 |
+| `praxeologies.yaml` | Taches-types et techniques | WF1 |
+| `misconceptions.yaml` | Erreurs frequentes des eleves | WF1 |
+| `lexique.yaml` | Vocabulaire specifique du module | WF1 |
+| `redaction.yaml` | Conventions de redaction specifiques au module | WF1 |
 | `patterns.yaml` | Patterns d'examen (enrichi iterativement) | WF1+ |
 
 ### 3.1 Molecule Livret
@@ -962,7 +965,7 @@ version: 1                              # incremente a chaque enrichissement
 
 patterns:
   - id: Prax3.v1                        # convention : {Praxeologie}.v{numero}
-    praxeology: Prax3                   # reference vers _meta/modules/{mod}/praxeologies.md
+    praxeology: Prax3                   # reference vers _meta/modules/{mod}/praxeologies.yaml
     name: "Nom court de la variante"
     description: >-
       Ce que l'eleve doit faire dans cette variante.
@@ -989,7 +992,7 @@ patterns:
 
 - **1 fichier par module** dans `_meta/modules/{module}/patterns.yaml` (pas par molecule)
 - IDs de patterns : `{Praxeologie}.v{numero}` (ex: `Prax3.v1`, `Prax3.v2`)
-- Chaque pattern reference une praxeologie de `_meta/modules/{module}/praxeologies.md` via `praxeology:`
+- Chaque pattern reference une praxeologie de `_meta/modules/{module}/praxeologies.yaml` via `praxeology:`
 - `frequency` = nombre d'occurrences observees dans les sources ingeres
 - `examples` = exercices reels (pas inventes), avec source
 - `variables` = ce qui change d'un exercice a l'autre pour ce pattern

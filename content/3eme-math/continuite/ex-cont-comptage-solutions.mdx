@@ -4,7 +4,7 @@ title: "Nombre exact de solutions d'une equation"
 difficulty: 2
 timeMinutes: 15
 category: approfondissement
-tags: [continuite, tvi, comptage, variation, polynome]
+tags: [continuite, tvi, comptage-solutions, variations]
 praxeologies: [Prax8]
 ---
 
@@ -19,48 +19,43 @@ Soit $f(x) = x^3 - 3x + 1$.
 :::
 
 :::solution
-**a)** On calcule $f'(x) = 3x^2 - 3 = 3(x^2 - 1) = 3(x - 1)(x + 1)$.
+**a)** $f(x) = x^3 - 3x + 1$ est un polynome, derivable sur $\mathbb{R}$.
 
-- $f'(x) > 0$ pour $x \in {]{-}\infty{,}\ -1[} \cup {]1{,}\ +\infty[}$
-- $f'(x) < 0$ pour $x \in {]{-}1{,}\ 1[}$
+$$f'(x) = 3x^2 - 3 = 3(x^2 - 1) = 3(x - 1)(x + 1)$$
 
-Donc $f$ est **croissante** sur $]{-}\infty{,}\ -1]$, **decroissante** sur $[-1{,}\ 1]$, et **croissante** sur $[1{,}\ +\infty[$.
+- $f'(x) = 0 \iff x = -1$ ou $x = 1$
+- $f'(x) > 0$ pour $x < -1$ : $f$ est strictement croissante sur $]{-}\infty, -1]$
+- $f'(x) < 0$ pour $-1 < x < 1$ : $f$ est strictement decroissante sur $[-1, 1]$
+- $f'(x) > 0$ pour $x > 1$ : $f$ est strictement croissante sur $[1, +\infty[$
 
-De plus : $\lim_{x \to -\infty} f(x) = -\infty$ et $\lim_{x \to +\infty} f(x) = +\infty$.
+**b)**
 
-**b)** On calcule :
-- $f(-1) = (-1)^3 - 3 \times (-1) + 1 = -1 + 3 + 1 = 3 > 0$
-- $f(1) = 1 - 3 + 1 = -1 < 0$
+$$f(-1) = (-1)^3 - 3 \times (-1) + 1 = -1 + 3 + 1 = 3 > 0$$
 
-Tableau de variation :
+$$f(1) = 1^3 - 3 \times 1 + 1 = 1 - 3 + 1 = -1 < 0$$
 
-| $x$ | $-\infty$ | | $-1$ | | $1$ | | $+\infty$ |
-|-----|-----------|---|------|---|-----|---|-----------|
-| $f'(x)$ | | $+$ | $0$ | $-$ | $0$ | $+$ | |
-| $f(x)$ | $-\infty$ | $\nearrow$ | $3$ | $\searrow$ | $-1$ | $\nearrow$ | $+\infty$ |
+**c)** D'apres le tableau de variation, $f$ admet :
 
-**c)** $f$ est continue sur $\mathbb{R}$ (fonction polynome). On etudie chaque intervalle de monotonie.
+- un **maximum local** en $x = -1$ : $f(-1) = 3 > 0$
+- un **minimum local** en $x = 1$ : $f(1) = -1 < 0$
 
-**Sur $]{-}\infty{,}\ -1]$** : $f$ est strictement croissante, continue, avec $\lim_{x \to -\infty} f(x) = -\infty$ et $f(-1) = 3 > 0$.
+De plus, $\lim_{x \to -\infty} f(x) = -\infty$ et $\lim_{x \to +\infty} f(x) = +\infty$.
 
-Comme $0 \in {]{-}\infty{,}\ 3[}$, par le TVI il existe une **unique** solution $\alpha_1 \in {]{-}\infty{,}\ -1[}$.
+On applique le TVI + unicite sur chaque intervalle de monotonie :
 
-On precise : $f(-2) = -8 + 6 + 1 = -1 < 0$ et $f(-1) = 3 > 0$, donc $\alpha_1 \in {]{-}2{,}\ -1[}$.
+**Sur $]{-}\infty, -1]$** : $f$ est continue et strictement croissante, $f(x) \to -\infty$ quand $x \to -\infty$ et $f(-1) = 3 > 0$. Par le TVI, $f(x) = 0$ admet une unique solution $\alpha_1$ dans cet intervalle.
 
-**Sur $[-1{,}\ 1]$** : $f$ est strictement decroissante, continue, avec $f(-1) = 3 > 0$ et $f(1) = -1 < 0$.
+Calculons $f(-2) = (-2)^3 - 3 \times (-2) + 1 = -8 + 6 + 1 = -1 < 0$. Donc $\alpha_1 \in {]-2, -1[}$.
 
-Par le TVI, il existe une **unique** solution $\alpha_2 \in {]{-}1{,}\ 1[}$.
+**Sur $[-1, 1]$** : $f$ est continue et strictement decroissante, $f(-1) = 3 > 0$ et $f(1) = -1 < 0$. Par le TVI, $f(x) = 0$ admet une unique solution $\alpha_2$ dans $]-1, 1[$.
 
-On precise : $f(0) = 1 > 0$ et $f(1) = -1 < 0$, donc $\alpha_2 \in {]0{,}\ 1[}$.
+Calculons $f(0) = 0 - 0 + 1 = 1 > 0$. Donc $\alpha_2 \in {]0, 1[}$.
 
-**Sur $[1{,}\ +\infty[$** : $f$ est strictement croissante, continue, avec $f(1) = -1 < 0$ et $\lim_{x \to +\infty} f(x) = +\infty$.
+**Sur $[1, +\infty[$** : $f$ est continue et strictement croissante, $f(1) = -1 < 0$ et $f(x) \to +\infty$. Par le TVI, $f(x) = 0$ admet une unique solution $\alpha_3$ dans cet intervalle.
 
-Par le TVI, il existe une **unique** solution $\alpha_3 \in {]1{,}\ +\infty[}$.
+Calculons $f(2) = 8 - 6 + 1 = 3 > 0$. Donc $\alpha_3 \in {]1, 2[}$.
 
-On precise : $f(1) = -1 < 0$ et $f(2) = 8 - 6 + 1 = 3 > 0$, donc $\alpha_3 \in {]1{,}\ 2[}$.
+**Conclusion** : l'equation $f(x) = 0$ admet exactement **trois solutions** :
 
-**Conclusion** : l'equation $f(x) = 0$ admet **exactement $3$ solutions** :
-- $\alpha_1 \in {]{-}2{,}\ -1[}$
-- $\alpha_2 \in {]0{,}\ 1[}$
-- $\alpha_3 \in {]1{,}\ 2[}$
+$$\alpha_1 \in {]-2, -1[}, \quad \alpha_2 \in {]0, 1[}, \quad \alpha_3 \in {]1, 2[}$$
 :::

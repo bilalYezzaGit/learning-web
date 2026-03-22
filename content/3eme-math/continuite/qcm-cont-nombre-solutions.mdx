@@ -3,12 +3,12 @@ type: qcm
 title: "Combien de solutions ?"
 difficulty: 1
 timeMinutes: 2
-tags: [continuite, solutions, factorisation, racine-double]
+tags: [continuite, solutions, factorisation]
 praxeologies: [Prax8]
 ---
 
 :::question
-Soit $f(x) = x^4 - 2x^2 + 1$. Combien de solutions **distinctes** l'equation $f(x) = 0$ admet-elle ?
+Soit $f(x) = x^4 - 2x^2 + 1$. Combien l'equation $f(x) = 0$ admet-elle de solutions dans $\mathbb{R}$ ?
 :::
 
 :::option
@@ -28,9 +28,16 @@ $4$
 :::
 
 :::explanation
-On factorise : $f(x) = x^4 - 2x^2 + 1 = (x^2 - 1)^2 = \big((x-1)(x+1)\big)^2$.
+On factorise $f(x)$ :
 
-Donc $f(x) = 0 \iff (x-1)^2(x+1)^2 = 0 \iff x = 1$ ou $x = -1$.
+$$f(x) = x^4 - 2x^2 + 1 = (x^2 - 1)^2 = \bigl((x - 1)(x + 1)\bigr)^2$$
 
-L'equation admet **$2$ solutions distinctes** : $x = 1$ et $x = -1$ (chacune est une racine double, mais cela ne change pas le nombre de solutions distinctes).
+Donc $f(x) = 0 \iff (x - 1)^2(x + 1)^2 = 0 \iff x = 1$ ou $x = -1$.
+
+L'equation admet exactement **deux solutions** : $x = 1$ et $x = -1$.
+
+**Pieges courants** :
+- Repondre $4$ en confondant le degre du polynome avec le nombre de racines distinctes. Chaque racine est de multiplicite $2$, mais il n'y a que $2$ valeurs distinctes.
+- Repondre $1$ en oubliant la racine negative.
+- Repondre $0$ en ne voyant pas la factorisation.
 :::

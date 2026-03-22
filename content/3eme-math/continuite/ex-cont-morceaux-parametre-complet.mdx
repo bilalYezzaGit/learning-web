@@ -4,7 +4,7 @@ title: "Fonction par morceaux avec deux parametres"
 difficulty: 3
 timeMinutes: 20
 category: synthese
-tags: [continuite, morceaux, parametres, raccordement, impossible]
+tags: [continuite, morceaux, parametres, raccordement, discontinuite]
 praxeologies: [Prax3]
 ---
 
@@ -13,74 +13,83 @@ Soit $f$ la fonction definie sur $\mathbb{R}$ par :
 
 $$f(x) = \begin{cases} ax^2 + bx + 1 & \text{si } x \leq 0 \\ \sqrt{x + 1} & \text{si } 0 < x < 3 \\ \dfrac{x + 6}{x - 1} & \text{si } x \geq 3 \end{cases}$$
 
-ou $a$ et $b$ sont deux reels.
-
-**a)** Etudier la continuite de $f$ en $x = 0$ en fonction de $a$ et $b$.
-
-**b)** Etudier la continuite de $f$ en $x = 3$. Que constate-t-on ?
-
-**c)** On remplace le troisieme morceau par $f(x) = cx + d$ pour $x \geq 3$, ou $c$ et $d$ sont deux reels. Determiner $c$ et $d$ pour que $f$ soit continue en $x = 3$.
+1. Determiner les valeurs de $a$ et $b$ pour que $f$ soit continue en $x = 0$.
+2. Etudier la continuite de $f$ en $x = 3$. Que peut-on conclure ?
+3. On remplace le troisieme morceau par $g(x) = cx + d$ pour $x \geq 3$. Determiner $c$ et $d$ pour que la fonction ainsi obtenue soit continue sur $\mathbb{R}$.
 :::
 
 :::solution
-**a)** Etude de la continuite en $x = 0$ :
+**1. Continuite en $x = 0$ :**
 
-On calcule :
-- $f(0) = a \times 0^2 + b \times 0 + 1 = 1$
-- $\displaystyle\lim_{x \to 0^-} f(x) = \lim_{x \to 0^-} (ax^2 + bx + 1) = 1$
-- $\displaystyle\lim_{x \to 0^+} f(x) = \lim_{x \to 0^+} \sqrt{x + 1} = \sqrt{1} = 1$
+$f$ est continue en $0$ si et seulement si $\displaystyle\lim_{x \to 0^-} f(x) = f(0) = \lim_{x \to 0^+} f(x)$.
 
-On obtient :
+- **Valeur en $0$ :** $f(0) = a \cdot 0 + b \cdot 0 + 1 = 1$
 
-$$\lim_{x \to 0^-} f(x) = \lim_{x \to 0^+} f(x) = f(0) = 1$$
+- **Limite a droite :** $\displaystyle\lim_{x \to 0^+} \sqrt{x + 1} = \sqrt{1} = 1$
 
-Donc $f$ est **continue en $x = 0$ quelles que soient les valeurs de $a$ et $b$**.
+- **Limite a gauche :** $\displaystyle\lim_{x \to 0^-} (ax^2 + bx + 1) = 1$
 
-Les parametres $a$ et $b$ n'interviennent pas dans la condition de continuite en $0$ car les termes $ax^2$ et $bx$ s'annulent en $0$.
+Les trois valeurs sont egales a $1$ **quel que soit** $a$ et $b$.
 
----
-
-**b)** Etude de la continuite en $x = 3$ :
-
-On calcule :
-- $f(3) = \dfrac{3 + 6}{3 - 1} = \dfrac{9}{2} = 4{,}5$
-- $\displaystyle\lim_{x \to 3^-} f(x) = \lim_{x \to 3^-} \sqrt{x + 1} = \sqrt{4} = 2$
-- $\displaystyle\lim_{x \to 3^+} f(x) = \lim_{x \to 3^+} \dfrac{x + 6}{x - 1} = \dfrac{9}{2} = 4{,}5$
-
-On a $\displaystyle\lim_{x \to 3^-} f(x) = 2 \neq \dfrac{9}{2} = f(3)$.
-
-Donc **$f$ n'est pas continue en $x = 3$**, et ce independamment de $a$ et $b$. Le probleme vient du fait que la limite a gauche ($\sqrt{4} = 2$) ne correspond pas a la valeur $f(3) = \dfrac{9}{2}$.
-
-**Il est impossible de rendre $f$ continue en $3$ avec le troisieme morceau $\dfrac{x + 6}{x - 1}$.**
+Conclusion : $f$ est continue en $0$ pour tout $a \in \mathbb{R}$ et tout $b \in \mathbb{R}$.
 
 ---
 
-**c)** On remplace le troisieme morceau par $f(x) = cx + d$ pour $x \geq 3$.
+**2. Continuite en $x = 3$ :**
 
-Pour la continuite en $x = 3$, il faut :
+- **Valeur en $3$ :** $f(3) = \dfrac{3 + 6}{3 - 1} = \dfrac{9}{2} = 4{,}5$
 
-$$\lim_{x \to 3^-} f(x) = f(3)$$
+- **Limite a gauche :** $\displaystyle\lim_{x \to 3^-} \sqrt{x + 1} = \sqrt{4} = 2$
 
-On a :
-- $\displaystyle\lim_{x \to 3^-} f(x) = \sqrt{3 + 1} = 2$
-- $f(3) = 3c + d$
+- **Limite a droite :** $\displaystyle\lim_{x \to 3^+} \dfrac{x + 6}{x - 1} = \dfrac{9}{2} = 4{,}5$
 
-La condition de continuite en $3$ est donc :
+On a $\displaystyle\lim_{x \to 3^-} f(x) = 2 \neq 4{,}5 = f(3)$.
 
-$$3c + d = 2$$
+Conclusion : **$f$ est discontinue en $x = 3$**, quel que soit le choix de $a$ et $b$. La discontinuite provient du saut entre le deuxieme morceau ($\sqrt{x+1}$) et le troisieme ($\frac{x+6}{x-1}$), qui ne se raccordent pas.
 
-C'est **une seule equation a deux inconnues** : il y a une infinite de solutions. Par exemple :
-- $c = 0$ et $d = 2$ (fonction constante $f(x) = 2$ pour $x \geq 3$)
-- $c = 1$ et $d = -1$ (fonction $f(x) = x - 1$ pour $x \geq 3$)
-- $c = -1$ et $d = 5$ (fonction $f(x) = -x + 5$ pour $x \geq 3$)
+---
 
-Toute valeur de $(c{,}\ d)$ verifiant $3c + d = 2$ rend $f$ continue en $x = 3$.
+**3. Remplacement du troisieme morceau :**
 
-**Bilan** : avec les conditions trouvees, $f$ est continue sur $\mathbb{R}$ pour tout $a{,}\ b \in \mathbb{R}$ et tout couple $(c{,}\ d)$ tel que $3c + d = 2$.
+La nouvelle fonction est :
+
+$$\tilde{f}(x) = \begin{cases} ax^2 + bx + 1 & \text{si } x \leq 0 \\ \sqrt{x + 1} & \text{si } 0 < x < 3 \\ cx + d & \text{si } x \geq 3 \end{cases}$$
+
+D'apres la question 1, $\tilde{f}$ est continue en $0$ pour tout $a, b$.
+
+**Continuite en $x = 3$ :** on a besoin de :
+
+$$\lim_{x \to 3^-} \sqrt{x + 1} = \tilde{f}(3)$$
+
+$$\sqrt{4} = 3c + d$$
+
+$$3c + d = 2 \quad \cdots (*)$$
+
+Cela donne une seule equation a deux inconnues. Toute paire $(c, d)$ verifiant $(*)$ convient.
+
+Par exemple :
+- $c = 0$, $d = 2$ : $\tilde{f}(x) = 2$ pour $x \geq 3$ (constante)
+- $c = 1$, $d = -1$ : $\tilde{f}(x) = x - 1$ pour $x \geq 3$
+
+**Verification de la continuite globale :**
+
+- Sur $]{-\infty}, 0[$ : $ax^2 + bx + 1$ est polynomiale, donc continue.
+- Sur $]0, 3[$ : $\sqrt{x+1}$ est continue (fonction racine sur son domaine).
+- Sur $]3, +\infty[$ : $cx + d$ est affine, donc continue.
+- En $0$ : continue pour tout $a, b$ (question 1).
+- En $3$ : continue si et seulement si $3c + d = 2$.
+
+Conclusion : $\tilde{f}$ est continue sur $\mathbb{R}$ pour tout $a, b \in \mathbb{R}$ et tout $(c, d)$ tel que $3c + d = 2$.
+:::
+
+:::methode
+Pour une fonction par morceaux a plusieurs points de raccordement :
+1. Sur chaque morceau ouvert, verifier la continuite par le type de fonction
+2. A chaque point de raccordement, calculer les trois quantites : limite a gauche, valeur, limite a droite
+3. Si un raccordement est impossible, l'identifier clairement avant de chercher des parametres
 :::
 
 :::erreurs
-- **Ne pas verifier la limite a gauche en $x = 3$** : l'erreur classique est de ne comparer que $f(3)$ et la limite a droite, en oubliant la limite a gauche qui vient du deuxieme morceau.
-- **Croire qu'on peut ajuster $a$ et $b$ pour corriger la discontinuite en $3$** : les parametres $a$ et $b$ n'apparaissent que dans le premier morceau ($x \leq 0$), ils n'ont aucune influence sur le raccord en $x = 3$.
-- **En c), donner une seule solution** : il faut bien indiquer que la relation $3c + d = 2$ admet une infinite de solutions et en donner quelques exemples.
+- Croire que les parametres $a$ et $b$ influencent la continuite en $0$ : ici, les deux limites et la valeur valent toutes $1$, independamment de $a$ et $b$.
+- Ne pas verifier la continuite en $3$ et supposer qu'elle est acquise : le saut $2 \neq 4{,}5$ est la vraie difficulte.
 :::

@@ -17,17 +17,18 @@ Document vivant qui cartographie le systeme de contenu pilote par LLM.
 | References Typst | `_raw/reference/{programme}/{module}/` | Transcriptions PDF -> Typst | WF0 [0b] — sortie ; WF1 — entree |
 | **--- Modele academique (_meta/) ---** | | | |
 | Interface | `_meta/_interface.yaml` | Contrat IDs modules/patterns/examens | WF1 — enregistrement ; WF2 — resolution refs ; WF3 — resolution refs |
-| Savoir module | `_meta/modules/{mod}/savoir.md` | Objectif, scope, theoremes, knowledge components | WF1 — sortie ; WF2 [2a] — entree analyse |
-| Praxeologies | `_meta/modules/{mod}/praxeologies.md` | Types de taches, techniques, technologies | WF1 — sortie ; WF2 [2a] — entree analyse ; WF3 [3a] — reference |
+| Savoir module | `_meta/modules/{mod}/savoir.yaml` | Objectif, scope, theoremes, knowledge components | WF1 — sortie ; WF2 [2a] — entree analyse |
+| Praxeologies | `_meta/modules/{mod}/praxeologies.yaml` | Types de taches, techniques, technologies | WF1 — sortie ; WF2 [2a] — entree analyse ; WF3 [3a] — reference |
 | Patterns module | `_meta/modules/{mod}/patterns.yaml` | Variantes d'examen par praxeologie | WF1+ — sortie ; WF2 — entree Livret 2 |
-| Misconceptions | `_meta/modules/{mod}/misconceptions.md` | Erreurs frequentes, diagnostics, remediations | WF1 — sortie ; WF3 [3a] — reference QCM |
-| Lexique module | `_meta/modules/{mod}/lexique.md` | Regles de redaction specifiques au module | WF1 — sortie ; WF3 [3a] — reference redaction |
+| Misconceptions | `_meta/modules/{mod}/misconceptions.yaml` | Erreurs frequentes, diagnostics, remediations | WF1 — sortie ; WF3 [3a] — reference QCM |
+| Lexique module | `_meta/modules/{mod}/lexique.yaml` | Regles de redaction specifiques au module | WF1 — sortie ; WF3 [3a] — reference redaction |
+| Redaction module | `_meta/modules/{mod}/redaction.yaml` | Conventions de redaction specifiques au module | WF1 — sortie ; WF3 [3a] — reference redaction |
 | Specs examen | `_meta/examens/{slug}.yaml` | Structure, duree, distribution par module | WF2 — plans cross-module/examen |
 | Globaux | `_meta/global/` | Lexique partage, echelle complexite, graphe prerequis | WF2 — reference transversale ; WF3 — reference |
 | **--- Knowledge Base (WF1) ---** | | | |
 | Referentiels | `docs/referentiels/` | Conventions redaction maths tunisiennes | WF1 — reference KB ; WF3 [3a] — reference generation |
 | KB template | `.claude/skills/content/references/kb-template.md` | Modele pour creer une KB module | WF1 — template de creation |
-| KB modules | `_meta/modules/{mod}/` (savoir.md, praxeologies.md, misconceptions.md, lexique.md) | Savoir structure par module (migre depuis _kb.md) | WF1 — sortie ; WF1+ — reference praxeologies ; WF2 [2a] — entree analyse |
+| KB modules | `_meta/modules/{mod}/` (savoir.yaml, praxeologies.yaml, misconceptions.yaml, lexique.yaml, redaction.yaml) | Savoir structure par module (migre depuis _kb.md) | WF1 — sortie ; WF1+ — reference praxeologies ; WF2 [2a] — entree analyse |
 | **--- Patterns (WF1+) ---** | | | |
 | Patterns template | `.claude/skills/content/references/patterns-template.yaml` | Schema du fichier patterns | WF1+ — template |
 | Patterns module | `_meta/modules/{mod}/patterns.yaml` | Variantes d'examen par praxeologie | WF1+ — sortie ; WF2 — entree Livret 2 |
@@ -124,11 +125,11 @@ flowchart TD
     TPL[".claude/skills/content/references/kb-template.md"] -.-> Synth
     REF["docs/referentiels/"] -.-> Synth
     Analyse --> Synth["Synthetiser en KB\naxiomatique, praxeologies, misconceptions"]
-    Synth --> Meta[("_meta/modules/{mod}/\nsavoir.md\npraxeologies.md\nmisconceptions.md\nlexique.md")]
+    Synth --> Meta[("_meta/modules/{mod}/\nsavoir.yaml\npraxeologies.yaml\nmisconceptions.yaml\nlexique.yaml")]
 ```
 
 Entree : fichiers .typ existants pour le module
-Sortie : `_meta/modules/{module}/` (4 fichiers : savoir.md, praxeologies.md, misconceptions.md, lexique.md)
+Sortie : `_meta/modules/{module}/` (4 fichiers : savoir.yaml, praxeologies.yaml, misconceptions.yaml, lexique.yaml)
 
 #### Declencheurs
 
@@ -152,11 +153,11 @@ Sortie : `_meta/modules/{module}/` (4 fichiers : savoir.md, praxeologies.md, mis
 
 Workflow iteratif qui accumule des patterns d'exercices a partir de series, BAC, parascolaires. Peut etre appele N fois par module. Chaque appel enrichit `patterns.yaml`.
 
-Prerequis : KB module existante (`_meta/modules/{mod}/savoir.md` + `praxeologies.md`).
+Prerequis : KB module existante (`_meta/modules/{mod}/savoir.yaml` + `praxeologies.yaml`).
 
 ```mermaid
 flowchart TD
-    KB[("_meta/modules/{mod}/\npraxeologies.md")] --> Load["Charger praxeologies"]
+    KB[("_meta/modules/{mod}/\npraxeologies.yaml")] --> Load["Charger praxeologies"]
     PAT[("_meta/modules/{mod}/\npatterns.yaml\n(existant ou vide)")] --> Load
     Source["Exercices\n(Typst, MDX, texte, image)"] --> Analyse["Analyser chaque exercice"]
     Load --> Analyse
@@ -194,7 +195,7 @@ Voici un sujet de BAC 2024, enrichis les patterns du module nombre-derive
 
 ```mermaid
 flowchart TD
-    KB[("_meta/modules/{mod}/\nsavoir.md + praxeologies.md")] --> Analyse["2a — Analyser les praxeologies"]
+    KB[("_meta/modules/{mod}/\nsavoir.yaml + praxeologies.yaml")] --> Analyse["2a — Analyser les praxeologies"]
     Analyse --> Gen["2b — Generer _molecules/{slug}/_planning.yaml\natomes par molecule"]
     TPL[".claude/skills/content/references/planning-template.yaml"] -.-> Gen
     Gen --> PlanD[("_planning.yaml per-molecule\nstatus: draft")]
@@ -203,7 +204,7 @@ flowchart TD
     Review -->|"valide"| PlanV[("_planning.yaml per-molecule\nstatus: validated")]
 ```
 
-Entree : KB module complete (`_meta/modules/{module}/savoir.md` + `praxeologies.md`)
+Entree : KB module complete (`_meta/modules/{module}/savoir.yaml` + `praxeologies.yaml`)
 Sortie : `content/{programme}/{module}/_molecules/{slug}/_planning.yaml` avec `status: validated` (1 fichier par molecule)
 
 > **_meta/ examens** : les plans peuvent aussi referencer les specs d'examen depuis `_meta/examens/{slug}.yaml` pour construire des livrets cross-module ou alignes sur un examen specifique (ex: bac-3eme-t3).

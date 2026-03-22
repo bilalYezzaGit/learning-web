@@ -3,7 +3,7 @@ type: qcm
 title: "Fonctions usuelles continues"
 difficulty: 1
 timeMinutes: 2
-tags: [continuité, fonctions-usuelles]
+tags: [continuite, fonctions-usuelles]
 praxeologies: [Prax1]
 ---
 
@@ -12,21 +12,26 @@ Parmi les affirmations suivantes, laquelle est **fausse** ?
 :::
 
 :::option
-Toute fonction polynôme est continue sur $\mathbb{R}$
+Toute fonction polynomiale est continue sur $\mathbb{R}$
 :::
 
 :::option
-La fonction $x \mapsto \dfrac{1}{x}$ est continue sur $\mathbb{R}^*$
+La fonction $f(x) = \dfrac{1}{x^2 + 1}$ est continue sur $\mathbb{R}$
 :::
 
 :::option{correct}
-La fonction $x \mapsto \sqrt{x}$ est continue sur $\mathbb{R}$
+La fonction $f(x) = \sqrt{x}$ est continue sur $\mathbb{R}$
 :::
 
 :::option
-Toute fonction affine est continue sur $\mathbb{R}$
+La fonction $f(x) = |2x - 5|$ est continue sur $\mathbb{R}$
 :::
 
 :::explanation
-La fonction $x \mapsto \sqrt{x}$ est continue sur $]0{,}\ +\infty[$ (et continue à droite en $0$), mais elle n'est **pas définie** sur $\mathbb{R}$ tout entier (pas définie pour $x < 0$). On ne peut donc pas dire qu'elle est continue sur $\mathbb{R}$.
+La fonction $\sqrt{x}$ n'est definie que pour $x \geqslant 0$ et elle est continue sur $\mathbb{R}^{+*}$. Elle n'est **pas definie** sur $\mathbb{R}$ tout entier, donc on ne peut pas dire qu'elle est continue sur $\mathbb{R}$.
+
+Les autres affirmations sont vraies :
+- Un polynome est toujours continu sur $\mathbb{R}$.
+- $\dfrac{1}{x^2 + 1}$ est une fonction rationnelle dont le denominateur ne s'annule jamais, donc elle est continue sur $\mathbb{R}$.
+- $|2x - 5|$ est la valeur absolue d'un polynome, donc continue sur $\mathbb{R}$.
 :::

@@ -3,7 +3,7 @@ type: qcm
 title: "Continuite de la partie entiere"
 difficulty: 1
 timeMinutes: 2
-tags: [continuite, partie-entiere, discontinuite]
+tags: [continuite, partie-entiere, laterale]
 praxeologies: [Prax3]
 ---
 
@@ -12,11 +12,11 @@ Soit $f(x) = E(x)$ la fonction partie entiere. Ou $f$ est-elle continue ?
 :::
 
 :::option
-Sur $\mathbb{R}$
+Sur $\mathbb{R}$ tout entier
 :::
 
 :::option{correct}
-Sur chaque intervalle $]n{,}\ n + 1[$ ou $n \in \mathbb{Z}$
+Sur chaque intervalle $]n, n + 1[$ ou $n \in \mathbb{Z}$, mais pas en les entiers
 :::
 
 :::option
@@ -28,9 +28,14 @@ Nulle part
 :::
 
 :::explanation
-La partie entiere $E(x)$ est constante (donc continue) sur chaque intervalle $]n{,}\ n+1[$ entre deux entiers consecutifs.
+Sur chaque intervalle ouvert $]n, n+1[$, la fonction $E(x) = n$ est constante, donc **continue**.
 
-En revanche, en tout entier $n$ : $\lim_{x \to n^-} E(x) = n - 1 \neq n = E(n)$, donc $E$ est **discontinue** en $n$.
+En revanche, en tout entier $n$ :
+- $\lim_{x \to n^-} E(x) = n - 1$
+- $\lim_{x \to n^+} E(x) = n$
+- $E(n) = n$
 
-$E$ n'est pas continue nulle part, car elle est bien continue entre les entiers.
+Les limites laterales sont differentes ($n - 1 \neq n$), donc $E$ est **discontinue en tout entier**.
+
+$E$ n'est pas continue « nulle part » car elle est bien continue entre les entiers. Elle n'est pas continue sur $\mathbb{R}$ car elle est discontinue aux entiers.
 :::

@@ -9,51 +9,52 @@ praxeologies: [Prax6]
 ---
 
 :::enonce
-Determiner l'image de l'intervalle indique par chacune des fonctions suivantes.
+Determiner l'image de l'intervalle $I$ par la fonction $f$ dans chacun des cas suivants.
 
-**a)** $f(x) = 2x + 3$ sur $[1{,}\ 5]$
+**a)** $f(x) = 2x + 3$ sur $I = [1, 5]$
 
-**b)** $f(x) = -x^2 + 4$ sur $[0{,}\ 3]$
+**b)** $f(x) = -x^2 + 4$ sur $I = [0, 3]$
 
-**c)** $f(x) = \sqrt{x}$ sur $[1{,}\ 9]$
+**c)** $f(x) = \sqrt{x}$ sur $I = [1, 9]$
 :::
 
 :::solution
-**a)** $f(x) = 2x + 3$ est une fonction affine avec un coefficient directeur $2 > 0$, donc $f$ est **strictement croissante** sur $[1{,}\ 5]$.
+**a)** $f(x) = 2x + 3$ est une fonction affine avec un coefficient directeur $2 > 0$, donc $f$ est **strictement croissante** sur $\mathbb{R}$.
 
-$f$ est continue sur $[1{,}\ 5]$ (fonction affine).
+$f$ est continue sur $[1, 5]$ (polynome, T1) et strictement croissante, donc :
 
-On calcule :
-- $f(1) = 2 \times 1 + 3 = 5$
-- $f(5) = 2 \times 5 + 3 = 13$
+$$f([1, 5]) = [f(1),\ f(5)]$$
 
-Comme $f$ est continue et strictement croissante sur $[1{,}\ 5]$ :
+$$f(1) = 2 \times 1 + 3 = 5 \qquad f(5) = 2 \times 5 + 3 = 13$$
 
-$$f([1{,}\ 5]) = [f(1){,}\ f(5)] = [5{,}\ 13]$$
+$$f([1, 5]) = [5, 13]$$
 
-**b)** $f(x) = -x^2 + 4$. On calcule $f'(x) = -2x$.
+**b)** $f(x) = -x^2 + 4$ est un polynome, continu sur $[0, 3]$ (T1).
 
-Pour tout $x \in [0{,}\ 3]$ : $f'(x) = -2x \leq 0$, donc $f$ est **decroissante** sur $[0{,}\ 3]$.
+Calculons $f'(x) = -2x$. Pour $x \in [0, 3]$ :
+- $f'(x) = -2x \leq 0$ pour tout $x \geq 0$
+- $f'(x) = 0$ uniquement en $x = 0$
 
-$f$ est continue sur $[0{,}\ 3]$ (fonction polynome).
+Donc $f$ est **strictement decroissante** sur $[0, 3]$. Ainsi :
 
-On calcule :
-- $f(0) = -0 + 4 = 4$
-- $f(3) = -9 + 4 = -5$
+$$f([0, 3]) = [f(3),\ f(0)]$$
 
-Comme $f$ est continue et decroissante sur $[0{,}\ 3]$ :
+$$f(0) = 0 + 4 = 4 \qquad f(3) = -9 + 4 = -5$$
 
-$$f([0{,}\ 3]) = [f(3){,}\ f(0)] = [-5{,}\ 4]$$
+$$f([0, 3]) = [-5, 4]$$
 
-**c)** $f(x) = \sqrt{x}$ est strictement croissante sur $[1{,}\ 9]$ (fonction racine carree).
+**c)** $f(x) = \sqrt{x}$ est continue sur $[1, 9]$ (T1).
 
-$f$ est continue sur $[1{,}\ 9]$.
+$f'(x) = \dfrac{1}{2\sqrt{x}} > 0$ pour tout $x > 0$, donc $f$ est **strictement croissante** sur $[1, 9]$.
 
-On calcule :
-- $f(1) = \sqrt{1} = 1$
-- $f(9) = \sqrt{9} = 3$
+$$f([1, 9]) = [f(1),\ f(9)] = [\sqrt{1},\ \sqrt{9}] = [1, 3]$$
+:::
 
-Comme $f$ est continue et strictement croissante sur $[1{,}\ 9]$ :
+:::methode
+Pour determiner l'image d'un intervalle $[a, b]$ par une fonction continue et monotone :
 
-$$f([1{,}\ 9]) = [f(1){,}\ f(9)] = [1{,}\ 3]$$
+1. Justifier la continuite de $f$ sur $[a, b]$
+2. Determiner le sens de variation (etude de $f'$)
+3. Si $f$ est croissante : $f([a, b]) = [f(a), f(b)]$
+4. Si $f$ est decroissante : $f([a, b]) = [f(b), f(a)]$
 :::

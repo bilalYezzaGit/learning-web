@@ -3,38 +3,60 @@ type: lesson
 title: "Methode — Justifier la continuite en un point"
 difficulty: 1
 timeMinutes: 5
-tags: [continuite, methode, justification, operations]
+tags: [continuite, methode, justification]
 praxeologies: [Prax1, Prax2, Prax9]
 ---
 
-### Trois approches pour justifier la continuite
+### Les trois approches pour justifier la continuite
 
-Pour montrer qu'une fonction $f$ est continue en un point $a$, on dispose de trois approches. Le choix depend de la forme de $f$.
+Pour montrer qu'une fonction $f$ est continue en un point $a$, on dispose de **trois approches** selon la nature de $f$.
 
-### Approche 1 : Par le type
+### Approche 1 : Par le type de fonction
 
-Si $f$ est une fonction usuelle (polynome, rationnelle, racine carree), on cite directement le theoreme correspondant.
+Si $f$ est une fonction usuelle, on cite directement le theoreme correspondant :
 
-:::remark
-Les fonctions polynomes sont continues sur $\mathbb{R}$. Les fonctions rationnelles sont continues en tout point ou le denominateur ne s'annule pas. La fonction $x \mapsto \sqrt{x}$ est continue en tout reel strictement positif.
+- **Polynome** : toute fonction polynome est continue sur $\mathbb{R}$ (T1)
+- **Rationnelle** : toute fonction rationnelle est continue en tout point de son domaine de definition (T1)
+- **Racine carree** : $\sqrt{x}$ est continue sur $\mathbb{R}^{+*}$ (T1)
+
+:::example[Approche par le type]
+$f(x) = x^4 - 3x^2 + 7$ est un polynome, donc $f$ est continue sur $\mathbb{R}$.
+
+En particulier, $f$ est continue en $a = 2$.
 :::
 
 ### Approche 2 : Par les operations
 
-On decompose $f$ en somme, produit, quotient ou composee de fonctions continues, puis on cite les theoremes d'operations.
+Si $f$ est construite a partir de fonctions continues par des operations, on decompose :
 
-:::attention[Conditions a verifier]
-- **Quotient** $\dfrac{f}{g}$ : il faut que $g(a) \neq 0$
-- **Racine** $\sqrt{f}$ : il faut que $f(a) > 0$ (strictement !)
-- **Valeur absolue** $|f|$ : toujours continue si $f$ l'est (pas de condition)
+| Operation | Theoreme | Condition |
+|-----------|----------|-----------|
+| $f + g$, $f \cdot g$, $k \cdot f$ | T2 | Aucune |
+| $\dfrac{1}{f}$ ou $\dfrac{f}{g}$ | T3 | $f(a) \neq 0$ ou $g(a) \neq 0$ |
+| $\lvert f \rvert$ | T4 | Aucune |
+| $\sqrt{f}$ | T5 | $f(a) > 0$ (**strictement**) |
+
+:::attention[Conditions a ne pas oublier]
+- Pour le **quotient** : verifier que le denominateur ne s'annule pas en $a$
+- Pour la **racine carree** : verifier que $f(a) > 0$ (pas seulement $f(a) \geq 0$)
 :::
 
-### Approche 3 : Par morceaux
+:::example[Approche par les operations]
+$f(x) = \dfrac{\sqrt{x + 3}}{x^2 + 1}$ en $a = 1$.
 
-Si $f$ est definie par morceaux, on etudie la continuite sur chaque morceau ouvert (par type), puis on verifie le raccordement aux points de jonction :
+- $x + 3$ est un polynome, continu en $1$, et $(1 + 3) = 4 > 0$, donc $\sqrt{x + 3}$ est continue en $1$ (T5)
+- $x^2 + 1$ est un polynome, continu en $1$, et $1^2 + 1 = 2 \neq 0$
+- Donc le quotient $f$ est continu en $1$ (T3)
+:::
 
-$$\lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = f(a)$$
+### Approche 3 : Par morceaux (raccordement)
+
+Si $f$ est definie par morceaux, on etudie la continuite au(x) point(s) de raccordement :
+
+1. Verifier que $f$ est continue sur chaque morceau ouvert (par les approches 1 ou 2)
+2. Au point de raccordement $a$ : calculer $\lim_{x \to a^-} f(x)$, $\lim_{x \to a^+} f(x)$ et $f(a)$
+3. Si les trois sont egaux, $f$ est continue en $a$ (T6)
 
 :::remark
-En pratique, un exercice d'examen combine souvent les approches 2 et 3. Par exemple, chaque morceau est une combinaison de fonctions continues (approche 2), et il faut verifier le raccordement (approche 3).
+La strategie depend de la forme de $f$ : commencer toujours par identifier quelle approche est la plus adaptee avant de rediger.
 :::

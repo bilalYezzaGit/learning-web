@@ -1,39 +1,54 @@
 ---
 type: exercise
-title: "Justifier la continuité par le type de fonction"
+title: "Justifier la continuite par le type de fonction"
 difficulty: 1
 timeMinutes: 10
 category: application
-tags: [continuité, fonctions-usuelles, justification]
+tags: [continuite, fonctions-usuelles, justification]
 praxeologies: [Prax1]
 ---
 
 :::enonce
-Justifier la continuité des fonctions suivantes au point indiqué.
+Justifier la continuite de chacune des fonctions suivantes au point $a$ indique :
 
-**1.** $f(x) = 3x^4 - 2x + 7$ en $a = 1$
+**a)** $f(x) = 3x^4 - 2x + 7$ en $a = 1$
 
-**2.** $f(x) = \dfrac{x - 1}{x^2 + 3}$ en $a = 0$
+**b)** $f(x) = \dfrac{x - 1}{x^2 + 3}$ en $a = 0$
 
-**3.** $f(x) = \sqrt{2x + 5}$ en $a = 2$
+**c)** $f(x) = \sqrt{2x + 5}$ en $a = 2$
 
-**4.** $f(x) = |x - 3|$ en $a = 0$
+**d)** $f(x) = |x - 3|$ en $a = 0$
 :::
 
 :::solution
-**1.** $f$ est une **fonction polynôme**, donc $f$ est continue sur $\mathbb{R}$.
+**a)** $f(x) = 3x^4 - 2x + 7$ est une **fonction polynomiale**.
 
-D'où $f$ est continue en $a = 1$.
+Toute fonction polynomiale est continue sur $\mathbb{R}$. Comme $1 \in \mathbb{R}$, $f$ est **continue en $a = 1$**.
 
-**2.** $f$ est une **fonction rationnelle**. On vérifie que le dénominateur est non nul en $a = 0$ : $0^2 + 3 = 3 \neq 0$.
+**b)** $f(x) = \dfrac{x - 1}{x^2 + 3}$ est une **fonction rationnelle**.
 
-D'où $f$ est continue en $a = 0$.
+Le denominateur $x^2 + 3 > 0$ pour tout $x \in \mathbb{R}$, donc $f$ est definie et continue sur $\mathbb{R}$.
 
-**3.** On a $2 \times 2 + 5 = 9 > 0$. La fonction $x \mapsto \sqrt{2x + 5}$ est définie et continue en tout réel $a$ tel que $2a + 5 > 0$.
+En particulier, comme $0^2 + 3 = 3 \neq 0$, $f$ est **continue en $a = 0$**.
 
-Comme $2 \times 2 + 5 = 9 > 0$, $f$ est continue en $a = 2$.
+**c)** $f(x) = \sqrt{2x + 5}$.
 
-**4.** $f(x) = |x - 3|$. La fonction $x \mapsto x - 3$ est affine, donc continue sur $\mathbb{R}$. La valeur absolue d'une fonction continue est continue.
+On verifie que $2x + 5 > 0$ en $a = 2$ : $2 \times 2 + 5 = 9 > 0$.
 
-D'où $|x - 3|$ est continue en $a = 0$.
+La fonction $x \mapsto 2x + 5$ est un polynome, donc continue sur $\mathbb{R}$. Comme $2a + 5 = 9 > 0$, la fonction $\sqrt{2x + 5}$ est **continue en $a = 2$** (racine carree d'une fonction continue et strictement positive en ce point).
+
+**d)** $f(x) = |x - 3|$.
+
+La fonction $x \mapsto x - 3$ est un polynome, donc continue sur $\mathbb{R}$.
+
+La valeur absolue d'une fonction continue est continue, donc $|x - 3|$ est **continue sur $\mathbb{R}$**, et en particulier **continue en $a = 0$**.
+:::
+
+:::methode
+Pour justifier la continuite d'une fonction en un point :
+
+1. **Identifier le type** de la fonction (polynome, rationnelle, racine, valeur absolue)
+2. **Citer le theoreme** correspondant (continuite des fonctions usuelles)
+3. **Verifier les conditions** : le point est dans le domaine, le denominateur est non nul, l'expression sous la racine est strictement positive
+4. **Conclure** : « donc $f$ est continue en $a$ »
 :::

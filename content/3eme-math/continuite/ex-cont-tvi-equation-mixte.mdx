@@ -4,35 +4,42 @@ title: "Existence d'une solution — equation mixte"
 difficulty: 2
 timeMinutes: 12
 category: approfondissement
-tags: [continuite, tvi, unicite, racine-carree, equation]
+tags: [continuite, tvi, unicite, equation-mixte]
 praxeologies: [Prax4, Prax5]
 ---
 
 :::enonce
-Montrer que l'equation $\sqrt{x + 1} = 3 - x$ admet une unique solution dans $[0{,}\ 3]$.
+Montrer que l'equation $\sqrt{x + 1} = 3 - x$ admet une unique solution dans $[0, 3]$.
 :::
 
 :::solution
-On pose $h(x) = \sqrt{x + 1} - 3 + x$. L'equation $\sqrt{x + 1} = 3 - x$ equivaut a $h(x) = 0$.
+On pose $h(x) = \sqrt{x + 1} - 3 + x$ de sorte que l'equation $\sqrt{x + 1} = 3 - x$ equivaut a $h(x) = 0$.
 
-**Continuite** : Sur $[0{,}\ 3]$, la fonction $x \mapsto x + 1 \geq 1 > 0$, donc $x \mapsto \sqrt{x + 1}$ est continue. La fonction $x \mapsto -3 + x$ est affine, donc continue. Par suite, $h$ est **continue** sur $[0{,}\ 3]$ comme somme de fonctions continues.
+### Continuite de $h$ sur $[0, 3]$
 
-**Existence** : On calcule :
+- $x + 1$ est un polynome, continu sur $\mathbb{R}$ (T1). Pour tout $x \in [0, 3]$, $x + 1 \geq 1 > 0$, donc $\sqrt{x + 1}$ est continue sur $[0, 3]$ (T5).
+- $-3 + x$ est un polynome, continu sur $\mathbb{R}$ (T1).
+- Donc $h = \sqrt{x + 1} + x - 3$ est continue sur $[0, 3]$ comme somme de fonctions continues (T2).
 
-- $h(0) = \sqrt{0 + 1} - 3 + 0 = 1 - 3 = -2 < 0$
-- $h(3) = \sqrt{3 + 1} - 3 + 3 = \sqrt{4} = 2 > 0$
+### Existence (TVI)
 
-On a $h(0) \times h(3) = (-2) \times 2 < 0$. Par le **TVI**, l'equation $h(x) = 0$ admet au moins une solution dans $]0{,}\ 3[$.
+$$h(0) = \sqrt{0 + 1} - 3 + 0 = 1 - 3 = -2 < 0$$
 
-**Unicite** : $h$ est derivable sur $]0{,}\ 3[$ et :
+$$h(3) = \sqrt{3 + 1} - 3 + 3 = \sqrt{4} = 2 > 0$$
+
+Comme $h$ est continue sur $[0, 3]$ et $h(0) \cdot h(3) = (-2) \times 2 = -4 < 0$, par le TVI, l'equation $h(x) = 0$ admet au moins une solution dans $]0, 3[$.
+
+### Unicite (monotonie)
+
+$h$ est derivable sur $]0, 3[$ et :
 
 $$h'(x) = \frac{1}{2\sqrt{x + 1}} + 1$$
 
-Pour tout $x \in ]0{,}\ 3[$, on a $\dfrac{1}{2\sqrt{x + 1}} > 0$ et $1 > 0$, donc $h'(x) > 0$.
+Pour tout $x \in [0, 3]$ : $\sqrt{x + 1} > 0$, donc $\dfrac{1}{2\sqrt{x + 1}} > 0$, et ainsi :
 
-Ainsi $h$ est **strictement croissante** sur $[0{,}\ 3]$. La solution est donc **unique**.
-:::
+$$h'(x) = \frac{1}{2\sqrt{x + 1}} + 1 > 1 > 0$$
 
-:::methode
-Pour une equation de la forme $g(x) = d(x)$, poser $h(x) = g(x) - d(x)$ et ramener au schema standard : continuite + TVI (existence) + monotonie stricte (unicite).
+Donc $h$ est **strictement croissante** sur $[0, 3]$. Par T9, la solution est **unique**.
+
+L'equation $\sqrt{x + 1} = 3 - x$ admet donc une unique solution dans $[0, 3]$.
 :::

@@ -4,31 +4,36 @@ title: "Image d'un intervalle — fonction non monotone"
 difficulty: 2
 timeMinutes: 12
 category: approfondissement
-tags: [continuite, image-intervalle, variation, extremum]
+tags: [continuite, image-intervalle, variations]
 praxeologies: [Prax6]
 ---
 
 :::enonce
-Soit $f(x) = x^2 - 2x$ definie sur $[-1{,}\ 3]$.
+Soit $f(x) = x^2 - 2x$ definie sur $[-1, 3]$.
 
-**a)** Calculer $f'(x)$ et en deduire le sens de variation de $f$ sur $[-1{,}\ 3]$.
+**a)** Calculer $f'(x)$ et en deduire les variations de $f$ sur $[-1, 3]$.
 
-**b)** Dresser le tableau de variation de $f$ sur $[-1{,}\ 3]$.
+**b)** Dresser le tableau de variation de $f$ sur $[-1, 3]$.
 
-**c)** Determiner $f([-1{,}\ 3])$.
+**c)** Determiner $f([-1, 3])$.
 :::
 
 :::solution
-**a)** On calcule $f'(x) = 2x - 2$.
+**a)** $f(x) = x^2 - 2x$ est un polynome, derivable sur $\mathbb{R}$.
 
-- Pour $x \in [-1{,}\ 1]$ : $f'(x) = 2x - 2 \leq 0$, donc $f$ est **decroissante** sur $[-1{,}\ 1]$.
-- Pour $x \in [1{,}\ 3]$ : $f'(x) = 2x - 2 \geq 0$, donc $f$ est **croissante** sur $[1{,}\ 3]$.
+$$f'(x) = 2x - 2$$
 
-**b)** On calcule les valeurs aux bornes et a l'extremum :
+- $f'(x) = 0 \iff 2x - 2 = 0 \iff x = 1$
+- $f'(x) < 0$ pour $x < 1$ : $f$ est strictement decroissante sur $[-1, 1]$
+- $f'(x) > 0$ pour $x > 1$ : $f$ est strictement croissante sur $[1, 3]$
 
-- $f(-1) = (-1)^2 - 2 \times (-1) = 1 + 2 = 3$
-- $f(1) = 1 - 2 = -1$ (minimum)
-- $f(3) = 9 - 6 = 3$
+**b)** Calculons les valeurs aux bornes et a l'extremum :
+
+$$f(-1) = (-1)^2 - 2 \times (-1) = 1 + 2 = 3$$
+
+$$f(1) = 1^2 - 2 \times 1 = 1 - 2 = -1$$
+
+$$f(3) = 3^2 - 2 \times 3 = 9 - 6 = 3$$
 
 Tableau de variation :
 
@@ -37,13 +42,21 @@ Tableau de variation :
 | $f'(x)$ | | $-$ | $0$ | $+$ | |
 | $f(x)$ | $3$ | $\searrow$ | $-1$ | $\nearrow$ | $3$ |
 
-**c)** $f$ est continue sur $[-1{,}\ 3]$ (fonction polynome).
+**c)** $f$ est continue sur $[-1, 3]$ (polynome, T1). D'apres le tableau de variation :
 
-D'apres le tableau de variation :
-- Le **minimum** de $f$ sur $[-1{,}\ 3]$ est $f(1) = -1$
-- Le **maximum** de $f$ sur $[-1{,}\ 3]$ est $\max(f(-1){,}\ f(3)) = \max(3{,}\ 3) = 3$
+- Le **minimum** de $f$ sur $[-1, 3]$ est $f(1) = -1$
+- Le **maximum** de $f$ sur $[-1, 3]$ est $\max(f(-1), f(3)) = \max(3, 3) = 3$
 
-D'ou :
+Par le theoreme de l'image d'un intervalle (T7), l'image d'un intervalle ferme par une fonction continue est un intervalle ferme.
 
-$$f([-1{,}\ 3]) = [-1{,}\ 3]$$
+$$f([-1, 3]) = [-1, 3]$$
+:::
+
+:::methode
+Quand $f$ n'est pas monotone sur l'intervalle :
+
+1. Etudier les variations de $f$ (signe de $f'$)
+2. Dresser le tableau de variation complet
+3. Le minimum et le maximum de $f$ sur l'intervalle determinent les bornes de l'image
+4. $f(I) = [\text{min}, \text{max}]$ si $I$ est un intervalle ferme
 :::

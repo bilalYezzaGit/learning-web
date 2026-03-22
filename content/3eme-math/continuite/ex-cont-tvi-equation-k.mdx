@@ -4,51 +4,62 @@ title: "Le TVI avec une valeur k non nulle"
 difficulty: 1
 timeMinutes: 10
 category: application
-tags: [continuite, tvi, equation, intersection]
+tags: [continuite, tvi, equation, valeur-intermediaire]
 praxeologies: [Prax4]
 ---
 
 :::enonce
-1. Soit $f(x) = x^2 + x - 1$. Montrer que l'equation $f(x) = 2$ admet au moins une solution dans $[0{,}\ 2]$.
-2. Montrer que l'equation $\sqrt{x - 2} = \dfrac{8}{x^2}$ admet au moins une solution dans $[3{,}\ 4]$.
+**a)** Soit $f(x) = x^2 + x - 1$. Montrer que l'equation $f(x) = 2$ admet au moins une solution dans $[0, 2]$.
+
+**b)** Montrer que l'equation $\sqrt{x - 2} = \dfrac{8}{x^2}$ admet au moins une solution dans $]2, +\infty[$.
+
+*Indication :* on pourra poser $h(x) = \sqrt{x - 2} - \dfrac{8}{x^2}$ et chercher un intervalle $[a, b]$ ou $h$ change de signe.
 :::
 
 :::solution
-**1.** $f$ est une fonction polynome, donc **continue** sur $[0{,}\ 2]$.
+**a)** $f(x) = x^2 + x - 1$ et $k = 2$.
 
-On calcule :
+**Continuite :** $f$ est un polynome, donc **continue sur $[0, 2]$**.
+
+**Calcul :**
 - $f(0) = 0 + 0 - 1 = -1$
 - $f(2) = 4 + 2 - 1 = 5$
 
-On a $f(0) = -1 < 2$ et $f(2) = 5 > 2$. Donc $2$ est compris entre $f(0)$ et $f(2)$.
+**Encadrement :** On verifie que $k = 2$ est compris entre $f(0)$ et $f(2)$ :
 
-Par le **TVI**, l'equation $f(x) = 2$ admet au moins une solution dans $[0{,}\ 2]$.
+$$f(0) = -1 < 2 < 5 = f(2)$$
 
-**2.** Posons $h(x) = \sqrt{x - 2} - \dfrac{8}{x^2}$, definie sur $[3{,}\ 4]$.
+Donc $2$ est bien entre $f(0)$ et $f(2)$.
 
-$h$ est continue sur $[3{,}\ 4]$ comme difference de fonctions continues (racine carree et quotient avec $x^2 \neq 0$).
+**Conclusion :** Par le **TVI**, l'equation $f(x) = 2$ admet **au moins une solution** dans $[0, 2]$.
 
-On calcule :
-- $h(3) = \sqrt{1} - \dfrac{8}{9} = 1 - \dfrac{8}{9} = \dfrac{1}{9} > 0$
-- $h(4) = \sqrt{2} - \dfrac{8}{16} = \sqrt{2} - \dfrac{1}{2} \approx 1{,}414 - 0{,}5 = 0{,}914 > 0$
+**b)** Posons $h(x) = \sqrt{x - 2} - \dfrac{8}{x^2}$.
 
-Les deux sont positifs. Essayons un point intermediaire... En fait, recalculons :
+**Continuite :** $h$ est definie pour $x > 2$. Sur tout intervalle $[a, b] \subset {]2, +\infty[}$ :
+- $x - 2 > 0$, donc $\sqrt{x - 2}$ est continue (racine d'une fonction continue et strictement positive).
+- $x^2 > 0$, donc $\dfrac{8}{x^2}$ est continue (quotient avec denominateur non nul).
+- Par difference, $h$ est **continue** sur tout $[a, b] \subset {]2, +\infty[}$.
 
-- $h(3) = 1 - \dfrac{8}{9} = \dfrac{1}{9} > 0$
+**Recherche d'un changement de signe.** Testons quelques valeurs :
 
-Cela montre que sur $[3{,}\ 4]$, $h$ ne change pas de signe. Essayons un intervalle plus large :
+- $h(2{,}5) = \sqrt{0{,}5} - \dfrac{8}{6{,}25} = 0{,}707 - 1{,}28 = -0{,}573 < 0$
+- $h(3) = \sqrt{1} - \dfrac{8}{9} = 1 - 0{,}889 = 0{,}111 > 0$
 
-Posons plutot $h(x) = \sqrt{x - 2} - \dfrac{8}{x^2}$ sur $[2{,}5{;}\ 3]$ :
-- $h(2{,}5) = \sqrt{0{,}5} - \dfrac{8}{6{,}25} = 0{,}707... - 1{,}28 \approx -0{,}573 < 0$
-- $h(3) = \dfrac{1}{9} > 0$
+On a $h(2{,}5) < 0$ et $h(3) > 0$, donc $h(2{,}5) \times h(3) < 0$.
 
-$h$ est continue sur $[2{,}5{;}\ 3]$ et $h(2{,}5) \times h(3) < 0$.
-
-Par le **TVI**, $h(x) = 0$ admet au moins une solution dans $]2{,}5{;}\ 3[$, donc l'equation $\sqrt{x - 2} = \dfrac{8}{x^2}$ admet au moins une solution dans $]2{,}5{;}\ 3[ \subset [3{,}\ 4]$.
-
-*(Note : la localisation precise depend de l'intervalle choisi.)*
+$h$ est continue sur $[2{,}5 ;\, 3]$ et change de signe. Par le **TVI**, l'equation $\sqrt{x - 2} = \dfrac{8}{x^2}$ admet **au moins une solution** dans $]2{,}5 ;\, 3[$.
 :::
 
 :::methode
-Pour une equation du type $f(x) = g(x)$, poser $h(x) = f(x) - g(x)$ et appliquer le TVI a $h(x) = 0$.
+Pour une equation de la forme $f(x) = g(x)$ :
+
+1. **Poser $h(x) = f(x) - g(x)$** pour se ramener a $h(x) = 0$
+2. **Justifier la continuite** de $h$ sur l'intervalle
+3. **Calculer** $h(a)$ et $h(b)$, verifier le changement de signe
+4. **Conclure** par le TVI
+:::
+
+:::erreurs
+- **Ne pas poser la fonction auxiliaire** : face a $f(x) = g(x)$, on doit poser $h = f - g$ pour se ramener a chercher un zero.
+- **Appliquer le TVI quand $k$ n'est pas entre $f(a)$ et $f(b)$** : il faut verifier l'encadrement avant de conclure.
 :::

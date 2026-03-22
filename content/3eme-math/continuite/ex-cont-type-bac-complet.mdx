@@ -4,165 +4,194 @@ title: "Exercice type devoir de synthese — etude complete"
 difficulty: 3
 timeMinutes: 20
 category: probleme
-tags: [continuite, variation, tvi, zeros, image-intervalle, dichotomie, type-bac]
+tags: [continuite, variations, tvi, dichotomie, morceaux, image-intervalle, type-bac]
 praxeologies: [Prax3, Prax5, Prax6, Prax7, Prax8]
 ---
 
 :::enonce
-Soit $f(x) = x^3 - 3x^2 + 4$.
+Soit $f$ la fonction definie sur $\mathbb{R}$ par :
 
-**Partie A — Etude des variations**
+$$f(x) = x^3 - 3x^2 + 4$$
 
-**a)** Calculer $f'(x)$ et dresser le tableau de variation de $f$ sur $\mathbb{R}$.
+**Partie A — Etude des variations et des zeros**
 
-**b)** Montrer que $f$ admet un maximum local et un minimum local. Preciser leurs valeurs.
+1. Verifier que $f(x) = (x + 1)(x - 2)^2$.
+2. Calculer $f'(x)$ et etudier son signe. Dresser le tableau de variation complet de $f$.
+3. Determiner les zeros de $f$ et leur nature (simple ou multiple).
 
-**Partie B — Zeros et equations**
+**Partie B — Equations et images**
 
-**c)** Verifier que $f(-1) = 0$ et factoriser $f(x)$.
-
-**d)** En deduire le nombre exact de solutions de l'equation $f(x) = 0$ dans $\mathbb{R}$.
-
-**Partie C — Images et dichotomie**
-
-**e)** Determiner $f(]{-}\infty{,}\ 0])$, $f([0{,}\ 2])$ et $f([2{,}\ +\infty[)$.
-
-**f)** Montrer que l'equation $f(x) = 1$ admet exactement $3$ solutions. Encadrer a $0{,}1$ pres la solution de $f(x) = 1$ dans l'intervalle $]{-}2{,}\ -1[$.
+4. Montrer que l'equation $f(x) = 1$ admet **exactement trois solutions** dans $\mathbb{R}$. On notera $\alpha$ la solution dans $]{-\infty}, 0[$.
+5. Par la methode de dichotomie, encadrer $\alpha$ a $10^{-1}$ pres.
+6. Determiner $f(]{-\infty}, 0])$ et $f([0, 2])$ et $f([2, +\infty[)$.
 :::
 
 :::solution
-**Partie A — Etude des variations**
+**Partie A**
 
-**a)** On calcule :
+**1. Verification de la factorisation :**
+
+Developpons $(x + 1)(x - 2)^2$ :
+
+$$(x - 2)^2 = x^2 - 4x + 4$$
+
+$$(x + 1)(x^2 - 4x + 4) = x^3 - 4x^2 + 4x + x^2 - 4x + 4 = x^3 - 3x^2 + 4$$
+
+Donc $f(x) = (x + 1)(x - 2)^2$. Verifie.
+
+---
+
+**2. Derivee et variations :**
 
 $$f'(x) = 3x^2 - 6x = 3x(x - 2)$$
 
-Signe de $f'(x)$ :
-- $f'(x) > 0$ pour $x \in {]{-}\infty{,}\ 0[} \cup {]2{,}\ +\infty[}$
-- $f'(x) < 0$ pour $x \in {]0{,}\ 2[}$
+**Signe de $f'(x)$ :** $f'(x) = 0 \Leftrightarrow x = 0$ ou $x = 2$.
 
-Limites : $\displaystyle\lim_{x \to -\infty} f(x) = -\infty$ et $\displaystyle\lim_{x \to +\infty} f(x) = +\infty$.
+Le coefficient dominant de $f'$ est $3 > 0$, donc $f'(x) > 0$ a l'exterieur des racines :
 
-Valeurs aux extremums :
-- $f(0) = 0 - 0 + 4 = 4$
-- $f(2) = 8 - 12 + 4 = 0$
+- $f'(x) > 0$ sur $]{-\infty}, 0[$
+- $f'(x) < 0$ sur $]0, 2[$
+- $f'(x) > 0$ sur $]2, +\infty[$
 
-Tableau de variation :
+**Valeurs remarquables :**
 
-| $x$ | $-\infty$ | | $0$ | | $2$ | | $+\infty$ |
-|-----|-----------|---|------|---|------|---|-----------|
-| $f'(x)$ | | $+$ | $0$ | $-$ | $0$ | $+$ | |
-| $f(x)$ | $-\infty$ | $\nearrow$ | $4$ | $\searrow$ | $0$ | $\nearrow$ | $+\infty$ |
+$$f(0) = 4 \quad ; \quad f(2) = 8 - 12 + 4 = 0$$
 
-**b)** D'apres le tableau de variation :
-- $f$ admet un **maximum local** $f(0) = 4$ en $x = 0$
-- $f$ admet un **minimum local** $f(2) = 0$ en $x = 2$
+**Limites :**
 
----
+$$\lim_{x \to -\infty} f(x) = -\infty \quad ; \quad \lim_{x \to +\infty} f(x) = +\infty$$
 
-**Partie B — Zeros et equations**
+**Tableau de variation :**
 
-**c)** Calculons :
+```typst
+#import "@preview/vartable:0.2.3": tabvar
 
-$$f(-1) = (-1)^3 - 3 \times (-1)^2 + 4 = -1 - 3 + 4 = 0$$
-
-Donc $x = -1$ est un zero de $f$, ce qui signifie que $(x + 1)$ divise $f(x)$.
-
-On effectue la division euclidienne ou on factorise :
-
-$$f(x) = x^3 - 3x^2 + 4 = (x + 1)(x^2 - 4x + 4) = (x + 1)(x - 2)^2$$
-
-**Verification** : $(x + 1)(x^2 - 4x + 4) = x^3 - 4x^2 + 4x + x^2 - 4x + 4 = x^3 - 3x^2 + 4$ --- correct.
-
-**d)** L'equation $f(x) = 0$ equivaut a :
-
-$$(x + 1)(x - 2)^2 = 0 \iff x = -1 \quad \text{ou} \quad x = 2$$
-
-L'equation $f(x) = 0$ admet **exactement $2$ solutions distinctes** : $x = -1$ et $x = 2$.
-
-**Remarque** : $x = 2$ est une racine double (le minimum local touche l'axe des abscisses sans le traverser), tandis que $x = -1$ est une racine simple (la courbe traverse l'axe).
+#tabvar(
+  variable: $x$,
+  label: (
+    ([signe de $f'(x)$], "s"),
+    ([variation de $f$], "v"),
+  ),
+  domain: ($-infinity$, $0$, $2$, $+infinity$),
+  contents: (
+    ($+$, ("0", $-$), ("0", $+$)),
+    (
+      (bottom, $-infinity$),
+      (top, $4$),
+      (bottom, $0$),
+      (top, $+infinity$),
+    ),
+  ),
+)
+```
 
 ---
 
-**Partie C — Images et dichotomie**
+**3. Zeros de $f$ :**
 
-**e)** D'apres le tableau de variation :
+$f(x) = 0 \Leftrightarrow (x + 1)(x - 2)^2 = 0 \Leftrightarrow x = -1$ ou $x = 2$.
 
-- **$f(]{-}\infty{,}\ 0])$** : $f$ est strictement croissante de $-\infty$ a $4$, donc $f(]{-}\infty{,}\ 0]) = {]{-}\infty{,}\ 4]}$.
+- $x = -1$ est une racine **simple** (multiplicite 1). La courbe **traverse** l'axe des abscisses.
+- $x = 2$ est une racine **double** (multiplicite 2). La courbe **touche** l'axe des abscisses sans le traverser (c'est un minimum local).
 
-- **$f([0{,}\ 2])$** : $f$ est strictement decroissante de $4$ a $0$, donc $f([0{,}\ 2]) = [0{,}\ 4]$.
-
-- **$f([2{,}\ +\infty[)$** : $f$ est strictement croissante de $0$ a $+\infty$, donc $f([2{,}\ +\infty[) = [0{,}\ +\infty[$.
-
-**f)** Montrons que $f(x) = 1$ admet exactement $3$ solutions.
-
-**Sur $]{-}\infty{,}\ 0]$** : $f$ est strictement croissante et continue, avec $\displaystyle\lim_{x \to -\infty} f(x) = -\infty$ et $f(0) = 4$.
-
-Comme $1 \in {]{-}\infty{,}\ 4[}$, par le TVI il existe une **unique** solution $\alpha_1 \in {]{-}\infty{,}\ 0[}$.
-
-**Sur $[0{,}\ 2]$** : $f$ est strictement decroissante et continue de $f(0) = 4$ a $f(2) = 0$.
-
-Comme $1 \in {]0{,}\ 4[}$, par le TVI il existe une **unique** solution $\alpha_2 \in {]0{,}\ 2[}$.
-
-**Sur $[2{,}\ +\infty[$** : $f$ est strictement croissante et continue de $f(2) = 0$ a $+\infty$.
-
-Comme $1 \in {]0{,}\ +\infty[}$, par le TVI il existe une **unique** solution $\alpha_3 \in {]2{,}\ +\infty[}$.
-
-L'equation $f(x) = 1$ admet **exactement $3$ solutions**.
+Verification : $f(-1) = -1 - 3 + 4 = 0$. Correct.
 
 ---
 
-**Encadrement de $\alpha_1$ par dichotomie** :
+**Partie B**
 
-On cherche $\alpha_1$ dans $]{-}\infty{,}\ 0[$. Localisons d'abord :
+**4. Solutions de $f(x) = 1$ :**
 
-- $f(-2) = -8 - 12 + 4 = -16 < 1$
-- $f(-1) = 0 < 1$
-- $f(0) = 4 > 1$
+On etudie l'equation $f(x) = 1$ sur chaque intervalle de monotonie.
 
-Donc $\alpha_1 \in {]{-}1{,}\ 0[}$. On affine par dichotomie sur $[-1{,}\ 0]$ avec $g(x) = f(x) - 1 = x^3 - 3x^2 + 3$.
+**Sur $]{-\infty}, 0]$ :** $f$ est strictement croissante, de $-\infty$ a $f(0) = 4$.
 
-- $g(-1) = -1 - 3 + 3 = -1 < 0$ et $g(0) = 3 > 0$
+Comme $1 \in {]{-\infty}, 4[}$, par le TVI, il existe $\alpha \in {]{-\infty}, 0[}$ tel que $f(\alpha) = 1$.
 
-**Etape 1** : milieu $x_0 = -0{,}5$.
+Par stricte monotonie (croissance stricte), $\alpha$ est **unique** sur $]{-\infty}, 0]$.
 
-$g(-0{,}5) = (-0{,}5)^3 - 3 \times (-0{,}5)^2 + 3 = -0{,}125 - 0{,}75 + 3 = 2{,}125 > 0$
+**Sur $[0, 2]$ :** $f$ est strictement decroissante, de $f(0) = 4$ a $f(2) = 0$.
 
-Donc $\alpha_1 \in {]{-}1{,}\ -0{,}5[}$.
+Comme $1 \in {]0, 4[}$, par le TVI, il existe $c_1 \in {]0, 2[}$ tel que $f(c_1) = 1$.
 
-**Etape 2** : milieu $x_1 = -0{,}75$.
+Par stricte monotonie (decroissance stricte), $c_1$ est **unique** sur $[0, 2]$.
 
-$g(-0{,}75) = (-0{,}75)^3 - 3 \times (-0{,}75)^2 + 3 = -0{,}421875 - 1{,}6875 + 3 = 0{,}890625 > 0$
+**Sur $[2, +\infty[$ :** $f$ est strictement croissante, de $f(2) = 0$ a $+\infty$.
 
-Donc $\alpha_1 \in {]{-}1{,}\ -0{,}75[}$.
+Comme $1 \in {]0, +\infty[}$, par le TVI, il existe $c_2 \in {]2, +\infty[}$ tel que $f(c_2) = 1$.
 
-**Etape 3** : milieu $x_2 = -0{,}875$.
+Par stricte monotonie (croissance stricte), $c_2$ est **unique** sur $[2, +\infty[$.
 
-$g(-0{,}875) = (-0{,}875)^3 - 3 \times (-0{,}875)^2 + 3 = -0{,}669921875 - 2{,}296875 + 3 = 0{,}033203125 > 0$
+**Conclusion :** l'equation $f(x) = 1$ admet **exactement trois solutions** : $\alpha < 0$, $c_1 \in {]0, 2[}$, et $c_2 \in {]2, +\infty[$.
 
-Donc $\alpha_1 \in {]{-}1{,}\ -0{,}875[}$.
+---
 
-**Etape 4** : milieu $x_3 = -0{,}9375$.
+**5. Dichotomie pour $\alpha$ :**
 
-$g(-0{,}9375) = (-0{,}9375)^3 - 3 \times (-0{,}9375)^2 + 3$
+On cherche $\alpha \in {]{-\infty}, 0[}$ tel que $f(\alpha) = 1$, c'est-a-dire $g(\alpha) = 0$ avec $g(x) = f(x) - 1 = x^3 - 3x^2 + 3$.
 
-$= -0{,}8245\ldots - 2{,}6367\ldots + 3 = -0{,}4613\ldots < 0$
+Localisation initiale :
 
-Donc $\alpha_1 \in {]{-}0{,}9375{,}\ -0{,}875[}$.
+$$g(-1) = -1 - 3 + 3 = -1 < 0 \quad ; \quad g(0) = 3 > 0$$
 
-Les deux bornes sont dans $]{-}1{,}0{,}\ -0{,}9[$ :
+Donc $\alpha \in {]-1, 0[}$.
 
-$$-1{,}0 < -0{,}9375 < \alpha_1 < -0{,}875 < -0{,}8$$
+**Etape 1 :** milieu $m = -0{,}5$.
 
-Donc $\alpha_1 \in {]{-}1{,}0{,}\ -0{,}9[}$, soit :
+$$g(-0{,}5) = (-0{,}5)^3 - 3(-0{,}5)^2 + 3 = -0{,}125 - 0{,}75 + 3 = 2{,}125 > 0$$
 
-$$\boxed{-1{,}0 < \alpha_1 < -0{,}9}$$
+$g(-1) < 0$ et $g(-0{,}5) > 0$, donc $\alpha \in {]-1, -0{,}5[}$.
 
-L'encadrement a $0{,}1$ pres est : $\alpha_1 \approx -0{,}9$ a $0{,}1$ pres.
+**Etape 2 :** milieu $m = -0{,}75$.
+
+$$g(-0{,}75) = (-0{,}75)^3 - 3(-0{,}75)^2 + 3 = -0{,}421875 - 1{,}6875 + 3 = 0{,}890625 > 0$$
+
+$g(-1) < 0$ et $g(-0{,}75) > 0$, donc $\alpha \in {]-1, -0{,}75[}$.
+
+**Etape 3 :** milieu $m = -0{,}875$.
+
+$$g(-0{,}875) = (-0{,}875)^3 - 3(-0{,}875)^2 + 3 \approx -0{,}6699 - 2{,}2969 + 3 = 0{,}033 > 0$$
+
+$g(-1) < 0$ et $g(-0{,}875) > 0$, donc $\alpha \in {]-1, -0{,}875[}$.
+
+**Etape 4 :** milieu $m = -0{,}9375$.
+
+$$g(-0{,}9375) \approx -0{,}8245 - 2{,}6367 + 3 = -0{,}461 < 0$$
+
+$g(-0{,}9375) < 0$ et $g(-0{,}875) > 0$, donc $\alpha \in {]-0{,}9375, -0{,}875[}$.
+
+Conclusion : $\alpha \in {]-1, -0{,}9[}$, soit a $10^{-1}$ pres :
+
+$$\boxed{-1 < \alpha < -0{,}9}$$
+
+---
+
+**6. Images d'intervalles :**
+
+**$f(]{-\infty}, 0])$ :** $f$ est strictement croissante de $-\infty$ a $f(0) = 4$.
+
+$$f(]{-\infty}, 0]) = {]{-\infty}, 4]}$$
+
+**$f([0, 2])$ :** $f$ est strictement decroissante de $f(0) = 4$ a $f(2) = 0$.
+
+$$f([0, 2]) = [0, 4]$$
+
+**$f([2, +\infty[)$ :** $f$ est strictement croissante de $f(2) = 0$ a $+\infty$.
+
+$$f([2, +\infty[) = [0, +\infty[$$
+:::
+
+:::methode
+Pour un exercice type BAC complet :
+1. **Factorisation** : verifier par developpement, utile pour lire les zeros
+2. **Variations** : deriver, signe de $f'$, tableau complet avec valeurs aux bornes
+3. **Nombre de solutions** : etudier $f(x) = k$ sur chaque intervalle de monotonie (TVI + injectivite)
+4. **Dichotomie** : se ramener a $g(x) = 0$, calculer les signes aux milieux successifs
+5. **Images** : lire directement dans le tableau de variation
 :::
 
 :::erreurs
-- **Oublier la racine double** : $x = 2$ est un zero de multiplicite $2$ (la courbe touche l'axe sans le traverser). Il faut bien distinguer « $2$ solutions distinctes » de « $3$ racines comptees avec multiplicite ».
-- **Pour $f(x) = 1$, ne considerer qu'un seul intervalle** : il faut analyser chaque intervalle de monotonie separement (ici trois intervalles, trois solutions).
-- **Mauvaise initialisation de la dichotomie** : l'intervalle de depart doit contenir la racine. Ici $g(-1) < 0$ et $g(0) > 0$, donc on part de $[-1{,}\ 0]$.
+- Pour la dichotomie : travailler avec $g(x) = f(x) - 1 = 0$ et non avec $f(x) = 1$ directement (il faut comparer les signes, pas les valeurs).
+- Confondre racine simple et double : en $x = 2$, $f$ touche l'axe sans le traverser car $f(2) = 0$ est un minimum local.
+- Oublier de justifier l'unicite sur chaque intervalle : le TVI seul donne l'existence, il faut la monotonie stricte pour l'unicite.
 :::

@@ -30,7 +30,7 @@ Genere un planning de livret a partir d'une KB module. Le planning declare tous 
 
 ### Pre-requis
 
-- Meta module existante (`_meta/modules/{module}/` avec savoir.md, praxeologies.md)
+- Meta module existante (`_meta/modules/{module}/` avec savoir.yaml, praxeologies.yaml)
 - Si pas de meta : creer d'abord la KB (`/content kb {module}`)
 
 ### Syntaxe
@@ -60,11 +60,11 @@ Exemples :
    - Ces contraintes sont appliquees a l'etape 4 (generation) et 5 (verification)
    - Si aucune spec : generer un planning par defaut (couverture complete, equilibre standard)
 
-1. **Charge la meta module** : Read `_meta/modules/{module}/savoir.md` + `_meta/modules/{module}/praxeologies.md`
+1. **Charge la meta module** : Read `_meta/modules/{module}/savoir.yaml` + `_meta/modules/{module}/praxeologies.yaml`
 
 2. **Charge le template planning** : Read `.claude/skills/content/references/planning-template.yaml`
 
-3. **Analyse les praxeologies** de `_meta/modules/{module}/praxeologies.md` :
+3. **Analyse les praxeologies** de `_meta/modules/{module}/praxeologies.yaml` :
    - Lister toutes les praxeologies avec leur difficulte
    - Identifier les groupements thematiques naturels
 
@@ -126,7 +126,7 @@ Voir [actions/enrich-patterns.md](actions/enrich-patterns.md) pour le pipeline c
 
 ### Pre-requis
 
-- Meta module existante (`_meta/modules/{module}/` avec savoir.md, praxeologies.md)
+- Meta module existante (`_meta/modules/{module}/` avec savoir.yaml, praxeologies.yaml)
 - Si pas de meta : creer d'abord la KB (`/content kb {module}`)
 
 ### Syntaxe
@@ -139,7 +139,7 @@ L'utilisateur fournit des exercices en contexte (transcriptions Typst, texte, im
 
 ### Etapes
 
-1. **Charge la meta module** : lire `_meta/modules/{module}/savoir.md` + `_meta/modules/{module}/praxeologies.md`
+1. **Charge la meta module** : lire `_meta/modules/{module}/savoir.yaml` + `_meta/modules/{module}/praxeologies.yaml`
 
 2. **Charge `_meta/modules/{module}/patterns.yaml` existant** (ou creer la structure vide si premier appel)
 
@@ -296,7 +296,7 @@ Atomes:     content/{programme}/{module}/{type}-{topic}-{slug}.mdx
 Molecules:  content/{programme}/{module}/_molecules/{slug}/molecule.yaml
 Planning:   content/{programme}/{module}/_molecules/{slug}/_planning.yaml
 Validation: content/{programme}/{module}/_molecules/{slug}/_validation.md
-Meta:       _meta/modules/{module}/  (savoir.md, praxeologies.md, patterns.yaml, etc.)
+Meta:       _meta/modules/{module}/  (savoir.yaml, praxeologies.yaml, patterns.yaml, redaction.yaml, etc.)
 Programme:  content/{programme}/_programme.yaml
 ```
 
@@ -368,13 +368,15 @@ Commandes liees : `/source scan`, `/source discover`, `/source status`
 
 ### Meta (modele academique)
 - Interface : `_meta/_interface.yaml`
-- Savoir module : `_meta/modules/{module}/savoir.md`
-- Praxeologies : `_meta/modules/{module}/praxeologies.md`
+- Savoir module : `_meta/modules/{module}/savoir.yaml`
+- Praxeologies : `_meta/modules/{module}/praxeologies.yaml`
 - Patterns : `_meta/modules/{module}/patterns.yaml`
-- Misconceptions : `_meta/modules/{module}/misconceptions.md`
-- Lexique module : `_meta/modules/{module}/lexique.md`
+- Misconceptions : `_meta/modules/{module}/misconceptions.yaml`
+- Lexique module : `_meta/modules/{module}/lexique.yaml`
+- Redaction : `_meta/modules/{module}/redaction.yaml`
 - Specs examen : `_meta/examens/{slug}.yaml`
-- Globaux : `_meta/global/` (lexique.md, complexite.md, prerequis-graph.yaml)
+- Globaux : `_meta/global/` (lexique.yaml, complexite.yaml, prerequis-graph.yaml)
+
 
 ### Difficulty scale
 

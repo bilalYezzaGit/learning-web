@@ -4,7 +4,7 @@ title: "Continuite d'une fonction a deux morceaux"
 difficulty: 1
 timeMinutes: 10
 category: application
-tags: [continuite, morceaux, laterale, raccordement]
+tags: [continuite, morceaux, raccordement]
 praxeologies: [Prax3]
 ---
 
@@ -13,34 +13,35 @@ Soit $f$ la fonction definie sur $\mathbb{R}$ par :
 
 $$f(x) = \begin{cases} x^2 - 3x + 2 & \text{si } x \leq 2 \\ \sqrt{x - 2} & \text{si } x > 2 \end{cases}$$
 
-1. Justifier que $f$ est continue sur $]-\infty{,}\ 2[$ et sur $]2{,}\ +\infty[$.
-2. Etudier la continuite de $f$ en $2$.
-3. $f$ est-elle continue sur $\mathbb{R}$ ? Justifier.
+**a)** Montrer que $f$ est continue sur $]{-}\infty, 2[$ et sur $]2, +\infty[$.
+
+**b)** Etudier la continuite de $f$ en $2$.
+
+**c)** $f$ est-elle continue sur $\mathbb{R}$ ? Justifier.
 :::
 
 :::solution
-**1.** Sur $]-\infty{,}\ 2[$ : $f(x) = x^2 - 3x + 2$ est une fonction polynome, donc **continue** sur $]-\infty{,}\ 2[$.
+**a)** Sur $]{-}\infty, 2[$ : $f(x) = x^2 - 3x + 2$ est un polynome, donc continue sur $\mathbb{R}$, et en particulier sur $]{-}\infty, 2[$ (T1).
 
-Sur $]2{,}\ +\infty[$ : $f(x) = \sqrt{x - 2}$. La fonction $x \mapsto x - 2$ est affine, continue, et strictement positive sur $]2{,}\ +\infty[$. Donc $f$ est **continue** sur $]2{,}\ +\infty[$.
+Sur $]2, +\infty[$ : $f(x) = \sqrt{x - 2}$. La fonction $x - 2$ est un polynome, continu sur $\mathbb{R}$ (T1), et pour tout $x > 2$, $x - 2 > 0$. Donc $\sqrt{x - 2}$ est continue sur $]2, +\infty[$ (T5).
 
-**2.** On calcule les limites laterales et la valeur en $2$ :
+**b)** On etudie la continuite de $f$ en $2$ en calculant les limites laterales et $f(2)$.
 
-- $f(2) = 2^2 - 3(2) + 2 = 4 - 6 + 2 = 0$
-- $\lim_{x \to 2^-} f(x) = \lim_{x \to 2^-} (x^2 - 3x + 2) = 4 - 6 + 2 = 0$
-- $\lim_{x \to 2^+} f(x) = \lim_{x \to 2^+} \sqrt{x - 2} = \sqrt{0} = 0$
+**Valeur de $f(2)$** : comme $2 \leq 2$, on utilise la premiere expression :
+
+$$f(2) = 2^2 - 3 \times 2 + 2 = 4 - 6 + 2 = 0$$
+
+**Limite a gauche** :
+
+$$\lim_{x \to 2^-} f(x) = \lim_{x \to 2^-} (x^2 - 3x + 2) = 4 - 6 + 2 = 0$$
+
+**Limite a droite** :
+
+$$\lim_{x \to 2^+} f(x) = \lim_{x \to 2^+} \sqrt{x - 2} = \sqrt{0} = 0$$
 
 On a $\lim_{x \to 2^-} f(x) = \lim_{x \to 2^+} f(x) = f(2) = 0$.
 
-Donc $f$ est **continue en $2$**.
+Donc $f$ est continue en $2$ (T6).
 
-**3.** $f$ est continue sur $]-\infty{,}\ 2[$, continue en $2$, et continue sur $]2{,}\ +\infty[$.
-
-Par suite, $f$ est **continue sur $\mathbb{R}$**.
-:::
-
-:::methode
-Pour une fonction par morceaux :
-1. Verifier la continuite sur chaque morceau ouvert (par type)
-2. Au point de raccordement : calculer $f(a)$, $\lim_{x \to a^-} f(x)$ et $\lim_{x \to a^+} f(x)$
-3. Conclure : continuite si et seulement si les trois valeurs sont egales
+**c)** D'apres **a)**, $f$ est continue sur $]{-}\infty, 2[$ et sur $]2, +\infty[$. D'apres **b)**, $f$ est continue en $2$. Donc $f$ est continue sur $\mathbb{R}$.
 :::

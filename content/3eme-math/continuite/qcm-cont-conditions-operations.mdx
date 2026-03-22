@@ -1,14 +1,14 @@
 ---
 type: qcm
-title: "Conditions de continuité des opérations"
+title: "Conditions de continuite des operations"
 difficulty: 1
 timeMinutes: 2
-tags: [continuité, opérations, conditions]
+tags: [continuite, operations, conditions]
 praxeologies: [Prax2, Prax9]
 ---
 
 :::question
-Soient $f$ et $g$ deux fonctions continues en $a$. Laquelle des fonctions suivantes n'est **pas nécessairement** continue en $a$ ?
+Soit $f$ et $g$ deux fonctions continues en $a$. Laquelle des fonctions suivantes n'est **pas necessairement** continue en $a$ ?
 :::
 
 :::option
@@ -16,19 +16,21 @@ $f + g$
 :::
 
 :::option
-$3f - 2g$
-:::
-
-:::option{correct}
-$\dfrac{f}{g}$
-:::
-
-:::option
 $f \times g$
 :::
 
-:::explanation
-Le quotient $\dfrac{f}{g}$ n'est continu en $a$ que si $g(a) \neq 0$. Si $g(a) = 0$, le quotient n'est même pas défini en $a$, donc on ne peut pas parler de continuité.
+:::option{correct}
+$\sqrt{f}$
+:::
 
-Les trois autres ($f + g$, $3f - 2g$ et $f \times g$) sont toujours continues en $a$ lorsque $f$ et $g$ le sont, sans condition supplémentaire.
+:::option
+$|f|$
+:::
+
+:::explanation
+La somme $f + g$, le produit $f \times g$ et la valeur absolue $|f|$ sont toujours continues en $a$ des lors que $f$ et $g$ le sont (aucune condition supplementaire).
+
+En revanche, $\sqrt{f}$ n'est continue en $a$ que si $f(a) > 0$ (**strictement**). Si $f(a) < 0$, la fonction n'est meme pas definie ; si $f(a) = 0$, le theoreme ne s'applique pas directement.
+
+La condition supplementaire rend $\sqrt{f}$ **pas necessairement continue** en $a$.
 :::

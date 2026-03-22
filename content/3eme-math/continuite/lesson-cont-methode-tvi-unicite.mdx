@@ -3,31 +3,49 @@ type: lesson
 title: "Methode — TVI + unicite par monotonie"
 difficulty: 1
 timeMinutes: 5
-tags: [continuite, tvi, unicite, monotonie, methode]
+tags: [continuite, tvi, unicite, methode]
 praxeologies: [Prax4, Prax5]
 ---
 
-### Schema en deux etapes
+### Schema standard en deux etapes
 
-Pour montrer qu'une equation $f(x) = 0$ admet une **unique** solution dans un intervalle $[a{,}\ b]$, il faut toujours proceder en **deux etapes separees**.
+Pour montrer qu'une equation $f(x) = 0$ admet une **unique** solution dans un intervalle $[a, b]$, on procede toujours en **deux etapes separees**.
 
 ### Etape 1 — Existence (TVI)
 
-1. Verifier que $f$ est **continue** sur $[a{,}\ b]$
+:::theorem[Theoreme des valeurs intermediaires (T8)]
+Soit $f$ une fonction continue sur $[a, b]$. Pour tout reel $k$ compris entre $f(a)$ et $f(b)$, l'equation $f(x) = k$ admet **au moins une** solution dans $[a, b]$.
+:::
+
+**En pratique pour $f(x) = 0$** :
+
+1. Justifier que $f$ est continue sur $[a, b]$
 2. Calculer $f(a)$ et $f(b)$
-3. Constater que $f(a) \times f(b) < 0$ (signes opposes)
-4. Conclure : par le TVI, il existe **au moins un** $c \in ]a{,}\ b[$ tel que $f(c) = 0$
+3. Constater que $f(a)$ et $f(b)$ sont de signes contraires : $f(a) \cdot f(b) < 0$
+4. Conclure : par le TVI, il existe au moins un $c \in {]a, b[}$ tel que $f(c) = 0$
 
-### Etape 2 — Unicite (monotonie stricte)
+### Etape 2 — Unicite (monotonie)
 
-1. Calculer $f'(x)$ sur $[a{,}\ b]$
-2. Montrer que $f'(x) > 0$ (ou $f'(x) < 0$) pour tout $x \in [a{,}\ b]$
-3. Conclure : $f$ est strictement monotone, donc la solution est **unique**
-
-:::attention[Toujours separer les deux etapes]
-Ne jamais ecrire directement « $f(x) = 0$ admet une unique solution » sans avoir montre les deux etapes. Le TVI donne l'existence, la monotonie donne l'unicite. Ce sont deux arguments **distincts**.
+:::theorem[Unicite par monotonie stricte (T9)]
+Si de plus $f$ est **strictement monotone** sur $[a, b]$, alors la solution est **unique**.
 :::
 
-:::remark
-Pour l'equation $f(x) = k$ (avec $k \neq 0$), on pose $g(x) = f(x) - k$ et on applique le meme schema a $g(x) = 0$. Ou bien, on applique directement le TVI a $f$ avec la valeur $k$ comprise entre $f(a)$ et $f(b)$.
+**En pratique** :
+
+1. Calculer $f'(x)$
+2. Montrer que $f'(x) > 0$ sur $[a, b]$ (ou $f'(x) < 0$) pour prouver la monotonie stricte
+3. Conclure : la solution est unique
+
+:::attention[Erreur frequente]
+Ne jamais ecrire « par le TVI, l'equation admet **une unique** solution » sans avoir prouve la monotonie. Le TVI seul ne donne que l'**existence** (au moins une solution), pas l'**unicite**.
+
+Les deux etapes doivent toujours etre **separees et explicites**.
 :::
+
+### Exemple type
+
+Montrer que $f(x) = x^3 + 3x - 1$ admet une unique solution dans $[0, 1]$.
+
+**Existence** : $f$ est un polynome, donc continue sur $[0, 1]$ (T1). $f(0) = -1 < 0$ et $f(1) = 3 > 0$. Comme $f(0) \cdot f(1) < 0$, par le TVI, $f(x) = 0$ admet au moins une solution dans $]0, 1[$.
+
+**Unicite** : $f'(x) = 3x^2 + 3 > 0$ pour tout $x \in \mathbb{R}$. Donc $f$ est strictement croissante sur $[0, 1]$. Par T9, la solution est unique.

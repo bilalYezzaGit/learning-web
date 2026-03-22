@@ -1,53 +1,69 @@
 ---
 type: lesson
-title: "Définition et interprétation graphique de la continuité"
+title: "Definition et interpretation graphique de la continuite"
 difficulty: 0
 timeMinutes: 10
-tags: [continuité, définition, fonctions-usuelles]
+tags: [continuite, definition, fonctions-usuelles]
 praxeologies: [Prax1]
 ---
 
-### Qu'est-ce que la continuité ?
+### Intuition : tracer sans lever le crayon
 
-Intuitivement, une fonction est **continue** lorsque sa courbe peut être tracée **sans lever le crayon**.
+Observe la courbe d'une fonction $f$. Si tu peux la tracer **sans lever le crayon** au voisinage d'un point $a$, alors $f$ est **continue en $a$**.
 
-:::definition[Continuité en un point]
-Soit $f$ une fonction définie sur un intervalle ouvert $I$ et $a$ un réel de $I$.
+A l'inverse, si la courbe presente un **saut** en $a$ (un trou, un point isole, ou un changement brusque), alors $f$ n'est **pas continue en $a$**.
 
-On dit que $f$ est **continue en $a$** si pour tout nombre $\beta > 0$, il existe un nombre $\alpha > 0$ tel que :
+### Definition formelle
 
-$$\text{si } x \in I \text{ et } |x - a| < \alpha, \text{ alors } |f(x) - f(a)| < \beta$$
+:::definition[Continuite en un point]
+Soit $f$ une fonction definie sur un intervalle ouvert $I$ et $a \in I$.
+
+$f$ est **continue en $a$** si : pour tout $\beta > 0$, il existe $\alpha > 0$ tel que :
+
+$$|x - a| < \alpha \implies |f(x) - f(a)| < \beta$$
 :::
 
 :::remark
-Le programme tunisien utilise $\alpha$ et $\beta$ (et non $\varepsilon$ et $\delta$) dans la définition de la continuité.
+La convention tunisienne utilise $\alpha$ et $\beta$ (et non $\varepsilon$ et $\delta$). L'idee reste la meme : en prenant $x$ suffisamment proche de $a$, on peut rendre $f(x)$ aussi proche de $f(a)$ que l'on veut.
 :::
 
-### Discontinuité
+### Contre-exemple : la partie entiere
 
-Une fonction **non continue** en $a$ est dite **discontinue en $a$**. Graphiquement, on observe un **saut** ou une **rupture** dans la courbe.
+La fonction **partie entiere** $E(x)$ est definie par : $E(x) = n$ si $n \leqslant x < n + 1$.
 
-:::example[Contre-exemple fondamental]
-La **partie entière** $f(x) = E(x)$ est discontinue en tout entier $n$.
+En tout entier $n$, on observe un **saut** :
+- $\lim_{x \to n^-} E(x) = n - 1$
+- $\lim_{x \to n^+} E(x) = n$
+- $E(n) = n$
 
-En effet, $\lim_{x \to n^-} E(x) = n - 1$ et $\lim_{x \to n^+} E(x) = n$. Les limites latérales sont différentes : il y a un saut.
+Les limites a gauche et a droite sont differentes, donc $E$ est **discontinue en tout entier**.
+
+:::attention[Piege classique]
+$E(x)$ est continue entre les entiers (sur chaque intervalle $]n, n+1[$), mais **discontinue en chaque entier $n$**.
 :::
 
 ### Fonctions usuelles continues
 
-:::theorem[Continuité des fonctions usuelles]
-Les fonctions suivantes sont continues sur leur domaine de définition :
+:::property[Continuite des fonctions usuelles]
+Les fonctions suivantes sont continues sur leur domaine de definition :
 
-- Toute fonction **constante** est continue en tout réel $a$
-- Toute fonction **linéaire** $x \mapsto ax$ est continue en tout réel $a$
-- Toute fonction **affine** $x \mapsto ax + b$ est continue en tout réel $a$
-- La fonction $x \mapsto x^2$ est continue en tout réel $a$
-- Toute **fonction polynôme** est continue sur $\mathbb{R}$
-- La fonction $x \mapsto \dfrac{1}{x}$ est continue en tout réel non nul $a$
-- Toute **fonction rationnelle** est continue en tout réel où elle est définie
-- La fonction $x \mapsto \sqrt{x}$ est continue en tout réel strictement positif $a$
+| Fonction | Domaine de continuite |
+|---|---|
+| Constante $f(x) = c$ | $\mathbb{R}$ |
+| Identite $f(x) = x$ | $\mathbb{R}$ |
+| Affine $f(x) = ax + b$ | $\mathbb{R}$ |
+| Polynome $f(x) = a_n x^n + \cdots + a_0$ | $\mathbb{R}$ |
+| Rationnelle $f(x) = \dfrac{P(x)}{Q(x)}$ | $\{x \in \mathbb{R} : Q(x) \neq 0\}$ |
+| Racine carree $f(x) = \sqrt{x}$ | $\mathbb{R}^{+*}$ |
+| Valeur absolue $f(x) = \lvert x \rvert$ | $\mathbb{R}$ |
 :::
 
-:::attention[Domaine de définition]
-Ces fonctions sont continues **sur leur domaine de définition**. Par exemple, $\dfrac{1}{x}$ n'est pas définie en $0$, donc on ne peut pas parler de continuité en $0$.
+:::remark
+Ces resultats sont admis. Ils servent de **briques de base** pour justifier la continuite de fonctions plus complexes (voir la lecon sur les operations).
+:::
+
+:::example[Exemple]
+- $f(x) = 3x^4 - 2x + 7$ est un polynome, donc $f$ est **continue sur $\mathbb{R}$**.
+- $g(x) = \dfrac{x - 1}{x^2 + 3}$ est une fonction rationnelle. Comme $x^2 + 3 > 0$ pour tout $x \in \mathbb{R}$, $g$ est **continue sur $\mathbb{R}$**.
+- $h(x) = \sqrt{x}$ est continue sur $\mathbb{R}^{+*}$, mais on ne peut pas affirmer qu'elle est continue en tout reel.
 :::

@@ -7,7 +7,7 @@
 - Respecter les conventions du referentiel `docs/referentiels/redaction-mathematiques-tunisie.md`
 - Section 8 (Praxeologies) est la plus critique : 1 praxeologie = 1 type de tache + 1 technique
 - Section 9 (Misconceptions) : inclure des questions diagnostiques au format QCM
-- Output : fichiers splites dans `_meta/modules/{module}/` (savoir.md, praxeologies.md, misconceptions.md, lexique.md)
+- Output : fichiers splites dans `_meta/modules/{module}/` (savoir.yaml, praxeologies.yaml, misconceptions.yaml, lexique.yaml, redaction.yaml)
 
 ## Pre-requis
 
@@ -74,13 +74,14 @@ Croiser les 3 sources pour chaque section. Estimation de taille par section :
 
 ### Etape 6 — Ecrire les fichiers splites
 
-Ecrire la KB en 4 fichiers dans `_meta/modules/{module}/` :
+Ecrire la KB en 5 fichiers dans `_meta/modules/{module}/` :
 
 ```
-Write: _meta/modules/{module}/savoir.md        # Sections 0-7 (objectif, scope, transposition, prereqs, carte, theoremes, KC, exemples)
-Write: _meta/modules/{module}/praxeologies.md   # Section 8 (praxeologies)
-Write: _meta/modules/{module}/misconceptions.md # Section 9 (misconceptions + QCM diagnostiques)
-Write: _meta/modules/{module}/lexique.md        # Section 10 (regles redactionnelles, notations)
+Write: _meta/modules/{module}/savoir.yaml        # Sections 0-7 (objectif, scope, transposition, prereqs, carte, theoremes, KC, exemples)
+Write: _meta/modules/{module}/praxeologies.yaml   # Section 8 (praxeologies)
+Write: _meta/modules/{module}/misconceptions.yaml # Section 9 (misconceptions + QCM diagnostiques)
+Write: _meta/modules/{module}/lexique.yaml        # Section 10 (regles redactionnelles, notations)
+Write: _meta/modules/{module}/redaction.yaml    # Modeles de redaction et criteres de notation
 ```
 
 ### Etape 7 — Mettre a jour l'interface
@@ -92,17 +93,17 @@ modules:
   {module}:
     programme: {programme}
     kb_status: complete     # ou partial
-    files: [savoir, praxeologies, misconceptions, lexique]
+    files: [savoir, praxeologies, misconceptions, lexique, redaction]
 ```
 
 ## Checklist KB
 
 Avant de presenter le resultat a l'utilisateur, verifier :
 
-- [ ] Les 10 sections sont presentes et remplies (reparties sur les 4 fichiers)
+- [ ] Les 10 sections sont presentes et remplies (reparties sur les 5 fichiers)
 - [ ] Chaque praxeologie a T, tau, theta, variables didactiques, difficulte
 - [ ] Chaque misconception a une question diagnostique QCM
 - [ ] Les notations suivent le referentiel tunisien
 - [ ] Les liens inter-modules sont corrects (prerequisites, ouvre vers)
-- [ ] Les 4 fichiers sont bien places dans `_meta/modules/{module}/`
+- [ ] Les 5 fichiers sont bien places dans `_meta/modules/{module}/`
 - [ ] `_meta/_interface.yaml` est mis a jour avec l'entree du module

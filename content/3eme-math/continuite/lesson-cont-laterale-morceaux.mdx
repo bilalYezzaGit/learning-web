@@ -3,44 +3,66 @@ type: lesson
 title: "Continuite a droite, a gauche, et fonctions par morceaux"
 difficulty: 0
 timeMinutes: 8
-tags: [continuite, laterale, morceaux]
+tags: [continuite, laterale, morceaux, raccordement]
 praxeologies: [Prax3]
 ---
 
 ### Continuite laterale
 
 :::definition[Continuite a droite]
-$f$ est **continue a droite en $a$** si pour tout $\beta > 0$, il existe $\alpha > 0$ tel que :
+$f$ est **continue a droite en $a$** si :
 
-$$0 \leq x - a < \alpha \implies |f(x) - f(a)| < \beta$$
+$$\lim_{x \to a^+} f(x) = f(a)$$
 :::
 
 :::definition[Continuite a gauche]
-$f$ est **continue a gauche en $a$** si pour tout $\beta > 0$, il existe $\alpha > 0$ tel que :
+$f$ est **continue a gauche en $a$** si :
 
-$$0 \leq a - x < \alpha \implies |f(x) - f(a)| < \beta$$
+$$\lim_{x \to a^-} f(x) = f(a)$$
 :::
 
 ### Lien avec la continuite
 
-:::theorem[Equivalence]
+:::theorem[Continuite et continuite laterale]
 $f$ est continue en $a$ si et seulement si $f$ est **continue a droite** et **continue a gauche** en $a$.
+
+$$f \text{ continue en } a \iff \lim_{x \to a^-} f(x) = \lim_{x \to a^+} f(x) = f(a)$$
 :::
+
+Ce theoreme est l'outil central pour etudier les **fonctions definies par morceaux**.
 
 ### Methode pour les fonctions par morceaux
 
-Pour etudier la continuite d'une fonction definie par morceaux au point de raccordement $x_0$ :
+Soit $f$ une fonction definie par morceaux avec un point de raccordement en $x_0$ :
 
-1. **Sur chaque morceau ouvert** : identifier le type (polynome, rationnelle...) et conclure par les theoremes
-2. **Au point de raccordement** : calculer $\lim_{x \to x_0^-} f(x)$, $\lim_{x \to x_0^+} f(x)$ et $f(x_0)$
-3. **Conclure** : si les trois sont egaux, $f$ est continue en $x_0$
+1. **Sur chaque morceau ouvert** : identifier le type de chaque expression (polynome, rationnelle...) et conclure qu'elle est continue sur son intervalle ouvert.
+2. **Au point de raccordement $x_0$** :
+   - Calculer $\lim_{x \to x_0^-} f(x)$ (limite a gauche)
+   - Calculer $\lim_{x \to x_0^+} f(x)$ (limite a droite)
+   - Calculer $f(x_0)$
+3. **Conclure** : si les trois valeurs sont egales, $f$ est continue en $x_0$. Sinon, $f$ est discontinue en $x_0$.
 
-:::example[Fonction par morceaux continue]
-$$f(x) = \begin{cases} 2x + 1 & \text{si } x > 1 \\ 3 & \text{si } x = 1 \\ 3x - 1 & \text{si } x < 1 \end{cases}$$
+### Exemple detaille
 
-- $\lim_{x \to 1^+} f(x) = 2(1) + 1 = 3$
+:::example[Fonction par morceaux]
+Soit $f$ definie par :
+
+$$f(x) = \begin{cases} 3x - 1 & \text{si } x < 1 \\ 3 & \text{si } x = 1 \\ 2x + 1 & \text{si } x > 1 \end{cases}$$
+
+**Sur $]{-\infty}, 1[$ :** $f(x) = 3x - 1$ est un polynome, donc continue.
+
+**Sur $]1, +\infty[$ :** $f(x) = 2x + 1$ est un polynome, donc continue.
+
+**En $x_0 = 1$ :**
 - $\lim_{x \to 1^-} f(x) = 3(1) - 1 = 2$
+- $\lim_{x \to 1^+} f(x) = 2(1) + 1 = 3$
 - $f(1) = 3$
 
-Comme $\lim_{x \to 1^-} f(x) = 2 \neq 3 = f(1)$, la fonction $f$ **n'est pas continue en $1$**.
+On a $\lim_{x \to 1^-} f(x) = 2 \neq 3 = \lim_{x \to 1^+} f(x)$.
+
+Les limites laterales sont differentes, donc $f$ est **discontinue en $1$**.
+:::
+
+:::remark
+Meme si $f(1) = \lim_{x \to 1^+} f(x) = 3$ (continuite a droite), la limite a gauche vaut $2 \neq 3$. Il suffit qu'**une seule** des trois conditions ne soit pas remplie pour que la continuite echoue.
 :::
