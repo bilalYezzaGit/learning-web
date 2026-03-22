@@ -52,6 +52,7 @@ content/       Systeme de production de livrets
 | Complexite | `→ complexite.yaml` | Echelle 0-3 avec criteres, correspondance types d'atomes | YAML |
 | Lexique global | `→ lexique.yaml` | Vocabulaire partage, verbes d'action, conventions de demonstration | YAML |
 | Prerequis | `→ prerequis-graph.yaml` | Graphe de dependances entre modules (ordre, trimestres) | YAML |
+| Profils livrets | `→ booklet-profiles.yaml` | Calibration des 3 types de livrets (cours, examen, exploration) : nb atomes, difficulte, categories, contextes, progression | YAML |
 | **Examens** | `_meta/examens/` | Specs par examen | |
 | Spec examen | `→ {slug}.yaml` | Structure, duree, distribution par module, patterns transversaux | YAML |
 
@@ -218,7 +219,8 @@ Declare tous les atomes et la structure d'un livret AVANT generation.
 ```mermaid
 flowchart TD
     KB[("_meta/modules/{mod}/\nsavoir.yaml + praxeologies.yaml")] --> Analyse["2a — Analyser les praxeologies"]
-    Analyse --> Gen["2b — Generer _molecules/{slug}/_planning.yaml\natomes par molecule"]
+    PROF[("booklet-profiles.yaml\ncours | examen | exploration")] --> Gen
+    Analyse --> Gen["2b — Generer _planning.yaml\ncalibre par le profil"]
     TPL["planning-template.yaml"] -.-> Gen
     EXAM[("_meta/examens/{slug}.yaml\n(optionnel)")] -.-> Gen
     Gen --> PlanD[("_planning.yaml per-molecule\nstatus: draft")]
@@ -227,28 +229,41 @@ flowchart TD
     Review -->|"valide"| PlanV[("_planning.yaml\nstatus: validated")]
 ```
 
-**Entree** : KB module + (optionnel) spec examen
+**Entree** : KB module + profil de livret (cours/examen/exploration) + (optionnel) spec examen
 **Sortie** : `content/{prog}/{mod}/_molecules/{slug}/_planning.yaml` avec `status: validated`
 
-Le planning contient un champ `meta_refs` qui pointe vers `_meta/` :
+Le planning contient un champ `profile` et un champ `meta_refs` :
 ```yaml
+profile: cours                   # charge depuis booklet-profiles.yaml
 meta_refs:
   module: continuite           # → _meta/modules/continuite/
   # patterns: [Prax1.v1, ...]  # optionnel, pour livrets examen
   # examen: synthese-3eme-t3   # optionnel, pour livrets cross-module
 ```
 
+**Profils de livrets** (`_meta/global/booklet-profiles.yaml`) :
+
+| Profil | Difficulte | Atomes | Lecons | Exercices | QCM | Guidance |
+|--------|-----------|--------|--------|-----------|-----|----------|
+| `cours` | 0-1 | ~16 | ~5 (30%) | ~8 (50%) | ~4 (20%) | haute |
+| `examen` | 1-2 | ~17 | ~2 (10%) | ~10 (60%) | ~5 (30%) | moyenne |
+| `exploration` | 2-3 | ~10 | 0 (0%) | ~7 (70%) | ~3 (30%) | faible |
+
+Chaque profil definit : difficulty range, exercise_categories (required/forbidden), contexts (allowed/forbidden), expected_order, expected_duration.
+
 **Cycle de vie** : `draft` → `validated` (review humain) → `generated` (apres WF3)
 
 **Types de livrets possibles** :
-- **Par module** : 3 livrets (cours diff 0-1, examen diff 1-2, exploration diff 2-3)
+- **Par module** : 3 livrets (cours, examen, exploration — calibres par profil)
 - **Cross-module** : prepa examen combinant plusieurs modules (via `meta_refs.examen`)
 - **Libre** : toute combinaison de praxeologies et modules
 
 | Declencheur | Ressources chargees |
 |-------------|---------------------|
-| `/content plan {module}` | KB module, planning-template.yaml |
-| `/content plan {module} : {specs}` | idem, avec contraintes libres (nb molecules, difficulte, praxeologies) |
+| `/content plan {module} : cours` | KB module, booklet-profiles.yaml, planning-template.yaml |
+| `/content plan {module} : examen` | idem |
+| `/content plan {module} : exploration` | idem |
+| `/content plan {module} : cours, focus TVI` | idem, avec overrides libres |
 
 ---
 
@@ -435,8 +450,8 @@ Definit les schemas, les modules declares, les specs d'examen, et les convention
 | `/transcription {module}` | WF0b | Transcrire un module en Typst |
 | `/content kb {module}` | WF1 | Creer les 5 fichiers YAML dans `_meta/modules/` |
 | `/content patterns {module}` | WF1+ | Enrichir patterns.yaml avec des exercices |
-| `/content plan {module}` | WF2 | Generer le(s) planning(s) d'un livret |
-| `/content plan {module} : {specs}` | WF2 | idem avec contraintes (difficulte, nb molecules, praxeologies) |
+| `/content plan {module} : {profil}` | WF2 | Generer un planning calibre par profil (cours, examen, exploration) |
+| `/content plan {module} : {profil}, {specs}` | WF2 | idem avec overrides libres |
 | `/content creer {slug-molecule}` | WF3 | Generer les atomes + molecule depuis le planning |
 | `npm run generate` | WF4a | Compiler MDX → HTML/JSON + PDFs |
 | `/content valider {module}` | WF4b+c | Validation semantique complete |
@@ -457,7 +472,7 @@ Definit les schemas, les modules declares, les specs d'examen, et les convention
 | KB modules (_meta/) | 4 (6 fichiers YAML chacun) |
 | Patterns | 1 (nombre-derive, 30+ patterns documentes) |
 | Specs examen | 1 (synthese-3eme-t3) |
-| Fichiers _meta/ globaux | 3 (complexite, lexique, prerequis-graph) |
+| Fichiers _meta/ globaux | 4 (complexite, lexique, prerequis-graph, booklet-profiles) |
 | Fiches sources (_raw/) | 8 (tous les PDFs 3eme-math indexes) |
 | References Typst | 8 modules transcrits (24 fichiers .typ) |
 | Plannings | 12 per-molecule (3 par module) |

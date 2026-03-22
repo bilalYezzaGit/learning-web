@@ -36,29 +36,34 @@ Genere un planning de livret a partir d'une KB module. Le planning declare tous 
 ### Syntaxe
 
 ```
-/content plan {module}
-/content plan {module} : {specs libres}
+/content plan {module} : {profil}
+/content plan {module} : {profil}, {specs libres}
 ```
 
-Le texte apres `:` est un argument libre de customisation. Il peut contenir des contraintes sur :
-- le nombre de molecules
-- les praxeologies a couvrir ou exclure
-- les types d'atomes a inclure/exclure
-- les niveaux de difficulte
-- la structure des sections
-- toute autre intention pedagogique
+Le premier mot apres `:` est matche contre les profils de `_meta/global/booklet-profiles.yaml` :
+- **`cours`** — difficulte 0-1, application directe, ~16 atomes, guidance elevee
+- **`examen`** — difficulte 1-2, combinaison de techniques, ~17 atomes, exercices types
+- **`exploration`** — difficulte 2-3, problemes de synthese, ~10 atomes, guidance faible
+
+Les specs libres apres le profil overrident les valeurs du profil.
+
+Si aucun profil reconnu : traiter comme specs libres (comportement par defaut, couverture complete).
 
 Exemples :
-- `/content plan nombre-derive : 2 molecules, focus bases dans la 1ere, approfondissement dans la 2eme`
-- `/content plan continuite : une seule molecule, seulement les Prax1-4, difficulte max 2`
-- `/content plan fonctions : 3 molecules progressives, pas de QCM dans la premiere`
+- `/content plan continuite : cours` — livret cours standard
+- `/content plan continuite : examen` — livret examen standard
+- `/content plan continuite : exploration` — livret exploration standard
+- `/content plan continuite : cours, focus TVI et dichotomie` — cours avec override
+- `/content plan continuite : examen, seulement Prax1-5` — examen filtre
 
 ### Etapes
 
-0. **Parse les specs de customisation** (si presentes apres `:` dans `$ARGUMENTS`) :
-   - Extraire les contraintes (nombre de molecules, praxeologies, difficultes, types, structure)
-   - Ces contraintes sont appliquees a l'etape 4 (generation) et 5 (verification)
-   - Si aucune spec : generer un planning par defaut (couverture complete, equilibre standard)
+0. **Charger le profil de livret** :
+   - Read `_meta/global/booklet-profiles.yaml`
+   - Matcher le premier mot apres `:` (cours, examen, exploration)
+   - Extraire : difficulty range, structure (exercise_count, lesson_count, qcm_count), exercise_categories (required/forbidden), contexts (allowed/forbidden), progression, guidance_level, expected_order
+   - Si specs libres supplementaires : elles overrident les valeurs du profil
+   - Ecrire le champ `profile:` dans le planning genere
 
 1. **Charge la meta module** : Read `_meta/modules/{module}/savoir.yaml` + `_meta/modules/{module}/praxeologies.yaml`
 
@@ -70,14 +75,17 @@ Exemples :
 
 4. **Genere un planning per-molecule** `content/{programme}/{module}/_molecules/{slug}/_planning.yaml` :
    - Un fichier par molecule (pas de wrapper `molecules:` ni `praxeologies:`)
-   - Pour chaque livret : organiser en sections thematiques
+   - **Respecter les contraintes du profil** : exercise_count, lesson_count, qcm_count, difficulty range, exercise_categories (required/forbidden), contexts (allowed/forbidden), expected_order
    - Pour chaque section : declarer les atomes (lecons, exercices, QCM)
    - Pour chaque atome : slug, type, title, praxeologies, contenu (2-3 phrases), difficulte, timeMinutes
 
-5. **Verifie la couverture** :
+5. **Verifie la conformite au profil** :
+   - Nombre d'atomes dans les fourchettes du profil (exercise_count, lesson_count, qcm_count)
+   - Toutes les difficultes dans le range du profil (ex: cours = 0-1, pas de niveau 2)
+   - Categories d'exercices conformes (required presentes, forbidden absentes)
+   - Contextes conformes (pas de contexte forbidden dans les enonces)
+   - Progression conforme (expected_order respecte)
    - Chaque praxeologie de la KB est couverte par au moins 1 atome
-   - Equilibre des types : ~60% exercices, ~25% lecons, ~15% QCM
-   - Progression de difficulte coherente dans chaque molecule
 
 6. **Redige les objectifs** pour chaque molecule :
    - Minimum 3 objectifs d'apprentissage clairs et mesurables
@@ -95,11 +103,20 @@ Exemples :
 
 ### Checklist planning
 
+**Conformite au profil** (si profil charge) :
+- [ ] `profile:` field present dans le planning
+- [ ] Nombre d'exercices dans la fourchette du profil (exercise_count)
+- [ ] Nombre de lecons dans la fourchette du profil (lesson_count)
+- [ ] Nombre de QCM dans la fourchette du profil (qcm_count)
+- [ ] Toutes les difficultes dans le range du profil (ex: cours = max 1)
+- [ ] Categories required presentes, categories forbidden absentes
+- [ ] Aucun contexte forbidden dans les enonces
+
+**Qualite du planning** :
 - [ ] Toutes les praxeologies de la KB sont couvertes
 - [ ] Slugs conformes au nommage (`{type}-{topic}-{slug}`)
 - [ ] Topics du vocabulaire controle
 - [ ] Chaque atome a un champ `contenu` de 2-3 phrases
-- [ ] Difficultes coherentes avec la KB
 - [ ] Categories presentes pour tous les exercices
 - [ ] QCM regroupables en blocs de 2-5 par theme
 - [ ] Chaque molecule a >= 3 objectifs d'apprentissage clairs et mesurables
@@ -375,6 +392,7 @@ Commandes liees : `/source scan`, `/source discover`, `/source status`
 - Lexique module : `_meta/modules/{module}/lexique.yaml`
 - Redaction : `_meta/modules/{module}/redaction.yaml`
 - Specs examen : `_meta/examens/{slug}.yaml`
+- Profils livrets : `_meta/global/booklet-profiles.yaml` (cours, examen, exploration)
 - Globaux : `_meta/global/` (lexique.yaml, complexite.yaml, prerequis-graph.yaml)
 
 

@@ -22,21 +22,25 @@ module: "{slug-module}"                           # Ex: continuite
 programme: "{slug-programme}"                     # Ex: 3eme-math
 status: draft                                     # draft | validated | generated
 
+# Profil de livret (charge depuis _meta/global/booklet-profiles.yaml)
+# Valeurs : cours | examen | exploration
+profile: "{cours|examen|exploration}"
+
 # References vers _meta/ (resolu via _meta/_interface.yaml)
 meta_refs:
   module: "{slug-module}"          # → _meta/modules/{slug-module}/
   # patterns: [Prax1.v1, ...]     # optionnel, pour livrets examen
-  # examen: "bac-3eme-t3"         # optionnel, pour livrets de preparation
+  # examen: "synthese-3eme-t3"    # optionnel, pour livrets de preparation
 
 # ============================================================================
 # Design intent
 # ============================================================================
 
 design_intent: >-
-  Decrire ici l'intention pedagogique du livret : quels types d'exercices,
-  quel niveau, quel style (application directe, problemes, synthese...).
-  Pour un livret Examen : exercices types par frequence decroissante.
-  Pour un livret Exploration : problemes atypiques, modelisations.
+  Genere automatiquement a partir du profil. Peut etre enrichi manuellement.
+  Le profil definit : difficulte, nombre d'atomes, categories d'exercices,
+  contextes autorises, progression attendue.
+  Les specs libres de l'utilisateur overrident le profil.
 
 slug: "{slug-molecule}"                           # Ex: continuite-fondamentaux
 title: "{Titre du livret}"

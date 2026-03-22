@@ -24,6 +24,7 @@ schema:
     complexite: "global/complexite.yaml"
     lexique: "global/lexique.yaml"
     prerequis_graph: "global/prerequis-graph.yaml"
+    booklet_profiles: "global/booklet-profiles.yaml"  # Profils cours/examen/exploration
 
   exam_files:
     pattern: "examens/{id}.yaml"

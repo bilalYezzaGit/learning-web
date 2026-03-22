@@ -1,0 +1,150 @@
+# Profils de livrets — Calibration
+#
+# Definit a quoi ressemble un vrai bon livret tunisien par type.
+# Charge automatiquement par le skill `/content plan {module} : {profil}`
+# Les specs libres apres le profil overrident les valeurs du profil.
+#
+# Profils : cours | examen | exploration
+
+profiles:
+
+  # =========================================================================
+  cours:
+  # =========================================================================
+  # Livret d'introduction — decouverte et application directe
+    description: >-
+      Livret cours : introduction progressive au module. Definitions,
+      theoremes, exemples types et exercices d'application directe.
+      L'eleve decouvre les notions et s'entraine sur des cas standards.
+
+    difficulty:
+      range: [0, 1]
+      target: 1
+      max_allowed: 1               # Aucun atome au-dessus de 1
+
+    structure:
+      exercise_count: {min: 6, typical: 8, max: 10}
+      lesson_count: {min: 4, typical: 5, max: 6}
+      qcm_count: {min: 3, typical: 4, max: 5}
+      total_atoms: {min: 13, typical: 16, max: 20}
+
+    balance:
+      lessons: "~30%"
+      exercises: "~50%"
+      qcm: "~20%"
+
+    guidance_level: high             # Methodes explicites, exemples dans les lecons
+    progression: linear              # Chaque section introduit une notion puis l'applique
+
+    exercise_categories:
+      required: [application]
+      forbidden: [probleme, synthese]
+      optional: [approfondissement]  # Seulement en fin de section, max 1-2
+
+    contexts:
+      allowed: [abstrait, direct, graphique]
+      forbidden: [modelisation, parametrique, demonstration-formelle]
+
+    section_pattern:
+      # Chaque section suit ce schema
+      typical: [lesson, exercise, exercise, qcm]
+      note: "Lecon d'abord, puis 1-2 exercices d'application, QCM en fin de section"
+
+    expected_duration_minutes: {min: 90, typical: 120, max: 150}
+
+  # =========================================================================
+  examen:
+  # =========================================================================
+  # Livret de preparation aux devoirs de synthese et examens
+    description: >-
+      Livret examen : entrainement aux exercices types des devoirs et examens.
+      Combinaison de techniques, progression de difficulte, exercices proches
+      de ceux rencontres dans les controles reels tunisiens.
+
+    difficulty:
+      range: [1, 2]
+      target: 2
+      max_allowed: 2               # Pas de niveau 3
+
+    structure:
+      exercise_count: {min: 8, typical: 10, max: 12}
+      lesson_count: {min: 1, typical: 2, max: 3}  # Rappels methodologiques uniquement
+      qcm_count: {min: 4, typical: 5, max: 6}
+      total_atoms: {min: 14, typical: 17, max: 20}
+
+    balance:
+      lessons: "~10-15%"            # Peu de lecons, ce sont des rappels methodo
+      exercises: "~55-60%"
+      qcm: "~25-30%"
+
+    guidance_level: medium           # Methodes rappelees brievement, pas detaillees
+    progression: thematic            # Organise par theme/praxeologie, pas par difficulte
+
+    exercise_categories:
+      required: [application, approfondissement]
+      forbidden: [probleme]          # Pas de problemes ouverts
+      optional: [synthese]           # Max 1-2 en fin de livret
+
+    contexts:
+      allowed: [abstrait, direct, graphique, parametrique, morceaux]
+      forbidden: [modelisation-ouverte, demonstration-formelle]
+
+    section_pattern:
+      typical: [exercise, exercise, qcm]
+      note: "Lecon methodo en debut de section si nouvelle technique, puis exercices"
+
+    expected_order:
+      # Progression au sein du livret
+      - application-directe          # Sections 1-2 : rappels + application
+      - combinaison-techniques       # Sections 3-4 : combiner 2+ praxeologies
+      - synthese-legere              # Section 5-6 : exercices qui combinent tout
+
+    expected_duration_minutes: {min: 120, typical: 150, max: 180}
+
+  # =========================================================================
+  exploration:
+  # =========================================================================
+  # Livret d'approfondissement et problemes de synthese
+    description: >-
+      Livret exploration : problemes de synthese, demonstrations, exercices
+      type BAC complets. Destine aux eleves avances ou en preparation intensive.
+      Combine plusieurs praxeologies dans chaque exercice.
+
+    difficulty:
+      range: [2, 3]
+      target: 2
+      max_allowed: 3
+
+    structure:
+      exercise_count: {min: 5, typical: 7, max: 9}
+      lesson_count: {min: 0, typical: 0, max: 1}  # Pas de lecons (ou 1 rappel max)
+      qcm_count: {min: 2, typical: 3, max: 4}
+      total_atoms: {min: 8, typical: 10, max: 13}
+
+    balance:
+      lessons: "0-5%"
+      exercises: "~65-70%"
+      qcm: "~25-30%"
+
+    guidance_level: low              # Pas de methodes explicites — l'eleve doit structurer
+    progression: difficulty          # Du plus accessible au plus complexe
+
+    exercise_categories:
+      required: [approfondissement, synthese]
+      forbidden: [application]       # Pas d'application directe
+      optional: [probleme]           # Encourage, 2-3 par livret
+
+    contexts:
+      allowed: [abstrait, graphique, parametrique, morceaux, modelisation, demonstration-formelle, geometrique]
+      forbidden: []                  # Tout est autorise
+
+    section_pattern:
+      typical: [exercise, exercise, qcm]
+      note: "Exercices de plus en plus longs et complexes, QCM de synthese"
+
+    expected_order:
+      - approfondissement            # Sections 1-2 : techniques avancees isolees
+      - synthese                     # Sections 3 : problemes combinant plusieurs praxeologies
+      - type-bac                     # Section 4 : exercice complet multi-parties type examen
+
+    expected_duration_minutes: {min: 120, typical: 150, max: 180}
