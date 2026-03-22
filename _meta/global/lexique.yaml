@@ -1,0 +1,74 @@
+# Lexique mathematique — Conventions globales
+# Conventions de vocabulaire et de notation partagees par tous les modules
+
+programme: 3eme-math
+
+# ---------------------------------------------------------------------------
+# Notations generales
+# ---------------------------------------------------------------------------
+notations:
+  - symbol: "$0{,}1$"
+    meaning: "Virgule decimale (convention francaise tunisienne, pas le point)"
+  - symbol: "$]a, b[$"
+    meaning: "Intervalle ouvert (convention francaise, pas (a, b))"
+  - symbol: "$E(x)$"
+    meaning: "Partie entiere"
+  - symbol: "$|x|$"
+    meaning: "Valeur absolue"
+  - symbol: "$\\mathbb{N}, \\mathbb{Z}, \\mathbb{Q}, \\mathbb{R}$"
+    meaning: "Ensembles de nombres"
+  - symbol: "$\\vec{u}, \\vec{i}, \\vec{j}$"
+    meaning: "Vecteurs (avec fleche)"
+  - symbol: "$(O, \\vec{i}, \\vec{j})$"
+    meaning: "Repere orthonorme"
+  - symbol: "$C_f$, $\\zeta_f$, $C$"
+    meaning: "Courbe representative (selon la source)"
+
+# ---------------------------------------------------------------------------
+# Formules de redaction consacrees
+# ---------------------------------------------------------------------------
+redaction_formulas:
+  transitions:
+    - phrase: "D'ou..."
+      usage: "Transition vers une conclusion"
+    - phrase: "Par suite..."
+      usage: "Enchainement logique"
+    - phrase: "On en deduit que..."
+      usage: "Deduction"
+    - phrase: "Il en resulte que..."
+      usage: "Consequence"
+    - phrase: "Or..."
+      usage: "Introduction d'un argument complementaire"
+
+  openings:
+    - phrase: "Soit f une fonction definie sur..."
+      usage: "Ouverture standard"
+    - phrase: "Montrons que..."
+      usage: "Debut de demonstration"
+
+# ---------------------------------------------------------------------------
+# Conventions de demonstration
+# ---------------------------------------------------------------------------
+proof_conventions:
+  - rule: "Une implication (=>) n'est pas une equivalence (<=>)"
+    detail: "Toujours preciser le sens"
+  - rule: "Reciproque : doit etre demontree ou refutee separement"
+  - rule: "Contre-exemple : un seul suffit pour refuter une assertion universelle"
+  - rule: "Recurrence : base + heredite + conclusion obligatoires"
+
+# ---------------------------------------------------------------------------
+# Verbes d'action et niveaux de rigueur
+# ---------------------------------------------------------------------------
+action_verbs:
+  - verb: "Montrer que / Demontrer que"
+    level: "Demonstration complete"
+  - verb: "Justifier"
+    level: "Argument precis, pas forcement une demonstration formelle"
+  - verb: "Verifier que"
+    level: "Calcul direct qui confirme"
+  - verb: "Determiner"
+    level: "Trouver la valeur par le calcul"
+  - verb: "En deduire"
+    level: "Utiliser le resultat precedent"
+  - verb: "Calculer"
+    level: "Application directe d'une formule"

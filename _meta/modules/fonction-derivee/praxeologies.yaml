@@ -1,0 +1,523 @@
+# Praxeologies — Fonction derivee
+# Cadre theorique : TAD de Chevallard (Tache, Technique, Technologie, Theorie)
+# Enrichi avec variables didactiques et profils de difficulte
+
+module: fonction-derivee
+programme: 3eme-math
+
+praxeologies:
+  # -------------------------------------------------------------------------
+  - id: Prax1
+    name: "Calculer la derivee d'une fonction simple"
+    concepts: [N2, N3]
+    difficulty: 1
+    exam_frequency: high
+
+    task_type: >-
+      Determiner f' pour une fonction polynome, rationnelle ou
+      combinaison lineaire.
+    technique: |
+      1. Identifier le type de f (polynome, rationnelle, combinaison lineaire)
+      2. Appliquer la formule correspondante du tableau des derivees
+      3. Si combinaison lineaire : (alpha.f + beta.g)' = alpha.f' + beta.g'
+      4. Simplifier l'expression obtenue
+    technology: "Les derivees des fonctions usuelles + linearite de la derivation (T1, P3, P4)"
+    theory: "Analyse reelle — derivation des fonctions elementaires"
+
+    didactic_variables:
+      - name: degre_polynome
+        values: [2, 3, 4, "5+"]
+        effect: "+0.5 par degre supplementaire"
+      - name: nombre_termes
+        values: [2, 3, "4+"]
+        effect: "+0.5 si 4+ termes"
+      - name: coefficients
+        values: [entiers, fractionnaires, irrationnels]
+        effect: "+0.5 si fractionnaires"
+
+    difficulty_profiles:
+      0: { degre_polynome: 2, nombre_termes: 2, coefficients: entiers }
+      1: { degre_polynome: 3, nombre_termes: 3, coefficients: entiers }
+      2: { degre_polynome: 4, nombre_termes: "4+", coefficients: fractionnaires }
+
+    common_errors: [E5]
+    canonical_examples:
+      - "f(x) = 5x^4 - 3x + 1 => f'(x) = 20x^3 - 3"
+      - "f(x) = x^7 - 3x^4/100 + 2x + 1"
+
+  # -------------------------------------------------------------------------
+  - id: Prax2a
+    name: "Calculer la derivee d'un produit ou quotient"
+    concepts: [N3]
+    difficulty: 1
+    exam_frequency: very_high
+
+    task_type: >-
+      Calculer f' quand f est un produit u.v ou un quotient u/v.
+    technique: |
+      1. Identifier u et v
+      2. Calculer u' et v' separement
+      3. Pour le produit : (u.v)' = u'.v + u.v'
+      4. Pour le quotient : (u/v)' = (u'.v - u.v')/v^2
+      5. Factoriser le resultat quand c'est possible
+    technology: "Formule de Leibniz pour le produit (T2), formule du quotient (T3)"
+    theory: "Analyse reelle — derivation des operations"
+
+    didactic_variables:
+      - name: type_operation
+        values: [produit, quotient, inverse]
+        effect: "quotient → +0.5 (formule plus complexe)"
+      - name: type_u_v
+        values: [polynomes, rationnelles, mixtes]
+        effect: "+0.5 si mixtes"
+      - name: factorisation
+        values: [simple, elaboree, non_requise]
+        effect: "+1 si factorisation elaboree"
+
+    difficulty_profiles:
+      1: { type_operation: produit, type_u_v: polynomes, factorisation: simple }
+      2: { type_operation: quotient, type_u_v: polynomes, factorisation: elaboree }
+      3: { type_operation: quotient, type_u_v: mixtes, factorisation: elaboree }
+
+    common_errors: [E2]
+    canonical_examples:
+      - "f(x) = (x^2-1)/(x-3) => f'(x) = (x^2-6x+1)/(x-3)^2"
+      - "f(x) = (x+1)(2x-3) => f'(x) = 4x-1"
+
+  # -------------------------------------------------------------------------
+  - id: Prax2b
+    name: "Calculer la derivee avec sqrt(f)"
+    concepts: [N4, N3]
+    difficulty: 2
+    exam_frequency: high
+
+    task_type: >-
+      Calculer la derivee d'une fonction contenant sqrt(expression).
+    technique: |
+      1. Identifier u(x) sous la racine
+      2. Verifier u(x) > 0 sur le domaine
+      3. Appliquer (sqrt(u))' = u'/(2.sqrt(u))
+      4. Si f = g.sqrt(u), utiliser la formule du produit
+      5. Simplifier l'expression obtenue
+    technology: "Theoreme T5 — condition f > 0 strictement"
+    theory: "Analyse reelle — derivation de la composition avec la racine carree"
+
+    didactic_variables:
+      - name: type_u
+        values: [lineaire, quadratique, complexe]
+        effect: "+0.5 par niveau de complexite"
+      - name: contexte
+        values: [sqrt_seul, produit_avec_sqrt, quotient_avec_sqrt]
+        effect: "+0.5 si dans un produit ou quotient"
+
+    difficulty_profiles:
+      1: { type_u: lineaire, contexte: sqrt_seul }
+      2: { type_u: quadratique, contexte: produit_avec_sqrt }
+      3: { type_u: complexe, contexte: quotient_avec_sqrt }
+
+    common_errors: [E3]
+    canonical_examples:
+      - "f(x) = sqrt(3x^2+1) => f'(x) = 3x/sqrt(3x^2+1)"
+      - "f(x) = x.sqrt(2x+1)"
+
+  # -------------------------------------------------------------------------
+  - id: Prax2c
+    name: "Calculer la derivee de f(ax+b)"
+    concepts: [N5]
+    difficulty: 1
+    exam_frequency: medium
+
+    task_type: >-
+      Calculer la derivee de g(x) = f(ax+b) par le theoreme de
+      composition affine.
+    technique: |
+      1. Identifier a, b et la fonction f
+      2. Appliquer g'(x) = a.f'(ax+b)
+      3. Verifier le domaine de derivabilite
+      4. Simplifier
+    technology: "Theoreme T6 (admis) — derivation d'une composition affine"
+    theory: "Analyse reelle — derivation d'une composition avec une fonction affine"
+
+    didactic_variables:
+      - name: type_f
+        values: [puissance, racine, inverse]
+        effect: "+0.5 si racine ou inverse"
+      - name: coefficients_a_b
+        values: [entiers, fractionnaires]
+        effect: "+0.5 si fractionnaires"
+
+    difficulty_profiles:
+      1: { type_f: puissance, coefficients_a_b: entiers }
+      2: { type_f: racine, coefficients_a_b: entiers }
+      3: { type_f: inverse, coefficients_a_b: fractionnaires }
+
+    common_errors: [E6]
+    canonical_examples:
+      - "f(x) = (5x-2)^4 => f'(x) = 20(5x-2)^3"
+      - "g(x) = 1/(2x+3)^2"
+
+  # -------------------------------------------------------------------------
+  - id: Prax2d
+    name: "Calculer des derivees successives et conjecturer une formule"
+    concepts: [N6]
+    difficulty: 2
+    exam_frequency: low
+
+    task_type: >-
+      Calculer f', f'', f''', conjecturer f^(k) et (optionnellement) prouver
+      par recurrence.
+    technique: |
+      1. Calculer f', f'', f''' en appliquant les formules
+      2. Observer la structure : factorielles, puissances alternees
+      3. Formuler une conjecture pour f^(k)(x)
+      4. Si demande, prouver par recurrence
+    technology: "(1/(x-a))^(k) = (-1)^k . k! / (x-a)^(k+1)"
+    theory: "Analyse reelle — derivees d'ordre superieur"
+
+    didactic_variables:
+      - name: type_f
+        values: [rationnelle_simple, decomposee]
+        effect: "+0.5 si decomposee"
+      - name: preuve_recurrence
+        values: [oui, non]
+        effect: "+1 si recurrence demandee"
+
+    difficulty_profiles:
+      2: { type_f: rationnelle_simple, preuve_recurrence: non }
+      3: { type_f: decomposee, preuve_recurrence: oui }
+
+    common_errors: []
+    canonical_examples:
+      - "f(x) = 1/(x-a) => f^(k)(x) = (-1)^k.k!/(x-a)^(k+1)"
+
+  # -------------------------------------------------------------------------
+  - id: Prax3
+    name: "Etudier la derivabilite avec racines ou valeurs absolues"
+    concepts: [N1, N4]
+    difficulty: 2
+    exam_frequency: medium
+
+    task_type: >-
+      Determiner si f est derivable en un point, en particulier aux bornes
+      du domaine de sqrt(f) ou aux points de changement de |.|.
+    technique: |
+      1. Calculer le taux de variation (f(x)-f(a))/(x-a) et passer a la limite
+      2. Si la limite est infinie : non derivable (tangente verticale)
+      3. Si les limites a gauche et a droite different : non derivable (point anguleux)
+      4. Interpreter graphiquement
+    technology: "f derivable en a <=> le taux de variation a une limite finie en a"
+    theory: "Analyse reelle — derivabilite et tangente"
+
+    didactic_variables:
+      - name: type_fonction
+        values: [sqrt_au_bord, valeur_absolue, par_morceaux]
+        effect: "+0.5 par complexite"
+      - name: nature_non_derivabilite
+        values: [tangente_verticale, point_anguleux, derivable]
+        effect: "tangente verticale plus subtile"
+
+    difficulty_profiles:
+      1: { type_fonction: valeur_absolue, nature_non_derivabilite: point_anguleux }
+      2: { type_fonction: sqrt_au_bord, nature_non_derivabilite: tangente_verticale }
+      3: { type_fonction: par_morceaux, nature_non_derivabilite: point_anguleux }
+
+    common_errors: [E3]
+    canonical_examples:
+      - "f(x) = |x| non derivable en 0 (f'_d = 1, f'_g = -1)"
+      - "sqrt(x) non derivable en 0 (limite infinie)"
+
+  # -------------------------------------------------------------------------
+  - id: Prax4
+    name: "Etudier les variations a l'aide de la derivee"
+    concepts: [N7, N3, N9]
+    difficulty: 1
+    exam_frequency: very_high
+
+    task_type: >-
+      Determiner le sens de variation de f sur son domaine.
+    technique: |
+      1. Calculer f'(x)
+      2. Factoriser f'(x) ou trouver ses racines (discriminant pour trinome)
+      3. Dresser le tableau de signes de f'
+      4. En deduire les variations de f : f' > 0 => f croissante, f' < 0 => f decroissante
+      5. Completer le tableau de variation avec les valeurs de f aux bornes et aux zeros de f'
+    technology: "Theoremes T7, T8, T9 — equivalence signe de f' et sens de variation"
+    theory: "Analyse reelle — lien derivee-monotonie"
+
+    didactic_variables:
+      - name: degre_f_prime
+        values: [lineaire, trinome, "degre_3+"]
+        effect: "+0.5 par degre supplementaire"
+      - name: zeros_f_prime
+        values: [rationnels, irrationnels]
+        effect: "+0.5 si irrationnels"
+      - name: presence_fractions
+        values: [oui, non]
+        effect: "+0.5 si oui"
+
+    difficulty_profiles:
+      1: { degre_f_prime: lineaire, zeros_f_prime: rationnels }
+      2: { degre_f_prime: trinome, zeros_f_prime: rationnels }
+      3: { degre_f_prime: trinome, zeros_f_prime: irrationnels, presence_fractions: oui }
+
+    common_errors: [E4, E5, E7]
+    canonical_examples:
+      - "f(x) = x^3 - 3x => f'(x) = 3(x^2-1), max local en -1, min local en 1"
+      - "f(x) = 2x/(x^2+1) => f'(x) = 2(1-x^2)/(x^2+1)^2"
+
+  # -------------------------------------------------------------------------
+  - id: Prax5
+    name: "Determiner les extrema a partir du tableau de variation"
+    concepts: [N8, N9]
+    difficulty: 2
+    exam_frequency: very_high
+
+    task_type: >-
+      Identifier les extrema locaux et globaux de f a partir de son
+      tableau de variation.
+    technique: |
+      1. Localiser les zeros de f' (condition necessaire T10)
+      2. Verifier le changement de signe de f' en ces points
+      3. f' passe de + a - en a => maximum local f(a)
+      4. f' passe de - a + en a => minimum local f(a)
+      5. Comparer avec les limites aux bornes pour les extrema globaux
+    technology: "T10 (condition necessaire) + T11 (condition suffisante par changement de signe)"
+    theory: "Analyse reelle — extrema des fonctions derivables"
+
+    didactic_variables:
+      - name: nombre_extrema
+        values: [1, 2, "3+"]
+        effect: "+0.5 par extremum supplementaire"
+      - name: type_extrema
+        values: [locaux_seulement, locaux_et_globaux]
+        effect: "+0.5 si distinction local/global"
+      - name: cas_f_prime_zero_sans_extremum
+        values: [absent, present]
+        effect: "+1 si present (piege x^3)"
+
+    difficulty_profiles:
+      1: { nombre_extrema: 1, type_extrema: locaux_seulement }
+      2: { nombre_extrema: 2, type_extrema: locaux_et_globaux }
+      3: { nombre_extrema: "3+", cas_f_prime_zero_sans_extremum: present }
+
+    common_errors: [E1]
+    canonical_examples:
+      - "f(x) = 2x^4 - x^2 + 5 : deux minima locaux en +/-1/2, un max local en 0"
+      - "f(x) = x^3 en 0 : f'(0) = 0 mais pas d'extremum"
+
+  # -------------------------------------------------------------------------
+  - id: Prax6
+    name: "Determiner les extrema avec parametres"
+    concepts: [N8, N3, N7]
+    difficulty: 2
+    exam_frequency: medium
+
+    task_type: >-
+      Trouver la valeur d'un parametre pour qu'une fonction admette un
+      extremum donne (en un point donne, ou d'une certaine nature).
+    technique: |
+      1. Calculer f'(x) en fonction du parametre
+      2. Imposer f'(x0) = 0 pour trouver le parametre
+      3. Verifier le changement de signe de f'
+      4. Attention : verifier que le resultat ne simplifie pas f en une fonction sans extremum
+    technology: "f'(x0) = 0 est necessaire ; il faut en plus que f' change de signe"
+    theory: "Analyse reelle — extrema parametriques"
+
+    didactic_variables:
+      - name: position_parametre
+        values: [numerateur, denominateur, exposant]
+        effect: "+0.5 si denominateur"
+      - name: nombre_conditions
+        values: [1, 2]
+        effect: "+0.5 si 2 conditions"
+      - name: discussion
+        values: [directe, avec_discussion]
+        effect: "+1 si discussion parametrique"
+
+    difficulty_profiles:
+      2: { position_parametre: numerateur, nombre_conditions: 1 }
+      3: { position_parametre: denominateur, nombre_conditions: 2, discussion: avec_discussion }
+
+    common_errors: [E1]
+    canonical_examples:
+      - "f(x) = ax^3 + 3x, extrema en +/-1 => a = -1"
+
+  # -------------------------------------------------------------------------
+  - id: Prax7a
+    name: "Probleme d'optimisation geometrique"
+    concepts: [N7, N8, N9]
+    difficulty: 3
+    exam_frequency: high
+
+    task_type: >-
+      Modeliser un probleme geometrique (aire, perimetre, volume, distance)
+      par une fonction, puis trouver la valeur optimale.
+    technique: |
+      1. Poser la variable x et exprimer la grandeur a optimiser en fonction de x
+      2. Identifier le domaine de x (contraintes geometriques)
+      3. Deriver
+      4. Etudier le signe de la derivee
+      5. En deduire l'extremum
+      6. Conclure en revenant au probleme geometrique
+    technology: "Derivee pour les variations + lecture du tableau pour l'extremum"
+    theory: "Analyse reelle — optimisation sous contrainte"
+
+    didactic_variables:
+      - name: dimension
+        values: ["2D", "3D"]
+        effect: "+1 si 3D"
+      - name: type_figure
+        values: [rectangle, cercle, triangle, cone]
+        effect: "+0.5 par complexite de figure"
+      - name: contrainte
+        values: [perimetre_fixe, aire_fixe, volume_fixe]
+        effect: "+0.5 par type de contrainte"
+
+    difficulty_profiles:
+      2: { dimension: "2D", type_figure: rectangle, contrainte: perimetre_fixe }
+      3: { dimension: "2D", type_figure: cercle, contrainte: aire_fixe }
+
+    common_errors: [E1, E7]
+    canonical_examples:
+      - "Rectangle de perimetre 20 cm d'aire maximale (carre 5x5)"
+      - "Rectangle inscrit dans un cercle de perimetre maximal (carre)"
+
+  # -------------------------------------------------------------------------
+  - id: Prax7b
+    name: "Probleme d'optimisation economique / pratique"
+    concepts: [N7, N8, N9]
+    difficulty: 3
+    exam_frequency: medium
+
+    task_type: >-
+      Modeliser un probleme de cout, revenu, benefice par une fonction
+      et trouver l'optimum.
+    technique: |
+      1. Traduire les donnees en fonction R(n) ou C(x)
+      2. Deriver
+      3. Tableau de variation
+      4. Conclure avec la variable entiere (comparer les deux entiers encadrant x0)
+    technology: "Le maximum de f sur R n'est pas forcement atteint en un entier — il faut comparer f(m) et f(m+1)"
+    theory: "Analyse reelle — optimisation discrete"
+
+    didactic_variables:
+      - name: variable
+        values: [continue, discrete]
+        effect: "+0.5 si discrete (comparaison entiers)"
+      - name: contrainte_capacite
+        values: [oui, non]
+        effect: "+0.5 si oui"
+
+    difficulty_profiles:
+      2: { variable: continue, contrainte_capacite: non }
+      3: { variable: discrete, contrainte_capacite: oui }
+
+    common_errors: [E7]
+    canonical_examples:
+      - "Compagnie de bus : R(n) = (15+n)(90-n), maximum pour n entre 37 et 38"
+
+  # -------------------------------------------------------------------------
+  - id: Prax8
+    name: "Prouver une inegalite a l'aide de la derivee"
+    concepts: [N7, N8]
+    difficulty: 2
+    exam_frequency: high
+
+    task_type: >-
+      Demontrer que f(x) >= g(x) pour tout x dans I, en etudiant
+      h(x) = f(x) - g(x).
+    technique: |
+      1. Poser h(x) = f(x) - g(x)
+      2. Calculer h'(x)
+      3. Etudier le signe de h' pour determiner les variations de h
+      4. En deduire le minimum de h sur I
+      5. Si min >= 0, alors h(x) >= 0 pour tout x, donc f(x) >= g(x)
+    technology: "Comparer deux fonctions revient a etudier le signe de leur difference"
+    theory: "Analyse reelle — demonstration d'inegalites par les variations"
+
+    didactic_variables:
+      - name: type_inegalite
+        values: [polynomiale, avec_racine, classique]
+        effect: "+0.5 si avec racine"
+      - name: nombre_etapes
+        values: [directe, "deux_fonctions_auxiliaires"]
+        effect: "+1 si deux fonctions auxiliaires"
+
+    difficulty_profiles:
+      2: { type_inegalite: polynomiale, nombre_etapes: directe }
+      3: { type_inegalite: avec_racine, nombre_etapes: "deux_fonctions_auxiliaires" }
+
+    common_errors: [E4, E5]
+    canonical_examples:
+      - "Montrer que sqrt(1+x) <= 1 + x/2 pour x >= 0"
+
+  # -------------------------------------------------------------------------
+  - id: Prax9
+    name: "Lire graphiquement la derivee et reciproquement"
+    concepts: [N7, N9]
+    difficulty: 1
+    exam_frequency: medium
+
+    task_type: >-
+      Identifier graphiquement la courbe de f' a partir de celle de f,
+      ou lire les variations de f a partir de la courbe de f'.
+    technique: |
+      1. De Cf vers f' : la ou f croit, f' > 0 ; la ou f decroit, f' < 0 ; aux extrema, f' = 0
+      2. De Cf' vers f : la ou f' > 0, f est croissante ; la ou f' < 0, f est decroissante
+      3. Les zeros de f' correspondent aux extrema de f
+    technology: "Lien bijectif entre signe de f' et sens de variation de f"
+    theory: "Analyse reelle — interpretation graphique de la derivee"
+
+    didactic_variables:
+      - name: sens_lecture
+        values: [f_vers_f_prime, f_prime_vers_f]
+        effect: "f_prime_vers_f legerement plus difficile"
+      - name: nombre_extrema
+        values: [1, 2, "3+"]
+        effect: "+0.5 par extremum"
+      - name: choix_multiple
+        values: [oui, non]
+        effect: "+0.5 si plusieurs courbes proposees"
+
+    difficulty_profiles:
+      1: { sens_lecture: f_vers_f_prime, nombre_extrema: 1 }
+      2: { sens_lecture: f_prime_vers_f, nombre_extrema: 2, choix_multiple: oui }
+
+    common_errors: [E4]
+    canonical_examples:
+      - "f cubique => f' parabolique"
+      - "f parabolique => f' lineaire"
+
+  # -------------------------------------------------------------------------
+  - id: Prax10
+    name: "Etudier les tangentes et leur position par rapport a la courbe"
+    concepts: [N1, N7, N8]
+    difficulty: 2
+    exam_frequency: medium
+
+    task_type: >-
+      Trouver les points ou la tangente est parallele a une droite donnee,
+      ou les tangentes issues d'un point exterieur.
+    technique: |
+      1. Tangente parallele a D de pente m : resoudre f'(x) = m
+      2. Tangente passant par A(a,b) : resoudre y_A = f'(x0)(a-x0) + f(x0) en x0
+      3. Position de la tangente : etudier le signe de f(x) - T(x) via la derivee seconde ou l'etude directe
+    technology: "L'equation de la tangente est y = f'(a)(x-a) + f(a) ; la pente est f'(a)"
+    theory: "Analyse reelle — tangente et approximation affine"
+
+    didactic_variables:
+      - name: type_probleme
+        values: [tangente_parallele, tangente_par_point, position_tangente]
+        effect: "+0.5 par complexite"
+      - name: nombre_solutions
+        values: [1, 2, "discussion"]
+        effect: "+0.5 si discussion"
+
+    difficulty_profiles:
+      1: { type_probleme: tangente_parallele, nombre_solutions: 1 }
+      2: { type_probleme: tangente_par_point, nombre_solutions: 2 }
+      3: { type_probleme: position_tangente, nombre_solutions: "discussion" }
+
+    common_errors: [E2]
+    canonical_examples:
+      - "f(x) = (x-2)^2(x+3), tangentes paralleles a D: x+y+3=0"

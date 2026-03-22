@@ -1,0 +1,559 @@
+# Savoir — Fonction derivee
+# Format structure pour lecture humaine (profs) et machine (LLM, pipeline)
+
+module: fonction-derivee
+programme: 3eme-math
+version: 2.0
+
+# ---------------------------------------------------------------------------
+# 0) OBJECTIF (1 phrase)
+# ---------------------------------------------------------------------------
+objective: >-
+  Maitriser la fonction derivee comme outil central pour etudier les variations
+  d'une fonction (signe de f' => sens de variation), determiner les extrema
+  locaux et globaux, et resoudre des problemes d'optimisation.
+
+# ---------------------------------------------------------------------------
+# 1) NIVEAU EPISTEMIQUE
+# Definit ce qui est admis, demontre ou exclu pour CE programme.
+# C'est la piece maitresse qui distingue un cours de prepa d'un cours lycee.
+# ---------------------------------------------------------------------------
+epistemic_level:
+  theory_base: "analyse-reelle-elementaire"
+  # Pas de theoreme des accroissements finis, pas de derivees partielles
+
+  admitted:
+    - id: T6
+      statement: >-
+        g(x) = f(ax+b) => g'(x) = a.f'(ax+b)
+      justification: "Admis — demonstration par composition hors programme"
+
+    - id: T7
+      statement: >-
+        f' = 0 sur I <=> f constante sur I
+      justification: "Admis — demonstration par le theoreme des accroissements finis hors programme"
+
+    - id: T8
+      statement: >-
+        f' >= 0 sur I <=> f croissante sur I
+      justification: "Admis — demonstration par le theoreme des accroissements finis hors programme"
+
+    - id: T9
+      statement: >-
+        f' <= 0 sur I <=> f decroissante sur I
+      justification: "Admis — demonstration par le theoreme des accroissements finis hors programme"
+
+    - id: T11
+      statement: >-
+        Si f' s'annule en a et change de signe en a, alors f admet un
+        extremum local en a (+ a - => max, - a + => min).
+      justification: "Admis — condition suffisante d'extremum"
+
+  demonstrated:
+    - id: T1
+      statement: "(f+g)' = f'+g', (alpha.f+beta.g)' = alpha.f'+beta.g'"
+      proof_type: demonstration-complete
+
+    - id: T2
+      statement: "(f.g)' = f'.g + f.g'"
+      proof_type: demonstration-complete
+
+    - id: T3
+      statement: "(1/f)' = -f'/f^2, (g/f)' = (g'.f-g.f')/f^2"
+      proof_type: demonstration-complete
+
+    - id: T4
+      statement: "(f^k)' = k.f'.f^(k-1)"
+      proof_type: demonstration-complete
+
+    - id: T5
+      statement: "(sqrt(f))' = f'/(2.sqrt(f)), sous condition f > 0"
+      proof_type: demonstration-complete
+
+    - id: T10
+      statement: "Si f admet un extremum en a et f est derivable en a, alors f'(a) = 0"
+      proof_type: demonstration-complete
+
+    - id: P1
+      statement: "f paire et derivable => f' impaire"
+      proof_type: demonstration-complete
+
+    - id: P2
+      statement: "f impaire et derivable => f' paire"
+      proof_type: demonstration-complete
+
+  excluded:
+    - "Theoreme des accroissements finis"
+    - "Derivees partielles"
+    - "Fonctions trigonometriques et leurs derivees"
+    - "Formule de Taylor / developpements limites"
+    - "Regle de L'Hopital"
+    - "Derivabilite en un point (definition par le taux de variation) — module nombre-derive"
+    - "Tangente en un point — module nombre-derive"
+    - "Etude complete de fonctions (limites + asymptotes + courbe) — module 07"
+
+  starting_point:
+    - "Nombre derive f'(a) et derivabilite en un point (module nombre-derive)"
+    - "Derivees des fonctions de reference (module nombre-derive)"
+    - "Generalites sur les fonctions : variations par la definition, bornes, extrema (module 01)"
+    - "Fonctions polynomes, rationnelles, racine carree (2nde annee)"
+
+# ---------------------------------------------------------------------------
+# 2) TRANSPOSITION DIDACTIQUE
+# ---------------------------------------------------------------------------
+transposition:
+  savoir_savant:
+    - "Theorie de la differentiation (Leibniz, Newton)"
+    - "Theoreme de Fermat (extremum => derivee nulle)"
+    - "Theoreme de la bijection derivee-monotonie (consequence du TAF)"
+    - "Derivees successives et developpements de Taylor"
+
+  savoir_a_enseigner:
+    - "La fonction derivee est introduite comme prolongement naturel du nombre derive (module 05)"
+    - "Le theoreme derivee-variations est ADMIS (la demonstration via le TAF est hors programme)"
+    - "Les derivees successives sont introduites mais limitees a des cas simples (polynomes, rationnelles)"
+    - "L'accent est mis sur les applications : sens de variation, extrema, problemes concrets"
+
+  adaptations_didactiques:
+    - "Approche motivante par la physique : vitesse instantanee comme derivee de la position"
+    - "Le theoreme f' >= 0 <=> f croissante est admis — l'eleve l'utilise comme boite a outils"
+    - "La condition necessaire d'extremum (f'(a) = 0) est demontree, la condition suffisante est admise"
+    - "La reciproque 'f'(a) = 0 n'implique pas extremum' est illustree par x^3 en 0"
+    - "Les problemes d'optimisation servent de motivation concrete : aire maximale, cout minimal"
+
+# ---------------------------------------------------------------------------
+# 3) PREREQUISITES & LIENS INTER-MODULES
+# ---------------------------------------------------------------------------
+prerequisites:
+  required:
+    - module: generalites-fonctions
+      description: "Variations par la definition, bornes, extrema, representation graphique"
+    - module: nombre-derive
+      description: "Definition du nombre derive f'(a), tangente, derivees des fonctions de reference"
+    - prior_knowledge: "Fonctions polynomes, rationnelles, racine carree (2nde annee)"
+
+  opens_toward:
+    - module: exemples-etude-fonctions
+      link: "Etude complete de fonctions utilisant la derivee pour les variations"
+    - module: primitives-integration
+      link: "Operation inverse de la derivation (4eme annee)"
+    - module: equations-differentielles
+      link: "Equations f' = g(f) (4eme annee)"
+
+# ---------------------------------------------------------------------------
+# 4) CARTE CONCEPTUELLE (dependances intra-module)
+# ---------------------------------------------------------------------------
+concepts:
+  - id: N1
+    name: "Fonction derivee (definition)"
+    bloom_level: comprendre
+    depends_on: []
+    sub_concepts:
+      - id: N1.1
+        name: "f' comme fonction qui a x associe f'(x) (nombre derive en x)"
+      - id: N1.2
+        name: "Extension aux bornes : derivee a droite en a, a gauche en b"
+
+  - id: N2
+    name: "Derivees des fonctions usuelles"
+    bloom_level: memoriser
+    depends_on: [N1]
+    sub_concepts:
+      - id: N2.1
+        name: "Tableau recapitulatif (constante, x, ax+b, x^n, 1/x, 1/x^n, sqrt(x))"
+      - id: N2.2
+        name: "Toute fonction polynome est derivable sur R"
+      - id: N2.3
+        name: "Toute fonction rationnelle est derivable sur son ensemble de definition"
+
+  - id: N3
+    name: "Operations sur les fonctions derivees"
+    bloom_level: appliquer
+    depends_on: [N1, N2]
+    sub_concepts:
+      - id: N3.1
+        name: "Somme et combinaison lineaire : (alpha.f + beta.g)' = alpha.f' + beta.g'"
+      - id: N3.2
+        name: "Produit : (f.g)' = f'.g + f.g'"
+      - id: N3.3
+        name: "Puissance : (f^k)' = k.f'.f^(k-1)"
+      - id: N3.4
+        name: "Inverse : (1/f)' = -f'/f^2"
+      - id: N3.5
+        name: "Quotient : (g/f)' = (g'.f - g.f')/f^2"
+      - id: N3.6
+        name: "Inverse de puissance : (1/f^k)' = -k.f'/f^(k+1)"
+
+  - id: N4
+    name: "Derivee de sqrt(f)"
+    bloom_level: appliquer
+    depends_on: [N3]
+    sub_concepts:
+      - id: N4.1
+        name: "Condition : f derivable et strictement positive"
+      - id: N4.2
+        name: "Formule : (sqrt(f))' = f'/(2.sqrt(f))"
+
+  - id: N5
+    name: "Derivee de x -> f(ax+b)"
+    bloom_level: appliquer
+    depends_on: [N2, N3]
+    sub_concepts:
+      - id: N5.1
+        name: "Theoreme (admis) : g'(x) = a.f'(ax+b)"
+
+  - id: N6
+    name: "Derivees successives"
+    bloom_level: appliquer
+    depends_on: [N1, N3]
+    sub_concepts:
+      - id: N6.1
+        name: "f'', f''', ..., f^(n)"
+      - id: N6.2
+        name: "Polynomes et rationnelles derivables n fois"
+
+  - id: N7
+    name: "Sens de variation"
+    bloom_level: appliquer
+    depends_on: [N1, N3]
+    sub_concepts:
+      - id: N7.1
+        name: "f' = 0 sur I <=> f constante sur I"
+      - id: N7.2
+        name: "f' >= 0 sur I <=> f croissante sur I"
+      - id: N7.3
+        name: "f' <= 0 sur I <=> f decroissante sur I"
+      - id: N7.4
+        name: "f paire => f' impaire, f impaire => f' paire"
+
+  - id: N8
+    name: "Extrema"
+    bloom_level: analyser
+    depends_on: [N7]
+    sub_concepts:
+      - id: N8.1
+        name: "Extremum local : definition (voisinage de x0)"
+      - id: N8.2
+        name: "Extremum absolu : pour tout x dans D"
+      - id: N8.3
+        name: "Condition necessaire : f admet un extremum en a => f'(a) = 0"
+      - id: N8.4
+        name: "Condition suffisante : f' s'annule en a et change de signe => extremum local"
+      - id: N8.5
+        name: "f' passe de + a - => maximum local ; f' passe de - a + => minimum local"
+
+  - id: N9
+    name: "Tableau de variation"
+    bloom_level: appliquer
+    depends_on: [N7, N8]
+    sub_concepts:
+      - id: N9.1
+        name: "Construction : signe de f' -> fleches -> valeurs aux bornes et aux extrema"
+      - id: N9.2
+        name: "Lecture : deduire extrema, encadrements, nombre de solutions"
+
+# ---------------------------------------------------------------------------
+# 5) THEOREMES & PROPRIETES CLES
+# ---------------------------------------------------------------------------
+theorems:
+  - id: D1
+    type: definition
+    name: "Fonction derivee"
+    statement: >-
+      Soit f derivable sur un intervalle I. La fonction derivee de f est
+      la fonction f' qui a tout x de I associe le nombre derive f'(x) =
+      lim_{h->0} (f(x+h)-f(x))/h.
+    status: definition
+    concepts: [N1]
+    used_in: [Prax1]
+
+  - id: D2
+    type: definition
+    name: "Extremum local"
+    statement: >-
+      f admet un maximum local en a s'il existe un intervalle ouvert J
+      contenant a tel que pour tout x dans J inter D, f(x) <= f(a).
+      De meme pour un minimum local avec f(x) >= f(a).
+    status: definition
+    concepts: [N8]
+    used_in: [Prax5, Prax6]
+
+  - id: D3
+    type: definition
+    name: "Extremum absolu"
+    statement: >-
+      f admet un maximum absolu en a si pour tout x dans D, f(x) <= f(a).
+      De meme pour un minimum absolu avec f(x) >= f(a).
+    status: definition
+    concepts: [N8]
+    used_in: [Prax6, Prax7a, Prax7b]
+
+  - id: T1
+    type: theorem
+    name: "Operations — somme, combinaison lineaire"
+    statement: "(f+g)' = f'+g', (alpha.f+beta.g)' = alpha.f'+beta.g'"
+    status: demontre
+    concepts: [N3]
+    used_in: [Prax1, Prax2a]
+
+  - id: T2
+    type: theorem
+    name: "Operations — produit"
+    statement: "(f.g)' = f'.g + f.g'"
+    status: demontre
+    concepts: [N3]
+    used_in: [Prax1, Prax2a]
+
+  - id: T3
+    type: theorem
+    name: "Operations — inverse, quotient"
+    statement: "(1/f)' = -f'/f^2, (g/f)' = (g'.f-g.f')/f^2"
+    status: demontre
+    concepts: [N3]
+    used_in: [Prax1, Prax2a]
+
+  - id: T4
+    type: theorem
+    name: "Operations — puissance"
+    statement: "(f^k)' = k.f'.f^(k-1)"
+    status: demontre
+    concepts: [N3]
+    used_in: [Prax2a, Prax2c]
+
+  - id: T5
+    type: theorem
+    name: "Operations — racine carree"
+    statement: "(sqrt(f))' = f'/(2.sqrt(f)), sous condition f > 0"
+    status: demontre
+    concepts: [N4]
+    used_in: [Prax2b, Prax3]
+
+  - id: T6
+    type: theorem
+    name: "Derivee de f(ax+b)"
+    statement: "g(x) = f(ax+b) => g'(x) = a.f'(ax+b)"
+    status: admis
+    concepts: [N5]
+    used_in: [Prax2c]
+
+  - id: T7
+    type: theorem
+    name: "Fonction constante"
+    statement: "f' = 0 sur I <=> f constante sur I"
+    status: admis
+    concepts: [N7]
+    used_in: [Prax4]
+
+  - id: T8
+    type: theorem
+    name: "Derivee-croissance"
+    statement: "f' >= 0 sur I <=> f croissante sur I"
+    status: admis
+    concepts: [N7]
+    used_in: [Prax4, Prax8]
+
+  - id: T9
+    type: theorem
+    name: "Derivee-decroissance"
+    statement: "f' <= 0 sur I <=> f decroissante sur I"
+    status: admis
+    concepts: [N7]
+    used_in: [Prax4, Prax8]
+
+  - id: T10
+    type: theorem
+    name: "Condition necessaire d'extremum"
+    statement: "Si f admet un extremum en a et f derivable en a, alors f'(a) = 0"
+    status: demontre
+    concepts: [N8]
+    used_in: [Prax5, Prax6]
+
+  - id: T11
+    type: theorem
+    name: "Condition suffisante d'extremum"
+    statement: >-
+      Si f' s'annule en a et change de signe en a, alors f admet un
+      extremum local en a. + a - => max local, - a + => min local.
+    status: admis
+    concepts: [N8]
+    used_in: [Prax5, Prax6]
+
+  - id: P1
+    type: property
+    name: "Derivee et parite"
+    statement: "f paire et derivable => f' impaire"
+    status: demontre
+    concepts: [N7]
+    used_in: [Prax4]
+
+  - id: P2
+    type: property
+    name: "Derivee et imparite"
+    statement: "f impaire et derivable => f' paire"
+    status: demontre
+    concepts: [N7]
+    used_in: [Prax4]
+
+  - id: P3
+    type: property
+    name: "Derivabilite des polynomes"
+    statement: "Toute fonction polynome est derivable sur R"
+    status: consequence
+    concepts: [N2]
+    used_in: [Prax1]
+
+  - id: P4
+    type: property
+    name: "Derivabilite des rationnelles"
+    statement: "Toute fonction rationnelle est derivable sur son ensemble de definition"
+    status: consequence
+    concepts: [N2]
+    used_in: [Prax1]
+
+# ---------------------------------------------------------------------------
+# 6) KNOWLEDGE COMPONENTS
+# ---------------------------------------------------------------------------
+facts:
+  - id: F1
+    content: "Tableau des derivees usuelles : (x^n)' = n.x^(n-1), (1/x)' = -1/x^2, (sqrt(x))' = 1/(2.sqrt(x))"
+  - id: F2
+    content: "Les formules d'operations : somme, produit, quotient, puissance, racine"
+  - id: F3
+    content: "f' >= 0 <=> f croissante, f' <= 0 <=> f decroissante (equivalence, pas simple implication)"
+  - id: F4
+    content: "Condition necessaire d'extremum : f'(a) = 0 (mais pas suffisante ! contre-exemple x^3)"
+  - id: F5
+    content: "Condition suffisante : changement de signe de f' en a"
+  - id: F6
+    content: "f paire => f' impaire et reciproquement"
+
+skills:
+  - id: S1
+    description: "Calculer la derivee d'une fonction polynome"
+    concepts: [N2, N3]
+    difficulty: 1
+    praxeology: Prax1
+
+  - id: S2
+    description: "Calculer la derivee d'une fonction rationnelle (quotient)"
+    concepts: [N3]
+    difficulty: 1
+    praxeology: Prax2a
+
+  - id: S3
+    description: "Calculer la derivee d'une fonction avec sqrt(f)"
+    concepts: [N4]
+    difficulty: 2
+    praxeology: Prax2b
+
+  - id: S4
+    description: "Calculer la derivee d'une fonction composee f(ax+b)"
+    concepts: [N5]
+    difficulty: 1
+    praxeology: Prax2c
+
+  - id: S5
+    description: "Calculer des derivees successives"
+    concepts: [N6]
+    difficulty: 2
+    praxeology: Prax2d
+
+  - id: S6
+    description: "Etudier le signe de f' (tableau de signes)"
+    concepts: [N7]
+    difficulty: 2
+    praxeology: Prax4
+
+  - id: S7
+    description: "Dresser un tableau de variation a partir du signe de f'"
+    concepts: [N9]
+    difficulty: 1
+    praxeology: Prax4
+
+  - id: S8
+    description: "Determiner les extrema locaux et globaux"
+    concepts: [N8]
+    difficulty: 2
+    praxeology: Prax5
+
+  - id: S9
+    description: "Modeliser un probleme d'optimisation et trouver l'extremum"
+    concepts: [N8, N9]
+    difficulty: 3
+    praxeology: Prax7a
+
+principles:
+  - id: P1
+    content: "La derivee transforme un probleme de variations (inegalites pour tout a <= b) en un probleme de signe (f'(x) >= 0) — changement de paradigme par rapport au module 01"
+  - id: P2
+    content: "f'(a) = 0 est NECESSAIRE mais PAS SUFFISANT pour un extremum — x^3 en 0 est le contre-exemple fondamental"
+  - id: P3
+    content: "La reciproque du theoreme variations-derivee est VRAIE (equivalence) : les fleches du tableau de variation et le signe de f' se correspondent exactement"
+  - id: P4
+    content: "Calculer une derivee est une competence de CALCUL (appliquer les formules) ; etudier le signe de f' est une competence d'ANALYSE (factoriser, discriminant, tableau de signes)"
+  - id: P5
+    content: "Les problemes d'optimisation suivent toujours le meme schema : modeliser -> deriver -> signe -> tableau -> conclure"
+
+# ---------------------------------------------------------------------------
+# 7) EXEMPLES CANONIQUES
+# ---------------------------------------------------------------------------
+canonical_examples:
+  - id: EC1
+    description: "f(x) = x^3 + 3x => f'(x) = 3x^2 + 3 > 0, f croissante sur R"
+    illustrates: "Derivee qui ne s'annule jamais, croissance stricte"
+    concepts: [N7]
+    difficulty: 1
+
+  - id: EC2
+    description: "f(x) = -x^3 + 3x => f'(x) = -3(x-1)(x+1), deux extrema"
+    illustrates: "Max local en -1, min local en 1, etude complete des variations"
+    concepts: [N7, N8]
+    difficulty: 2
+
+  - id: EC3
+    description: "f(x) = x^3 en 0 : f'(0) = 0 mais pas d'extremum"
+    illustrates: "Contre-exemple fondamental pour la condition necessaire"
+    concepts: [N8]
+    difficulty: 1
+
+  - id: EC4
+    description: "f(x) = x^2 - 6x + 11 => f'(x) = 2(x-3), minimum global en x=3"
+    illustrates: "Minimum global d'un trinome du second degre"
+    concepts: [N8, N9]
+    difficulty: 1
+
+  - id: EC5
+    description: "f(x) = 2x/(x^2+1) => f'(x) = 2(1-x^2)/(x^2+1)^2"
+    illustrates: "Derivee d'un quotient, max en 1, min en -1"
+    concepts: [N3, N8]
+    difficulty: 2
+
+  - id: EC6
+    description: "f(x) = (x-2)^2.(x+3), tangentes et extrema"
+    illustrates: "Produit de fonctions, derivee par le produit"
+    concepts: [N3, N8]
+    difficulty: 2
+
+  - id: EC7
+    description: "f(x) = sqrt(2x+1) => f'(x) = 1/sqrt(2x+1)"
+    illustrates: "Derivee d'une racine simple"
+    concepts: [N4]
+    difficulty: 1
+
+  - id: EC8
+    description: "Aire maximale d'un rectangle de perimetre donne (carre)"
+    illustrates: "Probleme classique d'optimisation geometrique"
+    concepts: [N7, N8, N9]
+    difficulty: 3
+
+  - id: EC9
+    description: "Rectangle inscrit dans un cercle de perimetre maximal"
+    illustrates: "Optimisation avec contrainte geometrique"
+    concepts: [N7, N8, N9]
+    difficulty: 3
+
+  - id: EC10
+    description: "f(x) = (1-x)/(x^2-1), simplification en -1/(x+1)"
+    illustrates: "Piege de la simplification avant derivation"
+    concepts: [N3]
+    difficulty: 2
