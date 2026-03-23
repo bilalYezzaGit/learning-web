@@ -24,11 +24,51 @@ Backlog vivant. Chaque item est analyse, discute, traite ou rejete. On itere.
 **Solution implementee** : section `pedagogy` avec listes `do` et `do_not` par profil (cours: 8 do + 6 do_not, examen: 6 do + 5 do_not, exploration: 6 do + 6 do_not). Format libre en langage naturel, facilement enrichissable. Grille D ajoutee dans `validate-module.md` pour verifier la conformite.
 **Commit** : 2026-03-23
 
-### A2 — Creer `patterns.yaml` pour 3 modules manquants
+### A2 — Enrichir les patterns sur 2 niveaux
 **Priorite** : haute
-**Probleme** : seul `nombre-derive` a un fichier patterns. Les livrets examen des 3 autres modules (continuite, fonction-derivee, denombrement) sont generes sans reference aux exercices reels tunisiens.
-**Proposition** : pour chaque module, analyser les exercices des manuels/parascolaires/xyplus et creer le fichier patterns via `/content patterns {module}`.
-**Impact** : direct sur la typicite tunisienne des livrets examen.
+**Probleme** : seul `nombre-derive` a un fichier patterns, et les patterns actuels ne couvrent que des exercices isoles (1 praxeologie). Les problemes complets multi-questions et les sujets cross-module ne sont pas modelises.
+**Proposition** (2 niveaux de patterns) :
+
+**Niveau 1 — `_meta/{prog}/{mod}/patterns.yaml`** (par module) :
+- Patterns d'exercices isoles (actuel, type: exercice)
+- **NOUVEAU** : patterns de problemes intra-module (type: probleme) — sequence de praxeologies avec role et progression
+```yaml
+- id: P1
+  type: probleme
+  name: "Etude de continuite complete"
+  sequence:
+    - {praxeology: Prax1, role: "justifier continuite"}
+    - {praxeology: Prax3, role: "etude par morceaux"}
+    - {praxeology: Prax4, role: "TVI existence"}
+    - {praxeology: Prax7, role: "dichotomie"}
+  frequency: high
+  sources: ["Para ex.16", "XY ex.5"]
+```
+
+**Niveau 2 — `_meta/{prog}/examens/{slug}/patterns.yaml`** (par examen) :
+- Patterns de problemes cross-module frequents dans cet examen
+```yaml
+- id: EP1
+  type: probleme-examen
+  name: "Etude de fonction avec TVI et derivee"
+  modules: [continuite, fonction-derivee]
+  sequence:
+    - {praxeology: Prax1, module: continuite, role: "continuite"}
+    - {praxeology: Prax4, module: fonction-derivee, role: "tableau de variation"}
+    - {praxeology: Prax8, module: continuite, role: "nombre de solutions"}
+    - {praxeology: Prax7, module: continuite, role: "dichotomie"}
+  frequency: very_high
+  points_typiques: 5-6
+  sources: ["Synthese T3 2023 ex.3", "Synthese T3 2024 ex.4"]
+```
+
+**Sous-taches** :
+- [ ] Enrichir le patterns-template.yaml avec le type `probleme`
+- [ ] Creer patterns.yaml pour continuite (exercices + problemes intra-module)
+- [ ] Creer patterns.yaml pour fonction-derivee
+- [ ] Creer patterns.yaml pour denombrement
+- [ ] Creer patterns.yaml pour synthese-t3 (problemes cross-module)
+**Impact** : direct sur la typicite tunisienne — les livrets examen reproduisent les vrais sujets.
 **Status** : a planifier
 
 ### A3 — Simplifier `redaction.yaml`
