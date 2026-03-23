@@ -52,6 +52,24 @@ profiles:
 
     expected_duration_minutes: {min: 90, typical: 120, max: 150}
 
+    pedagogy:
+      do:
+        - "Commencer chaque lecon par une question motivante ou une situation concrete avant toute definition"
+        - "Donner l'intuition (graphique, physique, ou par un exemple numerique) AVANT la formule"
+        - "Apres chaque definition ou theoreme, donner immediatement un exemple simple resolu"
+        - "Utiliser un ton encourageant : 'On va decouvrir...', 'Rappelons que...', 'Observons que...'"
+        - "Dans les solutions, justifier chaque etape : 'D'ou...', 'Par suite...', 'On en deduit que...'"
+        - "Anticiper les erreurs frequentes dans les lecons avec des blocs :::attention"
+        - "Varier les registres au sein d'une section : un exemple abstrait, un exemple graphique"
+        - "Terminer chaque section par un QCM qui cible la misconception la plus frequente"
+      do_not:
+        - "Ne jamais commencer une lecon directement par :::definition sans introduction ni motivation"
+        - "Ne jamais donner une formule sans expliquer intuitivement pourquoi elle marche"
+        - "Ne pas enchainer 3+ exercices du meme type sans varier le contexte"
+        - "Ne pas ecrire de solutions telegraphiques (une ligne sans justification)"
+        - "Ne pas utiliser un langage academique distant — s'adresser a l'eleve avec 'on' ou le tutoiement"
+        - "Ne pas supposer que l'eleve connait la methode — toujours inclure un bloc :::methode ou une lecon precedente"
+
   # =========================================================================
   examen:
   # =========================================================================
@@ -101,6 +119,21 @@ profiles:
 
     expected_duration_minutes: {min: 120, typical: 150, max: 180}
 
+    pedagogy:
+      do:
+        - "Commencer chaque section par un rappel methodologique bref (5 lignes max) avant les exercices"
+        - "Dans les solutions, montrer la demarche complete etape par etape"
+        - "Varier les types de fonctions dans les exercices (polynome, rationnelle, racine, par morceaux)"
+        - "Inclure au moins 1 exercice avec interpretation graphique par section"
+        - "Pour les QCM, cibler les erreurs frequentes avec des distracteurs pedagogiquement utiles"
+        - "Formuler les enonces comme dans les vrais devoirs tunisiens : 'Montrer que...', 'En deduire que...', 'Justifier que...'"
+      do_not:
+        - "Ne pas inclure de lecons detaillees — seulement des rappels methodologiques courts"
+        - "Ne pas donner d'indices dans les exercices (pas de bloc :::hint) — l'eleve doit retrouver la methode"
+        - "Ne pas utiliser d'exemples trop artificiels — les fonctions doivent ressembler a celles des examens"
+        - "Ne pas mettre plus de 2 exercices d'application directe (ce n'est pas un livret cours)"
+        - "Ne pas ecrire d'enonces trop longs — un exercice d'examen tient en 5-8 lignes"
+
   # =========================================================================
   exploration:
   # =========================================================================
@@ -148,3 +181,19 @@ profiles:
       - type-bac                     # Section 4 : exercice complet multi-parties type examen
 
     expected_duration_minutes: {min: 120, typical: 150, max: 180}
+
+    pedagogy:
+      do:
+        - "Laisser l'eleve structurer sa propre demarche — pas de methode pre-machee"
+        - "Ecrire des solutions rigoureuses et completes avec toutes les justifications"
+        - "Combiner plusieurs praxeologies dans un meme exercice (c'est le but du livret)"
+        - "Inclure au moins un exercice multi-parties type BAC (4+ questions enchainees)"
+        - "Utiliser des contextes varies : parametrique, geometrique, modelisation"
+        - "Pour les demonstrations alpha-beta, detailler la strategie de majoration"
+      do_not:
+        - "Ne pas inclure de lecons — l'eleve est suppose maitriser le cours"
+        - "Ne pas inclure d'exercices d'application directe (difficulte 0-1)"
+        - "Ne pas donner d'indices (:::hint) ni de methodes (:::methode) — l'eleve doit chercher"
+        - "Ne pas simplifier les calculs — les coefficients et fonctions doivent etre realistes"
+        - "Ne pas ecrire d'enonces triviaux — chaque exercice doit faire reflechir"
+        - "Ne pas oublier de verifier les cas limites dans les solutions (domaine, conditions sqrt, etc.)"

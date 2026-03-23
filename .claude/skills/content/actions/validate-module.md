@@ -3,7 +3,7 @@
 ## Regles
 
 - Validation **semantique** par LLM — ne duplique PAS le pipeline `npm run generate`
-- 3 grilles : A (structure subtile), B (mathematiques), C (pedagogie)
+- 4 grilles : A (structure subtile), B (mathematiques), C (pedagogie), D (conformite profil)
 - Verdict par grille : **PASS** / **WARN** / **FAIL**
 - Rapport ecrase a chaque re-execution
 - Calculs maths verifies **etape par etape** (pas survoles)
@@ -114,6 +114,26 @@ Pour chaque fichier `.mdx` du module, mener une analyse en profondeur selon 3 gr
 - Alignement avec le planning (si disponible) : le contenu correspond au champ `contenu` du planning
 - Alignement avec la KB (si disponible) : les praxeologies referees existent dans la KB
 
+#### Grille D — Conformite pedagogique au profil
+
+Si un planning avec un `profile:` existe pour ce module, charger les DO/DO NOT depuis `_meta/booklet-profiles.yaml` et verifier :
+
+**Pour chaque DO** (par atome ou par livret selon le DO) :
+- DO "Commencer chaque lecon par une question motivante" → verifier que les lecons ne commencent pas par :::definition directement
+- DO "Exemple apres chaque definition" → verifier que chaque :::definition est suivie d'un :::example dans les 20 lignes
+- DO "Solutions justifiees etape par etape" → verifier que les :::solution contiennent des connecteurs logiques ("D'ou", "Par suite", "On en deduit")
+
+**Pour chaque DO NOT** :
+- DO NOT "pas de solutions telegraphiques" → verifier que chaque :::solution fait au moins 3 lignes
+- DO NOT "pas de :::hint dans le profil examen/exploration" → verifier l'absence de :::hint
+
+**Verdict** :
+- **PASS** : tous les DO respectes, aucun DO NOT viole
+- **WARN** : 1-2 DO manques OU 1 DO NOT mineur viole
+- **FAIL** : ≥3 DO manques OU DO NOT critique viole (ex: lecon sans introduction dans un livret cours)
+
+> Si pas de planning ou pas de profil, la Grille D est notee **N/A** (non applicable).
+
 #### Verdict par atome
 
 - **FAIL** si ≥1 grille est FAIL
@@ -165,6 +185,9 @@ Ecrire un rapport par molecule dans `content/{programme}/{module}/_molecules/{sl
 
 #### Grille C — Pedagogie
 {constatations}
+
+#### Grille D — Conformite profil ({profil})
+{liste des DO verifies et DO NOT verifies, avec verdict par item}
 
 **Synthese** : {verdict} — {resume en 1 phrase}
 

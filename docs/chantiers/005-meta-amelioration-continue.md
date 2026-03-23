@@ -18,20 +18,11 @@ Backlog vivant. Chaque item est analyse, discute, traite ou rejete. On itere.
 
 ## Items actifs
 
-### A1 — Ajouter `pedagogy` aux profils de livrets
+### ~~A1 — Ajouter `pedagogy` aux profils de livrets~~ ✅
 **Priorite** : haute
-**Probleme** : `booklet-profiles.yaml` definit le QUOI (nombre d'exercices, difficulte, categories) mais pas le COMMENT (ton, style, approche pedagogique). Le LLM genere du contenu correct mais "froid".
-**Proposition** : ajouter une section `pedagogy` par profil :
-```yaml
-pedagogy:
-  tone: encouraging
-  introduction_style: motivating-question
-  solution_style: step-by-step-justified
-  intuition_before_formalism: true
-  anticipate_errors: true
-```
-**Impact** : direct sur la "chaleur" des livrets generes.
-**Status** : a discuter
+**Probleme** : `booklet-profiles.yaml` definit le QUOI mais pas le COMMENT.
+**Solution implementee** : section `pedagogy` avec listes `do` et `do_not` par profil (cours: 8 do + 6 do_not, examen: 6 do + 5 do_not, exploration: 6 do + 6 do_not). Format libre en langage naturel, facilement enrichissable. Grille D ajoutee dans `validate-module.md` pour verifier la conformite.
+**Commit** : 2026-03-23
 
 ### A2 — Creer `patterns.yaml` pour 3 modules manquants
 **Priorite** : haute
@@ -76,7 +67,7 @@ pedagogy:
 
 ## Items traites
 
-(vide — on commence)
+- **A1** — pedagogy DO/DO NOT dans booklet-profiles.yaml + Grille D dans validate-module.md (2026-03-23)
 
 ---
 
@@ -91,3 +82,9 @@ pedagogy:
 ### Iteration 1 — 2026-03-23
 - Creation du backlog avec 7 items (A1-A7)
 - Analyse initiale du systeme : savoir/praxeologies/misconceptions sont solides, booklet-profiles manque de pedagogie, patterns manquent pour 3 modules, redaction et interface sont over-engineered
+
+### Iteration 2 — 2026-03-23
+- A1 traite : pedagogy DO/DO NOT par profil + Grille D validation
+- Cours: 8 do + 6 do_not (ton encourageant, intuition avant formule, exemples apres definitions)
+- Examen: 6 do + 5 do_not (formulation type devoirs tunisiens, pas d'indices)
+- Exploration: 6 do + 6 do_not (autonomie, rigueur, pas de simplification)
