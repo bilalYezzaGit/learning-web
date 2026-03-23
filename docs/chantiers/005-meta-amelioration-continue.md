@@ -1,6 +1,6 @@
 # Chantier 005 — Amelioration continue du systeme _meta/
 
-Status: EN COURS (iteratif)
+Status: TERMINE (tous les items traites ou rejetes)
 Date: 2026-03-23
 
 Backlog vivant. Chaque item est analyse, discute, traite ou rejete. On itere.
@@ -117,12 +117,8 @@ Backlog vivant. Chaque item est analyse, discute, traite ou rejete. On itere.
 ### ~~A6 — Fusionner lexique module dans savoir.yaml~~ ✅
 **Status** : les notations et formules de redaction de chaque module sont dans savoir.yaml section "NOTATIONS ET REDACTION". -4 fichiers lexique.yaml supprimes.
 
-### A7 — Exemples d'atomes "gold standard"
-**Priorite** : moyenne
-**Probleme** : le systeme a des templates (comment structurer un MDX) mais pas d'exemples de ce a quoi un excellent atome ressemble pour chaque type et profil.
-**Proposition** : selectionner les meilleurs atomes generes, les annoter, et les stocker comme reference dans `.claude/skills/content/references/exemplars/`.
-**Impact** : ameliore la qualite de generation par l'exemple.
-**Status** : a discuter
+### ~~A7 — Exemples d'atomes "gold standard"~~ REJETE
+**Raison** : les DO/DO NOT (37 regles) + les 116 patterns avec examples reels couvrent deja le besoin. Ajouter des exemplars risque de rigidifier le style (le LLM copie au lieu de s'adapter). Si la qualite des lecons s'avere insuffisante apres test, on rouvrira avec un probleme concret.
 
 ---
 
@@ -136,7 +132,7 @@ Backlog vivant. Chaque item est analyse, discute, traite ou rejete. On itere.
 
 ## Items rejetes
 
-(vide — on commence)
+- **A7** — Exemplars gold standard : couvert par DO/DO NOT + examples dans patterns. Risque de rigidification. (2026-03-23)
 
 ---
 
@@ -160,3 +156,19 @@ Backlog vivant. Chaque item est analyse, discute, traite ou rejete. On itere.
 - denombrement : 34 patterns
 - synthese-t3 : 6 patterns cross-module (cubique, rationnelle, irrationnelle, denomb+proba, morceaux, binome)
 - Total : 116 patterns, 4326 lignes
+
+### Iteration 4 — 2026-03-23
+- A3-A6 traites : simplification massive
+- Supprimes : redaction.yaml x4, complexite.yaml, lexique.yaml module x4, schemas interface
+- Fusionnes : notations et formules de redaction dans savoir.yaml
+- De 12459 a 10930 lignes (-12%), de 6 a 4 fichiers par module
+- A7 rejete : couvert par DO/DO NOT + examples dans patterns
+
+### Bilan final
+- 7 items identifies, 6 traites, 1 rejete
+- Systeme _meta/ : 22 fichiers YAML, 10930 lignes, 4 fichiers/module
+- Structure par module : savoir.yaml + praxeologies.yaml + misconceptions.yaml + patterns.yaml
+- 116 patterns (exercices + problemes + cross-module) avec examples reels
+- 37 regles pedagogiques DO/DO NOT par profil de livret
+- Grille D de validation pedagogique
+- Pipeline : 218 atomes, 12 livrets, 0 erreurs
