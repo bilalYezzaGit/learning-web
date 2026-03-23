@@ -7,7 +7,7 @@
 - Respecter les conventions du referentiel `docs/referentiels/redaction-mathematiques-tunisie.md`
 - Section 8 (Praxeologies) est la plus critique : 1 praxeologie = 1 type de tache + 1 technique
 - Section 9 (Misconceptions) : inclure des questions diagnostiques au format QCM
-- Output : fichiers splites dans `_meta/{programme}/{module}/` (savoir.yaml, praxeologies.yaml, misconceptions.yaml, lexique.yaml, redaction.yaml)
+- Output : fichiers splites dans `_meta/{programme}/{module}/` (savoir.yaml, praxeologies.yaml, misconceptions.yaml)
 
 ## Pre-requis
 
@@ -61,7 +61,7 @@ Croiser les 3 sources pour chaque section. Estimation de taille par section :
 | 7 — Exemples canoniques | Classiques tunisiens | 15 |
 | 8 — Praxeologies | T, tau, theta, variables, difficulte | 150-200 |
 | 9 — Misconceptions | Avec QCM diagnostique | 70 |
-| 10 — Regles redactionnelles | Notations, rigueur, formules | 30 |
+| 10 — Regles redactionnelles | Notations, rigueur, formules (inclus dans savoir.yaml) | 30 |
 
 **Section 8 — Praxeologies** (la plus critique) :
 - 1 praxeologie = 1 type de tache + 1 technique (jamais d'alternatives dans "Technique")
@@ -74,14 +74,12 @@ Croiser les 3 sources pour chaque section. Estimation de taille par section :
 
 ### Etape 6 — Ecrire les fichiers splites
 
-Ecrire la KB en 5 fichiers dans `_meta/{programme}/{module}/` :
+Ecrire la KB en 3 fichiers dans `_meta/{programme}/{module}/` :
 
 ```
-Write: _meta/{programme}/{module}/savoir.yaml        # Sections 0-7 (objectif, scope, transposition, prereqs, carte, theoremes, KC, exemples)
+Write: _meta/{programme}/{module}/savoir.yaml        # Sections 0-7 + 10 (objectif, scope, transposition, prereqs, carte, theoremes, KC, exemples, notations)
 Write: _meta/{programme}/{module}/praxeologies.yaml   # Section 8 (praxeologies)
 Write: _meta/{programme}/{module}/misconceptions.yaml # Section 9 (misconceptions + QCM diagnostiques)
-Write: _meta/{programme}/{module}/lexique.yaml        # Section 10 (regles redactionnelles, notations)
-Write: _meta/{programme}/{module}/redaction.yaml    # Modeles de redaction et criteres de notation
 ```
 
 ### Etape 7 — Mettre a jour l'interface
@@ -93,17 +91,17 @@ modules:
   {module}:
     programme: {programme}
     kb_status: complete     # ou partial
-    files: [savoir, praxeologies, misconceptions, lexique, redaction]
+    files: [savoir, praxeologies, misconceptions]
 ```
 
 ## Checklist KB
 
 Avant de presenter le resultat a l'utilisateur, verifier :
 
-- [ ] Les 10 sections sont presentes et remplies (reparties sur les 5 fichiers)
+- [ ] Les 10 sections sont presentes et remplies (reparties sur les 3 fichiers)
 - [ ] Chaque praxeologie a T, tau, theta, variables didactiques, difficulte
 - [ ] Chaque misconception a une question diagnostique QCM
 - [ ] Les notations suivent le referentiel tunisien
 - [ ] Les liens inter-modules sont corrects (prerequisites, ouvre vers)
-- [ ] Les 5 fichiers sont bien places dans `_meta/{programme}/{module}/`
+- [ ] Les 3 fichiers sont bien places dans `_meta/{programme}/{module}/`
 - [ ] `_meta/_interface.yaml` est mis a jour avec l'entree du module

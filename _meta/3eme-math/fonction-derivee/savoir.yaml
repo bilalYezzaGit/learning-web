@@ -557,3 +557,38 @@ canonical_examples:
     illustrates: "Piege de la simplification avant derivation"
     concepts: [N3]
     difficulty: 2
+
+# ---------------------------------------------------------------------------
+# NOTATIONS ET REDACTION
+# ---------------------------------------------------------------------------
+notations:
+  - symbol: "f', f'(x), f'(a)"
+    meaning: "Fonction derivee, derivee en x, nombre derive en a"
+  - symbol: "f'', f''', f^(n)"
+    meaning: "Derivees successives (seconde, troisieme, n-ieme)"
+  - symbol: "f'_d(a), f'_g(b)"
+    meaning: "Derivee a droite en a, derivee a gauche en b"
+  - symbol: "C_f, zeta_f"
+    meaning: "Courbe representative de f (selon la source)"
+  - symbol: "(O, vec(i), vec(j))"
+    meaning: "Repere orthonorme du plan"
+
+redaction_formulas:
+  - "f est une fonction polynome donc derivable sur R"
+  - "f est une fonction rationnelle definie et derivable sur D"
+  - "f est derivable et strictement positive sur I, donc sqrt(f) est derivable sur I"
+  - "D'ou le tableau de variation de f..."
+  - "f admet {un max/min} local en a egal a f(a) = ..."
+  - "Pour tout x dans I, f(x) >= f(a) = ..., donc f(a) est le minimum de f sur I"
+  - "f'(x) {>= 0 / <= 0} pour tout x dans I, donc f est {croissante / decroissante} sur I."
+  - "f admet un extremum en a et f est derivable en a, donc f'(a) = 0."
+  - "f'(a) = 0 et f' change de signe en a (de + a - : max local / de - a + : min local)."
+  - "Posons h(x) = f(x) - g(x). h'(x) = ... {signe} pour tout x dans I. Donc h est {croissante/decroissante} sur I. Or h({borne}) = ... Donc h(x) >= 0 pour tout x dans I, d'ou f(x) >= g(x)."
+
+rigor_rules:
+  - "Calcul de derivee : TOUJOURS montrer les etapes intermediaires (identification de u, v, application de la formule)"
+  - "Etude de signe de f' : TOUJOURS passer par un tableau de signes complet (pas de test de valeurs)"
+  - "Tableau de variation : TOUJOURS comporter : ligne x, ligne signe de f', ligne variations de f (fleches + valeurs)"
+  - "Extremum : TOUJOURS preciser : f'(a) = 0 ET f' change de signe (pas de raccourci)"
+  - "Optimisation : TOUJOURS revenir au probleme initial apres l'etude de variations"
+  - "Domaine de derivabilite : TOUJOURS verifier que le domaine est un intervalle avant d'appliquer le theoreme variations-derivee"

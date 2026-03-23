@@ -513,3 +513,43 @@ canonical_examples:
     illustrates: "Binome de Newton (N7)"
     concepts: [N7]
     difficulty: 2
+
+# ---------------------------------------------------------------------------
+# NOTATIONS ET REDACTION
+# ---------------------------------------------------------------------------
+notations:
+  - symbol: "A_n^p"
+    meaning: "Nombre d'arrangements de p parmi n (jamais P(n,p) ni P_r)"
+  - symbol: "C_n^p"
+    meaning: "Nombre de combinaisons de p parmi n (notation binomiale acceptee mais secondaire)"
+  - symbol: "n!"
+    meaning: "Factorielle de n (convention 0! = 1)"
+  - symbol: "card(E)"
+    meaning: "Cardinal de l'ensemble E (pas |E| ni #E)"
+  - symbol: "E x F"
+    meaning: "Produit cartesien de E et F"
+  - symbol: "complementaire de A, C_E A"
+    meaning: "Complementaire de A dans E"
+  - symbol: "n^p"
+    meaning: "Nombre d'applications de {1,...,p} dans un ensemble de cardinal n (tirages avec remise)"
+
+redaction_formulas:
+  - "Il s'agit d'un tirage {type_tirage}, donc on utilise {formule}"
+  - "Il s'agit d'un tirage simultane de 3 boules parmi 10, donc on utilise C_{10}^3"
+  - "Il s'agit d'un tirage successif sans remise de 4 elements parmi 8, donc on utilise A_8^4"
+  - "Il s'agit d'un tirage successif avec remise, donc on utilise n^p"
+  - "On utilise le principe multiplicatif : {detail_etapes} d'ou le nombre total est {produit}"
+  - "Par la methode du complementaire, le nombre de ... est : total - nombre de ... = ..."
+  - "D'apres la formule du binome de Newton appliquee avec a = ..., b = ..., n = ..."
+  - "Le nombre de facons de choisir p elements parmi n est C_n^p = {calcul}"
+  - "Le nombre de p-uplets d'elements distincts de E est A_n^p = {calcul}"
+  - "Le mot comporte {n} lettres dont {detail_repetitions}. Le nombre d'anagrammes est n! / (p1! x p2! x ... x pk!) = {calcul}."
+  - "card(E union F) = card(E) + card(F) - card(E inter F) = {calcul}"
+
+rigor_rules:
+  - "Choix de formule : TOUJOURS justifier le choix du modele ('tirage simultane donc combinaisons' ou 'ordre et sans remise donc arrangements')"
+  - "Conditions de validite : TOUJOURS preciser que 0 <= p <= n pour A_n^p et C_n^p"
+  - "Denombrement sous contraintes : TOUJOURS expliciter la decomposition en cas et verifier que les cas sont disjoints"
+  - "Premier chiffre d'un nombre : TOUJOURS traiter le premier chiffre separement (ne peut pas etre 0)"
+  - "Methode du complementaire : TOUJOURS identifier clairement ce qu'on soustrait et pourquoi"
+  - "Anagrammes avec repetitions : TOUJOURS dresser le tableau lettre/frequence avant d'appliquer la formule"

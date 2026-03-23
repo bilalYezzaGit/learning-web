@@ -476,3 +476,33 @@ canonical_examples:
     illustrates: "Methode pratique (tableau de valeurs successifs)"
     concepts: [N8]
     difficulty: 1
+
+# ---------------------------------------------------------------------------
+# NOTATIONS ET REDACTION
+# ---------------------------------------------------------------------------
+notations:
+  - symbol: "alpha, beta"
+    meaning: "Tolerances dans la definition de la continuite (convention tunisienne, PAS epsilon-delta)"
+  - symbol: "E(x)"
+    meaning: "Partie entiere (pas la notation crochet)"
+  - symbol: "C_f, zeta_f, C"
+    meaning: "Courbe representative (selon la source)"
+  - symbol: "f(I), f([a,b])"
+    meaning: "Image d'un intervalle"
+
+redaction_formulas:
+  - "f est une fonction {type}, donc continue en a"
+  - "f est une fonction polynome, donc continue en a"
+  - "f est une fonction rationnelle dont le denominateur ne s'annule pas en a, donc continue en a"
+  - "f et g sont continues en a, donc {operation} est continue en a"
+  - "g est continue en a et g(a) != 0, donc f/g est continue en a"
+  - "f est continue en a et f(a) > 0, donc sqrt(f) est continue en a"
+  - "f est continue sur [a,b]. f(a) = ... et f(b) = ... D'ou f(a).f(b) < 0. Par le theoreme des valeurs intermediaires, l'equation f(x) = 0 admet au moins une solution dans ]a, b[."
+  - "De plus, f est strictement {croissante/decroissante} sur [a,b], donc la solution est unique."
+  - "f est continue et {croissante/decroissante} sur [a,b], donc f([a,b]) = [{borne_inf}, {borne_sup}]."
+
+rigor_rules:
+  - "Continuite par morceaux : TOUJOURS calculer les limites laterales et comparer avec f(x0)"
+  - "Application du TVI : TOUJOURS verifier la continuite avant d'appliquer"
+  - "Unicite : TOUJOURS preciser la monotonie (pas de raccourci)"
+  - "Image d'un intervalle : TOUJOURS dresser le tableau de variation avant de donner f(I)"

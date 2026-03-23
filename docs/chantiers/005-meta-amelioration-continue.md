@@ -105,30 +105,17 @@ Backlog vivant. Chaque item est analyse, discute, traite ou rejete. On itere.
 - examens/synthese-t3/patterns.yaml : 6 patterns cross-module, 352 lignes
 - patterns-template.yaml mis a jour avec format flexible (type probleme, example, do/do_not)
 
-### A3 — Simplifier `redaction.yaml`
-**Priorite** : moyenne
-**Probleme** : `grading_criteria` avec `weight` simule un systeme de correction automatique qui n'existe pas. Le LLM n'utilise pas les poids.
-**Proposition** : garder les `template` et `variants` (utiles pour guider la redaction), supprimer `grading_criteria`.
-**Impact** : reduction de complexite, pas de perte fonctionnelle.
-**Status** : a discuter
+### ~~A3 — Simplifier `redaction.yaml`~~ ✅
+**Status** : supprime. Les DO/DO NOT dans booklet-profiles.yaml + les examples dans patterns.yaml remplacent les templates structures. -1086 lignes (4 fichiers supprimes).
 
-### A4 — Supprimer `complexite.yaml`
-**Priorite** : basse
-**Probleme** : l'echelle 0-3 est deja dans `CONTENT-CONVENTIONS.md`, dans le skill, et dans `booklet-profiles.yaml`. Triple duplication.
-**Proposition** : fusionner le contenu utile dans `booklet-profiles.yaml` et supprimer le fichier.
-**Status** : a discuter
+### ~~A4 — Supprimer `complexite.yaml`~~ ✅
+**Status** : supprime. L'echelle de difficulte est dans booklet-profiles.yaml. -80 lignes.
 
-### A5 — Alleger `_interface.yaml`
-**Priorite** : basse
-**Probleme** : 75 lignes de schemas (savoir_schema, praxeologies_schema, etc.) qui ne sont jamais valides programmatiquement. C'est de la documentation deguisee en configuration.
-**Proposition** : retirer les sections schema, garder uniquement : version, programmes, modules, examens, identifiers, composition.
-**Status** : a discuter
+### ~~A5 — Alleger `_interface.yaml`~~ ✅
+**Status** : v4 — retire schemas (75 lignes), retire references redaction/lexique/complexite. De 199 a 82 lignes.
 
-### A6 — Clarifier la source unique pour le lexique global
-**Priorite** : basse
-**Probleme** : les conventions de notation (virgule decimale, intervalles francais) sont dans 3 endroits : `_meta/lexique.yaml`, `docs/referentiels/redaction-mathematiques-tunisie.md`, `docs/CONTENT-CONVENTIONS.md`.
-**Proposition** : decider d'une source unique et faire pointer les autres vers elle.
-**Status** : a discuter
+### ~~A6 — Fusionner lexique module dans savoir.yaml~~ ✅
+**Status** : les notations et formules de redaction de chaque module sont dans savoir.yaml section "NOTATIONS ET REDACTION". -4 fichiers lexique.yaml supprimes.
 
 ### A7 — Exemples d'atomes "gold standard"
 **Priorite** : moyenne
@@ -143,6 +130,7 @@ Backlog vivant. Chaque item est analyse, discute, traite ou rejete. On itere.
 
 - **A1** — pedagogy DO/DO NOT dans booklet-profiles.yaml + Grille D dans validate-module.md (2026-03-23)
 - **A2** — patterns 2 niveaux : 3 modules + 1 examen, format flexible avec example/do/do_not, 116 patterns total (2026-03-23)
+- **A3-A6** — simplification : suppression redaction.yaml (x4), complexite.yaml, lexique.yaml module (x4), schemas interface. De 12459 a 10930 lignes (-12%). De 6 fichiers/module a 4. (2026-03-23)
 
 ---
 

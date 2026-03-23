@@ -313,7 +313,7 @@ Atomes:     content/{programme}/{module}/{type}-{topic}-{slug}.mdx
 Molecules:  content/{programme}/{module}/_molecules/{slug}/molecule.yaml
 Planning:   content/{programme}/{module}/_molecules/{slug}/_planning.yaml
 Validation: content/{programme}/{module}/_molecules/{slug}/_validation.md
-Meta:       _meta/{programme}/{module}/  (savoir.yaml, praxeologies.yaml, patterns.yaml, redaction.yaml, etc.)
+Meta:       _meta/{programme}/{module}/  (savoir.yaml, praxeologies.yaml, misconceptions.yaml + optional patterns.yaml)
 Programme:  content/{programme}/_programme.yaml
 ```
 
@@ -385,15 +385,12 @@ Commandes liees : `/source scan`, `/source discover`, `/source status`
 
 ### Meta (modele academique)
 - Interface : `_meta/_interface.yaml`
-- Savoir module : `_meta/{programme}/{module}/savoir.yaml`
+- Savoir module : `_meta/{programme}/{module}/savoir.yaml` (inclut notations)
 - Praxeologies : `_meta/{programme}/{module}/praxeologies.yaml`
-- Patterns : `_meta/{programme}/{module}/patterns.yaml`
 - Misconceptions : `_meta/{programme}/{module}/misconceptions.yaml`
-- Lexique module : `_meta/{programme}/{module}/lexique.yaml`
-- Redaction : `_meta/{programme}/{module}/redaction.yaml`
+- Patterns : `_meta/{programme}/{module}/patterns.yaml` (optionnel, WF1+)
 - Specs examen : `_meta/{programme}/examens/{slug}/spec.yaml`
-- Profils livrets : `_meta/booklet-profiles.yaml` (cours, examen, exploration)
-- Globaux : `_meta/` (lexique.yaml, complexite.yaml)
+- Profils livrets : `_meta/booklet-profiles.yaml` (cours, examen, exploration — inclut echelle de difficulte)
 - Prerequis : `_meta/{programme}/prerequis-graph.yaml`
 
 
