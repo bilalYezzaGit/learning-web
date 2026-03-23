@@ -1,115 +1,207 @@
-# Chantier 006 — Restructuration _raw/ et concept d'enrichissement
+# Chantier 006 — Systeme d'integration des sources (_raw/)
 
-Status: PHASE 1 TERMINEE (restructuration), PHASE 2 A PLANIFIER (skill enrichissement)
+Status: PHASE 1 TERMINEE, PHASE 2 VISION DOCUMENTEE
 Date: 2026-03-23
 
 ---
 
-## Ce qui a ete fait (Phase 1)
+## Phase 1 — Restructuration _raw/ (terminee)
 
-### Restructuration _raw/
-
-Avant :
 ```
 _raw/
-├── *.pdf                    (PDFs en vrac a la racine)
-├── CARTOGRAPHIE.md          (obsolete)
-├── sources/*.yaml           (fiches sans namespace)
-├── reference/3eme-math/     (transcriptions sans distinction type)
-└── pages/                   (extractions PNG)
+└── {programme}/                    # Ex: 3eme-math/
+    ├── fondations/                 # Sources de reference → creent la KB
+    │   ├── Manuel_scolaire_t1.pdf  # PDFs, images, n'importe quel format
+    │   ├── Parascolaire.pdf
+    │   └── {module}/               # Transcriptions .typ produites
+    │       ├── manuel.typ
+    │       └── parascolaire.typ
+    │
+    ├── enrichissements/            # Sources iteratives → confrontent la KB
+    │   ├── serie-prof-ahmed.pdf    # PDFs, images, photos, n'importe quoi
+    │   ├── synthese-t3-2024.pdf
+    │   └── {module}/               # Transcriptions .typ produites
+    │       └── serie-prof-ahmed.typ
+    │
+    ├── sources/                    # Fiches d'indexation (1 YAML par PDF fondation)
+    └── pages/                      # PNG temporaires (gitignore)
 ```
 
-Apres :
-```
-_raw/
-└── 3eme-math/               (namespace par programme)
-    ├── pdfs/                 (8 PDFs)
-    ├── sources/              (8 fiches YAML avec champ status par module)
-    ├── fondations/           (transcriptions → KB, WF0→WF1)
-    │   └── {module}/         (manuel.typ, parascolaire.typ, xyplus.typ)
-    └── enrichissements/      (transcriptions iteratives → patterns, WF1+)
-        └── {module}/         (series, examens, cours de profs — vide pour l'instant)
-```
+**Le dossier dans lequel tu mets le fichier EST l'intention** :
+- `fondations/` = ce fichier fait autorite, il definit le savoir
+- `enrichissements/` = ce fichier est a confronter au modele existant
 
-### Tracking du statut
-
-Chaque fiche source a maintenant un `status:` par module :
-- `kb-complete` : transcrit + KB dans _meta/ (4 modules)
-- `transcribed` : transcrit mais pas de KB (4 modules)
-- `not-started` : pas encore transcrit (15 modules)
+**Tout type de fichier accepte** : PDF, images, photos — le systeme transcrit ce qu'il faut.
 
 ---
 
-## Concept d'enrichissement (Phase 2 — a planifier)
+## Phase 2 — Vision : commande unique `/content integrer`
 
-### Le probleme
+### Principe
 
-Le systeme actuel a deux flux distincts mais un seul est implemente :
-
-| Flux | Source | Cible | Skill | Status |
-|------|--------|-------|-------|--------|
-| **Fondation** | Manuels/parascolaires/xyplus | `_meta/{prog}/{mod}/savoir.yaml` + `praxeologies.yaml` + `misconceptions.yaml` | `/content kb` | ✅ operationnel |
-| **Enrichissement** | Series, examens, cours de profs, devoirs | `_meta/{prog}/{mod}/patterns.yaml` + potentiellement KB | `/content enrichir` | ❌ pas implemente |
-
-Le flux enrichissement est plus complexe que le flux fondation car il **confronte** une source externe au modele existant. Les effets possibles :
-
-### Effets d'un enrichissement
-
-Un fichier d'enrichissement (ex: une serie d'exercices d'un prof) peut produire :
-
-1. **Nouveau pattern** — un exercice dont la structure n'est pas dans patterns.yaml
-   → Ajouter un pattern dans `_meta/{prog}/{mod}/patterns.yaml`
-
-2. **Pattern connu, nouvelle instance** — un exercice qui correspond a un pattern existant
-   → Incrementer `frequency`, ajouter la source
-
-3. **Praxeologie manquante** — un type de tache non identifie dans praxeologies.yaml
-   → Alerter l'humain, proposer une nouvelle praxeologie
-
-4. **Contradiction avec la KB** — la source dit quelque chose qui contredit un theoreme ou une convention
-   → Alerter l'humain (erreur dans la source OU dans la KB)
-
-5. **Nouvelle misconception** — un corrige revele une erreur classique non documentee
-   → Proposer un ajout dans `misconceptions.yaml`
-
-6. **Confirmation** — la source est coherente avec le modele, rien a changer
-   → Marquer le fichier comme traite
-
-### Skill envisage : `/content enrichir {module}`
+Une seule commande pour tout :
 
 ```
-/content enrichir continuite
+/content integrer
 ```
 
-1. Scanne `_raw/{prog}/enrichissements/{module}/` pour les fichiers non traites
-2. Charge tout `_meta/{prog}/{mod}/` (savoir + praxeologies + misconceptions + patterns)
-3. Pour chaque fichier :
-   - Analyse les exercices/cours/series
-   - Classifie chaque element (match, nouveau, contradiction, misconception)
-   - Produit un rapport
-4. Propose les modifications a `_meta/` (patterns, misconceptions, praxeologies)
-5. Attend validation humaine avant de modifier
-6. Marque les fichiers comme traites (dans la fiche source ou dans un fichier _processed.yaml)
+Le systeme scanne `fondations/` et `enrichissements/`, detecte les fichiers non traites, et agit selon le dossier.
 
-### Comment marquer les fichiers traites
+On peut aussi cibler un fichier :
 
-Option A — Un fichier `_processed.yaml` par module dans enrichissements/ :
+```
+/content integrer serie-prof-ahmed.pdf
+/content integrer Manuel_t1.pdf Parascolaire.pdf
+```
+
+Le systeme trouve le fichier dans fondations/ ou enrichissements/ et agit en consequence.
+
+### Flux fondation (batch)
+
+Declenche quand des fichiers non traites sont dans `fondations/`.
+
+**Caractéristique** : on a besoin de TOUTES les sources fondation pour produire la KB. Ce n'est pas unitaire — c'est une synthese croisee.
+
+```
+/content integrer
+→ Scanne fondations/ : 3 PDFs non transcrits pour continuite
+→ "J'ai 3 sources pour continuite (manuel, parascolaire, xyplus).
+   Je transcris et je cree la KB ?"
+→ oui
+→ Transcrit les 3 en parallele → Croise → Produit _meta/{prog}/{mod}/
+  (savoir.yaml + praxeologies.yaml + misconceptions.yaml)
+```
+
+Si une nouvelle source fondation est ajoutee plus tard :
+
+```
+/content integrer nouveau-parascolaire.pdf
+→ "continuite a deja une KB (3 fondations). Nouvelle fondation detectee.
+   Je re-synthetise la KB en croisant les 4 sources ?"
+→ oui
+→ Relit TOUTES les fondations → Re-synthese → Met a jour _meta/
+```
+
+### Flux enrichissement (unitaire)
+
+Declenche quand des fichiers non traites sont dans `enrichissements/`.
+
+**Caractéristique** : chaque fichier est traite independamment. Le systeme ne modifie JAMAIS _meta/ sans validation humaine.
+
+```
+/content integrer serie-prof-ahmed.pdf
+→ Trouve le fichier dans enrichissements/
+→ Transcrit (PDF → Typst)
+→ Identifie les modules concernes automatiquement
+→ Confronte chaque exercice/cours au modele _meta/ existant
+→ Produit un rapport :
+
+  ## Rapport d'enrichissement
+  Source : serie-prof-ahmed.pdf (10 exercices)
+  Modules : continuite (8 exos), nombre-derive (2 exos)
+
+  | # | Exercice | Module | Effet | Detail |
+  |---|----------|--------|-------|--------|
+  | 1 | sqrt(x²+1) | continuite | pattern connu | Prax1.v1 freq 6→7 |
+  | 5 | morceaux param m | continuite | nouveau pattern | → Prax3.v4 propose |
+  | 8 | "continue ⇒ derivable" | continuite | contradiction | Erreur dans la source |
+  | 9 | derivee de x.sqrt(x) | nombre-derive | pattern connu | Prax2.v4 freq 3→4 |
+
+  Propositions :
+  - patterns.yaml continuite : +1 freq Prax1.v1, +1 nouveau Prax3.v4
+  - patterns.yaml nombre-derive : +1 freq Prax2.v4
+  - Alerte : exercice 8 contient une erreur mathematique
+
+  Valider ? (oui / non / ajuster)
+
+→ L'humain valide, ajuste ou rejette chaque proposition
+→ Les modifications validees sont appliquees a _meta/
+→ Le fichier est marque comme traite
+```
+
+### Effets possibles d'un enrichissement
+
+| Effet | Action proposee | Cible |
+|-------|----------------|-------|
+| Pattern connu | Incrementer frequency, ajouter source | patterns.yaml |
+| Nouveau pattern | Proposer un nouveau pattern avec description + example | patterns.yaml |
+| Praxeologie manquante | Alerter — type de tache non identifie | praxeologies.yaml |
+| Contradiction | Alerter — la source dit X, la KB dit Y | rapport uniquement |
+| Nouvelle misconception | Proposer un ajout | misconceptions.yaml |
+| Confirmation | Rien a modifier | marquer comme traite |
+
+### Tracking des fichiers traites
+
+Un fichier `_processed.yaml` par dossier d'enrichissement :
+
 ```yaml
-# _raw/3eme-math/enrichissements/continuite/_processed.yaml
+# _raw/3eme-math/enrichissements/_processed.yaml
 processed:
-  - file: serie-prof-lycee-x.typ
+  - file: serie-prof-ahmed.pdf
     date: 2026-03-25
-    effects: [2 new patterns, 1 misconception enriched]
-  - file: synthese-t1-2024.typ
+    modules: [continuite, nombre-derive]
+    effects:
+      - "continuite/patterns.yaml : +1 freq Prax1.v1, +1 nouveau Prax3.v4"
+      - "nombre-derive/patterns.yaml : +1 freq Prax2.v4"
+      - "alerte : exercice 8 erreur mathematique (non integre)"
+  - file: synthese-t3-2024.pdf
     date: 2026-03-26
-    effects: [3 patterns frequency++, 0 new]
+    modules: [continuite, fonction-derivee, denombrement]
+    effects:
+      - "examens/synthese-t3/patterns.yaml : +1 freq EP1, +1 nouveau EP7"
 ```
 
-Option B — Un champ dans la fiche source (plus leger mais moins detaille)
+### Parcours utilisateur complets
 
-### Prerequis avant implementation
+**"J'ai un nouveau manuel a integrer"**
+```
+1. Copier le PDF dans _raw/3eme-math/fondations/
+2. /content integrer
+3. Le systeme detecte le nouveau PDF, propose de transcrire et creer les KB
+4. Valider → KB creees pour chaque module du manuel
+```
+
+**"J'ai une serie d'exercices d'un prof"**
+```
+1. Copier le PDF dans _raw/3eme-math/enrichissements/
+2. /content integrer serie-prof.pdf
+3. Le systeme transcrit, identifie les modules, confronte au modele
+4. Rapport avec propositions → Valider/rejeter chaque proposition
+```
+
+**"J'ai un sujet d'examen"**
+```
+1. Copier le PDF dans _raw/3eme-math/enrichissements/
+2. /content integrer synthese-t3-2024.pdf
+3. Le systeme transcrit, detecte les patterns cross-module
+4. Rapport → enrichit les patterns d'examen si valide
+```
+
+**"J'ai juste une photo d'un exercice"**
+```
+1. Copier la photo dans _raw/3eme-math/enrichissements/
+2. /content integrer photo-exo.jpg
+3. Le systeme lit l'image, identifie le module, confronte
+4. Rapport unitaire
+```
+
+---
+
+## Implementation
+
+### Prerequis
 
 - [ ] Avoir au moins 1 fichier d'enrichissement reel pour tester
-- [ ] Definir le format du rapport d'enrichissement
-- [ ] Decider si le skill modifie directement _meta/ ou produit un diff a valider
-- [ ] Decider du tracking (option A ou B)
+- [ ] Implementer `/content integrer` comme orchestrateur des skills existants
+- [ ] Adapter `/transcription` pour ecrire dans fondations/ ou enrichissements/ selon le contexte
+
+### Complexite estimee
+
+| Composant | Effort | Existe deja ? |
+|-----------|--------|--------------|
+| Transcription PDF → Typst | faible | ✅ `/transcription` existe |
+| Detection du module depuis le contenu | moyen | partiellement (fiches sources) |
+| Confrontation enrichissement vs _meta/ | moyen | `/content patterns` fait une partie |
+| Rapport structure | faible | format defini ci-dessus |
+| Tracking _processed.yaml | faible | schema defini ci-dessus |
+| Orchestrateur `/content integrer` | moyen | a creer |
