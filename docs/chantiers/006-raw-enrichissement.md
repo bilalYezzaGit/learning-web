@@ -56,30 +56,54 @@ On peut aussi cibler un fichier :
 
 Le systeme trouve le fichier dans fondations/ ou enrichissements/ et agit en consequence.
 
-### Flux fondation (batch)
+### Flux fondation (batch, interactif)
 
 Declenche quand des fichiers non traites sont dans `fondations/`.
 
-**Caractéristique** : on a besoin de TOUTES les sources fondation pour produire la KB. Ce n'est pas unitaire — c'est une synthese croisee.
+**Caracteristiques** :
+- On a besoin de TOUTES les sources fondation pour produire la KB (synthese croisee)
+- Un PDF de fondation (ex: Manuel 238 pages) contient potentiellement 12 modules
+- Le systeme ne traite PAS tout d'un coup — il demande quels modules integrer
+- La fiche source (`sources/*.yaml`) est le registre central de l'etat de chaque module
 
 ```
 /content integrer
-→ Scanne fondations/ : 3 PDFs non transcrits pour continuite
-→ "J'ai 3 sources pour continuite (manuel, parascolaire, xyplus).
-   Je transcris et je cree la KB ?"
-→ oui
-→ Transcrit les 3 en parallele → Croise → Produit _meta/{prog}/{mod}/
-  (savoir.yaml + praxeologies.yaml + misconceptions.yaml)
+→ Scanne fondations/ : Manuel_t1.pdf detecte
+→ Cherche la fiche source dans sources/ pour ce PDF
+  → Pas trouvee → indexe automatiquement (lecture couverture + table des matieres)
+  → Cree sources/manuel-3eme-t1.yaml avec 12 modules status: not-started
+→ "Ce PDF contient 12 modules :
+   - continuite (not-started)
+   - nombre-derive (not-started)
+   - fonction-derivee (not-started)
+   - ... (9 autres)
+   Lesquels veux-tu integrer ?"
+→ continuite et nombre-derive
+→ Transcrit les 2 modules en parallele
+→ Cherche les autres sources fondation pour ces modules (parascolaire, xyplus)
+  → Si trouvees et deja transcrites → les inclut dans la synthese
+  → Si trouvees mais pas transcrites → les transcrit aussi
+→ Croise toutes les fondations disponibles → Produit _meta/{prog}/{mod}/
+→ Met a jour les fiches sources :
+    - slug: continuite
+      status: kb-complete          ← mis a jour
+    - slug: nombre-derive
+      status: kb-complete          ← mis a jour
+    - slug: generalites-fonctions
+      status: not-started          ← inchange
 ```
 
 Si une nouvelle source fondation est ajoutee plus tard :
 
 ```
 /content integrer nouveau-parascolaire.pdf
-→ "continuite a deja une KB (3 fondations). Nouvelle fondation detectee.
-   Je re-synthetise la KB en croisant les 4 sources ?"
-→ oui
-→ Relit TOUTES les fondations → Re-synthese → Met a jour _meta/
+→ Indexe le PDF → detecte 10 modules
+→ "Ce PDF contient 10 modules. continuite a deja une KB (3 fondations).
+   Ajouter cette source et re-synthetiser la KB ?"
+→ oui, juste continuite
+→ Transcrit le nouveau parascolaire pour continuite
+→ Relit TOUTES les fondations de continuite (4 sources maintenant)
+→ Re-synthese → Met a jour _meta/ et la fiche source
 ```
 
 ### Flux enrichissement (unitaire)
@@ -157,8 +181,11 @@ processed:
 ```
 1. Copier le PDF dans _raw/3eme-math/fondations/
 2. /content integrer
-3. Le systeme detecte le nouveau PDF, propose de transcrire et creer les KB
-4. Valider → KB creees pour chaque module du manuel
+3. Le systeme detecte le PDF, l'indexe si necessaire, liste les modules
+4. "Quels modules ?" → je choisis continuite et nombre-derive
+5. Transcrit les modules choisis + croise avec les fondations existantes
+6. KB creees/mises a jour → fiches sources mises a jour (status: kb-complete)
+7. Les autres modules restent not-started pour plus tard
 ```
 
 **"J'ai une serie d'exercices d'un prof"**
