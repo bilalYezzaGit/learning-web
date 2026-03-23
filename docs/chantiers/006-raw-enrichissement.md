@@ -64,46 +64,65 @@ Declenche quand des fichiers non traites sont dans `fondations/`.
 - On a besoin de TOUTES les sources fondation pour produire la KB (synthese croisee)
 - Un PDF de fondation (ex: Manuel 238 pages) contient potentiellement 12 modules
 - Le systeme ne traite PAS tout d'un coup — il demande quels modules integrer
+- L'indexation est un prerequis automatique (pas declenchee manuellement)
 - La fiche source (`sources/*.yaml`) est le registre central de l'etat de chaque module
+
+**Exemple realiste : 3 PDFs non indexes**
 
 ```
 /content integrer
-→ Scanne fondations/ : Manuel_t1.pdf detecte
-→ Cherche la fiche source dans sources/ pour ce PDF
-  → Pas trouvee → indexe automatiquement (lecture couverture + table des matieres)
-  → Cree sources/manuel-3eme-t1.yaml avec 12 modules status: not-started
-→ "Ce PDF contient 12 modules :
-   - continuite (not-started)
-   - nombre-derive (not-started)
-   - fonction-derivee (not-started)
-   - ... (9 autres)
-   Lesquels veux-tu integrer ?"
-→ continuite et nombre-derive
-→ Transcrit les 2 modules en parallele
-→ Cherche les autres sources fondation pour ces modules (parascolaire, xyplus)
-  → Si trouvees et deja transcrites → les inclut dans la synthese
-  → Si trouvees mais pas transcrites → les transcrit aussi
-→ Croise toutes les fondations disponibles → Produit _meta/{prog}/{mod}/
-→ Met a jour les fiches sources :
-    - slug: continuite
-      status: kb-complete          ← mis a jour
-    - slug: nombre-derive
-      status: kb-complete          ← mis a jour
-    - slug: generalites-fonctions
-      status: not-started          ← inchange
+
+→ Etape 1 : Detection
+  Scanne fondations/ : 3 PDFs detectes sans fiche source
+  - Manuel_scolaire_t1.pdf
+  - Parascolaire_Analyse.pdf
+  - xy_plus_tome1.pdf
+
+→ Etape 2 : Indexation automatique (3 agents en parallele)
+  Lecture couverture + table des matieres de chaque PDF
+  → Cree sources/manuel-3eme-t1.yaml (12 modules)
+  → Cree sources/parascolaire-analyse-3eme.yaml (10 modules)
+  → Cree sources/xyplus-3eme-t1.yaml (12 modules)
+
+→ Etape 3 : Synthese croisee des fiches + choix interactif
+  "Voici les modules couverts par les 3 sources :
+
+  | Module              | Manuel  | Parascolaire | XY Plus | Status      |
+  |---------------------|---------|-------------|---------|-------------|
+  | continuite          | p.21-39 | p.26-41     | p.15-25 | not-started |
+  | nombre-derive       | p.80-99 | p.110-130   | p.63-80 | not-started |
+  | fonction-derivee    | p.100   | p.131       | p.81    | not-started |
+  | ... (9 autres)      | ...     | ...         | ...     | not-started |
+
+  Quels modules veux-tu integrer ?"
+
+→ continuite
+
+→ Etape 4 : Transcription (3 agents en parallele pour le module choisi)
+  - Manuel p.21-39 → fondations/continuite/manuel.typ
+  - Parascolaire p.26-41 → fondations/continuite/parascolaire.typ
+  - XY Plus p.15-25 → fondations/continuite/xyplus.typ
+
+→ Etape 5 : Creation KB
+  - Croise les 3 transcriptions → _meta/3eme-math/continuite/
+    (savoir.yaml + praxeologies.yaml + misconceptions.yaml)
+  - Met a jour les 3 fiches sources : continuite → status: kb-complete
 ```
 
-Si une nouvelle source fondation est ajoutee plus tard :
+**Ajout d'une nouvelle source fondation plus tard** :
 
 ```
-/content integrer nouveau-parascolaire.pdf
-→ Indexe le PDF → detecte 10 modules
-→ "Ce PDF contient 10 modules. continuite a deja une KB (3 fondations).
-   Ajouter cette source et re-synthetiser la KB ?"
+(Utilisateur copie nouveau-parascolaire.pdf dans fondations/)
+
+/content integrer
+→ Detecte 1 nouveau PDF sans fiche source
+→ Indexe → 10 modules
+→ "continuite a deja une KB (3 fondations). Nouvelle source detectee.
+   Ajouter et re-synthetiser ?"
 → oui, juste continuite
 → Transcrit le nouveau parascolaire pour continuite
-→ Relit TOUTES les fondations de continuite (4 sources maintenant)
-→ Re-synthese → Met a jour _meta/ et la fiche source
+→ Relit TOUTES les fondations de continuite (4 sources)
+→ Re-synthese → Met a jour _meta/ et les fiches sources
 ```
 
 ### Flux enrichissement (unitaire)

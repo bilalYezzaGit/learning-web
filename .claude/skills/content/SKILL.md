@@ -1,6 +1,6 @@
 ---
 name: content
-description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/{programme}/{module}/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon, module, planifier, planning, plan, kb, knowledge base, base de connaissances.
+description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/{programme}/{module}/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon, module, planifier, planning, plan, kb, knowledge base, base de connaissances, integrer, enrichir, fonder, source, pdf, raw.
 argument-hint: "[action] [details] : [custom_detail]"
 ---
 
@@ -20,6 +20,7 @@ Determine l'action a partir de `$ARGUMENTS` ou du contexte utilisateur :
 | **Planifier** | [Planning](#planning-workflow) | planifier, planning, plan livret |
 | **KB** | [Knowledge Base](#kb-workflow) | kb, knowledge base, creer KB, base de connaissances |
 | **Patterns** | [Patterns](#patterns-workflow) | patterns, enrichir, feeder, exercices types, examen, variantes |
+| **Integrer** | [Integration](#integration-workflow) | integrer, enrichir, fonder, source, pdf, raw |
 | **Lister** | [Listing](#listing-workflow) | lister, inventaire, combien, quels atomes |
 
 ---
@@ -284,6 +285,24 @@ Deux modes selon l'argument :
 - [ ] Au moins 1 section avec label + steps
 
 4. **Rapporte** les problemes trouves avec fichier:ligne et suggestion de fix
+
+---
+
+## Integration workflow
+
+Commande unique pour integrer des sources brutes (fondation ou enrichissement).
+
+```
+/content integrer                         # scanne fondations/ et enrichissements/, detecte les non-traites
+/content integrer fichier.pdf             # integre un fichier specifique
+/content integrer fichier1.pdf fichier2   # integre plusieurs fichiers
+```
+
+Le dossier dans lequel se trouve le fichier determine l'intention :
+- `_raw/{prog}/fondations/` → flux fondation (batch : indexer + transcrire + creer KB)
+- `_raw/{prog}/enrichissements/` → flux enrichissement (unitaire : transcrire + confronter + rapport)
+
+Voir [actions/integrate.md](actions/integrate.md) pour le pipeline complet.
 
 ---
 
