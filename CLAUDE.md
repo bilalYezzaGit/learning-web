@@ -86,13 +86,14 @@ tools/pipeline/src/         # Pipeline de contenu
 - Rules detaillees → `.claude/rules/index.md` + `docs/specs/rules/` (14 domaines)
 - Contenu pedagogique → `docs/CONTENT-CONVENTIONS.md`
 - Systeme de contenu → `docs/content-agentic-workflow.md`
-- Modele academique → `_meta/` (savoir, praxeologies, patterns, misconceptions, lexique, redaction)
+- Modele academique → `_meta/` (savoir, praxeologies, patterns, misconceptions)
 
 ## Skills
 
-- `/content` — Gestion du contenu pedagogique (atomes, molecules, KB, planning, generation)
-- `/index` — Indexer des PDF sources (fiches YAML)
+- `/index` — Indexer des fichiers bruts (fiches YAML)
 - `/transcrire` — Transcrire des modules en Typst
+- `/meta` — Creer ou ameliorer le modele academique (_meta/)
+- `/content` — Produire des livrets (plan, creer, valider, lister)
 - `/source` — Gerer le registre de sources educatives et scanner des sites
 - `/check` — Verification des rules (auto + manual)
 - `/audit-ui` — Audit UI/UX complet (check + exploration)

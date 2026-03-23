@@ -1,6 +1,6 @@
 ---
 name: content
-description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/{programme}/{module}/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon, module, planifier, planning, plan, kb, knowledge base, base de connaissances, integrer, enrichir, fonder, source, pdf, raw.
+description: Manage pedagogical content (MDX atoms and YAML molecules). Use when creating, editing, validating, or listing content in content/{programme}/{module}/. Triggers on keywords: ajouter, creer, modifier, editer, corriger, valider, verifier, lister, inventaire, contenu, atome, molecule, cours, exercice, qcm, serie, lecon, module, planifier, planning, plan.
 argument-hint: "[action] [details] : [custom_detail]"
 ---
 
@@ -18,9 +18,6 @@ Determine l'action a partir de `$ARGUMENTS` ou du contexte utilisateur :
 | **Editer** | [Edition](#edition-workflow) | modifier, corriger, editer, renommer |
 | **Valider** | [Validation](#validation-workflow) | valider, verifier, checker, audit |
 | **Planifier** | [Planning](#planning-workflow) | planifier, planning, plan livret |
-| **KB** | [Knowledge Base](#kb-workflow) | kb, knowledge base, creer KB, base de connaissances |
-| **Patterns** | [Patterns](#patterns-workflow) | patterns, enrichir, feeder, exercices types, examen, variantes |
-| **Integrer** | [Integration](#integration-workflow) | integrer, enrichir, fonder, source, pdf, raw |
 | **Lister** | [Listing](#listing-workflow) | lister, inventaire, combien, quels atomes |
 
 ---
@@ -32,14 +29,16 @@ Genere un planning de livret a partir d'une KB module. Le planning declare tous 
 ### Pre-requis
 
 - Meta module existante (`_meta/{programme}/{module}/` avec savoir.yaml, praxeologies.yaml)
-- Si pas de meta : creer d'abord la KB (`/content kb {module}`)
+- Si pas de meta : creer d'abord le modele (`/meta {path}`)
 
 ### Syntaxe
 
 ```
-/content plan {module} : {profil}
-/content plan {module} : {profil}, {specs libres}
+/content plan {programme}/{module} : {profil}
+/content plan {programme}/{module} : {profil}, {specs libres}
 ```
+
+Raccourci : `/content plan {module} : {profil}` si un seul programme existe.
 
 Le premier mot apres `:` est matche contre les profils de `_meta/booklet-profiles.yaml` :
 - **`cours`** — difficulte 0-1, application directe, ~16 atomes, guidance elevee
@@ -51,11 +50,11 @@ Les specs libres apres le profil overrident les valeurs du profil.
 Si aucun profil reconnu : traiter comme specs libres (comportement par defaut, couverture complete).
 
 Exemples :
-- `/content plan continuite : cours` — livret cours standard
-- `/content plan continuite : examen` — livret examen standard
-- `/content plan continuite : exploration` — livret exploration standard
-- `/content plan continuite : cours, focus TVI et dichotomie` — cours avec override
-- `/content plan continuite : examen, seulement Prax1-5` — examen filtre
+- `/content plan 3eme-math/continuite : cours` — livret cours standard
+- `/content plan 3eme-math/continuite : examen` — livret examen standard
+- `/content plan 3eme-math/continuite : exploration` — livret exploration standard
+- `/content plan 3eme-math/continuite : cours, focus TVI et dichotomie` — cours avec override
+- `/content plan 3eme-math/continuite : examen, seulement Prax1-5` — examen filtre
 
 ### Etapes
 
@@ -125,65 +124,17 @@ Exemples :
 
 ---
 
-## KB workflow
+## KB / Meta workflow
 
-Cree une Knowledge Base module a partir des transcriptions Typst.
-
-Prerequis : transcriptions .typ dans `_raw/{programme}/fondations/{module}/`.
-Si absentes : utiliser `/transcrire {module}` d'abord.
-
-Voir [actions/create-kb.md](actions/create-kb.md) pour le pipeline complet.
+> **Deplace vers `/meta`** — utiliser `/meta {path}` pour creer ou ameliorer le modele academique.
+> Voir `.claude/skills/meta/SKILL.md`.
 
 ---
 
 ## Patterns workflow
 
-Enrichit le fichier `patterns.yaml` d'un module a partir de series d'exercices (WF1+).
-
-Voir [actions/enrich-patterns.md](actions/enrich-patterns.md) pour le pipeline complet.
-
-### Pre-requis
-
-- Meta module existante (`_meta/{programme}/{module}/` avec savoir.yaml, praxeologies.yaml)
-- Si pas de meta : creer d'abord la KB (`/content kb {module}`)
-
-### Syntaxe
-
-```
-/content patterns {module}
-```
-
-L'utilisateur fournit des exercices en contexte (transcriptions Typst, texte, images, PDFs).
-
-### Etapes
-
-1. **Charge la meta module** : lire `_meta/{programme}/{module}/savoir.yaml` + `_meta/{programme}/{module}/praxeologies.yaml`
-
-2. **Charge `_meta/{programme}/{module}/patterns.yaml` existant** (ou creer la structure vide si premier appel)
-
-3. **Charge le template patterns** : Read `.claude/skills/content/references/patterns-template.yaml`
-
-4. **Analyse chaque exercice fourni** :
-   - Identifier la/les praxeologie(s) mobilisees (reference KB)
-   - Extraire : type de tache, technique, variables qui changent
-   - Comparer avec les patterns existants dans `_meta/{programme}/{module}/patterns.yaml`
-
-5. **Classifier** :
-   - Si **variante connue** → incrementer `frequency`, ajouter source, optionnellement ajouter un exemple
-   - Si **nouvelle variante** → creer un nouveau pattern avec ID `PraxN.vM`
-   - Si **praxeologie inconnue** (pas dans la KB) → **signaler a l'humain**, ne pas modifier la KB
-
-6. **Ecrire** `_meta/{programme}/{module}/patterns.yaml` mis a jour, incrementer `version`
-
-7. **Afficher un resume** : N exercices analyses, M nouveaux patterns, K variantes enrichies, J non classifies
-
-### Regles
-
-- 1 fichier `_meta/{programme}/{module}/patterns.yaml` par module (pas par molecule)
-- Ne jamais modifier la KB automatiquement
-- Les `examples` sont des exercices reels (pas inventes), avec source
-- `frequency` est incremente a chaque observation dans une nouvelle source
-- IDs de patterns : `{Praxeologie}.v{numero}` (ex: `Prax3.v1`)
+> **Deplace vers `/meta`** — les patterns sont geres par `/meta {path}` (confrontation avec enrichissements).
+> Voir `.claude/skills/meta/SKILL.md`.
 
 ---
 
@@ -290,19 +241,8 @@ Deux modes selon l'argument :
 
 ## Integration workflow
 
-Commande unique pour integrer des sources brutes (fondation ou enrichissement).
-
-```
-/content integrer                         # scanne fondations/ et enrichissements/, detecte les non-traites
-/content integrer fichier.pdf             # integre un fichier specifique
-/content integrer fichier1.pdf fichier2   # integre plusieurs fichiers
-```
-
-Le dossier dans lequel se trouve le fichier determine l'intention :
-- `_raw/{prog}/fondations/` → flux fondation (batch : indexer + transcrire + creer KB)
-- `_raw/{prog}/enrichissements/` → flux enrichissement (unitaire : transcrire + confronter + rapport)
-
-Voir [actions/integrate.md](actions/integrate.md) pour le pipeline complet.
+> **Deplace vers `/meta`** — utiliser `/meta {path}` pour integrer fondations et enrichissements.
+> Voir `.claude/skills/meta/SKILL.md`.
 
 ---
 

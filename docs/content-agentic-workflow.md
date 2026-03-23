@@ -69,9 +69,10 @@ content/       Systeme de production de livrets
 
 | Ressource | Chemin | Role |
 |-----------|--------|------|
-| Skill /content | `.claude/skills/content/SKILL.md` | Routeur principal (kb, plan, creer, valider, patterns, lister) |
-| Skill /index | `.claude/skills/index/SKILL.md` | Indexation PDF → fiches sources YAML |
-| Skill /transcrire | `.claude/skills/transcrire/SKILL.md` | Transcription modules PDF → Typst |
+| Skill /content | `.claude/skills/content/SKILL.md` | Production de livrets (plan, creer, valider, lister) |
+| Skill /index | `.claude/skills/index/SKILL.md` | Indexation des fichiers bruts |
+| Skill /transcrire | `.claude/skills/transcrire/SKILL.md` | Transcription en Typst |
+| Skill /meta | `.claude/skills/meta/SKILL.md` | Modelisation academique (_meta/) |
 | Skill /source | `.claude/skills/source/SKILL.md` | Gestion sources pedagogiques web |
 | KB template | `.claude/skills/content/references/kb-template.md` | Modele pour creer une KB module |
 | Planning template | `.claude/skills/content/references/planning-template.yaml` | Schema du manifeste per-molecule |
@@ -92,8 +93,8 @@ content/       Systeme de production de livrets
 flowchart TD
     PDF["PDF brut"] -->|"WF0a : indexer"| Fiche[("Fiche source YAML\n_raw/{prog}/sources/*.yaml")]
     Fiche -->|"WF0b : transcrire\n/transcrire"| Typst[("Fondations Typst\n_raw/{prog}/fondations/{mod}/*.typ")]
-    Typst -->|"WF1 : creer KB\n/content kb"| Meta[("_meta/{prog}/{mod}/\n3 fichiers YAML")]
-    Meta -->|"WF1+ : enrichir patterns\n/content patterns"| Patterns[("patterns.yaml\n(version N)")]
+    Typst -->|"WF1 : creer KB\n/meta"| Meta[("_meta/{prog}/{mod}/\n3 fichiers YAML")]
+    Meta -->|"WF1+ : enrichir patterns\n/meta"| Patterns[("patterns.yaml\n(version N)")]
     Series["Nouvelles series\nBAC, devoirs, parascolaires"] -->|"WF1+"| Patterns
     Patterns -.->|"iteratif\n(N fois)"| Patterns
     Meta -->|"WF2 : planifier\n/content plan"| Plan["_planning.yaml\n(draft)"]
@@ -173,7 +174,7 @@ flowchart TD
 
 | Declencheur | Ressources chargees |
 |-------------|---------------------|
-| `/content kb {module}` | kb-template.md, `_raw/{prog}/fondations/{mod}/*.typ`, `docs/referentiels/` |
+| `/meta {programme}/{module}` | kb-template.md, `_raw/{prog}/fondations/{mod}/*.typ`, `docs/referentiels/` |
 
 ---
 
@@ -202,7 +203,7 @@ flowchart TD
 
 | Declencheur | Ressources chargees |
 |-------------|---------------------|
-| `/content patterns {module}` | KB module (_meta/{prog}/{mod}/), patterns.yaml existant, exercices fournis |
+| `/meta {programme}/{module}` | KB module (_meta/{prog}/{mod}/), patterns.yaml existant, exercices fournis |
 
 **Regles** : 1 fichier par module, ne jamais modifier la KB, examples reels uniquement, IDs `PraxN.vM`.
 
@@ -258,10 +259,10 @@ Chaque profil definit : difficulty range, exercise_categories (required/forbidde
 
 | Declencheur | Ressources chargees |
 |-------------|---------------------|
-| `/content plan {module} : cours` | KB module, booklet-profiles.yaml, planning-template.yaml |
-| `/content plan {module} : examen` | idem |
-| `/content plan {module} : exploration` | idem |
-| `/content plan {module} : cours, focus TVI` | idem, avec overrides libres |
+| `/content plan {programme}/{module} : cours` | KB module, booklet-profiles.yaml, planning-template.yaml |
+| `/content plan {programme}/{module} : examen` | idem |
+| `/content plan {programme}/{module} : exploration` | idem |
+| `/content plan {programme}/{module} : cours, focus TVI` | idem, avec overrides libres |
 
 ---
 
@@ -427,10 +428,10 @@ Definit les schemas, les modules declares, les specs d'examen, et les convention
 |----------|----------|-----------------|
 | `/index <pdf>` | WF0a | Indexer un PDF, creer la fiche source |
 | `/transcrire {module}` | WF0b | Transcrire un module en Typst |
-| `/content kb {module}` | WF1 | Creer les 3 fichiers YAML dans `_meta/{prog}/{mod}/` |
-| `/content patterns {module}` | WF1+ | Enrichir patterns.yaml avec des exercices |
-| `/content plan {module} : {profil}` | WF2 | Generer un planning calibre par profil (cours, examen, exploration) |
-| `/content plan {module} : {profil}, {specs}` | WF2 | idem avec overrides libres |
+| `/meta {programme}/{module}` | WF1 | Creer les 3 fichiers YAML dans `_meta/{prog}/{mod}/` |
+| `/meta {programme}/{module} [fichier-enrichissement]` | WF1+ | Enrichir patterns.yaml avec des exercices |
+| `/content plan {programme}/{module} : {profil}` | WF2 | Generer un planning calibre par profil (cours, examen, exploration) |
+| `/content plan {programme}/{module} : {profil}, {specs}` | WF2 | idem avec overrides libres |
 | `/content creer {slug-molecule}` | WF3 | Generer les atomes + molecule depuis le planning |
 | `npm run generate` | WF4a | Compiler MDX → HTML/JSON + PDFs |
 | `/content valider {module}` | WF4b+c | Validation semantique complete |
