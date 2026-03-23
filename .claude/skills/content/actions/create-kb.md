@@ -11,10 +11,10 @@
 
 ## Pre-requis
 
-Verifier que les transcriptions .typ existent dans `_raw/reference/{programme}/{module}/`.
+Verifier que les transcriptions .typ existent dans `_raw/{programme}/fondations/{module}/`.
 
 ```
-Glob: _raw/reference/{programme}/{module}/*.typ
+Glob: _raw/{programme}/fondations/{module}/*.typ
 ```
 
 Si elles manquent, indiquer quels fichiers sont absents et suggerer `/transcription {module}`.
@@ -24,7 +24,7 @@ Si elles manquent, indiquer quels fichiers sont absents et suggerer `/transcript
 ### Etape 1 — Verifier les transcriptions disponibles
 
 ```
-Glob: _raw/reference/{programme}/{module}/*.typ
+Glob: _raw/{programme}/fondations/{module}/*.typ
 ```
 
 Lister les fichiers trouves. On attend jusqu'a 3 sources (manuel, parascolaire, xyplus). Si aucun fichier n'existe, **stop** et orienter vers `/transcription {module}`.

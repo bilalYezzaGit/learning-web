@@ -128,7 +128,7 @@ Exemples :
 
 Cree une Knowledge Base module a partir des transcriptions Typst.
 
-Prerequis : transcriptions .typ dans `_raw/reference/{programme}/{module}/`.
+Prerequis : transcriptions .typ dans `_raw/{programme}/fondations/{module}/`.
 Si absentes : utiliser `/transcription {module}` d'abord.
 
 Voir [actions/create-kb.md](actions/create-kb.md) pour le pipeline complet.

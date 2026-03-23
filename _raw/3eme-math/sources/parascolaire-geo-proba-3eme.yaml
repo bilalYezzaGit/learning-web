@@ -2,7 +2,7 @@ titre: "Parascolaire Probabilites & Geometrie — 3eme Section Mathematiques"
 editeur: Kounouz Editions
 edition: 2023
 programme: 3eme-math
-fichier: Parascolaire_Proba_Geo_3eme_sec_Section_Math_ocr.pdf
+fichier: 3eme-math/pdfs/Parascolaire_Proba_Geo_3eme_sec_Section_Math_ocr.pdf
 pages_total: 306
 type: parascolaire
 
@@ -14,27 +14,40 @@ structure:
 modules:
   - slug: produit-scalaire-plan
     pages: "5-32"
+    status: not-started
   - slug: angles-orientes
     pages: "33-54"
+    status: not-started
   - slug: trigonometrie
     pages: "55-92"
+    status: not-started
   - slug: rotations
     pages: "93-114"
+    status: not-started
   - slug: nombres-complexes
     pages: "115-137"
+    status: not-started
   - slug: denombrement
     pages: "138-157"
+    status: kb-complete
   - slug: divisibilite-N
     pages: "158-174"
+    status: not-started
   - slug: nombres-premiers
     pages: "175-183"
+    status: not-started
   - slug: vecteurs-espace
     pages: "184-200"
+    status: not-started
   - slug: produit-scalaire-vectoriel-espace
     pages: "201-217"
+    status: not-started
   - slug: equations-droites-plans-sphere
     pages: "218-268"
+    status: not-started
   - slug: probabilites
     pages: "269-292"
+    status: not-started
   - slug: statistiques
     pages: "293-306"
+    status: not-started

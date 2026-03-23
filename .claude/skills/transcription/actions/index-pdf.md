@@ -18,16 +18,16 @@ Indexer un nouveau PDF source : parcourir sa structure, identifier les modules e
 
 ### Etape 1 : Identifier le PDF
 
-Verifier que le fichier PDF existe dans `_raw/`. Si non, demander a l'utilisateur de le placer dans `_raw/`.
+Verifier que le fichier PDF existe dans `_raw/{programme}/pdfs/`. Si non, demander a l'utilisateur de le placer dans `_raw/{programme}/pdfs/`.
 
 ### Etape 2 : Extraire les pages cles
 
 ```bash
 # Couverture + table des matieres (generalement les 5 premieres pages)
-pdftoppm -png -r 150 -f 1 -l 5 _raw/{fichier}.pdf _raw/pages/index
+pdftoppm -png -r 150 -f 1 -l 5 _raw/{programme}/pdfs/{fichier}.pdf _raw/pages/index
 
 # Compter le nombre total de pages
-pdfinfo _raw/{fichier}.pdf | grep Pages
+pdfinfo _raw/{programme}/pdfs/{fichier}.pdf | grep Pages
 ```
 
 ### Etape 3 : Lire visuellement
@@ -47,12 +47,12 @@ Si la table des matieres ne donne pas les pages de fin, les deduire de la page d
 
 ### Etape 5 : Mapper les modules aux slugs
 
-Pour chaque chapitre, trouver le slug correspondant dans les fiches existantes (`_raw/sources/*.yaml`).
+Pour chaque chapitre, trouver le slug correspondant dans les fiches existantes (`_raw/{programme}/sources/*.yaml`).
 Si c'est un nouveau programme, creer des slugs en kebab-case.
 
 ### Etape 6 : Ecrire la fiche source
 
-Ecrire le fichier `_raw/sources/{slug}.yaml` en suivant le schema ci-dessous.
+Ecrire le fichier `_raw/{programme}/sources/{slug}.yaml` en suivant le schema ci-dessous.
 
 Convention de nommage du slug de la fiche :
 - Manuel : `manuel-{programme}-t{tome}`
@@ -83,7 +83,7 @@ titre: "Titre complet du livre"
 editeur: "Nom de l'editeur"
 edition: 2023                          # Annee si connue, sinon omettre
 programme: "3eme-math"                 # Slug du programme
-fichier: "nom-exact-du-fichier.pdf"    # Nom du fichier dans _raw/
+fichier: "nom-exact-du-fichier.pdf"    # Nom du fichier dans _raw/{programme}/pdfs/
 pages_total: 238                       # Nombre total de pages
 type: manuel                           # manuel | corrige | parascolaire | exercices
 

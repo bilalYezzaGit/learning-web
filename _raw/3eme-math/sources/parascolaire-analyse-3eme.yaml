@@ -2,7 +2,7 @@ titre: "Parascolaire Analyse — 3eme Section Mathematiques"
 editeur: Kounouz Editions
 edition: 2023
 programme: 3eme-math
-fichier: Parascolaire_Analyse_3eme_sec_Section_Math_ocr.pdf
+fichier: 3eme-math/pdfs/Parascolaire_Analyse_3eme_sec_Section_Math_ocr.pdf
 pages_total: 338
 type: parascolaire
 
@@ -14,21 +14,31 @@ structure:
 modules:
   - slug: generalites-fonctions
     pages: "5-25"
+    status: transcribed
   - slug: continuite
     pages: "26-41"
+    status: kb-complete
   - slug: limites-continuite
     pages: "42-69"
+    status: transcribed
   - slug: limites-comportements-asymptotiques
     pages: "70-104"
+    status: transcribed
   - slug: nombre-derive
     pages: "105-133"
+    status: kb-complete
   - slug: fonction-derivee
     pages: "134-196"
+    status: kb-complete
   - slug: exemples-etude-fonctions
     pages: "197-260"
+    status: transcribed
   - slug: fonctions-trigonometriques
     pages: "261-297"
+    status: not-started
   - slug: suites-reelles
     pages: "298-315"
+    status: not-started
   - slug: limites-suites-reelles
     pages: "316-338"
+    status: not-started

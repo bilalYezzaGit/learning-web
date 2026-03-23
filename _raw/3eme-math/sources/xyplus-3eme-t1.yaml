@@ -2,7 +2,7 @@ titre: "XY Plus 3eme Mathematiques — Tome 1"
 editeur: CAEU Med Ali (Zied Belhadj, Lassaad Kallel)
 edition: 2023
 programme: 3eme-math
-fichier: xy_plus_3em_math_tome1.pdf
+fichier: 3eme-math/pdfs/xy_plus_3em_math_tome1.pdf
 pages_total: 258
 type: exercices
 
@@ -18,25 +18,37 @@ notes:
 modules:
   - slug: generalites-fonctions
     pages: "5-14"
+    status: transcribed
   - slug: continuite
     pages: "15-25"
+    status: kb-complete
   - slug: limites-continuite
     pages: "26-40"
+    status: transcribed
   - slug: limites-comportements-asymptotiques
     pages: "41-58"
+    status: transcribed
   - slug: nombre-derive
     pages: "59-73"
+    status: kb-complete
   - slug: fonction-derivee
     pages: "74-95"
+    status: kb-complete
   - slug: exemples-etude-fonctions
     pages: "96-141"
+    status: transcribed
   - slug: fonctions-trigonometriques
     pages: "142-170"
+    status: not-started
   - slug: suites-reelles
     pages: "171-192"
+    status: not-started
   - slug: limites-suites-reelles
     pages: "193-208"
+    status: not-started
   - slug: statistiques
     pages: "209-229"
+    status: not-started
   - slug: probabilites
     pages: "230-255"
+    status: not-started

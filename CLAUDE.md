@@ -32,15 +32,23 @@ src/
 │   └── utils/        # Helpers divers
 └── types/            # Interfaces (content, booklet, progress)
 
+_raw/
+└── {programme}/            # Ex: 3eme-math/
+    ├── pdfs/               # PDFs bruts (manuels, parascolaires, corriges)
+    ├── sources/            # Fiches d'indexation YAML (1 par PDF)
+    ├── fondations/         # Transcriptions Typst → KB (WF0→WF1)
+    │   └── {module}/       # manuel.typ, parascolaire.typ, xyplus.typ
+    └── enrichissements/    # Transcriptions iteratives → patterns (WF1+)
+        └── {module}/       # series, examens, cours de profs...
+
 _meta/
-├── _interface.yaml       # Contrat IDs, schemas, composition
-├── lexique.yaml          # Conventions globales (append-only)
-├── complexite.yaml       # Echelle 0-3
-├── booklet-profiles.yaml # Profils cours/examen/exploration
-└── {programme}/          # Ex: 3eme-math/
+├── _interface.yaml         # Contrat IDs modules/examens
+├── lexique.yaml            # Conventions globales (append-only)
+├── booklet-profiles.yaml   # Profils cours/examen/exploration + pedagogie DO/DO NOT
+└── {programme}/            # Ex: 3eme-math/
     ├── prerequis-graph.yaml
-    ├── {module}/         # savoir.yaml, praxeologies.yaml, patterns.yaml, misconceptions.yaml, lexique.yaml, redaction.yaml
-    └── examens/{slug}/   # spec.yaml
+    ├── {module}/           # savoir.yaml, praxeologies.yaml, misconceptions.yaml, patterns.yaml
+    └── examens/{slug}/     # spec.yaml, patterns.yaml
 
 content/
 ├── {programme}/            # Ex: 3eme-math/

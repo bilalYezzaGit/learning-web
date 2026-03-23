@@ -37,7 +37,7 @@ Les exercices viennent du contexte de l'utilisateur. Sources possibles :
 
 | Source | Comment la lire |
 |--------|----------------|
-| Transcriptions Typst (`_raw/reference/{prog}/{mod}/*.typ`) | Read direct — extraire les exercices (blocs "Exercice N", "QCM", "Vrai ou Faux") |
+| Transcriptions Typst (`_raw/{prog}/fondations/{mod}/*.typ`) | Read direct — extraire les exercices (blocs "Exercice N", "QCM", "Vrai ou Faux") |
 | Fichiers MDX existants | Read direct — parser l'enonce |
 | Texte libre dans le prompt | Analyser directement |
 | Images (photos de series, BAC) | Lecture visuelle — decrire l'exercice |
@@ -45,7 +45,7 @@ Les exercices viennent du contexte de l'utilisateur. Sources possibles :
 Si l'utilisateur ne fournit pas de source explicite, proposer :
 ```
 Je peux enrichir les patterns a partir de :
-1. Les transcriptions Typst existantes (_raw/reference/{prog}/{mod}/)
+1. Les transcriptions Typst existantes (_raw/{prog}/fondations/{mod}/)
 2. Des exercices que tu me donnes (texte, image, PDF)
 
 Quelle source veux-tu utiliser ?

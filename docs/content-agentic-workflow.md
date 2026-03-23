@@ -9,7 +9,7 @@ Document vivant qui cartographie le systeme de generation de contenu pedagogique
 Le systeme repose sur 3 couches decouples :
 
 ```
-_raw/          Ressources brutes (PDFs, transcriptions Typst)
+_raw/          Ressources brutes (PDFs, transcriptions Typst), organisees par programme
                Input du systeme. Stable, rarement modifiee.
 
 _meta/         Modele academique des mathematiques tunisiennes
@@ -31,9 +31,10 @@ content/       Systeme de production de livrets
 
 | Ressource | Chemin | Role |
 |-----------|--------|------|
-| PDFs bruts | `_raw/*.pdf` | Sources PDF manuels tunisiens (8 PDFs) |
-| Fiches sources | `_raw/sources/{slug}.yaml` | Cartographie structuree par PDF (1 fiche = 1 PDF) |
-| References Typst | `_raw/reference/{prog}/{mod}/*.typ` | Transcriptions PDF → Typst (8 modules, 24 fichiers) |
+| PDFs bruts | `_raw/{prog}/pdfs/*.pdf` | Sources PDF manuels tunisiens (8 PDFs par programme) |
+| Fiches sources | `_raw/{prog}/sources/{slug}.yaml` | Cartographie structuree par PDF (1 fiche = 1 PDF) |
+| Fondations Typst | `_raw/{prog}/fondations/{mod}/*.typ` | Transcriptions PDF → Typst (8 modules, 24 fichiers) |
+| Enrichissements Typst | `_raw/{prog}/enrichissements/{mod}/*.typ` | Transcriptions d'exercices supplementaires (WF1+) |
 | Pages PNG | `_raw/pages/` (gitignore) | Extractions visuelles a la demande (pdftoppm -r 150) |
 
 ### Couche 2 — `_meta/` (modele academique)
@@ -91,8 +92,8 @@ content/       Systeme de production de livrets
 
 ```mermaid
 flowchart TD
-    PDF["PDF brut"] -->|"WF0a : indexer"| Fiche[("Fiche source YAML\n_raw/sources/*.yaml")]
-    Fiche -->|"WF0b : transcrire\n/transcription"| Typst[("References Typst\n_raw/reference/{prog}/{mod}/*.typ")]
+    PDF["PDF brut"] -->|"WF0a : indexer"| Fiche[("Fiche source YAML\n_raw/{prog}/sources/*.yaml")]
+    Fiche -->|"WF0b : transcrire\n/transcription"| Typst[("Fondations Typst\n_raw/{prog}/fondations/{mod}/*.typ")]
     Typst -->|"WF1 : creer KB\n/content kb"| Meta[("_meta/{prog}/{mod}/\n6 fichiers YAML")]
     Meta -->|"WF1+ : enrichir patterns\n/content patterns"| Patterns[("patterns.yaml\n(version N)")]
     Series["Nouvelles series\nBAC, devoirs, parascolaires"] -->|"WF1+"| Patterns
@@ -118,26 +119,26 @@ Alimente le stock de references. Deux sous-etapes independantes.
 
 ```mermaid
 flowchart TD
-    PDF["PDF brut\n_raw/*.pdf"] --> Index["0a — Indexer\nparcourir le PDF, identifier\nmodules et plages de pages"]
-    Index --> Fiche[("Fiche source YAML\n_raw/sources/{slug}.yaml")]
+    PDF["PDF brut\n_raw/{prog}/pdfs/*.pdf"] --> Index["0a — Indexer\nparcourir le PDF, identifier\nmodules et plages de pages"]
+    Index --> Fiche[("Fiche source YAML\n_raw/{prog}/sources/{slug}.yaml")]
     Fiche --> Demande{"Module\ndemande ?"}
     Demande -->|"oui"| Extract["0b — Extraire pages PNG\npdftoppm -png -r 150"]
     Fiche -.-> Extract
     Extract --> Read["Lire visuellement\npar chunks de 5 pages"]
     Read --> Transcribe["Transcrire en Typst"]
     CONV["Conventions Typst\n(skill /transcription)"] -.-> Transcribe
-    Transcribe --> TYPST[("Fichier .typ\n_raw/reference/{prog}/{mod}/")]
+    Transcribe --> TYPST[("Fichier .typ\n_raw/{prog}/fondations/{mod}/")]
     Demande -->|"pas maintenant"| Stock["Stock indexe\n(transcription a la demande)"]
 ```
 
 **Entree** : fichier PDF brut
-**Sortie 0a** : `_raw/sources/{slug}.yaml` (fiche d'indexation)
-**Sortie 0b** : `_raw/reference/{programme}/{module}/*.typ` (transcription a la demande)
+**Sortie 0a** : `_raw/{programme}/sources/{slug}.yaml` (fiche d'indexation)
+**Sortie 0b** : `_raw/{programme}/fondations/{module}/*.typ` (transcription a la demande)
 
 | Etape | Declencheur | Ressources chargees |
 |-------|-------------|---------------------|
 | 0a — Indexer un PDF | `/transcription index <pdf>` | PDF brut (table des matieres) |
-| 0b — Transcrire un module | `/transcription {module}` | `_raw/sources/*.yaml` (plages de pages), PDFs source |
+| 0b — Transcrire un module | `/transcription {module}` | `_raw/{prog}/sources/*.yaml` (plages de pages), PDFs source |
 
 **Contraintes techniques** :
 - Resolution 150 DPI (`-r 150`) pour garder les images sous 2000px
@@ -151,11 +152,11 @@ flowchart TD
 
 Synthetise les transcriptions Typst en modele academique structure.
 
-**Prerequis** : transcriptions `.typ` dans `_raw/reference/{prog}/{mod}/`. Si absentes → WF0b.
+**Prerequis** : transcriptions `.typ` dans `_raw/{prog}/fondations/{mod}/`. Si absentes → WF0b.
 
 ```mermaid
 flowchart TD
-    TYPST[("References Typst\n_raw/reference/{prog}/{mod}/*.typ")] --> Analyse["Analyser les transcriptions\nmanuel + parascolaire + xyplus"]
+    TYPST[("Fondations Typst\n_raw/{prog}/fondations/{mod}/*.typ")] --> Analyse["Analyser les transcriptions\nmanuel + parascolaire + xyplus"]
     TPL["kb-template.md"] -.-> Synth
     REF["docs/referentiels/"] -.-> Synth
     Analyse --> Synth["Synthetiser en KB\n6 fichiers YAML structures"]
@@ -176,7 +177,7 @@ flowchart TD
 
 | Declencheur | Ressources chargees |
 |-------------|---------------------|
-| `/content kb {module}` | kb-template.md, `_raw/reference/{prog}/{mod}/*.typ`, `docs/referentiels/` |
+| `/content kb {module}` | kb-template.md, `_raw/{prog}/fondations/{mod}/*.typ`, `docs/referentiels/` |
 
 ---
 
@@ -200,7 +201,7 @@ flowchart TD
     New --> Write
 ```
 
-**Entree** : exercices (Typst, MDX, texte, image) + KB module
+**Entree** : exercices (Typst, MDX, texte, image) + KB module. Les transcriptions d'exercices supplementaires (series, BAC, devoirs) sont stockees dans `_raw/{prog}/enrichissements/{mod}/`.
 **Sortie** : `_meta/{programme}/{module}/patterns.yaml` (cree ou enrichi)
 
 | Declencheur | Ressources chargees |
@@ -474,8 +475,8 @@ Definit les schemas, les modules declares, les specs d'examen, et les convention
 | Patterns | 1 (nombre-derive, 30+ patterns documentes) |
 | Specs examen | 1 (synthese-3eme-t3) |
 | Fichiers _meta/ globaux | 3 (complexite, lexique, booklet-profiles) + prerequis-graph par programme |
-| Fiches sources (_raw/) | 8 (tous les PDFs 3eme-math indexes) |
-| References Typst | 8 modules transcrits (24 fichiers .typ) |
+| Fiches sources (_raw/{prog}/sources/) | 8 (tous les PDFs 3eme-math indexes) |
+| Fondations Typst (_raw/{prog}/fondations/) | 8 modules transcrits (24 fichiers .typ) |
 | Plannings | 12 per-molecule (3 par module) |
 | Pipeline | 0 erreurs, 12 PDFs generes |
 

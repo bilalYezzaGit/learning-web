@@ -53,28 +53,28 @@ Pipeline complet pour transcrire un module depuis les PDF sources vers des fichi
 
 ### Etape 1 : Identifier les plages de pages
 
-Lire les fiches sources dans `_raw/sources/*.yaml` pour le module demande. Chercher le slug du module dans chaque fiche pour obtenir les plages de pages. Chaque module a jusqu'a 4 sources :
+Lire les fiches sources dans `_raw/{programme}/sources/*.yaml` pour le module demande. Chercher le slug du module dans chaque fiche pour obtenir les plages de pages. Chaque module a jusqu'a 4 sources :
 
 | Source | Fichier PDF | Particularites |
 |--------|-------------|----------------|
-| Manuel scolaire (CNP) | `Manuel_scolaire_3_math_section_math_t1.pdf` ou `_t2.pdf` | T1 = modules 1-12, T2 = modules 13-23 |
-| Corrige (CMS) | `Corrige_manuel_scolaire_3_math_section_math_t1.pdf` ou `_t2.pdf` | **ATTENTION** : les tomes ne correspondent PAS au Manuel ! Consulter les fiches `_raw/sources/corrige-3eme-t*.yaml` |
-| Parascolaire (Kounouz) | `Parascolaire_Analyse_...` ou `Parascolaire_Proba_Geo_...` | Analyse = modules 1-10, Geo&Proba = modules 11-23 |
-| XY Plus (CAEU) | `xy_plus_3em_math_tome1.pdf` ou `_tome2.pdf` | T1 = modules 1-12, T2 = modules 13-23 (meme decoupage que Manuel) |
+| Manuel scolaire (CNP) | `_raw/{prog}/pdfs/Manuel_scolaire_3_math_section_math_t1.pdf` ou `_t2.pdf` | T1 = modules 1-12, T2 = modules 13-23 |
+| Corrige (CMS) | `_raw/{prog}/pdfs/Corrige_manuel_scolaire_3_math_section_math_t1.pdf` ou `_t2.pdf` | **ATTENTION** : les tomes ne correspondent PAS au Manuel ! Consulter les fiches `_raw/{prog}/sources/corrige-3eme-t*.yaml` |
+| Parascolaire (Kounouz) | `_raw/{prog}/pdfs/Parascolaire_Analyse_...` ou `Parascolaire_Proba_Geo_...` | Analyse = modules 1-10, Geo&Proba = modules 11-23 |
+| XY Plus (CAEU) | `_raw/{prog}/pdfs/xy_plus_3em_math_tome1.pdf` ou `_tome2.pdf` | T1 = modules 1-12, T2 = modules 13-23 (meme decoupage que Manuel) |
 
 ### Etape 2 : Lancer les agents en parallele
 
 Lancer **3 agents** en parallele (un par source secondaire), pendant que le main thread travaille sur le Manuel :
 
 ```
-Agent principal : Manuel scolaire → _raw/reference/{programme}/{module}/transcription-manuel.typ
-Agent 1         : Corrige         → _raw/reference/{programme}/{module}/transcription-corrige.typ
-Agent 2         : Parascolaire    → _raw/reference/{programme}/{module}/transcription-parascolaire.typ
-Agent 3         : XY Plus         → _raw/reference/{programme}/{module}/transcription-xyplus.typ
+Agent principal : Manuel scolaire → _raw/{programme}/fondations/{module}/transcription-manuel.typ
+Agent 1         : Corrige         → _raw/{programme}/fondations/{module}/transcription-corrige.typ
+Agent 2         : Parascolaire    → _raw/{programme}/fondations/{module}/transcription-parascolaire.typ
+Agent 3         : XY Plus         → _raw/{programme}/fondations/{module}/transcription-xyplus.typ
 ```
 
 Chaque agent doit :
-1. Creer le repertoire `_raw/reference/{programme}/{module}/` si necessaire
+1. Creer le repertoire `_raw/{programme}/fondations/{module}/` si necessaire
 2. Extraire les pages PNG (`pdftoppm -png -r 150`)
 3. Lire visuellement par chunks de 5 pages
 4. Ecrire le fichier .typ avec tout le contenu
@@ -96,7 +96,7 @@ Script de merge : utiliser un script Python regex-based (voir Module 1 comme ref
 ### Etape 4 : Renommer et nettoyer
 
 ```
-_raw/reference/{programme}/{module}/
+_raw/{programme}/fondations/{module}/
   manuel.typ         # Manuel + Corrige fusionne
   parascolaire.typ   # Autonome
   xyplus.typ         # Autonome
@@ -178,7 +178,7 @@ $cases(...)$          // systeme d'equations
 
 ## Correspondance numeros de modules → dossiers
 
-Programme : `3eme-math` — chemin : `_raw/reference/3eme-math/{slug}/`
+Programme : `3eme-math` — chemin : `_raw/3eme-math/fondations/{slug}/`
 
 | # | Slug |
 |---|------|
@@ -224,7 +224,7 @@ REGLES CRITIQUES :
 6. Nettoyer les PNG apres usage (rm _raw/pages/prefix*)
 
 SOURCE : [Nom du livre]
-FICHIER PDF : _raw/[nom].pdf
+FICHIER PDF : _raw/[programme]/pdfs/[nom].pdf
 PAGES : [debut] a [fin]
-SORTIE : _raw/reference/[XX-nom]/transcription-[source].typ
+SORTIE : _raw/[programme]/fondations/[module]/transcription-[source].typ
 ```

@@ -2,7 +2,7 @@ titre: "Corrige du manuel scolaire 3eme Mathematiques — Tome 1"
 editeur: Chams Edition (CMS)
 edition: 2023
 programme: 3eme-math
-fichier: Corrige_manuel_scolaire_3_math_section_math_t1.pdf
+fichier: 3eme-math/pdfs/Corrige_manuel_scolaire_3_math_section_math_t1.pdf
 pages_total: 190
 type: corrige
 
@@ -14,25 +14,37 @@ notes:
 modules:
   - slug: generalites-fonctions
     pages: "1-15"
+    status: transcribed
   - slug: continuite
     pages: "16-26"
+    status: kb-complete
   - slug: limites-continuite
     pages: "27-40"
+    status: transcribed
   - slug: limites-comportements-asymptotiques
     pages: "41-58"
+    status: transcribed
   - slug: nombre-derive
     pages: "59-71"
+    status: kb-complete
   - slug: fonction-derivee
     pages: "72-91"
+    status: kb-complete
   - slug: produit-scalaire-plan
     pages: "92-108"
+    status: not-started
   - slug: angles-orientes
     pages: "109-123"
+    status: not-started
   - slug: trigonometrie
     pages: "124-146"
+    status: not-started
   - slug: rotations
     pages: "147-160"
+    status: not-started
   - slug: divisibilite-N
     pages: "161-172"
+    status: not-started
   - slug: nombres-premiers
     pages: "173-190"
+    status: not-started
