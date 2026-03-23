@@ -43,18 +43,15 @@ content/       Systeme de production de livrets
 |-----------|--------|------|--------|
 | Interface | `_meta/_interface.yaml` | Contrat IDs, schemas, conventions d'identifiants | YAML v2 |
 | **Globaux (racine)** | `_meta/` | Fichiers transversaux a tous les programmes | |
-| Complexite | `→ complexite.yaml` | Echelle 0-3 avec criteres, correspondance types d'atomes | YAML |
 | Lexique global | `→ lexique.yaml` | Vocabulaire partage, verbes d'action, conventions de demonstration | YAML |
-| Profils livrets | `→ booklet-profiles.yaml` | Calibration des 3 types de livrets (cours, examen, exploration) : nb atomes, difficulte, categories, contextes, progression | YAML |
+| Profils livrets | `→ booklet-profiles.yaml` | Calibration des 3 types de livrets (cours, examen, exploration) : nb atomes, difficulte, categories, contextes, progression + pedagogie DO/DO NOT par profil | YAML |
 | **Par programme** | `_meta/{prog}/` | Fichiers specifiques a un programme | |
 | Prerequis | `→ prerequis-graph.yaml` | Graphe de dependances entre modules (ordre, trimestres) | YAML |
-| **Par module** | `_meta/{prog}/{mod}/` | 6 fichiers par module | |
-| Savoir | `→ savoir.yaml` | Objectif, epistemic_level (admis/demontre/exclu), theoremes, concepts, KC | YAML structure |
+| **Par module** | `_meta/{prog}/{mod}/` | 4 fichiers par module (savoir, praxeologies, misconceptions, patterns) | |
+| Savoir | `→ savoir.yaml` | Objectif, epistemic_level (admis/demontre/exclu), theoremes, concepts, KC, notations | YAML structure |
 | Praxeologies | `→ praxeologies.yaml` | TAD de Chevallard : tache, technique, technologie, theorie + didactic_variables, difficulty_profiles, exam_frequency | YAML structure |
-| Patterns | `→ patterns.yaml` | Variantes d'exercices observees dans les examens (frequency, sources, examples) | YAML structure |
 | Misconceptions | `→ misconceptions.yaml` | Erreurs frequentes avec category, diagnostic QCM (reveals), remediation (praxeology_to_practice) | YAML structure |
-| Lexique | `→ lexique.yaml` | Notations, formules de redaction, regles de rigueur, longueurs type | YAML structure |
-| Redaction | `→ redaction.yaml` | Modeles de redaction par praxeologie avec templates, variantes, criteres de notation ponderes | YAML structure |
+| Patterns | `→ patterns.yaml` | Variantes d'exercices (type exercice + type probleme) observees dans les examens (frequency, sources, examples) — optionnel | YAML structure |
 | **Examens** | `_meta/{prog}/examens/` | Specs par examen | |
 | Spec examen | `→ {slug}/spec.yaml` | Structure, duree, distribution par module, patterns transversaux | YAML |
 
@@ -94,7 +91,7 @@ content/       Systeme de production de livrets
 flowchart TD
     PDF["PDF brut"] -->|"WF0a : indexer"| Fiche[("Fiche source YAML\n_raw/{prog}/sources/*.yaml")]
     Fiche -->|"WF0b : transcrire\n/transcription"| Typst[("Fondations Typst\n_raw/{prog}/fondations/{mod}/*.typ")]
-    Typst -->|"WF1 : creer KB\n/content kb"| Meta[("_meta/{prog}/{mod}/\n6 fichiers YAML")]
+    Typst -->|"WF1 : creer KB\n/content kb"| Meta[("_meta/{prog}/{mod}/\n3 fichiers YAML")]
     Meta -->|"WF1+ : enrichir patterns\n/content patterns"| Patterns[("patterns.yaml\n(version N)")]
     Series["Nouvelles series\nBAC, devoirs, parascolaires"] -->|"WF1+"| Patterns
     Patterns -.->|"iteratif\n(N fois)"| Patterns
@@ -159,21 +156,19 @@ flowchart TD
     TYPST[("Fondations Typst\n_raw/{prog}/fondations/{mod}/*.typ")] --> Analyse["Analyser les transcriptions\nmanuel + parascolaire + xyplus"]
     TPL["kb-template.md"] -.-> Synth
     REF["docs/referentiels/"] -.-> Synth
-    Analyse --> Synth["Synthetiser en KB\n6 fichiers YAML structures"]
-    Synth --> Meta[("_meta/{prog}/{mod}/\nsavoir.yaml\npraxeologies.yaml\nmisconceptions.yaml\nlexique.yaml\nredaction.yaml")]
+    Analyse --> Synth["Synthetiser en KB\n3 fichiers YAML structures"]
+    Synth --> Meta[("_meta/{prog}/{mod}/\nsavoir.yaml\npraxeologies.yaml\nmisconceptions.yaml")]
     Meta --> Interface["Mettre a jour\n_interface.yaml"]
 ```
 
 **Entree** : fichiers `.typ` pour le module (jusqu'a 3 sources)
-**Sortie** : `_meta/{programme}/{module}/` — 5 fichiers YAML :
+**Sortie** : `_meta/{programme}/{module}/` — 3 fichiers YAML :
 
 | Fichier | Contenu | Sections KB |
 |---------|---------|-------------|
-| `savoir.yaml` | Objectif, epistemic_level, transposition, prerequisites, concepts, theoremes, KC, exemples | 0-7 |
+| `savoir.yaml` | Objectif, epistemic_level, transposition, prerequisites, concepts, theoremes, KC, exemples, notations | 0-7 + 10 |
 | `praxeologies.yaml` | TAD Chevallard : tache, technique, technologie, theorie + difficulty_profiles, exam_frequency | 8 |
 | `misconceptions.yaml` | Erreurs avec category, diagnostic QCM, remediation liee aux praxeologies | 9 |
-| `lexique.yaml` | Notations, formules de redaction, regles de rigueur, longueurs type | 10 |
-| `redaction.yaml` | Modeles de redaction avec templates, variantes et criteres de notation | Nouveau |
 
 | Declencheur | Ressources chargees |
 |-------------|---------------------|
@@ -419,25 +414,6 @@ misconceptions:
       praxeology_to_practice: Prax3    # Lien vers la praxeologie a travailler
 ```
 
-### `redaction.yaml` — Modeles de redaction (nouveau)
-
-```yaml
-redaction_models:
-  - praxeology: Prax4
-    name: "Application du TVI"
-    template: >-
-      $f$ est {type_continuite}, donc continue sur $[{a}, {b}]$.
-      $f({a}) = {val_a}$ et $f({b}) = {val_b}$.
-      $f({a}) \times f({b}) < 0$.
-      Par le TVI, $f(x) = 0$ admet au moins une solution dans $]{a}, {b}[$.
-    expected_lines: {min: 4, typical: 5, max: 6}
-    grading_criteria:
-      - {criterion: "Justification de la continuite", weight: 0.3, required: true}
-      - {criterion: "Calcul correct de f(a) et f(b)", weight: 0.3, required: true}
-      - {criterion: "Produit f(a)*f(b) < 0", weight: 0.2, required: true}
-      - {criterion: "Conclusion par le TVI", weight: 0.2, required: true}
-```
-
 ### `_interface.yaml` — Contrat
 
 Definit les schemas, les modules declares, les specs d'examen, et les conventions d'identifiants (`Prax{N}`, `T{N}`, `N{N}`, `E{N}`, `S{N}`, `F{N}`, `EC{N}`).
@@ -450,7 +426,7 @@ Definit les schemas, les modules declares, les specs d'examen, et les convention
 |----------|----------|-----------------|
 | `/transcription index <pdf>` | WF0a | Indexer un PDF, creer la fiche source |
 | `/transcription {module}` | WF0b | Transcrire un module en Typst |
-| `/content kb {module}` | WF1 | Creer les 5 fichiers YAML dans `_meta/{prog}/{mod}/` |
+| `/content kb {module}` | WF1 | Creer les 3 fichiers YAML dans `_meta/{prog}/{mod}/` |
 | `/content patterns {module}` | WF1+ | Enrichir patterns.yaml avec des exercices |
 | `/content plan {module} : {profil}` | WF2 | Generer un planning calibre par profil (cours, examen, exploration) |
 | `/content plan {module} : {profil}, {specs}` | WF2 | idem avec overrides libres |
@@ -463,7 +439,7 @@ Definit les schemas, les modules declares, les specs d'examen, et les convention
 
 ## Partie 5 : Etat actuel
 
-> Mis a jour le 2026-03-22.
+> Mis a jour le 2026-03-23.
 
 | Metrique | Valeur |
 |----------|--------|
@@ -471,10 +447,10 @@ Definit les schemas, les modules declares, les specs d'examen, et les convention
 | Modules avec contenu | 4 (continuite, denombrement, fonction-derivee, nombre-derive) |
 | Atomes MDX | 218 |
 | Livrets YAML | 12 (3 par module : cours, examen, exploration) |
-| KB modules (_meta/) | 4 (6 fichiers YAML chacun) |
-| Patterns | 1 (nombre-derive, 30+ patterns documentes) |
+| KB modules (_meta/) | 4 (4 fichiers YAML: savoir, praxeologies, misconceptions, patterns) |
+| Patterns | 4 modules + 1 examen (116 patterns total) |
 | Specs examen | 1 (synthese-3eme-t3) |
-| Fichiers _meta/ globaux | 3 (complexite, lexique, booklet-profiles) + prerequis-graph par programme |
+| Fichiers _meta/ racine | 3 (_interface, lexique, booklet-profiles) + prerequis-graph par programme |
 | Fiches sources (_raw/{prog}/sources/) | 8 (tous les PDFs 3eme-math indexes) |
 | Fondations Typst (_raw/{prog}/fondations/) | 8 modules transcrits (24 fichiers .typ) |
 | Plannings | 12 per-molecule (3 par module) |
