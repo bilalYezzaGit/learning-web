@@ -1,0 +1,1023 @@
+module: continuite
+programme: 3eme-math
+version: 1
+
+patterns:
+
+  # =========================================================================
+  # Prax1 — Justifier la continuite en un point par le type de fonction
+  # =========================================================================
+
+  - id: Prax1.v1
+    praxeology: Prax1
+    name: "Continuite en un point — polynome direct"
+    description: >-
+      Justifier que f est continue en a lorsque f est un polynome.
+      Il suffit de citer le theoreme : tout polynome est continu sur R.
+    method:
+      - "Identifier f comme fonction polynome"
+      - "Citer le theoreme : toute fonction polynome est continue sur R"
+      - "Conclure : f est continue en a"
+    variables:
+      function: ["2x^4+4x^3-1", "x^7-3x^4/100+2x+1", "3/2 x^2-x+1"]
+      point: ["0", "sqrt(2)", "-sqrt(2)", "1000000"]
+    difficulty: 0
+    frequency: 8
+    sources:
+      - "Manuel activite 2 p.24 (items 1-2)"
+      - "Manuel ex.1 p.35 (items 1-5)"
+      - "XY ex.1.1 p.18"
+      - "Para ex.5.1 p.31"
+    examples:
+      - title: "Manuel activite 2 — Polynome en 0"
+        enonce: >-
+          Soit f(x) = 2x^4 + 4x^3 - 1. Justifier que f est continue en 0.
+        sketch: >-
+          f est une fonction polynome, donc continue sur R,
+          en particulier en 0.
+      - title: "XY ex.1.1 — Polynome en irrationnel"
+        enonce: >-
+          Soit f(x) = 3/2 x^2 - x + 1. Justifier que f est continue en -sqrt(2).
+        sketch: >-
+          f est une fonction polynome, donc continue en tout reel,
+          en particulier en a = -sqrt(2).
+
+  - id: Prax1.v2
+    praxeology: Prax1
+    name: "Continuite en un point — rationnelle avec verification domaine"
+    description: >-
+      Justifier que f est continue en a lorsque f est une fraction rationnelle.
+      Il faut verifier que a appartient au domaine de definition (denominateur non nul).
+    method:
+      - "Identifier f comme fonction rationnelle"
+      - "Calculer le denominateur en a et verifier qu'il est non nul"
+      - "Conclure : f rationnelle et a dans Df, donc f continue en a"
+    variables:
+      function: ["(x+2)/(x-4)", "(x^2+3x-5)/(x-1)", "x/((x^2+1)(x-3)^5)"]
+      point: ["0.7", "2", "100"]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "XY ex.1.2 p.18"
+      - "Para ex.5.2 p.31"
+      - "Para QCM 1 p.30"
+      - "Manuel ex.1 p.35 (items 6-7)"
+    examples:
+      - title: "XY ex.1.2 — Rationnelle en 0.7"
+        enonce: >-
+          Soit f(x) = (x+2)/(x-4). Justifier que f est continue en 0.7.
+        sketch: >-
+          f est rationnelle, Df = R\{4}. Comme 0.7 != 4,
+          f est continue en 0.7.
+      - title: "Para ex.5.2 — Rationnelle avec verification"
+        enonce: >-
+          Soit f(x) = (x-1)/(x+2). Justifier que f est continue en 2.
+        sketch: >-
+          f est rationnelle, denominateur en 2 : 2+2 = 4 != 0,
+          donc f continue en 2.
+
+  # =========================================================================
+  # Prax2 — Justifier la continuite par les operations
+  # =========================================================================
+
+  - id: Prax2.v1
+    praxeology: Prax2
+    name: "Continuite par operations — somme avec racine carree"
+    description: >-
+      Justifier la continuite en decomposant f en somme de fonctions continues
+      dont une racine carree. Verifier que l'argument de sqrt est dans le domaine.
+    method:
+      - "Identifier les composantes : partie polynomiale + partie sqrt"
+      - "Chaque partie est continue en a (polynome + sqrt avec argument positif)"
+      - "Conclure par la somme de fonctions continues"
+    variables:
+      function: ["2x + sqrt(x+3)", "|x-1| + 2x + 1", "sqrt(3x^2+x+7)"]
+      point: ["0", "1", "-1.7"]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "Para ex.5.1 p.31"
+      - "Para ex.5.3 p.31"
+      - "Para ex.5.5 p.31"
+      - "Manuel activite 2 p.25"
+    examples:
+      - title: "Para ex.5.1 — Somme lineaire + racine"
+        enonce: >-
+          Soit f(x) = 2x + sqrt(x+3). Justifier que f est continue en 0.
+        sketch: >-
+          x -> 2x continue sur R (polynome). x -> sqrt(x+3) continue
+          sur [-3,+inf[, en particulier en 0. Donc f = somme est continue en 0.
+      - title: "Para ex.5.5 — Racine de trinome positif"
+        enonce: >-
+          Soit f(x) = sqrt(3x^2+x+7). Justifier que f est continue en -1.7.
+        sketch: >-
+          g(x) = 3x^2+x+7, Delta = 1-84 = -83 < 0 donc g > 0 sur R.
+          g polynome continue, g > 0, donc sqrt(g) continue en -1.7.
+
+  - id: Prax2.v2
+    praxeology: Prax2
+    name: "Continuite par operations — quotient sqrt / polynome"
+    description: >-
+      Justifier la continuite d'un quotient ou le numerateur contient sqrt
+      et le denominateur est un polynome non nul en a.
+    method:
+      - "Identifier numerateur (sqrt) et denominateur (polynome)"
+      - "Verifier la continuite de chaque partie en a"
+      - "Verifier que le denominateur est non nul en a"
+      - "Conclure par le theoreme du quotient"
+    variables:
+      function: ["sqrt(x-2)/(x^2+2x+5)", "sqrt(2x-1)/(x-1)", "(x+4)/sqrt(x)"]
+      point: ["2", "1/2", "1986"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Para cours p.27 (exemple)"
+      - "Para ex.5.4 p.31"
+      - "Manuel activite 2 p.25 (item 3)"
+    examples:
+      - title: "Para cours — sqrt/polynome en 2"
+        enonce: >-
+          Soit f(x) = sqrt(x-2)/(x^2+2x+5). Justifier que f est continue en 2.
+        sketch: >-
+          x -> sqrt(x-2) continue en 2. x -> x^2+2x+5 polynome continue
+          en 2 et 4+4+5 = 13 != 0. Donc f = quotient est continue en 2.
+
+  - id: Prax2.v3
+    praxeology: Prax2
+    name: "Continuite par operations — composition valeur absolue + quotient"
+    description: >-
+      Justifier la continuite d'une expression combinant valeur absolue et quotient.
+      Decomposer en |g| ou g/h puis appliquer les theoremes d'operations.
+    method:
+      - "Poser g la fonction interieure (sans la valeur absolue)"
+      - "g continue en a => |g| continue en a (theoreme T4)"
+      - "Si quotient : verifier denominateur non nul"
+      - "Conclure par composition des operations"
+    variables:
+      function: ["|(x-3)/(x^2-1)|", "|x|^2-4|x|-2/x", "x/(2x-|x+1|)"]
+      point: ["3", "15", "-1"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "XY ex.1.3 p.18"
+      - "XY ex.1.4 p.18"
+      - "XY ex.1.5 p.18"
+      - "Manuel ex.2 corrige p.19"
+    examples:
+      - title: "XY ex.1.3 — Valeur absolue de rationnelle"
+        enonce: >-
+          Soit f(x) = |(x-3)/(x^2-1)|. Justifier que f est continue en 3.
+        sketch: >-
+          g(x) = (x-3)/(x^2-1) rationnelle, 3 in Dg. g continue en 3.
+          Donc |g| continue en 3.
+
+  - id: Prax2.v4
+    praxeology: Prax2
+    name: "Continuite par operations — sqrt de quotient ou composition imbriquee"
+    description: >-
+      Justifier la continuite pour sqrt(g/h) ou sqrt composee avec un polynome.
+      Necessite de verifier positivite de l'argument et non-nullite du denominateur.
+    method:
+      - "Poser u(x) = expression sous la racine"
+      - "Montrer que u est continue en a (quotient de polynomes, etc.)"
+      - "Verifier u(a) >= 0 (souvent u(a) > 0)"
+      - "Conclure : sqrt(u) continue en a"
+    variables:
+      function: ["sqrt((x^2-2x+1)/(x+1))", "sqrt(4x^2-4x-3)"]
+      point: ["3", "2"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "XY ex.1.7 p.18"
+      - "XY ex.1.6 p.18"
+      - "Manuel ex.3 corrige p.19"
+    examples:
+      - title: "XY ex.1.7 — sqrt de fraction rationnelle"
+        enonce: >-
+          Soit f(x) = sqrt((x^2-2x+1)/(x+1)). Justifier que f est continue en 3.
+        sketch: >-
+          u(x) = (x-1)^2/(x+1) rationnelle, continue en 3.
+          u(3) = 4/4 = 1 > 0. Donc sqrt(u) continue en 3.
+
+  # =========================================================================
+  # Prax3 — Etudier la continuite d'une fonction par morceaux
+  # =========================================================================
+
+  - id: Prax3.v1
+    praxeology: Prax3
+    name: "Morceaux 2 pieces — raccordement simple (polynome/polynome)"
+    description: >-
+      Etudier la continuite d'une fonction definie par 2 morceaux polynomiaux.
+      Calculer les limites laterales au point de raccordement et comparer a f(x0).
+    method:
+      - "Justifier la continuite sur chaque morceau ouvert (polynomes)"
+      - "Au point de raccordement x0, calculer lim gauche et lim droite"
+      - "Comparer avec f(x0)"
+      - "Conclure : egalite => continue, sinon discontinue"
+    variables:
+      point_raccordement: ["0", "1"]
+      type_morceaux: ["polynome/polynome", "affine/affine"]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "Manuel cours activite 1 p.23"
+      - "Para ex.6 p.31-32"
+      - "XY ex.2 p.18"
+      - "Manuel ex.5 p.36 (2 morceaux)"
+      - "Manuel ex.6 p.36"
+    examples:
+      - title: "Para ex.6 — 3 morceaux avec discontinuite en 1"
+        enonce: >-
+          f(x) = {-x si x<=0, x^2 si 0<x<1, x-1 si x>=1}.
+          Justifier la continuite de f sur ]-inf,0], ]0,1[, [1,+inf[.
+          Justifier graphiquement que f n'est pas continue en 1.
+        sketch: >-
+          Sur chaque morceau : polynome donc continue.
+          En x=0 : lim_g = 0, lim_d = 0, f(0) = 0 => continue.
+          En x=1 : lim_g = 1 (parabole), f(1) = 0 (droite) => discontinue.
+
+  - id: Prax3.v2
+    praxeology: Prax3
+    name: "Morceaux 3 pieces — discontinuite au raccordement (polynome/sqrt)"
+    description: >-
+      Etudier la continuite d'une fonction a 3 morceaux dont un contient sqrt.
+      Verifier chaque raccordement avec les limites laterales et f(x0).
+    method:
+      - "Continuite sur chaque morceau (polynome, sqrt, affine)"
+      - "Pour chaque raccordement, calculer lim_g, lim_d, f(x0)"
+      - "Identifier les points de discontinuite"
+      - "Conclure"
+    variables:
+      morceaux: ["affine + lineaire + sqrt", "affine + quadratique + sqrt"]
+      points_raccord: ["(-1, 2)", "(0, 3)"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "XY ex.2 p.18 (3 morceaux : x-1, 2x-4, sqrt(x+1))"
+      - "XY ex.6 p.19 (3 morceaux : -x+2, x^2-2x, sqrt(x+2))"
+      - "Manuel ex.5 p.36 (2 morceaux : sqrt(2-x), x/(x+4))"
+    examples:
+      - title: "XY ex.2 — 3 morceaux avec saut en 0"
+        enonce: >-
+          f(x) = {x-1 si x<=0, 2x-4 si 0<x<3, sqrt(x+1) si x>=3}.
+          Etudier la continuite de f sur R.
+        sketch: >-
+          Chaque morceau : polynome ou sqrt, donc continue sur son intervalle.
+          En x=0 : lim_g = f(0) = -1, lim_d = -4. Discontinuite.
+          En x=3 : lim_g = 2, f(3) = 2 (sqrt(4) = 2). Continue.
+          f n'est pas continue sur R (discontinue en 0).
+      - title: "XY ex.6 — 3 morceaux, image d'intervalle"
+        enonce: >-
+          f(x) = {-x+2 si x<=-1, x^2-2x si -1<x<2, sqrt(x+2) si x>=2}.
+          Montrer que f est continue sur chacun des intervalles ]-inf,-1],
+          ]-1,2[, [2,+inf[. Determiner les images f([-4,-2]) et f(]-1,2[).
+        sketch: >-
+          Chaque morceau est un type usuel, donc continu.
+          Graphiquement, saut en x = -1 (lim_g = 3, lim_d = 3 => a verifier).
+
+  - id: Prax3.v3
+    praxeology: Prax3
+    name: "Morceaux avec parametre a,b — continuite conditionnelle"
+    description: >-
+      Determiner les valeurs de parametres (a, b) pour que f definie par
+      morceaux soit continue en un point de raccordement. Resoudre un systeme
+      d'equations issu de l'egalite des limites laterales et de f(x0).
+    method:
+      - "Ecrire la condition de continuite : lim_g(x0) = lim_d(x0) = f(x0)"
+      - "Exprimer chaque limite en fonction des parametres a, b"
+      - "Resoudre le systeme d'equations obtenu"
+      - "Conclure avec les valeurs trouvees"
+    variables:
+      parametres: ["a, b", "a seul"]
+      type_morceaux: ["polynome/polynome", "affine/quadratique"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Manuel ex.7 p.36 (f continue sur R, restriction affine)"
+      - "XY ex.6 activite cours p.17 (g lineaire + quadratique continue)"
+    examples:
+      - title: "Manuel ex.7 — Quadratique + affine, trouver a et b"
+        enonce: >-
+          f definie sur R avec f(x) = x^2+ax+b si x>=1 et la restriction
+          de f a ]-inf,1] est une fonction affine. f est continue sur R.
+          Determiner l'expression de f(x) pour tout x.
+        sketch: >-
+          Continuite en 1 => lim_g = f(1) = 1+a+b.
+          Plus la condition affine => systeme en a,b.
+
+  # =========================================================================
+  # Prax4 — Appliquer le TVI pour prouver l'existence d'une solution
+  # =========================================================================
+
+  - id: Prax4.v1
+    praxeology: Prax4
+    name: "TVI zero — polynome sur intervalle donne"
+    description: >-
+      Montrer que f(x) = 0 admet au moins une solution dans [a,b] donne.
+      f est un polynome (continu sur R), on verifie f(a)*f(b) < 0.
+    method:
+      - "f polynome => continue sur R, donc sur [a,b]"
+      - "Calculer f(a) et f(b)"
+      - "Verifier f(a)*f(b) < 0 (changement de signe)"
+      - "Conclure par le TVI : il existe c dans ]a,b[ tel que f(c) = 0"
+    variables:
+      function: ["x^3+4x^2+4x+2", "x^3+3x^2/2+1", "x^3+4x+1", "-2x^3-7x+4"]
+      interval: ["[-3,-1]", "[-2,1]", "[-1,0]", "[0,1]"]
+    difficulty: 0
+    frequency: 8
+    sources:
+      - "Para cours p.30 (exemple)"
+      - "Para ex.8 p.32"
+      - "Manuel activite 4 p.32 (items 2a,b,c)"
+      - "Manuel ex.16 p.37"
+      - "Manuel ex.17 p.37"
+      - "Manuel ex.18 p.37"
+    examples:
+      - title: "Para cours — Cubique dans [-3,-1]"
+        enonce: >-
+          Soit f(x) = x^3+4x^2+4x+2. Montrer que f(x) = 0 admet au moins
+          une solution dans [-3,-1].
+        sketch: >-
+          f polynome continue sur R. f(-3) = -1, f(-1) = 1.
+          f(-3)*f(-1) = -1 < 0. Par le TVI, il existe c dans ]-3,-1[
+          tel que f(c) = 0.
+      - title: "Manuel ex.16 — Cubique dans [-1,0]"
+        enonce: >-
+          Soit f(x) = x^3+4x+1. Montrer que f(x) = 0 admet une solution
+          dans ]-1,0[. Donner une valeur approchee a 0.1 pres.
+        sketch: >-
+          f(-1) = -4, f(0) = 1. f(-1)*f(0) < 0. Par TVI, solution alpha.
+          Balayage : f(-0.3)*f(-0.2) < 0, donc -0.3 < alpha < -0.2.
+
+  - id: Prax4.v2
+    praxeology: Prax4
+    name: "TVI valeur k — polynome f(x) = k avec k entre f(a) et f(b)"
+    description: >-
+      Montrer que f(x) = k (k != 0) admet au moins une solution dans [a,b].
+      Verifier que k est compris entre f(a) et f(b), appliquer le TVI directement.
+    method:
+      - "f continue sur [a,b] (polynome ou justification)"
+      - "Calculer f(a) et f(b)"
+      - "Montrer que k est compris entre f(a) et f(b)"
+      - "Conclure par le TVI : il existe c dans ]a,b[ tel que f(c) = k"
+    variables:
+      function: ["x^3-4x+5", "x^3-3x^2+1"]
+      valeur_k: ["8", "4"]
+      interval: ["[-2,3]", "graphique"]
+    difficulty: 1
+    frequency: 3
+    sources:
+      - "Para ex.7 p.32"
+      - "XY ex.5 p.19 (graphique + TVI)"
+    examples:
+      - title: "Para ex.7 — f(x) = 8"
+        enonce: >-
+          Soit f(x) = x^3-4x+5. Montrer que f(x) = 8 admet au moins une
+          solution dans [-2,3].
+        sketch: >-
+          f polynome continue. f(-2) = 5, f(3) = 20.
+          5 < 8 < 20, donc par TVI il existe alpha dans [-2,3] tel que f(alpha) = 8.
+
+  - id: Prax4.v3
+    praxeology: Prax4
+    name: "TVI intersection — poser h = f - g pour f(x) = g(x)"
+    description: >-
+      Montrer que f(x) = g(x) admet une solution en posant h(x) = f(x) - g(x)
+      et en appliquant le TVI a h. Souvent : parabole croise hyperbole, ou
+      sqrt(expression) = fraction.
+    method:
+      - "Poser h(x) = f(x) - g(x)"
+      - "Justifier que h est continue sur l'intervalle"
+      - "Calculer h(a) et h(b), verifier h(a)*h(b) < 0"
+      - "Conclure par le TVI : h(c) = 0, donc f(c) = g(c)"
+    variables:
+      fonctions: ["x^2+1 et -1/x", "sqrt(x-2) et 8/x^2"]
+      interval: ["[-2,2]", "[3,+inf["]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Para ex.11 p.32-33"
+      - "Para ex.10 p.32"
+    examples:
+      - title: "Para ex.11 — Parabole croise hyperbole"
+        enonce: >-
+          f(x) = x^2+1 et g(x) = -1/x. Montrer que f(x) = g(x) admet
+          au moins une solution alpha dans [-2,2]. Valeur approchee a 10^-2.
+        sketch: >-
+          h(x) = x^3+x+1 (apres multiplication par x). h(-2) = -9,
+          h(2) = 11, h continue. TVI => solution.
+          Balayage : h(-0.69) < 0, h(-0.68) > 0 => alpha ~ -0.69.
+      - title: "Para ex.10 — sqrt = fraction, transformation"
+        enonce: >-
+          Montrer que sqrt(x-2) = 8/x^2 admet une solution alpha dans [3,+inf[.
+          Verifier que alpha est solution de x^5-2x^4-64 = 0.
+        sketch: >-
+          Poser f(x) = x^2*sqrt(x-2). f(3) = 9, f(4) = 16*sqrt(2) > 8.
+          f continue, 8 entre f(3) et f(4). TVI => solution.
+          Elever au carre : x^4(x-2) = 64 => x^5-2x^4-64 = 0.
+
+  # =========================================================================
+  # Prax5 — Prouver l'unicite d'une solution (TVI + monotonie)
+  # =========================================================================
+
+  - id: Prax5.v1
+    praxeology: Prax5
+    name: "TVI + unicite — cubique strictement monotone"
+    description: >-
+      Montrer que f(x) = 0 admet une unique solution. Etape 1 : TVI pour
+      l'existence. Etape 2 : monotonie stricte pour l'unicite (souvent un
+      polynome de degre impair avec coefficient dominant clair).
+    method:
+      - "Justifier que f est continue (polynome)"
+      - "Calculer f(a) et f(b), verifier f(a)*f(b) < 0 => existence (TVI)"
+      - "Montrer que f est strictement monotone sur [a,b] (ou sur R)"
+      - "Conclure : solution unique (T9)"
+    variables:
+      function: ["x^3+3x-1", "sqrt(x)+x"]
+      interval: ["[0,1]", "deduire de la monotonie"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Para ex.15 p.33-34 (sqrt(x)+x = 5)"
+      - "Para ex.16.3 p.34 (2x^3-3x^2-1 unique solution)"
+      - "XY ex.5 p.19 (graphique + unicite)"
+    examples:
+      - title: "Para ex.15 — sqrt(x)+x, TVI + croissance"
+        enonce: >-
+          f(x) = sqrt(x)+x. Justifier la continuite sur [0,+inf[, montrer
+          f strictement croissante, en deduire que f(x) = 5 admet une unique
+          solution alpha dans [3,4].
+        sketch: >-
+          f continue (somme polynome + sqrt). f croissante (somme de
+          croissantes). f(3) < 5 < f(4). TVI => existence.
+          f strictement croissante => unicite.
+
+  - id: Prax5.v2
+    praxeology: Prax5
+    name: "TVI + unicite — cubique, unique solution sur R via tableau de variation"
+    description: >-
+      Montrer qu'une cubique f(x) = 0 admet une unique solution sur R.
+      Dresser le tableau de variation (f' = 6x^2-6x = 0...), identifier
+      que f garde un signe constant aux extrema, conclure.
+    method:
+      - "Dresser le tableau de variation complet (f' et signes)"
+      - "Montrer que f est strictement monotone sur R (ou que l'image est R)"
+      - "Appliquer TVI pour l'existence dans un intervalle cible"
+      - "Unicite par monotonie stricte"
+    variables:
+      function: ["2x^3-3x^2-1", "x^3+3x^2-5"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Para ex.16 p.34 (f(x)=2x^3-3x^2-1, unique zero)"
+      - "Manuel ex.19 p.37"
+    examples:
+      - title: "Para ex.16 — Cubique unique zero"
+        enonce: >-
+          f(x) = 2x^3-3x^2-1. Completer le tableau de variation.
+          Montrer que f(x) = 0 admet une seule solution sur R.
+          Verifier alpha in [1.6, 1.7].
+        sketch: >-
+          f'(x) = 6x^2-6x = 6x(x-1). f' = 0 en 0 et 1.
+          f(0) = -1, f(1) = -2. f decroit de +inf a -1 puis de -1 a -2
+          puis croit de -2 a +inf. f < 0 sur ]-inf,alpha[ et alpha > 1.
+          Unique zero car f strictement croissante sur [1,+inf[.
+
+  # =========================================================================
+  # Prax6 — Determiner l'image d'un intervalle par une fonction continue
+  # =========================================================================
+
+  - id: Prax6.v1
+    praxeology: Prax6
+    name: "Image d'intervalle — fonction monotone, lecture directe"
+    description: >-
+      Determiner f(I) pour une fonction monotone sur I. Si f croissante,
+      f([a,b]) = [f(a),f(b)]. Si decroissante, f([a,b]) = [f(b),f(a)].
+    method:
+      - "Justifier la monotonie de f sur I"
+      - "Calculer f aux bornes de I"
+      - "Ecrire l'image en respectant la monotonie et le type d'intervalle"
+    variables:
+      function: ["x^3", "-x^3-3x", "sqrt(x+3)-2"]
+      interval: ["[1,3]", "[2,3]", "[2,3]"]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "Para ex.16.2b p.34 (f([0,1]), f(]1,+inf[))"
+      - "Manuel ex.13 corrige (x^3)"
+      - "Manuel ex.14 corrige (-x^3-3x)"
+      - "Manuel ex.11 corrige (sqrt(x+3)-2)"
+    examples:
+      - title: "Manuel ex.13 — Cubique croissante"
+        enonce: >-
+          f(x) = x^3. Etudier les variations de f sur R. Quelles sont les
+          images des intervalles [1,3], [2,5], ]-6,-1] ?
+        sketch: >-
+          f croissante sur R. f([1,3]) = [1,27].
+          f([2,5]) = [8,125]. f(]-6,-1]) = ]-216,-1].
+      - title: "Para ex.16 — Images par cubique"
+        enonce: >-
+          f(x) = 2x^3-3x^2-1. Determiner f([0,1]) et f(]1,+inf[).
+        sketch: >-
+          f([0,1]) = [f(1),f(0)] = [-2,-1] (f decroissante sur [0,1]).
+          f(]1,+inf[) = ]-2,+inf[ (f croissante sur ]1,+inf[).
+
+  - id: Prax6.v2
+    praxeology: Prax6
+    name: "Image d'intervalle — changement de monotonie, lecture tableau"
+    description: >-
+      Determiner f(I) lorsque f change de sens de variation sur I.
+      Identifier les extrema locaux dans le tableau de variation, puis
+      combiner les images sur chaque sous-intervalle de monotonie.
+    method:
+      - "Identifier les extrema de f sur I (lecture du tableau de variation)"
+      - "Sur chaque sous-intervalle de monotonie, determiner l'image"
+      - "Reunir les sous-images en un seul intervalle (min, max global)"
+    variables:
+      shape: ["parabole (min au milieu)", "cubique (max puis min)"]
+      interval: ["[-2,3]", "[-1,2]", "R"]
+    difficulty: 2
+    frequency: 5
+    sources:
+      - "Para ex.12 p.33 (courbe a 2 extrema, image de 5 intervalles)"
+      - "Para ex.13 p.33 (tableaux de variation, image de sous-intervalles)"
+      - "XY ex.5 p.19 (f(x) = x^3-3x^2+1, images de [-1,0], [-1,2], [0,1])"
+      - "Manuel ex.9 corrige (1/2 x^2+5, parabole)"
+      - "Manuel ex.10 corrige (x^2-4x+1, parabole)"
+    examples:
+      - title: "Para ex.13.2 — Tableau de variation avec 2 extrema"
+        enonce: >-
+          D'apres le tableau de variation (f decroit de -4 a 1, puis decroit
+          de 1 a -4 sur [-2,3]), trouver f([-2,0]), f([0,3]) et f([-2,3]).
+        sketch: >-
+          f([-2,0]) = [-4,1]. f([0,3]) = [-4,1]. f([-2,3]) = [-4,1].
+      - title: "XY ex.5 — Cubique, images d'intervalles graphiques"
+        enonce: >-
+          f(x) = x^3-3x^2+1. Determiner graphiquement les images des
+          intervalles [-1,0], [-1,2] et [0,1] par f.
+        sketch: >-
+          f([-1,0]) = [-3,1]. f([-1,2]) = [-3,1]. f([0,1]) = [-1,1].
+
+  # =========================================================================
+  # Prax7 — Approximer une solution par dichotomie
+  # =========================================================================
+
+  - id: Prax7.v1
+    praxeology: Prax7
+    name: "Dichotomie a 10^-1 — balayage au pas 0.1"
+    description: >-
+      Encadrer une solution alpha a 10^-1 pres. Partir de l'intervalle [a,b]
+      issu du TVI et calculer f par pas de 0.1 jusqu'a detecter un changement
+      de signe.
+    method:
+      - "Partir de [a,b] ou f(a)*f(b) < 0"
+      - "Calculer f(a+0.1), f(a+0.2), ... jusqu'au changement de signe"
+      - "Obtenir [c, c+0.1] tel que f(c)*f(c+0.1) < 0"
+    variables:
+      function: ["x^3+4x+1", "-2x^3-7x+4", "-2x^3+2x+10"]
+      precision: ["10^-1"]
+    difficulty: 1
+    frequency: 4
+    sources:
+      - "Manuel ex.16 p.37 (x^3+4x+1)"
+      - "Manuel ex.17 p.37 (-2x^3-7x+4)"
+      - "Manuel ex.18 p.37 (-2x^3+2x+10)"
+      - "XY ex.5.2b p.19 (x^3-3x^2+1, encadrement amplitude 10^-1)"
+    examples:
+      - title: "Manuel ex.17 — Balayage pas 0.1"
+        enonce: >-
+          f(x) = -2x^3-7x+4. Montrer que f(x) = 0 admet une solution dans
+          [0,1]. Donner une valeur approchee a 0.1 pres.
+        sketch: >-
+          f(0) = 4, f(1) = -5. TVI => alpha dans [0,1].
+          f(0.5) = 0.25 > 0, f(0.6) = -0.63 < 0. Donc 0.5 < alpha < 0.6.
+
+  - id: Prax7.v2
+    praxeology: Prax7
+    name: "Dichotomie a 10^-2 — methode du milieu iteree"
+    description: >-
+      Encadrer alpha a 10^-2 pres. Utiliser la methode de dichotomie
+      systematique : calculer f au milieu, choisir le sous-intervalle
+      ou le signe change, repeter.
+    method:
+      - "Partir de [a,b] ou f(a)*f(b) < 0"
+      - "Calculer m = (a+b)/2 et f(m)"
+      - "Si f(a)*f(m) < 0 : alpha dans [a,m], sinon dans [m,b]"
+      - "Repeter jusqu'a b-a < 0.01"
+    variables:
+      function: ["x^2*sqrt(x-3)", "x^3+x+1", "x^5-x^3-x-1"]
+      precision: ["10^-2"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Para ex.14.2b p.33-34 (x^2*sqrt(x-3) = 4, encadrement 10^-2)"
+      - "Para ex.11 p.32-33 (x^3+x+1, alpha a 10^-2)"
+      - "Manuel situation 2 p.34 (dichotomie longueur 0.04)"
+      - "Manuel 'Avec l'ordinateur' p.39 (tableur, x^5-x^3-x-1)"
+    examples:
+      - title: "Para ex.14 — x^2*sqrt(x-3) = 4, precision 10^-2"
+        enonce: >-
+          f(x) = x^2*sqrt(x-3). Montrer que f(x) = 4 admet une unique
+          solution sur ]3,+inf[. Encadrement a 10^-2.
+        sketch: >-
+          f continue et strictement croissante sur [3,+inf[.
+          f(3.16) = 3.99 < 4 et f(3.17) = 4.14 > 4.
+          Donc 3.16 < alpha < 3.17.
+      - title: "Para ex.11 — Dichotomie par balayage 10^-2"
+        enonce: >-
+          alpha solution de x^3+x+1 = 0 dans [-2,2]. Valeur approchee a 10^-2.
+        sketch: >-
+          h(-0.7) < 0, h(-0.6) > 0 => alpha dans [-0.7,-0.6].
+          h(-0.69) < 0, h(-0.68) > 0 => alpha ~ -0.69 a 10^-2.
+
+  # =========================================================================
+  # Prax8 — Determiner le nombre de solutions d'une equation
+  # =========================================================================
+
+  - id: Prax8.v1
+    praxeology: Prax8
+    name: "Comptage solutions — quartique 4 zeros par TVI itere"
+    description: >-
+      Montrer que f(x) = 0 admet exactement 4 solutions pour un polynome
+      de degre 4. Calculer f en 4-5 points strategiques, detecter 4
+      changements de signe, conclure par le degre.
+    method:
+      - "Calculer f en suffisamment de points pour detecter 4 changements de signe"
+      - "Sur chaque intervalle [ai,ai+1] ou f(ai)*f(ai+1) < 0, appliquer le TVI"
+      - "Obtenir au moins 4 solutions distinctes"
+      - "f est de degre 4 => au plus 4 zeros. Conclure : exactement 4"
+    variables:
+      function: ["x^4-4x^2-x+1", "1/2 x^4-x^3-6x^2+5x+10"]
+      points_test: ["(-2,-1,0,1,3)", "(-3,-1.5,1,2,4,4.5)"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Para ex.9 p.32 (x^4-4x^2-x+1, exactement 4 solutions)"
+      - "Manuel ex.20 p.37 (1/2 x^4-x^3-6x^2+5x+10)"
+    examples:
+      - title: "Para ex.9 — Quartique, 4 zeros"
+        enonce: >-
+          f(x) = x^4-4x^2-x+1. Calculer f(-2), f(-1), f(0), f(1), f(3).
+          Montrer que f(x) = 0 admet exactement 4 solutions.
+        sketch: >-
+          f(-2) = 3, f(-1) = -1, f(0) = 1, f(1) = -3, f(3) = 43.
+          4 changements de signe : ]-2,-1[, ]-1,0[, ]0,1[, ]1,3[.
+          Degre 4 => au plus 4 zeros. Exactement 4.
+      - title: "Manuel ex.20 — Quartique, 4 solutions avec encadrement"
+        enonce: >-
+          f(x) = 1/2 x^4-x^3-6x^2+5x+10. Montrer que f(x) = 0 admet
+          exactement 4 solutions. Valeur approchee a 0.1 pres de chacune.
+        sketch: >-
+          f(-3)*f(-2) < 0, f(-1.5)*f(-1) < 0, f(1)*f(2) < 0, f(4)*f(4.5) < 0.
+          4 solutions, degre 4 => exactement 4.
+          alpha1 ~ -2.8, alpha2 ~ -1.1, alpha3 ~ 1.7, alpha4 ~ 4.1.
+
+  - id: Prax8.v2
+    praxeology: Prax8
+    name: "Comptage solutions — cubique 3 zeros par TVI + degre 3"
+    description: >-
+      Montrer que f(x) = 0 admet exactement 3 solutions pour un polynome
+      de degre 3. Identifier 3 changements de signe par le tableau de
+      variation ou des evaluations numeriques.
+    method:
+      - "Dresser le tableau de variation ou evaluer f en points strategiques"
+      - "Identifier 3 intervalles de changement de signe"
+      - "Appliquer le TVI sur chacun"
+      - "Degre 3 => au plus 3 zeros. Conclure : exactement 3"
+    variables:
+      function: ["2x^3-3x^2-12x+5", "x^3-3x^2+1", "5x^3-10x^2-8x+10"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Manuel activite 4 p.32 (2x^3-3x^2-12x+5, 3 solutions)"
+      - "Manuel situation 2 p.34 (5x^3-10x^2-8x+10)"
+      - "XY ex.5 p.19 (x^3-3x^2+1, graphiquement 3 zeros)"
+    examples:
+      - title: "Manuel activite 4 — Cubique, exactement 3 solutions"
+        enonce: >-
+          f(x) = 2x^3-3x^2-12x+5. Montrer que f(x) = 0 admet au moins
+          une solution dans [-3,-2], [0,1] et [3,4]. En deduire que f(x) = 0
+          admet exactement 3 solutions.
+        sketch: >-
+          f(-3)*f(-2) < 0, f(0)*f(1) < 0, f(3)*f(4) < 0.
+          Degre 3 => au plus 3 zeros. Exactement 3.
+
+  # =========================================================================
+  # Prax9 — Justifier la continuite de |f| ou sqrt(f)
+  # =========================================================================
+
+  - id: Prax9.v1
+    praxeology: Prax9
+    name: "Continuite de |f| — valeur absolue preserve la continuite"
+    description: >-
+      Justifier que |f| est continue en a. Il suffit de montrer que f est
+      continue en a puis d'appliquer le theoreme T4.
+    method:
+      - "Montrer que f est continue en a"
+      - "Citer le theoreme : f continue => |f| continue"
+      - "Conclure"
+    variables:
+      function: ["|2x-1|", "|x^2-3x+2|", "|x+3|-|5-x|"]
+      point: ["-3", "tout reel", "tout reel"]
+    difficulty: 1
+    frequency: 3
+    sources:
+      - "Manuel activite 2 p.25 (item 1: |2x-1| en -3)"
+      - "XY ex.4.4 p.18 (|x^2-3x+2|)"
+      - "XY ex.4.5 p.18 (|x+3|-|5-x|)"
+    examples:
+      - title: "Manuel activite — |2x-1| en -3"
+        enonce: >-
+          Justifier que f(x) = |2x-1| est continue en -3.
+        sketch: >-
+          g(x) = 2x-1 est polynome, continue en -3.
+          Donc |g| = f est continue en -3.
+
+  - id: Prax9.v2
+    praxeology: Prax9
+    name: "Continuite de sqrt(f) — racine avec condition positivite"
+    description: >-
+      Justifier que sqrt(f) est continue en a. Montrer que f est continue
+      en a, que f(a) >= 0 (et idealement f(a) > 0 sur un ouvert), puis
+      appliquer le theoreme T5.
+    method:
+      - "Montrer que f est continue en a"
+      - "Verifier que f(a) >= 0 (ou f > 0 sur un voisinage)"
+      - "Appliquer le theoreme : f continue et positive => sqrt(f) continue"
+    variables:
+      function: ["sqrt(x^4+1/x^2)", "sqrt(x^2+1)"]
+      point: ["2", "tout reel"]
+    difficulty: 1
+    frequency: 2
+    sources:
+      - "Manuel activite 2 p.25 (item 2: sqrt(x^4+1/x^2))"
+      - "XY theoreme p.17 (sqrt)"
+    examples:
+      - title: "Manuel — sqrt(x^4+1/x^2) en 2"
+        enonce: >-
+          Justifier que f(x) = sqrt(x^4+1/x^2) est continue en 2.
+        sketch: >-
+          g(x) = x^4+1/x^2, somme de polynome et rationnelle.
+          g continue en 2, g(2) = 16.25 > 0. Donc sqrt(g) continue en 2.
+
+  # =========================================================================
+  # Prax10 — Montrer la continuite par la definition alpha-beta
+  # =========================================================================
+
+  - id: Prax10.v1
+    praxeology: Prax10
+    name: "Definition epsilon-delta — fonction affine (alpha = beta/K)"
+    description: >-
+      Montrer par la definition que f(x) = ax+b est continue en un point.
+      La majoration |f(x)-f(a)| = |a|*|x-c| donne alpha = beta/|a|.
+    method:
+      - "Ecrire |f(x)-f(a)| = |a(x-c)+b - (ac+b)| = |a|*|x-c|"
+      - "Pour |f(x)-f(a)| < beta, il suffit |x-c| < beta/|a|"
+      - "Poser alpha = beta/|a|"
+      - "Conclure : f continue en c"
+    variables:
+      function: ["2x-1"]
+      point: ["2"]
+    difficulty: 1
+    frequency: 2
+    sources:
+      - "Para cours p.26 (f(x) = 2x-1 en 2)"
+      - "Manuel cours definition p.23"
+    examples:
+      - title: "Para cours — f(x) = 2x-1 en 2"
+        enonce: >-
+          Montrer que f(x) = 2x-1 est continue en 2 par la definition.
+        sketch: >-
+          |f(x)-f(2)| = |2x-1-3| = 2|x-2|. Pour 2|x-2| < beta,
+          poser alpha = beta/2. Donc f continue en 2.
+
+  - id: Prax10.v2
+    praxeology: Prax10
+    name: "Definition epsilon-delta — sqrt en 0 (continuite a droite)"
+    description: >-
+      Montrer par la definition que sqrt(x) est continue a droite en 0.
+      |sqrt(x)-0| = sqrt(x) < beta donne alpha = beta^2.
+    method:
+      - "Ecrire |f(x)-f(0)| = sqrt(x)"
+      - "Pour sqrt(x) < beta, il suffit x < beta^2"
+      - "Poser alpha = beta^2"
+      - "Conclure : f continue a droite en 0"
+    variables:
+      function: ["sqrt(x)"]
+      point: ["0"]
+    difficulty: 1
+    frequency: 1
+    sources:
+      - "Para cours p.27-28 (sqrt(x) continue a droite en 0)"
+    examples:
+      - title: "Para cours — sqrt(x) continue a droite en 0"
+        enonce: >-
+          Montrer que f(x) = sqrt(x) est continue a droite en 0.
+        sketch: >-
+          Pour beta > 0, |sqrt(x)-0| = sqrt(x) < beta <=> x < beta^2.
+          Poser alpha = beta^2. Donc f continue a droite en 0.
+
+  # =========================================================================
+  # Problemes (multi-praxeologies)
+  # =========================================================================
+
+  - id: Prob.v1
+    type: probleme
+    praxeologies: [Prax3, Prax4, Prax6]
+    name: "Morceaux → raccordement → TVI → image d'intervalle"
+    description: >-
+      Probleme complet sur une fonction par morceaux : etudier la continuite
+      sur chaque morceau, tracer la courbe, determiner graphiquement les
+      images d'intervalles, appliquer le TVI pour resoudre f(x) = k.
+    method:
+      - "Justifier la continuite sur chaque morceau (Prax3)"
+      - "Tracer la courbe representative"
+      - "Identifier les discontinuites graphiquement"
+      - "Determiner les images d'intervalles (Prax6)"
+      - "Appliquer le TVI si necessaire (Prax4)"
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Para ex.6 p.31-32 (3 morceaux, image, nombre de solutions graphiques)"
+      - "XY ex.6 p.19 (3 morceaux, images d'intervalles)"
+      - "Manuel ex.5 p.36 (2 morceaux sqrt/rationnelle)"
+    examples:
+      - title: "Para ex.6 — Morceaux + discontinuite + images"
+        enonce: >-
+          f(x) = {-x si x<=0, x^2 si 0<x<1, x-1 si x>=1}.
+          Tracer, justifier la continuite par morceaux, justifier que f
+          n'est pas continue en 1, nombre de solutions de f(x) = 1 et f(x) = -1.
+        sketch: >-
+          Continue sur chaque morceau. Discontinue en 1 (saut).
+          f(x) = 1 : 2 solutions. f(x) = -1 : 0 solution.
+
+  - id: Prob.v2
+    type: probleme
+    praxeologies: [Prax4, Prax5, Prax6, Prax7]
+    name: "Etude cubique complete : variations → zeros → encadrement"
+    description: >-
+      Probleme d'etude complete d'un polynome de degre 3 : justifier la
+      continuite, dresser le tableau de variation, appliquer le TVI pour
+      l'existence des zeros, unicite par monotonie, images d'intervalles,
+      encadrement par dichotomie, signe de f(x).
+    method:
+      - "Justifier la continuite (Prax1)"
+      - "Dresser le tableau de variation (f', extrema)"
+      - "Determiner les images d'intervalles (Prax6)"
+      - "Appliquer TVI pour chaque zero (Prax4)"
+      - "Unicite par monotonie (Prax5)"
+      - "Encadrement par dichotomie ou balayage (Prax7)"
+      - "En deduire le signe de f sur R"
+    difficulty: 3
+    frequency: 4
+    sources:
+      - "Para ex.16 p.34 (2x^3-3x^2-1 : tableau, unique zero, encadrement, signe)"
+      - "Manuel activite 4 p.32 (2x^3-3x^2-12x+5 : 3 solutions, encadrement)"
+      - "Manuel situation 2 p.34 (5x^3-10x^2-8x+10 : 3 solutions, dichotomie)"
+    examples:
+      - title: "Para ex.16 — Cubique complete"
+        enonce: >-
+          f(x) = 2x^3-3x^2-1. Justifier la continuite. Completer le
+          tableau de variation. Determiner f([0,1]) et f(]1,+inf[). Montrer
+          que f(x) = 0 admet une seule solution alpha sur R. Verifier
+          alpha in [1.6, 1.7]. Deduire le signe de f(x) sur R.
+        sketch: >-
+          f'(x) = 6x^2-6x, f' = 0 en 0 et 1. f(0) = -1, f(1) = -2.
+          f decroit ]-inf,0[ : +inf a -1, [0,1] : -1 a -2,
+          [1,+inf[ : -2 a +inf. Un seul zero dans [1,+inf[.
+          f(1.6) = -0.008 < 0, f(1.7) = 0.526 > 0. alpha in [1.6,1.7].
+          f(x) < 0 sur ]-inf,alpha[, f(x) > 0 sur ]alpha,+inf[.
+      - title: "Manuel activite 4 — Cubique, 3 zeros + dichotomie"
+        enonce: >-
+          f(x) = 2x^3-3x^2-12x+5. Montrer exactement 3 solutions. Donner
+          une valeur approchee a 0.1 puis 0.01 pres de chacune.
+        sketch: >-
+          f(-3)*f(-2) < 0, f(0)*f(1) < 0, f(3)*f(4) < 0.
+          Degre 3 => exactement 3. Balayage par pas de 0.1 puis 0.01.
+
+  - id: Prob.v3
+    type: probleme
+    praxeologies: [Prax1, Prax2, Prax4, Prax7]
+    name: "Intersection de courbes : continuite → poser h → TVI → dichotomie"
+    description: >-
+      Probleme ou on etudie l'intersection de deux courbes (ex: parabole
+      et hyperbole). On justifie la continuite de chaque fonction, on pose
+      h = f - g, on applique le TVI a h, puis on encadre la solution.
+    method:
+      - "Justifier la continuite de f et g (Prax1/Prax2)"
+      - "Poser h = f - g (ou ramener f(x) = g(x) a une seule equation)"
+      - "Montrer h continue, calculer h aux bornes (Prax4)"
+      - "TVI => existence de solution"
+      - "Encadrement par dichotomie ou balayage (Prax7)"
+    difficulty: 2
+    frequency: 2
+    sources:
+      - "Para ex.11 p.32-33 (x^2+1 = -1/x, h(x) = x^3+x+1)"
+      - "Para ex.10 p.32 (sqrt(x-2) = 8/x^2)"
+    examples:
+      - title: "Para ex.11 — f(x) = g(x), parabole et hyperbole"
+        enonce: >-
+          f(x) = x^2+1, g(x) = -1/x. Justifier continuite. Nombre de
+          solutions de f(x) = g(x) sur [-2,2]. Montrer existence et donner
+          valeur approchee a 10^-2.
+        sketch: >-
+          h(x) = x^3+x+1. h continue (polynome). h(-2) = -9, h(2) = 11.
+          h(-0.69) < 0, h(-0.68) > 0. alpha ~ -0.69 a 10^-2.
+
+  - id: Prob.v4
+    type: probleme
+    praxeologies: [Prax2, Prax4, Prax5, Prax7]
+    name: "Etude avec sqrt : domaine → continuite → TVI → unicite → encadrement"
+    description: >-
+      Probleme sur une fonction impliquant sqrt (souvent x^2*sqrt(x-3) ou
+      similaire). Etudier le domaine, justifier la continuite par operations,
+      variations, TVI pour existence, unicite par monotonie, encadrement.
+    method:
+      - "Determiner le domaine de definition"
+      - "Justifier la continuite par operations (Prax2)"
+      - "Etudier les variations (croissance)"
+      - "Appliquer TVI pour existence (Prax4)"
+      - "Unicite par monotonie (Prax5)"
+      - "Encadrement a la precision demandee (Prax7)"
+    difficulty: 3
+    frequency: 2
+    sources:
+      - "Para ex.14 p.33-34 (x^2*sqrt(x-3), unique solution f(x) = 4)"
+      - "Para ex.15 p.33-34 (sqrt(x)+x, unique solution f(x) = 5)"
+    examples:
+      - title: "Para ex.14 — x^2*sqrt(x-3) complete"
+        enonce: >-
+          f(x) = x^2*sqrt(x-3). Domaine, continuite, variations, montrer
+          f(x) = 4 admet une seule solution. Encadrement a 10^-2.
+        sketch: >-
+          D = [3,+inf[. f = produit polynome * sqrt, continue.
+          f strictement croissante. f(3) = 0, lim +inf.
+          4 dans l'image. TVI + monotonie => unique solution.
+          3.16 < alpha < 3.17.
+
+  - id: Prob.v5
+    type: probleme
+    praxeologies: [Prax6, Prax8]
+    name: "Image + graphique : nombre de solutions de f(x) = k par lecture courbe"
+    description: >-
+      Probleme graphique : on donne la courbe d'une fonction continue,
+      on determine les images d'intervalles par lecture, et on compte
+      les solutions de f(x) = k en comptant les intersections courbe/droite.
+    method:
+      - "Lire les valeurs de f aux points cles"
+      - "Determiner f(I) par lecture du graphique/tableau"
+      - "Pour f(x) = k : tracer la droite y = k, compter les intersections"
+      - "Justifier chaque solution par TVI sur un sous-intervalle de monotonie"
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Para ex.12 p.33 (courbe avec extrema, images de 5 intervalles)"
+      - "XY ex.5 p.19 (x^3-3x^2+1, f(x)=4 unique, f(x)=-1 deux, f(x)=0 trois)"
+    examples:
+      - title: "XY ex.5 — Cubique, comptage graphique + TVI"
+        enonce: >-
+          f(x) = x^3-3x^2+1. Graphiquement : f(x) = 4 unique solution,
+          f(x) = -1 exactement 2 solutions, f(x) = 0 exactement 3 solutions.
+          Montrer par TVI que f(x) = 0 admet une solution dans ]0,1[.
+          Encadrement a 10^-1.
+        sketch: >-
+          f(0) = 1 > 0, f(1) = -1 < 0. TVI => alpha dans ]0,1[.
+          f(0.6) = 0.136, f(0.7) = -0.437. alpha in [0.6, 0.7].
+
+  # =========================================================================
+  # Continuite sur R (exercices de justification globale)
+  # =========================================================================
+
+  - id: Prax2.v5
+    praxeology: Prax2
+    name: "Continuite sur R — justifier qu'une expression est continue partout"
+    description: >-
+      Montrer qu'une fonction est continue sur tout R en la decomposant
+      en operations de fonctions continues sur R. Souvent : polynome au
+      denominateur toujours non nul (Delta < 0), ou |f| + |g|.
+    method:
+      - "Identifier le type de chaque composante"
+      - "Si quotient : montrer que le denominateur ne s'annule pas sur R (Delta < 0)"
+      - "Si sqrt : montrer que l'argument est toujours >= 0"
+      - "Si |f| : f continue => |f| continue"
+      - "Conclure par les theoremes d'operations"
+    variables:
+      function: ["(x+3)/(2x^2+5)", "sqrt(x^2+3x+5+x^3+1)", "|x^2-3x+2|", "(|x|+3)/(|x|+1)", "|x+5|/sqrt(x^2+1)"]
+    difficulty: 1
+    frequency: 4
+    sources:
+      - "XY ex.4 p.18 (6 fonctions continues sur R)"
+      - "Para ex.4 p.31 (5 fonctions, lesquelles continues sur R)"
+    examples:
+      - title: "XY ex.4.2 — Rationnelle continue sur R"
+        enonce: >-
+          Justifier que f(x) = (x+3)/(2x^2+5) est continue sur R.
+        sketch: >-
+          Numerateur polynome, denominateur 2x^2+5 > 0 pour tout x.
+          f rationnelle definie sur R => f continue sur R.
+      - title: "XY ex.4.6 — Quotient |f|/sqrt(g)"
+        enonce: >-
+          Justifier que f(x) = |x+5|/sqrt(x^2+1) est continue sur R.
+        sketch: >-
+          |x+5| continue sur R. x^2+1 > 0 sur R, polynome continue,
+          donc sqrt(x^2+1) continue sur R et > 0. Quotient continue sur R.

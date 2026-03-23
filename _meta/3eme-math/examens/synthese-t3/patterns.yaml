@@ -1,0 +1,352 @@
+# Patterns d'examen — Devoir de synthese T3, 3eme Math
+# Problemes transversaux (cross-module) frequents dans les sujets tunisiens
+# Chaque pattern combine des praxeologies de 2+ modules
+
+exam: synthese-3eme-t3
+programme: 3eme-math
+version: 1
+
+patterns:
+
+  # =========================================================================
+  # EP1 — Cubique : variations → zeros exacts → f(x)=k → encadrement
+  # =========================================================================
+
+  - id: EP1
+    type: probleme-examen
+    name: "Cubique : variations, zeros exacts, f(x)=k, encadrement"
+    modules: [continuite, fonction-derivee]
+    praxeologies:
+      - continuite/Prax4    # TVI existence
+      - continuite/Prax5    # TVI + monotonie unicite
+      - continuite/Prax7    # Dichotomie
+      - continuite/Prax8    # Nombre de solutions
+      - fonction-derivee/Prax4  # Variations via f'
+    points_typiques: 5
+    difficulty: 2
+    frequency: "present dans ~90% des sujets"
+
+    description: >-
+      Le classique de l'examen tunisien. On donne f(x) = ax^3 + bx^2 + cx + d
+      (degre 3). L'exercice se deroule en 5-7 questions enchainées :
+      1) Calculer f' et etudier son signe (trinome du second degre)
+      2) Dresser le tableau de variation de f
+      3) Montrer que f(x) = 0 admet une unique solution alpha dans ]a,b[
+         (TVI + monotonie stricte sur chaque intervalle)
+      4) Encadrer alpha par dichotomie (precision 10^-1 ou 10^-2)
+      5) Discuter selon k le nombre de solutions de f(x) = k
+         (lecture graphique du tableau de variation)
+
+    example:
+      title: "Cubique classique"
+      enonce: >-
+        Soit f(x) = 2x^3 - 3x^2 - 1.
+        1) Calculer f'(x) et etudier son signe.
+        2) Dresser le tableau de variation de f.
+        3) Montrer que f(x) = 0 admet une unique solution alpha dans ]1, 2[.
+        4) Donner un encadrement de alpha a 10^-1 pres.
+        5) Discuter selon les valeurs de k le nombre de solutions de f(x) = k.
+      sketch: >-
+        f'(x) = 6x^2 - 6x = 6x(x-1). f' > 0 sur ]-inf,0[ et ]1,+inf[,
+        f' < 0 sur ]0,1[. Max local f(0) = -1, min local f(1) = -2.
+        f(1) = -2 < 0 et f(2) = 3 > 0, f continue strictement croissante
+        sur [1,+inf[ => unique alpha dans ]1,2[. Dichotomie : f(1.5) ≈ -0.25 < 0,
+        f(1.6) ≈ 0.392 > 0, donc alpha in ]1.5, 1.6[.
+        Pour f(x) = k : 0 solutions si k < -2, 1 si k = -2, 2 si -2 < k < -1,
+        3 si k = -1, 2 si k > -1... selon le tableau.
+
+    do:
+      - "Enchainer les questions dans l'ordre naturel (f' → tableau → TVI → dichotomie → discussion)"
+      - "Calibrer f pour que f' soit un trinome a racines entieres (facilite la factorisation)"
+      - "Choisir des bornes [a,b] ou les valeurs f(a) et f(b) se calculent mentalement"
+      - "Demander la dichotomie a 10^-1 (2-3 iterations) pour rester faisable en temps"
+      - "La discussion f(x)=k est la question de synthese finale (niveau 2-3)"
+
+    do_not:
+      - "Ne pas donner un polynome dont f' n'a pas de racines simples"
+      - "Ne pas demander la dichotomie a 10^-3 (trop d'iterations pour un examen)"
+      - "Ne pas oublier les cas limites dans la discussion (k = valeur d'un extremum)"
+      - "Ne pas melanger TVI et dichotomie dans la meme question"
+
+  # =========================================================================
+  # EP2 — Rationnelle complete : domaine → derivee → asymptotes → tableau → courbe
+  # =========================================================================
+
+  - id: EP2
+    type: probleme-examen
+    name: "Rationnelle complete : domaine, derivee, asymptotes, tableau, courbe"
+    modules: [fonction-derivee, continuite]
+    praxeologies:
+      - fonction-derivee/Prax1   # Derivee simple
+      - fonction-derivee/Prax2a  # Derivee quotient
+      - fonction-derivee/Prax4   # Variations via f'
+      - fonction-derivee/Prax5   # Extrema
+      - fonction-derivee/Prax10  # Tangentes et position
+    points_typiques: 5
+    difficulty: 2
+    frequency: "present dans ~80% des sujets (souvent l'exercice principal)"
+
+    description: >-
+      Etude complete d'une fonction rationnelle f(x) = P(x)/Q(x).
+      L'exercice-type couvre tout le programme de fonction-derivee en un seul
+      probleme structure :
+      1) Determiner le domaine de definition Df
+      2) Calculer f'(x) (formule du quotient) et etudier son signe
+      3) Dresser le tableau de variation complet
+      4) Determiner les asymptotes (verticales, horizontales ou obliques)
+      5) Tracer la courbe representative Cf
+      6) (Optionnel) Etudier la position de Cf par rapport a une asymptote oblique
+      7) (Optionnel) Determiner l'equation de la tangente en un point
+
+    example:
+      title: "Rationnelle avec asymptote oblique"
+      enonce: >-
+        Soit f(x) = (x^2 + x + 1)/(x - 1).
+        1) Determiner le domaine de f.
+        2) Montrer que f(x) = x + 2 + 3/(x-1).
+        3) Calculer f'(x) et etudier son signe.
+        4) Dresser le tableau de variation de f.
+        5) Determiner les asymptotes de la courbe Cf.
+        6) Etudier la position de Cf par rapport a la droite y = x + 2.
+        7) Tracer Cf et ses asymptotes dans un repere orthonorme.
+      sketch: >-
+        Df = R\{1}. Division euclidienne : f(x) = x+2 + 3/(x-1).
+        f'(x) = (x^2-2x-2)/(x-1)^2. Delta = 12, racines 1+/-sqrt(3).
+        AV : x = 1, AO : y = x+2. Position : f(x)-(x+2) = 3/(x-1),
+        positif si x > 1, negatif si x < 1.
+
+    do:
+      - "Commencer par une division euclidienne si le degre du numerateur >= degre du denominateur"
+      - "Garantir que f' se factorise proprement (discriminant positif)"
+      - "Inclure au moins une asymptote verticale et une oblique (ou horizontale)"
+      - "Demander la position par rapport a l'asymptote oblique (question de synthese)"
+      - "Fournir un repere avec unite adaptee pour le trace"
+
+    do_not:
+      - "Ne pas donner un denominateur de degre > 2 (trop de calcul pour le quotient)"
+      - "Ne pas oublier de preciser Df dans la premiere question"
+      - "Ne pas demander les limites en +-inf si elles ne servent pas a identifier les asymptotes"
+      - "Ne pas donner un f' dont le signe est trivial (sinon pas de variation interessante)"
+
+  # =========================================================================
+  # EP3 — Irrationnelle : domaine → derivee sqrt → tableau → TVI → image
+  # =========================================================================
+
+  - id: EP3
+    type: probleme-examen
+    name: "Irrationnelle : domaine, derivee sqrt, tableau, TVI, image"
+    modules: [fonction-derivee, continuite]
+    praxeologies:
+      - fonction-derivee/Prax2b  # Derivee avec sqrt
+      - fonction-derivee/Prax4   # Variations via f'
+      - continuite/Prax4         # TVI existence
+      - continuite/Prax6         # Image d'un intervalle
+    points_typiques: 4
+    difficulty: 2
+    frequency: "present dans ~50% des sujets"
+
+    description: >-
+      Etude d'une fonction contenant une racine carree, typiquement
+      f(x) = sqrt(ax^2+bx+c) ou f(x) = x + sqrt(expression).
+      Le probleme combine les techniques de derivation de sqrt (formule
+      u'/(2sqrt(u))) avec la continuite pour le TVI.
+      Structure typique :
+      1) Determiner le domaine Df (resoudre u(x) >= 0)
+      2) Calculer f'(x) et simplifier
+      3) Etudier le signe de f' et dresser le tableau de variation
+      4) Montrer qu'une equation f(x) = k admet une solution (TVI)
+      5) Determiner f(I) pour un intervalle I donne
+
+    example:
+      title: "Irrationnelle sur intervalle ferme"
+      enonce: >-
+        Soit f(x) = x - 2*sqrt(x+1) definie sur [-1, +inf[.
+        1) Calculer f'(x) et etudier son signe sur ]-1, +inf[.
+        2) Dresser le tableau de variation de f.
+        3) Determiner f([-1, 8]).
+        4) Montrer que f(x) = 1 admet exactement deux solutions.
+        5) En deduire un encadrement de la plus grande solution.
+      sketch: >-
+        f'(x) = 1 - 1/sqrt(x+1). f'(x) = 0 <=> sqrt(x+1) = 1 <=> x = 0.
+        f' < 0 sur ]-1,0[, f' > 0 sur ]0,+inf[. Min f(0) = -2.
+        f(-1) = -1, f croit vers +inf. f([-1,8]) = [-2, 8-2sqrt(9)] = [-2, 2].
+        f(x) = 1 : lecture du tableau, 2 solutions (une avant 0, une apres).
+
+    do:
+      - "Choisir u(x) lineaire ou quadratique simple sous la racine"
+      - "Garantir que f'(x) = 0 donne une equation resoluble sans formule complexe"
+      - "Inclure la question image d'intervalle (Prax6 continuite, souvent oubliee)"
+      - "Demander le nombre de solutions d'une equation en lecture de tableau"
+
+    do_not:
+      - "Ne pas donner une expression sous la racine de degre > 2"
+      - "Ne pas oublier de verifier la derivabilite aux bornes du domaine (x = -1 ici)"
+      - "Ne pas demander un trace de courbe (la racine rend le trace imprecis a la main)"
+      - "Ne pas confondre domaine de definition et domaine de derivabilite"
+
+  # =========================================================================
+  # EP4 — Denombrement → probabilites : urne/cartes → modele → complementaire → proba
+  # =========================================================================
+
+  - id: EP4
+    type: probleme-examen
+    name: "Denombrement et probabilites : urne, cartes, modele, complementaire"
+    modules: [denombrement, probabilites]
+    praxeologies:
+      - denombrement/Prax2   # Identifier le modele de tirage
+      - denombrement/Prax5a  # Combinaisons (application directe)
+      - denombrement/Prax6   # Methode du complementaire
+      - denombrement/Prax8   # Contraintes multiples (synthese)
+    points_typiques: 4
+    difficulty: 2
+    frequency: "present dans ~70% des sujets"
+
+    description: >-
+      Exercice combinant denombrement et probabilites dans un contexte concret
+      (urne avec boules colorees, jeu de cartes, formation de comites).
+      Structure typique :
+      1) Calculer le nombre total de tirages possibles (univers)
+      2) Denombrer les cas favorables pour un evenement A
+      3) Calculer P(A) = |A|/|Omega|
+      4) Utiliser le complementaire pour "au moins un..."
+      5) (Optionnel) Probabilites conditionnelles ou evenements independants
+
+    example:
+      title: "Urne et probabilites"
+      enonce: >-
+        Une urne contient 4 boules rouges, 3 boules vertes et 2 boules blanches.
+        On tire simultanement 3 boules.
+        1) Combien de tirages sont possibles ?
+        2) Calculer la probabilite d'obtenir 3 boules de meme couleur.
+        3) Calculer la probabilite d'obtenir au moins une boule rouge.
+        4) Calculer la probabilite d'obtenir exactement 2 couleurs differentes.
+      sketch: >-
+        1) C_9^3 = 84. 2) 3 rouges : C_4^3 = 4, 3 vertes : C_3^3 = 1,
+        3 blanches : impossible (2 < 3). P = 5/84.
+        3) Complementaire : aucune rouge = C_5^3 = 10. P(au moins 1 rouge) = 1 - 10/84 = 74/84 = 37/42.
+        4) Exactement 2 couleurs = total - 1 couleur - 3 couleurs.
+        3 couleurs : on choisit parmi chaque => decomposer en cas.
+
+    do:
+      - "Donner un contexte concret et familier (urne, cartes, comite)"
+      - "Inclure obligatoirement une question avec le complementaire"
+      - "Varier les types : tirage simultane (combinaisons) et successif (arrangements)"
+      - "Calibrer les nombres pour que les calculs restent raisonnables (n <= 15)"
+      - "Enchainer denombrement puis probabilite dans cet ordre"
+
+    do_not:
+      - "Ne pas melanger tirage avec et sans remise dans le meme exercice"
+      - "Ne pas donner des nombres trop grands (eviter C_52^5 en examen)"
+      - "Ne pas demander des probabilites conditionnelles complexes (hors programme 3eme)"
+      - "Ne pas oublier de preciser 'tirage simultane' ou 'successif sans remise'"
+
+  # =========================================================================
+  # EP5 — Fonction par morceaux : continuite raccordement → derivabilite → variations
+  # =========================================================================
+
+  - id: EP5
+    type: probleme-examen
+    name: "Fonction par morceaux : continuite, derivabilite, variations"
+    modules: [continuite, fonction-derivee]
+    praxeologies:
+      - continuite/Prax3         # Continuite par morceaux
+      - fonction-derivee/Prax3   # Derivabilite sqrt/|x|/morceaux
+      - fonction-derivee/Prax4   # Variations via f'
+    points_typiques: 4
+    difficulty: 2
+    frequency: "present dans ~40% des sujets"
+
+    description: >-
+      Etude d'une fonction definie par morceaux, typiquement 2 morceaux raccordes
+      en un point x0. L'exercice teste la comprehension fine de la continuite
+      et de la derivabilite au point de raccordement.
+      Structure typique :
+      1) Determiner le domaine de definition
+      2) Etudier la continuite en x0 (limites a gauche et a droite, valeur en x0)
+      3) Etudier la derivabilite en x0 (derivees a gauche et a droite)
+      4) Interpreter graphiquement (tangente, point anguleux, tangente verticale)
+      5) Etudier les variations sur chaque morceau puis globalement
+      6) Tracer la courbe
+
+    example:
+      title: "Raccordement avec parametre"
+      enonce: >-
+        Soit f definie sur R par :
+        f(x) = x^2 + x - 1  si x <= 1
+        f(x) = (ax + b)/(x + 1)  si x > 1
+        1) Determiner a et b pour que f soit continue en 1.
+        2) f est-elle derivable en 1 ? Interpreter graphiquement.
+        3) Etudier les variations de f sur chaque intervalle.
+        4) Dresser le tableau de variation de f sur R.
+        5) Tracer la courbe Cf.
+      sketch: >-
+        Continuite en 1 : lim droite = (a+b)/2, f(1) = 1. Donc (a+b)/2 = 1
+        soit a+b = 2. Derivabilite : f'_g(1) = 3, f'_d(1) = (a-b)/4.
+        Pour derivable : a-b = 12, d'ou a = 7, b = -5 (si demande).
+        Sinon point anguleux si f'_g != f'_d.
+
+    do:
+      - "Inclure une question de determination de parametre(s) pour la continuite"
+      - "Tester la derivabilite au point de raccordement (c'est la question-cle)"
+      - "Demander une interpretation graphique (tangente, point anguleux)"
+      - "Choisir des morceaux de types differents (polynome + rationnelle, polynome + sqrt)"
+
+    do_not:
+      - "Ne pas donner plus de 2 morceaux (3 morceaux est trop long pour un exercice d'examen)"
+      - "Ne pas oublier que continuite est necessaire avant de tester la derivabilite"
+      - "Ne pas donner un raccordement trivial (ou la reponse est evidente)"
+      - "Ne pas confondre 'non derivable' et 'discontinue' dans le corrige"
+
+  # =========================================================================
+  # EP6 — Binome + identites combinatoires : developper → specialiser → sommes
+  # =========================================================================
+
+  - id: EP6
+    type: probleme-examen
+    name: "Binome de Newton et identites combinatoires"
+    modules: [denombrement]
+    praxeologies:
+      - denombrement/Prax7a  # Developper avec le binome
+      - denombrement/Prax7b  # Identites du binome (sommes de C_n^k)
+      - denombrement/Prax5b  # Proprietes des combinaisons
+    points_typiques: 3
+    difficulty: 2
+    frequency: "present dans ~50% des sujets"
+
+    description: >-
+      Exercice de synthese purement combinatoire. On part du binome de Newton
+      pour aboutir a des identites sur les sommes de combinaisons. L'exercice
+      teste la maitrise du formalisme et la capacite a specialiser une formule
+      generale.
+      Structure typique :
+      1) Developper (a+b)^n pour des valeurs concretes
+      2) Specialiser a = 1, b = 1 pour obtenir somme C_n^k = 2^n
+      3) Specialiser a = 1, b = -1 pour obtenir la somme alternee = 0
+      4) En deduire la somme des C_n^k pour k pair (ou impair) = 2^{n-1}
+      5) (Optionnel) Deriver et specialiser pour somme k*C_n^k = n*2^{n-1}
+
+    example:
+      title: "Binome et sommes alternees"
+      enonce: >-
+        1) Developper (1+x)^n en utilisant le binome de Newton.
+        2) En deduire que somme_{k=0}^{n} C_n^k = 2^n.
+        3) Montrer que somme_{k=0}^{n} (-1)^k C_n^k = 0.
+        4) En deduire que C_n^0 + C_n^2 + C_n^4 + ... = C_n^1 + C_n^3 + C_n^5 + ... = 2^{n-1}.
+        5) Calculer somme_{k=1}^{n} k*C_n^k.
+      sketch: >-
+        1) (1+x)^n = somme C_n^k x^k. 2) x=1 : 2^n = somme C_n^k.
+        3) x=-1 : 0 = somme (-1)^k C_n^k. 4) Somme paire + Somme impaire = 2^n
+        et Somme paire - Somme impaire = 0, donc chacune = 2^{n-1}.
+        5) Deriver (1+x)^n = somme k C_n^k x^{k-1}, poser x=1 : n*2^{n-1}.
+
+    do:
+      - "Structurer l'exercice comme une cascade de deductions (chaque question utilise la precedente)"
+      - "Commencer par le developpement concret avant la generalisation"
+      - "Inclure au moins une specialisation (x=1 et x=-1)"
+      - "La question sur les sommes paires/impaires est un grand classique a inclure"
+
+    do_not:
+      - "Ne pas demander une demonstration du binome par recurrence (trop long pour un exercice)"
+      - "Ne pas inclure plus de 5 questions (risque de depasser le temps alloue)"
+      - "Ne pas melanger binome et probabilites dans le meme exercice"
+      - "Ne pas oublier que la derivation du binome est une technique plus avancee (question finale)"

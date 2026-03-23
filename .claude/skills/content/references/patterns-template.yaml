@@ -1,117 +1,118 @@
 # ============================================================================
-# PATTERNS D'EXAMEN — Template
+# PATTERNS — Template
 # ============================================================================
 #
-# Un fichier par module. Contient les variantes d'exercices d'examen
-# classifiees par praxeologie, avec frequences et exemples reels.
+# Un fichier par module (_meta/{prog}/{mod}/patterns.yaml)
+# Un fichier par examen (_meta/{prog}/examens/{slug}/patterns.yaml)
 #
-# Emplacement : content/{programme}/{module}/_patterns.yaml
+# Deux types de patterns :
+#   - type: exercice — un exercice isole (1 praxeologie, 1 technique)
+#   - type: probleme — un probleme multi-questions (sequence de praxeologies)
+#
+# Format flexible : chaque pattern a des champs structures (id, type, name,
+# praxeologies, difficulty, frequency, sources) + des champs libres en
+# langage naturel (description, example, do, do_not).
+#
+# Les noms sont DISTINCTIFS : ils encodent la technique ou la sequence.
+# Mauvais : "Exercice sur le TVI"
+# Bon : "TVI + unicite par monotonie stricte"
 #
 # Workflow :
 #   1. WF1 cree la KB (praxeologies abstraites)
 #   2. WF1+ cree/enrichit ce fichier (variantes concretes)
 #   3. WF1+ est appele N fois (iteratif) avec de nouvelles sources
-#   4. WF2 utilise les patterns pour planifier le Livret 2 (Examen)
+#   4. WF2 utilise les patterns pour planifier les livrets
 #   5. WF3 instancie les patterns en exercices concrets
 #
 # ============================================================================
 
-module: "{slug-module}"                           # Ex: nombre-derive
+module: "{slug-module}"                           # Ex: continuite
 programme: "{slug-programme}"                     # Ex: 3eme-math
-version: 1                                        # Incrementer a chaque enrichissement WF1+
-
-# ============================================================================
-# Patterns — liste des variantes d'examen
-# ============================================================================
-#
-# Chaque pattern instancie une praxeologie de la KB (section 8).
-# Un pattern = une facon concrete dont une praxeologie apparait en examen.
-#
-# Regles :
-#   - ID : {Praxeologie}.v{numero} (ex: Prax3.v1, Prax3.v2)
-#   - praxeology : reference vers la KB (Prax1, Prax2, etc.)
-#   - frequency : nombre d'occurrences observees dans les sources
-#   - examples : exercices REELS (pas inventes), avec source
-#   - variables : ce qui change d'un exercice a l'autre
-#   - method : etapes de resolution (pas la solution, la methode)
-#   - Seuil : au-dela de ~10 variantes par praxeologie, regrouper
-#
-# ============================================================================
+version: 1                                        # Incrementer a chaque enrichissement
 
 patterns:
 
-  # --- Pattern 1 ---
-  - id: Prax1.v1
-    praxeology: Prax1                             # Reference KB section 8
-    name: "{Nom court de la variante}"
-    description: >-
-      {Ce que l'eleve doit faire dans cette variante.
-      Assez precis pour distinguer cette variante des autres.}
-    method:
-      - "{Etape 1 de la methode de resolution}"
-      - "{Etape 2}"
-      - "{Etape 3}"
-    variables:                                    # Ce qui change entre instances
-      function: ["{f(x) = ...}", "{g(x) = ...}"]
-      interval: ["[a,b]", "[c,d]"]
-      # Ajouter d'autres variables selon le pattern
-    difficulty: 1                                 # 0-3, coherent avec la KB
-    frequency: 0                                  # Nombre d'occurrences dans les sources
-    sources: []                                   # Ex: ["Manuel T1 p.35 ex.1", "BAC 2024 ex.3a"]
-    examples: []                                  # Exercices reels (voir format ci-dessous)
+  # =========================================================================
+  # PATTERNS EXERCICE — un exercice isole, 1 praxeologie
+  # =========================================================================
 
-  # --- Pattern 2 (meme praxeologie, variante differente) ---
-  - id: Prax1.v2
-    praxeology: Prax1
-    name: "{Autre variante de la meme praxeologie}"
+  - id: Prax1.v1
+    type: exercice
+    name: "{Nom distinctif : technique + contexte}"    # Ex: "Derivee par definition — polynome"
+    praxeology: Prax1                                  # 1 seule praxeologie
     description: >-
-      {Description de ce qui distingue cette variante.}
-    method:
-      - "{Etape 1}"
-      - "{Etape 2}"
-    variables:
-      parameter: ["{valeur1}", "{valeur2}"]
+      {Ce que l'eleve doit faire. Assez precis pour distinguer cette variante.}
+    difficulty: 1
+    frequency: 0                                       # Nombre d'occurrences observees
+    sources: []                                        # Ex: ["Manuel T1 p.35 ex.1", "Para ex.5"]
+    example: >-
+      {Un exercice REEL (pas invente) avec enonce + sketch de solution.
+      Source obligatoire.}
+    # do et do_not sont optionnels pour les exercices simples
+    do:
+      - "{Instruction pour bien generer ce type d'exercice}"
+    do_not:
+      - "{Ce qu'il faut eviter}"
+
+  # =========================================================================
+  # PATTERNS PROBLEME — probleme multi-questions intra-module
+  # =========================================================================
+
+  - id: P1
+    type: probleme
+    name: "{Sequence distinctif : etape1 → etape2 → etape3}"
+    praxeologies: [Prax1, Prax3, Prax4]               # Plusieurs praxeologies
+    description: >-
+      {Description du probleme : structure multi-parties, progression logique,
+      ce qui le rend typique du systeme tunisien.}
     difficulty: 2
     frequency: 0
     sources: []
-    examples: []
-
-  # --- Pattern 3 (praxeologie differente) ---
-  - id: Prax2.v1
-    praxeology: Prax2
-    name: "{Variante de Prax2}"
-    description: >-
-      {Description.}
-    method:
-      - "{Etape 1}"
-    variables:
-      type_fonction: ["{polynome}", "{rationnelle}"]
-    difficulty: 1
-    frequency: 0
-    sources: []
-    examples: []
+    example: >-
+      {Un probleme REEL complet : enonce multi-parties + sketch de solution.}
+    do:
+      - "{Les questions doivent s'enchainer logiquement}"
+      - "{Le resultat de (a) sert en (b)}"
+    do_not:
+      - "{Ne pas depasser N questions}"
+      - "{Ne pas melanger des techniques sans lien logique}"
 
 # ============================================================================
-# Format des exemples
+# FORMAT POUR LES PATTERNS D'EXAMEN (cross-module)
 # ============================================================================
 #
-# Chaque exemple est un exercice REEL (pas invente) avec :
+# Meme format, fichier separe : _meta/{prog}/examens/{slug}/patterns.yaml
 #
-#   examples:
-#     - title: "BAC 2024 — Exercice 3a"
-#       enonce: >-
-#         Soit f la fonction definie sur [0,2] par f(x) = x³ - 3x + 1.
-#         Montrer que l'equation f(x) = 0 admet une unique solution
-#         dans [0,1].
-#       sketch: >-
-#         f(0)=1>0, f(1)=-1<0, f continue sur [0,1] → TVI.
-#         f'(x)=3x²-3<0 sur ]0,1[ → strictement decroissante → unicite.
+# Differences :
+#   - Champ `modules:` au lieu de `praxeology:`
+#   - Les praxeologies referencent leur module d'origine
+#   - Champ `points_typiques:` pour le bareme
 #
-# Regles :
-#   - title : source + reference (ex: "Manuel T1 ex.5", "BAC 2024 ex.3a")
-#   - enonce : texte EXACT de l'exercice source (pas reformule)
-#   - sketch : grandes lignes de la solution (pas la solution complete)
-#   - Ne pas inventer d'exemples — uniquement des exercices reels observes
+# Exemple :
+#
+#   - id: EP1
+#     type: probleme-examen
+#     name: "Cubique : variations → zeros → f(x)=k → encadrement (cont + derivee)"
+#     modules: [continuite, fonction-derivee]
+#     praxeologies: [Prax1-cont, Prax4-fd, Prax8-cont, Prax7-cont]
+#     description: >-
+#       Exercice majeur du devoir de synthese T3. Etude complete d'un
+#       polynome de degre 3 combinant derivation et continuite.
+#     difficulty: 2
+#     frequency: 5
+#     points_typiques: 5-6
+#     sources: ["Synthese T3 2023 ex.3", "Synthese T3 2024 ex.4"]
+#     example: >-
+#       f(x) = 2x^3 - 9x^2 + 12x - 4.
+#       (a) Calculer f'(x) et dresser le tableau de variation.
+#       (b) Montrer que f(x)=0 admet exactement 2 solutions.
+#       (c) Montrer que f(x)=1 admet 3 solutions.
+#       (d) Encadrer la plus grande a 10^-1.
+#     do:
+#       - "Polynome degre 3 avec coefficients entiers simples"
+#       - "Au moins une racine exacte (factorisable)"
+#     do_not:
+#       - "Ne pas depasser 6 questions"
 #
 # ============================================================================
 
@@ -121,15 +122,13 @@ patterns:
 #
 # 1. Toujours charger la KB module avant d'enrichir les patterns
 # 2. Chaque exercice analyse doit etre rattache a une praxeologie existante
-# 3. Si un exercice ne correspond a aucune praxeologie → signaler, ne pas
-#    creer de pattern orphelin
-# 4. Si plusieurs exercices sont tres similaires (meme methode, memes
-#    variables, seules les valeurs changent) → c'est la MEME variante,
-#    incrementer frequency et ajouter la source
-# 5. Si la methode ou la structure differe → c'est une NOUVELLE variante
-# 6. Les `variables` doivent capturer ce qui fait la "parametricite"
-#    du pattern : quels elements un generateur peut changer pour creer
-#    un nouvel exercice du meme type
+# 3. Si un exercice ne correspond a aucune praxeologie → signaler
+# 4. Meme methode + memes variables + valeurs differentes → MEME variante
+#    (incrementer frequency, ajouter source)
+# 5. Methode ou structure differente → NOUVELLE variante
+# 6. Les noms sont DISTINCTIFS — pas "exercice TVI" mais "TVI + unicite par monotonie"
 # 7. Toujours incrementer `version` apres modification
+# 8. Les `example` sont des exercices REELS (pas inventes), avec source
+# 9. Les `do` et `do_not` guident la generation sans la contraindre
 #
 # ============================================================================

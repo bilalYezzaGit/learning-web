@@ -1,0 +1,1277 @@
+module: denombrement
+programme: 3eme-math
+version: 1
+
+patterns:
+
+  # =========================================================================
+  # Prax1 — Cardinal d'une union/intersection
+  # =========================================================================
+
+  - id: Prax1.v1
+    praxeology: Prax1
+    name: "Cardinal union/intersection — 2 ensembles, donnees directes"
+    description: >-
+      Calculer card(E union F) a partir de card(E), card(F) et card(E inter F)
+      donnes directement. Application immediate de la formule d'inclusion-exclusion.
+    method:
+      - "Identifier card(E), card(F), card(E inter F) dans l'enonce"
+      - "Appliquer card(E union F) = card(E) + card(F) - card(E inter F)"
+      - "Si demande, deduire card(complementaire) = card(total) - card(E union F)"
+    variables:
+      contexte: ["appareils defectueux", "eleves/matieres", "club joueurs"]
+      donnees: [directes, avec_complementaire]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "Manuel ex.1 p.122 (appareils defauts A et B)"
+      - "Para ex.1 p.141 (eleves math/prof)"
+      - "Para cours p.138 (club bridge/tarot)"
+      - "KB N1"
+    examples:
+      - title: "Manuel ex.1 — Appareils electromenagers"
+        enonce: >-
+          Un appareil peut presenter deux defauts A et B. Sur 100 appareils :
+          6 presentent A seul, 8 presentent B seul, 4 presentent les deux.
+          Combien ne presentent aucun defaut ?
+        sketch: >-
+          card(A union B) = 6 + 8 + 4 = 18. Sans defaut : 100 - 18 = 82.
+      - title: "Para ex.1 — Eleves et professeur"
+        enonce: >-
+          100 eleves, 80 aiment les maths, 80 aiment le prof, 65 les deux.
+          Combien n'aiment ni la matiere, ni le professeur ?
+        sketch: >-
+          card(union) = 80 + 80 - 65 = 95. Ni l'un ni l'autre : 100 - 95 = 5.
+    do:
+      - "Dessiner un diagramme de Venn ou un tableau de Carrol pour visualiser"
+      - "Bien identifier card(E inter F) vs card(E seul)"
+    do_not:
+      - "Confondre card(E) avec card(E seul) — card(E) inclut l'intersection"
+      - "Oublier de soustraire l'intersection dans la formule d'union"
+
+  - id: Prax1.v2
+    praxeology: Prax1
+    name: "Cardinal union/intersection — 3 ensembles (inclusion-exclusion generalisee)"
+    description: >-
+      Calculer le cardinal d'une union de 3 ensembles par la formule
+      d'inclusion-exclusion generalisee, souvent avec un diagramme de Venn.
+    method:
+      - "Identifier les 7 donnees : card(A), card(B), card(C), card(A inter B), card(A inter C), card(B inter C), card(A inter B inter C)"
+      - "Appliquer card(A union B union C) = sum card - sum card(inter 2 a 2) + card(inter 3)"
+      - "Remplir le diagramme de Venn zone par zone"
+    variables:
+      contexte: ["langues etudiees", "sports pratiques"]
+      donnees: [toutes_fournies, a_deduire]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Para ex.6 p.142 (eleves 3 langues)"
+      - "KB N1"
+    examples:
+      - title: "Para ex.6 — Trois langues"
+        enonce: >-
+          16 etudient l'anglais, 13 l'espagnol, 13 l'allemand, 4 anglais+espagnol,
+          6 espagnol+allemand, 5 anglais+allemand, 3 les trois. Tous etudient
+          au moins une langue. Combien d'eleves ?
+        sketch: >-
+          card = 16 + 13 + 13 - 4 - 6 - 5 + 3 = 30 eleves.
+    do:
+      - "Remplir le diagramme de Venn en partant du centre (l'intersection des 3)"
+      - "Verifier que la somme des zones = total"
+    do_not:
+      - "Oublier le terme +card(A inter B inter C) dans la formule a 3 ensembles"
+      - "Confondre les donnees 'A et B' (intersection) avec 'A et B seulement'"
+
+  # =========================================================================
+  # Prax2 — Modele de tirage + principe multiplicatif
+  # =========================================================================
+
+  - id: Prax2.v1
+    praxeology: Prax2
+    name: "Codes et mots de passe — multiplicatif + contrainte premier chiffre"
+    description: >-
+      Former des codes a p chiffres/lettres avec repetition possible.
+      Contrainte typique : le premier chiffre est non nul, ou une lettre est
+      interdite. Appliquer le principe multiplicatif etape par etape.
+    method:
+      - "Identifier le nombre de positions et les choix a chaque position"
+      - "Traiter la position contrainte en premier (ex: premier chiffre != 0)"
+      - "Multiplier les choix independants a chaque etape"
+    variables:
+      type_code: ["numerique 4 chiffres", "alphanum lettre+chiffres", "binaire"]
+      contrainte: ["premier_chiffre_non_nul", "lettre_interdite", "sans_contrainte"]
+    difficulty: 1
+    frequency: 7
+    sources:
+      - "Manuel activite 7 p.114 (code acces lettre + 3 chiffres)"
+      - "Para ex.15 p.145 (Login + mot de passe)"
+      - "Para ex.17 p.145 (code antivol)"
+      - "XY ex.3 p.129 (code binaire)"
+      - "KB N2, N8"
+    examples:
+      - title: "Manuel act.7 — Code d'acces"
+        enonce: >-
+          Un code est compose d'une lettre parmi {A,B,C} suivie de 3 chiffres
+          parmi {1,...,9}. Combien de codes peut-on proposer ?
+          Combien avec 3 chiffres distincts ?
+        sketch: >-
+          Avec repetition : 3 x 9^3 = 2187.
+          Chiffres distincts : 3 x A_9^3 = 3 x 504 = 1512.
+      - title: "Para ex.15 — Login internet"
+        enonce: >-
+          Login = 6 chiffres + 1 lettre. Premier chiffre non nul, lettre != O.
+          Combien de clients possibles ?
+        sketch: >-
+          9 x 10^5 x 25 = 22 500 000.
+    do:
+      - "Toujours traiter la position la plus contrainte en premier"
+      - "Bien distinguer avec/sans repetition selon l'enonce"
+    do_not:
+      - "Utiliser n^p si les chiffres doivent etre distincts (il faut A_n^p)"
+      - "Oublier que le premier chiffre d'un nombre ne peut etre 0"
+
+  - id: Prax2.v2
+    praxeology: Prax2
+    name: "Tirage d'urne — identifier le modele (simultane / successif / remise)"
+    description: >-
+      Face a une situation de tirage de boules, identifier le modele
+      (simultane = combinaisons, successif sans remise = arrangements,
+      successif avec remise = n^p) et appliquer la formule.
+    method:
+      - "Analyser : ordre ? repetition ? combien choisis ?"
+      - "Simultane → C_n^p (pas d'ordre, pas de repetition)"
+      - "Successif sans remise → A_n^p (ordre, pas de repetition)"
+      - "Successif avec remise → n^p (ordre, repetition)"
+    variables:
+      contexte: ["urne boules", "des", "jetons numerotes"]
+      modele: [simultane, successif_sans_remise, successif_avec_remise]
+    difficulty: 1
+    frequency: 8
+    sources:
+      - "Para ex.4 p.141 (12 boules, 3 modeles)"
+      - "Para ex.9 p.142 (jetons 3 modeles)"
+      - "XY ex.1 p.128 (15 boules)"
+      - "XY tableau recapitulatif p.127"
+      - "KB N2, N8"
+    examples:
+      - title: "Para ex.4 — Trois modeles compares"
+        enonce: >-
+          Urne de 12 boules (5N, 3B, 4R). On tire 5 boules.
+          Combien de tirages : (1) simultane, (2) successif avec remise,
+          (3) successif sans remise ?
+        sketch: >-
+          (1) C_12^5 = 792. (2) 12^5 = 248832. (3) A_12^5 = 95040.
+    do:
+      - "Consulter le tableau recapitulatif ordre/repetition avant de choisir la formule"
+      - "Bien lire 'simultanement' (= combinaisons) vs 'successivement' (= arrangements)"
+    do_not:
+      - "Confondre tirage simultane (pas d'ordre → C_n^p) avec successif sans remise (ordre → A_n^p)"
+      - "Appliquer n^p quand les tirages sont sans remise"
+
+  # =========================================================================
+  # Prax3 — Arrangements
+  # =========================================================================
+
+  - id: Prax3.v1
+    praxeology: Prax3
+    name: "Circuits touristiques — arrangements de p villes parmi n"
+    description: >-
+      Denombrer les circuits touristiques visitant p villes dans un ordre donne
+      parmi n villes. L'ordre compte, pas de repetition : c'est A_n^p.
+    method:
+      - "Identifier n (villes disponibles) et p (villes visitees)"
+      - "L'ordre du circuit compte → arrangement"
+      - "Appliquer A_n^p = n(n-1)...(n-p+1)"
+    variables:
+      n: [6, 8, 10]
+      p: [2, 3, 6]
+    difficulty: 1
+    frequency: 3
+    sources:
+      - "Para ex.12 p.144 (6 villes grecques)"
+      - "KB N3"
+    examples:
+      - title: "Para ex.12 — Villes grecques"
+        enonce: >-
+          Une agence organise des circuits de 6 villes dans un ordre donne.
+          Combien de circuits ? Si Athenes est premiere, combien ?
+        sketch: >-
+          Total : 6! = 720. Athenes premiere : 5! = 120.
+    do:
+      - "Verifier que l'ordre des villes compte (A -> B != B -> A)"
+    do_not:
+      - "Utiliser C_n^p si l'ordre du parcours importe"
+
+  - id: Prax3.v2
+    praxeology: Prax3
+    name: "Election de bureau — president, secretaire, tresorier"
+    description: >-
+      Elire un bureau ordonne (president, vice-president, etc.) parmi n membres.
+      Chaque poste est distinct, donc c'est un arrangement.
+    method:
+      - "Identifier n (nombre de candidats) et p (nombre de postes)"
+      - "Les postes sont distincts → arrangement"
+      - "Appliquer A_n^p"
+    variables:
+      n: [10, 20, 50]
+      p: [3, 4]
+    difficulty: 1
+    frequency: 3
+    sources:
+      - "Manuel activite 4 p.115 (50 membres, bureau de 4)"
+      - "Manuel QCM 3 p.120"
+      - "KB N3"
+    examples:
+      - title: "Manuel act.4 — Bureau de 4 parmi 50"
+        enonce: >-
+          Une association de 50 membres elit un bureau de 4 (president,
+          vice-president, secretaire, tresorier). Combien de bureaux possibles ?
+        sketch: >-
+          A_50^4 = 50 x 49 x 48 x 47 = 5 527 200.
+    do:
+      - "Distinguer 'bureau ordonne' (arrangement) de 'comite' (combinaison)"
+    do_not:
+      - "Utiliser C_n^p si les postes sont differents (president != secretaire)"
+
+  # =========================================================================
+  # Prax4a — Permutations (anagrammes, lettres distinctes)
+  # =========================================================================
+
+  - id: Prax4a.v1
+    praxeology: Prax4a
+    name: "Anagrammes de mot a lettres distinctes — permutation directe"
+    description: >-
+      Compter les anagrammes d'un mot dont toutes les lettres sont distinctes.
+      Le nombre est n! ou n est le nombre de lettres.
+    method:
+      - "Verifier que toutes les lettres sont distinctes"
+      - "Compter n = nombre de lettres"
+      - "Le nombre d'anagrammes est n!"
+    variables:
+      mot: ["MAI", "TUNIS", "BLANCHE", "NATUREL"]
+      n: [3, 5, 7]
+    difficulty: 1
+    frequency: 4
+    sources:
+      - "Manuel act.1 p.114 (MAI, NATUREL)"
+      - "Manuel ex.13 corrige (BLANCHE = 7!)"
+      - "XY ex.4 p.129 (TUNIS)"
+      - "KB N4"
+    examples:
+      - title: "Manuel act.1 — Anagrammes de NATUREL"
+        enonce: >-
+          Combien y a-t-il d'anagrammes du mot NATUREL ?
+        sketch: >-
+          7 lettres toutes distinctes → 7! = 5040.
+    do:
+      - "Verifier d'abord que les lettres sont bien toutes distinctes"
+    do_not:
+      - "Appliquer n! si des lettres se repetent (il faut diviser)"
+
+  - id: Prax4a.v2
+    praxeology: Prax4a
+    name: "Permutations avec contrainte de position — lettre fixee"
+    description: >-
+      Anagrammes d'un mot a lettres distinctes avec contrainte : une lettre
+      en premiere/derniere position. Fixer les positions contraintes, permuter le reste.
+    method:
+      - "Fixer la/les position(s) contrainte(s)"
+      - "Permuter les lettres restantes : (n-k)!"
+      - "Si plusieurs contraintes, verifier la coherence"
+    variables:
+      contrainte: ["commence_par_X", "finit_par_Y", "deux_positions_fixees"]
+    difficulty: 1
+    frequency: 3
+    sources:
+      - "Manuel ex.14-15 (placement personnes avec contraintes)"
+      - "XY ex.17 p.131 (A pas derniere, E pas premiere)"
+      - "KB N4"
+    examples:
+      - title: "XY ex.17 — 5 personnes, positions interdites"
+        enonce: >-
+          Aligner 5 personnes A,B,C,D,E sachant que A ne peut etre en derniere
+          position ni E en premiere. Combien de dispositions ?
+        sketch: >-
+          Total 5! = 120. A en derniere : 4! = 24. E en premiere : 4! = 24.
+          A derniere ET E premiere : 3! = 6. Par inclusion-exclusion : 120 - 24 - 24 + 6 = 78.
+    do:
+      - "Utiliser l'inclusion-exclusion si plusieurs contraintes d'interdiction"
+      - "Fixer d'abord les positions contraintes, puis permuter le reste"
+    do_not:
+      - "Oublier le terme de correction (+) quand on soustrait deux contraintes"
+
+  # =========================================================================
+  # Prax4b — Anagrammes avec lettres repetees
+  # =========================================================================
+
+  - id: Prax4b.v1
+    praxeology: Prax4b
+    name: "Anagrammes avec lettres repetees — ANANAS, MATHEMATIQUES"
+    description: >-
+      Calculer le nombre d'anagrammes d'un mot contenant des lettres repetees.
+      Diviser n! par le produit des factorielles des multiplicites.
+      Pattern classique du bac tunisien.
+    method:
+      - "Compter n = nombre total de lettres"
+      - "Identifier les groupes de lettres repetees et leurs frequences p1, p2, ..., pk"
+      - "Appliquer n! / (p1! x p2! x ... x pk!)"
+      - "Verifier que p1 + p2 + ... + pk = n"
+    variables:
+      mot: ["ANANAS", "ESSENTIEL", "MATHEMATIQUES", "ANTICONSTITUTIONNELLEMENT", "EUCLIDE", "eleve"]
+      n: [6, 9, 12, 25, 7, 5]
+      repetitions: ["3A+2N", "3E+2S", "2M+2A+2T+2E", "5N+5T+3I+2O+3E+2L", "2E", "3e"]
+    difficulty: 2
+    frequency: 8
+    sources:
+      - "Manuel V/F 1-2 p.120 (ANANAS → 6!/(3!x2!) = 60)"
+      - "Manuel Mobiliser Situation 1 (ESSENTIEL, MATHEMATIQUES)"
+      - "Para ex.10 p.143 (eleve, EUCLIDE, ANTICONSTITUTIONNELLEMENT)"
+      - "KB N4"
+    examples:
+      - title: "Manuel V/F — ANANAS"
+        enonce: >-
+          Les anagrammes du mot ANANAS sont au nombre de 6!.
+          Vrai ou Faux ? Justifier.
+        sketch: >-
+          Faux. ANANAS a 6 lettres dont 3 A et 2 N.
+          Nombre = 6!/(3! x 2!) = 720/12 = 60.
+      - title: "Manuel Sit.1 — MATHEMATIQUES"
+        enonce: >-
+          Denombrer les anagrammes du mot MATHEMATIQUES.
+        sketch: >-
+          12 lettres. Repetitions : M(2), A(2), T(2), E(2).
+          Nombre = 12! / (2!)^4 = 479001600 / 16 = 29937600.
+      - title: "Para ex.10 — ANTICONSTITUTIONNELLEMENT"
+        enonce: >-
+          Determiner le nombre d'anagrammes de ANTICONSTITUTIONNELLEMENT.
+        sketch: >-
+          25 lettres. Repetitions : N(5), T(5), I(3), O(2), E(3), L(2).
+          Nombre = 25! / (5! x 5! x 3! x 2! x 3! x 2!).
+    do:
+      - "Lister systematiquement TOUTES les lettres et leurs frequences"
+      - "Verifier que la somme des frequences = nombre total de lettres"
+    do_not:
+      - "Oublier une lettre repetee (compter lettre par lettre)"
+      - "Ecrire n! sans diviser quand il y a des repetitions"
+      - "Diviser par la frequence au lieu de la factorielle de la frequence"
+
+  # =========================================================================
+  # Prax5a — Combinaisons (application directe)
+  # =========================================================================
+
+  - id: Prax5a.v1
+    praxeology: Prax5a
+    name: "Tirage simultane de boules — combinaisons directes"
+    description: >-
+      Denombrer les tirages simultanes de p boules parmi n, eventuellement
+      avec composition imposee (k noires et p-k blanches).
+    method:
+      - "Tirage simultane = pas d'ordre → combinaisons"
+      - "Appliquer C_n^p pour le total"
+      - "Pour une composition imposee : multiplier C par couleur (principe multiplicatif)"
+    variables:
+      n: [8, 10, 12, 15]
+      p: [3, 4, 5]
+      composition: [quelconque, imposee_par_couleur]
+    difficulty: 1
+    frequency: 7
+    sources:
+      - "Manuel activite 7 p.117 (3B+5N, tirage de 4)"
+      - "Para ex.4 p.141 (12 boules, tirage simultane)"
+      - "XY ex.1 p.128 (15 boules, composition)"
+      - "KB N5"
+    examples:
+      - title: "Para ex.4 — Composition imposee"
+        enonce: >-
+          Urne de 12 boules (5N, 3B, 4R). On tire 5 boules simultanement.
+          Combien de tirages avec 2N et 3B ? Avec 2R, 1N et 2B ?
+        sketch: >-
+          2N+3B : C_5^2 x C_3^3 = 10 x 1 = 10.
+          2R+1N+2B : C_4^2 x C_5^1 x C_3^2 = 6 x 5 x 3 = 90.
+    do:
+      - "Multiplier les C_n^p de chaque sous-groupe (principe multiplicatif)"
+      - "Verifier que la somme des boules choisies = p"
+    do_not:
+      - "Confondre tirage simultane (C_n^p) avec tirage successif (A_n^p)"
+      - "Additionner au lieu de multiplier les combinaisons par couleur"
+
+  - id: Prax5a.v2
+    praxeology: Prax5a
+    name: "Droites et triangles formes par n points — combinaisons geometriques"
+    description: >-
+      Compter les droites (C_n^2) ou triangles (C_n^3) determines par n points
+      en position generale (pas 3 alignes).
+    method:
+      - "Une droite = 2 points → C_n^2"
+      - "Un triangle = 3 points non alignes → C_n^3"
+      - "Un cercle = 3 points non alignes → C_n^3"
+    variables:
+      figure: [droite, triangle, cercle, diagonale]
+      n: [5, 6, 8, 10]
+    difficulty: 1
+    frequency: 4
+    sources:
+      - "Manuel activite 9 p.118 (polygone, diagonales)"
+      - "Manuel QCM 4-5 p.120 (pentagone)"
+      - "Para ex.21 p.145 (n points sur cercle)"
+      - "Para ex.22 p.146 (cercles par 3 points)"
+      - "KB N5"
+    examples:
+      - title: "Para ex.21 — Points sur un cercle"
+        enonce: >-
+          n points distincts sur un cercle. Combien de droites ?
+          Combien de triangles ?
+        sketch: >-
+          Droites : C_n^2 = n(n-1)/2. Triangles : C_n^3 = n(n-1)(n-2)/6.
+    do:
+      - "Verifier la condition 'pas 3 alignes' avant d'utiliser C_n^3"
+    do_not:
+      - "Utiliser A_n^p pour des figures geometriques (l'ordre des sommets ne compte pas)"
+
+  # =========================================================================
+  # Prax5b — Proprietes des combinaisons
+  # =========================================================================
+
+  - id: Prax5b.v1
+    praxeology: Prax5b
+    name: "Triangle de Pascal — construction et lecture"
+    description: >-
+      Construire le triangle de Pascal en utilisant C_n^p = C_{n-1}^{p-1} + C_{n-1}^p.
+      Lire les valeurs de C_n^p directement dans le triangle.
+    method:
+      - "Initialiser les bords : C_n^0 = 1, C_n^n = 1"
+      - "Chaque valeur interieure = somme des deux valeurs au-dessus"
+      - "Lire C_n^p a la ligne n, colonne p"
+    variables:
+      n_max: [6, 8, 10]
+    difficulty: 1
+    frequency: 3
+    sources:
+      - "Manuel activite 8 p.118 (construire pour n=6)"
+      - "XY cours p.126 (triangle jusqu'a n=8)"
+      - "KB N5"
+    examples:
+      - title: "Manuel act.8 — Triangle de Pascal"
+        enonce: >-
+          Completer le triangle de Pascal pour n = 6.
+        sketch: >-
+          Ligne 4 : 1 4 6 4 1. Ligne 5 : 1 5 10 10 5 1.
+          Ligne 6 : 1 6 15 20 15 6 1.
+    do:
+      - "Verifier la symetrie C_n^p = C_n^{n-p} comme controle"
+    do_not:
+      - "Confondre ligne et colonne dans le triangle"
+
+  - id: Prax5b.v2
+    praxeology: Prax5b
+    name: "Identites combinatoires — symetrie et relation de Pascal"
+    description: >-
+      Demontrer ou appliquer les proprietes C_n^p = C_n^{n-p} (symetrie),
+      C_n^p = C_{n-1}^{p-1} + C_{n-1}^p (Pascal), ou C_n^p = (n/p) C_{n-1}^{p-1}.
+    method:
+      - "Identifier la propriete a utiliser selon la forme de l'expression"
+      - "Pour symetrie : remplacer p par n-p"
+      - "Pour Pascal : decomposer selon la presence/absence d'un element fixe"
+      - "Pour n/p : repartir les factorielles"
+    variables:
+      type_propriete: [symetrie, pascal, formule_n_sur_p]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Manuel ex.19 corrige (C_n^p = (n/p) C_{n-1}^{p-1})"
+      - "XY ex.20 p.132 (decomposition par Pascal)"
+      - "KB N5"
+    examples:
+      - title: "XY ex.20 — Decomposition par Pascal itere"
+        enonce: >-
+          Montrer que C_n^p = C_{n-3}^p + 3 C_{n-3}^{p-1} + 3 C_{n-3}^{p-2} + C_{n-3}^{p-3}.
+        sketch: >-
+          Appliquer Pascal 3 fois : C_n^p = C_{n-1}^{p-1} + C_{n-1}^p,
+          puis developper chaque terme. On retrouve le binome (1+1)^3 = 1+3+3+1.
+    do:
+      - "Toujours partir de la definition par factorielles pour les demonstrations"
+    do_not:
+      - "Utiliser une propriete sans verifier les conditions 0 <= p <= n"
+
+  # =========================================================================
+  # Prax6 — Methode du complementaire
+  # =========================================================================
+
+  - id: Prax6.v1
+    praxeology: Prax6
+    name: "Mains de cartes — au moins un as (complementaire)"
+    description: >-
+      Denombrer les mains de cartes contenant "au moins un as" (ou un roi,
+      une figure...) par la methode du complementaire : total - aucun.
+      Pattern tres frequent au bac et en controle.
+    method:
+      - "Calculer le nombre total de mains : C_32^p (ou C_52^p)"
+      - "Calculer le nombre de mains sans aucun as : C_28^p (retirer les 4 as)"
+      - "Soustraire : au moins un as = total - aucun as"
+    variables:
+      jeu: [32, 52]
+      p: [5, 8]
+      condition: ["au_moins_un_as", "au_moins_un_roi", "au_moins_une_figure"]
+    difficulty: 2
+    frequency: 7
+    sources:
+      - "Para ex.5 q.4 p.142 (main de 5, au moins un roi)"
+      - "Manuel ex.6c p.122 (main de 8, au moins un as)"
+      - "Manuel activite 10 q.6 p.118 (au moins un roi)"
+      - "XY ex.1 q.1b p.128 (au moins une verte)"
+      - "KB N6"
+    examples:
+      - title: "Para ex.5 — Au moins un roi"
+        enonce: >-
+          Jeu de 32 cartes, main de 5 cartes. Combien de mains contenant
+          au moins un roi ?
+        sketch: >-
+          Total : C_32^5 = 201376. Sans roi : C_28^5 = 98280.
+          Au moins un roi : 201376 - 98280 = 103096.
+      - title: "Manuel ex.6c — Au moins un as (main de 8)"
+        enonce: >-
+          Jeu de 32 cartes, main de 8 cartes. Combien contiennent au moins un as ?
+        sketch: >-
+          Total : C_32^8. Sans as : C_28^8.
+          Reponse : C_32^8 - C_28^8.
+    do:
+      - "Penser complementaire des que l'enonce dit 'au moins'"
+      - "Bien retirer les bons elements pour 'aucun' (4 as parmi 32 → 28 restantes)"
+    do_not:
+      - "Tenter de denombrer directement 'au moins un' (1 as, 2 as, 3 as, 4 as) — c'est plus long et source d'erreurs"
+      - "Oublier que 'au moins un as' est le complementaire de 'aucun as'"
+
+  - id: Prax6.v2
+    praxeology: Prax6
+    name: "Entiers de 4 chiffres contenant au moins un chiffre donne"
+    description: >-
+      Denombrer les nombres de p chiffres distincts contenant au moins l'un des
+      chiffres donnes, par la methode du complementaire.
+    method:
+      - "Calculer le nombre total de nombres de p chiffres distincts"
+      - "Calculer le nombre de nombres n'utilisant aucun des chiffres imposes"
+      - "Soustraire"
+    variables:
+      p: [3, 4]
+      chiffres_imposes: ["5 et 7", "0, 1, 2"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "XY ex.6 q.3 p.129 (4 chiffres, au moins un parmi 5 et 7)"
+      - "Manuel ex.5 q.5 p.122 (4 chiffres distincts, au moins un parmi 0,1,2)"
+      - "KB N6"
+    examples:
+      - title: "XY ex.6 — Au moins un parmi {5, 7}"
+        enonce: >-
+          Combien d'entiers de 4 chiffres contiennent au moins un des chiffres 5 et 7 ?
+        sketch: >-
+          Total 4 chiffres : 9 x 10^3 = 9000. Sans 5 ni 7 : 7 x 8^3 = 3584.
+          Reponse : 9000 - 3584 = 5416.
+    do:
+      - "Bien compter les chiffres restants quand on retire les chiffres imposes"
+      - "Attention au premier chiffre non nul"
+    do_not:
+      - "Oublier la contrainte premier chiffre != 0 dans le complementaire"
+
+  - id: Prax6.v3
+    praxeology: Prax6
+    name: "Mots binaires avec au moins k lettres — complementaire par somme de C_n^p"
+    description: >-
+      Denombrer les mots de n lettres (alphabet {O, S} ou {0, 1}) contenant
+      au moins k fois une lettre donnee, en soustrayant les cas 0, 1, ..., k-1.
+    method:
+      - "Total = 2^n"
+      - "Soustraire les mots avec 0, 1, ..., k-1 occurrences de la lettre"
+      - "Nombre de mots avec exactement j occurrences = C_n^j"
+      - "Au moins k = 2^n - (C_n^0 + C_n^1 + ... + C_n^{k-1})"
+    variables:
+      n: [8, 10]
+      k: [3, 4]
+    difficulty: 2
+    frequency: 2
+    sources:
+      - "Manuel V/F 4 p.120 (mots de 8 lettres O et S, au moins 3 fois S)"
+      - "KB N6"
+    examples:
+      - title: "Manuel V/F 4 — Mots de 8 lettres avec au moins 3 S"
+        enonce: >-
+          Parmi les mots de 8 lettres ecrits avec O et S, combien contiennent
+          au moins 3 fois la lettre S ?
+        sketch: >-
+          Total : 2^8 = 256. Avec 0 S : 1. Avec 1 S : C_8^1 = 8.
+          Avec 2 S : C_8^2 = 28. Reponse : 256 - (1 + 8 + 28) = 219.
+    do:
+      - "Enumerer systematiquement les cas a soustraire (0, 1, ..., k-1 occurrences)"
+    do_not:
+      - "Oublier le cas '0 occurrences' (= 1 mot)"
+
+  # =========================================================================
+  # Prax7a — Binome de Newton
+  # =========================================================================
+
+  - id: Prax7a.v1
+    praxeology: Prax7a
+    name: "Developpement complet de (a+b)^n par le binome"
+    description: >-
+      Developper completement (a+b)^n en utilisant la formule du binome
+      de Newton. Ecrire tous les termes.
+    method:
+      - "Identifier a, b et n"
+      - "Ecrire la somme : somme_{k=0}^{n} C_n^k a^{n-k} b^k"
+      - "Calculer chaque C_n^k (triangle de Pascal ou formule)"
+      - "Simplifier les puissances"
+    variables:
+      expression: ["(1+x)^5", "(a+b)^4", "(2+x)^6", "(1-x)^4"]
+      n: [3, 4, 5, 6]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "Manuel activite 1 p.119 ((a+b)^4, (a+b)^5)"
+      - "Manuel activite 2 p.119 ((2+1)^n)"
+      - "XY cours p.126"
+      - "KB N7"
+    examples:
+      - title: "Manuel act.1 — Developper (a+b)^4"
+        enonce: >-
+          A l'aide du triangle de Pascal, developper (a+b)^4.
+        sketch: >-
+          (a+b)^4 = a^4 + 4a^3b + 6a^2b^2 + 4ab^3 + b^4.
+    do:
+      - "Utiliser le triangle de Pascal pour les coefficients si n <= 8"
+      - "Verifier le nombre de termes (n+1 termes)"
+    do_not:
+      - "Oublier le premier ou le dernier terme (C_n^0 = C_n^n = 1)"
+      - "Confondre les exposants de a et b (ils doivent sommer a n)"
+
+  - id: Prax7a.v2
+    praxeology: Prax7a
+    name: "Coefficient dans (a+b)^n — identification du terme"
+    description: >-
+      Trouver le coefficient d'un terme specifique x^k dans le developpement
+      de (a+b)^n. Identifier le rang k correspondant et calculer
+      C_n^k a^{n-k} b^k.
+    method:
+      - "Identifier a, b, n dans l'expression"
+      - "Le terme general est C_n^k a^{n-k} b^k"
+      - "Trouver k tel que la puissance de x soit celle cherchee"
+      - "Calculer le coefficient C_n^k a^{n-k}"
+    variables:
+      expression: ["(2+x)^7", "(1+2x)^6", "(x+1/x)^8"]
+      puissance_cherchee: ["x^3", "x^4", "x^2"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Manuel V/F 5 p.120 (2 as et 3 coeurs — lie au binome)"
+      - "Para ex.18 q.2b p.146 (C_10^p x 3^{10-p})"
+      - "XY ex.25 p.133 (derivation du binome)"
+      - "KB N7"
+    examples:
+      - title: "Coefficient de x^3 dans (2+x)^7"
+        enonce: >-
+          Trouver le coefficient de x^3 dans le developpement de (2+x)^7.
+        sketch: >-
+          Terme de rang k=3 : C_7^3 x 2^4 x x^3 = 35 x 16 = 560.
+          Le coefficient de x^3 est 560.
+    do:
+      - "Bien identifier le rang k a partir de la puissance cherchee"
+      - "Ne pas oublier la puissance de a dans le coefficient"
+    do_not:
+      - "Confondre le coefficient C_n^k avec le coefficient total (il faut multiplier par a^{n-k})"
+
+  # =========================================================================
+  # Prax7b — Identites du binome (sommes de C_n^k)
+  # =========================================================================
+
+  - id: Prax7b.v1
+    praxeology: Prax7b
+    name: "Somme des C_n^k = 2^n — specialiser a=b=1"
+    description: >-
+      Montrer que la somme de tous les C_n^k vaut 2^n en posant a=b=1
+      dans le binome de Newton. Lien avec le nombre de parties d'un ensemble.
+    method:
+      - "Ecrire (a+b)^n = somme C_n^k a^{n-k} b^k"
+      - "Poser a = 1, b = 1 : (1+1)^n = somme C_n^k = 2^n"
+      - "Interpretation : nombre de parties d'un ensemble de n elements"
+    variables: {}
+    difficulty: 1
+    frequency: 3
+    sources:
+      - "Manuel activite 3 p.119 (parties d'un ensemble)"
+      - "Para ex.24 q.2 p.146 (sommes pairs/impairs)"
+      - "KB N7"
+    examples:
+      - title: "Manuel act.3 — Nombre de parties"
+        enonce: >-
+          Montrer que le nombre de toutes les parties d'un ensemble de n
+          elements est 2^n.
+        sketch: >-
+          Nombre de parties = C_n^0 + C_n^1 + ... + C_n^n = (1+1)^n = 2^n.
+    do:
+      - "Toujours partir de la formule du binome avec des variables generales"
+    do_not:
+      - "Essayer de demontrer par recurrence quand la specialisation suffit"
+
+  - id: Prax7b.v2
+    praxeology: Prax7b
+    name: "Somme alternee nulle — specialiser a=1, b=-1"
+    description: >-
+      Montrer que somme (-1)^k C_n^k = 0 en posant a=1, b=-1 dans le binome.
+      En deduire que les sommes des C_n^k de rang pair et impair sont egales.
+    method:
+      - "Poser a=1, b=-1 dans (a+b)^n"
+      - "Obtenir 0 = C_n^0 - C_n^1 + C_n^2 - ... + (-1)^n C_n^n"
+      - "Separer termes pairs et impairs pour obtenir S_pair = S_impair = 2^{n-1}"
+    variables: {}
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Para ex.24 p.146 (somme alternee et deduction pairs/impairs)"
+      - "Manuel activite 2 q.2 p.119"
+      - "KB N7"
+    examples:
+      - title: "Para ex.24 — Somme alternee"
+        enonce: >-
+          1) Montrer que C_n^0 - C_n^1 + C_n^2 - ... + (-1)^n C_n^n = 0.
+          2) Pour n pair, calculer C_n^0 + C_n^2 + ... + C_n^n.
+        sketch: >-
+          1) (1-1)^n = 0. 2) S_pair - S_impair = 0 et S_pair + S_impair = 2^n,
+          donc S_pair = S_impair = 2^{n-1}.
+    do:
+      - "Combiner les deux specialisations (a=b=1) et (a=1,b=-1) par systeme"
+    do_not:
+      - "Oublier que (-1)^n depend de la parite de n"
+
+  - id: Prax7b.v3
+    praxeology: Prax7b
+    name: "Somme ponderee — deriver le binome pour obtenir somme k C_n^k"
+    description: >-
+      Calculer somme k C_n^k = n 2^{n-1} en derivant f(x) = (1+x)^n
+      et en specialisant x=1.
+    method:
+      - "Poser f(x) = (1+x)^n et developper par le binome"
+      - "Deriver les deux ecritures de f(x)"
+      - "f'(x) = n(1+x)^{n-1} = C_n^1 + 2 C_n^2 x + ... + n C_n^n x^{n-1}"
+      - "Poser x=1 : n 2^{n-1} = somme k C_n^k"
+    variables: {}
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Para ex.23 p.146 (derivation, inegalite)"
+      - "Manuel activite 4 p.119"
+      - "XY ex.25 p.133"
+      - "KB N7"
+    examples:
+      - title: "Para ex.23 — Derivation du binome"
+        enonce: >-
+          1) Calculer f'(x) de deux facons pour f(x) = (1+x)^n.
+          2) En deduire que n 2^{n-1} = C_n^1 + 2 C_n^2 + ... + n C_n^n.
+        sketch: >-
+          f'(x) = n(1+x)^{n-1} et aussi = somme k C_n^k x^{k-1}.
+          En x=1 : n 2^{n-1} = somme k C_n^k.
+    do:
+      - "Bien deriver le developpement terme a terme"
+      - "Specialiser x=1 apres la derivation"
+    do_not:
+      - "Deriver et specialiser dans le mauvais ordre"
+      - "Oublier que le terme k=0 disparait a la derivation"
+
+  # =========================================================================
+  # Prax8 — Denombrement sous contraintes multiples (synthese)
+  # =========================================================================
+
+  - id: Prax8.v1
+    praxeology: Prax8
+    name: "Nombres pairs de 4 chiffres distincts — cas 0 separe"
+    description: >-
+      Denombrer les nombres pairs de p chiffres distincts formes avec les chiffres
+      de {0,...,9}. Il faut separer le cas ou le dernier chiffre est 0 (pas de
+      contrainte sur le premier) du cas ou il est pair non nul (le premier
+      chiffre ne peut etre 0).
+    method:
+      - "Cas 1 : dernier chiffre = 0 → premier chiffre : 9 choix, les autres : arrangements"
+      - "Cas 2 : dernier chiffre pair != 0 (2,4,6,8) → premier chiffre : 8 choix (pas 0 ni d), les autres : arrangements"
+      - "Additionner les deux cas disjoints"
+    variables:
+      p: [4, 6]
+      ensemble: ["{0,...,5}", "{0,...,9}"]
+    difficulty: 2
+    frequency: 5
+    sources:
+      - "Manuel ex.5 q.4 p.122 (4 chiffres pairs distincts parmi 0-9)"
+      - "Para ex.19 p.145 (6 chiffres pairs parmi {0,...,5})"
+      - "KB N8"
+    examples:
+      - title: "Manuel ex.5 — 4 chiffres pairs distincts"
+        enonce: >-
+          Combien de nombres pairs de 4 chiffres distincts peut-on former
+          avec les chiffres {0,1,2,...,9} ?
+        sketch: >-
+          Cas d=0 : 9 x 8 x 7 = 504.
+          Cas d in {2,4,6,8} : 4 choix pour d, 8 pour a (pas 0 ni d),
+          8 pour b, 7 pour c → 4 x 8 x 8 x 7 = 1792.
+          Total : 504 + 1792 = 2296.
+      - title: "Para ex.19 — 6 chiffres pairs parmi {0,...,5}"
+        enonce: >-
+          Avec les jetons {0,1,2,3,4,5}, combien d'entiers de 6 chiffres
+          (chiffres distincts) sont pairs ?
+        sketch: >-
+          Cas unite=0 : 5! = 120.
+          Cas unite=2 : A_5^5 - A_4^4 = 120 - 24 = 96. Idem pour unite=4.
+          Total : 120 + 96 + 96 = 312.
+    do:
+      - "TOUJOURS separer le cas 'dernier chiffre = 0' car il n'y a pas de contrainte sur le premier"
+      - "Traiter le chiffre des unites en premier (position la plus contrainte)"
+    do_not:
+      - "Oublier de separer les cas (le piege classique de ce type d'exercice)"
+      - "Compter le premier chiffre = 0 comme valide (un nombre de 4 chiffres commence par 1-9)"
+
+  - id: Prax8.v2
+    praxeology: Prax8
+    name: "Mains de cartes avec exactement k rois et j coeurs — cas roi de coeur"
+    description: >-
+      Denombrer les mains contenant exactement 1 roi et exactement 3 coeurs.
+      Le piege : le roi de coeur est a l'intersection des deux contraintes.
+      Il faut separer en sous-cas disjoints.
+    method:
+      - "Cas 1 : le roi est un coeur (roi de coeur) → choisir 2 autres coeurs parmi 7, puis 2 cartes ni roi ni coeur parmi 21"
+      - "Cas 2 : le roi n'est pas un coeur → 3 choix pour le roi, 3 coeurs parmi 7, puis 1 carte parmi 21"
+      - "Additionner les deux cas disjoints"
+    variables:
+      jeu: [32, 52]
+      p: [5, 8]
+      conditions: ["1 roi + 3 coeurs", "2 as + 3 coeurs"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Para ex.5 q.5 p.142 (1 roi et 3 coeurs, jeu 32)"
+      - "Manuel V/F 5 p.120 (2 as et 3 coeurs — piege)"
+      - "KB N6, N8"
+    examples:
+      - title: "Para ex.5 — 1 roi et 3 coeurs"
+        enonce: >-
+          Jeu de 32 cartes, main de 5 cartes contenant exactement 1 roi et
+          exactement 3 coeurs. Combien de mains ?
+        sketch: >-
+          Cas roi non coeur : C_3^1 x C_7^3 x C_21^1 = 2205.
+          Cas roi de coeur : C_1^1 x C_7^2 x C_21^2 = 4410.
+          Total : 2205 + 4410 = 6615.
+      - title: "Manuel V/F 5 — 2 as et 3 coeurs (piege)"
+        enonce: >-
+          Le nombre de mains de 5 cartes contenant 2 as et 3 coeurs est
+          C_4^2 x C_8^3. Vrai ou Faux ?
+        sketch: >-
+          Faux. Il faut distinguer selon le nombre d'as qui sont coeur.
+          Reponse correcte : C_1^1 x C_3^1 x C_7^2 x C_21^1 + C_2^1 x C_7^3.
+    do:
+      - "Toujours identifier l'intersection des deux conditions (roi de coeur, as de coeur...)"
+      - "Decomposer en cas disjoints selon cette intersection"
+    do_not:
+      - "Multiplier C_4^k x C_8^j navement sans gerer l'intersection"
+      - "Oublier que l'as/roi de coeur est a la fois un as/roi ET un coeur"
+
+  - id: Prax8.v3
+    praxeology: Prax8
+    name: "Bloc de chiffres/personnes toujours ensemble — permutations groupees"
+    description: >-
+      Denombrer les arrangements ou un groupe de k elements doit rester
+      consecutif. Traiter le bloc comme un seul element, puis permuter
+      l'interieur du bloc.
+    method:
+      - "Considerer le bloc de k elements comme un seul super-element"
+      - "Permuter les (n-k+1) super-elements"
+      - "Multiplier par k! si l'ordre interne du bloc est libre"
+    variables:
+      n: [8]
+      k: [3]
+      ordre_interne: [fixe, libre]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "XY ex.7 p.130 (8 chiffres, bloc 6-7-8 ensemble)"
+      - "KB N4, N8"
+    examples:
+      - title: "XY ex.7 — Bloc 6,7,8 dans un nombre de 8 chiffres"
+        enonce: >-
+          Avec les chiffres 2,3,4,5,6,7,8,9, combien d'entiers de 8 chiffres
+          distincts ou 6,7,8 sont toujours consecutifs ? (a) dans cet ordre.
+          (b) dans un ordre quelconque.
+        sketch: >-
+          (a) Bloc fixe : 6! = 720. (b) Bloc libre : 3! x 6! = 4320.
+    do:
+      - "Traiter le bloc comme un element unique dans les permutations externes"
+      - "Multiplier par k! uniquement si l'ordre interne est libre"
+    do_not:
+      - "Oublier de multiplier par k! quand l'ordre interne est quelconque"
+      - "Confondre 'toujours ensemble' (bloc) avec 'dans cet ordre' (bloc ordonne)"
+
+  - id: Prax8.v4
+    praxeology: Prax8
+    name: "Coloriages de cases — produit avec contrainte de voisinage"
+    description: >-
+      Colorier n cases avec c couleurs en respectant des contraintes
+      (meme couleur interdite pour cases voisines, couleur imposee...).
+    method:
+      - "Position 1 : c choix"
+      - "Chaque position suivante : c-1 choix (couleur du voisin interdite)"
+      - "Total : c x (c-1)^{n-1}"
+      - "Si contrainte supplementaire (cases extremes identiques) : adapter"
+    variables:
+      n: [5, 6]
+      c: [3, 5]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Para ex.8 p.142 (5 cases, 3 couleurs)"
+      - "XY ex.11 p.130 (6 bandes, 5 couleurs, voisins differents)"
+      - "KB N2, N8"
+    examples:
+      - title: "XY ex.11 — 6 bandes, voisins differents"
+        enonce: >-
+          Colorier 6 bandes avec 5 couleurs, deux bandes voisines de couleurs
+          differentes. Combien de coloriages ?
+        sketch: >-
+          5 choix pour la 1ere, 4 pour chaque suivante : 5 x 4^5 = 5120.
+    do:
+      - "Traiter les positions de gauche a droite"
+    do_not:
+      - "Oublier la contrainte de voisinage en multipliant c^n"
+
+  # =========================================================================
+  # Prax9 — Equations combinatoires
+  # =========================================================================
+
+  - id: Prax9.v1
+    praxeology: Prax9
+    name: "Equation en n avec A_n^p — simplification de factorielles"
+    description: >-
+      Resoudre une equation du type A_n^p = k A_m^q en remplacant
+      les arrangements par leurs expressions en factorielles et en simplifiant.
+    method:
+      - "Remplacer A_n^p par n!/(n-p)!"
+      - "Simplifier les factorielles communes"
+      - "Obtenir une equation polynomiale en n"
+      - "Resoudre et verifier n dans N avec n >= p"
+    variables:
+      type: ["A_7^n = 21 A_6^{n-2}", "A_n^3 = 72 A_{n-2}^1"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Para ex.20a p.145 (A_7^n = 21 A_6^{n-2})"
+      - "Para ex.20c p.145 (A_n^3 = 72 A_{n-2}^1)"
+      - "KB N3"
+    examples:
+      - title: "Para ex.20a — A_7^n = 21 A_6^{n-2}"
+        enonce: >-
+          Trouver n dans N tel que A_7^n = 21 A_6^{n-2}.
+        sketch: >-
+          7!/(7-n)! = 21 x 6!/(8-n)!. Simplifier : (8-n) = 3, donc n = 5.
+    do:
+      - "Toujours verifier que la solution satisfait les conditions de validite"
+    do_not:
+      - "Oublier de verifier n >= p et n dans N"
+
+  - id: Prax9.v2
+    praxeology: Prax9
+    name: "Equation en n avec C_n^p — se ramener a un polynome"
+    description: >-
+      Resoudre C_n^p + C_m^q = k ou C_n^3 = 4 C_n^4 en se ramenant
+      a une equation polynomiale en n.
+    method:
+      - "Remplacer C_n^p par n!/(p!(n-p)!) = n(n-1)...(n-p+1)/p!"
+      - "Developper et obtenir un polynome en n"
+      - "Resoudre (souvent degre 2)"
+      - "Verifier n dans N et n >= p"
+    variables:
+      type: ["C_n^2 + C_{n-3}^2 = 17", "C_n^3 = 4 C_n^4"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Para ex.20b p.145 (C_n^2 + C_{n-3}^2 = 17)"
+      - "Para ex.12b p.144 (agence, 56 excursions)"
+      - "XY ex.21 p.133 (C_n^3 = 4 C_n^4)"
+      - "KB N5"
+    examples:
+      - title: "Para ex.12b — 56 excursions"
+        enonce: >-
+          L'agence veut proposer 56 excursions de 2 villes (ordonnees).
+          Combien de villes faut-il ?
+        sketch: >-
+          A_n^2 = n(n-1) = 56. n^2 - n - 56 = 0. Delta = 225 = 15^2.
+          n = 8 (n = -7 rejete).
+      - title: "Para ex.20b — C_n^2 + C_{n-3}^2 = 17"
+        enonce: >-
+          Trouver n tel que C_n^2 + C_{n-3}^2 = 17.
+        sketch: >-
+          n(n-1)/2 + (n-3)(n-4)/2 = 17. 2n^2 - 8n + 12 = 34.
+          n^2 - 4n - 11 = 0. Delta' = 15. Pas de solution entiere.
+    do:
+      - "Bien developper les produits de facteurs consecutifs"
+      - "Toujours conclure : solution dans N ou pas de solution"
+    do_not:
+      - "Oublier de rejeter les solutions negatives ou non entieres"
+      - "Confondre A_n^2 = n(n-1) avec C_n^2 = n(n-1)/2"
+
+  # =========================================================================
+  # Prax10 — Chemins sur un reseau
+  # =========================================================================
+
+  - id: Prax10.v1
+    praxeology: Prax10
+    name: "Chemins de A a Z sur un quadrillage — bijection avec anagrammes"
+    description: >-
+      Compter les chemins de A a Z sur un quadrillage m x n en allant
+      uniquement vers la droite (d) ou vers le haut (h). Chaque chemin
+      est un mot de m+n lettres avec m fois 'd' et n fois 'h'.
+    method:
+      - "Identifier m (pas a droite) et n (pas en haut)"
+      - "Un chemin = un mot de m+n lettres contenant m 'd' et n 'h'"
+      - "Nombre de chemins = C_{m+n}^m = (m+n)!/(m! x n!)"
+    variables:
+      m: [3, 5, 10]
+      n: [2, 3, 5]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Manuel Mobiliser Situation 2 (10 droite + 5 haut)"
+      - "KB N5, N4"
+    examples:
+      - title: "Manuel Sit.2 — Reseau 10 x 5"
+        enonce: >-
+          Sur un reseau, on se deplace de A a Z en ne se dirigeant que
+          vers la droite ou vers le haut : 10 pas a droite et 5 en haut.
+          Combien de chemins ?
+        sketch: >-
+          Chemin = mot de 15 lettres (10d + 5h).
+          Nombre = C_15^5 = 15!/(10! x 5!) = 3003.
+    do:
+      - "Bien compter les dimensions du quadrillage (nombre de pas, pas de noeuds)"
+      - "Etablir clairement la bijection chemin <-> mot binaire"
+    do_not:
+      - "Confondre le nombre de noeuds avec le nombre de pas"
+
+  - id: Prax10.v2
+    praxeology: Prax10
+    name: "Chemins passant par un point intermediaire — produit de chemins partiels"
+    description: >-
+      Compter les chemins de A a Z passant par un point E (puis eventuellement
+      par M). Decomposer le trajet en segments et multiplier.
+    method:
+      - "Compter les chemins de A a E : C_{m1+n1}^{m1}"
+      - "Compter les chemins de E a Z : C_{m2+n2}^{m2}"
+      - "Multiplier (par le principe multiplicatif)"
+      - "Si passage oblige par E puis M : A→E, E→M, M→Z"
+    variables:
+      points_intermediaires: [1, 2]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Manuel Mobiliser Situation 2 q.3-4 (chemins par E, puis par E et M)"
+      - "KB N5"
+    examples:
+      - title: "Manuel Sit.2 — Chemins par E puis M"
+        enonce: >-
+          Chemins de A a Z (10d+5h) passant par E puis M.
+          A→E : 1d+1h. E→M : 4d+1h. M→Z : 5d+3h.
+        sketch: >-
+          A→E : C_2^1 = 2. E→M : C_5^4 = 5. M→Z : C_8^5 = 56.
+          Total : 2 x 5 x 56 = 560.
+    do:
+      - "Bien decomposer les coordonnees a chaque segment"
+    do_not:
+      - "Additionner au lieu de multiplier les chemins partiels"
+
+  # =========================================================================
+  # Prax11 — Vandermonde
+  # =========================================================================
+
+  - id: Prax11.v1
+    praxeology: Prax11
+    name: "Identite de Vandermonde — somme (C_n^k)^2 = C_{2n}^n par double comptage"
+    description: >-
+      Demontrer l'identite somme_{k=0}^{n} (C_n^k)^2 = C_{2n}^n par un argument
+      de double comptage : choisir n boules parmi 2n (n noires + n blanches).
+    method:
+      - "Considerer un ensemble de 2n elements : n noirs + n blancs"
+      - "Compter les facons de choisir n elements : C_{2n}^n"
+      - "Decomposer selon le nombre k de noirs : C_n^k x C_n^{n-k} = (C_n^k)^2"
+      - "Sommer : somme (C_n^k)^2 = C_{2n}^n"
+    variables: {}
+    difficulty: 3
+    frequency: 2
+    sources:
+      - "Para ex.26 p.146 (urne 2n boules, double comptage)"
+      - "KB N5, N7"
+    examples:
+      - title: "Para ex.26 — Urne de 2n boules"
+        enonce: >-
+          Une urne contient n boules noires et n blanches. On tire n boules.
+          1) Combien de tirages ? 2) Combien avec p noires ?
+          3) En deduire que somme (C_n^k)^2 = C_{2n}^n.
+        sketch: >-
+          1) C_{2n}^n. 2) Avec p noires : C_n^p x C_n^{n-p}.
+          3) Total = somme_{p=0}^n C_n^p x C_n^{n-p} = somme (C_n^p)^2 = C_{2n}^n.
+    do:
+      - "Bien modeliser : deux groupes de n elements, choisir n au total"
+      - "Utiliser la symetrie C_n^{n-k} = C_n^k"
+    do_not:
+      - "Essayer de demontrer algebriquement (trop lourd) — le double comptage est elegant"
+
+  # =========================================================================
+  # PROBLEMES DE SYNTHESE
+  # =========================================================================
+
+  - id: Prob.v1
+    praxeology: [Prax2, Prax5a, Prax6, Prax8]
+    name: "Urne complete : tirage, modele, complementaire, contraintes"
+    description: >-
+      Probleme complet sur une urne de boules colorees et numerotees :
+      identifier le modele de tirage, denombrer les tirages par composition,
+      utiliser le complementaire pour "au moins", combiner des contraintes
+      de couleur et de parite.
+    method:
+      - "1. Identifier le modele : simultane (C), successif sans remise (A), avec remise (n^p)"
+      - "2. Denombrer les tirages par composition (multiplicatif sur les C par couleur)"
+      - "3. Pour 'au moins' : complementaire = total - 'aucun'"
+      - "4. Pour 'somme paire' : decomposer en cas (2 impairs + 1 pair, ou 3 pairs)"
+    variables:
+      n_boules: [10, 12, 15]
+      n_couleurs: [2, 3]
+      modeles: [simultane, successif_sans_remise, successif_avec_remise]
+    difficulty: 2
+    frequency: 6
+    sources:
+      - "Para ex.9 p.142 (10 jetons, 3 couleurs, 3 modeles)"
+      - "Para ex.4 p.141 (12 boules, 3 couleurs)"
+      - "XY ex.1 p.128 (15 boules, complementaire)"
+      - "XY ex.2 p.128 (10 boules numerotees, composition)"
+    examples:
+      - title: "Para ex.9 — Urne de 10 jetons"
+        enonce: >-
+          Urne de 10 jetons : 5 rouges (1-5), 3 blancs (6-8), 2 jaunes (0,9).
+          Tirage simultane de 3 : (a) quelconques, (b) meme couleur,
+          (c) au moins un numero pair, (d) somme paire.
+        sketch: >-
+          (a) C_10^3 = 120. (b) C_5^3 + C_3^3 = 11.
+          (c) Complementaire : 120 - C_5^3 = 110.
+          (d) 2 impairs + 1 pair : C_5^2 x C_5^1 = 50. 3 pairs : C_5^3 = 10. Total = 60.
+    do:
+      - "Toujours commencer par identifier clairement le modele de tirage"
+      - "Pour la parite de la somme, decomposer selon le nombre de pairs/impairs"
+    do_not:
+      - "Melanger les modeles entre les sous-questions"
+      - "Oublier que 'au moins un' appelle le complementaire"
+
+  - id: Prob.v2
+    praxeology: [Prax2, Prax3, Prax8]
+    name: "Codes et mots de passe : multiplicatif + arrangements + contrainte premier chiffre"
+    description: >-
+      Probleme complet sur la formation de codes/mots de passe combinant
+      differents types de caracteres, avec et sans repetition, et des
+      contraintes de position. Souvent lie au contexte informatique.
+    method:
+      - "1. Identifier les positions et les choix (chiffres, lettres)"
+      - "2. Appliquer le multiplicatif etape par etape"
+      - "3. Avec repetition → n^p, sans repetition → A_n^p"
+      - "4. Contraintes : premier chiffre != 0, lettre interdite, etc."
+    variables:
+      format: ["6 chiffres + 1 lettre", "4 lettres distinctes", "4 chiffres"]
+    difficulty: 2
+    frequency: 5
+    sources:
+      - "Para ex.15 p.145 (Login + mot de passe internet)"
+      - "Para ex.17 p.145 (code antivol)"
+      - "Para ex.18 p.146 (QCM 10 questions)"
+      - "Manuel activite 7 p.114 (code acces)"
+    examples:
+      - title: "Para ex.15 — Login et mot de passe"
+        enonce: >-
+          Login = 6 chiffres (premier != 0) + 1 lettre (pas O). Mot de passe =
+          4 lettres (repetition possible). Combien de clients ? Le client
+          oublie son code : (a) 4 lettres distinctes → essais ?
+          (b) contient 2 voyelles → essais ?
+        sketch: >-
+          Clients : 9 x 10^5 x 25 = 22500000. Mots de passe : 26^4 = 456976.
+          (a) A_26^4 = 358800. (b) C_4^2 x 6 x 5 x 20 x 19 = 68400.
+      - title: "Para ex.17 — Code antivol"
+        enonce: >-
+          Code de 4 chiffres (0-9). (a) Total ? (b) 4 chiffres distincts ?
+          (c) Chiffres connus = {1,9,9,5}, ordre oublie : essais max ?
+        sketch: >-
+          (a) 10^4 = 10000. (b) A_10^4 = 5040.
+          (c) Permutations de {1,9,9,5} : 4!/2! = 12. Essais max : 11.
+    do:
+      - "Bien lire si la repetition est autorisee ou non"
+      - "Traiter les contraintes de position avant de compter"
+    do_not:
+      - "Confondre le nombre d'essais max (total - 1) avec le nombre de codes"
+
+  - id: Prob.v3
+    praxeology: [Prax5a, Prax6, Prax8]
+    name: "Jeu de cartes complet : figures, couleurs, complementaire, intersection"
+    description: >-
+      Probleme complet sur un jeu de 32 (ou 52) cartes : mains ne contenant
+      que des figures, aucun roi, au moins un as, et la combinaison subtile
+      'exactement k rois ET j coeurs' avec gestion de l'intersection.
+    method:
+      - "Denombrer les mains totales : C_32^p"
+      - "Figures seulement : choisir parmi les 12 figures"
+      - "Sans roi : choisir parmi les 28 non-rois"
+      - "Au moins un roi : complementaire = total - sans roi"
+      - "k rois + j coeurs : decomposer selon le roi de coeur"
+    variables:
+      jeu: [32, 52]
+      p: [5, 8]
+    difficulty: 2
+    frequency: 6
+    sources:
+      - "Para ex.5 p.142 (jeu 32, main de 5)"
+      - "Manuel ex.6 p.122 (jeu 32, main de 8)"
+      - "Manuel activite 10 p.118 (jeu 32, main de 5)"
+      - "KB N5, N6"
+    examples:
+      - title: "Para ex.5 — Main de 5 cartes"
+        enonce: >-
+          Jeu de 32 cartes, main de 5. 1) Mains totales ? 2) Que des figures ?
+          3) Aucun roi ? 4) Au moins un roi ? 5) Exactement 1 roi et 3 coeurs ?
+        sketch: >-
+          1) C_32^5 = 201376. 2) C_12^5 = 792. 3) C_28^5 = 98280.
+          4) 201376 - 98280 = 103096. 5) Deux cas : 2205 + 4410 = 6615.
+    do:
+      - "Toujours penser au complementaire pour 'au moins'"
+      - "Decomposer en cas disjoints pour les conditions croisees"
+    do_not:
+      - "Multiplier navement C_4^k x C_8^j sans gerer l'as/roi de coeur"
+
+  - id: Prob.v4
+    praxeology: [Prax7a, Prax7b, Prax5a]
+    name: "QCM et binome — nombre de grilles, lien avec (1+3)^n"
+    description: >-
+      Probleme de QCM : n questions, c choix. Denombrer les grilles totales (c^n),
+      les grilles avec exactement p bonnes reponses (C_n^p x (c-1)^{n-p}),
+      et en deduire la somme = c^n par le binome.
+    method:
+      - "Total de grilles : c^n (choix independants)"
+      - "Exactement p bonnes : choisir les p questions (C_n^p), puis pour chaque mauvaise (c-1) choix"
+      - "Nombre = C_n^p x (c-1)^{n-p}"
+      - "Somme sur p : somme C_n^p (c-1)^{n-p} = (1+(c-1))^n = c^n (binome)"
+    variables:
+      n: [10]
+      c: [4]
+    difficulty: 2
+    frequency: 2
+    sources:
+      - "Para ex.18 p.146 (QCM 10 questions, 4 choix)"
+      - "KB N7"
+    examples:
+      - title: "Para ex.18 — QCM 10 questions"
+        enonce: >-
+          QCM de 10 questions, 4 reponses par question (1 bonne).
+          1) Nombre de grilles ? 2a) Grilles avec 8 bonnes reponses ?
+          2b) Avec p bonnes ? 3) En deduire somme C_10^p x 3^{10-p} = 4^10.
+        sketch: >-
+          1) 4^10. 2a) C_10^8 x 3^2 = 405. 2b) C_10^p x 3^{10-p}.
+          3) Somme = (1+3)^10 = 4^10 par le binome.
+    do:
+      - "Interpreter combinatoirement la formule du binome"
+    do_not:
+      - "Confondre le nombre de bonnes reponses avec le nombre de mauvaises"

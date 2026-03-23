@@ -1,0 +1,1674 @@
+module: fonction-derivee
+programme: 3eme-math
+version: 1
+
+patterns:
+
+  # =========================================================================
+  # Prax1 — Derivee d'une fonction simple (polynome, rationnelle, combinaison)
+  # =========================================================================
+
+  - id: Prax1.v1
+    praxeology: Prax1
+    type: exercice
+    name: "Derivee d'un polynome — formules directes"
+    description: >-
+      Calculer f' pour un polynome de degre 2 a 5 en appliquant terme
+      a terme (x^n)' = n.x^(n-1) et la linearite.
+    method:
+      - "Appliquer (x^n)' = n.x^(n-1) a chaque terme"
+      - "Utiliser la linearite : (alpha.f + beta.g)' = alpha.f' + beta.g'"
+      - "Simplifier l'expression finale"
+    variables:
+      function: ["5x^4-3x+1", "-x^4/4+x^3/6-3x+1", "x^7-3x^4/100+2x+1"]
+      coefficients: [entiers, fractionnaires]
+    difficulty: 1
+    frequency: 8
+    sources:
+      - "Para ex.1 (f2) p.138"
+      - "Manuel QCM 1 p.111"
+      - "Manuel ex.1 p.113"
+      - "Manuel ex.3 p.113"
+      - "XY corrige ex.1.1 p.82"
+      - "KB Prax1"
+    examples:
+      - title: "Para ex.1 — Polynome degre 4"
+        enonce: >-
+          Montrer que f(x) = -x^4/4 + x^3/6 - 3x + 1 est derivable sur R
+          puis trouver f'.
+        sketch: >-
+          f'(x) = -x^3 + x^2/2 - 3. Application directe des formules.
+    do:
+      - "Traiter chaque terme separement"
+      - "Preciser le domaine de derivabilite (R pour un polynome)"
+    do_not:
+      - "Oublier de deriver les constantes (elles disparaissent)"
+      - "Confondre x^n et (f(x))^n (pas de composition ici)"
+
+  - id: Prax1.v2
+    praxeology: Prax1
+    type: exercice
+    name: "Derivee d'une rationnelle simple — quotient de polynomes"
+    description: >-
+      Calculer f' pour u(x)/v(x) ou u, v sont des polynomes.
+      Formule du quotient : (u/v)' = (u'.v - u.v')/v^2.
+    method:
+      - "Identifier u et v, calculer u' et v'"
+      - "Appliquer (u/v)' = (u'v - u.v')/v^2"
+      - "Developper et simplifier le numerateur"
+      - "Preciser le domaine (exclure v(x) = 0)"
+    variables:
+      function: ["(x^2+4x+3)/(x-1)", "(x^3+9x)/(x^2+1)", "(ax+b)/(x^2+x+3)"]
+      numerateur: [degre_2, degre_3]
+      denominateur: [degre_1, degre_2]
+    difficulty: 1
+    frequency: 7
+    sources:
+      - "Para ex.2 (g5) p.138"
+      - "Para ex.12.1a p.142"
+      - "Para ex.16 p.143"
+      - "Para ex.19 p.144"
+      - "XY ex.9 p.79"
+      - "Manuel ex.3 p.113"
+    examples:
+      - title: "Para ex.12 — Rationnelle classique"
+        enonce: >-
+          Soit f(x) = (x^2+4x+3)/(x-1). Montrer que f est derivable sur
+          R\{1} et calculer f'(x).
+        sketch: >-
+          f'(x) = ((2x+4)(x-1) - (x^2+4x+3))/(x-1)^2 = (x^2-2x-7)/(x-1)^2.
+    do:
+      - "Factoriser le numerateur de f' quand c'est possible"
+      - "Toujours preciser l'ensemble de derivabilite"
+    do_not:
+      - "Inverser u' et v' dans la formule du quotient"
+      - "Oublier le carre au denominateur"
+
+  # =========================================================================
+  # Prax2a — Derivee produit / quotient compose
+  # =========================================================================
+
+  - id: Prax2a.v1
+    praxeology: Prax2a
+    type: exercice
+    name: "Derivee d'un produit de polynomes — factorisation"
+    description: >-
+      Calculer f' pour f = u.v ou u, v sont des polynomes.
+      (u.v)' = u'.v + u.v', puis factoriser le resultat.
+    method:
+      - "Identifier u et v"
+      - "Calculer u' et v' separement"
+      - "Appliquer (u.v)' = u'.v + u.v'"
+      - "Factoriser l'expression obtenue"
+    variables:
+      function: ["(2x+4)(x^3-2)", "(x+1)(2x-3)", "(1-x)(3x-3)(5x+2)"]
+      nombre_facteurs: [2, 3]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "Para ex.1 (f3, f4) p.138"
+      - "XY corrige ex.1 (item 2) p.82"
+      - "KB Prax2a"
+    examples:
+      - title: "Para ex.1 — Triple produit"
+        enonce: >-
+          Montrer que f(x) = (1-x)(3x-3)(5x+2) est derivable sur R
+          et calculer f'(x).
+        sketch: >-
+          Reecrire f(x) = -3(1-x)^2(5x+2). Derivee :
+          f'(x) = 3(1-x)(15x-1) apres factorisation.
+    do:
+      - "Toujours factoriser f' au maximum pour en deduire le signe"
+      - "Pour un triple produit, regrouper avant de deriver"
+    do_not:
+      - "Oublier un facteur dans la regle du produit"
+      - "Rester sur la forme developpee (peu exploitable)"
+
+  - id: Prax2a.v2
+    praxeology: Prax2a
+    type: exercice
+    name: "Derivee d'un produit de puissances — chaine de facteurs"
+    description: >-
+      Calculer f' pour f = (ax+b)^m . (cx+d)^n. Mettre en facteur
+      commun pour obtenir une forme entierement factorisee.
+    method:
+      - "Appliquer (u^m)' = m.a.u^(m-1) pour chaque facteur"
+      - "Formule du produit : f' = m.a.u^(m-1).v^n + n.c.u^m.v^(n-1)"
+      - "Mettre en facteur commun u^(m-1).v^(n-1)"
+      - "Simplifier le crochet restant"
+    variables:
+      function: ["(3x+4)^3.(3-x)^5", "(5x+4)^2/(1-x)^3"]
+      exposants: ["(3,5)", "(2,3)"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Para ex.1 (f5) p.138"
+      - "Para ex.2 (g3) p.138"
+      - "XY corrige ex.1 (item 8) p.83"
+    examples:
+      - title: "Para ex.1 — Puissances de binomes"
+        enonce: >-
+          Calculer f'(x) pour f(x) = (3x+4)^3.(3-x)^5.
+        sketch: >-
+          f'(x) = (3x+4)^2.(3-x)^4.[9(3-x) - 5(3x+4)]
+          = (3x+4)^2.(3-x)^4.(-24x+7).
+    do:
+      - "Factoriser au maximum pour pouvoir dresser un tableau de signe"
+    do_not:
+      - "Developper les puissances avant de deriver"
+
+  - id: Prax2a.v3
+    praxeology: Prax2a
+    type: exercice
+    name: "Derivee d'un quotient — rationnelle avec factorisation"
+    description: >-
+      Calculer f' pour des quotients de polynomes ou de puissances,
+      puis factoriser le numerateur de f'.
+    method:
+      - "Appliquer (u/v)' = (u'.v - u.v')/v^2"
+      - "Factoriser le numerateur de f'"
+      - "Simplifier les facteurs communs avec v^2"
+    variables:
+      function: ["(-4x+5)/(-2x+3)^2", "((3x+5)/(4x-3))^2", "(x^2-x+3)/(3x^2+x+1)"]
+    difficulty: 2
+    frequency: 5
+    sources:
+      - "Para ex.2 (g2, g4, g5) p.138"
+      - "XY corrige ex.1 (items 3, 10) p.82"
+    examples:
+      - title: "Para ex.2 — Quotient au carre"
+        enonce: >-
+          Calculer g'(x) pour g(x) = ((3x+5)/(4x-3))^2.
+        sketch: >-
+          g'(x) = 2.(3x+5)/(4x-3) . (-87)/(4x-3)^2 = -87(3x+5)^2/(4x-3)^4.
+          Utiliser (u^2)' = 2.u'.u avec u = (3x+5)/(4x-3).
+    do:
+      - "Pour (u/v)^n, deriver d'abord u/v puis appliquer la puissance"
+    do_not:
+      - "Developper le carre avant de deriver"
+
+  # =========================================================================
+  # Prax2b — Derivee avec sqrt(f)
+  # =========================================================================
+
+  - id: Prax2b.v1
+    praxeology: Prax2b
+    type: exercice
+    name: "Derivee de sqrt(u) — expression lineaire ou quadratique sous la racine"
+    description: >-
+      Calculer f' pour f(x) = sqrt(u(x)) ou u est lineaire
+      ou quadratique. Formule (sqrt(u))' = u'/(2.sqrt(u)).
+    method:
+      - "Identifier u(x) et calculer u'(x)"
+      - "Appliquer (sqrt(u))' = u'/(2.sqrt(u))"
+      - "Preciser le domaine de derivabilite (u > 0 strictement)"
+    variables:
+      function: ["sqrt(3x^2+1)", "sqrt(2x+1)", "sqrt(x^2-x-6)"]
+      type_u: [lineaire, quadratique]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "Para ex.3 (h4) p.138"
+      - "Manuel activite 4 p.103"
+      - "XY corrige ex.1 (items 4, 5) p.82"
+    examples:
+      - title: "Para ex.3 — sqrt de trinome"
+        enonce: >-
+          Calculer h'(x) pour h(x) = sqrt(3x^2+1).
+        sketch: >-
+          h'(x) = 6x/(2.sqrt(3x^2+1)) = 3x/sqrt(3x^2+1).
+          Derivable sur R car 3x^2+1 > 0 pour tout x.
+    do:
+      - "Verifier que u(x) > 0 strictement sur le domaine"
+    do_not:
+      - "Oublier le facteur u' au numerateur"
+      - "Ecrire (sqrt(u))' = 1/(2.sqrt(u)) sans le u'"
+
+  - id: Prax2b.v2
+    praxeology: Prax2b
+    type: exercice
+    name: "Derivee d'un produit avec sqrt — regle produit + racine"
+    description: >-
+      Calculer f' pour f = g(x).sqrt(u(x)). Combinaison
+      de la regle du produit et de la derivee de sqrt.
+    method:
+      - "Poser v(x) = sqrt(u(x)), calculer v'(x) = u'/(2.sqrt(u))"
+      - "Appliquer f' = g'.v + g.v'"
+      - "Mettre au meme denominateur et simplifier"
+    variables:
+      function: ["x.sqrt(2x+1)", "(x^2+x).sqrt(x+1)", "sqrt(x)/(3x-2)"]
+    difficulty: 2
+    frequency: 5
+    sources:
+      - "Para ex.3 (h1, h2, h5) p.138"
+      - "XY corrige ex.1 (item 6) p.83"
+      - "XY corrige ex.1 (item 7) p.83"
+    examples:
+      - title: "Para ex.3 — Produit x.sqrt"
+        enonce: >-
+          Calculer h'(x) pour h(x) = x.sqrt(2x+1), x > -1/2.
+        sketch: >-
+          h'(x) = sqrt(2x+1) + x/(sqrt(2x+1))
+          = (2x+1+x)/sqrt(2x+1) = (3x+1)/sqrt(2x+1).
+    do:
+      - "Mettre au meme denominateur sqrt(u) pour simplifier"
+    do_not:
+      - "Appliquer la formule de sqrt(u) sans la regle du produit"
+
+  - id: Prax2b.v3
+    praxeology: Prax2b
+    type: exercice
+    name: "Derivee d'un quotient avec sqrt au numerateur ou denominateur"
+    description: >-
+      Calculer f' pour un quotient impliquant sqrt, par exemple
+      sqrt(x)/(3x-2) ou (3.sqrt(x)-1)/(1-2.sqrt(x)).
+    method:
+      - "Appliquer la formule du quotient (u/v)'"
+      - "Utiliser (sqrt(x))' = 1/(2.sqrt(x))"
+      - "Reduire au meme denominateur et simplifier"
+    variables:
+      function: ["sqrt(x)/(3x-2)", "(3.sqrt(x)-1)/(1-2.sqrt(x))", "(x^2-1)/sqrt(x^2+x+1)"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Para ex.3 (h1, h2, h3) p.138"
+      - "XY corrige ex.1 (item 7) p.83"
+    examples:
+      - title: "Para ex.3 — Quotient avec sqrt"
+        enonce: >-
+          Calculer h'(x) pour h(x) = (3.sqrt(x)-1)/(1-2.sqrt(x)),
+          0 < x < 1/4.
+        sketch: >-
+          h'(x) = 1/(2.sqrt(x).(1-2.sqrt(x))^2).
+          Simplification apres application de (u/v)'.
+    do:
+      - "Bien preciser les conditions sur x (sqrt defini, denominateur non nul)"
+    do_not:
+      - "Melanger les derivees de sqrt(x) et de sqrt(u(x))"
+
+  # =========================================================================
+  # Prax2c — Derivee de f(ax+b) — composition affine
+  # =========================================================================
+
+  - id: Prax2c.v1
+    praxeology: Prax2c
+    type: exercice
+    name: "Derivee de (ax+b)^n — composition affine puissance"
+    description: >-
+      Calculer g'(x) pour g(x) = (ax+b)^n en appliquant
+      g'(x) = a.n.(ax+b)^(n-1).
+    method:
+      - "Identifier a, b, n et la fonction f(t) = t^n"
+      - "Appliquer g'(x) = a.f'(ax+b) = a.n.(ax+b)^(n-1)"
+    variables:
+      function: ["(5x-2)^4", "(2x+3)^3", "1/(5-3x)^3", "1/(2x+3)^2"]
+      exposant: [2, 3, 4, -2, -3]
+    difficulty: 1
+    frequency: 5
+    sources:
+      - "Para ex.1 (f1) p.138"
+      - "XY corrige ex.1 (items 8, 9) p.83-84"
+      - "Manuel activite 1 (composition) p.104"
+      - "KB Prax2c"
+    examples:
+      - title: "Para ex.1 — Puissance affine"
+        enonce: >-
+          Calculer f'(x) pour f(x) = (5x-2)^4.
+        sketch: >-
+          f'(x) = 4.5.(5x-2)^3 = 20(5x-2)^3.
+    do:
+      - "Ne pas oublier le facteur a (coefficient de x)"
+    do_not:
+      - "Confondre (ax+b)^n avec un polynome a developper"
+
+  - id: Prax2c.v2
+    praxeology: Prax2c
+    type: exercice
+    name: "Derivee de 1/(ax+b)^n — inverse de puissance affine"
+    description: >-
+      Calculer g'(x) pour g(x) = 1/(ax+b)^n en appliquant
+      g'(x) = -n.a/(ax+b)^(n+1).
+    method:
+      - "Appliquer (1/u^k)' = -k.u'/u^(k+1)"
+      - "Avec u = ax+b, u' = a"
+      - "Preciser le domaine"
+    variables:
+      function: ["1/(5-3x)^3", "1/(2x+3)^2", "(-4x+5)/(-2x+3)^2"]
+    difficulty: 1
+    frequency: 3
+    sources:
+      - "XY corrige ex.1 (items 8, 9) p.83-84"
+      - "Para ex.2 (g4) p.138"
+    examples:
+      - title: "XY ex.1 — Inverse cubique"
+        enonce: >-
+          Calculer f'(x) pour f(x) = 1/(5-3x)^3.
+        sketch: >-
+          f'(x) = -3.(-3)/(5-3x)^4 = 9/(5-3x)^4.
+    do:
+      - "Appliquer la formule (1/g^k)' directement, sans developper"
+    do_not:
+      - "Se tromper de signe sur a (coefficient de x)"
+
+  # =========================================================================
+  # Prax2d — Derivees successives et conjecture
+  # =========================================================================
+
+  - id: Prax2d.v1
+    praxeology: Prax2d
+    type: exercice
+    name: "Derivees successives de 1/(x-a) — conjecture et recurrence"
+    description: >-
+      Calculer f', f'', f''' pour f(x) = 1/(x-a), conjecturer f^(k)
+      et (eventuellement) prouver par recurrence.
+    method:
+      - "Calculer f'(x) = -1/(x-a)^2"
+      - "Calculer f''(x) = 2/(x-a)^3, f'''(x) = -6/(x-a)^4"
+      - "Observer le pattern : f^(k)(x) = (-1)^k.k!/(x-a)^(k+1)"
+      - "Si demande : prouver par recurrence"
+    variables:
+      function: ["1/(x-a)", "1/(x-1)", "(1+x)/(1-x)"]
+      preuve: [conjecture_seule, avec_recurrence]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Manuel situation 2 p.112"
+      - "Para ex.8 p.139"
+      - "KB Prax2d"
+    examples:
+      - title: "Manuel situation 2 — Derivees de 1/(x-a)"
+        enonce: >-
+          Soit f(x) = 1/(x-a). Calculer f^(k)(x) pour k >= 1
+          et montrer par recurrence que f^(k)(x) = (-1)^k.k!/(x-a)^(k+1).
+        sketch: >-
+          f'(x) = -1/(x-a)^2, f''(x) = 2/(x-a)^3.
+          Recurrence : (f^(k+1))(x) = -(k+1).(-1)^k.k!/(x-a)^(k+2)
+          = (-1)^(k+1).(k+1)!/(x-a)^(k+2).
+    do:
+      - "Bien identifier le facteur (-1)^k et le factoriel k!"
+    do_not:
+      - "Confondre derivee k-ieme et puissance k-ieme"
+
+  # =========================================================================
+  # Prax3 — Derivabilite avec racines ou valeurs absolues
+  # =========================================================================
+
+  - id: Prax3.v1
+    praxeology: Prax3
+    type: exercice
+    name: "Non-derivabilite de sqrt en un bord — tangente verticale"
+    description: >-
+      Montrer que f n'est pas derivable en a car le taux de variation
+      tend vers l'infini. Interpretation : demi-tangente verticale.
+    method:
+      - "Calculer lim (f(x)-f(a))/(x-a) quand x → a"
+      - "Pour sqrt : limite = 1/sqrt(x-a) → +inf"
+      - "Conclure : tangente verticale, non-derivabilite"
+    variables:
+      function: ["f(x)=(1-|sqrt(x)-1|)/(sqrt(x)+1)", "sqrt(x)"]
+      point: ["0", "0"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Para ex.7.3 p.139"
+      - "Manuel V/F 2 p.111"
+      - "XY II (h en 0) p.81"
+    examples:
+      - title: "Para ex.7 — sqrt composee en 0"
+        enonce: >-
+          Soit f(x) = (1-|sqrt(x)-1|)/(sqrt(x)+1). Etudier la derivabilite
+          de f en 0.
+        sketch: >-
+          lim (f(x)-f(0))/x = lim 1/(sqrt(x).(sqrt(x)+1)) = +inf.
+          f non derivable en 0, demi-tangente verticale.
+    do:
+      - "Calculer explicitement la limite du taux de variation"
+      - "Interpreter geometriquement : tangente verticale"
+    do_not:
+      - "Confondre non-derivable avec non-continue"
+      - "Oublier l'interpretation graphique"
+
+  - id: Prax3.v2
+    praxeology: Prax3
+    type: exercice
+    name: "Point anguleux avec valeur absolue — derivees laterales differentes"
+    description: >-
+      Montrer que f n'est pas derivable en a car f'_d(a) != f'_g(a)
+      (point anguleux). Reecrire |g(x)| par morceaux.
+    method:
+      - "Reecrire |g(x)| par morceaux selon le signe de g"
+      - "Calculer f'_d(a) et f'_g(a)"
+      - "Si differentes : point anguleux, deux demi-tangentes"
+    variables:
+      function: ["|sqrt(x)-1|", "|x^2-2x|", "x|x-3|"]
+      point: ["1", "0 et 2", "3"]
+    difficulty: 2
+    frequency: 5
+    sources:
+      - "Para ex.7.3 p.139"
+      - "Para ex.13.1 p.142"
+      - "Para ex.14 p.142"
+      - "Para ex.21.3 p.145"
+      - "Manuel V/F 1 p.111"
+    examples:
+      - title: "Para ex.7 — Point anguleux en 1"
+        enonce: >-
+          Soit f(x) = (1-|sqrt(x)-1|)/(sqrt(x)+1). Etudier la derivabilite
+          de f en 1.
+        sketch: >-
+          f'_g(1) = 1/8, f'_d(1) = -3/8. Point anguleux
+          avec deux demi-tangentes de pentes 1/8 et -3/8.
+    do:
+      - "Toujours donner les pentes des deux demi-tangentes"
+    do_not:
+      - "Conclure derivable sans verifier les deux cotes"
+
+  - id: Prax3.v3
+    praxeology: Prax3
+    type: exercice
+    name: "Derivabilite d'une fonction par morceaux — raccord en un point"
+    description: >-
+      Etudier la derivabilite de f en un point ou la definition change
+      (par morceaux avec valeur absolue ou condition). Verifier
+      continuite puis derivees laterales.
+    method:
+      - "Verifier d'abord la continuite en a"
+      - "Calculer f'_g(a) et f'_d(a)"
+      - "Si egales et finies : derivable. Sinon : non derivable"
+    variables:
+      function: ["f par morceaux avec |g(x)|", "f avec conditions x<a, x>=a"]
+      point: ["point de raccord"]
+    difficulty: 2
+    frequency: 6
+    sources:
+      - "Para ex.5 p.139"
+      - "Para ex.11.5 p.141"
+      - "Para ex.13 p.142"
+      - "XY ex.10 III p.81"
+      - "Manuel V/F 1 p.111"
+    examples:
+      - title: "Para ex.5 — Derivabilite avec |x+1|"
+        enonce: >-
+          Soit f(x) = (x^2-1)/(|x+1|+1). Montrer que f est derivable
+          au point -1.
+        sketch: >-
+          f'_g(-1) = -2, f'_d(-1) = -2. Derivees laterales egales,
+          donc f derivable en -1 avec f'(-1) = -2.
+    do:
+      - "Verifier la continuite avant d'etudier la derivabilite"
+      - "Ecrire explicitement les deux limites laterales"
+    do_not:
+      - "Sauter l'etape de continuite"
+
+  # =========================================================================
+  # Prax4 — Variations a l'aide de la derivee
+  # =========================================================================
+
+  - id: Prax4.v1
+    praxeology: Prax4
+    type: exercice
+    name: "Tableau de variation d'un polynome — f' lineaire ou trinome"
+    description: >-
+      Calculer f', trouver ses zeros, dresser le tableau de signes de f'
+      puis en deduire les variations de f.
+    method:
+      - "Calculer f'(x)"
+      - "Resoudre f'(x) = 0"
+      - "Dresser le tableau de signes de f'"
+      - "En deduire les variations de f"
+      - "Calculer f aux zeros de f' et aux bornes"
+    variables:
+      function: ["4x-x^2", "x^3-3x", "2x^4-x^2+5"]
+      degre_f_prime: [lineaire, trinome, degre_3]
+    difficulty: 1
+    frequency: 8
+    sources:
+      - "Para ex.24.1 p.146"
+      - "Manuel activite 1 (problemes) p.109"
+      - "Para ex.20 p.144"
+      - "XY ex.9 p.79"
+      - "Manuel ex.3 p.113"
+    examples:
+      - title: "Para ex.24 — Parabole"
+        enonce: >-
+          Soit f(x) = 4x - x^2. Dresser le tableau de variation
+          de f et tracer la courbe.
+        sketch: >-
+          f'(x) = 4-2x. f'(x) = 0 pour x = 2.
+          f croit sur ]-inf, 2], decroit sur [2, +inf[.
+          Maximum f(2) = 4.
+    do:
+      - "Inclure les valeurs de f aux bornes et aux zeros de f'"
+      - "Verifier la coherence : le degre de f' est bien un de moins que f"
+    do_not:
+      - "Confondre le signe de f' avec le signe de f"
+      - "Oublier les fleches dans le tableau de variation"
+
+  - id: Prax4.v2
+    praxeology: Prax4
+    type: exercice
+    name: "Tableau de variation d'une rationnelle — quotient avec trinome"
+    description: >-
+      Etudier les variations de f = P/Q. Calculer f' (quotient),
+      factoriser le numerateur, dresser le tableau sur R\{racines de Q}.
+    method:
+      - "Calculer f' par la formule du quotient"
+      - "Etudier le signe du numerateur de f' (trinome ou factorisable)"
+      - "Completer le tableau avec les limites aux bornes et asymptotes"
+    variables:
+      function: ["(x^3+9x)/(x^2+1)", "(x^2+mx-3)/(x-1)", "2x/(x^2+1)"]
+      type_numerateur_f_prime: [trinome, facteur_evident]
+    difficulty: 2
+    frequency: 6
+    sources:
+      - "Para ex.16 p.143"
+      - "Para ex.22 p.145"
+      - "Para ex.23 p.145"
+      - "XY ex.9 p.79"
+      - "KB Prax4"
+    examples:
+      - title: "KB — Fonction rationnelle classique"
+        enonce: >-
+          Soit f(x) = 2x/(x^2+1). Etudier les variations de f.
+        sketch: >-
+          f'(x) = 2(1-x^2)/(x^2+1)^2. f'(x) = 0 pour x = +/-1.
+          f croit sur [-1,1], decroit ailleurs.
+          Max f(1) = 1, min f(-1) = -1.
+    do:
+      - "Bien identifier le signe de f' grace au numerateur (denominateur toujours > 0)"
+    do_not:
+      - "Oublier les asymptotes dans le tableau de variation"
+
+  - id: Prax4.v3
+    praxeology: Prax4
+    type: exercice
+    name: "Tableau de variation avec sqrt — domaine restreint"
+    description: >-
+      Etudier les variations de f contenant sqrt. Domaine
+      restreint par la condition sous la racine, derivee avec sqrt.
+    method:
+      - "Determiner le domaine de definition (u >= 0)"
+      - "Calculer f' en utilisant (sqrt(u))' = u'/(2.sqrt(u))"
+      - "Etudier le signe de f' sur le domaine"
+      - "Dresser le tableau de variation"
+    variables:
+      function: ["(1-x).sqrt(1-x^2)", "x.sqrt(2x+1)", "-x^3/6+4x^2.sqrt(x)/5-x^2-x"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Para ex.27 p.147"
+      - "Para ex.20 p.144"
+      - "XY II (h) p.81"
+    examples:
+      - title: "Para ex.27 — Produit avec sqrt(1-x^2)"
+        enonce: >-
+          Soit f(x) = (1-x).sqrt(1-x^2) definie sur [-1, 1].
+          Dresser le tableau de variation de f.
+        sketch: >-
+          f'(x) = -sqrt(1-x^2) + (1-x).(-x/sqrt(1-x^2)).
+          Apres calcul : f'(x) = (2x^2-x-1)/sqrt(1-x^2).
+    do:
+      - "Verifier la derivabilite aux bornes du domaine"
+    do_not:
+      - "Etendre le domaine au-dela de ce que sqrt permet"
+
+  # =========================================================================
+  # Prax5 — Extrema a partir du tableau de variation
+  # =========================================================================
+
+  - id: Prax5.v1
+    praxeology: Prax5
+    type: exercice
+    name: "Identifier extrema — changement de signe de f'"
+    description: >-
+      A partir du tableau de variation, identifier les extrema locaux
+      et globaux. f' passe de + a - → max, de - a + → min.
+    method:
+      - "Reperer les zeros de f' dans le tableau"
+      - "Verifier le changement de signe de f' en chaque zero"
+      - "f' : + → - en a → max local f(a)"
+      - "f' : - → + en a → min local f(a)"
+      - "Comparer avec les limites aux bornes pour le global"
+    variables:
+      nombre_extrema: [1, 2, 3]
+      distinction_local_global: [oui, non]
+    difficulty: 1
+    frequency: 7
+    sources:
+      - "Para ex.15 p.143"
+      - "XY ex.6 p.78"
+      - "XY ex.7 p.78"
+      - "Manuel activite 1 (extrema) p.107"
+      - "Manuel V/F 3 p.111"
+    examples:
+      - title: "XY ex.6 — Lecture graphique des extrema"
+        enonce: >-
+          On donne la courbe de f. Identifier les extrema et preciser
+          leur nature (local/global).
+        sketch: >-
+          Max local en x = -3 et x = 1 (f' passe de + a -).
+          Min local en x = 0 et x = 4 (f' passe de - a +).
+          Pas d'extremum global (limites infinies).
+    do:
+      - "Distinguer extremum local et global"
+      - "Verifier si f' = 0 sans changement de signe (pas d'extremum, ex: x^3)"
+    do_not:
+      - "Affirmer extremum des que f' = 0 (condition necessaire seulement)"
+
+  - id: Prax5.v2
+    praxeology: Prax5
+    type: exercice
+    name: "Piege f'(a)=0 sans extremum — inflexion horizontale"
+    description: >-
+      Montrer qu'en un point ou f'(a) = 0 mais f' ne change pas de signe,
+      il n'y a pas d'extremum (ex : f(x) = x^3 en 0).
+    method:
+      - "Calculer f'(x) et trouver f'(a) = 0"
+      - "Etudier le signe de f' au voisinage de a"
+      - "Si f' garde le meme signe : pas d'extremum"
+      - "Interpreter : point d'inflexion a tangente horizontale"
+    variables:
+      function: ["x^3", "x^5"]
+      point: ["0"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Manuel V/F 3 p.111"
+      - "KB Prax5 erreurs"
+      - "XY cours (theoreme) p.76"
+    examples:
+      - title: "Manuel V/F — x^3 en 0"
+        enonce: >-
+          Si f'(a) = 0 alors f admet un minimum en a. Vrai ou faux?
+        sketch: >-
+          Faux. Contre-exemple : f(x) = x^3, f'(0) = 0 mais
+          f' = 3x^2 >= 0 partout, pas de changement de signe.
+    do:
+      - "Toujours verifier le changement de signe de f'"
+    do_not:
+      - "Conclure extremum a partir de f'(a) = 0 seul"
+
+  # =========================================================================
+  # Prax6 — Extrema avec parametres
+  # =========================================================================
+
+  - id: Prax6.v1
+    praxeology: Prax6
+    type: exercice
+    name: "Parametre pour extremum donne — f'(x0)=0 et condition de valeur"
+    description: >-
+      Determiner a, b pour que f admette un extremum donne en un point
+      donne (f'(x0)=0 et f(x0)=valeur).
+    method:
+      - "Ecrire f'(x) en fonction des parametres"
+      - "Imposer f'(x0) = 0 → equation sur les parametres"
+      - "Imposer f(x0) = valeur donnee → deuxieme equation"
+      - "Resoudre le systeme"
+      - "Verifier le changement de signe de f'"
+    variables:
+      function: ["ax^2+bx+c", "(ax+b)/(x^2+x+3)"]
+      conditions: ["extremum en x0 = 1/2", "extremum egal a 1 en x0 = 0"]
+    difficulty: 2
+    frequency: 5
+    sources:
+      - "Para ex.17 p.143"
+      - "Para ex.19 p.144"
+      - "Para ex.22 p.145"
+      - "XY ex.11.2a p.80"
+    examples:
+      - title: "Para ex.19 — Extremum egal a 1 en 0"
+        enonce: >-
+          Soit f(x) = (ax+b)/(x^2+x+3). Determiner a et b pour que f
+          admette un extremum egal a 1 en x0 = 0.
+        sketch: >-
+          f(0) = b/3 = 1 → b = 3. f'(0) = (a.3 - b.1)/9 = 0 → a = 1.
+          Verifier : f'(x) change de signe en 0.
+    do:
+      - "Toujours verifier que f' change de signe (l'extremum est reel)"
+    do_not:
+      - "Oublier la verification du changement de signe"
+
+  - id: Prax6.v2
+    praxeology: Prax6
+    type: exercice
+    name: "Famille parametrique — nombre d'extrema selon le parametre"
+    description: >-
+      Etudier f_m(x) = famille de fonctions parametree par m.
+      Determiner pour quelles valeurs de m la fonction a 0, 1 ou 2 extrema.
+    method:
+      - "Calculer f'_m(x)"
+      - "Resoudre f'_m(x) = 0 : nombre de solutions selon m"
+      - "Discriminant du trinome f'_m = 0 → discussion"
+      - "Delta > 0 : 2 extrema, Delta = 0 : 1, Delta < 0 : 0"
+    variables:
+      function: ["(2m-3)x^3+3x^2-3mx+m", "(x^2+mx-3)/(x-1)"]
+      parametre: ["m reel"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Para ex.21 p.144"
+      - "Para ex.23 p.145"
+    examples:
+      - title: "Para ex.21 — Cubique parametree"
+        enonce: >-
+          Soit f_m(x) = (2m-3)x^3+3x^2-3mx+m. Pour quelles valeurs
+          de m, f_m possede un seul extremum?
+        sketch: >-
+          Pour m = 3/2 : f est un polynome de degre 2, un seul extremum.
+          Pour m != 3/2 : f'_m est un trinome, discriminant
+          Delta = 36(m^2-2m+3). Etudier son signe selon m.
+    do:
+      - "Separer le cas m = valeur critique (degre de f change)"
+    do_not:
+      - "Oublier les cas limites ou le degre change"
+
+  # =========================================================================
+  # Prax7a — Optimisation geometrique
+  # =========================================================================
+
+  - id: Prax7a.v1
+    praxeology: Prax7a
+    type: exercice
+    name: "Aire maximale d'un rectangle a perimetre fixe"
+    description: >-
+      Parmi les rectangles de perimetre P, trouver celui d'aire
+      maximale. Modeliser A(x), deriver, conclure carre.
+    method:
+      - "Poser x la largeur, exprimer la longueur (P/2 - x)"
+      - "A(x) = x.(P/2 - x), domaine x in ]0, P/2["
+      - "A'(x) = P/2 - 2x, zero en x = P/4"
+      - "Maximum : carre de cote P/4"
+    variables:
+      perimetre: ["20 cm", "P general"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Manuel activite 5 p.109"
+      - "KB Prax7a"
+    examples:
+      - title: "Manuel activite 5 — Perimetre 20"
+        enonce: >-
+          De tous les rectangles de perimetre 20 cm, quel est celui
+          qui a la plus grande aire?
+        sketch: >-
+          A(x) = x.(10-x). A'(x) = 10-2x = 0 pour x = 5.
+          Carre 5x5, aire maximale = 25 cm^2.
+    do:
+      - "Bien definir le domaine de la variable x"
+      - "Revenir au probleme geometrique dans la conclusion"
+    do_not:
+      - "Oublier de verifier que le maximum est atteint dans le domaine"
+
+  - id: Prax7a.v2
+    praxeology: Prax7a
+    type: exercice
+    name: "Rectangle inscrit dans un cercle — perimetre maximal"
+    description: >-
+      Trouver les dimensions du rectangle inscrit dans un cercle
+      de rayon R qui a le plus grand perimetre.
+    method:
+      - "Poser x un demi-cote, y = sqrt(R^2-x^2)"
+      - "P(x) = 4(x + sqrt(R^2-x^2))"
+      - "P'(x) = 4(1 - x/sqrt(R^2-x^2)) = 0 → x = R/sqrt(2)"
+      - "Conclure : carre inscrit"
+    variables:
+      rayon: ["1", "R general"]
+    difficulty: 2
+    frequency: 2
+    sources:
+      - "Manuel activite 6 p.110"
+    examples:
+      - title: "Manuel activite 6 — Cercle unite"
+        enonce: >-
+          Un rectangle est inscrit dans un cercle de rayon 1.
+          Trouver ses dimensions pour que le perimetre soit maximal.
+        sketch: >-
+          P(x) = 4(x+sqrt(1-x^2)). P'(x) = 0 pour x = 1/sqrt(2).
+          Carre inscrit de cote sqrt(2).
+    do:
+      - "Utiliser le theoreme de Pythagore pour exprimer y en fonction de x"
+    do_not:
+      - "Oublier que le domaine est [0, R]"
+
+  - id: Prax7a.v3
+    praxeology: Prax7a
+    type: exercice
+    name: "Triangle inscrit dans un cercle — aire maximale"
+    description: >-
+      Trouver la position d'un point M sur un cercle pour que
+      le triangle AMM' ait l'aire maximale.
+    method:
+      - "Exprimer l'aire en fonction de la variable x (position sur le diametre)"
+      - "A(x) = f(x) impliquant sqrt(1-x^2)"
+      - "Deriver, etudier le signe, conclure"
+    variables:
+      figure: ["triangle AMM' dans cercle", "triangle equilateral"]
+    difficulty: 3
+    frequency: 2
+    sources:
+      - "Para ex.27 p.147"
+    examples:
+      - title: "Para ex.27 — Triangle dans cercle unite"
+        enonce: >-
+          Cercle de centre O et rayon 1, A(1,0). On mene la
+          perpendiculaire en H a (AA'). Montrer que le triangle
+          AMM' d'aire maximale est equilateral.
+        sketch: >-
+          f(x) = (1-x).sqrt(1-x^2). Deriver, tableau de variation,
+          maximum pour x = -1/2, soit H(-1/2, 0).
+          Le triangle est equilateral.
+    do:
+      - "Verifier que la conclusion a un sens geometrique"
+    do_not:
+      - "Oublier de verifier les bornes du domaine"
+
+  - id: Prax7a.v4
+    praxeology: Prax7a
+    type: exercice
+    name: "Volume maximal — boite decoupee ou cone"
+    description: >-
+      Trouver les dimensions d'un solide (boite, cone) de volume
+      maximal sous une contrainte geometrique.
+    method:
+      - "Exprimer V(x) en fonction d'une seule variable"
+      - "Determiner le domaine de x"
+      - "Deriver V'(x), trouver les zeros"
+      - "Dresser le tableau de variation et conclure"
+    variables:
+      figure: ["boite triangulaire", "cone circonscrit a une sphere", "casserole cylindrique"]
+    difficulty: 3
+    frequency: 3
+    sources:
+      - "Para ex.26 p.146"
+      - "Para ex.28 p.147"
+      - "Para ex.32 p.148"
+    examples:
+      - title: "Para ex.26 — Boite triangulaire"
+        enonce: >-
+          Triangle equilateral de 60 cm de cote. On decoupe les coins
+          de longueur x et on forme une boite. Montrer V(x) = x(30-x)^2
+          et trouver le volume maximal.
+        sketch: >-
+          V'(x) = (30-x)^2 + x.2.(30-x).(-1) = (30-x)(30-3x).
+          V'(x) = 0 pour x = 10. V(10) = 10.20^2 = 4000 cm^3.
+    do:
+      - "Bien justifier la formule de V(x) a partir de la geometrie"
+    do_not:
+      - "Oublier que x doit etre positif et respecter les contraintes"
+
+  # =========================================================================
+  # Prax7b — Optimisation economique
+  # =========================================================================
+
+  - id: Prax7b.v1
+    praxeology: Prax7b
+    type: exercice
+    name: "Revenu maximal d'une compagnie — variable discrete"
+    description: >-
+      Modeliser le revenu R(n) d'une entreprise, trouver l'optimum
+      et comparer les deux entiers encadrant.
+    method:
+      - "Traduire l'enonce en R(n) = (15+n)(90-n) ou equivalent"
+      - "Deriver f(x) = (15+x)(90-x) sur R"
+      - "Tableau de variation, maximum en x0 = 37.5"
+      - "Comparer f(37) et f(38) pour conclure"
+    variables:
+      contexte: ["bus d'excursion", "tarif degressif"]
+    difficulty: 2
+    frequency: 2
+    sources:
+      - "Manuel activite 7 p.110"
+      - "KB Prax7b"
+    examples:
+      - title: "Manuel activite 7 — Compagnie de bus"
+        enonce: >-
+          Un bus de 60 places, 15 personnes a 90 dinars. Pour chaque
+          personne supplementaire, le tarif baisse de n dinars.
+          Trouver n pour maximiser le revenu.
+        sketch: >-
+          R(n) = (15+n)(90-n). f'(x) = 75-2x = 0 pour x = 37.5.
+          f(37) = 52.53 = 2756, f(38) = 53.52 = 2756. Egal!
+          Maximum pour 52 ou 53 personnes.
+    do:
+      - "Comparer f(m) et f(m+1) car la variable est entiere"
+    do_not:
+      - "Donner x0 = 37.5 comme reponse (variable discrete)"
+
+  - id: Prax7b.v2
+    praxeology: Prax7b
+    type: exercice
+    name: "Distance minimale — point a courbe"
+    description: >-
+      Trouver le point M d'une courbe minimisant la distance AM.
+      On etudie AM^2 = f(x) pour eviter les racines.
+    method:
+      - "Exprimer AM^2 = f(x) en fonction de l'abscisse de M"
+      - "Deriver f'(x), trouver les zeros"
+      - "AM minimale <=> AM^2 minimale"
+      - "Dresser le tableau de variation de f et conclure"
+    variables:
+      courbe: ["y = x^2 (parabole)", "cercle"]
+      point: ["A(0,1)", "M(1,1)"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Para ex.31 p.148"
+      - "XY ex.10 p.79"
+      - "Manuel situation 1 p.112"
+    examples:
+      - title: "Para ex.31 — Distance a la parabole"
+        enonce: >-
+          A(0,1) et M sur y=x^2. Trouver M qui minimise AM.
+        sketch: >-
+          AM^2 = x^4-x^2+1. f'(x) = 4x^3-2x = 2x(2x^2-1).
+          Zeros : 0, +/-1/sqrt(2). Min pour x = +/-1/sqrt(2),
+          AM_min = sqrt(3/4).
+    do:
+      - "Travailler avec AM^2 plutot qu'AM (evite la racine)"
+    do_not:
+      - "Deriver directement sqrt(f(x)) (inutilement complique)"
+
+  # =========================================================================
+  # Prax8 — Prouver une inegalite par la derivee
+  # =========================================================================
+
+  - id: Prax8.v1
+    praxeology: Prax8
+    type: exercice
+    name: "Inegalite par etude de h=f-g — minimum positif"
+    description: >-
+      Montrer f(x) >= g(x) en posant h = f-g, puis en prouvant
+      que min(h) >= 0 via le tableau de variation.
+    method:
+      - "Poser h(x) = f(x) - g(x)"
+      - "Calculer h'(x) et dresser le tableau de variation"
+      - "Trouver le minimum de h"
+      - "Si min(h) >= 0 alors h(x) >= 0, donc f(x) >= g(x)"
+    variables:
+      inegalite: ["sqrt(1+x) <= 1+x/2", "1-x <= 1/(1+x)", "x^n >= k(x-1)"]
+    difficulty: 2
+    frequency: 5
+    sources:
+      - "Manuel activite 2 p.109"
+      - "Manuel activite 3 p.109"
+      - "XY ex.11.1 p.80"
+      - "KB Prax8"
+    examples:
+      - title: "Manuel activite 2 — sqrt(1+x) <= 1+x/2"
+        enonce: >-
+          Montrer que sqrt(1+x) <= 1 + x/2 pour tout x >= 0.
+        sketch: >-
+          h(x) = 1+x/2 - sqrt(1+x). h'(x) = 1/2 - 1/(2.sqrt(1+x)).
+          h'(x) = 0 pour x = 0. h croit sur [0,+inf[.
+          Minimum h(0) = 0. Donc h(x) >= 0.
+    do:
+      - "Toujours conclure en revenant a l'inegalite demandee"
+      - "Si min = 0, preciser le cas d'egalite"
+    do_not:
+      - "Oublier de preciser le domaine de validite"
+
+  - id: Prax8.v2
+    praxeology: Prax8
+    type: exercice
+    name: "Encadrement de sqrt(1+x) — double inegalite par deux fonctions"
+    description: >-
+      Montrer un encadrement du type 1+x/4 <= sqrt(1+x) <= 1+x/2
+      en etudiant deux fonctions auxiliaires.
+    method:
+      - "Poser h1(x) = sqrt(1+x) - (1+x/4), h2(x) = 1+x/2 - sqrt(1+x)"
+      - "Etudier chaque h_i separement"
+      - "Montrer min(h1) >= 0 et min(h2) >= 0"
+    variables:
+      encadrement: ["1+x/4 <= sqrt(1+x) <= 1+x/2"]
+    difficulty: 3
+    frequency: 2
+    sources:
+      - "Manuel activite 2 (questions 2+3) p.109"
+    examples:
+      - title: "Manuel activite 2 — Encadrement complet"
+        enonce: >-
+          Montrer que 1+x/4 <= sqrt(1+x) <= 1+x/2 pour tout x >= 0.
+        sketch: >-
+          Borne sup : h2(x) = 1+x/2-sqrt(1+x), min h2(0) = 0.
+          Borne inf : h1(x) = sqrt(1+x)-1-x/4, etudier le signe
+          via h1'(x) = 1/(2.sqrt(1+x)) - 1/4.
+    do:
+      - "Traiter les deux bornes separement"
+    do_not:
+      - "Melanger les deux inegalites"
+
+  # =========================================================================
+  # Prax9 — Lecture graphique de la derivee
+  # =========================================================================
+
+  - id: Prax9.v1
+    praxeology: Prax9
+    type: exercice
+    name: "De C_f vers C_f' — lire la derivee a partir de la courbe"
+    description: >-
+      A partir du graphe de f, identifier la courbe de f' parmi
+      plusieurs propositions. Utiliser la correspondance :
+      f croit ↔ f'>0, extrema ↔ zeros de f'.
+    method:
+      - "La ou f croit, f' > 0 (au-dessus de l'axe)"
+      - "La ou f decroit, f' < 0 (en dessous de l'axe)"
+      - "Aux extrema de f, f' = 0 (zeros de f')"
+      - "Si f est un polynome de degre n, f' est de degre n-1"
+    variables:
+      sens: [f_vers_f_prime]
+      type_f: [cubique, parabolique]
+    difficulty: 1
+    frequency: 4
+    sources:
+      - "Manuel QCM 2 p.111"
+      - "Manuel activite 2 (variations) p.105"
+      - "XY ex.8 p.78"
+    examples:
+      - title: "XY ex.8 — Identifier f' parmi trois courbes"
+        enonce: >-
+          On donne la courbe Gamma de f et ses tangentes en x=1 et x=3/2.
+          Parmi les trois courbes proposees, laquelle est C_f'?
+        sketch: >-
+          f'(1) = 1 (pente de la tangente en A), f'(3/2) < 0.
+          La courbe qui passe par (1,1) et est negative apres 3/2.
+    do:
+      - "Verifier la coherence : nombre de zeros de f' = nombre d'extrema de f"
+    do_not:
+      - "Confondre la courbe de f avec celle de f'"
+
+  - id: Prax9.v2
+    praxeology: Prax9
+    type: exercice
+    name: "De C_f' vers variations de f — tableau depuis le graphe de f'"
+    description: >-
+      A partir du graphe de f', dresser le tableau de variation de f.
+      f' > 0 → f croit, f' < 0 → f decroit.
+    method:
+      - "Lire les zeros de f' sur le graphe"
+      - "Determiner le signe de f' entre les zeros"
+      - "En deduire les variations de f"
+      - "Identifier les extrema"
+    variables:
+      sens: [f_prime_vers_f]
+    difficulty: 1
+    frequency: 3
+    sources:
+      - "Manuel activite 5 (variations) p.106"
+      - "Manuel QCM 3 p.111"
+      - "XY ex.6 p.78"
+    examples:
+      - title: "XY ex.6 — Lecture du tableau depuis le graphe"
+        enonce: >-
+          On donne la courbe de f. Dresser le tableau de variation.
+          f admet-elle un extremum en 4?
+        sketch: >-
+          f croit sur [-5,-3], decroit sur [-3,0], croit sur [0,1],
+          decroit sur [1,4], croit sur [4,+inf[.
+          En 4 : point anguleux, pas d'extremum classique.
+    do:
+      - "Preciser si les extrema sont locaux ou globaux"
+    do_not:
+      - "Confondre zeros de f' et zeros de f"
+
+  - id: Prax9.v3
+    praxeology: Prax9
+    type: exercice
+    name: "Vrai-faux graphique — assertions sur f et f' depuis la courbe"
+    description: >-
+      A partir d'un graphe, repondre par vrai ou faux a des assertions
+      sur f, f', ses extrema, ses variations.
+    method:
+      - "Lire les valeurs de f aux points donnes"
+      - "Lire les pentes (signe de f') dans les intervalles"
+      - "Verifier chaque assertion"
+    variables:
+      assertions: ["f(1)=0?", "f admet un extremum en x=-2?", "f croissante sur [1,+inf[?"]
+    difficulty: 1
+    frequency: 3
+    sources:
+      - "Para ex.15 p.143"
+      - "Para ex.18 p.144"
+      - "Manuel V/F p.111"
+    examples:
+      - title: "Para ex.15 — Vrai-faux depuis la courbe"
+        enonce: >-
+          On donne le graphe de f. a) f(1)=0. b) f admet un extremum en
+          x=-2. c) f est croissante sur [1,+inf[. Vrai ou faux?
+        sketch: >-
+          a) Faux : f(1) ≈ 0.5 d'apres le graphe.
+          b) Vrai : min local en x=-2.
+          c) Faux : f decroit apres x=1/2.
+    do:
+      - "Justifier chaque reponse par une lecture precise du graphe"
+    do_not:
+      - "Repondre par intuition sans reference au graphe"
+
+  # =========================================================================
+  # Prax10 — Tangentes et position par rapport a la courbe
+  # =========================================================================
+
+  - id: Prax10.v1
+    praxeology: Prax10
+    type: exercice
+    name: "Tangente parallele a une droite — resoudre f'(x)=m"
+    description: >-
+      Trouver les points de la courbe ou la tangente est parallele
+      a une droite D de pente m. Resoudre f'(x) = m.
+    method:
+      - "Identifier la pente m de la droite D"
+      - "Resoudre f'(x) = m"
+      - "Calculer les coordonnees des points correspondants"
+      - "Ecrire les equations des tangentes"
+    variables:
+      function: ["(x-2)^2.(x+3)", "x^2-x+3/(x-1)", "(x^2+4x+3)/(x-1)"]
+      droite: ["x+y+3=0", "3x-4y+13=0"]
+    difficulty: 1
+    frequency: 6
+    sources:
+      - "Para ex.6.2 p.139"
+      - "Para ex.23.4b p.145"
+      - "Para ex.12.1c p.142"
+      - "Para ex.5.3a p.139"
+      - "XY ex.10 p.79"
+    examples:
+      - title: "Para ex.6 — Cubique, tangentes paralleles a D"
+        enonce: >-
+          f(x) = (x-2)^2(x+3), D : x+y+3=0.
+          Existe-t-il des tangentes paralleles a D?
+        sketch: >-
+          f'(x) = (x-2)(3x+4). Resoudre f'(x) = -1 :
+          3x^2-2x-7 = 0, Delta = 22 > 0. Deux solutions,
+          donc deux tangentes paralleles a D.
+    do:
+      - "Bien extraire la pente de la droite D (forme y = mx + p)"
+    do_not:
+      - "Confondre tangente parallele et tangente confondue"
+
+  - id: Prax10.v2
+    praxeology: Prax10
+    type: exercice
+    name: "Tangente perpendiculaire a une droite — resoudre f'(x)=-1/m"
+    description: >-
+      Trouver les points ou la tangente est perpendiculaire a une
+      droite D de pente m. Resoudre f'(x) = -1/m.
+    method:
+      - "Identifier la pente m de D"
+      - "Condition de perpendicularite : f'(x0).m = -1"
+      - "Resoudre f'(x0) = -1/m"
+    variables:
+      function: ["(x^2-1)/(|x+1|+1)", "(x^2+4x+3)/(x-1)"]
+      droite: ["4x-5y+1=0"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Para ex.5.3b p.139"
+      - "Para ex.12.1c p.142"
+    examples:
+      - title: "Para ex.5 — Tangente perpendiculaire a Delta'"
+        enonce: >-
+          f(x) = (x^2-1)/(|x+1|+1). Trouver les points ou la tangente
+          est perpendiculaire a Delta' : 4x-5y+1=0.
+        sketch: >-
+          Pente de Delta' : 4/5. Resoudre f'(x0) = -5/4.
+          Cas x0 <= -1 : -(x0^2+1)/x0^2 = -5/4, x0 = -2.
+    do:
+      - "Penser aux deux cas si f est definie par morceaux"
+    do_not:
+      - "Oublier la condition de perpendicularite (produit = -1)"
+
+  - id: Prax10.v3
+    praxeology: Prax10
+    type: exercice
+    name: "Tangentes issues d'un point exterieur — resolution en x0"
+    description: >-
+      Trouver les tangentes a C_f passant par un point A(a,b)
+      exterieur a la courbe. Resoudre b = f'(x0).(a-x0)+f(x0).
+    method:
+      - "Ecrire l'equation de la tangente en x0 : y = f'(x0)(x-x0)+f(x0)"
+      - "Imposer que A(a,b) verifie cette equation"
+      - "Resoudre l'equation en x0"
+      - "En deduire les equations des tangentes"
+    variables:
+      function: ["(x-2)^2(x+3)", "-x^2+2x-4"]
+      point: ["A(2,0)", "O(0,0)"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Para ex.6.3 p.139"
+      - "Para ex.4 p.138"
+      - "Para ex.24.1c p.146"
+    examples:
+      - title: "Para ex.6 — Tangentes issues de A(2,0)"
+        enonce: >-
+          f(x) = (x-2)^2(x+3). Determiner les tangentes a C_f
+          issues du point A(2,0).
+        sketch: >-
+          0 = f'(x0)(2-x0)+f(x0) = -(x0-2)^2(3x0+4)+(x0-2)^2(x0+3)
+          = (x0-2)^2(-2x0-1). x0 = 2 ou x0 = -1/2.
+          Deux tangentes.
+    do:
+      - "Bien distinguer tangente EN un point et tangente PASSANT PAR un point"
+    do_not:
+      - "Substituer directement les coordonnees de A dans f (A n'est pas sur C_f)"
+
+  - id: Prax10.v4
+    praxeology: Prax10
+    type: exercice
+    name: "D est-elle tangente a la courbe? — intersection + pente"
+    description: >-
+      Verifier si une droite D est tangente a C_f. Condition :
+      D coupe C_f en un point unique ET f'(x0) = pente de D.
+    method:
+      - "Resoudre f(x) = droite D : equation du type g(x) = 0"
+      - "Factoriser pour voir si racine double"
+      - "Verifier que f'(x0) = pente de D au point de contact"
+    variables:
+      function: ["(x-2)^2(x+3)"]
+      droite: ["x+y+3=0"]
+    difficulty: 2
+    frequency: 2
+    sources:
+      - "Para ex.6.1 p.139"
+    examples:
+      - title: "Para ex.6 — D tangente a la cubique?"
+        enonce: >-
+          f(x) = (x-2)^2(x+3), D : x+y+3=0.
+          D est-elle tangente a C_f?
+        sketch: >-
+          f(x) = -x-3 ⟺ (x+3)[(x-2)^2+1] = 0 ⟺ x = -3.
+          Point unique I(-3,0). f'(-3) = (-5)(-5) = -1 = pente de D.
+          Oui, D est tangente en I(-3,0).
+    do:
+      - "Verifier les deux conditions : point unique ET pente egale"
+    do_not:
+      - "Conclure tangente a partir d'une seule intersection"
+
+  # =========================================================================
+  # PROBLEMES (type: probleme)
+  # =========================================================================
+
+  - id: Prob1
+    praxeology: [Prax1, Prax4, Prax5, Prax10]
+    type: probleme
+    name: "Etude complete polynome degre 3 : f' → signes → tableau → extrema → courbe"
+    description: >-
+      Etude complete d'une fonction polynome de degre 3. Derivee
+      (trinome du second degre), signe de f', tableau de variation
+      complet, extrema, tracer de la courbe. Souvent prolonge
+      par des questions de tangentes ou d'equation f(x) = m.
+    method:
+      - "Calculer f'(x) (polynome de degre 2)"
+      - "Resoudre f'(x) = 0 (discriminant)"
+      - "Dresser le tableau de signes de f'"
+      - "Calculer f aux zeros de f' et les limites aux bornes"
+      - "Dresser le tableau de variation complet"
+      - "Identifier les extrema locaux"
+      - "Tracer la courbe"
+      - "(Optionnel) Discuter le nombre de solutions de f(x) = m"
+    variables:
+      function: ["-x^4+6x^2-9x+1", "x^3-3x", "(2m-3)x^3+3x^2-3mx+m"]
+    difficulty: 2
+    frequency: 6
+    sources:
+      - "Manuel activite 1 (problemes) p.109"
+      - "Para ex.20 p.144"
+      - "Para ex.21 p.144"
+      - "Para ex.24 p.146"
+      - "XY ex.9 p.79"
+      - "XY ex.11 p.80"
+    examples:
+      - title: "Manuel activite 1 — Polynome degre 4"
+        enonce: >-
+          f(x) = -x^4+6x^2-9x+1. Calculer les limites, f', variations,
+          extrema locaux. Montrer que f(x)=0 admet exactement 3 racines.
+          Discuter le nombre de solutions de f(x)=m.
+        sketch: >-
+          f'(x) = -4x^3+12x-9. Etude de signe, tableau, extrema.
+          Discussion graphique pour f(x) = m.
+    do:
+      - "Calculer les limites en +inf et -inf"
+      - "Preciser les extrema locaux et globaux"
+      - "Donner les valeurs de f aux points critiques"
+    do_not:
+      - "Oublier les limites aux bornes du domaine"
+      - "Omettre la discussion parametrique si demandee"
+
+  - id: Prob2
+    praxeology: [Prax4, Prax5, Prax2a, Prax2b]
+    type: probleme
+    name: "Etude complete rationnelle ou irrationnelle : domaine → f' → signes → tableau → asymptotes → courbe"
+    description: >-
+      Etude complete d'une fonction rationnelle (ou avec sqrt).
+      Domaine, derivee (quotient), signe, variations, limites,
+      asymptotes, tracé. Inclut souvent valeur absolue ou parametre.
+    method:
+      - "Determiner le domaine de definition"
+      - "Calculer f'(x) par la formule du quotient"
+      - "Factoriser le numerateur de f'"
+      - "Dresser le tableau de variation avec limites aux bornes"
+      - "Determiner les asymptotes (horizontales, verticales, obliques)"
+      - "Tracer la courbe"
+    variables:
+      function: ["(x^2+4x+3)/(x-1)", "(x^2+mx-3)/(x-1)", "(x^3+9x)/(x^2+1)"]
+    difficulty: 2
+    frequency: 5
+    sources:
+      - "Para ex.12 p.142"
+      - "Para ex.16 p.143"
+      - "Para ex.23 p.145"
+      - "XY ex.9 p.79"
+      - "XY ex.10 p.79"
+    examples:
+      - title: "XY ex.9 — Rationnelle classique"
+        enonce: >-
+          f(x) = (x^2-3x+3)/(x-1). Derivee, variations, solutions
+          du systeme f(x)<1 et f(x)>-3.
+        sketch: >-
+          f'(x) = (x^2-2x)/(x-1)^2 = x(x-2)/(x-1)^2.
+          Zeros : x=0 et x=2. Tableau de variation, discussion.
+    do:
+      - "Preciser les asymptotes dans le tableau"
+      - "Faire la division euclidienne si le degre du numerateur >= celui du denominateur"
+    do_not:
+      - "Oublier l'asymptote oblique le cas echeant"
+
+  - id: Prob3
+    praxeology: [Prax7a, Prax4, Prax5]
+    type: probleme
+    name: "Optimisation geometrique : modeliser → deriver → tableau → conclure"
+    description: >-
+      Probleme en plusieurs parties. Modeliser une grandeur geometrique
+      (aire, perimetre, volume, distance) en fonction d'une variable,
+      determiner le domaine, deriver, trouver l'extremum, conclure.
+    method:
+      - "Lire l'enonce et poser la variable x"
+      - "Exprimer la grandeur a optimiser G(x)"
+      - "Preciser le domaine de x (contraintes geometriques)"
+      - "Calculer G'(x)"
+      - "Dresser le tableau de variation"
+      - "Conclure en revenant au contexte geometrique"
+    variables:
+      grandeur: [aire, perimetre, volume, distance]
+      figure: [rectangle, triangle, cercle, cone, cylindre]
+    difficulty: 3
+    frequency: 7
+    sources:
+      - "Manuel activites 5, 6 p.109-110"
+      - "Para ex.24 p.146"
+      - "Para ex.25 p.146"
+      - "Para ex.26 p.146"
+      - "Para ex.27 p.147"
+      - "Para ex.28 p.147"
+      - "Para ex.29 p.147"
+      - "Para ex.30 p.148"
+      - "Para ex.31 p.148"
+      - "Para ex.32 p.148"
+    examples:
+      - title: "Para ex.24 — Rectangle sous parabole"
+        enonce: >-
+          f(x) = 4x-x^2. M variable sur l'arc entre O et A(2,4).
+          N symetrique par rapport a x=2. Exprimer l'aire du rectangle
+          MNN'M' et la maximiser.
+        sketch: >-
+          s(x) = 2(2-x).f(x) = 2(2-x)(4x-x^2).
+          Deriver, tableau de variation, trouver x optimal.
+    do:
+      - "Toujours revenir au contexte geometrique pour conclure"
+      - "Verifier que l'optimum est dans le domaine"
+    do_not:
+      - "Donner une reponse purement analytique sans interpretation geometrique"
+
+  - id: Prob4
+    praxeology: [Prax10, Prax4, Prax2a]
+    type: probleme
+    name: "Tangentes paralleles/perpendiculaires a une droite donnee"
+    description: >-
+      Probleme en plusieurs parties sur les tangentes : equation
+      generale de la tangente, tangentes paralleles a D (f'(x)=m),
+      tangentes perpendiculaires (f'(x)=-1/m), tangentes issues
+      d'un point, D est-elle tangente a la courbe?
+    method:
+      - "Ecrire l'equation de la tangente T_a en x=a"
+      - "Pour parallele a D : resoudre f'(a) = pente(D)"
+      - "Pour perpendiculaire : resoudre f'(a) = -1/pente(D)"
+      - "Pour tangente issue de A : imposer A in T_a et resoudre en a"
+      - "Pour D tangente : verifier intersection unique ET pente"
+    variables:
+      function: ["(x-2)^2(x+3)", "-x^2+2x-4", "(x^2+4x+3)/(x-1)"]
+      questions: [parallele, perpendiculaire, issue_de, est_tangente]
+    difficulty: 2
+    frequency: 5
+    sources:
+      - "Para ex.4 p.138"
+      - "Para ex.5 p.139"
+      - "Para ex.6 p.139"
+      - "Para ex.12 p.142"
+      - "Para ex.23.4b p.145"
+    examples:
+      - title: "Para ex.6 — Tangentes a une cubique"
+        enonce: >-
+          f(x) = (x-2)^2(x+3), D : x+y+3=0.
+          1) D est-elle tangente a C_f?
+          2) Tangentes paralleles a D?
+          3) Tangentes issues de A(2,0)?
+        sketch: >-
+          1) Oui, en I(-3,0). 2) f'(x)=-1 : deux solutions (discriminant 22).
+          3) (x0-2)^2(-2x0-1)=0 : x0=2 ou x0=-1/2.
+    do:
+      - "Traiter chaque type de tangente avec la bonne methode"
+    do_not:
+      - "Confondre tangente en un point et tangente passant par un point"
+
+  - id: Prob5
+    praxeology: [Prax8, Prax4]
+    type: probleme
+    name: "Demontrer une inegalite : poser h, deriver, conclure par le minimum"
+    description: >-
+      Probleme structure en etapes. Introduire une fonction auxiliaire,
+      etudier ses variations, montrer que son minimum est positif
+      pour en deduire l'inegalite.
+    method:
+      - "Poser h(x) = f(x) - g(x)"
+      - "Calculer h'(x)"
+      - "Dresser le tableau de variation de h"
+      - "Montrer que le minimum vaut 0 (ou est positif)"
+      - "Conclure l'inegalite"
+    variables:
+      inegalite: ["sqrt(1+x) <= 1+x/2 pour x >= 0", "x^n >= n(x-1) pour x >= 0"]
+    difficulty: 2
+    frequency: 4
+    sources:
+      - "Manuel activites 2, 3 p.109"
+      - "XY ex.11.1 p.80"
+    examples:
+      - title: "Manuel activite 2 — Enchainement d'inegalites"
+        enonce: >-
+          1) Montrer 1-x <= 1/(1+x) pour x >= 0.
+          2) En deduire 1-x <= 1/sqrt(1+x).
+          3) Montrer sqrt(1+x) <= 1+x/2.
+          4) En deduire un encadrement de sqrt(1+10^(-10)).
+        sketch: >-
+          Chaque partie utilise la derivee pour montrer que h >= 0.
+          L'encadrement final donne une approximation a 10^(-20) pres.
+    do:
+      - "Enchainer les resultats : utiliser une inegalite pour en deduire la suivante"
+    do_not:
+      - "Reprendre tout de zero a chaque etape"
+
+  - id: Prob6
+    praxeology: [Prax3, Prax4, Prax10]
+    type: probleme
+    name: "Etude avec valeur absolue et derivabilite : morceaux → raccord → tableau → tangentes"
+    description: >-
+      Probleme complet sur une fonction avec valeur absolue.
+      Reecriture par morceaux, etude de la derivabilite aux points
+      de changement, derivee sur chaque intervalle, tableau,
+      tangentes ou demi-tangentes.
+    method:
+      - "Reecrire f par morceaux selon le signe de |.|"
+      - "Etudier la continuite et derivabilite aux points de raccord"
+      - "Calculer f' sur chaque intervalle"
+      - "Dresser le tableau de variation global"
+      - "Identifier les points anguleux et tangentes verticales"
+    variables:
+      function: ["|x^2-2x|/(x(x^2-x-2))", "f par morceaux avec |g(x)|"]
+    difficulty: 3
+    frequency: 5
+    sources:
+      - "Para ex.7 p.139"
+      - "Para ex.11 p.141"
+      - "Para ex.13 p.142"
+      - "Para ex.14 p.142"
+      - "Para ex.21.3 p.145"
+    examples:
+      - title: "Para ex.13 — Fonction mixte avec |x|"
+        enonce: >-
+          f(x) = x^2-x+3 si x >= 1, f(x) = (2|x|-5)/(x-2) si x < 1.
+          Etudier la continuite et derivabilite en 0 et 1.
+          Montrer que la tangente Delta en A(1,3) est aussi tangente
+          en un autre point B.
+        sketch: >-
+          f derivable en 1 (f'_g=f'_d=1), non derivable en 0
+          (point anguleux). Delta : y = x+2. Second point de tangence
+          B a trouver.
+    do:
+      - "Traiter chaque point de raccord separement"
+      - "Interpreter geometriquement (point anguleux, tangente verticale)"
+    do_not:
+      - "Appliquer les formules de derivation sans verifier la derivabilite"
+
+  - id: Prob7
+    praxeology: [Prax6, Prax4, Prax10]
+    type: probleme
+    name: "Famille parametrique : derivee, extrema, tangente selon m"
+    description: >-
+      Etude d'une famille f_m selon un parametre m. Determiner m
+      pour un extremum donne, discuter le nombre d'extrema selon m,
+      trouver m pour une tangente particuliere.
+    method:
+      - "Calculer f'_m(x) en fonction de m"
+      - "Resoudre f'_m(x) = 0 et discuter selon m"
+      - "Trouver m pour un extremum en x0 donne"
+      - "Trouver m pour une tangente de pente donnee"
+    variables:
+      function: ["(x^2+mx-3)/(x-1)", "(2m-3)x^3+3x^2-3mx+m"]
+    difficulty: 3
+    frequency: 4
+    sources:
+      - "Para ex.11 p.141"
+      - "Para ex.21 p.144"
+      - "Para ex.23 p.145"
+      - "XY ex.11 p.80"
+    examples:
+      - title: "Para ex.23 — Rationnelle parametree"
+        enonce: >-
+          f_m(x) = (x^2+mx-3)/(x-1). Pour quelle valeur de m,
+          f admet-elle un extremum en 2? Pour quels m, f n'admet
+          pas d'extremum?
+        sketch: >-
+          f'_m(x0) = 0 et x0 = 2 → m = -1.
+          Pas d'extremum si discriminant de f'_m < 0, discussion sur m.
+    do:
+      - "Mener la discussion parametrique avec rigueur"
+    do_not:
+      - "Donner une seule valeur de m sans discussion"
+
+  - id: Prob8
+    praxeology: [Prax2d, Prax1]
+    type: probleme
+    name: "Derivees successives et sommes — conjecture par derivation"
+    description: >-
+      Utiliser les derivees successives pour calculer des sommes.
+      Deriver une serie geometrique pour obtenir des identites.
+    method:
+      - "Ecrire f(x) sous forme somme et sous forme close"
+      - "Deriver les deux formes"
+      - "Evaluer en un point pour obtenir la somme cherchee"
+    variables:
+      function: ["1+x+x^2+...+x^50", "1+x/2+x^2/4+..."]
+    difficulty: 2
+    frequency: 2
+    sources:
+      - "Para ex.8 p.139"
+      - "Para ex.10 p.140"
+    examples:
+      - title: "Para ex.10 — Somme par derivation"
+        enonce: >-
+          f(x) = 1+x+x^2+...+x^50. Calculer f'(x) sous deux formes
+          et en deduire la somme k=0 a 50 de k.2^(k-1).
+        sketch: >-
+          f(x) = (x^51-1)/(x-1) pour x != 1.
+          f'(x) = 1+2x+...+50x^49 et aussi [(51x^50)(x-1)-(x^51-1)]/(x-1)^2.
+          Evaluer en x = 2.
+    do:
+      - "Comparer les deux expressions de f'(x)"
+    do_not:
+      - "Evaluer en un point ou la forme close n'est pas definie"
+
+  - id: Prob9
+    praxeology: [Prax7b, Prax4, Prax5]
+    type: probleme
+    name: "Distance minimale d'un point a une courbe : AM^2 = f(x)"
+    description: >-
+      Trouver le point d'une courbe le plus proche d'un point fixe.
+      Exprimer AM^2 en fonction de x, etudier les variations,
+      trouver le minimum.
+    method:
+      - "Exprimer AM^2 = (x-a)^2 + (f(x)-b)^2"
+      - "Simplifier en une seule variable"
+      - "Deriver et dresser le tableau de variation"
+      - "AM min <=> AM^2 min"
+      - "Conclure avec les coordonnees du point optimal"
+    variables:
+      courbe: ["y=x^2", "y=f(x) general"]
+      point: ["A(0,1)", "A(1,8)"]
+    difficulty: 2
+    frequency: 3
+    sources:
+      - "Para ex.31 p.148"
+      - "XY ex.10 p.79"
+      - "Manuel situation 1 p.112"
+    examples:
+      - title: "XY ex.10 — Distance minimale MN"
+        enonce: >-
+          A(1,8), D_alpha passant par A de pente alpha coupe les axes
+          en M et N. Trouver alpha pour que MN soit minimale.
+        sketch: >-
+          MN^2 = (alpha-8)^2.(1/alpha^2+1). Deriver en alpha,
+          trouver le minimum.
+    do:
+      - "Travailler avec le carre de la distance pour simplifier"
+    do_not:
+      - "Oublier que la variable est l'abscisse du point mobile"
+
+  - id: Prob10
+    praxeology: [Prax7a, Prax2b, Prax4]
+    type: probleme
+    name: "Frottement minimal — contour optimal sous contrainte d'aire"
+    description: >-
+      Minimiser un contour (perimetre mouille) sous contrainte
+      d'aire fixee. Exprimer L(x) avec 1/x, deriver, conclure.
+    method:
+      - "Exprimer la contrainte (aire fixee → longueur = f/x)"
+      - "Ecrire le contour L(x) = 2x + k/x"
+      - "Deriver, trouver le minimum"
+      - "Conclure sur les dimensions optimales"
+    variables:
+      forme: [rectangle, demi-cercle]
+    difficulty: 2
+    frequency: 2
+    sources:
+      - "Para ex.30 p.148"
+      - "Para ex.32 p.148"
+    examples:
+      - title: "Para ex.30 — Canal rectangulaire"
+        enonce: >-
+          Section rectangulaire d'aire 2 dm^2. Minimiser le contour
+          interieur L(x) = 2x + 2/(100x).
+        sketch: >-
+          L'(x) = 2 - 2/(100x^2) = 0 → x = 1/10.
+          ell = 2/(100.1/10) = 1/5. Section optimale.
+    do:
+      - "Bien interpreter le contexte physique"
+    do_not:
+      - "Donner des dimensions negatives ou hors domaine"
