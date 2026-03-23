@@ -17,7 +17,7 @@ Verifier que les transcriptions .typ existent dans `_raw/{programme}/fondations/
 Glob: _raw/{programme}/fondations/{module}/*.typ
 ```
 
-Si elles manquent, indiquer quels fichiers sont absents et suggerer `/transcription {module}`.
+Si elles manquent, indiquer quels fichiers sont absents et suggerer `/transcrire {module}`.
 
 ## Pipeline
 
@@ -27,7 +27,7 @@ Si elles manquent, indiquer quels fichiers sont absents et suggerer `/transcript
 Glob: _raw/{programme}/fondations/{module}/*.typ
 ```
 
-Lister les fichiers trouves. On attend jusqu'a 3 sources (manuel, parascolaire, xyplus). Si aucun fichier n'existe, **stop** et orienter vers `/transcription {module}`.
+Lister les fichiers trouves. On attend jusqu'a 3 sources (manuel, parascolaire, xyplus). Si aucun fichier n'existe, **stop** et orienter vers `/transcrire {module}`.
 
 ### Etape 2 — Charger le template
 

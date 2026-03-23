@@ -91,7 +91,8 @@ tools/pipeline/src/         # Pipeline de contenu
 ## Skills
 
 - `/content` — Gestion du contenu pedagogique (atomes, molecules, KB, planning, generation)
-- `/transcription` — Indexer des PDF sources et transcrire des modules en Typst
+- `/index` — Indexer des PDF sources (fiches YAML)
+- `/transcrire` — Transcrire des modules en Typst
 - `/source` — Gerer le registre de sources educatives et scanner des sites
 - `/check` — Verification des rules (auto + manual)
 - `/audit-ui` — Audit UI/UX complet (check + exploration)

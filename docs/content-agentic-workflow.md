@@ -70,7 +70,8 @@ content/       Systeme de production de livrets
 | Ressource | Chemin | Role |
 |-----------|--------|------|
 | Skill /content | `.claude/skills/content/SKILL.md` | Routeur principal (kb, plan, creer, valider, patterns, lister) |
-| Skill /transcription | `.claude/skills/transcription/SKILL.md` | Indexation et transcription PDF → Typst |
+| Skill /index | `.claude/skills/index/SKILL.md` | Indexation PDF → fiches sources YAML |
+| Skill /transcrire | `.claude/skills/transcrire/SKILL.md` | Transcription modules PDF → Typst |
 | Skill /source | `.claude/skills/source/SKILL.md` | Gestion sources pedagogiques web |
 | KB template | `.claude/skills/content/references/kb-template.md` | Modele pour creer une KB module |
 | Planning template | `.claude/skills/content/references/planning-template.yaml` | Schema du manifeste per-molecule |
@@ -90,7 +91,7 @@ content/       Systeme de production de livrets
 ```mermaid
 flowchart TD
     PDF["PDF brut"] -->|"WF0a : indexer"| Fiche[("Fiche source YAML\n_raw/{prog}/sources/*.yaml")]
-    Fiche -->|"WF0b : transcrire\n/transcription"| Typst[("Fondations Typst\n_raw/{prog}/fondations/{mod}/*.typ")]
+    Fiche -->|"WF0b : transcrire\n/transcrire"| Typst[("Fondations Typst\n_raw/{prog}/fondations/{mod}/*.typ")]
     Typst -->|"WF1 : creer KB\n/content kb"| Meta[("_meta/{prog}/{mod}/\n3 fichiers YAML")]
     Meta -->|"WF1+ : enrichir patterns\n/content patterns"| Patterns[("patterns.yaml\n(version N)")]
     Series["Nouvelles series\nBAC, devoirs, parascolaires"] -->|"WF1+"| Patterns
@@ -123,7 +124,7 @@ flowchart TD
     Fiche -.-> Extract
     Extract --> Read["Lire visuellement\npar chunks de 5 pages"]
     Read --> Transcribe["Transcrire en Typst"]
-    CONV["Conventions Typst\n(skill /transcription)"] -.-> Transcribe
+    CONV["Conventions Typst\n(skill /transcrire)"] -.-> Transcribe
     Transcribe --> TYPST[("Fichier .typ\n_raw/{prog}/fondations/{mod}/")]
     Demande -->|"pas maintenant"| Stock["Stock indexe\n(transcription a la demande)"]
 ```
@@ -134,8 +135,8 @@ flowchart TD
 
 | Etape | Declencheur | Ressources chargees |
 |-------|-------------|---------------------|
-| 0a — Indexer un PDF | `/transcription index <pdf>` | PDF brut (table des matieres) |
-| 0b — Transcrire un module | `/transcription {module}` | `_raw/{prog}/sources/*.yaml` (plages de pages), PDFs source |
+| 0a — Indexer un PDF | `/index <pdf>` | PDF brut (table des matieres) |
+| 0b — Transcrire un module | `/transcrire {module}` | `_raw/{prog}/sources/*.yaml` (plages de pages), PDFs source |
 
 **Contraintes techniques** :
 - Resolution 150 DPI (`-r 150`) pour garder les images sous 2000px
@@ -424,8 +425,8 @@ Definit les schemas, les modules declares, les specs d'examen, et les convention
 
 | Commande | Workflow | Ce qu'elle fait |
 |----------|----------|-----------------|
-| `/transcription index <pdf>` | WF0a | Indexer un PDF, creer la fiche source |
-| `/transcription {module}` | WF0b | Transcrire un module en Typst |
+| `/index <pdf>` | WF0a | Indexer un PDF, creer la fiche source |
+| `/transcrire {module}` | WF0b | Transcrire un module en Typst |
 | `/content kb {module}` | WF1 | Creer les 3 fichiers YAML dans `_meta/{prog}/{mod}/` |
 | `/content patterns {module}` | WF1+ | Enrichir patterns.yaml avec des exercices |
 | `/content plan {module} : {profil}` | WF2 | Generer un planning calibre par profil (cours, examen, exploration) |
