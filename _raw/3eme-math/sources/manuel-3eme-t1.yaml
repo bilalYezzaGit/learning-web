@@ -20,7 +20,7 @@ modules:
     status: transcribed
   - slug: continuite
     pages: "21-39"
-    status: kb-complete
+    status: meta-complete
   - slug: limites-continuite
     pages: "40-55"
     status: transcribed
@@ -29,10 +29,10 @@ modules:
     status: transcribed
   - slug: nombre-derive
     pages: "80-99"
-    status: kb-complete
+    status: meta-complete
   - slug: fonction-derivee
     pages: "100-117"
-    status: kb-complete
+    status: meta-complete
   - slug: exemples-etude-fonctions
     pages: "118-135"
     status: transcribed

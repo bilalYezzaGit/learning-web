@@ -17,7 +17,7 @@ modules:
     status: transcribed
   - slug: continuite
     pages: "16-26"
-    status: kb-complete
+    status: meta-complete
   - slug: limites-continuite
     pages: "27-40"
     status: transcribed
@@ -26,10 +26,10 @@ modules:
     status: transcribed
   - slug: nombre-derive
     pages: "59-71"
-    status: kb-complete
+    status: meta-complete
   - slug: fonction-derivee
     pages: "72-91"
-    status: kb-complete
+    status: meta-complete
   - slug: produit-scalaire-plan
     pages: "92-108"
     status: not-started

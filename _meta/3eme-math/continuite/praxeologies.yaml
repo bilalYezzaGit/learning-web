@@ -13,7 +13,6 @@ praxeologies:
     difficulty: 1
     exam_frequency: medium
 
-    # Les 4 composantes de Chevallard
     task_type: >-
       Montrer que f est continue en a en identifiant son type
       (polynome, rationnelle, sqrt...).
@@ -22,26 +21,6 @@ praxeologies:
       2. Citer le theoreme T1 correspondant
       3. Verifier les conditions (a dans le domaine, denominateur non nul, sqrt positive)
       4. Conclure "D'ou f est continue en a"
-    technology: "Les fonctions usuelles sont continues sur leur domaine de definition (T1)"
-    theory: "Analyse reelle — continuite des fonctions elementaires"
-
-    # Variables didactiques — ce qui fait varier la difficulte
-    didactic_variables:
-      - name: type_de_fonction
-        values: [polynome, rationnelle, irrationnelle]
-        effect: "+1 par niveau de complexite"
-      - name: complexite_expression
-        values: [simple, composee, imbriquee]
-        effect: "+1 si imbriquee"
-      - name: valeur_de_a
-        values: [entier, rationnel, irrationnel]
-        effect: "+0.5 si irrationnel"
-
-    difficulty_profiles:
-      0: { type_de_fonction: polynome, complexite_expression: simple }
-      1: { type_de_fonction: rationnelle, complexite_expression: simple }
-      2: { type_de_fonction: irrationnelle, complexite_expression: composee }
-
     common_errors: [E1]
     canonical_examples:
       - "f(x) = 2x^4+4x^3-1 en 0"
@@ -62,24 +41,6 @@ praxeologies:
       2. Pour chaque composante, citer le theoreme adapte (T2 somme/produit, T3 quotient, T4 |f|, T5 sqrt)
       3. Verifier les conditions (denominateur non nul, sqrt > 0)
       4. Conclure par enchainement
-    technology: "Les operations algebriques preservent la continuite (T2, T3, T4, T5)"
-    theory: "Analyse reelle — stabilite de la continuite par operations"
-
-    didactic_variables:
-      - name: nombre_operations
-        values: [1, 2, "3+"]
-        effect: "+0.5 par operation supplementaire"
-      - name: presence_sqrt
-        values: [oui, non]
-        effect: "+0.5 si oui (condition stricte)"
-      - name: presence_quotient
-        values: [oui, non]
-        effect: "+0.5 si oui (condition non-nullite)"
-
-    difficulty_profiles:
-      1: { nombre_operations: 1, presence_sqrt: non }
-      2: { nombre_operations: 2, presence_sqrt: oui }
-
     common_errors: [E3]
     canonical_examples:
       - "f(x) = sqrt(x-2)/(x^2+2x+5) en 2"
@@ -103,25 +64,6 @@ praxeologies:
          c. Calculer f(x0)
       3. Si les trois sont egaux : f continue en x0
       4. Sinon : f discontinue en x0
-    technology: "f continue en a <=> f continue a droite et a gauche en a (T6)"
-    theory: "Analyse reelle — continuite laterale et raccordement"
-
-    didactic_variables:
-      - name: nombre_morceaux
-        values: [2, 3]
-        effect: "+1 si 3 morceaux"
-      - name: type_fonctions_morceaux
-        values: [polynomes, rationnelles, mixtes]
-        effect: "+0.5 si mixtes"
-      - name: nature_discontinuite
-        values: [saut, point_isole, continue]
-        effect: "saut est plus intuitif"
-
-    difficulty_profiles:
-      1: { nombre_morceaux: 2, type_fonctions_morceaux: polynomes }
-      2: { nombre_morceaux: 2, type_fonctions_morceaux: mixtes }
-      3: { nombre_morceaux: 3, type_fonctions_morceaux: mixtes }
-
     common_errors: [E5]
     canonical_examples:
       - "f(x) = {2x+1 si x>1, 3 si x=1, 3x-1 si x<1}"
@@ -142,25 +84,6 @@ praxeologies:
       2. Calculer f(a) et f(b)
       3. Constater que k est entre f(a) et f(b) (ou que f(a).f(b) < 0 pour k=0)
       4. Conclure par le TVI : il existe au moins un c dans ]a,b[ tel que f(c) = k
-    technology: "Theoreme des valeurs intermediaires (T8, T8')"
-    theory: "Analyse reelle — propriete des valeurs intermediaires des fonctions continues"
-
-    didactic_variables:
-      - name: type_de_fonction
-        values: [polynome, rationnelle, avec_racine, par_morceaux]
-        effect: "+1 par niveau de complexite"
-      - name: bornes_explicites
-        values: [true, false]
-        effect: "false → +1 (il faut trouver a et b)"
-      - name: equation_forme
-        values: ["f(x) = 0", "f(x) = k", "f(x) = g(x)"]
-        effect: "f(x) = g(x) → +1 (poser h = f - g)"
-
-    difficulty_profiles:
-      0: { type_de_fonction: polynome, bornes_explicites: true, equation_forme: "f(x) = 0" }
-      1: { type_de_fonction: polynome, bornes_explicites: true, equation_forme: "f(x) = k" }
-      2: { type_de_fonction: rationnelle, bornes_explicites: false, equation_forme: "f(x) = g(x)" }
-
     common_errors: [E2, E4]
     canonical_examples:
       - "f(x) = x^3+3x/2+1, solution dans [-2,1]"
@@ -181,21 +104,6 @@ praxeologies:
       2. Montrer que f est strictement monotone sur [a,b]
          (soit par definition, soit par etude de f')
       3. Conclure : la solution est unique (T9)
-    technology: "Une fonction continue strictement monotone est injective (T9)"
-    theory: "Analyse reelle — injectivite des fonctions monotones"
-
-    didactic_variables:
-      - name: monotonie_evidente
-        values: [true, false]
-        effect: "false → +1 (necessite etude de f')"
-      - name: type_de_fonction
-        values: [polynome_degre_impair, rationnelle, composee]
-        effect: "+0.5 par complexite"
-
-    difficulty_profiles:
-      1: { monotonie_evidente: true, type_de_fonction: polynome_degre_impair }
-      2: { monotonie_evidente: false, type_de_fonction: rationnelle }
-
     common_errors: [E2]
     canonical_examples:
       - "f(x) = x^3+3x-1, unique solution dans [0,1]"
@@ -214,24 +122,6 @@ praxeologies:
       2. Si f monotone : f([a,b]) = [f(a),f(b)] ou [f(b),f(a)]
       3. Si f change de sens : trouver le(s) extremum(s), composer les images
       4. Attention aux bornes ouvertes/fermees
-    technology: "L'image d'un intervalle par une fonction continue est un intervalle (T7)"
-    theory: "Analyse reelle — image continue d'un connexe"
-
-    didactic_variables:
-      - name: type_intervalle
-        values: [ferme, ouvert, semi_ouvert]
-        effect: "+0.5 si bornes ouvertes"
-      - name: monotonie
-        values: [monotone, non_monotone]
-        effect: "+1 si non monotone"
-      - name: lecture_tableau
-        values: [avec_tableau, sans_tableau]
-        effect: "+0.5 si sans tableau fourni"
-
-    difficulty_profiles:
-      1: { type_intervalle: ferme, monotonie: monotone }
-      2: { type_intervalle: semi_ouvert, monotonie: non_monotone }
-
     common_errors: [E6]
     canonical_examples:
       - "f(x) = x^2 sur [-1, 2], f(I) = [0, 4]"
@@ -252,21 +142,6 @@ praxeologies:
       2. Calculer f(m) ou m = (a+b)/2
       3. Si f(a).f(m) < 0 : solution dans [a,m], sinon dans [m,b]
       4. Repeter jusqu'a la precision souhaitee
-    technology: "A chaque etape, on divise l'intervalle par 2. Apres n etapes, precision (b-a)/2^n"
-    theory: "Analyse reelle — methode de dichotomie (Bolzano)"
-
-    didactic_variables:
-      - name: precision
-        values: ["10^-1", "10^-2"]
-        effect: "+0.5 si 10^-2 (plus d'iterations)"
-      - name: presentation
-        values: [tableau, texte_libre]
-        effect: "tableau est plus guide"
-
-    difficulty_profiles:
-      1: { precision: "10^-1", presentation: tableau }
-      2: { precision: "10^-2", presentation: texte_libre }
-
     common_errors: []
     canonical_examples:
       - "Encadrer alpha a 10^-2 ou f(x) = x^3-x-1"
@@ -286,26 +161,6 @@ praxeologies:
          (deriver, signe de f', valeurs aux bornes et extrema)
       2. Sur chaque intervalle de monotonie, appliquer TVI + unicite
       3. Compter le nombre total de solutions
-    technology: >-
-      Sur chaque intervalle de monotonie, le TVI + monotonie donne au plus
-      une solution. Le nombre total est la somme sur tous les intervalles.
-    theory: "Analyse reelle — decomposition en intervalles de monotonie"
-
-    didactic_variables:
-      - name: degre_polynome
-        values: [3, 4, 5]
-        effect: "+0.5 par degre supplementaire"
-      - name: nombre_extrema
-        values: [0, 1, 2, 3]
-        effect: "+0.5 par extremum supplementaire"
-      - name: signe_aux_extrema
-        values: [clair, ambigu]
-        effect: "+1 si ambigu (necessite calcul precis)"
-
-    difficulty_profiles:
-      2: { degre_polynome: 3, nombre_extrema: 1 }
-      3: { degre_polynome: 4, nombre_extrema: 2, signe_aux_extrema: ambigu }
-
     common_errors: [E2]
     canonical_examples:
       - "f(x) = x^4-4x^2-x+1, exactement 4 solutions"
@@ -323,21 +178,6 @@ praxeologies:
       Pour |f| : f continue en a => |f| continue en a (T4, direct).
       Pour sqrt(f) : verifier que f est continue en a ET que f(a) > 0
       (strictement), puis appliquer T5.
-    technology: "T4 (valeur absolue) et T5 (racine carree avec condition stricte)"
-    theory: "Analyse reelle — composition avec fonctions Lipschitziennes"
-
-    didactic_variables:
-      - name: type_operation
-        values: [valeur_absolue, racine_carree]
-        effect: "racine → +0.5 (condition stricte)"
-      - name: cas_limite
-        values: [clair, f_a_egal_zero]
-        effect: "+1 si f(a) = 0 (piege)"
-
-    difficulty_profiles:
-      1: { type_operation: valeur_absolue }
-      2: { type_operation: racine_carree, cas_limite: f_a_egal_zero }
-
     common_errors: [E3]
     canonical_examples:
       - "|x^2-4| continue en 2"
@@ -358,19 +198,6 @@ praxeologies:
       2. Majorer |f(x)-f(a)| en fonction de |x-a|
       3. Choisir alpha = beta/K (ou K est le coefficient de majoration)
       4. Conclure : pour tout beta > 0, prendre alpha = ... pour que |f(x)-f(a)| < beta
-    technology: "Definition D1 de la continuite. La difficulte est la bonne majoration."
-    theory: "Analyse reelle — definition formelle de la continuite"
-
-    didactic_variables:
-      - name: type_de_fonction
-        values: [affine, quadratique, avec_racine]
-        effect: "quadratique → +1 (restriction locale), racine → +1 (conjuguee)"
-
-    difficulty_profiles:
-      1: { type_de_fonction: affine }
-      2: { type_de_fonction: quadratique }
-      3: { type_de_fonction: avec_racine }
-
     common_errors: []
     canonical_examples:
       - "f(x) = 2x-1 en a=2 (alpha = beta/2)"

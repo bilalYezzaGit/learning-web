@@ -29,7 +29,7 @@ modules:
     status: not-started
   - slug: denombrement
     pages: "138-157"
-    status: kb-complete
+    status: meta-complete
   - slug: divisibilite-N
     pages: "158-174"
     status: not-started

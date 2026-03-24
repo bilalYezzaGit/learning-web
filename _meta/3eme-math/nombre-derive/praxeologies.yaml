@@ -21,25 +21,6 @@ praxeologies:
       2. Simplifier algebriquement (factoriser, rationaliser, meme denominateur)
       3. Calculer la limite quand h->0
       4. Conclure : "f est derivable en a et f'(a) = ..."
-    technology: "La limite finie du taux de variation est le nombre derive par definition (D1, D1')"
-    theory: "Analyse reelle — definition du nombre derive comme limite"
-
-    didactic_variables:
-      - name: type_de_fonction
-        values: [polynome, racine, inverse, quotient]
-        effect: "+1 par niveau de complexite algebrique"
-      - name: complexite_simplification
-        values: [factorisation, rationalisation, mise_au_denominateur]
-        effect: "rationalisation et denominateur +0.5"
-      - name: valeur_de_a
-        values: [entier, fraction, parametre]
-        effect: "+0.5 si parametre generique"
-
-    difficulty_profiles:
-      0: { type_de_fonction: polynome, complexite_simplification: factorisation, valeur_de_a: entier }
-      1: { type_de_fonction: racine, complexite_simplification: rationalisation, valeur_de_a: entier }
-      2: { type_de_fonction: quotient, complexite_simplification: mise_au_denominateur, valeur_de_a: parametre }
-
     common_errors: [E3]
     canonical_examples:
       - "f(x) = x^2 en a=1"
@@ -62,21 +43,6 @@ praxeologies:
       3. Montrer que la limite est infinie (+∞ ou -∞) ou n'existe pas
       4. Conclure : "f n'est pas derivable en a"
       5. Preciser la nature : tangente verticale ou point anguleux
-    technology: "Absence de limite finie => non-derivabilite. Limite infinie => tangente verticale."
-    theory: "Analyse reelle — conditions de derivabilite"
-
-    didactic_variables:
-      - name: type_non_derivabilite
-        values: [tangente_verticale, point_anguleux]
-        effect: "point anguleux necessite etude bilaterale"
-      - name: type_de_fonction
-        values: [racine, valeur_absolue, par_morceaux]
-        effect: "+0.5 pour par_morceaux"
-
-    difficulty_profiles:
-      1: { type_non_derivabilite: tangente_verticale, type_de_fonction: racine }
-      2: { type_non_derivabilite: point_anguleux, type_de_fonction: valeur_absolue }
-
     common_errors: [E1, E4]
     canonical_examples:
       - "f(x) = sqrt(x-1) en 1 (tangente verticale)"
@@ -97,25 +63,6 @@ praxeologies:
       2. Appliquer les formules de derivation (T4 fonctions usuelles, T5 operations, T6 sqrt)
       3. Substituer la valeur de a
       4. Simplifier le resultat
-    technology: "Les theoremes de derivation des fonctions usuelles (T4) et des operations (T5, T6)"
-    theory: "Analyse reelle — derivation par formules"
-
-    didactic_variables:
-      - name: type_de_fonction
-        values: [polynome, rationnelle, irrationnelle, composee]
-        effect: "+0.5 par niveau de complexite"
-      - name: nombre_operations
-        values: [1, 2, "3+"]
-        effect: "+0.5 par operation supplementaire"
-      - name: presence_sqrt
-        values: [oui, non]
-        effect: "+0.5 si oui (condition f(a) > 0)"
-
-    difficulty_profiles:
-      0: { type_de_fonction: polynome, nombre_operations: 1 }
-      1: { type_de_fonction: rationnelle, nombre_operations: 2 }
-      2: { type_de_fonction: irrationnelle, nombre_operations: "3+", presence_sqrt: oui }
-
     common_errors: [E5, E7]
     canonical_examples:
       - "f(x) = x^4-3x^2+5 en 1"
@@ -138,25 +85,6 @@ praxeologies:
       2. Calculer f'(a) (par formule ou par definition)
       3. Appliquer la formule y = f'(a)(x-a) + f(a)
       4. Developper et simplifier
-    technology: "La tangente est la droite passant par (a, f(a)) de pente f'(a) (T1)"
-    theory: "Analyse reelle — tangente a une courbe"
-
-    didactic_variables:
-      - name: type_de_fonction
-        values: [polynome, rationnelle, irrationnelle]
-        effect: "+0.5 par complexite"
-      - name: valeur_de_a
-        values: [entier, fraction, parametre]
-        effect: "+0.5 si fraction ou parametre"
-      - name: tangente_horizontale
-        values: [oui, non]
-        effect: "oui → cas particulier f'(a) = 0"
-
-    difficulty_profiles:
-      0: { type_de_fonction: polynome, valeur_de_a: entier }
-      1: { type_de_fonction: rationnelle, valeur_de_a: fraction }
-      2: { type_de_fonction: irrationnelle, tangente_horizontale: oui }
-
     common_errors: [E3]
     canonical_examples:
       - "f(x) = 2x^3-4x+3 en a=1"
@@ -177,24 +105,6 @@ praxeologies:
       2. Resoudre l'equation f'(a) = m
       3. En deduire les abscisses des points cherches
       4. Calculer les ordonnees correspondantes f(a)
-    technology: "Deux droites sont paralleles ssi elles ont le meme coefficient directeur"
-    theory: "Geometrie analytique — parallelisme de droites"
-
-    didactic_variables:
-      - name: droite_horizontale
-        values: [oui, non]
-        effect: "oui → m=0, resoudre f'(a)=0"
-      - name: nombre_solutions
-        values: [0, 1, 2]
-        effect: "+0.5 si 2 solutions"
-      - name: type_de_fonction
-        values: [polynome_degre_2, polynome_degre_3, rationnelle]
-        effect: "+0.5 par complexite"
-
-    difficulty_profiles:
-      1: { droite_horizontale: oui, nombre_solutions: 1, type_de_fonction: polynome_degre_2 }
-      2: { droite_horizontale: non, nombre_solutions: 2, type_de_fonction: polynome_degre_3 }
-
     common_errors: [E3]
     canonical_examples:
       - "f(x) = x^3-x, tangente parallele a y=x => f'(a)=1 => 3a^2-1=1"
@@ -214,21 +124,6 @@ praxeologies:
       2. Resoudre l'equation f'(a) . m = -1 (soit f'(a) = -1/m)
       3. En deduire les abscisses des points cherches
       4. Calculer les ordonnees correspondantes f(a)
-    technology: "Deux droites sont perpendiculaires ssi le produit de leurs coefficients directeurs vaut -1"
-    theory: "Geometrie analytique — perpendicularite de droites"
-
-    didactic_variables:
-      - name: equation_droite_forme
-        values: [y_mx_p, ax_by_c]
-        effect: "+0.5 si ax+by+c=0 (extraire m)"
-      - name: type_de_fonction
-        values: [polynome_degre_2, polynome_degre_3, rationnelle]
-        effect: "+0.5 par complexite"
-
-    difficulty_profiles:
-      1: { equation_droite_forme: y_mx_p, type_de_fonction: polynome_degre_2 }
-      2: { equation_droite_forme: ax_by_c, type_de_fonction: rationnelle }
-
     common_errors: [E3]
     canonical_examples:
       - "f(x) = 2x^2+x+1, tangente perpendiculaire a x-7y+7=0"
@@ -247,22 +142,6 @@ praxeologies:
       2. Calculer f(a) et f'(a)
       3. Appliquer f(a+h) ≈ f(a) + h.f'(a)
       4. Ecrire le resultat sous forme simplifiee
-    technology: "L'approximation affine remplace la courbe par sa tangente au voisinage de a (T2)"
-    theory: "Analyse reelle — developpement limite d'ordre 1"
-
-    didactic_variables:
-      - name: type_de_fonction
-        values: [racine, puissance, inverse]
-        effect: "racine est le plus frequent"
-      - name: choix_de_a
-        values: [evident, a_trouver]
-        effect: "+0.5 si a_trouver"
-
-    difficulty_profiles:
-      0: { type_de_fonction: racine, choix_de_a: evident }
-      1: { type_de_fonction: puissance, choix_de_a: evident }
-      2: { type_de_fonction: inverse, choix_de_a: a_trouver }
-
     common_errors: []
     canonical_examples:
       - "sqrt(1+h) ≈ 1 + h/2"
@@ -284,25 +163,6 @@ praxeologies:
       2. Calculer f(a) et f'(a)
       3. Appliquer f(a+h) ≈ f(a) + h.f'(a)
       4. Donner la valeur approchee
-    technology: "L'approximation est d'autant meilleure que h est petit"
-    theory: "Analyse reelle — approximation lineaire"
-
-    didactic_variables:
-      - name: choix_du_point_reference
-        values: [evident, non_evident]
-        effect: "+0.5 si non_evident"
-      - name: type_nombre
-        values: [racine, puissance, inverse]
-        effect: "varier les types"
-      - name: precision_demandee
-        values: [qualitative, quantitative]
-        effect: "+0.5 si quantitative"
-
-    difficulty_profiles:
-      0: { choix_du_point_reference: evident, type_nombre: racine }
-      1: { choix_du_point_reference: evident, type_nombre: puissance }
-      2: { choix_du_point_reference: non_evident, precision_demandee: quantitative }
-
     common_errors: []
     canonical_examples:
       - "sqrt(1,001) ≈ 1 + 0,001/2 = 1,0005"
@@ -321,18 +181,6 @@ praxeologies:
     technique: |
       1. Montrer que f est derivable en a (par definition ou par formule)
       2. Conclure par T3 : "f est derivable en a, donc f est continue en a"
-    technology: "Derivable en a => continu en a (T3)"
-    theory: "Analyse reelle — lien derivabilite-continuite"
-
-    didactic_variables:
-      - name: type_de_fonction
-        values: [polynome, rationnelle, composee]
-        effect: "+0.5 par complexite"
-
-    difficulty_profiles:
-      0: { type_de_fonction: polynome }
-      1: { type_de_fonction: rationnelle }
-
     common_errors: [E1]
     canonical_examples:
       - "f derivable en a par calcul du taux de variation => f continue en a"
@@ -353,18 +201,6 @@ praxeologies:
          - Point anguleux : f'_d(a) ≠ f'_g(a)
          - Tangente verticale : limite infinie du taux de variation
       3. Conclure : "f est continue en a mais non derivable en a"
-    technology: "La reciproque de T3 est fausse (T3')"
-    theory: "Analyse reelle — contre-exemples classiques"
-
-    didactic_variables:
-      - name: type_non_derivabilite
-        values: [point_anguleux, tangente_verticale]
-        effect: "varier les types"
-
-    difficulty_profiles:
-      0: { type_non_derivabilite: point_anguleux }
-      1: { type_non_derivabilite: tangente_verticale }
-
     common_errors: [E1]
     canonical_examples:
       - "f(x) = |x| en 0 (continu, f'_d=1 ≠ f'_g=-1)"
@@ -388,22 +224,6 @@ praxeologies:
          - Si differents (finis) : point anguleux, ecrire les demi-tangentes
          - Si l'un est infini : demi-tangente verticale
       4. Ecrire les equations des demi-tangentes : y = f'_d(a)(x-a)+f(a) et y = f'_g(a)(x-a)+f(a)
-    technology: "f derivable en a <=> f'_d(a) = f'_g(a) (T7)"
-    theory: "Analyse reelle — derivabilite laterale et demi-tangentes"
-
-    didactic_variables:
-      - name: type_de_fonction
-        values: [valeur_absolue, par_morceaux, composee]
-        effect: "+0.5 pour par_morceaux"
-      - name: nature_point
-        values: [anguleux, tangente_verticale_unilaterale, derivable]
-        effect: "anguleux est le cas le plus frequent"
-
-    difficulty_profiles:
-      1: { type_de_fonction: valeur_absolue, nature_point: anguleux }
-      2: { type_de_fonction: par_morceaux, nature_point: anguleux }
-      3: { type_de_fonction: composee, nature_point: tangente_verticale_unilaterale }
-
     common_errors: [E6]
     canonical_examples:
       - "f(x) = |x| en 0"
@@ -428,28 +248,6 @@ praxeologies:
          - f'_g(a) via le morceau de gauche
          - f'_d(a) via le morceau de droite
       3. Comparer f'_d(a) et f'_g(a) et conclure (T7)
-    technology: "Il faut d'abord verifier la continuite (prerequis a la derivabilite), puis appliquer T7"
-    theory: "Analyse reelle — derivabilite des fonctions par morceaux"
-
-    didactic_variables:
-      - name: nombre_morceaux
-        values: [2, 3]
-        effect: "+1 si 3 morceaux"
-      - name: type_fonctions_morceaux
-        values: [polynomes, rationnelles, irrationnelles, mixtes]
-        effect: "+0.5 si mixtes"
-      - name: continuite_acquise
-        values: [oui, non]
-        effect: "non → arret premature (f non derivable car non continue)"
-      - name: limite_infinie
-        values: [oui, non]
-        effect: "+0.5 si oui (demi-tangente verticale)"
-
-    difficulty_profiles:
-      1: { nombre_morceaux: 2, type_fonctions_morceaux: polynomes, continuite_acquise: oui }
-      2: { nombre_morceaux: 2, type_fonctions_morceaux: mixtes, continuite_acquise: oui }
-      3: { nombre_morceaux: 3, type_fonctions_morceaux: mixtes, limite_infinie: oui }
-
     common_errors: [E2]
     canonical_examples:
       - "f(x) = {x^2+x-6 si x<=2, sqrt(x^2-4)+x-2 si x>2} en x=2"
@@ -470,21 +268,6 @@ praxeologies:
       2. Verifier que g est derivable en a
       3. Conclure : la limite vaut g'(a)
       4. Calculer g'(a) par la formule appropriee
-    technology: "Par definition, si g est derivable en a, lim_{x->a} (g(x)-g(a))/(x-a) = g'(a)"
-    theory: "Analyse reelle — definition du nombre derive exploitee en sens inverse"
-
-    didactic_variables:
-      - name: forme_expression
-        values: [directe, transformee, racine]
-        effect: "+0.5 si transformee (factorisation necessaire)"
-      - name: choix_g_et_a
-        values: [evident, non_evident]
-        effect: "+1 si non_evident"
-
-    difficulty_profiles:
-      1: { forme_expression: directe, choix_g_et_a: evident }
-      2: { forme_expression: transformee, choix_g_et_a: non_evident }
-
     common_errors: []
     canonical_examples:
       - "lim_{x->1} (x^3-1)/(x-1) = 3 (car g(x)=x^3, g'(1)=3)"
@@ -507,24 +290,6 @@ praxeologies:
       2. Former le systeme d'equations
       3. Resoudre le systeme (substitution, elimination)
       4. Conclure en donnant les valeurs des coefficients
-    technology: "La tangente en un point a pour pente f'(a), et passe par (a, f(a))"
-    theory: "Algebre lineaire — resolution de systemes"
-
-    didactic_variables:
-      - name: nombre_conditions
-        values: [2, 3]
-        effect: "+0.5 par condition supplementaire"
-      - name: type_de_fonction
-        values: [polynome_degre_2, polynome_degre_3]
-        effect: "+0.5 si degre 3"
-      - name: nature_conditions
-        values: [passage_et_pente, tangente_parallele, tangente_perpendiculaire]
-        effect: "+0.5 pour perpendiculaire"
-
-    difficulty_profiles:
-      1: { nombre_conditions: 2, type_de_fonction: polynome_degre_2 }
-      2: { nombre_conditions: 3, type_de_fonction: polynome_degre_3 }
-
     common_errors: [E3, E7]
     canonical_examples:
       - "f(x) = ax^2+bx+c avec C passant par A(1,4), B(-1,6) et tangente en A de pente 3"
@@ -543,21 +308,6 @@ praxeologies:
       2. Verifier que f'(a) = g'(a) au point commun
       3. Conclure : les deux courbes ont la meme tangente en ce point
       4. Ecrire l'equation de la tangente commune
-    technology: "Tangente commune <=> meme point, meme pente => meme equation de tangente"
-    theory: "Geometrie analytique — tangence de courbes"
-
-    didactic_variables:
-      - name: type_courbes
-        values: [paraboles, parabole_et_hyperbole, polynomes_degre_3]
-        effect: "+0.5 par complexite"
-      - name: unicite_point_tangence
-        values: [unique, multiple]
-        effect: "+0.5 si multiple"
-
-    difficulty_profiles:
-      1: { type_courbes: paraboles, unicite_point_tangence: unique }
-      2: { type_courbes: polynomes_degre_3, unicite_point_tangence: multiple }
-
     common_errors: []
     canonical_examples:
       - "f(x) = x^2+2x-1, g(x) = -x^2-6x-9 => tangente commune en A(-2,-1)"
@@ -577,21 +327,6 @@ praxeologies:
       2. Calculer f'(a) et g'(a) en chaque point commun
       3. Verifier que f'(a) . g'(a) = -1
       4. Conclure : les tangentes sont perpendiculaires
-    technology: "Deux droites sont perpendiculaires ssi le produit de leurs coefficients directeurs vaut -1"
-    theory: "Geometrie analytique — perpendicularite de droites"
-
-    didactic_variables:
-      - name: points_communs_donnes
-        values: [oui, non]
-        effect: "+0.5 si non (il faut d'abord les trouver)"
-      - name: type_courbes
-        values: [paraboles, mixtes]
-        effect: "+0.5 si mixtes"
-
-    difficulty_profiles:
-      1: { points_communs_donnes: oui, type_courbes: paraboles }
-      2: { points_communs_donnes: non, type_courbes: mixtes }
-
     common_errors: []
     canonical_examples:
       - "P: y=x^2 et P': y=-x^2/3+1, tangentes perpendiculaires aux points d'intersection"
@@ -612,22 +347,6 @@ praxeologies:
       3. Mesurer la pente de la tangente (coefficient directeur)
          via deux points de la tangente : m = (y2-y1)/(x2-x1)
       4. Ecrire l'equation : y = m(x-a) + f(a)
-    technology: "f'(a) est le coefficient directeur de la tangente en a (T1)"
-    theory: "Geometrie analytique — lecture graphique"
-
-    didactic_variables:
-      - name: precision_lecture
-        values: [pente_entiere, pente_fractionnaire]
-        effect: "+0.5 si fractionnaire"
-      - name: tangente_horizontale
-        values: [oui, non]
-        effect: "oui → cas particulier f'(a) = 0"
-
-    difficulty_profiles:
-      0: { precision_lecture: pente_entiere, tangente_horizontale: oui }
-      1: { precision_lecture: pente_entiere, tangente_horizontale: non }
-      2: { precision_lecture: pente_fractionnaire }
-
     common_errors: [E4]
     canonical_examples:
       - "Lire f(-1), f'(-1), f(1), f'(1) sur un graphe donne"

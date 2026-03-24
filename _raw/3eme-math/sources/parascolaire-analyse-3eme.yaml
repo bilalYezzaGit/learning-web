@@ -17,7 +17,7 @@ modules:
     status: transcribed
   - slug: continuite
     pages: "26-41"
-    status: kb-complete
+    status: meta-complete
   - slug: limites-continuite
     pages: "42-69"
     status: transcribed
@@ -26,10 +26,10 @@ modules:
     status: transcribed
   - slug: nombre-derive
     pages: "105-133"
-    status: kb-complete
+    status: meta-complete
   - slug: fonction-derivee
     pages: "134-196"
-    status: kb-complete
+    status: meta-complete
   - slug: exemples-etude-fonctions
     pages: "197-260"
     status: transcribed

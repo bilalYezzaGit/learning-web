@@ -273,7 +273,7 @@ Les polynomes sont continus sur tout $\mathbb{R}$, sans exception.
 
 ## 3. Molecules
 
-Les molecules sont des fichiers YAML dans `content/{programme}/{module}/_molecules/`. Elles assemblent des atomes en vues ordonnees.
+Les molecules sont des fichiers YAML dans `content/{programme}/{module}/{profil}/`. Elles assemblent des atomes en vues ordonnees.
 
 ### 3.0 Structure des repertoires
 
@@ -282,22 +282,21 @@ content/
 ├── 3eme-math/                          # programme (contient _programme.yaml)
 │   ├── _programme.yaml                 # metadata du programme
 │   ├── nombre-derive/                  # module
-│   │   ├── _molecules/
-│   │   │   ├── nombre-derive-cours/
-│   │   │   │   ├── molecule.yaml       # livret (kind: livret)
-│   │   │   │   ├── _planning.yaml      # planning specifique (optionnel)
-│   │   │   │   └── _validation.md      # validation specifique (optionnel)
-│   │   │   ├── nombre-derive-examen/
-│   │   │   │   └── molecule.yaml
-│   │   │   └── nombre-derive-exploration/
-│   │   │       └── molecule.yaml
-│   │   ├── lesson-der-definition.mdx
-│   │   ├── ex-der-tvi-direct.mdx
-│   │   └── qcm-der-tangente.mdx
+│   │   ├── cours/                      # profil cours
+│   │   │   ├── molecule.yaml           # livret (kind: livret)
+│   │   │   ├── _planning.yaml          # planning specifique (optionnel)
+│   │   │   ├── _validation.md          # validation specifique (optionnel)
+│   │   │   ├── lesson-der-definition.mdx
+│   │   │   ├── ex-der-tvi-direct.mdx
+│   │   │   └── qcm-der-tangente.mdx
+│   │   ├── examen/                     # profil examen
+│   │   │   └── molecule.yaml
+│   │   └── exploration/                # profil exploration
+│   │       └── molecule.yaml
 │   └── fonction-derivee/
-│       ├── _molecules/
-│       │   └── .../molecule.yaml
-│       └── *.mdx
+│       ├── cours/molecule.yaml
+│       ├── examen/molecule.yaml
+│       └── exploration/molecule.yaml
 ├── 2nde-math/                          # futur programme
 │   └── ...
 
@@ -309,12 +308,12 @@ _meta/                                   # modele academique (hors pipeline)
 └── 3eme-math/                           # 1 repertoire par programme
     ├── prerequis-graph.yaml             # graphe de dependances entre modules
     ├── nombre-derive/                   # 1 repertoire par module
-    │   ├── savoir.yaml                    # savoirs theoriques (ex _kb.md)
+    │   ├── savoir.yaml                    # savoirs theoriques
     │   ├── praxeologies.yaml              # taches-types et techniques
     │   ├── misconceptions.yaml            # erreurs frequentes
     │   ├── lexique.yaml                   # vocabulaire du module
     │   ├── redaction.yaml                 # conventions de redaction du module
-    │   └── patterns.yaml                  # patterns d'examen (ex _patterns.yaml)
+    │   └── patterns.yaml                  # patterns d'examen
     ├── fonction-derivee/
     │   ├── savoir.yaml
     │   ├── praxeologies.yaml
@@ -326,14 +325,14 @@ _meta/                                   # modele academique (hors pipeline)
             └── spec.yaml
 ```
 
-Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les atomes (`.mdx` dans les modules), et les molecules/livrets (`_molecules/{slug}/molecule.yaml`). Les fichiers prefixes `_` dans les sous-repertoires molecule sont **invisibles au pipeline** :
+Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les profils (sous-repertoires des modules contenant `molecule.yaml`), et les atomes (`.mdx` dans les profils). Les fichiers prefixes `_` dans les repertoires profil sont **invisibles au pipeline** :
 
 | Fichier invisible | Role | Cree par |
 |-------------------|------|----------|
 | `_planning.yaml` | Spec de generation (par molecule) | WF2 |
 | `_validation.md` | Rapport de validation (par molecule) | WF4 |
 
-Le modele academique (anciennement `_kb.md` et `_patterns.yaml` dans les modules) vit desormais dans `_meta/{programme}/{module}/` :
+Le modele academique vit dans `_meta/{programme}/{module}/` :
 
 | Fichier `_meta/` | Role | Cree par |
 |-------------------|------|----------|
@@ -348,7 +347,7 @@ Le modele academique (anciennement `_kb.md` et `_patterns.yaml` dans les modules
 
 Tous les livrets utilisent `kind: livret`. Il n'y a plus de distinction `cours`/`serie` — un livret est simplement un assemblage ordonne d'atomes organise en sections.
 
-Fichier : `content/{programme}/{module}/_molecules/{slug}/molecule.yaml`
+Fichier : `content/{programme}/{module}/{profil}/molecule.yaml`
 
 ```yaml
 kind: livret                            # obligatoire, toujours "livret"
@@ -401,7 +400,7 @@ visible: true                           # optionnel, defaut: true
 
 **Regles** :
 - L'ID du programme (nom du repertoire) correspond au slug de parcours
-- Plus de listes `cours:` et `series:` — le pipeline decouvre automatiquement les livrets en scannant les `_molecules/{slug}/molecule.yaml` des sous-modules
+- Plus de listes `cours:` et `series:` — le pipeline decouvre automatiquement les livrets en scannant les `{profil}/molecule.yaml` des sous-modules
 - Les livrets sont tries par `order`
 - `visible: true` par defaut. Mettre `false` pour un programme non publie
 

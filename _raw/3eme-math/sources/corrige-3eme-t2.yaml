@@ -35,7 +35,7 @@ modules:
     status: not-started
   - slug: denombrement
     pages: "164-173"
-    status: kb-complete
+    status: meta-complete
   - slug: vecteurs-espace
     pages: "174-191"
     status: not-started
