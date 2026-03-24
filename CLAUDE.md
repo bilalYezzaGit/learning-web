@@ -54,12 +54,10 @@ content/
 ├── {programme}/            # Ex: 3eme-math/
 │   ├── _programme.yaml     # Metadata programme
 │   └── {module}/           # Ex: continuite/
-│       ├── _molecules/     # Repertoire par molecule
-│       │   └── {slug}/     # Ex: continuite/
-│       │       ├── molecule.yaml    # Livret YAML
-│       │       ├── _planning.yaml   # Planning (optionnel)
-│       │       └── _validation.md   # Validation (optionnel)
-│       └── *.mdx           # Atomes (lesson, exercise, qcm)
+│       └── {profil}/       # Ex: cours/, examen/, exploration/
+│           ├── molecule.yaml    # Livret YAML
+│           ├── _planning.yaml   # Planning (optionnel)
+│           └── *.mdx            # Atomes du livret (lesson, exercise, qcm)
 
 tools/pipeline/src/         # Pipeline de contenu
 ├── stages/                 # read → validate → compile → resolve → write → generate-pdfs
