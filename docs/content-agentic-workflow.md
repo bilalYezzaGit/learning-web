@@ -1,479 +1,224 @@
 # Content Agentic Workflow
 
-Document vivant qui cartographie le systeme de generation de contenu pedagogique pilote par LLM.
+Document vivant qui decrit le systeme de generation de contenu pedagogique.
 
 ---
 
 ## Architecture
 
-Le systeme repose sur 3 couches decouples :
+3 couches decouples, 3 phases de travail independantes.
 
 ```
-_raw/          Ressources brutes (PDFs, transcriptions Typst), organisees par programme
-               Input du systeme. Stable, rarement modifiee.
-
-_meta/         Modele academique des mathematiques tunisiennes
-               Savoir pur en YAML structure. Enrichissable independamment.
-               Ne contient AUCUNE convention d'implementation (Typst, MDX).
-
-content/       Systeme de production de livrets
-               Plans (ephemeres) → atomes MDX + molecules YAML (produits finis).
-               Les livrables ne dependent pas de _meta/ une fois generes.
+_raw/          Ressources brutes (PDFs, transcriptions Typst)
+_meta/         Modele academique (YAML structure)
+content/       Livrets produits (atomes MDX + molecules YAML)
 ```
 
-**Principe de separation** : `_meta/` definit le QUOI (mathematiques), `content/` definit le COMMENT (implementation MDX/Typst). Les conventions d'implementation vivent dans `docs/` et `.claude/skills/`.
+### Couche `_raw/{programme}/`
+
+```
+3eme-math/
+├── pdfs/                             # Fichiers bruts (PDF, images)
+├── sources/                          # Fiches d'indexation (1 YAML par PDF)
+│   └── manuel-3eme-t1.yaml          #   → titre, editeur, modules, pages, status
+├── fondations/                       # Transcriptions de reference (creent la KB)
+│   └── {module}/                     #   → manuel.typ, parascolaire.typ, xyplus.typ
+└── enrichissements/                  # Sources iteratives (confrontent la KB)
+    └── {module}/                     #   → series, examens, cours de profs
+```
+
+Le dossier dans lequel tu mets un fichier EST l'intention :
+- `fondations/` = source de reference, fait autorite
+- `enrichissements/` = source a confronter au modele existant
+
+### Couche `_meta/`
+
+```
+_meta/
+├── _interface.yaml                   # Contrat : modules, examens, identifiants
+├── lexique.yaml                      # Conventions globales (append-only)
+├── booklet-profiles.yaml             # Profils livrets + pedagogie DO/DO NOT
+└── 3eme-math/
+    ├── prerequis-graph.yaml          # Dependances entre modules
+    ├── {module}/                     # 3-4 fichiers par module
+    │   ├── savoir.yaml              #   theoremes, concepts, notations, exemples
+    │   ├── praxeologies.yaml        #   types d'exercices, techniques, difficulte
+    │   ├── misconceptions.yaml      #   erreurs frequentes, diagnostic QCM
+    │   └── patterns.yaml            #   variantes observees (optionnel)
+    └── examens/{slug}/
+        ├── spec.yaml                #   structure, duree, distribution
+        └── patterns.yaml            #   patterns cross-module
+```
+
+### Couche `content/{programme}/`
+
+```
+3eme-math/
+├── _programme.yaml                   # Metadata du programme
+└── {module}/
+    └── {profil}/                     # Ex: cours/, examen/, exploration/
+        ├── molecule.yaml             #   Livret assemble (sections → atomes)
+        ├── _planning.yaml            #   Manifeste de generation
+        └── *.mdx                     #   Atomes du livret (lesson, exercise, qcm)
+```
+
+Chaque livret est un dossier autonome. Ses atomes vivent avec lui.
 
 ---
 
-## Partie 1 : Inventaire des ressources
+## Phases de travail
 
-### Couche 1 — `_raw/` (ressources brutes)
+3 phases independantes. Chaque phase peut etre faite un jour different, par un outil different.
 
-| Ressource | Chemin | Role |
-|-----------|--------|------|
-| PDFs bruts | `_raw/{prog}/pdfs/*.pdf` | Sources PDF manuels tunisiens (8 PDFs par programme) |
-| Fiches sources | `_raw/{prog}/sources/{slug}.yaml` | Cartographie structuree par PDF (1 fiche = 1 PDF) |
-| Fondations Typst | `_raw/{prog}/fondations/{mod}/*.typ` | Transcriptions PDF → Typst (8 modules, 24 fichiers) |
-| Enrichissements Typst | `_raw/{prog}/enrichissements/{mod}/*.typ` | Transcriptions d'exercices supplementaires (WF1+) |
-| Pages PNG | `_raw/pages/` (gitignore) | Extractions visuelles a la demande (pdftoppm -r 150) |
+```
+Phase 1 — Transcription          brut → structure         /index, /transcrire
+Phase 2 — Modelisation           transcriptions → _meta/  /meta
+Phase 3 — Production             _meta/ → livrets         /content plan, /content creer, /content valider
+```
 
-### Couche 2 — `_meta/` (modele academique)
+### Phase 1 — Transcription
 
-| Ressource | Chemin | Role | Format |
-|-----------|--------|------|--------|
-| Interface | `_meta/_interface.yaml` | Contrat IDs, schemas, conventions d'identifiants | YAML v2 |
-| **Globaux (racine)** | `_meta/` | Fichiers transversaux a tous les programmes | |
-| Lexique global | `→ lexique.yaml` | Vocabulaire partage, verbes d'action, conventions de demonstration | YAML |
-| Profils livrets | `→ booklet-profiles.yaml` | Calibration des 3 types de livrets (cours, examen, exploration) : nb atomes, difficulte, categories, contextes, progression + pedagogie DO/DO NOT par profil | YAML |
-| **Par programme** | `_meta/{prog}/` | Fichiers specifiques a un programme | |
-| Prerequis | `→ prerequis-graph.yaml` | Graphe de dependances entre modules (ordre, trimestres) | YAML |
-| **Par module** | `_meta/{prog}/{mod}/` | 4 fichiers par module (savoir, praxeologies, misconceptions, patterns) | |
-| Savoir | `→ savoir.yaml` | Objectif, epistemic_level (admis/demontre/exclu), theoremes, concepts, KC, notations | YAML structure |
-| Praxeologies | `→ praxeologies.yaml` | TAD de Chevallard : tache, technique, technologie, theorie + didactic_variables, difficulty_profiles, exam_frequency | YAML structure |
-| Misconceptions | `→ misconceptions.yaml` | Erreurs frequentes avec category, diagnostic QCM (reveals), remediation (praxeology_to_practice) | YAML structure |
-| Patterns | `→ patterns.yaml` | Variantes d'exercices (type exercice + type probleme) observees dans les examens (frequency, sources, examples) — optionnel | YAML structure |
-| **Examens** | `_meta/{prog}/examens/` | Specs par examen | |
-| Spec examen | `→ {slug}/spec.yaml` | Structure, duree, distribution par module, patterns transversaux | YAML |
+**But** : transformer des fichiers bruts en fichiers Typst structures et lisibles.
+**Independante** de _meta/ et content/. Activite autonome.
 
-### Couche 3 — `content/` (production de livrets)
+| Commande | Ce qu'elle fait |
+|----------|-----------------|
+| `/index` | Indexe tous les fichiers bruts non indexes (couverture + table des matieres → fiche YAML) |
+| `/index fichier.pdf` | Indexe un fichier specifique |
+| `/transcrire` | Montre l'etat global (X transcrits, Y non transcrits), propose quoi transcrire |
+| `/transcrire 3eme-math/continuite` | Transcrit un module specifique (3 agents en parallele) |
 
-| Ressource | Chemin | Role |
-|-----------|--------|------|
-| Programme | `content/{prog}/_programme.yaml` | Metadata du programme (titre, description) |
-| Atomes MDX | `content/{prog}/{mod}/{type}-{topic}-{slug}.mdx` | Contenus atomiques (lesson, exercise, qcm) |
-| Molecules | `content/{prog}/{mod}/_molecules/{slug}/molecule.yaml` | Livrets assembles (kind: livret, sections → steps) |
-| Plannings | `content/{prog}/{mod}/_molecules/{slug}/_planning.yaml` | Manifeste de generation (ephemere, status: draft→validated→generated) |
-| Validations | `content/{prog}/{mod}/_molecules/{slug}/_validation.md` | Rapports de validation semantique |
+**Parcours utilisateur** :
+```
+1. Deposer un PDF dans _raw/3eme-math/fondations/ (ou enrichissements/)
+2. /index                    → le systeme detecte le nouveau PDF, cree la fiche source
+3. /transcrire               → "12 modules non transcrits. Lesquels ?"
+4. /transcrire continuite    → transcrit depuis les 3 sources en parallele
+```
 
-### Outils et references (implementation)
+### Phase 2 — Modelisation
 
-| Ressource | Chemin | Role |
-|-----------|--------|------|
-| Skill /content | `.claude/skills/content/SKILL.md` | Production de livrets (plan, creer, valider, lister) |
-| Skill /index | `.claude/skills/index/SKILL.md` | Indexation des fichiers bruts |
-| Skill /transcrire | `.claude/skills/transcrire/SKILL.md` | Transcription en Typst |
-| Skill /meta | `.claude/skills/meta/SKILL.md` | Modelisation academique (_meta/) |
-| Skill /source | `.claude/skills/source/SKILL.md` | Gestion sources pedagogiques web |
-| KB template | `.claude/skills/content/references/kb-template.md` | Modele pour creer une KB module |
-| Planning template | `.claude/skills/content/references/planning-template.yaml` | Schema du manifeste per-molecule |
-| Patterns template | `.claude/skills/content/references/patterns-template.yaml` | Schema du fichier patterns |
-| Templates atomes | `.claude/skills/content/references/templates.md` | Templates MDX par type (lesson, exercise, qcm, molecule) |
-| Snippets Typst | `.claude/skills/content/references/typst-snippets.md` | Snippets vartable, cetz-plot, cetz |
-| Conventions | `docs/CONTENT-CONVENTIONS.md` | Source de verite syntaxe + structure MDX/YAML |
-| Referentiels | `docs/referentiels/` | Conventions redaction maths tunisiennes |
-| Pipeline | `tools/pipeline/src/` | Compilation MDX → HTML/JSON + PDFs (6 stages) |
+**But** : creer ou ameliorer le modele academique d'un module.
+**Independante** de content/. Activite autonome.
 
----
+| Commande | Ce qu'elle fait |
+|----------|-----------------|
+| `/meta 3eme-math/continuite` | Si _meta/ n'existe pas → cree depuis les fondations. Si existe → verifie + propose ameliorations |
+| `/meta continuite` | Raccourci (si un seul programme) |
+| `/meta continuite serie.typ` | Enrichit avec un fichier specifique |
 
-## Partie 2 : Workflows
+**Deux modes automatiques** :
 
-### Vue globale
+| Etat | Mode | Comportement |
+|------|------|-------------|
+| _meta/ n'existe pas | **Creation** | Lit les fondations → cree 3 fichiers YAML → puis propose enrichissements si disponibles |
+| _meta/ existe | **Verification** | Relit fondations + enrichissements → compare → propose ameliorations (ne modifie rien sans validation) |
 
-```mermaid
-flowchart TD
-    PDF["PDF brut"] -->|"WF0a : indexer"| Fiche[("Fiche source YAML\n_raw/{prog}/sources/*.yaml")]
-    Fiche -->|"WF0b : transcrire\n/transcrire"| Typst[("Fondations Typst\n_raw/{prog}/fondations/{mod}/*.typ")]
-    Typst -->|"WF1 : creer KB\n/meta"| Meta[("_meta/{prog}/{mod}/\n3 fichiers YAML")]
-    Meta -->|"WF1+ : enrichir patterns\n/meta"| Patterns[("patterns.yaml\n(version N)")]
-    Series["Nouvelles series\nBAC, devoirs, parascolaires"] -->|"WF1+"| Patterns
-    Patterns -.->|"iteratif\n(N fois)"| Patterns
-    Meta -->|"WF2 : planifier\n/content plan"| Plan["_planning.yaml\n(draft)"]
-    Patterns -.->|"Livret Examen\n(patterns)"| Plan
-    Plan --> Review{"Review\nhumain"}
-    Review -->|"ajuste"| Plan
-    Review -->|"valide"| PlanV["_planning.yaml\n(validated)"]
-    PlanV -->|"WF3 : generer\n/content creer"| Contenu["Atomes MDX\n+ Molecules YAML"]
-    Contenu --> PlanG["_planning.yaml\n(generated)"]
-    PlanG --> V4a["4a Syntaxe\nnpm run generate"]
-    V4a --> V4bc["4b+4c Semantique\n/content valider"]
-    V4bc --> Rapport[/"Rapport pass/fail\n_validation.md"/]
-    V4bc -->|"Si FAIL"| Plan
+**Sortie** : `_meta/{prog}/{mod}/` — savoir.yaml, praxeologies.yaml, misconceptions.yaml (+ patterns.yaml si enrichissements)
+
+### Phase 3 — Production
+
+**But** : generer des livrets a partir du modele academique.
+**Depend de** _meta/ mais pas de _raw/.
+
+| Commande | Ce qu'elle fait |
+|----------|-----------------|
+| `/content plan 3eme-math/continuite : cours` | Genere un planning calibre par le profil |
+| `/content plan continuite : examen` | Raccourci |
+| `/content creer 3eme-math/continuite : cours` | Genere les atomes + molecule depuis le planning |
+| `/content creer continuite` | Sans profil → genere tous les livrets planifies |
+| `/content valider continuite` | Validation semantique (4 grilles : structure, maths, pedagogie, profil) |
+| `npm run generate` | Pipeline : compile MDX → HTML/JSON + PDFs |
+
+**Profils de livrets** (definis dans `_meta/booklet-profiles.yaml`) :
+
+| Profil | Diff | Atomes | Guidance | DO/DO NOT |
+|--------|------|--------|----------|-----------|
+| `cours` | 0-1 | ~16 | haute | 14 regles |
+| `examen` | 1-2 | ~17 | moyenne | 11 regles |
+| `exploration` | 2-3 | ~10 | faible | 12 regles |
+
+**Parcours utilisateur** :
+```
+1. /content plan continuite : cours      → planning genere (draft)
+2. Relire, ajuster si besoin             → passer en validated
+3. /content creer continuite : cours     → 16 atomes MDX + molecule.yaml
+4. npm run generate                      → PDF genere
+5. /content valider continuite           → rapport de validation
 ```
 
 ---
 
-### WF0 — Indexer et transcrire les sources
+## Notion de path
 
-Alimente le stock de references. Deux sous-etapes independantes.
+Le **path** identifie un element partout dans le systeme : `{programme}/{module}` ou `{programme}/examens/{slug}`.
 
-```mermaid
-flowchart TD
-    PDF["PDF brut\n_raw/{prog}/pdfs/*.pdf"] --> Index["0a — Indexer\nparcourir le PDF, identifier\nmodules et plages de pages"]
-    Index --> Fiche[("Fiche source YAML\n_raw/{prog}/sources/{slug}.yaml")]
-    Fiche --> Demande{"Module\ndemande ?"}
-    Demande -->|"oui"| Extract["0b — Extraire pages PNG\npdftoppm -png -r 150"]
-    Fiche -.-> Extract
-    Extract --> Read["Lire visuellement\npar chunks de 5 pages"]
-    Read --> Transcribe["Transcrire en Typst"]
-    CONV["Conventions Typst\n(skill /transcrire)"] -.-> Transcribe
-    Transcribe --> TYPST[("Fichier .typ\n_raw/{prog}/fondations/{mod}/")]
-    Demande -->|"pas maintenant"| Stock["Stock indexe\n(transcription a la demande)"]
+```
+3eme-math/continuite                 ← module
+3eme-math/examens/synthese-t3        ← examen
+continuite                           ← raccourci si un seul programme
 ```
 
-**Entree** : fichier PDF brut
-**Sortie 0a** : `_raw/{programme}/sources/{slug}.yaml` (fiche d'indexation)
-**Sortie 0b** : `_raw/{programme}/fondations/{module}/*.typ` (transcription a la demande)
-
-| Etape | Declencheur | Ressources chargees |
-|-------|-------------|---------------------|
-| 0a — Indexer un PDF | `/index <pdf>` | PDF brut (table des matieres) |
-| 0b — Transcrire un module | `/transcrire {module}` | `_raw/{prog}/sources/*.yaml` (plages de pages), PDFs source |
-
-**Contraintes techniques** :
-- Resolution 150 DPI (`-r 150`) pour garder les images sous 2000px
-- Lecture visuelle des PNG (pas extraction de texte) — figures, tableaux, courbes
-- Chunks de 5-8 pages max par appel API
-- Toujours extraire Manuel + Corrige en parallele
+Le path est le meme dans `_raw/`, `_meta/` et `content/` :
+```
+_raw/3eme-math/fondations/continuite/   ← transcriptions
+_meta/3eme-math/continuite/             ← modele academique
+content/3eme-math/continuite/           ← livrets
+```
 
 ---
 
-### WF1 — Creer une KB module
+## Outils complementaires
 
-Synthetise les transcriptions Typst en modele academique structure.
+| Outil | Phases | Pourquoi |
+|-------|--------|----------|
+| **Claude Code** | Phase 3 (production) | Pipeline, TypeScript, git, generation batch MDX |
+| **Claude Cowork** | Phase 1-2 (transcription, modelisation) | Lecture de PDFs, synthese, discussion iterative |
 
-**Prerequis** : transcriptions `.typ` dans `_raw/{prog}/fondations/{mod}/`. Si absentes → WF0b.
-
-```mermaid
-flowchart TD
-    TYPST[("Fondations Typst\n_raw/{prog}/fondations/{mod}/*.typ")] --> Analyse["Analyser les transcriptions\nmanuel + parascolaire + xyplus"]
-    TPL["kb-template.md"] -.-> Synth
-    REF["docs/referentiels/"] -.-> Synth
-    Analyse --> Synth["Synthetiser en KB\n3 fichiers YAML structures"]
-    Synth --> Meta[("_meta/{prog}/{mod}/\nsavoir.yaml\npraxeologies.yaml\nmisconceptions.yaml")]
-    Meta --> Interface["Mettre a jour\n_interface.yaml"]
-```
-
-**Entree** : fichiers `.typ` pour le module (jusqu'a 3 sources)
-**Sortie** : `_meta/{programme}/{module}/` — 3 fichiers YAML :
-
-| Fichier | Contenu | Sections KB |
-|---------|---------|-------------|
-| `savoir.yaml` | Objectif, epistemic_level, transposition, prerequisites, concepts, theoremes, KC, exemples, notations | 0-7 + 10 |
-| `praxeologies.yaml` | TAD Chevallard : tache, technique, technologie, theorie + difficulty_profiles, exam_frequency | 8 |
-| `misconceptions.yaml` | Erreurs avec category, diagnostic QCM, remediation liee aux praxeologies | 9 |
-
-| Declencheur | Ressources chargees |
-|-------------|---------------------|
-| `/meta {programme}/{module}` | kb-template.md, `_raw/{prog}/fondations/{mod}/*.typ`, `docs/referentiels/` |
+Les deux outils partagent les memes dossiers (`_raw/`, `_meta/`, `content/`).
 
 ---
 
-### WF1+ — Enrichir les patterns d'examen (iteratif)
+## Commandes — Reference rapide
 
-Accumule des patterns d'exercices a partir de series, BAC, parascolaires. Peut etre appele N fois par module.
-
-**Prerequis** : KB module existante dans `_meta/{prog}/{mod}/`.
-
-```mermaid
-flowchart TD
-    KB[("_meta/{prog}/{mod}/\npraxeologies.yaml")] --> Load["Charger praxeologies"]
-    PAT[("_meta/{prog}/{mod}/\npatterns.yaml\n(existant ou vide)")] --> Load
-    Source["Exercices\n(Typst, MDX, texte, image)"] --> Analyse["Analyser chaque exercice"]
-    Load --> Analyse
-    Analyse --> Class{"Variante\nconnue ?"}
-    Class -->|"oui"| Incr["Incrementer frequency\najouter source + exemple"]
-    Class -->|"non, meme prax"| New["Creer nouveau pattern\nPraxN.vM"]
-    Class -->|"prax inconnue"| Alert["Signaler a l'humain"]
-    Incr --> Write["Ecrire patterns.yaml\nincrementer version"]
-    New --> Write
-```
-
-**Entree** : exercices (Typst, MDX, texte, image) + KB module. Les transcriptions d'exercices supplementaires (series, BAC, devoirs) sont stockees dans `_raw/{prog}/enrichissements/{mod}/`.
-**Sortie** : `_meta/{programme}/{module}/patterns.yaml` (cree ou enrichi)
-
-| Declencheur | Ressources chargees |
-|-------------|---------------------|
-| `/meta {programme}/{module}` | KB module (_meta/{prog}/{mod}/), patterns.yaml existant, exercices fournis |
-
-**Regles** : 1 fichier par module, ne jamais modifier la KB, examples reels uniquement, IDs `PraxN.vM`.
+| Commande | Phase | Ce qu'elle fait |
+|----------|-------|-----------------|
+| `/index` | 1 | Indexer les fichiers bruts non indexes |
+| `/transcrire` | 1 | Etat global + transcrire des modules |
+| `/meta {path}` | 2 | Creer ou verifier/enrichir le modele |
+| `/content plan {path} : {profil}` | 3 | Planifier un livret |
+| `/content creer {path} : {profil}` | 3 | Generer les atomes + molecule |
+| `/content valider {path}` | 3 | Valider le contenu |
+| `npm run generate` | 3 | Compiler + PDFs |
 
 ---
 
-### WF2 — Planifier un livret
+## Etat actuel
 
-Declare tous les atomes et la structure d'un livret AVANT generation.
-
-**Prerequis** : KB module dans `_meta/{prog}/{mod}/`.
-
-```mermaid
-flowchart TD
-    KB[("_meta/{prog}/{mod}/\nsavoir.yaml + praxeologies.yaml")] --> Analyse["2a — Analyser les praxeologies"]
-    PROF[("booklet-profiles.yaml\ncours | examen | exploration")] --> Gen
-    Analyse --> Gen["2b — Generer _planning.yaml\ncalibre par le profil"]
-    TPL["planning-template.yaml"] -.-> Gen
-    EXAM[("_meta/{prog}/examens/{slug}/spec.yaml\n(optionnel)")] -.-> Gen
-    Gen --> PlanD[("_planning.yaml per-molecule\nstatus: draft")]
-    PlanD --> Review{"2c — Review humain\ncouverture, slugs, difficultes"}
-    Review -->|"ajuste"| Gen
-    Review -->|"valide"| PlanV[("_planning.yaml\nstatus: validated")]
-```
-
-**Entree** : KB module + profil de livret (cours/examen/exploration) + (optionnel) spec examen
-**Sortie** : `content/{prog}/{mod}/_molecules/{slug}/_planning.yaml` avec `status: validated`
-
-Le planning contient un champ `profile` et un champ `meta_refs` :
-```yaml
-profile: cours                   # charge depuis booklet-profiles.yaml
-meta_refs:
-  module: continuite           # → _meta/{prog}/continuite/
-  # patterns: [Prax1.v1, ...]  # optionnel, pour livrets examen
-  # examen: synthese-3eme-t3   # optionnel, pour livrets cross-module
-```
-
-**Profils de livrets** (`_meta/booklet-profiles.yaml`) :
-
-| Profil | Difficulte | Atomes | Lecons | Exercices | QCM | Guidance |
-|--------|-----------|--------|--------|-----------|-----|----------|
-| `cours` | 0-1 | ~16 | ~5 (30%) | ~8 (50%) | ~4 (20%) | haute |
-| `examen` | 1-2 | ~17 | ~2 (10%) | ~10 (60%) | ~5 (30%) | moyenne |
-| `exploration` | 2-3 | ~10 | 0 (0%) | ~7 (70%) | ~3 (30%) | faible |
-
-Chaque profil definit : difficulty range, exercise_categories (required/forbidden), contexts (allowed/forbidden), expected_order, expected_duration.
-
-**Cycle de vie** : `draft` → `validated` (review humain) → `generated` (apres WF3)
-
-**Types de livrets possibles** :
-- **Par module** : 3 livrets (cours, examen, exploration — calibres par profil)
-- **Cross-module** : prepa examen combinant plusieurs modules (via `meta_refs.examen`)
-- **Libre** : toute combinaison de praxeologies et modules
-
-| Declencheur | Ressources chargees |
-|-------------|---------------------|
-| `/content plan {programme}/{module} : cours` | KB module, booklet-profiles.yaml, planning-template.yaml |
-| `/content plan {programme}/{module} : examen` | idem |
-| `/content plan {programme}/{module} : exploration` | idem |
-| `/content plan {programme}/{module} : cours, focus TVI` | idem, avec overrides libres |
-
----
-
-### WF3 — Generer le livret a partir du planning
-
-```mermaid
-flowchart TD
-    PlanV[("_planning.yaml\nstatus: validated")] --> GenAtomes["3a — Generer chaque atome\nle champ contenu = spec"]
-    TPL["templates.md"] -.-> GenAtomes
-    TYPST["typst-snippets.md"] -.-> GenAtomes
-    CONV["CONTENT-CONVENTIONS.md"] -.-> GenAtomes
-    META[("_meta/{prog}/{mod}/\nsavoir + praxeologies")] -.-> GenAtomes
-    GenAtomes --> Atomes[("Atomes MDX\ncontent/{prog}/{mod}/*.mdx")]
-    Atomes --> GenMol["3b — Assembler les livrets\nkind: livret, sections > steps"]
-    PlanV -.-> GenMol
-    GenMol --> Molecules[("Livrets YAML\n_molecules/{slug}/molecule.yaml")]
-    Molecules --> Status["3c — status -> generated"]
-```
-
-**Entree** : `_planning.yaml` avec `status: validated`
-**Sortie** : atomes MDX + molecules YAML dans `content/{prog}/{mod}/`
-
-Le generateur :
-1. Lit le planning et detecte les atomes deja generes (reprise possible)
-2. Charge les references (_meta/, templates, conventions, snippets)
-3. Genere chaque atome en suivant le champ `contenu` du planning comme spec
-4. Assemble la molecule YAML (sections → steps, quiz blocks 2-5 QCM)
-5. Passe le planning en `status: generated`
-
-| Declencheur | Ressources chargees |
-|-------------|---------------------|
-| `/content creer {slug-molecule}` | planning, KB (_meta/), templates, typst-snippets, conventions |
-| `/content creer section {label} {module}` | idem, filtre par section |
-| `/content creer {type} {slug}` | templates, conventions (atome libre sans planning) |
-
----
-
-### WF4 — Valider le contenu genere
-
-Validation multi-paliers :
-
-```mermaid
-flowchart TD
-    Atomes[("Atomes MDX\ncontent/**/*.mdx")] --> V4a["4a — Syntaxe\nnpm run generate"]
-    CONV["CONTENT-CONVENTIONS.md"] -.-> V4a
-    PIPE["tools/pipeline/"] -.-> V4a
-    V4a --> V4bc["4b+4c — Semantique\n/content valider {module}\nstructure + maths + pedagogie"]
-    KB[("_meta/{prog}/{mod}/")] -.-> V4bc
-    V4bc --> Rapport[/"Rapport pass/fail\n_validation.md"/]
-```
-
-**Palier 4a — Pipeline** (`npm run generate`) : 6 phases internes
-
-```mermaid
-flowchart LR
-    R["1. read\natoms + molecules"] --> V["2. validate\nreferences croisees"]
-    V --> C["3. compile\nMDX → HTML/JSON"]
-    C --> Res["4. resolve\nlivrets complets"]
-    Res --> W["5. write\nsrc/generated/"]
-    W --> P["6. generate-pdfs\npublic/pdfs/"]
-```
-
-**Palier 4b+4c — Semantique** (`/content valider {module}`) : analyse LLM chaque atome selon 3 grilles (Structure, Maths, Pedagogie). Ecrit un rapport par molecule dans `_validation.md`.
-
-| Declencheur | Ce qu'il fait |
-|-------------|---------------|
-| `npm run generate` | Compile MDX → HTML/JSON + PDFs. Valide references croisees. |
-| `/content valider {module}` | Validation semantique complete (structure + maths + pedagogie) |
-| `/content valider {fichier}` | Validation rapide d'un seul atome |
-
----
-
-## Partie 3 : Structure des fichiers `_meta/` (YAML v2)
-
-### `savoir.yaml` — Savoir structure
-
-```yaml
-module: continuite
-programme: 3eme-math
-version: 2.0
-objective: "..."                    # 1 phrase
-
-epistemic_level:
-  theory_base: "analyse-reelle-elementaire"
-  admitted: [{id, statement, justification}]     # Theoremes admis
-  demonstrated: [{id, statement, proof_type}]    # Theoremes demontres
-  excluded: ["..."]                              # Hors programme
-  starting_point: ["..."]                        # Connaissances de depart
-
-transposition:
-  savoir_savant: ["..."]
-  savoir_a_enseigner: ["..."]
-  adaptations_didactiques: ["..."]
-
-prerequisites: {required: [...], opens_toward: [...]}
-concepts: [{id, name, sub_concepts: [...]}]      # N1, N1.1, N1.2...
-theorems: [{id, type, name, statement, status, proof_type, concepts, used_in}]
-facts: [{id, content}]
-skills: [{id, description, concepts, difficulty, praxeology}]
-principles: [{id, content}]
-canonical_examples: [{id, description, illustrates, concepts, difficulty}]
-```
-
-### `praxeologies.yaml` — TAD de Chevallard enrichi
-
-```yaml
-praxeologies:
-  - id: Prax1
-    name: "..."
-    concepts: [N2]
-    difficulty: 1                     # 0-3
-    exam_frequency: medium            # low, medium, high, very_high
-
-    task_type: "..."                  # T — type de tache
-    technique: "..."                  # tau — methode pas a pas
-    technology: "..."                 # theta — justification theorique
-    theory: "..."                     # Theta — cadre theorique
-
-    didactic_variables:               # Ce qui fait varier la difficulte
-      - name: type_de_fonction
-        values: [polynome, rationnelle, irrationnelle]
-        effect: "+1 par niveau de complexite"
-
-    difficulty_profiles:              # Combinaisons → niveau
-      0: {type_de_fonction: polynome, complexite: simple}
-      1: {type_de_fonction: rationnelle, complexite: simple}
-      2: {type_de_fonction: irrationnelle, complexite: composee}
-
-    common_errors: [E1, E3]           # Liens vers misconceptions
-    canonical_examples: ["..."]
-```
-
-### `misconceptions.yaml` — Erreurs avec diagnostic
-
-```yaml
-misconceptions:
-  - id: E1
-    name: "..."
-    category: confusion               # confusion, sur-generalisation, oubli, erreur-technique
-    frequency: frequente               # occasionnelle, frequente, tres_frequente
-    description: "..."
-    source_cognitive: "..."
-    diagnostic:
-      question: "..."
-      options:
-        - {label: "...", reveals: "...", correct: false}
-        - {label: "...", reveals: null, correct: true}
-    remediation:
-      explanation: "..."
-      counter_example: "..."
-      praxeology_to_practice: Prax3    # Lien vers la praxeologie a travailler
-```
-
-### `_interface.yaml` — Contrat
-
-Definit les schemas, les modules declares, les specs d'examen, et les conventions d'identifiants (`Prax{N}`, `T{N}`, `N{N}`, `E{N}`, `S{N}`, `F{N}`, `EC{N}`).
-
----
-
-## Partie 4 : Commandes
-
-| Commande | Workflow | Ce qu'elle fait |
-|----------|----------|-----------------|
-| `/index <pdf>` | WF0a | Indexer un PDF, creer la fiche source |
-| `/transcrire {module}` | WF0b | Transcrire un module en Typst |
-| `/meta {programme}/{module}` | WF1 | Creer les 3 fichiers YAML dans `_meta/{prog}/{mod}/` |
-| `/meta {programme}/{module} [fichier-enrichissement]` | WF1+ | Enrichir patterns.yaml avec des exercices |
-| `/content plan {programme}/{module} : {profil}` | WF2 | Generer un planning calibre par profil (cours, examen, exploration) |
-| `/content plan {programme}/{module} : {profil}, {specs}` | WF2 | idem avec overrides libres |
-| `/content creer {slug-molecule}` | WF3 | Generer les atomes + molecule depuis le planning |
-| `npm run generate` | WF4a | Compiler MDX → HTML/JSON + PDFs |
-| `/content valider {module}` | WF4b+c | Validation semantique complete |
-| `/content lister {query}` | — | Inventaire (atomes, molecules, orphelins) |
-
----
-
-## Partie 5 : Etat actuel
-
-> Mis a jour le 2026-03-23.
+> Mis a jour le 2026-03-24.
 
 | Metrique | Valeur |
 |----------|--------|
-| Programmes | 3 declares (3eme-math, 1ere-tc, 2nde-math), 1 avec contenu |
+| Programmes | 1 avec contenu (3eme-math) |
 | Modules avec contenu | 4 (continuite, denombrement, fonction-derivee, nombre-derive) |
 | Atomes MDX | 218 |
-| Livrets YAML | 12 (3 par module : cours, examen, exploration) |
-| KB modules (_meta/) | 4 (4 fichiers YAML: savoir, praxeologies, misconceptions, patterns) |
-| Patterns | 4 modules + 1 examen (116 patterns total) |
-| Specs examen | 1 (synthese-3eme-t3) |
-| Fichiers _meta/ racine | 3 (_interface, lexique, booklet-profiles) + prerequis-graph par programme |
-| Fiches sources (_raw/{prog}/sources/) | 8 (tous les PDFs 3eme-math indexes) |
-| Fondations Typst (_raw/{prog}/fondations/) | 8 modules transcrits (24 fichiers .typ) |
-| Plannings | 12 per-molecule (3 par module) |
-| Pipeline | 0 erreurs, 12 PDFs generes |
-
-### Modules sans contenu mais avec transcriptions
-
-4 modules transcrits et prets pour WF1 :
-- `generalites-fonctions`
-- `limites-comportements-asymptotiques`
-- `limites-continuite`
-- `exemples-etude-fonctions`
+| Livrets | 12 (dans des dossiers par profil) |
+| Meta modules | 4 (savoir + praxeologies + misconceptions + patterns) |
+| Patterns | 116 (4 modules + 1 examen) |
+| Fiches sources | 8 (tous les PDFs 3eme-math indexes) |
+| Fondations Typst | 8 modules transcrits (24 fichiers .typ) |
+| Modules prets pour meta | 4 (generalites-fonctions, limites-continuite, limites-asymptotiques, exemples-etude-fonctions) |
+| Modules non transcrits | 15 |
+| Pipeline | 0 erreurs, 12 PDFs |
 
 ---
 
-## Partie 6 : Lacunes et evolutions
+## Lacunes
 
-| # | Lacune | Workflow | Priorite |
-|---|--------|----------|----------|
-| L1 | Pas de patterns pour 3 modules (continuite, fonction-derivee, denombrement) | WF1+ | moyenne |
-| L2 | Pas de verification automatique planning → atomes generes (slugs du planning vs fichiers .mdx) | WF4 | basse |
-| L3 | Pas d'export lisible de `_meta/` pour review par des profs (YAML difficile a lire pour un non-tech) | WF1 | haute |
-| L4 | Pas de livret cross-module (l'architecture le permet, mais aucun n'a ete cree) | WF2 | moyenne |
-| L5 | `_resources/` contient des artefacts obsoletes (serie ad-hoc d'avant le systeme structure) | — | basse |
+| # | Lacune | Priorite |
+|---|--------|----------|
+| L1 | `content-agentic-workflow.md` mentionne encore `_molecules/` dans les schemas WF2/WF3 | haute |
+| L2 | Pas d'export lisible de `_meta/` pour review par des profs | haute |
+| L3 | Pas de livret cross-module (l'architecture le permet) | moyenne |
+| L4 | `docs/CONTENT-CONVENTIONS.md` reference l'ancienne structure | moyenne |
+| L5 | Praxeologies.yaml contient des champs non utilises (theory, didactic_variables, difficulty_profiles) | basse |
