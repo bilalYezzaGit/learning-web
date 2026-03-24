@@ -25,21 +25,20 @@ const atomMetaSchema = z
   )
 
 /**
- * Scan content/{programme}/{module}/*.mdx recursively.
+ * Scan content/{programme}/{module}/**\/*.mdx recursively.
  * Programme dirs contain _programme.yaml, module dirs are their subdirectories.
+ * Atoms can be at module root (legacy) or in profil subdirs (e.g. cours/, examen/).
  */
 export function readAllAtoms(): RawAtom[] {
   const atoms: RawAtom[] = []
 
   for (const progDir of getProgrammeDirs()) {
     for (const moduleDir of getModuleDirs(progDir)) {
-      const files = fs.readdirSync(moduleDir)
-        .filter(f => f.endsWith('.mdx'))
-        .sort()
+      // Collect .mdx files from module root AND profil subdirectories
+      const mdxFiles = collectMdxFiles(moduleDir)
 
-      for (const file of files) {
-        const id = file.replace('.mdx', '')
-        const raw = fs.readFileSync(path.join(moduleDir, file), 'utf-8')
+      for (const { id, filePath } of mdxFiles) {
+        const raw = fs.readFileSync(filePath, 'utf-8')
         const { data, content } = matter(raw)
 
         // Strip legacy correctOption field (now derived from :::option{correct})
@@ -63,6 +62,39 @@ export function readAllAtoms(): RawAtom[] {
   }
 
   return atoms
+}
+
+/** Collect all .mdx files from a module dir and its profil subdirs */
+function collectMdxFiles(moduleDir: string): { id: string; filePath: string }[] {
+  const results: { id: string; filePath: string }[] = []
+
+  const entries = fs.readdirSync(moduleDir, { withFileTypes: true })
+
+  // .mdx files at module root (legacy layout)
+  for (const entry of entries) {
+    if (entry.isFile() && entry.name.endsWith('.mdx')) {
+      results.push({
+        id: entry.name.replace('.mdx', ''),
+        filePath: path.join(moduleDir, entry.name),
+      })
+    }
+  }
+
+  // .mdx files in profil subdirs (new layout: cours/, examen/, exploration/)
+  for (const entry of entries) {
+    if (entry.isDirectory() && !entry.name.startsWith('_')) {
+      const subDir = path.join(moduleDir, entry.name)
+      const subFiles = fs.readdirSync(subDir).filter(f => f.endsWith('.mdx'))
+      for (const file of subFiles) {
+        results.push({
+          id: file.replace('.mdx', ''),
+          filePath: path.join(subDir, file),
+        })
+      }
+    }
+  }
+
+  return results.sort((a, b) => a.id.localeCompare(b.id))
 }
 
 /** Find programme directories (those containing _programme.yaml) */

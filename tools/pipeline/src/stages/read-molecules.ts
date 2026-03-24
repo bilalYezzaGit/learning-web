@@ -82,31 +82,20 @@ export function readAllContent(): {
       .sort()
 
     for (const moduleDir of moduleDirs) {
-      const moleculesDir = path.join(moduleDir, '_molecules')
-      if (!fs.existsSync(moleculesDir)) continue
+      const moduleName = path.basename(moduleDir)
 
-      const entries = fs.readdirSync(moleculesDir, { withFileTypes: true })
-        .filter(e => !e.name.startsWith('.'))
+      // Scan for molecule.yaml in profil subdirs (new layout: {module}/{profil}/molecule.yaml)
+      // AND legacy _molecules/{slug}/molecule.yaml or _molecules/{slug}.yaml
+      const profilDirs = fs.readdirSync(moduleDir, { withFileTypes: true })
+        .filter(d => d.isDirectory() && !d.name.startsWith('_') && !d.name.startsWith('.'))
         .sort((a, b) => a.name.localeCompare(b.name))
 
-      for (const entry of entries) {
-        let slug: string
-        let raw: string
+      for (const profilDir of profilDirs) {
+        const molFile = path.join(moduleDir, profilDir.name, 'molecule.yaml')
+        if (!fs.existsSync(molFile)) continue
 
-        if (entry.isDirectory()) {
-          // New layout: _molecules/{slug}/molecule.yaml
-          const molFile = path.join(moleculesDir, entry.name, 'molecule.yaml')
-          if (!fs.existsSync(molFile)) continue
-          slug = entry.name
-          raw = fs.readFileSync(molFile, 'utf-8')
-        } else if (entry.isFile() && entry.name.endsWith('.yaml')) {
-          // Legacy layout: _molecules/{slug}.yaml
-          slug = entry.name.replace('.yaml', '')
-          raw = fs.readFileSync(path.join(moleculesDir, entry.name), 'utf-8')
-        } else {
-          continue
-        }
-
+        const slug = `${moduleName}-${profilDir.name}`
+        const raw = fs.readFileSync(molFile, 'utf-8')
         const data = parseYaml(raw) as Record<string, unknown>
 
         if (data.kind !== 'livret') {
@@ -125,6 +114,50 @@ export function readAllContent(): {
           ...result.data,
         })
         progLivrets.push(slug)
+      }
+
+      // Legacy: _molecules/{slug}/molecule.yaml or _molecules/{slug}.yaml
+      const moleculesDir = path.join(moduleDir, '_molecules')
+      if (fs.existsSync(moleculesDir)) {
+        const entries = fs.readdirSync(moleculesDir, { withFileTypes: true })
+          .filter(e => !e.name.startsWith('.'))
+          .sort((a, b) => a.name.localeCompare(b.name))
+
+        for (const entry of entries) {
+          let slug: string
+          let raw: string
+
+          if (entry.isDirectory()) {
+            const molFile = path.join(moleculesDir, entry.name, 'molecule.yaml')
+            if (!fs.existsSync(molFile)) continue
+            slug = entry.name
+            raw = fs.readFileSync(molFile, 'utf-8')
+          } else if (entry.isFile() && entry.name.endsWith('.yaml')) {
+            slug = entry.name.replace('.yaml', '')
+            raw = fs.readFileSync(path.join(moleculesDir, entry.name), 'utf-8')
+          } else {
+            continue
+          }
+
+          const data = parseYaml(raw) as Record<string, unknown>
+
+          if (data.kind !== 'livret') {
+            throw new Error(`Unknown molecule kind in "${slug}": ${data.kind} (expected "livret")`)
+          }
+
+          const result = livretMoleculeSchema.safeParse(data)
+          if (!result.success) {
+            const issues = result.error.issues.map(i => `${i.path.join('.')}: ${i.message}`).join(', ')
+            throw new Error(`Invalid livret molecule "${slug}": ${issues}`)
+          }
+
+          livrets.push({
+            slug,
+            programme: progDir.name,
+            ...result.data,
+          })
+          progLivrets.push(slug)
+        }
       }
     }
 
