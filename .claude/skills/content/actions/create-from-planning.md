@@ -23,7 +23,7 @@
    - `draft` → **stop**, demander a l'utilisateur de valider d'abord
    - `generated` → avertir que le contenu a deja ete genere, demander confirmation avant de regenerer
 
-3. **KB source existe** : verifier que `_meta/{programme}/{module}/savoir.yaml` et `_meta/{programme}/{module}/praxeologies.yaml` existent (consulter `_meta/_interface.yaml` pour resoudre les references module)
+3. **KB source existe** : verifier que `_meta/{programme}/{module}/savoir.yaml` et `_meta/{programme}/{module}/praxeologies.yaml` existent
 
 ## Pipeline
 

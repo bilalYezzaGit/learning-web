@@ -35,8 +35,6 @@ Le dossier dans lequel tu mets un fichier EST l'intention :
 
 ```
 _meta/
-├── _interface.yaml                   # Contrat : modules, examens, identifiants
-├── lexique.yaml                      # Conventions globales (append-only)
 ├── booklet-profiles.yaml             # Profils livrets + pedagogie DO/DO NOT
 └── 3eme-math/
     ├── prerequis-graph.yaml          # Dependances entre modules

@@ -93,7 +93,7 @@ Exemples :
    - Les objectifs sont inclus dans le champ `objectives:` du planning
 
 7. **Ecrit le(s) fichier(s)** `_planning.yaml` avec `status: draft`
-   - Les plannings referencent `_meta/` via le champ `meta_refs` (interface definie dans `_meta/_interface.yaml`)
+   - Les plannings referencent `_meta/` via le champ `meta_refs`
 
 8. **Presente le planning a l'humain** pour validation :
    - Resume : nombre de molecules, nombre d'atomes par type, praxeologies couvertes
@@ -343,7 +343,6 @@ et croiser les references lors de la creation de contenu.
 Commandes liees : `/source scan`, `/source discover`, `/source status`
 
 ### Meta (modele academique)
-- Interface : `_meta/_interface.yaml`
 - Savoir module : `_meta/{programme}/{module}/savoir.yaml` (inclut notations)
 - Praxeologies : `_meta/{programme}/{module}/praxeologies.yaml`
 - Misconceptions : `_meta/{programme}/{module}/misconceptions.yaml`

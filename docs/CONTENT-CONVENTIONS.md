@@ -4,7 +4,7 @@ Version 5 — 2026-03-22
 
 Ce document definit les regles strictes d'ecriture du contenu pedagogique. Tout contenu qui ne respecte pas ces regles doit etre corrige. La convention prime sur l'existant.
 
-> **Architecture `_meta/`** : le modele academique (savoir, praxeologies, misconceptions, lexique, patterns) vit dans `_meta/{programme}/{module}/`, separe de la production de contenu dans `content/`. Le repertoire `_meta/` n'est pas touche par le pipeline de contenu.
+> **Architecture `_meta/`** : le modele academique (savoir, praxeologies, misconceptions, patterns) vit dans `_meta/{programme}/{module}/`, separe de la production de contenu dans `content/`. Le repertoire `_meta/` n'est pas touche par le pipeline de contenu.
 
 ---
 
@@ -301,28 +301,22 @@ content/
 │   └── ...
 
 _meta/                                   # modele academique (hors pipeline)
-├── _interface.yaml                      # schema d'interface _meta ↔ content
-├── lexique.yaml                         # conventions globales (append-only)
-├── complexite.yaml                      # echelle 0-3
-├── booklet-profiles.yaml                # profils cours/examen/exploration
+├── booklet-profiles.yaml                # profils cours/examen/exploration + pedagogie DO/DO NOT
 └── 3eme-math/                           # 1 repertoire par programme
     ├── prerequis-graph.yaml             # graphe de dependances entre modules
     ├── nombre-derive/                   # 1 repertoire par module
-    │   ├── savoir.yaml                    # savoirs theoriques
+    │   ├── savoir.yaml                    # savoirs theoriques (sections 0-7 + notations)
     │   ├── praxeologies.yaml              # taches-types et techniques
     │   ├── misconceptions.yaml            # erreurs frequentes
-    │   ├── lexique.yaml                   # vocabulaire du module
-    │   ├── redaction.yaml                 # conventions de redaction du module
-    │   └── patterns.yaml                  # patterns d'examen
+    │   └── patterns.yaml                  # patterns d'examen (optionnel)
     ├── fonction-derivee/
     │   ├── savoir.yaml
     │   ├── praxeologies.yaml
-    │   ├── misconceptions.yaml
-    │   ├── lexique.yaml
-    │   └── redaction.yaml
+    │   └── misconceptions.yaml
     └── examens/                           # specifications d'examens
         └── synthese-3eme-t3/
-            └── spec.yaml
+            ├── spec.yaml
+            └── patterns.yaml
 ```
 
 Le pipeline decouvre automatiquement les programmes (repertoires contenant `_programme.yaml`), les modules (sous-repertoires sans prefixe `_`), les profils (sous-repertoires des modules contenant `molecule.yaml`), et les atomes (`.mdx` dans les profils). Les fichiers prefixes `_` dans les repertoires profil sont **invisibles au pipeline** :
@@ -336,12 +330,10 @@ Le modele academique vit dans `_meta/{programme}/{module}/` :
 
 | Fichier `_meta/` | Role | Cree par |
 |-------------------|------|----------|
-| `savoir.yaml` | Savoirs theoriques du module | WF1 |
+| `savoir.yaml` | Savoirs theoriques du module (sections 0-7 + notations) | WF1 |
 | `praxeologies.yaml` | Taches-types et techniques | WF1 |
 | `misconceptions.yaml` | Erreurs frequentes des eleves | WF1 |
-| `lexique.yaml` | Vocabulaire specifique du module | WF1 |
-| `redaction.yaml` | Conventions de redaction specifiques au module | WF1 |
-| `patterns.yaml` | Patterns d'examen (enrichi iterativement) | WF1+ |
+| `patterns.yaml` | Patterns d'examen (enrichi iterativement, optionnel) | WF1+ |
 
 ### 3.1 Molecule Livret
 
@@ -998,3 +990,228 @@ patterns:
 - `variables` = ce qui change d'un exercice a l'autre pour ce pattern
 - `version` incremente a chaque enrichissement (WF1+)
 - Seuil : au-dela de ~10 variantes par praxeologie, regrouper ou elaguer
+
+---
+
+## 12. Redaction mathematique — Programme tunisien (Lycee)
+
+Source de verite pour la redaction du contenu pedagogique en mathematiques.
+Extrait des sources officielles (Manuel scolaire, Parascolaire, XY Plus).
+
+### 12.1 Vocabulaire standard
+
+#### Ouvertures de definitions et theoremes
+
+| Forme correcte | A eviter |
+|---|---|
+| "Soit $f$ une fonction **definie** sur un intervalle $I$" | "Considerons une fonction..." |
+| "Soit $a$ un reel de $I$" | "Soit $a$ un element de $I$" |
+| "Soit $f$ et $g$ deux fonctions definies sur $I$" | "Soient les fonctions $f$ et $g$..." |
+| "On dit que $f$ est **continue en $a$**" | "La fonction $f$ est dite continue..." (acceptable mais moins courant) |
+| "Soit $a$ et $b$ deux reels de $I$ tels que $a < b$" | "Pour $a < b$ dans $I$..." |
+
+#### Termes normalises
+
+| Terme | Usage |
+|---|---|
+| **ensemble de definition** | Toujours (jamais "domaine de definition") |
+| **reel** | Pour designer un nombre ($a$ un reel, $k$ un reel) |
+| **fonction polynome** | Pas "polynomiale" (le Manuel et le Parascolaire ecrivent "fonction polynome") |
+| **fonction rationnelle** | Standard |
+| **partie entiere** | Notee $E(x)$, jamais $\lfloor x \rfloor$ |
+| **valeur absolue** | Notee $\|x\|$ |
+| **repere orthonorme** | Toujours nomme $(O, \vec{i}, \vec{j})$ |
+| **courbe representative** | Notee $C_f$, $\mathcal{C}_f$ ou $\zeta_f$ selon la source |
+
+#### Formulations recurrentes
+
+- "en tout reel $a$" (pour la continuite des fonctions usuelles)
+- "en tout reel ou elle est definie" (pour les rationnelles)
+- "en particulier sur $[a, b]$" (pour restreindre un domaine)
+- "D'ou $f$ est continue en $a$" (conclusion standard)
+- "Par suite..." / "Finalement..." (enchainements)
+
+### 12.2 Notation mathematique
+
+#### Nombres decimaux
+
+Virgule decimale avec espace fin en LaTeX : `$0{,}1$` → $0{,}1$
+
+Jamais le point decimal : ~~`$0.1$`~~
+
+#### Fractions
+
+- **En ligne dans le texte** : `$\dfrac{a}{b}$` (display fraction, plus lisible)
+- **En bloc $$ ... $$** : `$\frac{a}{b}$` suffit
+
+#### Ensembles
+
+| Notation | Signification |
+|---|---|
+| $\mathbb{R}$ | Ensemble des reels |
+| $\mathbb{R}^*$ | Reels non nuls |
+| $\mathbb{R}_+$ | Reels positifs |
+| $\mathbb{R}_+^*$ | Reels strictement positifs |
+| $\mathbb{Z}$ | Entiers relatifs |
+| $\mathbb{N}$ | Entiers naturels |
+
+#### Intervalles
+
+- Crochets francais : $[a, b]$, $]a, b[$, $[a, b[$, $]a, b]$
+- Jamais la notation anglo-saxonne avec parentheses : ~~$(a, b)$~~ pour un intervalle ouvert
+- Infinis : $]-\infty, a]$, $[a, +\infty[$
+
+#### Fonctions speciales
+
+| Objet | Notation |
+|---|---|
+| Partie entiere | $E(x)$ |
+| Valeur absolue | $\|x\|$, $\|f(x)\|$ |
+| Racine composee | $\sqrt{f}$ (pas $\sqrt{f(x)}$ dans les theoremes, mais $\sqrt{f(x)}$ dans les calculs) |
+| Image d'un ensemble | $f(A) = \{f(x) \; ; \; x \in A\}$ |
+| Courbe | $C_f$, $\mathcal{C}_f$, ou $\zeta_f$ |
+| Repere | $(O, \vec{i}, \vec{j})$ |
+
+#### Quantificateurs (definition formelle)
+
+La convention tunisienne utilise $\alpha$ et $\beta$ (pas $\varepsilon$ et $\delta$) :
+
+> Pour tout $\beta > 0$, il existe $\alpha > 0$ tel que si $x \in I$ et $|x - a| < \alpha$, alors $|f(x) - f(a)| < \beta$.
+
+### 12.3 Verbes d'action (consignes)
+
+Les verbes sont normalises et chacun implique un niveau de rigueur attendu :
+
+| Verbe | Signification | Niveau de rigueur |
+|---|---|---|
+| **Justifier** | Appliquer un theoreme connu, citer la regle | Citation + verification des hypotheses |
+| **Montrer que** | Demonstration ou preuve d'existence | Raisonnement complet |
+| **Determiner** | Calculer un resultat precis | Calcul + resultat explicite |
+| **Etudier** | Analyse ouverte (continuite, variations...) | Methodique, cas par cas |
+| **Tracer** | Representation graphique | Courbe avec repere |
+| **Verifier** | Confirmer un resultat donne | Calcul de verification |
+| **En deduire que** | Enchainement logique depuis un resultat precedent | Reference explicite au resultat |
+| **Resoudre** | Trouver toutes les solutions | Solutions + ensemble |
+| **Calculer** | Effectuer un calcul numerique | Resultat exact |
+
+### 12.4 Patterns de redaction des solutions
+
+#### Justification de continuite
+
+Le schema est toujours le meme, en 2-3 phrases :
+
+1. **Identifier le type** de la fonction (polynome, rationnelle, racine, valeur absolue, composee)
+2. **Citer le theoreme** applicable
+3. **Verifier les conditions** (domaine, positivite, denominateur non nul)
+4. **Conclure** : "D'ou $f$ est continue en $a$."
+
+Exemples-types :
+
+**Polynome :**
+> $f$ est une fonction polynome donc continue sur $\mathbb{R}$, en particulier en $a$.
+
+**Rationnelle :**
+> $f$ est une fonction rationnelle. Le denominateur $x - 4$ ne s'annule pas en $a = 0{,}7$, donc $f$ est continue en $a$.
+
+**Racine :**
+> La fonction $u : x \mapsto 3x + 5$ est polynome donc continue en $a = \dfrac{2}{3}$. De plus $u\left(\dfrac{2}{3}\right) = 7 > 0$. Donc $f = \sqrt{u}$ est continue en $a$.
+
+**Valeur absolue :**
+> La fonction $g : x \mapsto x^2 - 3x + 2$ est polynome donc continue sur $\mathbb{R}$. D'ou $f = |g|$ est continue sur $\mathbb{R}$.
+
+**Operations (somme/produit/quotient) :**
+> $f_1$ et $f_2$ sont continues en $a$ et $f_2(a) \neq 0$. Donc $f = \dfrac{f_1}{f_2}$ est continue en $a$.
+
+**Discriminant pour la positivite :**
+> $\Delta = 9 - 20 = -11 < 0$ et le coefficient dominant $a = 1 > 0$, donc $x^2 + 3x + 5 > 0$ pour tout $x \in \mathbb{R}$.
+
+#### Continuite par morceaux
+
+Schema standard :
+
+1. Etudier la continuite sur chaque morceau separement (fonctions usuelles)
+2. Aux points de raccordement $x_0$ : comparer $f(x_0)$, $\lim_{x \to x_0^-} f(x)$ et $\lim_{x \to x_0^+} f(x)$
+3. Si egalite des trois : continue en $x_0$. Sinon : discontinue (saut).
+
+Formulation-type :
+> En $x = a$ : $\lim_{x \to a^-} f(x) = ... \neq f(a) = ...$, donc $f$ n'est pas continue en $a$.
+
+#### Application du TVI
+
+Le patron est identique dans les trois sources :
+
+```
+$f$ est une fonction polynome donc continue sur $\mathbb{R}$,
+en particulier sur $[a, b]$.
+
+$f(a) = ... > 0$ et $f(b) = ... < 0$.
+
+$f(a) \times f(b) = ... < 0$.
+
+D'apres le TVI, il existe au moins un $c \in ]a, b[$
+tel que $f(c) = 0$.
+```
+
+Variante pour $f(x) = k$ (pas zero) :
+> $k$ est compris entre $f(a)$ et $f(b)$. D'apres le TVI, il existe au moins un $c \in [a, b]$ tel que $f(c) = k$.
+
+#### Unicite (TVI + monotonie)
+
+> De plus, $f$ est strictement croissante sur $[a, b]$, donc la solution est **unique**.
+
+#### Nombre exact de solutions (polynome de degre $n$)
+
+Schema :
+1. Trouver $n$ solutions par le TVI dans des intervalles **disjoints**
+2. Argument : "un polynome de degre $n$ a au plus $n$ racines reelles"
+3. Conclusion : "donc exactement $n$ solutions"
+
+#### Images d'intervalles
+
+Methode systematique :
+1. Identifier les variations de $f$ sur l'intervalle (croissante/decroissante)
+2. Si monotone : $f([a,b]) = [f(a), f(b)]$ ou $[f(b), f(a)]$
+3. Si changement de monotonie : reperer le min/max atteint sur l'intervalle
+4. Attention aux bornes ouvertes/fermees (atteintes ou non)
+
+#### Dichotomie (valeur approchee)
+
+Schema :
+> $f(0{,}6) > 0$ et $f(0{,}7) < 0$, donc $\alpha \in [0{,}6 \; ; \; 0{,}7]$.
+
+Precision demandee : generalement $10^{-1}$ ou $10^{-2}$.
+
+### 12.5 Structuration des cours
+
+#### Approche du Manuel scolaire
+
+Le Manuel suit un schema pedagogique precis :
+
+1. **Activite** introductive (situation concrete, graphique, ou calcul guide)
+2. **Definition** ou **Theoreme** (encadre, formulation rigoureuse)
+3. **Activite** d'application (exemples resolus)
+4. Repetition du cycle pour chaque notion
+
+#### Approche du Parascolaire
+
+Plus condense :
+1. **Resume** direct (definition + theoreme, sans activite motivante)
+2. **Tableau** recapitulatif (fonctions usuelles continues)
+3. **Exemples** intercales (courts, 3-4 lignes)
+
+#### Approche XY Plus
+
+Le plus concis :
+1. **Resume** ultra-compact (1-2 pages pour tout le module)
+2. Enchainement rapide des theoremes sans activites
+3. Exercices corriges plus elabores que le cours
+
+### 12.6 Formulations a eviter
+
+| A eviter | Correct |
+|---|---|
+| "On a donc le theoreme suivant" | "On a donc obtenu le theoreme ci-dessous" |
+| "Il est evident que..." | (supprimer, aller droit au calcul) |
+| "Trivialement..." | (supprimer) |
+| "$\forall$", "$\exists$" dans le texte | Ecrire en toutes lettres : "pour tout", "il existe" |
+| "CQFD" | (pas utilise dans le programme tunisien) |

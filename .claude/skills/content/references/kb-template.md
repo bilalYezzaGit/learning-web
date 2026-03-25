@@ -16,9 +16,6 @@
 > Chaque fichier commence par un header avec les metadonnees `Module:` et
 > `Programme:` (ex: `Module: continuite`, `Programme: 3eme-math`).
 >
-> Apres avoir cree les 3 fichiers, mettre a jour `_meta/_interface.yaml`
-> pour enregistrer le nouveau module dans le registre.
-
 id: module_{slug}
 niveau: 3eme-math | 4eme-math
 version: 0.1

@@ -8,7 +8,7 @@ Pour les blocs Typst (tableaux de variations, courbes, graphiques manuels), voir
 
 ## Atome — Lesson
 
-Fichier : `content/{programme}/{module}/lesson-{topic}-{slug}.mdx`
+Fichier : `content/{programme}/{module}/{profil}/lesson-{topic}-{slug}.mdx`
 
 ```mdx
 ---
@@ -117,7 +117,7 @@ Tous les snippets copier-coller sont dans **[typst-snippets.md](./typst-snippets
 
 ## Atome — Exercise
 
-Fichier : `content/{programme}/{module}/ex-{topic}-{slug}.mdx`
+Fichier : `content/{programme}/{module}/{profil}/ex-{topic}-{slug}.mdx`
 
 ```mdx
 ---
@@ -202,7 +202,7 @@ Pour inserer un tableau de variations ou un graphique dans un exercise, placer l
 
 ## Atome — QCM
 
-Fichier : `content/{programme}/{module}/qcm-{topic}-{slug}.mdx`
+Fichier : `content/{programme}/{module}/{profil}/qcm-{topic}-{slug}.mdx`
 
 ```mdx
 ---
@@ -288,7 +288,7 @@ On applique la regle $(x^n)' = nx^{n-1}$, donc $(x^3)' = 3x^{3-1} = 3x^2$.
 
 ## Molecule — Livret
 
-Fichier : `content/{programme}/{module}/_molecules/{slug}/molecule.yaml`
+Fichier : `content/{programme}/{module}/{profil}/molecule.yaml`
 
 ```yaml
 kind: livret

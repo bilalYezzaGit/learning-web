@@ -6,7 +6,7 @@
 # Cree par le LLM a partir d'une KB module, puis valide par un humain
 # AVANT toute generation de contenu MDX.
 #
-# Emplacement : content/{programme}/{module}/_molecules/{slug}/_planning.yaml
+# Emplacement : content/{programme}/{module}/{profil}/_planning.yaml
 #
 # Workflow :
 #   1. LLM genere ce fichier a partir de la KB
@@ -26,7 +26,7 @@ status: draft                                     # draft | validated | generate
 # Valeurs : cours | examen | exploration
 profile: "{cours|examen|exploration}"
 
-# References vers _meta/ (resolu via _meta/_interface.yaml)
+# References vers _meta/
 meta_refs:
   module: "{slug-module}"          # → _meta/{slug-programme}/{slug-module}/
   # patterns: [Prax1.v1, ...]     # optionnel, pour livrets examen
@@ -69,7 +69,7 @@ sections:
         type: exercise
         title: "{Titre de l'exercice}"
         praxeologies: [Prax0]
-        pattern: Prax0.v1                         # Optionnel — reference _patterns.yaml (Livret Examen)
+        pattern: Prax0.v1                         # Optionnel — reference _meta/{prog}/{mod}/patterns.yaml (Livret Examen)
         category: application                     # application | approfondissement | synthese | probleme
         contenu: >-
           {Description precise : combien de questions, quel type de
@@ -107,12 +107,12 @@ sections:
 # 7. Respecter le vocabulaire controle des topics (voir SKILL.md Quick Reference)
 # 8. Viser un equilibre : ~60% exercices, ~25% lecons, ~15% QCM
 # 9. Les praxeologies vivent dans la KB module — pas dupliquees ici
-# 10. Le champ `pattern` (optionnel) reference un pattern de _patterns.yaml
+# 10. Le champ `pattern` (optionnel) reference un pattern de _meta/{prog}/{mod}/patterns.yaml
 #     Utilise surtout pour le Livret 2 (Examen) : le LLM instancie le pattern
 #     avec de nouvelles valeurs au lieu de creer un exercice de zero.
 # 11. Le champ `design_intent` decrit l'intention pedagogique du livret
 # 12. Le champ `meta_refs` lie le planning au modele academique dans `_meta/`.
 #     Il permet a la pipeline et au LLM de retrouver la KB eclatee
-#     (savoir, praxeologies, misconceptions, lexique) pour ce module.
+#     (savoir, praxeologies, misconceptions) pour ce module.
 #
 # ============================================================================

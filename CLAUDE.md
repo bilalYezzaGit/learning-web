@@ -42,8 +42,6 @@ _raw/
         └── {module}/       # series, examens, cours de profs...
 
 _meta/
-├── _interface.yaml         # Contrat IDs modules/examens
-├── lexique.yaml            # Conventions globales (append-only)
 ├── booklet-profiles.yaml   # Profils cours/examen/exploration + pedagogie DO/DO NOT
 └── {programme}/            # Ex: 3eme-math/
     ├── prerequis-graph.yaml

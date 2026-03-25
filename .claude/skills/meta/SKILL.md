@@ -65,8 +65,7 @@ Glob: _meta/{programme}/{module}/savoir.yaml
 2. Charger les references :
    ```
    Read: .claude/skills/content/references/kb-template.md
-   Read: docs/referentiels/redaction-mathematiques-tunisie.md
-   Read: _meta/lexique.yaml (conventions globales)
+   Read: docs/CONTENT-CONVENTIONS.md (section 12 : redaction mathematique programme tunisien)
    ```
 
 3. Croiser les sources (manuel + parascolaire + xyplus) et synthetiser en 3 fichiers :
@@ -76,9 +75,7 @@ Glob: _meta/{programme}/{module}/savoir.yaml
    Write: _meta/{programme}/{module}/misconceptions.yaml  # section 9
    ```
 
-4. Mettre a jour `_meta/_interface.yaml` (ajouter le module).
-
-5. Mettre a jour les fiches sources : `status: meta-complete`.
+4. Mettre a jour les fiches sources : `status: meta-complete`.
 
 **Sous-etape 2 : Proposer des enrichissements** (si des fichiers existent dans enrichissements/)
 
